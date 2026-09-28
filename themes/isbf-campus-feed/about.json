@@ -1,0 +1,68 @@
+{
+  "name": "ISBF Campus Feed",
+  "component": false,
+  "license_url": null,
+  "about_url": null,
+  "authors": null,
+  "theme_version": null,
+  "minimum_discourse_version": null,
+  "maximum_discourse_version": null,
+  "assets": {},
+  "color_schemes": {
+    "ISBF Community Light": {
+      "primary": "17202a",
+      "secondary": "ffffff",
+      "tertiary": "1769aa",
+      "quaternary": "1769aa",
+      "header_background": "ffffff",
+      "header_primary": "17202a",
+      "highlight": "e8f3fa",
+      "selected": "d9ebf8",
+      "hover": "f2f6f9",
+      "danger": "c93545",
+      "success": "087e5b",
+      "love": "d63c64"
+    },
+    "ISBF Community Dark": {
+      "primary": "e7e9ea",
+      "secondary": "101413",
+      "tertiary": "72c5fa",
+      "quaternary": "72c5fa",
+      "header_background": "101413",
+      "header_primary": "e7e9ea",
+      "highlight": "17354a",
+      "selected": "193c53",
+      "hover": "1c272c",
+      "danger": "f15b6c",
+      "success": "38c997",
+      "love": "f06a8a"
+    }
+  },
+  "modifiers": {
+    "only_theme_color_schemes": true,
+    "serialize_topic_excerpts": true,
+    "svg_icons": [
+      "house",
+      "magnifying-glass",
+      "bell",
+      "bookmark",
+      "plus",
+      "user",
+      "chevron-right",
+      "arrow-left",
+      "briefcase",
+      "calendar-days",
+      "table-cells-large",
+      "book-open",
+      "graduation-cap",
+      "file-lines",
+      "building-columns",
+      "id-card",
+      "database",
+      "user-group",
+      "chevron-left",
+      "xmark"
+    ]
+  },
+  "learn_more": "https://meta.discourse.org/t/beginners-guide-to-using-discourse-themes/91966"
+}
