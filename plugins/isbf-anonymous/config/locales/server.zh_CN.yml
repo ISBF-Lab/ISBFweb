@@ -1,0 +1,9 @@
+zh_CN:
+  isbf_anonymous:
+    unavailable: "此账号或讨论暂不支持匿名发布。"
+  system_messages:
+    isbf_anonymous_post_rejected:
+      title: "你的匿名帖子未获批准"
+      subject_template: "你的匿名帖子未获批准"
+      text_body_template: |
+        你的匿名帖子未获批准。你可以查看审核反馈后重新发布。

@@ -1,0 +1,24 @@
+brand_name:
+  default: "国金综合平台"
+  type: string
+  description: "导航中显示的平台名称。"
+
+official_path:
+  default: "/c/staff/3/l/latest"
+  type: string
+  description: "官方信息标签使用的现有 Discourse 分类列表路由。"
+
+show_right_rail:
+  default: true
+  type: bool
+  description: "宽屏显示搜索与热门话题入口。"
+
+calendar_category_id:
+  default: 0
+  type: integer
+  description: "校园活动分类 ID；日历仅展示该分类的活动。"
+
+calendar_category_path:
+  default: "/c/campus-events"
+  type: string
+  description: "校园活动分类页面路径，用于发布活动入口。"
