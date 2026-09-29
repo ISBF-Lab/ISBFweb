@@ -1,0 +1,9 @@
+en:
+  isbf_anonymous:
+    unavailable: "Anonymous posting is unavailable for this account or discussion."
+  system_messages:
+    isbf_anonymous_post_rejected:
+      title: "Your anonymous post was not approved"
+      subject_template: "Your anonymous post was not approved"
+      text_body_template: |
+        Your anonymous post was not approved. You can review the moderation feedback and submit a new post.

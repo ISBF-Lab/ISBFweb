@@ -4,6 +4,8 @@ import { settings, themePrefix } from "virtual:theme";
 import dAvatar from "discourse/ui-kit/helpers/d-avatar";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
+import ISBFV2AccountMenu from "./isbf-v2-account-menu";
+import ISBFV2AnonymousPosts from "./isbf-v2-anonymous-posts";
 import ISBFV2Calendar from "./isbf-v2-calendar";
 import ISBFV2RightRail from "./isbf-v2-right-rail";
 import ISBFV2SideNav from "./isbf-v2-side-nav";
@@ -25,6 +27,9 @@ export default class ISBFV2Shell extends Component {
     }
     if (/^\/t\//.test(path)) {
       return "topic";
+    }
+    if (path === "/isbf-anonymous/posts") {
+      return "anonymous-posts";
     }
     if (path === "/isbf/calendar") {
       return "calendar";
@@ -62,6 +67,10 @@ export default class ISBFV2Shell extends Component {
     return this.pageKind === "notifications";
   }
 
+  get isAnonymousPosts() {
+    return this.pageKind === "anonymous-posts";
+  }
+
   get isCalendar() {
     return this.pageKind === "calendar";
   }
@@ -70,8 +79,29 @@ export default class ISBFV2Shell extends Component {
     return this.pageKind === "workbench";
   }
 
+  get showRightRail() {
+    return (
+      settings.show_right_rail &&
+      !this.isCalendar &&
+      !this.isWorkbench &&
+      !this.isAnonymousPosts
+    );
+  }
+
+  get isOwnProfile() {
+    if (this.pageKind !== "profile" || !this.currentUser) {
+      return false;
+    }
+
+    const profilePath =
+      `/u/${encodeURIComponent(this.currentUser.username)}`.toLowerCase();
+    const path = this.path.toLowerCase();
+    return path === profilePath || path.startsWith(`${profilePath}/`);
+  }
+
   get pageTitle() {
     const titles = {
+      "anonymous-posts": "my_anonymous_posts",
       bookmarks: "bookmarks",
       calendar: "calendar",
       explore: "explore",
@@ -132,11 +162,7 @@ export default class ISBFV2Shell extends Component {
     {{#if this.pageKind}}
       <div class={{this.shellClass}}>
         <ISBFV2SideNav />
-        {{#if settings.show_right_rail}}
-          {{#unless this.isCalendar}}
-            {{#unless this.isWorkbench}}<ISBFV2RightRail />{{/unless}}
-          {{/unless}}
-        {{/if}}
+        {{#if this.showRightRail}}<ISBFV2RightRail />{{/if}}
 
         {{#if this.isFeed}}
           <header class="isbf-v2-feed-header">
@@ -196,9 +222,13 @@ export default class ISBFV2Shell extends Component {
               href="/latest"
             >{{dIcon "arrow-left"}}</a>
             <span>{{this.pageTitle}}</span>
+            {{#if this.isOwnProfile}}<ISBFV2AccountMenu
+                @mobile={{true}}
+              />{{/if}}
           </header>
         {{/if}}
 
+        {{#if this.isAnonymousPosts}}<ISBFV2AnonymousPosts />{{/if}}
         {{#if this.isCalendar}}<ISBFV2Calendar />{{/if}}
         {{#if this.isWorkbench}}<ISBFV2Workbench />{{/if}}
 

@@ -1,18 +1,14 @@
 import { scheduleOnce } from "@ember/runloop";
-import { settings, themePrefix } from "virtual:theme";
+import { themePrefix } from "virtual:theme";
 import { apiInitializer } from "discourse/lib/api";
+import Composer from "discourse/models/composer";
 import { i18n } from "discourse-i18n";
+import ISBFV2ComposerCancel from "../components/isbf-v2-composer-cancel";
+import ISBFV2ComposerOptions from "../components/isbf-v2-composer-options";
 import ISBFV2Shell from "../components/isbf-v2-shell";
-import { quickPostTitle } from "../lib/quick-post-title";
-
-function isQuickPost(model) {
-  return (
-    model?.action === "createTopic" &&
-    !model.creatingEvent &&
-    Number(model.categoryId) !== Number(settings.calendar_category_id) &&
-    Boolean(document.querySelector(".isbf-v2-shell"))
-  );
-}
+import { canPublishAnonymously } from "../lib/anonymous-post-scope";
+import { isQuickPost } from "../lib/quick-post-scope";
+import { quickPostText, quickPostTitle } from "../lib/quick-post-title";
 
 function syncQuickPostTitle(model) {
   if (!isQuickPost(model)) {
@@ -25,36 +21,41 @@ function syncQuickPostTitle(model) {
     model.siteSettings.max_topic_title_length
   );
 
+  if (
+    model.isbf_repost_source_topic_id &&
+    !quickPostText(model.reply) &&
+    model.title
+  ) {
+    return;
+  }
+
   if (model.title !== title) {
     model.set("title", title);
   }
 }
 
+function focusComposerInput() {
+  document
+    .querySelector(
+      "#reply-control.open.composer-action-create-topic .d-editor-input"
+    )
+    ?.focus();
+}
+
 export default apiInitializer((api) => {
+  Composer.serializeOnCreate(
+    "isbf_repost_source_topic_id",
+    "isbf_repost_source_topic_id"
+  );
+  Composer.serializeToDraft(
+    "isbf_repost_source_topic_id",
+    "isbf_repost_source_topic_id"
+  );
+  Composer.serializeOnCreate("isbf_anonymous", "isbf_anonymous");
+  Composer.serializeToDraft("isbf_anonymous", "isbf_anonymous");
   api.renderInOutlet("before-main-outlet", ISBFV2Shell);
-  const composer = api.container.lookup("service:composer");
-
-  function applyEventComposerClass(model) {
-    document
-      .querySelector("#reply-control")
-      ?.classList.toggle(
-        "isbf-event-composer",
-        Number(model?.categoryId) === Number(settings.calendar_category_id) &&
-          Number(settings.calendar_category_id) > 0
-      );
-  }
-
-  function syncEventComposerClass(model) {
-    scheduleOnce("afterRender", null, applyEventComposerClass, model);
-  }
-
-  function focusComposerInput() {
-    document
-      .querySelector(
-        "#reply-control.open.composer-action-create-topic .d-editor-input"
-      )
-      ?.focus();
-  }
+  api.renderInOutlet("before-composer-controls", ISBFV2ComposerCancel);
+  api.renderInOutlet("before-composer-fields", ISBFV2ComposerOptions);
 
   api.customizeComposerText({
     actionTitle: (model) =>
@@ -63,12 +64,22 @@ export default apiInitializer((api) => {
       isQuickPost(model) ? themePrefix("isbf_v2.compose") : null,
   });
 
-  api.onAppEvent("composer:opened", () => {
-    syncEventComposerClass(composer.model);
-    scheduleOnce("afterRender", null, focusComposerInput);
+  api.onAppEvent("composer:category-changed", (model) => {
+    if (
+      model.isbf_anonymous &&
+      !canPublishAnonymously(
+        model,
+        api.container.lookup("service:current-user"),
+        api.container.lookup("service:site-settings")
+      )
+    ) {
+      model.set("isbf_anonymous", false);
+    }
   });
 
-  api.onAppEvent("composer:category-changed", syncEventComposerClass);
+  api.onAppEvent("composer:opened", () => {
+    scheduleOnce("afterRender", null, focusComposerInput);
+  });
 
   api.registerValueTransformer(
     "composer-editor-reply-placeholder",
