@@ -51,6 +51,8 @@ Only administrators can look up an author:
 
 - On a published anonymous post, open the wrench menu at the bottom of the
   post and select **View real author**.
+  Themes can place this admin menu inside **More**. The current campus theme
+  uses **More → Developer → View real author** (更多 → 开发者 → 查看真实作者).
 - On the review page, anonymous queued posts have a **View real author** button
   below their content. Other reviewable types use their existing interfaces.
 - Both buttons open the same dialog, showing the real username, name when
