@@ -513,7 +513,7 @@ class Topic < ActiveRecord::Base
   end
 
   def advance_draft_sequence
-    DraftSequence.next!(user, draft_key)
+    DraftSequence.next!(acting_user, draft_key)
   end
 
   def ensure_topic_has_a_category
@@ -578,7 +578,7 @@ class Topic < ActiveRecord::Base
   # Additional rate limits on topics: per day and private messages per day
   def limit_topics_per_day
     return unless regular?
-    if user && user.new_user_posting_on_first_day?
+    if acting_user && acting_user.new_user_posting_on_first_day?
       limit_first_day_topics_per_day
     else
       apply_per_day_rate_limit_for("topics", :max_topics_per_day)
@@ -588,9 +588,9 @@ class Topic < ActiveRecord::Base
   def limit_private_messages_per_day
     return unless private_message?
     return if subtype == TopicSubtype.notify_moderators
-    if user&.admin? && SiteSetting.limit_admin_personal_messages_per_day > 0
+    if acting_user&.admin? && SiteSetting.limit_admin_personal_messages_per_day > 0
       RateLimiter.new(
-        user,
+        acting_user,
         "pms-per-day",
         SiteSetting.limit_admin_personal_messages_per_day,
         1.day.to_i,
@@ -1828,6 +1828,10 @@ class Topic < ActiveRecord::Base
     @acting_user = u
   end
 
+  def rate_limit_user
+    acting_user
+  end
+
   def duplicate_title_candidates
     candidates = Topic.listable_topics.where(category_id:)
 
@@ -2345,11 +2349,16 @@ class Topic < ActiveRecord::Base
   end
 
   def limit_first_day_topics_per_day
-    RateLimiter.new(user, "first-day-topics-per-day", user.first_day_topics_limit, 1.day.to_i)
+    RateLimiter.new(
+      acting_user,
+      "first-day-topics-per-day",
+      acting_user.first_day_topics_limit,
+      1.day.to_i,
+    )
   end
 
   def apply_per_day_rate_limit_for(key, method_name)
-    RateLimiter.new(user, "#{key}-per-day", SiteSetting.get(method_name), 1.day.to_i)
+    RateLimiter.new(acting_user, "#{key}-per-day", SiteSetting.get(method_name), 1.day.to_i)
   end
 end
 

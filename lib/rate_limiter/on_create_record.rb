@@ -8,11 +8,16 @@ class RateLimiter
   # `model_name` is the class name of your model, underscored.
   #
   module OnCreateRecord
+    def rate_limit_user
+      user
+    end
+
     # Over write to define your own rate limiter
     def default_rate_limiter
       return @rate_limiter if @rate_limiter.present?
 
       limit_key = "create_#{self.class.name.underscore}"
+      user = rate_limit_user
       max_setting =
         if user && user.new_user? && SiteSetting.has_setting?("rate_limit_new_user_#{limit_key}")
           SiteSetting.get("rate_limit_new_user_#{limit_key}")

@@ -8,27 +8,23 @@ module IsbfAnonymous
     PAGE_SIZE = 20
 
     def index
-      before_id = Integer(params[:before_id], exception: false) if params[
-        :before_id
-      ].present?
+      before_id = Integer(params[:before_id], exception: false) if params[:before_id].present?
       if params[:before_id].present? && !before_id&.positive?
         raise Discourse::InvalidParameters.new(:before_id)
       end
 
-      shadow_ids =
-        AnonymousUser.where(master_user_id: current_user.id).select(:user_id)
       posts =
         Post
           .joins(:topic)
           .joins(
-            "INNER JOIN post_custom_fields anon_field ON anon_field.post_id = posts.id AND anon_field.name = '#{IsbfAnonymous::POST_FIELD}'"
+            "INNER JOIN post_custom_fields anon_field ON anon_field.post_id = posts.id AND anon_field.name = '#{IsbfAnonymous::POST_FIELD}'",
           )
           .where(
-            user_id: shadow_ids,
+            id: IsbfAnonymous.owned_post_ids(current_user.id),
             deleted_at: nil,
             topics: {
-              deleted_at: nil
-            }
+              deleted_at: nil,
+            },
           )
           .where("anon_field.value = 't'")
       posts = posts.where("posts.id < ?", before_id) if before_id
@@ -44,10 +40,10 @@ module IsbfAnonymous
                      title: post.topic.title,
                      excerpt: post.raw.to_s.truncate(180),
                      url: post.url,
-                     created_at: post.created_at
+                     created_at: post.created_at,
                    }
                  end,
-               next_before_id: has_more ? rows[PAGE_SIZE - 1].id : nil
+               next_before_id: has_more ? rows[PAGE_SIZE - 1].id : nil,
              }
     end
   end

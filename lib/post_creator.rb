@@ -95,14 +95,18 @@ class PostCreator
   end
 
   def guardian
-    @guardian ||= @opts[:guardian] || Guardian.new(@user)
+    @guardian ||= @opts[:guardian] || acting_user.guardian
+  end
+
+  def acting_user
+    @opts[:acting_user] || @user
   end
 
   def valid?
     @topic = nil
     @post = nil
 
-    if @user.suspended? && !skip_validations?
+    if acting_user.suspended? && !skip_validations?
       errors.add(:base, I18n.t(:user_is_suspended))
       return false
     end
@@ -112,7 +116,7 @@ class PostCreator
     end
 
     if (@opts[:target_usernames].present? || @opts[:target_user_ids].present?) &&
-         !skip_validations? && !@user.staff?
+         !skip_validations? && !acting_user.staff?
       if @opts[:target_user_ids].present?
         ids = Array.wrap(@opts[:target_user_ids])
         target_users = User.where(id: ids).pluck(:id, :username).to_h
@@ -135,7 +139,7 @@ class PostCreator
       end
 
       UserCommScreener
-        .new(acting_user: @user, target_user_ids: target_users.keys)
+        .new(acting_user: acting_user, target_user_ids: target_users.keys)
         .preventing_actor_communication
         .each do |user_id|
           errors.add(:base, I18n.t(:not_accepting_pms, username: target_users[user_id]))
@@ -157,7 +161,11 @@ class PostCreator
 
       if guardian.affected_by_slow_mode?(@topic)
         last_posted_at =
-          @topic.posts.where(user_id: @user.id).order(created_at: :desc).pick(:created_at)
+          acting_user
+            .posts_for_posting_limits
+            .where(topic_id: @topic.id)
+            .order(created_at: :desc)
+            .pick(:created_at)
 
         if last_posted_at
           threshold = last_posted_at + @topic.slow_mode_seconds.seconds
@@ -220,7 +228,7 @@ class PostCreator
         delete_owned_bookmarks
         ensure_in_allowed_users if guardian.is_staff? && !skip_staff_author_pm_membership_sync?
         unarchive_message if !@opts[:import_mode]
-        DraftSequence.next!(@user, draft_key) if !@opts[:import_mode] && @opts[:advance_draft]
+        DraftSequence.next!(acting_user, draft_key) if !@opts[:import_mode] && @opts[:advance_draft]
         @post.save_reply_relationships
       end
     end
@@ -359,10 +367,11 @@ class PostCreator
 
   def build_post_stats
     if PostCreator.track_post_stats
-      sequence = DraftSequence.current(@user, draft_key)
+      sequence = DraftSequence.current(acting_user, draft_key)
       revisions =
-        Draft.where(sequence: sequence, user_id: @user.id, draft_key: draft_key).pick(:revisions) ||
-          0
+        Draft.where(sequence: sequence, user_id: acting_user.id, draft_key: draft_key).pick(
+          :revisions,
+        ) || 0
 
       @post.build_post_stat(
         drafts_saved: revisions,
@@ -442,7 +451,7 @@ class PostCreator
 
   def delete_owned_bookmarks
     return if !@post.topic_id
-    BookmarkManager.new(@user).destroy_for_topic(
+    BookmarkManager.new(acting_user).destroy_for_topic(
       Topic.with_deleted.find(@post.topic_id),
       { auto_delete_preference: Bookmark.auto_delete_preferences[:on_owner_reply] },
       @opts,
