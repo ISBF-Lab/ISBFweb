@@ -47,21 +47,26 @@ module IsbfAnonymous
       Post
         .with_deleted
         .where(user_id: shadow.id)
-        .includes(:_custom_fields, topic: :category)
-        .find_each do |post|
-          unless migratable_post?(post)
-            retained = true
-            @report[:skipped_posts] << { id: post.id, reason: "unmarked or non-public post" }
-            next
+        .includes(:_custom_fields)
+        .find_in_batches do |posts|
+          topics =
+            Topic.with_deleted.where(id: posts.map(&:topic_id)).includes(:category).index_by(&:id)
+          posts.each do |post|
+            post.topic = topics[post.topic_id]
+            unless migratable_post?(post)
+              retained = true
+              @report[:skipped_posts] << { id: post.id, reason: "unmarked or non-public post" }
+              next
+            end
+
+            @report[:posts] += 1
+            post_ids << post.id
+            topic_ids << post.topic_id if post.is_first_post?
+            next if @dry_run
+
+            author ||= pooled_author(mapping)
+            migrate_post(post, shadow, master, author)
           end
-
-          @report[:posts] += 1
-          post_ids << post.id
-          topic_ids << post.topic_id if post.is_first_post?
-          next if @dry_run
-
-          author ||= pooled_author(mapping)
-          migrate_post(post, shadow, master, author)
         end
 
       ReviewableQueuedPost

@@ -92,5 +92,47 @@ RSpec.describe IsbfAnonymous::LegacyMigrator do
       expect(report[:retained_accounts].map { |row| row[:user_id] }).to eq([shadow.id])
       expect(User.exists?(shadow.id)).to eq(true)
     end
+
+    it "migrates deleted public topics and preserves their deleted state during cleanup" do
+      shadow = AnonymousShadowCreator.get(user)
+      published = legacy_post(shadow, deleted_at: 1.day.ago)
+      topic = published.topic
+      topic.trash!(user)
+      post_deleted_at = published.deleted_at
+      topic_deleted_at = topic.deleted_at
+      previous_revision_count = PostRevision.count
+
+      preview = described_class.new(cleanup: true).run
+      expect(preview[:posts]).to eq(1)
+      expect(preview[:cleanable_accounts]).to eq([shadow.id])
+
+      report = described_class.new(dry_run: false, cleanup: true).run
+
+      expect(report[:deleted_accounts]).to eq([shadow.id])
+      expect(IsbfAnonymous::PoolAccount.exists?(user_id: published.reload.user_id)).to eq(true)
+      expect(published.custom_fields[IsbfAnonymous::OWNER_FIELD]).to eq(user.id)
+      expect(topic.reload.user_id).to eq(published.user_id)
+      expect(published.deleted_at).to eq_time(post_deleted_at)
+      expect(topic.deleted_at).to eq_time(topic_deleted_at)
+      expect(PostRevision.count).to eq(previous_revision_count)
+      expect(described_class.new(dry_run: false, cleanup: true).run[:posts]).to eq(0)
+    end
+
+    it "retains accounts with anonymous posts in deleted unlisted topics" do
+      shadow = AnonymousShadowCreator.get(user)
+      published = legacy_post(shadow)
+      topic = published.topic
+      topic.update!(visible: false)
+      topic.trash!(user)
+
+      report = described_class.new(dry_run: false, cleanup: true).run
+
+      expect(report[:posts]).to eq(0)
+      expect(report[:retained_accounts].map { |row| row[:user_id] }).to eq([shadow.id])
+      expect(report[:skipped_posts].map { |row| row[:id] }).to eq([published.id])
+      expect(published.reload.user_id).to eq(shadow.id)
+      expect(User.exists?(shadow.id)).to eq(true)
+      expect(IsbfAnonymous::PoolAccount.count).to eq(0)
+    end
   end
 end

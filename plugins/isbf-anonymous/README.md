@@ -76,10 +76,11 @@ The task defaults to a **read-only preview**. It is idempotent and requires the
 pool to be enabled before writes, so new per-post publishing uses the pool
 during migration. A secret-derived slot preserves each legacy shadow's posts
 as a group. `PostOwnerChanger` updates authors, topic ownership, reply links,
-and statistics without creating public author-change revisions. Owner metadata
-is saved in the same transaction before the author changes. Deleted posts are
-included and remain deleted. Anonymous queued posts and related post reviewables
-also move to the pool.
+and statistics without creating public author-change revisions. Rendered HTML
+may be rebaked using current site settings; post source remains unchanged.
+Owner metadata is saved in the same transaction before the author changes.
+Deleted public topics and their posts are included and remain deleted.
+Anonymous queued posts and related post reviewables also move to the pool.
 
 The report lists migrated counts, cleanup candidates, removed accounts,
 skipped posts, and retained accounts. Unmarked, restricted, private, or unlisted
@@ -87,6 +88,13 @@ content, missing owners, remaining reviewables, and login data retain the old
 account for manual inspection. Cleanup uses `UserDestroyer` and rechecks that
 no posts (including deleted posts), topics, reviewables, or sessions remain.
 The task does not delete content to make an account eligible for cleanup.
+
+For authorized removal of historical anonymous content, record the legacy
+user, topic, and post IDs before migration. Use the existing post/topic deletion
+services and `UserDestroyer` for those IDs. Pool accounts can contain new posts
+from other users, so content removal must use the recorded historical IDs.
+Normal topic and post deletion leaves recoverable content records; deleting
+the old shadow accounts removes their user records.
 
 ## Verification
 
