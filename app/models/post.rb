@@ -212,8 +212,13 @@ class Post < ActiveRecord::Base
   end
 
   def limit_posts_per_day
-    if user && user.new_user_posting_on_first_day? && post_number && post_number > 1
-      RateLimiter.new(user, "first-day-replies-per-day", user.first_day_replies_limit, 1.day.to_i)
+    if acting_user && acting_user.new_user_posting_on_first_day? && post_number && post_number > 1
+      RateLimiter.new(
+        acting_user,
+        "first-day-replies-per-day",
+        acting_user.first_day_replies_limit,
+        1.day.to_i,
+      )
     end
   end
 
@@ -276,7 +281,7 @@ class Post < ActiveRecord::Base
 
   # The key we use in redis to ensure unique posts
   def unique_post_key
-    "unique#{topic&.private_message? ? "-pm" : ""}-post-#{user_id}:#{raw_hash}"
+    "unique#{topic&.private_message? ? "-pm" : ""}-post-#{acting_user&.id}:#{raw_hash}"
   end
 
   def store_unique_post_key
@@ -388,6 +393,10 @@ class Post < ActiveRecord::Base
 
   def acting_user=(pu)
     @acting_user = pu
+  end
+
+  def rate_limit_user
+    acting_user
   end
 
   def last_editor

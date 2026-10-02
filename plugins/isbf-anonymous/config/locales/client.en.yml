@@ -1,0 +1,15 @@
+en:
+  js:
+    isbf_anonymous:
+      author_lookup:
+        button: "View real author"
+        title: "Real author"
+        username: "Username"
+        name: "Name"
+        user_id: "User ID"
+        manage_user: "Manage this user"
+        retry: "Try again"
+        loaded: "Real author: %{username}"
+        forbidden: "Only administrators can view the real author."
+        unavailable: "The author information is no longer available."
+        failed: "Unable to look up the author. Please try again."

@@ -776,7 +776,7 @@ class TopicView
 
   def pending_posts
     @pending_posts ||=
-      ReviewableQueuedPost.pending.where(target_created_by: @user, topic: @topic).order(:created_at)
+      (@user&.pending_posts || ReviewableQueuedPost.none).where(topic: @topic).order(:created_at)
   end
 
   def post_action_type_view

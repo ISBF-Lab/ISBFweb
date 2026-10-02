@@ -1,0 +1,8 @@
+isbf_anonymous:
+  isbf_anonymous_pool_enabled:
+    default: false
+    area: "group_permissions"
+  isbf_anonymous_pool_size:
+    default: 256
+    validator: "IsbfAnonymousPoolSizeValidator"
+    area: "group_permissions"

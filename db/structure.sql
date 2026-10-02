@@ -7208,6 +7208,72 @@ ALTER SEQUENCE public.invites_id_seq OWNED BY public.invites.id;
 
 
 --
+-- Name: isbf_anonymous_pool_accounts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.isbf_anonymous_pool_accounts (
+    id bigint NOT NULL,
+    slot integer NOT NULL,
+    user_id integer NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: isbf_anonymous_pool_accounts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.isbf_anonymous_pool_accounts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: isbf_anonymous_pool_accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.isbf_anonymous_pool_accounts_id_seq OWNED BY public.isbf_anonymous_pool_accounts.id;
+
+
+--
+-- Name: isbf_anonymous_pool_assignments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.isbf_anonymous_pool_assignments (
+    id bigint NOT NULL,
+    master_user_id integer NOT NULL,
+    pool_account_id bigint NOT NULL,
+    started_at timestamp(6) without time zone NOT NULL,
+    expires_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: isbf_anonymous_pool_assignments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.isbf_anonymous_pool_assignments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: isbf_anonymous_pool_assignments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.isbf_anonymous_pool_assignments_id_seq OWNED BY public.isbf_anonymous_pool_assignments.id;
+
+
+--
 -- Name: javascript_caches; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -15033,6 +15099,20 @@ ALTER TABLE ONLY public.invites ALTER COLUMN id SET DEFAULT nextval('public.invi
 
 
 --
+-- Name: isbf_anonymous_pool_accounts id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_anonymous_pool_accounts ALTER COLUMN id SET DEFAULT nextval('public.isbf_anonymous_pool_accounts_id_seq'::regclass);
+
+
+--
+-- Name: isbf_anonymous_pool_assignments id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_anonymous_pool_assignments ALTER COLUMN id SET DEFAULT nextval('public.isbf_anonymous_pool_assignments_id_seq'::regclass);
+
+
+--
 -- Name: javascript_caches id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -17729,6 +17809,22 @@ ALTER TABLE ONLY public.invited_users
 
 ALTER TABLE ONLY public.invites
     ADD CONSTRAINT invites_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: isbf_anonymous_pool_accounts isbf_anonymous_pool_accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_anonymous_pool_accounts
+    ADD CONSTRAINT isbf_anonymous_pool_accounts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: isbf_anonymous_pool_assignments isbf_anonymous_pool_assignments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_anonymous_pool_assignments
+    ADD CONSTRAINT isbf_anonymous_pool_assignments_pkey PRIMARY KEY (id);
 
 
 --
@@ -22307,6 +22403,34 @@ CREATE INDEX index_invites_on_invited_by_id ON public.invites USING btree (invit
 
 
 --
+-- Name: index_isbf_anonymous_pool_accounts_on_slot; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_isbf_anonymous_pool_accounts_on_slot ON public.isbf_anonymous_pool_accounts USING btree (slot);
+
+
+--
+-- Name: index_isbf_anonymous_pool_accounts_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_isbf_anonymous_pool_accounts_on_user_id ON public.isbf_anonymous_pool_accounts USING btree (user_id);
+
+
+--
+-- Name: index_isbf_anonymous_pool_assignments_on_master_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_isbf_anonymous_pool_assignments_on_master_user_id ON public.isbf_anonymous_pool_assignments USING btree (master_user_id);
+
+
+--
+-- Name: index_isbf_anonymous_pool_assignments_on_pool_account_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_isbf_anonymous_pool_assignments_on_pool_account_id ON public.isbf_anonymous_pool_assignments USING btree (pool_account_id);
+
+
+--
 -- Name: index_javascript_caches_on_digest; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -25564,6 +25688,7 @@ ALTER TABLE ONLY public.ad_plugin_house_ads_groups
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261002060453'),
 ('20260923141924'),
 ('20260923080644'),
 ('20260923080642'),

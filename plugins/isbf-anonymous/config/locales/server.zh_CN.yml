@@ -1,4 +1,10 @@
 zh_CN:
+  site_settings:
+    isbf_anonymous_pool_enabled: "使用共享账号池发布匿名帖子。历史匿名帖子可单独迁移。仅管理员可以查询真实作者。需开启 {{setting:allow_anonymous_mode}}。"
+    isbf_anonymous_pool_size: "共享匿名账号数量上限（默认 256）。账号按需创建，分配后只能扩容。每位用户从首次发帖起按 {{setting:anonymous_account_duration_minutes}} 复用同一账号。"
+    errors:
+      isbf_anonymous_pool_size_invalid: "匿名账号池数量须在 2 至 4096 之间。"
+      isbf_anonymous_pool_cannot_shrink: "匿名账号池已有分配记录，不能缩小。"
   isbf_anonymous:
     unavailable: "此账号或讨论暂不支持匿名发布。"
   system_messages:

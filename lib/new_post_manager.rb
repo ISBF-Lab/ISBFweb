@@ -8,6 +8,18 @@
 class NewPostManager
   attr_reader :user, :args
 
+  def acting_user
+    args[:acting_user] || user
+  end
+
+  def post_count
+    acting_user.post_count
+  end
+
+  def topic_count
+    acting_user.topic_count
+  end
+
   FAST_TYPING_THRESHOLD_MAP = { disabled: 0, low: 1000, standard: 3000, high: 5000 }
 
   def self.sorted_handlers
@@ -36,10 +48,9 @@ class NewPostManager
   end
 
   def self.is_first_post?(manager)
-    user = manager.user
     args = manager.args
 
-    !!(args[:first_post_checks] && user.post_count == 0 && user.topic_count == 0)
+    !!(args[:first_post_checks] && manager.post_count == 0 && manager.topic_count == 0)
   end
 
   def self.is_fast_typer?(manager)
@@ -49,7 +60,7 @@ class NewPostManager
       args[:typing_duration_msecs].to_i <
         FAST_TYPING_THRESHOLD_MAP[SiteSetting.fast_typing_threshold.to_sym] &&
       SiteSetting.auto_silence_fast_typers_on_first_post &&
-      manager.user.trust_level <= SiteSetting.auto_silence_fast_typers_max_trust_level
+      manager.acting_user.trust_level <= SiteSetting.auto_silence_fast_typers_max_trust_level
   end
 
   def self.auto_silence?(manager)
@@ -80,7 +91,7 @@ class NewPostManager
   end
 
   def self.post_needs_approval?(manager)
-    user = manager.user
+    user = manager.acting_user
 
     return :email_auth_res_enqueue if manager.args[:email_auth_res_action] == :enqueue
 
@@ -89,7 +100,7 @@ class NewPostManager
     return :email_spam if manager.args[:email_spam]
 
     if user.trust_level <= TrustLevel.levels[:basic] &&
-         (user.post_count + user.topic_count) < SiteSetting.approve_post_count
+         (manager.post_count + manager.topic_count) < SiteSetting.approve_post_count
       return :post_count
     end
 
@@ -128,7 +139,7 @@ class NewPostManager
   end
 
   def self.post_needs_approval_in_its_category?(manager)
-    guardian = manager.user.guardian
+    guardian = manager.acting_user.guardian
 
     if manager.args[:topic_id].present?
       topic = Topic.find_by(id: manager.args[:topic_id])
@@ -152,6 +163,7 @@ class NewPostManager
     validator = PostValidator.new
     post = Post.new(raw: manager.args[:raw])
     post.user = manager.user
+    post.acting_user = manager.acting_user
     validator.validate(post)
 
     if post.errors[:raw].present?
@@ -161,7 +173,7 @@ class NewPostManager
     elsif manager.args[:topic_id]
       topic = Topic.unscoped.where(id: manager.args[:topic_id]).first
 
-      unless manager.user.guardian.can_create_post_on_topic?(topic)
+      unless manager.acting_user.guardian.can_create_post_on_topic?(topic)
         result = NewPostResult.new(:created_post, false)
         result.errors.add(:base, I18n.t(:topic_not_found))
         return result
@@ -169,9 +181,10 @@ class NewPostManager
     elsif manager.args[:category]
       category = Category.find_by(id: manager.args[:category])
       skip_topic_validations =
-        manager.args[:via_email] && manager.user.staged? && manager.args[:skip_validations]
+        manager.args[:via_email] && manager.acting_user.staged? && manager.args[:skip_validations]
 
-      unless skip_topic_validations || manager.user.guardian.can_create_topic_on_category?(category)
+      unless skip_topic_validations ||
+               manager.acting_user.guardian.can_create_topic_on_category?(category)
         result = NewPostResult.new(:created_post, false)
         result.errors.add(:base, I18n.t("js.errors.reasons.forbidden"))
         return result
@@ -187,7 +200,7 @@ class NewPostManager
       I18n.with_locale(SiteSetting.default_locale) do
         if is_fast_typer?(manager)
           UserSilencer.auto_silence(
-            manager.user,
+            manager.acting_user,
             Discourse.system_user,
             keep_posts: true,
             reason: I18n.t("user.new_user_typed_too_fast"),
@@ -195,7 +208,7 @@ class NewPostManager
           )
         elsif auto_silence?(manager) || matches_auto_silence_regex?(manager)
           UserSilencer.auto_silence(
-            manager.user,
+            manager.acting_user,
             Discourse.system_user,
             keep_posts: true,
             reason: I18n.t("user.content_matches_auto_silence_regex"),
@@ -203,7 +216,7 @@ class NewPostManager
           )
         elsif reason == :email_spam && is_first_post?(manager)
           UserSilencer.auto_silence(
-            manager.user,
+            manager.acting_user,
             Discourse.system_user,
             keep_posts: true,
             reason: I18n.t("user.email_in_spam_header"),
@@ -231,7 +244,7 @@ class NewPostManager
   end
 
   def perform
-    if !self.class.exempt_user?(@user) &&
+    if !self.class.exempt_user?(acting_user) &&
          matches = WordWatcher.new("#{@args[:title]} #{@args[:raw]}").should_block?.presence
       result = NewPostResult.new(:created_post, false)
       if matches.size == 1
@@ -288,14 +301,14 @@ class NewPostManager
     reviewable.category_id = args[:category] if @args[:topic_id].blank? && args[:category].present?
     reviewable.created_new!
 
-    create_options = reviewable.create_options.merge(creator_opts)
+    create_options = reviewable.create_options.merge(acting_user: acting_user).merge(creator_opts)
 
     creator =
       (
         if @args[:topic_id]
           PostCreator.new(@user, create_options)
         else
-          TopicCreator.new(@user, Guardian.new(@user), create_options)
+          TopicCreator.new(@user, acting_user.guardian, create_options)
         end
       )
 
@@ -319,7 +332,7 @@ class NewPostManager
     result.reviewable = reviewable
     result.reason = reason if reason
     result.check_errors(errors)
-    result.pending_count = ReviewableQueuedPost.where(target_created_by: @user).pending.count
+    result.pending_count = acting_user.pending_posts.count
     result
   end
 
@@ -332,7 +345,7 @@ class NewPostManager
     if result.success?
       result.post = post
     else
-      @user.flag_linked_posts_as_spam if creator.spam?
+      acting_user.flag_linked_posts_as_spam if creator.spam?
     end
 
     result

@@ -1371,15 +1371,20 @@ class User < ActiveRecord::Base
     topics_allowed.where(archetype: Archetype.private_message).count
   end
 
+  def posts_for_posting_limits
+    posts
+  end
+
   def posted_too_much_in_topic?(topic_id)
     # Does not apply to staff and non-new members...
     return false if staff? || (trust_level != TrustLevel[0])
     # ... your own topics or in private messages
     topic = Topic.where(id: topic_id).first
     return false if topic.try(:private_message?) || (topic.try(:user_id) == id)
+    return false if posts_for_posting_limits.exists?(topic_id: topic_id, post_number: 1)
 
     last_action_in_topic = UserAction.last_action_in_topic(id, topic_id)
-    since_reply = Post.where(user_id: id, topic_id: topic_id)
+    since_reply = posts_for_posting_limits.where(topic_id: topic_id)
     since_reply = since_reply.where("id > ?", last_action_in_topic) if last_action_in_topic
 
     (since_reply.count >= SiteSetting.newuser_max_replies_per_topic)

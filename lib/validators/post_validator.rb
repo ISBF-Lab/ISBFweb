@@ -166,33 +166,22 @@ class PostValidator < ActiveModel::Validator
     return if SiteSetting.max_consecutive_replies == 0
 
     topic = post.topic
-    return if topic&.ordered_posts&.first&.user == post.user
+    first_post = topic&.ordered_posts&.first
+    return if first_post && post.acting_user.posts_for_posting_limits.exists?(id: first_post.id)
 
     guardian = Guardian.new(post.acting_user)
     return if guardian.is_category_group_moderator?(post.topic&.category)
 
-    last_posts_count =
-      DB.query_single(
-        <<~SQL,
-      SELECT COUNT(*)
-      FROM (
-        SELECT user_id
-          FROM posts
-         WHERE deleted_at IS NULL
-           AND NOT hidden
-           AND topic_id = :topic_id
-         ORDER BY post_number DESC
-         LIMIT :max_replies
-      ) c
-      WHERE c.user_id = :user_id
-    SQL
-        topic_id: post.topic_id,
-        user_id: post.acting_user.id,
-        max_replies: SiteSetting.max_consecutive_replies,
-      ).first
+    last_post_ids =
+      Post
+        .where(topic_id: post.topic_id, hidden: false)
+        .order(post_number: :desc)
+        .limit(SiteSetting.max_consecutive_replies)
+        .select(:id)
+    last_posts_count = post.acting_user.posts_for_posting_limits.where(id: last_post_ids).count
     return if last_posts_count < SiteSetting.max_consecutive_replies
 
-    if guardian.can_edit?(topic.ordered_posts.last)
+    if guardian.can_edit?(topic.ordered_posts.last) || post.acting_user != post.user
       post.errors.add(
         :base,
         I18n.t(:max_consecutive_replies, count: SiteSetting.max_consecutive_replies),

@@ -98,6 +98,10 @@ class ReviewableQueuedPost < Reviewable
     result
   end
 
+  def notification_user
+    target_created_by
+  end
+
   def perform_approve_post(performed_by, args)
     created_post = nil
     opts =
@@ -134,7 +138,7 @@ class ReviewableQueuedPost < Reviewable
 
     Notification.create!(
       notification_type: Notification.types[:post_approved],
-      user_id: target_created_by.id,
+      user_id: notification_user.id,
       data: { post_url: created_post.url }.to_json,
       topic_id: created_post.topic_id,
       post_number: created_post.post_number,
@@ -186,11 +190,11 @@ class ReviewableQueuedPost < Reviewable
       feedback: args[:revise_feedback],
       original_post: payload["raw"],
       site_name: SiteSetting.title,
-      edit_instructions: I18n.t(edit_instructions_key, locale: target_created_by.effective_locale),
+      edit_instructions: I18n.t(edit_instructions_key, locale: notification_user.effective_locale),
     }
 
     SystemMessage.create(
-      target_created_by,
+      notification_user,
       (
         if is_new_topic
           :reviewable_queued_post_revise_and_reject_new_topic
@@ -235,7 +239,7 @@ class ReviewableQueuedPost < Reviewable
 
   def compute_user_stats
     return unless status_changed_from_or_to_pending?
-    target_created_by&.user_stat&.update_pending_posts
+    notification_user&.user_stat&.update_pending_posts
   end
 
   def status_changed_from_or_to_pending?

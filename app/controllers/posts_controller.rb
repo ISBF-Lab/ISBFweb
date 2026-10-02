@@ -176,7 +176,7 @@ class PostsController < ApplicationController
       DiscoursePluginRegistry.apply_modifier(
         :posts_controller_create_user,
         current_user,
-        create_params,
+        manager_params,
       )
     manager = NewPostManager.new(user, manager_params)
 
@@ -768,11 +768,14 @@ class PostsController < ApplicationController
     user = fetch_user_from_params
     raise Discourse::NotFound unless guardian.can_edit_user?(user)
 
-    render_serialized(
-      user.pending_posts.order(created_at: :desc),
-      PendingPostSerializer,
-      root: :pending_posts,
-    )
+    posts =
+      DiscoursePluginRegistry.apply_modifier(
+        :posts_controller_pending_posts,
+        user.pending_posts,
+        self,
+        user,
+      )
+    render_serialized(posts.order(created_at: :desc), PendingPostSerializer, root: :pending_posts)
   end
 
   protected
@@ -1074,6 +1077,7 @@ class PostsController < ApplicationController
   def signature_for(args)
     +"post##" << Digest::SHA1.hexdigest(
       args
+        .except(:acting_user)
         .to_h
         .to_a
         .concat([["user", current_user.id]])

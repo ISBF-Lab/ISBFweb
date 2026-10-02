@@ -2,9 +2,7 @@
 
 module IsbfAnonymous
   def self.requested?(options)
-    ActiveModel::Type::Boolean.new.cast(
-      options[:isbf_anonymous] || options["isbf_anonymous"]
-    )
+    ActiveModel::Type::Boolean.new.cast(options[:isbf_anonymous] || options["isbf_anonymous"])
   end
 
   def self.master_for(shadow_user_id)
@@ -12,18 +10,15 @@ module IsbfAnonymous
   end
 
   def self.ensure_allowed!(user, options)
-    forbidden = -> do
-      raise Discourse::InvalidAccess.new(I18n.t("isbf_anonymous.unavailable"))
-    end
-    if user.blank? || user.anonymous? || !SiteSetting.allow_anonymous_mode
+    forbidden = -> { raise Discourse::InvalidAccess.new(I18n.t("isbf_anonymous.unavailable")) }
+    forbidden.call if user.blank? || user.anonymous? || !SiteSetting.allow_anonymous_mode
+    if user.suspended? || !user.active? ||
+         !user.in_any_groups?(SiteSetting.anonymous_posting_allowed_groups_map) ||
+         (SiteSetting.must_approve_users? && !user.approved?)
       forbidden.call
     end
-    if ActiveModel::Type::Boolean.new.cast(options[:academy_official])
-      forbidden.call
-    end
-    if options[:target_recipients].present? || options[:visible].to_s == "false"
-      forbidden.call
-    end
+    forbidden.call if ActiveModel::Type::Boolean.new.cast(options[:academy_official])
+    forbidden.call if options[:target_recipients].present? || options[:visible].to_s == "false"
 
     topic_id = options[:topic_id]
     if topic_id.present?
@@ -33,9 +28,7 @@ module IsbfAnonymous
     else
       archetype = options[:archetype]
       forbidden.call if archetype.present? && archetype != Archetype.default
-      category = Category.find_by(id: options[:category]) if options[
-        :category
-      ].present?
+      category = Category.find_by(id: options[:category]) if options[:category].present?
       forbidden.call if options[:category].present? && !category
     end
 
@@ -48,32 +41,22 @@ module IsbfAnonymous
 
   module Permissions
     def can_edit_post?(post)
-      if !is_staff? && post.custom_fields[IsbfAnonymous::POST_FIELD]
-        return false
-      end
+      return false if !is_staff? && post.custom_fields[IsbfAnonymous::POST_FIELD]
       super
     end
 
     def can_delete_post?(post)
-      if !is_staff? && post.custom_fields[IsbfAnonymous::POST_FIELD]
-        return false
-      end
+      return false if !is_staff? && post.custom_fields[IsbfAnonymous::POST_FIELD]
       super
     end
 
     def can_edit_topic?(topic)
-      if !is_staff? &&
-           topic.first_post&.custom_fields&.dig(IsbfAnonymous::POST_FIELD)
-        return false
-      end
+      return false if !is_staff? && topic.first_post&.custom_fields&.dig(IsbfAnonymous::POST_FIELD)
       super
     end
 
     def can_delete_topic?(topic)
-      if !is_staff? &&
-           topic.first_post&.custom_fields&.dig(IsbfAnonymous::POST_FIELD)
-        return false
-      end
+      return false if !is_staff? && topic.first_post&.custom_fields&.dig(IsbfAnonymous::POST_FIELD)
       super
     end
   end

@@ -1,4 +1,10 @@
 en:
+  site_settings:
+    isbf_anonymous_pool_enabled: "Publish anonymous posts using a shared account pool. Existing anonymous posts can be migrated separately. Only administrators can look up the real author. Requires {{setting:allow_anonymous_mode}}."
+    isbf_anonymous_pool_size: "Maximum number of shared anonymous accounts (default 256). Accounts are created as needed. Once pool accounts exist, the pool can only grow. The reuse period follows {{setting:anonymous_account_duration_minutes}} from each user's first post."
+    errors:
+      isbf_anonymous_pool_size_invalid: "The anonymous account pool must contain between 2 and 4096 accounts."
+      isbf_anonymous_pool_cannot_shrink: "The anonymous account pool cannot shrink after accounts have been assigned."
   isbf_anonymous:
     unavailable: "Anonymous posting is unavailable for this account or discussion."
   system_messages:
