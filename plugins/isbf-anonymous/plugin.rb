@@ -8,6 +8,8 @@
 
 require_relative "app/validators/isbf_anonymous_pool_size_validator"
 
+register_asset "stylesheets/common/isbf-anonymous.scss"
+
 module ::IsbfAnonymous
   PLUGIN_NAME = "isbf-anonymous"
   POST_FIELD = "isbf_per_post_anonymous"
@@ -36,6 +38,12 @@ after_initialize do
   allow_new_queued_post_payload_attribute(:isbf_anonymous)
   allow_new_queued_post_payload_attribute(:draft_key)
   allow_new_queued_post_payload_attribute(IsbfAnonymous::OWNER_FIELD.to_sym)
+
+  add_to_serializer :reviewable_queued_post,
+                    IsbfAnonymous::POST_FIELD.to_sym,
+                    include_condition: -> { scope&.is_admin? } do
+    IsbfAnonymous.requested?(object.payload) == true
+  end
 
   Guardian.prepend(IsbfAnonymous::Permissions)
   Guardian.prepend(IsbfAnonymous::PoolPermissions)

@@ -49,6 +49,23 @@ rejection feedback go to the real owner, even when accounts are shared.
 
 Only administrators can look up an author:
 
+- On a published anonymous post, open the wrench menu at the bottom of the
+  post and select **View real author**.
+- On the review page, anonymous queued posts have a **View real author** button
+  below their content. Other reviewable types use their existing interfaces.
+- Both buttons open the same dialog, showing the real username, name when
+  available, avatar, and user ID. **Manage this user** opens that real account's
+  existing admin page.
+
+The lookup is made only when an administrator opens the dialog. Results stay
+in the dialog and are discarded when it closes; they are not added to post
+models or browser storage. Lookup always uses the post or queued-post ID:
+different people can share the same anonymous account. The review serializer
+exposes only the `isbf_per_post_anonymous` boolean to administrators to control
+the button's visibility. Ownership remains private.
+
+The buttons reuse the existing administrator-only APIs:
+
 - `GET /isbf-anonymous/api/posts/:id/author.json`
 - `GET /isbf-anonymous/api/queued-posts/:id/author.json`
 
@@ -102,3 +119,13 @@ Run `LOAD_PLUGINS=1 bin/rspec plugins/isbf-anonymous/spec`. The tests exercise
 rotation boundaries and the account bound, shared-author ownership and
 notifications, real-user limits and review, public payload privacy,
 administrator lookup, API retries, and migration/cleanup with repeated runs.
+
+Run the frontend tests against a Rails server with plugins loaded:
+
+```bash
+bin/qunit --qunit-path /tests --target isbf-anonymous plugins/isbf-anonymous/test/javascripts
+```
+
+These cover the administrator menu, review connector, on-demand lookup,
+errors, retry, and dialog lifecycle. Use `--rails-port` and `--rails-env` to
+target an isolated server when sharing the development site.

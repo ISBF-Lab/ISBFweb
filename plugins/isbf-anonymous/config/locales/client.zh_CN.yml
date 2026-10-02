@@ -1,0 +1,15 @@
+zh_CN:
+  js:
+    isbf_anonymous:
+      author_lookup:
+        button: "查看真实作者"
+        title: "真实作者"
+        username: "用户名"
+        name: "显示名"
+        user_id: "用户 ID"
+        manage_user: "管理此用户"
+        retry: "重试"
+        loaded: "真实作者：%{username}"
+        forbidden: "仅管理员可以查询真实作者。"
+        unavailable: "作者信息已不可用。"
+        failed: "查询作者失败，请重试。"

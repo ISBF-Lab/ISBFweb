@@ -200,6 +200,42 @@ RSpec.describe PostsController do
       expect(Notification.where(user_id: other_user.id, topic_id: published.topic_id)).not_to exist
     end
 
+    it "marks anonymous review items only for administrators" do
+      SiteSetting.approve_post_count = 1
+      publish_anonymously(user)
+      reviewable = ReviewableQueuedPost.order(:id).last
+
+      sign_in(moderator)
+      get "/review/#{reviewable.id}.json"
+      expect(response.status).to eq(200)
+      expect(response.parsed_body["reviewable"]).not_to have_key(IsbfAnonymous::POST_FIELD)
+      expect(response.body).not_to include(IsbfAnonymous::OWNER_FIELD, user.username)
+
+      sign_in(admin)
+      get "/review/#{reviewable.id}.json"
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.dig("reviewable", IsbfAnonymous::POST_FIELD)).to eq(true)
+      expect(response.body).not_to include(IsbfAnonymous::OWNER_FIELD, user.username)
+    end
+
+    it "marks ordinary review items as non-anonymous for administrators" do
+      SiteSetting.approve_post_count = 1
+      sign_in(user)
+      post "/posts.json",
+           params: {
+             title: "A public campus discussion awaiting approval",
+             raw: "A sufficiently long public campus discussion awaiting approval.",
+             category: category.id,
+           }
+      expect(response.status).to eq(200), response.body
+      reviewable = ReviewableQueuedPost.order(:id).last
+
+      sign_in(admin)
+      get "/review/#{reviewable.id}.json"
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.dig("reviewable", IsbfAnonymous::POST_FIELD)).to eq(false)
+    end
+
     it "queues according to the real author's history and preserves ownership through approval" do
       SiteSetting.approve_post_count = 1
       publish_anonymously(user)
@@ -351,6 +387,8 @@ RSpec.describe PostsController do
 
     it "returns the real author only to administrators" do
       published = publish_anonymously(user)
+      other_post = publish_anonymously(other_user, title: "Another anonymous campus discussion")
+      expect(other_post.user_id).to eq(published.user_id)
       lookup = "/isbf-anonymous/api/posts/#{published.id}/author.json"
       get lookup
       expect(response.status).to eq(403)
@@ -361,6 +399,23 @@ RSpec.describe PostsController do
       get lookup
       expect(response.status).to eq(200)
       expect(response.parsed_body.dig("author", "id")).to eq(user.id)
+
+      get "/isbf-anonymous/api/posts/#{other_post.id}/author.json"
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.dig("author", "id")).to eq(other_user.id)
+    end
+
+    it "returns 404 when a post is unmarked or its author is unavailable" do
+      published = publish_anonymously(user)
+      ordinary = Fabricate(:post)
+      published.custom_fields[IsbfAnonymous::OWNER_FIELD] = User.maximum(:id) + 1
+      published.save_custom_fields
+
+      sign_in(admin)
+      get "/isbf-anonymous/api/posts/#{ordinary.id}/author.json"
+      expect(response.status).to eq(404)
+      get "/isbf-anonymous/api/posts/#{published.id}/author.json"
+      expect(response.status).to eq(404)
     end
 
     it "restricts queued author lookup to administrators" do
@@ -369,6 +424,8 @@ RSpec.describe PostsController do
       reviewable = ReviewableQueuedPost.order(:id).last
       lookup = "/isbf-anonymous/api/queued-posts/#{reviewable.id}/author.json"
 
+      get lookup
+      expect(response.status).to eq(403)
       sign_in(moderator)
       get lookup
       expect(response.status).to eq(403)
