@@ -117,6 +117,7 @@ RSpec.describe PostsController do
       published = Post.order(:id).last
 
       expect(response.status).to eq(200)
+      expect(response.parsed_body[IsbfAnonymous::POST_FIELD]).to eq(true)
       expect(published.user_id).to eq(IsbfAnonymous::PoolAccount.first.user_id)
       expect(published.topic.user_id).to eq(published.user_id)
       expect(published.custom_fields[IsbfAnonymous::OWNER_FIELD]).to eq(user.id)
@@ -129,6 +130,16 @@ RSpec.describe PostsController do
 
       get "/t/#{published.topic_id}.json"
       expect(response.status).to eq(200)
+      expect(response.parsed_body.dig("post_stream", "posts", 0, IsbfAnonymous::POST_FIELD)).to eq(
+        true,
+      )
+      expect(response.body).not_to include(IsbfAnonymous::OWNER_FIELD, user.username)
+
+      get "/t/#{published.topic_id}/posts.json", params: { post_ids: [published.id] }
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.dig("post_stream", "posts", 0, IsbfAnonymous::POST_FIELD)).to eq(
+        true,
+      )
       expect(response.body).not_to include(IsbfAnonymous::OWNER_FIELD, user.username)
     end
 
@@ -338,6 +349,23 @@ RSpec.describe PostsController do
       expect(response.status).to eq(200)
     ensure
       RateLimiter.disable
+    end
+  end
+
+  describe "#show" do
+    it "exposes the anonymous marker without private ownership for administrator menus" do
+      published = publish_anonymously(user)
+      ordinary = Fabricate(:post, topic: published.topic)
+
+      sign_in(admin)
+      get "/posts/#{published.id}.json"
+      expect(response.status).to eq(200)
+      expect(response.parsed_body[IsbfAnonymous::POST_FIELD]).to eq(true)
+      expect(response.body).not_to include(IsbfAnonymous::OWNER_FIELD, user.username)
+
+      get "/posts/#{ordinary.id}.json"
+      expect(response.status).to eq(200)
+      expect(response.parsed_body[IsbfAnonymous::POST_FIELD]).to eq(false)
     end
   end
 

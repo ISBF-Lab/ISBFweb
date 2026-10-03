@@ -35,7 +35,7 @@ function anonymousTopic() {
     post.user_id = 77;
     post.username = "anon_pool_0001";
     post.name = null;
-    post.custom_fields = { isbf_per_post_anonymous: index < 2 };
+    post.isbf_per_post_anonymous = index < 2;
   });
   topic.post_stream.stream = topic.post_stream.posts.map((post) => post.id);
   return topic;
