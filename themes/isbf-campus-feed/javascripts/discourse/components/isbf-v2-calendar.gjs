@@ -1,10 +1,13 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+import { fn } from "@ember/helper";
+import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { scheduleOnce } from "@ember/runloop";
 import { service } from "@ember/service";
 import { settings, themePrefix } from "virtual:theme";
 import { ajax } from "discourse/lib/ajax";
+import { eq } from "discourse/truth-helpers";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import I18n, { i18n } from "discourse-i18n";
 
@@ -46,8 +49,10 @@ export default class ISBFV2Calendar extends Component {
   @tracked endInput = "";
   @tracked allDay = false;
   @tracked saveError = false;
+  @tracked isSaving = false;
 
   weekdays = WEEKDAYS.map((day) => i18n(themePrefix(`isbf_v2.week_${day}`)));
+  #editorVersion = 0;
   #requestNumber = 0;
 
   constructor() {
@@ -125,11 +130,15 @@ export default class ISBFV2Calendar extends Component {
     const events = this.filter === "personal" ? [] : this.communityEvents;
     return [...entries, ...events]
       .filter((item) => this.#occursOn(item, this.selectedDate))
-      .sort((a, b) => a.starts_at.localeCompare(b.starts_at));
+      .sort((a, b) => new Date(a.starts_at) - new Date(b.starts_at));
   }
 
   @action
   async loadMonth() {
+    if (this.isDestroying) {
+      return;
+    }
+
     const request = ++this.#requestNumber;
     const first = new Date(
       this.visibleMonth.getFullYear(),
@@ -245,6 +254,7 @@ export default class ISBFV2Calendar extends Component {
 
   @action
   newEntry() {
+    this.#editorVersion++;
     this.editingId = null;
     this.title = "";
     this.note = "";
@@ -258,6 +268,7 @@ export default class ISBFV2Calendar extends Component {
 
   @action
   editEntry(entry) {
+    this.#editorVersion++;
     this.editingId = entry.id;
     this.title = entry.title;
     this.note = entry.note || "";
@@ -277,6 +288,7 @@ export default class ISBFV2Calendar extends Component {
 
   @action
   closeEditor() {
+    this.#editorVersion++;
     this.isEditing = false;
   }
 
@@ -321,6 +333,10 @@ export default class ISBFV2Calendar extends Component {
   @action
   async saveEntry(event) {
     event.preventDefault();
+    if (this.isDestroying || !this.isEditing || this.isSaving) {
+      return;
+    }
+
     this.saveError = false;
 
     let startsAt;
@@ -345,6 +361,9 @@ export default class ISBFV2Calendar extends Component {
       return;
     }
 
+    const editorVersion = this.#editorVersion;
+    this.isSaving = true;
+
     try {
       await ajax(
         this.editingId
@@ -363,10 +382,21 @@ export default class ISBFV2Calendar extends Component {
           },
         }
       );
-      this.isEditing = false;
+      if (this.isDestroying) {
+        return;
+      }
+      if (editorVersion === this.#editorVersion) {
+        this.closeEditor();
+      }
       await this.loadMonth();
     } catch {
-      this.saveError = true;
+      if (!this.isDestroying && editorVersion === this.#editorVersion) {
+        this.saveError = true;
+      }
+    } finally {
+      if (!this.isDestroying) {
+        this.isSaving = false;
+      }
     }
   }
 
@@ -375,7 +405,7 @@ export default class ISBFV2Calendar extends Component {
     const confirmed = await this.dialog.confirm({
       message: i18n(themePrefix("isbf_v2.calendar_delete_confirm")),
     });
-    if (!confirmed) {
+    if (!confirmed || this.isDestroying) {
       return;
     }
 
@@ -383,7 +413,9 @@ export default class ISBFV2Calendar extends Component {
       await ajax(`/isbf/api/entries/${entry.id}.json`, { type: "DELETE" });
       await this.loadMonth();
     } catch {
-      this.loadError = true;
+      if (!this.isDestroying) {
+        this.loadError = true;
+      }
     }
   }
 
@@ -643,6 +675,7 @@ export default class ISBFV2Calendar extends Component {
                 {{on "click" this.closeEditor}}
               >{{i18n (themePrefix "isbf_v2.calendar_cancel")}}</button><button
                 class="isbf-v2-calendar__primary"
+                disabled={{this.isSaving}}
                 type="submit"
               >{{i18n (themePrefix "isbf_v2.calendar_save")}}</button></div>
           </form>

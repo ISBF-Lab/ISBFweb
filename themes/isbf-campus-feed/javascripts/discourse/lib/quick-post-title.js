@@ -22,16 +22,22 @@ export function quickPostTitle(reply, minimumLength, maximumLength) {
 
   const minimum = Math.max(1, Number(minimumLength) || 1);
   const maximum = Math.max(minimum, Number(maximumLength) || 255);
-  const limit = Math.min(maximum, 80);
-  let title = (text || "引用转发").slice(0, limit);
+  const limit = Math.min(maximum, Math.max(minimum, 80));
+  const truncate = (value, length) => {
+    const truncated = value.slice(0, length);
+    return /[\uD800-\uDBFF]$/.test(truncated)
+      ? truncated.slice(0, -1)
+      : truncated;
+  };
+  let title = truncate(text || "引用转发", limit);
 
-  if (title.length < minimum) {
-    title = `校园动态：${title}`.slice(0, maximum);
+  if (Array.from(title).length < minimum) {
+    title = truncate(`校园动态：${title}`, maximum);
   }
 
-  if (title.length < minimum) {
+  if (Array.from(title).length < minimum) {
     const timestamp = new Date().toISOString().slice(0, 16).replace("T", " ");
-    title = `${title} · ${timestamp} · 国金综合平台`.slice(0, maximum);
+    title = truncate(`${title} · ${timestamp} · 国金综合平台`, maximum);
   }
 
   return title;

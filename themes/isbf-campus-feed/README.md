@@ -18,10 +18,13 @@ the headless shell, so launch Playwright with `channel: "chromium"`.
 The calendar and workbench routes, and the private calendar entry API, require
 the `isbf-calendar` plugin. Community events use Discourse Events and the
 `calendar_category_id` and `calendar_category_path` theme settings.
+The `isbf-calendar` plugin is not included in this repository and must be
+supplied separately for a reproducible deployment and calendar integration tests.
 
 Per-post anonymous publishing requires `plugins/isbf-anonymous`, Discourse's
 `allow_anonymous_mode` setting, and `anonymous_posting_allowed_groups` containing
-`trust_level_0` (group 10). The plugin uses the core shadow identity; its private
+`trust_level_0` (group 10). The plugin uses the core shadow identity by default
+and supports shared accounts when `isbf_anonymous_pool_enabled` is enabled; its private
 `/isbf-anonymous/api/posts` endpoint resolves all rotated identities for the
 logged-in owner. Anonymous posts cannot be edited or deleted by non-staff after
 publishing. The core full-session anonymous switch is denied by the plugin.

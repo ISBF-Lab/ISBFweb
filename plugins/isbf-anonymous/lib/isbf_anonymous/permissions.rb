@@ -23,7 +23,7 @@ module IsbfAnonymous
     topic_id = options[:topic_id]
     if topic_id.present?
       topic = Topic.find_by(id: topic_id)
-      forbidden.call unless topic && topic.archetype == Archetype.default
+      forbidden.call unless topic && topic.visible? && topic.archetype == Archetype.default
       category = topic.category
     else
       archetype = options[:archetype]

@@ -181,7 +181,9 @@ class PostValidator < ActiveModel::Validator
     last_posts_count = post.acting_user.posts_for_posting_limits.where(id: last_post_ids).count
     return if last_posts_count < SiteSetting.max_consecutive_replies
 
-    if guardian.can_edit?(topic.ordered_posts.last) || post.acting_user != post.user
+    last_post = topic.ordered_posts.last
+    if guardian.can_edit?(last_post) || post.acting_user != post.user ||
+         last_post.user_id != post.acting_user.id
       post.errors.add(
         :base,
         I18n.t(:max_consecutive_replies, count: SiteSetting.max_consecutive_replies),

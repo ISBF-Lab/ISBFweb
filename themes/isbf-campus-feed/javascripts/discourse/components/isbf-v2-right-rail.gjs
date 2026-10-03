@@ -10,12 +10,16 @@ export default class ISBFV2RightRail extends Component {
 
   constructor() {
     super(...arguments);
-    this.loadTopics();
+    void this.#loadTopics();
   }
 
-  async loadTopics() {
+  async #loadTopics() {
     try {
       const response = await ajax("/latest.json");
+      if (this.isDestroying) {
+        return;
+      }
+
       this.topics = (response.topic_list?.topics ?? [])
         .slice(0, 4)
         .map((topic) => ({

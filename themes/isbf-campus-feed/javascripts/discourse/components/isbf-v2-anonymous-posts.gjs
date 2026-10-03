@@ -27,6 +27,10 @@ export default class ISBFV2AnonymousPosts extends Component {
     return Boolean(this.nextBeforeId);
   }
 
+  get canLoadMore() {
+    return !this.loaded || this.hasMore;
+  }
+
   @action
   async loadMore() {
     if (this.isDestroying || this.loading || (this.loaded && !this.hasMore)) {
@@ -74,7 +78,7 @@ export default class ISBFV2AnonymousPosts extends Component {
       {{else if this.isEmpty}}
         <p>{{i18n (themePrefix "isbf_v2.anonymous_posts_empty")}}</p>
       {{/if}}
-      {{#if this.hasMore}}
+      {{#if this.canLoadMore}}
         <DButton
           class="isbf-v2-anonymous-posts__more"
           @action={{this.loadMore}}

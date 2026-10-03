@@ -131,3 +131,6 @@ bin/qunit --qunit-path /tests --target isbf-anonymous plugins/isbf-anonymous/tes
 These cover the administrator menu, review connector, on-demand lookup,
 errors, retry, and dialog lifecycle. Use `--rails-port` and `--rails-env` to
 target an isolated server when sharing the development site.
+
+The [2026-10-03 repository audit](docs/repository-audit-20261003.md) records
+the reviewed scope, fixes, completed checks, and remaining integration checks.

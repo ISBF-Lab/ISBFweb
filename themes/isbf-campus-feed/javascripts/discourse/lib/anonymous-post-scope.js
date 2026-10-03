@@ -7,6 +7,7 @@ export function canPublishAnonymously(model, currentUser, siteSettings) {
     currentUser.is_anonymous ||
     !["createTopic", "reply"].includes(model.action) ||
     model.archetypeId === "private_message" ||
+    [false, "false"].includes(model.visible) ||
     [true, "true"].includes(model.academy_official)
   ) {
     return false;
@@ -14,7 +15,8 @@ export function canPublishAnonymously(model, currentUser, siteSettings) {
 
   if (
     model.action === "reply" &&
-    model.topic?.archetype === "private_message"
+    (model.topic?.archetype === "private_message" ||
+      [false, "false"].includes(model.topic?.visible))
   ) {
     return false;
   }
