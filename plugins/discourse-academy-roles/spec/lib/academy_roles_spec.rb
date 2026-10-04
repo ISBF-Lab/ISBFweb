@@ -19,12 +19,49 @@ RSpec.describe DiscourseAcademyRoles do
     expect(Guardian.new(moderator).can_edit_group?(official_group)).to eq(false)
   end
 
+  describe "merge permissions" do
+    fab!(:member, :user)
+    fab!(:other_member, :user)
+    fab!(:registration, :registered_academy_student)
+
+    it "protects bound source and target accounts while allowing ordinary account merges" do
+      guardian = admin.guardian
+
+      expect(guardian.can_merge_user?(registration.user)).to eq(false)
+      expect(guardian.can_merge_users?(registration.user, member)).to eq(false)
+      expect(guardian.can_merge_users?(member, registration.user)).to eq(false)
+      expect(guardian.can_merge_user?(member)).to eq(true)
+      expect(guardian.can_merge_users?(member, other_member)).to eq(true)
+      expect(guardian.can_merge_user?(admin)).to eq(false)
+      expect(guardian.can_merge_users?(member, nil)).to eq(false)
+    end
+
+    it "preserves core merge permissions when the plugin is disabled" do
+      SiteSetting.academy_roles_enabled = false
+      guardian = admin.guardian
+
+      expect(guardian.can_merge_user?(registration.user)).to eq(true)
+      expect(guardian.can_merge_users?(registration.user, member)).to eq(true)
+      expect(guardian.can_merge_users?(member, registration.user)).to eq(true)
+      expect(guardian.can_merge_user?(admin)).to eq(false)
+      expect(guardian.can_merge_user?(nil)).to eq(false)
+      expect(guardian.can_merge_users?(admin, member)).to eq(false)
+      expect(guardian.can_merge_users?(member, nil)).to eq(false)
+      expect(moderator.guardian.can_merge_user?(member)).to eq(false)
+      expect(moderator.guardian.can_merge_users?(member, other_member)).to eq(
+        false
+      )
+    end
+  end
+
   it "locks a new member's internal trust independently of activity" do
     member = Fabricate(:user, refresh_auto_groups: true)
 
     expect(member.reload.trust_level).to eq(0)
     expect(member.manual_locked_trust_level).to eq(0)
-    expect(member.custom_fields[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD]).to eq(0)
+    expect(
+      member.custom_fields[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD]
+    ).to eq(0)
   end
 
   it "retains an existing member's activity while fixing internal trust" do
@@ -37,13 +74,28 @@ RSpec.describe DiscourseAcademyRoles do
 
     expect(member.reload.trust_level).to eq(0)
     expect(member.manual_locked_trust_level).to eq(0)
-    expect(member.custom_fields[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD]).to eq(4)
+    expect(
+      member.custom_fields[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD]
+    ).to eq(4)
   end
 
   it "requires single-use invitation codes without an email binding" do
-    reusable = Fabricate.build(:invite, invited_by: admin, email: nil, max_redemptions_allowed: 2)
-    bound_to_email = Fabricate.build(:invite, invited_by: admin, max_redemptions_allowed: 1)
-    bound_to_domain = Fabricate.build(:invite, invited_by: admin, email: nil, domain: "example.edu")
+    reusable =
+      Fabricate.build(
+        :invite,
+        invited_by: admin,
+        email: nil,
+        max_redemptions_allowed: 2
+      )
+    bound_to_email =
+      Fabricate.build(:invite, invited_by: admin, max_redemptions_allowed: 1)
+    bound_to_domain =
+      Fabricate.build(
+        :invite,
+        invited_by: admin,
+        email: nil,
+        domain: "example.edu"
+      )
 
     expect(reusable).not_to be_valid
     expect(bound_to_email).not_to be_valid
@@ -68,7 +120,9 @@ RSpec.describe DiscourseAcademyRoles do
     official_group.remove(member)
 
     expect(Guardian.new(member).can_edit_post?(post)).to eq(false)
-    expect(post.reload.custom_fields[DiscourseAcademyRoles::OFFICIAL_POST_FIELD]).to eq(true)
+    expect(
+      post.reload.custom_fields[DiscourseAcademyRoles::OFFICIAL_POST_FIELD]
+    ).to eq(true)
   end
 
   it "prevents moving an official topic into an ordinary category" do
@@ -112,18 +166,30 @@ RSpec.describe DiscourseAcademyRoles do
     ].each { |setting| SiteSetting.public_send("#{setting}=", 0) }
 
     member = Fabricate(:user, refresh_auto_groups: true)
-    member.custom_fields[DiscourseAcademyRoles::LV3_SINCE_FIELD] = 89.days.ago.iso8601
-    member.custom_fields[DiscourseAcademyRoles::LV3_CHECKED_AT_FIELD] = 1.day.ago.iso8601
+    member.custom_fields[DiscourseAcademyRoles::LV3_SINCE_FIELD] = 89
+      .days
+      .ago
+      .iso8601
+    member.custom_fields[DiscourseAcademyRoles::LV3_CHECKED_AT_FIELD] = 1
+      .day
+      .ago
+      .iso8601
     member.save_custom_fields
 
     DiscourseAcademyRoles::ActivityLevel.update(member)
-    expect(member.custom_fields[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD]).to eq(3)
+    expect(
+      member.custom_fields[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD]
+    ).to eq(3)
 
     DiscourseAcademyRoles::ActivityLevel.update(member, now: 1.day.from_now)
-    expect(member.custom_fields[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD]).to eq(4)
+    expect(
+      member.custom_fields[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD]
+    ).to eq(4)
     expect(member.reload.trust_level).to eq(0)
 
     DiscourseAcademyRoles::ActivityLevel.update(member, now: 3.days.from_now)
-    expect(member.custom_fields[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD]).to eq(3)
+    expect(
+      member.custom_fields[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD]
+    ).to eq(3)
   end
 end

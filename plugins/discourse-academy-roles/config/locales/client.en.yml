@@ -1,4 +1,9 @@
 en:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          academy_roles: "Academy roles"
   js:
     academy_roles:
       invite_title: "Register with an invitation code"
@@ -14,3 +19,28 @@ en:
       activity_level: "Activity level %{level}"
       activity_title: "Activity level"
       activity_value: "LV%{level}"
+      student_number: "Student number"
+      student_invites:
+        title: "Student invitations"
+        description: "Issue single-use invitation codes and view the student number bound to each registered account."
+        create: "Create student invitation"
+        created: "Invitation created. Share the code or link with the student."
+        expiry_days: "Valid for this many days"
+        expires_at: "Expires at"
+        copied: "Copied"
+        status: "Status"
+        account: "Registered account"
+        no_account: "No account available"
+        unbound: "No student number bound"
+        actions: "Actions"
+        reissue: "Generate a new code"
+        revoke: "Revoke code"
+        confirm_reissue: "Generate a new invitation code? The previous code will stop working."
+        confirm_revoke: "Revoke this invitation code? It will no longer allow registration."
+        load_more: "Load more"
+        empty: "No student invitations yet."
+        states:
+          pending: "Not redeemed"
+          registered: "Registered"
+          expired: "Expired"
+          revoked: "Revoked"

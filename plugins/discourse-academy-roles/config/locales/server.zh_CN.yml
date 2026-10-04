@@ -7,8 +7,16 @@ zh_CN:
       academy_roles_not_configured: "启用学院身份前，请先选择已有的官方用户组和分类。"
   academy_roles:
     single_use_invite: "学院邀请码只能使用一次。"
-    unbound_invite: "请生成不绑定邮箱或域名的邀请码。"
+    unbound_invite: "邀请码不能绑定邮箱或邮箱域名。"
     official_category_move: "官方话题必须保留在官方分类。"
     official_required: "只有经认证的官方成员才能在此分类发布话题。"
     official_outside_category: "官方身份只能在官方分类使用。"
     official_membership_required: "你的官方身份已失效。"
+    student_invites:
+      immutable_identity: "学号绑定关系不能修改。"
+      duplicate_student_number: "此学号已生成邀请码或已绑定账号。"
+      already_registered: "此学号已绑定账号。"
+      create_failed: "邀请码保存失败。"
+      new_account_required: "此邀请码只能用于注册新账号。"
+      use_student_invite: "请从学号邀请码页面生成邀请。"
+      merge_not_allowed: "绑定了学号的账号不能合并。"

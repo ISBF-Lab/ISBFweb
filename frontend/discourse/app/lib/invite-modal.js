@@ -1,10 +1,12 @@
 import { getOwner } from "@ember/owner";
 import CreateInvite from "discourse/components/modal/create-invite";
 import CreateInviteWithRoles from "discourse/components/modal/create-invite-with-roles";
+import { applyValueTransformer } from "discourse/lib/transformer";
 
 /**
  * Opens the invite creation modal, selecting the redesigned role-based
  * variant when the `enable_invite_modal_with_roles` upcoming change is enabled.
+ * Plugins can replace the selected component with the invite-modal-component transformer.
  *
  * @param {Object} context - any owned object (component, route, controller)
  * @param {Object} opts - options forwarded to `modal.show`, e.g. `{ model }`
@@ -15,9 +17,15 @@ export function showCreateInviteModal(context, opts = {}) {
   const modal = owner.lookup("service:modal");
   const siteSettings = owner.lookup("service:site-settings");
 
-  const component = siteSettings.enable_invite_modal_with_roles
+  const defaultComponent = siteSettings.enable_invite_modal_with_roles
     ? CreateInviteWithRoles
     : CreateInvite;
+
+  const component = applyValueTransformer(
+    "invite-modal-component",
+    defaultComponent,
+    { opts }
+  );
 
   return modal.show(component, opts);
 }

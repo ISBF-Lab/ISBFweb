@@ -12,3 +12,11 @@ en:
     official_required: "Only verified official members may start topics in this category."
     official_outside_category: "Official identity can only be used in the official category."
     official_membership_required: "Your official identity is no longer active."
+    student_invites:
+      immutable_identity: "A student number binding cannot be changed."
+      duplicate_student_number: "An invitation or account already exists for this student number."
+      already_registered: "This student number is already bound to an account."
+      create_failed: "The invitation could not be saved."
+      new_account_required: "This invitation is only for registering a new account."
+      use_student_invite: "Create an invitation from the student invitations page."
+      merge_not_allowed: "Accounts with a student number binding cannot be merged."

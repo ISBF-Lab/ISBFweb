@@ -51,13 +51,20 @@ module DiscourseAcademyRoles
       end
     official_category = official_category?(category_id)
     is_private_message =
-      options[:archetype] == Archetype.private_message || post.topic&.private_message?
+      options[:archetype] == Archetype.private_message ||
+        post.topic&.private_message?
 
     if official
       if is_private_message || !official_category
-        post.errors.add(:base, I18n.t("academy_roles.official_outside_category"))
+        post.errors.add(
+          :base,
+          I18n.t("academy_roles.official_outside_category")
+        )
       elsif !official_member?(post.user)
-        post.errors.add(:base, I18n.t("academy_roles.official_membership_required"))
+        post.errors.add(
+          :base,
+          I18n.t("academy_roles.official_membership_required")
+        )
       else
         post.custom_fields[OFFICIAL_POST_FIELD] = true
       end
@@ -67,7 +74,9 @@ module DiscourseAcademyRoles
   end
 
   def self.mark_official_post(post, options)
-    return unless ActiveModel::Type::Boolean.new.cast(options[:academy_official])
+    unless ActiveModel::Type::Boolean.new.cast(options[:academy_official])
+      return
+    end
     return unless official_category?(post.topic&.category_id)
 
     post.custom_fields[OFFICIAL_POST_FIELD] = true
@@ -77,6 +86,8 @@ module DiscourseAcademyRoles
   def self.ensure_valid_post!(user, options)
     post = Post.new(user: user)
     validate_post(post, options)
-    raise Discourse::InvalidAccess.new(post.errors.full_messages.to_sentence) if post.errors.any?
+    if post.errors.any?
+      raise Discourse::InvalidAccess.new(post.errors.full_messages.to_sentence)
+    end
   end
 end

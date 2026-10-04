@@ -3,13 +3,15 @@
 desc "Configure a closed academy site with official and ordinary categories"
 task "academy_roles:setup" => :environment do
   official_group =
-    Group.find_or_create_by!(name: "academy_official") { |group| group.full_name = "学院官方认证" }
+    Group.find_or_create_by!(name: "academy_official") do |group|
+      group.full_name = "学院官方认证"
+    end
   official_group.update!(
     public_admission: false,
     public_exit: false,
     allow_membership_requests: false,
     automatic_membership_email_domains: "",
-    grant_trust_level: 0,
+    grant_trust_level: 0
   )
 
   ordinary_category =
@@ -27,7 +29,9 @@ task "academy_roles:setup" => :environment do
   official_category.update!(name: "官方")
 
   ordinary_category.set_permissions(everyone: :full)
-  official_category.set_permissions({ everyone: :create_post }.merge(official_group => :full))
+  official_category.set_permissions(
+    { everyone: :create_post }.merge(official_group => :full)
+  )
 
   SiteSetting.login_required = true
   SiteSetting.invite_only = true
@@ -57,9 +61,26 @@ task "academy_roles:setup" => :environment do
 
   SiteSetting.academy_roles_enabled = true
 
-  Badge.where(id: [Badge::BasicUser, Badge::Member, Badge::Regular, Badge::Leader]).update_all(
-    enabled: false,
-  )
+  Badge.where(
+    id: [Badge::BasicUser, Badge::Member, Badge::Regular, Badge::Leader]
+  ).update_all(enabled: false)
 
   puts "Academy roles configured. Site admins can issue one-use invitations and manage #{official_group.name}."
+end
+
+desc "Invalidate academy invitations without a student number binding"
+task "academy_roles:invalidate_unbound_invites" => :environment do
+  unless SiteSetting.academy_roles_enabled?
+    abort "Enable academy_roles_enabled before invalidating invitations."
+  end
+
+  count =
+    Invite
+      .where(invalidated_at: nil)
+      .where.not(
+        id: DiscourseAcademyRoles::StudentRegistration.select(:invite_id)
+      )
+      .update_all(invalidated_at: Time.current)
+
+  puts "Invalidated #{count} invitations without student number bindings."
 end

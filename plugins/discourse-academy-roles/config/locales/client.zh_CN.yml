@@ -1,4 +1,9 @@
 zh_CN:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          academy_roles: "学院身份"
   js:
     academy_roles:
       invite_title: "使用邀请码注册"
@@ -14,3 +19,28 @@ zh_CN:
       activity_level: "活跃等级 LV%{level}"
       activity_title: "活跃等级"
       activity_value: "LV%{level}"
+      student_number: "学号"
+      student_invites:
+        title: "学号邀请码"
+        description: "生成单次使用的邀请码，并查看已注册账号绑定的学号。"
+        create: "生成学号邀请码"
+        created: "邀请码已生成，请将邀请码或邀请链接发给该学生。"
+        expiry_days: "有效天数"
+        expires_at: "过期时间"
+        copied: "已复制"
+        status: "状态"
+        account: "注册账号"
+        no_account: "暂无可查看的账号"
+        unbound: "未绑定学号"
+        actions: "操作"
+        reissue: "重新生成邀请码"
+        revoke: "撤销邀请码"
+        confirm_reissue: "重新生成邀请码？旧邀请码将立即失效。"
+        confirm_revoke: "撤销此邀请码？撤销后将无法用它注册。"
+        load_more: "加载更多"
+        empty: "还没有学号邀请码。"
+        states:
+          pending: "未兑换"
+          registered: "已注册"
+          expired: "已过期"
+          revoked: "已撤销"

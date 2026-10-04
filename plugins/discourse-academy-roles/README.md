@@ -6,7 +6,9 @@ Run `bin/rake academy_roles:setup` once, then restart the web and job processes.
 
 For a local checkout where plugins are not loaded by default, run `LOAD_PLUGINS=1 bin/rake academy_roles:setup`.
 
-Site admins create an invitation link in Discourse's invitation UI with one redemption and no email address. The UI shows the link's key as an invitation code. A visitor enters that code on the login page; Discourse's existing invitation flow handles expiry, single redemption, and revocation. The first person to redeem an unbound code receives the account. Moderators and members cannot issue registration invitations.
+Site admins issue student invitations at `/admin/plugins/discourse-academy-roles/student-invites` or through the standard invitation creation button. Each code is bound to a unique student number, permits one new account registration, and binds that number to the account in the same transaction as redemption. Only site admins can view student numbers, including in admin user details. Moderators, members, anonymous identities, and visitors cannot view them. Unredeemed codes can be revoked or reissued; registered bindings cannot be changed, transferred, or released by deleting an invitation or account. Account merges involving a bound student number are blocked. Existing accounts are retained without backfilling student numbers.
+
+After upgrading and migrating the database, old invitations without a student-number record cannot be redeemed while the plugin is enabled. Run `LOAD_PLUGINS=1 bin/rake academy_roles:invalidate_unbound_invites` to also mark those codes invalid in the core invitation list. See the [invitation guide](../../docs/academy-invitation-guide.md) for issuance, registration, upgrade steps, and email activation requirements.
 
 Only site admins add or remove members of `academy_official`. An official topic must be created in **官方** by a verified member using official identity. Any member can reply there. Verified members can mark their replies official; all posts in **普通** use ordinary identity. The badge on an existing official post remains after certification is revoked, while its former author can no longer edit it.
 

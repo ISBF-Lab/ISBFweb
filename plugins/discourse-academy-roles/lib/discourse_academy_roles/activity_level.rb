@@ -16,9 +16,13 @@ module DiscourseAcademyRoles
       requirements = ActivityRequirements.new(user)
 
       if requirements.requirements_met?
-        since = Time.zone.parse(fields[LV3_SINCE_FIELD]) if fields[LV3_SINCE_FIELD].present?
-        last_check = Time.zone.parse(previous_checked_at) if previous_checked_at.present?
-        since = now if since.nil? || last_check.nil? || last_check < now - 36.hours
+        since = Time.zone.parse(fields[LV3_SINCE_FIELD]) if fields[
+          LV3_SINCE_FIELD
+        ].present?
+        last_check =
+          Time.zone.parse(previous_checked_at) if previous_checked_at.present?
+        since = now if since.nil? || last_check.nil? ||
+          last_check < now - 36.hours
         level = since <= now - 90.days ? 4 : 3
         fields[LV3_SINCE_FIELD] = since.iso8601
         fields[LV3_CHECKED_AT_FIELD] = now.iso8601
