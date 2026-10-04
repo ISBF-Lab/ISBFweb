@@ -1,0 +1,114 @@
+import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
+import { on } from "@ember/modifier";
+import { action } from "@ember/object";
+import { themePrefix } from "virtual:theme";
+import { ajax } from "discourse/lib/ajax";
+import DButton from "discourse/ui-kit/d-button";
+import dIcon from "discourse/ui-kit/helpers/d-icon";
+import { i18n } from "discourse-i18n";
+import { mergeEntries } from "../lib/notification-groups";
+import ISBFNotificationEntry from "./isbf-notification-entry";
+
+export default class ISBFNotificationAction extends Component {
+  @tracked entries = [];
+  @tracked error = false;
+  @tracked expanded = false;
+  @tracked loaded = false;
+  @tracked loading = false;
+  @tracked nextCursor = null;
+
+  get extraEntries() {
+    return this.entries.filter(
+      (entry) => entry.key !== this.args.group.latest.key
+    );
+  }
+
+  get label() {
+    const actionName = this.args.group.key;
+    return i18n(themePrefix("isbf_v2.notification_action_count"), {
+      action: this.args.actionLabel(actionName),
+      count: this.args.group.count,
+    });
+  }
+
+  @action
+  async loadMore() {
+    if (this.loading || (this.loaded && !this.nextCursor)) {
+      return;
+    }
+    this.loading = true;
+    this.error = false;
+    try {
+      const response = await ajax(this.args.group.detail_url, {
+        data: { cursor: this.nextCursor, limit: 20 },
+      });
+      if (this.isDestroying) {
+        return;
+      }
+      const entries = await this.args.prepareEntries(response.entries);
+      if (this.isDestroying) {
+        return;
+      }
+      this.entries = mergeEntries(this.entries, entries);
+      this.nextCursor = response.next_cursor;
+      this.loaded = true;
+    } catch {
+      if (!this.isDestroying) {
+        this.error = true;
+      }
+    } finally {
+      if (!this.isDestroying) {
+        this.loading = false;
+      }
+    }
+  }
+
+  @action
+  toggle() {
+    this.expanded = !this.expanded;
+    if (this.expanded && !this.loaded) {
+      this.loadMore();
+    }
+  }
+
+  <template>
+    <section class="isbf-notification-action">
+      <button
+        aria-expanded={{if this.expanded "true" "false"}}
+        class="isbf-notification-action__toggle"
+        type="button"
+        {{on "click" this.toggle}}
+      >
+        <span>{{this.label}}</span>
+        {{dIcon (if this.expanded "chevron-down" "chevron-right")}}
+      </button>
+      <ISBFNotificationEntry @entry={{@group.latest}} />
+      {{#if this.expanded}}
+        <div class="isbf-notification-action__details">
+          {{#each this.extraEntries key="key" as |entry|}}
+            <ISBFNotificationEntry @entry={{entry}} />
+          {{/each}}
+          {{#if this.loading}}<p role="status">{{i18n
+                (themePrefix "isbf_v2.notifications_loading")
+              }}</p>{{/if}}
+          {{#if this.error}}
+            <p role="alert">{{i18n
+                (themePrefix "isbf_v2.notifications_error")
+              }}</p>
+            <DButton
+              @action={{this.loadMore}}
+              @label={{themePrefix "isbf_v2.notifications_retry"}}
+            />
+          {{else if this.nextCursor}}
+            <DButton
+              @action={{this.loadMore}}
+              @isLoading={{this.loading}}
+              @label={{themePrefix "isbf_v2.load_more"}}
+            />
+          {{/if}}
+        </div>
+      {{/if}}
+    </section>
+  </template>
+}

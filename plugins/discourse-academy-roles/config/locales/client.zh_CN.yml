@@ -1,0 +1,16 @@
+zh_CN:
+  js:
+    academy_roles:
+      invite_title: "使用邀请码注册"
+      invite_code: "邀请码"
+      redeem: "注册"
+      copy_code: "复制邀请码"
+      official_topic: "此话题将以官方身份发布"
+      post_as_official: "切换为官方身份"
+      post_as_member: "切换为普通身份"
+      posting_as_official: "当前身份：官方"
+      posting_as_member: "当前身份：普通成员"
+      official_badge: "官方"
+      activity_level: "活跃等级 LV%{level}"
+      activity_title: "活跃等级"
+      activity_value: "LV%{level}"

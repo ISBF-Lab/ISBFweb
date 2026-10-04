@@ -1,0 +1,16 @@
+en:
+  site_settings:
+    isbf_account_switch_enabled: "Enable approved account linking and direct switching"
+    isbf_account_switch_device_authorization_days: "Days a verified device may directly switch linked accounts"
+  isbf_account_switch:
+    errors:
+      disabled: "Account switching is unavailable."
+      invalid_target: "That account cannot be linked."
+      same_account: "You cannot link an account to itself."
+      link_exists: "A link request already exists for these accounts."
+      invalid_link: "This account link is unavailable."
+      admin_approval_required: "An administrator must approve this account link."
+      device_verification_required: "Verify the target account on this device before switching."
+      invalid_credentials: "The target account credentials are incorrect."
+      invalid_second_factor: "The two-factor verification failed."
+      target_unavailable: "The target account cannot sign in."

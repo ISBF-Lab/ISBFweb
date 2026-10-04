@@ -52,41 +52,44 @@ export default class ISBFV2RightRail extends Component {
         />
       </form>
 
-      {{#if this.topics.length}}
+      <div class="isbf-v2-rail__content">
+
+        {{#if this.topics.length}}
+          <section
+            aria-labelledby="isbf-v2-recent-title"
+            class="isbf-v2-rail__panel"
+          >
+            <h2 id="isbf-v2-recent-title">{{i18n
+                (themePrefix "isbf_v2.recent")
+              }}</h2>
+            {{#each this.topics as |topic|}}
+              <a class="isbf-v2-rail__topic" href={{topic.href}}><span
+                >{{topic.title}}</span>{{dIcon "chevron-right"}}</a>
+            {{/each}}
+            <a class="isbf-v2-rail__more" href="/latest">{{i18n
+                (themePrefix "isbf_v2.view_all")
+              }}</a>
+          </section>
+        {{/if}}
+
         <section
-          aria-labelledby="isbf-v2-recent-title"
+          aria-labelledby="isbf-v2-links-title"
           class="isbf-v2-rail__panel"
         >
-          <h2 id="isbf-v2-recent-title">{{i18n
-              (themePrefix "isbf_v2.recent")
+          <h2 id="isbf-v2-links-title">{{i18n
+              (themePrefix "isbf_v2.rail_label")
             }}</h2>
-          {{#each this.topics as |topic|}}
-            <a class="isbf-v2-rail__topic" href={{topic.href}}><span
-              >{{topic.title}}</span>{{dIcon "chevron-right"}}</a>
-          {{/each}}
-          <a class="isbf-v2-rail__more" href="/latest">{{i18n
-              (themePrefix "isbf_v2.view_all")
-            }}</a>
+          <a href={{settings.official_path}}><span>{{i18n
+                (themePrefix "isbf_v2.official")
+              }}</span>{{dIcon "chevron-right"}}</a>
+          <a href="/categories"><span>{{i18n
+                (themePrefix "isbf_v2.categories")
+              }}</span>{{dIcon "chevron-right"}}</a>
+          <a href="/top"><span>{{i18n
+                (themePrefix "isbf_v2.top")
+              }}</span>{{dIcon "chevron-right"}}</a>
         </section>
-      {{/if}}
-
-      <section
-        aria-labelledby="isbf-v2-links-title"
-        class="isbf-v2-rail__panel"
-      >
-        <h2 id="isbf-v2-links-title">{{i18n
-            (themePrefix "isbf_v2.rail_label")
-          }}</h2>
-        <a href={{settings.official_path}}><span>{{i18n
-              (themePrefix "isbf_v2.official")
-            }}</span>{{dIcon "chevron-right"}}</a>
-        <a href="/categories"><span>{{i18n
-              (themePrefix "isbf_v2.categories")
-            }}</span>{{dIcon "chevron-right"}}</a>
-        <a href="/top"><span>{{i18n (themePrefix "isbf_v2.top")}}</span>{{dIcon
-            "chevron-right"
-          }}</a>
-      </section>
+      </div>
     </aside>
   </template>
 }

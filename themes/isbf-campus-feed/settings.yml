@@ -4,7 +4,7 @@ brand_name:
   description: "导航中显示的平台名称。"
 
 official_path:
-  default: "/c/staff/3/l/latest"
+  default: "/c/official/6/l/latest"
   type: string
   description: "官方信息标签使用的现有 Discourse 分类列表路由。"
 

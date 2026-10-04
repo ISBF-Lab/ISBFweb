@@ -1,0 +1,16 @@
+zh_CN:
+  site_settings:
+    isbf_account_switch_enabled: "启用经管理员批准的账号关联与直接切换"
+    isbf_account_switch_device_authorization_days: "新设备验证后可直接切换关联账号的有效天数"
+  isbf_account_switch:
+    errors:
+      disabled: "账号切换功能当前不可用。"
+      invalid_target: "无法关联该账号。"
+      same_account: "不能关联当前账号自身。"
+      link_exists: "这两个账号之间已存在关联申请。"
+      invalid_link: "该账号关联不可用。"
+      admin_approval_required: "该账号关联需要管理员批准。"
+      device_verification_required: "请先在此设备验证目标账号。"
+      invalid_credentials: "目标账号的登录凭据不正确。"
+      invalid_second_factor: "双重验证失败。"
+      target_unavailable: "目标账号当前无法登录。"

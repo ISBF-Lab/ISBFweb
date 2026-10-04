@@ -1,0 +1,14 @@
+zh_CN:
+  site_settings:
+    academy_roles_enabled: "启用学院封闭成员身份及官方发布。启用前先运行 academy_roles:setup。"
+    academy_official_category: "经认证成员可发布官方话题的分类。"
+    academy_official_group: "拥有官方发布权限的用户组；仅站点管理员可管理。"
+    errors:
+      academy_roles_not_configured: "启用学院身份前，请先选择已有的官方用户组和分类。"
+  academy_roles:
+    single_use_invite: "学院邀请码只能使用一次。"
+    unbound_invite: "请生成不绑定邮箱或域名的邀请码。"
+    official_category_move: "官方话题必须保留在官方分类。"
+    official_required: "只有经认证的官方成员才能在此分类发布话题。"
+    official_outside_category: "官方身份只能在官方分类使用。"
+    official_membership_required: "你的官方身份已失效。"

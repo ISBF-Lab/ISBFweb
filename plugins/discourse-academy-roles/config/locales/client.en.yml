@@ -1,0 +1,16 @@
+en:
+  js:
+    academy_roles:
+      invite_title: "Register with an invitation code"
+      invite_code: "Invitation code"
+      redeem: "Register"
+      copy_code: "Copy code"
+      official_topic: "This topic will be published as official"
+      post_as_official: "Switch to official"
+      post_as_member: "Switch to member"
+      posting_as_official: "Posting as official"
+      posting_as_member: "Posting as member"
+      official_badge: "Official"
+      activity_level: "Activity level %{level}"
+      activity_title: "Activity level"
+      activity_value: "LV%{level}"

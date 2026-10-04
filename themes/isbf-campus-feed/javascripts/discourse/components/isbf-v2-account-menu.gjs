@@ -3,7 +3,7 @@ import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { themePrefix } from "virtual:theme";
-import getURL from "discourse/lib/get-url";
+import { ajax } from "discourse/lib/ajax";
 import logout from "discourse/lib/logout";
 import { getCurrentPushSubscription } from "discourse/lib/push-notifications";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
@@ -14,13 +14,28 @@ export default class ISBFV2AccountMenu extends Component {
   @service dialog;
   @service site;
 
+  @tracked errorMessage;
+  @tracked isBusy = false;
+  @tracked isLinkFormOpen = false;
   @tracked isOpen = false;
+  @tracked linkedAccounts = [];
+  @tracked password = "";
+  @tracked requestedUsername = "";
+  @tracked secondFactorMethod = "1";
+  @tracked secondFactorToken = "";
+  @tracked verificationLinkId;
 
   #rootElement;
 
   willDestroy() {
     super.willDestroy(...arguments);
     this.#removeDocumentListeners();
+  }
+
+  get activeLinks() {
+    return this.linkedAccounts.filter((link) =>
+      ["pending_target", "pending_admin", "approved"].includes(link.status)
+    );
   }
 
   get avatarUrl() {
@@ -36,6 +51,47 @@ export default class ISBFV2AccountMenu extends Component {
   }
 
   @action
+  closeMenu() {
+    this.isOpen = false;
+    this.#resetForms();
+    this.#removeDocumentListeners();
+  }
+
+  @action
+  async confirmLogout() {
+    this.closeMenu();
+    if (
+      await this.dialog.confirm({
+        message: i18n(themePrefix("isbf_v2.logout_confirm"), {
+          username: this.currentUser.username,
+        }),
+        confirmButtonLabel: themePrefix("isbf_v2.logout"),
+      })
+    ) {
+      await this.#signOut();
+    }
+  }
+
+  @action
+  async createLink(event) {
+    event.preventDefault();
+    const username = this.requestedUsername.trim();
+    if (!username) {
+      return;
+    }
+
+    await this.#runRequest(async () => {
+      await ajax("/isbf/account-switch/links", {
+        type: "POST",
+        data: { username },
+      });
+      this.requestedUsername = "";
+      this.isLinkFormOpen = false;
+      await this.#loadAccounts();
+    });
+  }
+
+  @action
   openMenu(event) {
     if (this.args.mobile || this.isOpen) {
       return;
@@ -46,6 +102,17 @@ export default class ISBFV2AccountMenu extends Component {
   @action
   onFocusOut(event) {
     if (!event.currentTarget.contains(event.relatedTarget)) {
+      this.closeMenu();
+    }
+  }
+
+  @action
+  onKeyDown(event) {
+    if (event.key === "Escape" && this.isOpen) {
+      event.preventDefault();
+      this.#rootElement
+        ?.querySelector(".isbf-v2-account-menu__trigger")
+        ?.focus();
       this.closeMenu();
     }
   }
@@ -68,14 +135,34 @@ export default class ISBFV2AccountMenu extends Component {
   }
 
   @action
-  onKeyDown(event) {
-    if (event.key === "Escape" && this.isOpen) {
-      event.preventDefault();
-      this.#rootElement
-        ?.querySelector(".isbf-v2-account-menu__trigger")
-        ?.focus();
-      this.closeMenu();
+  selectVerification(link) {
+    this.errorMessage = null;
+    this.password = "";
+    this.secondFactorToken = "";
+    this.verificationLinkId = link.id;
+  }
+
+  @action
+  async switchAccount(link) {
+    if (!link.device_authorized) {
+      this.selectVerification(link);
+      return;
     }
+
+    await this.#runRequest(async () => {
+      const response = await ajax(
+        `/isbf/account-switch/links/${link.id}/switch`,
+        { type: "POST" }
+      );
+      window.location.assign(response.redirect_url || "/");
+    });
+  }
+
+  @action
+  toggleLinkForm() {
+    this.errorMessage = null;
+    this.isLinkFormOpen = !this.isLinkFormOpen;
+    this.verificationLinkId = null;
   }
 
   @action
@@ -92,44 +179,60 @@ export default class ISBFV2AccountMenu extends Component {
   }
 
   @action
-  closeMenu() {
-    this.isOpen = false;
-    this.#removeDocumentListeners();
+  updatePassword(event) {
+    this.password = event.target.value;
   }
 
   @action
-  async confirmLogout() {
-    this.closeMenu();
-    if (
-      await this.dialog.confirm({
-        message: i18n(themePrefix("isbf_v2.logout_confirm"), {
-          username: this.currentUser.username,
-        }),
-        confirmButtonLabel: themePrefix("isbf_v2.logout"),
-      })
-    ) {
-      await this.#signOut(false);
-    }
+  updateRequestedUsername(event) {
+    this.requestedUsername = event.target.value;
   }
 
   @action
-  async confirmSwitch() {
-    this.closeMenu();
-    if (
-      await this.dialog.confirm({
-        message: i18n(themePrefix("isbf_v2.switch_account_confirm")),
-        confirmButtonLabel: themePrefix("isbf_v2.switch_account"),
-      })
-    ) {
-      await this.#signOut(true);
-    }
+  updateSecondFactorMethod(event) {
+    this.secondFactorMethod = event.target.value;
   }
 
-  #showMenu(target) {
-    this.#rootElement = target.closest(".isbf-v2-account-menu");
-    this.isOpen = true;
-    document.addEventListener("pointerdown", this.onOutsidePointer, true);
-    document.addEventListener("keydown", this.onKeyDown, true);
+  @action
+  updateSecondFactorToken(event) {
+    this.secondFactorToken = event.target.value;
+  }
+
+  @action
+  async verifyAndSwitch(link, event) {
+    event.preventDefault();
+    const data = {
+      password: this.password,
+      second_factor_method: this.secondFactorMethod,
+      second_factor_token: this.secondFactorToken,
+    };
+
+    await this.#runRequest(async () => {
+      const response = await ajax(
+        `/isbf/account-switch/links/${link.id}/verify`,
+        { type: "POST", data }
+      );
+      window.location.assign(response.redirect_url || "/");
+    });
+  }
+
+  #errorText(error) {
+    return (
+      error?.jqXHR?.responseJSON?.errors?.[0] ||
+      error?.jqXHR?.responseJSON?.error ||
+      i18n(themePrefix("isbf_v2.account_action_failed"))
+    );
+  }
+
+  async #loadAccounts() {
+    try {
+      const response = await ajax("/isbf/account-switch/accounts");
+      this.linkedAccounts = response.links || [];
+    } catch (error) {
+      if (error?.jqXHR?.status !== 404) {
+        this.errorMessage = this.#errorText(error);
+      }
+    }
   }
 
   #removeDocumentListeners() {
@@ -137,20 +240,46 @@ export default class ISBFV2AccountMenu extends Component {
     document.removeEventListener("keydown", this.onKeyDown, true);
   }
 
-  async #signOut(switchAccount) {
+  #resetForms() {
+    this.errorMessage = null;
+    this.isLinkFormOpen = false;
+    this.password = "";
+    this.requestedUsername = "";
+    this.secondFactorToken = "";
+    this.verificationLinkId = null;
+  }
+
+  async #runRequest(callback) {
+    this.errorMessage = null;
+    this.isBusy = true;
+    try {
+      await callback();
+    } catch (error) {
+      this.errorMessage = this.#errorText(error);
+    } finally {
+      this.isBusy = false;
+    }
+  }
+
+  #showMenu(target) {
+    this.#rootElement = target.closest(".isbf-v2-account-menu");
+    this.isOpen = true;
+    this.#loadAccounts();
+    document.addEventListener("pointerdown", this.onOutsidePointer, true);
+    document.addEventListener("keydown", this.onKeyDown, true);
+  }
+
+  async #signOut() {
     if (this.site.isReadOnly && !this.site.isStaffWritesOnly) {
       await this.dialog.alert(i18n("read_only_mode.logout_disabled"));
       return;
     }
 
     try {
+      await ajax("/isbf/account-switch/device", { type: "DELETE" });
       const pushSubscription = await getCurrentPushSubscription();
       const response = await this.currentUser.destroySession(pushSubscription);
-      logout({
-        redirect:
-          response.redirect_url ||
-          (switchAccount ? getURL("/login") : undefined),
-      });
+      logout({ redirect: response.redirect_url });
     } catch {
       await this.dialog.alert(i18n(themePrefix("isbf_v2.logout_failed")));
     }
@@ -176,10 +305,13 @@ export default class ISBFV2AccountMenu extends Component {
             {{on "click" this.closeMenu}}
           >
             <img alt="" height="40" src={{this.avatarUrl}} width="40" />
-            <span><b>{{this.displayName}}</b><small
-              >@{{this.currentUser.username}}</small></span>
+            <span>
+              <b>{{this.displayName}}</b>
+              <small>@{{this.currentUser.username}}</small>
+            </span>
           </a>
         {{/unless}}
+
         <button
           aria-expanded={{if this.isOpen "true" "false"}}
           aria-label={{i18n (themePrefix "isbf_v2.account_actions")}}
@@ -187,36 +319,156 @@ export default class ISBFV2AccountMenu extends Component {
           type="button"
           {{on "click" this.toggleMenu}}
         >
-          {{#unless @mobile}}<img
+          {{#unless @mobile}}
+            <img
               alt=""
               class="isbf-v2-account-menu__compact-avatar"
               height="40"
               src={{this.avatarUrl}}
               width="40"
-            />{{/unless}}
+            />
+          {{/unless}}
           {{dIcon "ellipsis"}}
         </button>
+
         {{#if this.isOpen}}
           <div
             aria-label={{i18n (themePrefix "isbf_v2.account_actions")}}
             class="isbf-v2-account-menu__panel"
             role="group"
           >
-            {{#unless @mobile}}<a
+            {{#unless @mobile}}
+              <a
                 class="isbf-v2-account-menu__compact-profile"
                 href={{this.profileHref}}
                 {{on "click" this.closeMenu}}
-              >{{i18n (themePrefix "isbf_v2.profile")}}</a>{{/unless}}
-            <a href="/isbf-anonymous/posts" {{on "click" this.closeMenu}}>{{i18n
-                (themePrefix "isbf_v2.my_anonymous_posts")
-              }}</a>
-            <button type="button" {{on "click" this.confirmSwitch}}>{{i18n
-                (themePrefix "isbf_v2.switch_account")
-              }}</button>
-            <button type="button" {{on "click" this.confirmLogout}}>{{i18n
-                (themePrefix "isbf_v2.logout")
-              }}
-              @{{this.currentUser.username}}</button>
+              >
+                {{i18n (themePrefix "isbf_v2.profile")}}
+              </a>
+            {{/unless}}
+            <a href="/isbf-anonymous/posts" {{on "click" this.closeMenu}}>
+              {{i18n (themePrefix "isbf_v2.my_anonymous_posts")}}
+            </a>
+
+            {{#each this.activeLinks as |link|}}
+              <div class="isbf-v2-account-menu__linked-account">
+                <img
+                  alt=""
+                  height="32"
+                  src={{link.account.avatar_template}}
+                  width="32"
+                />
+                <span>
+                  <b>{{or link.account.name link.account.username}}</b>
+                  <small>@{{link.account.username}}</small>
+                </span>
+                {{#if (eq link.status "approved")}}
+                  <button
+                    disabled={{this.isBusy}}
+                    type="button"
+                    {{on "click" (fn this.switchAccount link)}}
+                  >
+                    {{if
+                      link.device_authorized
+                      (i18n (themePrefix "isbf_v2.switch_now"))
+                      (i18n (themePrefix "isbf_v2.verify_device"))
+                    }}
+                  </button>
+                {{else}}
+                  <small class="isbf-v2-account-menu__status">
+                    {{i18n (themePrefix "isbf_v2.account_link_pending")}}
+                  </small>
+                {{/if}}
+
+                {{#if (eq this.verificationLinkId link.id)}}
+                  <form
+                    class="isbf-v2-account-menu__verify"
+                    {{on "submit" (fn this.verifyAndSwitch link)}}
+                  >
+                    <label>
+                      {{i18n (themePrefix "isbf_v2.target_password")}}
+                      <input
+                        autocomplete="current-password"
+                        required
+                        type="password"
+                        value={{this.password}}
+                        {{on "input" this.updatePassword}}
+                      />
+                    </label>
+                    {{#if link.account.totp_enabled}}
+                      <label>
+                        {{i18n (themePrefix "isbf_v2.second_factor_code")}}
+                        <input
+                          autocomplete="one-time-code"
+                          inputmode="numeric"
+                          type="text"
+                          value={{this.secondFactorToken}}
+                          {{on "input" this.updateSecondFactorToken}}
+                        />
+                      </label>
+                    {{/if}}
+                    {{#if link.account.backup_codes_enabled}}
+                      <label>
+                        {{i18n (themePrefix "isbf_v2.second_factor_method")}}
+                        <select
+                          value={{this.secondFactorMethod}}
+                          {{on "change" this.updateSecondFactorMethod}}
+                        >
+                          <option value="1">
+                            {{i18n (themePrefix "isbf_v2.authenticator_code")}}
+                          </option>
+                          <option value="2">
+                            {{i18n (themePrefix "isbf_v2.backup_code")}}
+                          </option>
+                        </select>
+                      </label>
+                    {{/if}}
+                    <button disabled={{this.isBusy}} type="submit">
+                      {{i18n (themePrefix "isbf_v2.verify_and_switch")}}
+                    </button>
+                  </form>
+                {{/if}}
+              </div>
+            {{/each}}
+
+            {{#if this.isLinkFormOpen}}
+              <form
+                class="isbf-v2-account-menu__link-form"
+                {{on "submit" this.createLink}}
+              >
+                <label>
+                  {{i18n (themePrefix "isbf_v2.account_username")}}
+                  <input
+                    autocomplete="username"
+                    placeholder={{i18n
+                      (themePrefix "isbf_v2.account_username_placeholder")
+                    }}
+                    required
+                    type="text"
+                    value={{this.requestedUsername}}
+                    {{on "input" this.updateRequestedUsername}}
+                  />
+                </label>
+                <button disabled={{this.isBusy}} type="submit">
+                  {{i18n (themePrefix "isbf_v2.send_link_request")}}
+                </button>
+              </form>
+            {{else}}
+              <button type="button" {{on "click" this.toggleLinkForm}}>
+                {{i18n (themePrefix "isbf_v2.link_account")}}
+              </button>
+            {{/if}}
+
+            {{#if this.errorMessage}}
+              <p class="isbf-v2-account-menu__error" role="alert">
+                {{this.errorMessage}}
+              </p>
+            {{/if}}
+
+            <button type="button" {{on "click" this.confirmLogout}}>
+              {{i18n (themePrefix "isbf_v2.logout")}}
+              @{{this.currentUser.username}}
+            </button>
           </div>
         {{/if}}
       </div>

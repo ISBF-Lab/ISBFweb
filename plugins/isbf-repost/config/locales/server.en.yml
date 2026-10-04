@@ -1,0 +1,6 @@
+en:
+  site_settings:
+    isbf_repost_enabled: "Enable ISBF quote repost relationships and counts."
+  isbf_repost:
+    errors:
+      invalid_source: "This post cannot be reposted because it is unavailable or not visible to you."

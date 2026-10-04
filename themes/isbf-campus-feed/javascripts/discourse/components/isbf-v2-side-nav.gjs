@@ -134,6 +134,14 @@ export default class ISBFV2SideNav extends Component {
           (themePrefix "isbf_v2.compose")
         }}</a>
 
+      {{#if this.currentUser.staff}}
+        <a
+          aria-label={{i18n (themePrefix "isbf_v2.review")}}
+          class="isbf-v2-side__review"
+          href="/review"
+        >{{i18n (themePrefix "isbf_v2.review")}}</a>
+      {{/if}}
+
       {{#if this.currentUser}}
         <ISBFV2AccountMenu />
       {{/if}}

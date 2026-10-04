@@ -1,0 +1,20 @@
+en:
+  js:
+    isbf_account_switch:
+      admin:
+        nav: "Account links"
+        title: "Linked account approvals"
+        description: "Approve, reject, revoke, and audit account links."
+        accounts: "Accounts"
+        requester: "Requester"
+        status: "Status"
+        actions: "Actions"
+        approve: "Approve"
+        reject: "Reject"
+        revoke: "Revoke"
+        empty: "No account link requests."
+        audit: "Audit log"
+        time: "Time"
+        actor: "Actor"
+        event: "Event"
+        link: "Link"

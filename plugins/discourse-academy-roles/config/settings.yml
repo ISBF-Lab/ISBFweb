@@ -1,0 +1,15 @@
+academy_roles:
+  academy_roles_enabled:
+    default: false
+    client: true
+    validator: "AcademyRolesEnabledValidator"
+    area: "group_permissions"
+  academy_official_category:
+    type: category
+    default: ""
+    client: true
+    area: "group_permissions"
+  academy_official_group:
+    type: group
+    default: ""
+    area: "group_permissions"

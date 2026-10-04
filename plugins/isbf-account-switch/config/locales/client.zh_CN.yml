@@ -1,0 +1,20 @@
+zh_CN:
+  js:
+    isbf_account_switch:
+      admin:
+        nav: "账号关联"
+        title: "关联账号审批"
+        description: "审批、拒绝、撤销账号关联，并查看操作记录。"
+        accounts: "账号"
+        requester: "申请人"
+        status: "状态"
+        actions: "操作"
+        approve: "批准"
+        reject: "拒绝"
+        revoke: "撤销"
+        empty: "暂无账号关联申请。"
+        audit: "操作记录"
+        time: "时间"
+        actor: "操作人"
+        event: "事件"
+        link: "关联"

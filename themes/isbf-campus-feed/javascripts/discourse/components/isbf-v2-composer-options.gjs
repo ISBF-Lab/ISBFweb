@@ -5,7 +5,6 @@ import { service } from "@ember/service";
 import { themePrefix } from "virtual:theme";
 import DButton from "discourse/ui-kit/d-button";
 import dAvatar from "discourse/ui-kit/helpers/d-avatar";
-import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import { canPublishAnonymously } from "../lib/anonymous-post-scope";
 import { isQuickPost } from "../lib/quick-post-scope";
@@ -14,7 +13,6 @@ export default class ISBFV2ComposerOptions extends Component {
   @service currentUser;
   @service siteSettings;
 
-  @tracked optionsExpanded = false;
   @tracked anonymousSelection = null;
 
   get model() {
@@ -40,15 +38,6 @@ export default class ISBFV2ComposerOptions extends Component {
       : selected;
   }
 
-  get optionsVisible() {
-    return this.optionsExpanded || Boolean(this.model?.requiredCategoryMissing);
-  }
-
-  @action
-  toggleOptions() {
-    this.optionsExpanded = !this.optionsVisible;
-  }
-
   @action
   toggleAnonymous() {
     const selected = !this.isAnonymous;
@@ -57,20 +46,12 @@ export default class ISBFV2ComposerOptions extends Component {
   }
 
   <template>
+    <span aria-hidden="true" class="isbf-v2-composer"></span>
     {{#if this.isQuickPost}}
       <div class="isbf-v2-composer-options">
         <div aria-hidden="true" class="isbf-v2-composer-options__avatar">
           {{dAvatar this.currentUser imageSize="large"}}
         </div>
-        <button
-          aria-expanded={{this.optionsVisible}}
-          class="isbf-v2-composer-options__toggle"
-          type="button"
-          {{on "click" this.toggleOptions}}
-        >
-          {{i18n (themePrefix "isbf_v2.compose_options")}}
-          {{dIcon "chevron-right"}}
-        </button>
       </div>
     {{/if}}
     {{#if this.canAnonymize}}

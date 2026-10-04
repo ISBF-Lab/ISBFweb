@@ -1,0 +1,4 @@
+plugins:
+  isbf_notifications_enabled:
+    default: false
+    client: true

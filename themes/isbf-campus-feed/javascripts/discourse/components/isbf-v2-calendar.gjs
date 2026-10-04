@@ -372,10 +372,11 @@ export default class ISBFV2Calendar extends Component {
 
   @action
   async deleteEntry(entry) {
-    const confirmed = await this.dialog.confirm({
-      message: i18n(themePrefix("isbf_v2.calendar_delete_confirm")),
-    });
-    if (!confirmed) {
+    if (
+      !(await this.dialog.confirm({
+        message: i18n(themePrefix("isbf_v2.calendar_delete_confirm")),
+      }))
+    ) {
       return;
     }
 
@@ -429,15 +430,9 @@ export default class ISBFV2Calendar extends Component {
 
   <template>
     <main class="isbf-v2-feature isbf-v2-calendar">
-      <p class="isbf-v2-feature__eyebrow">{{i18n
-          (themePrefix "isbf_v2.calendar_eyebrow")
-        }}</p>
       <div class="isbf-v2-calendar__heading">
         <div>
           <h1>{{i18n (themePrefix "isbf_v2.calendar")}}</h1>
-          <p class="isbf-v2-feature__intro">{{i18n
-              (themePrefix "isbf_v2.calendar_intro")
-            }}</p>
         </div>
         {{#if this.currentUser}}<button
             class="isbf-v2-calendar__primary"
@@ -585,12 +580,12 @@ export default class ISBFV2Calendar extends Component {
       </div>
 
       {{#if this.isEditing}}
-        {{! eslint-disable-next-line ember/template-no-invalid-interactive }}
         <div
           aria-label={{i18n (themePrefix "isbf_v2.calendar_personal")}}
           aria-modal="true"
           class="isbf-v2-calendar__editor-backdrop"
           role="dialog"
+          tabindex="-1"
           {{on "keydown" this.editorKeydown}}
         >
           <form class="isbf-v2-calendar__editor" {{on "submit" this.saveEntry}}>

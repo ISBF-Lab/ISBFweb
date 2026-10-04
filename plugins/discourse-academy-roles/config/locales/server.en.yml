@@ -1,0 +1,14 @@
+en:
+  site_settings:
+    academy_roles_enabled: "Enable closed academy membership and official publishing. Run the academy_roles:setup task before enabling this setting."
+    academy_official_category: "Category where verified members may publish official topics."
+    academy_official_group: "Group whose membership grants official publishing. Only site admins may manage it."
+    errors:
+      academy_roles_not_configured: "Choose an existing official group and category before enabling academy roles."
+  academy_roles:
+    single_use_invite: "Academy invitation codes must be single-use."
+    unbound_invite: "Use an invitation code without an email or domain restriction."
+    official_category_move: "Official topics must remain in the official category."
+    official_required: "Only verified official members may start topics in this category."
+    official_outside_category: "Official identity can only be used in the official category."
+    official_membership_required: "Your official identity is no longer active."
