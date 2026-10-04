@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe IsbfRepost do
-  fab!(:user)
+  fab!(:user) { Fabricate(:user, refresh_auto_groups: true) }
   fab!(:source_topic, :topic)
 
   before { SiteSetting.isbf_repost_enabled = true }

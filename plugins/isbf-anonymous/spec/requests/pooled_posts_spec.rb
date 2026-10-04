@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe PostsController do
-  fab!(:user)
-  fab!(:other_user, :user)
+  fab!(:user) { Fabricate(:user, refresh_auto_groups: true) }
+  fab!(:other_user) { Fabricate(:user, refresh_auto_groups: true) }
   fab!(:category)
   fab!(:admin)
   fab!(:moderator)
@@ -180,6 +180,7 @@ RSpec.describe PostsController do
 
     it "enforces real user trust restrictions and blocks inactive accounts" do
       user.change_trust_level!(TrustLevel[0])
+      SiteSetting.auto_silence_fast_typers_on_first_post = false
       SiteSetting.newuser_max_links = 0
       publish_anonymously(user, raw: "A long reply linking to https://example.com/campus.")
       expect(response.status).to eq(422)

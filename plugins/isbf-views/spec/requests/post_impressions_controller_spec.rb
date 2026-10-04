@@ -175,7 +175,14 @@ RSpec.describe IsbfViews::PostImpressionsController do
 
   it "checks native post permissions after filtering visible topics" do
     sign_in(viewer)
-    allow_any_instance_of(Guardian).to receive(:can_see_post?).with(reply).and_return(false)
+    allow(Guardian).to receive(:new).and_wrap_original do |original, *args|
+      guardian = original.call(*args)
+      if guardian.user == viewer
+        allow(guardian).to receive(:can_see_post?).and_call_original
+        allow(guardian).to receive(:can_see_post?).with(reply).and_return(false)
+      end
+      guardian
+    end
 
     record([reply.id])
 

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe "ISBF anonymous posts" do
-  fab!(:user)
-  fab!(:other_user, :user)
+  fab!(:user) { Fabricate(:user, refresh_auto_groups: true) }
+  fab!(:other_user) { Fabricate(:user, refresh_auto_groups: true) }
   fab!(:category)
 
   before do
@@ -10,16 +10,9 @@ RSpec.describe "ISBF anonymous posts" do
     SiteSetting.anonymous_posting_allowed_groups = "1|2|10"
   end
 
-  def publish_anonymously(
-    author,
-    title: "An anonymous campus discussion",
-    topic_id: nil
-  )
+  def publish_anonymously(author, title: "An anonymous campus discussion", topic_id: nil)
     sign_in(author)
-    params = {
-      raw: "A sufficiently long anonymous discussion post.",
-      isbf_anonymous: "true"
-    }
+    params = { raw: "A sufficiently long anonymous discussion post.", isbf_anonymous: "true" }
     if topic_id
       params[:topic_id] = topic_id
     else
@@ -48,18 +41,13 @@ RSpec.describe "ISBF anonymous posts" do
   it "publishes an anonymous reply and lists only the owner's marked posts" do
     topic = Fabricate(:topic, category: category)
     published = publish_anonymously(user, topic_id: topic.id)
-    publish_anonymously(
-      other_user,
-      title: "Another anonymous campus discussion"
-    )
+    publish_anonymously(other_user, title: "Another anonymous campus discussion")
     sign_in(user)
 
     get "/isbf-anonymous/api/posts.json"
 
     expect(response.status).to eq(200)
-    expect(response.parsed_body["posts"].map { |row| row["id"] }).to include(
-      published.id
-    )
+    expect(response.parsed_body["posts"].map { |row| row["id"] }).to include(published.id)
     expect(response.parsed_body["posts"].size).to eq(1)
     expect(user.guardian.can_edit?(published)).to eq(false)
     expect(user.guardian.can_delete?(published)).to eq(false)
@@ -73,7 +61,7 @@ RSpec.describe "ISBF anonymous posts" do
            title: "Restricted anonymous topic",
            raw: "A sufficiently long anonymous discussion post.",
            category: restricted.id,
-           isbf_anonymous: "true"
+           isbf_anonymous: "true",
          }
     expect(response.status).to eq(403)
 
@@ -83,7 +71,7 @@ RSpec.describe "ISBF anonymous posts" do
            raw: "A sufficiently long anonymous discussion post.",
            archetype: Archetype.private_message,
            target_recipients: other_user.username,
-           isbf_anonymous: "true"
+           isbf_anonymous: "true",
          }
     expect(response.status).to eq(403)
   end
@@ -97,13 +85,11 @@ RSpec.describe "ISBF anonymous posts" do
            raw: "A sufficiently long anonymous discussion post.",
            category: category.id,
            draft_key: Draft::NEW_TOPIC,
-           isbf_anonymous: "true"
+           isbf_anonymous: "true",
          }
 
     expect(response.status).to eq(200)
-    expect(
-      Draft.where(user_id: user.id, draft_key: Draft::NEW_TOPIC)
-    ).not_to exist
+    expect(Draft.where(user_id: user.id, draft_key: Draft::NEW_TOPIC)).not_to exist
     expect(DraftSequence.current(user, Draft::NEW_TOPIC)).to eq(1)
   end
 
@@ -113,7 +99,7 @@ RSpec.describe "ISBF anonymous posts" do
       PostCreator.create!(
         other_user,
         topic_id: published.topic_id,
-        raw: "A sufficiently long reply to the anonymous author."
+        raw: "A sufficiently long reply to the anonymous author.",
       )
     PostAlerter.post_created(reply)
 
@@ -122,8 +108,8 @@ RSpec.describe "ISBF anonymous posts" do
         user_id: user.id,
         topic_id: published.topic_id,
         post_number: reply.post_number,
-        notification_type: Notification.types[:replied]
-      )
+        notification_type: Notification.types[:replied],
+      ),
     ).to exist
   end
 
@@ -136,14 +122,12 @@ RSpec.describe "ISBF anonymous posts" do
            title: "An anonymous queued campus topic",
            raw: "A sufficiently long anonymous discussion post.",
            category: category.id,
-           isbf_anonymous: "true"
+           isbf_anonymous: "true",
          }
 
     reviewable = ReviewableQueuedPost.order(:id).last
     expect(reviewable.payload["isbf_anonymous"]).to eq("true")
-    expect(IsbfAnonymous.master_for(reviewable.target_created_by_id)).to eq(
-      user
-    )
+    expect(IsbfAnonymous.master_for(reviewable.target_created_by_id)).to eq(user)
 
     reviewable.perform(Fabricate(:admin), :approve_post)
     approved_post = reviewable.reload.target
@@ -152,8 +136,8 @@ RSpec.describe "ISBF anonymous posts" do
       Notification.where(
         user_id: user.id,
         topic_id: approved_post.topic_id,
-        notification_type: Notification.types[:post_approved]
-      )
+        notification_type: Notification.types[:post_approved],
+      ),
     ).to exist
   end
 
@@ -165,13 +149,11 @@ RSpec.describe "ISBF anonymous posts" do
            title: "An anonymous topic awaiting review",
            raw: "A sufficiently long anonymous discussion post.",
            category: category.id,
-           isbf_anonymous: "true"
+           isbf_anonymous: "true",
          }
     reviewable = ReviewableQueuedPost.order(:id).last
 
-    expect do
-      reviewable.perform(Fabricate(:admin), :reject_post)
-    end.to change {
+    expect do reviewable.perform(Fabricate(:admin), :reject_post) end.to change {
       Topic.where(archetype: Archetype.private_message).count
     }.by(1)
 

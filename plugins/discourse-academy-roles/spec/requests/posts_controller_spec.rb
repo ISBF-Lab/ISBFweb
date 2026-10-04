@@ -13,6 +13,8 @@ RSpec.describe PostsController do
     SiteSetting.academy_official_category = official_category.id
     SiteSetting.academy_roles_enabled = true
     SiteSetting.auto_silence_fast_typers_on_first_post = false
+    SiteSetting.flag_post_allowed_groups = Group::AUTO_GROUPS[:trust_level_0].to_s
+    SiteSetting.personal_message_enabled_groups = Group::AUTO_GROUPS[:trust_level_0].to_s
     official_group.add(verified_member)
     official_category.set_permissions({ everyone: :create_post }.merge(official_group => :full))
     ordinary_category.set_permissions(everyone: :full)
@@ -21,7 +23,7 @@ RSpec.describe PostsController do
   describe "#create" do
     it "lets a newly registered member post, report, and send a private message" do
       new_member = Fabricate(:user, refresh_auto_groups: true)
-      reported_post = Fabricate(:post, user: admin)
+      reported_post = Fabricate(:post, user: member)
       expect(new_member.reload.trust_level).to eq(0)
       sign_in(new_member)
 

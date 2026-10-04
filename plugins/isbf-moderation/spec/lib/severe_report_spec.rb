@@ -3,7 +3,7 @@
 require_relative "../support/fixtures"
 
 RSpec.describe IsbfModeration::SevereReport, type: :model do
-  fab!(:reporter) { isbf_fabricate(:user) }
+  fab!(:reporter) { isbf_fabricate(:user, refresh_auto_groups: true) }
   fab!(:author) { isbf_fabricate(:user) }
   fab!(:moderator) { isbf_fabricate(:moderator) }
   fab!(:forum_post) { isbf_fabricate(:post, user: author) }

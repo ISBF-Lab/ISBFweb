@@ -3,7 +3,7 @@
 require_relative "../../lib/isbf_anonymous/legacy_migrator"
 
 RSpec.describe IsbfAnonymous::LegacyMigrator do
-  fab!(:user)
+  fab!(:user) { Fabricate(:user, refresh_auto_groups: true) }
   fab!(:category)
 
   before do
