@@ -11,6 +11,16 @@ Fabricator(
   schedule_kind "event"
 end
 
+Fabricator(
+  :isbf_calendar_official_deadline,
+  from: :isbf_calendar_official_item
+) do
+  title "Registration deadline"
+  starts_at { Time.iso8601("2026-10-19T18:00:00+08:00") }
+  ends_at { |attributes| attributes[:starts_at] }
+  schedule_kind "deadline"
+end
+
 Fabricator(:isbf_calendar_entry, class_name: "IsbfCalendar::Entry") do
   user
   title "Study session"

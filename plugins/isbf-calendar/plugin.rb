@@ -2,7 +2,7 @@
 
 # name: isbf-calendar
 # about: Private personal schedules and routes for the ISBF calendar UI
-# version: 0.2.0
+# version: 0.3.0
 # authors: ISBF Lab
 # url: https://github.com/ISBF-Lab/ISBF-Calendar
 # required_version: 3.4.0
@@ -96,7 +96,9 @@ after_initialize do
     IsbfCalendar::OfficialItem
       .where(topic_id: topic.id)
       .active
-      .find_each { |item| item.update!(cancelled: true) }
+      .find_each do |item|
+        item.update!(cancelled: true, registration_deadline: nil)
+      end
   end
 
   %i[topic_view topic_list_item post].each do |serializer|

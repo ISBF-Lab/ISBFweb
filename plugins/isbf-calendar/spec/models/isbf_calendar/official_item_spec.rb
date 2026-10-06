@@ -44,10 +44,36 @@ RSpec.describe IsbfCalendar::OfficialItem do
         topic_id: 100,
         cancelled: true,
         revision: 50,
-        position: 10
+        position: 10,
+        registration_deadline_id: 20,
+        registration_deadline_index: 1
       )
 
       expect(described_class.attributes_from_payload(payload)).to eq(original)
+    end
+
+    it "normalizes the optional activity information without adding missing fields" do
+      expect(attributes.keys).not_to include("location", "organizer")
+
+      payload.merge!(location: "  Main hall  ", organizer: "  Student office  ")
+      expect(described_class.attributes_from_payload(payload)).to include(
+        "location" => "Main hall",
+        "organizer" => "Student office"
+      )
+
+      payload.merge!(location: "  ", organizer: nil)
+      expect(described_class.attributes_from_payload(payload)).to include(
+        "location" => "",
+        "organizer" => ""
+      )
+    end
+
+    context "with activity information of an invalid type" do
+      let(:payload) { super().merge(location: ["Main hall"]) }
+
+      it "rejects the malformed information" do
+        expect { attributes }.to raise_error(ArgumentError)
+      end
     end
 
     context "without an explicit timezone" do
@@ -88,7 +114,10 @@ RSpec.describe IsbfCalendar::OfficialItem do
         schedule_kind:,
         starts_at:,
         ends_at:,
-        all_day:
+        all_day:,
+        location:,
+        organizer:,
+        registration_deadline:
       )
     end
 
@@ -96,6 +125,77 @@ RSpec.describe IsbfCalendar::OfficialItem do
     let(:starts_at) { Time.iso8601("2026-10-20T09:00:00+08:00") }
     let(:ends_at) { starts_at + 1.hour }
     let(:all_day) { false }
+    let(:location) { nil }
+    let(:organizer) { nil }
+    let(:registration_deadline) { nil }
+
+    it "accepts absent activity information" do
+      expect(item).to be_valid
+    end
+
+    context "with activity information at the length limits" do
+      let(:location) { "地" * 255 }
+      let(:organizer) { "方" * 120 }
+
+      it { is_expected.to be_valid }
+    end
+
+    context "with activity information above the length limits" do
+      let(:location) { "地" * 256 }
+      let(:organizer) { "方" * 121 }
+
+      it "rejects the oversized fields" do
+        expect(item).not_to be_valid
+        expect(item.errors.attribute_names).to contain_exactly(
+          :location,
+          :organizer
+        )
+      end
+    end
+
+    context "with an active registration deadline in the same topic" do
+      fab!(:deadline) { Fabricate(:isbf_calendar_official_deadline, topic:) }
+
+      let(:registration_deadline) { deadline }
+
+      it { is_expected.to be_valid }
+    end
+
+    context "with a registration deadline from another topic" do
+      fab!(:deadline, :isbf_calendar_official_deadline)
+
+      let(:registration_deadline) { deadline }
+
+      it { is_expected.not_to be_valid }
+    end
+
+    context "with a cancelled registration deadline" do
+      fab!(:deadline) do
+        Fabricate(:isbf_calendar_official_deadline, topic:, cancelled: true)
+      end
+
+      let(:registration_deadline) { deadline }
+
+      it { is_expected.not_to be_valid }
+    end
+
+    context "with an activity used as a registration deadline" do
+      fab!(:other_activity) { Fabricate(:isbf_calendar_official_item, topic:) }
+
+      let(:registration_deadline) { other_activity }
+
+      it { is_expected.not_to be_valid }
+    end
+
+    context "with a deadline that owns another deadline" do
+      fab!(:deadline) { Fabricate(:isbf_calendar_official_deadline, topic:) }
+
+      let(:registration_deadline) { deadline }
+      let(:schedule_kind) { "deadline" }
+      let(:ends_at) { starts_at }
+
+      it { is_expected.not_to be_valid }
+    end
 
     context "with a point activity" do
       let(:ends_at) { starts_at }
@@ -233,6 +333,33 @@ RSpec.describe IsbfCalendar::OfficialItem do
       end
 
       expect(item.reload.revision).to eq(1)
+    end
+
+    it "updates display information without changing calendar snapshots or notifying subscribers" do
+      deadline = Fabricate(:isbf_calendar_official_deadline, topic:)
+      original_snapshot =
+        entry.attributes.slice(*IsbfCalendar::OfficialItem::SNAPSHOT_FIELDS)
+
+      expect_not_enqueued_with(job: :isbf_calendar_notify_change) do
+        item.update!(
+          location: "Main hall",
+          organizer: "Student office",
+          registration_deadline: deadline
+        )
+      end
+
+      expect(item.reload).to have_attributes(
+        revision: 1,
+        location: "Main hall",
+        organizer: "Student office",
+        registration_deadline_id: deadline.id
+      )
+      expect(
+        entry.reload.attributes.slice(
+          *IsbfCalendar::OfficialItem::SNAPSHOT_FIELDS
+        )
+      ).to eq(original_snapshot)
+      expect(entry).not_to be_needs_update
     end
 
     it "notifies cancellation while retaining subscribed entries" do

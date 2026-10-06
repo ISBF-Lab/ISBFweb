@@ -127,6 +127,33 @@ RSpec.describe IsbfCalendar::AddOfficialEntry do
       end
     end
 
+    context "when adding an activity with a registration deadline and display information" do
+      fab!(:deadline) { Fabricate(:isbf_calendar_official_deadline, topic:) }
+
+      before do
+        item.update!(
+          location: "Main hall",
+          organizer: "Student office",
+          registration_deadline: deadline
+        )
+      end
+
+      it "imports only the selected activity's existing time snapshot" do
+        expect { result }.to change(IsbfCalendar::Entry, :count).by(1)
+        expect(result).to run_successfully
+        expect(
+          result[:entry].attributes.slice(
+            *IsbfCalendar::OfficialItem::SNAPSHOT_FIELDS
+          )
+        ).to eq(item.snapshot)
+        expect(result[:entry]).to have_attributes(
+          source_item_id: item.id,
+          accepted_revision: 1
+        )
+        expect(IsbfCalendar::Entry.where(source_item: deadline)).to be_empty
+      end
+    end
+
     context "when the user has already added the source" do
       fab!(:entry) do
         Fabricate(

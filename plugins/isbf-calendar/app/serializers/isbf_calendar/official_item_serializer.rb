@@ -8,6 +8,9 @@ module IsbfCalendar
                :starts_at,
                :ends_at,
                :all_day,
+               :location,
+               :organizer,
+               :registration_deadline_id,
                :revision,
                :cancelled,
                :timezone

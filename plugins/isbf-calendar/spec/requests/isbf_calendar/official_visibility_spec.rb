@@ -86,4 +86,62 @@ RSpec.describe "Official calendar visibility" do
       "cancelled" => true
     )
   end
+
+  it "hides activity information and its linked registration deadline after access is revoked" do
+    deadline = Fabricate(:isbf_calendar_official_deadline, topic:)
+    item.update!(
+      location: "Restricted hall",
+      organizer: "Restricted office",
+      registration_deadline: deadline
+    )
+    category.set_permissions(staff: :full)
+    category.save!
+    sign_in(user)
+
+    get "/t/#{topic.id}.json"
+    expect(response.status).to eq(404)
+
+    get "/isbf/api/entries/#{entry.id}.json"
+    expect(response.status).to eq(200)
+    expect(response.parsed_body["entry"]).to include(
+      "latest_source" => nil,
+      "source_unavailable" => true,
+      "title" => entry.title
+    )
+    expect(response.body).not_to include(item.location, item.organizer)
+
+    get "/latest.json"
+    expect(response.status).to eq(200)
+    expect(
+      response.parsed_body.dig("topic_list", "topics").map { |data| data["id"] }
+    ).not_to include(topic.id)
+  end
+
+  it "cancels linked activity and registration sources when the topic is deleted" do
+    deadline = Fabricate(:isbf_calendar_official_deadline, topic:)
+    activity =
+      Fabricate(
+        :isbf_calendar_official_item,
+        topic:,
+        registration_deadline: deadline
+      )
+    activity_entry =
+      Fabricate(:isbf_calendar_official_entry, source_item: activity, user:)
+    deadline_entry =
+      Fabricate(:isbf_calendar_official_entry, source_item: deadline, user:)
+    sign_in(admin)
+
+    delete "/t/#{topic.id}.json"
+    expect(response.status).to eq(200), response.body
+    expect(activity.reload).to be_cancelled
+    expect(deadline.reload).to be_cancelled
+    expect(activity_entry.reload).to have_attributes(
+      source_item_id: activity.id,
+      accepted_revision: 1
+    )
+    expect(deadline_entry.reload).to have_attributes(
+      source_item_id: deadline.id,
+      accepted_revision: 1
+    )
+  end
 end

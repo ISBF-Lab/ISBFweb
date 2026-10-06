@@ -91,5 +91,55 @@ RSpec.describe IsbfCalendar::OfficialItemsController do
         response.parsed_body["entries"].map { |entry| entry["source_item_id"] }
       ).to eq([item.id])
     end
+
+    it "adds linked activity and registration deadline independently with their own time snapshots" do
+      deadline = Fabricate(:isbf_calendar_official_deadline, topic:)
+      item.update!(
+        location: "Main hall",
+        organizer: "Student office",
+        registration_deadline: deadline
+      )
+      sign_in(owner)
+
+      post "/isbf/api/official-items/#{item.id}/add.json",
+           params: {
+             revision: item.revision
+           }
+      expect(response.status).to eq(201), response.body
+      activity_entry = response.parsed_body["entry"]
+      expect(activity_entry).to include(
+        "source_item_id" => item.id,
+        "starts_at" => item.starts_at.iso8601,
+        "schedule_kind" => "event"
+      )
+      expect(activity_entry["latest_source"]).to include(
+        "location" => item.location,
+        "organizer" => item.organizer,
+        "registration_deadline_id" => deadline.id
+      )
+      expect(activity_entry.keys).not_to include(
+        "location",
+        "organizer",
+        "registration_deadline_id"
+      )
+      expect(
+        IsbfCalendar::Entry.where(user: owner).pluck(:source_item_id)
+      ).to eq([item.id])
+
+      post "/isbf/api/official-items/#{deadline.id}/add.json",
+           params: {
+             revision: deadline.revision
+           }
+      expect(response.status).to eq(201), response.body
+      expect(response.parsed_body["entry"]).to include(
+        "source_item_id" => deadline.id,
+        "starts_at" => deadline.starts_at.iso8601,
+        "ends_at" => deadline.starts_at.iso8601,
+        "schedule_kind" => "deadline"
+      )
+      expect(
+        IsbfCalendar::Entry.where(user: owner).pluck(:source_item_id)
+      ).to contain_exactly(item.id, deadline.id)
+    end
   end
 end

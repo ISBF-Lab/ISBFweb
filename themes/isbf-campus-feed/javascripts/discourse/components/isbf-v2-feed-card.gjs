@@ -5,7 +5,7 @@ import { action } from "@ember/object";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import { service } from "@ember/service";
 import { trustHTML } from "@ember/template";
-import { themePrefix } from "virtual:theme";
+import { settings, themePrefix } from "virtual:theme";
 import { ajax } from "discourse/lib/ajax";
 import Composer from "discourse/models/composer";
 import Draft from "discourse/models/draft";
@@ -14,6 +14,7 @@ import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import { loadCookedPost, loadRepostCount } from "../lib/feed-post-loader";
 import { recordVisibleView } from "../lib/feed-view-tracker";
+import { isOfficialCalendarPath } from "../lib/official-calendar";
 import {
   compactNumber,
   openQuotedRepost,
@@ -21,6 +22,7 @@ import {
   postCardTitle,
 } from "../lib/post-card-helpers";
 import { isReportedHidden, openPostReport } from "../lib/report-post";
+import ISBFOfficialActivitySummary from "./isbf-official-activity-summary";
 import ISBFOfficialCalendarItems from "./isbf-official-calendar-items";
 
 export default class ISBFV2FeedCard extends Component {
@@ -97,6 +99,13 @@ export default class ISBFV2FeedCard extends Component {
 
   get contentReady() {
     return this.body !== null || this.bodyFailed;
+  }
+
+  get officialLayout() {
+    return (
+      this.args.officialLayout ||
+      isOfficialCalendarPath(this.router.currentURL, settings.official_path)
+    );
   }
 
   get canFlag() {
@@ -617,10 +626,16 @@ export default class ISBFV2FeedCard extends Component {
               )
             }}</button>{{/if}}
         {{#unless this.hidden}}
-          <ISBFOfficialCalendarItems
-            @items={{@topic.isbf_official_calendar_items}}
-            @readOnly={{true}}
-          />
+          {{#if this.officialLayout}}
+            <ISBFOfficialActivitySummary
+              @items={{@topic.isbf_official_calendar_items}}
+            />
+          {{else}}
+            <ISBFOfficialCalendarItems
+              @items={{@topic.isbf_official_calendar_items}}
+              @readOnly={{true}}
+            />
+          {{/if}}
         {{/unless}}
         <footer class="isbf-feed-card__actions">
           <button

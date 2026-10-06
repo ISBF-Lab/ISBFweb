@@ -54,6 +54,57 @@ RSpec.describe PostsController do
       )
     end
 
+    it "returns activity information and its persisted registration deadline in official responses" do
+      sign_in(admin)
+      activity_items = items.deep_dup
+      activity_items.last.merge!(
+        location: "  Main hall  ",
+        organizer: "  Student office  ",
+        registration_deadline_index: 0
+      )
+
+      post "/posts.json",
+           params: {
+             title: "Campus briefing with registration",
+             raw: "A campus briefing with a linked registration deadline.",
+             category: category.id,
+             academy_official: true,
+             isbf_official_calendar_items: activity_items.to_json
+           }
+      expect(response.status).to eq(200), response.body
+      topic = Topic.find(response.parsed_body["topic_id"])
+      deadline, activity = topic.isbf_official_calendar_items.to_a
+      expected_activity = {
+        "id" => activity.id,
+        "location" => "Main hall",
+        "organizer" => "Student office",
+        "registration_deadline_id" => deadline.id
+      }
+
+      get "/posts/#{topic.first_post.id}.json"
+      expect(response.status).to eq(200)
+      expect(
+        response.parsed_body[IsbfCalendar::OFFICIAL_ITEMS_FIELD].last
+      ).to include(expected_activity)
+
+      get "/t/#{topic.id}.json"
+      expect(response.status).to eq(200)
+      expect(
+        response.parsed_body[IsbfCalendar::OFFICIAL_ITEMS_FIELD].last
+      ).to include(expected_activity)
+
+      get "/latest.json"
+      expect(response.status).to eq(200)
+      listed_topic =
+        response
+          .parsed_body
+          .dig("topic_list", "topics")
+          .find { |data| data["id"] == topic.id }
+      expect(listed_topic[IsbfCalendar::OFFICIAL_ITEMS_FIELD].last).to include(
+        expected_activity
+      )
+    end
+
     it "rolls back the post and time items on invalid official input" do
       sign_in(admin)
       invalid = items.deep_dup
@@ -70,6 +121,28 @@ RSpec.describe PostsController do
       end.not_to change(IsbfCalendar::OfficialItem, :count)
       expect(response.status).to eq(400), response.body
       expect(Topic.where(title: "Invalid campus announcement")).to be_empty
+    end
+
+    it "rolls back an invalid registration link together with the official topic" do
+      sign_in(admin)
+      invalid = items.deep_dup
+      invalid.last[:registration_deadline_index] = 99
+
+      expect do
+        post "/posts.json",
+             params: {
+               title: "Announcement with invalid registration",
+               raw:
+                 "This announcement points to a registration deadline that is missing.",
+               category: category.id,
+               academy_official: true,
+               isbf_official_calendar_items: invalid.to_json
+             }
+      end.not_to change(IsbfCalendar::OfficialItem, :count)
+      expect(response.status).to eq(400), response.body
+      expect(
+        Topic.where(title: "Announcement with invalid registration")
+      ).to be_empty
     end
 
     it "rejects calendar payloads in ordinary posts" do
@@ -111,6 +184,77 @@ RSpec.describe PostsController do
         revision: 2
       )
       expect(topic.first_post.reload.raw).to eq(original_raw)
+    end
+
+    it "records a display information edit in the post revision without changing the calendar version" do
+      SiteSetting.editing_grace_period = 0
+      original_raw = topic.first_post.raw
+      original_item =
+        item.snapshot.as_json.merge(
+          "id" => item.id,
+          "location" => item.location,
+          "organizer" => item.organizer,
+          "registration_deadline_id" => nil
+        )
+      data =
+        item.snapshot.merge(
+          id: item.id,
+          revision: item.revision,
+          location: "Main hall",
+          organizer: "Student office"
+        )
+
+      put "/posts/#{topic.first_post.id}.json",
+          params: {
+            post: {
+              isbf_official_calendar_items: [data].to_json
+            }
+          }
+      expect(response.status).to eq(200), response.body
+      expect(item.reload).to have_attributes(
+        location: "Main hall",
+        organizer: "Student office",
+        revision: 1
+      )
+      expect(topic.first_post.reload.raw).to eq(original_raw)
+      before_items, after_items =
+        topic.first_post.revisions.last.modifications[
+          IsbfCalendar::OFFICIAL_ITEMS_FIELD
+        ]
+      expect(before_items).to eq([original_item])
+      expect(after_items).to eq(
+        [
+          original_item.merge(
+            "location" => "Main hall",
+            "organizer" => "Student office"
+          )
+        ]
+      )
+    end
+
+    it "rejects a nonpublisher editing activity information" do
+      item.update!(location: "Original hall", organizer: "Original office")
+      sign_in(member)
+      data =
+        item.snapshot.merge(
+          id: item.id,
+          revision: item.revision,
+          location: "Unauthorized hall",
+          organizer: "Unauthorized office"
+        )
+
+      put "/posts/#{topic.first_post.id}.json",
+          params: {
+            post: {
+              isbf_official_calendar_items: [data].to_json
+            }
+          }
+      expect(response.status).to eq(403), response.body
+      expect(item.reload).to have_attributes(
+        location: "Original hall",
+        organizer: "Original office",
+        revision: 1
+      )
     end
 
     it "preserves items on ordinary edits and cancels them only when explicitly removed" do

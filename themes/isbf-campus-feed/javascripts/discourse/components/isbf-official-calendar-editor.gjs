@@ -9,13 +9,13 @@ import DModal from "discourse/ui-kit/d-modal";
 import { i18n } from "discourse-i18n";
 import {
   calendarEditorItems,
-  calendarItemFromEditor,
+  calendarItemsFromEditor,
 } from "../lib/official-calendar";
 
 export default class ISBFOfficialCalendarEditor extends Component {
   @service site;
 
-  @tracked error = false;
+  @tracked error = null;
   #formApi;
 
   @tracked _itemCount = null;
@@ -39,15 +39,24 @@ export default class ISBFOfficialCalendarEditor extends Component {
 
   @action
   updateCount(name, value, data) {
-    this._itemCount = data.items.length;
-    this.error = false;
-    const match = name.match(/^items\.(\d+)\.all_day$/);
+    this._itemCount = data.items.reduce(
+      (count, item) =>
+        count +
+        (item.schedule_kind === "event" && item.has_registration_deadline
+          ? 2
+          : 1),
+      0
+    );
+    this.error = null;
+    const match = name.match(
+      /^(items\.\d+(?:\.registration_deadline)?)\.all_day$/
+    );
     if (match) {
-      const item = data.items[Number(match[1])];
+      const item = this.#formApi.get(match[1]);
       for (const field of ["start", "end"]) {
         if (item[field]) {
           this.#formApi.set(
-            `items.${match[1]}.${field}`,
+            `${match[1]}.${field}`,
             value
               ? item[field].slice(0, 10)
               : `${item[field].slice(0, 10)}T09:00`
@@ -68,6 +77,16 @@ export default class ISBFOfficialCalendarEditor extends Component {
           all_day: false,
           start: "",
           end: "",
+          location: "",
+          organizer: "",
+          has_registration_deadline: false,
+          registration_deadline: {
+            title: "",
+            schedule_kind: "deadline",
+            all_day: false,
+            start: "",
+            end: "",
+          },
         })
       );
     }
@@ -85,9 +104,16 @@ export default class ISBFOfficialCalendarEditor extends Component {
   save(data) {
     let items;
     try {
-      items = data.items.map(calendarItemFromEditor);
+      items = calendarItemsFromEditor(data.items);
     } catch {
-      this.error = true;
+      this.error = i18n(themePrefix("isbf_v2.schedule_invalid_time"));
+      return;
+    }
+    const max = this.site.isbf_calendar?.max_items ?? 20;
+    if (items.length > max) {
+      this.error = i18n(themePrefix("isbf_v2.schedule_too_many_items"), {
+        max,
+      });
       return;
     }
     this.args.model.onSave(items);
@@ -98,7 +124,7 @@ export default class ISBFOfficialCalendarEditor extends Component {
     <DModal
       class="isbf-official-calendar-editor"
       @closeModal={{@closeModal}}
-      @title={{themePrefix "isbf_v2.schedule_editor_title"}}
+      @title={{i18n (themePrefix "isbf_v2.schedule_editor_title")}}
     >
       <:body>
         <p>{{i18n (themePrefix "isbf_v2.schedule_timezone_hint")}}</p>
@@ -131,7 +157,7 @@ export default class ISBFOfficialCalendarEditor extends Component {
                       (themePrefix "isbf_v2.schedule_event")
                     }}</select.Option>
                   <select.Option @value="deadline">{{i18n
-                      (themePrefix "isbf_v2.schedule_deadline")
+                      (themePrefix "isbf_v2.schedule_standalone_deadline")
                     }}</select.Option>
                 </field.Control>
               </collection.Field>
@@ -169,6 +195,64 @@ export default class ISBFOfficialCalendarEditor extends Component {
                 >
                   <field.Control />
                 </collection.Field>
+                <collection.Field
+                  @name="location"
+                  @title={{i18n (themePrefix "isbf_v2.schedule_location")}}
+                  @type="input"
+                  as |field|
+                >
+                  <field.Control maxlength="255" />
+                </collection.Field>
+                <collection.Field
+                  @name="organizer"
+                  @title={{i18n (themePrefix "isbf_v2.schedule_organizer")}}
+                  @type="input"
+                  as |field|
+                >
+                  <field.Control maxlength="120" />
+                </collection.Field>
+                <collection.Field
+                  @name="has_registration_deadline"
+                  @title={{i18n
+                    (themePrefix "isbf_v2.schedule_has_registration_deadline")
+                  }}
+                  @type="checkbox"
+                  as |field|
+                >
+                  <field.Control />
+                </collection.Field>
+                {{#if item.has_registration_deadline}}
+                  <collection.Object
+                    @name="registration_deadline"
+                    as |registration deadline|
+                  >
+                    <registration.Field
+                      @name="all_day"
+                      @title={{i18n
+                        (themePrefix "isbf_v2.schedule_registration_date_only")
+                      }}
+                      @type="checkbox"
+                      as |field|
+                    >
+                      <field.Control />
+                    </registration.Field>
+                    <registration.Field
+                      @name="start"
+                      @title={{i18n
+                        (themePrefix "isbf_v2.schedule_registration_deadline")
+                      }}
+                      @type={{if
+                        deadline.all_day
+                        "input-date"
+                        "input-datetime-local"
+                      }}
+                      @validation="required"
+                      as |field|
+                    >
+                      <field.Control />
+                    </registration.Field>
+                  </collection.Object>
+                {{/if}}
               {{/if}}
               <DButton
                 @action={{fn this.removeItem index}}
@@ -186,7 +270,7 @@ export default class ISBFOfficialCalendarEditor extends Component {
           {{#if this.error}}<p
               class="isbf-official-calendar-editor__error"
               role="alert"
-            >{{i18n (themePrefix "isbf_v2.schedule_invalid_time")}}</p>{{/if}}
+            >{{this.error}}</p>{{/if}}
           <form.Submit @label={{themePrefix "isbf_v2.schedule_save_items"}} />
         </Form>
       </:body>

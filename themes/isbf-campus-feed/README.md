@@ -61,7 +61,7 @@ re-export to confirm the repository and live source match.
 Keep the frontend build running during browser tests. `THEME_IDS` also supplies
 the `id` query parameter needed to select the runner rather than its index page.
 
-Official activity times and deadlines are provided by `isbf-calendar` 0.2.0.
+Official activity times and deadlines are provided by `isbf-calendar` 0.3.0.
 The calendar pre-initializer runs after the campus/type extension and preserves
 its reset and open behavior. Drafts keep arrays, while first-post create/update
 payloads use JSON strings containing stable source IDs and revisions. Replies,
@@ -77,6 +77,25 @@ revision. The UI refreshes conflicts before asking the user to decide again.
 The official calendar tests include composer restoration, source time boundaries,
 the FormKit editor, add/retry state, update confirmation, note-only writes,
 notification routing and existing manual-calendar interactions.
+
+The official feed places an activity summary after the post body and before the
+existing action footer. Each activity has a title and a two-column grid of
+activity time, registration deadline, location, and organizer on both desktop
+and mobile. Missing registration deadlines display None; blank locations and
+organizers display Not provided. Ordinary announcements have no schedule block,
+and independent deadlines use compact name/time rows. The latest feed retains
+its existing summary. Theme color variables support light and dark modes.
+The standard official category list also uses this layout when the dedicated
+campus/type feed is unavailable. Match the configured official category path
+with a segment boundary so other categories and the latest feed remain separate.
+
+The editor groups an activity with its optional registration deadline while
+submitting the existing flat source array. Activity rows link to deadline rows
+using `registration_deadline_index`; saved responses use stable IDs. The helper
+retains existing IDs and revisions, and counts a linked deadline toward the
+20-item limit. Historical deadlines remain independent until explicitly linked.
+Location and organizer belong to the official display and publication history;
+they do not alter personal calendar snapshots or time-change notifications.
 
 The `/badges` listing and badge detail routes share the V2 shell, including
 details filtered by `username`. Keep their cards and grant lists within the

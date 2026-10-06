@@ -21,6 +21,7 @@ module IsbfCalendar
       step :lock_topic
       try ArgumentError do
         step :prepare_items
+        step :link_registration_deadlines
       end
       step :save_items
     end
@@ -44,7 +45,7 @@ module IsbfCalendar
         topic.persisted? ? OfficialItem.where(topic_id: topic.id).to_a : []
       context[:before_items] = existing
         .reject(&:cancelled?)
-        .map { |item| item.snapshot.as_json.merge("id" => item.id) }
+        .map { |item| item.publication_snapshot.as_json.merge("id" => item.id) }
       existing_by_id = existing.index_by(&:id)
       used_ids = Set.new
       context[:items] = params.items.each_with_index.map do |payload, position|
@@ -63,6 +64,8 @@ module IsbfCalendar
         item.assign_attributes(
           OfficialItem.attributes_from_payload(payload).merge(position:)
         )
+        item.topic = topic
+        item.registration_deadline = nil
         fail! unless item.valid?
         item
       end
@@ -71,14 +74,47 @@ module IsbfCalendar
         .reject { |item| used_ids.include?(item.id) }
     end
 
+    def link_registration_deadlines(params:, items:)
+      existing_by_id = items.select(&:persisted?).index_by(&:id)
+      used_deadlines = Set.new
+      items.each_with_index do |item, position|
+        payload = params.items[position].with_indifferent_access
+        deadline =
+          if payload.key?(:registration_deadline_index)
+            raise ArgumentError unless item.schedule_kind == "event"
+            index = payload[:registration_deadline_index]
+            valid_index =
+              index.nil? ||
+                (index.is_a?(Integer) && index >= 0 && index < items.length)
+            raise ArgumentError unless valid_index
+            items[index] unless index.nil?
+          elsif item.schedule_kind == "event" &&
+                item.registration_deadline_id_in_database
+            existing_by_id[item.registration_deadline_id_in_database]
+          end
+        if deadline
+          unless deadline.schedule_kind == "deadline" && !deadline.cancelled? &&
+                   used_deadlines.add?(deadline)
+            raise ArgumentError
+          end
+        end
+        item.registration_deadline = deadline
+        fail! unless item.valid?
+      end
+    end
+
     def save_items(topic:, items:, removed_items:)
       if topic.persisted?
-        items.each(&:save!)
-        removed_items.each { |item| item.update!(cancelled: true) }
+        items
+          .sort_by { |item| item.schedule_kind == "deadline" ? 0 : 1 }
+          .each(&:save!)
+        removed_items.each do |item|
+          item.update!(cancelled: true, registration_deadline: nil)
+        end
         topic.association(:isbf_official_calendar_items).reset
       end
       context[:after_items] = items.map do |item|
-        item.snapshot.as_json.merge("id" => item.id)
+        item.publication_snapshot.as_json.merge("id" => item.id)
       end
     end
   end

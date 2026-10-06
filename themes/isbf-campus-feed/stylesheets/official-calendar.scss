@@ -2,6 +2,58 @@
   margin-top: var(--isbf-v2-space-3);
 }
 
+.isbf-official-activity-summary {
+  display: grid;
+  gap: var(--isbf-v2-space-4);
+  margin-block: var(--isbf-v2-space-4);
+
+  &__title {
+    margin-block: 0 var(--isbf-v2-space-2);
+    font-size: var(--isbf-v2-font-md);
+    overflow-wrap: anywhere;
+  }
+
+  &__fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--isbf-v2-space-3);
+    margin: 0;
+  }
+
+  &__field,
+  &__deadline {
+    min-width: 0;
+    padding: var(--isbf-v2-space-3);
+    border: 1px solid var(--isbf-v2-border);
+    border-radius: var(--isbf-v2-radius-sm);
+    overflow-wrap: anywhere;
+  }
+
+  &__field {
+    dt {
+      margin-block-end: var(--isbf-v2-space-2);
+      font-weight: 600;
+      color: var(--isbf-v2-text);
+    }
+
+    dd {
+      margin: 0;
+      color: var(--isbf-v2-muted);
+      font-size: var(--isbf-v2-font-xs);
+    }
+  }
+
+  &__deadline {
+    display: grid;
+    gap: var(--isbf-v2-space-1);
+
+    span {
+      color: var(--isbf-v2-muted);
+      font-size: var(--isbf-v2-font-xs);
+    }
+  }
+}
+
 .isbf-official-calendar-items {
   display: grid;
   gap: var(--isbf-v2-space-3);

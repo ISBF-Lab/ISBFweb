@@ -4,6 +4,17 @@ import I18n, { i18n } from "discourse-i18n";
 export const OFFICIAL_CALENDAR_FIELD = "isbf_official_calendar_items";
 export const OFFICIAL_TIMEZONE = "Asia/Shanghai";
 
+export function isOfficialCalendarPath(path, officialPath) {
+  if (!path || !officialPath) {
+    return false;
+  }
+  const currentPath = path.split(/[?#]/)[0];
+  const categoryPath = officialPath.split("/l/")[0].replace(/\/$/, "");
+  return (
+    currentPath === categoryPath || currentPath.startsWith(`${categoryPath}/`)
+  );
+}
+
 function parts(value, withTime = false) {
   return Object.fromEntries(
     new Intl.DateTimeFormat("en-CA", {
@@ -105,20 +116,66 @@ export function isOfficialCalendarComposer(model, site) {
 }
 
 export function canonicalCalendarItems(items = []) {
-  return items
-    .filter((item) => !item.cancelled)
-    .map((item) => ({
+  const active = items.filter((item) => !item.cancelled);
+  return active.map((item) => {
+    const result = {
       ...(item.id ? { id: item.id, revision: item.revision } : {}),
       title: item.title,
       schedule_kind: item.schedule_kind,
       starts_at: item.starts_at,
       ends_at: item.ends_at,
       all_day: Boolean(item.all_day),
-    }));
+    };
+    if (item.schedule_kind === "event") {
+      for (const field of ["location", "organizer"]) {
+        if (Object.hasOwn(item, field)) {
+          result[field] = item[field]?.trim() || "";
+        }
+      }
+      if (
+        Object.hasOwn(item, "registration_deadline_index") ||
+        Object.hasOwn(item, "registration_deadline_id")
+      ) {
+        const deadline = registrationDeadline(item, items);
+        result.registration_deadline_index = deadline
+          ? active.indexOf(deadline)
+          : null;
+      }
+    }
+    return result;
+  });
 }
 
-export function calendarEditorItems(items) {
-  return canonicalCalendarItems(items).map((item) => ({
+function registrationDeadline(item, items) {
+  const deadline = Object.hasOwn(item, "registration_deadline_index")
+    ? items[item.registration_deadline_index]
+    : items.find(
+        (candidate) =>
+          candidate.id && candidate.id === item.registration_deadline_id
+      );
+  return deadline &&
+    !deadline.cancelled &&
+    deadline.schedule_kind === "deadline"
+    ? deadline
+    : null;
+}
+
+export function officialCalendarGroups(items = []) {
+  const active = items.filter((item) => !item.cancelled);
+  const linked = new Set();
+  const groups = active.map((item) => {
+    const deadline =
+      item.schedule_kind === "event" ? registrationDeadline(item, items) : null;
+    if (deadline) {
+      linked.add(deadline);
+    }
+    return { item, deadline, isEvent: item.schedule_kind === "event" };
+  });
+  return groups.filter((group) => !linked.has(group.item));
+}
+
+function calendarEditorItem(item) {
+  return {
     ...item,
     start: officialInput(item.starts_at, item.all_day),
     end:
@@ -128,7 +185,53 @@ export function calendarEditorItems(items) {
             new Date(item.ends_at).getTime() - (item.all_day ? 86400000 : 0),
             item.all_day
           ),
-  }));
+  };
+}
+
+export function calendarEditorItems(items) {
+  return officialCalendarGroups(canonicalCalendarItems(items)).map(
+    ({ item, deadline }) => ({
+      ...calendarEditorItem(item),
+      has_registration_deadline: Boolean(deadline),
+      registration_deadline: deadline
+        ? calendarEditorItem(deadline)
+        : {
+            title: "",
+            schedule_kind: "deadline",
+            all_day: false,
+            start: "",
+            end: "",
+          },
+    })
+  );
+}
+
+export function calendarItemsFromEditor(items) {
+  const result = [];
+  for (const item of items) {
+    const source = calendarItemFromEditor(item);
+    result.push(source);
+    if (item.schedule_kind !== "event") {
+      continue;
+    }
+    source.registration_deadline_index = null;
+    if (item.has_registration_deadline) {
+      const deadline = item.registration_deadline;
+      source.registration_deadline_index = result.length;
+      result.push(
+        calendarItemFromEditor({
+          ...deadline,
+          title: deadline.id
+            ? deadline.title
+            : i18n(themePrefix("isbf_v2.schedule_registration_name"), {
+                name: item.title,
+              }).slice(0, 120),
+          schedule_kind: "deadline",
+        })
+      );
+    }
+  }
+  return result;
 }
 
 export function calendarItemFromEditor(item) {
