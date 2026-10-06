@@ -1,3 +1,1 @@
-export default <template>
-  <div class="isbf-calendar-route"></div>
-</template>
+<template><div class="isbf-calendar-route"></div></template>

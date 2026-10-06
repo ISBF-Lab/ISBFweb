@@ -12,7 +12,12 @@ class CreateIsbfCalendarEntries < ActiveRecord::Migration[7.2]
       t.timestamps
     end
 
-    add_index :isbf_calendar_entries, %i[user_id starts_at], name: "idx_isbf_calendar_user_start"
-    add_foreign_key :isbf_calendar_entries, :users, column: :user_id, on_delete: :cascade
+    add_index :isbf_calendar_entries,
+              %i[user_id starts_at],
+              name: "idx_isbf_calendar_user_start"
+    add_foreign_key :isbf_calendar_entries,
+                    :users,
+                    column: :user_id,
+                    on_delete: :cascade
   end
 end

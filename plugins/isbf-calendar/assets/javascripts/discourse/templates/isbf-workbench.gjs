@@ -1,3 +1,1 @@
-export default <template>
-  <div class="isbf-workbench-route"></div>
-</template>
+<template><div class="isbf-workbench-route"></div></template>

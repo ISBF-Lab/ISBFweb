@@ -21,6 +21,7 @@ import {
   postCardTitle,
 } from "../lib/post-card-helpers";
 import { isReportedHidden, openPostReport } from "../lib/report-post";
+import ISBFOfficialCalendarItems from "./isbf-official-calendar-items";
 
 export default class ISBFV2FeedCard extends Component {
   @service appEvents;
@@ -615,30 +616,39 @@ export default class ISBFV2FeedCard extends Component {
                 (if this.expanded "isbf_v2.show_less" "isbf_v2.show_more")
               )
             }}</button>{{/if}}
+        {{#unless this.hidden}}
+          <ISBFOfficialCalendarItems
+            @items={{@topic.isbf_official_calendar_items}}
+            @readOnly={{true}}
+          />
+        {{/unless}}
         <footer class="isbf-feed-card__actions">
           <button
             aria-label={{i18n (themePrefix "isbf_v2.reply")}}
             disabled={{this.isReplying}}
             type="button"
             {{on "click" this.reply}}
-          >{{dIcon "comment"}}<span>{{this.formattedReplyCount}}</span></button>
+          >{{dIcon "comment"}}{{#if this.formattedReplyCount}}<span
+              >{{this.formattedReplyCount}}</span>{{/if}}</button>
           <button
             aria-label={{i18n (themePrefix "isbf_v2.repost")}}
             type="button"
             {{on "click" this.repost}}
-          >{{dIcon "retweet"}}<span
-            >{{this.formattedRepostCount}}</span></button>
+          >{{dIcon "retweet"}}{{#if this.formattedRepostCount}}<span
+              >{{this.formattedRepostCount}}</span>{{/if}}</button>
           <button
             aria-label={{i18n (themePrefix "isbf_v2.like")}}
             class={{if this.liked "is-liked"}}
             disabled={{this.isLiking}}
             type="button"
             {{on "click" this.toggleLike}}
-          >{{dIcon "heart"}}<span>{{this.formattedLikeCount}}</span></button>
+          >{{dIcon "heart"}}{{#if this.formattedLikeCount}}<span
+              >{{this.formattedLikeCount}}</span>{{/if}}</button>
           <span
             aria-label={{this.viewLabel}}
             class="isbf-feed-card__views"
-          >{{dIcon "chart-bar"}}<span>{{this.formattedViewCount}}</span></span>
+          >{{dIcon "chart-bar"}}{{#if this.formattedViewCount}}<span
+              >{{this.formattedViewCount}}</span>{{/if}}</span>
           <button
             aria-label={{i18n (themePrefix "isbf_v2.bookmark_action")}}
             class={{if this.bookmarked "is-bookmarked"}}

@@ -1,0 +1,6 @@
+en:
+  isbf_calendar:
+    invalid_items: "Check the official calendar items and their versions."
+    invalid_time: "Enter a valid activity time or deadline."
+    version_conflict: "The official information has changed. Refresh it before continuing."
+    readonly_fields: "Only the private note can be edited for an official calendar entry."

@@ -12,7 +12,7 @@ RSpec.describe IsbfCalendar::EntriesController do
       starts_at: "2026-10-02T09:00:00+08:00",
       ends_at: "2026-10-02T11:00:00+08:00",
       all_day: false,
-      note: "二楼",
+      note: "二楼"
     }
   end
 
@@ -20,7 +20,7 @@ RSpec.describe IsbfCalendar::EntriesController do
     get "/isbf/api/entries.json",
         params: {
           from: "2026-10-01T00:00:00Z",
-          to: "2026-11-01T00:00:00Z",
+          to: "2026-11-01T00:00:00Z"
         }
     expect(response.status).not_to eq(200)
   end
@@ -33,20 +33,23 @@ RSpec.describe IsbfCalendar::EntriesController do
     get "/isbf/api/entries.json",
         params: {
           from: "2026-10-01T00:00:00Z",
-          to: "2026-11-01T00:00:00Z",
+          to: "2026-11-01T00:00:00Z"
         }
 
     expect(response.status).to eq(200)
-    expect(response.parsed_body["entries"].map { |entry| entry["id"] }).to eq([own.id])
+    expect(response.parsed_body["entries"].map { |entry| entry["id"] }).to eq(
+      [own.id]
+    )
   end
 
   it "does not let another user update or delete an entry" do
-    entry = IsbfCalendar::Entry.create!(entry_attributes.merge(user: other_user))
+    entry =
+      IsbfCalendar::Entry.create!(entry_attributes.merge(user: other_user))
     sign_in(owner)
 
     patch "/isbf/api/entries/#{entry.id}.json",
           params: {
-            entry: entry_attributes.merge(title: "改动"),
+            entry: entry_attributes.merge(title: "改动")
           }
     expect(response.status).to eq(404)
     delete "/isbf/api/entries/#{entry.id}.json"
@@ -73,7 +76,7 @@ RSpec.describe IsbfCalendar::EntriesController do
     sign_in(owner)
     post "/isbf/api/entries.json",
          params: {
-           entry: entry_attributes.merge(ends_at: "2026-10-02T08:00:00+08:00"),
+           entry: entry_attributes.merge(ends_at: "2026-10-02T08:00:00+08:00")
          }
     expect(response.status).not_to eq(201)
     expect(IsbfCalendar::Entry.count).to eq(0)
