@@ -164,6 +164,36 @@ body.signup-page {
     margin-top: 1em;
   }
 
+  .login-page-cta {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 500px;
+
+    .login-page-cta__login,
+    .login-page-cta__code-login-button {
+      width: 100%;
+    }
+
+    &__code-login {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding-block-start: 0.5rem;
+      width: 100%;
+    }
+
+    &__code-login-button {
+      min-height: max(2.75rem, 44px);
+      font-size: var(--font-0);
+    }
+
+    &__code-login-hint {
+      color: var(--primary-medium);
+      font-size: var(--font-down-1);
+      text-align: center;
+    }
+  }
+
   .login-left-side {
     box-sizing: border-box;
     width: 100%;
@@ -318,7 +348,6 @@ body.signup-page {
     }
 
     #email-login-link,
-    #one-time-code-link,
     .login__password-links {
       font-size: var(--font-down-1);
       display: flex;

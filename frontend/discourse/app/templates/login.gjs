@@ -84,6 +84,7 @@ export default <template>
                 <LocalLoginForm
                   @backupEnabled={{@controller.backupEnabled}}
                   @canLoginLocalWithEmail={{@controller.canLoginLocalWithEmail}}
+                  @canUseCodeLogin={{@controller.canUseCodeLogin}}
                   @canUsePasskeys={{@controller.canUsePasskeys}}
                   @flashChanged={{@controller.flashChanged}}
                   @flashTypeChanged={{@controller.flashTypeChanged}}
@@ -93,10 +94,6 @@ export default <template>
                   @loginNameChanged={{@controller.loginNameChanged}}
                   @loginPassword={{@controller.loginPassword}}
                   @loginPasswordChanged={{@controller.loginPasswordChanged}}
-                  @onShowCodeLogin={{if
-                    @controller.canUseCodeLogin
-                    @controller.showCodeLogin
-                  }}
                   @otherMethodAllowed={{@controller.otherMethodAllowed}}
                   @passkeyLogin={{@controller.passkeyLogin}}
                   @secondFactorMethod={{@controller.secondFactorMethod}}
@@ -123,6 +120,10 @@ export default <template>
                 @loggingIn={{@controller.loggingIn}}
                 @loginButtonLabel={{@controller.loginButtonLabel}}
                 @loginDisabled={{@controller.loginDisabled}}
+                @onShowCodeLogin={{if
+                  @controller.canUseCodeLogin
+                  @controller.showCodeLogin
+                }}
                 @showSecondFactor={{@controller.showSecondFactor}}
                 @showSecurityKey={{@controller.showSecurityKey}}
                 @showSignupLink={{@controller.showSignupLink}}
@@ -161,6 +162,10 @@ export default <template>
             @loggingIn={{@controller.loggingIn}}
             @loginButtonLabel={{@controller.loginButtonLabel}}
             @loginDisabled={{@controller.loginDisabled}}
+            @onShowCodeLogin={{if
+              @controller.canUseCodeLogin
+              @controller.showCodeLogin
+            }}
             @showSecondFactor={{@controller.showSecondFactor}}
             @showSecurityKey={{@controller.showSecurityKey}}
             @showSignupLink={{@controller.showSignupLink}}
