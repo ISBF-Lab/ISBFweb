@@ -1,6 +1,7 @@
-import { visit } from "@ember/test-helpers";
+import { click, visit } from "@ember/test-helpers";
 import { test } from "qunit";
 import { acceptance } from "discourse/tests/helpers/qunit-helpers";
+import { i18n } from "discourse-i18n";
 
 acceptance("Academy student invitations", function (needs) {
   needs.user({ admin: true });
@@ -74,5 +75,28 @@ acceptance("Academy student invitations", function (needs) {
     assert
       .dom(".academy-student-invite-form [type='submit']")
       .exists("the administrator can submit the invitation form");
+  });
+
+  test("opens the CSV bulk form from the invitation list", async function (assert) {
+    await visit("/admin/plugins/discourse-academy-roles/student-invites");
+
+    assert
+      .dom(".d-page-subheader__actions .btn-default")
+      .hasText(
+        i18n("academy_roles.student_invites.bulk.title"),
+        "the invitation list offers bulk generation"
+      );
+
+    await click(".d-page-subheader__actions .btn-default");
+
+    assert
+      .dom(".admin-config-area-card__content .academy-student-invite-bulk-form")
+      .exists("the bulk page uses an admin form card");
+    assert
+      .dom(".academy-student-invite-bulk-form input[type='file']")
+      .exists("the administrator can choose a CSV");
+    assert
+      .dom("[data-name='expires_after_days'] input")
+      .hasValue("30", "the configured invitation lifetime is the default");
   });
 });

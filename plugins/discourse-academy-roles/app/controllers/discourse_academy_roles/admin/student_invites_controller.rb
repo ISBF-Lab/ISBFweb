@@ -68,6 +68,46 @@ class DiscourseAcademyRoles::Admin::StudentInvitesController < ::Admin::AdminCon
     end
   end
 
+  def bulk
+    hijack do
+      DiscourseAcademyRoles::BulkCreateStudentInvites.call(service_params) do
+        on_success do |csv:|
+          render json:
+                   DiscourseAcademyRoles::StudentInviteBatchSerializer.new(
+                     csv,
+                     scope: guardian,
+                     root: false
+                   ).as_json,
+                 status: csv.created_count.positive? ? :created : :ok
+        end
+        on_failed_contract do |contract|
+          render_json_error(contract.errors.full_messages, status: :bad_request)
+        end
+        on_failed_policy(:can_manage_student_invites) do
+          render_json_error(I18n.t("invalid_access"), status: :forbidden)
+        end
+        on_model_not_found(:csv) do |model|
+          if model.exception.is_a?(
+               DiscourseAcademyRoles::StudentInviteCsv::InvalidFile
+             )
+            render_json_error(model.exception.message, status: :bad_request)
+          else
+            render_json_error(
+              I18n.t("academy_roles.student_invites.create_failed"),
+              status: :unprocessable_entity
+            )
+          end
+        end
+        on_failure do
+          render_json_error(
+            I18n.t("academy_roles.student_invites.create_failed"),
+            status: :unprocessable_entity
+          )
+        end
+      end
+    end
+  end
+
   def reissue
     DiscourseAcademyRoles::ReissueStudentInvite.call(
       service_params.deep_merge(

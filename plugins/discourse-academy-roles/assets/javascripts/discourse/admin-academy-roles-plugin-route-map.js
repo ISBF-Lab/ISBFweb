@@ -8,6 +8,7 @@ export default {
       { path: "student-invites" },
       function () {
         this.route("new");
+        this.route("bulk");
       }
     );
   },

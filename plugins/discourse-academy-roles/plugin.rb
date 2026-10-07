@@ -2,7 +2,7 @@
 
 # name: discourse-academy-roles
 # about: Closed academy membership and official publishing
-# version: 0.1.0
+# version: 0.2.0
 # authors: Discourse
 
 require_relative "app/validators/academy_roles_enabled_validator"
@@ -31,15 +31,24 @@ after_initialize do
 
     module Admin
     end
+
+    module StudentInvites
+      module Action
+      end
+    end
   end
 
   %w[
     app/models/discourse_academy_roles/student_registration
+    lib/discourse_academy_roles/student_invite_csv
     app/services/discourse_academy_roles/student_invite_contract
     app/services/discourse_academy_roles/create_student_invite
+    app/services/discourse_academy_roles/student_invites/action/issue_batch
+    app/services/discourse_academy_roles/bulk_create_student_invites
     app/services/discourse_academy_roles/reissue_student_invite
     app/services/discourse_academy_roles/revoke_student_invite
     app/serializers/discourse_academy_roles/student_registration_serializer
+    app/serializers/discourse_academy_roles/student_invite_batch_serializer
     app/controllers/discourse_academy_roles/admin/student_invites_controller
   ].each { |path| require_relative path }
 
@@ -49,6 +58,7 @@ after_initialize do
                 path: "student-invites",
                 only: %i[index create destroy] do
         post :reissue, on: :member
+        post :bulk, on: :collection
       end
     end
   end
@@ -58,6 +68,9 @@ after_initialize do
           "admin/plugins#index",
         :constraints => AdminConstraint.new
     get "/admin/plugins/discourse-academy-roles/student-invites/new" =>
+          "admin/plugins#index",
+        :constraints => AdminConstraint.new
+    get "/admin/plugins/discourse-academy-roles/student-invites/bulk" =>
           "admin/plugins#index",
         :constraints => AdminConstraint.new
     mount ::DiscourseAcademyRoles::Engine, at: "/academy-roles"

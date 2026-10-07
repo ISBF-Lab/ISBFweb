@@ -111,6 +111,10 @@ export default class AcademyStudentInvites extends Component {
               @label="academy_roles.student_invites.create"
               @route="adminPlugins.show.academy-student-invites.new"
             />
+            <actions.Default
+              @label="academy_roles.student_invites.bulk.title"
+              @route="adminPlugins.show.academy-student-invites.bulk"
+            />
           </:actions>
         </DPageSubheader>
         {{#if this.state.records.length}}
