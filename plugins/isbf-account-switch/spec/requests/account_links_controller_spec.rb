@@ -8,6 +8,76 @@ RSpec.describe IsbfAccountSwitch::AccountsController do
 
   before { SiteSetting.isbf_account_switch_enabled = true }
 
+  describe "#index" do
+    it "returns live links alongside a revoked link to a deleted account" do
+      deleted_link = create_link
+      deleted_link.update!(status: :revoked)
+      target.destroy!
+      live_link =
+        Fabricate(
+          :isbf_account_link,
+          user_a: requester,
+          user_b: stranger,
+          requester: requester,
+          status: :approved,
+        )
+
+      get "/isbf/account-switch/accounts.json"
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body["links"].map { |link| link["id"] }).to eq([live_link.id])
+      expect(response.parsed_body["links"].first["account"]["username"]).to eq(stranger.username)
+      expect(deleted_link.reload).to be_revoked
+      expect(IsbfAccountSwitch::AuditEvent.where(account_link_id: deleted_link.id)).to exist
+    end
+
+    it "returns an empty list when the first account of an approved link was deleted" do
+      link = create_link
+      link.update!(status: :approved)
+      requester.destroy!
+      sign_in(target)
+
+      get "/isbf/account-switch/accounts.json"
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body["links"]).to eq([])
+      expect(response.parsed_body["can_link_accounts"]).to eq(true)
+      expect(link.reload).to be_approved
+    end
+
+    it "returns an empty list for a user without account links" do
+      sign_in(stranger)
+
+      get "/isbf/account-switch/accounts.json"
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body["links"]).to eq([])
+    end
+  end
+
+  %w[verify switch].each do |action_name|
+    describe "##{action_name}" do
+      it "preserves the session when the approved target account was deleted" do
+        link = create_link
+        link.update!(status: :approved)
+        target.destroy!
+
+        post "/isbf/account-switch/links/#{link.id}/#{action_name}.json",
+             params: {
+               password: "target-password",
+             }
+
+        expect(response.status).to eq(403)
+        expect(response.parsed_body["errors"]).to eq(
+          [I18n.t("isbf_account_switch.errors.target_unavailable")],
+        )
+        expect(IsbfAccountSwitch::DeviceGrant.count).to eq(0)
+        get "/session/current.json"
+        expect(response.parsed_body["current_user"]["username"]).to eq(requester.username)
+      end
+    end
+  end
+
   it "opens the approval page directly for an administrator" do
     sign_in(admin)
     Discourse.stubs(:plugins_sorted_by_name).returns(

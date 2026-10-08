@@ -72,6 +72,20 @@ acceptance("ISBF account switch admin links", function (needs) {
             requester: "bob",
             status: "approved",
           },
+          {
+            id: 4,
+            user_a: { id: 4, username: null, name: null },
+            user_b: { username: "bob" },
+            requester: null,
+            status: "pending_admin",
+          },
+          {
+            id: 5,
+            user_a: { username: "alice" },
+            user_b: { id: 5, username: null, name: null },
+            requester: "alice",
+            status: "pending_admin",
+          },
         ],
         audit_events: [
           {
@@ -91,7 +105,7 @@ acceptance("ISBF account switch admin links", function (needs) {
     const table = ".isbf-account-switch-admin table:first-of-type";
     assert
       .dom(`${table} tbody tr`)
-      .exists({ count: 3 }, "the linked accounts are rendered");
+      .exists({ count: 5 }, "live and historical account links are rendered");
     assert
       .dom(`${table} tbody tr:first-child td:first-child`)
       .hasText("@alice ↔ @bob", "the account pair is shown");
@@ -140,5 +154,38 @@ acceptance("ISBF account switch admin links", function (needs) {
       [],
       "navigation resolves the route and template without deprecated normalization"
     );
+  });
+
+  test("marks deleted accounts and prevents approving their historical links", async function (assert) {
+    await visit("/admin/plugins/isbf-account-switch/links");
+
+    const rows = ".isbf-account-switch-admin table:first-of-type tbody";
+    const deletedAccount = i18n("isbf_account_switch.admin.deleted_account");
+    assert
+      .dom(`${rows} tr:nth-child(4) td:first-child`)
+      .hasText(
+        `${deletedAccount} ↔ @bob`,
+        "the missing first account is marked"
+      );
+    assert
+      .dom(`${rows} tr:nth-child(5) td:first-child`)
+      .hasText(
+        `@alice ↔ ${deletedAccount}`,
+        "the missing second account is marked"
+      );
+    assert
+      .dom(`${rows} tr:nth-child(4) td:nth-child(2)`)
+      .hasText(deletedAccount, "a deleted requester is marked");
+    for (const rowNumber of [4, 5]) {
+      assert
+        .dom(`${rows} tr:nth-child(${rowNumber}) button:first-of-type`)
+        .isDisabled("links to deleted accounts cannot be approved");
+      assert
+        .dom(`${rows} tr:nth-child(${rowNumber}) button:nth-of-type(2)`)
+        .isEnabled("historical pending links can still be rejected");
+    }
+    assert
+      .dom(`${rows} tr:first-child button:first-of-type`)
+      .isEnabled("a live account link can still be approved");
   });
 });

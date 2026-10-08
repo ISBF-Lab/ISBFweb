@@ -7,6 +7,7 @@ zh_CN:
         description: "审批、拒绝、撤销账号关联，并查看操作记录。"
         accounts: "账号"
         requester: "申请人"
+        deleted_account: "账号已删除"
         status: "状态"
         actions: "操作"
         approve: "批准"

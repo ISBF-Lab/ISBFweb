@@ -23,7 +23,9 @@ module IsbfAccountSwitch
 
       def approve
         link = AccountLink.find(params[:id])
-        return render_error(:invalid_link) unless link.pending_admin?
+        unless link.pending_admin? && link.user_a.present? && link.user_b.present?
+          return render_error(:invalid_link)
+        end
 
         link.update!(status: :approved, approved_by: current_user, approved_at: Time.zone.now)
         AuditEvent.record!(
@@ -91,9 +93,9 @@ module IsbfAccountSwitch
         {
           id: link.id,
           status: link.status,
-          user_a: user_payload(link.user_a),
-          user_b: user_payload(link.user_b),
-          requester: link.requester.username,
+          user_a: user_payload(link.user_a, link.user_a_id),
+          user_b: user_payload(link.user_b, link.user_b_id),
+          requester: link.requester&.username,
           approved_by: link.approved_by&.username,
           approved_at: link.approved_at,
           rejected_by: link.rejected_by&.username,
@@ -105,8 +107,8 @@ module IsbfAccountSwitch
         }
       end
 
-      def user_payload(user)
-        { id: user.id, username: user.username, name: user.name }
+      def user_payload(user, user_id)
+        { id: user_id, username: user&.username, name: user&.name }
       end
     end
   end

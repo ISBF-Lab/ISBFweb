@@ -11,7 +11,10 @@ module IsbfAccountSwitch
       links =
         AccountLink.for_user(current_user.id).includes(:user_a, :user_b).order(updated_at: :desc)
 
-      render json: { links: links.map { |link| serialize_link(link) }, can_link_accounts: true }
+      render json: {
+               links: links.filter_map { |link| serialize_link(link) },
+               can_link_accounts: true,
+             }
     end
 
     def create
@@ -161,6 +164,8 @@ module IsbfAccountSwitch
 
     def serialize_link(link)
       other = link.other_user(current_user)
+      return if other.nil?
+
       {
         id: link.id,
         status: link.status,
@@ -182,7 +187,7 @@ module IsbfAccountSwitch
     end
 
     def target_available?(target)
-      target.active? && !target.suspended? &&
+      target.present? && target.active? && !target.suspended? &&
         (!SiteSetting.must_approve_users? || target.approved? || target.admin?)
     end
 

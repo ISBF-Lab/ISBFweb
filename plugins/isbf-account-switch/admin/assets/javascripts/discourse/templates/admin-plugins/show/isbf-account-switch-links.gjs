@@ -55,14 +55,34 @@ class AccountSwitchAdmin extends Component {
         <tbody>
           {{#each this.links as |link|}}
             <tr>
-              <td>@{{link.user_a.username}} ↔ @{{link.user_b.username}}</td>
-              <td>@{{link.requester}}</td>
+              <td>
+                {{#if
+                  link.user_a.username
+                }}@{{link.user_a.username}}{{else}}{{i18n
+                    "isbf_account_switch.admin.deleted_account"
+                  }}{{/if}}
+                ↔
+                {{#if
+                  link.user_b.username
+                }}@{{link.user_b.username}}{{else}}{{i18n
+                    "isbf_account_switch.admin.deleted_account"
+                  }}{{/if}}
+              </td>
+              <td>
+                {{#if link.requester}}@{{link.requester}}{{else}}{{i18n
+                    "isbf_account_switch.admin.deleted_account"
+                  }}{{/if}}
+              </td>
               <td>{{link.status}}</td>
               <td>
                 {{#if (eq link.status "pending_admin")}}
                   <DButton
                     @action={{fn this.update link "approve"}}
-                    @disabled={{eq this.busyId link.id}}
+                    @disabled={{or
+                      (eq this.busyId link.id)
+                      (not link.user_a.username)
+                      (not link.user_b.username)
+                    }}
                     @label="isbf_account_switch.admin.approve"
                   />
                   <DButton
