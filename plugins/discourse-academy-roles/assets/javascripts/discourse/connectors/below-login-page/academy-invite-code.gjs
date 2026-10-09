@@ -3,6 +3,7 @@ import { action } from "@ember/object";
 import { service } from "@ember/service";
 import Form from "discourse/components/form";
 import getURL from "discourse/lib/get-url";
+import { and, not } from "discourse/truth-helpers";
 import { i18n } from "discourse-i18n";
 
 export default class AcademyInviteCode extends Component {
@@ -21,7 +22,12 @@ export default class AcademyInviteCode extends Component {
   }
 
   <template>
-    {{#if this.siteSettings.academy_roles_enabled}}
+    {{#if
+      (and
+        this.siteSettings.academy_roles_enabled
+        (not this.siteSettings.academy_auth_page_enabled)
+      )
+    }}
       <section class="academy-invite-code" ...attributes>
         <h2>{{i18n "academy_roles.invite_title"}}</h2>
         <Form @onSubmit={{this.redeem}} as |form|>

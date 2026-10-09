@@ -13,6 +13,9 @@ add_admin_route "academy_roles.student_invites.title",
                 use_new_show_route: true
 
 register_asset "stylesheets/common/academy-roles.scss"
+register_asset "stylesheets/common/academy-auth.scss"
+register_svg_icon "pause"
+register_svg_icon "play"
 
 module ::DiscourseAcademyRoles
   PLUGIN_NAME = "discourse-academy-roles"

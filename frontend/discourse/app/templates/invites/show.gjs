@@ -24,295 +24,308 @@ import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 
 export default <template>
-  {{bodyClass "invite-page"}}
-  {{hideApplicationHeaderButtons "search" "login" "signup" "menu"}}
-  {{hideApplicationSidebar}}
-  <section>
-    <div class="container invites-show clearfix">
-      {{#if @controller.showWelcomeHeader}}
-        {{#if @controller.showSignupProgressBar}}
-          <SignupProgressBar @step={{@controller.progressBarStep}} />
-          {{#if @controller.showInviteIntroduction}}
-            <WelcomeHeader @header={{@controller.welcomeTitle}} />
+  <PluginOutlet
+    @name="invite-registration-page"
+    @outletArgs={{lazyHash controller=@controller}}
+  >
+    {{bodyClass "invite-page"}}
+    {{hideApplicationHeaderButtons "search" "login" "signup" "menu"}}
+    {{hideApplicationSidebar}}
+    <section>
+      <div class="container invites-show clearfix">
+        {{#if @controller.showWelcomeHeader}}
+          {{#if @controller.showSignupProgressBar}}
+            <SignupProgressBar @step={{@controller.progressBarStep}} />
+            {{#if @controller.showInviteIntroduction}}
+              <WelcomeHeader @header={{@controller.welcomeTitle}} />
+            {{/if}}
           {{/if}}
         {{/if}}
-      {{/if}}
 
-      <div
-        class={{if @controller.successMessage "invite-success" "invite-form"}}
-      >
-        <div class="col-form">
-          {{#if @controller.successMessage}}
-            <div class="success-info">
-              <p>{{trustHTML @controller.successMessage}}</p>
-            </div>
-          {{else}}
-            {{#if @controller.showInviteIntroduction}}
-              <div class="invited-by">
-                <p>{{i18n "invites.invited_by"}}</p>
-                <p>
-                  <DUserInfo @user={{@controller.invitedBy}} />
-                </p>
+        <div
+          class={{if @controller.successMessage "invite-success" "invite-form"}}
+        >
+          <div class="col-form">
+            {{#if @controller.successMessage}}
+              <div class="success-info">
+                <p>{{trustHTML @controller.successMessage}}</p>
               </div>
+            {{else}}
+              {{#if @controller.showInviteIntroduction}}
+                <div class="invited-by">
+                  <p>{{i18n "invites.invited_by"}}</p>
+                  <p>
+                    <DUserInfo @user={{@controller.invitedBy}} />
+                  </p>
+                </div>
 
-              {{#if @controller.associateHtml}}
-                <p class="create-account-associate-link">
-                  {{trustHTML @controller.associateHtml}}
-                </p>
-              {{/if}}
-
-              {{#unless @controller.isInviteLink}}
-                <p class="email-message">
-                  {{trustHTML @controller.yourEmailMessage}}
-                  {{#if @controller.showSocialLoginAvailable}}
-                    {{i18n "invites.social_login_available"}}
-                  {{/if}}
-                </p>
-              {{/unless}}
-            {{/if}}
-
-            {{#if @controller.externalAuthsOnly}}
-              {{! authOptions are present once the user has followed the OmniAuth flow (e.g. twitter/google/etc) }}
-              {{#if @controller.authOptions}}
-                {{#unless @controller.isInviteLink}}
-                  <DInputTip
-                    id="account-email-validation"
-                    @validation={{@controller.emailValidation}}
-                  />
-                {{/unless}}
-              {{else}}
-                <LoginButtons
-                  @context="invite"
-                  @externalLogin={{@controller.externalLogin}}
-                />
-              {{/if}}
-            {{/if}}
-
-            {{#if @controller.discourseConnectEnabled}}
-              <a
-                class="btn btn-primary discourse-connect raw-link"
-                href={{@controller.ssoPath}}
-              >
-                {{i18n "continue"}}
-              </a>
-            {{/if}}
-
-            {{#if @controller.shouldDisplayForm}}
-              {{#if @controller.showCodeInviteForm}}
-                <CodeLoginForm
-                  @context="invite"
-                  @emailLocked={{not @controller.isInviteLink}}
-                  @initialEmail={{@controller.email}}
-                  @inviteKey={{@controller.model.token}}
-                  @onStepChange={{@controller.updateCodeInviteStep}}
-                />
-                {{#if
-                  (and
-                    @controller.showInviteIntroduction
-                    @controller.disclaimerHtml
-                  )
-                }}
-                  <div class="disclaimer">
-                    {{trustHTML @controller.disclaimerHtml}}
-                  </div>
+                {{#if @controller.associateHtml}}
+                  <p class="create-account-associate-link">
+                    {{trustHTML @controller.associateHtml}}
+                  </p>
                 {{/if}}
-              {{else}}
-                <form>
-                  {{#if @controller.isInviteLink}}
-                    <div class="input email-input input-group">
-                      <Input
-                        autofocus="autofocus"
-                        class={{valueEntered @controller.email}}
-                        disabled={{@controller.externalAuthsOnly}}
-                        id="new-account-email"
-                        name="email"
-                        @type="email"
-                        @value={{@controller.email}}
-                        {{on "focusin" @controller.scrollInputIntoView}}
-                      />
-                      <label class="alt-placeholder" for="new-account-email">
-                        {{i18n "user.email.title"}}
-                      </label>
-                      <DInputTip
-                        id="account-email-validation"
-                        @validation={{@controller.emailValidation}}
-                      />
-                      {{#unless @controller.emailValidation.reason}}
-                        <div class="instructions">
-                          {{i18n "user.email.instructions"}}
-                        </div>
-                      {{/unless}}
+
+                {{#unless @controller.isInviteLink}}
+                  <p class="email-message">
+                    {{trustHTML @controller.yourEmailMessage}}
+                    {{#if @controller.showSocialLoginAvailable}}
+                      {{i18n "invites.social_login_available"}}
+                    {{/if}}
+                  </p>
+                {{/unless}}
+              {{/if}}
+
+              {{#if @controller.externalAuthsOnly}}
+                {{! authOptions are present once the user has followed the OmniAuth flow (e.g. twitter/google/etc) }}
+                {{#if @controller.authOptions}}
+                  {{#unless @controller.isInviteLink}}
+                    <DInputTip
+                      id="account-email-validation"
+                      @validation={{@controller.emailValidation}}
+                    />
+                  {{/unless}}
+                {{else}}
+                  <LoginButtons
+                    @context="invite"
+                    @externalLogin={{@controller.externalLogin}}
+                  />
+                {{/if}}
+              {{/if}}
+
+              {{#if @controller.discourseConnectEnabled}}
+                <a
+                  class="btn btn-primary discourse-connect raw-link"
+                  href={{@controller.ssoPath}}
+                >
+                  {{i18n "continue"}}
+                </a>
+              {{/if}}
+
+              {{#if @controller.shouldDisplayForm}}
+                {{#if @controller.showCodeInviteForm}}
+                  <CodeLoginForm
+                    @context="invite"
+                    @emailLocked={{not @controller.isInviteLink}}
+                    @initialEmail={{@controller.email}}
+                    @inviteKey={{@controller.model.token}}
+                    @onStepChange={{@controller.updateCodeInviteStep}}
+                  />
+                  {{#if
+                    (and
+                      @controller.showInviteIntroduction
+                      @controller.disclaimerHtml
+                    )
+                  }}
+                    <div class="disclaimer">
+                      {{trustHTML @controller.disclaimerHtml}}
                     </div>
                   {{/if}}
+                {{else}}
+                  <form>
+                    {{#if @controller.isInviteLink}}
+                      <div class="input email-input input-group">
+                        <Input
+                          autofocus="autofocus"
+                          class={{valueEntered @controller.email}}
+                          disabled={{@controller.externalAuthsOnly}}
+                          id="new-account-email"
+                          name="email"
+                          @type="email"
+                          @value={{@controller.email}}
+                          {{on "focusin" @controller.scrollInputIntoView}}
+                        />
+                        <label class="alt-placeholder" for="new-account-email">
+                          {{i18n "user.email.title"}}
+                        </label>
+                        <DInputTip
+                          id="account-email-validation"
+                          @validation={{@controller.emailValidation}}
+                        />
+                        {{#unless @controller.emailValidation.reason}}
+                          <div class="instructions">
+                            {{i18n "user.email.instructions"}}
+                          </div>
+                        {{/unless}}
+                      </div>
+                    {{/if}}
 
-                  <div class="input username-input input-group">
-                    <PluginOutlet
-                      @name="invite-username-input"
-                      @outletArgs={{lazyHash
-                        accountUsername=@controller.accountUsername
-                        accountName=@controller.accountName
-                        scrollInputIntoView=@controller.scrollInputIntoView
-                        setAccountUsername=@controller.setAccountUsername
-                        maxLength=@controller.maxUsernameLength
-                        validation=@controller.usernameValidation
-                      }}
-                    >
-                      <input
-                        autocomplete="off"
-                        class={{valueEntered @controller.accountUsername}}
-                        id="new-account-username"
-                        maxlength={{@controller.maxUsernameLength}}
-                        name="username"
-                        type="text"
-                        value={{@controller.accountUsername}}
-                        {{on "focusin" @controller.scrollInputIntoView}}
-                        {{on "input" @controller.setAccountUsername}}
-                      />
-                      <label class="alt-placeholder" for="new-account-username">
-                        {{i18n "user.username.title"}}
-                      </label>
-                      <DInputTip
-                        id="username-validation"
-                        @validation={{@controller.usernameValidation}}
-                      />
-                    </PluginOutlet>
-                  </div>
+                    <div class="input username-input input-group">
+                      <PluginOutlet
+                        @name="invite-username-input"
+                        @outletArgs={{lazyHash
+                          accountUsername=@controller.accountUsername
+                          accountName=@controller.accountName
+                          scrollInputIntoView=@controller.scrollInputIntoView
+                          setAccountUsername=@controller.setAccountUsername
+                          maxLength=@controller.maxUsernameLength
+                          validation=@controller.usernameValidation
+                        }}
+                      >
+                        <input
+                          autocomplete="off"
+                          class={{valueEntered @controller.accountUsername}}
+                          id="new-account-username"
+                          maxlength={{@controller.maxUsernameLength}}
+                          name="username"
+                          type="text"
+                          value={{@controller.accountUsername}}
+                          {{on "focusin" @controller.scrollInputIntoView}}
+                          {{on "input" @controller.setAccountUsername}}
+                        />
+                        <label
+                          class="alt-placeholder"
+                          for="new-account-username"
+                        >
+                          {{i18n "user.username.title"}}
+                        </label>
+                        <DInputTip
+                          id="username-validation"
+                          @validation={{@controller.usernameValidation}}
+                        />
+                      </PluginOutlet>
+                    </div>
 
-                  {{#if
-                    (and @controller.showFullname @controller.fullnameRequired)
-                  }}
-                    <FullnameInput
-                      class="input name-input input-group name-required"
-                      @accountName={{@controller.accountName}}
-                      @nameDisabled={{@controller.nameDisabled}}
-                      @nameTitle={{@controller.nameTitle}}
-                      @nameValidation={{@controller.nameValidation}}
-                      @onFocusIn={{@controller.scrollInputIntoView}}
-                    />
-                  {{/if}}
+                    {{#if
+                      (and
+                        @controller.showFullname @controller.fullnameRequired
+                      )
+                    }}
+                      <FullnameInput
+                        class="input name-input input-group name-required"
+                        @accountName={{@controller.accountName}}
+                        @nameDisabled={{@controller.nameDisabled}}
+                        @nameTitle={{@controller.nameTitle}}
+                        @nameValidation={{@controller.nameValidation}}
+                        @onFocusIn={{@controller.scrollInputIntoView}}
+                      />
+                    {{/if}}
 
-                  {{#unless @controller.externalAuthsOnly}}
-                    <div class="input password-input input-group">
-                      <DPasswordField
-                        autocomplete="new-password"
-                        class={{valueEntered @controller.accountPassword}}
-                        id="new-account-password"
-                        type={{if @controller.maskPassword "password" "text"}}
-                        @capsLockOn={{@controller.capsLockOn}}
-                        @value={{@controller.accountPassword}}
-                        {{on "focusin" @controller.scrollInputIntoView}}
-                      />
-                      <label class="alt-placeholder" for="new-account-password">
-                        {{i18n "invites.password_label"}}
-                      </label>
-                      <DTogglePasswordMask
-                        @maskPassword={{@controller.maskPassword}}
-                        @parentController="invites-show"
-                        @togglePasswordMask={{@controller.togglePasswordMask}}
-                      />
-                      <div class="create-account__password-info">
-                        <div class="create-account__password-tip-validation">
-                          <DInputTip
-                            id="password-validation"
-                            @validation={{@controller.passwordValidation}}
-                          />
-                          <div
-                            class="caps-lock-warning
-                              {{unless @controller.capsLockOn 'hidden'}}"
-                          >
-                            {{dIcon "triangle-exclamation"}}
-                            {{i18n "login.caps_lock_warning"}}
+                    {{#unless @controller.externalAuthsOnly}}
+                      <div class="input password-input input-group">
+                        <DPasswordField
+                          autocomplete="new-password"
+                          class={{valueEntered @controller.accountPassword}}
+                          id="new-account-password"
+                          type={{if @controller.maskPassword "password" "text"}}
+                          @capsLockOn={{@controller.capsLockOn}}
+                          @value={{@controller.accountPassword}}
+                          {{on "focusin" @controller.scrollInputIntoView}}
+                        />
+                        <label
+                          class="alt-placeholder"
+                          for="new-account-password"
+                        >
+                          {{i18n "invites.password_label"}}
+                        </label>
+                        <DTogglePasswordMask
+                          @maskPassword={{@controller.maskPassword}}
+                          @parentController="invites-show"
+                          @togglePasswordMask={{@controller.togglePasswordMask}}
+                        />
+                        <div class="create-account__password-info">
+                          <div class="create-account__password-tip-validation">
+                            <DInputTip
+                              id="password-validation"
+                              @validation={{@controller.passwordValidation}}
+                            />
+                            <div
+                              class="caps-lock-warning
+                                {{unless @controller.capsLockOn 'hidden'}}"
+                            >
+                              {{dIcon "triangle-exclamation"}}
+                              {{i18n "login.caps_lock_warning"}}
+                            </div>
                           </div>
                         </div>
                       </div>
+                    {{/unless}}
+
+                    {{#if
+                      (and
+                        @controller.showFullname
+                        (not @controller.fullnameRequired)
+                      )
+                    }}
+                      <FullnameInput
+                        class="input name-input input-group"
+                        @accountName={{@controller.accountName}}
+                        @nameDisabled={{@controller.nameDisabled}}
+                        @nameTitle={{@controller.nameTitle}}
+                        @nameValidation={{@controller.nameValidation}}
+                        @onFocusIn={{@controller.scrollInputIntoView}}
+                      />
+                    {{/if}}
+
+                    {{#if @controller.userFields}}
+                      <div class="user-fields">
+                        {{#each @controller.userFields as |f|}}
+                          <div class="input-group">
+                            <UserField
+                              class={{valueEntered f.value}}
+                              @field={{f.field}}
+                              @value={{f.value}}
+                              {{on "focusin" @controller.scrollInputIntoView}}
+                            />
+                          </div>
+                        {{/each}}
+                      </div>
+                    {{/if}}
+
+                    <div class="invitation-cta">
+                      <DButton
+                        class="btn-primary invitation-cta__accept"
+                        type="submit"
+                        @action={{@controller.submit}}
+                        @disabled={{@controller.submitDisabled}}
+                        @label="invites.accept_invite"
+                      />
+                      <div class="invitation-cta__info">
+                        <span class="invitation-cta__signed-up">{{i18n
+                            "login.previous_sign_up"
+                          }}</span>
+                        <DButton
+                          class="btn-flat invitation-cta__sign-in"
+                          @action={{routeAction "showLogin"}}
+                          @label="log_in"
+                        />
+                      </div>
                     </div>
-                  {{/unless}}
 
-                  {{#if
-                    (and
-                      @controller.showFullname
-                      (not @controller.fullnameRequired)
-                    )
-                  }}
-                    <FullnameInput
-                      class="input name-input input-group"
-                      @accountName={{@controller.accountName}}
-                      @nameDisabled={{@controller.nameDisabled}}
-                      @nameTitle={{@controller.nameTitle}}
-                      @nameValidation={{@controller.nameValidation}}
-                      @onFocusIn={{@controller.scrollInputIntoView}}
-                    />
-                  {{/if}}
-
-                  {{#if @controller.userFields}}
-                    <div class="user-fields">
-                      {{#each @controller.userFields as |f|}}
-                        <div class="input-group">
-                          <UserField
-                            class={{valueEntered f.value}}
-                            @field={{f.field}}
-                            @value={{f.value}}
-                            {{on "focusin" @controller.scrollInputIntoView}}
-                          />
-                        </div>
-                      {{/each}}
+                    <div class="disclaimer">
+                      {{trustHTML @controller.disclaimerHtml}}
                     </div>
-                  {{/if}}
 
-                  <div class="invitation-cta">
+                    {{#if @controller.errorMessage}}
+                      <br /><br />
+                      <div
+                        class="alert alert-error"
+                      >{{@controller.errorMessage}}</div>
+                    {{/if}}
+                  </form>
+                {{/if}}
+              {{/if}}
+              {{! When using DiscourseConnect, all invite acceptance has to go through the SSO flow }}
+              {{#unless @controller.discourseConnectEnabled}}
+                {{#if @controller.existingUserRedeeming}}
+                  {{#if @controller.existingUserCanRedeem}}
                     <DButton
-                      class="btn-primary invitation-cta__accept"
+                      class="btn-primary accept-invitation"
                       type="submit"
                       @action={{@controller.submit}}
                       @disabled={{@controller.submitDisabled}}
                       @label="invites.accept_invite"
                     />
-                    <div class="invitation-cta__info">
-                      <span class="invitation-cta__signed-up">{{i18n
-                          "login.previous_sign_up"
-                        }}</span>
-                      <DButton
-                        class="btn-flat invitation-cta__sign-in"
-                        @action={{routeAction "showLogin"}}
-                        @label="log_in"
-                      />
-                    </div>
-                  </div>
-
-                  <div class="disclaimer">
-                    {{trustHTML @controller.disclaimerHtml}}
-                  </div>
-
-                  {{#if @controller.errorMessage}}
-                    <br /><br />
+                  {{else}}
                     <div
                       class="alert alert-error"
-                    >{{@controller.errorMessage}}</div>
+                    >{{@controller.existingUserCanRedeemError}}</div>
                   {{/if}}
-                </form>
-              {{/if}}
-            {{/if}}
-            {{! When using DiscourseConnect, all invite acceptance has to go through the SSO flow }}
-            {{#unless @controller.discourseConnectEnabled}}
-              {{#if @controller.existingUserRedeeming}}
-                {{#if @controller.existingUserCanRedeem}}
-                  <DButton
-                    class="btn-primary accept-invitation"
-                    type="submit"
-                    @action={{@controller.submit}}
-                    @disabled={{@controller.submitDisabled}}
-                    @label="invites.accept_invite"
-                  />
-                {{else}}
-                  <div
-                    class="alert alert-error"
-                  >{{@controller.existingUserCanRedeemError}}</div>
                 {{/if}}
-              {{/if}}
-            {{/unless}}
-          {{/if}}
+              {{/unless}}
+            {{/if}}
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </PluginOutlet>
 </template>

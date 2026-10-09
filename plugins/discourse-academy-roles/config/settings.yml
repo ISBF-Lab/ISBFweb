@@ -13,3 +13,8 @@ academy_roles:
     type: group
     default: ""
     area: "group_permissions"
+  academy_auth_page_enabled:
+    default: false
+    client: true
+    refresh: true
+    area: "login"

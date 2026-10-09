@@ -20,6 +20,16 @@ en:
       activity_title: "Activity level"
       activity_value: "LV%{level}"
       student_number: "Student number"
+      auth:
+        welcome: "Welcome to ISBF - One"
+        register: "Register"
+        invite_title: "Invitation registration"
+        back: "Back to login and registration"
+        pause_motion: "Pause motion"
+        play_motion: "Play motion"
+        success: "Registration complete"
+        redirect_notice: "Entering the forum homepage in 5 seconds"
+        new_account_required: "This invitation creates a new account. Sign out before registering."
       student_invites:
         title: "Student invitations"
         description: "Issue single-use invitation codes and view the student number bound to each registered account."

@@ -47,6 +47,24 @@ module DiscourseAcademyRoles::StudentInvitesControllerExtension
   private
 
   def show_irredeemable_invite(invite)
+    if SiteSetting.academy_roles_enabled? &&
+         SiteSetting.academy_auth_page_enabled? && request.format.json?
+      status =
+        if invite&.expired?
+          "expired"
+        elsif invite&.redeemed?
+          "used"
+        else
+          "invalid"
+        end
+      render json: {
+               errors: [I18n.t("academy_roles.auth.invite_#{status}")],
+               invite_status: status
+             },
+             status: :not_found
+      return
+    end
+
     if SiteSetting.academy_roles_enabled? && invite && !invite.expired? &&
          !invite.redeemed?
       super(nil)
