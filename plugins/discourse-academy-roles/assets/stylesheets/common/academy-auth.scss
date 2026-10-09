@@ -12,8 +12,8 @@ body.academy-auth-page {
 }
 
 .academy-auth {
-  --confetti-gold: var(--highlight);
-  --confetti-mint: var(--success);
+  --confetti-gold: color-mix(in srgb, var(--gold) 75%, var(--secondary));
+  --confetti-mint: color-mix(in srgb, var(--success) 65%, var(--secondary));
   --d-input-border-radius: 12px;
   --d-input-bg-color: var(--secondary);
   --d-button-border-radius: 12px;
