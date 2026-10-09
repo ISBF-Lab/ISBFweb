@@ -9,6 +9,11 @@ body.academy-auth-page {
   #main-outlet {
     padding: 0;
   }
+
+  #main-outlet-wrapper {
+    position: relative;
+    z-index: z("fullscreen");
+  }
 }
 
 .academy-auth {
@@ -19,7 +24,7 @@ body.academy-auth-page {
   --d-button-border-radius: 12px;
   position: fixed;
   inset: 0;
-  z-index: 10;
+  z-index: z("fullscreen");
   overflow: auto;
   isolation: isolate;
   background: var(--secondary);
