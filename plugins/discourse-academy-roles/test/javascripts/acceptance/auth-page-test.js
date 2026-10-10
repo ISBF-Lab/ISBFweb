@@ -1,4 +1,4 @@
-import { click, currentURL, fillIn, visit } from "@ember/test-helpers";
+import { click, currentURL, fillIn, settled, visit } from "@ember/test-helpers";
 import { test } from "qunit";
 import cookie, { removeCookie } from "discourse/lib/cookie";
 import getURL from "discourse/lib/get-url";
@@ -32,6 +32,74 @@ acceptance("Academy authentication page", function (needs) {
         invite_status: "expired",
       })
     );
+  });
+
+  test("keeps the brand synchronized with the forum settings", async function (assert) {
+    this.siteSettings.title = "Campus forum";
+    this.siteSettings.site_logo_small_url = "/images/auth-small.png";
+    this.siteSettings.site_logo_url = "/images/auth-wide.png";
+    await visit("/login");
+
+    assert
+      .dom(".academy-auth__brand")
+      .hasText("Campus forum", "the forum title is displayed");
+    assert
+      .dom(".academy-auth__logo")
+      .hasAttribute(
+        "src",
+        getURL("/images/auth-small.png"),
+        "the configured small logo is displayed"
+      );
+
+    this.siteSettings.title = "Renamed forum";
+    await settled();
+    assert
+      .dom(".academy-auth__brand")
+      .hasText("Renamed forum", "a title update is reflected in the page");
+  });
+
+  test("falls back to the forum logo and then the title", async function (assert) {
+    this.siteSettings.title = "Campus forum";
+    this.siteSettings.site_logo_small_url = "";
+    this.siteSettings.site_logo_small_dark_url = "";
+    this.siteSettings.site_logo_url = "/images/auth-wide.png";
+    this.siteSettings.site_logo_dark_url = "";
+    await visit("/login");
+
+    assert
+      .dom(".academy-auth__logo")
+      .hasAttribute(
+        "src",
+        getURL("/images/auth-wide.png"),
+        "the ordinary logo is used when the small logo is absent"
+      );
+
+    this.siteSettings.site_logo_url = "";
+    await settled();
+    assert
+      .dom(".academy-auth__logo")
+      .doesNotExist("there is no broken image when no logo is configured");
+    assert
+      .dom(".academy-auth__brand")
+      .hasText("Campus forum", "the forum title remains visible");
+  });
+
+  test("uses the configured logo for the default dark palette", async function (assert) {
+    this.owner.lookup("service:session").setProperties({
+      darkModeAvailable: true,
+      defaultColorSchemeIsDark: true,
+    });
+    this.siteSettings.site_logo_small_url = "/images/auth-small.png";
+    this.siteSettings.site_logo_small_dark_url = "/images/auth-small-dark.png";
+    await visit("/login");
+
+    assert
+      .dom(".academy-auth__logo")
+      .hasAttribute(
+        "src",
+        getURL("/images/auth-small-dark.png"),
+        "a dark default palette uses the configured dark logo"
+      );
   });
 
   test("starts with two choices and opens real login methods", async function (assert) {

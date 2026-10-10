@@ -7,6 +7,7 @@ import { schedule } from "@ember/runloop";
 import { service } from "@ember/service";
 import CodeLoginForm from "discourse/components/code-login-form";
 import Form from "discourse/components/form";
+import Logo from "discourse/components/header/logo";
 import InterfaceColorSelector from "discourse/components/interface-color-selector";
 import LocalLoginForm from "discourse/components/local-login-form";
 import LoginButtons from "discourse/components/login-buttons";
@@ -19,16 +20,18 @@ import { ajax } from "discourse/lib/ajax";
 import { extractError } from "discourse/lib/ajax-error";
 import cookie from "discourse/lib/cookie";
 import getURL from "discourse/lib/get-url";
+import { applyValueTransformer } from "discourse/lib/transformer";
 import DiscourseURL from "discourse/lib/url";
 import { and, not, or } from "discourse/truth-helpers";
 import DButton from "discourse/ui-kit/d-button";
 import DFlashMessage from "discourse/ui-kit/d-flash-message";
 import { i18n } from "discourse-i18n";
-import createAuthParticles, { AUTH_LOGO } from "../lib/academy-auth-particles";
+import createAuthParticles from "../lib/academy-auth-particles";
 
 export default class AcademyAuthPage extends Component {
   @service interfaceColor;
   @service router;
+  @service session;
   @service siteSettings;
 
   @tracked completing = false;
@@ -39,7 +42,6 @@ export default class AcademyAuthPage extends Component {
   @tracked inviteInfo;
   @tracked verifyingInvite = false;
 
-  logoUrl = AUTH_LOGO;
   privacyUrl = getURL("/privacy");
   termsUrl = getURL("/tos");
 
@@ -118,6 +120,14 @@ export default class AcademyAuthPage extends Component {
 
   get invitation() {
     return this.args.inviteInfo || this.inviteInfo;
+  }
+
+  get logoUrl() {
+    return this.#resolveLogo();
+  }
+
+  get logoUrlDark() {
+    return this.session.darkModeAvailable ? this.#resolveLogo(true) : "";
   }
 
   get motionIcon() {
@@ -374,6 +384,22 @@ export default class AcademyAuthPage extends Component {
     this.#deadline = null;
   }
 
+  #resolveLogo(dark = false) {
+    const name =
+      this.siteSettings.site_logo_small_url ||
+      this.siteSettings.site_logo_small_dark_url
+        ? "logo_small"
+        : "logo";
+    const lightUrl = this.siteSettings[`site_${name}_url`] || "";
+    const darkUrl = this.siteSettings[`site_${name}_dark_url`] || "";
+    const url = dark
+      ? darkUrl
+      : this.session.defaultColorSchemeIsDark
+        ? darkUrl || lightUrl
+        : lightUrl;
+    return applyValueTransformer("home-logo-image-url", url, { name, dark });
+  }
+
   <template>
     {{bodyClass "academy-auth-page"}}
     {{hideApplicationHeaderButtons "search" "login" "signup" "menu"}}
@@ -387,8 +413,15 @@ export default class AcademyAuthPage extends Component {
     >
       <header class="academy-auth__header">
         <a class="academy-auth__brand" href={{getURL "/"}}>
-          <img alt="" height="30" src={{this.logoUrl}} width="30" />
-          <span>ISBF - One</span>
+          {{#if this.logoUrl}}
+            <Logo
+              @darkUrl={{this.logoUrlDark}}
+              @key="academy-auth__logo"
+              @title={{this.siteSettings.title}}
+              @url={{this.logoUrl}}
+            />
+          {{/if}}
+          <span>{{this.siteSettings.title}}</span>
         </a>
       </header>
       <div aria-hidden="true" class="academy-auth__stage">

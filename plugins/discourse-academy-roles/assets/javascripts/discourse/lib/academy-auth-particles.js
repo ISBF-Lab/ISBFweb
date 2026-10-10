@@ -39,6 +39,7 @@ export default function createAuthParticles({
 
   function setPaused(value) {
     userPaused = value;
+    clearPointer();
     syncControl();
     cancelAnimationFrame(frame);
     frame = 0;
@@ -170,12 +171,14 @@ export default function createAuthParticles({
   let focused = false;
   let snap = true;
   const pointer = {
+    id: null,
     x: 0,
     y: 0,
     tx: 0,
     ty: 0,
     influence: 0,
     active: false,
+    releaseAt: 0,
   };
 
   /* eslint-disable no-bitwise -- Deterministic sampling uses 32-bit arithmetic. */
@@ -597,7 +600,12 @@ export default function createAuthParticles({
       sceneTime += delta;
       pointer.x = mix(pointer.x, pointer.tx, 0.12);
       pointer.y = mix(pointer.y, pointer.ty, 0.12);
-      pointer.influence = mix(pointer.influence, pointer.active ? 1 : 0, 0.1);
+      const releasedInfluence = Math.max(0, (pointer.releaseAt - time) / 600);
+      pointer.influence = mix(
+        pointer.influence,
+        pointer.active ? 1 : releasedInfluence,
+        0.1
+      );
     }
     if (!active) {
       sceneTime = Math.max(sceneTime, sceneDuration);
@@ -772,26 +780,72 @@ export default function createAuthParticles({
   function syncControl() {
     onPauseChange(paused());
   }
+
+  function clearPointer() {
+    pointer.id = null;
+    pointer.active = false;
+    pointer.influence = 0;
+    pointer.releaseAt = 0;
+  }
+
+  function updatePointer(event) {
+    if (
+      !moving() ||
+      event.target.closest(
+        ".academy-auth__panel, .academy-auth__header, .academy-auth__footer, button, a, input, textarea, select, summary, dialog, [role='dialog'], [contenteditable]"
+      )
+    ) {
+      clearPointer();
+      return false;
+    }
+    const bounds = stage.getBoundingClientRect();
+    pointer.tx = event.clientX - bounds.left;
+    pointer.ty = event.clientY - bounds.top;
+    pointer.active = true;
+    pointer.releaseAt = 0;
+    requestPaint();
+    return true;
+  }
+
   listen(
-    document,
-    "pointermove",
+    root,
+    "pointerdown",
     (event) => {
-      if (
-        event.pointerType === "touch" ||
-        event.target.closest(".access-panel, button, a, input, summary, dialog")
-      ) {
-        pointer.active = false;
+      if (event.pointerType === "mouse" || !event.isPrimary) {
         return;
       }
-      const bounds = stage.getBoundingClientRect();
-      pointer.tx = event.clientX - bounds.left;
-      pointer.ty = event.clientY - bounds.top;
-      pointer.active = true;
+      if (updatePointer(event)) {
+        pointer.id = event.pointerId;
+        pointer.x = pointer.tx;
+        pointer.y = pointer.ty;
+        pointer.influence = 1;
+      }
     },
     { passive: true }
   );
-  listen(document, "pointerleave", () => {
-    pointer.active = false;
+  listen(
+    root,
+    "pointermove",
+    (event) => {
+      if (event.pointerType !== "mouse" && event.pointerId !== pointer.id) {
+        return;
+      }
+      updatePointer(event);
+    },
+    { passive: true }
+  );
+  listen(document, "pointerup", (event) => {
+    if (event.pointerId === pointer.id) {
+      pointer.id = null;
+      pointer.active = false;
+      pointer.releaseAt = performance.now() + 600;
+    }
+  });
+  listen(document, "pointercancel", clearPointer, { passive: true });
+  listen(root, "pointerleave", (event) => {
+    if (event.pointerType === "mouse") {
+      clearPointer();
+    }
   });
   listen(document, "focusin", (event) => {
     focused = event.target.matches("input");
@@ -800,12 +854,14 @@ export default function createAuthParticles({
     focused = false;
   });
   listen(document, "visibilitychange", () => {
+    clearPointer();
     cancelAnimationFrame(frame);
     frame = 0;
     lastPaint = 0;
     requestPaint();
   });
   listen(reducedMotion, "change", () => {
+    clearPointer();
     syncControl();
     cancelAnimationFrame(frame);
     frame = 0;
@@ -813,6 +869,7 @@ export default function createAuthParticles({
     requestPaint();
   });
   listen(window, "pagehide", () => {
+    clearPointer();
     inactive = true;
     cancelAnimationFrame(frame);
     frame = 0;
