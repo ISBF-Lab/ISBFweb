@@ -29,6 +29,9 @@ export default function createAuthParticles({
     if (destroyed) {
       return;
     }
+    if (context) {
+      clearPointer();
+    }
     requestedScene = { mode, run };
     if (fallbackActive) {
       renderFallback(requestedScene);
@@ -52,6 +55,7 @@ export default function createAuthParticles({
     listeners.forEach((remove) => remove());
     observers.forEach((observer) => observer.disconnect());
     if (context) {
+      clearPointer();
       inactive = true;
       cancelAnimationFrame(frame);
     }
@@ -781,8 +785,16 @@ export default function createAuthParticles({
     onPauseChange(paused());
   }
 
-  function clearPointer() {
+  function releasePointer() {
+    const id = pointer.id;
     pointer.id = null;
+    if (id !== null && stage.hasPointerCapture(id)) {
+      stage.releasePointerCapture(id);
+    }
+  }
+
+  function clearPointer() {
+    releasePointer();
     pointer.active = false;
     pointer.influence = 0;
     pointer.releaseAt = 0;
@@ -819,6 +831,7 @@ export default function createAuthParticles({
         pointer.x = pointer.tx;
         pointer.y = pointer.ty;
         pointer.influence = 1;
+        stage.setPointerCapture(event.pointerId);
       }
     },
     { passive: true }
@@ -836,12 +849,17 @@ export default function createAuthParticles({
   );
   listen(document, "pointerup", (event) => {
     if (event.pointerId === pointer.id) {
-      pointer.id = null;
+      releasePointer();
       pointer.active = false;
       pointer.releaseAt = performance.now() + 600;
     }
   });
   listen(document, "pointercancel", clearPointer, { passive: true });
+  listen(stage, "lostpointercapture", (event) => {
+    if (event.pointerId === pointer.id) {
+      clearPointer();
+    }
+  });
   listen(root, "pointerleave", (event) => {
     if (event.pointerType === "mouse") {
       clearPointer();

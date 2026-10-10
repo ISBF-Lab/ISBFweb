@@ -26,7 +26,11 @@ body.academy-auth-page {
   inset: 0;
   z-index: z("fullscreen");
   overflow: auto;
+  overscroll-behavior: contain;
   isolation: isolate;
+  user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
   background: var(--secondary);
   color: var(--primary);
   font-family:
@@ -35,6 +39,15 @@ body.academy-auth-page {
 
   [hidden] {
     display: none !important;
+  }
+
+  input,
+  textarea,
+  [contenteditable="true"],
+  [contenteditable=""] {
+    user-select: text;
+    user-select: text;
+    -webkit-touch-callout: default;
   }
 
   &__header,
@@ -78,7 +91,7 @@ body.academy-auth-page {
   &__stage {
     position: fixed;
     inset: 0;
-    pointer-events: none;
+    touch-action: pinch-zoom;
     z-index: -1;
 
     canvas {
@@ -96,11 +109,13 @@ body.academy-auth-page {
     justify-content: flex-end;
     flex-direction: column;
     padding-bottom: 22dvh;
+    pointer-events: none;
   }
 
   &__choices {
     display: flex;
     gap: 14px;
+    pointer-events: auto;
 
     .btn {
       min-width: 132px;
