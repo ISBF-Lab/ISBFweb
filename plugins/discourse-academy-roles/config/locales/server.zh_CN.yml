@@ -18,7 +18,7 @@ zh_CN:
       duplicate_student_number: 此学号已生成邀请码或已绑定账号。
       already_registered: 此学号已绑定账号。
       create_failed: 邀请码保存失败。
-      new_account_required: 此邀请码只能用于注册新账号。
+      new_account_required: 此邮箱已注册，请返回登录页面登录。邀请码仅用于创建新账号。
       use_student_invite: 请从学号邀请码页面生成邀请。
       merge_not_allowed: 绑定了学号的账号不能合并。
       bulk:

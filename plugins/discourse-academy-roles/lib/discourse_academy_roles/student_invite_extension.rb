@@ -32,7 +32,7 @@ module DiscourseAcademyRoles::StudentInviteRedeemerExtension
 
       if redeeming_user.present? ||
            User.real.where(staged: false).find_by_email(email).present?
-        raise ActiveRecord::RecordNotSaved,
+        raise Invite::UserExists,
               I18n.t("academy_roles.student_invites.new_account_required")
       end
 

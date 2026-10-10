@@ -240,7 +240,7 @@ RSpec.describe SessionController do
       expect(login_code.reload.consumed_at).to be_nil
     end
 
-    it "rejects existing accounts without consuming their email code" do
+    it "explains that the email is registered and lets the same code log in without redeeming the invitation" do
       login_code = EmailLoginCode.generate!(email: member.email)
 
       post "/session/login-code/verify.json",
@@ -251,10 +251,46 @@ RSpec.describe SessionController do
            }
 
       expect(response.status).to eq(200)
-      expect(response.parsed_body["error"]).to be_present
+      expect(response.parsed_body["error"]).to eq(
+        I18n.t("academy_roles.student_invites.new_account_required")
+      )
+      expect(session[:current_user_id]).to be_nil
       expect(registration.reload.user_id).to be_nil
       expect(registration.invite.redemption_count).to eq(0)
       expect(login_code.reload.consumed_at).to be_nil
+
+      post "/session/login-code/verify.json",
+           params: {
+             email: member.email,
+             code: login_code.code
+           }
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body["error"]).to be_nil
+      expect(session[:current_user_id]).to eq(member.id)
+      expect(login_code.reload.consumed_at).to be_present
+      expect(registration.reload.user_id).to be_nil
+      expect(registration.invite.redemption_count).to eq(0)
+    end
+
+    it "keeps the generic verification error for an incorrect code even when the email is registered" do
+      login_code = EmailLoginCode.generate!(email: member.email)
+      incorrect_code = login_code.code == "000000" ? "000001" : "000000"
+
+      post "/session/login-code/verify.json",
+           params: {
+             invite_key: registration.invite.invite_key,
+             email: member.email,
+             code: incorrect_code
+           }
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body["error"]).to eq(
+        I18n.t("email_login_code.invalid_code")
+      )
+      expect(session[:current_user_id]).to be_nil
+      expect(login_code.reload.consumed_at).to be_nil
+      expect(registration.reload.user_id).to be_nil
     end
   end
 end

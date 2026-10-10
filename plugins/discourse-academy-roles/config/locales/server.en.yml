@@ -22,7 +22,7 @@ en:
       duplicate_student_number: "An invitation or account already exists for this student number."
       already_registered: "This student number is already bound to an account."
       create_failed: "The invitation could not be saved."
-      new_account_required: "This invitation is only for registering a new account."
+      new_account_required: "This email is already registered. Return to the login page to log in. Invitation codes are only for new accounts."
       use_student_invite: "Create an invitation from the student invitations page."
       merge_not_allowed: "Accounts with a student number binding cannot be merged."
       bulk:
