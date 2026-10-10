@@ -12,5 +12,8 @@ en:
       admin_approval_required: "An administrator must approve this account link."
       device_verification_required: "Verify the target account on this device before switching."
       invalid_credentials: "The target account credentials are incorrect."
+      email_code_unavailable: "Email code verification is currently unavailable."
+      invalid_email_code: "The code is incorrect, expired, or already used. Request a new code."
+      invalid_verification_method: "Choose a valid device verification method."
       invalid_second_factor: "The two-factor verification failed."
       target_unavailable: "The target account cannot sign in."

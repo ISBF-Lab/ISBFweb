@@ -8,7 +8,10 @@
 # required_version: 3.2.0
 
 enabled_site_setting :isbf_account_switch_enabled
-add_admin_route "isbf_account_switch.admin.title", "isbf-account-switch", use_new_show_route: true
+Rails.application.config.filter_parameters += [:email_code]
+add_admin_route "isbf_account_switch.admin.title",
+                "isbf-account-switch",
+                use_new_show_route: true
 
 module ::IsbfAccountSwitch
   PLUGIN_NAME = "isbf-account-switch"
@@ -26,15 +29,29 @@ after_initialize do
   require_relative "app/models/isbf_account_switch/account_link"
   require_relative "app/models/isbf_account_switch/audit_event"
   require_relative "app/models/isbf_account_switch/device_grant"
+  require_relative "app/models/isbf_account_switch/device_verification_code"
   require_relative "app/services/isbf_account_switch/device_authorizer"
   require_relative "app/controllers/isbf_account_switch/accounts_controller"
   require_relative "app/controllers/isbf_account_switch/admin/links_controller"
+
+  add_to_class(:guardian, :can_switch_linked_accounts?) do
+    authenticated? &&
+      (
+        is_admin? ||
+          IsbfAccountSwitch::AccountLink.approved.for_user(user.id).exists?
+      )
+  end
+
+  add_to_serializer(:current_user, :can_switch_linked_accounts) do
+    scope.can_switch_linked_accounts?
+  end
 
   IsbfAccountSwitch::Engine.routes.draw do
     get "/accounts" => "accounts#index"
     post "/links" => "accounts#create"
     delete "/links/:id" => "accounts#revoke"
     post "/links/:id/verify" => "accounts#verify"
+    post "/links/:id/email-code" => "accounts#request_email_code"
     post "/links/:id/switch" => "accounts#switch"
     delete "/device" => "accounts#revoke_device"
 
@@ -58,7 +75,7 @@ after_initialize do
         IsbfAccountSwitch::DeviceAuthorizer.revoke_from_cookie!(
           cookies: cookies,
           actor: current_user,
-          request: request,
+          request: request
         )
       end
       super

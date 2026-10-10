@@ -12,5 +12,8 @@ zh_CN:
       admin_approval_required: "该账号关联需要管理员批准。"
       device_verification_required: "请先在此设备验证目标账号。"
       invalid_credentials: "目标账号的登录凭据不正确。"
+      email_code_unavailable: "邮箱验证码验证当前不可用。"
+      invalid_email_code: "验证码不正确、已过期或已使用，请重新获取。"
+      invalid_verification_method: "请选择有效的设备验证方式。"
       invalid_second_factor: "双重验证失败。"
       target_unavailable: "目标账号当前无法登录。"

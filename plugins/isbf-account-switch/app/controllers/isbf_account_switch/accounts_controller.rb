@@ -6,18 +6,20 @@ module IsbfAccountSwitch
     requires_login
 
     before_action :ensure_enabled
-    before_action :ensure_admin, except: :revoke_device
+    before_action :ensure_admin, only: %i[create revoke]
+    before_action :ensure_switch_access,
+                  only: %i[index request_email_code verify switch]
+    before_action :prepare_verification, only: %i[request_email_code verify]
+    before_action :rate_limit_email_code_request, only: :request_email_code
 
     def index
-      links =
-        AccountLink
-          .for_user(current_user.id)
-          .includes(:user_a, :user_b)
-          .order(updated_at: :desc)
+      links = AccountLink.for_user(current_user.id)
+      links = links.approved unless current_user.admin?
+      links = links.includes(:user_a, :user_b).order(updated_at: :desc)
 
       render json: {
                links: links.filter_map { |link| serialize_link(link) },
-               can_link_accounts: true
+               can_link_accounts: current_user.admin?
              }
     end
 
@@ -77,20 +79,62 @@ module IsbfAccountSwitch
       render json: success_json
     end
 
-    def verify
-      link = participant_link
-      unless link.approved?
-        return render_error(:admin_approval_required, status: :forbidden)
+    def request_email_code
+      if !email_code_enabled?
+        return render_error(:email_code_unavailable, status: :forbidden)
       end
 
-      target = link.other_user(current_user)
-      unless target_available?(target)
-        return render_error(:target_unavailable, status: :forbidden)
-      end
+      code =
+        DeviceVerificationCode.issue!(
+          link: @verification_link,
+          actor: current_user,
+          target: @verification_target,
+          server_session: server_session
+        )
+      Jobs.enqueue(
+        :send_email_login_code,
+        to_address: code.email,
+        code: code.code
+      )
+      render json:
+               success_json.merge(
+                 expires_in: DeviceVerificationCode::VALID_FOR.to_i
+               )
+    end
+
+    def verify
+      link = @verification_link
+      target = @verification_target
+      verification_method = params[:verification_method].presence || "password"
 
       rate_limit_verification!(target)
-      unless target.confirm_password?(params.require(:password))
-        return render_error(:invalid_credentials, status: :forbidden)
+      case verification_method
+      when "password"
+        unless target.confirm_password?(params.require(:password))
+          return render_error(:invalid_credentials, status: :forbidden)
+        end
+      when "email_code"
+        if !email_code_enabled?
+          return render_error(:email_code_unavailable, status: :forbidden)
+        end
+
+        code = params[:email_code]
+        code = code.strip if code.is_a?(String)
+        verification_code =
+          DeviceVerificationCode.for_session(
+            link: link,
+            actor: current_user,
+            target: target,
+            server_session: server_session
+          )
+        unless code.is_a?(String) &&
+                 code.match?(
+                   /\A\d{#{DeviceVerificationCode::CODE_LENGTH}}\z/o
+                 ) && verification_code&.verify(code)
+          return render_error(:invalid_email_code, status: :forbidden)
+        end
+      else
+        return render_error(:invalid_verification_method, status: :bad_request)
       end
 
       second_factor_result =
@@ -109,6 +153,11 @@ module IsbfAccountSwitch
         return render json: payload, status: :forbidden
       end
 
+      if verification_code && !verification_code.consume!
+        return render_error(:invalid_email_code, status: :forbidden)
+      end
+      server_session.delete(DeviceVerificationCode.session_key(link))
+
       previous_user = current_user
       DeviceAuthorizer.authorize_pair!(
         cookies: cookies,
@@ -122,7 +171,8 @@ module IsbfAccountSwitch
         actor: previous_user,
         request: request,
         metadata: {
-          target_user_id: target.id
+          target_user_id: target.id,
+          verification_method: verification_method
         }
       )
       log_on_user(target)
@@ -184,6 +234,12 @@ module IsbfAccountSwitch
       raise Discourse::NotFound unless SiteSetting.isbf_account_switch_enabled
     end
 
+    def ensure_switch_access
+      unless current_user.guardian.can_switch_linked_accounts?
+        raise Discourse::InvalidAccess
+      end
+    end
+
     def participant_link
       link = AccountLink.includes(:user_a, :user_b).find(params[:id])
       raise Discourse::InvalidAccess unless link.participant?(current_user)
@@ -191,12 +247,57 @@ module IsbfAccountSwitch
       link
     end
 
+    def prepare_verification
+      @verification_link = participant_link
+      if !@verification_link.approved?
+        return render_error(:admin_approval_required, status: :forbidden)
+      end
+
+      @verification_target = @verification_link.other_user(current_user)
+      if !target_available?(@verification_target)
+        render_error(:target_unavailable, status: :forbidden)
+      end
+    end
+
+    def email_code_enabled?
+      SiteSetting.enable_local_logins &&
+        SiteSetting.enable_local_logins_via_email &&
+        !SiteSetting.enable_discourse_connect &&
+        UpcomingChanges.enabled_for_user?(
+          :enable_local_logins_via_code,
+          current_user
+        )
+    end
+
+    def rate_limit_email_code_request
+      RateLimiter.new(
+        current_user,
+        "isbf-account-switch-code-minute",
+        1,
+        1.minute,
+        apply_limit_to_staff: true
+      ).performed!
+      RateLimiter.new(
+        nil,
+        "isbf-account-switch-code-target-#{@verification_target.id}",
+        3,
+        1.hour
+      ).performed!
+      RateLimiter.new(
+        nil,
+        "isbf-account-switch-code-ip-#{request.remote_ip}",
+        6,
+        1.hour
+      ).performed!
+    end
+
     def rate_limit_verification!(target)
       RateLimiter.new(
         current_user,
         "isbf-account-switch-verify-#{target.id}",
         5,
-        10.minutes
+        10.minutes,
+        apply_limit_to_staff: true
       ).performed!
     end
 
@@ -231,7 +332,8 @@ module IsbfAccountSwitch
           suspended: other.suspended?,
           totp_enabled: other.totp_enabled?,
           backup_codes_enabled: other.backup_codes_enabled?,
-          security_keys_enabled: other.security_keys_enabled?
+          security_keys_enabled: other.security_keys_enabled?,
+          email_code_enabled: email_code_enabled?
         }
       }
     end
