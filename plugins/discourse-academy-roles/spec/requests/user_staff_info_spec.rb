@@ -19,17 +19,73 @@ RSpec.describe UsersController do
   end
 
   describe "#show" do
-    it "returns personal details with staff information unavailable when management permissions are disabled" do
+    it "keeps the personal profile moderator projection consistent with enabled management permissions" do
       sign_in(moderator)
 
       get "/u/#{moderator.username}.json"
 
       expect(response.status).to eq(200)
       expect(response.parsed_body.fetch("user")).to include(
-        "moderator" => true,
+        "moderator" => false,
         "can_edit" => true,
         "academy_can_see_staff_info" => false,
       )
+
+      SiteSetting.academy_moderators_review_content = true
+      get "/u/#{moderator.username}.json"
+      expect(response.parsed_body.fetch("user")).to include(
+        "moderator" => true,
+        "academy_can_see_staff_info" => false,
+      )
+
+      SiteSetting.academy_moderators_review_content = false
+      get "/u/#{moderator.username}.json"
+      expect(response.parsed_body.fetch("user").fetch("moderator")).to eq(false)
+      expect(moderator.reload[:moderator]).to eq(true)
+
+      sign_in(developer)
+      get "/u/#{moderator.username}.json"
+      expect(response.parsed_body.fetch("user").fetch("moderator")).to eq(true)
+    end
+
+    it "loads management assets when the current user has a management permission" do
+      sign_in(moderator)
+
+      [false, true, false].each do |enabled|
+        SiteSetting.academy_moderators_review_content = enabled
+        get "/u/#{moderator.username}/summary"
+
+        expect(response.status).to eq(200)
+        document = Nokogiri.HTML5(response.body)
+        expect(document.at_css("#data-discourse-setup")["data-is-staff"]).to eq(enabled.to_s)
+        preloaded = JSON.parse(document.at_css("#data-preloaded").text)
+        expect(JSON.parse(preloaded.fetch("currentUser"))).to include(
+          "staff" => enabled,
+          "moderator" => enabled,
+          "academy_moderator_role" => true,
+        )
+        scripts = document.css("script[src]").map { |script| script["src"] }
+        expect(scripts.include?(ExtraLocalesController.url("admin"))).to eq(enabled)
+      end
+    end
+
+    it "keeps native management asset eligibility for members, developers and a disabled role feature" do
+      [[member, false], [developer, true]].each do |actor, eligible|
+        sign_in(actor)
+        get "/u/#{actor.username}/summary"
+
+        expect(response.status).to eq(200)
+        document = Nokogiri.HTML5(response.body)
+        expect(document.at_css("#data-discourse-setup")["data-is-staff"]).to eq(eligible.to_s)
+      end
+
+      SiteSetting.academy_roles_enabled = false
+      sign_in(moderator)
+      get "/u/#{moderator.username}/summary"
+
+      expect(response.status).to eq(200)
+      document = Nokogiri.HTML5(response.body)
+      expect(document.at_css("#data-discourse-setup")["data-is-staff"]).to eq("true")
     end
 
     it "reports the staff information permission independently of another management permission" do

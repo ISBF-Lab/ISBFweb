@@ -119,7 +119,7 @@ from pathlib import Path
 directory=Path('/private/admin-user-pages-fix-20261011/release-artifacts')
 directory.mkdir(mode=0o700,exist_ok=False)
 result={}
-for name in ['release.json','release.bundle','runtime-inventory.json','candidate-inventory.json','validation.json','lint-report.json','rspec.log','qunit.log','build.py','deploy.py','compile-release.rb','verify.py']:
+for name in ['release.json','release.bundle','runtime-inventory.json','candidate-inventory.json','validation.json','lint-report.json','rspec.log','qunit.log','rspec-client-permissions.log','qunit-client-permissions.log','lint-client-permissions.log','lint-client-doc.log','build.py','deploy.py','compile-release.rb','verify.py']:
  source=Path('/art')/name
  destination=directory/name
  shutil.copyfile(source,destination)

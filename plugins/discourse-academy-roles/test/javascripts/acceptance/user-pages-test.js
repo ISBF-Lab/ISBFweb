@@ -38,6 +38,7 @@ function setupUserPages(
   });
   needs.hooks.beforeEach(() => {
     state.permission = permission;
+    state.effectiveModerator = effectiveModerator;
     state.status = permission === false ? 403 : 200;
     state.requests = 0;
   });
@@ -49,7 +50,7 @@ function setupUserPages(
         json.user.academy_official_member = false;
         if (username === "eviltrout") {
           json.user.admin = admin;
-          json.user.moderator = moderatorRole;
+          json.user.moderator = state.effectiveModerator;
           json.user.can_edit = true;
         }
         if (state.permission === undefined || state.permission === null) {
@@ -105,6 +106,7 @@ acceptance("Academy user pages without staff information", function (needs) {
       moderator: true,
       academy_moderator_permissions: { user_admin: false, review: true },
     });
+    state.effectiveModerator = true;
 
     for (const route of [...PERSONAL_ROUTES, "/u/charlie/summary"]) {
       await visit(route);
@@ -118,6 +120,24 @@ acceptance("Academy user pages without staff information", function (needs) {
       0,
       "another management permission does not request staff information"
     );
+  });
+
+  test("keeps management navigation hidden after loading the personal profile", async function (assert) {
+    await visit("/u/eviltrout/summary");
+
+    const user = this.owner.lookup("service:current-user");
+    assert.false(
+      user.staff,
+      "loading the profile keeps effective staff access disabled"
+    );
+    assert.true(
+      user.academy_moderator_role,
+      "the administrator role remains present"
+    );
+    assert.dom(".user-main").exists("the personal profile renders");
+    assert
+      .dom('a[href="/admin"]')
+      .doesNotExist("management navigation stays hidden");
   });
 
   test("preserves the missing profile error", async function (assert) {

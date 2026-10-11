@@ -92,6 +92,7 @@ after_initialize do
   require_relative "lib/discourse_academy_roles/moderator_guardian"
   require_relative "lib/discourse_academy_roles/moderator_reviews"
   require_relative "lib/discourse_academy_roles/moderator_controllers"
+  require_relative "lib/discourse_academy_roles/moderator_client_permissions"
   require_relative "lib/discourse_academy_roles/moderator_post_destroyer"
 
   register_post_custom_field_type(DiscourseAcademyRoles::OFFICIAL_POST_FIELD, :boolean)
@@ -143,6 +144,8 @@ after_initialize do
     UsersController.before_action :academy_check_credentials_target,
                                   only: %i[remove_password revoke_account revoke_auth_token]
     CurrentUserSerializer.prepend(DiscourseAcademyRoles::ModeratorCurrentUserSerializer)
+    UserSerializer.prepend(DiscourseAcademyRoles::ModeratorUserSerializer)
+    ApplicationHelper.prepend(DiscourseAcademyRoles::ModeratorApplicationHelper)
     StaffConstraint.prepend(DiscourseAcademyRoles::ModeratorStaffConstraint)
     AdminConstraint.prepend(DiscourseAcademyRoles::ModeratorAdminConstraint)
     Topic.prepend(DiscourseAcademyRoles::TopicCategoryExtension)
