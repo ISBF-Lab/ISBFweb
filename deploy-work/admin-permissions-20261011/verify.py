@@ -1,4 +1,4 @@
-"""Exercise the real theme and permission page using temporary, bounded credentials."""
+"""Exercise the real theme and permission page using temporary browser sessions."""
 
 import json
 import os
@@ -27,20 +27,21 @@ if (mode === 'production') args.push('--host-resolver-rules=MAP isbf-one.com '+p
  try {
   async function contextFor(actor, viewport, write = false) {
    const context = await browser.newContext({viewport:{width:viewport.width,height:viewport.height},isMobile:viewport.name==='mobile',hasTouch:viewport.name==='mobile',colorScheme:viewport.name==='mobile'?'dark':'light',locale:'zh-CN'});
+   await context.addCookies([{name:actor.cookie_name,value:actor.cookie,url:address,httpOnly:true,secure:mode==='production',sameSite:'Lax',expires:Date.now()/1000+900}]);
    const errors=[], brokenAssets=[];
    await context.route('**/*',async route => {
     const request=route.request(), url=new URL(request.url());
     if(url.origin !== origin) return route.continue();
     if(!['GET','HEAD'].includes(request.method())) {
      if(write && url.pathname === '/admin/site_settings/bulk_update') {
-      return route.continue({headers:{...request.headers(),'api-key':actor.key,'api-username':actor.username}});
+      return route.continue();
      }
      if(url.pathname==='/srv/pv') return route.fulfill({status:204});
      if(url.pathname.startsWith('/message-bus/')) return route.fulfill({status:200,contentType:'application/json',body:'[]'});
      return route.abort('blockedbyclient');
     }
     if(/^\/(assets|theme-javascripts|stylesheets|extra-locales|uploads|user_avatar|plugins)\//.test(url.pathname)) return route.continue();
-    const headers={...request.headers(),'api-key':actor.key,'api-username':actor.username};
+    const headers={...request.headers()};
     delete headers['discourse-logged-in'];
     return route.continue({headers});
    });
@@ -64,7 +65,7 @@ if (mode === 'production') args.push('--host-resolver-rules=MAP isbf-one.com '+p
   for(const viewport of [{name:'desktop',width:1365,height:900},{name:'mobile',width:390,height:640}]) {
    const root=await contextFor(credentials.developer,viewport,mode==='preview');
    try {
-    const response=await root.page.goto(address+'/admin/plugins/discourse-academy-roles/moderator-permissions',{waitUntil:'networkidle',timeout:120000});
+    const response=await root.page.goto(address+'/admin/plugins/discourse-academy-roles/moderator-permissions',{waitUntil:'domcontentloaded',timeout:120000});
     assert.equal(response.status(),200);
     await root.page.locator('.academy-moderator-permissions .d-toggle-switch__checkbox-slider').first().waitFor();
     assert.equal(await root.page.locator('.academy-moderator-permissions [role=switch]').count(),20);
@@ -77,7 +78,7 @@ if (mode === 'production') args.push('--host-resolver-rules=MAP isbf-one.com '+p
 
     const moderator=await contextFor(credentials.moderator,viewport);
     try {
-     await moderator.page.goto(address+'/isbf/workbench',{waitUntil:'networkidle',timeout:120000});
+     await moderator.page.goto(address+'/isbf/workbench',{waitUntil:'domcontentloaded',timeout:120000});
      await moderator.page.locator('.isbf-v2-workbench__grid').waitFor();
      const session=await read(moderator.page,'/session/current.json');
      assert.equal(session.status,200);
@@ -119,7 +120,7 @@ if (mode === 'production') args.push('--host-resolver-rules=MAP isbf-one.com '+p
 
    const member=await contextFor(credentials.member,viewport);
    try {
-    const sitePage=await member.page.goto(address+'/isbf/workbench',{waitUntil:'networkidle',timeout:120000});
+    const sitePage=await member.page.goto(address+'/isbf/workbench',{waitUntil:'domcontentloaded',timeout:120000});
     assert.equal(sitePage.status(),200);await member.page.locator('.isbf-v2-workbench__grid').waitFor();
     await member.page.screenshot({path:reportPath.replace('.json','-'+viewport.name+'-workbench.png'),fullPage:true});
     report.workbench_diagnostics=await member.page.locator('.isbf-v2-workbench__card').evaluateAll(nodes=>nodes.map(node=>({href:node.getAttribute('href'),text:node.textContent,visible:node.getBoundingClientRect().width>0})));
@@ -133,7 +134,7 @@ if (mode === 'production') args.push('--host-resolver-rules=MAP isbf-one.com '+p
     await member.page.waitForFunction(count=>document.querySelectorAll('.isbf-marketplace-card').length===count && !document.querySelector('.isbf-marketplace__loading'),count);
     assert.equal(await member.page.locator('.isbf-marketplace [role=alert]').count(),0);
     await member.page.screenshot({path:reportPath.replace('.json','-'+viewport.name+'-marketplace.png'),fullPage:true});
-    await member.page.goto(address+'/isbf/workbench',{waitUntil:'networkidle',timeout:120000});
+    await member.page.goto(address+'/isbf/workbench',{waitUntil:'domcontentloaded',timeout:120000});
     await member.page.locator('.isbf-v2-workbench__card[href="/isbf/alumni"]').click();
     await member.page.locator('.isbf-alumni-map__canvas.leaflet-container').waitFor();
     await member.page.screenshot({path:reportPath.replace('.json','-'+viewport.name+'-alumni.png'),fullPage:true});
@@ -164,19 +165,23 @@ def verify(mode):
     ruby = """
 require "json"
 description=DESCRIPTION
-raise "Verification credentials already exist" if ApiKey.where("description LIKE ?", description + " %").exists?
+raise "Verification sessions already exist" if UserAuthToken.where("user_agent LIKE ?", description + " %").exists?
 developer=User.where(admin:true,active:true).where("id>0").order(:id).first!
 moderator=User.where(admin:false,moderator:true,active:true,approved:true).where("id>0").order(:id).find{|user| !user.suspended? && !user.silenced?}
 member=User.where(admin:false,moderator:false,active:true,approved:true,staged:false).where("id>0").order(:id).find{|user| !IsbfAnonymous.pool_user?(user) && !user.anonymous? && !user.suspended? && !user.silenced? && user.guardian.can_see_category?(Category.find(8))}
 raise "Verification actors unavailable" unless moderator && member
 result={}
-ApiKey.transaction do
+UserAuthToken.transaction do
  {developer:developer,moderator:moderator,member:member}.each do |role,user|
-  writable=MODE=="preview" && role==:developer
-  key=ApiKey.new(description:description+" "+role.to_s,user:user,created_by:developer,scope_mode:writable ? "global" : "read_only",allowed_ips:["127.0.0.1","172.17.0.0/16"])
-  key.api_key_scopes.build(resource:"global",action:"read") unless writable
-  key.save!
-  result[role]={id:user.id,key:key.key,username:user.username,key_id:key.id}
+  token=UserAuthToken.generate!(user_id:user.id,user_agent:description+" "+role.to_s,client_ip:"127.0.0.1")
+  env=Rails.application.env_config.merge(Rack::MockRequest.env_for(MODE=="production" ? "https://isbf-one.com/" : "http://127.0.0.1:3411/"))
+  jar=ActionDispatch::Request.new(env).cookie_jar
+  Auth::DefaultCurrentUserProvider.new(env).set_auth_cookie!(token.unhashed_auth_token,user,jar)
+  cookie_name=Auth::DefaultCurrentUserProvider::TOKEN_COOKIE
+  cookie=CGI.escape(jar[cookie_name])
+  check_env=env.merge("HTTP_COOKIE"=>cookie_name+"="+cookie)
+  raise "Verification cookie unavailable" unless CurrentUser.lookup_from_env(check_env)&.id==user.id
+  result[role]={id:user.id,cookie:cookie,cookie_name:cookie_name,token_id:token.id}
  end
 end
 puts JSON.generate(result)
@@ -199,12 +204,13 @@ puts JSON.generate(result)
     finally:
         credential_file.unlink(missing_ok=True)
         if credentials:
-            key_ids = [item["key_id"] for item in credentials.values()]
-            cleanup = "ApiKey.where(id: IDS).where(\"description LIKE ?\", DESCRIPTION + \" %\").destroy_all; raise \"Verification key cleanup failed\" if ApiKey.where(id: IDS).exists?; puts \"Temporary verification keys removed\"".replace("IDS", repr(key_ids)).replace("DESCRIPTION", repr(description))
+            token_ids = [item["token_id"] for item in credentials.values()]
+            token_owners = {item["token_id"]: item["id"] for item in credentials.values()}
+            cleanup = "owners=OWNERS; UserAuthToken.where(id: IDS).find_each { |token| raise \"Verification token owner changed\" unless token.user_id == owners.fetch(token.id); raise \"Verification token provenance unavailable\" unless UserAuthTokenLog.where(user_auth_token_id: token.id, action: \"generate\").where(\"user_agent LIKE ?\", DESCRIPTION + \" %\").exists?; token.destroy! }; raise \"Verification session cleanup failed\" if UserAuthToken.where(id: IDS).exists?; puts \"Temporary verification sessions removed\"".replace("OWNERS", str(token_owners).replace(":", " =>")).replace("IDS", repr(token_ids)).replace("DESCRIPTION", repr(description))
             print(output(command + [cleanup]), flush=True)
             if report_file.exists():
                 report = json.loads(report_file.read_text())
-                report["verification_keys_removed"] = True
+                report["verification_sessions_removed"] = True
                 save_json(report_file, report)
 
 
