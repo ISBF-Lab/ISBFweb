@@ -24,4 +24,8 @@
 
 第二次发布保留了样式缓存，资料 HTML 和管理信息接口均返回 200，但页面启动暴露上述路由加载问题，报错 `There is no route named admin`。发布工具再次自动恢复基线，检查会话已清理。针对这个问题新增 HTML 启动资源和本人权限投影的接口覆盖，以及关闭权限后管理入口保持隐藏的前端覆盖。
 
+QUnit 的 `test-boot-ember-cli.js` 固定加载管理模块，因此前端用例不能单独证明生产启动条件正确；HTML 请求用例需要检查 `data-is-staff` 与启动资料的一致性。主题 4 的通知页使用 `.isbf-notifications` 独立界面，隐藏原生个人容器；线上检查应核对实际通知界面及 `/isbf/notifications/groups.json` 返回 200。第三次发布中资料、书签已通过，通知页因检查脚本等待隐藏的原生 `.user-main` 被误判，已自动回退并清理会话。
+
+后续检查保留第三次发布已通过的资料、书签结果，只继续通知、偏好设置和私信。复用前确认应用源码未改（仅发布工具与文档调整）、样式缓存摘要相同、权限与主题等状态摘要相同，浏览器报告注明复用的页面。第三次回退的完整资料保存在同级 `admin-user-pages-fix-20261011-attempt3`。
+
 发布前备份角色插件资源及配置，发布后使用一个临时原生管理员会话只读检查五个个人页面，清理会话，再更新版本配置和已验证镜像。启动、页面检查或设置完整性检查失败时恢复本次基线代码、资源及配置，不恢复数据库覆盖用户数据。最终状态以服务器私有目录 `/home/codex/discourse-production/deploy/admin-user-pages-fix-20261011/production-report.json` 和同目录的浏览器报告为准；完整发布清单、源码 bundle 与针对性测试结果保存在 `release-artifacts`。前两次回退的资料分别另存于同级 `admin-user-pages-fix-20261011-attempt1` 和 `admin-user-pages-fix-20261011-attempt2`。
