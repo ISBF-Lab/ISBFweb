@@ -24,6 +24,16 @@ Discourse is large with long history. Understand context before changes.
 - Plugins/themes can't import npm modules directly; add the dependency to core and expose a `frontend/discourse/app/lib/load-*.js` wrapper that does the `import()` (see `load-morphlex.js`).
 - Use the skill at `.skills/discourse-warpdrive-models` when creating or changing WarpDrive-backed models (`frontend/discourse/app/data`)
 
+### Frontend Design Consistency
+
+- Before any UI change, read [UI status](docs/design-system/ui-status.md), [tokens](docs/design-system/tokens.md), [components](docs/design-system/components.md), and [reference map](docs/design-system/reference-map.md).
+- Find an Approved reference for the specific region, state, route, and responsive behaviour being changed. Approval of a page shell does not approve every component inside it. Legacy UI, platform default themes, unverified prototypes, and uncommitted changes are not sources of the target visual language.
+- Reuse the existing approved components and tokens within their documented scope. Read the complete styles and their later overrides; do not promote local values to global rules or invent new colours, spacing, typography, shapes, or component variants.
+- Check [reference provenance](docs/design-system/references/README.md) and its manifest before using a source. The accepted theme snapshot differs from parts of the workspace; reference attachments are non-executable evidence, not installable replacements for the active theme. Authentication has its own dated accepted supplement.
+- If a matching approved component or visual rule is missing, mark it as requiring human confirmation and propose a design with its references, reuse boundaries, and unresolved decisions before implementation. Wait for human confirmation of those decisions; do not fill gaps from Discourse defaults or personal preference.
+- Continue to use UI kit, FormKit, float-kit, BEM, translations, and the frontend skills required above. Their APIs provide engineering behaviour; their default appearance does not establish this project's design standard.
+- When a new region is explicitly approved, persist its actual source version, acceptance scope, tokens, component rules, and reference mapping in `docs/design-system/`. Do not classify a region as Approved solely because it renders or has custom CSS.
+
 ### Comments & Types
 - Prefer self-documenting code. Comments should only be added when future misunderstanding is likely. They should be terse, and should describe 'why', not 'what'. They should not be used to describe history.
 - In the frontend, typescript is typically used for platform-level code, javascript for business-logic
