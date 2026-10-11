@@ -204,6 +204,8 @@ after_initialize do
     DiscourseAcademyRoles.official_member?(object)
   end
 
+  add_to_serializer(:user, :academy_can_see_staff_info) { !!scope&.can_see_staff_info?(object) }
+
   add_to_serializer(:current_user, :academy_official_member) do
     DiscourseAcademyRoles.official_member?(object)
   end
