@@ -14,4 +14,6 @@
 
 增量发布工具位于 `deploy-work/admin-user-pages-fix-20261011`。基线为已上线核心 `67706a5a30d71ff0b6793e5b8f55a85c4fe3ebb5`、镜像 `sha256:e748995d9786f7cac5d0fa1eca66e3c0fafd6765dcd50942d0a88d80ade4345a`。此基线包含权限功能发布后的登录界面布局更新，修复分支已保留这些改动。仅重新编译角色插件，保留全部插件来源、主题、外部插件固定版本和现有 public assets manifest 条目。
 
-发布前备份角色插件资源及配置，发布后使用一个临时原生管理员会话只读检查五个个人页面，清理会话，再更新版本配置和已验证镜像。启动、页面检查或设置完整性检查失败时恢复本次基线代码、资源及配置，不恢复数据库覆盖用户数据。最终状态以服务器私有目录 `/home/codex/discourse-production/deploy/admin-user-pages-fix-20261011/production-report.json` 和同目录的浏览器报告为准；完整发布清单、源码 bundle 与针对性测试结果保存在 `release-artifacts`。
+此次只改脚本和序列化字段，保留生产 `stylesheet-manifest` 及其缓存键。原生样式缓存键包含各插件 `plugin.rb` 的内容，即使只添加序列化字段也会改变重算后的缓存键。首次发布重算了该键，资料页请求卡在 Sass 编译并返回 500，已自动恢复基线；这次重算没有必要，因为样式源码及注册均未改变。构建和发布工具明确检查样式源码未改、保留线上缓存键，避免让个人页面首次请求承担无关样式编译。
+
+发布前备份角色插件资源及配置，发布后使用一个临时原生管理员会话只读检查五个个人页面，清理会话，再更新版本配置和已验证镜像。启动、页面检查或设置完整性检查失败时恢复本次基线代码、资源及配置，不恢复数据库覆盖用户数据。最终状态以服务器私有目录 `/home/codex/discourse-production/deploy/admin-user-pages-fix-20261011/production-report.json` 和同目录的浏览器报告为准；完整发布清单、源码 bundle 与针对性测试结果保存在 `release-artifacts`。首次回退的资料另存于同级 `admin-user-pages-fix-20261011-attempt1`。

@@ -141,6 +141,8 @@ def deploy():
     assert json.loads((ART / "validation.json").read_text())["passed"]
     assert json.loads((ART / "lint-report.json").read_text())["passed"]
     assert inventory("isbf_app") == json.loads((ART / "runtime-inventory.json").read_text()), "Production source changed since build"
+    stylesheet_path = "/var/www/discourse/tmp/cache/assets/production/stylesheet-manifest"
+    assert output(DOCKER + ["exec", "isbf_app", "sha256sum", stylesheet_path]).split()[0] == manifest["stylesheet_manifest_sha256"], "Production stylesheet cache changed since build"
     assert output(DOCKER + ["image", "inspect", "local_discourse/isbf_app:latest", "--format", "{{.Id}} "]) == BASE_IMAGE
     live_git("diff", "--exit-code", "--", *manifest["files"])
     create_helper()
@@ -166,6 +168,7 @@ def deploy():
         live_git("checkout", "--detach", manifest["release_commit"])
         changed = True
         copy_assets(ART / "image/assets")
+        assert output(DOCKER + ["exec", "isbf_app", "sha256sum", stylesheet_path]).split()[0] == manifest["stylesheet_manifest_sha256"], "Published scripts changed the stylesheet cache"
         restart_web()
         assert inventory("isbf_app") == json.loads((ART / "candidate-inventory.json").read_text()), "Published source differs from the candidate"
         print("Service ready; checking only the affected personal pages once", flush=True)
@@ -175,6 +178,7 @@ def deploy():
         report["browser_verification"] = {"passed": True, "personal_pages": len(browser_report["pages"]), "verification_sessions_removed": True, "report_sha256": digest(ART / "production-browser-report.json")}
         report["after"] = state()
         assert report["before"] == report["after"], "Site settings, themes or management identities changed"
+        assert output(DOCKER + ["exec", "isbf_app", "sha256sum", stylesheet_path]).split()[0] == manifest["stylesheet_manifest_sha256"], "Stylesheet cache changed during publication"
         subprocess.run(DOCKER + ["exec", HELPER, "git", "--git-dir=/release.git", "fetch", "/art/release.bundle", "refs/heads/" + manifest["branch"] + ":refs/heads/" + manifest["branch"]], check=True)
         branch_changed = True
         write_config()

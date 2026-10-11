@@ -72,11 +72,14 @@ def build():
     feature_commit = git(ROOT, "rev-parse", "HEAD")
     changed = git(ROOT, "diff", "--name-only", BASE_COMMIT, feature_commit).splitlines()
     assert not any(path.startswith("frontend/") for path in changed), "Core frontend requires a complete build"
+    assert not any(path.endswith((".scss", ".css", ".sass")) or path.startswith(("lib/stylesheet/", "app/assets/images/")) for path in changed), "Stylesheet source changes require a stylesheet build"
     assert output(DOCKER + ["image", "inspect", "local_discourse/isbf_app:latest", "--format", "{{.Id}} {{index .Config.Labels \"org.opencontainers.image.revision\"}} "]) == BASE_IMAGE + " " + BASE_COMMIT, "Known-good production image changed"
     subprocess.run(DOCKER + ["tag", BASE_IMAGE, BASE_IMAGE_TAG], check=True)
     live = inventory("isbf_app")
     assert live["revision"] == BASE_COMMIT and len(live["plugins"]) == 61, "Production baseline changed"
     save_json(ART / "runtime-inventory.json", live)
+    stylesheet_manifest = "tmp/cache/assets/production/stylesheet-manifest"
+    stylesheet_digest = output(DOCKER + ["exec", "isbf_app", "sha256sum", "/var/www/discourse/" + stylesheet_manifest]).split()[0]
     externals = {}
     mounts = json.loads(output(DOCKER + ["inspect", "isbf_app", "--format", "{{json .Mounts}} "]))
     shared = next(mount["Source"] for mount in mounts if mount["Destination"] == "/shared")
@@ -111,6 +114,7 @@ def build():
             if existing["core"].get(relative) != value:
                 assert value is not None
                 copied.append(relative)
+        copied.append(stylesheet_manifest)
         for relative in copied:
             target = overlay / relative
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -137,7 +141,7 @@ def build():
             subprocess.run(command + [container, "bin/rails", "runner", "/tmp/user-pages-fix-compile.rb"], stdout=log, stderr=subprocess.STDOUT, check=True)
         assert_preserved(live, inventory(container), changed, externals)
         sources = {"app/assets/generated/" + name: "/var/www/discourse/app/assets/generated/" + name for name in PLUGINS_WITH_ASSETS}
-        sources.update({"public/assets": "/tmp/user-pages-public-delta", "tmp/cache/assets/production/stylesheet-manifest": "/var/www/discourse/tmp/cache/assets/production/stylesheet-manifest"})
+        sources.update({"public/assets": "/tmp/user-pages-public-delta"})
         for relative, source in sources.items():
             target = assets / relative
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -165,10 +169,12 @@ def build():
             final = inventory(candidate)
             assert final["revision"] == feature_commit
             assert_preserved(live, final, changed, externals)
+            assert output(DOCKER + ["exec", candidate, "sha256sum", "/var/www/discourse/" + stylesheet_manifest]).split()[0] == stylesheet_digest, "Existing stylesheet cache key changed"
             save_json(ART / "candidate-inventory.json", final)
         finally:
             subprocess.run(DOCKER + ["rm", "-f", candidate], check=True, stdout=subprocess.DEVNULL)
         report = {"branch": BRANCH, "base_commit": BASE_COMMIT, "release_commit": feature_commit, "base_image_id": BASE_IMAGE, "image_tag": IMAGE_TAG, "image_id": image_id, "files": changed, "external_releases": externals, "core_frontend_rebuilt": False, "compiled_plugins": PLUGINS_WITH_ASSETS, "existing_manifest_preserved": True, "plugin_inventory_verified": len(live["plugins"]), "plugin_source_files_verified": sum(len(item["files"]) for item in live["plugins"].values()), "runtime_overlay_files": copied, "removed_runtime_files": removed, "created_at": datetime.datetime.now(datetime.timezone.utc).isoformat()}
+        report.update({"stylesheet_manifest_preserved": True, "stylesheet_manifest_sha256": stylesheet_digest})
         save_json(ART / "release.json", report)
         print(json.dumps({"image_ready": True, "revision": feature_commit, "plugins_verified": 61}), flush=True)
     finally:

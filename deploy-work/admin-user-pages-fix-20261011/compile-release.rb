@@ -58,7 +58,6 @@ end
 
 File.write(manifest_path, JSON.generate(manifest))
 FileUtils.cp(manifest_path, delta.join(".manifest.json"))
-Stylesheet::Manager.recalculate_fs_asset_cachebuster!
 puts JSON.generate(
        compiled_plugins: 1,
        published_assets: published.length,
