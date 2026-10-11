@@ -566,6 +566,8 @@ export default class AcademyAuthPage extends Component {
               }}</h1>
             <Form @onSubmit={{this.redeem}} as |form|>
               <form.Field
+                class="academy-auth__invite-field"
+                @format="full"
                 @name="code"
                 @title={{i18n "academy_roles.invite_code"}}
                 @type="input"

@@ -14,6 +14,10 @@ body.academy-auth-page {
     position: relative;
     z-index: z("fullscreen");
   }
+
+  .fk-d-menu[data-identifier="interface-color-selector"] {
+    z-index: calc(z("fullscreen") + 1);
+  }
 }
 
 .academy-auth {
@@ -28,7 +32,6 @@ body.academy-auth-page {
   overflow: auto;
   overscroll-behavior: contain;
   isolation: isolate;
-  user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
   background: var(--secondary);
@@ -45,7 +48,6 @@ body.academy-auth-page {
   textarea,
   [contenteditable="true"],
   [contenteditable=""] {
-    user-select: text;
     user-select: text;
     -webkit-touch-callout: default;
   }
@@ -201,6 +203,10 @@ body.academy-auth-page {
       text-align: center;
     }
 
+    .academy-auth__invite-field {
+      align-items: stretch;
+    }
+
     .form-kit__container-content {
       justify-content: center;
       width: 100%;
@@ -230,21 +236,26 @@ body.academy-auth-page {
     #login-form {
       .input-group {
         margin-block: 0 16px;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
         position: relative;
+
+        > * {
+          grid-column: 1;
+        }
       }
 
       input {
+        grid-row: 2;
         width: 100%;
+        margin-bottom: 0;
         border-radius: 12px;
-        padding-inline: 38px;
+        padding-inline: 44px;
       }
 
       .alt-placeholder {
+        grid-row: 1;
         position: static;
-        order: -1;
         margin: 0 0 8px;
         font-size: 13px;
         font-weight: 400;
@@ -254,6 +265,14 @@ body.academy-auth-page {
         text-align: center;
         width: 100%;
         pointer-events: none;
+      }
+
+      .toggle-password-mask {
+        grid-row: 2;
+        position: static;
+        align-self: center;
+        justify-self: end;
+        min-width: 44px;
       }
     }
 
