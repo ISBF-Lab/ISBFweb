@@ -125,11 +125,12 @@ def clear_plugin_styles():
     output(command + ['%w[discourse-academy-roles isbf-anonymous].each { |name| Stylesheet::Manager.clear_plugin_cache!(name) }'])
 
 
-def backup_private_data():
+def backup_private_data(release_commit):
+    assert len(release_commit) == 40 and all(character in "0123456789abcdef" for character in release_commit)
     code = """
 import hashlib,json,os,subprocess
 from pathlib import Path
-directory=Path('/shared/admin-permissions-backups/20261011')
+directory=Path(BACKUP_DIRECTORY)
 directory.parent.mkdir(mode=0o700,exist_ok=True)
 directory.mkdir(mode=0o700,exist_ok=False)
 os.chmod(directory.parent,0o700)
@@ -147,7 +148,7 @@ for name,command in {
   for part in iter(lambda:handle.read(1048576),b''):value.update(part)
  result[name]={'path':str(path),'bytes':path.stat().st_size,'sha256':value.hexdigest()}
 print(json.dumps(result))
-"""
+""".replace("BACKUP_DIRECTORY", repr("/shared/admin-permissions-backups/20261011-" + release_commit[:12]))
     return json.loads(output(DOCKER + ["exec", "-u", "root", "-i", "isbf_app", "python3", "-"], input=code))
 
 
@@ -261,7 +262,7 @@ def deploy():
         old_public = json.loads((backup / "public-manifest.json").read_text())
         new_public = json.loads((ART / "image/assets/public/assets/.manifest.json").read_text())
         assert all(new_public.get(key) == value for key, value in old_public.items()), "Existing asset manifest entry omitted"
-        report["private_data_backup"] = backup_private_data()
+        report["private_data_backup"] = backup_private_data(manifest["release_commit"])
         save_json(backup / "private-data-backup.json", report["private_data_backup"])
         save_json(backup / "theme.json", theme_payload())
         save_json(ART / "theme-update.json", json.loads((backup / "theme.json").read_text()))

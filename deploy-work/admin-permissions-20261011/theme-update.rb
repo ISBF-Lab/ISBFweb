@@ -3,6 +3,8 @@
 require "digest"
 require "json"
 
+AssetProcessor.timeout = 120_000
+
 payload = JSON.parse(File.read(ARGV.fetch(0)))
 mode = ARGV.fetch(1)
 raise "Unknown theme update mode" if %w[apply rollback check].exclude?(mode)
