@@ -24,6 +24,7 @@ function lookupErrorMessage(error) {
 
 export default class IsbfAnonymousAuthor extends Component {
   @service a11y;
+  @service currentUser;
 
   @tracked retryCount = 0;
 
@@ -92,13 +93,20 @@ export default class IsbfAnonymousAuthor extends Component {
                 </dd>
               </dl>
             </div>
-            <DButton
-              class="btn-primary isbf-anonymous-author__manage"
-              @href={{result.adminUrl}}
-              @icon="user-gear"
-              @label="isbf_anonymous.author_lookup.manage_user"
-              {{on "click" @closeModal}}
-            />
+            {{#if
+              (or
+                this.currentUser.admin
+                this.currentUser.academy_moderator_permissions.user_admin
+              )
+            }}
+              <DButton
+                class="btn-primary isbf-anonymous-author__manage"
+                @href={{result.adminUrl}}
+                @icon="user-gear"
+                @label="isbf_anonymous.author_lookup.manage_user"
+                {{on "click" @closeModal}}
+              />
+            {{/if}}
           </:content>
           <:error as |error|>
             <p class="isbf-anonymous-author__error">

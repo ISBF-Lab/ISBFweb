@@ -2,6 +2,8 @@
 
 module IsbfAnonymous
   def self.requested?(options)
+    return false if options.blank?
+
     ActiveModel::Type::Boolean.new.cast(options[:isbf_anonymous] || options["isbf_anonymous"])
   end
 
@@ -41,22 +43,34 @@ module IsbfAnonymous
 
   module Permissions
     def can_edit_post?(post)
-      return false if !is_staff? && post.custom_fields[IsbfAnonymous::POST_FIELD]
+      if !is_staff? && !(respond_to?(:academy_can?) && academy_can?(:edit_others)) &&
+           post.custom_fields[IsbfAnonymous::POST_FIELD]
+        return false
+      end
       super
     end
 
     def can_delete_post?(post)
-      return false if !is_staff? && post.custom_fields[IsbfAnonymous::POST_FIELD]
+      if !is_staff? && !(respond_to?(:academy_can?) && academy_can?(:delete_others)) &&
+           post.custom_fields[IsbfAnonymous::POST_FIELD]
+        return false
+      end
       super
     end
 
     def can_edit_topic?(topic)
-      return false if !is_staff? && topic.first_post&.custom_fields&.dig(IsbfAnonymous::POST_FIELD)
+      if !is_staff? && !(respond_to?(:academy_can?) && academy_can?(:manage_topics)) &&
+           topic.first_post&.custom_fields&.dig(IsbfAnonymous::POST_FIELD)
+        return false
+      end
       super
     end
 
     def can_delete_topic?(topic)
-      return false if !is_staff? && topic.first_post&.custom_fields&.dig(IsbfAnonymous::POST_FIELD)
+      if !is_staff? && !(respond_to?(:academy_can?) && academy_can?(:delete_others)) &&
+           topic.first_post&.custom_fields&.dig(IsbfAnonymous::POST_FIELD)
+        return false
+      end
       super
     end
   end

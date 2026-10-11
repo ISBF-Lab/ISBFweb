@@ -14,6 +14,10 @@ module DiscourseAcademyRoles
   def self.official_member?(user)
     return false if user.blank?
     return true if user.admin?
+    if ModeratorPermissions.restricted?(user) &&
+         ModeratorPermissions.allowed?(user, :publish_official)
+      return true
+    end
 
     group_id = SiteSetting.academy_official_group.to_i
     group_id.positive? && user.group_users.exists?(group_id: group_id)
@@ -51,20 +55,13 @@ module DiscourseAcademyRoles
       end
     official_category = official_category?(category_id)
     is_private_message =
-      options[:archetype] == Archetype.private_message ||
-        post.topic&.private_message?
+      options[:archetype] == Archetype.private_message || post.topic&.private_message?
 
     if official
       if is_private_message || !official_category
-        post.errors.add(
-          :base,
-          I18n.t("academy_roles.official_outside_category")
-        )
+        post.errors.add(:base, I18n.t("academy_roles.official_outside_category"))
       elsif !official_member?(post.user)
-        post.errors.add(
-          :base,
-          I18n.t("academy_roles.official_membership_required")
-        )
+        post.errors.add(:base, I18n.t("academy_roles.official_membership_required"))
       else
         post.custom_fields[OFFICIAL_POST_FIELD] = true
       end
@@ -74,9 +71,7 @@ module DiscourseAcademyRoles
   end
 
   def self.mark_official_post(post, options)
-    unless ActiveModel::Type::Boolean.new.cast(options[:academy_official])
-      return
-    end
+    return unless ActiveModel::Type::Boolean.new.cast(options[:academy_official])
     return unless official_category?(post.topic&.category_id)
 
     post.custom_fields[OFFICIAL_POST_FIELD] = true
@@ -86,8 +81,6 @@ module DiscourseAcademyRoles
   def self.ensure_valid_post!(user, options)
     post = Post.new(user: user)
     validate_post(post, options)
-    if post.errors.any?
-      raise Discourse::InvalidAccess.new(post.errors.full_messages.to_sentence)
-    end
+    raise Discourse::InvalidAccess.new(post.errors.full_messages.to_sentence) if post.errors.any?
   end
 end

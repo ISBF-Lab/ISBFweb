@@ -63,7 +63,10 @@ module PostGuardian
         return false if is_flag && post.hidden?
 
         # post made by staff, but we don't allow staff flags
-        return false if is_flag && !SiteSetting.allow_flagging_staff? && post&.user&.staff?
+        if is_flag && !SiteSetting.allow_flagging_staff? &&
+             (post.user&.admin || post.user&.moderator)
+          return false
+        end
 
         if is_flag && post_action_type_view.disabled_flag_types.keys.include?(action_key)
           return false
@@ -129,7 +132,7 @@ module PostGuardian
   end
 
   def can_delete_all_posts?(user)
-    is_staff? && user && !user.admin? && (!user.moderator? || is_admin?) &&
+    is_staff? && user && !user.admin? && (!user.moderator || is_admin?) &&
       (
         is_admin? ||
           (

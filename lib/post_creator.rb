@@ -348,7 +348,7 @@ class PostCreator
       whisper_type = Post.types[:whisper]
 
       if reply_info.post_type == whisper_type
-        if post.acting_user&.whisperer?
+        if post.acting_user&.guardian&.can_create_whisper?
           post.post_type = whisper_type
         else
           post.errors.add(:base, I18n.t(:topic_not_found))

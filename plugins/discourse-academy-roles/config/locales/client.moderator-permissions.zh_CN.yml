@@ -1,0 +1,37 @@
+zh_CN:
+  js:
+    academy_roles:
+      moderator_permissions:
+        title: "管理员权限"
+        description: "以下开关统一应用于没有开发者身份的管理员。调整后点击保存，权限统一生效。初始全部关闭，开发者保留完整权限。"
+        fixed: "邀请、学号查看与权限设置始终仅限开发者。"
+        saved: "管理员权限已保存"
+        save: "保存权限"
+        groups:
+          access: "访问权限"
+          content: "内容管理"
+          users: "账号管理"
+          structure: "分类与用户组"
+          business: "校园功能"
+          sensitive: "敏感信息"
+        capabilities:
+          internal_boards: "访问内部版块"
+          user_admin: "查看用户管理信息"
+          hidden_content: "查看隐藏和已删除内容"
+          review: "审核举报与待发布内容"
+          edit_others: "编辑他人内容"
+          delete_others: "删除与恢复他人内容"
+          manage_topics: "管理主题"
+          edit_users: "编辑普通账号资料"
+          suspend_users: "封禁与解除封禁普通账号"
+          silence_users: "禁言与解除禁言普通账号"
+          delete_users: "删除普通账号"
+          anonymize_users: "匿名化普通账号"
+          manage_categories: "管理分类"
+          manage_groups: "管理用户组与认证成员"
+          publish_activities: "发布校园活动"
+          publish_official: "使用官方身份发布"
+          review_resources: "审核学习资源"
+          manage_resources: "管理学习资源"
+          view_emails: "查看他人邮箱"
+          trace_anonymous: "查询匿名作者"

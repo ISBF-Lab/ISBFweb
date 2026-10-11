@@ -22,9 +22,7 @@ module DiscourseAcademyRoles::GuardianExtension
     return false unless super
 
     if SiteSetting.academy_roles_enabled? &&
-         DiscourseAcademyRoles::StudentRegistration.exists?(
-           user_id: target_user.id
-         )
+         DiscourseAcademyRoles::StudentRegistration.exists?(user_id: target_user.id)
       return false
     end
 
@@ -32,26 +30,29 @@ module DiscourseAcademyRoles::GuardianExtension
   end
 
   def can_admin_group?(group)
-    if SiteSetting.academy_roles_enabled? &&
-         DiscourseAcademyRoles.official_group?(group)
-      return is_admin?
+    if SiteSetting.academy_roles_enabled? && DiscourseAcademyRoles.official_group?(group)
+      return(
+        is_admin? ||
+          (respond_to?(:academy_can?) && academy_can?(:manage_groups) && !group.automatic?)
+      )
     end
 
     super
   end
 
   def can_edit_group?(group)
-    if SiteSetting.academy_roles_enabled? &&
-         DiscourseAcademyRoles.official_group?(group)
-      return is_admin?
+    if SiteSetting.academy_roles_enabled? && DiscourseAcademyRoles.official_group?(group)
+      return(
+        is_admin? ||
+          (respond_to?(:academy_can?) && academy_can?(:manage_groups) && !group.automatic?)
+      )
     end
 
     super
   end
 
   def can_create_topic_on_category?(category)
-    if SiteSetting.academy_roles_enabled? &&
-         DiscourseAcademyRoles.official_category?(category)
+    if SiteSetting.academy_roles_enabled? && DiscourseAcademyRoles.official_category?(category)
       return false unless DiscourseAcademyRoles.official_member?(user)
     end
 
@@ -61,10 +62,8 @@ module DiscourseAcademyRoles::GuardianExtension
   def can_edit_topic?(topic)
     if SiteSetting.academy_roles_enabled?
       official_post =
-        topic&.first_post&.custom_fields&.dig(
-          DiscourseAcademyRoles::OFFICIAL_POST_FIELD
-        )
-      if official_post && !is_staff? &&
+        topic&.first_post&.custom_fields&.dig(DiscourseAcademyRoles::OFFICIAL_POST_FIELD)
+      if official_post && !is_staff? && !academy_can?(:manage_topics) &&
            !DiscourseAcademyRoles.official_member?(user)
         return false
       end
@@ -76,7 +75,7 @@ module DiscourseAcademyRoles::GuardianExtension
   def can_edit_post?(post)
     if SiteSetting.academy_roles_enabled? &&
          post&.custom_fields&.dig(DiscourseAcademyRoles::OFFICIAL_POST_FIELD)
-      unless is_staff? || DiscourseAcademyRoles.official_member?(user)
+      unless is_staff? || academy_can?(:edit_others) || DiscourseAcademyRoles.official_member?(user)
         return false
       end
     end

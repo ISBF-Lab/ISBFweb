@@ -112,7 +112,8 @@ class ReviewableQueuedPost < Reviewable
         skip_guardian: true,
         reviewed_queued_post: true,
       )
-    opts.merge!(guardian: Guardian.new(performed_by)) if performed_by.staff?
+    reviewer = performed_by.guardian
+    opts.merge!(guardian: reviewer) if reviewer.can_see_review_queue?
 
     creator = PostCreator.new(target_created_by, opts)
     created_post = creator.create
@@ -125,11 +126,14 @@ class ReviewableQueuedPost < Reviewable
     self.topic_id = created_post.topic_id if topic_id.nil?
     save
 
-    if target_created_by.silenced?
+    can_unsilence =
+      reviewer.can_unsilence_user?(target_created_by) ||
+        (!performed_by[:moderator] && reviewer.is_category_group_moderator?(category))
+    if target_created_by.silenced? && can_unsilence
       UserSilencer.unsilence(target_created_by, performed_by, reviewable_id: id)
     end
 
-    if performed_by.staff?
+    if reviewer.can_see_review_queue?
       StaffActionLogger.new(performed_by).log_post_approved(created_post, reviewable_id: id)
     end
 

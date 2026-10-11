@@ -101,7 +101,8 @@ export default class ISBFV2Calendar extends Component {
 
   get canCreateCommunity() {
     return Boolean(
-      this.currentUser?.staff &&
+      (this.currentUser?.admin ||
+        this.currentUser?.academy_moderator_permissions?.publish_activities) &&
       this.currentUser?.can_create_discourse_post_event &&
       Number(settings.calendar_category_id) > 0
     );

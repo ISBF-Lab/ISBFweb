@@ -21,7 +21,11 @@ module IsbfModeration
     end
 
     def self.staff_reviewer?(user, post)
-      user.present? && user.id.positive? && user.staff? && Guardian.new(user).can_review_post?(post)
+      user.present? && user.id.positive? &&
+        (
+          user.staff? ||
+            (user.guardian.respond_to?(:academy_can?) && user.guardian.academy_can?(:review))
+        ) && user.guardian.can_review_post?(post)
     end
   end
 end

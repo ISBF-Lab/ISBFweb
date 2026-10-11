@@ -3,6 +3,9 @@ export default {
   path: "/plugins",
 
   map() {
+    this.route("academy-moderator-permissions", {
+      path: "moderator-permissions",
+    });
     this.route(
       "academy-student-invites",
       { path: "student-invites" },

@@ -4,18 +4,9 @@ require "rails_helper"
 
 RSpec.describe IsbfCalendar::PublishOfficialItems do
   describe described_class::Contract, type: :model do
-    it do
-      is_expected.to allow_values([], [{}], Array.new(20) { {} }).for(:items)
-    end
+    it { is_expected.to allow_values([], [{}], Array.new(20) { {} }).for(:items) }
 
-    it do
-      is_expected.not_to allow_values(
-        nil,
-        {},
-        ["invalid"],
-        Array.new(21) { {} }
-      ).for(:items)
-    end
+    it { is_expected.not_to allow_values(nil, {}, ["invalid"], Array.new(21) { {} }).for(:items) }
   end
 
   describe ".call" do
@@ -27,9 +18,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
     fab!(:topic) { Fabricate(:topic_with_op, category:, user: acting_user) }
 
     let(:params) { { items: } }
-    let(:dependencies) do
-      { topic: publishing_topic, guardian: acting_user.guardian }
-    end
+    let(:dependencies) { { topic: publishing_topic, guardian: acting_user.guardian } }
     let(:publishing_topic) { topic }
     let(:items) do
       [
@@ -38,8 +27,8 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
           schedule_kind: "deadline",
           starts_at: "2026-10-20T00:00:00+08:00",
           ends_at: "2026-10-21T00:00:00+08:00",
-          all_day: true
-        }
+          all_day: true,
+        },
       ]
     end
 
@@ -69,9 +58,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
     end
 
     context "when the topic is a private message" do
-      before do
-        topic.update!(archetype: Archetype.private_message, category_id: nil)
-      end
+      before { topic.update!(archetype: Archetype.private_message, category_id: nil) }
 
       it { is_expected.to fail_a_policy(:can_publish) }
     end
@@ -88,6 +75,117 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
       it { is_expected.to fail_a_policy(:can_publish) }
     end
 
+    context "with a moderator whose publishing permission is disabled" do
+      fab!(:acting_user, :moderator)
+
+      let(:publishing_topic) { Fabricate.build(:topic, category:, user: acting_user) }
+
+      it "rejects publication without preparing calendar items" do
+        expect(result).to fail_a_policy(:can_publish)
+        expect(publishing_topic.isbf_official_calendar_items).to be_empty
+      end
+    end
+
+    context "with a moderator allowed to publish a new official topic" do
+      fab!(:acting_user, :moderator)
+
+      let(:publishing_topic) { Fabricate.build(:topic, category:, user: acting_user) }
+
+      before { SiteSetting.academy_moderators_publish_official = true }
+
+      it "saves its calendar items with the topic without granting an editing permission" do
+        expect(result).to run_successfully
+        expect { publishing_topic.save! }.to change(IsbfCalendar::OfficialItem, :count).by(1)
+        expect(publishing_topic.isbf_official_calendar_items.sole).to have_attributes(
+          title: items.first[:title],
+          topic_id: publishing_topic.id,
+        )
+      end
+    end
+
+    context "with a moderator allowed to publish but unable to edit another author's topic" do
+      fab!(:acting_user, :moderator)
+      fab!(:author, :user)
+
+      before do
+        SiteSetting.academy_moderators_publish_official = true
+        topic.first_post.update!(user: author)
+      end
+
+      it "rejects the calendar changes without creating a source" do
+        expect { result }.not_to change(IsbfCalendar::OfficialItem, :count)
+        expect(result).to fail_a_policy(:can_publish)
+      end
+    end
+
+    context "with a moderator allowed to publish and edit another author's topic" do
+      fab!(:acting_user, :moderator)
+      fab!(:author, :user)
+
+      before do
+        SiteSetting.academy_moderators_publish_official = true
+        SiteSetting.academy_moderators_edit_others_content = true
+        topic.first_post.update!(user: author)
+      end
+
+      it "publishes calendar items on the existing topic" do
+        expect { result }.to change(IsbfCalendar::OfficialItem, :count).by(1)
+        expect(result).to run_successfully
+        expect(topic.isbf_official_calendar_items.reload.sole).to have_attributes(
+          title: items.first[:title],
+          topic_id: topic.id,
+        )
+      end
+    end
+
+    context "with a moderator whose publishing permission is revoked" do
+      fab!(:acting_user, :moderator)
+
+      let(:publishing_topic) { Fabricate.build(:topic, category:, user: acting_user) }
+
+      before { SiteSetting.academy_moderators_publish_official = true }
+
+      it "rejects publication using the guardian created before the permission changed" do
+        expect(dependencies[:guardian].academy_can?(:publish_official)).to eq(true)
+        SiteSetting.academy_moderators_publish_official = false
+
+        expect(result).to fail_a_policy(:can_publish)
+        expect(publishing_topic.isbf_official_calendar_items).to be_empty
+      end
+    end
+
+    context "with a moderator whose editing permission is revoked" do
+      fab!(:acting_user, :moderator)
+      fab!(:author, :user)
+
+      before do
+        SiteSetting.academy_moderators_publish_official = true
+        SiteSetting.academy_moderators_edit_others_content = true
+        topic.first_post.update!(user: author)
+      end
+
+      it "rejects existing-topic changes using the guardian created before the permission changed" do
+        expect(dependencies[:guardian].can_edit?(topic.first_post)).to eq(true)
+        SiteSetting.academy_moderators_edit_others_content = false
+
+        expect { result }.not_to change(IsbfCalendar::OfficialItem, :count)
+        expect(result).to fail_a_policy(:can_publish)
+      end
+    end
+
+    context "with a developer who also has the moderator role" do
+      fab!(:acting_user) { Fabricate(:admin, moderator: true) }
+      fab!(:author, :user)
+
+      before { topic.first_post.update!(user: author) }
+
+      it "publishes on another author's topic while moderator permissions are disabled" do
+        expect { result }.to change(IsbfCalendar::OfficialItem, :count).by(1)
+        expect(result).to run_successfully
+        expect(topic.isbf_official_calendar_items.reload.sole.title).to eq(items.first[:title])
+      end
+    end
+
     context "with an official publisher who owns the first post" do
       fab!(:acting_user) { Fabricate(:user, group_ids: [official_group.id]) }
 
@@ -96,7 +194,11 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
         SiteSetting.edit_post_allowed_groups = official_group.id.to_s
       end
 
-      it { is_expected.to run_successfully }
+      it "publishes the certified member's calendar items while moderator permissions are disabled" do
+        expect { result }.to change(IsbfCalendar::OfficialItem, :count).by(1)
+        expect(result).to run_successfully
+        expect(topic.isbf_official_calendar_items.reload.sole.title).to eq(items.first[:title])
+      end
     end
 
     context "with a publisher who cannot edit the first post" do
@@ -116,12 +218,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
       fab!(:other_item, :isbf_calendar_official_item)
 
       let(:items) do
-        [
-          other_item.snapshot.as_json.merge(
-            id: other_item.id,
-            revision: other_item.revision
-          )
-        ]
+        [other_item.snapshot.as_json.merge(id: other_item.id, revision: other_item.revision)]
       end
 
       it { is_expected.to fail_with_exception(ArgumentError) }
@@ -131,9 +228,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
       fab!(:item) { Fabricate(:isbf_calendar_official_item, topic:) }
 
       let(:items) do
-        Array.new(2) do
-          item.snapshot.as_json.merge(id: item.id, revision: item.revision)
-        end
+        Array.new(2) { item.snapshot.as_json.merge(id: item.id, revision: item.revision) }
       end
 
       it { is_expected.to fail_with_exception(ArgumentError) }
@@ -142,9 +237,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
     context "when a source ID is a string" do
       fab!(:item) { Fabricate(:isbf_calendar_official_item, topic:) }
 
-      let(:items) do
-        [item.snapshot.as_json.merge(id: item.id.to_s, revision: item.revision)]
-      end
+      let(:items) { [item.snapshot.as_json.merge(id: item.id.to_s, revision: item.revision)] }
 
       it { is_expected.to fail_with_exception(ArgumentError) }
     end
@@ -160,13 +253,9 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
     end
 
     context "when a removed source ID is reused" do
-      fab!(:item) do
-        Fabricate(:isbf_calendar_official_item, topic:, cancelled: true)
-      end
+      fab!(:item) { Fabricate(:isbf_calendar_official_item, topic:, cancelled: true) }
 
-      let(:items) do
-        [item.snapshot.as_json.merge(id: item.id, revision: item.revision)]
-      end
+      let(:items) { [item.snapshot.as_json.merge(id: item.id, revision: item.revision)] }
 
       it { is_expected.to fail_with_exception(ArgumentError) }
     end
@@ -178,9 +267,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
     end
 
     context "when the source time range is invalid" do
-      let(:items) do
-        [super().first.merge(ends_at: "2026-10-19T00:00:00+08:00")]
-      end
+      let(:items) { [super().first.merge(ends_at: "2026-10-19T00:00:00+08:00")] }
 
       it "halts without creating a source" do
         expect { result }.not_to change(IsbfCalendar::OfficialItem, :count)
@@ -196,15 +283,15 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
           item.snapshot.as_json.merge(
             id: item.id,
             revision: item.revision,
-            title: "Uncommitted change"
+            title: "Uncommitted change",
           ),
           {
             title: "Invalid activity",
             schedule_kind: "event",
             starts_at: "2026-10-22T10:00:00+08:00",
             ends_at: "2026-10-22T09:00:00+08:00",
-            all_day: false
-          }
+            all_day: false,
+          },
         ]
       end
 
@@ -223,7 +310,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
           :isbf_calendar_official_item,
           topic:,
           location: "Original hall",
-          organizer: "Original office"
+          organizer: "Original office",
         )
       end
 
@@ -234,9 +321,9 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
             revision: item.revision,
             location: "Uncommitted hall",
             organizer: "Uncommitted office",
-            registration_deadline_index: 1
+            registration_deadline_index: 1,
           ),
-          super().first.merge(starts_at: "2026-10-20T00:00:00")
+          super().first.merge(starts_at: "2026-10-20T00:00:00"),
         ]
       end
 
@@ -247,59 +334,33 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
           location: "Original hall",
           organizer: "Original office",
           registration_deadline_id: nil,
-          revision: 1
+          revision: 1,
         )
       end
     end
 
     context "when the registration deadline index has an invalid type" do
       let(:items) do
-        [
-          super().first.merge(
-            schedule_kind: "event",
-            registration_deadline_index: "0"
-          )
-        ]
+        [super().first.merge(schedule_kind: "event", registration_deadline_index: "0")]
       end
 
       it { is_expected.to fail_with_exception(ArgumentError) }
     end
 
     context "when the registration deadline index is negative" do
-      let(:items) do
-        [
-          super().first.merge(
-            schedule_kind: "event",
-            registration_deadline_index: -1
-          )
-        ]
-      end
+      let(:items) { [super().first.merge(schedule_kind: "event", registration_deadline_index: -1)] }
 
       it { is_expected.to fail_with_exception(ArgumentError) }
     end
 
     context "when the registration deadline index is outside the submitted items" do
-      let(:items) do
-        [
-          super().first.merge(
-            schedule_kind: "event",
-            registration_deadline_index: 1
-          )
-        ]
-      end
+      let(:items) { [super().first.merge(schedule_kind: "event", registration_deadline_index: 1)] }
 
       it { is_expected.to fail_with_exception(ArgumentError) }
     end
 
     context "when an activity references itself as its registration deadline" do
-      let(:items) do
-        [
-          super().first.merge(
-            schedule_kind: "event",
-            registration_deadline_index: 0
-          )
-        ]
-      end
+      let(:items) { [super().first.merge(schedule_kind: "event", registration_deadline_index: 0)] }
 
       it { is_expected.to fail_with_exception(ArgumentError) }
     end
@@ -308,7 +369,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
       let(:items) do
         [
           super().first.merge(registration_deadline_index: 1),
-          super().first.merge(title: "Another deadline")
+          super().first.merge(title: "Another deadline"),
         ]
       end
 
@@ -318,16 +379,13 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
     context "when two activities reference the same registration deadline" do
       let(:items) do
         [
-          super().first.merge(
-            schedule_kind: "event",
-            registration_deadline_index: 2
-          ),
+          super().first.merge(schedule_kind: "event", registration_deadline_index: 2),
           super().first.merge(
             title: "Second activity",
             schedule_kind: "event",
-            registration_deadline_index: 2
+            registration_deadline_index: 2,
           ),
-          super().first
+          super().first,
         ]
       end
 
@@ -341,15 +399,13 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
       it "creates the structured Beijing deadline" do
         expect { result }.to change(IsbfCalendar::OfficialItem, :count).by(1)
         expect(result).to run_successfully
-        expect(
-          topic.isbf_official_calendar_items.reload.sole
-        ).to have_attributes(
+        expect(topic.isbf_official_calendar_items.reload.sole).to have_attributes(
           title: items.first[:title],
           schedule_kind: "deadline",
           all_day: true,
           starts_at: Time.iso8601(items.first[:starts_at]),
           ends_at: Time.iso8601(items.first[:ends_at]),
-          revision: 1
+          revision: 1,
         )
       end
     end
@@ -365,7 +421,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
             all_day: false,
             location: "  Main hall  ",
             organizer: "  Student office  ",
-            registration_deadline_index: 1
+            registration_deadline_index: 1,
           },
           super().first,
           {
@@ -376,9 +432,9 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
             all_day: false,
             location: "Library",
             organizer: "Library team",
-            registration_deadline_index: 3
+            registration_deadline_index: 3,
           },
-          super().first.merge(title: "Workshop registration")
+          super().first.merge(title: "Workshop registration"),
         ]
       end
 
@@ -391,59 +447,44 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
         expect(first_activity).to have_attributes(
           location: "Main hall",
           organizer: "Student office",
-          registration_deadline_id: first_deadline.id
+          registration_deadline_id: first_deadline.id,
         )
         expect(second_activity).to have_attributes(
           location: "Library",
           organizer: "Library team",
-          registration_deadline_id: second_deadline.id
+          registration_deadline_id: second_deadline.id,
         )
-        expect(
-          result[:after_items].map do |source|
-            source["registration_deadline_id"]
-          end
-        ).to eq([first_deadline.id, nil, second_deadline.id, nil])
+        expect(result[:after_items].map { |source| source["registration_deadline_id"] }).to eq(
+          [first_deadline.id, nil, second_deadline.id, nil],
+        )
       end
     end
 
     context "when publishing legacy activities and independent deadlines" do
-      let(:items) do
-        [super().first.merge(schedule_kind: "event"), super().first]
-      end
+      let(:items) { [super().first.merge(schedule_kind: "event"), super().first] }
 
       it "preserves the independent items without inferring a registration deadline" do
         expect(result).to run_successfully
-        expect(
-          topic.isbf_official_calendar_items.reload.map(
-            &:registration_deadline_id
-          )
-        ).to eq([nil, nil])
+        expect(topic.isbf_official_calendar_items.reload.map(&:registration_deadline_id)).to eq(
+          [nil, nil],
+        )
       end
     end
 
     context "when creating an unsaved official topic" do
-      let(:publishing_topic) do
-        Fabricate.build(:topic, category:, user: acting_user)
-      end
+      let(:publishing_topic) { Fabricate.build(:topic, category:, user: acting_user) }
 
       it "saves its sources together with the topic" do
         expect { result }.not_to change(IsbfCalendar::OfficialItem, :count)
         expect(result).to run_successfully
 
-        expect { publishing_topic.save! }.to change(
-          IsbfCalendar::OfficialItem,
-          :count
-        ).by(1)
-        expect(
-          publishing_topic.isbf_official_calendar_items.sole
-        ).to be_persisted
+        expect { publishing_topic.save! }.to change(IsbfCalendar::OfficialItem, :count).by(1)
+        expect(publishing_topic.isbf_official_calendar_items.sole).to be_persisted
       end
     end
 
     context "when creating an unsaved topic with an activity before its registration deadline" do
-      let(:publishing_topic) do
-        Fabricate.build(:topic, category:, user: acting_user)
-      end
+      let(:publishing_topic) { Fabricate.build(:topic, category:, user: acting_user) }
       let(:items) do
         [
           super().first.merge(
@@ -451,9 +492,9 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
             schedule_kind: "event",
             location: "Main hall",
             organizer: "Student office",
-            registration_deadline_index: 1
+            registration_deadline_index: 1,
           ),
-          super().first
+          super().first,
         ]
       end
 
@@ -461,17 +502,13 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
         expect { result }.not_to change(IsbfCalendar::OfficialItem, :count)
         expect(result).to run_successfully
 
-        expect { publishing_topic.save! }.to change(
-          IsbfCalendar::OfficialItem,
-          :count
-        ).by(2)
-        activity, deadline =
-          publishing_topic.isbf_official_calendar_items.reload.to_a
+        expect { publishing_topic.save! }.to change(IsbfCalendar::OfficialItem, :count).by(2)
+        activity, deadline = publishing_topic.isbf_official_calendar_items.reload.to_a
         expect(activity).to have_attributes(
           topic_id: publishing_topic.id,
           location: "Main hall",
           organizer: "Student office",
-          registration_deadline_id: deadline.id
+          registration_deadline_id: deadline.id,
         )
         expect(deadline.topic_id).to eq(publishing_topic.id)
       end
@@ -481,20 +518,14 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
         publishing_topic.title = nil
 
         expect do
-          expect { publishing_topic.save! }.to raise_error(
-            ActiveRecord::RecordInvalid
-          )
+          expect { publishing_topic.save! }.to raise_error(ActiveRecord::RecordInvalid)
         end.not_to change(IsbfCalendar::OfficialItem, :count)
       end
     end
 
     context "when reordering existing time items" do
-      fab!(:first_item) do
-        Fabricate(:isbf_calendar_official_item, topic:, position: 0)
-      end
-      fab!(:second_item) do
-        Fabricate(:isbf_calendar_official_item, topic:, position: 1)
-      end
+      fab!(:first_item) { Fabricate(:isbf_calendar_official_item, topic:, position: 0) }
+      fab!(:second_item) { Fabricate(:isbf_calendar_official_item, topic:, position: 1) }
 
       let(:items) do
         [second_item, first_item].map do |item|
@@ -505,48 +536,35 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
       it "preserves source identities and revisions" do
         expect { result }.not_to change(IsbfCalendar::OfficialItem, :count)
         expect(result).to run_successfully
-        expect(
-          topic.isbf_official_calendar_items.reload.pluck(:id, :revision)
-        ).to eq([[second_item.id, 1], [first_item.id, 1]])
+        expect(topic.isbf_official_calendar_items.reload.pluck(:id, :revision)).to eq(
+          [[second_item.id, 1], [first_item.id, 1]],
+        )
       end
     end
 
     context "when changing an existing time item" do
       fab!(:item) { Fabricate(:isbf_calendar_official_item, topic:) }
-      fab!(:entry) do
-        Fabricate(
-          :isbf_calendar_official_entry,
-          source_item: item,
-          note: "My note"
-        )
-      end
+      fab!(:entry) { Fabricate(:isbf_calendar_official_entry, source_item: item, note: "My note") }
 
       let(:items) do
         [
           item.snapshot.as_json.merge(
             id: item.id,
             revision: item.revision,
-            title: "Updated briefing"
-          )
+            title: "Updated briefing",
+          ),
         ]
       end
 
       it "keeps the stable source and the accepted personal snapshot" do
-        original_snapshot =
-          entry.attributes.slice(*IsbfCalendar::OfficialItem::SNAPSHOT_FIELDS)
+        original_snapshot = entry.attributes.slice(*IsbfCalendar::OfficialItem::SNAPSHOT_FIELDS)
 
         expect { result }.not_to change(IsbfCalendar::OfficialItem, :count)
         expect(result).to run_successfully
-        expect(item.reload).to have_attributes(
-          id: item.id,
-          revision: 2,
-          title: "Updated briefing"
+        expect(item.reload).to have_attributes(id: item.id, revision: 2, title: "Updated briefing")
+        expect(entry.reload.attributes.slice(*IsbfCalendar::OfficialItem::SNAPSHOT_FIELDS)).to eq(
+          original_snapshot,
         )
-        expect(
-          entry.reload.attributes.slice(
-            *IsbfCalendar::OfficialItem::SNAPSHOT_FIELDS
-          )
-        ).to eq(original_snapshot)
         expect(entry).to have_attributes(note: "My note", accepted_revision: 1)
       end
     end
@@ -560,8 +578,8 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
             id: item.id,
             revision: item.revision,
             location: "Main hall",
-            organizer: "Student office"
-          )
+            organizer: "Student office",
+          ),
         ]
       end
 
@@ -571,7 +589,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
             "id" => item.id,
             "location" => item.location,
             "organizer" => item.organizer,
-            "registration_deadline_id" => nil
+            "registration_deadline_id" => nil,
           )
 
         expect_not_enqueued_with(job: :isbf_calendar_notify_change) do
@@ -580,12 +598,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
 
         expect(result[:before_items]).to eq([previous_item])
         expect(result[:after_items]).to eq(
-          [
-            previous_item.merge(
-              "location" => "Main hall",
-              "organizer" => "Student office"
-            )
-          ]
+          [previous_item.merge("location" => "Main hall", "organizer" => "Student office")],
         )
         expect(item.reload.revision).to eq(1)
       end
@@ -599,16 +612,13 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
           topic:,
           location: "Main hall",
           organizer: "Student office",
-          registration_deadline: deadline
+          registration_deadline: deadline,
         )
       end
 
       let(:items) do
         [item, deadline].map do |source|
-          source.snapshot.as_json.merge(
-            id: source.id,
-            revision: source.revision
-          )
+          source.snapshot.as_json.merge(id: source.id, revision: source.revision)
         end
       end
 
@@ -618,7 +628,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
           location: "Main hall",
           organizer: "Student office",
           registration_deadline_id: deadline.id,
-          revision: 1
+          revision: 1,
         )
         expect(deadline.reload).not_to be_cancelled
       end
@@ -627,11 +637,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
     context "when the activity explicitly clears its registration deadline" do
       fab!(:deadline) { Fabricate(:isbf_calendar_official_deadline, topic:) }
       fab!(:item) do
-        Fabricate(
-          :isbf_calendar_official_item,
-          topic:,
-          registration_deadline: deadline
-        )
+        Fabricate(:isbf_calendar_official_item, topic:, registration_deadline: deadline)
       end
 
       let(:items) do
@@ -639,12 +645,9 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
           item.snapshot.as_json.merge(
             id: item.id,
             revision: item.revision,
-            registration_deadline_index: nil
+            registration_deadline_index: nil,
           ),
-          deadline.snapshot.as_json.merge(
-            id: deadline.id,
-            revision: deadline.revision
-          )
+          deadline.snapshot.as_json.merge(id: deadline.id, revision: deadline.revision),
         ]
       end
 
@@ -658,23 +661,14 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
     context "when the request omits an activity's existing registration deadline" do
       fab!(:deadline) { Fabricate(:isbf_calendar_official_deadline, topic:) }
       fab!(:item) do
-        Fabricate(
-          :isbf_calendar_official_item,
-          topic:,
-          registration_deadline: deadline
-        )
+        Fabricate(:isbf_calendar_official_item, topic:, registration_deadline: deadline)
       end
 
-      let(:items) do
-        [item.snapshot.as_json.merge(id: item.id, revision: item.revision)]
-      end
+      let(:items) { [item.snapshot.as_json.merge(id: item.id, revision: item.revision)] }
 
       it "cancels the omitted deadline and clears the active activity's association" do
         expect(result).to run_successfully
-        expect(item.reload).to have_attributes(
-          cancelled: false,
-          registration_deadline_id: nil
-        )
+        expect(item.reload).to have_attributes(cancelled: false, registration_deadline_id: nil)
         expect(deadline.reload).to have_attributes(cancelled: true, revision: 2)
       end
     end
@@ -682,11 +676,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
     context "when an activity and its registration deadline are removed" do
       fab!(:deadline) { Fabricate(:isbf_calendar_official_deadline, topic:) }
       fab!(:item) do
-        Fabricate(
-          :isbf_calendar_official_item,
-          topic:,
-          registration_deadline: deadline
-        )
+        Fabricate(:isbf_calendar_official_item, topic:, registration_deadline: deadline)
       end
 
       let(:items) { [] }
@@ -701,13 +691,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
 
     context "when the publisher removes every time item" do
       fab!(:item) { Fabricate(:isbf_calendar_official_item, topic:) }
-      fab!(:entry) do
-        Fabricate(
-          :isbf_calendar_official_entry,
-          source_item: item,
-          note: "My note"
-        )
-      end
+      fab!(:entry) { Fabricate(:isbf_calendar_official_entry, source_item: item, note: "My note") }
 
       let(:items) { [] }
 
@@ -718,7 +702,7 @@ RSpec.describe IsbfCalendar::PublishOfficialItems do
         expect(entry.reload).to have_attributes(
           source_item_id: item.id,
           note: "My note",
-          accepted_revision: 1
+          accepted_revision: 1,
         )
       end
     end

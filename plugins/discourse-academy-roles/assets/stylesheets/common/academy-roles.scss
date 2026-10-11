@@ -29,3 +29,11 @@
 .academy-roles-enabled #collapsed-info-panel dl > div:has(> dt.trust-level) {
   display: none;
 }
+
+.academy-moderator-permissions__group {
+  align-self: stretch;
+
+  .form-kit__field-toggle {
+    width: 100%;
+  }
+}

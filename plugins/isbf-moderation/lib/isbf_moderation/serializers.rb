@@ -3,70 +3,130 @@
 module IsbfModeration
   module BasicPostProtection
     def cooked
-      return Hold.notice if !scope.is_staff? && Hold.active?(object)
+      if !(
+           scope.is_staff? ||
+             (scope.respond_to?(:academy_can?) && scope.academy_can?(:hidden_content))
+         ) && Hold.active?(object)
+        return Hold.notice
+      end
       super
     end
   end
 
   module PostSerializerProtection
     def raw
-      return nil if !scope.is_staff? && Hold.active?(object)
+      if !(
+           scope.is_staff? ||
+             (scope.respond_to?(:academy_can?) && scope.academy_can?(:hidden_content))
+         ) && Hold.active?(object)
+        return nil
+      end
       super
     end
 
     def excerpt
-      return Hold.notice if !scope.is_staff? && Hold.active?(object)
+      if !(
+           scope.is_staff? ||
+             (scope.respond_to?(:academy_can?) && scope.academy_can?(:hidden_content))
+         ) && Hold.active?(object)
+        return Hold.notice
+      end
       super
     end
 
     def edit_reason
-      return nil if !scope.is_staff? && Hold.active?(object)
+      if !(
+           scope.is_staff? ||
+             (scope.respond_to?(:academy_can?) && scope.academy_can?(:hidden_content))
+         ) && Hold.active?(object)
+        return nil
+      end
       object.edit_reason
     end
   end
 
   module TopicViewSerializerProtection
     def image_url
-      return nil if !scope.is_staff? && Hold.active?(object.topic.first_post)
+      if !(
+           scope.is_staff? ||
+             (scope.respond_to?(:academy_can?) && scope.academy_can?(:hidden_content))
+         ) && Hold.active?(object.topic.first_post)
+        return nil
+      end
       super
     end
 
     def thumbnails
-      return nil if !scope.is_staff? && Hold.active?(object.topic.first_post)
+      if !(
+           scope.is_staff? ||
+             (scope.respond_to?(:academy_can?) && scope.academy_can?(:hidden_content))
+         ) && Hold.active?(object.topic.first_post)
+        return nil
+      end
       super
     end
   end
 
   module TopicSerializerProtection
     def excerpt
-      return Hold.notice if !scope.is_staff? && Hold.active?(object.first_post)
+      if !(
+           scope.is_staff? ||
+             (scope.respond_to?(:academy_can?) && scope.academy_can?(:hidden_content))
+         ) && Hold.active?(object.first_post)
+        return Hold.notice
+      end
       super
     end
 
     def image_url
-      return nil if !scope.is_staff? && Hold.active?(object.first_post)
+      if !(
+           scope.is_staff? ||
+             (scope.respond_to?(:academy_can?) && scope.academy_can?(:hidden_content))
+         ) && Hold.active?(object.first_post)
+        return nil
+      end
       super
     end
 
     def thumbnails
-      return nil if !scope.is_staff? && Hold.active?(object.first_post)
+      if !(
+           scope.is_staff? ||
+             (scope.respond_to?(:academy_can?) && scope.academy_can?(:hidden_content))
+         ) && Hold.active?(object.first_post)
+        return nil
+      end
       super
     end
   end
 
   module ReviewSerializerProtection
     def cooked
-      return Hold.notice if !scope.is_staff? && Hold.active?(object.post)
+      if !(
+           scope.is_staff? ||
+             (scope.respond_to?(:academy_can?) && scope.academy_can?(:hidden_content))
+         ) && Hold.active?(object.post)
+        return Hold.notice
+      end
       super
     end
 
     def raw
-      return nil if !scope.is_staff? && Hold.active?(object.post)
+      if !(
+           scope.is_staff? ||
+             (scope.respond_to?(:academy_can?) && scope.academy_can?(:hidden_content))
+         ) && Hold.active?(object.post)
+        return nil
+      end
       super
     end
 
     def reviewable_notes
-      return [] if !scope.is_staff? && Hold.active?(object.post)
+      if !(
+           scope.is_staff? ||
+             (scope.respond_to?(:academy_can?) && scope.academy_can?(:hidden_content))
+         ) && Hold.active?(object.post)
+        return []
+      end
       object.reviewable_notes
     end
   end
@@ -95,8 +155,9 @@ module IsbfModeration
     private
 
     def isbf_restricted_score?
-      !scope.is_staff? && object.reviewable.is_a?(ReviewableFlaggedPost) &&
-        Hold.active?(object.reviewable.post)
+      !(
+        scope.is_staff? || (scope.respond_to?(:academy_can?) && scope.academy_can?(:hidden_content))
+      ) && object.reviewable.is_a?(ReviewableFlaggedPost) && Hold.active?(object.reviewable.post)
     end
 
     def watched_words_found
@@ -125,7 +186,10 @@ module IsbfModeration
     private
 
     def isbf_held_excerpt?
-      return false if scope.is_staff?
+      if scope.is_staff? ||
+           (scope.respond_to?(:academy_can?) && scope.academy_can?(:hidden_content))
+        return false
+      end
       return object.isbf_severe_report_held? if object.respond_to?(:isbf_severe_report_held?)
       return @isbf_held_excerpt if defined?(@isbf_held_excerpt)
       post_id = object.respond_to?(:cooked_post_id) ? object.cooked_post_id : object.post_id
@@ -136,7 +200,13 @@ module IsbfModeration
   module ActivityHoldPreloader
     def stream(options = nil)
       records = super
-      return records if options&.dig(:guardian)&.is_staff? || records.empty?
+      if records.empty? || options&.dig(:guardian)&.is_staff? ||
+           (
+             options&.dig(:guardian).respond_to?(:academy_can?) &&
+               options[:guardian].academy_can?(:hidden_content)
+           )
+        return records
+      end
 
       post_ids =
         records.filter_map { |record| record.cooked_post_id if record.respond_to?(:cooked_post_id) }

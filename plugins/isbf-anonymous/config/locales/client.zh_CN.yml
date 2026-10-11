@@ -10,6 +10,6 @@ zh_CN:
         manage_user: "管理此用户"
         retry: "重试"
         loaded: "真实作者：%{username}"
-        forbidden: "仅管理员可以查询真实作者。"
+        forbidden: "你没有查询真实作者的权限。"
         unavailable: "作者信息已不可用。"
         failed: "查询作者失败，请重试。"

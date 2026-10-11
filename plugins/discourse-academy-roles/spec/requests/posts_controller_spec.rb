@@ -16,9 +16,7 @@ RSpec.describe PostsController do
     SiteSetting.personal_message_enabled_groups = "1|2|10"
     SiteSetting.auto_silence_fast_typers_on_first_post = false
     official_group.add(verified_member)
-    official_category.set_permissions(
-      { everyone: :create_post }.merge(official_group => :full)
-    )
+    official_category.set_permissions({ everyone: :create_post }.merge(official_group => :full))
     ordinary_category.set_permissions(everyone: :full)
   end
 
@@ -33,14 +31,14 @@ RSpec.describe PostsController do
            params: {
              title: "First ordinary discussion",
              raw: "A first message for the academy community",
-             category: ordinary_category.id
+             category: ordinary_category.id,
            }
       expect(response.status).to eq(200)
 
       post "/post_actions.json",
            params: {
              id: reported_post.id,
-             post_action_type_id: PostActionType.types[:inappropriate]
+             post_action_type_id: PostActionType.types[:inappropriate],
            }
       expect(response.status).to eq(200)
 
@@ -49,7 +47,7 @@ RSpec.describe PostsController do
              title: "A private question about the academy",
              raw: "Could you help with this private question?",
              archetype: Archetype.private_message,
-             target_recipients: admin.username
+             target_recipients: admin.username,
            }
       expect(response.status).to eq(200)
     end
@@ -57,22 +55,13 @@ RSpec.describe PostsController do
     it "does not cap a new member's replies on the first day or per topic" do
       SiteSetting.max_replies_in_first_day = 1
       SiteSetting.newuser_max_replies_per_topic = 1
-      topic =
-        Fabricate(:topic_with_op, user: admin, category: ordinary_category)
+      topic = Fabricate(:topic_with_op, user: admin, category: ordinary_category)
       sign_in(member)
 
-      post "/posts.json",
-           params: {
-             topic_id: topic.id,
-             raw: "My first reply today"
-           }
+      post "/posts.json", params: { topic_id: topic.id, raw: "My first reply today" }
       expect(response.status).to eq(200), response.body
 
-      post "/posts.json",
-           params: {
-             topic_id: topic.id,
-             raw: "My second reply today"
-           }
+      post "/posts.json", params: { topic_id: topic.id, raw: "My second reply today" }
       expect(response.status).to eq(200), response.body
     end
 
@@ -84,7 +73,7 @@ RSpec.describe PostsController do
            params: {
              title: title,
              raw: "A new announcement for members",
-             category: official_category.id
+             category: official_category.id,
            }
 
       expect(response.status).to be >= 400
@@ -96,48 +85,37 @@ RSpec.describe PostsController do
              title: title,
              raw: "A new announcement for members",
              category: official_category.id,
-             academy_official: true
+             academy_official: true,
+             isbf_official_campuses: '["zhuhai"]',
+             isbf_official_types: '["academic"]',
            }
 
       expect(response.status).to eq(200), response.body
       topic = Topic.find_by!(title: title)
       first_post = topic.first_post
-      expect(
-        first_post.custom_fields[DiscourseAcademyRoles::OFFICIAL_POST_FIELD]
-      ).to eq(true)
+      expect(first_post.custom_fields[DiscourseAcademyRoles::OFFICIAL_POST_FIELD]).to eq(true)
 
       get "/t/#{topic.id}.json"
-      expect(
-        response.parsed_body.dig(
-          "post_stream",
-          "posts",
-          0,
-          "academy_official_post"
-        )
-      ).to eq(true)
+      expect(response.parsed_body.dig("post_stream", "posts", 0, "academy_official_post")).to eq(
+        true,
+      )
     end
 
     it "allows ordinary replies in the official category and rejects official identity elsewhere" do
       topic = Fabricate(:topic, user: admin, category: official_category)
       sign_in(member)
 
-      post "/posts.json",
-           params: {
-             topic_id: topic.id,
-             raw: "A question about the announcement"
-           }
+      post "/posts.json", params: { topic_id: topic.id, raw: "A question about the announcement" }
 
       expect(response.status).to eq(200)
-      expect(
-        Post.last.custom_fields[DiscourseAcademyRoles::OFFICIAL_POST_FIELD]
-      ).to be_nil
+      expect(Post.last.custom_fields[DiscourseAcademyRoles::OFFICIAL_POST_FIELD]).to be_nil
 
       post "/posts.json",
            params: {
              title: "Ordinary discussion",
              raw: "An ordinary discussion for members",
              category: ordinary_category.id,
-             academy_official: true
+             academy_official: true,
            }
 
       expect(response.status).to be >= 400
@@ -152,13 +130,11 @@ RSpec.describe PostsController do
            params: {
              topic_id: topic.id,
              raw: "An official answer from the academy",
-             academy_official: true
+             academy_official: true,
            }
 
       expect(response.status).to eq(200)
-      expect(
-        Post.last.custom_fields[DiscourseAcademyRoles::OFFICIAL_POST_FIELD]
-      ).to eq(true)
+      expect(Post.last.custom_fields[DiscourseAcademyRoles::OFFICIAL_POST_FIELD]).to eq(true)
     end
   end
 end

@@ -1,0 +1,37 @@
+en:
+  js:
+    academy_roles:
+      moderator_permissions:
+        title: "Moderator permissions"
+        description: "These switches apply to every moderator who is not a developer. Save your changes to apply them together. All permissions start disabled. Developers retain full access."
+        fixed: "Invitations, student numbers and permission settings are always restricted to developers."
+        saved: "Moderator permissions saved"
+        save: "Save permissions"
+        groups:
+          access: "Access"
+          content: "Content"
+          users: "Accounts"
+          structure: "Categories and groups"
+          business: "Campus features"
+          sensitive: "Sensitive information"
+        capabilities:
+          internal_boards: "Access internal boards"
+          user_admin: "View user administration"
+          hidden_content: "View hidden and deleted content"
+          review: "Review reports and queued content"
+          edit_others: "Edit other members’ content"
+          delete_others: "Delete and restore other members’ content"
+          manage_topics: "Manage topics"
+          edit_users: "Edit ordinary accounts"
+          suspend_users: "Suspend and unsuspend ordinary accounts"
+          silence_users: "Silence and unsilence ordinary accounts"
+          delete_users: "Delete ordinary accounts"
+          anonymize_users: "Anonymize ordinary accounts"
+          manage_categories: "Manage categories"
+          manage_groups: "Manage groups and certification membership"
+          publish_activities: "Publish campus activities"
+          publish_official: "Publish with the official identity"
+          review_resources: "Review learning resources"
+          manage_resources: "Manage learning resources"
+          view_emails: "View other members’ email addresses"
+          trace_anonymous: "Look up anonymous authors"

@@ -3,11 +3,26 @@ import { service } from "@ember/service";
 import { settings, themePrefix } from "virtual:theme";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
+import {
+  feedbackCategory,
+  feedbackComposeHref,
+  isFeedbackPath,
+} from "../lib/feedback-category";
 import ISBFV2AccountMenu from "./isbf-v2-account-menu";
+import ISBFV2Brand from "./isbf-v2-brand";
+import ISBFV2MoreMenu from "./isbf-v2-more-menu";
 
 export default class ISBFV2SideNav extends Component {
   @service currentUser;
   @service router;
+  @service site;
+
+  get composeHref() {
+    const category = feedbackCategory(this.site, settings.feedback_category_id);
+    return isFeedbackPath(this.router.currentURL, category)
+      ? feedbackComposeHref(category)
+      : "/new-topic";
+  }
 
   get bookmarksHref() {
     return this.currentUser
@@ -28,6 +43,14 @@ export default class ISBFV2SideNav extends Component {
   get homeActive() {
     const path = this.router.currentURL ?? "";
     const officialPath = settings.official_path.split("/l/")[0];
+    if (
+      isFeedbackPath(
+        path,
+        feedbackCategory(this.site, settings.feedback_category_id)
+      )
+    ) {
+      return false;
+    }
 
     return (
       path === "/" ||
@@ -38,6 +61,14 @@ export default class ISBFV2SideNav extends Component {
   }
 
   get exploreActive() {
+    if (
+      isFeedbackPath(
+        this.router.currentURL,
+        feedbackCategory(this.site, settings.feedback_category_id)
+      )
+    ) {
+      return false;
+    }
     return /^\/(search|categories|c|tag|tags)(\/|\?|$)/.test(
       this.router.currentURL ?? ""
     );
@@ -52,7 +83,9 @@ export default class ISBFV2SideNav extends Component {
   }
 
   get workbenchActive() {
-    return (this.router.currentURL ?? "").startsWith("/isbf/workbench");
+    return /^\/isbf\/(workbench|learning|alumni)(\/|\?|$)/.test(
+      this.router.currentURL ?? ""
+    );
   }
 
   get bookmarksActive() {
@@ -71,14 +104,7 @@ export default class ISBFV2SideNav extends Component {
       aria-label={{i18n (themePrefix "isbf_v2.navigation_label")}}
       class="isbf-v2-side"
     >
-      <a
-        aria-label={{settings.brand_name}}
-        class="isbf-v2-brand"
-        href="/latest"
-      >
-        <span aria-hidden="true" class="isbf-v2-brand__mark">I</span>
-        <span class="isbf-v2-brand__name">{{settings.brand_name}}</span>
-      </a>
+      <ISBFV2Brand />
 
       <nav class="isbf-v2-side__links">
         <a
@@ -128,13 +154,14 @@ export default class ISBFV2SideNav extends Component {
         >{{dIcon "user"}}<span>{{i18n
               (themePrefix "isbf_v2.profile")
             }}</span></a>
+        <ISBFV2MoreMenu />
       </nav>
 
-      <a class="isbf-v2-side__compose" href="/new-topic">{{i18n
+      <a class="isbf-v2-side__compose" href={{this.composeHref}}>{{i18n
           (themePrefix "isbf_v2.compose")
         }}</a>
 
-      {{#if this.currentUser.staff}}
+      {{#if this.currentUser.can_review}}
         <a
           aria-label={{i18n (themePrefix "isbf_v2.review")}}
           class="isbf-v2-side__review"

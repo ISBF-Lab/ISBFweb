@@ -311,7 +311,11 @@ class ReviewableFlaggedPost < Reviewable
       notify_poster(performed_by)
       post.acting_user = performed_by
       post.unhide!
-      if UserSilencer.was_silenced_for?(post)
+      reviewer = performed_by.guardian
+      can_unsilence =
+        reviewer.can_unsilence_user?(post.user) ||
+          (!performed_by[:moderator] && reviewer.is_category_group_moderator?(category))
+      if UserSilencer.was_silenced_for?(post) && can_unsilence
         UserSilencer.unsilence(post.user, performed_by, reviewable_id: id)
       end
     end

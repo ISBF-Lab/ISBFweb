@@ -3,12 +3,18 @@
 module IsbfModeration
   module GuardianProtection
     def can_see_post?(post)
-      return false if !is_staff? && Hold.active?(post)
+      if !(is_staff? || (respond_to?(:academy_can?) && academy_can?(:hidden_content))) &&
+           Hold.active?(post)
+        return false
+      end
       super
     end
 
     def can_see_hidden_post?(post)
-      return false if !is_staff? && Hold.active?(post)
+      if !(is_staff? || (respond_to?(:academy_can?) && academy_can?(:hidden_content))) &&
+           Hold.active?(post)
+        return false
+      end
       super
     end
 
@@ -19,7 +25,7 @@ module IsbfModeration
 
     def filter_hidden_posts(records, **options)
       filtered = super
-      return filtered if is_staff?
+      return filtered if is_staff? || (respond_to?(:academy_can?) && academy_can?(:hidden_content))
       filtered.where(<<~SQL)
         NOT EXISTS (
           SELECT 1 FROM post_custom_fields isbf_hold

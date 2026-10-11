@@ -53,13 +53,13 @@ after_initialize do
     app/serializers/discourse_academy_roles/student_registration_serializer
     app/serializers/discourse_academy_roles/student_invite_batch_serializer
     app/controllers/discourse_academy_roles/admin/student_invites_controller
+    app/controllers/discourse_academy_roles/admin/moderator_permissions_controller
   ].each { |path| require_relative path }
 
   DiscourseAcademyRoles::Engine.routes.draw do
     namespace :admin do
-      resources :student_invites,
-                path: "student-invites",
-                only: %i[index create destroy] do
+      get "moderator-permissions" => "moderator_permissions#index"
+      resources :student_invites, path: "student-invites", only: %i[index create destroy] do
         post :reissue, on: :member
         post :bulk, on: :collection
       end
@@ -67,14 +67,13 @@ after_initialize do
   end
 
   Discourse::Application.routes.append do
-    get "/admin/plugins/discourse-academy-roles/student-invites" =>
-          "admin/plugins#index",
+    get "/admin/plugins/discourse-academy-roles/moderator-permissions" => "admin/plugins#index",
         :constraints => AdminConstraint.new
-    get "/admin/plugins/discourse-academy-roles/student-invites/new" =>
-          "admin/plugins#index",
+    get "/admin/plugins/discourse-academy-roles/student-invites" => "admin/plugins#index",
         :constraints => AdminConstraint.new
-    get "/admin/plugins/discourse-academy-roles/student-invites/bulk" =>
-          "admin/plugins#index",
+    get "/admin/plugins/discourse-academy-roles/student-invites/new" => "admin/plugins#index",
+        :constraints => AdminConstraint.new
+    get "/admin/plugins/discourse-academy-roles/student-invites/bulk" => "admin/plugins#index",
         :constraints => AdminConstraint.new
     mount ::DiscourseAcademyRoles::Engine, at: "/academy-roles"
   end
@@ -85,35 +84,31 @@ after_initialize do
   require_relative "lib/discourse_academy_roles/daily_limits_extension"
   require_relative "lib/discourse_academy_roles/activity_level"
   require_relative "lib/discourse_academy_roles/student_invite_extension"
+  require_relative "lib/discourse_academy_roles/moderator_permissions"
+  require_relative "lib/discourse_academy_roles/moderator_user"
+  require_relative "lib/discourse_academy_roles/moderator_categories"
+  require_relative "lib/discourse_academy_roles/moderator_groups"
+  require_relative "lib/discourse_academy_roles/moderator_topics"
+  require_relative "lib/discourse_academy_roles/moderator_guardian"
+  require_relative "lib/discourse_academy_roles/moderator_reviews"
+  require_relative "lib/discourse_academy_roles/moderator_controllers"
+  require_relative "lib/discourse_academy_roles/moderator_post_destroyer"
 
-  register_post_custom_field_type(
-    DiscourseAcademyRoles::OFFICIAL_POST_FIELD,
-    :boolean
-  )
+  register_post_custom_field_type(DiscourseAcademyRoles::OFFICIAL_POST_FIELD, :boolean)
   TopicView.default_post_custom_fields << DiscourseAcademyRoles::OFFICIAL_POST_FIELD
-  register_user_custom_field_type(
-    DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD,
-    :integer
-  )
-  register_user_custom_field_type(
-    DiscourseAcademyRoles::LV3_SINCE_FIELD,
-    :string,
-    max_length: 40
-  )
+  register_user_custom_field_type(DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD, :integer)
+  register_user_custom_field_type(DiscourseAcademyRoles::LV3_SINCE_FIELD, :string, max_length: 40)
   register_user_custom_field_type(
     DiscourseAcademyRoles::LV3_CHECKED_AT_FIELD,
     :string,
-    max_length: 40
+    max_length: 40,
   )
   add_permitted_post_create_param :academy_official, :string
   NewPostManager.add_plugin_payload_attribute(:academy_official)
 
   Invite.validate do
     if SiteSetting.academy_roles_enabled? && max_redemptions_allowed != 1
-      errors.add(
-        :max_redemptions_allowed,
-        I18n.t("academy_roles.single_use_invite")
-      )
+      errors.add(:max_redemptions_allowed, I18n.t("academy_roles.single_use_invite"))
     end
     if SiteSetting.academy_roles_enabled? && (email.present? || domain.present?)
       errors.add(:email, I18n.t("academy_roles.unbound_invite"))
@@ -121,10 +116,7 @@ after_initialize do
   end
 
   Topic.validate do
-    unless SiteSetting.academy_roles_enabled? && persisted? &&
-             will_save_change_to_category_id?
-      next
-    end
+    next unless SiteSetting.academy_roles_enabled? && persisted? && will_save_change_to_category_id?
 
     unless DiscourseAcademyRoles.valid_topic_category?(self, category_id)
       errors.add(:category_id, I18n.t("academy_roles.official_category_move"))
@@ -133,18 +125,34 @@ after_initialize do
 
   reloadable_patch do
     Guardian.prepend(DiscourseAcademyRoles::GuardianExtension)
+    User.prepend(DiscourseAcademyRoles::ModeratorUser)
+    Guardian.prepend(DiscourseAcademyRoles::ModeratorGuardian)
+    Category.singleton_class.prepend(DiscourseAcademyRoles::ModeratorCategories)
+    Group.singleton_class.prepend(DiscourseAcademyRoles::ModeratorGroups)
+    Topic.singleton_class.prepend(DiscourseAcademyRoles::ModeratorTopics)
+    Reviewable.singleton_class.prepend(DiscourseAcademyRoles::ModeratorReviewScope)
+    Reviewable.prepend(DiscourseAcademyRoles::ModeratorReview)
+    Reviewable::Actions.prepend(DiscourseAcademyRoles::ModeratorReviewActions)
+    ReviewableActionBuilder.prepend(DiscourseAcademyRoles::ModeratorReviewActionBuilder)
+    ReviewableFlaggedPost.prepend(DiscourseAcademyRoles::ModeratorFlaggedReview)
+    PostDestroyer.prepend(DiscourseAcademyRoles::ModeratorPostDestroyer)
+    ApplicationController.prepend(DiscourseAcademyRoles::ModeratorControllers)
+    Admin::UsersController.prepend(DiscourseAcademyRoles::ModeratorUserController)
+    Admin::UsersController.before_action :academy_check_ordinary_target
+    UsersController.prepend(DiscourseAcademyRoles::ModeratorProfileController)
+    UsersController.before_action :academy_check_credentials_target,
+                                  only: %i[remove_password revoke_account revoke_auth_token]
+    CurrentUserSerializer.prepend(DiscourseAcademyRoles::ModeratorCurrentUserSerializer)
+    StaffConstraint.prepend(DiscourseAcademyRoles::ModeratorStaffConstraint)
+    AdminConstraint.prepend(DiscourseAcademyRoles::ModeratorAdminConstraint)
     Topic.prepend(DiscourseAcademyRoles::TopicCategoryExtension)
     Topic.prepend(DiscourseAcademyRoles::TopicDailyLimitsExtension)
     Post.prepend(DiscourseAcademyRoles::PostDailyLimitsExtension)
     PostAction.prepend(DiscourseAcademyRoles::PostActionDailyLimitsExtension)
     User.prepend(DiscourseAcademyRoles::NewMemberPostingExtension)
     Invite.prepend(DiscourseAcademyRoles::StudentInviteExtension)
-    InviteRedeemer.prepend(
-      DiscourseAcademyRoles::StudentInviteRedeemerExtension
-    )
-    InvitesController.prepend(
-      DiscourseAcademyRoles::StudentInvitesControllerExtension
-    )
+    InviteRedeemer.prepend(DiscourseAcademyRoles::StudentInviteRedeemerExtension)
+    InvitesController.prepend(DiscourseAcademyRoles::StudentInvitesControllerExtension)
     UserMerger.prepend(DiscourseAcademyRoles::StudentUserMergerExtension)
   end
 
@@ -152,34 +160,26 @@ after_initialize do
     if SiteSetting.academy_roles_enabled?
       render_json_error(
         I18n.t("academy_roles.student_invites.use_student_invite"),
-        status: :bad_request
+        status: :bad_request,
       )
     end
   end
 
   on(:before_create_post) do |post, options|
-    if SiteSetting.academy_roles_enabled?
-      DiscourseAcademyRoles.validate_post(post, options)
-    end
+    DiscourseAcademyRoles.validate_post(post, options) if SiteSetting.academy_roles_enabled?
   end
 
   on(:post_created) do |post, options|
-    if SiteSetting.academy_roles_enabled?
-      DiscourseAcademyRoles.mark_official_post(post, options)
-    end
+    DiscourseAcademyRoles.mark_official_post(post, options) if SiteSetting.academy_roles_enabled?
   end
 
   register_modifier(:posts_controller_create_user) do |user, options|
-    if SiteSetting.academy_roles_enabled?
-      DiscourseAcademyRoles.ensure_valid_post!(user, options)
-    end
+    DiscourseAcademyRoles.ensure_valid_post!(user, options) if SiteSetting.academy_roles_enabled?
     user
   end
 
   on(:user_created) do |user|
-    if SiteSetting.academy_roles_enabled?
-      DiscourseAcademyRoles.lock_member_trust_level(user)
-    end
+    DiscourseAcademyRoles.lock_member_trust_level(user) if SiteSetting.academy_roles_enabled?
   end
 
   add_to_serializer(:post, :academy_official_post) do
@@ -197,12 +197,8 @@ after_initialize do
   add_to_serializer(
     :admin_detailed_user,
     :academy_student_number,
-    include_condition: -> { scope&.is_admin? }
-  ) do
-    DiscourseAcademyRoles::StudentRegistration.find_by(
-      user_id: object.id
-    )&.student_number
-  end
+    include_condition: -> { scope&.is_admin? },
+  ) { DiscourseAcademyRoles::StudentRegistration.find_by(user_id: object.id)&.student_number }
 
   add_to_serializer(:user, :academy_official_member) do
     DiscourseAcademyRoles.official_member?(object)
@@ -210,5 +206,17 @@ after_initialize do
 
   add_to_serializer(:current_user, :academy_official_member) do
     DiscourseAcademyRoles.official_member?(object)
+  end
+
+  add_to_serializer(:current_user, :academy_moderator_role) { object[:moderator] }
+
+  add_to_serializer(:current_user, :academy_moderator_permissions) do
+    DiscourseAcademyRoles::ModeratorPermissions.for(object)
+  end
+
+  on(:site_setting_changed) do |name, _previous, _value|
+    if DiscourseAcademyRoles::ModeratorPermissions::SETTINGS.value?(name.to_sym)
+      Discourse.request_refresh!
+    end
   end
 end

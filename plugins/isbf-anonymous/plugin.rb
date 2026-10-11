@@ -44,7 +44,10 @@ after_initialize do
 
   add_to_serializer :reviewable_queued_post,
                     IsbfAnonymous::POST_FIELD.to_sym,
-                    include_condition: -> { scope&.is_admin? } do
+                    include_condition: -> do
+                      scope&.is_admin? ||
+                        (scope.respond_to?(:academy_can?) && scope.academy_can?(:trace_anonymous))
+                    end do
     IsbfAnonymous.requested?(object.payload) == true
   end
 

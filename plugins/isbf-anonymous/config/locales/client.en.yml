@@ -10,6 +10,6 @@ en:
         manage_user: "Manage this user"
         retry: "Try again"
         loaded: "Real author: %{username}"
-        forbidden: "Only administrators can view the real author."
+        forbidden: "You do not have permission to view the real author."
         unavailable: "The author information is no longer available."
         failed: "Unable to look up the author. Please try again."

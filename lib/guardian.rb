@@ -389,7 +389,7 @@ class Guardian
   alias can_deactivate? can_suspend?
 
   def can_unsuspend?(user)
-    user && is_staff? && (!user.staff? || is_admin?)
+    user && is_staff? && (!(user.admin || user.moderator) || is_admin?)
   end
 
   def can_revoke_admin?(admin)
@@ -401,11 +401,11 @@ class Guardian
   end
 
   def can_revoke_moderation?(moderator)
-    can_administer?(moderator) && moderator.moderator?
+    can_administer?(moderator) && moderator.moderator
   end
 
   def can_grant_moderation?(user)
-    can_administer?(user) && !user.moderator?
+    can_administer?(user) && !user.moderator
   end
 
   def can_grant_title?(user, title = nil)
@@ -532,7 +532,7 @@ class Guardian
       # Check group messageable level
       (from_system || target_is_user || group_is_messageable || notify_moderators) &&
       # Silenced users can only send PM to staff
-      (!is_silenced? || target.staff?)
+      (!is_silenced? || (target_is_user ? target.admin || target.moderator : target.staff?))
   end
 
   def can_send_private_messages_to_email?
@@ -578,7 +578,7 @@ class Guardian
   end
 
   def can_mute_user?(target_user)
-    can_mute_users? && @user.id != target_user.id && !target_user.staff?
+    can_mute_users? && @user.id != target_user.id && !(target_user.admin || target_user.moderator)
   end
 
   def can_mute_users?
@@ -587,7 +587,7 @@ class Guardian
   end
 
   def can_ignore_user?(target_user)
-    can_ignore_users? && @user.id != target_user.id && !target_user.staff?
+    can_ignore_users? && @user.id != target_user.id && !(target_user.admin || target_user.moderator)
   end
 
   def can_ignore_users?

@@ -57,11 +57,11 @@ module UserGuardian
   end
 
   def can_silence_user?(user)
-    user && is_staff? && not(user.staff?)
+    user && is_staff? && !(user.admin || user.moderator)
   end
 
   def can_unsilence_user?(user)
-    user && is_staff? && (!user.staff? || is_admin?)
+    user && is_staff? && (!(user.admin || user.moderator) || is_admin?)
   end
 
   def can_delete_user?(user)
@@ -74,7 +74,7 @@ module UserGuardian
     end
 
     return false unless is_staff?
-    return false if user.moderator? && !is_admin?
+    return false if user.moderator && !is_admin?
     return true if user.first_post_created_at.nil?
     return true unless user.has_more_posts_than?(User::MAX_STAFF_DELETE_POST_COUNT)
 
@@ -82,11 +82,12 @@ module UserGuardian
   end
 
   def can_anonymize_user?(user)
-    is_staff? && !user.nil? && !user.staff? && !user.email&.ends_with?(UserAnonymizer::EMAIL_SUFFIX)
+    is_staff? && !user.nil? && !(user.admin || user.moderator) &&
+      !user.email&.ends_with?(UserAnonymizer::EMAIL_SUFFIX)
   end
 
   def can_merge_user?(user)
-    is_admin? && !user.nil? && !user.staff?
+    is_admin? && !user.nil? && !(user.admin || user.moderator)
   end
 
   def can_merge_users?(source_user, target_user)
@@ -169,7 +170,7 @@ module UserGuardian
 
     profile_hidden = SiteSetting.allow_users_to_hide_profile && user.user_option&.hide_profile?
 
-    return true if user.staff? && !profile_hidden
+    return true if (user.admin || user.moderator) && !profile_hidden
 
     if SiteSetting.hide_new_user_profiles && !SiteSetting.invite_only &&
          !SiteSetting.must_approve_users

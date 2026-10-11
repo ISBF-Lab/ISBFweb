@@ -1,0 +1,14 @@
+{
+  "isbf-learning": [
+    "app/models/reviewable_isbf_learning_course.rb",
+    "lib/isbf_learning.rb",
+    "lib/isbf_learning/admin_review.rb",
+    "lib/isbf_learning/controllers.rb",
+    "lib/isbf_learning/courses.rb",
+    "plugin.rb"
+  ],
+  "isbf-official": [
+    "lib/isbf_official.rb",
+    "spec/isbf_official_spec.rb"
+  ]
+}
