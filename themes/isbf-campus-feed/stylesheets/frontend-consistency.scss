@@ -683,6 +683,12 @@
   }
 }
 
+.isbf-frontend.is-frontend-messages
+  .new-user-content-wrapper
+  .user-navigation-secondary {
+  @include frontend-controls;
+}
+
 .isbf-frontend.is-frontend-preferences .user-preferences {
   @include frontend-form-groups;
 
