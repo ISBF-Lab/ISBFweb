@@ -702,7 +702,11 @@
   }
 
   @media (width >= 601px) {
-    table-layout: fixed;
+    table-layout: auto;
+
+    .main-link {
+      inline-size: 100%;
+    }
 
     .posters {
       inline-size: calc(42px + 2 * var(--isbf-v2-space-4));
