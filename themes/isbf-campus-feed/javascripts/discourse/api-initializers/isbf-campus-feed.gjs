@@ -1,14 +1,18 @@
 import { scheduleOnce } from "@ember/runloop";
+import { service } from "@ember/service";
 import { themePrefix } from "virtual:theme";
 import { apiInitializer } from "discourse/lib/api";
 import Composer from "discourse/models/composer";
+import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
 import { i18n } from "discourse-i18n";
+import ISBFActivityPreview from "../components/isbf-activity-preview";
 import ISBFV2ComposerCancel from "../components/isbf-v2-composer-cancel";
 import ISBFV2ComposerOptions from "../components/isbf-v2-composer-options";
 import ISBFV2ComposerTitle from "../components/isbf-v2-composer-title";
 import ISBFV2Shell from "../components/isbf-v2-shell";
 import { canPublishAnonymously } from "../lib/anonymous-post-scope";
 import { prepareOptionalTopicTitle } from "../lib/optional-topic-title";
+import { isActivityPreview } from "../lib/post-preview";
 import { isQuickPost } from "../lib/quick-post-scope";
 
 function focusComposer() {
@@ -24,6 +28,24 @@ export default apiInitializer((api) => {
     pluginId: "isbf-ui-profile-expanded",
     forceExpand: true,
   });
+
+  api.modifyClass(
+    "component:post-list/item",
+    (Superclass) =>
+      class ISBFActivityPostListItem extends Superclass {
+        @service router;
+
+        get itemClasses() {
+          return dConcatClass(
+            super.itemClasses,
+            this.args.additionalItemClasses === "user-stream-item" &&
+              isActivityPreview(this.args.post, this.router.currentURL) &&
+              "isbf-activity-item"
+          );
+        }
+      }
+  );
+  api.renderInOutlet("user-stream-item-above", ISBFActivityPreview);
 
   Composer.serializeOnCreate(
     "isbf_repost_source_topic_id",

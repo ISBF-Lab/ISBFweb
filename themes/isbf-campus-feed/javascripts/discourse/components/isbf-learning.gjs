@@ -12,6 +12,7 @@ import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import {
   learningConfig,
+  learningEditableResource,
   learningResourceQuery,
 } from "../lib/learning-resources";
 import ISBFLearningCourseDialog from "./isbf-learning-course-dialog";
@@ -259,6 +260,31 @@ export default class ISBFLearning extends Component {
     this.sharePending = false;
     this.shareContext = {
       course: this.selectedCourse,
+      selectedCourseId: this.selectedCourseId,
+      query: this.query.trim(),
+      coursesRequest: this.#coursesRequest,
+    };
+  }
+
+  @action
+  editResource(resource) {
+    if (
+      this.isDestroying ||
+      !this.currentUser?.admin ||
+      this.config?.resource_admin_management !== true ||
+      this.shareContext ||
+      resource?.can_delete !== true ||
+      !learningEditableResource(resource) ||
+      !resource.course?.id
+    ) {
+      return;
+    }
+    this.#shareTrigger = document.activeElement;
+    this.sharePending = false;
+    this.shareContext = {
+      course: resource.course,
+      resource,
+      selectedCourseId: this.selectedCourseId,
       query: this.query.trim(),
       coursesRequest: this.#coursesRequest,
     };
@@ -282,7 +308,8 @@ export default class ISBFLearning extends Component {
     this.sharePending = response.pending === true;
     if (
       !this.sharePending &&
-      context.course.id === this.selectedCourseId &&
+      (context.selectedCourseId ?? context.course.id) ===
+        this.selectedCourseId &&
       context.query === this.query.trim() &&
       context.coursesRequest === this.#coursesRequest
     ) {
@@ -383,6 +410,7 @@ export default class ISBFLearning extends Component {
             @course={{this.shareContext.course}}
             @onClose={{this.closeShareDialog}}
             @onSubmitted={{this.resourceSubmitted}}
+            @resource={{this.shareContext.resource}}
           />{{/if}}
         {{#if this.showCourseDialog}}<ISBFLearningCourseDialog
             @grade={{this.grade}}
@@ -479,6 +507,7 @@ export default class ISBFLearning extends Component {
             {{#each this.resources key="id" as |resource|}}<ISBFLearningResource
                 @grades={{this.config.grades}}
                 @onDeleted={{this.resourceDeleted}}
+                @onEdit={{this.editResource}}
                 @resource={{resource}}
                 @searching={{this.searching}}
               />{{/each}}

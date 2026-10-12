@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { fn } from "@ember/helper";
+import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { themePrefix } from "virtual:theme";
@@ -9,7 +10,13 @@ import { ajax } from "discourse/lib/ajax";
 import DButton from "discourse/ui-kit/d-button";
 import DDropdownMenu from "discourse/ui-kit/d-dropdown-menu";
 import { i18n } from "discourse-i18n";
-import { learningFileSize, learningSafeUrl } from "../lib/learning-resources";
+import { isImageAttachment } from "../lib/content-images";
+import {
+  learningEditableResource,
+  learningFileSize,
+  learningSafeUrl,
+} from "../lib/learning-resources";
+import contentImages from "../modifiers/content-images";
 
 export default class ISBFLearningResource extends Component {
   @service currentUser;
@@ -18,14 +25,20 @@ export default class ISBFLearningResource extends Component {
 
   @tracked deleteError = null;
   @tracked deleting = false;
+  @tracked menuPending = false;
 
-  menuTriggers = { desktop: ["hover", "click"], mobile: ["click"] };
+  menuTriggers = ["click"];
 
   #closed = false;
+  #hoverOpened = false;
+  #menu;
+  #opening = false;
+  #pointerType;
 
   willDestroy() {
     super.willDestroy(...arguments);
     this.#closed = true;
+    this.#menu = null;
   }
 
   get canDelete() {
@@ -34,6 +47,14 @@ export default class ISBFLearningResource extends Component {
         this.currentUser?.academy_moderator_permissions?.manage_resources) &&
       this.site?.isbf_learning?.resource_admin_management === true &&
       this.args.resource.can_delete === true
+    );
+  }
+
+  get canEdit() {
+    return (
+      this.currentUser?.admin === true &&
+      this.canDelete &&
+      learningEditableResource(this.args.resource)
     );
   }
 
@@ -63,7 +84,14 @@ export default class ISBFLearningResource extends Component {
     return (this.args.resource.files || []).flatMap((file) => {
       const url = learningSafeUrl(file.url);
       return url
-        ? [{ ...file, url, sizeLabel: learningFileSize(file.size) }]
+        ? [
+            {
+              ...file,
+              url,
+              sizeLabel: learningFileSize(file.size),
+              isImage: isImageAttachment(file),
+            },
+          ]
         : [];
     });
   }
@@ -97,12 +125,97 @@ export default class ISBFLearningResource extends Component {
   }
 
   @action
-  async deleteFromMenu(menu) {
-    if (this.deleting || !this.canDelete) {
+  registerMenu(menu) {
+    this.#menu = menu;
+  }
+
+  @action
+  rememberPointer(event) {
+    this.#pointerType = event.pointerType;
+  }
+
+  @action
+  pinHoveredMenu(event) {
+    if (
+      this.#hoverOpened &&
+      this.#menu?.expanded &&
+      this.#pointerType === "mouse" &&
+      event.detail !== 0
+    ) {
+      this.#hoverOpened = false;
+      event.stopImmediatePropagation();
+      event.stopPropagation();
+    }
+  }
+
+  @action
+  async showForMouse(event) {
+    if (
+      event.pointerType !== "mouse" ||
+      this.#closed ||
+      this.isDestroying ||
+      this.deleting ||
+      this.menuPending ||
+      !this.canDelete ||
+      !this.#menu ||
+      this.#menu.expanded ||
+      this.#opening
+    ) {
       return;
     }
-    await menu.close();
-    await this.deleteResource();
+    this.#opening = true;
+    this.#hoverOpened = true;
+    try {
+      await this.#menu.show();
+    } finally {
+      this.#opening = false;
+    }
+  }
+
+  @action
+  async editFromMenu(menu) {
+    if (
+      this.#closed ||
+      this.isDestroying ||
+      this.menuPending ||
+      this.deleting ||
+      !this.canEdit
+    ) {
+      return;
+    }
+    this.menuPending = true;
+    try {
+      await menu.close();
+      if (!this.#closed && !this.isDestroying && this.canEdit) {
+        this.args.onEdit(this.args.resource);
+      }
+    } finally {
+      if (!this.#closed && !this.isDestroying) {
+        this.menuPending = false;
+      }
+    }
+  }
+
+  @action
+  async deleteFromMenu(menu) {
+    if (
+      this.#closed ||
+      this.isDestroying ||
+      this.menuPending ||
+      this.deleting ||
+      !this.canDelete
+    ) {
+      return;
+    }
+    this.menuPending = true;
+    try {
+      await menu.close();
+      await this.deleteResource();
+    } finally {
+      if (!this.#closed && !this.isDestroying) {
+        this.menuPending = false;
+      }
+    }
   }
 
   @action
@@ -161,24 +274,39 @@ export default class ISBFLearningResource extends Component {
               @autofocus={{false}}
               @contentClass="isbf-learning-resource-menu"
               @disabled={{this.deleting}}
-              @hoverGracePeriod={{300}}
               @icon="ellipsis"
               @identifier={{this.menuIdentifier}}
               @interactive={{true}}
               @modalForMobile={{false}}
+              @onRegisterApi={{this.registerMenu}}
               @placement="bottom-end"
               @title={{i18n "more"}}
               @triggerClass="btn-flat isbf-learning-resource__more"
               @triggers={{this.menuTriggers}}
               @untriggers={{this.menuTriggers}}
+              {{on "pointerenter" this.showForMouse}}
+              {{on "pointerup" this.rememberPointer}}
+              {{on "click" this.pinHoveredMenu capture=true}}
             >
               <:content as |menu|>
                 <DDropdownMenu as |dropdown|>
+                  {{#if this.canEdit}}
+                    <dropdown.item>
+                      <DButton
+                        class="btn-flat isbf-learning-resource__edit"
+                        @action={{fn this.editFromMenu menu}}
+                        @disabled={{this.menuPending}}
+                        @translatedLabel={{i18n
+                          (themePrefix "isbf_v2.learning_edit")
+                        }}
+                      />
+                    </dropdown.item>
+                  {{/if}}
                   <dropdown.item>
                     <DButton
                       class="btn-flat isbf-learning-resource__delete"
                       @action={{fn this.deleteFromMenu menu}}
-                      @disabled={{this.deleting}}
+                      @disabled={{this.menuPending}}
                       @translatedLabel={{i18n
                         (themePrefix "isbf_v2.learning_delete")
                       }}
@@ -204,10 +332,21 @@ export default class ISBFLearningResource extends Component {
         <ul
           aria-label={{i18n (themePrefix "isbf_v2.learning_files")}}
           class="isbf-learning-resource__attachments"
+          {{contentImages}}
         >
-          {{#each this.files as |file|}}<li><a
-                href={{file.url}}
-              >{{file.name}}</a><span>{{file.sizeLabel}}</span></li>{{/each}}
+          {{#each this.files as |file|}}
+            <li>
+              <a href={{file.url}}>{{file.name}}</a>
+              <span>{{file.sizeLabel}}</span>
+              {{#if file.isImage}}
+                <a
+                  aria-label={{i18n (themePrefix "isbf_v2.preview_image")}}
+                  class="lightbox isbf-content-image-attachment"
+                  href={{file.url}}
+                >{{i18n (themePrefix "isbf_v2.preview_image")}}</a>
+              {{/if}}
+            </li>
+          {{/each}}
         </ul>
       {{/if}}
       {{#if this.additionalLinks.length}}

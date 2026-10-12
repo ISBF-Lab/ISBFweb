@@ -9,6 +9,11 @@ import { ajax } from "discourse/lib/ajax";
 import DButton from "discourse/ui-kit/d-button";
 import DModal from "discourse/ui-kit/d-modal";
 import { i18n } from "discourse-i18n";
+import {
+  learningEditableResource,
+  learningEditDetails,
+  learningLinkBody,
+} from "../lib/learning-resources";
 
 export default class ISBFLearningShareDialog extends Component {
   @service currentUser;
@@ -18,29 +23,72 @@ export default class ISBFLearningShareDialog extends Component {
   @tracked contributor = null;
   @tracked description = "";
   @tracked error = null;
+  @tracked editReady = false;
+  @tracked loadError = null;
+  @tracked loading = false;
   @tracked link = "";
   @tracked saving = false;
   @tracked title = "";
 
   #closed = false;
+  #loadGeneration = 0;
+  #original = null;
+
+  constructor() {
+    super(...arguments);
+    if (this.isEditing) {
+      this.retryLoad();
+    }
+  }
 
   willDestroy() {
     super.willDestroy(...arguments);
     this.#closed = true;
   }
 
+  get isEditing() {
+    return Boolean(this.args.resource);
+  }
+
+  get editAllowed() {
+    return (
+      this.currentUser?.admin === true &&
+      this.site?.isbf_learning?.resource_admin_management === true &&
+      learningEditableResource(this.args.resource)
+    );
+  }
+
+  get fieldsDisabled() {
+    return this.saving || (this.isEditing && !this.editReady);
+  }
+
   get contributorEnabled() {
     return this.site?.isbf_learning?.resource_contributor === true;
+  }
+
+  get contributorHint() {
+    return i18n(
+      themePrefix(
+        this.isEditing
+          ? "isbf_v2.learning_edit_contributor_hint"
+          : "isbf_v2.learning_contributor_hint"
+      )
+    );
   }
 
   get contributorValue() {
     return (
       this.contributor ??
-      (this.currentUser?.name || this.currentUser?.username || "")
+      (this.isEditing
+        ? ""
+        : this.currentUser?.name || this.currentUser?.username || "")
     );
   }
 
   get shareLabel() {
+    if (this.isEditing) {
+      return i18n(themePrefix("isbf_v2.learning_edit"));
+    }
     return i18n(
       themePrefix(
         this.site?.isbf_learning?.resource_admin_management === true &&
@@ -55,6 +103,9 @@ export default class ISBFLearningShareDialog extends Component {
   }
 
   get submitLabel() {
+    if (this.isEditing) {
+      return i18n(themePrefix("isbf_v2.learning_save_changes"));
+    }
     return this.site?.isbf_learning?.resource_admin_management === true &&
       !(
         this.currentUser?.admin ||
@@ -79,7 +130,8 @@ export default class ISBFLearningShareDialog extends Component {
   get saveDisabled() {
     const length = [...this.title.trim()].length;
     return (
-      this.saving ||
+      this.fieldsDisabled ||
+      (this.isEditing && !this.editAllowed) ||
       !this.args.course?.id ||
       length < this.minimumTitleLength ||
       length > this.maximumTitleLength ||
@@ -87,7 +139,9 @@ export default class ISBFLearningShareDialog extends Component {
       (this.descriptionEnabled && [...this.description].length > 300) ||
       (this.contributorEnabled &&
         this.contributor !== null &&
-        [...this.contributor.trim()].length > 15)
+        [...this.contributor.trim()].length > 15 &&
+        (!this.isEditing ||
+          this.contributor.trim() !== this.#original?.contributor))
     );
   }
 
@@ -140,6 +194,73 @@ export default class ISBFLearningShareDialog extends Component {
   }
 
   @action
+  async retryLoad() {
+    if (this.#closed || this.isDestroying || this.loading || this.saving) {
+      return;
+    }
+    this.editReady = false;
+    this.loadError = null;
+    if (!this.editAllowed) {
+      this.loadError = i18n(themePrefix("isbf_v2.learning_edit_unavailable"));
+      return;
+    }
+    const generation = ++this.#loadGeneration;
+    const topicId = this.args.resource.id;
+    this.loading = true;
+    try {
+      const topic = await ajax(`/t/${topicId}.json`);
+      if (
+        this.#closed ||
+        this.isDestroying ||
+        generation !== this.#loadGeneration
+      ) {
+        return;
+      }
+      const firstPost = topic?.post_stream?.posts?.find(
+        (post) => post.post_number === 1
+      );
+      if (topic?.id !== topicId || !Number.isSafeInteger(firstPost?.id)) {
+        throw new Error("Unexpected learning topic response");
+      }
+      const post = await ajax(`/posts/${firstPost.id}.json`);
+      if (
+        this.#closed ||
+        this.isDestroying ||
+        generation !== this.#loadGeneration
+      ) {
+        return;
+      }
+      const details = learningEditDetails(topic, post, this.args.course?.id);
+      if (!this.editAllowed || !details) {
+        this.loadError = i18n(themePrefix("isbf_v2.learning_edit_unavailable"));
+        return;
+      }
+      this.#original = details;
+      this.title = details.title;
+      this.link = details.link;
+      this.description = details.description;
+      this.contributor = details.contributor;
+      this.editReady = true;
+    } catch {
+      if (
+        !this.#closed &&
+        !this.isDestroying &&
+        generation === this.#loadGeneration
+      ) {
+        this.loadError = i18n(themePrefix("isbf_v2.learning_edit_load_error"));
+      }
+    } finally {
+      if (
+        !this.#closed &&
+        !this.isDestroying &&
+        generation === this.#loadGeneration
+      ) {
+        this.loading = false;
+      }
+    }
+  }
+
+  @action
   async save(event) {
     event.preventDefault();
     if (this.#closed || this.saveDisabled) {
@@ -148,18 +269,22 @@ export default class ISBFLearningShareDialog extends Component {
     this.error = null;
     this.saving = true;
     try {
-      const response = await ajax("/isbf/learning/resources", {
-        type: "POST",
-        data: {
-          course_id: this.args.course.id,
-          title: this.title.trim(),
-          link: this.link.trim(),
-          ...(this.descriptionEnabled ? { description: this.description } : {}),
-          ...(this.contributorEnabled
-            ? { contributor: this.contributor?.trim() || "" }
-            : {}),
-        },
-      });
+      const response = this.isEditing
+        ? await this.#saveEdit()
+        : await ajax("/isbf/learning/resources", {
+            type: "POST",
+            data: {
+              course_id: this.args.course.id,
+              title: this.title.trim(),
+              link: this.link.trim(),
+              ...(this.descriptionEnabled
+                ? { description: this.description }
+                : {}),
+              ...(this.contributorEnabled
+                ? { contributor: this.contributor?.trim() || "" }
+                : {}),
+            },
+          });
       if (this.#closed || this.isDestroying) {
         return;
       }
@@ -172,13 +297,60 @@ export default class ISBFLearningShareDialog extends Component {
       if (!this.#closed && !this.isDestroying) {
         this.error =
           error?.jqXHR?.responseJSON?.errors?.[0] ||
-          i18n(themePrefix("isbf_v2.learning_share_error"));
+          i18n(
+            themePrefix(
+              this.isEditing
+                ? "isbf_v2.learning_edit_error"
+                : "isbf_v2.learning_share_error"
+            )
+          );
       }
     } finally {
       if (!this.#closed && !this.isDestroying) {
         this.saving = false;
       }
     }
+  }
+
+  async #saveEdit() {
+    const original = this.#original;
+    if (!this.editAllowed || !this.editReady || !original) {
+      throw new Error("Learning resource is not editable");
+    }
+    const title = this.title.trim();
+    const link = this.link.trim();
+    const description = this.descriptionEnabled
+      ? this.description.replace(/\r\n?/g, "\n").trim()
+      : original.description;
+    const raw =
+      title === original.title &&
+      link === original.link &&
+      description === original.description
+        ? original.raw
+        : learningLinkBody(title, link, description);
+    const response = await ajax(`/posts/${original.postId}.json`, {
+      type: "PUT",
+      data: {
+        title,
+        post: {
+          raw,
+          isbf_learning_link: link,
+          ...(this.descriptionEnabled
+            ? { isbf_learning_description: description }
+            : {}),
+          ...(this.contributorEnabled
+            ? { isbf_learning_contributor: this.contributor?.trim() || "" }
+            : {}),
+        },
+      },
+    });
+    if (
+      response?.post?.id !== original.postId ||
+      response.post.topic_id !== original.topicId
+    ) {
+      throw new Error("Unexpected learning edit response");
+    }
+    return { success: true, pending: false, edited: true };
   }
 
   <template>
@@ -190,13 +362,24 @@ export default class ISBFLearningShareDialog extends Component {
     >
       <:body>
         <p class="isbf-learning-share-dialog__course">{{@course.name}}</p>
+        {{#if this.loading}}
+          <p role="status">{{i18n (themePrefix "isbf_v2.learning_loading")}}</p>
+        {{/if}}
+        {{#if this.loadError}}
+          <p role="alert">{{this.loadError}}</p>
+          <DButton
+            @action={{this.retryLoad}}
+            @disabled={{this.loading}}
+            @translatedLabel={{i18n (themePrefix "isbf_v2.learning_retry")}}
+          />
+        {{/if}}
         <form {{on "submit" this.save}}>
           <label>
             <span>{{i18n
                 (themePrefix "isbf_v2.learning_resource_title")
               }}</span>
             <input
-              disabled={{this.saving}}
+              disabled={{this.fieldsDisabled}}
               maxlength={{this.maximumTitleLength}}
               minlength={{this.minimumTitleLength}}
               required
@@ -212,7 +395,7 @@ export default class ISBFLearningShareDialog extends Component {
                   (themePrefix "isbf_v2.learning_resource_description")
                 }}</span>
               <textarea
-                disabled={{this.saving}}
+                disabled={{this.fieldsDisabled}}
                 rows="3"
                 value={{this.description}}
                 {{on "input" this.changeDescription}}
@@ -225,7 +408,7 @@ export default class ISBFLearningShareDialog extends Component {
           <label>
             <span>{{i18n (themePrefix "isbf_v2.learning_resource_link")}}</span>
             <input
-              disabled={{this.saving}}
+              disabled={{this.fieldsDisabled}}
               maxlength="2048"
               placeholder="https://"
               required
@@ -240,14 +423,12 @@ export default class ISBFLearningShareDialog extends Component {
                   (themePrefix "isbf_v2.learning_resource_contributor")
                 }}</span>
               <input
-                disabled={{this.saving}}
+                disabled={{this.fieldsDisabled}}
                 type="text"
                 value={{this.contributorValue}}
                 {{on "input" this.changeContributor}}
               />
-              <span>{{i18n
-                  (themePrefix "isbf_v2.learning_contributor_hint")
-                }}</span>
+              <span>{{this.contributorHint}}</span>
             </label>
           {{/if}}
           {{#if this.error}}<p role="alert">{{this.error}}</p>{{/if}}

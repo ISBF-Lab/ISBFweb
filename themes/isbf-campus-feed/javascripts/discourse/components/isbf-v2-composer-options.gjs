@@ -3,11 +3,14 @@ import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { themePrefix } from "virtual:theme";
+import PluginOutlet from "discourse/components/plugin-outlet";
+import lazyHash from "discourse/helpers/lazy-hash";
 import DButton from "discourse/ui-kit/d-button";
 import dAvatar from "discourse/ui-kit/helpers/d-avatar";
 import { i18n } from "discourse-i18n";
 import { canPublishAnonymously } from "../lib/anonymous-post-scope";
 import { isQuickPost } from "../lib/quick-post-scope";
+import ISBFOfficialComposer from "./isbf-official-composer";
 
 export default class ISBFV2ComposerOptions extends Component {
   @service currentUser;
@@ -46,11 +49,19 @@ export default class ISBFV2ComposerOptions extends Component {
   }
 
   <template>
+    <ISBFOfficialComposer @model={{this.model}} />
     <span aria-hidden="true" class="isbf-v2-composer"></span>
     {{#if this.isQuickPost}}
       <div class="isbf-v2-composer-options">
-        <div aria-hidden="true" class="isbf-v2-composer-options__avatar">
+        <div
+          aria-hidden="true"
+          class="isbf-v2-composer-options__avatar isbf-avatar"
+        >
           {{dAvatar this.currentUser imageSize="large"}}
+          {{#unless this.isAnonymous}}<PluginOutlet
+              @name="user-avatar-frame"
+              @outletArgs={{lazyHash user=this.currentUser motion="static"}}
+            />{{/unless}}
         </div>
       </div>
     {{/if}}

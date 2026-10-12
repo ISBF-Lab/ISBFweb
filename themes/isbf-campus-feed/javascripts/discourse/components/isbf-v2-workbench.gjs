@@ -1,7 +1,12 @@
 import Component from "@glimmer/component";
+import { service } from "@ember/service";
 import { themePrefix } from "virtual:theme";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
+import { alumniConfig } from "../lib/alumni";
+import { learningConfig } from "../lib/learning-resources";
+import { marketplaceConfig } from "../lib/marketplace";
+import ISBFV2MoreMenu from "./isbf-v2-more-menu";
 
 const CARDS = [
   { key: "learning_resources", icon: "book-open", tone: "blue" },
@@ -12,13 +17,26 @@ const CARDS = [
   { key: "student_identity", icon: "id-card", tone: "rose" },
   { key: "library", icon: "database", tone: "indigo" },
   { key: "alumni", icon: "user-group", tone: "teal" },
+  { key: "marketplace", icon: "bag-shopping", tone: "amber" },
 ];
 
 export default class ISBFV2Workbench extends Component {
+  @service site;
+
   get cards() {
-    return CARDS.map((card) => ({
+    return CARDS.filter(
+      (card) => card.key !== "alumni" || alumniConfig(this.site)
+    ).map((card) => ({
       ...card,
       label: i18n(themePrefix(`isbf_v2.workbench_${card.key}`)),
+      href:
+        card.key === "learning_resources" && learningConfig(this.site)
+          ? "/isbf/learning"
+          : card.key === "marketplace" && marketplaceConfig(this.site)
+            ? "/isbf/marketplace"
+            : card.key === "alumni"
+              ? "/isbf/alumni"
+              : null,
     }));
   }
 
@@ -31,16 +49,31 @@ export default class ISBFV2Workbench extends Component {
       >
         <div class="isbf-v2-workbench__grid">
           {{#each this.cards as |card|}}
-            <div class="isbf-v2-workbench__card">
-              <span
-                aria-hidden="true"
-                class="isbf-v2-workbench__icon isbf-v2-workbench__icon--{{card.tone}}"
-              >{{dIcon card.icon}}</span>
-              <span class="isbf-v2-workbench__name">{{card.label}}</span>
-            </div>
+            {{#if card.href}}
+              <a class="isbf-v2-workbench__card" href={{card.href}}>
+                <span
+                  aria-hidden="true"
+                  class="isbf-v2-workbench__icon isbf-v2-workbench__icon--{{card.tone}}"
+                >{{dIcon card.icon}}</span>
+                <span class="isbf-v2-workbench__name">{{card.label}}</span>
+              </a>
+            {{else}}
+              <div class="isbf-v2-workbench__card">
+                <span
+                  aria-hidden="true"
+                  class="isbf-v2-workbench__icon isbf-v2-workbench__icon--{{card.tone}}"
+                >{{dIcon card.icon}}</span>
+                <span class="isbf-v2-workbench__name">{{card.label}}</span>
+              </div>
+            {{/if}}
           {{/each}}
         </div>
       </section>
+      <div class="isbf-v2-workbench__more">
+        <div class="isbf-v2-workbench__more-control">
+          <ISBFV2MoreMenu @workbench={{true}} />
+        </div>
+      </div>
     </main>
   </template>
 }

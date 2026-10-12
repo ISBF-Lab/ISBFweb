@@ -32,6 +32,13 @@ export default class ISBFNotificationAction extends Component {
     });
   }
 
+  get showDetails() {
+    return (
+      this.expanded &&
+      (this.extraEntries.length > 0 || this.error || Boolean(this.nextCursor))
+    );
+  }
+
   @action
   async loadMore() {
     if (this.loading || (this.loaded && !this.nextCursor)) {
@@ -75,6 +82,7 @@ export default class ISBFNotificationAction extends Component {
   <template>
     <section class="isbf-notification-action">
       <button
+        aria-busy={{if this.loading "true" "false"}}
         aria-expanded={{if this.expanded "true" "false"}}
         class="isbf-notification-action__toggle"
         type="button"
@@ -84,14 +92,14 @@ export default class ISBFNotificationAction extends Component {
         {{dIcon (if this.expanded "chevron-down" "chevron-right")}}
       </button>
       <ISBFNotificationEntry @entry={{@group.latest}} />
-      {{#if this.expanded}}
+      <span class="sr-only" role="status">{{#if this.loading}}{{i18n
+            (themePrefix "isbf_v2.notifications_loading")
+          }}{{/if}}</span>
+      {{#if this.showDetails}}
         <div class="isbf-notification-action__details">
           {{#each this.extraEntries key="key" as |entry|}}
             <ISBFNotificationEntry @entry={{entry}} />
           {{/each}}
-          {{#if this.loading}}<p role="status">{{i18n
-                (themePrefix "isbf_v2.notifications_loading")
-              }}</p>{{/if}}
           {{#if this.error}}
             <p role="alert">{{i18n
                 (themePrefix "isbf_v2.notifications_error")

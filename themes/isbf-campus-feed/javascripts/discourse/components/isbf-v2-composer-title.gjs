@@ -11,6 +11,7 @@ import { setOptionalTopicTitle } from "../lib/optional-topic-title";
 import { isQuickPost } from "../lib/quick-post-scope";
 
 export default class ISBFV2ComposerTitle extends Component {
+  @service composer;
   @service siteSettings;
 
   @tracked focused = false;
@@ -50,7 +51,11 @@ export default class ISBFV2ComposerTitle extends Component {
     }
 
     if (reason) {
-      return EmberObject.create({ failed: true, reason });
+      return EmberObject.create({
+        failed: true,
+        reason,
+        lastShownAt: this.composer.get("lastValidatedAt"),
+      });
     }
   }
 

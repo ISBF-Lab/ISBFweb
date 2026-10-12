@@ -39,7 +39,9 @@
     }
   },
   "modifiers": {
+    "only_theme_color_schemes": true,
     "serialize_topic_excerpts": true,
+    "serialize_topic_op_likes_data": true,
     "svg_icons": [
       "house",
       "magnifying-glass",
@@ -68,9 +70,7 @@
       "chart-bar",
       "flag",
       "chevron-down"
-    ],
-    "serialize_topic_op_likes_data": true,
-    "only_theme_color_schemes": true
+    ]
   },
   "learn_more": "https://meta.discourse.org/t/beginners-guide-to-using-discourse-themes/91966"
 }

@@ -37,7 +37,7 @@ export default class ISBFCalendarNoteEditor extends Component {
     <DModal
       class="isbf-calendar-note-editor"
       @closeModal={{@closeModal}}
-      @title={{themePrefix "isbf_v2.schedule_edit_note"}}
+      @title={{i18n (themePrefix "isbf_v2.schedule_edit_note")}}
     >
       <:body>
         <p>{{@model.entry.title}}</p>

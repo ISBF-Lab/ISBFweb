@@ -14,6 +14,7 @@ import DButton from "discourse/ui-kit/d-button";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import { consumeInitialNotificationTab } from "../lib/notification-groups";
+import { isUntitledTopicTitle } from "../lib/optional-topic-title";
 import ISBFNotificationAction from "./isbf-notification-action";
 import ISBFNotificationEntry from "./isbf-notification-entry";
 
@@ -221,6 +222,13 @@ export default class ISBFNotifications extends Component {
     }
   }
 
+  @action
+  topicTitle(title) {
+    return isUntitledTopicTitle(title)
+      ? i18n(themePrefix("isbf_v2.untitled_topic"))
+      : title;
+  }
+
   async #initializeModels(raw) {
     const missing = [
       ...new Map(
@@ -295,19 +303,16 @@ export default class ISBFNotifications extends Component {
       {{#each this.groups key="key" as |group|}}
         {{#if group.topic}}
           <article class="isbf-notifications__topic">
-            <h2><a href={{group.topic.url}}>{{group.topic.title}}</a></h2>
-            <details open>
-              <summary aria-label={{group.topic.title}}>
-                {{dIcon "chevron-down"}}
-              </summary>
-              {{#each group.actions key="key" as |item|}}
-                <ISBFNotificationAction
-                  @actionLabel={{this.actionLabel}}
-                  @group={{item}}
-                  @prepareEntries={{this.prepareEntries}}
-                />
-              {{/each}}
-            </details>
+            <h2><a href={{group.topic.url}}>{{this.topicTitle
+                  group.topic.title
+                }}</a></h2>
+            {{#each group.actions key="key" as |item|}}
+              <ISBFNotificationAction
+                @actionLabel={{this.actionLabel}}
+                @group={{item}}
+                @prepareEntries={{this.prepareEntries}}
+              />
+            {{/each}}
           </article>
         {{else}}
           <article class="isbf-notifications__standalone"><ISBFNotificationEntry

@@ -1,3 +1,13 @@
+brand_show_logo:
+  default: true
+  type: bool
+  description: "显示徽标：使用后台「徽标」页配置的对应场景图片及深色版本。"
+
+brand_show_name:
+  default: true
+  type: bool
+  description: "显示名称：显示平台名称，可与徽标同时显示；两个开关均关闭时隐藏品牌区域。"
+
 brand_name:
   default: "国金综合平台"
   type: string
@@ -18,7 +28,23 @@ calendar_category_id:
   type: integer
   description: "校园活动分类 ID；日历仅展示该分类的活动。"
 
+feedback_category_id:
+  default: 2
+  type: integer
+  description: "更多菜单使用的现有反馈分类 ID；该分类复用首页信息流和发布框，保留原生权限。"
+
+join_us_description:
+  default: ""
+  type: string
+  description: "加入我们弹窗的招募说明、岗位及联系方式。留空时显示招募信息筹备中；仅作为纯文本显示。"
+
 calendar_category_path:
   default: "/c/campus-events"
   type: string
   description: "校园活动分类页面路径，用于发布活动入口。"
+
+svg_icons:
+  default: "bag-shopping"
+  type: list
+  list_type: compact
+  description: "商城工作台入口使用的图标。"

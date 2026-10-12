@@ -1,4 +1,5 @@
 import Category from "discourse/models/category";
+import { marketplaceConfig } from "./marketplace";
 
 export function canPublishAnonymously(model, currentUser, siteSettings) {
   if (
@@ -24,6 +25,9 @@ export function canPublishAnonymously(model, currentUser, siteSettings) {
       ? (model.topic?.category_id ?? model.topic?.category?.id)
       : model.categoryId;
   const category = categoryId ? Category.findById(categoryId) : null;
+  if (marketplaceConfig(model.site)?.category_id === Number(categoryId)) {
+    return false;
+  }
 
   const officialCategoryId = Number(siteSettings.academy_official_category);
 

@@ -1,6 +1,7 @@
 import { ajax } from "discourse/lib/ajax";
 
 const cache = new Map();
+const pendingRequests = new Map();
 const invalidatedPosts = new Set();
 const generations = new Map();
 const queue = [];
@@ -14,50 +15,67 @@ function runQueue() {
 }
 
 function runJob(job) {
-  const generation = generations.get(Number(job.postId));
+  const { generation, postId } = job;
   ajax(`/posts/${job.postId}/cooked`)
     .then((result) => {
       if (
-        invalidatedPosts.has(Number(job.postId)) ||
-        generation !== generations.get(Number(job.postId))
+        invalidatedPosts.has(postId) ||
+        generation !== generations.get(postId)
       ) {
         job.resolve("");
       } else {
-        cache.set(job.postId, result.cooked);
+        cache.set(postId, result.cooked);
+        if (cache.size > 50) {
+          cache.delete(cache.keys().next().value);
+        }
         job.resolve(result.cooked);
       }
     })
     .catch(job.reject)
     .finally(() => {
+      if (pendingRequests.get(postId)?.promise === job.promise) {
+        pendingRequests.delete(postId);
+      }
       activeRequests -= 1;
       runQueue();
     });
 }
 
 export function loadCookedPost(postId) {
-  if (invalidatedPosts.has(Number(postId))) {
+  postId = Number(postId);
+  if (invalidatedPosts.has(postId)) {
     return Promise.resolve("");
   }
   if (cache.has(postId)) {
-    return Promise.resolve(cache.get(postId));
+    const cooked = cache.get(postId);
+    cache.delete(postId);
+    cache.set(postId, cooked);
+    return Promise.resolve(cooked);
   }
-
-  return new Promise((resolve, reject) => {
-    queue.push({ postId, reject, resolve });
-    runQueue();
+  const generation = generations.get(postId);
+  const pending = pendingRequests.get(postId);
+  if (pending && pending.generation === generation) {
+    return pending.promise;
+  }
+  const job = { generation, postId };
+  job.promise = new Promise((resolve, reject) => {
+    Object.assign(job, { reject, resolve });
   });
+  pendingRequests.set(postId, job);
+  queue.push(job);
+  runQueue();
+  return job.promise;
 }
 
 export function invalidateCookedPost(postId, hidden = true) {
   const id = Number(postId);
   generations.set(id, (generations.get(id) || 0) + 1);
   if (hidden) {
-    invalidatedPosts.add(Number(postId));
+    invalidatedPosts.add(id);
   } else {
-    invalidatedPosts.delete(Number(postId));
+    invalidatedPosts.delete(id);
   }
-  cache.delete(postId);
-  cache.delete(Number(postId));
+  cache.delete(id);
 }
 
 const countCache = new Map();

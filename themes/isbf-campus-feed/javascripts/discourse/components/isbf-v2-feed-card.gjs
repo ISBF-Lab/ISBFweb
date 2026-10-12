@@ -6,10 +6,13 @@ import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import { service } from "@ember/service";
 import { trustHTML } from "@ember/template";
 import { settings, themePrefix } from "virtual:theme";
+import PluginOutlet from "discourse/components/plugin-outlet";
+import lazyHash from "discourse/helpers/lazy-hash";
 import { ajax } from "discourse/lib/ajax";
 import Composer from "discourse/models/composer";
 import Draft from "discourse/models/draft";
 import { loadTopicView } from "discourse/models/topic";
+import DDecoratedHtml from "discourse/ui-kit/d-decorated-html";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import { loadCookedPost, loadRepostCount } from "../lib/feed-post-loader";
@@ -22,6 +25,7 @@ import {
   postCardTitle,
 } from "../lib/post-card-helpers";
 import { isReportedHidden, openPostReport } from "../lib/report-post";
+import { ISBFMarketplacePrice } from "./isbf-marketplace-card";
 import ISBFOfficialActivitySummary from "./isbf-official-activity-summary";
 import ISBFOfficialCalendarItems from "./isbf-official-calendar-items";
 
@@ -552,13 +556,17 @@ export default class ISBFV2FeedCard extends Component {
       {{didInsert this.observeVisibleView}}
       {{on "click" this.openTopic}}
     >
-      <a class="isbf-feed-card__avatar" href={{this.profileUrl}}>
+      <a class="isbf-feed-card__avatar isbf-avatar" href={{this.profileUrl}}>
         <img
           alt=""
           height="42"
           loading="lazy"
           src={{this.avatarUrl}}
           width="42"
+        />
+        <PluginOutlet
+          @name="user-avatar-frame"
+          @outletArgs={{lazyHash user=@topic.creator motion="static"}}
         />
       </a>
       <div class="isbf-feed-card__main">
@@ -611,7 +619,11 @@ export default class ISBFV2FeedCard extends Component {
           }}
         >{{#if this.hidden}}{{i18n
               (themePrefix "isbf_v2.report_hidden")
-            }}{{else}}{{this.bodyHtml}}{{/if}}</div>
+            }}{{else}}<DDecoratedHtml
+              @className="isbf-content-images"
+              @html={{this.bodyHtml}}
+              @preservePointerTarget={{true}}
+            />{{/if}}</div>
         {{#if this.bodyFailed}}<a
             class="isbf-feed-card__fallback"
             href={{this.topicUrl}}
@@ -637,6 +649,9 @@ export default class ISBFV2FeedCard extends Component {
             />
           {{/if}}
         {{/unless}}
+        {{#unless this.hidden}}<ISBFMarketplacePrice
+            @metadata={{@topic.isbf_marketplace}}
+          />{{/unless}}
         <footer class="isbf-feed-card__actions">
           <button
             aria-label={{i18n (themePrefix "isbf_v2.reply")}}

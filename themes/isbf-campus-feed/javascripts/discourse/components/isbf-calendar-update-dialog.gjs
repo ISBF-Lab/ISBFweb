@@ -106,7 +106,7 @@ export default class ISBFCalendarUpdateDialog extends Component {
     <DModal
       class="isbf-calendar-update-dialog"
       @closeModal={{@closeModal}}
-      @title={{themePrefix "isbf_v2.schedule_review"}}
+      @title={{i18n (themePrefix "isbf_v2.schedule_review")}}
     >
       <:body>
         <div class="isbf-calendar-update-dialog__snapshot">

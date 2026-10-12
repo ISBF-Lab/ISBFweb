@@ -2,9 +2,11 @@ import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import { settings } from "virtual:theme";
 import ISBFV2FeedCard from "../../components/isbf-v2-feed-card";
+import { feedbackCategory, isFeedbackPath } from "../../lib/feedback-category";
 
 export default class ISBFFeedCardConnector extends Component {
   @service router;
+  @service site;
 
   get shouldRenderCard() {
     if (this.args.outletArgs.bulkSelectEnabled) {
@@ -15,6 +17,10 @@ export default class ISBFFeedCardConnector extends Component {
     return (
       path === "/" ||
       path.startsWith("/latest") ||
+      isFeedbackPath(
+        path,
+        feedbackCategory(this.site, settings.feedback_category_id)
+      ) ||
       path === officialPath ||
       path.startsWith(`${officialPath}/`)
     );
