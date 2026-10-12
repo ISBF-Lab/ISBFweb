@@ -41,6 +41,7 @@ RSpec.describe "Frontend consistency" do
         review.visit_preferences(user)
         expect(review).to have_account_fields
         expect(review).to have_aligned_account_labels
+        expect(review).to have_aligned_email_metadata
         expect(review).to have_upper_profile
         upper_before = review.upper_region_geometry
         review.without_rollout_styles { expect(review.upper_region_geometry).to eq(upper_before) }
@@ -95,6 +96,7 @@ RSpec.describe "Frontend consistency" do
         )
         review.visit_bookmarks(user)
         expect(review).to have_no_public_cards
+        expect(review).to have_accessible_bookmark_menu
         review.save_review_screenshot("#{device}-#{mode}-bookmarks")
         review.open_bookmark_removal
         expect(review).to have_scoped_confirmation
@@ -103,17 +105,32 @@ RSpec.describe "Frontend consistency" do
         page.refresh
         expect(review).to have_bookmark(bookmark)
         review.visit_drafts(user)
+        expect(review).to have_individual_draft_actions
         review.save_review_screenshot("#{device}-#{mode}-drafts")
+        review.open_draft_removal
+        expect(review).to have_scoped_confirmation
+        review.cancel_confirmation
+        expect(review).to have_no_confirmation
         review.visit_pending(user)
       end
 
       it "lets users browse their private message filters and loaded inbox" do
-        message = Fabricate(:private_message_topic, user: other_user, recipient: user)
+        message =
+          Fabricate(
+            :private_message_topic,
+            user: other_user,
+            recipient: user,
+            title: "Synthetic private message with a longer title and readable metadata",
+          )
+        second_message = Fabricate(:private_message_topic, user: other_user, recipient: user)
         Fabricate(:post, user: other_user, topic: message)
         Fabricate(:post, user: user, topic: message)
+        Fabricate(:post, user: other_user, topic: second_message)
         %w[sent new unread archive].each { |filter| review.visit_messages(user, filter: filter) }
         review.visit_messages(user)
         expect(review).to have_message(message)
+        expect(review).to have_message(second_message)
+        expect(review).to have_balanced_message_rows
         expect(review).to have_no_public_cards
         review.save_review_screenshot("#{device}-#{mode}-messages")
       end

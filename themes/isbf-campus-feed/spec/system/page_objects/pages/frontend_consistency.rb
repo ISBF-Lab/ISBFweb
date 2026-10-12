@@ -23,6 +23,15 @@ module PageObjects
         JS
       end
 
+      def has_aligned_email_metadata?
+        page.evaluate_script(<<~JS)
+          const row = document.querySelector(".pref-email .row");
+          const email = row.querySelector(".email-first").getBoundingClientRect();
+          const primary = row.querySelector(".primary").getBoundingClientRect();
+          return Math.abs((email.top + email.bottom) / 2 - (primary.top + primary.bottom) / 2) < 2;
+        JS
+      end
+
       def rename_to(name)
         page.find(".pref-name input").set(name)
         page.find(".save-button .btn-primary").click
@@ -134,8 +143,28 @@ module PageObjects
         page.has_css?(".bookmark-list-item", text: bookmark.name)
       end
 
+      def has_accessible_bookmark_menu?
+        page.evaluate_script(<<~JS)
+          const item = document.querySelector(".bookmark-list-item");
+          const row = item.getBoundingClientRect();
+          const menu = item.querySelector(".bookmark-actions-dropdown .select-kit-header").getBoundingClientRect();
+          const title = item.querySelector(".bookmark-status-with-link").getBoundingClientRect();
+          return menu.right <= row.right && menu.top >= row.top && menu.left >= title.right;
+        JS
+      end
+
       def visit_drafts(user)
         visit_review("/u/#{user.username}/activity/drafts", "drafts", ".user-stream-item")
+      end
+
+      def has_individual_draft_actions?
+        page.has_no_css?(".post-list-item__bulk-select") && page.has_css?(".resume-draft") &&
+          page.has_css?(".remove-draft")
+      end
+
+      def open_draft_removal
+        page.find(".remove-draft", match: :first).click
+        self
       end
 
       def visit_pending(user)
@@ -150,6 +179,31 @@ module PageObjects
 
       def has_message?(topic)
         page.has_css?(".topic-list-item", text: topic.title)
+      end
+
+      def has_balanced_message_rows?
+        page.evaluate_script(<<~JS)
+          return [...document.querySelectorAll(".topic-list-item")].every(row => {
+            const title = row.querySelector(".main-link").getBoundingClientRect();
+            const avatar = [...row.querySelectorAll(".avatar")]
+              .map(image => image.getBoundingClientRect()).find(bounds => bounds.width > 0);
+            const table = row.closest(".topic-list").getBoundingClientRect();
+            if (!avatar || avatar.width < 42 || avatar.height < 42) { return false; }
+            if (window.innerWidth <= 600) { return true; }
+            const centers = [...row.querySelectorAll(".num")].map(cell => {
+              const walker = document.createTreeWalker(cell, NodeFilter.SHOW_TEXT);
+              let text;
+              while ((text = walker.nextNode())) {
+                if (!text.textContent.trim()) { continue; }
+                const range = document.createRange();
+                range.selectNodeContents(text);
+                const bounds = range.getBoundingClientRect();
+                return (bounds.top + bounds.bottom) / 2;
+              }
+            }).filter(value => value !== undefined);
+            return title.width >= table.width * 0.45 && Math.max(...centers) - Math.min(...centers) < 3;
+          });
+        JS
       end
 
       def visit_summary(user)

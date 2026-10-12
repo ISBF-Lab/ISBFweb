@@ -689,6 +689,111 @@
   @include frontend-controls;
 }
 
+.isbf-frontend.is-frontend-messages .topic-list {
+  .raw-topic-link {
+    font-size: var(--isbf-v2-font-lg);
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .posters .avatar {
+    inline-size: 42px;
+    block-size: 42px;
+  }
+
+  @media (width >= 601px) {
+    table-layout: fixed;
+
+    .posters {
+      inline-size: calc(42px + 2 * var(--isbf-v2-space-4));
+      text-align: center;
+    }
+
+    .topic-list-data {
+      vertical-align: middle;
+    }
+
+    .topic-list-data.num {
+      inline-size: calc(2 * var(--isbf-v2-space-8));
+      text-align: center;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    :is(.badge-posts, .post-activity) {
+      padding: 0;
+    }
+  }
+}
+
+.isbf-frontend.is-frontend-bookmarks .bookmark-list {
+  .bookmark-list-item {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    gap: var(--isbf-v2-space-2) var(--isbf-v2-space-3);
+    position: relative;
+    padding: var(--isbf-v2-space-4);
+    border-block-end: 1px solid var(--isbf-v2-border);
+  }
+
+  .topic-list-data {
+    min-inline-size: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .main-link {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    padding-inline-end: calc(44px + var(--isbf-v2-space-3));
+  }
+
+  .topic-list-data:has(> .bookmark-actions-dropdown) {
+    position: absolute;
+    inset-block-start: var(--isbf-v2-space-4);
+    inset-inline-end: var(--isbf-v2-space-4);
+  }
+
+  .bookmark-actions-dropdown > .select-kit-header {
+    inline-size: 44px;
+    padding: 0;
+    border: 0;
+  }
+
+  .author-avatar {
+    align-self: center;
+
+    &:not(:has(.avatar)) {
+      display: none;
+    }
+  }
+
+  .post-metadata {
+    align-self: center;
+    text-align: start;
+
+    .post-activity {
+      padding: 0;
+    }
+  }
+
+  .topic-list-data.bulk-select {
+    grid-column: 1;
+    grid-row: 1;
+
+    ~ .main-link {
+      grid-column-start: 2;
+    }
+  }
+}
+
+.isbf-frontend.is-frontend-drafts {
+  .post-list-item__bulk-select,
+  .post-list-bulk-controls {
+    display: none;
+  }
+}
+
 .isbf-frontend.is-frontend-preferences .user-preferences {
   @include frontend-form-groups;
 
@@ -701,8 +806,22 @@
   .pref-email .row {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: var(--isbf-v2-space-3);
     padding-block: var(--isbf-v2-space-3);
+
+    .email-first {
+      overflow-wrap: anywhere;
+    }
+
+    .email-second {
+      align-self: center;
+    }
+
+    .email-dropdown {
+      flex-shrink: 0;
+      margin-inline-start: auto;
+    }
   }
 
   :is(input, textarea, select):not(
