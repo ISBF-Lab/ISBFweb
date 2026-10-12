@@ -338,6 +338,7 @@
   .control-group {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     gap: var(--isbf-v2-space-2);
     min-inline-size: 0;
     margin: 0;

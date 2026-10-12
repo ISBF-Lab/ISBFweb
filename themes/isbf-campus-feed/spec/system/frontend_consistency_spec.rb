@@ -40,6 +40,7 @@ RSpec.describe "Frontend consistency" do
       it "loads settings and directory without changing the upper profile region" do
         review.visit_preferences(user)
         expect(review).to have_account_fields
+        expect(review).to have_aligned_account_labels
         expect(review).to have_upper_profile
         upper_before = review.upper_region_geometry
         review.without_rollout_styles { expect(review.upper_region_geometry).to eq(upper_before) }

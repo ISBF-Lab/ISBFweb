@@ -15,6 +15,14 @@ module PageObjects
         page.has_css?(".pref-name input") && page.has_css?(".pref-email")
       end
 
+      def has_aligned_account_labels?
+        page.evaluate_script(<<~JS)
+          [".pref-username", ".pref-avatar", ".pref-email", ".pref-name"]
+            .map(selector => document.querySelector(`${selector} .control-label`).getBoundingClientRect().left)
+            .every((left, _, positions) => Math.abs(left - positions[0]) < 1);
+        JS
+      end
+
       def rename_to(name)
         page.find(".pref-name input").set(name)
         page.find(".save-button .btn-primary").click
@@ -224,7 +232,9 @@ module PageObjects
       def save_review_screenshot(name)
         directory = Rails.root.join("tmp/isbf-frontend-screenshots")
         FileUtils.mkdir_p(directory)
-        page.save_screenshot(directory.join("#{name}.png")) # rubocop:disable Lint/Debugger -- Required theme review artifact.
+        page.driver.with_playwright_page do |pw_page|
+          pw_page.screenshot(path: directory.join("#{name}.png").to_s, fullPage: true)
+        end
       end
 
       private
