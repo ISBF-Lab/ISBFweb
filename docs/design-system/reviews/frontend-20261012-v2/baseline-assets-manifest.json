@@ -1,0 +1,26 @@
+[
+  {
+    "file": "assets/baseline-core.css",
+    "source_sha256": "b94d739c3c19e57c044580d0b80a5f20b37b63984406a5a0fb95077e4e478aa6",
+    "offline_sha256": "b94d739c3c19e57c044580d0b80a5f20b37b63984406a5a0fb95077e4e478aa6",
+    "adjustment": "font URLs rebased for offline review; no design declarations added"
+  },
+  {
+    "file": "assets/baseline-theme.css",
+    "source_sha256": "a50a1e561b205f215ab7d9c97ea0bf987b9b486ed3b6f50a8748d066b7c3340a",
+    "offline_sha256": "a50a1e561b205f215ab7d9c97ea0bf987b9b486ed3b6f50a8748d066b7c3340a",
+    "adjustment": "font URLs rebased for offline review; no design declarations added"
+  },
+  {
+    "file": "assets/baseline-light.css",
+    "source_sha256": "2075d7cb1c19950b0eab400f7d7c5fdff0f11b963848c626f0d514140b4943ac",
+    "offline_sha256": "ef1e1d8b016ca54dd4376e2cd0f29127547721f96e07cd27d8d573d9d339f91b",
+    "adjustment": "font URLs rebased for offline review; no design declarations added"
+  },
+  {
+    "file": "assets/baseline-dark.css",
+    "source_sha256": "6e7e6c4c9227f6658fac27f883e5e4b002bbb0c1cc8c40bd0e9a544b679f2440",
+    "offline_sha256": "2039bb45aa860587beda64c099f2a98f7661a62c52f33e03827ebf10706ee39d",
+    "adjustment": "font URLs rebased for offline review; no design declarations added"
+  }
+]

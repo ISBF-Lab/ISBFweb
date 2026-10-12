@@ -1924,7 +1924,11 @@
         "existing calendar and reporting"
       ],
       "implementation_status": "In Progress",
-      "baseline_source_map": "../baselines/production-20261012/source-map.json"
+      "baseline_source_map": "../baselines/production-20261012/source-map.json",
+      "implementation_source_map": "../frontend-implementation-source-map-20261012.json",
+      "implementation_source_map_sha256": "f1719da81ffd90653434e5630952e03fbdb328a40f30f8b784b12899b91d7ade",
+      "verification": "../frontend-verification-20261012.json",
+      "review": "../reviews/frontend-20261012-v2/index.html"
     }
   ]
 }

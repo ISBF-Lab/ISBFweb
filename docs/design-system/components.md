@@ -103,7 +103,7 @@ A01：[shell](references/theme-4/javascripts/discourse/components/isbf-v2-shell.
 
 ### Forbidden Patterns
 
-- 给 `/admin`、群组或未知插件页强行套用现有 shell。
+- 给 `/admin`、未列入本轮确认范围的群组子路由或未知插件页强行套用现有 shell；已确认的前台群组范围见C15。
 - 写死页面偏移、创建另一份 sidebar/移动导航，或删去安全区。
 - 以 shell 出现为依据批准内层原生表单。
 
@@ -287,7 +287,7 @@ A05：[notifications](references/theme-4/javascripts/discourse/components/isbf-n
 
 ## 尚无组件规范的区域
 
-设置表单、用户弹出卡、后台公共样式、全站 empty/loading/success 容器，以及校友/商品全部编辑与异常状态仍需人工确认。处理这些区域时先按 [Reference Map](reference-map.md) 说明可复用部分与缺口；不在实现阶段临时补设计。
+本轮范围外的设置表单、用户弹出卡、后台公共样式、全站 empty/loading/success 容器，以及校友/商品全部编辑与异常状态仍需人工确认。处理这些区域时先按 [Reference Map](reference-map.md) 说明可复用部分与缺口；不在实现阶段临时补设计。
 
 ## C14 · Avatar frame calibration
 
@@ -344,3 +344,11 @@ D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用
 ### Forbidden Patterns
 
 全局改写.btn/input/.d-modal；给用户卡换肤；修改资料上部或其父容器宽度；裁切头像框；移除动态列、私信权限或表单字段；增加新阴影、颜色或装饰。
+
+## 本轮实现来源与验证
+
+19组均已提交代码，实际页面仍为In Progress。具体接入文件、保留边界和未覆盖状态见
+[实现说明](frontend-implementation-20261012.md)，源码摘要见
+[source map](frontend-implementation-source-map-20261012.json)，检查结果见
+[验证记录](frontend-verification-20261012.json)。新版离线入口为
+[V2预览](reviews/frontend-20261012-v2/index.html)，已移除用户卡示例；旧包只作历史记录。

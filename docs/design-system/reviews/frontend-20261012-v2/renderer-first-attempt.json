@@ -1,0 +1,9 @@
+{
+  "exit_code": 137,
+  "available_before_bytes": 1283858432,
+  "memory_limit_bytes": 536870912,
+  "production_access": false,
+  "single_browser": true,
+  "container_removed": true,
+  "stopped_reason": "timeout"
+}

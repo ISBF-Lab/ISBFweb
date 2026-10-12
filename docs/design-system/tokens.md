@@ -157,7 +157,7 @@
 | 工作台                      | 面板 `22px`；桌面卡片/图标 `18px`；手机卡片 `8px`、图标 `12px`                      |
 | 官方活动摘要字段/独立截止项 | `1px solid border`、`radius-sm`；外层摘要不设置整块边框或圆角                       |
 | 认证                        | 局部 `--d-input-border-radius: 12px`、`--d-button-border-radius: 12px`；面板 `20px` |
-| 资料头像                    | `4px solid surface`、`50%`；头像框独立叠层以图像内容定位，扣除白边，不裁掉框           |
+| 资料头像                    | `4px solid surface`、`50%`；头像框独立叠层以图像内容定位，扣除白边，不裁掉框        |
 | 公开活动/商品缩略图         | `radius-sm`，分别见 common `.isbf-post-preview`、marketplace `__image`              |
 
 `12px/18px/20px/22px` 是现有局部值，尚无对应全局半径 token。菜单阴影不能扩展成所有卡片的阴影。
@@ -239,3 +239,11 @@ D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用
 功能区沿用feature-width，内容列表沿用feed-width；16/24px间距、双列12px gap及18px/600分区标题均限定在目标主体。
 信息正文16px/1.45，段落16px、列表内缩32px。关联弹窗最大600px、16px内距/圆角、1px边框，手机全宽与安全区。
 用户卡的340px/96px提案被排除，不是可复用token。资料上部及一级导航的实际级联不得改变。
+
+## 本轮实现来源与验证
+
+19组均已提交代码，实际页面仍为In Progress。具体接入文件、保留边界和未覆盖状态见
+[实现说明](frontend-implementation-20261012.md)，源码摘要见
+[source map](frontend-implementation-source-map-20261012.json)，检查结果见
+[验证记录](frontend-verification-20261012.json)。新版离线入口为
+[V2预览](reviews/frontend-20261012-v2/index.html)，已移除用户卡示例；旧包只作历史记录。
