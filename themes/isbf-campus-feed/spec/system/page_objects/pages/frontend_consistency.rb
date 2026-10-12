@@ -25,10 +25,12 @@ module PageObjects
 
       def has_aligned_email_metadata?
         page.evaluate_script(<<~JS)
-          const row = document.querySelector(".pref-email .row");
-          const email = row.querySelector(".email-first").getBoundingClientRect();
-          const primary = row.querySelector(".primary").getBoundingClientRect();
-          return Math.abs((email.top + email.bottom) / 2 - (primary.top + primary.bottom) / 2) < 2;
+          (() => {
+            const row = document.querySelector(".pref-email .row");
+            const email = row.querySelector(".email-first").getBoundingClientRect();
+            const primary = row.querySelector(".primary").getBoundingClientRect();
+            return Math.abs((email.top + email.bottom) / 2 - (primary.top + primary.bottom) / 2) < 2;
+          })()
         JS
       end
 
@@ -145,11 +147,13 @@ module PageObjects
 
       def has_accessible_bookmark_menu?
         page.evaluate_script(<<~JS)
-          const item = document.querySelector(".bookmark-list-item");
-          const row = item.getBoundingClientRect();
-          const menu = item.querySelector(".bookmark-actions-dropdown .select-kit-header").getBoundingClientRect();
-          const title = item.querySelector(".bookmark-status-with-link").getBoundingClientRect();
-          return menu.right <= row.right && menu.top >= row.top && menu.left >= title.right;
+          (() => {
+            const item = document.querySelector(".bookmark-list-item");
+            const row = item.getBoundingClientRect();
+            const menu = item.querySelector(".bookmark-actions-dropdown .select-kit-header").getBoundingClientRect();
+            const title = item.querySelector(".bookmark-status-with-link").getBoundingClientRect();
+            return menu.right <= row.right && menu.top >= row.top && menu.left >= title.right;
+          })()
         JS
       end
 
@@ -183,7 +187,7 @@ module PageObjects
 
       def has_balanced_message_rows?
         page.evaluate_script(<<~JS)
-          return [...document.querySelectorAll(".topic-list-item")].every(row => {
+          [...document.querySelectorAll(".topic-list-item")].every(row => {
             const title = row.querySelector(".main-link").getBoundingClientRect();
             const avatar = [...row.querySelectorAll(".avatar")]
               .map(image => image.getBoundingClientRect()).find(bounds => bounds.width > 0);
