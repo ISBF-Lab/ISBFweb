@@ -1,9 +1,11 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import AvatarSelector from "discourse/components/modal/avatar-selector";
+import Bookmark from "discourse/components/modal/bookmark";
 import CreateInvite from "discourse/components/modal/create-invite";
 import CreateInviteBulk from "discourse/components/modal/create-invite-bulk";
 import CreateInviteWithRoles from "discourse/components/modal/create-invite-with-roles";
+import DiscardDraft from "discourse/components/modal/discard-draft";
 import EditUserDirectoryColumns from "discourse/components/modal/edit-user-directory-columns";
 import SecondFactorAddSecurityKey from "discourse/components/modal/second-factor-add-security-key";
 import SecondFactorAddTotp from "discourse/components/modal/second-factor-add-totp";
@@ -31,6 +33,18 @@ const PREFERENCE_DIALOGS = new Set([
   SecondFactorEditSecurityKey,
 ]);
 
+const DIRECTORY_DIALOGS = new Set([EditUserDirectoryColumns]);
+const BOOKMARK_DIALOGS = new Set([Bookmark]);
+const DRAFT_DIALOGS = new Set([DiscardDraft]);
+const CONFIRMATION_SCOPES = new Set([
+  "preferences",
+  "invitations",
+  "bookmarks",
+  "drafts",
+  "pending",
+  "messages",
+]);
+
 function matchesComponent(component, candidates) {
   return [...candidates].some(
     (candidate) =>
@@ -45,6 +59,7 @@ function matchesComponent(component, candidates) {
 }
 
 export default class ISBFFrontendScope extends Component {
+  @service("dialog") _dialog;
   @service("modal") _modal;
   @service("router") _router;
 
@@ -55,6 +70,10 @@ export default class ISBFFrontendScope extends Component {
   get #dialogEnabled() {
     const component = this._modal.activeModal?.component;
     const route = normalizedRouteName(this._router.currentRouteName);
+
+    if (this._dialog.show && CONFIRMATION_SCOPES.has(this.#scope?.id)) {
+      return true;
+    }
 
     if (matchesComponent(component, INVITE_DIALOGS)) {
       return (
@@ -68,9 +87,17 @@ export default class ISBFFrontendScope extends Component {
       return matchesComponent(component, PREFERENCE_DIALOGS);
     }
 
+    if (this.#scope?.id === "bookmarks") {
+      return matchesComponent(component, BOOKMARK_DIALOGS);
+    }
+
+    if (this.#scope?.id === "drafts") {
+      return matchesComponent(component, DRAFT_DIALOGS);
+    }
+
     return (
       this.#scope?.id === "directory" &&
-      matchesComponent(component, new Set([EditUserDirectoryColumns]))
+      matchesComponent(component, DIRECTORY_DIALOGS)
     );
   }
 
@@ -87,6 +114,8 @@ export default class ISBFFrontendScope extends Component {
       }
       if (this.#scope.userContent) {
         classes.push("has-frontend-user-content");
+      } else {
+        classes.push("has-frontend-page");
       }
     }
     if (this.#dialogEnabled) {
