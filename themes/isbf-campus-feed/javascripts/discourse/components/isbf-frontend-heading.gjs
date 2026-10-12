@@ -15,6 +15,9 @@ export default class ISBFFrontendHeading extends Component {
     if (scope?.id === "directory") {
       return i18n("directory.title");
     }
+    if (scope?.id === "groups" && route === "groups.index") {
+      return i18n("groups.index.all");
+    }
     if (scope?.id !== "preferences") {
       return null;
     }

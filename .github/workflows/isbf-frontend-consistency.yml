@@ -73,7 +73,7 @@ jobs:
       - name: Native frontend behavior regression
         env:
           LOAD_PLUGINS: "0"
-          FILTER: "/User Preferences|User Directory|User Invited|User Bookmarks|User Drafts|User Private Messages|Group|Search|Badges|User Card/i"
+          FILTER: "/User.*preferences|User.*directory|User.*invited|Invite|Bookmark|Draft|Private Message|Pending Post|Group|Search|Badge|User Card|User.*summary|Tag/i"
         run: bin/qunit --standalone --filter "$FILTER"
 
       - name: Install the project theme in the synthetic test database
@@ -84,12 +84,14 @@ jobs:
           bin/rails runner 'theme = RemoteTheme.import_theme_from_directory(Rails.root.join("themes/isbf-campus-feed")); theme.set_default!'
 
       - name: Project theme QUnit
+        id: theme_qunit
         env:
           DISCOURSE_DEV_DB: discourse_test
           QUNIT_RAILS_ENV: development
         run: bin/rake 'themes:qunit[name,ISBF Campus Feed]'
 
       - name: Real page appearance and preservation checks
+        if: success() || (failure() && steps.theme_qunit.outcome == 'failure')
         run: bin/rspec themes/isbf-campus-feed/spec/system/frontend_consistency_spec.rb
 
       - uses: actions/upload-artifact@v7

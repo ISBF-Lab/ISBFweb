@@ -97,6 +97,63 @@ module("ISBF | Unit | Lib | frontend-consistency-scope", function () {
     );
   });
 
+  test("group management and directory scopes include only the accepted routes", function (assert) {
+    for (const section of [
+      "profile",
+      "membership",
+      "interaction",
+      "email",
+      "members",
+      "categories",
+      "tags",
+      "logs",
+    ]) {
+      assert.strictEqual(
+        frontendConsistencyScope(`group.manage.${section}`).id,
+        "group-manage",
+        `${section} preserves frontend group management`
+      );
+    }
+    const routes = {
+      "groups.index": "groups",
+      "groups.new": "groups",
+      "group.index": "group",
+      "group.members": "group",
+      "group.requests": "group",
+      "group.permissions": "group",
+      "group.activity.index": "group",
+      "group.activity.posts": "group",
+      "group.activity.topics": "group",
+      "group.activity.mentions": "group",
+      "group.messages.inbox": "group-messages",
+      "group.messages.archive": "group-messages",
+      "full-page-search": "search",
+      "tags.index": "tags",
+    };
+    for (const [route, id] of Object.entries(routes)) {
+      assert.strictEqual(
+        frontendConsistencyScope(route).id,
+        id,
+        `${route} has an accepted page scope`
+      );
+    }
+    for (const route of [
+      "about",
+      "faq",
+      "guidelines",
+      "conduct",
+      "rules",
+      "tos",
+      "privacy",
+    ]) {
+      assert.strictEqual(
+        frontendConsistencyScope(route).id,
+        "information",
+        `${route} retains the site's information body`
+      );
+    }
+  });
+
   test("loading, admin, authentication and approved surfaces stay outside the rollout", function (assert) {
     for (const route of [
       null,
@@ -108,6 +165,11 @@ module("ISBF | Unit | Lib | frontend-consistency-scope", function () {
       "signup",
       "session",
       "tagGroups.index",
+      "tags.showCategory",
+      "tags.intersection",
+      "tag.show",
+      "group.manage.plugin-settings",
+      "group.plugin-settings",
       "discovery.latest",
       "userActivity.topics",
       "userActivity.replies",

@@ -9,6 +9,12 @@ acceptance("ISBF frontend consistency", function (needs) {
   needs.user();
   needs.settings({ enable_names: true, enable_user_directory: true });
   needs.pretender((server, helper) => {
+    server.get("/posts/:id/cooked", () =>
+      helper.response({ cooked: "<p>Synthetic public activity</p>" })
+    );
+    server.get("/filter.json", () =>
+      helper.response({ users: [], topic_list: { topics: [] } })
+    );
     server.get("/u/eviltrout.json", () => {
       const data = cloneJSON(fixturesByUrl["/u/eviltrout.json"]);
       data.user.can_edit = true;
@@ -46,7 +52,7 @@ acceptance("ISBF frontend consistency", function (needs) {
       .exists("native directory data has completed loading");
     assert.dom(".time-read").exists("period-dependent columns are retained");
     assert
-      .dom(".directory-table__cell--user-field")
+      .dom(".directory-table__value--user-field")
       .exists("custom fields are retained");
     await visit("/u/eviltrout/activity/topics");
     assert
@@ -128,6 +134,9 @@ acceptance("ISBF frontend consistency", function (needs) {
 acceptance("ISBF private list appearance", function (needs) {
   needs.user();
   needs.pretender((server, helper) => {
+    server.get("/filter.json", () =>
+      helper.response({ users: [], topic_list: { topics: [] } })
+    );
     server.get("/u/eviltrout/bookmarks.json", () => {
       const data = cloneJSON(fixturesByUrl["/u/eviltrout/bookmarks.json"]);
       data.user_bookmark_list.bookmarks[0].reminder_at = "2028-01-01T08:00";

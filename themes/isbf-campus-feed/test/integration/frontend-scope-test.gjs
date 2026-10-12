@@ -1,21 +1,15 @@
-import { tracked } from "@glimmer/tracking";
-import Service from "@ember/service";
 import { render, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import CreateInvite from "discourse/components/modal/create-invite";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import ISBFFrontendScope from "../../discourse/components/isbf-frontend-scope";
 
-class ScopedRouter extends Service {
-  @tracked currentRouteName = "preferences.account";
-}
-
 module("ISBF | Integration | Component | ISBFFrontendScope", function (hooks) {
-  setupRenderingTest(hooks);
+  setupRenderingTest(hooks, { stubRouter: true });
 
   hooks.beforeEach(function () {
-    this.owner.register("service:router", ScopedRouter);
     this.router = this.owner.lookup("service:router");
+    this.router.currentRouteName = "preferences.account";
   });
 
   test("route transitions remove the previous region's classes", async function (assert) {

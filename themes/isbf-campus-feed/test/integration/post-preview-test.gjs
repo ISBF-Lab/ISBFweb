@@ -1,9 +1,11 @@
 import { click, render, settled, triggerEvent } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
+import { themePrefix } from "virtual:theme";
 import UserAction from "discourse/models/user-action";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import pretender, { response } from "discourse/tests/helpers/create-pretender";
+import { i18n } from "discourse-i18n";
 import ISBFActivityPreview from "../../discourse/components/isbf-activity-preview";
 import ISBFPostPreview from "../../discourse/components/isbf-post-preview";
 import { invalidateCookedPost } from "../../discourse/lib/feed-post-loader";
@@ -77,7 +79,11 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
       .exists({ count: 2 }, "both image thumbnails are displayed");
     assert
       .dom(".isbf-post-preview__image")
-      .hasAttribute("alt", "Post image", "the filename is not an image label");
+      .hasAttribute(
+        "alt",
+        i18n(themePrefix("isbf_v2.preview_image")),
+        "the filename is not an image label"
+      );
     assert
       .dom(".isbf-activity-preview__metadata .badge-category.--style-square")
       .exists("the native square category badge is used");
@@ -105,7 +111,7 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
     assert.strictEqual(this.requests, 0, "a titled row needs no body request");
   });
 
-  test("a recent untitled discussion uses one thumbnail and readable text", async function (assert) {
+  test("a recent untitled discussion retains the production text-only rail", async function (assert) {
     this.title = TITLE;
     await render(
       <template>
@@ -124,7 +130,20 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
       .hasText("Campus photos.", "the body replaces the internal title");
     assert
       .dom(".isbf-post-preview__image")
-      .exists({ count: 1 }, "the rail stays compact");
+      .doesNotExist("the production rail does not show thumbnails");
+    assert
+      .dom(".isbf-post-preview")
+      .hasAttribute("href", "/t/campus/780001", "the post link remains usable");
+  });
+
+  test("failed activity images are removed while the post link remains usable", async function (assert) {
+    await render(
+      <template>
+        <ISBFActivityPreview @outletArgs={{this.outletArgs}} />
+      </template>
+    );
+    this.observers[0]([{ isIntersecting: true }]);
+    await settled();
     await triggerEvent(".isbf-post-preview__image", "error", {
       bubbles: false,
     });
@@ -136,7 +155,7 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
           "/images/d-logo-sketch-small.png?preview=b",
           window.location.href
         ).href,
-        "the next thumbnail replaces the failed image"
+        "the remaining thumbnail survives the failed image"
       );
     await triggerEvent(".isbf-post-preview__image", "error", {
       bubbles: false,
@@ -146,7 +165,7 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
       .doesNotExist("a failed image is removed");
     assert
       .dom(".isbf-post-preview")
-      .hasAttribute("href", "/t/campus/780001", "the post link remains usable");
+      .hasAttribute("href", this.item.postUrl, "the post link remains usable");
   });
 
   test("a failed request retains a clean excerpt and post link", async function (assert) {

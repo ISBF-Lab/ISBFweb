@@ -13,6 +13,7 @@ import {
   feedbackComposeHref,
   isFeedbackPath,
 } from "../lib/feedback-category";
+import { frontendConsistencyScope } from "../lib/frontend-consistency-scope";
 import { notificationsEnabled } from "../lib/notification-groups";
 import { officialConfig } from "../lib/official-filters";
 import { isFeedStyleTopic } from "../lib/topic-card-scope";
@@ -56,6 +57,13 @@ export default class ISBFV2Shell extends Component {
 
     if (/^\/(admin|login|signup|session)(\/|$)/.test(path)) {
       return null;
+    }
+    const scope = frontendConsistencyScope(this.router.currentRouteName);
+    if (/^\/g(\/|$)/.test(path) && scope?.id.startsWith("group")) {
+      return "groups";
+    }
+    if (scope?.id === "search" || scope?.id === "tags") {
+      return scope.id;
     }
     if (this.informationPage) {
       return "information";
@@ -235,6 +243,15 @@ export default class ISBFV2Shell extends Component {
 
     if (this.pageKind === "directory") {
       return i18n("directory.title");
+    }
+
+    const frontendTitles = {
+      groups: "groups.index.all",
+      search: "search.full_page_title",
+      tags: "tagging.tags",
+    };
+    if (frontendTitles[this.pageKind]) {
+      return i18n(frontendTitles[this.pageKind]);
     }
 
     const titles = {

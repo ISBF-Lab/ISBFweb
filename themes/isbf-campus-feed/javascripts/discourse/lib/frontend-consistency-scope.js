@@ -41,6 +41,39 @@ const USER_CONTENT = new Map([
   ["user.profile-hidden", "profile-hidden"],
 ]);
 
+const GROUP_PAGES = new Set([
+  "group.index",
+  "group.members",
+  "group.requests",
+  "group.permissions",
+  "group.activity.index",
+  "group.activity.posts",
+  "group.activity.topics",
+  "group.activity.mentions",
+]);
+
+const GROUP_MANAGEMENT = new Set([
+  "group.manage.index",
+  "group.manage.profile",
+  "group.manage.membership",
+  "group.manage.interaction",
+  "group.manage.email",
+  "group.manage.members",
+  "group.manage.categories",
+  "group.manage.tags",
+  "group.manage.logs",
+]);
+
+const INFORMATION = new Set([
+  "about",
+  "faq",
+  "guidelines",
+  "conduct",
+  "rules",
+  "tos",
+  "privacy",
+]);
+
 export function normalizedRouteName(routeName = "") {
   return (routeName ?? "").replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
 }
@@ -75,6 +108,40 @@ export function frontendConsistencyScope(routeName) {
 
   if (name === "badges.index" || name === "badges.show") {
     return { id: "badges", layout: "feed", userContent: false };
+  }
+
+  if (name === "full-page-search") {
+    return { id: "search", layout: "feature", userContent: false };
+  }
+
+  if (name === "tags.index") {
+    return { id: "tags", layout: "feed", userContent: false };
+  }
+
+  if (name === "groups.index" || name === "groups.new") {
+    return { id: "groups", layout: "feature", userContent: false };
+  }
+
+  if (GROUP_PAGES.has(name)) {
+    return { id: "group", layout: "feature", userContent: false };
+  }
+
+  if (GROUP_MANAGEMENT.has(name)) {
+    return { id: "group-manage", layout: "feature", userContent: false };
+  }
+
+  if (
+    [
+      "group.messages.index",
+      "group.messages.inbox",
+      "group.messages.archive",
+    ].includes(name)
+  ) {
+    return { id: "group-messages", layout: "feature", userContent: false };
+  }
+
+  if (INFORMATION.has(name)) {
+    return { id: "information", layout: "feed", userContent: false };
   }
 
   return null;
