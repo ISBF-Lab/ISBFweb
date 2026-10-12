@@ -1,0 +1,65 @@
+[
+  {
+    "page": "account",
+    "title": "账户设置",
+    "decisions": "D01/D02/D04",
+    "layout": "feature",
+    "status": "requires-human-confirmation"
+  },
+  {
+    "page": "bookmarks",
+    "title": "书签",
+    "decisions": "D03/D04",
+    "layout": "feed",
+    "status": "requires-human-confirmation"
+  },
+  {
+    "page": "directory",
+    "title": "用户目录",
+    "decisions": "D01/D04",
+    "layout": "feature",
+    "status": "requires-human-confirmation"
+  },
+  {
+    "page": "invitations",
+    "title": "邀请管理",
+    "decisions": "D01/D02/D04",
+    "layout": "feature",
+    "status": "requires-human-confirmation"
+  },
+  {
+    "page": "summary",
+    "title": "个人资料下部",
+    "decisions": "D04/D05",
+    "layout": "feed",
+    "status": "requires-human-confirmation"
+  },
+  {
+    "page": "badges",
+    "title": "徽章",
+    "decisions": "D04/D05",
+    "layout": "feed",
+    "status": "requires-human-confirmation"
+  },
+  {
+    "page": "information",
+    "title": "关于与帮助",
+    "decisions": "D06",
+    "layout": "feed",
+    "status": "requires-human-confirmation"
+  },
+  {
+    "page": "usercard",
+    "title": "用户卡",
+    "decisions": "D07",
+    "layout": "feed",
+    "status": "requires-human-confirmation"
+  },
+  {
+    "page": "modal",
+    "title": "关联弹窗",
+    "decisions": "D02/D07",
+    "layout": "component",
+    "status": "requires-human-confirmation"
+  }
+]

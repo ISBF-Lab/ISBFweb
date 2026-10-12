@@ -1,0 +1,90 @@
+@use "lib/viewport";
+
+.post-avatar,
+.user-card-avatar,
+.user-profile-avatar {
+  position: relative;
+}
+
+.avatar-frame__overlay {
+  position: absolute;
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.avatar-frame__overlay > .avatar-frame__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  border: 0;
+  border-radius: 0;
+  object-fit: contain;
+}
+
+.avatar-frame__anchor {
+  display: inline-block;
+  position: relative;
+  line-height: 0;
+}
+
+#main-outlet .user-profile-avatar {
+  .avatar-frame__anchor > img.avatar {
+    display: block;
+    margin: 0;
+  }
+
+  .avatar-frame__overlay > .avatar-frame__image {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+    box-sizing: border-box;
+  }
+}
+
+.user-main .about .details .avatar-frame__anchor {
+  @include viewport.from(md) {
+    margin-block-end: 10px;
+    margin-inline-end: 20px;
+  }
+}
+
+.user-main .about.collapsed-info .details .avatar-frame__anchor {
+  margin-inline-end: 10px;
+}
+
+.avatar-frame-preferences {
+  margin-block: 1em;
+
+  &__selection {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 0.5em;
+  }
+
+  &__preview {
+    display: inline-block;
+    position: relative;
+    width: 48px;
+    height: 48px;
+    margin: 0.5em;
+    flex-shrink: 0;
+    line-height: 0;
+
+    > img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.post-avatar .avatar-flair,
+.user-card-avatar .avatar-flair,
+.user-profile-avatar .avatar-flair {
+  z-index: 3;
+}
