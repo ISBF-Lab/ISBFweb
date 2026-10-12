@@ -63,8 +63,8 @@
   "core_changed": false,
   "plugins_changed": false,
   "database_migrations": false,
-  "production_deployed": false,
-  "production_gate": "Pending explicit confirmation because automatic approval review retained the earlier no-production-check constraint",
+  "production_deployed": true,
+  "production_gate": "Completed: explicit user authorization, guarded theme backup and merge, all 63 plugins preserved, desktop/mobile read-only page and feature loading confirmed; temporary credentials removed",
   "ci_run": "https://github.com/ISBF-Lab/ISBFweb/actions/runs/38291752432",
   "verification": {
     "conclusion": "success",
@@ -91,5 +91,8 @@
     "sha256": "17e115c96a4ef7eb6d774c04d55db326347c36a8592ab09a88a6aa9cda36f4fc",
     "screenshots_all": 112,
     "review_subset": 16
-  }
+  },
+  "production_release_manifest": "deployments/frontend-consistency-20261013/manifest.json",
+  "production_published_at_utc": "2026-10-12T20:59:58Z",
+  "production_integration": "Two shared fields were three-way merged with the actual 162-field production theme; six added files match the verified UI commit. Actual deployed hashes are recorded in the production manifest."
 }

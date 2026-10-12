@@ -55,3 +55,9 @@
 
 见[人工确认记录](evidence/frontend-consistency-acceptance-20261012.md)。D01–D06与D07仅弹窗部分用于本轮19组主体。
 用户卡、资料上部、一级导航及后台排除。历史源附件不修改，运行快照不整体升级为Approved。
+
+## 2026-10-13 前台生产运行证据
+
+见[主题增量发布](../deployments/frontend-consistency-20261013/README.md)及其 manifest。
+该记录保存基于当时162字段、63插件生产状态合并的八份实际发布源码；最终主题为168字段。
+它是运行来源与回退证据，19组主体仍为In Progress，不新增Approved范围。
