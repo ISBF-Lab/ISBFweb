@@ -82,6 +82,7 @@ RSpec.describe "Frontend consistency" do
 
       it "retains private lists, reminder cancellation, and lower profile collections" do
         bookmark = Fabricate(:bookmark, user: user, name: "Synthetic reviewed bookmark")
+        Fabricate(:topic_user, user: user, topic: bookmark.bookmarkable.topic)
         Draft.set(
           user,
           "#{Draft::NEW_TOPIC}_1",
@@ -154,7 +155,7 @@ RSpec.describe "Frontend consistency" do
         review.expand_search_filters
         expect(review).to have_search_filters
         review.save_review_screenshot("#{device}-#{mode}-search")
-        Fabricate(:tag, name: "frontend-review-tag")
+        topic.tags << Fabricate(:tag, name: "frontend-review-tag")
         review.visit_tags
         review.save_review_screenshot("#{device}-#{mode}-tags")
         %w[about faq guidelines conduct rules tos privacy].each do |information|
