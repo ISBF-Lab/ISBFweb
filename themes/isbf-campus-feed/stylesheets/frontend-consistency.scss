@@ -689,7 +689,7 @@
   @include frontend-controls;
 }
 
-.isbf-frontend.is-frontend-messages .topic-list {
+.isbf-frontend.is-frontend-messages #main-outlet .user-content .topic-list {
   .raw-topic-link {
     font-size: var(--isbf-v2-font-lg);
     white-space: normal;
@@ -725,7 +725,7 @@
   }
 }
 
-.isbf-frontend.is-frontend-bookmarks .bookmark-list {
+.isbf-frontend.is-frontend-bookmarks #main-outlet .user-content .bookmark-list {
   .bookmark-list-item {
     display: grid;
     grid-template-columns: auto auto minmax(0, 1fr);
