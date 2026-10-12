@@ -229,6 +229,10 @@ module PageObjects
         visit_review("/#{information}", "information", ".body-page")
       end
 
+      def has_information_body?(post)
+        page.has_css?(".body-page", text: post.raw)
+      end
+
       def save_review_screenshot(name)
         directory = Rails.root.join("tmp/isbf-frontend-screenshots")
         FileUtils.mkdir_p(directory)

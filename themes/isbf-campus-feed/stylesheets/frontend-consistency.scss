@@ -215,8 +215,11 @@
 
   :focus-visible:not(
     [autocomplete="one-time-code"],
+    [aria-hidden="true"],
     .d-otp-input input,
-    .d-otp input
+    .d-otp input,
+    .ace_editor *,
+    .cm-editor *
   ) {
     outline: 2px solid var(--isbf-v2-focus-ring);
   }
@@ -681,34 +684,7 @@
 }
 
 .isbf-frontend.is-frontend-preferences .user-preferences {
-  .form-vertical {
-    display: flex;
-    flex-direction: column;
-    gap: var(--isbf-v2-space-6);
-    margin: 0;
-  }
-
-  .control-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--isbf-v2-space-2);
-    min-inline-size: 0;
-    margin: 0;
-
-    > .control-label {
-      inline-size: auto;
-      margin: 0;
-      color: var(--isbf-v2-text);
-      font-size: var(--isbf-v2-font-sm);
-      font-weight: var(--isbf-v2-weight-medium);
-      text-align: start;
-    }
-
-    > .controls {
-      min-inline-size: 0;
-      margin: 0;
-    }
-  }
+  @include frontend-form-groups;
 
   :is(.instructions, .form-kit__container-help) {
     margin: 0;
@@ -723,18 +699,17 @@
     padding-block: var(--isbf-v2-space-3);
   }
 
-  :is(
-    input:not(
-      [type="checkbox"],
-      [type="radio"],
-      [type="hidden"],
-      [type="file"],
-      [autocomplete="one-time-code"],
-      .d-otp-input input,
-      .d-otp input
-    ),
-    textarea,
-    select
+  :is(input, textarea, select):not(
+    [type="checkbox"],
+    [type="radio"],
+    [type="hidden"],
+    [type="file"],
+    [autocomplete="one-time-code"],
+    [aria-hidden="true"],
+    .d-otp-input input,
+    .d-otp input,
+    .ace_editor *,
+    .cm-editor *
   ) {
     inline-size: 100%;
   }

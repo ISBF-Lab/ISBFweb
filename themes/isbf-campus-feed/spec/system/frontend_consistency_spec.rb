@@ -37,7 +37,7 @@ RSpec.describe "Frontend consistency" do
         page.current_window.resize_to(width, 900)
       end
 
-      it "loads settings and directory without changing the upper profile region" do
+      it "lets users save account settings while preserving the upper profile region" do
         review.visit_preferences(user)
         expect(review).to have_account_fields
         expect(review).to have_aligned_account_labels
@@ -52,6 +52,9 @@ RSpec.describe "Frontend consistency" do
         expect(review).to have_saved_preferences
         page.refresh
         expect(review).to have_name("Synthetic reviewed name")
+      end
+
+      it "lets users browse preference sections and the user directory" do
         %w[
           security
           profile
@@ -81,7 +84,7 @@ RSpec.describe "Frontend consistency" do
         expect(review).to have_no_scoped_dialog
       end
 
-      it "retains private lists, reminder cancellation, and lower profile collections" do
+      it "lets users cancel bookmark removal and browse their drafts and pending posts" do
         bookmark = Fabricate(:bookmark, user: user, name: "Synthetic reviewed bookmark")
         Fabricate(:topic_user, user: user, topic: bookmark.bookmarkable.topic)
         Draft.set(
@@ -90,8 +93,6 @@ RSpec.describe "Frontend consistency" do
           0,
           { title: "Synthetic draft", reply: "Synthetic draft body" }.to_json,
         )
-        message = Fabricate(:private_message_topic, user: user, recipient: other_user)
-        Fabricate(:post, user: user, topic: message)
         review.visit_bookmarks(user)
         expect(review).to have_no_public_cards
         review.save_review_screenshot("#{device}-#{mode}-bookmarks")
@@ -104,11 +105,20 @@ RSpec.describe "Frontend consistency" do
         review.visit_drafts(user)
         review.save_review_screenshot("#{device}-#{mode}-drafts")
         review.visit_pending(user)
+      end
+
+      it "lets users browse their private message filters and loaded inbox" do
+        message = Fabricate(:private_message_topic, user: other_user, recipient: user)
+        Fabricate(:post, user: other_user, topic: message)
+        Fabricate(:post, user: user, topic: message)
         %w[sent new unread archive].each { |filter| review.visit_messages(user, filter: filter) }
         review.visit_messages(user)
         expect(review).to have_message(message)
         expect(review).to have_no_public_cards
         review.save_review_screenshot("#{device}-#{mode}-messages")
+      end
+
+      it "lets users browse their lower profile and real badge collections" do
         review.visit_summary(user)
         upper_before = review.upper_region_geometry
         review.without_rollout_styles { expect(review.upper_region_geometry).to eq(upper_before) }
@@ -122,7 +132,7 @@ RSpec.describe "Frontend consistency" do
         review.save_review_screenshot("#{device}-#{mode}-badge-details")
       end
 
-      it "retains group ownership, every management section, and associated dialogs" do
+      it "lets group owners browse members and activity and dismiss the member dialog" do
         review.visit_groups
         review.save_review_screenshot("#{device}-#{mode}-groups")
         review.visit_group(group)
@@ -133,10 +143,23 @@ RSpec.describe "Frontend consistency" do
         %w[requests posts topics mentions permissions].each do |section|
           review.visit_group(group, section: section)
         end
-        %w[profile membership interaction email members categories tags logs].each do |section|
+      end
+
+      it "lets group owners browse profile, membership, interaction, and email settings" do
+        %w[profile membership interaction email].each do |section|
           review.visit_group_management(group, section: section)
           review.save_review_screenshot("#{device}-#{mode}-group-#{section}")
         end
+      end
+
+      it "lets group owners browse member, category, tag, and log settings" do
+        %w[members categories tags logs].each do |section|
+          review.visit_group_management(group, section: section)
+          review.save_review_screenshot("#{device}-#{mode}-group-#{section}")
+        end
+      end
+
+      it "lets users browse group messages and administrators create groups with unchanged admin UI" do
         %w[inbox archive].each { |section| review.visit_group_messages(group, section: section) }
         sign_in(admin)
         review.visit_group_creation
@@ -145,7 +168,7 @@ RSpec.describe "Frontend consistency" do
         expect(review).to have_no_rollout_styles
       end
 
-      it "loads search data, tag collections, and the complete information body" do
+      it "lets users search real content and browse populated tag collections" do
         topic = Fabricate(:topic, title: "Frontend review topic with synthetic search content")
         post = Fabricate(:post, topic: topic, raw: "Frontend review synthetic content")
         SearchIndexer.enable
@@ -159,12 +182,24 @@ RSpec.describe "Frontend consistency" do
         topic.tags << Fabricate(:tag, name: "frontend-review-tag")
         review.visit_tags
         review.save_review_screenshot("#{device}-#{mode}-tags")
-        %w[about faq guidelines conduct rules tos privacy].each do |information|
-          review.visit_information(information)
-          review.save_review_screenshot("#{device}-#{mode}-#{information}")
-        end
       ensure
         SearchIndexer.disable
+      end
+
+      it "lets users read the about page and configured information page bodies" do
+        information_post =
+          Fabricate(
+            :post,
+            raw: "Synthetic frontend review information body for policy page checks.",
+          )
+        SiteSetting.guidelines_topic_id = information_post.topic.id
+        SiteSetting.tos_topic_id = information_post.topic.id
+        SiteSetting.privacy_topic_id = information_post.topic.id
+        %w[about faq guidelines conduct rules tos privacy].each do |information|
+          review.visit_information(information)
+          expect(review).to have_information_body(information_post) unless information == "about"
+          review.save_review_screenshot("#{device}-#{mode}-#{information}")
+        end
       end
     end
   end
