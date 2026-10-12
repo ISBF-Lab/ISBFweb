@@ -165,7 +165,7 @@ module PageObjects
       end
 
       def visit_badge(badge)
-        visit_review(badge.url, "badges", ".badges-granted .user-info")
+        visit_review("/badges/#{badge.id}/#{badge.slug}", "badges", ".badges-granted .user-info")
       end
 
       def visit_groups
