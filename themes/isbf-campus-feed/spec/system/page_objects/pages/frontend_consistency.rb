@@ -1,0 +1,244 @@
+# frozen_string_literal: true
+
+module PageObjects
+  module Pages
+    class FrontendConsistency < PageObjects::Pages::Base
+      def visit_preferences(user, section: "account")
+        visit_review(
+          "/u/#{user.username}/preferences/#{section}",
+          "preferences",
+          ".user-preferences",
+        )
+      end
+
+      def has_account_fields?
+        page.has_css?(".pref-name input") && page.has_css?(".pref-email")
+      end
+
+      def rename_to(name)
+        page.find(".pref-name input").set(name)
+        page.find(".save-button .btn-primary").click
+        self
+      end
+
+      def has_saved_preferences?
+        page.has_css?(".save-button .saved")
+      end
+
+      def has_name?(name)
+        page.find(".pref-name").has_field?(with: name)
+      end
+
+      def has_upper_profile?
+        page.has_css?(".user-main > .about")
+      end
+
+      def upper_region_geometry
+        page.evaluate_script(<<~JS)
+          [".user-main > .about", ".user-profile-avatar", ".user-profile-names", ".user-navigation-primary"].map(selector => {
+            const element = document.querySelector(selector);
+            const rectangle = element.getBoundingClientRect();
+            const style = getComputedStyle(element);
+            return { selector, width: rectangle.width, height: rectangle.height, font: style.font, background: style.backgroundColor };
+          })
+        JS
+      end
+
+      def without_rollout_styles
+        page.execute_script("document.body.classList.remove('isbf-frontend')")
+        yield
+      ensure
+        page.execute_script("document.body.classList.add('isbf-frontend')")
+      end
+
+      def lower_surface_color
+        page.evaluate_script(
+          "getComputedStyle(document.querySelector('.user-content')).backgroundColor",
+        )
+      end
+
+      def visit_directory
+        visit_review("/u", "directory", ".directory-table__row")
+      end
+
+      def has_directory_controls?
+        page.has_css?(".directory-controls")
+      end
+
+      def visit_invitations(user)
+        visit_review(
+          "/u/#{user.username}/invited/pending",
+          "invitations",
+          ".user-navigation-secondary",
+        )
+      end
+
+      def open_invitation
+        page.find(".invite-button, .empty-state .btn-primary", match: :first).click
+        self
+      end
+
+      def has_scoped_dialog?
+        page.has_css?("body.has-frontend-dialog") && page.has_css?(".d-modal[role='dialog']")
+      end
+
+      def has_invitation_fields?
+        page.has_css?(".d-modal__body input")
+      end
+
+      def dismiss_dialog
+        page.send_keys(:escape)
+        self
+      end
+
+      def has_no_scoped_dialog?
+        page.has_no_css?(".d-modal") && page.has_no_css?("body.has-frontend-dialog")
+      end
+
+      def visit_bookmarks(user)
+        visit_review("/u/#{user.username}/activity/bookmarks", "bookmarks", ".bookmark-list-item")
+      end
+
+      def has_no_public_cards?
+        page.has_no_css?(".isbf-feed-card")
+      end
+
+      def open_bookmark_removal
+        page.find(".bookmark-actions-dropdown .select-kit-header", match: :first).click
+        page.find('.select-kit-row[data-value="remove"]').click
+        self
+      end
+
+      def has_scoped_confirmation?
+        page.has_css?("body.has-frontend-dialog") && page.has_css?(".dialog-container")
+      end
+
+      def cancel_confirmation
+        page.find(".dialog-footer .btn-default").click
+        self
+      end
+
+      def has_no_confirmation?
+        page.has_no_css?(".dialog-container")
+      end
+
+      def has_bookmark?(bookmark)
+        page.has_css?(".bookmark-list-item", text: bookmark.name)
+      end
+
+      def visit_drafts(user)
+        visit_review("/u/#{user.username}/activity/drafts", "drafts", ".user-stream-item")
+      end
+
+      def visit_pending(user)
+        visit_review("/u/#{user.username}/activity/pending", "pending", ".user-content")
+      end
+
+      def visit_messages(user, filter: nil)
+        path = "/u/#{user.username}/messages"
+        path += "/#{filter}" if filter
+        visit_review(path, "messages", ".user-content")
+      end
+
+      def has_message?(topic)
+        page.has_css?(".topic-list-item", text: topic.title)
+      end
+
+      def visit_summary(user)
+        visit_review("/u/#{user.username}/summary", "profile-summary", ".stats-section")
+      end
+
+      def visit_user_badges(user)
+        visit_review("/u/#{user.username}/badges", "profile-badges", ".user-content")
+      end
+
+      def visit_badges
+        visit_review("/badges", "badges", ".badge-grouping")
+      end
+
+      def visit_badge(badge)
+        visit_review(badge.url, "badges", ".badges-granted .user-info")
+      end
+
+      def visit_groups
+        visit_review("/g", "groups", ".group-box")
+      end
+
+      def visit_group(group, section: "members")
+        path = %w[posts topics mentions].include?(section) ? "activity/#{section}" : section
+        selector = section == "members" ? ".group-member" : ".group"
+        visit_review("/g/#{group.name}/#{path}", "group", selector)
+      end
+
+      def open_group_add_members
+        page.find(".group-members-add").click
+        self
+      end
+
+      def visit_group_management(group, section:)
+        selector = section == "members" ? ".group-member" : ".group .user-content"
+        visit_review("/g/#{group.name}/manage/#{section}", "group-manage", selector)
+      end
+
+      def visit_group_messages(group, section:)
+        visit_review(
+          "/g/#{group.name}/messages/#{section}",
+          "group-messages",
+          ".group .user-content",
+        )
+      end
+
+      def visit_group_creation
+        visit_review("/g/custom/new", "groups", ".groups-form")
+      end
+
+      def has_no_rollout_styles?
+        page.has_no_css?("body.isbf-frontend")
+      end
+
+      def visit_search(query:)
+        visit_review("/search?q=#{CGI.escape(query)}", "search", ".fps-result")
+      end
+
+      def has_search_result?(topic)
+        page.has_css?(".fps-result", text: topic.title)
+      end
+
+      def expand_search_filters
+        page.find(".advanced-filters__toggle").click
+        self
+      end
+
+      def has_search_filters?
+        page.has_css?(".search-advanced-options")
+      end
+
+      def visit_tags
+        visit_review("/tags", "tags", ".tag-box")
+      end
+
+      def visit_information(information)
+        visit_review("/#{information}", "information", ".body-page")
+      end
+
+      def save_review_screenshot(name)
+        directory = Rails.root.join("tmp/isbf-frontend-screenshots")
+        FileUtils.mkdir_p(directory)
+        page.save_screenshot(directory.join("#{name}.png")) # rubocop:disable Lint/Debugger -- Required theme review artifact.
+      end
+
+      private
+
+      def visit_review(path, scope, selector)
+        page.visit(path)
+        expect(page).to have_css("body.is-frontend-#{scope}")
+        expect(page).to have_css(selector)
+        expect(page).to have_no_css("#main-outlet .spinner")
+        expect(
+          page.evaluate_script("document.documentElement.scrollWidth <= window.innerWidth"),
+        ).to eq(true)
+        self
+      end
+    end
+  end
+end
