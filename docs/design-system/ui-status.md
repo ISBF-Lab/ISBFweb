@@ -80,5 +80,12 @@
 
 [运行基线](baselines/README.md)、[19组执行记录](frontend-rollout-20261012.md)
 及[D01–D07代表提案](proposals/frontend-consistency-20261012.md)已建立。
-新用途组合待人工确认，基线附件和离线预览不自动成为Approved；后台排除。
+D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用户卡及资料上部保留，后台排除。
 遵照用户要求[控制内存](resource-policy.md)，停止生产排查。
+
+## 本轮接入状态与保留区域
+
+19个页面组进入In Progress，原生模板的Legacy审阅记录不表示其仍待设计选择。
+范围与进度以[执行记录](frontend-rollout-20261012.md)为准，新增组合以[人工确认记录](references/evidence/frontend-consistency-acceptance-20261012.md)为准。
+用户弹出卡仍是Legacy且明确排除；资料顶部A11、一级导航、头像框A14和公开活动预览A12保留。
+资料设置表单属于接入范围。新页面未完成实际交互与保留区域验证前，不标为Approved。

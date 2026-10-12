@@ -1909,6 +1909,22 @@
       },
       "final_deployment_report": "deploy-work/avatar-frame-calibration-20261011/deployment-final-report.json",
       "final_deployment_report_sha256": "02142608738e08980cc4698bd5fc06546b9940974ca78525e67382ae7a11071a"
+    },
+    {
+      "date": "2026-10-12",
+      "kind": "frontend_consistency_composition_acceptance",
+      "evidence": "evidence/frontend-consistency-acceptance-20261012.md",
+      "approved_scope": "D01-D06 and D07 associated dialogs; 19 page groups only",
+      "excluded": [
+        "user card",
+        "A11 profile upper region and primary navigation",
+        "A12 public activity previews",
+        "admin",
+        "authentication",
+        "existing calendar and reporting"
+      ],
+      "implementation_status": "In Progress",
+      "baseline_source_map": "../baselines/production-20261012/source-map.json"
     }
   ]
 }

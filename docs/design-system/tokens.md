@@ -229,5 +229,13 @@ A15/C14 来源为 [2026-10-11 校准样式](references/plugins/discourse-avatar-
 
 [运行基线](baselines/README.md)、[19组执行记录](frontend-rollout-20261012.md)
 及[D01–D07代表提案](proposals/frontend-consistency-20261012.md)已建立。
-新用途组合待人工确认，基线附件和离线预览不自动成为Approved；后台排除。
+D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用户卡及资料上部保留，后台排除。
 遵照用户要求[控制内存](resource-policy.md)，停止生产排查。
+
+## 本轮已确认的用途组合
+
+[人工确认](references/evidence/frontend-consistency-acceptance-20261012.md)只扩展D01–D06和D07关联弹窗的用途，没有新增全站token。
+输入最小44px、radius-sm 8px、1px边框、左右space-3；按钮最小44px、font-sm/600及pill，主按钮accent/contrast、hover brightness(0.92)。
+功能区沿用feature-width，内容列表沿用feed-width；16/24px间距、双列12px gap及18px/600分区标题均限定在目标主体。
+信息正文16px/1.45，段落16px、列表内缩32px。关联弹窗最大600px、16px内距/圆角、1px边框，手机全宽与安全区。
+用户卡的340px/96px提案被排除，不是可复用token。资料上部及一级导航的实际级联不得改变。

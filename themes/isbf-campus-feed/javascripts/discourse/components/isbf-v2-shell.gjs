@@ -87,6 +87,9 @@ export default class ISBFV2Shell extends Component {
     if (/^\/u\/[^/]+\/activity\/bookmarks(\/|$)/.test(path)) {
       return "bookmarks";
     }
+    if (/^\/u\/?$/.test(path)) {
+      return "directory";
+    }
     if (/^\/u\//.test(path)) {
       return "profile";
     }
@@ -228,6 +231,10 @@ export default class ISBFV2Shell extends Component {
 
     if (this.pageKind === "badges") {
       return i18n("badges.title");
+    }
+
+    if (this.pageKind === "directory") {
+      return i18n("directory.title");
     }
 
     const titles = {

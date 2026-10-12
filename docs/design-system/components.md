@@ -321,5 +321,26 @@ A15 的 [确认方案](proposals/avatar-frame-calibration-20261011.md)，对应�
 
 [运行基线](baselines/README.md)、[19组执行记录](frontend-rollout-20261012.md)
 及[D01–D07代表提案](proposals/frontend-consistency-20261012.md)已建立。
-新用途组合待人工确认，基线附件和离线预览不自动成为Approved；后台排除。
+D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用户卡及资料上部保留，后台排除。
 遵照用户要求[控制内存](resource-policy.md)，停止生产排查。
+
+## C15 · 本轮前台主体与关联弹窗
+
+### Source of Truth
+
+[人工确认与保留边界](references/evidence/frontend-consistency-acceptance-20261012.md)、[D01–D07组合](proposals/frontend-consistency-20261012.md)。
+实现位于[frontend-consistency.scss](../../themes/isbf-campus-feed/stylesheets/frontend-consistency.scss)及[路由范围](../../themes/isbf-campus-feed/javascripts/discourse/lib/frontend-consistency-scope.js)。页面接入仍为In Progress。
+
+### Visual Rules
+
+严格按D01–D06和D07关联弹窗组合复用现有token；600px内容列、最大920px功能区只作用于对应主体。
+原生控件和浮层保留字段、数据加载、错误/disabled语义、焦点和权限。二级导航使用D04；资料一级导航不接入。
+
+### Usage Rules
+
+仅用于19组目标主体及明确登记的关联弹窗。原生FormKit/UI kit/select-kit负责行为；私有列表不使用公开FeedCard或A12加载器。
+没有匹配规则的状态记录为待确认，不能从平台默认外观填入新设计值。
+
+### Forbidden Patterns
+
+全局改写.btn/input/.d-modal；给用户卡换肤；修改资料上部或其父容器宽度；裁切头像框；移除动态列、私信权限或表单字段；增加新阴影、颜色或装饰。
