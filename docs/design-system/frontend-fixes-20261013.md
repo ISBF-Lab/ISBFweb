@@ -35,3 +35,21 @@
 页面测量脚本使用可返回值的JavaScript表达式；多语句通过立即调用的函数包裹。
 当前[浏览器驱动0.5.10源码](https://github.com/YusukeIwaki/capybara-playwright-driver/blob/0.5.10/lib/capybara/playwright/browser.rb)
 会在传入内容前添加return，不能直接传顶层const声明或另一个return语句。
+
+2026-10-13回归发现：隐藏表头的私信列表采用fixed布局时仍把五列平均分配，
+因此将桌面列表改为auto布局，标题列请求全部剩余空间；保持头像42px与数字居中。
+第12轮原生1044项、主题89项通过，真实页面46/48例通过；两项失败均为桌面私信标题宽度。
+列宽修正后的独立CSS复现得到566px表格/约358px标题区；该复现不是原生页面验收，也不是设计参考。
+最终受测提交为7008a3662fbcebebf2e9dd9469a75e280cfbeed5，
+[第13轮CI](https://github.com/ISBF-Lab/ISBFweb/actions/runs/38291752432)已通过：
+原生QUnit1043项、主题QUnit89项、真实页面48例均为0失败。
+本轮已核对四处目标截图，邮箱/书签/草稿及桌面私信标题、头像和数字对齐均通过。
+
+112张原始页面截图中的16张目标截图及其摘要保存在
+[本轮截图索引](reviews/frontend-fixes-20261013/INDEX.html)；
+可下载[四处修复审核包](../downloads/isbf-frontend-fixes-20261013.zip)，
+完整解压后打开INDEX.html。包内使用合成用户，图片未裁切或重绘。
+手机长页中固定导航仍对应900px高的截图视口，不将这种拼接位置记作页面滚动后的状态。
+实际接入仍按原有In Progress范围管理，不因测试通过升级为Approved。
+
+生产主题尚未更新，仍等待此前明确确认问题的答复。
