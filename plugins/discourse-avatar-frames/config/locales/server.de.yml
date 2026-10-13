@@ -1,0 +1,4 @@
+de:
+  site_settings:
+    avatar_frames_enabled: "Avatar Frames Plugin aktivieren"
+    avatar_frames_config: "Avatar Frames Konfiguration (Format: rahmen_id:Rahmen Name:bedingung). Erlaubte Bedingungen: tl0, tl1, tl2, tl3, tl4, group:gruppen_name"

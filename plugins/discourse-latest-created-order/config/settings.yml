@@ -1,0 +1,5 @@
+latest_created_order:
+  latest_topics_order_by_created:
+    default: false
+    client: true
+    refresh: true

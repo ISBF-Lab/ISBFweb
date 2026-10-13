@@ -1,0 +1,327 @@
+{
+  "generated_at": "2026-10-09T04:57:28.357306+00:00",
+  "scope": "Standalone offline HTML design preview",
+  "skill": "frontend-design",
+  "preview_sha256": "e67cde86c9a882b0a2d969cf74f22d9468354e413338d23526e537ace4ee7510",
+  "summary": {
+    "browser_engines": 2,
+    "layout_checks": 16,
+    "distinct_interaction_scenarios": 19,
+    "interaction_scenario_executions": 38,
+    "console_errors": 0,
+    "external_requests": 0,
+    "inline_scripts_parsed": 2,
+    "unique_html_and_svg_ids": 76,
+    "missing_svg_references": 0
+  },
+  "browsers": [
+    {
+      "generated_at": "2026-10-09T04:49:05.095349+00:00",
+      "engine": "chromium",
+      "browser_version": "151.0.7922.34",
+      "layouts": [
+        {
+          "width": 320,
+          "height": 720,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 320,
+          "height": 720,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "theme": "dark",
+          "status": "passed"
+        }
+      ],
+      "scenarios": [
+        {
+          "name": "Login has a registration link and no invite textbox",
+          "status": "passed"
+        },
+        {
+          "name": "Empty invitation has a focused accessible error",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: INVALID",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: EXPIRED2026",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: USED2026",
+          "status": "passed"
+        },
+        {
+          "name": "Valid invitation ignores letter case",
+          "status": "passed"
+        },
+        {
+          "name": "Email format and existing account errors",
+          "status": "passed"
+        },
+        {
+          "name": "Email send failure can be retried",
+          "status": "passed"
+        },
+        {
+          "name": "Back and view changes preserve drafts",
+          "status": "passed"
+        },
+        {
+          "name": "OTP empty, wrong and expired states recover",
+          "status": "passed"
+        },
+        {
+          "name": "OTP filters pasted input and supports autofill",
+          "status": "passed"
+        },
+        {
+          "name": "Changing email clears old OTP",
+          "status": "passed"
+        },
+        {
+          "name": "Resend is available after its countdown",
+          "status": "passed"
+        },
+        {
+          "name": "Username validation leads to completion",
+          "status": "passed"
+        },
+        {
+          "name": "Complete registration, community preview and restart",
+          "status": "passed"
+        },
+        {
+          "name": "Navigation cancels pending invitation validation",
+          "status": "passed"
+        },
+        {
+          "name": "Keyboard focus and persistent automatic themes",
+          "status": "passed"
+        },
+        {
+          "name": "Reduced motion keeps immediate progress feedback",
+          "status": "passed"
+        },
+        {
+          "name": "Login alternatives remain interactive",
+          "status": "passed"
+        }
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "screenshots": [
+        "registration-390-light.png",
+        "login-390-light.png",
+        "registration-390-dark.png",
+        "registration-1440-light.png",
+        "login-1440-light.png",
+        "registration-1440-dark.png",
+        "code-error-1440-light.png",
+        "email-1440-light.png",
+        "verification-1440-light.png",
+        "profile-1440-light.png",
+        "complete-1440-light.png",
+        "verification-390-dark.png",
+        "complete-390-dark.png"
+      ]
+    },
+    {
+      "generated_at": "2026-10-09T04:53:05.945290+00:00",
+      "engine": "webkit",
+      "browser_version": "26.5",
+      "layouts": [
+        {
+          "width": 320,
+          "height": 720,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 320,
+          "height": 720,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "theme": "dark",
+          "status": "passed"
+        }
+      ],
+      "scenarios": [
+        {
+          "name": "Login has a registration link and no invite textbox",
+          "status": "passed"
+        },
+        {
+          "name": "Empty invitation has a focused accessible error",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: INVALID",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: EXPIRED2026",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: USED2026",
+          "status": "passed"
+        },
+        {
+          "name": "Valid invitation ignores letter case",
+          "status": "passed"
+        },
+        {
+          "name": "Email format and existing account errors",
+          "status": "passed"
+        },
+        {
+          "name": "Email send failure can be retried",
+          "status": "passed"
+        },
+        {
+          "name": "Back and view changes preserve drafts",
+          "status": "passed"
+        },
+        {
+          "name": "OTP empty, wrong and expired states recover",
+          "status": "passed"
+        },
+        {
+          "name": "OTP filters pasted input and supports autofill",
+          "status": "passed"
+        },
+        {
+          "name": "Changing email clears old OTP",
+          "status": "passed"
+        },
+        {
+          "name": "Resend is available after its countdown",
+          "status": "passed"
+        },
+        {
+          "name": "Username validation leads to completion",
+          "status": "passed"
+        },
+        {
+          "name": "Complete registration, community preview and restart",
+          "status": "passed"
+        },
+        {
+          "name": "Navigation cancels pending invitation validation",
+          "status": "passed"
+        },
+        {
+          "name": "Keyboard focus and persistent automatic themes",
+          "status": "passed"
+        },
+        {
+          "name": "Reduced motion keeps immediate progress feedback",
+          "status": "passed"
+        },
+        {
+          "name": "Login alternatives remain interactive",
+          "status": "passed"
+        }
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "screenshots": []
+    }
+  ],
+  "screenshots": [
+    "code-error-1440-light.png",
+    "complete-1440-light.png",
+    "complete-390-dark.png",
+    "email-1440-light.png",
+    "login-1440-light.png",
+    "login-390-light.png",
+    "profile-1440-light.png",
+    "registration-1440-dark.png",
+    "registration-1440-light.png",
+    "registration-390-dark.png",
+    "registration-390-light.png",
+    "verification-1440-light.png",
+    "verification-390-dark.png"
+  ],
+  "visual_review": [
+    "Desktop and mobile registration in light and dark modes",
+    "Login entry with invite registration link",
+    "Email verification and error states",
+    "Profile and completion states",
+    "Reduced-motion progression and theme controls"
+  ]
+}

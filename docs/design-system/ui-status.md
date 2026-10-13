@@ -97,3 +97,9 @@ D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用
 [source map](frontend-implementation-source-map-20261012.json)，检查结果见
 [验证记录](frontend-verification-20261012.json)。新版离线入口为
 [V2预览](reviews/frontend-20261012-v2/index.html)，已移除用户卡示例；旧包只作历史记录。
+
+## 2026-10-13 头像框显示技术修复
+
+[首页及个人卡片的定位修复](deployments/avatar-frame-visibility-20261013/README.md) 已上线，
+复用 A14/C03 的叠层视觉规则，只修正锚点及头像查找；没有新增颜色、尺寸或页面布局。
+用户明确最后自行视觉核验，当前待确认。该记录不批准整个用户卡片或提升新的视觉标准。

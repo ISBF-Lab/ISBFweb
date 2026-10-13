@@ -1,0 +1,168 @@
+{
+  "generated_at": "2026-10-10T14:38:56.107345+00:00",
+  "engine": "webkit",
+  "svg_sha256": "b61fc68ca4a7c1608bcbd2963f824742da8cc4afd5f207f426302da6ba98207b",
+  "particles": 552,
+  "layouts": [
+    {
+      "width": 1440,
+      "height": 900,
+      "theme": "light",
+      "metrics": {
+        "centerX": 720,
+        "centerY": 450,
+        "width": 121.07611083984375,
+        "height": 124.92315673828125,
+        "left": 659.5501708984375,
+        "right": 780.6262817382812,
+        "top": 387.75146484375,
+        "bottom": 512.6746215820312,
+        "fill": "rgb(23, 105, 170)",
+        "background": "rgb(255, 255, 255)",
+        "pointerEvents": "none",
+        "scrollWidth": 1440
+      },
+      "breathing_opacity": [
+        0.6,
+        1.0
+      ],
+      "input_ignored": true,
+      "reduced_motion_static": true,
+      "screenshot": "screenshots/webkit-1440-light.png"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "theme": "dark",
+      "metrics": {
+        "centerX": 720,
+        "centerY": 450,
+        "width": 121.07611083984375,
+        "height": 124.92315673828125,
+        "left": 659.5501708984375,
+        "right": 780.6262817382812,
+        "top": 387.75146484375,
+        "bottom": 512.6746215820312,
+        "fill": "rgb(114, 197, 250)",
+        "background": "rgb(16, 20, 19)",
+        "pointerEvents": "none",
+        "scrollWidth": 1440
+      },
+      "breathing_opacity": [
+        0.6,
+        1.0
+      ],
+      "input_ignored": true,
+      "reduced_motion_static": true,
+      "screenshot": "screenshots/webkit-1440-dark.png"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "metrics": {
+        "centerX": 195,
+        "centerY": 421.984375,
+        "width": 121.07611083984375,
+        "height": 124.92315673828125,
+        "left": 134.55014038085938,
+        "right": 255.62625122070312,
+        "top": 359.73583984375,
+        "bottom": 484.65899658203125,
+        "fill": "rgb(23, 105, 170)",
+        "background": "rgb(255, 255, 255)",
+        "pointerEvents": "none",
+        "scrollWidth": 390
+      },
+      "breathing_opacity": [
+        0.6,
+        1.0
+      ],
+      "input_ignored": true,
+      "reduced_motion_static": true,
+      "screenshot": "screenshots/webkit-390-light.png"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "metrics": {
+        "centerX": 195,
+        "centerY": 421.984375,
+        "width": 121.07611083984375,
+        "height": 124.92315673828125,
+        "left": 134.55014038085938,
+        "right": 255.62625122070312,
+        "top": 359.73583984375,
+        "bottom": 484.65899658203125,
+        "fill": "rgb(114, 197, 250)",
+        "background": "rgb(16, 20, 19)",
+        "pointerEvents": "none",
+        "scrollWidth": 390
+      },
+      "breathing_opacity": [
+        0.6,
+        1.0
+      ],
+      "input_ignored": true,
+      "reduced_motion_static": true,
+      "screenshot": "screenshots/webkit-390-dark.png"
+    },
+    {
+      "width": 320,
+      "height": 720,
+      "theme": "light",
+      "metrics": {
+        "centerX": 160,
+        "centerY": 360,
+        "width": 121.07610321044922,
+        "height": 124.92315673828125,
+        "left": 99.5501480102539,
+        "right": 220.62625122070312,
+        "top": 297.75146484375,
+        "bottom": 422.67462158203125,
+        "fill": "rgb(23, 105, 170)",
+        "background": "rgb(255, 255, 255)",
+        "pointerEvents": "none",
+        "scrollWidth": 320
+      },
+      "breathing_opacity": [
+        0.6,
+        1.0
+      ],
+      "input_ignored": true,
+      "reduced_motion_static": true,
+      "screenshot": "screenshots/webkit-320-light.png"
+    },
+    {
+      "width": 320,
+      "height": 720,
+      "theme": "dark",
+      "metrics": {
+        "centerX": 160,
+        "centerY": 360,
+        "width": 121.07610321044922,
+        "height": 124.92315673828125,
+        "left": 99.5501480102539,
+        "right": 220.62625122070312,
+        "top": 297.75146484375,
+        "bottom": 422.67462158203125,
+        "fill": "rgb(114, 197, 250)",
+        "background": "rgb(16, 20, 19)",
+        "pointerEvents": "none",
+        "scrollWidth": 320
+      },
+      "breathing_opacity": [
+        0.6,
+        1.0
+      ],
+      "input_ignored": true,
+      "reduced_motion_static": true,
+      "screenshot": "screenshots/webkit-320-dark.png"
+    }
+  ],
+  "errors": [],
+  "external_requests": [],
+  "passed": true,
+  "browser_version": "26.5"
+}

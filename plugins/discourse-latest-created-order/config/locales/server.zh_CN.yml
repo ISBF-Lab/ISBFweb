@@ -1,0 +1,3 @@
+zh_CN:
+  site_settings:
+    latest_topics_order_by_created: "将所有默认「最新」列表（包括分类和标签）按话题创建日期从新到旧排序，保留置顶。回复仍会更新活动时间和未读通知。用户手动选择的排序方式优先。"

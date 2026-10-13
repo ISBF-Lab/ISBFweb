@@ -1,0 +1,9 @@
+{
+  "logo_sha256": "4fc06c282d390610f6ce639d5082aca64a4a632e382ad1c4a33f873290230777",
+  "svg_sha256": "b61fc68ca4a7c1608bcbd2963f824742da8cc4afd5f207f426302da6ba98207b",
+  "particles": 552,
+  "animated_groups": 8,
+  "seed": 20261010,
+  "cycle_seconds": 3,
+  "bytes": 35277
+}

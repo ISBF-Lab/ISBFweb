@@ -1,0 +1,27 @@
+{
+  "published": true,
+  "release_commit": "2eb878d4227dee6009f839f681b0ad06f8e6223c",
+  "scope": "Restore equipped-frame overlays in homepage avatars and user cards; existing visual rules and parameters retained",
+  "visual_acceptance": "Pending user review",
+  "plugin_inventory": 63,
+  "theme_fields_unchanged": 169,
+  "database_writes": false,
+  "production_browser_run": false,
+  "image_tag_changed": false,
+  "source": {
+    "archive_path": "sources/avatar-frame-position.js.txt",
+    "sha256": "7a31696dc06fff3343d39bcc6e6ad2c3dba9209ee2f9cb4f5ca6e2a36778fd4d"
+  },
+  "deployment-report": {
+    "path": "deploy-work/avatar-frame-visibility-20261013/deployment-report.json",
+    "sha256": "a7a9bffc1081d4a291d199f7084fefa8af7fe3139b17b686824b4258dd6df620"
+  },
+  "position-report": {
+    "path": "deploy-work/avatar-frame-visibility-20261013/position-report.json",
+    "sha256": "e92ab2150947c031f1ed944f865d4fcfe6fe103cd7d81126fcbb2b090846cdfa"
+  },
+  "build-config-report": {
+    "path": "deploy-work/avatar-frame-visibility-20261013/build-config-report.json",
+    "sha256": "dac112df671d98c6a45f84c322de2e186d3b2d06171670c217843ce8cb651dfa"
+  }
+}

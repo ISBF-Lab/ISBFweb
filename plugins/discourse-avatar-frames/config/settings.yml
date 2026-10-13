@@ -1,0 +1,9 @@
+plugins:
+  avatar_frames_enabled:
+    default: true
+    client: true
+  avatar_frames_config:
+    default: "dream-dive-stars:Dream Dive Stars:tl0|head-in-the-clouds-sunset:Head in the Clouds:tl0|sakura-pink:Sakura Pink:tl0|chromawave:Chromawave:tl0|bubble:Bubble:tl0|terrarium:Terrarium:tl0"
+    type: list
+    hidden: true
+    client: false

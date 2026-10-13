@@ -1,0 +1,371 @@
+{
+  "generated_at": "2026-10-09T09:54:05.366178+00:00",
+  "artifact": "ISBF - One nebula and confetti registration preview V6",
+  "html_sha256": "7e1c3d0f052636744de39029e6b382f5f75878a6d65c65810744e28d8f23f526",
+  "tested_html_sha256": "864b91c166a3c50c7e6fbc8f470695de3113d4a574089a8ce2ac625161bc9da7",
+  "post_verification_changes": {
+    "formatter": "Prettier 3.8.1",
+    "purpose": "Code style only after browser verification; no implementation changes.",
+    "before_sha256": "864b91c166a3c50c7e6fbc8f470695de3113d4a574089a8ce2ac625161bc9da7",
+    "after_sha256": "7e1c3d0f052636744de39029e6b382f5f75878a6d65c65810744e28d8f23f526"
+  },
+  "inline_scripts": 3,
+  "unique_ids": 83,
+  "missing_icon_references": 0,
+  "python_syntax": "passed",
+  "redirect_target": "https://isbf-one.com/",
+  "redirect_delay_ms_after_check_ready": 5000,
+  "navigation_test_mode": "Browser routes intercept the homepage; no requests reach the live forum.",
+  "browsers": [
+    {
+      "generated_at": "2026-10-09T09:38:25.740222+00:00",
+      "engine": "chromium",
+      "group": "all (verified in registration, interactions, effects groups)",
+      "html_sha256": "864b91c166a3c50c7e6fbc8f470695de3113d4a574089a8ce2ac625161bc9da7",
+      "browser_version": "151.0.7922.34",
+      "layouts": [
+        {
+          "width": 320,
+          "height": 720,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 320,
+          "height": 720,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "theme": "dark",
+          "status": "passed"
+        }
+      ],
+      "scenarios": [
+        {
+          "name": "Login has a registration link and no invite textbox",
+          "status": "passed"
+        },
+        {
+          "name": "Empty invitation has a focused accessible error",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: INVALID",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: EXPIRED2026",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: USED2026",
+          "status": "passed"
+        },
+        {
+          "name": "Valid invitation ignores letter case",
+          "status": "passed"
+        },
+        {
+          "name": "Email format and existing account errors",
+          "status": "passed"
+        },
+        {
+          "name": "Email send failure can be retried",
+          "status": "passed"
+        },
+        {
+          "name": "Back and view changes preserve drafts",
+          "status": "passed"
+        },
+        {
+          "name": "OTP empty, wrong and expired states recover",
+          "status": "passed"
+        },
+        {
+          "name": "OTP filters pasted input and supports autofill",
+          "status": "passed"
+        },
+        {
+          "name": "Changing email clears old OTP",
+          "status": "passed"
+        },
+        {
+          "name": "Resend is available after its countdown",
+          "status": "passed"
+        },
+        {
+          "name": "Username validation leads to completion",
+          "status": "passed"
+        },
+        {
+          "name": "Completion shows the centered waiting hint and redirects once after exactly five seconds",
+          "status": "passed"
+        },
+        {
+          "name": "Navigation cancels pending invitation validation",
+          "status": "passed"
+        },
+        {
+          "name": "Keyboard focus and persistent automatic themes",
+          "status": "passed"
+        },
+        {
+          "name": "Reduced motion preserves static shapes and theme feedback",
+          "status": "passed"
+        },
+        {
+          "name": "Particles animate, freeze on pause and resume",
+          "status": "passed"
+        },
+        {
+          "name": "Character particles morph from One to the site logo",
+          "status": "passed"
+        },
+        {
+          "name": "Fullscreen canvas follows touch orientation and keyboard-sized viewports",
+          "status": "passed"
+        },
+        {
+          "name": "Canvas fallback preserves registration without animation",
+          "status": "passed"
+        },
+        {
+          "name": "System motion preference and manual choice work together",
+          "status": "passed"
+        },
+        {
+          "name": "Login alternatives remain interactive",
+          "status": "passed"
+        },
+        {
+          "name": "Welcome hides inputs and opening or closing preserves drafts and focus",
+          "status": "passed"
+        },
+        {
+          "name": "Closing cancels pending validation without losing input",
+          "status": "passed"
+        },
+        {
+          "name": "Closed verification restores its OTP and elapsed resend countdown",
+          "status": "passed"
+        },
+        {
+          "name": "Browser history follows welcome, registration and login",
+          "status": "passed"
+        },
+        {
+          "name": "Direct hashes open the matching centered view",
+          "status": "passed"
+        },
+        {
+          "name": "Escape closes the top explanation before the form",
+          "status": "passed"
+        },
+        {
+          "name": "Click scatters characters into a moving cloud touching all four form edges with centered inputs",
+          "status": "passed"
+        },
+        {
+          "name": "Nebula gathers into a check above confetti while the form disappears and the waiting hint appears",
+          "status": "passed"
+        },
+        {
+          "name": "Themes and pause retain the deadline; leaving cancels it and reentry restarts it",
+          "status": "passed"
+        },
+        {
+          "name": "Canvas fallback completes registration with a static check, confetti, hint and redirect",
+          "status": "passed"
+        },
+        {
+          "name": "Manual pause shows a static check and confetti while waiting progress and navigation continue",
+          "status": "passed"
+        },
+        {
+          "name": "Three-color ribbons burst from both bottom corners, freeze independently of waiting progress, and finish once",
+          "status": "passed"
+        },
+        {
+          "name": "Mobile confetti and the centered waiting hint remain clear through themes, narrow screens and rotation",
+          "status": "passed"
+        }
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "forum_navigation_requests": [
+        "https://isbf-one.com/",
+        "https://isbf-one.com/",
+        "https://isbf-one.com/",
+        "https://isbf-one.com/"
+      ],
+      "screenshots": [
+        "welcome-390-light.png",
+        "registration-390-light.png",
+        "login-390-light.png",
+        "welcome-390-dark.png",
+        "registration-390-dark.png",
+        "welcome-1440-light.png",
+        "registration-1440-light.png",
+        "login-1440-light.png",
+        "welcome-1440-dark.png",
+        "registration-1440-dark.png",
+        "code-error-1440-light.png",
+        "email-1440-light.png",
+        "verification-1440-light.png",
+        "profile-1440-light.png",
+        "complete-1440-light.png",
+        "verification-390-dark.png",
+        "complete-static-390-dark.png",
+        "particles-morph-1440-light.png",
+        "particles-logo-1440-light.png",
+        "scatter-1440-dark.png",
+        "nebula-1440-dark.png",
+        "gather-1440-dark.png",
+        "complete-1440-dark.png",
+        "success-confetti-1440-dark.png",
+        "success-confetti-1440-light.png",
+        "complete-390-light.png",
+        "complete-390-dark.png",
+        "complete-320-dark.png",
+        "complete-844-dark.png"
+      ],
+      "runtime_log_coverage": [
+        "Login has a registration link and no invite textbox",
+        "Empty invitation has a focused accessible error",
+        "Invitation error: INVALID",
+        "Invitation error: EXPIRED2026",
+        "Invitation error: USED2026",
+        "Valid invitation ignores letter case",
+        "Email format and existing account errors",
+        "Email send failure can be retried",
+        "Back and view changes preserve drafts",
+        "OTP empty, wrong and expired states recover",
+        "OTP filters pasted input and supports autofill",
+        "Changing email clears old OTP",
+        "Resend is available after its countdown",
+        "Username validation leads to completion",
+        "Completion shows the centered waiting hint and redirects once after exactly five seconds",
+        "Navigation cancels pending invitation validation",
+        "Keyboard focus and persistent automatic themes",
+        "Reduced motion preserves static shapes and theme feedback",
+        "Particles animate, freeze on pause and resume",
+        "Character particles morph from One to the site logo",
+        "Fullscreen canvas follows touch orientation and keyboard-sized viewports",
+        "Canvas fallback preserves registration without animation",
+        "System motion preference and manual choice work together",
+        "Login alternatives remain interactive",
+        "Welcome hides inputs and opening or closing preserves drafts and focus",
+        "Closing cancels pending validation without losing input",
+        "Closed verification restores its OTP and elapsed resend countdown",
+        "Browser history follows welcome, registration and login",
+        "Direct hashes open the matching centered view",
+        "Escape closes the top explanation before the form",
+        "Click scatters characters into a moving cloud touching all four form edges with centered inputs",
+        "Nebula gathers into a check above confetti while the form disappears and the waiting hint appears",
+        "Themes and pause retain the deadline; leaving cancels it and reentry restarts it",
+        "Canvas fallback completes registration with a static check, confetti, hint and redirect",
+        "Manual pause shows a static check and confetti while waiting progress and navigation continue",
+        "Three-color ribbons burst from both bottom corners, freeze independently of waiting progress, and finish once",
+        "Mobile confetti and the centered waiting hint remain clear through themes, narrow screens and rotation"
+      ]
+    },
+    {
+      "generated_at": "2026-10-09T09:52:20.117842+00:00",
+      "engine": "webkit",
+      "group": "all (verified in registration, effects groups)",
+      "html_sha256": "864b91c166a3c50c7e6fbc8f470695de3113d4a574089a8ce2ac625161bc9da7",
+      "browser_version": "26.5",
+      "layouts": [],
+      "scenarios": [
+        {
+          "name": "Completion shows the centered waiting hint and redirects once after exactly five seconds",
+          "status": "passed"
+        },
+        {
+          "name": "Click scatters characters into a moving cloud touching all four form edges with centered inputs",
+          "status": "passed",
+          "evidence": "PASS webkit line in the initial tool output"
+        },
+        {
+          "name": "Nebula gathers into a check above confetti while the form disappears and the waiting hint appears",
+          "status": "passed",
+          "evidence": "PASS webkit line in the initial tool output"
+        },
+        {
+          "name": "Themes and pause retain the deadline; leaving cancels it and reentry restarts it",
+          "status": "passed",
+          "evidence": "PASS webkit line in the initial tool output"
+        },
+        {
+          "name": "Canvas fallback completes registration with a static check, confetti, hint and redirect",
+          "status": "passed",
+          "evidence": "PASS webkit line in the initial tool output"
+        },
+        {
+          "name": "Manual pause shows a static check and confetti while waiting progress and navigation continue",
+          "status": "passed",
+          "evidence": "PASS webkit line in the initial tool output"
+        },
+        {
+          "name": "Three-color ribbons burst from both bottom corners, freeze independently of waiting progress, and finish once",
+          "status": "passed",
+          "evidence": "PASS webkit line in the initial tool output"
+        },
+        {
+          "name": "Mobile confetti and the centered waiting hint remain clear through themes, narrow screens and rotation",
+          "status": "passed"
+        }
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "forum_navigation_requests": [
+        "https://isbf-one.com/"
+      ],
+      "screenshots": [],
+      "runtime_log_coverage": [
+        "Completion shows the centered waiting hint and redirects once after exactly five seconds",
+        "Mobile confetti and the centered waiting hint remain clear through themes, narrow screens and rotation"
+      ],
+      "initial_run": {
+        "passed_before_interruption": 6,
+        "interrupted_scenario": "Mobile confetti and the centered waiting hint remain clear through themes, narrow screens and rotation",
+        "cause": "The controlled test clock advanced before WebKit delivered the native viewport resize.",
+        "resolution": "The test now waits for native viewport delivery before advancing its clock; the single failed scenario passed on rerun. Production HTML did not change.",
+        "result_recovery": "The first six functional results were recovered from captured PASS output. Runtime console and request lists from that interrupted run were not preserved; the runtime_log_coverage field names the scenario with recorded logs."
+      }
+    }
+  ]
+}
