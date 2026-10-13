@@ -278,15 +278,24 @@ RSpec.describe IsbfResume::Generator do
         expect { generate }.to raise_error(described_class::GenerationError)
         processes =
           JSON.parse(File.read(File.join(export.directory, "processes.json")))
-        active_pids =
-          processes.values.select do |pid|
-            path = "/proc/#{pid}/stat"
-            begin
-              File.read(path).split(") ").last.split.first != "Z"
-            rescue Errno::ENOENT
-              false
+        deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + 5
+        active_pids = []
+        loop do
+          active_pids =
+            processes.values.select do |pid|
+              path = "/proc/#{pid}/stat"
+              begin
+                File.read(path).split(") ").last.split.first != "Z"
+              rescue Errno::ENOENT
+                false
+              end
             end
+          if active_pids.empty? ||
+               Process.clock_gettime(Process::CLOCK_MONOTONIC) >= deadline
+            break
           end
+          sleep 0.01
+        end
         expect(active_pids).to be_empty
         expect(File.exist?(export.input_path)).to eq(false)
         expect(IsbfResume::Export.find(export.id)).to eq(nil)
