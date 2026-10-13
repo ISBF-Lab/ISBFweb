@@ -15,6 +15,7 @@ module ::IsbfResume
   GENERATION_TIMEOUT = 90
 end
 
+require_relative "lib/isbf_resume/generator"
 require_relative "lib/isbf_resume/engine"
 register_asset "stylesheets/isbf-resume.scss"
 register_svg_icon "file-lines"
@@ -27,7 +28,6 @@ after_initialize do
   end
 
   require_relative "app/models/isbf_resume/export"
-  require_relative "lib/isbf_resume/generator"
   require_relative "app/services/isbf_resume/export/generate"
   require_relative "app/serializers/isbf_resume/export_serializer"
   require_relative "lib/isbf_resume/guardian_extension"

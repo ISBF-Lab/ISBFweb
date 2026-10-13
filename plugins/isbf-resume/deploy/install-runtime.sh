@@ -4,8 +4,12 @@ test "$(id -u)" = 0
 source_dir=$(cd "$(dirname "$0")/.." && pwd)
 test -f "$source_dir/requirements.txt"
 export DEBIAN_FRONTEND=noninteractive
-apt-get update
-apt-get install -y --no-install-recommends python3-venv libreoffice-writer fonts-noto-cjk poppler-utils
+apt_options=(-o Acquire::Retries=3)
+if test -f /etc/apt/sources.list.d/debian.sources; then
+  apt_options+=(-o Dir::Etc::sourcelist=/etc/apt/sources.list.d/debian.sources -o Dir::Etc::sourceparts=-)
+fi
+apt-get "${apt_options[@]}" update
+apt-get "${apt_options[@]}" install -y --no-install-recommends python3-venv libreoffice-writer fonts-noto-cjk poppler-utils
 if test ! -e /opt/resume-venv; then
   python3 -m venv /opt/resume-venv
 fi
