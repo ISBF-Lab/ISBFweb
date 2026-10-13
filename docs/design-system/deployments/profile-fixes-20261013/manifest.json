@@ -1,0 +1,54 @@
+{
+  "prepared_at_utc": "2026-10-13T00:38:36.853372+00:00",
+  "core_commit": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "plugins": 63,
+  "theme_id": 4,
+  "field_id": 404,
+  "theme_fields": 168,
+  "before_sha256": "ff7e34f5fa9958ef72100149c416733544c050d983fb7faec5d209b5c5f55e4b",
+  "after_sha256": "7930ec7fad543262219ab6724f978340da222416cc72b1f66d7d7b759e43152c",
+  "container_id": "8b3389a4c02a33a11750db0a92baf4324e4c1beb22cfa2edc3e6f931dd0fa421",
+  "container_image_id": "sha256:d7392bb5d64fd8cb127fdf0f594bf8e890faf6346a449f3fbde6fc190fef8ae8",
+  "applied": true,
+  "updated_fields": 1,
+  "unrelated_fields_preserved": 167,
+  "unrelated_settings_preserved": true,
+  "theme_javascript_unchanged": true,
+  "styles": [
+    {
+      "target": "common_theme",
+      "bytes": 252773,
+      "sha256": "a14ba443276ebc3a490e74fc599c3a751c05bc6c0643da47ed037ee71d183023",
+      "url": "/stylesheets/common_theme_4_238bdcc269bc3db891874893b05d3b9d027de541.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "desktop_theme",
+      "bytes": 108,
+      "sha256": "431622fc8841158521a9e45bce66fe23d25e1786c400244ef7c7745f3ba611e9",
+      "url": "/stylesheets/desktop_theme_4_9b8a01df65e4947798a19d6a72f1096c06e47da2.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "mobile_theme",
+      "bytes": 107,
+      "sha256": "d690d35cc075aaf0f8cd007845d3eeba7a4b23f2f01e9ecbaa43ee4e08b503b2",
+      "url": "/stylesheets/mobile_theme_4_9b8a01df65e4947798a19d6a72f1096c06e47da2.css?__ws=isbf-one.com"
+    }
+  ],
+  "compilation_errors": [],
+  "published_at_utc": "2026-10-13T00:42:35Z",
+  "visual_acceptance": "Pending user review; user volunteered to perform visual checks",
+  "core_and_plugins_unchanged": true,
+  "container_recreated": false,
+  "database_migrations": false,
+  "browser_validation": "User handles visual verification; no extra production browser run",
+  "code_commit": "25a819ce15d7f5fda306490bac0128471fac0481",
+  "source_path": "themes/isbf-campus-feed/stylesheets/frontend-consistency.scss",
+  "evidence_path": "sources/frontend-consistency.scss.txt",
+  "lint": "passed",
+  "system_tests": "Existing CI gate unchanged; newly added frame-boundary assertions have not been run locally",
+  "visual_review": "Delegated to the user, pending; no additional production browser or screenshot run",
+  "private_release_directory": "deploy-work/frontend-consistency-20261012/release-profile-fixes-20261013",
+  "previous_full_release": "../frontend-consistency-20261013/manifest.json",
+  "ci_status": "Not confirmed: GitHub connector temporarily unavailable; do not reuse the earlier CI success as this patch result",
+  "served_common_stylesheet_verified": true
+}
