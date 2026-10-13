@@ -1,0 +1,22 @@
+zh_CN:
+  site_settings:
+    avatar_frames_enabled: "允许用户选择头像框。"
+    avatar_frames_config: "旧版头像框配置，仅用于导入原有款式名称和版本回退。"
+  avatar_frames:
+    errors:
+      unavailable: "这个头像框已不可用，或你没有使用权限。请选择其他头像框。"
+      admin_required: "只有管理员可以管理头像框。"
+      invalid_image: "请上传有效的正方形 PNG 或动画 PNG，且不超过站点图片限制。"
+      image_too_large: "图片超过了站点上传大小限制。"
+      invalid_csv: "CSV 格式无效，请保存为 UTF-8 编码的 CSV 后重试。"
+      empty_csv: "CSV 中没有用户名或邮箱。"
+      too_many_csv_entries: "CSV 最多允许 %{count} 行。"
+      import_failed: "未能完成导入。"
+      invalid_static: "静态图片必须为不含动画的 PNG。"
+      transparency_required: "头像框必须有透明背景，不能上传完全不透明的图片。"
+      calibration_required: "请预览头像框并确认校准后再启用。"
+  staff_action_logs:
+    avatar_frame_saved: "保存头像框"
+    avatar_frame_granted: "授予头像框"
+    avatar_frame_revoked: "撤销头像框"
+    avatar_frame_imported: "批量授予头像框"

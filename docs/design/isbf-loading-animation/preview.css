@@ -1,0 +1,30 @@
+:root {
+  color-scheme: light dark;
+  --primary: #17202a;
+  --secondary: #fff;
+  --tertiary: #1769aa;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #e7e9ea;
+    --secondary: #101413;
+    --tertiary: #72c5fa;
+  }
+}
+
+body {
+  display: grid;
+  min-block-size: 100dvh;
+  margin: 0;
+  place-items: center;
+  background: var(--secondary);
+}
+
+.isbf-loading-preview {
+  display: flex;
+  inline-size: min(250px, 60vw);
+  block-size: min(150px, 25vh);
+  align-items: center;
+  justify-content: center;
+}

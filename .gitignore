@@ -30,6 +30,8 @@
 # Plugins except for the bundled ones
 /plugins/*
 !/plugins/discourse-academy-roles
+!/plugins/discourse-avatar-frames
+!/plugins/discourse-latest-created-order
 !/plugins/isbf-account-switch
 !/plugins/isbf-anonymous
 !/plugins/isbf-calendar
@@ -158,3 +160,8 @@ frontend/discourse-i18n/src/index.d.ts.map
 /.cursor
 .playwright-mcp
 /frontend/discourse-types/dts-generator.js
+
+# Local deployment worktrees, generated bundles, logs, and private backups
+/deploy-work/
+/themes/isbf-brand-visibility-*/
+/themes/isbf-native-logo-*/

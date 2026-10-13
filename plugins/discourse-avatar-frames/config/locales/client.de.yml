@@ -1,0 +1,8 @@
+de:
+  js:
+    avatar_frames:
+      title: "Avatar Rahmen"
+      none: "Kein Rahmen"
+      requires_level: "🔒 Benötigt Level %{level}"
+      requires_group: "🔒 Benötigt VIP/Gruppe"
+      instructions: "Wähle einen animierten Rahmen für deinen Avatar aus. Besondere Rahmen erfordern ein höheres Trust Level oder VIP-Status."

@@ -1,0 +1,72 @@
+{
+  "verified_at": "2026-10-10T15:30:50.888674+00:00",
+  "passed": true,
+  "site": "https://isbf-one.com",
+  "source_svg_sha256": "b61fc68ca4a7c1608bcbd2963f824742da8cc4afd5f207f426302da6ba98207b",
+  "production_upload": {
+    "applied_at": "2026-10-10T15:20:11Z",
+    "previous_upload_id": null,
+    "upload_id": 73,
+    "sha1": "76760b08e4620c06751220b440f01a11dbed10c5",
+    "url": "/uploads/default/original/1X/76760b08e4620c06751220b440f01a11dbed10c5.svg",
+    "bytes": 35299,
+    "particles": 552,
+    "animated_groups": 8
+  },
+  "preview_layouts": {
+    "chromium": 6,
+    "webkit": 6
+  },
+  "production_pages": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "theme": "light",
+      "motion": "no-preference",
+      "held_scripts": 57,
+      "native_splash_verified": true,
+      "removed_on_initial_route": true,
+      "existing_login_particles_ready": true,
+      "cached_reload_verified": true
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "motion": "no-preference",
+      "held_scripts": 57,
+      "native_splash_verified": true,
+      "removed_on_initial_route": true,
+      "existing_login_particles_ready": true,
+      "cached_reload_verified": true
+    },
+    {
+      "name": "reduced-motion",
+      "width": 320,
+      "height": 720,
+      "theme": "light",
+      "motion": "reduce",
+      "held_scripts": 57,
+      "native_splash_verified": true,
+      "removed_on_initial_route": true,
+      "existing_login_particles_ready": true,
+      "cached_reload_verified": false
+    }
+  ],
+  "unrelated_configuration_preserved": [
+    "source_commit",
+    "default_theme_id",
+    "theme_fields_sha256",
+    "theme_settings_sha256",
+    "colors",
+    "dark_colors",
+    "login_required",
+    "invite_only",
+    "plugins"
+  ],
+  "plugin_count": 61,
+  "browser_script_errors": [],
+  "failed_script_or_stylesheet_responses": []
+}

@@ -1,0 +1,167 @@
+{
+  "checkedAt": "2026-10-09T03:42:35.780Z",
+  "browsers": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34"
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5"
+    }
+  ],
+  "layouts": [
+    {
+      "engine": "chromium",
+      "width": 320,
+      "color": "light",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "chromium",
+      "width": 320,
+      "color": "dark",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "color": "light",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "color": "dark",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "chromium",
+      "width": 768,
+      "color": "light",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "chromium",
+      "width": 768,
+      "color": "dark",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "chromium",
+      "width": 1440,
+      "color": "light",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "chromium",
+      "width": 1440,
+      "color": "dark",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "webkit",
+      "width": 320,
+      "color": "light",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "webkit",
+      "width": 320,
+      "color": "dark",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "color": "light",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "color": "dark",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "webkit",
+      "width": 768,
+      "color": "light",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "webkit",
+      "width": 768,
+      "color": "dark",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "webkit",
+      "width": 1440,
+      "color": "light",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    },
+    {
+      "engine": "webkit",
+      "width": 1440,
+      "color": "dark",
+      "registerOverflow": false,
+      "loginOverflow": false,
+      "primaryButtonHeight": 54
+    }
+  ],
+  "scenarios": [
+    "chromium: 系统配色变化、手动配色持久化及减少动态效果",
+    "chromium: 登录页单一注册入口及登录邮箱保留",
+    "chromium: 邀请码空值、无效、过期、已使用及帮助",
+    "chromium: 页面切换取消旧验证并保留草稿",
+    "chromium: 邮箱格式、已有账号及失败后重试",
+    "chromium: 修改邮箱清除验证码",
+    "chromium: 真实 30 秒重发倒计时及重发清空",
+    "chromium: 验证码错误、粘贴、返回及资料保留",
+    "chromium: 用户名校验、转义、完成注册及重新体验",
+    "chromium: 演示填充、键盘提交及步骤焦点",
+    "webkit: 系统配色变化、手动配色持久化及减少动态效果",
+    "webkit: 登录页单一注册入口及登录邮箱保留",
+    "webkit: 邀请码空值、无效、过期、已使用及帮助",
+    "webkit: 页面切换取消旧验证并保留草稿",
+    "webkit: 邮箱格式、已有账号及失败后重试",
+    "webkit: 修改邮箱清除验证码",
+    "webkit: 验证码错误、粘贴、返回及资料保留",
+    "webkit: 用户名校验、转义、完成注册及重新体验",
+    "webkit: 演示填充、键盘提交及步骤焦点"
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "passed": true
+}

@@ -62,3 +62,45 @@ and image for rollback and serialize production releases.
 
 Release verification artifacts are stored in
 `deploy-work/account-switch-deleted-user-20261007/`.
+
+## Completed production release
+
+Published on 2026-10-08 at 07:29 UTC with source commit
+`10004ccf5090d85f80da529aeb4ecb4f3b7b1205` and image
+`sha256:32e7ac0ba2e4708458571ac46087924ca512fae646a621eaa64cd170b6485404`.
+The production version, release Git reference, and latest image tag now point
+to this release. The current independent learning release
+`621f938a6676533fce0f7e725b77c485cef965d1` was preserved.
+
+Production acceptance passed for Alan_Tan's and Gin's account menus and their
+account-list endpoints. The administrator page loaded all four historical links
+and displayed the deleted-account label for link ID 2. The home and health
+endpoints returned 200. Data, settings, themes, link records, and audit events
+were preserved. Temporary verification keys were removed and readonly mode was
+released. After publication, validation is limited to these necessary checks;
+the passing source test suites are not rerun without a relevant change.
+
+Read-only browser verification uses temporary user-bound API keys restricted to
+local private addresses. Do not send the `Discourse-Logged-In` cookie-session
+marker with API authentication: without a login cookie it causes a logged-out
+response header. Send API credentials only to dynamic same-origin GET requests,
+excluding static assets to avoid spending the API rate limit on page resources.
+Telemetry writes and message-bus polling are suppressed in the verification
+browser; account and approval requests reach the real production endpoints.
+
+At the user's request, three older database-and-upload archives were removed,
+reclaiming 142,886,815 bytes. The retained complete backup is
+`before-account-switch-deleted-user-20261008-071312-v20261008000000.tar.gz`,
+with verified SHA-256
+`bd4004b9973908e40d251263c25c61ca59826b8f2dbcd56d26a33810507853a0`.
+It remains under `/shared/account-switch-deleted-user-20261007/` with restricted
+permissions. Backup cleanup verifies the latest archive before deleting only
+older archives and does not modify live database or upload files.
+
+The previous application container is retained for rollback. The guarded
+`deploy-work/account-switch-deleted-user-20261007/rollback-production.py` restores
+that container, its version configuration, and its release reference without
+restoring the database. A later learning release requires updating the rollback
+plan before using this script. Public release and cleanup results are recorded in
+`production-report.json`, `verification/production-verification.json`, and
+`backup-cleanup-report.json` within the artifact directory above.

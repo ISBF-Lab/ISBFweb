@@ -1,0 +1,3 @@
+en:
+  site_settings:
+    latest_topics_order_by_created: "Sort the default Latest lists by topic creation date, newest first, including category and tag lists. Keep pinned topics at the top. Replies still update activity and unread notifications. Explicitly selected sorts take precedence."

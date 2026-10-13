@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="288" height="288" viewBox="0 0 288 288">
+  <title>头像框制作参考：288×288 画布，头像圆心 144、144，直径 240</title>
+  <desc>把装饰放入 artwork 组；导出 PNG/APNG 前隐藏或删除 guides 组。动画全过程保持头像定位参考区域固定。</desc>
+  <g id="artwork" />
+  <g id="guides" fill="none" stroke="currentColor" stroke-width="1">
+    <rect x="0.5" y="0.5" width="287" height="287" stroke-dasharray="4 4" />
+    <circle cx="144" cy="144" r="120" stroke-dasharray="6 3" />
+    <path d="M144 0V288M0 144H288" opacity="0.35" />
+    <path d="M138 144H150M144 138V150" stroke-width="2" />
+  </g>
+</svg>

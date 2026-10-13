@@ -1,0 +1,22 @@
+en:
+  site_settings:
+    avatar_frames_enabled: "Allow users to choose avatar frames."
+    avatar_frames_config: "Legacy frame definitions used to import built-in frame names and support rollback."
+  avatar_frames:
+    errors:
+      unavailable: "This avatar frame is unavailable or you do not have permission to use it. Choose another frame."
+      admin_required: "Avatar frames can only be managed by an administrator."
+      invalid_image: "Upload a valid square PNG or animated PNG within the site's image limits."
+      image_too_large: "The image exceeds the site's upload size limit."
+      invalid_csv: "The CSV is invalid. Save it as a UTF-8 CSV and try again."
+      empty_csv: "The CSV does not contain any usernames or emails."
+      too_many_csv_entries: "The CSV may contain at most %{count} rows."
+      import_failed: "The import could not be completed."
+      invalid_static: "The static image must be a non-animated PNG."
+      transparency_required: "The frame must have a transparent background. Fully opaque images cannot be used as avatar frames."
+      calibration_required: "Preview the frame and confirm its alignment before enabling it."
+  staff_action_logs:
+    avatar_frame_saved: "Avatar frame saved"
+    avatar_frame_granted: "Avatar frame granted"
+    avatar_frame_revoked: "Avatar frame revoked"
+    avatar_frame_imported: "Avatar frames imported"

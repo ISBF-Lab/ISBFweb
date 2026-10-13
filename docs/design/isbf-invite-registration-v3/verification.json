@@ -1,0 +1,339 @@
+{
+  "generated_at": "2026-10-09T05:57:49.361606+00:00",
+  "artifact": "ISBF - One particle registration preview V3",
+  "html_sha256": "580a2094d9d1c7d82a3a6a9ee4e3c8847b489b9e4bbed1bade2c50dc85068180",
+  "inline_scripts": 3,
+  "unique_ids": 74,
+  "missing_icon_references": 0,
+  "python_syntax": "passed",
+  "browsers": [
+    {
+      "generated_at": "2026-10-09T05:53:58.631473+00:00",
+      "engine": "chromium",
+      "browser_version": "151.0.7922.34",
+      "layouts": [
+        {
+          "width": 320,
+          "height": 720,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 320,
+          "height": 720,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "theme": "dark",
+          "status": "passed"
+        }
+      ],
+      "scenarios": [
+        {
+          "name": "Login has a registration link and no invite textbox",
+          "status": "passed"
+        },
+        {
+          "name": "Empty invitation has a focused accessible error",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: INVALID",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: EXPIRED2026",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: USED2026",
+          "status": "passed"
+        },
+        {
+          "name": "Valid invitation ignores letter case",
+          "status": "passed"
+        },
+        {
+          "name": "Email format and existing account errors",
+          "status": "passed"
+        },
+        {
+          "name": "Email send failure can be retried",
+          "status": "passed"
+        },
+        {
+          "name": "Back and view changes preserve drafts",
+          "status": "passed"
+        },
+        {
+          "name": "OTP empty, wrong and expired states recover",
+          "status": "passed"
+        },
+        {
+          "name": "OTP filters pasted input and supports autofill",
+          "status": "passed"
+        },
+        {
+          "name": "Changing email clears old OTP",
+          "status": "passed"
+        },
+        {
+          "name": "Resend is available after its countdown",
+          "status": "passed"
+        },
+        {
+          "name": "Username validation leads to completion",
+          "status": "passed"
+        },
+        {
+          "name": "Complete registration, community preview and restart",
+          "status": "passed"
+        },
+        {
+          "name": "Navigation cancels pending invitation validation",
+          "status": "passed"
+        },
+        {
+          "name": "Keyboard focus and persistent automatic themes",
+          "status": "passed"
+        },
+        {
+          "name": "Reduced motion preserves static shapes and theme feedback",
+          "status": "passed"
+        },
+        {
+          "name": "Particles animate, freeze on pause and resume",
+          "status": "passed"
+        },
+        {
+          "name": "Character particles morph from One to the site logo",
+          "status": "passed"
+        },
+        {
+          "name": "Offscreen mobile particles stop drawing and resume",
+          "status": "passed"
+        },
+        {
+          "name": "Canvas fallback preserves registration without animation",
+          "status": "passed"
+        },
+        {
+          "name": "System motion preference and manual choice work together",
+          "status": "passed"
+        },
+        {
+          "name": "Login alternatives remain interactive",
+          "status": "passed"
+        }
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "screenshots": [
+        "registration-390-light.png",
+        "login-390-light.png",
+        "registration-390-dark.png",
+        "registration-1440-light.png",
+        "login-1440-light.png",
+        "registration-1440-dark.png",
+        "code-error-1440-light.png",
+        "email-1440-light.png",
+        "verification-1440-light.png",
+        "profile-1440-light.png",
+        "complete-1440-light.png",
+        "particles-morph-1440-light.png",
+        "particles-logo-1440-light.png",
+        "verification-390-dark.png",
+        "complete-390-dark.png"
+      ]
+    },
+    {
+      "generated_at": "2026-10-09T05:53:59.340099+00:00",
+      "engine": "webkit",
+      "browser_version": "26.5",
+      "layouts": [
+        {
+          "width": 320,
+          "height": 720,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 320,
+          "height": 720,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "theme": "dark",
+          "status": "passed"
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "theme": "light",
+          "status": "passed"
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "theme": "dark",
+          "status": "passed"
+        }
+      ],
+      "scenarios": [
+        {
+          "name": "Login has a registration link and no invite textbox",
+          "status": "passed"
+        },
+        {
+          "name": "Empty invitation has a focused accessible error",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: INVALID",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: EXPIRED2026",
+          "status": "passed"
+        },
+        {
+          "name": "Invitation error: USED2026",
+          "status": "passed"
+        },
+        {
+          "name": "Valid invitation ignores letter case",
+          "status": "passed"
+        },
+        {
+          "name": "Email format and existing account errors",
+          "status": "passed"
+        },
+        {
+          "name": "Email send failure can be retried",
+          "status": "passed"
+        },
+        {
+          "name": "Back and view changes preserve drafts",
+          "status": "passed"
+        },
+        {
+          "name": "OTP empty, wrong and expired states recover",
+          "status": "passed"
+        },
+        {
+          "name": "OTP filters pasted input and supports autofill",
+          "status": "passed"
+        },
+        {
+          "name": "Changing email clears old OTP",
+          "status": "passed"
+        },
+        {
+          "name": "Resend is available after its countdown",
+          "status": "passed"
+        },
+        {
+          "name": "Username validation leads to completion",
+          "status": "passed"
+        },
+        {
+          "name": "Complete registration, community preview and restart",
+          "status": "passed"
+        },
+        {
+          "name": "Navigation cancels pending invitation validation",
+          "status": "passed"
+        },
+        {
+          "name": "Keyboard focus and persistent automatic themes",
+          "status": "passed"
+        },
+        {
+          "name": "Reduced motion preserves static shapes and theme feedback",
+          "status": "passed"
+        },
+        {
+          "name": "Particles animate, freeze on pause and resume",
+          "status": "passed"
+        },
+        {
+          "name": "Character particles morph from One to the site logo",
+          "status": "passed"
+        },
+        {
+          "name": "Offscreen mobile particles stop drawing and resume",
+          "status": "passed"
+        },
+        {
+          "name": "Canvas fallback preserves registration without animation",
+          "status": "passed"
+        },
+        {
+          "name": "System motion preference and manual choice work together",
+          "status": "passed"
+        },
+        {
+          "name": "Login alternatives remain interactive",
+          "status": "passed"
+        }
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "screenshots": []
+    }
+  ]
+}
