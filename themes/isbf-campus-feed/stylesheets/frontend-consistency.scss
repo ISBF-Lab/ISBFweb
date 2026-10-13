@@ -529,7 +529,7 @@
   }
 
   .stats-section ul,
-  .top-section:not(.stats-section) {
+  .top-section:not(.stats-section, .top-categories-section, .badges-section) {
     @include frontend-collection-grid;
   }
 
