@@ -7,6 +7,9 @@ import { i18n } from "discourse-i18n";
 acceptance("ISBF | Information pages", function (needs) {
   needs.user();
   needs.pretender((server, helper) => {
+    server.get("/filter.json", () =>
+      helper.response({ users: [], topic_list: { topics: [] } })
+    );
     for (const page of [
       "guidelines",
       "faq",
