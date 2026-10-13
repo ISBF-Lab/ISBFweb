@@ -15,6 +15,23 @@ module PageObjects
         page.has_css?(".pref-name input") && page.has_css?(".pref-email")
       end
 
+      def has_contained_lower_navigation?
+        page.evaluate_script(<<~JS)
+          (() => {
+            const frame = document.querySelector("#main-outlet");
+            const bounds = frame.getBoundingClientRect();
+            const left = bounds.left + frame.clientLeft;
+            const right = left + frame.clientWidth;
+            return [".new-user-content-wrapper", ".user-navigation-secondary", ".user-navigation-secondary .horizontal-overflow-nav"].every(selector => {
+              const element = frame.querySelector(selector);
+              if (!element) { return false; }
+              const rectangle = element.getBoundingClientRect();
+              return rectangle.width > 0 && rectangle.left >= left - 1 && rectangle.right <= right + 1;
+            });
+          })()
+        JS
+      end
+
       def has_aligned_account_labels?
         page.evaluate_script(<<~JS)
           [".pref-username", ".pref-avatar", ".pref-email", ".pref-name"]

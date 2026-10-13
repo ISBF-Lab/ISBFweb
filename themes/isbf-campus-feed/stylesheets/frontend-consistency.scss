@@ -522,6 +522,12 @@
     text-transform: none;
   }
 
+  .stats-topic-count,
+  .top-categories-section,
+  .badges-section {
+    display: none;
+  }
+
   .stats-section ul,
   .top-section:not(.stats-section) {
     @include frontend-collection-grid;
@@ -672,15 +678,28 @@
 
 .isbf-frontend.has-frontend-feature.has-frontend-user-content #main-outlet {
   .new-user-content-wrapper {
-    inline-size: var(--isbf-v2-feature-width);
-    max-inline-size: var(--isbf-v2-feature-width);
-    margin-inline-start: calc(-1 * var(--isbf-v2-border-width));
-    border-inline: 1px solid var(--isbf-v2-border);
+    inline-size: 100%;
+    max-inline-size: 100%;
+    margin-inline-start: 0;
+    border: 0;
+
+    .user-navigation-secondary {
+      box-sizing: border-box;
+      inline-size: 100%;
+      min-inline-size: 0;
+      max-inline-size: 100%;
+    }
 
     .user-content {
       padding-inline: 26px;
     }
   }
+}
+
+body.user-activity-page:has(.isbf-v2-shell)
+  #main-outlet
+  .user-nav__activity-bookmarks {
+  display: none;
 }
 
 .isbf-frontend.is-frontend-messages

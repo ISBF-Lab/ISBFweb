@@ -39,6 +39,7 @@ RSpec.describe "Frontend consistency" do
 
       it "lets users save account settings while preserving the upper profile region" do
         review.visit_preferences(user)
+        expect(review).to have_contained_lower_navigation
         expect(review).to have_account_fields
         expect(review).to have_aligned_account_labels
         expect(review).to have_aligned_email_metadata
@@ -77,6 +78,7 @@ RSpec.describe "Frontend consistency" do
 
       it "keeps invitation controls and native dismissal available" do
         review.visit_invitations(user)
+        expect(review).to have_contained_lower_navigation
         review.open_invitation
         expect(review).to have_scoped_dialog
         expect(review).to have_invitation_fields
