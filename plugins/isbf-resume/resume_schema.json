@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "templates": [
+    {"id": "blue-gold", "label": "蓝金", "accent": "C19F67"},
+    {"id": "blue-gray", "label": "蓝灰", "accent": "A5A5A5"}
+  ],
+  "basic": {
+    "label": "基本信息", "labelEn": "Personal information",
+    "description": "姓名、联系电话和电子邮箱必填；其余信息按应聘岗位需要填写，未填写的项目不会出现在简历中。",
+    "fields": [
+      {"id": "name", "label": "姓名", "labelEn": "Name", "type": "text", "required": true, "maxLength": 80, "help": "填写投递简历使用的真实姓名；海外申请可按需要填写英文姓名。", "placeholder": "例如：张明"},
+      {"id": "phone", "label": "联系电话", "labelEn": "Phone", "type": "tel", "required": true, "maxLength": 80, "help": "填写能联系到你的常用号码。投递海外岗位建议加区号。", "placeholder": "例如：+86 138 0000 0000"},
+      {"id": "email", "label": "电子邮箱", "labelEn": "Email", "type": "email", "required": true, "maxLength": 254, "help": "推荐学校邮箱/专业稳定的商业邮箱；确认拼写正确，并能正常收信。", "placeholder": "例如：name@example.com"},
+      {"id": "job_intent", "label": "求职意向", "labelEn": "Target role", "type": "text", "maxLength": 120, "help": "明确具体岗位，避免写“意向广泛”；可填写岗位名称及方向。", "placeholder": "例如：前端开发工程师"},
+      {"id": "current_city", "label": "现居城市", "labelEn": "Current location", "type": "text", "maxLength": 80, "help": "填写目前居住的城市；跨国投递可加国家或地区，无需填写详细住址。", "placeholder": "例如：北京 / Singapore"},
+      {"id": "preferred_city", "label": "期望城市", "labelEn": "Preferred location", "type": "text", "maxLength": 120, "help": "填写希望工作的城市；多个城市可用顿号分隔，接受远程工作时也可注明。", "placeholder": "例如：北京、上海、远程"},
+      {"id": "photo", "label": "证件照", "labelEn": "Photo", "type": "file", "accept": "image/jpeg,image/png,image/webp", "maxBytes": 5242880, "help": "按岗位及投递要求上传清晰的本人证件照；支持 JPG、PNG、WebP，最大 5 MB，不上传时不保留照片空位。"},
+      {"id": "birth_month", "label": "出生年月", "labelEn": "Date of birth", "type": "month", "maxLength": 7, "help": "按岗位需要填写出生年份和月份，不需要填写具体日期。", "placeholder": "例如：2002-08"},
+      {"id": "highest_education", "label": "最高学历与院校", "labelEn": "Education", "type": "text", "maxLength": 200, "help": "建议按“院校·专业·学历”填写；详细教育经历可在下方单独补充。", "placeholder": "例如：清华大学·计算机科学与技术·本科"},
+      {"id": "political_status", "label": "政治面貌", "labelEn": "Political affiliation", "type": "text", "maxLength": 80, "help": "按实际情况填写，如中共党员、中共预备党员、共青团员或群众等。", "placeholder": "例如：共青团员"},
+      {"id": "native_place", "label": "籍贯", "labelEn": "Place of origin", "type": "text", "maxLength": 80, "help": "通常精确到省市即可，按岗位需要填写。", "placeholder": "例如：浙江杭州"},
+      {"id": "ethnicity", "label": "民族", "labelEn": "Ethnicity", "type": "text", "maxLength": 40, "help": "按实际情况填写民族名称；没有投递要求时可留空。", "placeholder": "例如：汉族"},
+      {"id": "portfolio_links", "label": "技术社区 / 作品主页", "labelEn": "Portfolio / community", "type": "textarea", "maxLength": 1600, "help": "适用于互联网、技术、设计岗位。填写 GitHub、个人博客、Behance、作品集网盘或直链；每行一条，可注明平台名称。", "placeholder": "GitHub：https://github.com/your-name\n作品集：https://example.com/portfolio"},
+      {"id": "linkedin", "label": "LinkedIn 个人主页", "labelEn": "LinkedIn", "type": "url", "maxLength": 500, "help": "外企或海外申请可填写个人职业社交档案的完整直链；请填写个人主页地址。", "placeholder": "https://www.linkedin.com/in/your-name/"},
+      {"id": "work_permit", "label": "签证 / 许可状态", "labelEn": "Work authorization", "type": "text", "maxLength": 200, "help": "涉及跨国应聘时，填写当前实际工作许可类型或雇主担保需求，如 OPT、Green Card、无需雇主担保等。", "placeholder": "例如：OPT / 无需雇主担保"},
+      {"id": "height", "label": "身高", "labelEn": "Height", "type": "text", "maxLength": 40, "help": "按岗位要求填写身高并注明单位，没有相关要求时可留空。", "placeholder": "例如：175 cm"},
+      {"id": "weight", "label": "体重", "labelEn": "Weight", "type": "text", "maxLength": 40, "help": "按岗位要求填写体重并注明单位，没有相关要求时可留空。", "placeholder": "例如：65 kg"},
+      {"id": "vision", "label": "视力", "labelEn": "Vision", "type": "text", "maxLength": 100, "help": "仅在岗位有要求时填写；注明左右眼，以及裸眼或矫正视力，按实际资料填写。", "placeholder": "例如：矫正视力，左眼 1.0、右眼 1.0"},
+      {"id": "language_grade", "label": "外语等级", "labelEn": "Language proficiency", "type": "text", "maxLength": 200, "help": "填写已经取得的外语等级或考试成绩，如托业、专八；更详细的语言能力可在技能与证书中补充。", "placeholder": "例如：TOEIC 900 / 英语专业八级"}
+    ]
+  },
+  "sections": [
+    {
+      "id": "education", "label": "教育背景", "labelEn": "Education", "repeatable": true, "maxEntries": 10,
+      "description": "按最近经历在前的顺序填写，可添加多段教育经历。整个模块选填；填写一条经历时需注明学校。",
+      "fields": [
+        {"id": "school", "label": "学校名称", "type": "text", "requiredForEntry": true, "maxLength": 160, "help": "填写学校全称或通用名称；交换、联合培养经历可分别添加。", "placeholder": "例如：清华大学"},
+        {"id": "major", "label": "专业", "type": "text", "maxLength": 160, "help": "填写专业或研究方向；辅修可直接补充在本栏。", "placeholder": "例如：计算机科学与技术"},
+        {"id": "degree", "label": "学历 / 学位", "type": "text", "maxLength": 80, "help": "填写已取得或正在攻读的学历、学位；未毕业时可注明在读。", "placeholder": "例如：本科 / 硕士在读"},
+        {"id": "start_month", "label": "开始年月", "type": "month", "maxLength": 7, "help": "填写入学年月，只需精确到月。", "placeholder": "例如：2022-09"},
+        {"id": "end_month", "label": "结束 / 预计毕业年月", "type": "month", "maxLength": 7, "help": "填写毕业或预计毕业年月；在读且尚未确定毕业时间时可留空，并勾选下方“在读”。", "placeholder": "例如：2026-06"},
+        {"id": "ongoing", "label": "在读", "type": "checkbox", "help": "目前仍在就读时勾选；未填写结束年月时，时间栏会显示“至今”。"},
+        {"id": "courses", "label": "相关课程", "type": "textarea", "maxLength": 800, "help": "选择与目标岗位相关的课程，用顿号或逗号分隔；不必罗列全部课程。", "placeholder": "例如：数据结构、数据库系统、软件工程"},
+        {"id": "achievements", "label": "成绩与教育补充", "type": "textarea", "maxLength": 1200, "help": "可填写 GPA（注明满分）、排名、交换经历或毕业论文方向；按实际资料填写，每行一个要点。", "placeholder": "GPA：3.8/4.0\n毕业论文：……"}
+      ]
+    },
+    {
+      "id": "experience", "label": "工作与实习经历", "labelEn": "Work and internship experience", "repeatable": true, "maxEntries": 10,
+      "description": "正式工作和实习放在同一模块，按最近经历在前的顺序填写。没有相关经历时可跳过。",
+      "fields": [
+        {"id": "company", "label": "单位名称", "type": "text", "requiredForEntry": true, "maxLength": 180, "help": "填写公司或机构名称；填写了经历内容时，需要注明所属单位。", "placeholder": "例如：某某科技有限公司"},
+        {"id": "position", "label": "岗位名称", "type": "text", "maxLength": 120, "help": "填写实际岗位名称，可注明实习生、兼职等身份。", "placeholder": "例如：前端开发实习生"},
+        {"id": "department", "label": "部门 / 业务方向", "type": "text", "maxLength": 120, "help": "可填写所属部门、产品线或业务方向，帮助读者理解工作背景。", "placeholder": "例如：研发部 · 企业服务产品"},
+        {"id": "start_month", "label": "开始年月", "type": "month", "maxLength": 7, "help": "填写入职或实习开始年月。", "placeholder": "例如：2025-03"},
+        {"id": "end_month", "label": "结束年月", "type": "month", "maxLength": 7, "help": "填写离职或实习结束年月；仍在职时可留空，并勾选下方“在职”。", "placeholder": "例如：2025-08"},
+        {"id": "ongoing", "label": "在职", "type": "checkbox", "help": "目前仍在该单位工作时勾选，时间栏显示“至今”。"},
+        {"id": "details", "label": "职责与成果", "type": "textarea", "maxLength": 1800, "help": "每行一个要点，说明你承担的工作、采用的方法及实际成果；有数据时注明指标和范围，不虚构数字。", "placeholder": "负责……，使用……完成……\n参与……，取得……成果"}
+      ]
+    },
+    {
+      "id": "projects", "label": "项目与科研经历", "labelEn": "Projects and research", "repeatable": true, "maxEntries": 10,
+      "description": "可填写课程项目、个人作品、团队项目或科研课题。优先选择与目标岗位相关的经历。",
+      "fields": [
+        {"id": "name", "label": "项目 / 课题名称", "type": "text", "requiredForEntry": true, "maxLength": 180, "help": "填写能说明项目用途的名称；科研经历可填写课题名称。", "placeholder": "例如：校园活动管理系统"},
+        {"id": "role", "label": "个人角色", "type": "text", "maxLength": 120, "help": "说明你在项目中的实际职责，区分独立完成、负责人或团队成员。", "placeholder": "例如：前端开发 / 项目负责人"},
+        {"id": "start_month", "label": "开始年月", "type": "month", "maxLength": 7, "help": "填写项目或课题开始年月。", "placeholder": "例如：2024-10"},
+        {"id": "end_month", "label": "结束年月", "type": "month", "maxLength": 7, "help": "填写完成年月；尚在进行时可留空，并勾选下方“进行中”。", "placeholder": "例如：2025-02"},
+        {"id": "ongoing", "label": "进行中", "type": "checkbox", "help": "目前仍在开展该项目或课题时勾选，时间栏显示“至今”。"},
+        {"id": "technology", "label": "技术 / 方法", "type": "text", "maxLength": 300, "help": "列出你实际使用的技术、工具、设计方法或研究方法。", "placeholder": "例如：Vue、Python、用户访谈"},
+        {"id": "link", "label": "项目 / 论文链接", "type": "url", "maxLength": 600, "help": "填写可访问的完整链接，如代码仓库、作品展示、论文或项目演示；不填写内部或无权公开的资料。", "placeholder": "https://example.com/project"},
+        {"id": "details", "label": "项目内容与个人贡献", "type": "textarea", "maxLength": 1800, "help": "每行一个要点，写清项目目标、你完成的部分和结果；团队成果与个人贡献应区分说明。", "placeholder": "项目用于……\n我负责……，完成……"}
+      ]
+    },
+    {
+      "id": "activities", "label": "校园与实践经历", "labelEn": "Campus and volunteer experience", "repeatable": true, "maxEntries": 10,
+      "description": "可填写学生组织、社团、志愿服务、社会实践或活动运营经历。没有相关内容时可跳过。",
+      "fields": [
+        {"id": "name", "label": "组织 / 活动名称", "type": "text", "requiredForEntry": true, "maxLength": 180, "help": "填写所属组织或参与活动的名称。", "placeholder": "例如：计算机协会 / 校园开放日"},
+        {"id": "role", "label": "担任角色", "type": "text", "maxLength": 120, "help": "填写实际担任的职务或参与身份。", "placeholder": "例如：活动负责人 / 志愿者"},
+        {"id": "start_month", "label": "开始年月", "type": "month", "maxLength": 7, "help": "填写参与该组织或活动的开始年月。", "placeholder": "例如：2023-09"},
+        {"id": "end_month", "label": "结束年月", "type": "month", "maxLength": 7, "help": "填写结束年月；仍在参与时可留空，并勾选下方“进行中”。", "placeholder": "例如：2024-06"},
+        {"id": "ongoing", "label": "进行中", "type": "checkbox", "help": "目前仍在参与时勾选，时间栏显示“至今”。"},
+        {"id": "details", "label": "职责与成果", "type": "textarea", "maxLength": 1800, "help": "每行一个要点，说明组织协调、运营或服务工作，以及实际覆盖人数、活动规模或产出。", "placeholder": "组织……活动，负责……\n协助……，完成……"}
+      ]
+    },
+    {
+      "id": "skills", "label": "技能与证书", "labelEn": "Skills and certifications", "repeatable": true, "maxEntries": 10,
+      "description": "可填写专业技能、语言能力和资格证书，优先填写与目标岗位相关且能够说明水平的内容。",
+      "fields": [
+        {"id": "name", "label": "技能 / 证书名称", "type": "text", "requiredForEntry": true, "maxLength": 160, "help": "填写具体技能或已取得的证书名称。", "placeholder": "例如：Python / IELTS / 教师资格证"},
+        {"id": "level", "label": "掌握程度 / 等级 / 成绩", "type": "text", "maxLength": 160, "help": "填写实际熟练程度、证书等级或考试成绩，避免仅写“精通”而没有依据。", "placeholder": "例如：可独立进行数据清洗 / IELTS 7.0"},
+        {"id": "date", "label": "取得年月", "type": "month", "maxLength": 7, "help": "证书或成绩可填写取得年月；一般技能可留空。", "placeholder": "例如：2025-05"},
+        {"id": "issuer", "label": "发证机构", "type": "text", "maxLength": 160, "help": "证书可填写发证或认证机构；一般技能可留空。", "placeholder": "例如：教育部教育考试院"},
+        {"id": "description", "label": "使用场景 / 有效期补充", "type": "textarea", "maxLength": 800, "help": "可补充实际使用场景、相关作品，或成绩和证书的有效期；每行一个要点。", "placeholder": "在……项目中用于……\n有效期至……"}
+      ]
+    },
+    {
+      "id": "honors", "label": "荣誉与奖项", "labelEn": "Awards and honors", "repeatable": true, "maxEntries": 10,
+      "description": "可填写竞赛奖项、奖学金或与岗位相关的荣誉。没有相关内容时可跳过。",
+      "fields": [
+        {"id": "name", "label": "奖项 / 荣誉名称", "type": "text", "requiredForEntry": true, "maxLength": 180, "help": "填写奖项名称及获奖等级，必要时注明国家级、省级或校级。", "placeholder": "例如：某某竞赛省级一等奖"},
+        {"id": "date", "label": "获得年月", "type": "month", "maxLength": 7, "help": "填写获得该奖项或荣誉的年月。", "placeholder": "例如：2024-11"},
+        {"id": "issuer", "label": "授予机构", "type": "text", "maxLength": 160, "help": "填写主办或授予机构，帮助说明奖项来源。", "placeholder": "例如：某某大学 / 竞赛组委会"},
+        {"id": "description", "label": "奖项补充说明", "type": "textarea", "maxLength": 800, "help": "可说明评选范围、获奖作品或你在团队中的贡献，按实际资料填写。", "placeholder": "获奖作品为……，本人负责……"}
+      ]
+    },
+    {
+      "id": "summary", "label": "自我评价", "labelEn": "Profile", "repeatable": false,
+      "description": "选填。用简短文字补充与目标岗位相关的能力或经历，已有内容充分时可以省略。",
+      "fields": [
+        {"id": "text", "label": "自我评价", "type": "textarea", "maxLength": 600, "help": "建议 2–4 句，说明相关经验、能力及工作方向；避免空泛性格评价，不重复整份简历。系统会保留你的原文。", "placeholder": "具备……经验，曾完成……，能够……"}
+      ]
+    }
+  ]
+}

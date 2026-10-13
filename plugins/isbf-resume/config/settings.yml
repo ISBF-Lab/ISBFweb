@@ -1,0 +1,4 @@
+plugins:
+  isbf_resume_enabled:
+    default: false
+    client: true
