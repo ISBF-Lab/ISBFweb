@@ -1,0 +1,16 @@
+name: Plugin syntax checks
+
+on:
+  pull_request:
+  push:
+    branches: [main, codex/calendar-workbench]
+
+jobs:
+  ruby:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+      - run: find . -path './.git' -prune -o -name '*.rb' -print -exec ruby -c '{}' \;

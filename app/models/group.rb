@@ -819,9 +819,10 @@ class Group < ActiveRecord::Base
     groups_by_id = automatic_group_ids.index_with { |group_id| self[AUTO_GROUP_IDS[group_id]] }
 
     desired_group_ids = desired_trust_level_groups(user.trust_level)
-    desired_group_ids << AUTO_GROUPS[:admins] if user.admin?
-    desired_group_ids << AUTO_GROUPS[:moderators] if user.moderator?
-    desired_group_ids << AUTO_GROUPS[:staff] if user.staff?
+    # Identity groups follow stored roles independently of effective permissions.
+    desired_group_ids << AUTO_GROUPS[:admins] if user.admin
+    desired_group_ids << AUTO_GROUPS[:moderators] if user.moderator
+    desired_group_ids << AUTO_GROUPS[:staff] if user.admin || user.moderator
 
     current_group_ids =
       GroupUser.where(user_id: user.id, group_id: automatic_group_ids).pluck(:group_id)

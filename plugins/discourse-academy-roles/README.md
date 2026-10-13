@@ -1,0 +1,17 @@
+# Academy roles
+
+This plugin configures a private academy Discourse site. Site admins are the developers with full site access; moderators are the academy administrators who manage content, suspensions, and silences. Verified official members use their own accounts to publish marked official content.
+
+Run `bin/rake academy_roles:setup` once, then restart the web and job processes. The task creates the **普通** and **官方** categories and the `academy_official` group, enables login-only access and invitation registration, fixes current and future members' internal trust level at 0, and removes trust-level editing privileges and badges. Posting, flagging, and messaging permissions are granted separately. It may be run again after configuration changes, but it resets these site settings and category permissions.
+
+For a local checkout where plugins are not loaded by default, run `LOAD_PLUGINS=1 bin/rake academy_roles:setup`.
+
+Site admins issue student invitations at `/admin/plugins/discourse-academy-roles/student-invites` or through the standard invitation creation button. Each code is bound to a unique student number, permits one new account registration, and binds that number to the account in the same transaction as redemption. Only site admins can view student numbers, including in admin user details. Moderators, members, anonymous identities, and visitors cannot view them. Unredeemed codes can be revoked or reissued; registered bindings cannot be changed, transferred, or released by deleting an invitation or account. Account merges involving a bound student number are blocked. Existing accounts are retained without backfilling student numbers.
+
+After upgrading and migrating the database, old invitations without a student-number record cannot be redeemed while the plugin is enabled. Run `LOAD_PLUGINS=1 bin/rake academy_roles:invalidate_unbound_invites` to also mark those codes invalid in the core invitation list. See the [invitation guide](../../docs/academy-invitation-guide.md) for issuance, registration, upgrade steps, and email activation requirements.
+
+Only site admins add or remove members of `academy_official`. An official topic must be created in **官方** by a verified member using official identity. Any member can reply there. Verified members can mark their replies official; all posts in **普通** use ordinary identity. The badge on an existing official post remains after certification is revoked, while its former author can no longer edit it.
+
+The post badge connector uses `post-meta-data-poster-name__after`. The base `post-meta-data-poster-name` outlet replaces Core's author label, so putting the badge there hides every post author's name.
+
+The separate activity label appears on member profiles and admin user details. It uses Discourse's LV1–LV3 engagement requirements. LV4 requires 90 consecutive daily checks meeting LV3 requirements; a missed check longer than 36 hours resets the streak. The daily job updates this label without changing permissions. Daily topic, personal-message, and flag counts have no cap; short-interval rate limits remain enabled.

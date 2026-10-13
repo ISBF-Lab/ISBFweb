@@ -13,4 +13,4 @@
 set -e -u -o pipefail
 
 suffix=${1:-}
-git ls-tree --name-only -d HEAD plugins/* | sed "s|$|$suffix|"
+git ls-files -- ':(glob)plugins/*/plugin.rb' | sed "s|/plugin.rb$|$suffix|"

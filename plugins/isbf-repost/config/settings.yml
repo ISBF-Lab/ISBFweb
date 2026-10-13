@@ -1,0 +1,4 @@
+plugins:
+  isbf_repost_enabled:
+    default: true
+    client: true

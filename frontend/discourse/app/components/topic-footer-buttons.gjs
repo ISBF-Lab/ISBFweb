@@ -267,7 +267,7 @@ export default class TopicFooterButtons extends Component {
         <PluginOutlet
           @connectorTagName="span"
           @name="topic-footer-main-buttons-before-create"
-          @outletArgs={{lazyHash topic=this.topic}}
+          @outletArgs={{lazyHash buttons=this.inlineButtons topic=this.topic}}
         />
 
         {{#if this.showCreateButton}}

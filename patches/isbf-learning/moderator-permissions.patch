@@ -1,0 +1,1176 @@
+--- a/plugins/isbf-learning/app/models/reviewable_isbf_learning_course.rb
++++ b/plugins/isbf-learning/app/models/reviewable_isbf_learning_course.rb
+@@ -9,8 +9,19 @@
+ 
+   def build_combined_actions(actions, guardian, _args)
+     return unless pending? && can_review_target?(guardian)
+-    build_action(actions, :approve_course, icon: "check", button_class: "btn-primary", source: "isbf_learning")
+-    build_action(actions, :reject_course, icon: "xmark", source: "isbf_learning")
++    build_action(
++      actions,
++      :approve_course,
++      icon: "check",
++      button_class: "btn-primary",
++      source: "isbf_learning"
++    )
++    build_action(
++      actions,
++      :reject_course,
++      icon: "xmark",
++      source: "isbf_learning"
++    )
+   end
+ 
+   def perform(performed_by, action_id, args = nil)
+@@ -18,9 +29,12 @@
+   end
+ 
+   def perform_approve_course(performed_by, _args)
+-    course = IsbfLearning::Courses.approve_locked(
+-      performed_by, name: payload.fetch("course_name"), grade: payload.fetch("grade"),
+-    )
++    course =
++      IsbfLearning::Courses.approve_locked(
++        performed_by,
++        name: payload.fetch("course_name"),
++        grade: payload.fetch("grade")
++      )
+     self.payload = payload.merge("course_id" => course.fetch("id"))
+     create_result(:success, :approved)
+   rescue IsbfLearning::StorageError
+@@ -36,8 +50,18 @@
+   private
+ 
+   def can_review_target?(guardian)
+-    guardian.is_staff? && SiteSetting.isbf_learning_enabled &&
+-      category_id == IsbfLearning.category_id && category && guardian.can_see_category?(category) &&
+-      !guardian.user.silenced? && !guardian.user.suspended? && super
++    (
++      IsbfLearning.can_review?(guardian) ||
++        (
++          guardian.is_staff? &&
++            !(
++              SiteSetting.respond_to?(:academy_roles_enabled?) &&
++                SiteSetting.academy_roles_enabled?
++            )
++        )
++    ) && SiteSetting.isbf_learning_enabled &&
++      category_id == IsbfLearning.category_id && category &&
++      guardian.can_see_category?(category) && !guardian.user.silenced? &&
++      !guardian.user.suspended? && super
+   end
+ end
+--- a/plugins/isbf-learning/lib/isbf_learning.rb
++++ b/plugins/isbf-learning/lib/isbf_learning.rb
+@@ -4,6 +4,22 @@
+ require "cgi"
+ 
+ module IsbfLearning
++  def self.can_manage?(guardian)
++    guardian.is_admin? ||
++      (
++        guardian.respond_to?(:academy_can?) &&
++          guardian.academy_can?(:manage_resources)
++      )
++  end
++
++  def self.can_review?(guardian)
++    guardian.is_admin? ||
++      (
++        guardian.respond_to?(:academy_can?) &&
++          guardian.academy_can?(:review_resources)
++      )
++  end
++
+   STORE = "isbf-learning"
+   COURSE_FIELD = "isbf_learning_course_id"
+   FILES_FIELD = "isbf_learning_files"
+@@ -12,9 +28,16 @@
+   DESCRIPTION_LIMIT = 300
+   CONTRIBUTOR_FIELD = "isbf_learning_contributor"
+   CONTRIBUTOR_LIMIT = 15
+-  RESOURCE_FIELDS = [COURSE_FIELD, FILES_FIELD, LINK_FIELD, DESCRIPTION_FIELD, CONTRIBUTOR_FIELD].freeze
++  RESOURCE_FIELDS = [
++    COURSE_FIELD,
++    FILES_FIELD,
++    LINK_FIELD,
++    DESCRIPTION_FIELD,
++    CONTRIBUTOR_FIELD
++  ].freeze
+   GRADES = (1..4).map { |id| { id: id, label: %w[大一 大二 大三 大四][id - 1] } }.freeze
+-  class StorageError < StandardError; end
++  class StorageError < StandardError
++  end
+ 
+   def self.category_id
+     id = SiteSetting.isbf_learning_category_id.to_i
+@@ -27,11 +50,12 @@
+ 
+   def self.ensure_can_submit!(user, guardian)
+     category = Category.find_by(id: category_id)
+-    unless SiteSetting.isbf_learning_enabled && user&.active? && (user.staff? || user.approved?) &&
+-             !user.silenced? && !user.suspended? && category &&
+-             guardian.can_create_topic_on_category?(category)
+-      raise Discourse::InvalidAccess
+-    end
++    permitted =
++      SiteSetting.isbf_learning_enabled && user&.active? &&
++        (user.staff? || user.approved?) && !user.silenced? &&
++        !user.suspended? && category &&
++        guardian.can_create_topic_on_category?(category)
++    raise Discourse::InvalidAccess unless permitted
+   end
+ 
+   def self.file_ids(value)
+@@ -46,24 +70,35 @@
+   end
+ 
+   def self.links(raw)
+-    URI.extract(raw.to_s, %w[http https]).filter_map do |value|
+-      value = value.sub(/[)\]>.,，。]+\z/, "")
+-      uri = URI.parse(value)
+-      value if uri.host.present? && !uri.userinfo && uri.host != Discourse.current_hostname
+-    rescue URI::InvalidURIError
+-      nil
+-    end.uniq.first(20)
++    URI
++      .extract(raw.to_s, %w[http https])
++      .filter_map do |value|
++        value = value.sub(/[)\]>.,，。]+\z/, "")
++        uri = URI.parse(value)
++        if uri.host.present? && !uri.userinfo &&
++             uri.host != Discourse.current_hostname
++          value
++        end
++      rescue URI::InvalidURIError
++        nil
++      end
++      .uniq
++      .first(20)
+   end
+ 
+   def self.external_link(value)
+     unless value.is_a?(String) && value.length.between?(1, 2048) &&
+              !value.match?(/[\\\s\x00-\x20<>]/)
+-      raise Discourse::InvalidParameters.new(I18n.t("isbf_learning.invalid_link"))
++      raise Discourse::InvalidParameters.new(
++              I18n.t("isbf_learning.invalid_link")
++            )
+     end
+     uri = URI.parse(value)
+-    unless %w[http https].include?(uri.scheme&.downcase) && uri.host.present? &&
+-             !uri.userinfo && !uri.host.casecmp?(Discourse.current_hostname)
+-      raise Discourse::InvalidParameters.new(I18n.t("isbf_learning.invalid_link"))
++    if %w[http https].exclude?(uri.scheme&.downcase) || uri.host.blank? ||
++         uri.userinfo || uri.host.casecmp?(Discourse.current_hostname)
++      raise Discourse::InvalidParameters.new(
++              I18n.t("isbf_learning.invalid_link")
++            )
+     end
+     value
+   rescue URI::InvalidURIError
+@@ -72,36 +107,53 @@
+ 
+   def self.description(value)
+     return "" if value.nil?
+-    unless value.is_a?(String) && value.length <= DESCRIPTION_LIMIT && !value.match?(/[\x00-\x08\x0b\x0c\x0e-\x1f]/)
+-      raise Discourse::InvalidParameters.new(I18n.t("isbf_learning.invalid_description"))
++    unless value.is_a?(String) && value.length <= DESCRIPTION_LIMIT &&
++             !value.match?(/[\x00-\x08\x0b\x0c\x0e-\x1f]/)
++      raise Discourse::InvalidParameters.new(
++              I18n.t("isbf_learning.invalid_description")
++            )
+     end
+     value.gsub("\r\n", "\n").gsub("\r", "\n").strip
+   end
+ 
+   def self.contributor_name(user)
+-    user&.name.presence || user&.username.presence || I18n.t("isbf_learning.unknown_contributor")
++    user&.name.presence || user&.username.presence ||
++      I18n.t("isbf_learning.unknown_contributor")
+   end
+ 
+   def self.contributor(value, user)
+     default = contributor_name(user)
+     return default if value.nil? || (value.is_a?(String) && value.strip.empty?)
+-    unless value.is_a?(String) && !value.match?(/[\x00-\x1f\x7f]/) &&
+-             (value.strip.length <= CONTRIBUTOR_LIMIT || value.strip == default)
+-      raise Discourse::InvalidParameters.new(I18n.t("isbf_learning.invalid_contributor"))
++    valid =
++      value.is_a?(String) && !value.match?(/[\x00-\x1f\x7f]/) &&
++        (value.strip.length <= CONTRIBUTOR_LIMIT || value.strip == default)
++    unless valid
++      raise Discourse::InvalidParameters.new(
++              I18n.t("isbf_learning.invalid_contributor")
++            )
+     end
+     value.strip
+   end
+ 
+   def self.learning_reviewable?(reviewable)
+     reviewable.is_a?(ReviewableQueuedPost) &&
+-      ((category_id && reviewable.category_id == category_id) || reviewable.payload&.[](COURSE_FIELD).present?)
++      (
++        (category_id && reviewable.category_id == category_id) ||
++          reviewable.payload&.[](COURSE_FIELD).present?
++      )
+   end
+ 
+   def self.link_body(title, link, introduction = "")
+-    label = CGI.escapeHTML(title).gsub(/[\\\[\]]/) { |character| "\\#{character}" }
++    label =
++      CGI.escapeHTML(title).gsub(/[\\\[\]]/) { |character| "\\#{character}" }
+     body = "[#{label}](<#{link}>)"
+     return body if introduction.blank?
+-    plain = CGI.escapeHTML(introduction.gsub(/[\\`*_{}\[\]()#+.!|~:\/-]/) { |character| "\\#{character}" })
++    plain =
++      CGI.escapeHTML(
++        introduction.gsub(/[\\`*_{}\[\]()#+.!|~:\/-]/) do |character|
++          "\\#{character}"
++        end
++      )
+     "#{body}\n\n#{plain}"
+   end
+ 
+@@ -116,29 +168,38 @@
+       external_link(options[LINK_FIELD.to_sym])
+       raise Discourse::InvalidParameters.new(FILES_FIELD) unless ids.empty?
+     end
+-    if !course || options[:title].to_s.strip.blank? || options[:title].to_s.include?("[isbf-untitled:") || options[:archetype] == Archetype.private_message ||
++    if !course || options[:title].to_s.strip.blank? ||
++         options[:title].to_s.include?("[isbf-untitled:") ||
++         options[:archetype] == Archetype.private_message ||
+          options[:isbf_anonymous] || raw.match?(%r{(?:upload://|/uploads/)}i) ||
+          (ids.empty? && links(raw).empty?)
+       raise Discourse::InvalidParameters.new(I18n.t("isbf_learning.invalid"))
+     end
+     referenced = raw.scan(%r{/isbf/learning/files/([0-9a-f-]{36})}).flatten.uniq
+-    raise Discourse::InvalidParameters.new(FILES_FIELD) unless (referenced - ids).empty?
++    unless (referenced - ids).empty?
++      raise Discourse::InvalidParameters.new(FILES_FIELD)
++    end
+     ids.each do |id|
+       file = Files.metadata(id)
+-      unless file && (user.staff? || file[:owner_id] == user.id) &&
+-               file_accessible?(id, user, Guardian.new(user))
+-        raise Discourse::InvalidAccess
+-      end
++      permitted =
++        file &&
++          (
++            can_manage?(user.guardian) || can_review?(user.guardian) ||
++              file[:owner_id] == user.id
++          ) && file_accessible?(id, user, Guardian.new(user))
++      raise Discourse::InvalidAccess unless permitted
+     end
+     [course, ids]
+   end
+ 
+   def self.visible_resource?(topic, guardian)
+-    return false unless guardian.user && learning_topic?(topic) && topic.visible &&
+-                        !topic.deleted_at && guardian.can_see_topic?(topic)
++    unless guardian.user && learning_topic?(topic) && topic.visible &&
++             !topic.deleted_at && guardian.can_see_topic?(topic)
++      return false
++    end
+     post = topic.first_post
+-    post && post.post_type == Post.types[:regular] && !post.deleted_at && !post.user_deleted &&
+-      !post.hidden? && guardian.can_see_post?(post) &&
++    post && post.post_type == Post.types[:regular] && !post.deleted_at &&
++      !post.user_deleted && !post.hidden? && guardian.can_see_post?(post) &&
+       !(defined?(IsbfModeration::Hold) && IsbfModeration::Hold.persisted?(post))
+   end
+ 
+@@ -147,18 +208,29 @@
+     file = Files.metadata(id)
+     return false unless file
+     # Existing topic references take precedence over ownership and stale queues.
+-    references = Topic.with_deleted.joins(:_custom_fields).where(
+-      topic_custom_fields: { name: FILES_FIELD },
+-    ).where("topic_custom_fields.value LIKE ?", "%#{id}%").distinct
++    references =
++      Topic
++        .with_deleted
++        .joins(:_custom_fields)
++        .where(topic_custom_fields: { name: FILES_FIELD })
++        .where("topic_custom_fields.value LIKE ?", "%#{id}%")
++        .distinct
+     if references.exists?
+       return references.any? { |topic| visible_resource?(topic, guardian) }
+     end
+     return false if file[:bound]
+-    pending = ReviewableQueuedPost.pending.where(category_id: category_id).where(
+-      "payload ->> ? LIKE ?", FILES_FIELD, "%#{id}%",
+-    )
+-    return user.staff? || pending.where(target_created_by_id: user.id).exists? if pending.exists?
+-    user.staff? || file[:owner_id] == user.id
++    pending =
++      ReviewableQueuedPost
++        .pending
++        .where(category_id: category_id)
++        .where("payload ->> ? LIKE ?", FILES_FIELD, "%#{id}%")
++    if pending.exists?
++      return(
++        pending.viewable_by(user).exists? ||
++          pending.where(target_created_by_id: user.id).exists?
++      )
++    end
++    can_manage?(guardian) || file[:owner_id] == user.id
+   end
+ 
+   def self.resource(topic, guardian)
+@@ -166,18 +238,45 @@
+     return unless course && visible_resource?(topic, guardian)
+     post = topic.first_post
+     link = topic.custom_fields[LINK_FIELD].presence
+-    files = file_ids(topic.custom_fields[FILES_FIELD] || []).filter_map do |id|
+-      file = Files.metadata(id)
+-      file&.slice(:id, :name, :size, :url)
+-    end
++    files =
++      file_ids(topic.custom_fields[FILES_FIELD] || []).filter_map do |id|
++        file = Files.metadata(id)
++        file&.slice(:id, :name, :size, :url)
++      end
+     {
+-      id: topic.id, title: topic.title, url: topic.relative_url,
+-      description: link ? description(topic.custom_fields[DESCRIPTION_FIELD]) : PrettyText.excerpt(post.cooked, 280, strip_links: true, strip_images: true),
+-      created_at: post.created_at, grade: course["grade"], course: course,
+-      contributor: topic.custom_fields[CONTRIBUTOR_FIELD].presence || contributor_name(post.user),
+-      can_delete: guardian.is_admin? && guardian.can_delete_topic?(topic),
+-      author: post.user && { username: post.user.username, name: post.user.name, avatar_template: post.user.avatar_template },
+-      files: files, links: link ? [external_link(link)] : links(post.raw), link_only: link.present?,
++      id: topic.id,
++      title: topic.title,
++      url: topic.relative_url,
++      description:
++        (
++          if link
++            description(topic.custom_fields[DESCRIPTION_FIELD])
++          else
++            PrettyText.excerpt(
++              post.cooked,
++              280,
++              strip_links: true,
++              strip_images: true
++            )
++          end
++        ),
++      created_at: post.created_at,
++      grade: course["grade"],
++      course: course,
++      contributor:
++        topic.custom_fields[CONTRIBUTOR_FIELD].presence ||
++          contributor_name(post.user),
++      can_delete: can_manage?(guardian) && guardian.can_delete_topic?(topic),
++      author:
++        post.user &&
++          {
++            username: post.user.username,
++            name: post.user.name,
++            avatar_template: post.user.avatar_template
++          },
++      files: files,
++      links: link ? [external_link(link)] : links(post.raw),
++      link_only: link.present?
+     }
+   end
+ end
+--- a/plugins/isbf-learning/lib/isbf_learning/admin_review.rb
++++ b/plugins/isbf-learning/lib/isbf_learning/admin_review.rb
+@@ -4,11 +4,12 @@
+   module AdminReviewScope
+     def viewable_by(user, **options)
+       scope = super
+-      return scope if user&.admin?
++      return scope if user && IsbfLearning.can_review?(user.guardian)
+       scope.where(
+         "NOT (reviewables.type = :type AND (COALESCE(reviewables.category_id, 0) = :category_id OR COALESCE(reviewables.payload ->> :course_field, '') <> ''))",
+-        type: "ReviewableQueuedPost", category_id: IsbfLearning.category_id || -1,
+-        course_field: IsbfLearning::COURSE_FIELD,
++        type: "ReviewableQueuedPost",
++        category_id: IsbfLearning.category_id || -1,
++        course_field: IsbfLearning::COURSE_FIELD
+       )
+     end
+   end
+@@ -18,7 +19,10 @@
+ 
+     def can_review_target?(guardian)
+       if IsbfLearning.learning_reviewable?(self)
+-        return false unless guardian.is_admin? && category && guardian.can_see_category?(category)
++        unless IsbfLearning.can_review?(guardian) && category &&
++                 guardian.can_see_category?(category)
++          return false
++        end
+         return false if guardian.user.silenced? || guardian.user.suspended?
+       end
+       super
+@@ -29,9 +33,10 @@
+     def cooked
+       body = super
+       return body unless IsbfLearning.learning_reviewable?(object)
+-      name = object.payload[IsbfLearning::CONTRIBUTOR_FIELD].presence ||
+-        IsbfLearning.contributor_name(object.target_created_by)
+-      "#{body}<p>#{CGI.escapeHTML(I18n.t('isbf_learning.contributor_label'))}: #{CGI.escapeHTML(name)}</p>"
++      name =
++        object.payload[IsbfLearning::CONTRIBUTOR_FIELD].presence ||
++          IsbfLearning.contributor_name(object.target_created_by)
++      "#{body}<p>#{CGI.escapeHTML(I18n.t("isbf_learning.contributor_label"))}: #{CGI.escapeHTML(name)}</p>"
+     end
+   end
+ end
+@@ -39,7 +44,13 @@
+ Reviewable.singleton_class.prepend(IsbfLearning::AdminReviewScope)
+ Reviewable.prepend(IsbfLearning::AdminReviewPermission)
+ ReviewableQueuedPost.before_validation do
+-  self.reviewable_by_moderator = false if IsbfLearning.learning_reviewable?(self)
++  self.reviewable_by_moderator = false if IsbfLearning.learning_reviewable?(
++    self
++  )
+ end
+-ReviewableQueuedPostSerializer.payload_attributes(IsbfLearning::CONTRIBUTOR_FIELD.to_sym)
+-ReviewableQueuedPostSerializer.prepend(IsbfLearning::ContributorReviewSerializer)
++ReviewableQueuedPostSerializer.payload_attributes(
++  IsbfLearning::CONTRIBUTOR_FIELD.to_sym
++)
++ReviewableQueuedPostSerializer.prepend(
++  IsbfLearning::ContributorReviewSerializer
++)
+--- a/plugins/isbf-learning/lib/isbf_learning/controllers.rb
++++ b/plugins/isbf-learning/lib/isbf_learning/controllers.rb
+@@ -21,34 +21,74 @@
+     end
+ 
+     def create_course
+-      RateLimiter.new(current_user, "isbf-learning-courses", 10, 1.minute).performed!
++      RateLimiter.new(
++        current_user,
++        "isbf-learning-courses",
++        10,
++        1.minute
++      ).performed!
+       IsbfLearning.ensure_can_submit!(current_user, guardian)
+-      if current_user.staff?
+-        course = Courses.create(current_user, name: params[:name], grade: params[:grade])
++      if IsbfLearning.can_manage?(guardian) ||
++           (
++             current_user.staff? &&
++               !(
++                 SiteSetting.respond_to?(:academy_roles_enabled?) &&
++                   SiteSetting.academy_roles_enabled?
++               )
++           )
++        course =
++          Courses.create(
++            current_user,
++            name: params[:name],
++            grade: params[:grade]
++          )
+         render json: { success: true, pending: false, course: course }
+       else
+-        reviewable = Courses.request(current_user, name: params[:name], grade: params[:grade])
+-        render json: { success: true, pending: true, reviewable_id: reviewable.id }
++        reviewable =
++          Courses.request(
++            current_user,
++            name: params[:name],
++            grade: params[:grade]
++          )
++        render json: {
++                 success: true,
++                 pending: true,
++                 reviewable_id: reviewable.id
++               }
+       end
+     rescue Discourse::InvalidParameters => error
+       render_json_error(error.message, status: 422)
+     rescue StorageError
+-      render_json_error(I18n.t("isbf_learning.course_storage_error"), status: 422)
++      render_json_error(
++        I18n.t("isbf_learning.course_storage_error"),
++        status: 422
++      )
+     end
+ 
+     def resources
+       page = params[:page].presence || "0"
+-      raise Discourse::InvalidParameters.new("page") unless page.to_s.match?(/\A\d{1,4}\z/)
++      unless page.to_s.match?(/\A\d{1,4}\z/)
++        raise Discourse::InvalidParameters.new("page")
++      end
+       page = page.to_i
+       query = params[:q].to_s.strip
+       if query.present?
+         raise Discourse::InvalidParameters.new("q") if query.length > 200
+-        RateLimiter.new(current_user, "isbf-learning-search", 30, 1.minute).performed!
+-        results = Search.new(
+-          "#{query} isbf-learning:library in:first",
+-          guardian: guardian, search_type: :full_page, type_filter: "topic", page: page + 1,
+-          search_context: Category.find(IsbfLearning.category_id),
+-        ).execute
++        RateLimiter.new(
++          current_user,
++          "isbf-learning-search",
++          30,
++          1.minute
++        ).performed!
++        results =
++          Search.new(
++            "#{query} isbf-learning:library in:first",
++            guardian: guardian,
++            search_type: :full_page,
++            type_filter: "topic",
++            page: page + 1,
++            search_context: Category.find(IsbfLearning.category_id)
++          ).execute
+         raise Discourse::InvalidParameters.new("q") if results.error
+         topics = results.posts.map(&:topic).uniq(&:id)
+         more = results.more_full_page_results || results.more_posts
+@@ -56,20 +96,52 @@
+         course = Courses.find(params[:course_id])
+         raise Discourse::InvalidParameters.new("course_id") unless course
+         limit = 20
+-        scope = Topic.visible.secured(guardian).where(category_id: IsbfLearning.category_id, archetype: Archetype.default)
+-          .joins(:_custom_fields).where(topic_custom_fields: { name: COURSE_FIELD, value: course["id"] })
+-          .joins(:first_post).where(posts: { hidden: false, user_deleted: false, deleted_at: nil, post_type: Post.types[:regular] })
+-          .order(created_at: :desc, id: :desc)
++        scope =
++          Topic
++            .visible
++            .secured(guardian)
++            .where(
++              category_id: IsbfLearning.category_id,
++              archetype: Archetype.default
++            )
++            .joins(:_custom_fields)
++            .where(
++              topic_custom_fields: {
++                name: COURSE_FIELD,
++                value: course["id"]
++              }
++            )
++            .joins(:first_post)
++            .where(
++              posts: {
++                hidden: false,
++                user_deleted: false,
++                deleted_at: nil,
++                post_type: Post.types[:regular]
++              }
++            )
++            .order(created_at: :desc, id: :desc)
+         topics = scope.offset(page * limit).limit(limit + 1).to_a
+         more = topics.length > limit
+         topics = topics.first(limit)
+       end
+-      render json: { resources: topics.filter_map { |topic| IsbfLearning.resource(topic, guardian) }, has_more: !!more }
++      render json: {
++               resources:
++                 topics.filter_map { |topic|
++                   IsbfLearning.resource(topic, guardian)
++                 },
++               has_more: !!more
++             }
+     end
+ 
+     def create_resource
+       IsbfLearning.ensure_can_submit!(current_user, guardian)
+-      RateLimiter.new(current_user, "isbf-learning-share", 10, 1.minute).performed!
++      RateLimiter.new(
++        current_user,
++        "isbf-learning-share",
++        10,
++        1.minute
++      ).performed!
+       link = IsbfLearning.external_link(params[:link])
+       title = params[:title].is_a?(String) ? params[:title].strip : ""
+       introduction = IsbfLearning.description(params[:description])
+@@ -83,38 +155,55 @@
+         isbf_learning_files: "[]",
+         isbf_learning_link: link,
+         isbf_learning_description: introduction,
+-        isbf_learning_contributor: contributor,
++        isbf_learning_contributor: contributor
+       }
+       IsbfLearning.validate_payload!(current_user, options)
+       creator = TopicCreator.new(current_user, guardian, options)
+-      return render_json_error(creator.errors.full_messages, status: 422) unless creator.valid?
++      unless creator.valid?
++        return render_json_error(creator.errors.full_messages, status: 422)
++      end
+       result = NewPostManager.new(current_user, options).perform
+-      return render_json_error(result.errors.full_messages, status: 422) unless result.success?
++      unless result.success?
++        return render_json_error(result.errors.full_messages, status: 422)
++      end
+       render json: {
+-        success: true,
+-        pending: result.reviewable.present? && result.post.nil?,
+-        resource: result.post && IsbfLearning.resource(result.post.topic, guardian),
+-      }
++               success: true,
++               pending: result.reviewable.present? && result.post.nil?,
++               resource:
++                 result.post &&
++                   IsbfLearning.resource(result.post.topic, guardian)
++             }
+     rescue Discourse::InvalidParameters => error
+       render_json_error(error.message, status: 422)
+     end
+ 
+     def destroy_resource
+-      raise Discourse::InvalidAccess unless guardian.is_admin?
+-      raise Discourse::InvalidParameters.new("id") unless params[:id].to_s.match?(/\A[1-9]\d{0,18}\z/)
++      raise Discourse::InvalidAccess unless IsbfLearning.can_manage?(guardian)
++      unless params[:id].to_s.match?(/\A[1-9]\d{0,18}\z/)
++        raise Discourse::InvalidParameters.new("id")
++      end
+       topic = Topic.includes(:first_post).find_by(id: params[:id])
+-      raise Discourse::NotFound unless topic && IsbfLearning.resource(topic, guardian)
++      unless topic && IsbfLearning.resource(topic, guardian)
++        raise Discourse::NotFound
++      end
+       guardian.ensure_can_delete!(topic)
+       destroyer = PostDestroyer.new(current_user, topic.first_post)
+       destroyer.destroy
+       unless Topic.with_deleted.find_by(id: topic.id)&.deleted_at
+-        return render_json_error(I18n.t("isbf_learning.delete_failed"), status: 422)
++        return(
++          render_json_error(I18n.t("isbf_learning.delete_failed"), status: 422)
++        )
+       end
+       render json: { success: true }
+     end
+ 
+     def upload
+-      render json: Files.upload(current_user, guardian, params[:file] || params[:files]&.first)
++      render json:
++               Files.upload(
++                 current_user,
++                 guardian,
++                 params[:file] || params[:files]&.first
++               )
+     rescue StorageError => error
+       render_json_error(I18n.t("isbf_learning.storage_error"), status: 422)
+     end
+@@ -123,14 +212,19 @@
+       info = Files.download(params[:id], current_user, guardian)
+       response.headers["Cache-Control"] = "private, no-store"
+       response.headers["X-Content-Type-Options"] = "nosniff"
+-      send_file info[:path], filename: info[:name], type: "application/octet-stream", disposition: "attachment"
++      send_file info[:path],
++                filename: info[:name],
++                type: "application/octet-stream",
++                disposition: "attachment"
+     end
+ 
+     private
+ 
+     def check_category
+       category = Category.find_by(id: IsbfLearning.category_id)
+-      raise Discourse::InvalidAccess unless category && guardian.can_see_category?(category)
++      unless category && guardian.can_see_category?(category)
++        raise Discourse::InvalidAccess
++      end
+     end
+   end
+ end
+--- a/plugins/isbf-learning/lib/isbf_learning/courses.rb
++++ b/plugins/isbf-learning/lib/isbf_learning/courses.rb
+@@ -15,8 +15,12 @@
+     def self.normalize(name:, grade:)
+       raise Discourse::InvalidParameters.new("name") unless name.is_a?(String)
+       name = name.strip.unicode_normalize(:nfkc)
+-      raise Discourse::InvalidParameters.new("name") unless name.length.between?(1, 80)
+-      raise Discourse::InvalidParameters.new("grade") unless grade.to_s.match?(/\A[1-4]\z/)
++      unless name.length.between?(1, 80)
++        raise Discourse::InvalidParameters.new("name")
++      end
++      unless grade.to_s.match?(/\A[1-4]\z/)
++        raise Discourse::InvalidParameters.new("grade")
++      end
+       { "name" => name, "grade" => grade.to_i }
+     end
+ 
+@@ -35,19 +39,41 @@
+       IsbfLearning.ensure_can_submit!(user, Guardian.new(user))
+       attributes = normalize(name: name, grade: grade)
+       synchronize do
+-        raise Discourse::InvalidParameters.new(I18n.t("isbf_learning.duplicate_course")) if matching(attributes)
+-        pending = ReviewableIsbfLearningCourse.pending.where(
+-          created_by_id: user.id, category_id: IsbfLearning.category_id,
+-        ).detect do |reviewable|
+-          stored = normalize(name: reviewable.payload["course_name"], grade: reviewable.payload["grade"])
+-          stored["grade"] == attributes["grade"] && stored["name"].casecmp?(attributes["name"])
++        if matching(attributes)
++          raise Discourse::InvalidParameters.new(
++                  I18n.t("isbf_learning.duplicate_course")
++                )
+         end
++        pending =
++          ReviewableIsbfLearningCourse
++            .pending
++            .where(
++              created_by_id: user.id,
++              category_id: IsbfLearning.category_id
++            )
++            .detect do |reviewable|
++              stored =
++                normalize(
++                  name: reviewable.payload["course_name"],
++                  grade: reviewable.payload["grade"]
++                )
++              stored["grade"] == attributes["grade"] &&
++                stored["name"].casecmp?(attributes["name"])
++            end
+         next pending if pending
+-        reviewable = ReviewableIsbfLearningCourse.new(
+-          created_by: user, target_created_by: user, category_id: IsbfLearning.category_id,
+-          payload: { "course_name" => attributes["name"], "grade" => attributes["grade"] },
+-          reviewable_by_moderator: true, force_review: true, potential_spam: false,
+-        )
++        reviewable =
++          ReviewableIsbfLearningCourse.new(
++            created_by: user,
++            target_created_by: user,
++            category_id: IsbfLearning.category_id,
++            payload: {
++              "course_name" => attributes["name"],
++              "grade" => attributes["grade"]
++            },
++            reviewable_by_moderator: true,
++            force_review: true,
++            potential_spam: false
++          )
+         reviewable.created_new!
+         reviewable.save!
+         reviewable
+@@ -56,29 +82,53 @@
+ 
+     # Called inside ReviewableIsbfLearningCourse#perform's shared catalog lock.
+     def self.approve_locked(user, name:, grade:)
+-      ensure_staff!(user)
++      ensure_staff!(user, review: true)
+       add(normalize(name: name, grade: grade), reuse_existing: true)
+     end
+ 
+-    def self.ensure_staff!(user)
+-      raise Discourse::InvalidAccess unless user&.staff? && !user.silenced? && !user.suspended?
++    def self.ensure_staff!(user, review: false)
++      permitted =
++        user &&
++          (
++            if review
++              IsbfLearning.can_review?(user.guardian)
++            else
++              IsbfLearning.can_manage?(user.guardian)
++            end
++          )
++      permitted ||=
++        user&.staff? &&
++          !(
++            SiteSetting.respond_to?(:academy_roles_enabled?) &&
++              SiteSetting.academy_roles_enabled?
++          )
++      unless permitted && !user.silenced? && !user.suspended?
++        raise Discourse::InvalidAccess
++      end
+     end
+ 
+     def self.matching(attributes)
+       list.find do |course|
+-        course["grade"] == attributes["grade"] && course["name"].casecmp?(attributes["name"])
++        course["grade"] == attributes["grade"] &&
++          course["name"].casecmp?(attributes["name"])
+       end
+     end
+ 
+     def self.add(attributes, reuse_existing: false)
+       if existing = matching(attributes)
+         return existing if reuse_existing
+-        raise Discourse::InvalidParameters.new(I18n.t("isbf_learning.duplicate_course"))
++        raise Discourse::InvalidParameters.new(
++                I18n.t("isbf_learning.duplicate_course")
++              )
+       end
+       courses = list
+-      raise Discourse::InvalidParameters.new("courses") if courses.length >= 1000
++      if courses.length >= 1000
++        raise Discourse::InvalidParameters.new("courses")
++      end
+       course = attributes.merge("id" => SecureRandom.uuid)
+-      raise StorageError unless PluginStore.set(STORE, "courses", courses + [course])
++      unless PluginStore.set(STORE, "courses", courses + [course])
++        raise StorageError
++      end
+       course.with_indifferent_access
+     end
+ 
+--- a/plugins/isbf-learning/plugin.rb
++++ b/plugins/isbf-learning/plugin.rb
+@@ -17,30 +17,57 @@
+   require_relative "app/serializers/reviewable_isbf_learning_course_serializer"
+   register_reviewable_type ReviewableIsbfLearningCourse
+ 
+-  { IsbfLearning::COURSE_FIELD => :string, IsbfLearning::FILES_FIELD => :json,
+-    IsbfLearning::LINK_FIELD => :string, IsbfLearning::DESCRIPTION_FIELD => :string,
+-    IsbfLearning::CONTRIBUTOR_FIELD => :string }.each do |field, type|
++  {
++    IsbfLearning::COURSE_FIELD => :string,
++    IsbfLearning::FILES_FIELD => :json,
++    IsbfLearning::LINK_FIELD => :string,
++    IsbfLearning::DESCRIPTION_FIELD => :string,
++    IsbfLearning::CONTRIBUTOR_FIELD => :string
++  }.each do |field, type|
+     register_topic_custom_field_type(field, type, max_length: 4096)
+     add_permitted_post_create_param(field.to_sym, :string)
+     NewPostManager.add_plugin_payload_attribute(field.to_sym)
+     add_permitted_post_update_param(field.to_sym)
+     PostRevisor.track_topic_field(field.to_sym) do |changes, value|
+       next if value.nil?
+-      unless changes.user.admin? && IsbfLearning.learning_topic?(changes.topic)
++      unless IsbfLearning.can_manage?(changes.guardian) &&
++               IsbfLearning.learning_topic?(changes.topic)
+         raise Discourse::InvalidAccess
+       end
+-      normalized = field == IsbfLearning::FILES_FIELD ? IsbfLearning.file_ids(value) : value.to_s
+-      normalized = IsbfLearning.external_link(normalized) if field == IsbfLearning::LINK_FIELD
+-      normalized = IsbfLearning.description(value) if field == IsbfLearning::DESCRIPTION_FIELD
+-      normalized = IsbfLearning.contributor(value, changes.topic.first_post.user) if field == IsbfLearning::CONTRIBUTOR_FIELD
+-      if field == IsbfLearning::COURSE_FIELD && !IsbfLearning::Courses.find(normalized)
++      normalized =
++        (
++          if field == IsbfLearning::FILES_FIELD
++            IsbfLearning.file_ids(value)
++          else
++            value.to_s
++          end
++        )
++      normalized = IsbfLearning.external_link(normalized) if field ==
++        IsbfLearning::LINK_FIELD
++      normalized = IsbfLearning.description(value) if field ==
++        IsbfLearning::DESCRIPTION_FIELD
++      normalized =
++        IsbfLearning.contributor(
++          value,
++          changes.topic.first_post.user
++        ) if field == IsbfLearning::CONTRIBUTOR_FIELD
++      if field == IsbfLearning::COURSE_FIELD &&
++           !IsbfLearning::Courses.find(normalized)
+         raise Discourse::InvalidParameters.new(field)
+       end
+-      changes.record_change(field, changes.topic.custom_fields[field], normalized)
++      changes.record_change(
++        field,
++        changes.topic.custom_fields[field],
++        normalized
++      )
+       changes.topic.custom_fields[field] = normalized
+     end
+     %i[topic_view post].each do |serializer|
+-      add_to_serializer(serializer, field.to_sym, include_condition: -> { scope.user.present? }) do
++      add_to_serializer(
++        serializer,
++        field.to_sym,
++        include_condition: -> { scope.user.present? }
++      ) do
+         topic = object.respond_to?(:topic) ? object.topic : object
+         topic.custom_fields[field] if IsbfLearning.learning_topic?(topic)
+       end
+@@ -50,10 +77,16 @@
+   module ::IsbfLearning::ResourceGuardian
+     def can_create_topic_on_category?(category)
+       id = category.is_a?(Category) ? category.id : category
+-      return super unless IsbfLearning.category_id && id.to_i == IsbfLearning.category_id
+-      SiteSetting.isbf_learning_enabled && user&.active? && (user.staff? || user.approved?) &&
+-        !user.silenced? && !user.suspended? &&
+-        (is_admin? || Category.topic_create_allowed(self).exists?(id: id))
++      unless IsbfLearning.category_id && id.to_i == IsbfLearning.category_id
++        return super
++      end
++      SiteSetting.isbf_learning_enabled && user&.active? &&
++        (user.staff? || user.approved?) && !user.silenced? &&
++        !user.suspended? &&
++        (
++          IsbfLearning.can_manage?(self) ||
++            Category.topic_create_allowed(self).exists?(id: id)
++        )
+     end
+ 
+     def can_see_topic?(topic, hide_deleted = true)
+@@ -62,41 +95,62 @@
+     end
+ 
+     def can_move_topic_to_category?(category)
+-      return false if category&.id == IsbfLearning.category_id && !is_admin?
++      if category&.id == IsbfLearning.category_id &&
++           !IsbfLearning.can_manage?(self)
++        return false
++      end
+       super
+     end
+ 
+     def can_delete_topic?(topic)
+-      return false if IsbfLearning.learning_topic?(topic) && !is_admin?
++      if IsbfLearning.learning_topic?(topic) && !IsbfLearning.can_manage?(self)
++        return false
++      end
+       super
+     end
+ 
+     def can_recover_topic?(topic)
+-      return false if IsbfLearning.learning_topic?(topic) && !is_admin?
++      if IsbfLearning.learning_topic?(topic) && !IsbfLearning.can_manage?(self)
++        return false
++      end
+       super
+     end
+ 
+     def can_recover_post?(post)
+-      topic = post&.topic || (post && Topic.with_deleted.find_by(id: post.topic_id))
+-      return false if post&.is_first_post? && IsbfLearning.learning_topic?(topic) && !is_admin?
++      topic =
++        post&.topic || (post && Topic.with_deleted.find_by(id: post.topic_id))
++      if post&.is_first_post? && IsbfLearning.learning_topic?(topic) &&
++           !IsbfLearning.can_manage?(self)
++        return false
++      end
+       super
+     end
+ 
+     def can_edit_post?(post)
+-      return false if post&.is_first_post? && IsbfLearning.learning_topic?(post.topic) && !is_admin?
++      if post&.is_first_post? && IsbfLearning.learning_topic?(post.topic) &&
++           !IsbfLearning.can_manage?(self)
++        return false
++      end
+       super
+     end
+ 
+     def can_edit_topic?(topic)
+-      return false if IsbfLearning.learning_topic?(topic) && !is_admin?
++      if IsbfLearning.learning_topic?(topic) && !IsbfLearning.can_manage?(self)
++        return false
++      end
+       super
+     end
+   end
+   Guardian.prepend(IsbfLearning::ResourceGuardian)
+ 
+   on(:before_upload_creation) do |_file, image, upload, _validate|
+-    id = File.basename(upload.original_filename.to_s, File.extname(upload.original_filename.to_s))
+-    if image && IsbfLearning::Files.valid_id?(id) && IsbfLearning::Files.metadata(id)
++    id =
++      File.basename(
++        upload.original_filename.to_s,
++        File.extname(upload.original_filename.to_s)
++      )
++    if image && IsbfLearning::Files.valid_id?(id) &&
++         IsbfLearning::Files.metadata(id)
+       upload.errors.add(:base, I18n.t("isbf_learning.invalid"))
+     end
+   end
+@@ -104,31 +158,51 @@
+   module ::IsbfLearning::ResourceRevisor
+     def revise!(editor, fields, opts = {}, &block)
+       if IsbfLearning.learning_topic?(@post.topic) && @post.is_first_post?
+-        raise Discourse::InvalidAccess unless editor.admin?
++        unless IsbfLearning.can_manage?(editor.guardian)
++          raise Discourse::InvalidAccess
++        end
+         payload = {
+           title: fields[:title] || @post.topic.title,
+           raw: fields[:raw] || @post.raw,
+           category: fields[:category_id] || @post.topic.category_id,
+-          isbf_learning_course_id: fields[IsbfLearning::COURSE_FIELD.to_sym] || @post.topic.custom_fields[IsbfLearning::COURSE_FIELD],
+-          isbf_learning_files: fields[IsbfLearning::FILES_FIELD.to_sym] || @post.topic.custom_fields[IsbfLearning::FILES_FIELD],
+-          isbf_learning_link: fields[IsbfLearning::LINK_FIELD.to_sym] || @post.topic.custom_fields[IsbfLearning::LINK_FIELD],
+-          isbf_learning_description: fields[IsbfLearning::DESCRIPTION_FIELD.to_sym] || @post.topic.custom_fields[IsbfLearning::DESCRIPTION_FIELD],
+-          isbf_learning_contributor: fields[IsbfLearning::CONTRIBUTOR_FIELD.to_sym] || @post.topic.custom_fields[IsbfLearning::CONTRIBUTOR_FIELD],
++          isbf_learning_course_id:
++            fields[IsbfLearning::COURSE_FIELD.to_sym] ||
++              @post.topic.custom_fields[IsbfLearning::COURSE_FIELD],
++          isbf_learning_files:
++            fields[IsbfLearning::FILES_FIELD.to_sym] ||
++              @post.topic.custom_fields[IsbfLearning::FILES_FIELD],
++          isbf_learning_link:
++            fields[IsbfLearning::LINK_FIELD.to_sym] ||
++              @post.topic.custom_fields[IsbfLearning::LINK_FIELD],
++          isbf_learning_description:
++            fields[IsbfLearning::DESCRIPTION_FIELD.to_sym] ||
++              @post.topic.custom_fields[IsbfLearning::DESCRIPTION_FIELD],
++          isbf_learning_contributor:
++            fields[IsbfLearning::CONTRIBUTOR_FIELD.to_sym] ||
++              @post.topic.custom_fields[IsbfLearning::CONTRIBUTOR_FIELD]
+         }
+-        raise Discourse::InvalidParameters.new("category_id") unless payload[:category].to_i == IsbfLearning.category_id
++        unless payload[:category].to_i == IsbfLearning.category_id
++          raise Discourse::InvalidParameters.new("category_id")
++        end
+         IsbfLearning.validate_payload!(editor, payload)
+-      elsif fields.any? { |key, value| IsbfLearning::RESOURCE_FIELDS.include?(key.to_s) && !value.nil? }
++      elsif fields.any? do |key, value|
++            IsbfLearning::RESOURCE_FIELDS.include?(key.to_s) && !value.nil?
++          end
+         raise Discourse::InvalidParameters.new("isbf_learning")
+       end
+-      fields = fields.reject do |key, value|
+-        value.nil? && IsbfLearning::RESOURCE_FIELDS.include?(key.to_s)
+-      end
++      fields =
++        fields.reject do |key, value|
++          value.nil? && IsbfLearning::RESOURCE_FIELDS.include?(key.to_s)
++        end
+       PluginStoreRow.transaction do
+         result = super(editor, fields, opts, &block)
+-        if result && IsbfLearning.learning_topic?(@post.topic) && @post.is_first_post?
+-          IsbfLearning.file_ids(@post.topic.custom_fields[IsbfLearning::FILES_FIELD] || []).each do |id|
+-            IsbfLearning::Files.mark_bound!(id)
+-          end
++        if result && IsbfLearning.learning_topic?(@post.topic) &&
++             @post.is_first_post?
++          IsbfLearning
++            .file_ids(
++              @post.topic.custom_fields[IsbfLearning::FILES_FIELD] || []
++            )
++            .each { |id| IsbfLearning::Files.mark_bound!(id) }
+         end
+         result
+       end
+@@ -139,13 +213,16 @@
+   NewPostManager.add_handler(-100) do |manager|
+     fields = IsbfLearning::RESOURCE_FIELDS
+     supplied = fields.any? { |field| manager.args[field.to_sym].present? }
+-    resource = manager.args[:category].to_i == IsbfLearning.category_id && manager.args[:topic_id].blank?
++    resource =
++      manager.args[:category].to_i == IsbfLearning.category_id &&
++        manager.args[:topic_id].blank?
+     next unless supplied || resource
+     begin
+       raise Discourse::InvalidParameters.new("isbf_learning") unless resource
+       IsbfLearning.validate_payload!(manager.user, manager.args)
+-      unless manager.user.admin?
+-        post = Post.new(raw: manager.args[:raw], user: manager.user, post_number: 1)
++      unless IsbfLearning.can_manage?(manager.user.guardian)
++        post =
++          Post.new(raw: manager.args[:raw], user: manager.user, post_number: 1)
+         PostValidator.new(skip_topic: true).validate(post)
+         if post.errors.present?
+           result = NewPostResult.new(:created_post, false)
+@@ -163,8 +240,13 @@
+ 
+   on(:before_create_post) do |post, options|
+     next if post.user&.is_system_user?
+-    supplied = IsbfLearning::RESOURCE_FIELDS.any? { |field| options[field.to_sym].present? }
+-    resource = options[:category].to_i == IsbfLearning.category_id && options[:topic_id].blank?
++    supplied =
++      IsbfLearning::RESOURCE_FIELDS.any? do |field|
++        options[field.to_sym].present?
++      end
++    resource =
++      options[:category].to_i == IsbfLearning.category_id &&
++        options[:topic_id].blank?
+     next unless supplied || resource
+     raise Discourse::InvalidParameters.new("isbf_learning") unless resource
+     IsbfLearning.validate_payload!(post.user, options)
+@@ -172,35 +254,84 @@
+ 
+   on(:before_create_topic) do |topic, creator|
+     next if creator.user.is_system_user?
+-    supplied = IsbfLearning::RESOURCE_FIELDS.any? { |field| creator.opts[field.to_sym].present? }
++    supplied =
++      IsbfLearning::RESOURCE_FIELDS.any? do |field|
++        creator.opts[field.to_sym].present?
++      end
+     next unless supplied || IsbfLearning.learning_topic?(topic)
+-    raise Discourse::InvalidParameters.new("isbf_learning") unless IsbfLearning.learning_topic?(topic)
+-    unless creator.user.admin? || (creator.opts[:reviewed_queued_post] && creator.guardian.is_admin?)
+-      raise Discourse::InvalidAccess
+-    end
++    unless IsbfLearning.learning_topic?(topic)
++      raise Discourse::InvalidParameters.new("isbf_learning")
++    end
++    permitted =
++      IsbfLearning.can_manage?(creator.user.guardian) ||
++        (
++          creator.opts[:reviewed_queued_post] &&
++            IsbfLearning.can_review?(creator.guardian)
++        )
++    raise Discourse::InvalidAccess unless permitted
+     course, files = IsbfLearning.validate_payload!(creator.user, creator.opts)
+     topic.custom_fields[IsbfLearning::COURSE_FIELD] = course["id"]
+     topic.custom_fields[IsbfLearning::FILES_FIELD] = files
+     if creator.opts[IsbfLearning::LINK_FIELD.to_sym].present?
+-      topic.custom_fields[IsbfLearning::LINK_FIELD] = IsbfLearning.external_link(creator.opts[IsbfLearning::LINK_FIELD.to_sym])
+-    end
+-    topic.custom_fields[IsbfLearning::DESCRIPTION_FIELD] = IsbfLearning.description(creator.opts[IsbfLearning::DESCRIPTION_FIELD.to_sym])
+-    topic.custom_fields[IsbfLearning::CONTRIBUTOR_FIELD] = IsbfLearning.contributor(creator.opts[IsbfLearning::CONTRIBUTOR_FIELD.to_sym], creator.user)
++      topic.custom_fields[
++        IsbfLearning::LINK_FIELD
++      ] = IsbfLearning.external_link(
++        creator.opts[IsbfLearning::LINK_FIELD.to_sym]
++      )
++    end
++    topic.custom_fields[
++      IsbfLearning::DESCRIPTION_FIELD
++    ] = IsbfLearning.description(
++      creator.opts[IsbfLearning::DESCRIPTION_FIELD.to_sym]
++    )
++    topic.custom_fields[
++      IsbfLearning::CONTRIBUTOR_FIELD
++    ] = IsbfLearning.contributor(
++      creator.opts[IsbfLearning::CONTRIBUTOR_FIELD.to_sym],
++      creator.user
++    )
+     files.each { |id| IsbfLearning::Files.mark_bound!(id) }
+   end
+ 
+-  add_to_serializer(:site, :isbf_learning, include_condition: -> { SiteSetting.isbf_learning_enabled && IsbfLearning.category_id }) do
+-    { category_id: IsbfLearning.category_id, grades: IsbfLearning::GRADES, link_sharing: true, course_requests: true, resource_description: true, resource_contributor: true, resource_admin_management: true }
+-  end
+-
+-  TopicQuery.add_custom_filter(:isbf_learning_community_exclusion) do |topics, _query|
++  add_to_serializer(
++    :site,
++    :isbf_learning,
++    include_condition: -> do
++      SiteSetting.isbf_learning_enabled && IsbfLearning.category_id
++    end
++  ) do
++    {
++      category_id: IsbfLearning.category_id,
++      grades: IsbfLearning::GRADES,
++      link_sharing: true,
++      course_requests: true,
++      resource_description: true,
++      resource_contributor: true,
++      resource_admin_management: true
++    }
++  end
++
++  TopicQuery.add_custom_filter(
++    :isbf_learning_community_exclusion
++  ) do |topics, _query|
+     id = IsbfLearning.category_id
+     id ? topics.where.not(topics: { category_id: id }) : topics
+   end
+ 
+   register_search_advanced_filter(/\Aisbf-learning:library\z/) do |posts, _|
+     id = IsbfLearning.category_id
+-    id ? posts.where(post_number: 1, topics: { category_id: id, visible: true, archetype: Archetype.default }) : posts.none
++    if id
++      posts.where(
++        post_number: 1,
++        topics: {
++          category_id: id,
++          visible: true,
++          archetype: Archetype.default
++        }
++      )
++    else
++      posts.none
++    end
+   end
+ 
+   IsbfLearning::Engine.routes.draw do

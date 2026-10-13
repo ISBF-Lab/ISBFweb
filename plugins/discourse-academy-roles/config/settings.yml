@@ -1,0 +1,111 @@
+academy_roles:
+  academy_activity_category:
+    type: category
+    default: ""
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_access_internal_boards:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_access_user_admin:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_view_hidden_content:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_review_content:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_edit_others_content:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_delete_others_content:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_manage_topics:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_edit_users:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_suspend_users:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_silence_users:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_delete_users:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_anonymize_users:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_publish_activities:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_publish_official:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_review_resources:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_manage_resources:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_moderators_trace_anonymous:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
+  academy_roles_enabled:
+    default: false
+    client: true
+    validator: "AcademyRolesEnabledValidator"
+    area: "group_permissions"
+  academy_official_category:
+    type: category
+    default: ""
+    client: true
+    area: "group_permissions"
+  academy_official_group:
+    type: group
+    default: ""
+    area: "group_permissions"
+  academy_auth_page_enabled:
+    default: false
+    client: true
+    refresh: true
+    area: "login"

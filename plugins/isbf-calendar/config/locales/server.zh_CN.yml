@@ -1,0 +1,6 @@
+zh_CN:
+  isbf_calendar:
+    invalid_items: "请检查官方时间项的内容及版本。"
+    invalid_time: "请填写有效的活动时间或截止时间。"
+    version_conflict: "官方信息已有变更，请刷新后再操作。"
+    readonly_fields: "官方行程只能修改私人备注。"

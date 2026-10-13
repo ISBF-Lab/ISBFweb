@@ -1,0 +1,174 @@
+{
+  "date": "2026-10-13",
+  "source_kind": "GitHub Actions native Discourse pages with synthetic data",
+  "code_commit": "7008a3662fbcebebf2e9dd9469a75e280cfbeed5",
+  "workflow_run_id": 38291752432,
+  "workflow_url": "https://github.com/ISBF-Lab/ISBFweb/actions/runs/38291752432",
+  "job_id": 114953256111,
+  "artifact_id": 11766689533,
+  "artifact_sha256": "17e115c96a4ef7eb6d774c04d55db326347c36a8592ab09a88a6aa9cda36f4fc",
+  "conclusion": "success",
+  "native_qunit": {
+    "total": 1043,
+    "failed": 0
+  },
+  "theme_qunit": {
+    "total": 89,
+    "failed": 0
+  },
+  "real_page_examples": {
+    "total": 48,
+    "failed": 0
+  },
+  "viewport_height": 900,
+  "full_page": true,
+  "screenshots": [
+    {
+      "path": "desktop-light-messages.png",
+      "sha256": "796bc50419411c3aa4c1675b2d63e23a046324806d35111b9ff341c87882dae8",
+      "bytes": 107174,
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      }
+    },
+    {
+      "path": "desktop-dark-messages.png",
+      "sha256": "6ef6ac22f8d7ee6c81c819bc3d02b7b10495957305a4a44149fe169a2d61fd35",
+      "bytes": 110925,
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      }
+    },
+    {
+      "path": "mobile-light-messages.png",
+      "sha256": "09b337d3eba839e467b6f7aaf3f405dfff53adf56ef2dc710a68e3dc32ab156e",
+      "bytes": 174956,
+      "image_pixels": {
+        "width": 1170,
+        "height": 2787
+      }
+    },
+    {
+      "path": "mobile-dark-messages.png",
+      "sha256": "474f01d5b63ff05d92790daa5281d402beb4461d321b9e10544fd5e8ba977809",
+      "bytes": 181571,
+      "image_pixels": {
+        "width": 1170,
+        "height": 2787
+      }
+    },
+    {
+      "path": "desktop-light-account.png",
+      "sha256": "d313cb0720f94ed03e7f5d8dd6b06b02963b022736c55e0d6f1374a4c59bb3a5",
+      "bytes": 130641,
+      "image_pixels": {
+        "width": 1440,
+        "height": 1667
+      }
+    },
+    {
+      "path": "desktop-dark-account.png",
+      "sha256": "517d46ae6458b681f97e19749067c782e6ad8eaac32a45fce38c0b82ecb48705",
+      "bytes": 134827,
+      "image_pixels": {
+        "width": 1440,
+        "height": 1667
+      }
+    },
+    {
+      "path": "mobile-light-account.png",
+      "sha256": "6ccef2aa2fe083a6f5134a81919d26ae2875e46edd45ad34eee8e2e5c58e9d55",
+      "bytes": 269598,
+      "image_pixels": {
+        "width": 1170,
+        "height": 4947
+      }
+    },
+    {
+      "path": "mobile-dark-account.png",
+      "sha256": "f00ead4dd91346b389022a8487102c422f781838ace3ee0e00b19497f84c676a",
+      "bytes": 282967,
+      "image_pixels": {
+        "width": 1170,
+        "height": 4947
+      }
+    },
+    {
+      "path": "desktop-light-bookmarks.png",
+      "sha256": "a6f455fb0be0bbc2499a796098a06324d2a2f8ec95abe6bd32ac8f44bcd1448d",
+      "bytes": 80435,
+      "image_pixels": {
+        "width": 1440,
+        "height": 1025
+      }
+    },
+    {
+      "path": "desktop-dark-bookmarks.png",
+      "sha256": "b585282165c77d006cb4ab55ee7f1e917479de7743535cc2088589c31f535706",
+      "bytes": 82222,
+      "image_pixels": {
+        "width": 1440,
+        "height": 1025
+      }
+    },
+    {
+      "path": "mobile-light-bookmarks.png",
+      "sha256": "9701a7b1f6ae52bae5a55127f5e74498f79d5688f0ba1b2ddd821988df13f773",
+      "bytes": 101303,
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      }
+    },
+    {
+      "path": "mobile-dark-bookmarks.png",
+      "sha256": "bbb041eeb2a65fb71fb7d3c233432e9024582c42b6d6df0489cb39491bbc86db",
+      "bytes": 106981,
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      }
+    },
+    {
+      "path": "desktop-light-drafts.png",
+      "sha256": "510ab3b55a10c624bc0c518df72964f3edea722091b3635c8fb8bce5405e0cb5",
+      "bytes": 101479,
+      "image_pixels": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "path": "desktop-dark-drafts.png",
+      "sha256": "1a7d4022c6258034cc5bba9dfeebceebcf1bbbcc424b33f17fb782b623a2edd9",
+      "bytes": 104827,
+      "image_pixels": {
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "path": "mobile-light-drafts.png",
+      "sha256": "f1b0821568e13d93b55be9add491212895719c81b33fd92f0ba39d318c517991",
+      "bytes": 125773,
+      "image_pixels": {
+        "width": 1170,
+        "height": 2700
+      }
+    },
+    {
+      "path": "mobile-dark-drafts.png",
+      "sha256": "03fb46413e9a4fcecd090e254c1cf62fdd4fc9b3e78d37b55b5686bcb78abab9",
+      "bytes": 131796,
+      "image_pixels": {
+        "width": 1170,
+        "height": 2700
+      }
+    }
+  ],
+  "screenshot_count": 16,
+  "production_access": false,
+  "human_visual_acceptance": false
+}

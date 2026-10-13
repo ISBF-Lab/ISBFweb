@@ -1,0 +1,625 @@
+--- a/plugins/isbf-official/lib/isbf_official.rb
++++ b/plugins/isbf-official/lib/isbf_official.rb
+@@ -4,12 +4,14 @@
+ 
+ module IsbfOfficial
+   def self.category_id
+-    return unless SiteSetting.isbf_official_enabled &&
+-                  defined?(DiscourseAcademyRoles) &&
+-                  DiscourseAcademyRoles.respond_to?(:official_member?) &&
+-                  SiteSetting.respond_to?(:academy_roles_enabled) &&
+-                  SiteSetting.academy_roles_enabled &&
+-                  SiteSetting.respond_to?(:academy_official_category)
++    unless SiteSetting.isbf_official_enabled &&
++             defined?(DiscourseAcademyRoles) &&
++             DiscourseAcademyRoles.respond_to?(:official_member?) &&
++             SiteSetting.respond_to?(:academy_roles_enabled) &&
++             SiteSetting.academy_roles_enabled &&
++             SiteSetting.respond_to?(:academy_official_category)
++      return
++    end
+     id = SiteSetting.academy_official_category.to_i
+     id if id.positive? && Category.exists?(id: id)
+   end
+@@ -24,7 +26,9 @@
+   end
+ 
+   def self.attach(topic, options)
+-    FIELDS.each_key { |field| topic.custom_fields[field] = normalize(field, options[field.to_sym]) }
++    FIELDS.each_key do |field|
++      topic.custom_fields[field] = normalize(field, options[field.to_sym])
++    end
+   end
+ 
+   def self.validate_topic(topic)
+@@ -34,17 +38,19 @@
+     return if topic.new_record? && !has_fields
+     if topic.persisted? && !topic.will_save_change_to_category_id?
+       return if topic.custom_fields_clean?
+-      original = topic._custom_fields.where(name: FIELDS.keys).pluck(:name, :value).to_h
+-      classification_dirty = FIELDS.keys.any? do |field|
+-        stored = original[field]
+-        previous =
+-          begin
+-            stored.nil? ? nil : JSON.parse(stored)
+-          rescue JSON::ParserError
+-            {} # Matches native HasCustomFields' malformed-JSON fallback.
+-          end
+-        previous != topic.custom_fields[field]
+-      end
++      original =
++        topic._custom_fields.where(name: FIELDS.keys).pluck(:name, :value).to_h
++      classification_dirty =
++        FIELDS.keys.any? do |field|
++          stored = original[field]
++          previous =
++            begin
++              stored.nil? ? nil : JSON.parse(stored)
++            rescue JSON::ParserError
++              {} # Matches native HasCustomFields' malformed-JSON fallback.
++            end
++          previous != topic.custom_fields[field]
++        end
+       return unless classification_dirty
+     end
+     FIELDS.each_key { |field| normalize(field, topic.custom_fields[field]) }
+@@ -55,8 +61,16 @@
+   def self.revise(changes, field, value)
+     return if value.nil?
+     topic = changes.topic
+-    unless official_topic?(topic) && changes.guardian.can_edit_topic?(topic) &&
+-             (changes.guardian.is_staff? || DiscourseAcademyRoles.official_member?(changes.user))
++    permitted =
++      official_topic?(topic) && changes.guardian.can_edit_topic?(topic) &&
++        (
++          changes.guardian.is_staff? ||
++            (
++              changes.guardian.respond_to?(:academy_can?) &&
++                changes.guardian.academy_can?(:manage_topics)
++            ) || DiscourseAcademyRoles.official_member?(changes.user)
++        )
++    unless permitted
+       add_error(topic)
+       changes.check_result(false)
+       return
+@@ -73,17 +87,21 @@
+   def self.filter(scope, values, guardian, field: nil)
+     id = category_id
+     return scope.none unless id && Category.secured(guardian).exists?(id: id)
+-    return scope.none unless values.is_a?(Array) && values.length == 1 && values.first.is_a?(String)
++    unless values.is_a?(Array) && values.length == 1 &&
++             values.first.is_a?(String)
++      return scope.none
++    end
+     value = values.first
+-    scope = scope.where(category_id: id, archetype: Archetype.default, visible: true)
++    scope =
++      scope.where(category_id: id, archetype: Archetype.default, visible: true)
+     return value == id.to_s ? scope : scope.none if field.nil?
+-    return scope.none unless FIELDS.fetch(field).include?(value)
++    return scope.none if FIELDS.fetch(field).exclude?(value)
+     # JSON custom fields are serialized text. A quoted supported ID is an exact
+     # array element match without risking casts on unrelated legacy field data.
+     scope.where(
+       "topics.id IN (SELECT topic_id FROM topic_custom_fields WHERE name = ? AND value LIKE '[%' AND value LIKE ?)",
+       field,
+-      "%#{JSON.generate(value)}%",
++      "%#{JSON.generate(value)}%"
+     )
+   end
+ end
+--- a/plugins/isbf-official/spec/isbf_official_spec.rb
++++ b/plugins/isbf-official/spec/isbf_official_spec.rb
+@@ -2,18 +2,18 @@
+ 
+ require "rails_helper"
+ 
+-RSpec.shared_context "ISBF official contract" do
++RSpec.shared_context "with the official identity contract" do
+   fab!(:category)
+   fab!(:admin)
+   fab!(:user) { Fabricate(:user, active: true, approved: true, trust_level: 1) }
+-  fab!(:posting_group) { Fabricate(:group) }
+-  fab!(:official_group) { Fabricate(:group) }
++  fab!(:posting_group, :group)
++  fab!(:official_group, :group)
+ 
+   around do |example|
+-    # Stock Core CI has no academy plugin. Simulate only its public identity
+-    # contract using real group membership; native Guardian remains untouched.
++    # Keep installed integrations while substituting the identity contract.
+     group_id = official_group.id
+-    contract = Module.new
++    contract =
++      defined?(DiscourseAcademyRoles) ? DiscourseAcademyRoles.dup : Module.new
+     contract.define_singleton_method(:official_member?) do |actor|
+       actor && (actor.admin? || actor.group_users.exists?(group_id: group_id))
+     end
+@@ -41,7 +41,7 @@
+       category: category.id,
+       academy_official: true,
+       isbf_official_campuses: '["shenzhen","zhuhai"]',
+-      isbf_official_types: '["volunteer","academic"]',
++      isbf_official_types: '["volunteer","academic"]'
+     }
+   end
+ 
+@@ -50,24 +50,32 @@
+   end
+ end
+ 
+-RSpec.describe "ISBF official classification" do
+-  include_context "ISBF official contract"
++RSpec.describe IsbfOfficial do
++  include_context "with the official identity contract"
+ 
+   it "creates native official topics with normalized multiselect fields" do
+     post = create_notice
+     expect(post).to be_persisted
+-    expect(post.topic.reload.custom_fields["isbf_official_campuses"]).to eq(%w[zhuhai shenzhen])
+-    expect(post.topic.custom_fields["isbf_official_types"]).to eq(%w[academic volunteer])
++    expect(post.topic.reload.custom_fields["isbf_official_campuses"]).to eq(
++      %w[zhuhai shenzhen]
++    )
++    expect(post.topic.custom_fields["isbf_official_types"]).to eq(
++      %w[academic volunteer]
++    )
+   end
+ 
+   it "uses the existing official group identity" do
+     official_group.add(user)
+-    expect(Guardian.new(user).can_create_topic_on_category?(category)).to eq(true)
++    expect(Guardian.new(user).can_create_topic_on_category?(category)).to eq(
++      true
++    )
+     expect(create_notice(user)).to be_persisted
+   end
+ 
+   it "rejects unverified members even when native category posting is allowed" do
+-    expect(Guardian.new(user).can_create_topic_on_category?(category)).to eq(true)
++    expect(Guardian.new(user).can_create_topic_on_category?(category)).to eq(
++      true
++    )
+     creator = PostCreator.new(user, payload)
+     expect(creator.create).not_to be_persisted
+     expect(creator.errors).to be_present
+@@ -81,8 +89,15 @@
+   end
+ 
+   it "requires both fields and rejects malformed, duplicate, or unsupported IDs" do
+-    [nil, "[]", "null", '["invalid"]', '["academic","academic"]'].each do |value|
+-      creator = PostCreator.new(admin, payload.merge(isbf_official_types: value))
++    [
++      nil,
++      "[]",
++      "null",
++      '["invalid"]',
++      '["academic","academic"]'
++    ].each do |value|
++      creator =
++        PostCreator.new(admin, payload.merge(isbf_official_types: value))
+       expect(creator.create).not_to be_persisted
+       expect(creator.errors).to be_present
+     end
+@@ -91,34 +106,72 @@
+   it "revises only metadata through PostRevisor and records a native revision" do
+     post = create_notice
+     original_raw = post.raw
+-    expect(PostRevisor.new(post).revise!(admin, isbf_official_campuses: '["guangzhou-east"]')).to eq(true)
+-    expect(post.topic.reload.custom_fields["isbf_official_campuses"]).to eq(["guangzhou-east"])
++    expect(
++      PostRevisor.new(post).revise!(
++        admin,
++        isbf_official_campuses: '["guangzhou-east"]'
++      )
++    ).to eq(true)
++    expect(post.topic.reload.custom_fields["isbf_official_campuses"]).to eq(
++      ["guangzhou-east"]
++    )
+     expect(post.reload.raw).to eq(original_raw)
+     expect(post.revisions.last.modifications["isbf_official_campuses"]).to eq(
+-      [%w[zhuhai shenzhen], ["guangzhou-east"]],
++      [%w[zhuhai shenzhen], ["guangzhou-east"]]
+     )
+   end
+ 
+   it "rolls back invalid metadata together with a raw change" do
+     post = create_notice
+     raw = post.raw
+-    expect(PostRevisor.new(post).revise!(admin, raw: "Changed body contents", isbf_official_types: "[]")).to eq(false)
++    expect(
++      PostRevisor.new(post).revise!(
++        admin,
++        raw: "Changed body contents",
++        isbf_official_types: "[]"
++      )
++    ).to eq(false)
+     expect(post.reload.raw).to eq(raw)
+-    expect(post.topic.reload.custom_fields["isbf_official_types"]).to eq(%w[academic volunteer])
++    expect(post.topic.reload.custom_fields["isbf_official_types"]).to eq(
++      %w[academic volunteer]
++    )
+   end
+ 
+   it "ignores nil fields on raw edits and preserves historical topics" do
+     SiteSetting.isbf_official_enabled = false
+-    legacy = PostCreator.new(admin, payload.except(:isbf_official_campuses, :isbf_official_types)).create
++    legacy =
++      PostCreator.new(
++        admin,
++        payload.except(:isbf_official_campuses, :isbf_official_types)
++      ).create
+     SiteSetting.isbf_official_enabled = true
+-    expect(PostRevisor.new(legacy).revise!(admin, raw: "Edited historical notice body.", isbf_official_campuses: nil, isbf_official_types: nil)).to eq(true)
+-    expect(legacy.topic.reload.custom_fields).not_to have_key("isbf_official_campuses")
+-    expect(PostRevisor.new(legacy).revise!(admin, isbf_official_campuses: '["zhuhai"]')).to eq(false)
++    expect(
++      PostRevisor.new(legacy).revise!(
++        admin,
++        raw: "Edited historical notice body.",
++        isbf_official_campuses: nil,
++        isbf_official_types: nil
++      )
++    ).to eq(true)
++    expect(legacy.topic.reload.custom_fields).not_to have_key(
++      "isbf_official_campuses"
++    )
++    expect(
++      PostRevisor.new(legacy).revise!(
++        admin,
++        isbf_official_campuses: '["zhuhai"]'
++      )
++    ).to eq(false)
+   end
+ 
+   it "allows replies without classification and rejects metadata on reply edits" do
+     notice = create_notice
+-    reply = PostCreator.new(user, topic_id: notice.topic_id, raw: "A normal reply to the campus notice.").create
++    reply =
++      PostCreator.new(
++        user,
++        topic_id: notice.topic_id,
++        raw: "A normal reply to the campus notice."
++      ).create
+     expect(reply).to be_persisted
+     expect do
+       PostRevisor.new(reply).revise!(admin, isbf_official_types: '["clubs"]')
+@@ -128,21 +181,49 @@
+   it "does not allow nonofficial or private messages to carry official metadata" do
+     other = Fabricate(:category)
+     expect(create_notice(admin, category: other.id)).not_to be_persisted
+-    expect(create_notice(admin, archetype: Archetype.private_message, target_usernames: user.username)).not_to be_persisted
++    expect(
++      create_notice(
++        admin,
++        archetype: Archetype.private_message,
++        target_usernames: user.username
++      )
++    ).not_to be_persisted
+   end
+ 
+   it "filters by exact category ID and combines campus and type by intersection" do
+     first = create_notice
+-    second = create_notice(admin, title: "Another campus announcement", isbf_official_campuses: '["shenzhen"]', isbf_official_types: '["clubs"]')
++    second =
++      create_notice(
++        admin,
++        title: "Another campus announcement",
++        isbf_official_campuses: '["shenzhen"]',
++        isbf_official_types: '["clubs"]'
++      )
+     guardian = Guardian.new(user)
+     base = Topic.visible.secured(guardian)
+     scoped = IsbfOfficial.filter(base, [category.id.to_s], guardian)
+-    scoped = IsbfOfficial.filter(scoped, ["shenzhen"], guardian, field: "isbf_official_campuses")
+-    scoped = IsbfOfficial.filter(scoped, ["academic"], guardian, field: "isbf_official_types")
++    scoped =
++      IsbfOfficial.filter(
++        scoped,
++        ["shenzhen"],
++        guardian,
++        field: "isbf_official_campuses"
++      )
++    scoped =
++      IsbfOfficial.filter(
++        scoped,
++        ["academic"],
++        guardian,
++        field: "isbf_official_types"
++      )
+     expect(scoped.order(:id).limit(1).pluck(:id)).to eq([first.topic_id])
+     expect(scoped.order(:id).offset(1).limit(1)).to be_empty
+     expect(scoped.pluck(:id)).not_to include(second.topic_id)
+-    [[category.slug], ["0"], [category.id.to_s, category.id.to_s]].each do |values|
++    [
++      [category.slug],
++      ["0"],
++      [category.id.to_s, category.id.to_s]
++    ].each do |values|
+       expect(IsbfOfficial.filter(base, values, guardian)).to be_empty
+     end
+   end
+@@ -150,41 +231,82 @@
+   it "fails closed when the official category is restricted or the dependency disabled" do
+     category.set_permissions(admins: :full)
+     category.save!
+-    expect(IsbfOfficial.filter(Topic.all, [category.id.to_s], Guardian.new(user))).to be_empty
++    expect(
++      IsbfOfficial.filter(Topic.all, [category.id.to_s], Guardian.new(user))
++    ).to be_empty
+     allow(IsbfOfficial).to receive(:category_id).and_return(nil)
+     expect(IsbfOfficial.category_id).to be_nil
+-    expect(IsbfOfficial.filter(Topic.all, ["zhuhai"], Guardian.new(admin), field: "isbf_official_campuses")).to be_empty
++    expect(
++      IsbfOfficial.filter(
++        Topic.all,
++        ["zhuhai"],
++        Guardian.new(admin),
++        field: "isbf_official_campuses"
++      )
++    ).to be_empty
+   end
+ 
+   it "omits site capability when disabled" do
+     SiteSetting.isbf_official_enabled = false
+-    expect(SiteSerializer.new(Site.new(Guardian.new(admin)), scope: Guardian.new(admin)).as_json).not_to have_key(:isbf_official)
++    expect(
++      SiteSerializer.new(
++        Site.new(Guardian.new(admin)),
++        scope: Guardian.new(admin)
++      ).as_json
++    ).not_to have_key(:isbf_official)
+   end
+ 
+   it "allows native staff metadata editing and denies unverified nonstaff editors" do
+     post = create_notice
+     moderator = Fabricate(:moderator)
+-    expect(PostRevisor.new(post).revise!(moderator, isbf_official_types: '["clubs"]')).to eq(true)
++    expect(
++      PostRevisor.new(post).revise!(moderator, isbf_official_types: '["clubs"]')
++    ).to eq(true)
+     post = post.reload
+-    expect(PostRevisor.new(post).revise!(user, isbf_official_types: '["academic"]')).to eq(false)
+-    expect(post.topic.reload.custom_fields["isbf_official_types"]).to eq(["clubs"])
++    expect(
++      PostRevisor.new(post).revise!(user, isbf_official_types: '["academic"]')
++    ).to eq(false)
++    expect(post.topic.reload.custom_fields["isbf_official_types"]).to eq(
++      ["clubs"]
++    )
+   end
+ 
+   it "rejects reply create payload and accepts a complete legacy classification" do
+     post = create_notice
+-    reply = PostCreator.new(admin, topic_id: post.topic_id, raw: "Reply with misplaced topic metadata.", isbf_official_types: '["clubs"]').create
++    reply =
++      PostCreator.new(
++        admin,
++        topic_id: post.topic_id,
++        raw: "Reply with misplaced topic metadata.",
++        isbf_official_types: '["clubs"]'
++      ).create
+     expect(reply).not_to be_persisted
+     SiteSetting.isbf_official_enabled = false
+-    legacy = PostCreator.new(admin, payload.except(:isbf_official_campuses, :isbf_official_types)).create
++    legacy =
++      PostCreator.new(
++        admin,
++        payload.except(:isbf_official_campuses, :isbf_official_types)
++      ).create
+     SiteSetting.isbf_official_enabled = true
+-    expect(PostRevisor.new(legacy).revise!(admin, payload.slice(:isbf_official_campuses, :isbf_official_types))).to eq(true)
+-    expect(legacy.topic.reload.custom_fields["isbf_official_types"]).to eq(%w[academic volunteer])
++    expect(
++      PostRevisor.new(legacy).revise!(
++        admin,
++        payload.slice(:isbf_official_campuses, :isbf_official_types)
++      )
++    ).to eq(true)
++    expect(legacy.topic.reload.custom_fields["isbf_official_types"]).to eq(
++      %w[academic volunteer]
++    )
+   end
+ 
+   it "does not turn nil HTTP payload fields into a metadata revision" do
+     post = create_notice
+     version = post.version
+-    PostRevisor.new(post).revise!(admin, isbf_official_campuses: nil, isbf_official_types: nil)
++    PostRevisor.new(post).revise!(
++      admin,
++      isbf_official_campuses: nil,
++      isbf_official_types: nil
++    )
+     expect(post.reload.version).to eq(version)
+   end
+ 
+@@ -206,7 +328,12 @@
+     post = create_notice
+     guardian = Guardian.new(admin)
+     Topic.preload_custom_fields([post.topic], IsbfOfficial::FIELDS.keys)
+-    item = TopicListItemSerializer.new(post.topic, scope: guardian, root: false).as_json
++    item =
++      TopicListItemSerializer.new(
++        post.topic,
++        scope: guardian,
++        root: false
++      ).as_json
+     expect(item[:isbf_official_campuses]).to eq(%w[zhuhai shenzhen])
+     serialized = PostSerializer.new(post, scope: guardian, root: false).as_json
+     expect(serialized[:isbf_official_types]).to eq(%w[academic volunteer])
+@@ -214,65 +341,105 @@
+ end
+ 
+ RSpec.describe "ISBF official native HTTP integration", type: :request do
+-  include_context "ISBF official contract"
++  include_context "with the official identity contract"
+ 
+   it "passes flattened create strings and metadata-only edits through the posts controller" do
+     sign_in(admin)
+     post "/posts.json", params: payload
+     expect(response.status).to eq(200), response.body
+     notice = Post.find(response.parsed_body["id"])
+-    expect(notice.topic.custom_fields["isbf_official_campuses"]).to eq(%w[zhuhai shenzhen])
++    expect(notice.topic.custom_fields["isbf_official_campuses"]).to eq(
++      %w[zhuhai shenzhen]
++    )
+     original_raw = notice.raw
+ 
+     put "/posts/#{notice.id}.json",
+-        params: { post: { isbf_official_types: '["clubs"]' } }
++        params: {
++          post: {
++            isbf_official_types: '["clubs"]'
++          }
++        }
+     expect(response.status).to eq(200), response.body
+     expect(notice.reload.raw).to eq(original_raw)
+-    expect(notice.topic.reload.custom_fields["isbf_official_types"]).to eq(["clubs"])
+-    expect(response.parsed_body.dig("post", "isbf_official_types")).to eq(["clubs"])
++    expect(notice.topic.reload.custom_fields["isbf_official_types"]).to eq(
++      ["clubs"]
++    )
++    expect(response.parsed_body.dig("post", "isbf_official_types")).to eq(
++      ["clubs"]
++    )
+ 
+     put "/posts/#{notice.id}.json", params: { post: { raw: nil } }
+     expect(response.status).to eq(422), response.body
+     expect(notice.reload.raw).to eq(original_raw)
+ 
+     put "/posts/#{notice.id}.json",
+-        params: { post: { raw: "", isbf_official_types: '["academic"]' } }
++        params: {
++          post: {
++            raw: "",
++            isbf_official_types: '["academic"]'
++          }
++        }
+     expect(response.status).to eq(422), response.body
+     expect(notice.reload.raw).to eq(original_raw)
+-    expect(notice.topic.reload.custom_fields["isbf_official_types"]).to eq(["clubs"])
+-
+-    put "/posts/#{notice.id}.json", params: { post: { raw: "Edited through the native posts endpoint." } }
++    expect(notice.topic.reload.custom_fields["isbf_official_types"]).to eq(
++      ["clubs"]
++    )
++
++    put "/posts/#{notice.id}.json",
++        params: {
++          post: {
++            raw: "Edited through the native posts endpoint."
++          }
++        }
+     expect(response.status).to eq(200), response.body
+-    expect(notice.topic.reload.custom_fields["isbf_official_types"]).to eq(["clubs"])
++    expect(notice.topic.reload.custom_fields["isbf_official_types"]).to eq(
++      ["clubs"]
++    )
+   end
+ 
+   it "keeps native HTTP editing permission for unverified users" do
+     notice = create_notice
+     sign_in(user)
+-    put "/posts/#{notice.id}.json", params: { post: { isbf_official_types: '["clubs"]' } }
++    put "/posts/#{notice.id}.json",
++        params: {
++          post: {
++            isbf_official_types: '["clubs"]'
++          }
++        }
+     expect(response.status).to eq(403)
+-    expect(notice.topic.reload.custom_fields["isbf_official_types"]).to eq(%w[academic volunteer])
++    expect(notice.topic.reload.custom_fields["isbf_official_types"]).to eq(
++      %w[academic volunteer]
++    )
+   end
+ 
+   it "applies registered filter operators together and preserves native paging" do
+     first = create_notice
+     second = create_notice(admin, title: "Second matching campus notice")
+-    create_notice(admin, title: "Different notice type", isbf_official_types: '["clubs"]')
++    create_notice(
++      admin,
++      title: "Different notice type",
++      isbf_official_types: '["clubs"]'
++    )
+     sign_in(user)
+-    query = "isbf-official:#{category.id} isbf-campus:shenzhen isbf-official-type:academic"
++    query =
++      "isbf-official:#{category.id} isbf-campus:shenzhen isbf-official-type:academic"
+ 
+     stub_const(TopicQuery, :DEFAULT_PER_PAGE_COUNT, 1) do
+       get "/filter.json", params: { q: query }
+       expect(response.status).to eq(200)
+       page_zero = response.parsed_body.dig("topic_list", "topics")
+       expect(page_zero.length).to eq(1)
+-      expect(page_zero.first["isbf_official_types"]).to eq(%w[academic volunteer])
++      expect(page_zero.first["isbf_official_types"]).to eq(
++        %w[academic volunteer]
++      )
+ 
+       get "/filter.json", params: { q: query, page: 1 }
+       expect(response.status).to eq(200)
+       page_one = response.parsed_body.dig("topic_list", "topics")
+       expect(page_one.length).to eq(1)
+-      expect((page_zero + page_one).map { |item| item["id"] }).to contain_exactly(first.topic_id, second.topic_id)
++      expect(
++        (page_zero + page_one).map { |item| item["id"] }
++      ).to contain_exactly(first.topic_id, second.topic_id)
+     end
+ 
+     get "/filter.json", params: { q: "isbf-official:#{category.slug}" }
+@@ -286,23 +453,36 @@
+     sign_in(admin)
+     get "/filter.json"
+     expect(response.status).to eq(200)
+-    expect(response.parsed_body.dig("topic_list", "topics").map { |item| item["id"] }).to include(notice.topic_id)
+-
+-    ["isbf-official:#{category.id}", "isbf-campus:zhuhai", "isbf-official-type:academic"].each do |query|
++    expect(
++      response.parsed_body.dig("topic_list", "topics").map { |item| item["id"] }
++    ).to include(notice.topic_id)
++
++    [
++      "isbf-official:#{category.id}",
++      "isbf-campus:zhuhai",
++      "isbf-official-type:academic"
++    ].each do |query|
+       get "/filter.json", params: { q: query }
+       expect(response.status).to eq(200)
+       expect(response.parsed_body.dig("topic_list", "topics")).to eq([])
+     end
+ 
+     put "/posts/#{notice.id}.json",
+-        params: { post: { raw: "A normal body edit while classification is disabled.", isbf_official_types: '["clubs"]' } }
++        params: {
++          post: {
++            raw: "A normal body edit while classification is disabled.",
++            isbf_official_types: '["clubs"]'
++          }
++        }
+     expect(response.status).to eq(200)
+-    expect(notice.topic.reload.custom_fields["isbf_official_types"]).to eq(%w[academic volunteer])
++    expect(notice.topic.reload.custom_fields["isbf_official_types"]).to eq(
++      %w[academic volunteer]
++    )
+     expect(response.parsed_body["post"]).not_to have_key("isbf_official_types")
+   end
+ end
+ 
+-RSpec.describe "ISBF official dependency availability" do
++RSpec.describe IsbfOfficial, ".category_id" do
+   before { SiteSetting.isbf_official_enabled = true }
+ 
+   it "does not advertise a category when the dependency contract is absent" do
+@@ -316,7 +496,9 @@
+     contract.define_singleton_method(:official_member?) { |_user| true }
+     stub_const(Object, :DiscourseAcademyRoles, contract) do
+       allow(SiteSetting).to receive(:respond_to?).and_call_original
+-      allow(SiteSetting).to receive(:respond_to?).with(:academy_roles_enabled).and_return(false)
++      allow(SiteSetting).to receive(:respond_to?).with(
++        :academy_roles_enabled
++      ).and_return(false)
+       expect(IsbfOfficial.category_id).to be_nil
+     end
+   end

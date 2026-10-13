@@ -526,11 +526,13 @@ export default class CodeLoginForm extends Component {
         if (this.isDestroying) {
           return;
         }
-        this.redirectAfterLogin(result.redirect_url);
+        await this.redirectAfterLogin(result.redirect_url, {
+          accountCreated: true,
+        });
         return;
       }
 
-      this.redirectAfterLogin(result?.redirect_url);
+      await this.redirectAfterLogin(result?.redirect_url);
     } catch (e) {
       if (this.isDestroying) {
         return;
@@ -792,7 +794,7 @@ export default class CodeLoginForm extends Component {
         }
         this.codeError = result.error;
       } else {
-        this.redirectAfterLogin(result?.redirect_url);
+        await this.redirectAfterLogin(result?.redirect_url);
       }
     } catch (e) {
       if (isReadOnlyError(e)) {
@@ -893,7 +895,12 @@ export default class CodeLoginForm extends Component {
     }
   }
 
-  redirectAfterLogin(redirectUrl) {
+  async redirectAfterLogin(redirectUrl, { accountCreated = false } = {}) {
+    if (this.args.onAuthenticated) {
+      await this.args.onAuthenticated({ accountCreated, redirectUrl });
+      return;
+    }
+
     const destinationUrl = cookie("destination_url");
     if (redirectUrl) {
       DiscourseURL.redirectTo(redirectUrl);

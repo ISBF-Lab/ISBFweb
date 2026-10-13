@@ -2791,6 +2791,8 @@ zh_CN:
       use_different_email: "使用不同的电子邮件地址"
       use_password_instead: "改用密码登录"
       email_me_code: "通过电子邮件向我发送一次性登录代码"
+      login_with_code: "用邮箱验证码登录"
+      passwordless_hint: "未设置密码？可以使用注册邮箱验证码登录。"
       signup_title: "创建您的帐户"
       signup_instructions: "输入您的电子邮件地址即可加入此社区。我们将向您发送验证码，验证通过后您就可以加入了！"
       user_fields_title: "即将完成"

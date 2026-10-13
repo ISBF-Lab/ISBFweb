@@ -1,0 +1,59 @@
+{
+  "prepared_at_utc": "2026-10-13T06:20:31.891973+00:00",
+  "core_commit": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "plugins": 63,
+  "theme_id": 4,
+  "field_id": 404,
+  "theme_fields": 169,
+  "before_sha256": "7930ec7fad543262219ab6724f978340da222416cc72b1f66d7d7b759e43152c",
+  "after_sha256": "b690f4d7259df258c1dcc0dcd3b584b9cfc98d5051c46e88fe8e420ae9bf5c49",
+  "container_id": "8b3389a4c02a33a11750db0a92baf4324e4c1beb22cfa2edc3e6f931dd0fa421",
+  "container_image_id": "sha256:d7392bb5d64fd8cb127fdf0f594bf8e890faf6346a449f3fbde6fc190fef8ae8",
+  "applied": true,
+  "updated_fields": 1,
+  "unrelated_fields_preserved": 168,
+  "unrelated_settings_preserved": true,
+  "theme_javascript_unchanged": true,
+  "styles": [
+    {
+      "target": "common_theme",
+      "bytes": 266524,
+      "sha256": "a806075885019291d0b2d44caf9dbddca64d7a2f7b6ff92a45c60622623dd67c",
+      "url": "/stylesheets/common_theme_4_8b592a1abd14ff5723fa1cf8e2e702197dcd7921.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "desktop_theme",
+      "bytes": 108,
+      "sha256": "431622fc8841158521a9e45bce66fe23d25e1786c400244ef7c7745f3ba611e9",
+      "url": "/stylesheets/desktop_theme_4_9b8a01df65e4947798a19d6a72f1096c06e47da2.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "mobile_theme",
+      "bytes": 107,
+      "sha256": "d690d35cc075aaf0f8cd007845d3eeba7a4b23f2f01e9ecbaa43ee4e08b503b2",
+      "url": "/stylesheets/mobile_theme_4_9b8a01df65e4947798a19d6a72f1096c06e47da2.css?__ws=isbf-one.com"
+    }
+  ],
+  "compilation_errors": [],
+  "published_at_utc": "2026-10-13T06:22:00Z",
+  "visual_acceptance": "Pending user review; user volunteered to perform visual checks",
+  "core_and_plugins_unchanged": true,
+  "container_recreated": false,
+  "database_migrations": false,
+  "browser_validation": "User handles visual verification; no extra production browser run",
+  "code_commit": "7a06f749dddf9739a3272b933edc20fd8b93bbb7",
+  "source_path": "themes/isbf-campus-feed/stylesheets/frontend-consistency.scss",
+  "evidence_path": "sources/frontend-consistency.scss.txt",
+  "lint": "passed: changed SCSS only",
+  "served_common_stylesheet_verified": true,
+  "published_stylesheet_check": {
+    "http_status": 200,
+    "sha256": "a806075885019291d0b2d44caf9dbddca64d7a2f7b6ff92a45c60622623dd67c",
+    "compiled_summary_grid_excludes_removed_sections": true,
+    "visual_acceptance": "Pending user review"
+  },
+  "visual_review": "User reported the previous top categories/badges removal failed; this corrected release awaits their review",
+  "ci_status": "Existing gates unchanged; latest workflow result not queried or claimed",
+  "previous_deployment": "../profile-fixes-20261013/manifest.json",
+  "private_release_directory": "deploy-work/frontend-consistency-20261012/release-summary-visibility-20261013"
+}

@@ -1,0 +1,12 @@
+*
+!.gitignore
+!bootstrap.sh
+!test-runtime.rb
+!inventory.py
+!build.py
+!deploy.py
+!verify.py
+!compile-release.rb
+!theme-update.rb
+!preview-seed.rb
+!external-changed-files.json

@@ -39,6 +39,8 @@ describe "Login via email code" do
   end
 
   it "logs an existing user in without a password" do
+    user.user_password.destroy!
+
     start_code_login(user.email)
     expect(page).to have_css(".code-login-form__resend[disabled]")
 

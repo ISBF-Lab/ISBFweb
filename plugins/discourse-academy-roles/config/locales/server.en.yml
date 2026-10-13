@@ -1,0 +1,50 @@
+en:
+  site_settings:
+    academy_auth_page_enabled: "Show the particle login and invitation registration page when {{setting:academy_roles_enabled}} is enabled. Turn off to restore the standard page."
+    academy_roles_enabled: "Enable closed academy membership and official publishing. Run the academy_roles:setup task before enabling this setting."
+    academy_official_category: "Category where verified members may publish official topics."
+    academy_official_group: "Group whose membership grants official publishing. Only site admins may manage it."
+    errors:
+      academy_roles_not_configured: "Choose an existing official group and category before enabling academy roles."
+  academy_roles:
+    auth:
+      invite_invalid: "This invitation code is invalid. Check the code and try again."
+      invite_expired: "This invitation code has expired. Request a new code from an administrator."
+      invite_used: "This invitation code has already been used. Log in with your registered account."
+    single_use_invite: "Academy invitation codes must be single-use."
+    unbound_invite: "Use an invitation code without an email or domain restriction."
+    official_category_move: "Official topics must remain in the official category."
+    official_required: "Only verified official members may start topics in this category."
+    official_outside_category: "Official identity can only be used in the official category."
+    official_membership_required: "Your official identity is no longer active."
+    student_invites:
+      immutable_identity: "A student number binding cannot be changed."
+      duplicate_student_number: "An invitation or account already exists for this student number."
+      already_registered: "This student number is already bound to an account."
+      create_failed: "The invitation could not be saved."
+      new_account_required: "This email is already registered. Return to the login page to log in. Invitation codes are only for new accounts."
+      use_student_invite: "Create an invitation from the student invitations page."
+      merge_not_allowed: "Accounts with a student number binding cannot be merged."
+      bulk:
+        csv_required: "Upload a CSV file."
+        too_large: "The CSV file must be no larger than 1 MB."
+        invalid_encoding: "Save the CSV file with UTF-8 encoding."
+        empty_file: "The CSV file contains no student number rows."
+        too_many_rows: "The CSV file may contain at most %{count} student number rows."
+        malformed_csv: "The CSV format is invalid. No invitations were created."
+        missing_student_number: "Student number is empty."
+        single_column_required: "Each row must contain only one student number column."
+        student_number_too_long: "Student number exceeds 64 characters."
+        duplicate_row: "Repeated student number in this file; skipped."
+        existing_student_number: "This student number already has a record; skipped."
+        results:
+          created: "Created"
+          skipped: "Skipped"
+          failed: "Failed"
+        columns:
+          student_number: "Student number"
+          invite_key: "Invitation code"
+          link: "Invitation link"
+          expires_at: "Expires at (UTC)"
+          result: "Result"
+          reason: "Reason"

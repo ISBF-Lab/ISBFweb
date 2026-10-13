@@ -1,0 +1,6 @@
+zh_CN:
+  site_settings:
+    isbf_repost_enabled: "启用 ISBF 引用转发关系与计数。"
+  isbf_repost:
+    errors:
+      invalid_source: "无法转发该帖子，帖子可能不存在或你没有查看权限。"

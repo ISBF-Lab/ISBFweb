@@ -1,0 +1,98 @@
+{
+  "code_commit": "7008a3662fbcebebf2e9dd9469a75e280cfbeed5",
+  "scope": "Candidate theme source manifest, not an active production snapshot",
+  "runtime_core_baseline": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "runtime_source_files": [
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "bytes": 112600,
+      "sha256": "084ef2ce4245105963b8cd2beaa59dfa8f5c67d4b24e912cd95dc29206c85abb",
+      "recorded_field_id": 197,
+      "recorded_sha256": "866b3892808e0f2123077f71d5453ec59a2513fe089761ebc8d89eb036cb65c9"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-frontend-consistency.gjs",
+      "bytes": 500,
+      "sha256": "8aadcb64d3806c6ef1aeb154ad8a697400a98dc4b9804268467ac093c283dd8a",
+      "recorded_field_id": null,
+      "recorded_sha256": null
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-frontend-heading.gjs",
+      "bytes": 1098,
+      "sha256": "4018caf67aca97c3cd758dcc3785f5bfbde8157cbbd81d2eb0dafa502957fce9",
+      "recorded_field_id": null,
+      "recorded_sha256": null
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-frontend-scope.gjs",
+      "bytes": 4662,
+      "sha256": "d0cc3f6afb5539aa73a51ecfd47ccd3baa4c255f2bc53a68e221002dda3f31e3",
+      "recorded_field_id": null,
+      "recorded_sha256": null
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+      "bytes": 16394,
+      "sha256": "45651f45ae8ac1b61dfe53568b7b428c961ab20a3b494694d947aed3d00e9df8",
+      "recorded_field_id": 200,
+      "recorded_sha256": "60e7539c9ee2421948a8d9a1fd770dab008e68395166ffcca66b1f080d29012c"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/frontend-consistency-scope.js",
+      "bytes": 3732,
+      "sha256": "15f1f5470a06bff1020a5ec66b0f156b6f31ba9faf3daa46c0e18d4d2df11292",
+      "recorded_field_id": null,
+      "recorded_sha256": null
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/routes/group/manage/members.js",
+      "bytes": 185,
+      "sha256": "b742a10422448c6cbe4314a7f083df040a95fc0e9fd37bcbff9dee66539ca522",
+      "recorded_field_id": null,
+      "recorded_sha256": null
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/frontend-consistency.scss",
+      "bytes": 29499,
+      "sha256": "ff7e34f5fa9958ef72100149c416733544c050d983fb7faec5d209b5c5f55e4b",
+      "recorded_field_id": null,
+      "recorded_sha256": null
+    }
+  ],
+  "core_changed": false,
+  "plugins_changed": false,
+  "database_migrations": false,
+  "production_deployed": true,
+  "production_gate": "Completed: explicit user authorization, guarded theme backup and merge, all 63 plugins preserved, desktop/mobile read-only page and feature loading confirmed; temporary credentials removed",
+  "ci_run": "https://github.com/ISBF-Lab/ISBFweb/actions/runs/38291752432",
+  "verification": {
+    "conclusion": "success",
+    "workflow_run_id": 38291752432,
+    "job_id": 114953256111,
+    "native_qunit": {
+      "total": 1043,
+      "failed": 0
+    },
+    "theme_qunit": {
+      "total": 89,
+      "failed": 0
+    },
+    "real_page_examples": {
+      "total": 48,
+      "failed": 0
+    },
+    "lint": "passed",
+    "application_code_unchanged_after_verified_commit": true
+  },
+  "artifact": {
+    "id": 11766689533,
+    "bytes": 17543902,
+    "sha256": "17e115c96a4ef7eb6d774c04d55db326347c36a8592ab09a88a6aa9cda36f4fc",
+    "screenshots_all": 112,
+    "review_subset": 16
+  },
+  "production_release_manifest": "deployments/frontend-consistency-20261013/manifest.json",
+  "production_published_at_utc": "2026-10-12T20:59:58Z",
+  "production_integration": "Two shared fields were three-way merged with the actual 162-field production theme; six added files match the verified UI commit. Actual deployed hashes are recorded in the production manifest."
+}

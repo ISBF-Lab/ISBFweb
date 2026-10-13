@@ -5,7 +5,13 @@ export default apiInitializer((api) => {
   const currentUser = api.getCurrentUser();
 
   api.addPostAdminMenuButton((post) => {
-    if (!currentUser?.admin || !post.custom_fields?.isbf_per_post_anonymous) {
+    if (
+      !(
+        currentUser?.admin ||
+        currentUser?.academy_moderator_permissions?.trace_anonymous
+      ) ||
+      !post.isbf_per_post_anonymous
+    ) {
       return;
     }
 

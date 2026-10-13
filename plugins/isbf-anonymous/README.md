@@ -29,7 +29,10 @@ The two tables store pool membership and each user's current assignment.
 Published posts and topics use the pool account as their actual `user_id`.
 Each post stores its real owner in the private integer custom field
 `isbf_anonymous_owner_id`; only the boolean `isbf_per_post_anonymous` is exposed
-to topic serializers. The private owner is server supplied and is never
+as a top-level post attribute in creation, topic, post-stream, and individual
+post responses. The post serializer reads the preloaded field explicitly;
+preloading a custom field alone does not expose it to the frontend.
+The private owner is server supplied and is never
 accepted from request parameters or included in the queued-post serializer
 allowlist. Queued posts temporarily retain the owner in their private payload.
 
@@ -114,6 +117,20 @@ services and `UserDestroyer` for those IDs. Pool accounts can contain new posts
 from other users, so content removal must use the recorded historical IDs.
 Normal topic and post deletion leaves recoverable content records; deleting
 the old shadow accounts removes their user records.
+
+## Updating a running site
+
+Restart the application server after changing `plugin.rb` so its serializer
+registrations run. Development servers without the plugin JavaScript watcher
+also need their plugin bundle regenerated before reloading the browser:
+
+```bash
+bin/rails runner 'Plugin::JsManager.new.compile_js_bundle(Discourse.plugins.find { |plugin| plugin.directory_name == "isbf-anonymous" })'
+```
+
+Check an actual anonymous post in `/t/:topic_id.json` or `/posts/:post_id.json`
+for the top-level `isbf_per_post_anonymous: true` attribute. The administrator
+menu reads this attribute; frontend fixtures must use the same response shape.
 
 ## Verification
 

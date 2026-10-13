@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-12",
+  "scope": "implementation sources, not an Approved reference or installable theme snapshot",
+  "code_commit": "015a1a592d96fc23993c430d1cf3480ba8d347ad",
+  "runtime_core_baseline": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "alignment_commit": "6088c676701c4bb7bacbbf924b5369b80e01cd2f",
+  "pr": "https://github.com/ISBF-Lab/ISBFweb/pull/52",
+  "baseline_archives_verified": 133,
+  "approved_source_archives_verified": 78,
+  "historical_evidence_archives_verified": 13,
+  "original_workspace_tracked_changes_preserved": 31,
+  "existing_baseline_fields_changed_by_rollout": [
+    "themes/isbf-campus-feed/common/common.scss",
+    "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+    "themes/isbf-campus-feed/test/integration/post-preview-test.gjs"
+  ],
+  "existing_baseline_fields_retained": 130,
+  "common_base_retained_except_import": true,
+  "files": [
+    {
+      "path": ".github/workflows/isbf-frontend-consistency.yml",
+      "bytes": 3676,
+      "git_blob_sha256": "8a26d814e678304583b91b1e69f45f5db89beba6438a63e19ea97a5c49621ad0",
+      "workspace_sha256": "8a26d814e678304583b91b1e69f45f5db89beba6438a63e19ea97a5c49621ad0"
+    },
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "bytes": 112600,
+      "git_blob_sha256": "084ef2ce4245105963b8cd2beaa59dfa8f5c67d4b24e912cd95dc29206c85abb",
+      "workspace_sha256": "084ef2ce4245105963b8cd2beaa59dfa8f5c67d4b24e912cd95dc29206c85abb"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-frontend-consistency.gjs",
+      "bytes": 500,
+      "git_blob_sha256": "8aadcb64d3806c6ef1aeb154ad8a697400a98dc4b9804268467ac093c283dd8a",
+      "workspace_sha256": "8aadcb64d3806c6ef1aeb154ad8a697400a98dc4b9804268467ac093c283dd8a"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-frontend-heading.gjs",
+      "bytes": 1098,
+      "git_blob_sha256": "4018caf67aca97c3cd758dcc3785f5bfbde8157cbbd81d2eb0dafa502957fce9",
+      "workspace_sha256": "4018caf67aca97c3cd758dcc3785f5bfbde8157cbbd81d2eb0dafa502957fce9"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-frontend-scope.gjs",
+      "bytes": 4662,
+      "git_blob_sha256": "d0cc3f6afb5539aa73a51ecfd47ccd3baa4c255f2bc53a68e221002dda3f31e3",
+      "workspace_sha256": "d0cc3f6afb5539aa73a51ecfd47ccd3baa4c255f2bc53a68e221002dda3f31e3"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+      "bytes": 16394,
+      "git_blob_sha256": "45651f45ae8ac1b61dfe53568b7b428c961ab20a3b494694d947aed3d00e9df8",
+      "workspace_sha256": "45651f45ae8ac1b61dfe53568b7b428c961ab20a3b494694d947aed3d00e9df8"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/frontend-consistency-scope.js",
+      "bytes": 3732,
+      "git_blob_sha256": "15f1f5470a06bff1020a5ec66b0f156b6f31ba9faf3daa46c0e18d4d2df11292",
+      "workspace_sha256": "15f1f5470a06bff1020a5ec66b0f156b6f31ba9faf3daa46c0e18d4d2df11292"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/routes/group/manage/members.js",
+      "bytes": 185,
+      "git_blob_sha256": "b742a10422448c6cbe4314a7f083df040a95fc0e9fd37bcbff9dee66539ca522",
+      "workspace_sha256": "b742a10422448c6cbe4314a7f083df040a95fc0e9fd37bcbff9dee66539ca522"
+    },
+    {
+      "path": "themes/isbf-campus-feed/spec/system/frontend_consistency_spec.rb",
+      "bytes": 8558,
+      "git_blob_sha256": "482bcc30ddb8319b72b4d4777a04191500b9230b268d65e35ce088569c8f7c86",
+      "workspace_sha256": "482bcc30ddb8319b72b4d4777a04191500b9230b268d65e35ce088569c8f7c86"
+    },
+    {
+      "path": "themes/isbf-campus-feed/spec/system/page_objects/pages/frontend_consistency.rb",
+      "bytes": 7612,
+      "git_blob_sha256": "eb368a982bf029c648ff5924c75b4566f6775da5fceb942cfb73f0a1b925ed90",
+      "workspace_sha256": "eb368a982bf029c648ff5924c75b4566f6775da5fceb942cfb73f0a1b925ed90"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/frontend-consistency.scss",
+      "bytes": 27183,
+      "git_blob_sha256": "f0f2128db899c1ce7d56b16c4e571a41cae1bf76732c446b88d34ba1763f0b01",
+      "workspace_sha256": "f0f2128db899c1ce7d56b16c4e571a41cae1bf76732c446b88d34ba1763f0b01"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/acceptance/frontend-consistency-test.js",
+      "bytes": 6476,
+      "git_blob_sha256": "551bf72b62643bcbb2e9f1405f0c0e297a641e48973a9d8511280e41a6bea17a",
+      "workspace_sha256": "551bf72b62643bcbb2e9f1405f0c0e297a641e48973a9d8511280e41a6bea17a"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/frontend-scope-test.gjs",
+      "bytes": 4187,
+      "git_blob_sha256": "8648d8d19b2f5dd3d1baf6ed19965e273bc05ba37f562e85b3ef51b2fe86deed",
+      "workspace_sha256": "8648d8d19b2f5dd3d1baf6ed19965e273bc05ba37f562e85b3ef51b2fe86deed"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/post-preview-test.gjs",
+      "bytes": 7984,
+      "git_blob_sha256": "000ce13755e45af940d5f0929d28248c4390d81f7c0cf7dd6af5a4f5fc09991d",
+      "workspace_sha256": "000ce13755e45af940d5f0929d28248c4390d81f7c0cf7dd6af5a4f5fc09991d"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/unit/frontend-consistency-scope-test.js",
+      "bytes": 5522,
+      "git_blob_sha256": "b294a3fb8ab45528b05cb05c951160301e98e41d50d955ecb9f0b249ec8a7ee6",
+      "workspace_sha256": "b294a3fb8ab45528b05cb05c951160301e98e41d50d955ecb9f0b249ec8a7ee6"
+    }
+  ],
+  "comparison": "SHA-256 of Git blobs after baseline normalization; original runtime archives remain byte-exact",
+  "workspace_line_ending_variants": 19,
+  "review_diff_from_alignment": "6088c676701..015a1a592d96fc23993c430d1cf3480ba8d347ad",
+  "core_source_directories_unchanged_from_runtime_baseline": [
+    "app",
+    "frontend",
+    "plugins",
+    "config",
+    "db",
+    "lib"
+  ]
+}

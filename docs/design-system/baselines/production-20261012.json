@@ -1,0 +1,153 @@
+{
+  "core_commit": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "theme_id": 4,
+  "theme_field_count": 133,
+  "restored_at": "2026-10-12T03:13:27.290132+00:00",
+  "source": "Byte-preserved theme JSON previously captured from production and restored from the stopped task preview container after the server reboot.",
+  "original_capture_utc": "2026-10-11T16:01:14Z",
+  "snapshot_sha256": "ac203783ab879b1147172c0fa9dbebf17e99d000e2c7046f35a5e878973213a3",
+  "field_manifest": "production-20261012/source-map.json",
+  "colors": [
+    {
+      "color_scheme_id": 21,
+      "name": "danger",
+      "hex": "c93545"
+    },
+    {
+      "color_scheme_id": 21,
+      "name": "header_background",
+      "hex": "ffffff"
+    },
+    {
+      "color_scheme_id": 21,
+      "name": "header_primary",
+      "hex": "17202a"
+    },
+    {
+      "color_scheme_id": 21,
+      "name": "highlight",
+      "hex": "e8f3fa"
+    },
+    {
+      "color_scheme_id": 21,
+      "name": "hover",
+      "hex": "f2f6f9"
+    },
+    {
+      "color_scheme_id": 21,
+      "name": "love",
+      "hex": "d63c64"
+    },
+    {
+      "color_scheme_id": 21,
+      "name": "primary",
+      "hex": "17202a"
+    },
+    {
+      "color_scheme_id": 21,
+      "name": "quaternary",
+      "hex": "1769aa"
+    },
+    {
+      "color_scheme_id": 21,
+      "name": "secondary",
+      "hex": "ffffff"
+    },
+    {
+      "color_scheme_id": 21,
+      "name": "selected",
+      "hex": "d9ebf8"
+    },
+    {
+      "color_scheme_id": 21,
+      "name": "success",
+      "hex": "087e5b"
+    },
+    {
+      "color_scheme_id": 21,
+      "name": "tertiary",
+      "hex": "1769aa"
+    },
+    {
+      "color_scheme_id": 22,
+      "name": "danger",
+      "hex": "f15b6c"
+    },
+    {
+      "color_scheme_id": 22,
+      "name": "header_background",
+      "hex": "101413"
+    },
+    {
+      "color_scheme_id": 22,
+      "name": "header_primary",
+      "hex": "e7e9ea"
+    },
+    {
+      "color_scheme_id": 22,
+      "name": "highlight",
+      "hex": "17354a"
+    },
+    {
+      "color_scheme_id": 22,
+      "name": "hover",
+      "hex": "1c272c"
+    },
+    {
+      "color_scheme_id": 22,
+      "name": "love",
+      "hex": "f06a8a"
+    },
+    {
+      "color_scheme_id": 22,
+      "name": "primary",
+      "hex": "e7e9ea"
+    },
+    {
+      "color_scheme_id": 22,
+      "name": "quaternary",
+      "hex": "72c5fa"
+    },
+    {
+      "color_scheme_id": 22,
+      "name": "secondary",
+      "hex": "101413"
+    },
+    {
+      "color_scheme_id": 22,
+      "name": "selected",
+      "hex": "193c53"
+    },
+    {
+      "color_scheme_id": 22,
+      "name": "success",
+      "hex": "38c997"
+    },
+    {
+      "color_scheme_id": 22,
+      "name": "tertiary",
+      "hex": "72c5fa"
+    }
+  ],
+  "color_schemes": [
+    {
+      "id": 21,
+      "name": "ISBF Community Light",
+      "base_scheme_id": null,
+      "user_selectable": false
+    },
+    {
+      "id": 22,
+      "name": "ISBF Community Dark",
+      "base_scheme_id": null,
+      "user_selectable": false
+    }
+  ],
+  "plugin_inventory": {
+    "count_at_original_audit": 61,
+    "verification_before_reboot": "13,472 source files matched the copied runtime; 26,849 tracked core files matched production.",
+    "complete_audit_file": "lost with volatile /tmp during reboot; not represented as a retained verification report",
+    "production_recheck": "stopped at the user's request; no new production audit is claimed"
+  },
+  "approved_policy": "Runtime baseline and prototypes do not confer design approval."
+}

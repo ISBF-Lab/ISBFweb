@@ -1,40 +1,21 @@
 import { scheduleOnce } from "@ember/runloop";
+import { service } from "@ember/service";
 import { themePrefix } from "virtual:theme";
 import { apiInitializer } from "discourse/lib/api";
 import Composer from "discourse/models/composer";
+import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
 import { i18n } from "discourse-i18n";
+import ISBFActivityPreview from "../components/isbf-activity-preview";
 import ISBFV2ComposerCancel from "../components/isbf-v2-composer-cancel";
 import ISBFV2ComposerOptions from "../components/isbf-v2-composer-options";
+import ISBFV2ComposerTitle from "../components/isbf-v2-composer-title";
 import ISBFV2Shell from "../components/isbf-v2-shell";
 import { canPublishAnonymously } from "../lib/anonymous-post-scope";
+import { prepareOptionalTopicTitle } from "../lib/optional-topic-title";
+import { isActivityPreview } from "../lib/post-preview";
 import { isQuickPost } from "../lib/quick-post-scope";
-import { quickPostText, quickPostTitle } from "../lib/quick-post-title";
 
-function syncQuickPostTitle(model) {
-  if (!isQuickPost(model)) {
-    return;
-  }
-
-  const title = quickPostTitle(
-    model.reply,
-    model.minimumTitleLength,
-    model.siteSettings.max_topic_title_length
-  );
-
-  if (
-    model.isbf_repost_source_topic_id &&
-    !quickPostText(model.reply) &&
-    model.title
-  ) {
-    return;
-  }
-
-  if (model.title !== title) {
-    model.set("title", title);
-  }
-}
-
-function focusComposerInput() {
+function focusComposer() {
   document
     .querySelector(
       "#reply-control.open.composer-action-create-topic .d-editor-input"
@@ -43,6 +24,29 @@ function focusComposerInput() {
 }
 
 export default apiInitializer((api) => {
+  api.modifyClass("controller:user", {
+    pluginId: "isbf-ui-profile-expanded",
+    forceExpand: true,
+  });
+
+  api.modifyClass(
+    "component:post-list/item",
+    (Superclass) =>
+      class ISBFActivityPostListItem extends Superclass {
+        @service router;
+
+        get itemClasses() {
+          return dConcatClass(
+            super.itemClasses,
+            this.args.additionalItemClasses === "user-stream-item" &&
+              isActivityPreview(this.args.post, this.router.currentURL) &&
+              "isbf-activity-item"
+          );
+        }
+      }
+  );
+  api.renderInOutlet("user-stream-item-above", ISBFActivityPreview);
+
   Composer.serializeOnCreate(
     "isbf_repost_source_topic_id",
     "isbf_repost_source_topic_id"
@@ -56,8 +60,11 @@ export default apiInitializer((api) => {
   api.renderInOutlet("before-main-outlet", ISBFV2Shell);
   api.renderInOutlet("before-composer-controls", ISBFV2ComposerCancel);
   api.renderInOutlet("before-composer-fields", ISBFV2ComposerOptions);
+  api.renderInOutlet("composer-fields", ISBFV2ComposerTitle);
 
   api.customizeComposerText({
+    titlePlaceholder: (model) =>
+      isQuickPost(model) ? themePrefix("isbf_v2.optional_title") : null,
     actionTitle: (model) =>
       isQuickPost(model) ? i18n(themePrefix("isbf_v2.quick_post")) : null,
     saveLabel: (model) =>
@@ -78,7 +85,11 @@ export default apiInitializer((api) => {
   });
 
   api.onAppEvent("composer:opened", () => {
-    scheduleOnce("afterRender", null, focusComposerInput);
+    const model = api.container.lookup("service:composer").model;
+    if (isQuickPost(model)) {
+      prepareOptionalTopicTitle(model);
+    }
+    scheduleOnce("afterRender", focusComposer);
   });
 
   api.registerValueTransformer(
@@ -91,21 +102,15 @@ export default apiInitializer((api) => {
     }
   );
 
-  api.registerValueTransformer(
-    "composer-service-cannot-submit-post",
-    ({ value, context }) => {
-      const model = context?.model;
-      if (!isQuickPost(model)) {
-        return value;
-      }
-
-      syncQuickPostTitle(model);
-      return model.cantSubmitPost;
+  api.registerValueTransformer("topic-list-class", ({ value, context }) => {
+    const listContext = context?.listContext;
+    if (listContext !== "discovery" && listContext !== "suggested") {
+      return value;
     }
-  );
 
-  // Discourse's own mobile topic renderer already has an avatar, title,
-  // excerpt, categories, tags, reply count and activity time.
+    return [...value, "isbf-v2-topic-list", `--${listContext}`];
+  });
+
   api.registerValueTransformer(
     "topic-list-item-mobile-layout",
     ({ value, context }) =>

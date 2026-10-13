@@ -1,0 +1,251 @@
+{
+  "date": "2026-10-12",
+  "production_access": false,
+  "full_local_forum": "stopped",
+  "pr": "https://github.com/ISBF-Lab/ISBFweb/pull/52",
+  "code_commit": "015a1a592d96fc23993c430d1cf3480ba8d347ad",
+  "status": "implementation complete; automated regression passed; In Progress pending human visual acceptance; not deployed",
+  "ci_runs": [
+    {
+      "run_id": 38241444440,
+      "result": "failure",
+      "native_qunit": "passed",
+      "theme_qunit": "failed; corrected router stub, right-rail fixtures and baseline preview expectations",
+      "real_pages": "skipped"
+    },
+    {
+      "run_id": 38247475043,
+      "commit": "a47a470aaf68a86acb1627837f2cacd67fd97b33",
+      "result": "failure",
+      "native_qunit": {
+        "passed": 1044,
+        "failed": 0
+      },
+      "theme_qunit": {
+        "passed": 89,
+        "failed": 0
+      },
+      "real_pages": {
+        "examples": 20,
+        "failed": 20,
+        "reason": "Selenium-only window API used with Playwright; all stopped during setup, not page evaluation"
+      }
+    },
+    {
+      "run_id": 38250749680,
+      "commit": "a6b5524ed77ea747a3246d96c0264416925a8708",
+      "result": "failure",
+      "native_qunit": {
+        "passed": 1042,
+        "failed": 0
+      },
+      "theme_qunit": {
+        "passed": 89,
+        "failed": 0
+      },
+      "real_pages": {
+        "examples": 20,
+        "passed": 12,
+        "failed": 8,
+        "reason": "Post bookmarks fabricated without topic_user; unused fabricated tag hidden by the normal tag query",
+        "verified_flows": [
+          "account save and directory in four viewport/palette combinations",
+          "invitation dialog and Escape in four combinations",
+          "group ownership, eight management sections, group inbox/archive and admin exclusion in four combinations"
+        ]
+      },
+      "artifact_id": 11749132352,
+      "artifact_sha256": "ae0746f4579ae845e498b7188e26c6c82d5e5f9e4864f02fb20ffe71c2cf1ac3"
+    },
+    {
+      "run_id": 38253913846,
+      "commit": "fd712600650cbcac84044761f096a3dfe38094c9",
+      "result": "superseded",
+      "native_qunit": "pending",
+      "theme_qunit": "pending",
+      "real_pages": "pending",
+      "corrections": [
+        "Fabricate required topic_user for bookmark list",
+        "Use a tag attached to an actual topic",
+        "Preserve active/pressed button colors and embedded editor inputs",
+        "Contain nested information-page navigation overflow"
+      ],
+      "note": "Replaced by account-label alignment and full-page screenshot change; not counted as a completed regression"
+    },
+    {
+      "run_id": 38255119017,
+      "commit": "fe3f2017995e939c9a63371712fb5d7304b07c9f",
+      "result": "failure",
+      "native_qunit": {
+        "passed": 1042,
+        "failed": 0
+      },
+      "theme_qunit": {
+        "passed": 89,
+        "failed": 0
+      },
+      "real_pages": {
+        "examples": 20,
+        "passed": 7,
+        "failed": 13,
+        "reason": "Four account alignment failures from duplicate preferences CSS; four missing configured information topics; four inbox fixtures containing only self-authored posts; one group flow exceeded the CI 45-second per-example cap"
+      },
+      "corrections": [
+        "Stretch account groups to align email labels with the accepted D02 layout",
+        "Check aligned account labels",
+        "Capture complete long-page screenshots via the pinned Playwright driver callback"
+      ],
+      "artifact_id": 11751770190,
+      "artifact_sha256": "97cce3f4c5b3bf45e338c4a7193fa1bcd5b83d93e4ee2cae7bcc5e270100e26c"
+    },
+    {
+      "commit": "b5ef81bf1a240b0c1407ee750bd5432accf6849f",
+      "result": "failure",
+      "native_qunit": {
+        "passed": 1044,
+        "failed": 0
+      },
+      "theme_qunit": {
+        "passed": 89,
+        "failed": 0
+      },
+      "real_pages": {
+        "examples": 48,
+        "passed": 44,
+        "failed": 4,
+        "reason": "All four lower-profile/badge flows stopped before visiting badge details: Ruby Badge has no url method; corrected to the native id/slug route",
+        "passed_regions": [
+          "account labels, save and refresh; upper-profile geometry",
+          "preference sections and loaded directory",
+          "invitation dialog and Escape",
+          "bookmark cancellation, drafts and pending",
+          "loaded private inbox and filters",
+          "group ownership, activity, eight management sections, private inbox/archive and admin exclusion",
+          "search, populated tags and seven configured information-page bodies"
+        ]
+      },
+      "corrections": [
+        "Use the shared form-group mixin in preferences rather than duplicate rules",
+        "Seed actual synthetic policy topics for guidelines, terms and privacy",
+        "Create inbox fixtures with posts from another user",
+        "Split long browser scenarios into twelve user flows per viewport/palette, retaining the 45-second CI limit and all assertions"
+      ],
+      "run_id": 38261829247,
+      "job_id": 114854003250,
+      "artifact_id": 11753473914,
+      "artifact_sha256": "4c7e3563d1841c9923d7de34e76c4c0f0fb411c586ad49b7845fa817d520b866"
+    },
+    {
+      "commit": "c7b1dccd70683d482fd78dfd1fc1268ae9b5d5f7",
+      "result": "superseded",
+      "native_qunit": "cancelled",
+      "theme_qunit": "skipped",
+      "real_pages": "skipped",
+      "corrections": [
+        "Use Ruby Badge id and slug for its actual native route; no UI or business implementation changes from the preceding run"
+      ],
+      "run_id": 38265535957,
+      "job_id": 114866629022,
+      "note": "Superseded by confirmed D02 private-message secondary-navigation control styling; not counted as a completed regression",
+      "workflow_conclusion": "cancelled"
+    },
+    {
+      "commit": "015a1a592d96fc23993c430d1cf3480ba8d347ad",
+      "result": "success",
+      "native_qunit": {
+        "passed": 1044,
+        "failed": 0
+      },
+      "theme_qunit": {
+        "passed": 89,
+        "failed": 0
+      },
+      "real_pages": {
+        "examples": 48,
+        "passed": 48,
+        "failed": 0,
+        "viewports": [
+          1440,
+          390
+        ],
+        "palettes": [
+          "light",
+          "dark"
+        ],
+        "per_example_timeout_seconds": 45,
+        "full_page_screenshots": 112
+      },
+      "corrections": [
+        "Apply existing D02 controls to the admitted private-message secondary navigation outside user-content; preserve the upper-profile action region and user card"
+      ],
+      "run_id": 38266734379,
+      "job_id": 114870779972,
+      "artifact_id": 11756113645,
+      "artifact_sha256": "4eb3f32e974998085f8200e4d709a7186880f7763c5162dda2f0249f7534fffa",
+      "url": "https://github.com/ISBF-Lab/ISBFweb/actions/runs/38266734379"
+    }
+  ],
+  "static_v2": {
+    "regions": 8,
+    "html_variants": 16,
+    "screenshots": 32,
+    "checks_passed": 58,
+    "boundary_checks": 24,
+    "memory_limit_bytes": 536870912,
+    "oom_kills": 0,
+    "production_access": false,
+    "first_attempt": "stopped at time budget; remaining cases resumed serially",
+    "container_removed": true
+  },
+  "source_preservation": {
+    "baseline_archives": 133,
+    "approved_source_archives": 78,
+    "original_workspace_changed_files_preserved": 31
+  },
+  "lint": "bin/lint --fix on the actual changed implementation files passed; documentation paths have no matching core linter",
+  "limitations": [
+    "No valid complete before-screenshot set",
+    "Offline proposals are not real page screenshots",
+    "Not exhaustive permission, plugin, transient state or save-flow coverage",
+    "No fresh production/plugin inventory audit",
+    "Automatic checks do not grant Approved status",
+    "Real-page browser coverage is Chromium; no physical iOS or Android acceptance",
+    "CI uses synthetic site configuration, accounts and content, including test policy bodies; not the production branding or deployed plugin inventory"
+  ],
+  "screenshot_api_source": "https://github.com/YusukeIwaki/capybara-playwright-driver/blob/0.5.10/lib/capybara/playwright/browser.rb",
+  "offline_reader_checks": {
+    "html_local_links": "passed; 747 HTML files, zero unresolved file targets in the 1518-file final bundle",
+    "browser": {
+      "passed": 6,
+      "checks": [
+        "entry",
+        "implementation reader and table",
+        "token reader anchors",
+        "escaped source reader",
+        "offline preview and excluded user-card sample",
+        "actual-page gallery provenance and 112 available screenshots"
+      ],
+      "production_access": false,
+      "single_browser": true,
+      "memory_limit_bytes": 536870912,
+      "container_removed": true,
+      "first_final_attempt": "timed out selecting preview viewport; the unchanged bundle passed all six checks on retry"
+    },
+    "status": "final bundle passed; checksums and source provenance verified"
+  },
+  "actual_page_screenshots": {
+    "count": 112,
+    "source": "reviews/frontend-20261012-v2/actual-pages/source.json",
+    "unmodified_png": true,
+    "workflow_run_id": 38266734379,
+    "commit": "015a1a592d96fc23993c430d1cf3480ba8d347ad",
+    "human_visual_acceptance": false
+  },
+  "handoff": {
+    "docs_images_package_only": true,
+    "tested_code_commit": "015a1a592d96fc23993c430d1cf3480ba8d347ad",
+    "ui_code_changes_after_verified_commit": false,
+    "ci_repeat": "Final docs/images/package commit uses [skip ci]; completed full UI regression is preserved at the tested code commit",
+    "date": "2026-10-13"
+  }
+}

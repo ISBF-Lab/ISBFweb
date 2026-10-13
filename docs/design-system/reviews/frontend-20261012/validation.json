@@ -1,0 +1,17 @@
+{
+  "scope": "offline review package, not forum business regression",
+  "restored_theme_fields": 133,
+  "baseline_field_hashes_verified": true,
+  "approved_source_hashes_verified": 78,
+  "browser_checks_passed": 62,
+  "screenshots": 36,
+  "representative_regions": 9,
+  "variants": 18,
+  "memory_limit_bytes": 536870912,
+  "oom_kills": 0,
+  "original_tracked_changes_preserved": 31,
+  "bin_lint": "bin/lint --fix completed, but these documentation paths have no matching core linter",
+  "additional_checks": "Explicit project prettier and Node syntax checks; Playwright palette, control geometry, hover, focus, viewport overflow and local assets",
+  "product_ui_modified": false,
+  "pending": "Human confirmation of D01–D07, followed by 19 frontend page groups and real business regression"
+}

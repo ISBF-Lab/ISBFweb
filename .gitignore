@@ -29,7 +29,15 @@
 
 # Plugins except for the bundled ones
 /plugins/*
+!/plugins/discourse-academy-roles
+!/plugins/isbf-account-switch
 !/plugins/isbf-anonymous
+!/plugins/isbf-calendar
+!/plugins/isbf-explore
+!/plugins/isbf-moderation
+!/plugins/isbf-notifications
+!/plugins/isbf-repost
+!/plugins/isbf-views
 !/plugins/discourse-details
 !/plugins/discourse-local-dates
 !/plugins/discourse-narrative-bot

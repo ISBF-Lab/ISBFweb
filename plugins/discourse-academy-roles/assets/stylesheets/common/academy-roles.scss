@@ -1,0 +1,39 @@
+.academy-invite-code {
+  max-width: 28rem;
+  margin: 1.5rem auto;
+}
+
+.academy-invite-key {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.academy-official-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.academy-official-badge,
+.academy-activity-level {
+  color: var(--primary-medium);
+  font-size: var(--font-down-1);
+}
+
+.academy-official-badge {
+  margin-inline-start: 0.4rem;
+}
+
+.academy-roles-enabled #collapsed-info-panel dl > div:has(> dt.trust-level) {
+  display: none;
+}
+
+.academy-moderator-permissions__group {
+  align-self: stretch;
+
+  .form-kit__field-toggle {
+    width: 100%;
+  }
+}

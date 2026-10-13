@@ -241,7 +241,7 @@ class PostActionCreator
 
   def auto_hide_if_needed
     return if @post.hidden?
-    return if !@created_by.staff? && @post.user&.staff?
+    return if !@created_by.staff? && (@post.user&.admin || @post.user&.moderator)
 
     not_auto_action_flag_type =
       !@post_action_type_view.auto_action_flag_types.include?(@post_action_name)

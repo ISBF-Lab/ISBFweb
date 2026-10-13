@@ -31,6 +31,7 @@ class Admin::GroupsController < Admin::StaffController
   def destroy
     group = Group.find_by(id: params[:id])
     raise Discourse::NotFound unless group
+    guardian.ensure_can_admin_group!(group)
 
     if group.automatic
       can_not_modify_automatic

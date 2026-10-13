@@ -1,0 +1,43 @@
+body {
+  margin: 16px;
+  background: var(--secondary);
+  color: var(--primary);
+  font-family: var(--font-family);
+  line-height: 1.45;
+}
+
+a {
+  color: var(--tertiary);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+label {
+  display: grid;
+  gap: 8px;
+}
+
+select {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--primary-low);
+  border-radius: 8px;
+  background: var(--secondary);
+  color: var(--primary);
+  font: inherit;
+}
+
+.viewer {
+  margin-block: 16px;
+  overflow: auto;
+  border: 1px solid var(--primary-low);
+}
+
+iframe {
+  display: block;
+  border: 0;
+}

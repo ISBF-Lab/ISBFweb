@@ -1,0 +1,1925 @@
+{
+  "schema_version": 1,
+  "source_kind": "GitHub Actions native Discourse pages with synthetic test data",
+  "repository": "ISBF-Lab/ISBFweb",
+  "commit": "015a1a592d96fc23993c430d1cf3480ba8d347ad",
+  "workflow_run_id": 38266734379,
+  "job_id": 114870779972,
+  "workflow_result": "success",
+  "workflow_url": "https://github.com/ISBF-Lab/ISBFweb/actions/runs/38266734379",
+  "artifact": {
+    "id": 11756113645,
+    "bytes": 17444247,
+    "sha256": "4eb3f32e974998085f8200e4d709a7186880f7763c5162dda2f0249f7534fffa"
+  },
+  "screenshot_count": 112,
+  "production_access": false,
+  "human_visual_acceptance": false,
+  "browser": "Playwright Chromium",
+  "images": [
+    {
+      "path": "desktop-dark-about.png",
+      "sha256": "ec37c2fd7e14b46ac1fe9e0d610e62a733c931e7a93f79edcab7bd0dc2efa595",
+      "bytes": 106458,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "about",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 941
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-account.png",
+      "sha256": "d70148125dfcf26ccd4c4b97e5aab3d63d944ed35a267e0626fe843586712f88",
+      "bytes": 134957,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "account",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 1667
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-badge-details.png",
+      "sha256": "d699ae1435d9542558d8dc76a2d6acdb583919b81ef6f65c40dc9c496f7c32da",
+      "bytes": 91187,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "badge-details",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-badges.png",
+      "sha256": "0cc78cb54236fa7e5cb869f7efb329156b092d26da44c23b120468ab494dbd06",
+      "bytes": 462861,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "badges",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 5655
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-bookmarks.png",
+      "sha256": "aace2e9970cefef41f4bd84c15d29f76f7744a2d5482b64f9f594a10c9aeb1a5",
+      "bytes": 83243,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "bookmarks",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 1025
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-conduct.png",
+      "sha256": "3d6ad0f68598a68204f91b5020396cfe91a1a0745c76a9bd745284adeeaf219d",
+      "bytes": 73476,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "conduct",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-directory.png",
+      "sha256": "fdd4c35579f0dc369715a38e59d920a7c544a0c51945bd9e95ad6da7488954f2",
+      "bytes": 80702,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "directory",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-drafts.png",
+      "sha256": "a1f16d2068a7f3125cc7241005c0d124076b3926b1d6b2cd5a53206cfa0973ed",
+      "bytes": 104690,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "drafts",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 900
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-faq.png",
+      "sha256": "3d6ad0f68598a68204f91b5020396cfe91a1a0745c76a9bd745284adeeaf219d",
+      "bytes": 73476,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "faq",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-group-categories.png",
+      "sha256": "929a981be81b63951fd313aef905631152896648a38e0a9f3d2edf11a6ee61d2",
+      "bytes": 137199,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "group-categories",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 1346
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-group-email.png",
+      "sha256": "c474b8212afc6774a5e6cf0f8f46454e1101a96330962d6dd4367b25b2d67b10",
+      "bytes": 82808,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "group-email",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-group-interaction.png",
+      "sha256": "e55110b05999ba6bdfdcded6f197cf08a63f63e2732a2baf2de1549ea67ba3cd",
+      "bytes": 91045,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "group-interaction",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-group-logs.png",
+      "sha256": "a37e08ca407365fcf3324938bab1d49c2851856093be864f1ce195325d7bda6e",
+      "bytes": 68890,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "group-logs",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-group-members.png",
+      "sha256": "dd4dd822e1caa173e903899ee4083641de00539afdd926e125698b2339faa208",
+      "bytes": 82811,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "group-members",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-group-membership.png",
+      "sha256": "c5b5f0f9e51c86870ef318ca30766a1d3abfc9925d92970c808bcf55f5d7bb42",
+      "bytes": 101644,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "group-membership",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 953
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-group-new.png",
+      "sha256": "7040049217a33398caffca6bd564d23628932941298149d02ee602a34d5b9efc",
+      "bytes": 189024,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "group-new",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 2266
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-group-profile.png",
+      "sha256": "c474b8212afc6774a5e6cf0f8f46454e1101a96330962d6dd4367b25b2d67b10",
+      "bytes": 82808,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "group-profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-group-tags.png",
+      "sha256": "137d540058cb506e12c7578caf37a3173661d38d2af08c2e0519f8e462609cb0",
+      "bytes": 134465,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "group-tags",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 1328
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-groups.png",
+      "sha256": "ea3ff9bfb2245645286e61361ad6678ef3d187c3ae5386ae1288ae43f6a7fa04",
+      "bytes": 71610,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "groups",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-guidelines.png",
+      "sha256": "3d6ad0f68598a68204f91b5020396cfe91a1a0745c76a9bd745284adeeaf219d",
+      "bytes": 73476,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "guidelines",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-invitation-dialog.png",
+      "sha256": "4258745b0f03b02889f2002412baf9388ca98049c6819b0185aad03b4d145f75",
+      "bytes": 98859,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "invitation-dialog",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 1116
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-messages.png",
+      "sha256": "57676747b0a0fda9c2595fa084466029ca4066133f7eca47939ed2f9c3f4621f",
+      "bytes": 98922,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "messages",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-privacy.png",
+      "sha256": "5fbc395b25cc932e362eff52875ef6db4a4b314f13c5455977dd254058f05715",
+      "bytes": 72696,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "privacy",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-rules.png",
+      "sha256": "3d6ad0f68598a68204f91b5020396cfe91a1a0745c76a9bd745284adeeaf219d",
+      "bytes": 73476,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "rules",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-search.png",
+      "sha256": "0c05fd5d4a66cac9841a277a3b6bf5a3161c31ee715e9ee3cdf28fdc0d4d3401",
+      "bytes": 108867,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "search",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 1432
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-summary.png",
+      "sha256": "a75c013ed2d418f32d391b99bf4be56cfaed29921430303c107bd4470d9422ee",
+      "bytes": 122950,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "summary",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 1394
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-tags.png",
+      "sha256": "e78e10c9a81ca437586aa2d7a9113d3629f9ef10656107f0ac5db4a2cac2d79b",
+      "bytes": 72557,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "tags",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-dark-tos.png",
+      "sha256": "4b20644ae6fc54f98d9eac03885aab6b2385e6eb734afa31dd6d4efb638d5e67",
+      "bytes": 74693,
+      "device": "desktop",
+      "palette": "dark",
+      "region": "tos",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-about.png",
+      "sha256": "6093a56a01d8c809dc7b4017a8da6885c61fc3eb66e497970a54de2896283716",
+      "bytes": 104763,
+      "device": "desktop",
+      "palette": "light",
+      "region": "about",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 941
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-account.png",
+      "sha256": "d42b5ee474be0810b4522e3fc616bc5301eb2f3c7021b10fa34b76d8684d1e18",
+      "bytes": 130703,
+      "device": "desktop",
+      "palette": "light",
+      "region": "account",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 1667
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-badge-details.png",
+      "sha256": "32621d24bece39993ba060f434fa353bb564bbdd4d6026ab927d639547b65a27",
+      "bytes": 89395,
+      "device": "desktop",
+      "palette": "light",
+      "region": "badge-details",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-badges.png",
+      "sha256": "b1fa1dc03cabbc91b251e5a0d2e3f1cc3b38793c21c38833a5b649daddf45531",
+      "bytes": 453655,
+      "device": "desktop",
+      "palette": "light",
+      "region": "badges",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 5655
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-bookmarks.png",
+      "sha256": "fa17438926af7366738762311cc3bbd4dc6001df73f50c7e36f7f79170d7fce4",
+      "bytes": 81692,
+      "device": "desktop",
+      "palette": "light",
+      "region": "bookmarks",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 1025
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-conduct.png",
+      "sha256": "72f17f33fd7f7544ad6ea5d0f0dd999562d4ebb6b430ca133b517bfc301470d8",
+      "bytes": 72209,
+      "device": "desktop",
+      "palette": "light",
+      "region": "conduct",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-directory.png",
+      "sha256": "52e74f41415613ad037188b0b6ce70b162ddaebbc521eba59fe7845e5820d0f6",
+      "bytes": 79315,
+      "device": "desktop",
+      "palette": "light",
+      "region": "directory",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-drafts.png",
+      "sha256": "5afc5c169b5b88798d7d8f95b6d320872deda0374f2e4335eb328b63aded02eb",
+      "bytes": 101546,
+      "device": "desktop",
+      "palette": "light",
+      "region": "drafts",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 900
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-faq.png",
+      "sha256": "72f17f33fd7f7544ad6ea5d0f0dd999562d4ebb6b430ca133b517bfc301470d8",
+      "bytes": 72209,
+      "device": "desktop",
+      "palette": "light",
+      "region": "faq",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-group-categories.png",
+      "sha256": "9cdebc832d23659c3610c86a6bc0c494b93269caaa65e60f8b275bd1cf52e0e2",
+      "bytes": 133638,
+      "device": "desktop",
+      "palette": "light",
+      "region": "group-categories",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 1346
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-group-email.png",
+      "sha256": "aca54b083b2fe353e2f94a19c1d01fd008740f45fa3de06b992de62842bf024c",
+      "bytes": 81166,
+      "device": "desktop",
+      "palette": "light",
+      "region": "group-email",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-group-interaction.png",
+      "sha256": "bd4c773276cf7a485e2348807cdb557c3c4289aeef074b9a754261488585eb13",
+      "bytes": 89436,
+      "device": "desktop",
+      "palette": "light",
+      "region": "group-interaction",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-group-logs.png",
+      "sha256": "000ba1041e1d2be646074b3bd18cc8285a5c83d969834fed05469cecc5bffe8f",
+      "bytes": 67445,
+      "device": "desktop",
+      "palette": "light",
+      "region": "group-logs",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-group-members.png",
+      "sha256": "d4a56474fa37e65ef0697e13dac86ebffed748c5900114a79ebcd2ea0eb5c113",
+      "bytes": 81006,
+      "device": "desktop",
+      "palette": "light",
+      "region": "group-members",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-group-membership.png",
+      "sha256": "1b25f37b934849dae5fe49149e25c0b81f02107435a85bcda4c7d6193fcabec6",
+      "bytes": 99489,
+      "device": "desktop",
+      "palette": "light",
+      "region": "group-membership",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 953
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-group-new.png",
+      "sha256": "753b5f6cdfeaac5086e2be745b9629e0dd79cae2014a6fed7c40b9bbd5dac21d",
+      "bytes": 187340,
+      "device": "desktop",
+      "palette": "light",
+      "region": "group-new",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 2266
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-group-profile.png",
+      "sha256": "aca54b083b2fe353e2f94a19c1d01fd008740f45fa3de06b992de62842bf024c",
+      "bytes": 81166,
+      "device": "desktop",
+      "palette": "light",
+      "region": "group-profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-group-tags.png",
+      "sha256": "509885f9f706baead4ec6a760818aa429695e401e1975f9073f114b1c537eee1",
+      "bytes": 130453,
+      "device": "desktop",
+      "palette": "light",
+      "region": "group-tags",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 1328
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-groups.png",
+      "sha256": "22399557b19127f09f306c2b8119af29f6a9d377885f59ae018bb71f8df57207",
+      "bytes": 70121,
+      "device": "desktop",
+      "palette": "light",
+      "region": "groups",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-guidelines.png",
+      "sha256": "72f17f33fd7f7544ad6ea5d0f0dd999562d4ebb6b430ca133b517bfc301470d8",
+      "bytes": 72209,
+      "device": "desktop",
+      "palette": "light",
+      "region": "guidelines",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-invitation-dialog.png",
+      "sha256": "f7c1bddb7216db69fd74ca18eef14f4ffd87063d718e65fa43af231773ba88d6",
+      "bytes": 100488,
+      "device": "desktop",
+      "palette": "light",
+      "region": "invitation-dialog",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 1116
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-messages.png",
+      "sha256": "b0cf08ba9983741ffd6e1f0e0dc083bbc7223b4e3b36ac9bf893f77ac819fb93",
+      "bytes": 95202,
+      "device": "desktop",
+      "palette": "light",
+      "region": "messages",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-privacy.png",
+      "sha256": "f9f66d44d22df107244fbcd2112a2dd5cb4bde54d74f72742caf48423b1f3df8",
+      "bytes": 71369,
+      "device": "desktop",
+      "palette": "light",
+      "region": "privacy",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-rules.png",
+      "sha256": "72f17f33fd7f7544ad6ea5d0f0dd999562d4ebb6b430ca133b517bfc301470d8",
+      "bytes": 72209,
+      "device": "desktop",
+      "palette": "light",
+      "region": "rules",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-search.png",
+      "sha256": "ac292399864c4fbfe9c452b9657ccbbe39ce437c62eee61c38d84f750e6dda0e",
+      "bytes": 106992,
+      "device": "desktop",
+      "palette": "light",
+      "region": "search",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 1432
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-summary.png",
+      "sha256": "555c62052a51e140ae913cc7ece10eb751de283364db656a77705036ce8c7d3b",
+      "bytes": 119035,
+      "device": "desktop",
+      "palette": "light",
+      "region": "summary",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 1394
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-tags.png",
+      "sha256": "a02f12e2eca43a0cf0c22251ea19860e18bafb2262014d0405e36f1d666c0998",
+      "bytes": 70960,
+      "device": "desktop",
+      "palette": "light",
+      "region": "tags",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "desktop-light-tos.png",
+      "sha256": "798b7e36eb6cfdf63b63d90ec4d512f04aa4d12e4376da64fdc6d99c4b9f7d9d",
+      "bytes": 73349,
+      "device": "desktop",
+      "palette": "light",
+      "region": "tos",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1440,
+        "height": 926
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-about.png",
+      "sha256": "be24b2f746e8559f5af8a0ba7f48438b2bf302aec5c0688a2deef5e82af36c51",
+      "bytes": 204394,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "about",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 3027
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-account.png",
+      "sha256": "a0b8fb25bb6ff1acc166224bd63fb77a47f746f244c1a32270dcf7a5327176d2",
+      "bytes": 283734,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "account",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 4947
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-badge-details.png",
+      "sha256": "f2d5cf37332d0e90b4bda2c9ed08fa3d33e358c0df9c09697455498247aadf6e",
+      "bytes": 172009,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "badge-details",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-badges.png",
+      "sha256": "1253ca71133e0dbed96350f9992f8fa0a97d97beb0ee2d4a0994fb44471dc183",
+      "bytes": 1466849,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "badges",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 18975
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-bookmarks.png",
+      "sha256": "372a49f7c83184521fade1627533094b90d94011e0b3069e2d8b679130c05616",
+      "bytes": 110233,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "bookmarks",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-conduct.png",
+      "sha256": "b5f2417bf4f1f85f9eb1e1537a807cc5ba74daee0a927674c788dcbf09ff50a5",
+      "bytes": 90211,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "conduct",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-directory.png",
+      "sha256": "6407ead83030260ce516009b5630f3d7f108b8be80d4492daa5dc61f395fbb0a",
+      "bytes": 262042,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "directory",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 5994
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-drafts.png",
+      "sha256": "d724acfacd220c14225a5ca3202d44f66612b1b1e6e26612aaa876e1b91c4a78",
+      "bytes": 132889,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "drafts",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2700
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-faq.png",
+      "sha256": "b5f2417bf4f1f85f9eb1e1537a807cc5ba74daee0a927674c788dcbf09ff50a5",
+      "bytes": 90211,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "faq",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-group-categories.png",
+      "sha256": "7238fff92414a8f1b1d9c27cbfa47bbb21f9bd4b24b2fb91dcf5f57b28a380f5",
+      "bytes": 403793,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "group-categories",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 4785
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-group-email.png",
+      "sha256": "9f24693d3d3093603cc7ff09d567a731330a8e19720875ee8ea12d9d4afe75e5",
+      "bytes": 161694,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "group-email",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-group-interaction.png",
+      "sha256": "77d865b9bb082ba9ae7fb562967085f9f7494e9575de399cbcd6b0f81d8eabf8",
+      "bytes": 198399,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "group-interaction",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-group-logs.png",
+      "sha256": "5367f56c603d197f2e0cd4a0edfbfcafc5ebe4c2ec77a4f7e28cdd5353d5bbb5",
+      "bytes": 122098,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "group-logs",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-group-members.png",
+      "sha256": "1fbe5c7398f0825078ec39809452ab3caffa26ebba93b58a047cae02bfd97519",
+      "bytes": 171413,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "group-members",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-group-membership.png",
+      "sha256": "97dc3d887e8b7623648ed8dca5b391bb8febfb9e2e2cd910bdab674b1d8ed253",
+      "bytes": 236690,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "group-membership",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 3078
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-group-new.png",
+      "sha256": "f163427201fd0dcfa142a4d7332308d919539d5d3f811a7214e40ebebb987aac",
+      "bytes": 551557,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "group-new",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 7215
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-group-profile.png",
+      "sha256": "9f24693d3d3093603cc7ff09d567a731330a8e19720875ee8ea12d9d4afe75e5",
+      "bytes": 161694,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "group-profile",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-group-tags.png",
+      "sha256": "414d1cd0a4ce0547b69e320f19d552e58e46d9c9b125cb8247c57b7f1ddf5858",
+      "bytes": 389442,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "group-tags",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 4662
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-groups.png",
+      "sha256": "7910a3fed9eb383e853322565fbaa922f27a92e231ee85be5964d5b013517792",
+      "bytes": 163461,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "groups",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-guidelines.png",
+      "sha256": "b5f2417bf4f1f85f9eb1e1537a807cc5ba74daee0a927674c788dcbf09ff50a5",
+      "bytes": 90211,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "guidelines",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-invitation-dialog.png",
+      "sha256": "06977527622a4e8dfc4977cb0207092402f91359af5af0a373771c6309723a24",
+      "bytes": 172074,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "invitation-dialog",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 3330
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-messages.png",
+      "sha256": "206841b64860b40870976688728911d1799a34de28b3a5dbe7dbbe39ceea5aa9",
+      "bytes": 141231,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "messages",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-privacy.png",
+      "sha256": "74fea627aa0c77307a14c0efa9ae8798ff4fe5a9b104bf1b7d4254ec5f80bf6e",
+      "bytes": 87239,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "privacy",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-rules.png",
+      "sha256": "b5f2417bf4f1f85f9eb1e1537a807cc5ba74daee0a927674c788dcbf09ff50a5",
+      "bytes": 90211,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "rules",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-search.png",
+      "sha256": "7a08d8b0aaa44eb9fe582a49633b5c07782972e7c2cde42dc19c497175721942",
+      "bytes": 272614,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "search",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 4833
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-summary.png",
+      "sha256": "a53aa6c7d689c10be7b667f8eb38ec25a631ce6cb3017cd41f838521ec4a6986",
+      "bytes": 210908,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "summary",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 4098
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-tags.png",
+      "sha256": "06516a85e416c1079dcfa3451d2262824657c1a205656fb107db50abd14fb0da",
+      "bytes": 75495,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "tags",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-dark-tos.png",
+      "sha256": "67383de2530a34158e1f84baf8a5a2e0074fa653ba9a0cdd47a2d82b16a08292",
+      "bytes": 93196,
+      "device": "mobile",
+      "palette": "dark",
+      "region": "tos",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-about.png",
+      "sha256": "77e1d82b738e4ab72355360c9da144d37b5896b45210f4ad4c3b188819bac12e",
+      "bytes": 198674,
+      "device": "mobile",
+      "palette": "light",
+      "region": "about",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 3027
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-account.png",
+      "sha256": "e4ad7c33f39e0c6d353c135d5a748e1e931ee5384abb7ef375cbdd6200294714",
+      "bytes": 270394,
+      "device": "mobile",
+      "palette": "light",
+      "region": "account",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 4947
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-badge-details.png",
+      "sha256": "fcd3c491fdaea90cd4c84594e90e80c52f95f94eb3a0b98291a80be5ec9a6710",
+      "bytes": 167167,
+      "device": "mobile",
+      "palette": "light",
+      "region": "badge-details",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-badges.png",
+      "sha256": "d03c7609d810380a51c1fc031f70ba9c439eed7bc4e4e26472349157ae94f186",
+      "bytes": 1421106,
+      "device": "mobile",
+      "palette": "light",
+      "region": "badges",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 18975
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-bookmarks.png",
+      "sha256": "76775f87a3d893e33f07a65791e5755757a397f72686e49765c25aa682c217cf",
+      "bytes": 104629,
+      "device": "mobile",
+      "palette": "light",
+      "region": "bookmarks",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-conduct.png",
+      "sha256": "78e5b3aca8f84df60bc5b89d57ab46345a73f3291d2602dd5b9a19423e185850",
+      "bytes": 87408,
+      "device": "mobile",
+      "palette": "light",
+      "region": "conduct",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-directory.png",
+      "sha256": "a9a21577ee28fd6faaf2a2c97806ea92259e57f855dee2caf8a7dfcbe56e862f",
+      "bytes": 253392,
+      "device": "mobile",
+      "palette": "light",
+      "region": "directory",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 5994
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-drafts.png",
+      "sha256": "50ca9175d7f95a8f72d21701e595c33528550ad61ecb220d1db32de8edd25fd7",
+      "bytes": 127199,
+      "device": "mobile",
+      "palette": "light",
+      "region": "drafts",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2700
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-faq.png",
+      "sha256": "78e5b3aca8f84df60bc5b89d57ab46345a73f3291d2602dd5b9a19423e185850",
+      "bytes": 87408,
+      "device": "mobile",
+      "palette": "light",
+      "region": "faq",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-group-categories.png",
+      "sha256": "8d5e11289963e39f3f572503108b0d69e24ebf1aed6614d6673523d4818a1ee9",
+      "bytes": 388903,
+      "device": "mobile",
+      "palette": "light",
+      "region": "group-categories",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 4785
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-group-email.png",
+      "sha256": "436ee6678149c8d4181cf5978788d7045e2add0ff5fc1214e09ae468b06c9e63",
+      "bytes": 156327,
+      "device": "mobile",
+      "palette": "light",
+      "region": "group-email",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-group-interaction.png",
+      "sha256": "6d1c03d9afe1b466d0ff8cd5de0f49a072b9bdeff462171f018c9fec22366cf1",
+      "bytes": 192364,
+      "device": "mobile",
+      "palette": "light",
+      "region": "group-interaction",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-group-logs.png",
+      "sha256": "69bed836b62fc79a19bc040d546eff8854569a22391c6440621e8382954e5f73",
+      "bytes": 118756,
+      "device": "mobile",
+      "palette": "light",
+      "region": "group-logs",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-group-members.png",
+      "sha256": "7b1ebbfa7b47f1758473438c66e5fe3027febcf974e018a26e8422724bf46b03",
+      "bytes": 163960,
+      "device": "mobile",
+      "palette": "light",
+      "region": "group-members",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-group-membership.png",
+      "sha256": "f6dc058d6a4d355e75be59a1e85c4e38a31292bed9fb395a5c6c55e996ad2168",
+      "bytes": 228208,
+      "device": "mobile",
+      "palette": "light",
+      "region": "group-membership",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 3078
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-group-new.png",
+      "sha256": "f15e0d2c6d26562e7bdd06b6678a2295aed87e11a51050c6dd37ed95832e7639",
+      "bytes": 532521,
+      "device": "mobile",
+      "palette": "light",
+      "region": "group-new",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 7215
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-group-profile.png",
+      "sha256": "436ee6678149c8d4181cf5978788d7045e2add0ff5fc1214e09ae468b06c9e63",
+      "bytes": 156327,
+      "device": "mobile",
+      "palette": "light",
+      "region": "group-profile",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-group-tags.png",
+      "sha256": "0185b2dea18bfbd4feb6a6a0a563feba29e4c9c2f0eb7a83dddf87df97b1e5d5",
+      "bytes": 374259,
+      "device": "mobile",
+      "palette": "light",
+      "region": "group-tags",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 4662
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-groups.png",
+      "sha256": "267a62ee5e4fb027fd3e679001dbba1554691226e7632523930bbc0b512e1885",
+      "bytes": 158838,
+      "device": "mobile",
+      "palette": "light",
+      "region": "groups",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-guidelines.png",
+      "sha256": "78e5b3aca8f84df60bc5b89d57ab46345a73f3291d2602dd5b9a19423e185850",
+      "bytes": 87408,
+      "device": "mobile",
+      "palette": "light",
+      "region": "guidelines",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-invitation-dialog.png",
+      "sha256": "2ac6ba474030a23f7bb00b382aeffec8570258f66186f38d5b4f0af4135d0547",
+      "bytes": 160468,
+      "device": "mobile",
+      "palette": "light",
+      "region": "invitation-dialog",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 3330
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-messages.png",
+      "sha256": "aa5de133e0294681de2ae4f64f47d68c53e73edaa9b1b2e9a33372ae3039a755",
+      "bytes": 133935,
+      "device": "mobile",
+      "palette": "light",
+      "region": "messages",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-privacy.png",
+      "sha256": "629dd2c4d9cfd845d09e076777c17623c11bb4e379cc0fe562b56ae9417631cf",
+      "bytes": 84164,
+      "device": "mobile",
+      "palette": "light",
+      "region": "privacy",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-rules.png",
+      "sha256": "78e5b3aca8f84df60bc5b89d57ab46345a73f3291d2602dd5b9a19423e185850",
+      "bytes": 87408,
+      "device": "mobile",
+      "palette": "light",
+      "region": "rules",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-search.png",
+      "sha256": "f1e13eea8a24a9ba71856701b1a6b0db1a5ff7bfffcda3ce02d81510889de21e",
+      "bytes": 264812,
+      "device": "mobile",
+      "palette": "light",
+      "region": "search",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 4833
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-summary.png",
+      "sha256": "f51d70de26b90438028a2be7b49fa17b70ddc2d4107d3d87eb8f2a790d29bde2",
+      "bytes": 201223,
+      "device": "mobile",
+      "palette": "light",
+      "region": "summary",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 4098
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-tags.png",
+      "sha256": "3482126723f5b1e327b0c4d7daa64f554735ce457650756de4f1b7b927b815a6",
+      "bytes": 73112,
+      "device": "mobile",
+      "palette": "light",
+      "region": "tags",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    },
+    {
+      "path": "mobile-light-tos.png",
+      "sha256": "03fc20874e7cea7935709196b8874d02005e67ec44e4347c45ed2887d16dca85",
+      "bytes": 90407,
+      "device": "mobile",
+      "palette": "light",
+      "region": "tos",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "image_pixels": {
+        "width": 1170,
+        "height": 2778
+      },
+      "full_page": true
+    }
+  ]
+}

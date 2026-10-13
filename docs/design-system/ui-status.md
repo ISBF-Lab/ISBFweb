@@ -32,12 +32,13 @@
 
 ### 资料、预览与认证
 
-| ID  | 页面/组件与使用场景                      | Source of Truth                                                                                                                                                                                                                                                                                                                         | 为什么可作参考、批准边界                                                                                                                                                                                                                                                     | 可复用页面                                           |
-| --- | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| A11 | 公开用户资料顶部：封面、头像、文字及导航 | [common.scss](references/theme-4/common/common.scss.txt) 的 `body:has(.isbf-v2-shell--profile)`；原生 [user.gjs](../../frontend/discourse/app/templates/user.gjs) 提供结构                                                                                                                                                              | [上传封面与手机文字检查](references/evidence/ui-layout.md)。无封面、展开状态有后续 CSS 覆盖，须读完整级联。只批准顶部，不批准偏好设置表单或弹出卡                                                                                                                            | 公开个人资料顶部                                     |
-| A12 | 公开个人活动摘要与右栏最近讨论预览       | [activity-preview](references/theme-4/javascripts/discourse/components/isbf-activity-preview.gjs.txt)、[post-preview](references/theme-4/javascripts/discourse/components/isbf-post-preview.gjs.txt)、[post-preview lib](references/theme-4/javascripts/discourse/lib/post-preview.js.txt)                                              | [验收与边界](references/evidence/post-preview.md)明确公开活动最多 3 图、最近讨论无标题时 2 行/1 图；草稿、书签、待审核、私信、通知不接管                                                                                                                                     | 公开活动、右栏最近讨论                               |
-| A13 | 学院认证页：登录、邀请码注册及认证面板   | [2026-10-11 组件](references/plugins/discourse-academy-roles/accepted-20261011/assets/javascripts/discourse/components/academy-auth-page.gjs.txt)、[2026-10-11 样式](references/plugins/discourse-academy-roles/accepted-20261011/assets/stylesheets/common/academy-auth.scss.txt)；实际路径 `plugins/discourse-academy-roles/assets/…` | [已审核集成](references/evidence/auth-accepted.md)、[面板对齐](references/evidence/auth-alignment.md)、[最新验收](references/evidence/auth-current.md)。依赖 `academy_auth_page_enabled`；粒子和居中表单属于认证页专用设计。手机验收为浏览器触控模式，注册部分曾使用模拟请求 | 同一认证流程；不移植成论坛一般页面背景或全局表单规范 |
-| A14 | 可选头像框叠层                           | [overlay](references/plugins/discourse-avatar-frames/assets/javascripts/discourse/components/avatar-frame-overlay.gjs.txt)、[avatar-frames.scss](references/plugins/discourse-avatar-frames/assets/stylesheets/common/avatar-frames.scss.txt)；实际路径 `plugins/discourse-avatar-frames/assets/…`                                      | [头像对齐及资料页验证](references/evidence/avatar-management.md)。范围是现有头像挂载点上的装饰叠层，依赖插件及佩戴数据；后台管理外观没有转为论坛公共设计标准                                                                                                                 | 已有帖子、资料等头像挂载点                           |
+| ID  | 页面/组件与使用场景                      | Source of Truth                                                                                                                                                                                                                                                                                                                                                                                                          | 为什么可作参考、批准边界                                                                                                                                                                                                                                                     | 可复用页面                                           |
+| --- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| A11 | 公开用户资料顶部：封面、头像、文字及导航 | [common.scss](references/theme-4/common/common.scss.txt) 的 `body:has(.isbf-v2-shell--profile)`；原生 [user.gjs](../../frontend/discourse/app/templates/user.gjs) 提供结构                                                                                                                                                                                                                                               | [上传封面与手机文字检查](references/evidence/ui-layout.md)。无封面、展开状态有后续 CSS 覆盖，须读完整级联。只批准顶部，不批准偏好设置表单或弹出卡                                                                                                                            | 公开个人资料顶部                                     |
+| A12 | 公开个人活动摘要与右栏最近讨论预览       | [activity-preview](references/theme-4/javascripts/discourse/components/isbf-activity-preview.gjs.txt)、[post-preview](references/theme-4/javascripts/discourse/components/isbf-post-preview.gjs.txt)、[post-preview lib](references/theme-4/javascripts/discourse/lib/post-preview.js.txt)                                                                                                                               | [验收与边界](references/evidence/post-preview.md)明确公开活动最多 3 图、最近讨论无标题时 2 行/1 图；草稿、书签、待审核、私信、通知不接管                                                                                                                                     | 公开活动、右栏最近讨论                               |
+| A13 | 学院认证页：登录、邀请码注册及认证面板   | [2026-10-11 组件](references/plugins/discourse-academy-roles/accepted-20261011/assets/javascripts/discourse/components/academy-auth-page.gjs.txt)、[2026-10-11 样式](references/plugins/discourse-academy-roles/accepted-20261011/assets/stylesheets/common/academy-auth.scss.txt)；实际路径 `plugins/discourse-academy-roles/assets/…`                                                                                  | [已审核集成](references/evidence/auth-accepted.md)、[面板对齐](references/evidence/auth-alignment.md)、[最新验收](references/evidence/auth-current.md)。依赖 `academy_auth_page_enabled`；粒子和居中表单属于认证页专用设计。手机验收为浏览器触控模式，注册部分曾使用模拟请求 | 同一认证流程；不移植成论坛一般页面背景或全局表单规范 |
+| A14 | 可选头像框叠层及内容区域定位             | [2026-10-11 overlay](references/plugins/discourse-avatar-frames/accepted-20261011/assets/javascripts/discourse/components/avatar-frame-overlay.gjs.txt)、[定位](references/plugins/discourse-avatar-frames/accepted-20261011/assets/javascripts/discourse/modifiers/avatar-frame-position.js.txt)、[样式](references/plugins/discourse-avatar-frames/accepted-20261011/assets/stylesheets/common/avatar-frames.scss.txt) | [确认方案](proposals/avatar-frame-calibration-20261011.md)与[验收](references/evidence/avatar-calibration.md)。保留 A11 白边、完整装饰和点击行为；参数按头像内容归一化；不批准全部后台                                                                                       | 已有头像挂载点、选择预览                             |
+| A15 | 后台头像框上传校准区                     | [上传组件](references/plugins/discourse-avatar-frames/accepted-20261011/admin/assets/javascripts/admin/components/avatar-frame-upload.gjs.txt)、[局部样式](references/plugins/discourse-avatar-frames/accepted-20261011/assets/stylesheets/common/avatar-frames-admin.scss.txt)                                                                                                                                          | 用户以“开始实现”批准[布局](proposals/avatar-frame-calibration-20261011.md)，后续明确两款由其自行校准。144px/48px 预览在上，三项调节单列在下，手机同样竖排；只批准该字段内区域                                                                                                | 头像框新建、编辑页的校准区                           |
 
 ## Legacy
 
@@ -56,7 +57,7 @@
 
 ## In Progress
 
-截至本次可读取证据，没有可以准确认定为“正在修改且仍未完成验收”的正式参考条目。不为填满分类而猜测。
+2026-10-11最初审阅时，没有可以准确认定为“正在修改且仍未完成验收”的正式参考条目。不为填满分类而猜测。
 
 认证触控候选曾被 [暂停记录](references/evidence/auth-pending.md) 标为未验收，后续发布已完成并有 [最新验收](references/evidence/auth-current.md)，因此不再列为 In Progress。工作区未提交差异、历史原型和缺少报告的组件均不能直接当作进行中标准。
 
@@ -73,4 +74,26 @@
 
 ## 状态维护
 
-提升为 Approved 必须记录区域、实际源码版本、路由/开关、验收范围和可复用边界，并同步其余三份规范及参考 manifest。若目标没有匹配的 Approved 组件或状态，必须先提出包含来源、缺口和复用方式的设计方案，获得人工确认后再实现；当前任务只分析与记录。
+提升为 Approved 必须记录区域、实际源码版本、路由/开关、验收范围和可复用边界，并同步其余三份规范及参考 manifest。若目标没有匹配的 Approved 组件或状态，必须先提出包含来源、缺口和复用方式的设计方案，获得人工确认后再实现；最初分析阶段只记录；2026-10-12后的实施范围见下文确认记录。
+
+## 2026-10-12：本轮前台统一
+
+[运行基线](baselines/README.md)、[19组执行记录](frontend-rollout-20261012.md)
+及[D01–D07代表提案](proposals/frontend-consistency-20261012.md)已建立。
+D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用户卡及资料上部保留，后台排除。
+遵照用户要求[控制内存](resource-policy.md)，停止生产排查。
+
+## 本轮接入状态与保留区域
+
+19个页面组进入In Progress，原生模板的Legacy审阅记录不表示其仍待设计选择。
+范围与进度以[执行记录](frontend-rollout-20261012.md)为准，新增组合以[人工确认记录](references/evidence/frontend-consistency-acceptance-20261012.md)为准。
+用户弹出卡仍是Legacy且明确排除；资料顶部A11、一级导航、头像框A14和公开活动预览A12保留。
+资料设置表单属于接入范围。新页面未完成实际交互与保留区域验证前，不标为Approved。
+
+## 本轮实现来源与验证
+
+19组均已提交代码，实际页面仍为In Progress。具体接入文件、保留边界和未覆盖状态见
+[实现说明](frontend-implementation-20261012.md)，源码摘要见
+[source map](frontend-implementation-source-map-20261012.json)，检查结果见
+[验证记录](frontend-verification-20261012.json)。新版离线入口为
+[V2预览](reviews/frontend-20261012-v2/index.html)，已移除用户卡示例；旧包只作历史记录。

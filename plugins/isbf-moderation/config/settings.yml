@@ -1,0 +1,4 @@
+plugins:
+  isbf_severe_reports_enabled:
+    default: true
+    client: true

@@ -1,0 +1,18 @@
+en:
+  site_settings:
+    isbf_severe_reports_enabled: "Allow signed-in normal accounts to submit severe reports. Existing content holds remain protected when disabled."
+  isbf_moderation:
+    held_notice: "This content is temporarily hidden while staff reviews a severe report."
+    severe_label: "Severe report"
+    review_required: "A severe report must be resolved through the staff review queue."
+  reviewables:
+    reasons:
+      isbf_severe_report: "A community member confirmed a severe report. The content is held for staff review."
+  system_messages:
+    isbf_severe_post_hidden:
+      title: "Content temporarily held for staff review"
+      subject_template: "Your content is awaiting staff review"
+      text_body_template: |
+        Your [content](%{url}) received a severe report and has been temporarily hidden for staff review.
+
+        Editing the content does not restore it. Staff will review the report and decide whether to restore or remove the content.

@@ -1,0 +1,50 @@
+zh_CN:
+  site_settings:
+    academy_roles_enabled: 启用学院封闭成员身份及官方发布。启用前先运行 academy_roles:setup。
+    academy_official_category: 经认证成员可发布官方话题的分类。
+    academy_official_group: 拥有官方发布权限的用户组；仅站点管理员可管理。
+    errors:
+      academy_roles_not_configured: 启用学院身份前，请先选择已有的官方用户组和分类。
+    academy_auth_page_enabled: 启用 {{setting:academy_roles_enabled}} 时显示粒子登录与邀请码注册页面。关闭可恢复原页面。
+  academy_roles:
+    single_use_invite: 学院邀请码只能使用一次。
+    unbound_invite: 邀请码不能绑定邮箱或邮箱域名。
+    official_category_move: 官方话题必须保留在官方分类。
+    official_required: 只有经认证的官方成员才能在此分类发布话题。
+    official_outside_category: 官方身份只能在官方分类使用。
+    official_membership_required: 你的官方身份已失效。
+    student_invites:
+      immutable_identity: 学号绑定关系不能修改。
+      duplicate_student_number: 此学号已生成邀请码或已绑定账号。
+      already_registered: 此学号已绑定账号。
+      create_failed: 邀请码保存失败。
+      new_account_required: 此邮箱已注册，请返回登录页面登录。邀请码仅用于创建新账号。
+      use_student_invite: 请从学号邀请码页面生成邀请。
+      merge_not_allowed: 绑定了学号的账号不能合并。
+      bulk:
+        csv_required: 请上传 CSV 文件。
+        too_large: CSV 文件不能超过 1 MB。
+        invalid_encoding: 请将 CSV 文件保存为 UTF-8 编码。
+        empty_file: CSV 文件中没有学号数据行。
+        too_many_rows: CSV 文件最多包含 %{count} 行学号数据。
+        malformed_csv: CSV 格式有误，未生成任何邀请码。
+        missing_student_number: 学号为空。
+        single_column_required: 每行只能包含一列学号。
+        student_number_too_long: 学号超过 64 个字符。
+        duplicate_row: 学号在本文件中重复，已跳过。
+        existing_student_number: 学号已有记录，已跳过。
+        results:
+          created: 已生成
+          skipped: 已跳过
+          failed: 失败
+        columns:
+          student_number: 学号
+          invite_key: 邀请码
+          link: 邀请链接
+          expires_at: 到期时间（UTC）
+          result: 处理结果
+          reason: 原因
+    auth:
+      invite_invalid: 邀请码无效，请检查后重试。
+      invite_expired: 邀请码已过期，请联系管理员获取新邀请码。
+      invite_used: 邀请码已使用，请使用已注册的账号登录。

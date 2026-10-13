@@ -1,0 +1,1199 @@
+[
+  {
+    "id": 196,
+    "target_id": 9,
+    "name": "about",
+    "path": "theme-4/about.json.txt",
+    "runtime_path": "themes/isbf-campus-feed/about.json",
+    "sha256": "be6f4cc306615e8bc03ccc665723c6826cb56e18478e433689f2f8f8c88688ca",
+    "bytes": 1868
+  },
+  {
+    "id": 197,
+    "target_id": 0,
+    "name": "scss",
+    "path": "theme-4/common/common.scss.txt",
+    "runtime_path": "themes/isbf-campus-feed/common/common.scss",
+    "sha256": "866b3892808e0f2123077f71d5453ec59a2513fe089761ebc8d89eb036cb65c9",
+    "bytes": 112568
+  },
+  {
+    "id": 198,
+    "target_id": 6,
+    "name": "discourse/api-initializers/isbf-campus-feed.gjs",
+    "path": "theme-4/javascripts/discourse/api-initializers/isbf-campus-feed.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-campus-feed.gjs",
+    "sha256": "b56b544716d11b12a99eafa4d3604f89dac648511a10182cd589e4f631dcf598",
+    "bytes": 4476
+  },
+  {
+    "id": 199,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-right-rail.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-right-rail.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-right-rail.gjs",
+    "sha256": "6cf5e1cf8914e97302f3e2c2f417d4f7b2da5d1a4d9d16a52b1f3cdd200835db",
+    "bytes": 3488
+  },
+  {
+    "id": 200,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-shell.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-shell.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+    "sha256": "60e7539c9ee2421948a8d9a1fd770dab008e68395166ffcca66b1f080d29012c",
+    "bytes": 15671
+  },
+  {
+    "id": 201,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-side-nav.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-side-nav.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-side-nav.gjs",
+    "sha256": "b044b36cab119f55da3cd1e3447bdb08740d13b972230bef75032d6681b6c8b4",
+    "bytes": 5187
+  },
+  {
+    "id": 202,
+    "target_id": 4,
+    "name": "en",
+    "path": "theme-4/locales/en.yml.txt",
+    "runtime_path": "themes/isbf-campus-feed/locales/en.yml",
+    "sha256": "0a4e98fd315ff54094f7c1cf858f900f902aeb0ca076a5f516b11ae81d4c665b",
+    "bytes": 16487
+  },
+  {
+    "id": 203,
+    "target_id": 4,
+    "name": "zh_CN",
+    "path": "theme-4/locales/zh_CN.yml.txt",
+    "runtime_path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+    "sha256": "9d2549112a4fc1d89a6f2e6da85284fcb89ef68d46a40ebd3b114899e0355b77",
+    "bytes": 15838
+  },
+  {
+    "id": 204,
+    "target_id": 3,
+    "name": "yaml",
+    "path": "theme-4/settings.yml.txt",
+    "runtime_path": "themes/isbf-campus-feed/settings.yml",
+    "sha256": "c9b83da12b3892b316e50589716de453dd34770c5cd9a7ab8c6f878d8aeeb258",
+    "bytes": 1475
+  },
+  {
+    "id": 205,
+    "target_id": 6,
+    "name": "discourse/lib/quick-post-title.js",
+    "path": "theme-4/javascripts/discourse/lib/quick-post-title.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/quick-post-title.js",
+    "sha256": "cc51274ca2cf4f6963a9172e7b3b00d37b16357539337a4de6129f5b90acbc3f",
+    "bytes": 1131
+  },
+  {
+    "id": 206,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-calendar.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-calendar.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-calendar.gjs",
+    "sha256": "9931bec8b543a5b711623ac0c46ca07e041526ae60023a6bc16af2b8dcf953a7",
+    "bytes": 27392
+  },
+  {
+    "id": 207,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-workbench.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-workbench.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-workbench.gjs",
+    "sha256": "cafa3ca03b88038b8ce95ba31a83356c6bb5ca7df481f59816d2ba1d526ba74b",
+    "bytes": 2965
+  },
+  {
+    "id": 223,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-composer-cancel.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-composer-cancel.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-composer-cancel.gjs",
+    "sha256": "654b3ccb3df5d792d5c24dfada1e3f549734a0ce35e03760eb1a5295adaf2959",
+    "bytes": 908
+  },
+  {
+    "id": 224,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-composer-options.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-composer-options.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-composer-options.gjs",
+    "sha256": "c7c0f7f94105eda089ce609a4d7b5f42a5fee0978cd8aae451575ed8905d6745",
+    "bytes": 2499
+  },
+  {
+    "id": 225,
+    "target_id": 6,
+    "name": "discourse/lib/quick-post-scope.js",
+    "path": "theme-4/javascripts/discourse/lib/quick-post-scope.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/quick-post-scope.js",
+    "sha256": "038b119e4723022a1f67b7379986675ec0f14ac196737706a6b596e869b234cd",
+    "bytes": 634
+  },
+  {
+    "id": 226,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-account-menu.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-account-menu.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-account-menu.gjs",
+    "sha256": "58344c8af37e9faeb4e719dbee7a87132a86987212435ce7bdfa28c95e57aa92",
+    "bytes": 21787
+  },
+  {
+    "id": 227,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-feed-card.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-feed-card.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-feed-card.gjs",
+    "sha256": "43af9e5df676129b867eeb0bbe6cbd72d165fab895073a7f2f11ca94548fe4a9",
+    "bytes": 19436
+  },
+  {
+    "id": 228,
+    "target_id": 6,
+    "name": "discourse/connectors/topic-list-item/isbf-feed-card.gjs",
+    "path": "theme-4/javascripts/discourse/connectors/topic-list-item/isbf-feed-card.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/connectors/topic-list-item/isbf-feed-card.gjs",
+    "sha256": "9695aba1bcbc31dc0eae9d74af668e0db27e438488ad45f1f889551662726b09",
+    "bytes": 1160
+  },
+  {
+    "id": 229,
+    "target_id": 6,
+    "name": "discourse/lib/feed-post-loader.js",
+    "path": "theme-4/javascripts/discourse/lib/feed-post-loader.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/feed-post-loader.js",
+    "sha256": "fd1428048241f03f99cc67769e9e9a737f3edd3c04d96b5052361677ebb3e547",
+    "bytes": 3209
+  },
+  {
+    "id": 230,
+    "target_id": 6,
+    "name": "discourse/lib/anonymous-post-scope.js",
+    "path": "theme-4/javascripts/discourse/lib/anonymous-post-scope.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/anonymous-post-scope.js",
+    "sha256": "737c40996f9290971bc98d80e02fffff36357b3ff245f47485683585aa208d8e",
+    "bytes": 1085
+  },
+  {
+    "id": 231,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-anonymous-posts.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-anonymous-posts.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-anonymous-posts.gjs",
+    "sha256": "d0ca9a5ff8473629274245af281d0009d04147bc55e75106316d92c36b0a258e",
+    "bytes": 2482
+  },
+  {
+    "id": 232,
+    "target_id": 6,
+    "name": "discourse/connectors/topic-footer-main-buttons-before-create/isbf-topic-more.gjs",
+    "path": "theme-4/javascripts/discourse/connectors/topic-footer-main-buttons-before-create/isbf-topic-more.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/connectors/topic-footer-main-buttons-before-create/isbf-topic-more.gjs",
+    "sha256": "73abe7df6567e8a4a1c160f4fa9433fca714499e9d8dc4688f4ef4e7ac4ff1ff",
+    "bytes": 1823
+  },
+  {
+    "id": 233,
+    "target_id": 6,
+    "name": "discourse/lib/feed-view-tracker.js",
+    "path": "theme-4/javascripts/discourse/lib/feed-view-tracker.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/feed-view-tracker.js",
+    "sha256": "71562362f873996a86f68b8b43ff25512613dac4b40fd468226db6e91b45df35",
+    "bytes": 269
+  },
+  {
+    "id": 234,
+    "target_id": 6,
+    "name": "discourse/api-initializers/isbf-notifications.gjs",
+    "path": "theme-4/javascripts/discourse/api-initializers/isbf-notifications.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-notifications.gjs",
+    "sha256": "f1f7c7380f9ffc9f28e0250165175d34862b5c55260a08f91ae06ed86fb9d73f",
+    "bytes": 1865
+  },
+  {
+    "id": 235,
+    "target_id": 6,
+    "name": "discourse/components/isbf-notification-action.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-notification-action.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-action.gjs",
+    "sha256": "98e9e8b06280f14aec36b971927a1b9657b471bccbcd6cbfcd7eeffc178f7f40",
+    "bytes": 3602
+  },
+  {
+    "id": 236,
+    "target_id": 6,
+    "name": "discourse/components/isbf-notification-entry.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-notification-entry.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-entry.gjs",
+    "sha256": "df863611922de0651e78bebf78c9a785933f6d6efd3856bb6d4f13dd1972943c",
+    "bytes": 2659
+  },
+  {
+    "id": 237,
+    "target_id": 6,
+    "name": "discourse/components/isbf-notifications.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-notifications.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+    "sha256": "ffb0444dc5549a79dbc23ef87fcc9e8ed6de91af56c0276d0279e9d8535cdaa7",
+    "bytes": 10571
+  },
+  {
+    "id": 238,
+    "target_id": 6,
+    "name": "discourse/lib/notification-groups.js",
+    "path": "theme-4/javascripts/discourse/lib/notification-groups.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/notification-groups.js",
+    "sha256": "1214c9339265519915b193564866b0acf67923bf5f6b75337a08990333571051",
+    "bytes": 903
+  },
+  {
+    "id": 239,
+    "target_id": 6,
+    "name": "discourse/api-initializers/isbf-topic-card.gjs",
+    "path": "theme-4/javascripts/discourse/api-initializers/isbf-topic-card.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-topic-card.gjs",
+    "sha256": "6378f737a7423652773daec2c7940c923a8b203933de0ba21f22c1aedee6d13a",
+    "bytes": 2538
+  },
+  {
+    "id": 240,
+    "target_id": 6,
+    "name": "discourse/components/isbf-topic-actions.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-topic-actions.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-actions.gjs",
+    "sha256": "4a0a3069a4862f36172fb2ee2487024b2f1536a67be9a6afd1f22d31d0c72ce6",
+    "bytes": 4642
+  },
+  {
+    "id": 241,
+    "target_id": 6,
+    "name": "discourse/components/isbf-topic-info.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-topic-info.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-info.gjs",
+    "sha256": "0b73163593ec6b91b7c18abfb7a217ac81387b7a2b1f39e0c44205e38faec539",
+    "bytes": 3094
+  },
+  {
+    "id": 242,
+    "target_id": 6,
+    "name": "discourse/components/isbf-topic-metadata.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-topic-metadata.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-metadata.gjs",
+    "sha256": "6366301d063d05d9fa5373fd0bfb8a3fe4652b7cdc7a012998fd63d3f3ddb5b0",
+    "bytes": 1133
+  },
+  {
+    "id": 243,
+    "target_id": 6,
+    "name": "discourse/components/isbf-topic-more.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-topic-more.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-more.gjs",
+    "sha256": "86bfbb4c863e450f07880e769ff5df2272e47ae55b0b8684c2964b4e85073095",
+    "bytes": 2921
+  },
+  {
+    "id": 244,
+    "target_id": 6,
+    "name": "discourse/components/isbf-topic-views.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-topic-views.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-views.gjs",
+    "sha256": "883611e734c208bd0c77502563637fde2b00a933c7bfd36eb95b985d8b92659a",
+    "bytes": 2801
+  },
+  {
+    "id": 245,
+    "target_id": 6,
+    "name": "discourse/lib/post-card-helpers.js",
+    "path": "theme-4/javascripts/discourse/lib/post-card-helpers.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/post-card-helpers.js",
+    "sha256": "101ded2eab1bca3a65196cc0c277bad91a8ff62187b0d128a0920fa6ed87cf87",
+    "bytes": 2052
+  },
+  {
+    "id": 246,
+    "target_id": 6,
+    "name": "discourse/lib/topic-card-scope.js",
+    "path": "theme-4/javascripts/discourse/lib/topic-card-scope.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/topic-card-scope.js",
+    "sha256": "ab4d80f4523893d50a09ecc875b23344a32673c7fa89f8f50f50e756a006bf1c",
+    "bytes": 773
+  },
+  {
+    "id": 247,
+    "target_id": 6,
+    "name": "discourse/lib/view-tracker.js",
+    "path": "theme-4/javascripts/discourse/lib/view-tracker.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/view-tracker.js",
+    "sha256": "214cca39b8aa53bd5f5060bff0210f6e7c0523022dbc1aa88c982b92b2eaaa30",
+    "bytes": 1665
+  },
+  {
+    "id": 250,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-composer-title.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-composer-title.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-composer-title.gjs",
+    "sha256": "3d643872786923a3878140789f6b081034015e4fc66ff6ccc5e0fbc6e5f37ea6",
+    "bytes": 2571
+  },
+  {
+    "id": 251,
+    "target_id": 6,
+    "name": "discourse/lib/optional-topic-title.js",
+    "path": "theme-4/javascripts/discourse/lib/optional-topic-title.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/optional-topic-title.js",
+    "sha256": "bea46dced6800f92d7f4c24929a467639488775c3d9285bb8e31f66f32951a34",
+    "bytes": 830
+  },
+  {
+    "id": 252,
+    "target_id": 6,
+    "name": "discourse/api-initializers/isbf-composer-category-menu.gjs",
+    "path": "theme-4/javascripts/discourse/api-initializers/isbf-composer-category-menu.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-composer-category-menu.gjs",
+    "sha256": "d78a17129b6872904878d258eadec70f7aba038eeb5cd3353af1c594c302d38e",
+    "bytes": 1882
+  },
+  {
+    "id": 259,
+    "target_id": 6,
+    "name": "discourse/api-initializers/isbf-topic-reading.gjs",
+    "path": "theme-4/javascripts/discourse/api-initializers/isbf-topic-reading.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-topic-reading.gjs",
+    "sha256": "7003193d99c36667e0f1173aed6cf39cca8c5d08a1c4a06942403af169a2dc5c",
+    "bytes": 339
+  },
+  {
+    "id": 260,
+    "target_id": 6,
+    "name": "discourse/components/isbf-topic-reading.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-topic-reading.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-reading.gjs",
+    "sha256": "0bd50c652265bc72d23056a4ec3b493772bce8a0d32dee4ff82a281d1b837453",
+    "bytes": 4813
+  },
+  {
+    "id": 261,
+    "target_id": 5,
+    "name": "topic-reading",
+    "path": "theme-4/stylesheets/topic-reading.scss.txt",
+    "runtime_path": "themes/isbf-campus-feed/stylesheets/topic-reading.scss",
+    "sha256": "83a1a1314a7096484c56fd5b48889c133fee914885b2499bf1c1bbbfab51588f",
+    "bytes": 7523
+  },
+  {
+    "id": 262,
+    "target_id": 6,
+    "name": "discourse/components/isbf-explore-group.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-explore-group.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-explore-group.gjs",
+    "sha256": "80bc7ae34c0947f6b7f90c19f8747065df3015c90659eff6d7ef1b7f106f068f",
+    "bytes": 10367
+  },
+  {
+    "id": 263,
+    "target_id": 6,
+    "name": "discourse/components/isbf-explore-picker.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-explore-picker.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-explore-picker.gjs",
+    "sha256": "841c20d087a69fc6d859ebe33703abc8b5f6381a28b225761df551129f0bde7c",
+    "bytes": 5830
+  },
+  {
+    "id": 264,
+    "target_id": 6,
+    "name": "discourse/components/isbf-explore.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-explore.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-explore.gjs",
+    "sha256": "13ad744927c9381466762f1fb52f26c9a92ea81dc6cb33a6234081127e05eeb2",
+    "bytes": 15144
+  },
+  {
+    "id": 265,
+    "target_id": 6,
+    "name": "discourse/lib/explore-preferences.js",
+    "path": "theme-4/javascripts/discourse/lib/explore-preferences.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/explore-preferences.js",
+    "sha256": "7ea8c2de85308d49509032ce33bbc84a2037e201a05eb30d1c2c573126e6276e",
+    "bytes": 1926
+  },
+  {
+    "id": 266,
+    "target_id": 6,
+    "name": "discourse/lib/explore-preview.js",
+    "path": "theme-4/javascripts/discourse/lib/explore-preview.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/explore-preview.js",
+    "sha256": "348f1337e2ba3cccddc6cd95a8cf4052e33cce5db8c9a2111074410452dc4d72",
+    "bytes": 1816
+  },
+  {
+    "id": 267,
+    "target_id": 6,
+    "name": "discourse/lib/explore-query.js",
+    "path": "theme-4/javascripts/discourse/lib/explore-query.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/explore-query.js",
+    "sha256": "7bd767e6cf419ff19ce0cd44083a6bc52f795b93d1d178d7f71dd46574327fb8",
+    "bytes": 1519
+  },
+  {
+    "id": 268,
+    "target_id": 6,
+    "name": "discourse/api-initializers/isbf-reporting.gjs",
+    "path": "theme-4/javascripts/discourse/api-initializers/isbf-reporting.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-reporting.gjs",
+    "sha256": "8c061741ebf4219614e41983882ed91a8ff519a7c8267208f5f7545acc0ac5cc",
+    "bytes": 1567
+  },
+  {
+    "id": 269,
+    "target_id": 6,
+    "name": "discourse/components/isbf-flag-modal.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-flag-modal.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-flag-modal.gjs",
+    "sha256": "6859c94efb123b9e8773c065e965cc55402877e641f3608c8863bd090495e7a2",
+    "bytes": 8281
+  },
+  {
+    "id": 270,
+    "target_id": 6,
+    "name": "discourse/lib/report-post.js",
+    "path": "theme-4/javascripts/discourse/lib/report-post.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/report-post.js",
+    "sha256": "1bf4148be84b3389e4c1da37785d675db9493dd4d19cf8da7f1e6b4f04849e38",
+    "bytes": 1900
+  },
+  {
+    "id": 271,
+    "target_id": 5,
+    "name": "reporting",
+    "path": "theme-4/stylesheets/reporting.scss.txt",
+    "runtime_path": "themes/isbf-campus-feed/stylesheets/reporting.scss",
+    "sha256": "ce2cca589858163a314473c8d8a02fffef9019293b419e64bf04fddbaaae2355",
+    "bytes": 1268
+  },
+  {
+    "id": 272,
+    "target_id": 6,
+    "name": "discourse/pre-initializers/isbf-composer-optional-title.js",
+    "path": "theme-4/javascripts/discourse/pre-initializers/isbf-composer-optional-title.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/pre-initializers/isbf-composer-optional-title.js",
+    "sha256": "f3a0647d9209085518dbe9075020a5a179cd513d5ad860fe98eb4fa8ba0a8531",
+    "bytes": 723
+  },
+  {
+    "id": 273,
+    "target_id": 7,
+    "name": "integration/calendar-test.gjs",
+    "path": "theme-4/test/integration/calendar-test.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/integration/calendar-test.gjs",
+    "sha256": "4d94500f54006106ec3d0eeeb1e89d8cde868ce52c2aaf0ab0d4c81d241f5dde",
+    "bytes": 6294
+  },
+  {
+    "id": 274,
+    "target_id": 7,
+    "name": "unit/composer-optional-title-test.js",
+    "path": "theme-4/test/unit/composer-optional-title-test.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/unit/composer-optional-title-test.js",
+    "sha256": "f50e7c713685a8620b27349da4078b2358d034ea72120b8b028fc1c1a9e4f86e",
+    "bytes": 5175
+  },
+  {
+    "id": 275,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-more-menu.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-more-menu.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-more-menu.gjs",
+    "sha256": "4df6769afd0987515f9b1e7bb3b32199d95e54c2bf0da58c1dab55b6d009c9ed",
+    "bytes": 1596
+  },
+  {
+    "id": 276,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-join-modal.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-join-modal.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-join-modal.gjs",
+    "sha256": "c5b57cb3513a19ce51bf6ba4c8792c298643257baf43742a176ed71d92c6558e",
+    "bytes": 667
+  },
+  {
+    "id": 277,
+    "target_id": 6,
+    "name": "discourse/lib/feedback-category.js",
+    "path": "theme-4/javascripts/discourse/lib/feedback-category.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/feedback-category.js",
+    "sha256": "6defd8c51e0bd1dd83406c5a9d1eaaedf9650d3a0dfc4095f339daa101f71eaf",
+    "bytes": 845
+  },
+  {
+    "id": 279,
+    "target_id": 6,
+    "name": "discourse/components/isbf-official-composer.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-official-composer.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-composer.gjs",
+    "sha256": "647401ee80dd18e19ce9ba759df969712789b7341ecd6112b8ac1a16f60fc048",
+    "bytes": 2237
+  },
+  {
+    "id": 280,
+    "target_id": 6,
+    "name": "discourse/components/isbf-official-feed.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-official-feed.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-feed.gjs",
+    "sha256": "32fd0739a68b818a0fa1d64b4e28649ee2306ebfb85f115fac5f4b72efe3ed41",
+    "bytes": 4786
+  },
+  {
+    "id": 281,
+    "target_id": 6,
+    "name": "discourse/components/isbf-official-picker.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-official-picker.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-picker.gjs",
+    "sha256": "69d8e3276a9590e8553ab75cc1af7c8fce78e4c1100a9018b4ca34f00aae5f65",
+    "bytes": 2970
+  },
+  {
+    "id": 282,
+    "target_id": 6,
+    "name": "discourse/lib/official-filters.js",
+    "path": "theme-4/javascripts/discourse/lib/official-filters.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/official-filters.js",
+    "sha256": "0a8522f75a90a5a4f659b50caa44b0ee3c2ebf2e2e97d9e63950279ea79c44c6",
+    "bytes": 2771
+  },
+  {
+    "id": 283,
+    "target_id": 5,
+    "name": "official-filters",
+    "path": "theme-4/stylesheets/official-filters.scss.txt",
+    "runtime_path": "themes/isbf-campus-feed/stylesheets/official-filters.scss",
+    "sha256": "8ec34b6192560f27cef339be966bd36539438df488b6672bd80a8a0725653bd9",
+    "bytes": 4024
+  },
+  {
+    "id": 284,
+    "target_id": 6,
+    "name": "discourse/pre-initializers/isbf-official-composer.js",
+    "path": "theme-4/javascripts/discourse/pre-initializers/isbf-official-composer.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/pre-initializers/isbf-official-composer.js",
+    "sha256": "ea24d3b2ebf75705016abdf5556f6af175e1181ffc9a4ec1f624f8f98f274aae",
+    "bytes": 2268
+  },
+  {
+    "id": 285,
+    "target_id": 7,
+    "name": "unit/composer-official-test.js",
+    "path": "theme-4/test/unit/composer-official-test.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/unit/composer-official-test.js",
+    "sha256": "ed3123903afcb6a513fc98112bf810616741627437e8c0b77a6ca1cfdafd34d4",
+    "bytes": 12809
+  },
+  {
+    "id": 286,
+    "target_id": 6,
+    "name": "discourse/lib/official-calendar.js",
+    "path": "theme-4/javascripts/discourse/lib/official-calendar.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/official-calendar.js",
+    "sha256": "6fa3784c06d4c9bc24a6b9dcd83da14aa13e1262b7277026d4d4b6ebdd4c872c",
+    "bytes": 8026
+  },
+  {
+    "id": 287,
+    "target_id": 6,
+    "name": "discourse/pre-initializers/isbf-official-calendar.js",
+    "path": "theme-4/javascripts/discourse/pre-initializers/isbf-official-calendar.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/pre-initializers/isbf-official-calendar.js",
+    "sha256": "11b4e69649ea57fe99bb94c3d42d6854ab2de9605a65b0594a5db5ab5fae43f6",
+    "bytes": 2195
+  },
+  {
+    "id": 288,
+    "target_id": 6,
+    "name": "discourse/api-initializers/isbf-official-calendar.gjs",
+    "path": "theme-4/javascripts/discourse/api-initializers/isbf-official-calendar.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-official-calendar.gjs",
+    "sha256": "a1e9374cf6ab1141556cb05ebc6ee194f8c5a065a1d836b1b25cb708f609a696",
+    "bytes": 1396
+  },
+  {
+    "id": 289,
+    "target_id": 6,
+    "name": "discourse/components/isbf-official-calendar-composer.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-official-calendar-composer.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-calendar-composer.gjs",
+    "sha256": "1caf4e4cea8b6a02a22f8d486d0d24590b6782bd0867b30d4b8261ca4231ff38",
+    "bytes": 1444
+  },
+  {
+    "id": 290,
+    "target_id": 6,
+    "name": "discourse/components/isbf-official-calendar-editor.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-official-calendar-editor.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-calendar-editor.gjs",
+    "sha256": "0676aa6276e7a095d3a8b3bb3a6d77baf72a8b6e2785fc276542764cc08897ca",
+    "bytes": 8732
+  },
+  {
+    "id": 291,
+    "target_id": 6,
+    "name": "discourse/components/isbf-official-calendar-items.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-official-calendar-items.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-calendar-items.gjs",
+    "sha256": "b00c12ceb9baa6993dd6b05d945b8ffac1b7fa343a87e4ecbe3db570c088b1bb",
+    "bytes": 3911
+  },
+  {
+    "id": 292,
+    "target_id": 6,
+    "name": "discourse/components/isbf-calendar-note-editor.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-calendar-note-editor.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-calendar-note-editor.gjs",
+    "sha256": "6a0d372fb142bb94f0fb85733336d7d465f0e1f7d7a8d90c0f5dfb5046965a40",
+    "bytes": 1813
+  },
+  {
+    "id": 293,
+    "target_id": 6,
+    "name": "discourse/components/isbf-calendar-update-dialog.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-calendar-update-dialog.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-calendar-update-dialog.gjs",
+    "sha256": "c92d0da4cde6eaa9602f2e69e757d8c22df03e4faefb8ebacee7c09a0d7ae70f",
+    "bytes": 4892
+  },
+  {
+    "id": 294,
+    "target_id": 7,
+    "name": "unit/official-calendar-test.js",
+    "path": "theme-4/test/unit/official-calendar-test.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/unit/official-calendar-test.js",
+    "sha256": "e73efabb25341df32f260f2a61aefe24d044be7d7246edf3c1e83fd7490e38b4",
+    "bytes": 3325
+  },
+  {
+    "id": 295,
+    "target_id": 7,
+    "name": "unit/composer-official-calendar-test.js",
+    "path": "theme-4/test/unit/composer-official-calendar-test.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/unit/composer-official-calendar-test.js",
+    "sha256": "b8a3320b9e57e05b316eb9e9b8d279c80a8b418072b6a435e03efb04241cf8d0",
+    "bytes": 4678
+  },
+  {
+    "id": 296,
+    "target_id": 7,
+    "name": "unit/calendar-notification-test.js",
+    "path": "theme-4/test/unit/calendar-notification-test.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/unit/calendar-notification-test.js",
+    "sha256": "6c5fd11003f07b128d396e7bb0dce70db1cdc32e645feffd98cb9e1ee4c4c48b",
+    "bytes": 1593
+  },
+  {
+    "id": 297,
+    "target_id": 7,
+    "name": "integration/official-calendar-items-test.gjs",
+    "path": "theme-4/test/integration/official-calendar-items-test.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/integration/official-calendar-items-test.gjs",
+    "sha256": "a66d492bddc69472c12806067fd7ec11b4fea79f93d404f8a7526e31df5a9bb5",
+    "bytes": 3572
+  },
+  {
+    "id": 298,
+    "target_id": 7,
+    "name": "integration/official-calendar-editor-test.gjs",
+    "path": "theme-4/test/integration/official-calendar-editor-test.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/integration/official-calendar-editor-test.gjs",
+    "sha256": "f5c7aacba2ccf41817ac2d81cb87527fe3412b40060c829d342042f5a3c0d454",
+    "bytes": 7765
+  },
+  {
+    "id": 299,
+    "target_id": 7,
+    "name": "integration/calendar-update-dialog-test.gjs",
+    "path": "theme-4/test/integration/calendar-update-dialog-test.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/integration/calendar-update-dialog-test.gjs",
+    "sha256": "2ce687eb97efbcc6447e082b8bd66365661480b82a0cbecf91f89cced8ba7596",
+    "bytes": 6019
+  },
+  {
+    "id": 300,
+    "target_id": 5,
+    "name": "official-calendar",
+    "path": "theme-4/stylesheets/official-calendar.scss.txt",
+    "runtime_path": "themes/isbf-campus-feed/stylesheets/official-calendar.scss",
+    "sha256": "f49c2bd5a5416d33a77f8b0d91c26a1516b7172451617d5076986b9de536edd5",
+    "bytes": 3650
+  },
+  {
+    "id": 301,
+    "target_id": 6,
+    "name": "discourse/api-initializers/isbf-learning.gjs",
+    "path": "theme-4/javascripts/discourse/api-initializers/isbf-learning.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-learning.gjs",
+    "sha256": "95b2b197cd2d5dbaa9a30c2769b89a8ba386a505ba202e87d8cea460941ddda7",
+    "bytes": 2750
+  },
+  {
+    "id": 302,
+    "target_id": 6,
+    "name": "discourse/components/isbf-learning-composer.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-learning-composer.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-composer.gjs",
+    "sha256": "d0ee1e13de96164284965b11ef4e2db78dfe757dc42d50bd5f6b3792c06ad2b1",
+    "bytes": 2524
+  },
+  {
+    "id": 303,
+    "target_id": 6,
+    "name": "discourse/components/isbf-learning-course-dialog.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-learning-course-dialog.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-course-dialog.gjs",
+    "sha256": "d79d27c4afb983f166492d13b3249f20355007cd45cca9f7983d27eb9037e76d",
+    "bytes": 4453
+  },
+  {
+    "id": 304,
+    "target_id": 6,
+    "name": "discourse/components/isbf-learning-grade-picker.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-learning-grade-picker.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-grade-picker.gjs",
+    "sha256": "1bfbdaf8debcf2c8ef9fe5a12f202c0b07bf028b1ea905b9f2f032b5f60b0cec",
+    "bytes": 1654
+  },
+  {
+    "id": 305,
+    "target_id": 6,
+    "name": "discourse/components/isbf-learning-resource.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-learning-resource.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-resource.gjs",
+    "sha256": "34f780fd642af0e4832fd4ffddd6d38720b4548f48d47ef20496456af5471bf5",
+    "bytes": 10545
+  },
+  {
+    "id": 306,
+    "target_id": 6,
+    "name": "discourse/components/isbf-learning.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-learning.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning.gjs",
+    "sha256": "ca3b27ab57ec3a6d804ff72f883db5d5afe96a41374f0be6605aac3aa52241e9",
+    "bytes": 16278
+  },
+  {
+    "id": 307,
+    "target_id": 6,
+    "name": "discourse/isbf-learning-route-map.js",
+    "path": "theme-4/javascripts/discourse/isbf-learning-route-map.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/isbf-learning-route-map.js",
+    "sha256": "430b0867c9f17aac4a06c1b1f1da9c7858e4fa4c6f421f28a945a92253183fb6",
+    "bytes": 89
+  },
+  {
+    "id": 308,
+    "target_id": 6,
+    "name": "discourse/lib/learning-composer.js",
+    "path": "theme-4/javascripts/discourse/lib/learning-composer.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/learning-composer.js",
+    "sha256": "163b9ad5f76ac5a9ad5368531f1ca2125b5a0c12b0c08a9d8558e982a909ceba",
+    "bytes": 1311
+  },
+  {
+    "id": 309,
+    "target_id": 6,
+    "name": "discourse/lib/learning-resources.js",
+    "path": "theme-4/javascripts/discourse/lib/learning-resources.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/learning-resources.js",
+    "sha256": "d81a2f5beea9b2a6cb4454ca9e1676dd89461b14217264f846b0161091abd7af",
+    "bytes": 3130
+  },
+  {
+    "id": 310,
+    "target_id": 6,
+    "name": "discourse/lib/learning-upload.js",
+    "path": "theme-4/javascripts/discourse/lib/learning-upload.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/learning-upload.js",
+    "sha256": "0b8316a4ddbb10c9ffce499c0b376251bda10c5c9f6615c0e2d451a5f757e2cb",
+    "bytes": 646
+  },
+  {
+    "id": 311,
+    "target_id": 6,
+    "name": "discourse/routes/isbf-learning.js",
+    "path": "theme-4/javascripts/discourse/routes/isbf-learning.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/routes/isbf-learning.js",
+    "sha256": "3a4cc61880899b85354aa22b3b0280b35d67a9c68838e5be6aa41dcda4d04414",
+    "bytes": 123
+  },
+  {
+    "id": 312,
+    "target_id": 6,
+    "name": "discourse/templates/isbf-learning.gjs",
+    "path": "theme-4/javascripts/discourse/templates/isbf-learning.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/templates/isbf-learning.gjs",
+    "sha256": "ccf73ea5b22790598e249b2e652d2d2afdae35387852c30630007ae4d12143d3",
+    "bytes": 22
+  },
+  {
+    "id": 313,
+    "target_id": 5,
+    "name": "learning-composer",
+    "path": "theme-4/stylesheets/learning-composer.scss.txt",
+    "runtime_path": "themes/isbf-campus-feed/stylesheets/learning-composer.scss",
+    "sha256": "6996f1880d1b6d370c3b1268eba11d54d32ea06aaf99fb8ef210b3ac4e897025",
+    "bytes": 679
+  },
+  {
+    "id": 314,
+    "target_id": 5,
+    "name": "learning-resources",
+    "path": "theme-4/stylesheets/learning-resources.scss.txt",
+    "runtime_path": "themes/isbf-campus-feed/stylesheets/learning-resources.scss",
+    "sha256": "01d52b9bee32b22dd86c1e5d4ff79b74d467a2dec15b6e8b3e3dbb150db56728",
+    "bytes": 8574
+  },
+  {
+    "id": 315,
+    "target_id": 7,
+    "name": "integration/composer-title-test.gjs",
+    "path": "theme-4/test/integration/composer-title-test.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/integration/composer-title-test.gjs",
+    "sha256": "f51d618d695916c527db85399034ba9ad97d3ecbc01a6abff7d3bdb97d586afe",
+    "bytes": 3328
+  },
+  {
+    "id": 316,
+    "target_id": 6,
+    "name": "discourse/components/isbf-learning-share-dialog.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-learning-share-dialog.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-share-dialog.gjs",
+    "sha256": "f2e78abcbe7b12dc33a07fdbcbfdef5e2d952be00809521166c5d092278ba405",
+    "bytes": 12661
+  },
+  {
+    "id": 317,
+    "target_id": 6,
+    "name": "discourse/components/isbf-official-activity-summary.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-official-activity-summary.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-activity-summary.gjs",
+    "sha256": "1a48d5184a9d39fdc4114eb75d283ed76608ed5bc6a885124711816b7f05d561",
+    "bytes": 2858
+  },
+  {
+    "id": 318,
+    "target_id": 7,
+    "name": "unit/official-activities-test.js",
+    "path": "theme-4/test/unit/official-activities-test.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/unit/official-activities-test.js",
+    "sha256": "92e24af9c18cfead415d09c6ac3d9d894b002d7452828505c2fd3e2e724a9929",
+    "bytes": 6193
+  },
+  {
+    "id": 319,
+    "target_id": 7,
+    "name": "integration/official-activity-summary-test.gjs",
+    "path": "theme-4/test/integration/official-activity-summary-test.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/integration/official-activity-summary-test.gjs",
+    "sha256": "dc5dde264b92e31177ddbbd0a831f4065ba375824410fb01a78a0fe4862cfc4f",
+    "bytes": 4547
+  },
+  {
+    "id": 320,
+    "target_id": 6,
+    "name": "discourse/components/reviewable-isbf-learning-course.gjs",
+    "path": "theme-4/javascripts/discourse/components/reviewable-isbf-learning-course.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/reviewable-isbf-learning-course.gjs",
+    "sha256": "101639dcea89c29b3ddd6bd42afb54effe0103dd3974a2f9c533431b76c7cf48",
+    "bytes": 659
+  },
+  {
+    "id": 321,
+    "target_id": 6,
+    "name": "discourse/lib/composer-model-extensions.js",
+    "path": "theme-4/javascripts/discourse/lib/composer-model-extensions.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/composer-model-extensions.js",
+    "sha256": "df4784b2bd9a0471ebe0d0ad36c60c168ced685d7d78369419757a81ca0d6493",
+    "bytes": 369
+  },
+  {
+    "id": 322,
+    "target_id": 6,
+    "name": "discourse/components/isbf-alumni-map.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-alumni-map.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-alumni-map.gjs",
+    "sha256": "4d614fe4f1bbaf32c34316cf6bb2ecd2991ecce95e6ec741c3b8569a02a0b9d4",
+    "bytes": 10524
+  },
+  {
+    "id": 323,
+    "target_id": 6,
+    "name": "discourse/components/isbf-alumni-profile.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-alumni-profile.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-alumni-profile.gjs",
+    "sha256": "50f6bc796cbe89d91aefaf20901cfddc0c1c6385bc603b51c758eb76e9dfc755",
+    "bytes": 6089
+  },
+  {
+    "id": 324,
+    "target_id": 6,
+    "name": "discourse/components/isbf-alumni.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-alumni.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-alumni.gjs",
+    "sha256": "9e5554ccf8c8d833051347548235c11a86db44bf45d8de84a41cfeae6d1db4c7",
+    "bytes": 8428
+  },
+  {
+    "id": 325,
+    "target_id": 6,
+    "name": "discourse/isbf-alumni-route-map.js",
+    "path": "theme-4/javascripts/discourse/isbf-alumni-route-map.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/isbf-alumni-route-map.js",
+    "sha256": "ffe70ab48ab0a5277065e4b7d5c8fb107503f4d91482c14ad685c7b3559389da",
+    "bytes": 85
+  },
+  {
+    "id": 326,
+    "target_id": 6,
+    "name": "discourse/lib/alumni.js",
+    "path": "theme-4/javascripts/discourse/lib/alumni.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/alumni.js",
+    "sha256": "105c94080ccea9897ebe1ef65f136a08b9e7beee7481b2cdb744a0d5ca738d00",
+    "bytes": 513
+  },
+  {
+    "id": 327,
+    "target_id": 6,
+    "name": "discourse/routes/isbf-alumni.js",
+    "path": "theme-4/javascripts/discourse/routes/isbf-alumni.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/routes/isbf-alumni.js",
+    "sha256": "93da0dd43696b314f38f7d7252958518dbfbacdcd4c8469142b6dbfa49d56e5b",
+    "bytes": 121
+  },
+  {
+    "id": 328,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-utility-actions.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-utility-actions.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-utility-actions.gjs",
+    "sha256": "fe9fdc6561c3bd2d9414fd929cda61f7acac131e521bd6453c7eec9a143e157a",
+    "bytes": 2767
+  },
+  {
+    "id": 329,
+    "target_id": 6,
+    "name": "discourse/lib/alumni-map-labels.js",
+    "path": "theme-4/javascripts/discourse/lib/alumni-map-labels.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/alumni-map-labels.js",
+    "sha256": "7db7a25b232f9be1364f973dba9c11c122d576a3148f14cd4e103c9a87de1e6a",
+    "bytes": 791
+  },
+  {
+    "id": 330,
+    "target_id": 6,
+    "name": "discourse/components/isbf-post-preview.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-post-preview.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-post-preview.gjs",
+    "sha256": "8be3aad701f02c35506f3f516caaa5d66dc71cb89d0c0db9299c6e65753ee8e9",
+    "bytes": 4144
+  },
+  {
+    "id": 331,
+    "target_id": 6,
+    "name": "discourse/components/isbf-activity-preview.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-activity-preview.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-activity-preview.gjs",
+    "sha256": "6ad9d2dde3854153518e5570cf5269a2a84404b50f5979671113fabf355c39e2",
+    "bytes": 3255
+  },
+  {
+    "id": 332,
+    "target_id": 6,
+    "name": "discourse/lib/post-preview.js",
+    "path": "theme-4/javascripts/discourse/lib/post-preview.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/post-preview.js",
+    "sha256": "aeb9a7811d5308458bc36144fc6e7a2a6b90bf801b259f8a76199c384c6ba582",
+    "bytes": 2084
+  },
+  {
+    "id": 333,
+    "target_id": 7,
+    "name": "unit/post-preview-test.js",
+    "path": "theme-4/test/unit/post-preview-test.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/unit/post-preview-test.js",
+    "sha256": "39ff2b0385bd54a95b3338445140d63b67f0b160ba5a95b87294d7c8b9c55d44",
+    "bytes": 3561
+  },
+  {
+    "id": 334,
+    "target_id": 7,
+    "name": "unit/feed-post-loader-test.js",
+    "path": "theme-4/test/unit/feed-post-loader-test.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/unit/feed-post-loader-test.js",
+    "sha256": "47e4b35bdbbef1c81eada2c67d7e3f5901d1b00932e7bb6534c5b9c76ca50a38",
+    "bytes": 3484
+  },
+  {
+    "id": 335,
+    "target_id": 7,
+    "name": "integration/post-preview-test.gjs",
+    "path": "theme-4/test/integration/post-preview-test.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/test/integration/post-preview-test.gjs",
+    "sha256": "4401c049ad05673e8e1c6700dc9830f8a4fb4e0e4d0d1397c7f31ca8264d82b7",
+    "bytes": 7385
+  },
+  {
+    "id": 336,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-brand.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-brand.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-brand.gjs",
+    "sha256": "2b728a4708e65fc7c4adc1f64c3894cf8801805c84413be51c56661454d1906c",
+    "bytes": 2146
+  },
+  {
+    "id": 348,
+    "target_id": 6,
+    "name": "discourse/api-initializers/isbf-marketplace.gjs",
+    "path": "theme-4/javascripts/discourse/api-initializers/isbf-marketplace.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-marketplace.gjs",
+    "sha256": "f32843360c85cfb7963ffc7e9605640a1ec9e1dea6a825a73fd1e3910636d516",
+    "bytes": 2992
+  },
+  {
+    "id": 349,
+    "target_id": 6,
+    "name": "discourse/components/isbf-marketplace-card.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-marketplace-card.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-marketplace-card.gjs",
+    "sha256": "172ab4d25927b2e71c7d5acf7be3b206bfad9f3f9c5ccdc9cf8758ca43c52361",
+    "bytes": 3192
+  },
+  {
+    "id": 350,
+    "target_id": 6,
+    "name": "discourse/components/isbf-marketplace-composer.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-marketplace-composer.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-marketplace-composer.gjs",
+    "sha256": "97686f38469a756ad57213e816221a409e2523b6837b119c16e5899e27dcdcfb",
+    "bytes": 1775
+  },
+  {
+    "id": 351,
+    "target_id": 6,
+    "name": "discourse/components/isbf-marketplace.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-marketplace.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-marketplace.gjs",
+    "sha256": "7b6fbf30c5b4440826245bc7323e712a2fd2147f37647ee0b98e53db5c8c6cde",
+    "bytes": 5043
+  },
+  {
+    "id": 352,
+    "target_id": 6,
+    "name": "discourse/isbf-marketplace-route-map.js",
+    "path": "theme-4/javascripts/discourse/isbf-marketplace-route-map.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/isbf-marketplace-route-map.js",
+    "sha256": "dc1473807842715ffeb784b56f6173ee4d5ea92050e6a331df86bb7f2224c0fd",
+    "bytes": 95
+  },
+  {
+    "id": 353,
+    "target_id": 6,
+    "name": "discourse/lib/marketplace-upload.js",
+    "path": "theme-4/javascripts/discourse/lib/marketplace-upload.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/marketplace-upload.js",
+    "sha256": "965c16cbaddaf8c6143105155769b97edf46f5af5bd36e299247fd2e5052ef43",
+    "bytes": 708
+  },
+  {
+    "id": 354,
+    "target_id": 6,
+    "name": "discourse/lib/marketplace.js",
+    "path": "theme-4/javascripts/discourse/lib/marketplace.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/marketplace.js",
+    "sha256": "abfc70e4713951642493ef4f1dcd82e38d1b22c1bdc6d0ae55a0382d88b94abf",
+    "bytes": 4264
+  },
+  {
+    "id": 355,
+    "target_id": 6,
+    "name": "discourse/lib/private-upload-endpoint.js",
+    "path": "theme-4/javascripts/discourse/lib/private-upload-endpoint.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/private-upload-endpoint.js",
+    "sha256": "8c30d3a7c4862521564f0930346da5136444bf9516131f83aa4ed57da2393c24",
+    "bytes": 1085
+  },
+  {
+    "id": 356,
+    "target_id": 6,
+    "name": "discourse/routes/isbf-marketplace.js",
+    "path": "theme-4/javascripts/discourse/routes/isbf-marketplace.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/routes/isbf-marketplace.js",
+    "sha256": "88869bd2d2a622c04194185f4844035cab92fb2a47191ee8685d48c5830059d7",
+    "bytes": 126
+  },
+  {
+    "id": 357,
+    "target_id": 6,
+    "name": "discourse/templates/isbf-marketplace.gjs",
+    "path": "theme-4/javascripts/discourse/templates/isbf-marketplace.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/templates/isbf-marketplace.gjs",
+    "sha256": "ccf73ea5b22790598e249b2e652d2d2afdae35387852c30630007ae4d12143d3",
+    "bytes": 22
+  },
+  {
+    "id": 358,
+    "target_id": 5,
+    "name": "marketplace",
+    "path": "theme-4/stylesheets/marketplace.scss.txt",
+    "runtime_path": "themes/isbf-campus-feed/stylesheets/marketplace.scss",
+    "sha256": "663ebacbea0e6017976ec2325fe511369b515f55b3d6f194b190ca47278bebcf",
+    "bytes": 8740
+  },
+  {
+    "id": 359,
+    "target_id": 6,
+    "name": "discourse/components/isbf-v2-appearance-modal.gjs",
+    "path": "theme-4/javascripts/discourse/components/isbf-v2-appearance-modal.gjs.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-appearance-modal.gjs",
+    "sha256": "e43c5b66a166877aa1826f1f75935c1ea43a689bd6257e2226bc26230f4adaa9",
+    "bytes": 2356
+  },
+  {
+    "id": 360,
+    "target_id": 6,
+    "name": "discourse/api-initializers/isbf-content-images.js",
+    "path": "theme-4/javascripts/discourse/api-initializers/isbf-content-images.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-content-images.js",
+    "sha256": "5cb922bb63150cae4672cef56563954764d8e596daf04f1a169c4d9e46173285",
+    "bytes": 856
+  },
+  {
+    "id": 361,
+    "target_id": 6,
+    "name": "discourse/lib/content-images.js",
+    "path": "theme-4/javascripts/discourse/lib/content-images.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/content-images.js",
+    "sha256": "2a9948a2c6bcd237663c4dbb4b7d9d842c91779c32400e39a509f8fe9a08e89e",
+    "bytes": 8803
+  },
+  {
+    "id": 362,
+    "target_id": 6,
+    "name": "discourse/modifiers/content-images.js",
+    "path": "theme-4/javascripts/discourse/modifiers/content-images.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/modifiers/content-images.js",
+    "sha256": "440d8e90f0cb1965b6a8eee56d69416d1a55f549761039005c9e37727a49d782",
+    "bytes": 480
+  },
+  {
+    "id": 363,
+    "target_id": 6,
+    "name": "discourse/lib/recent-discussions.js",
+    "path": "theme-4/javascripts/discourse/lib/recent-discussions.js.txt",
+    "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/recent-discussions.js",
+    "sha256": "93c97de66c9ee080e8c13263129235446131164983b090ef75f5cae85cbd0b42",
+    "bytes": 1610
+  }
+]

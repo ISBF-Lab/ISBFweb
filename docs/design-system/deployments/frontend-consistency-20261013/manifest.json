@@ -1,0 +1,248 @@
+{
+  "release": "frontend-consistency-20261013",
+  "production_url": "https://isbf-one.com",
+  "verified_ui_commit": "7008a3662fbcebebf2e9dd9469a75e280cfbeed5",
+  "core_commit": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "container_id": "8b3389a4c02a33a11750db0a92baf4324e4c1beb22cfa2edc3e6f931dd0fa421",
+  "container_image_id": "sha256:d7392bb5d64fd8cb127fdf0f594bf8e890faf6346a449f3fbde6fc190fef8ae8",
+  "theme_id": 4,
+  "published_at_utc": "2026-10-12T20:59:58Z",
+  "theme_fields_before": 162,
+  "theme_fields_after": 168,
+  "unchanged_existing_theme_fields": 160,
+  "plugins": 63,
+  "plugin_inventory_sha256": "580decd65b62da219924f2752afac8c41f2d3c92ae11e86aba17c2d956a9e288",
+  "core_source_inventory_sha256": "7e7e3245942886b27757bfe9dbddc8f3d6c3d0a9132d0ae6b160f827a6cb1f8a",
+  "core_and_plugins_unchanged": true,
+  "container_recreated": false,
+  "database_migrations": false,
+  "compilation_errors": [],
+  "compiled_styles": [
+    {
+      "target": "common_theme",
+      "bytes": 252269,
+      "sha256": "e68f6f172f87e8f424a764c8bd4c51ca267597dd9e208fed295eee802970a962",
+      "url": "/stylesheets/common_theme_4_90c08e1b28c710a2c4a766f8d1805d11fd7fdd33.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "desktop_theme",
+      "bytes": 108,
+      "sha256": "431622fc8841158521a9e45bce66fe23d25e1786c400244ef7c7745f3ba611e9",
+      "url": "/stylesheets/desktop_theme_4_9b8a01df65e4947798a19d6a72f1096c06e47da2.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "mobile_theme",
+      "bytes": 107,
+      "sha256": "d690d35cc075aaf0f8cd007845d3eeba7a4b23f2f01e9ecbaa43ee4e08b503b2",
+      "url": "/stylesheets/mobile_theme_4_9b8a01df65e4947798a19d6a72f1096c06e47da2.css?__ws=isbf-one.com"
+    }
+  ],
+  "compiled_javascript_sha256": "215add02178eaa75d07aaee6f41b02b8eca2296be633e83fe3bdb07e6c800d10",
+  "runtime_sources": [
+    {
+      "runtime_path": "themes/isbf-campus-feed/common/common.scss",
+      "evidence_path": "sources/common/common.scss.txt",
+      "bytes": 112933,
+      "sha256": "317a681c50c188cb7840aceea8a3845b126616d3610c562468bd9606cbb309fe",
+      "verified_candidate_sha256": "084ef2ce4245105963b8cd2beaa59dfa8f5c67d4b24e912cd95dc29206c85abb",
+      "merged_with_active_production": true,
+      "field_id": 197,
+      "target_id": 0,
+      "type_id": 1,
+      "name": "scss"
+    },
+    {
+      "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-frontend-consistency.gjs",
+      "evidence_path": "sources/javascripts/discourse/api-initializers/isbf-frontend-consistency.gjs.txt",
+      "bytes": 500,
+      "sha256": "8aadcb64d3806c6ef1aeb154ad8a697400a98dc4b9804268467ac093c283dd8a",
+      "verified_candidate_sha256": "8aadcb64d3806c6ef1aeb154ad8a697400a98dc4b9804268467ac093c283dd8a",
+      "merged_with_active_production": false,
+      "field_id": 399,
+      "target_id": 6,
+      "type_id": 6,
+      "name": "discourse/api-initializers/isbf-frontend-consistency.gjs"
+    },
+    {
+      "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-frontend-heading.gjs",
+      "evidence_path": "sources/javascripts/discourse/components/isbf-frontend-heading.gjs.txt",
+      "bytes": 1098,
+      "sha256": "4018caf67aca97c3cd758dcc3785f5bfbde8157cbbd81d2eb0dafa502957fce9",
+      "verified_candidate_sha256": "4018caf67aca97c3cd758dcc3785f5bfbde8157cbbd81d2eb0dafa502957fce9",
+      "merged_with_active_production": false,
+      "field_id": 400,
+      "target_id": 6,
+      "type_id": 6,
+      "name": "discourse/components/isbf-frontend-heading.gjs"
+    },
+    {
+      "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-frontend-scope.gjs",
+      "evidence_path": "sources/javascripts/discourse/components/isbf-frontend-scope.gjs.txt",
+      "bytes": 4662,
+      "sha256": "d0cc3f6afb5539aa73a51ecfd47ccd3baa4c255f2bc53a68e221002dda3f31e3",
+      "verified_candidate_sha256": "d0cc3f6afb5539aa73a51ecfd47ccd3baa4c255f2bc53a68e221002dda3f31e3",
+      "merged_with_active_production": false,
+      "field_id": 401,
+      "target_id": 6,
+      "type_id": 6,
+      "name": "discourse/components/isbf-frontend-scope.gjs"
+    },
+    {
+      "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+      "evidence_path": "sources/javascripts/discourse/components/isbf-v2-shell.gjs.txt",
+      "bytes": 16928,
+      "sha256": "a3d7042df83a6ca54322c8e4f6cf93ffd3ca3e6ebd10de245e1eef3353b7cdc5",
+      "verified_candidate_sha256": "45651f45ae8ac1b61dfe53568b7b428c961ab20a3b494694d947aed3d00e9df8",
+      "merged_with_active_production": true,
+      "field_id": 200,
+      "target_id": 6,
+      "type_id": 6,
+      "name": "discourse/components/isbf-v2-shell.gjs"
+    },
+    {
+      "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/lib/frontend-consistency-scope.js",
+      "evidence_path": "sources/javascripts/discourse/lib/frontend-consistency-scope.js.txt",
+      "bytes": 3732,
+      "sha256": "15f1f5470a06bff1020a5ec66b0f156b6f31ba9faf3daa46c0e18d4d2df11292",
+      "verified_candidate_sha256": "15f1f5470a06bff1020a5ec66b0f156b6f31ba9faf3daa46c0e18d4d2df11292",
+      "merged_with_active_production": false,
+      "field_id": 402,
+      "target_id": 6,
+      "type_id": 6,
+      "name": "discourse/lib/frontend-consistency-scope.js"
+    },
+    {
+      "runtime_path": "themes/isbf-campus-feed/javascripts/discourse/routes/group/manage/members.js",
+      "evidence_path": "sources/javascripts/discourse/routes/group/manage/members.js.txt",
+      "bytes": 185,
+      "sha256": "b742a10422448c6cbe4314a7f083df040a95fc0e9fd37bcbff9dee66539ca522",
+      "verified_candidate_sha256": "b742a10422448c6cbe4314a7f083df040a95fc0e9fd37bcbff9dee66539ca522",
+      "merged_with_active_production": false,
+      "field_id": 403,
+      "target_id": 6,
+      "type_id": 6,
+      "name": "discourse/routes/group/manage/members.js"
+    },
+    {
+      "runtime_path": "themes/isbf-campus-feed/stylesheets/frontend-consistency.scss",
+      "evidence_path": "sources/stylesheets/frontend-consistency.scss.txt",
+      "bytes": 29499,
+      "sha256": "ff7e34f5fa9958ef72100149c416733544c050d983fb7faec5d209b5c5f55e4b",
+      "verified_candidate_sha256": "ff7e34f5fa9958ef72100149c416733544c050d983fb7faec5d209b5c5f55e4b",
+      "merged_with_active_production": false,
+      "field_id": 404,
+      "target_id": 5,
+      "type_id": 1,
+      "name": "frontend-consistency"
+    }
+  ],
+  "private_backup_directory": "deploy-work/frontend-consistency-20261012/release-20261013",
+  "browser_verification": {
+    "passed": true,
+    "views": [
+      {
+        "viewport": "desktop",
+        "pages": [
+          {
+            "page": "account",
+            "loaded": true,
+            "horizontal_overflow": false,
+            "applicable_assertions": "passed in previous read-only run",
+            "measurements": "not retained before the final feature-navigation timeout"
+          },
+          {
+            "page": "messages",
+            "loaded": true,
+            "horizontal_overflow": false,
+            "applicable_assertions": "passed in previous read-only run",
+            "measurements": "not retained before the final feature-navigation timeout"
+          },
+          {
+            "page": "bookmarks",
+            "loaded": true,
+            "horizontal_overflow": false,
+            "applicable_assertions": "passed in previous read-only run",
+            "measurements": "not retained before the final feature-navigation timeout"
+          },
+          {
+            "page": "drafts",
+            "loaded": true,
+            "horizontal_overflow": false,
+            "applicable_assertions": "passed in previous read-only run",
+            "measurements": "not retained before the final feature-navigation timeout"
+          }
+        ],
+        "workbench_links": [
+          "/isbf/learning",
+          "/isbf/library",
+          "/isbf/alumni",
+          "/isbf/marketplace",
+          "/isbf/teamup"
+        ],
+        "marketplace_products_loaded": 1,
+        "alumni_map_initialized": true
+      },
+      {
+        "viewport": "mobile",
+        "pages": [
+          {
+            "page": "account",
+            "loaded": true,
+            "horizontal_overflow": false,
+            "primary_alignment": "not present"
+          },
+          {
+            "page": "messages",
+            "loaded": true,
+            "horizontal_overflow": false,
+            "topic_rows": 0,
+            "table_layout": null,
+            "title_fraction": null,
+            "avatar_widths": []
+          },
+          {
+            "page": "bookmarks",
+            "loaded": true,
+            "horizontal_overflow": false,
+            "bookmark_rows": 0,
+            "menus": 0
+          },
+          {
+            "page": "drafts",
+            "loaded": true,
+            "horizontal_overflow": false,
+            "draft_rows": 0,
+            "visible_bulk_select": 0
+          }
+        ],
+        "workbench_links": [
+          "/isbf/learning",
+          "/isbf/library",
+          "/isbf/alumni",
+          "/isbf/marketplace",
+          "/isbf/teamup"
+        ],
+        "marketplace_products_loaded": 1,
+        "alumni_map_initialized": true
+      }
+    ],
+    "verification_keys_removed": true,
+    "javascript_errors": [],
+    "failed_assets": [],
+    "failed_data_requests": [],
+    "no_forum_content_submitted": true,
+    "user_preferences_saved": false,
+    "production_list_coverage": "The member used for read-only production checks has empty message, bookmark and draft lists; populated geometry and actions are covered by the successful CI fixtures.",
+    "production_email_badge_coverage": "Primary badge not displayed for this production member; alignment is covered by the successful CI fixtures.",
+    "desktop_stage_provenance": "Four successful desktop stages were retained from the earlier read-only run; after its final feature-navigation timeout only the remaining desktop features and mobile checks were continued.",
+    "browser_memory_limit_mib": 512,
+    "browser_cpu_limit": 0.5,
+    "full_preview_started": false,
+    "screenshots_created_for_publication": false
+  },
+  "visual_status": "In Progress; publishing is not new human visual acceptance",
+  "standalone_new_image_created": false,
+  "historical_image_reference": "local_discourse/isbf_app:avatar-calibration-ready-20261011",
+  "historical_image_id": "sha256:7e2882ec982dc16ad7cb869471aaf2a9a892df28017c18ff739d11d4e0724fa9",
+  "theme_fields_at_final_verification": 168
+}

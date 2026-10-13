@@ -1,0 +1,58 @@
+[
+  {
+    "page": "account",
+    "title": "账户设置",
+    "decisions": "D01/D02/D04",
+    "layout": "feature",
+    "status": "accepted-composition-not-page-approval"
+  },
+  {
+    "page": "bookmarks",
+    "title": "书签",
+    "decisions": "D03/D04",
+    "layout": "feed",
+    "status": "accepted-composition-not-page-approval"
+  },
+  {
+    "page": "directory",
+    "title": "用户目录",
+    "decisions": "D01/D04",
+    "layout": "feature",
+    "status": "accepted-composition-not-page-approval"
+  },
+  {
+    "page": "invitations",
+    "title": "邀请管理",
+    "decisions": "D01/D02/D04",
+    "layout": "feature",
+    "status": "accepted-composition-not-page-approval"
+  },
+  {
+    "page": "summary",
+    "title": "个人资料下部",
+    "decisions": "D04/D05",
+    "layout": "feed",
+    "status": "accepted-composition-not-page-approval"
+  },
+  {
+    "page": "badges",
+    "title": "徽章",
+    "decisions": "D04/D05",
+    "layout": "feed",
+    "status": "accepted-composition-not-page-approval"
+  },
+  {
+    "page": "information",
+    "title": "关于与帮助",
+    "decisions": "D06",
+    "layout": "feed",
+    "status": "accepted-composition-not-page-approval"
+  },
+  {
+    "page": "modal",
+    "title": "关联弹窗",
+    "decisions": "D02/D07",
+    "layout": "feature",
+    "status": "accepted-composition-not-page-approval"
+  }
+]

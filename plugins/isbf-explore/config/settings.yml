@@ -1,0 +1,4 @@
+plugins:
+  isbf_explore_enabled:
+    default: true
+    client: true

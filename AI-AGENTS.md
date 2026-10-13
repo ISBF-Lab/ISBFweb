@@ -33,6 +33,7 @@ Discourse is large with long history. Understand context before changes.
 - If a matching approved component or visual rule is missing, mark it as requiring human confirmation and propose a design with its references, reuse boundaries, and unresolved decisions before implementation. Wait for human confirmation of those decisions; do not fill gaps from Discourse defaults or personal preference.
 - Continue to use UI kit, FormKit, float-kit, BEM, translations, and the frontend skills required above. Their APIs provide engineering behaviour; their default appearance does not establish this project's design standard.
 - When a new region is explicitly approved, persist its actual source version, acceptance scope, tokens, component rules, and reference mapping in `docs/design-system/`. Do not classify a region as Approved solely because it renders or has custom CSS.
+- Keep this rollout's worktree and snapshots in persistent storage and follow [its resource policy](docs/design-system/resource-policy.md): serialize work, use one capped browser tool, and keep the full preview forum stopped on this shared host. Do not use production as a test backend.
 
 ### Comments & Types
 - Prefer self-documenting code. Comments should only be added when future misunderstanding is likely. They should be terse, and should describe 'why', not 'what'. They should not be used to describe history.
@@ -100,6 +101,12 @@ use `bin/lint --fix --recent` only when appropriate.
 - Auth: Guardian classes (`lib/guardian.rb`), POST/PUT/DELETE for state changes, CSRF tokens, `protect_from_forgery`
 - Input: validate client+server, strong parameters, length limits, don't trust client-only validation
 - Authorization: Guardian classes, route+action permissions, scope limiting, `can_see?`/`can_edit?` patterns. Use user.guardian shorthand not Guardian.new(user)
+
+## Production Deployments
+- Before building or rolling back production, read [the external plugin deployment incident](docs/workbench-plugins-missing-20261010.md).
+- Compare the candidate image with the running container's complete plugin inventory, symlink targets, shared release markers, and source hashes, including hidden files. A saved base image or the container's immutable image ID does not include later filesystem changes. Resolve missing plugins before switching production.
+- Inspect the active database-backed theme before replacing it with workspace files. Preserve unrelated deployed features, settings, and data during recovery.
+- Verify existing feature links and completed data loading in desktop and mobile browsers. Git HEAD, the health endpoint, and the login page alone do not establish deployment completeness. Update the known-good deployment image reference after verification.
 
 ## Knowledge Sharing
 - ALWAYS persist information for ALL developers (no conversational-only memory)

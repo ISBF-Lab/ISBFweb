@@ -34,6 +34,9 @@ after_initialize do
   register_post_custom_field_type(IsbfAnonymous::POST_FIELD, :boolean)
   register_post_custom_field_type(IsbfAnonymous::OWNER_FIELD, :integer)
   TopicView.default_post_custom_fields << IsbfAnonymous::POST_FIELD
+  add_to_serializer :post, IsbfAnonymous::POST_FIELD.to_sym do
+    post_custom_fields[IsbfAnonymous::POST_FIELD] == true
+  end
   add_permitted_post_create_param(:isbf_anonymous, :string)
   allow_new_queued_post_payload_attribute(:isbf_anonymous)
   allow_new_queued_post_payload_attribute(:draft_key)
@@ -41,7 +44,10 @@ after_initialize do
 
   add_to_serializer :reviewable_queued_post,
                     IsbfAnonymous::POST_FIELD.to_sym,
-                    include_condition: -> { scope&.is_admin? } do
+                    include_condition: -> do
+                      scope&.is_admin? ||
+                        (scope.respond_to?(:academy_can?) && scope.academy_can?(:trace_anonymous))
+                    end do
     IsbfAnonymous.requested?(object.payload) == true
   end
 

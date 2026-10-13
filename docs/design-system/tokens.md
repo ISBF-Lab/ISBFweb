@@ -157,7 +157,7 @@
 | 工作台                      | 面板 `22px`；桌面卡片/图标 `18px`；手机卡片 `8px`、图标 `12px`                      |
 | 官方活动摘要字段/独立截止项 | `1px solid border`、`radius-sm`；外层摘要不设置整块边框或圆角                       |
 | 认证                        | 局部 `--d-input-border-radius: 12px`、`--d-button-border-radius: 12px`；面板 `20px` |
-| 资料头像                    | `4px solid surface`、`50%`；头像框另用独立叠层，不裁掉框                            |
+| 资料头像                    | `4px solid surface`、`50%`；头像框独立叠层以图像内容定位，扣除白边，不裁掉框        |
 | 公开活动/商品缩略图         | `radius-sm`，分别见 common `.isbf-post-preview`、marketplace `__image`              |
 
 `12px/18px/20px/22px` 是现有局部值，尚无对应全局半径 token。菜单阴影不能扩展成所有卡片的阴影。
@@ -214,3 +214,36 @@
 - 全站空态、骨架屏、成功提示与错误容器的设计。
 
 缺失项不能用 Discourse 默认样式补为目标规范。先选匹配 Approved 变体；仍无匹配则提交方案，等待人工确认。
+
+## 头像框校准区局部尺寸
+
+A15/C14 来源为 [2026-10-11 校准样式](references/plugins/discourse-avatar-frames/accepted-20261011/assets/stylesheets/common/avatar-frames-admin.scss.txt)。
+`--avatar-frame-preview-size` 在 large/small modifier 上分别为 `144px`、`48px`；
+预览外距为该值的 `10%`，预览及操作 gap 为原上传区已有的 `0.75em`。数字输入单列。
+这些值只限本次批准的校准区，不形成通用头像、间距或后台 token。
+
+款式定位数据默认大小 `120%`、偏移 `0/0` 是 C03 的图片几何接口，
+以实际头像内容尺寸计算，不是排版 token。个人主页 `4px` 白边保持原批准值。
+
+## 2026-10-12：本轮前台统一
+
+[运行基线](baselines/README.md)、[19组执行记录](frontend-rollout-20261012.md)
+及[D01–D07代表提案](proposals/frontend-consistency-20261012.md)已建立。
+D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用户卡及资料上部保留，后台排除。
+遵照用户要求[控制内存](resource-policy.md)，停止生产排查。
+
+## 本轮已确认的用途组合
+
+[人工确认](references/evidence/frontend-consistency-acceptance-20261012.md)只扩展D01–D06和D07关联弹窗的用途，没有新增全站token。
+输入最小44px、radius-sm 8px、1px边框、左右space-3；按钮最小44px、font-sm/600及pill，主按钮accent/contrast、hover brightness(0.92)。
+功能区沿用feature-width，内容列表沿用feed-width；16/24px间距、双列12px gap及18px/600分区标题均限定在目标主体。
+信息正文16px/1.45，段落16px、列表内缩32px。关联弹窗最大600px、16px内距/圆角、1px边框，手机全宽与安全区。
+用户卡的340px/96px提案被排除，不是可复用token。资料上部及一级导航的实际级联不得改变。
+
+## 本轮实现来源与验证
+
+19组均已提交代码，实际页面仍为In Progress。具体接入文件、保留边界和未覆盖状态见
+[实现说明](frontend-implementation-20261012.md)，源码摘要见
+[source map](frontend-implementation-source-map-20261012.json)，检查结果见
+[验证记录](frontend-verification-20261012.json)。新版离线入口为
+[V2预览](reviews/frontend-20261012-v2/index.html)，已移除用户卡示例；旧包只作历史记录。

@@ -1,0 +1,5 @@
+zh_CN:
+  js:
+    notifications:
+      isbf_calendar:
+        changed: "你添加的官方行程已有变更：%{topic_title}"

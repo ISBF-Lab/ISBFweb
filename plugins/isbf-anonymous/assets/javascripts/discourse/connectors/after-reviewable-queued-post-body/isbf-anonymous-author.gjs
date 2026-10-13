@@ -10,7 +10,8 @@ export default class IsbfAnonymousAuthorButton extends Component {
 
   get canLookupAuthor() {
     return (
-      this.currentUser?.admin &&
+      (this.currentUser?.admin ||
+        this.currentUser?.academy_moderator_permissions?.trace_anonymous) &&
       this.args.outletArgs.model.isbf_per_post_anonymous
     );
   }

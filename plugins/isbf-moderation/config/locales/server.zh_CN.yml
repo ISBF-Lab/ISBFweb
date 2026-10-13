@@ -1,0 +1,18 @@
+zh_CN:
+  site_settings:
+    isbf_severe_reports_enabled: "允许正常登录账号提交严重举报；关闭后，已有内容保留与审核保护仍然生效。"
+  isbf_moderation:
+    held_notice: "该内容因严重举报暂时隐藏，正在等待管理人员审核。"
+    severe_label: "严重举报"
+    review_required: "严重举报必须由管理人员在原生审核队列中处理。"
+  reviewables:
+    reasons:
+      isbf_severe_report: "社区成员确认提交了严重举报，内容已暂时隐藏并等待管理人员审核。"
+  system_messages:
+    isbf_severe_post_hidden:
+      title: "内容暂时隐藏，等待管理人员审核"
+      subject_template: "你的内容正在等待管理人员审核"
+      text_body_template: |
+        你的[内容](%{url})收到严重举报，现已暂时隐藏，等待管理人员审核。
+
+        编辑内容不会自动恢复展示。管理人员审核后，会决定恢复展示或移除内容。

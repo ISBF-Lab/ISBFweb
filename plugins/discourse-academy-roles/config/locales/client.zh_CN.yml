@@ -1,0 +1,69 @@
+zh_CN:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          academy_roles: 学院身份
+  js:
+    academy_roles:
+      invite_title: 通过邀请码注册
+      invite_code: 邀请码
+      redeem: 注册
+      copy_code: 复制邀请码
+      official_topic: 此话题将以官方身份发布
+      post_as_official: 切换为官方身份
+      post_as_member: 切换为普通身份
+      posting_as_official: 当前身份：官方
+      posting_as_member: 当前身份：普通成员
+      official_badge: 官方
+      activity_level: 活跃等级 LV%{level}
+      activity_title: 活跃等级
+      activity_value: LV%{level}
+      student_number: 学号
+      student_invites:
+        title: 学号邀请码
+        description: 生成单次使用的邀请码，并查看已注册账号绑定的学号。
+        create: 生成学号邀请码
+        created: 邀请码已生成，请将邀请码或邀请链接发给该学生。
+        expiry_days: 有效天数
+        expires_at: 过期时间
+        copied: 已复制
+        status: 状态
+        account: 注册账号
+        no_account: 暂无可查看的账号
+        unbound: 未绑定学号
+        actions: 操作
+        reissue: 重新生成邀请码
+        revoke: 撤销邀请码
+        confirm_reissue: 重新生成邀请码？旧邀请码将立即失效。
+        confirm_revoke: 撤销此邀请码？撤销后将无法用它注册。
+        load_more: 加载更多
+        empty: 还没有学号邀请码。
+        states:
+          pending: 未兑换
+          registered: 已注册
+          expired: 已过期
+          revoked: 已撤销
+        bulk:
+          title: CSV 批量生成邀请码
+          description: 上传 UTF-8 编码的 CSV，每行一个学号，最多 1500 行、1 MB。可使用“学号”或 student_number 表头，也可不带表头。已有和重复学号会跳过，错误行不影响其他行。
+          file: 学号 CSV 文件
+          expiry_days: 有效天数
+          generate: 生成并下载 CSV
+          download_template: 下载 CSV 模板
+          download_result: 再次下载结果 CSV
+          another_batch: 导入另一个文件
+          summary: 已生成 %{created} 个，已跳过 %{skipped} 行，失败 %{failed} 行。
+          result_description: 只有本次新生成的行包含邀请码和链接，跳过及失败行会注明原因。请保存结果文件，在此页面关闭前可以再次下载。
+          csv_required: 请选择 CSV 文件。
+          too_large: CSV 文件不能超过 1 MB。
+      auth:
+        welcome: 欢迎来到 ISBF - One
+        register: 注册
+        invite_title: 邀请码注册
+        back: 返回登录与注册入口
+        pause_motion: 暂停动效
+        play_motion: 播放动效
+        success: 注册成功
+        redirect_notice: 5 秒后进入论坛首页
+        new_account_required: 邀请码仅用于创建新账号，请先退出当前账号。

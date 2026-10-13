@@ -1,0 +1,6 @@
+*
+!.gitignore
+!build.py
+!deploy.py
+!compile-release.rb
+!verify.py

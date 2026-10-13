@@ -1705,6 +1705,72 @@
       "workspace_exists_at_review": true,
       "workspace_matches_at_review": true,
       "review_date": "2026-10-11"
+    },
+    {
+      "archive_path": "plugins/discourse-avatar-frames/accepted-20261011/assets/javascripts/discourse/components/avatar-frame-overlay.gjs.txt",
+      "sha256": "5586370f4a78ec03b6f97b4edd30a758158d76788d8b57a12091c61afbe2eeba",
+      "origin_kind": "accepted_avatar_calibration_patch",
+      "origin_path": "plugins/discourse-avatar-frames/assets/javascripts/discourse/components/avatar-frame-overlay.gjs",
+      "release_commit": "bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41",
+      "workspace_path": "plugins/discourse-avatar-frames/assets/javascripts/discourse/components/avatar-frame-overlay.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true,
+      "review_date": "2026-10-11"
+    },
+    {
+      "archive_path": "plugins/discourse-avatar-frames/accepted-20261011/assets/javascripts/discourse/modifiers/avatar-frame-position.js.txt",
+      "sha256": "2449350e72910c198cf6fcbcf18217b6bd5493efff8e3eb4fa96481de08fbbe3",
+      "origin_kind": "accepted_avatar_calibration_patch",
+      "origin_path": "plugins/discourse-avatar-frames/assets/javascripts/discourse/modifiers/avatar-frame-position.js",
+      "release_commit": "bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41",
+      "workspace_path": "plugins/discourse-avatar-frames/assets/javascripts/discourse/modifiers/avatar-frame-position.js",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true,
+      "review_date": "2026-10-11"
+    },
+    {
+      "archive_path": "plugins/discourse-avatar-frames/accepted-20261011/assets/stylesheets/common/avatar-frames.scss.txt",
+      "sha256": "77a751835eef154c4b1d63ed02912714a9409b59708e9ff8f231ce44783bb766",
+      "origin_kind": "accepted_avatar_calibration_patch",
+      "origin_path": "plugins/discourse-avatar-frames/assets/stylesheets/common/avatar-frames.scss",
+      "release_commit": "bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41",
+      "workspace_path": "plugins/discourse-avatar-frames/assets/stylesheets/common/avatar-frames.scss",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true,
+      "review_date": "2026-10-11"
+    },
+    {
+      "archive_path": "plugins/discourse-avatar-frames/accepted-20261011/assets/stylesheets/common/avatar-frames-admin.scss.txt",
+      "sha256": "8c3eefd1e4f84f01052d892d731f930ff250751a11dde36e7ab10ff85e77ed7e",
+      "origin_kind": "accepted_avatar_calibration_patch",
+      "origin_path": "plugins/discourse-avatar-frames/assets/stylesheets/common/avatar-frames-admin.scss",
+      "release_commit": "bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41",
+      "workspace_path": "plugins/discourse-avatar-frames/assets/stylesheets/common/avatar-frames-admin.scss",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true,
+      "review_date": "2026-10-11"
+    },
+    {
+      "archive_path": "plugins/discourse-avatar-frames/accepted-20261011/admin/assets/javascripts/admin/components/avatar-frame-upload.gjs.txt",
+      "sha256": "46b0d32ac2ed9c54094e1869bf252e4b0332d5a1d9bbe90781724e600ef77bdb",
+      "origin_kind": "accepted_avatar_calibration_patch",
+      "origin_path": "plugins/discourse-avatar-frames/admin/assets/javascripts/admin/components/avatar-frame-upload.gjs",
+      "release_commit": "bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41",
+      "workspace_path": "plugins/discourse-avatar-frames/admin/assets/javascripts/admin/components/avatar-frame-upload.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true,
+      "review_date": "2026-10-11"
+    },
+    {
+      "archive_path": "plugins/discourse-avatar-frames/accepted-20261011/admin/assets/javascripts/admin/components/avatar-frame-form.gjs.txt",
+      "sha256": "7ef1cec579c8fdc6994a1a751f52271c2221d15bfa3d084ca62d0936169dc350",
+      "origin_kind": "accepted_avatar_calibration_patch",
+      "origin_path": "plugins/discourse-avatar-frames/admin/assets/javascripts/admin/components/avatar-frame-form.gjs",
+      "release_commit": "bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41",
+      "workspace_path": "plugins/discourse-avatar-frames/admin/assets/javascripts/admin/components/avatar-frame-form.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true,
+      "review_date": "2026-10-11"
     }
   ],
   "evidence": [
@@ -1793,6 +1859,14 @@
       "source_sha256": "abaac4063f51f75f5cf7f814079acc7300222c2e4d680a034ead2f4e6549e2ee",
       "sha256": "bdd587c8613758f842e94c09b66defb99bcf66accc505e3eb71b8e0df08930d6",
       "review_date": "2026-10-11"
+    },
+    {
+      "id": "avatar-calibration",
+      "archive_path": "evidence/avatar-calibration.md",
+      "source_path": "docs/avatar-frame-calibration-production-20261011.md",
+      "source_sha256": "ce6e5c75f7308b46bf722510bad12df5a2b49fbfbfb2357a5abee331191cbeaa",
+      "sha256": "6078212c0c9f10ef1eec921975125160516b4f76248b7377892ce86a53161eef",
+      "review_date": "2026-10-11"
     }
   ],
   "supplements": [
@@ -1811,6 +1885,50 @@
         "mobile_touch_preserved": true,
         "workspace_matches_git_commit": true
       }
+    },
+    {
+      "review_date": "2026-10-11",
+      "scope": "Avatar content geometry and explicitly approved upload-field calibration region only; existing two frames left for user calibration; historical theme and authentication supplement unchanged",
+      "release_commit": "bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41",
+      "user_acceptance_report": "deploy-work/avatar-frame-calibration-20261011/user-acceptance-report.json",
+      "user_acceptance_report_sha256": "a4fb2cd55d5c1e3dbcca411844b32f9724ecd1901c50a82048678098cc29cbb9",
+      "acceptance_report": "deploy-work/avatar-frame-calibration-20261011/production-installation-report.json",
+      "acceptance_report_sha256": "ef873985521b7fd48808e6829b1b3706ac72d1bd4bc46290906473160ff59563",
+      "preview_browser_report": "deploy-work/avatar-frame-calibration-20261011/preview-browser-report.json",
+      "preview_browser_report_sha256": "c986139c43012fb60853c53f8b0189f9adf1130bd0bf2293b38d75aa88c50adc",
+      "production_browser_report": "deploy-work/avatar-frame-calibration-20261011/production-browser-report.json",
+      "production_browser_report_sha256": "2e4c574e037c8b0a5e2b1e590c84ebecea1ab2061bd872e7cb4630ac7b263cff",
+      "verified": {
+        "production_ui_user_accepted": true,
+        "isolated_desktop_mobile_preview_passed": true,
+        "production_automated_browser_complete": false,
+        "production_automated_browser_stopped_by_user": true,
+        "workspace_matches_git_commit": true,
+        "verification_keys_removed": true,
+        "existing_frames_calibrated": false
+      },
+      "final_deployment_report": "deploy-work/avatar-frame-calibration-20261011/deployment-final-report.json",
+      "final_deployment_report_sha256": "02142608738e08980cc4698bd5fc06546b9940974ca78525e67382ae7a11071a"
+    },
+    {
+      "date": "2026-10-12",
+      "kind": "frontend_consistency_composition_acceptance",
+      "evidence": "evidence/frontend-consistency-acceptance-20261012.md",
+      "approved_scope": "D01-D06 and D07 associated dialogs; 19 page groups only",
+      "excluded": [
+        "user card",
+        "A11 profile upper region and primary navigation",
+        "A12 public activity previews",
+        "admin",
+        "authentication",
+        "existing calendar and reporting"
+      ],
+      "implementation_status": "In Progress",
+      "baseline_source_map": "../baselines/production-20261012/source-map.json",
+      "implementation_source_map": "../frontend-implementation-source-map-20261012.json",
+      "implementation_source_map_sha256": "f1719da81ffd90653434e5630952e03fbdb328a40f30f8b784b12899b91d7ade",
+      "verification": "../frontend-verification-20261012.json",
+      "review": "../reviews/frontend-20261012-v2/index.html"
     }
   ]
 }

@@ -10,6 +10,9 @@ module DiscourseEvents
 
       def can_create_discourse_post_event?
         return false if anonymous?
+        if respond_to?(:academy_restricted_moderator?) && academy_restricted_moderator?
+          return true if academy_can?(:publish_activities) || academy_can?(:publish_official)
+        end
         @can_create_discourse_post_event ||=
           user.in_any_groups?(SiteSetting.discourse_post_event_allowed_on_groups_map)
       end

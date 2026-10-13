@@ -3,18 +3,19 @@ import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { themePrefix } from "virtual:theme";
+import PluginOutlet from "discourse/components/plugin-outlet";
+import lazyHash from "discourse/helpers/lazy-hash";
 import DButton from "discourse/ui-kit/d-button";
 import dAvatar from "discourse/ui-kit/helpers/d-avatar";
-import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import { canPublishAnonymously } from "../lib/anonymous-post-scope";
 import { isQuickPost } from "../lib/quick-post-scope";
+import ISBFOfficialComposer from "./isbf-official-composer";
 
 export default class ISBFV2ComposerOptions extends Component {
   @service currentUser;
   @service siteSettings;
 
-  @tracked optionsExpanded = false;
   @tracked anonymousSelection = null;
 
   get model() {
@@ -40,15 +41,6 @@ export default class ISBFV2ComposerOptions extends Component {
       : selected;
   }
 
-  get optionsVisible() {
-    return this.optionsExpanded || Boolean(this.model?.requiredCategoryMissing);
-  }
-
-  @action
-  toggleOptions() {
-    this.optionsExpanded = !this.optionsVisible;
-  }
-
   @action
   toggleAnonymous() {
     const selected = !this.isAnonymous;
@@ -57,20 +49,20 @@ export default class ISBFV2ComposerOptions extends Component {
   }
 
   <template>
+    <ISBFOfficialComposer @model={{this.model}} />
+    <span aria-hidden="true" class="isbf-v2-composer"></span>
     {{#if this.isQuickPost}}
       <div class="isbf-v2-composer-options">
-        <div aria-hidden="true" class="isbf-v2-composer-options__avatar">
-          {{dAvatar this.currentUser imageSize="large"}}
-        </div>
-        <button
-          aria-expanded={{this.optionsVisible}}
-          class="isbf-v2-composer-options__toggle"
-          type="button"
-          {{on "click" this.toggleOptions}}
+        <div
+          aria-hidden="true"
+          class="isbf-v2-composer-options__avatar isbf-avatar"
         >
-          {{i18n (themePrefix "isbf_v2.compose_options")}}
-          {{dIcon "chevron-right"}}
-        </button>
+          {{dAvatar this.currentUser imageSize="large"}}
+          {{#unless this.isAnonymous}}<PluginOutlet
+              @name="user-avatar-frame"
+              @outletArgs={{lazyHash user=this.currentUser motion="static"}}
+            />{{/unless}}
+        </div>
       </div>
     {{/if}}
     {{#if this.canAnonymize}}

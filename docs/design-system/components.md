@@ -6,7 +6,7 @@
 
 视觉来源和工程能力分别核对：UI kit、FormKit、float-kit 可以提供按钮、焦点、表单和弹层能力，但平台默认外观不是本项目设计来源。遵循 [UI kit](../developer-guides/docs/03-code-internals/02-ui-kit.md)、[FormKit](../developer-guides/docs/03-code-internals/22-form-kit.md) 和 [BEM](../developer-guides/docs/03-code-internals/26-css-guidelines-bem.md)。新操作使用 UI kit 的 `DButton`，表单使用 `Form` 的公开 API，浮动菜单优先组合 float-kit；显示文本使用翻译，保留权限与键盘行为。
 
-已有业务组件中的底层原生元素和历史实现不应被扩大为新控件模板。复用既有组件时保留其行为；需要新变体且没有 Approved 视觉参考时，先提方案并等待人工确认。本次未新增任何控件或 token。
+已有业务组件中的底层原生元素和历史实现不应被扩大为新控件模板。复用既有组件时保留其行为；需要新变体且没有 Approved 视觉参考时，先提方案并等待人工确认。头像框校准区的局部新增规则见 C14；没有新增全站 token。
 
 ## C01 · Button
 
@@ -66,13 +66,14 @@ A01/A08：[common.scss](references/theme-4/common/common.scss.txt) 的 `.isbf-v2
 
 ### Source of Truth
 
-A02 的 `.isbf-feed-card__avatar`，A11 的资料头像，均在 [common.scss](references/theme-4/common/common.scss.txt)。A14：[avatar-frame-overlay](references/plugins/discourse-avatar-frames/assets/javascripts/discourse/components/avatar-frame-overlay.gjs.txt) 与 [avatar-frames.scss](references/plugins/discourse-avatar-frames/assets/stylesheets/common/avatar-frames.scss.txt)。工程能力：[d-user-avatar](../../frontend/discourse/app/ui-kit/d-user-avatar.gjs)、[d-avatar helper](../../frontend/discourse/app/ui-kit/helpers/d-avatar.js)。
+A02 的 `.isbf-feed-card__avatar`，A11 的资料头像，均在 [common.scss](references/theme-4/common/common.scss.txt)。A14 的有效定位参考为 [2026-10-11 overlay](references/plugins/discourse-avatar-frames/accepted-20261011/assets/javascripts/discourse/components/avatar-frame-overlay.gjs.txt)、[定位 modifier](references/plugins/discourse-avatar-frames/accepted-20261011/assets/javascripts/discourse/modifiers/avatar-frame-position.js.txt) 与 [样式](references/plugins/discourse-avatar-frames/accepted-20261011/assets/stylesheets/common/avatar-frames.scss.txt)。工程能力：[d-user-avatar](../../frontend/discourse/app/ui-kit/d-user-avatar.gjs)、[d-avatar helper](../../frontend/discourse/app/ui-kit/helpers/d-avatar.js)。
 
 ### Visual Rules
 
 - Feed card 图片及列宽 `42px`、圆形 `50%`；原生话题行 fallback 的 `40px` 图片是独立变体。
 - 资料头像 `4px solid surface`、`50%`；上移 `32px`，封面状态由原生结构和现有覆盖决定，未建立全局头像尺寸表。
-- 头像框父级 `position: relative`；overlay `inset: -10%`、宽高 `120%`、`pointer-events: none`、`z-index: 2`；框图片宽高 `100%`、无边框、半径 `0`、`object-fit: contain`。flair 在 `z-index: 3`。
+- 头像框父级 `position: relative`；overlay 由 modifier 以实际头像图像区域定位，扣除边框和内边距。每款大小默认 `120%`、偏移默认 `0/0`，以头像内容尺寸归一化；不再以父容器的固定 `inset` 定位。
+- overlay 在测量前隐藏，定位后可见；`pointer-events: none`、`z-index: 2`；框图片宽高 `100%`、无边框、半径 `0`、`object-fit: contain`。flair 在 `z-index: 3`。4px 资料白边继续保留。
 - 装饰层只在插件与佩戴数据满足条件时存在，不能影响头像链接和点击。
 
 ### Usage Rules
@@ -84,6 +85,7 @@ A02 的 `.isbf-feed-card__avatar`，A11 的资料头像，均在 [common.scss](r
 - 为配合新卡片任意修改全部头像尺寸。
 - 对头像父容器统一 `overflow: hidden` 或圆形裁剪，截掉头像框。
 - 把装饰框画成头像图片的一部分，或覆盖其点击区域。
+- 按款式名称、UUID 或页面路由添加独立定位补丁；把头像白边、内边距或外边距算成图片内容。
 
 ## C04 · Navigation
 
@@ -101,7 +103,7 @@ A01：[shell](references/theme-4/javascripts/discourse/components/isbf-v2-shell.
 
 ### Forbidden Patterns
 
-- 给 `/admin`、群组或未知插件页强行套用现有 shell。
+- 给 `/admin`、未列入本轮确认范围的群组子路由或未知插件页强行套用现有 shell；已确认的前台群组范围见C15。
 - 写死页面偏移、创建另一份 sidebar/移动导航，或删去安全区。
 - 以 shell 出现为依据批准内层原生表单。
 
@@ -285,4 +287,68 @@ A05：[notifications](references/theme-4/javascripts/discourse/components/isbf-n
 
 ## 尚无组件规范的区域
 
-设置表单、用户弹出卡、后台公共样式、全站 empty/loading/success 容器，以及校友/商品全部编辑与异常状态仍需人工确认。处理这些区域时先按 [Reference Map](reference-map.md) 说明可复用部分与缺口；不在实现阶段临时补设计。
+本轮范围外的设置表单、用户弹出卡、后台公共样式、全站 empty/loading/success 容器，以及校友/商品全部编辑与异常状态仍需人工确认。处理这些区域时先按 [Reference Map](reference-map.md) 说明可复用部分与缺口；不在实现阶段临时补设计。
+
+## C14 · Avatar frame calibration
+
+### Source of Truth
+
+A15 的 [确认方案](proposals/avatar-frame-calibration-20261011.md)，对应提交
+`bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41` 的 [上传组件](references/plugins/discourse-avatar-frames/accepted-20261011/admin/assets/javascripts/admin/components/avatar-frame-upload.gjs.txt)、
+[表单接入](references/plugins/discourse-avatar-frames/accepted-20261011/admin/assets/javascripts/admin/components/avatar-frame-form.gjs.txt)
+及 [局部样式](references/plugins/discourse-avatar-frames/accepted-20261011/assets/stylesheets/common/avatar-frames-admin.scss.txt)。
+仅批准既有上传字段内的校准区，不批准整个后台表单或导航。
+
+### Visual Rules
+
+- 两种叠加预览位于输入上方，头像尺寸为 144px 和 48px；圆形 `50%`，图片 margin 为 0。
+- 预览及操作使用 flex、垂直居中、允许换行，gap 复用既有上传区的 `0.75em`。
+- `--avatar-frame-preview-size` 只控制两种预览；容器外距为该尺寸的 `10%`，为默认框预留空间，不裁切更大的装饰。
+- 大小、左右位置、上下位置的 FormKit 数字输入单列排列，后接恢复默认、可选建议操作和确认复选框。桌面与手机保持此顺序。
+- 沿用既有 FormKit/UI kit 控件，没有新增品牌色、字体、阴影、全局半径或全站输入样式。
+
+### Usage Rules
+
+叠加预览复用 C03 的内容区域定位和静态/动画选择。修改参数或替换素材后重新确认；
+建议位置需管理员主动采用。只用于头像框新建、编辑页的上传字段。
+
+### Forbidden Patterns
+
+把局部布局推广为整个后台、偏好设置或所有上传控件的规范；用一排三列输入替代已确认的单列布局；
+裁掉装饰或自动替管理员确认建议。现有两款的校准由用户自行完成。
+
+## 2026-10-12：本轮前台统一
+
+[运行基线](baselines/README.md)、[19组执行记录](frontend-rollout-20261012.md)
+及[D01–D07代表提案](proposals/frontend-consistency-20261012.md)已建立。
+D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用户卡及资料上部保留，后台排除。
+遵照用户要求[控制内存](resource-policy.md)，停止生产排查。
+
+## C15 · 本轮前台主体与关联弹窗
+
+### Source of Truth
+
+[人工确认与保留边界](references/evidence/frontend-consistency-acceptance-20261012.md)、[D01–D07组合](proposals/frontend-consistency-20261012.md)。
+实现位于[frontend-consistency.scss](../../themes/isbf-campus-feed/stylesheets/frontend-consistency.scss)及[路由范围](../../themes/isbf-campus-feed/javascripts/discourse/lib/frontend-consistency-scope.js)。页面接入仍为In Progress。
+
+### Visual Rules
+
+严格按D01–D06和D07关联弹窗组合复用现有token；600px内容列、最大920px功能区只作用于对应主体。
+原生控件和浮层保留字段、数据加载、错误/disabled语义、焦点和权限。二级导航使用D04；资料一级导航不接入。
+
+### Usage Rules
+
+仅用于19组目标主体及明确登记的关联弹窗。原生FormKit/UI kit/select-kit负责行为；私有列表不使用公开FeedCard或A12加载器。
+没有匹配规则的状态记录为待确认，不能从平台默认外观填入新设计值。
+
+### Forbidden Patterns
+
+全局改写.btn/input/.d-modal；给用户卡换肤；修改资料上部或其父容器宽度；裁切头像框；移除动态列、私信权限或表单字段；增加新阴影、颜色或装饰。
+
+## 本轮实现来源与验证
+
+19组均已提交代码，实际页面仍为In Progress。具体接入文件、保留边界和未覆盖状态见
+[实现说明](frontend-implementation-20261012.md)，源码摘要见
+[source map](frontend-implementation-source-map-20261012.json)，检查结果见
+[验证记录](frontend-verification-20261012.json)。新版离线入口为
+[V2预览](reviews/frontend-20261012-v2/index.html)，已移除用户卡示例；旧包只作历史记录。
