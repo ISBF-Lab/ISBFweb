@@ -1,0 +1,50 @@
+[
+  {
+    "name": "desktop-dark.png",
+    "pixels": [
+      2880,
+      3056
+    ],
+    "sha256": "8264fa68ee3f18a9b76c45c79067d7273072d177d0aef70f9d1f1e0ab2720713"
+  },
+  {
+    "name": "desktop-light.png",
+    "pixels": [
+      2880,
+      3056
+    ],
+    "sha256": "735c30da0ef332d2f2c7ef3435febf5ca372262adedae10bfd2e02c2762cf3fb"
+  },
+  {
+    "name": "desktop-templates.png",
+    "pixels": [
+      2880,
+      2200
+    ],
+    "sha256": "bf142d6bef539209841a5e65ff2b81a68c6b5e53c5bb4fd590b4248968719ead"
+  },
+  {
+    "name": "field-states.png",
+    "pixels": [
+      2880,
+      2640
+    ],
+    "sha256": "ba67f084e09bc3cafc28d35b074c109d477f901297594575c4e210a2e8c82241"
+  },
+  {
+    "name": "mobile-content.png",
+    "pixels": [
+      780,
+      4330
+    ],
+    "sha256": "22fce7bf325cedef2ff58e8be407541f645f74d44b513daf2e31df36baccfd67"
+  },
+  {
+    "name": "mobile-preview.png",
+    "pixels": [
+      780,
+      2240
+    ],
+    "sha256": "5e55ce2d50a5d46f19a8c2a2f9bd59fbbbf55d1f50a605b5f5e12b9ccf0ea2c1"
+  }
+]

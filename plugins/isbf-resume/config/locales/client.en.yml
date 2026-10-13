@@ -1,0 +1,411 @@
+en:
+  js:
+    isbf_resume:
+      title: "Resume"
+      intro: "Enter your content, choose a template, and generate DOCX and PDF. Your wording is placed in a fixed layout."
+      back: "Back to workbench"
+      stages: "Resume editing stages"
+      content: "Content"
+      templates: "Template"
+      preview: "Preview and download"
+      basic: "Basic information"
+      more: "More basic information"
+      optional: "Optional"
+      required: "Required"
+      modules: "Experience and skills"
+      add: "Add entry"
+      remove: "Remove entry"
+      entry: "Entry %{count}"
+      photo_remove: "Remove photo"
+      photo_invalid: "Choose a JPG, PNG or WebP up to 5 MB and 16 million pixels."
+      photo_reading: "Reading photo…"
+      photo_failed: "The photo could not be read. Choose it again."
+      photo_ready: "Photo selected"
+      generate: "Generate DOCX and PDF"
+      generate_english: "Generate English version"
+      confirmation_title: "Confirm before generating"
+      english_confirmation_title: "Confirm English resume generation"
+      generation_notice: "isbf-one does not verify the accuracy or suitability of your content. It generates a resume from what you provide. Please review all entries yourself."
+      frequency_notice: "You cannot generate multiple resumes in a short period. Check all entries before confirming."
+      english_notice: "Please enter your content in English. isbf-one does not translate it automatically. Only resume headings and labels switch to English; your entries are preserved."
+      return_edit: "Return to editing"
+      confirm_generate: "Confirm generation"
+      page_advice: "Aim for a one-page resume and avoid large blank areas. Review the preview and adjust the length of your content."
+      generating_preview: "Generating your resume from the supplied content. Your actual preview will appear here when it is ready."
+      generating: "Generating…"
+      generated: "Generated, %{count} pages"
+      failed: "Generation failed. Check your content and try again."
+      invalid: "Correct the highlighted fields and generate again."
+      missing: "Complete this field."
+      phone_invalid: "Enter a valid phone number. Include the country code for overseas applications."
+      email_invalid: "Enter a valid email address."
+      sample: "Example preview"
+      example_note: "This template example uses fictional content. Generate to preview your actual PDF."
+      preview_page: "Generated resume PDF, page %{page} of %{count}"
+      preview_unavailable: "This export has no page preview. Generate again to preview each PDF page."
+      download_docx: "Download DOCX"
+      download_pdf: "Download PDF"
+      open_pdf: "Open PDF preview"
+      blue_gold: "Blue and gold"
+      blue_gray: "Blue and gray"
+      template_help: "Only the accent color differs. Both templates use the same fields, layout and pagination."
+      selection: "Choose a resume template"
+      selected: "Selected"
+      not_generated: "Not generated yet"
+      stale: "Your content changed. Generate again before downloading."
+      expiry: "Only you can download these files. They expire 24 hours after generation."
+      update: "Generate again"
+      next_template: "Next: choose template"
+      next_preview: "Next: preview and download"
+      empty_preview: "Enter your name, phone and email to generate."
+      retained: "Your entries remain available on this page."
+      field_label: "Field: %{name}"
+      skipped: "Empty sections are omitted from the resume."
+      limit: "Add up to %{count} entries in this section."
+      draft_preview: "Current resume preview"
+      draft_preview_note: "The preview updates as you fill in your content. Generate the PDF to check the final pages."
+      empty_draft_preview: "Start filling in your content to see your resume here. Empty fields are omitted."
+      paper:
+        subtitle: "Personal resume"
+        zh:
+          title: "个人简历"
+          present: "至今"
+          expected: "（预计）"
+          sections:
+            basic: "基本信息"
+            education: "教育背景"
+            experience: "工作与实习经历"
+            projects: "项目与科研经历"
+            activities: "校园与实践经历"
+            skills: "技能与证书"
+            honors: "荣誉与奖项"
+            summary: "自我评价"
+          fields:
+            name: "姓名"
+            phone: "联系电话"
+            email: "电子邮箱"
+            job_intent: "求职意向"
+            current_city: "现居城市"
+            preferred_city: "期望城市"
+            birth_month: "出生年月"
+            highest_education: "最高学历与院校"
+            political_status: "政治面貌"
+            native_place: "籍贯"
+            ethnicity: "民族"
+            portfolio_links: "技术社区 / 作品主页"
+            linkedin: "LinkedIn 个人主页"
+            work_permit: "签证 / 许可状态"
+            height: "身高"
+            weight: "体重"
+            vision: "视力"
+            language_grade: "外语等级"
+          leads:
+            courses: "相关课程："
+            department: "部门 / 业务方向："
+            technology: "技术 / 方法："
+            link: "链接："
+            issuer: "机构："
+        en:
+          title: "Resume"
+          present: "Present"
+          expected: " (expected)"
+          sections:
+            basic: "Personal information"
+            education: "Education"
+            experience: "Work and internship experience"
+            projects: "Projects and research"
+            activities: "Campus and volunteer experience"
+            skills: "Skills and certifications"
+            honors: "Awards and honors"
+            summary: "Profile"
+          fields:
+            name: "Name"
+            phone: "Phone"
+            email: "Email"
+            job_intent: "Target role"
+            current_city: "Current location"
+            preferred_city: "Preferred location"
+            birth_month: "Date of birth"
+            highest_education: "Education"
+            political_status: "Political affiliation"
+            native_place: "Place of origin"
+            ethnicity: "Ethnicity"
+            portfolio_links: "Portfolio / community"
+            linkedin: "LinkedIn"
+            work_permit: "Work authorization"
+            height: "Height"
+            weight: "Weight"
+            vision: "Vision"
+            language_grade: "Language proficiency"
+          leads:
+            courses: "Relevant coursework: "
+            department: "Department / business area: "
+            technology: "Technologies / methods: "
+            link: "Link: "
+            issuer: "Institution: "
+      sections:
+        basic:
+          label: "Basic information"
+          description: "Name, phone and email are required. Add other information when it is relevant to the role."
+        education:
+          label: "Education"
+          description: "Add recent education first. The section is optional; include the school for any completed entry."
+        experience:
+          label: "Work and internships"
+          description: "Add employment and internships, most recent first. Skip this section if it does not apply."
+        projects:
+          label: "Projects and research"
+          description: "Include relevant coursework, personal work, team projects or research."
+        activities:
+          label: "Campus and practical experience"
+          description: "Include student organizations, volunteering, community work or event operations."
+        skills:
+          label: "Skills and certificates"
+          description: "List relevant skills, language ability and certificates you actually hold."
+        honors:
+          label: "Awards and honors"
+          description: "Add relevant awards, most recent first. Skip if not applicable."
+        summary:
+          label: "Profile"
+          description: "Optional. Briefly describe relevant experience and abilities without repeating the whole resume."
+      fields:
+        basic:
+          name:
+            label: "Name"
+            help: "Use the name you apply with. Add an English name if relevant."
+            placeholder: "例如：张明"
+          phone:
+            label: "Phone number"
+            help: "Use a reachable number. Include the country code when applying overseas."
+            placeholder: "例如：+86 138 0000 0000"
+          email:
+            label: "Email address"
+            help: "A school email or a stable professional commercial email is recommended. Check the spelling."
+            placeholder: "例如：name@example.com"
+          job_intent:
+            label: "Target role"
+            help: "Specify a concrete role. Avoid broad phrases such as “open to anything”."
+            placeholder: "例如：前端开发工程师"
+          current_city:
+            label: "Current city"
+            help: "Enter your current city; add the country when relevant. A street address is unnecessary."
+            placeholder: "例如：北京 / Singapore"
+          preferred_city:
+            label: "Preferred city"
+            help: "Enter desired work locations, separated by commas. Mention remote work if relevant."
+            placeholder: "例如：北京、上海、远程"
+          photo:
+            label: "ID photo"
+            help: "Upload a clear photo only when relevant to the application. JPG, PNG or WebP, up to 5 MB. No photo leaves no empty slot."
+            placeholder: ""
+          birth_month:
+            label: "Birth month"
+            help: "Enter year and month only, when the role requires it."
+            placeholder: "例如：2002-08"
+          highest_education:
+            label: "Highest education and institution"
+            help: "Use institution · major · degree. Add detailed education below."
+            placeholder: "例如：清华大学·计算机科学与技术·本科"
+          political_status:
+            label: "Political affiliation"
+            help: "State your current affiliation accurately, if required for the role."
+            placeholder: "例如：共青团员"
+          native_place:
+            label: "Place of origin"
+            help: "A province and city are usually sufficient."
+            placeholder: "例如：浙江杭州"
+          ethnicity:
+            label: "Ethnicity"
+            help: "Enter your ethnicity only if relevant to the application."
+            placeholder: "例如：汉族"
+          portfolio_links:
+            label: "Technical community / portfolio"
+            help: "For technical, internet or design roles, add GitHub, a blog, Behance or a portfolio link. One labeled link per line."
+            placeholder: "GitHub：https://github.com/your-name\n作品集：https://example.com/portfolio"
+          linkedin:
+            label: "LinkedIn profile"
+            help: "For international employers, enter the full link to your personal professional profile."
+            placeholder: "https://www.linkedin.com/in/your-name/"
+          work_permit:
+            label: "Visa / work permission"
+            help: "For cross-border applications, describe actual permission and sponsorship needs, such as OPT or Green Card."
+            placeholder: "例如：OPT / 无需雇主担保"
+          height:
+            label: "Height"
+            help: "Add a unit and fill only when the role requires it."
+            placeholder: "例如：175 cm"
+          weight:
+            label: "Weight"
+            help: "Add a unit and fill only when the role requires it."
+            placeholder: "例如：65 kg"
+          vision:
+            label: "Vision"
+            help: "If required, state left and right eye vision and whether it is corrected."
+            placeholder: "例如：矫正视力，左眼 1.0、右眼 1.0"
+          language_grade:
+            label: "Language qualification"
+            help: "List qualifications or scores already achieved, such as TOEIC or TEM-8."
+            placeholder: "例如：TOEIC 900 / 英语专业八级"
+        education:
+          school:
+            label: "School"
+            help: "Use the full or commonly recognized school name. Add exchange programs as separate entries."
+            placeholder: "例如：清华大学"
+          major:
+            label: "Major"
+            help: "Enter your major or research area; you can add a minor here."
+            placeholder: "例如：计算机科学与技术"
+          degree:
+            label: "Degree"
+            help: "State the degree achieved or currently pursued, and indicate ongoing study."
+            placeholder: "例如：本科 / 硕士在读"
+          start_month:
+            label: "Start month"
+            help: "Enter the start year and month."
+            placeholder: "例如：2022-09"
+          end_month:
+            label: "End month"
+            help: "Enter the end or expected completion year and month. Leave blank and select ongoing if still active."
+            placeholder: "例如：2026-06"
+          ongoing:
+            label: "Ongoing"
+            help: "Select if currently ongoing. Clear the end month to show “present”."
+            placeholder: ""
+          courses:
+            label: "Relevant courses"
+            help: "Choose courses relevant to the role, separated by commas. Do not list every course."
+            placeholder: "例如：数据结构、数据库系统、软件工程"
+          achievements:
+            label: "Academic achievements"
+            help: "Add GPA with its scale, rank, exchange study or thesis area. One factual point per line."
+            placeholder: "GPA：3.8/4.0\n毕业论文：……"
+        experience:
+          company:
+            label: "Employer"
+            help: "Name the employer or organization for this entry."
+            placeholder: "例如：某某科技有限公司"
+          position:
+            label: "Position"
+            help: "State your actual role and indicate internship or part-time status when relevant."
+            placeholder: "例如：前端开发实习生"
+          department:
+            label: "Department / business area"
+            help: "Add the department, product line or business area to provide context."
+            placeholder: "例如：研发部 · 企业服务产品"
+          start_month:
+            label: "Start month"
+            help: "Enter the start year and month."
+            placeholder: "例如：2025-03"
+          end_month:
+            label: "End month"
+            help: "Enter the end or expected completion year and month. Leave blank and select ongoing if still active."
+            placeholder: "例如：2025-08"
+          ongoing:
+            label: "Ongoing"
+            help: "Select if currently ongoing. Clear the end month to show “present”."
+            placeholder: ""
+          details:
+            label: "Responsibilities and achievements"
+            help: "Use one point per line: your task, approach and actual result. Include factual metrics when available."
+            placeholder: "负责……，使用……完成……\n参与……，取得……成果"
+        projects:
+          name:
+            label: "Project / research title"
+            help: "Name this entry when you fill in any details; remove completely empty entries."
+            placeholder: "例如：校园活动管理系统"
+          role:
+            label: "Your role"
+            help: "Describe your actual role, distinguishing individual work, leadership and team membership."
+            placeholder: "例如：前端开发 / 项目负责人"
+          start_month:
+            label: "Start month"
+            help: "Enter the start year and month."
+            placeholder: "例如：2024-10"
+          end_month:
+            label: "End month"
+            help: "Enter the end or expected completion year and month. Leave blank and select ongoing if still active."
+            placeholder: "例如：2025-02"
+          ongoing:
+            label: "Ongoing"
+            help: "Select if currently ongoing. Clear the end month to show “present”."
+            placeholder: ""
+          technology:
+            label: "Technology / methods"
+            help: "List technologies, tools or research methods you actually used."
+            placeholder: "例如：Vue、Python、用户访谈"
+          link:
+            label: "Project / publication link"
+            help: "Use a full accessible http:// or https:// link to a project, repository or publication."
+            placeholder: "https://example.com/project"
+          details:
+            label: "Responsibilities and achievements"
+            help: "Use one point per line: your task, approach and actual result. Include factual metrics when available."
+            placeholder: "项目用于……\n我负责……，完成……"
+        activities:
+          name:
+            label: "Organization / activity"
+            help: "Name this entry when you fill in any details; remove completely empty entries."
+            placeholder: "例如：计算机协会 / 校园开放日"
+          role:
+            label: "Your role"
+            help: "Describe your actual role, distinguishing individual work, leadership and team membership."
+            placeholder: "例如：活动负责人 / 志愿者"
+          start_month:
+            label: "Start month"
+            help: "Enter the start year and month."
+            placeholder: "例如：2023-09"
+          end_month:
+            label: "End month"
+            help: "Enter the end or expected completion year and month. Leave blank and select ongoing if still active."
+            placeholder: "例如：2024-06"
+          ongoing:
+            label: "Ongoing"
+            help: "Select if currently ongoing. Clear the end month to show “present”."
+            placeholder: ""
+          details:
+            label: "Responsibilities and achievements"
+            help: "Use one point per line: your task, approach and actual result. Include factual metrics when available."
+            placeholder: "组织……活动，负责……\n协助……，完成……"
+        skills:
+          name:
+            label: "Name"
+            help: "Name this entry when you fill in any details; remove completely empty entries."
+            placeholder: "例如：Python / IELTS / 教师资格证"
+          level:
+            label: "Level"
+            help: "List your actual level relevant to the target role. Use one point per line."
+            placeholder: "例如：可独立进行数据清洗 / IELTS 7.0"
+          date:
+            label: "Award month"
+            help: "Enter the year and month the award was received."
+            placeholder: "例如：2025-05"
+          issuer:
+            label: "Awarding organization"
+            help: "Name the awarding organization."
+            placeholder: "例如：教育部教育考试院"
+          description:
+            label: "Award details"
+            help: "Describe the award scope, winning work or your individual contribution accurately."
+            placeholder: "在……项目中用于……\n有效期至……"
+        honors:
+          name:
+            label: "Award name"
+            help: "Name this entry when you fill in any details; remove completely empty entries."
+            placeholder: "例如：某某竞赛省级一等奖"
+          date:
+            label: "Award month"
+            help: "Enter the year and month the award was received."
+            placeholder: "例如：2024-11"
+          issuer:
+            label: "Awarding organization"
+            help: "Name the awarding organization."
+            placeholder: "例如：某某大学 / 竞赛组委会"
+          description:
+            label: "Award details"
+            help: "Describe the award scope, winning work or your individual contribution accurately."
+            placeholder: "获奖作品为……，本人负责……"
+        summary:
+          text:
+            label: "Profile"
+            help: "Write 2–4 concise sentences about relevant abilities and experience. Avoid vague personality claims. Your original wording is retained."
+            placeholder: "具备……经验，曾完成……，能够……"

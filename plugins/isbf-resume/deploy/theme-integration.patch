@@ -1,0 +1,133 @@
+--- a/javascripts/discourse/components/isbf-v2-shell.gjs
++++ b/javascripts/discourse/components/isbf-v2-shell.gjs
+@@ -51,7 +51,7 @@
+       this.path
+         .split("#")[0]
+         .match(
+-          /^\/(about|faq|guidelines|tos|privacy|rules|conduct)\/?$/,
++          /^\/(about|faq|guidelines|tos|privacy|rules|conduct)\/?$/
+         )?.[1] ?? null
+     );
+   }
+@@ -81,6 +81,12 @@
+     if (path === "/isbf/calendar") {
+       return "calendar";
+     }
++    if (
++      path === "/isbf/workbench/resume" &&
++      this.siteSettings.isbf_resume_enabled
++    ) {
++      return "resume";
++    }
+     if (path === "/isbf/workbench") {
+       return "workbench";
+     }
+@@ -142,8 +148,8 @@
+   get composePrompt() {
+     return i18n(
+       themePrefix(
+-        this.isFeedback ? "isbf_v2.feedback_prompt" : "isbf_v2.compose_prompt",
+-      ),
++        this.isFeedback ? "isbf_v2.feedback_prompt" : "isbf_v2.compose_prompt"
++      )
+     );
+   }
+ 
+@@ -151,7 +157,7 @@
+     return Boolean(
+       this.currentUser?.admin ||
+       (this.currentUser?.moderator &&
+-        this.siteSettings.moderators_manage_categories),
++        this.siteSettings.moderators_manage_categories)
+     );
+   }
+ 
+@@ -181,12 +187,17 @@
+   get isWorkbench() {
+     return [
+       "workbench",
++      "resume",
+       "learning",
+       "library",
+       "alumni",
+       "marketplace",
+       "teamup",
+     ].includes(this.pageKind);
++  }
++
++  get isWorkbenchHome() {
++    return this.pageKind === "workbench";
+   }
+ 
+   get isAlumni() {
+@@ -222,6 +233,7 @@
+         "notifications",
+         "teamup",
+         "workbench",
++        "resume",
+       ].includes(this.pageKind)
+     );
+   }
+@@ -258,7 +270,7 @@
+       return i18n(
+         this.informationPage === "about"
+           ? "about.simple_title"
+-          : this.informationPage,
++          : this.informationPage
+       );
+     }
+ 
+@@ -318,7 +330,7 @@
+     }
+     return Boolean(
+       this.currentUser?.academy_official_member &&
+-      this.officialCategory?.canCreateTopic,
++      this.officialCategory?.canCreateTopic
+     );
+   }
+ 
+@@ -327,7 +339,7 @@
+       this.officialConfig?.category_id ??
+       Number(settings.official_path.split("/")[3]);
+     return this.site.categories?.find(
+-      (item) => Number(item.id) === Number(categoryId),
++      (item) => Number(item.id) === Number(categoryId)
+     );
+   }
+ 
+@@ -568,7 +580,7 @@
+         {{else if this.isTeamup}}<ISBFTeamup />
+         {{else if this.isLibrary}}<ISBFLibrary />
+         {{else if this.isLearning}}<ISBFLearning />
+-        {{else if this.isWorkbench}}<ISBFV2Workbench />{{/if}}
++        {{else if this.isWorkbenchHome}}<ISBFV2Workbench />{{/if}}
+ 
+         {{#if this.showMobileCompose}}
+           <a
+--- a/javascripts/discourse/components/isbf-v2-workbench.gjs
++++ b/javascripts/discourse/components/isbf-v2-workbench.gjs
+@@ -24,10 +24,11 @@
+ 
+ export default class ISBFV2Workbench extends Component {
+   @service site;
++  @service siteSettings;
+ 
+   get cards() {
+     return CARDS.filter(
+-      (card) => card.key !== "alumni" || alumniConfig(this.site),
++      (card) => card.key !== "alumni" || alumniConfig(this.site)
+     ).map((card) => ({
+       ...card,
+       label: i18n(themePrefix(`isbf_v2.workbench_${card.key}`)),
+@@ -42,7 +43,10 @@
+                 ? "/isbf/teamup"
+                 : card.key === "alumni"
+                   ? "/isbf/alumni"
+-                  : null,
++                  : card.key === "resume" &&
++                      this.siteSettings.isbf_resume_enabled
++                    ? "/isbf/workbench/resume"
++                    : null,
+     }));
+   }
+ 
