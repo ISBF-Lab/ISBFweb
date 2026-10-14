@@ -27,8 +27,8 @@ RSpec.describe DiscourseAcademyRoles::ModeratorPermissions do
   end
 
   describe ".for" do
-    it "starts with all twenty capabilities disabled and retains the persisted role" do
-      expect(described_class.for(moderator).values).to eq([false] * 20)
+    it "starts with all 21 capabilities disabled and retains the persisted role" do
+      expect(described_class.for(moderator).values).to eq([false] * 21)
       expect(moderator.reload[:moderator]).to eq(true)
       expect(moderator.groups.pluck(:id)).to include(
         Group::AUTO_GROUPS[:moderators],
@@ -61,12 +61,12 @@ RSpec.describe DiscourseAcademyRoles::ModeratorPermissions do
 
     it "keeps developers unrestricted and never grants capabilities to ordinary or anonymous users" do
       developer.update!(moderator: true)
-      expect(described_class.for(developer).values).to eq([true] * 20)
+      expect(described_class.for(developer).values).to eq([true] * 21)
       described_class::SETTINGS.values.each do |setting|
         SiteSetting.public_send("#{setting}=", true)
       end
-      expect(described_class.for(member).values).to eq([false] * 20)
-      expect(described_class.for(nil).values).to eq([false] * 20)
+      expect(described_class.for(member).values).to eq([false] * 21)
+      expect(described_class.for(nil).values).to eq([false] * 21)
       expect(moderator.guardian.can_invite_to_forum?).to eq(false)
       expect(moderator.guardian.can_administer_user?(member)).to eq(false)
     end

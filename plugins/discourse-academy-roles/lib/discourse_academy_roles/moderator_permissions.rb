@@ -20,6 +20,7 @@ module DiscourseAcademyRoles
       publish_activities: :academy_moderators_publish_activities,
       publish_official: :academy_moderators_publish_official,
       review_resources: :academy_moderators_review_resources,
+      review_resumes: :academy_moderators_review_resumes,
       manage_resources: :academy_moderators_manage_resources,
       view_emails: :moderators_view_emails,
       trace_anonymous: :academy_moderators_trace_anonymous,
