@@ -6,6 +6,7 @@ body:has(.isbf-v2-shell.isbf-v2-shell--resume) #main-outlet {
 }
 
 .isbf-resume {
+  --isbf-resume-content-gutter: 26px;
   --d-input-bg-color: var(--isbf-v2-surface, var(--secondary));
   --d-input-border: 1px solid var(--isbf-v2-muted, var(--primary-medium));
   --d-input-text-color: var(--isbf-v2-text, var(--primary));
@@ -16,13 +17,13 @@ body:has(.isbf-v2-shell.isbf-v2-shell--resume) #main-outlet {
   --form-kit-gutter-y: var(--isbf-v2-space-6, 24px);
   box-sizing: border-box;
   min-width: 0;
-  padding: 92px 26px 80px;
+  padding: 0 0 80px;
   color: var(--isbf-v2-text, var(--primary));
   font-family: var(--isbf-v2-font-family, var(--font-family));
 
   h1 {
-    margin-block: var(--isbf-v2-space-3, 12px);
-    font-size: clamp(28px, 3vw, 34px);
+    margin: 0;
+    font-size: var(--isbf-v2-font-xl, 20px);
     line-height: 1.25;
   }
 
@@ -131,12 +132,32 @@ body:has(.isbf-v2-shell.isbf-v2-shell--resume) #main-outlet {
     }
   }
 
+  &__header {
+    padding-block: var(--isbf-v2-space-4, 16px);
+    border-bottom: 1px solid var(--isbf-v2-border, var(--primary-low));
+  }
+
   &__back {
-    font-size: var(--isbf-v2-font-sm, 15px);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: var(--isbf-v2-space-2, 8px);
+    width: fit-content;
+    min-height: 44px;
+    padding-inline: var(--isbf-v2-space-3, 12px);
+    color: var(--isbf-v2-text, var(--primary));
+    white-space: nowrap;
+
+    .d-icon {
+      flex: 0 0 auto;
+      width: 20px;
+      height: 20px;
+    }
   }
 
   &__intro {
-    margin-block: 0 var(--isbf-v2-space-6, 24px);
+    margin-block: var(--isbf-v2-space-4, 16px) var(--isbf-v2-space-6, 24px);
+    margin-inline: var(--isbf-resume-content-gutter);
     font-size: var(--isbf-v2-font-sm, 15px);
   }
 
@@ -145,6 +166,7 @@ body:has(.isbf-v2-shell.isbf-v2-shell--resume) #main-outlet {
     grid-template-columns: minmax(0, 560fr) minmax(0, 284fr);
     gap: var(--isbf-v2-space-6, 24px);
     align-items: start;
+    margin-inline: var(--isbf-resume-content-gutter);
   }
 
   &__form {
@@ -451,7 +473,26 @@ body:has(.isbf-v2-shell.isbf-v2-shell--resume) #main-outlet {
 
 @media (width <= 600px) {
   .isbf-resume {
-    padding: 82px 16px calc(90px + env(safe-area-inset-bottom));
+    --isbf-resume-content-gutter: 16px;
+    padding-bottom: calc(90px + env(safe-area-inset-bottom));
+
+    &__header {
+      padding-block: var(--isbf-v2-space-2, 8px);
+    }
+
+    &__back {
+      gap: var(--isbf-v2-space-1, 4px);
+      padding-inline: var(--isbf-v2-space-1, 4px);
+
+      .d-icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      h1 {
+        font-size: var(--isbf-v2-font-md, 16px);
+      }
+    }
 
     &__fields {
       grid-template-columns: minmax(0, 1fr);

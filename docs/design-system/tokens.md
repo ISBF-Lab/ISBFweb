@@ -247,3 +247,10 @@ D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用
 [source map](frontend-implementation-source-map-20261012.json)，检查结果见
 [验证记录](frontend-verification-20261012.json)。新版离线入口为
 [V2预览](reviews/frontend-20261012-v2/index.html)，已移除用户卡示例；旧包只作历史记录。
+
+
+## 2026-10-14 简历紧凑页头
+
+桌面纵向 space-4、返回横向 space-3、gap space-2、20px 图标/font-xl；≤600px 纵向 space-2、返回横向及 gap space-1、18px 图标/font-md。沿用站点字体、text/surface/border/focus-ring、1px 底部分隔线和最小 44px 点击高度。局部 content-gutter 保留桌面 26px/手机 16px 内容间距，无新增全站 token。
+
+[局部 token 映射](../../plugins/isbf-resume/docs/design-system/resume-approval.md#2026-10-14-简历紧凑页头设计确认)保存用户批准范围、来源版本和实现边界。

@@ -51,3 +51,17 @@ FormKit 当前草稿通过既有 `exportPayload` 契约交给 `ResumeDraftPaper`
 2026-10-12，七个缺失的主题 SCSS 导入依赖已从用户提供的已验收参考包补齐到独立、非默认的预览主题 ID 2，逐份 SHA-256 与该包的 `manifest.json` 匹配。参考版本为 2026-10-10 主题 4 快照，Core 基线 `c0f4739d143a4efbb4e7f19dafadcd56a5302a58`。这些 partial 与当前生产版本相等尚未核验；用途限于本次隔离预览补齐原有样式依赖，设计确认范围仍为 R01–R06。
 
 新鲜运行版 `common.scss` 和现有同伴更新保留，本次简历规则采用增量接入。临时样式指纹仅在独立容器备份后由 Core 原生 API 重新生成，没有 Core 业务源码或正式环境写入。预览主题字段的样式错误已清空，默认主题保持 `-1`。桌面手机、明暗、阶段宽度、真实文件下载及多页图片验证已完成；手机主区仅增加父容器宽度约束，不引入新视觉 token。实际证据见 [真实页面记录](../BROWSER_QA.md)。用户网页验收仍待进行；资源恢复与验证边界见 [服务器架构记录](../SERVER_ARCHITECTURE.md)。
+
+## 2026-10-14 简历紧凑页头设计确认
+
+用户已批准[桌面预览图](resume-header-desktop-preview.png)，并要求按该方案实现。本次仅确认简历页头设计；按用户要求不增加浏览器或真机检查，实际页面的桌面/手机、明暗、键盘及返回行为尚未复验。既有 R01–R06 和后续审批继续有效；本图是设计证据，不是运行页面截图或整页验收。
+
+实现基线为 ISBFweb `32c32fca205579be24741b33ee32c4b2d18ea99d`，分支 `codex/resume-header`。Course（课程资源）参考的已发布来源为 ISBF-UI `f72a86ca7435a489471c0fc53be2f2fc7e84ce83`，文件为 `stylesheets/learning-resources.scss`（`.isbf-learning__header`、`.isbf-learning__back` 及手机覆盖）和 `javascripts/discourse/components/isbf-resource-page.gjs`。实际读取工作目录为 ISBF-UI-solved-poll，HEAD `cc1eb7efb47b6229f1c6df5b1f81c4f60dce1496`；两文件 SHA-256 分别为 `797861cf64e9c0f1aebedb6fa719cb0e2b28aff0656c33c5caf957cab3878348`、`ebe9a428a5605a537e986b8cdf81f5c8e13b9bb8754357ba3c9f18291fecbddd`。两文件已与上述已发布提交比较，无差异。工作目录 HEAD 不证明线上版本，本次不扩大课程页其他区域的批准范围。
+
+批准以正常文档流中的单行“← 简历”替换独立返回链接和大标题，取消桌面 92px / 手机 82px 顶部留白，不使用 sticky/fixed。返回仍为 `/isbf/workbench`，保留 h1、链接语义、可见焦点和至少 44px 点击高度。现有说明、阶段 tabs、表单及预览自然上移；填写、确认生成、草稿、下载及预览行为沿用已有规则。
+
+页头局部 token 映射与 Course 一致：桌面纵向 space-4（16px）、返回横向 space-3（12px）、gap space-2（8px）、20px 箭头和 font-xl（20px）；width <= 600px 时纵向 space-2（8px）、返回横向及 gap space-1（4px）、18px 箭头和 font-md（16px）。标题 margin 为 0、字体继承站点字体；沿用 `--isbf-v2-text`、`--isbf-v2-surface`、`--isbf-v2-focus-ring`，底部分隔线为 `1px solid var(--isbf-v2-border)`。不新增全站 token，不引入课程目录列宽、搜索框或滚动容器。
+
+插件使用 `assets/javascripts/discourse/components/resume-editor.gjs` 中的局部 header/链接/图标及 `assets/stylesheets/isbf-resume.scss`。主容器顶部和横向 padding 清零，使分隔线横贯主内容宽度；局部 `--isbf-resume-content-gutter` 保留原表单左右间距（桌面 26px、手机 16px），应用于说明和布局，说明上距为 space-4。原底部间距保持桌面 80px、手机 90px 加 safe-area。跨文档索引见 [UI 状态](../../../../docs/design-system/ui-status.md)、[tokens](../../../../docs/design-system/tokens.md)、[组件规范](../../../../docs/design-system/components.md) 和 [Reference Map](../../../../docs/design-system/reference-map.md)。
+
+预览源文件为 `exec-cf6039d2-4f0f-434e-ac7e-a3bea6fc39c5.png`，保存副本 SHA-256：`79fe077917d34a3024161e5fef01a648aafc3f95c3536fe9364433326bb341bf`。

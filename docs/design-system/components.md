@@ -352,3 +352,10 @@ D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用
 [source map](frontend-implementation-source-map-20261012.json)，检查结果见
 [验证记录](frontend-verification-20261012.json)。新版离线入口为
 [V2预览](reviews/frontend-20261012-v2/index.html)，已移除用户卡示例；旧包只作历史记录。
+
+
+## 2026-10-14 简历紧凑页头
+
+插件局部 header 使用原生返回链接和图标，单行“← 简历”，保留 h1、可见焦点、至少 44px 点击高度及 /isbf/workbench 返回目标。正常文档流、不吸顶，说明/tabs/表单/预览自然上移；只复用 Course 页头字体、间距和分隔线，已有简历交互不变。实际页面验证待完成。
+
+[局部组件规则](../../plugins/isbf-resume/docs/design-system/resume-approval.md#2026-10-14-简历紧凑页头设计确认)保存用户批准范围、来源版本和实现边界。
