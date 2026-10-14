@@ -10,6 +10,7 @@ import { ajax } from "discourse/lib/ajax";
 import getURL from "discourse/lib/get-url";
 import DButton from "discourse/ui-kit/d-button";
 import DTabs from "discourse/ui-kit/d-tabs";
+import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import {
   emptyResume,
@@ -323,10 +324,16 @@ export default class ResumeEditor extends Component {
 
   <template>
     <main class="isbf-resume" data-stage={{this.activeStage}}>
-      <a class="isbf-resume__back" href={{getURL "/isbf/workbench"}}>{{i18n
-          "isbf_resume.back"
-        }}</a>
-      <h1>{{i18n "isbf_resume.title"}}</h1>
+      <header class="isbf-resume__header">
+        <a
+          aria-label={{i18n "isbf_resume.back"}}
+          class="isbf-resume__back"
+          href={{getURL "/isbf/workbench"}}
+        >
+          {{dIcon "arrow-left"}}
+          <h1>{{i18n "isbf_resume.title"}}</h1>
+        </a>
+      </header>
       <p class="isbf-resume__intro">{{i18n "isbf_resume.intro"}}</p>
       <div class="isbf-resume__layout">
         <Form
