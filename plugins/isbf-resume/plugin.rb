@@ -16,6 +16,7 @@ module ::IsbfResume
 end
 
 require_relative "lib/isbf_resume/generator"
+require_relative "lib/isbf_resume/shared_pdf"
 require_relative "lib/isbf_resume/engine"
 register_asset "stylesheets/isbf-resume.scss"
 register_asset "stylesheets/isbf-resume-sharing.scss"
@@ -39,7 +40,6 @@ after_initialize do
   require_relative "app/serializers/isbf_resume/export_serializer"
   require_relative "lib/isbf_resume/guardian_extension"
 
-  require_relative "lib/isbf_resume/shared_pdf"
   require_relative "app/models/isbf_resume/shared_resume"
   require_relative "app/models/isbf_resume/share_review"
   require_relative "app/services/isbf_resume/shared_resume/submit"
