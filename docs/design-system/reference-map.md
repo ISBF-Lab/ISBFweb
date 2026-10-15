@@ -83,3 +83,10 @@ D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用
 [source map](frontend-implementation-source-map-20261012.json)，检查结果见
 [验证记录](frontend-verification-20261012.json)。新版离线入口为
 [V2预览](reviews/frontend-20261012-v2/index.html)，已移除用户卡示例；旧包只作历史记录。
+
+
+## 2026-10-14 简历紧凑页头
+
+Course 的 .isbf-learning__header / .isbf-learning__back 及手机覆盖 → 简历插件 resume-editor.gjs / isbf-resume.scss 局部页头。已发布参考为 f72a86ca7435a489471c0fc53be2f2fc7e84ce83；下述记录保存实际读取版本、摘要、预览和 token 映射。只批准简历页头组合，不扩大课程页其他区域的批准范围；本轮未运行浏览器或真机验证。
+
+[参考映射](../../plugins/isbf-resume/docs/design-system/resume-approval.md#2026-10-14-简历紧凑页头设计确认)保存用户批准范围、来源版本和实现边界。

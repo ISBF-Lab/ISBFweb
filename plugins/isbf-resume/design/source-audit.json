@@ -1,0 +1,97 @@
+{
+  "snapshotStartedAt": "2026-10-11T19:52:38.344997+08:00",
+  "mode": "read-only",
+  "referenceArchiveSHA256": "6999688e5ad99d774440a1a8672158c0c041fac1963228dc888b2f8a98006631",
+  "referenceArchiveChecksumCount": 265,
+  "serverGuides": {
+    "AGENTS.md": "fb40c26d29baef74bb0c98f86783e020f98aa67e5fe0157a3fe0894307bef065",
+    "docs/design-system/ui-status.md": "4b0ee29b2cc366b1c50f240b7ee4ac001d5ab417baaebd91f22df91503bd9257",
+    "docs/design-system/tokens.md": "96324143724fe0f1a480ab654e1d1af23c482d247d28a18f08acca239e9986f5",
+    "docs/design-system/components.md": "0fb7e52fc507e65c4a2d64bac0769eaad4b7d716e65a750db58e83835bdbb0e7",
+    "docs/design-system/reference-map.md": "1b9f3d23cd83aea37c1def00b4c6b0203118b02e0a4b35123dd58add528f71bf",
+    "docs/design-system/references/README.md": "04c235781f6e27bdf61a84715a3c7c26ce977e653099daa06e14579d14e622f5",
+    "docs/design-system/references/manifest.json": "71ffc20d9c1055c2d9051a4dea68b2fda927e4f92fe3783afa793c908c9603f0",
+    ".skills/discourse-frontend-conventions/SKILL.md": "99ef0cead77e6736e6bbb05577cbafb8654210585ebff709f87c9254f6589b34",
+    ".skills/discourse-writing-html-css/SKILL.md": "8e3b28f9a539e8df7e1bbac492ee5863a038dc6dd4ff42bbe6847b24d3f5ec2e",
+    ".skills/discourse-content-localization/SKILL.md": "c9ffa5c39778d630e5f15f577037d8124f3205c39c111409ff15f213060ee498"
+  },
+  "coreHeadAbbreviation": "d91ef8456b9",
+  "coreAndThemeHavePreexistingUncommittedChanges": true,
+  "theme": {
+    "id": 4,
+    "name": "ISBF Campus Feed",
+    "color_scheme_id": 21,
+    "component": false,
+    "user_selectable": true
+  },
+  "liveThemeFields": [
+    {
+      "id": 203,
+      "name": "zh_CN",
+      "target_id": 4,
+      "type_id": 5,
+      "sha256": "3f1b7b5092f22a6ad1410c5e0a3e10bf35ae718e15a6509c9c826a4fb3c844a8"
+    },
+    {
+      "id": 202,
+      "name": "en",
+      "target_id": 4,
+      "type_id": 5,
+      "sha256": "228a27aa3132b09025f76187bc8e07a2d1b4c87f8d486960c67c2790c6331e33"
+    },
+    {
+      "id": 197,
+      "name": "scss",
+      "target_id": 0,
+      "type_id": 1,
+      "sha256": "1ca9466950adfdc3c97134b4f1dd3239ed4a26ff43dbaf40102f6508245ad037"
+    },
+    {
+      "id": 200,
+      "name": "discourse/components/isbf-v2-shell.gjs",
+      "target_id": 6,
+      "type_id": 6,
+      "sha256": "60e7539c9ee2421948a8d9a1fd770dab008e68395166ffcca66b1f080d29012c"
+    },
+    {
+      "id": 201,
+      "name": "discourse/components/isbf-v2-side-nav.gjs",
+      "target_id": 6,
+      "type_id": 6,
+      "sha256": "b044b36cab119f55da3cd1e3447bdb08740d13b972230bef75032d6681b6c8b4"
+    },
+    {
+      "id": 204,
+      "name": "yaml",
+      "target_id": 3,
+      "type_id": 5,
+      "sha256": "c9b83da12b3892b316e50589716de453dd34770c5cd9a7ab8c6f878d8aeeb258"
+    },
+    {
+      "id": 207,
+      "name": "discourse/components/isbf-v2-workbench.gjs",
+      "target_id": 6,
+      "type_id": 6,
+      "sha256": "cafa3ca03b88038b8ce95ba31a83356c6bb5ca7df481f59816d2ba1d526ba74b"
+    },
+    {
+      "id": 198,
+      "name": "discourse/api-initializers/isbf-campus-feed.gjs",
+      "target_id": 6,
+      "type_id": 6,
+      "sha256": "b56b544716d11b12a99eafa4d3604f89dac648511a10182cd589e4f631dcf598"
+    }
+  ],
+  "runtime": {
+    "ruby": "3.4.10",
+    "rails": "8.1.3.1",
+    "node": "22.23.2",
+    "database": "PostgreSQL"
+  },
+  "declaredSourceDependencies": {
+    "ember-source": "~7.2.0",
+    "@glimmer/component": "^2.1.1",
+    "packageManager": "pnpm@10.34.5"
+  },
+  "deploymentBaseline": false
+}

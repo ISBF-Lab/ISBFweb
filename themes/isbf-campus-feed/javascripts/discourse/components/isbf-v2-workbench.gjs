@@ -22,6 +22,7 @@ const CARDS = [
 
 export default class ISBFV2Workbench extends Component {
   @service site;
+  @service siteSettings;
 
   get cards() {
     return CARDS.filter(
@@ -36,7 +37,9 @@ export default class ISBFV2Workbench extends Component {
             ? "/isbf/marketplace"
             : card.key === "alumni"
               ? "/isbf/alumni"
-              : null,
+              : card.key === "resume" && this.siteSettings.isbf_resume_enabled
+                ? "/isbf/workbench/resume"
+                : null,
     }));
   }
 

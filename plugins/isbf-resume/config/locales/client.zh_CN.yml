@@ -1,0 +1,411 @@
+zh_CN:
+  js:
+    isbf_resume:
+      title: "简历"
+      intro: "填写内容，选择模板，生成 DOCX 和 PDF。你的原文将按固定布局排版。"
+      back: "返回工作台"
+      stages: "简历编辑阶段"
+      content: "填写内容"
+      templates: "选择模板"
+      preview: "预览与下载"
+      basic: "基本信息"
+      more: "更多基本信息"
+      optional: "选填"
+      required: "必填"
+      modules: "经历与能力"
+      add: "添加一条"
+      remove: "移除本条"
+      entry: "第 %{count} 条"
+      photo_remove: "移除照片"
+      photo_invalid: "请选择 JPG、PNG 或 WebP，大小不超过 5 MB，像素总量不超过 1600 万。"
+      photo_reading: "正在读取照片…"
+      photo_failed: "照片读取失败，请重新选择。"
+      photo_ready: "照片已选择"
+      generate: "生成 DOCX 和 PDF"
+      generate_english: "生成英文版"
+      confirmation_title: "生成前请确认"
+      english_confirmation_title: "生成英文版前请确认"
+      generation_notice: "isbf-one 不核验内容的准确性与合理性，仅根据您提供的内容生成简历。请自行检查全部填写内容。"
+      frequency_notice: "短时间内无法多次生成，请核对完整后再确认。"
+      english_notice: "请确保填写的内容为英文。isbf-one 不会自动翻译，仅将简历栏目标题切换为英文，填写内容会原样保留。"
+      return_edit: "返回修改"
+      confirm_generate: "确认生成"
+      page_advice: "简历建议控制在一页，同时避免大面积留白。请根据预览调整内容和篇幅。"
+      generating_preview: "正在根据填写内容生成简历，完成后将在此显示实际预览。"
+      generating: "正在生成…"
+      generated: "已生成，共 %{count} 页"
+      failed: "生成失败，请检查内容后重试。"
+      invalid: "请修正标出的内容后重新生成。"
+      missing: "请填写此项。"
+      phone_invalid: "请填写有效的联系电话，海外号码可加区号。"
+      email_invalid: "请填写有效的电子邮箱地址。"
+      sample: "示例预览"
+      example_note: "此处展示虚构内容的模板示例。生成后可查看你的实际 PDF。"
+      preview_page: "生成的简历 PDF，第 %{page} 页，共 %{count} 页"
+      preview_unavailable: "该生成结果没有页面预览。请重新生成，查看 PDF 的逐页预览。"
+      download_docx: "下载 DOCX"
+      download_pdf: "下载 PDF"
+      open_pdf: "打开 PDF 预览"
+      blue_gold: "蓝金"
+      blue_gray: "蓝灰"
+      template_help: "两款模板仅装饰颜色不同，字段、布局和分页规则相同。"
+      selection: "选择简历模板"
+      selected: "已选择"
+      not_generated: "尚未生成"
+      stale: "内容已修改，请重新生成后下载。"
+      expiry: "文件仅限本人下载，有效期为生成后 24 小时。"
+      update: "重新生成"
+      next_template: "下一步：选择模板"
+      next_preview: "下一步：预览与下载"
+      empty_preview: "填写姓名、联系电话和电子邮箱后即可生成。"
+      retained: "本页保留已填写的内容。"
+      field_label: "字段：%{name}"
+      skipped: "空白模块不会出现在简历中。"
+      limit: "本模块最多添加 %{count} 条。"
+      draft_preview: "填写内容预览"
+      draft_preview_note: "预览随填写内容更新；生成后可查看实际 PDF 和分页。"
+      empty_draft_preview: "填写内容后，你的简历会在这里实时显示。未填写的项目不会出现在预览中。"
+      paper:
+        subtitle: "Personal resume"
+        zh:
+          title: "个人简历"
+          present: "至今"
+          expected: "（预计）"
+          sections:
+            basic: "基本信息"
+            education: "教育背景"
+            experience: "工作与实习经历"
+            projects: "项目与科研经历"
+            activities: "校园与实践经历"
+            skills: "技能与证书"
+            honors: "荣誉与奖项"
+            summary: "自我评价"
+          fields:
+            name: "姓名"
+            phone: "联系电话"
+            email: "电子邮箱"
+            job_intent: "求职意向"
+            current_city: "现居城市"
+            preferred_city: "期望城市"
+            birth_month: "出生年月"
+            highest_education: "最高学历与院校"
+            political_status: "政治面貌"
+            native_place: "籍贯"
+            ethnicity: "民族"
+            portfolio_links: "技术社区 / 作品主页"
+            linkedin: "LinkedIn 个人主页"
+            work_permit: "签证 / 许可状态"
+            height: "身高"
+            weight: "体重"
+            vision: "视力"
+            language_grade: "外语等级"
+          leads:
+            courses: "相关课程："
+            department: "部门 / 业务方向："
+            technology: "技术 / 方法："
+            link: "链接："
+            issuer: "机构："
+        en:
+          title: "Resume"
+          present: "Present"
+          expected: " (expected)"
+          sections:
+            basic: "Personal information"
+            education: "Education"
+            experience: "Work and internship experience"
+            projects: "Projects and research"
+            activities: "Campus and volunteer experience"
+            skills: "Skills and certifications"
+            honors: "Awards and honors"
+            summary: "Profile"
+          fields:
+            name: "Name"
+            phone: "Phone"
+            email: "Email"
+            job_intent: "Target role"
+            current_city: "Current location"
+            preferred_city: "Preferred location"
+            birth_month: "Date of birth"
+            highest_education: "Education"
+            political_status: "Political affiliation"
+            native_place: "Place of origin"
+            ethnicity: "Ethnicity"
+            portfolio_links: "Portfolio / community"
+            linkedin: "LinkedIn"
+            work_permit: "Work authorization"
+            height: "Height"
+            weight: "Weight"
+            vision: "Vision"
+            language_grade: "Language proficiency"
+          leads:
+            courses: "Relevant coursework: "
+            department: "Department / business area: "
+            technology: "Technologies / methods: "
+            link: "Link: "
+            issuer: "Institution: "
+      sections:
+        basic:
+          label: "基本信息"
+          description: "姓名、联系电话和电子邮箱必填；其余信息按应聘岗位需要填写，未填写的项目不会出现在简历中。"
+        education:
+          label: "教育背景"
+          description: "按最近经历在前的顺序填写，可添加多段教育经历。整个模块选填；填写一条经历时需注明学校。"
+        experience:
+          label: "工作与实习经历"
+          description: "正式工作和实习放在同一模块，按最近经历在前的顺序填写。没有相关经历时可跳过。"
+        projects:
+          label: "项目与科研经历"
+          description: "可填写课程项目、个人作品、团队项目或科研课题。优先选择与目标岗位相关的经历。"
+        activities:
+          label: "校园与实践经历"
+          description: "可填写学生组织、社团、志愿服务、社会实践或活动运营经历。没有相关内容时可跳过。"
+        skills:
+          label: "技能与证书"
+          description: "可填写专业技能、语言能力和资格证书，优先填写与目标岗位相关且能够说明水平的内容。"
+        honors:
+          label: "荣誉与奖项"
+          description: "可填写竞赛奖项、奖学金或与岗位相关的荣誉。没有相关内容时可跳过。"
+        summary:
+          label: "自我评价"
+          description: "选填。用简短文字补充与目标岗位相关的能力或经历，已有内容充分时可以省略。"
+      fields:
+        basic:
+          name:
+            label: "姓名"
+            help: "填写投递简历使用的真实姓名；海外申请可按需要填写英文姓名。"
+            placeholder: "例如：张明"
+          phone:
+            label: "联系电话"
+            help: "填写能联系到你的常用号码。投递海外岗位建议加区号。"
+            placeholder: "例如：+86 138 0000 0000"
+          email:
+            label: "电子邮箱"
+            help: "推荐学校邮箱/专业稳定的商业邮箱；确认拼写正确，并能正常收信。"
+            placeholder: "例如：name@example.com"
+          job_intent:
+            label: "求职意向"
+            help: "明确具体岗位，避免写“意向广泛”；可填写岗位名称及方向。"
+            placeholder: "例如：前端开发工程师"
+          current_city:
+            label: "现居城市"
+            help: "填写目前居住的城市；跨国投递可加国家或地区，无需填写详细住址。"
+            placeholder: "例如：北京 / Singapore"
+          preferred_city:
+            label: "期望城市"
+            help: "填写希望工作的城市；多个城市可用顿号分隔，接受远程工作时也可注明。"
+            placeholder: "例如：北京、上海、远程"
+          photo:
+            label: "证件照"
+            help: "按岗位及投递要求上传清晰的本人证件照；支持 JPG、PNG、WebP，最大 5 MB，不上传时不保留照片空位。"
+            placeholder: ""
+          birth_month:
+            label: "出生年月"
+            help: "按岗位需要填写出生年份和月份，不需要填写具体日期。"
+            placeholder: "例如：2002-08"
+          highest_education:
+            label: "最高学历与院校"
+            help: "建议按“院校·专业·学历”填写；详细教育经历可在下方单独补充。"
+            placeholder: "例如：清华大学·计算机科学与技术·本科"
+          political_status:
+            label: "政治面貌"
+            help: "按实际情况填写，如中共党员、中共预备党员、共青团员或群众等。"
+            placeholder: "例如：共青团员"
+          native_place:
+            label: "籍贯"
+            help: "通常精确到省市即可，按岗位需要填写。"
+            placeholder: "例如：浙江杭州"
+          ethnicity:
+            label: "民族"
+            help: "按实际情况填写民族名称；没有投递要求时可留空。"
+            placeholder: "例如：汉族"
+          portfolio_links:
+            label: "技术社区 / 作品主页"
+            help: "适用于互联网、技术、设计岗位。填写 GitHub、个人博客、Behance、作品集网盘或直链；每行一条，可注明平台名称。"
+            placeholder: "GitHub：https://github.com/your-name\n作品集：https://example.com/portfolio"
+          linkedin:
+            label: "LinkedIn 个人主页"
+            help: "外企或海外申请可填写个人职业社交档案的完整直链；请填写个人主页地址。"
+            placeholder: "https://www.linkedin.com/in/your-name/"
+          work_permit:
+            label: "签证 / 许可状态"
+            help: "涉及跨国应聘时，填写当前实际工作许可类型或雇主担保需求，如 OPT、Green Card、无需雇主担保等。"
+            placeholder: "例如：OPT / 无需雇主担保"
+          height:
+            label: "身高"
+            help: "按岗位要求填写身高并注明单位，没有相关要求时可留空。"
+            placeholder: "例如：175 cm"
+          weight:
+            label: "体重"
+            help: "按岗位要求填写体重并注明单位，没有相关要求时可留空。"
+            placeholder: "例如：65 kg"
+          vision:
+            label: "视力"
+            help: "仅在岗位有要求时填写；注明左右眼，以及裸眼或矫正视力，按实际资料填写。"
+            placeholder: "例如：矫正视力，左眼 1.0、右眼 1.0"
+          language_grade:
+            label: "外语等级"
+            help: "填写已经取得的外语等级或考试成绩，如托业、专八；更详细的语言能力可在技能与证书中补充。"
+            placeholder: "例如：TOEIC 900 / 英语专业八级"
+        education:
+          school:
+            label: "学校名称"
+            help: "填写学校全称或通用名称；交换、联合培养经历可分别添加。"
+            placeholder: "例如：清华大学"
+          major:
+            label: "专业"
+            help: "填写专业或研究方向；辅修可直接补充在本栏。"
+            placeholder: "例如：计算机科学与技术"
+          degree:
+            label: "学历 / 学位"
+            help: "填写已取得或正在攻读的学历、学位；未毕业时可注明在读。"
+            placeholder: "例如：本科 / 硕士在读"
+          start_month:
+            label: "开始年月"
+            help: "填写入学年月，只需精确到月。"
+            placeholder: "例如：2022-09"
+          end_month:
+            label: "结束 / 预计毕业年月"
+            help: "填写毕业或预计毕业年月；在读且尚未确定毕业时间时可留空，并勾选下方“在读”。"
+            placeholder: "例如：2026-06"
+          ongoing:
+            label: "在读"
+            help: "目前仍在就读时勾选；未填写结束年月时，时间栏会显示“至今”。"
+            placeholder: ""
+          courses:
+            label: "相关课程"
+            help: "选择与目标岗位相关的课程，用顿号或逗号分隔；不必罗列全部课程。"
+            placeholder: "例如：数据结构、数据库系统、软件工程"
+          achievements:
+            label: "成绩与教育补充"
+            help: "可填写 GPA（注明满分）、排名、交换经历或毕业论文方向；按实际资料填写，每行一个要点。"
+            placeholder: "GPA：3.8/4.0\n毕业论文：……"
+        experience:
+          company:
+            label: "单位名称"
+            help: "填写公司或机构名称；填写了经历内容时，需要注明所属单位。"
+            placeholder: "例如：某某科技有限公司"
+          position:
+            label: "岗位名称"
+            help: "填写实际岗位名称，可注明实习生、兼职等身份。"
+            placeholder: "例如：前端开发实习生"
+          department:
+            label: "部门 / 业务方向"
+            help: "可填写所属部门、产品线或业务方向，帮助读者理解工作背景。"
+            placeholder: "例如：研发部 · 企业服务产品"
+          start_month:
+            label: "开始年月"
+            help: "填写入职或实习开始年月。"
+            placeholder: "例如：2025-03"
+          end_month:
+            label: "结束年月"
+            help: "填写离职或实习结束年月；仍在职时可留空，并勾选下方“在职”。"
+            placeholder: "例如：2025-08"
+          ongoing:
+            label: "在职"
+            help: "目前仍在该单位工作时勾选，时间栏显示“至今”。"
+            placeholder: ""
+          details:
+            label: "职责与成果"
+            help: "每行一个要点，说明你承担的工作、采用的方法及实际成果；有数据时注明指标和范围，不虚构数字。"
+            placeholder: "负责……，使用……完成……\n参与……，取得……成果"
+        projects:
+          name:
+            label: "项目 / 课题名称"
+            help: "填写能说明项目用途的名称；科研经历可填写课题名称。"
+            placeholder: "例如：校园活动管理系统"
+          role:
+            label: "个人角色"
+            help: "说明你在项目中的实际职责，区分独立完成、负责人或团队成员。"
+            placeholder: "例如：前端开发 / 项目负责人"
+          start_month:
+            label: "开始年月"
+            help: "填写项目或课题开始年月。"
+            placeholder: "例如：2024-10"
+          end_month:
+            label: "结束年月"
+            help: "填写完成年月；尚在进行时可留空，并勾选下方“进行中”。"
+            placeholder: "例如：2025-02"
+          ongoing:
+            label: "进行中"
+            help: "目前仍在开展该项目或课题时勾选，时间栏显示“至今”。"
+            placeholder: ""
+          technology:
+            label: "技术 / 方法"
+            help: "列出你实际使用的技术、工具、设计方法或研究方法。"
+            placeholder: "例如：Vue、Python、用户访谈"
+          link:
+            label: "项目 / 论文链接"
+            help: "填写可访问的完整链接，如代码仓库、作品展示、论文或项目演示；不填写内部或无权公开的资料。"
+            placeholder: "https://example.com/project"
+          details:
+            label: "项目内容与个人贡献"
+            help: "每行一个要点，写清项目目标、你完成的部分和结果；团队成果与个人贡献应区分说明。"
+            placeholder: "项目用于……\n我负责……，完成……"
+        activities:
+          name:
+            label: "组织 / 活动名称"
+            help: "填写所属组织或参与活动的名称。"
+            placeholder: "例如：计算机协会 / 校园开放日"
+          role:
+            label: "担任角色"
+            help: "填写实际担任的职务或参与身份。"
+            placeholder: "例如：活动负责人 / 志愿者"
+          start_month:
+            label: "开始年月"
+            help: "填写参与该组织或活动的开始年月。"
+            placeholder: "例如：2023-09"
+          end_month:
+            label: "结束年月"
+            help: "填写结束年月；仍在参与时可留空，并勾选下方“进行中”。"
+            placeholder: "例如：2024-06"
+          ongoing:
+            label: "进行中"
+            help: "目前仍在参与时勾选，时间栏显示“至今”。"
+            placeholder: ""
+          details:
+            label: "职责与成果"
+            help: "每行一个要点，说明组织协调、运营或服务工作，以及实际覆盖人数、活动规模或产出。"
+            placeholder: "组织……活动，负责……\n协助……，完成……"
+        skills:
+          name:
+            label: "技能 / 证书名称"
+            help: "填写具体技能或已取得的证书名称。"
+            placeholder: "例如：Python / IELTS / 教师资格证"
+          level:
+            label: "掌握程度 / 等级 / 成绩"
+            help: "填写实际熟练程度、证书等级或考试成绩，避免仅写“精通”而没有依据。"
+            placeholder: "例如：可独立进行数据清洗 / IELTS 7.0"
+          date:
+            label: "取得年月"
+            help: "证书或成绩可填写取得年月；一般技能可留空。"
+            placeholder: "例如：2025-05"
+          issuer:
+            label: "发证机构"
+            help: "证书可填写发证或认证机构；一般技能可留空。"
+            placeholder: "例如：教育部教育考试院"
+          description:
+            label: "使用场景 / 有效期补充"
+            help: "可补充实际使用场景、相关作品，或成绩和证书的有效期；每行一个要点。"
+            placeholder: "在……项目中用于……\n有效期至……"
+        honors:
+          name:
+            label: "奖项 / 荣誉名称"
+            help: "填写奖项名称及获奖等级，必要时注明国家级、省级或校级。"
+            placeholder: "例如：某某竞赛省级一等奖"
+          date:
+            label: "获得年月"
+            help: "填写获得该奖项或荣誉的年月。"
+            placeholder: "例如：2024-11"
+          issuer:
+            label: "授予机构"
+            help: "填写主办或授予机构，帮助说明奖项来源。"
+            placeholder: "例如：某某大学 / 竞赛组委会"
+          description:
+            label: "奖项补充说明"
+            help: "可说明评选范围、获奖作品或你在团队中的贡献，按实际资料填写。"
+            placeholder: "获奖作品为……，本人负责……"
+        summary:
+          text:
+            label: "自我评价"
+            help: "建议 2–4 句，说明相关经验、能力及工作方向；避免空泛性格评价，不重复整份简历。系统会保留你的原文。"
+            placeholder: "具备……经验，曾完成……，能够……"

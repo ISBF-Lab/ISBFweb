@@ -1,0 +1,82 @@
+{
+  "time": "2026-10-11T20:31:33.371924+08:00",
+  "scope": "static design and integration contract; no application tests or server writes",
+  "status": "passed",
+  "fieldCount": 58,
+  "requiredFields": [
+    "name",
+    "phone",
+    "email"
+  ],
+  "initialBasicCount": 8,
+  "extraBasicCount": 11,
+  "images": 6,
+  "imageHeadersAndHashes": "passed",
+  "galleryLocalLinksAndAnchors": "passed",
+  "galleryHasNoScriptsFormsOrRemoteContent": true,
+  "sourceArchiveSHA256": "6999688e5ad99d774440a1a8672158c0c041fac1963228dc888b2f8a98006631",
+  "sourceArchiveChecksumCount": 265,
+  "currentServerGuideSHA256": {
+    "AGENTS.md": "fb40c26d29baef74bb0c98f86783e020f98aa67e5fe0157a3fe0894307bef065",
+    "docs/design-system/ui-status.md": "4b0ee29b2cc366b1c50f240b7ee4ac001d5ab417baaebd91f22df91503bd9257",
+    "docs/design-system/tokens.md": "96324143724fe0f1a480ab654e1d1af23c482d247d28a18f08acca239e9986f5",
+    "docs/design-system/components.md": "0fb7e52fc507e65c4a2d64bac0769eaad4b7d716e65a750db58e83835bdbb0e7",
+    "docs/design-system/reference-map.md": "1b9f3d23cd83aea37c1def00b4c6b0203118b02e0a4b35123dd58add528f71bf",
+    "docs/design-system/references/README.md": "04c235781f6e27bdf61a84715a3c7c26ce977e653099daa06e14579d14e622f5",
+    "docs/design-system/references/manifest.json": "71ffc20d9c1055c2d9051a4dea68b2fda927e4f92fe3783afa793c908c9603f0",
+    ".skills/discourse-frontend-conventions/SKILL.md": "99ef0cead77e6736e6bbb05577cbafb8654210585ebff709f87c9254f6589b34",
+    ".skills/discourse-writing-html-css/SKILL.md": "8e3b28f9a539e8df7e1bbac492ee5863a038dc6dd4ff42bbe6847b24d3f5ec2e",
+    ".skills/discourse-content-localization/SKILL.md": "c9ffa5c39778d630e5f15f577037d8124f3205c39c111409ff15f213060ee498"
+  },
+  "paletteContrast": {
+    "light": {
+      "cssSource": "/stylesheets/color_definitions_scheme_21_4_3d671d0767691bc748a3d9eb56967e7aad45362d.css?__ws=isbf-one.com",
+      "values": {
+        "--secondary": "#ffffff",
+        "--primary": "#17202a",
+        "--primary-medium": "rgb(43.6199095023%, 55.7013574661%, 69.125188537%)",
+        "--tertiary": "#1769aa",
+        "--danger": "#c93545"
+      },
+      "contrastOnSurface": {
+        "--primary": 16.4516,
+        "--primary-medium": 3.3984,
+        "--tertiary": 5.7732,
+        "--danger": 5.1487,
+        "focusRing": 8.5192
+      }
+    },
+    "dark": {
+      "cssSource": "/stylesheets/color_definitions_scheme_22_4_3ac7dd3c60dc0f4c766b57e3db81e74f9711acc8.css?__ws=isbf-one.com",
+      "values": {
+        "--secondary": "#101413",
+        "--primary": "#e7e9ea",
+        "--primary-medium": "rgb(56.5490196078%, 60.1699346405%, 61.9803921569%)",
+        "--tertiary": "#72c5fa",
+        "--danger": "#f15b6c"
+      },
+      "contrastOnSurface": {
+        "--primary": 15.2377,
+        "--primary-medium": 6.4237,
+        "--tertiary": 9.7945,
+        "--danger": 5.7032,
+        "focusRing": 11.3859
+      }
+    }
+  },
+  "visualInspection": [
+    "desktop-light",
+    "desktop-dark",
+    "desktop-templates",
+    "mobile-content",
+    "mobile-preview",
+    "field-states"
+  ],
+  "notValidated": [
+    "interactive ISBF route and form",
+    "FormKit behaviour",
+    "download permissions",
+    "responsive browser rendering",
+    "production conversion dependencies"
+  ]
+}

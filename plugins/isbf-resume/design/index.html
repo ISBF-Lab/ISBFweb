@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ISBF 工作台 · 简历设计审阅</title>
+    <style>
+      body { margin: 0; color: CanvasText; background: Canvas; font: 16px/1.6 system-ui, sans-serif; }
+      header, main { max-width: 1440px; margin-inline: auto; padding: 24px; }
+      header { border-block-end: 1px solid GrayText; }
+      h1 { font-size: 28px; margin: 0; }
+      p { margin-block: 12px; }
+      nav { display: flex; flex-wrap: wrap; gap: 16px; }
+      nav a, a:focus-visible { outline-offset: 4px; }
+      section { margin-block: 40px; scroll-margin-block-start: 24px; }
+      img { display: block; width: 100%; height: auto; border: 1px solid GrayText; box-sizing: border-box; }
+      .review-mobile { max-width: 460px; }
+      .review-files { display: flex; gap: 24px; flex-wrap: wrap; }
+      a { color: LinkText; }
+      @media print { nav { display: none; } section { break-before: page; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>工作台 · 简历设计审阅</h1>
+      <p>按 ISBF 现行 UI 规范重新设计。以下均为静态提案，表单、生成和下载尚未接入 ISBF；点击图片可查看原始尺寸。</p>
+      <nav aria-label="设计稿导航">
+        <a href="#desktop">桌面明色</a>
+        <a href="#dark">桌面暗色</a>
+        <a href="#templates">模板选择</a>
+        <a href="#mobile">手机填写</a>
+        <a href="#preview">手机预览</a>
+        <a href="#states">字段与状态</a>
+      </nav>
+    </header>
+    <main>
+      <p class="review-files">
+        <a href="../docs/UI_DESIGN_V2.md">完整设计及确认范围</a>
+        <a href="../docs/SERVER_ARCHITECTURE.md">服务器架构与接入方案</a>
+        <a href="../docs/FIELD_DESIGN.md">58 个字段及填写说明</a>
+        <a href="ui-contract.json">字段与组件接入契约</a>
+      </p>
+      <section id="desktop" aria-labelledby="desktop-title">
+        <h2 id="desktop-title">桌面填写 · 明色</h2>
+        <p>复用既有站点侧栏，在工作台功能区中并排呈现填写内容与预览。基本资料先显示常用字段，其余选填资料和经历模块按需展开。</p>
+        <a href="desktop-light.png"><img src="desktop-light.png" alt="桌面简历填写方案，表单和预览并排，每个字段下方持续显示填写说明" width="2880" height="3056"></a>
+      </section>
+      <section id="dark" aria-labelledby="dark-title">
+        <h2 id="dark-title">桌面填写 · 暗色</h2>
+        <p>使用相同语义变量跟随站点配色。简历纸面保持实际 PDF 原样。</p>
+        <a href="desktop-dark.png"><img src="desktop-dark.png" alt="暗色界面的相同简历填写布局，PDF 纸面保持白色" width="2880" height="3056" loading="lazy"></a>
+      </section>
+      <section id="templates" aria-labelledby="templates-title">
+        <h2 id="templates-title">模板选择</h2>
+        <p>蓝金与蓝灰仅颜色不同；两张缩略图来自真实生成的 PDF。</p>
+        <a href="desktop-templates.png"><img src="desktop-templates.png" alt="蓝金与蓝灰两款模板并排选择，具有明确的选中标识" width="2880" height="2200" loading="lazy"></a>
+      </section>
+      <section id="mobile" aria-labelledby="mobile-title">
+        <h2 id="mobile-title">手机填写 · 390 px</h2>
+        <p>字段单列排列，填写说明不依赖悬停；保留工作台的底部导航和安全区。</p>
+        <a href="mobile-content.png"><img class="review-mobile" src="mobile-content.png" alt="手机简历填写方案，常用基本字段单列显示，其他模块可折叠" width="780" height="4330" loading="lazy"></a>
+      </section>
+      <section id="preview" aria-labelledby="preview-title">
+        <h2 id="preview-title">手机预览与下载</h2>
+        <a href="mobile-preview.png"><img class="review-mobile" src="mobile-preview.png" alt="手机预览阶段显示实际简历页，并提供 DOCX 和 PDF 两个下载入口" width="780" height="2240" loading="lazy"></a>
+      </section>
+      <section id="states" aria-labelledby="states-title">
+        <h2 id="states-title">字段、经历与生成状态</h2>
+        <p>默认、键盘聚焦、校验失败、生成中、已完成及内容已修改均有明确的提案。</p>
+        <a href="field-states.png"><img src="field-states.png" alt="字段默认聚焦和校验失败的对比，以及重复经历和各生成状态" width="2880" height="2640" loading="lazy"></a>
+      </section>
+    </main>
+  </body>
+</html>
