@@ -41,7 +41,7 @@ module("Integration | Component | ResumeShareDetails", function (hooks) {
       );
     assert
       .dom(".isbf-resume-share-details__preview img")
-      .exists({ count: 2 }, "renders each preview page");
+      .exists({ count: 1 }, "loads one preview page at a time");
     assert
       .dom('img[src="/isbf-resume/shares/42/previews/1"]')
       .hasAttribute(

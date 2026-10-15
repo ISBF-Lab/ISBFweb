@@ -63,7 +63,11 @@ export default class ResumeShareUpload extends Component {
       event.target.value = "";
       this.#file = null;
       setValue("");
-      this.error = i18n("isbf_resume.sharing.invalid_pdf");
+      this.error = i18n(
+        file.size > MAX_BYTES
+          ? "isbf_resume.sharing.pdf_too_large"
+          : "isbf_resume.sharing.invalid_pdf"
+      );
       this.a11y.announce(this.error, "assertive");
       return;
     }
@@ -117,6 +121,7 @@ export default class ResumeShareUpload extends Component {
             @type="error"
           >{{this.error}}</form.Alert>{{/if}}
         <form.Field
+          @format="full"
           @name="file"
           @title={{i18n "isbf_resume.sharing.pdf"}}
           @type="custom"
@@ -144,6 +149,7 @@ export default class ResumeShareUpload extends Component {
                 "isbf-resume__field"
                 (if field.fullRow "--full-row")
               }}
+              @format="full"
               @helpText={{field.help}}
               @name={{field.name}}
               @title={{field.title}}
@@ -158,6 +164,7 @@ export default class ResumeShareUpload extends Component {
           {{/each}}
         </div>
         <form.Field
+          @format="full"
           @helpText={{i18n "isbf_resume.sharing.privacy_notice"}}
           @name="consent"
           @title={{i18n "isbf_resume.sharing.consent"}}

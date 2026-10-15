@@ -76,7 +76,7 @@ module IsbfResume
       SharedPdf.new(key: storage_key, pages: pages)
     end
 
-    def review!(reviewer:, decision:, description:, expected_version:)
+    def review!(reviewer:, decision:, description:, expected_version:, metadata: {})
       with_lock do
         raise Discourse::InvalidAccess unless reviewer.guardian.can_review_isbf_resumes?
         raise ReviewConflict unless pending? && lock_version == expected_version
@@ -86,6 +86,16 @@ module IsbfResume
              (decision == "approve" && final_description.blank?)
           raise Discourse::InvalidParameters.new(:description)
         end
+        final_metadata = metadata.symbolize_keys
+        final_metadata.each do |field, value|
+          limit = FIELD_LIMITS.except(:description)[field]
+          unless limit && value.is_a?(String) && value.length <= limit
+            raise Discourse::InvalidParameters.new(field)
+          end
+        end
+        final_metadata.transform_values!(&:strip)
+        final_metadata[:title] = title if final_metadata.key?(:title) &&
+          final_metadata[:title].blank?
         timestamp = Time.now.utc
         reviews.create!(
           reviewer: reviewer,
@@ -99,9 +109,11 @@ module IsbfResume
           updated_at: timestamp,
         )
         update!(
-          status: decision == "approve" ? "approved" : "rejected",
-          description: final_description,
-          reviewed_at: timestamp,
+          final_metadata.merge(
+            status: decision == "approve" ? "approved" : "rejected",
+            description: final_description,
+            reviewed_at: timestamp,
+          ),
         )
       end
     end
@@ -115,10 +127,11 @@ module IsbfResume
         reviewable_by_moderator: true,
         force_review: true,
         status: status,
-        payload: {
-          shared_resume_id: id,
-          description: submitted_description,
-        },
+        payload:
+          attributes.slice(*FIELD_LIMITS.keys.map(&:to_s)).merge(
+            "shared_resume_id" => id,
+            "description" => submitted_description,
+          ),
       )
     end
   end

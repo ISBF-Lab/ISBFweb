@@ -3,7 +3,12 @@ en:
     sharing:
       untitled: "Shared resume"
       invalid_submission: "Check the file, sharing consent and field lengths."
-      invalid_pdf: "Upload a valid, readable, unencrypted PDF no larger than 10 MiB."
+      invalid_pdf: "This PDF could not be read. Check that it opens correctly, or export it again before uploading."
+      pdf_too_large: "The PDF exceeds 10 MiB. Compress it before uploading."
+      pdf_encrypted: "This PDF is encrypted. Remove its password protection before uploading."
+      pdf_too_many_pages: "The PDF exceeds 100 pages. Split it before uploading."
+      pdf_validation_timeout: "PDF validation timed out. Try again later; this does not mean the file is damaged."
+      pdf_validation_failed: "PDF validation is temporarily unavailable. Try again later."
       submit_failed: "The resume could not be submitted. Try again later."
       review_description_required: "Approval requires a short description and a valid review decision."
       review_conflict: "This submission changed or was already reviewed. Refresh the page."

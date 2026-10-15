@@ -219,6 +219,12 @@ body:has(.isbf-resume-workspace) .powered-by-discourse {
   }
 }
 
+.isbf-resume-share-upload {
+  .isbf-resume__fields {
+    width: 100%;
+  }
+}
+
 .isbf-resume-share-list {
   &__actions {
     margin-inline-start: auto;
@@ -323,18 +329,22 @@ body:has(.isbf-resume-workspace) .powered-by-discourse {
   }
 }
 
+.isbf-resume-share-preview {
+  &__controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--isbf-v2-space-2, 8px);
+    margin-block: var(--isbf-v2-space-4, 16px);
+  }
+}
+
 .isbf-resume-review {
   min-width: 0;
 
   &__description {
     white-space: pre-wrap;
     overflow-wrap: anywhere;
-  }
-
-  &__preview {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin-block-start: var(--isbf-v2-space-4, 16px);
   }
 }
