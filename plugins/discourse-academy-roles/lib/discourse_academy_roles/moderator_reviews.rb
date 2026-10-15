@@ -25,11 +25,18 @@ module DiscourseAcademyRoles::ModeratorReviewScope
         ],
       )
     resources = resources.none unless guardian.academy_can?(:review_resources)
+    resumes = where(type: "ReviewableIsbfResume", reviewable_by_moderator: true, category_id: nil)
+    unless guardian.respond_to?(:can_review_isbf_resumes?) && guardian.can_review_isbf_resumes?
+      resumes = resumes.none
+    end
     result =
-      content.or(resources).where(
-        "reviewables.category_id IS NULL OR reviewables.category_id IN (?)",
-        guardian.allowed_category_ids,
-      )
+      content
+        .or(resources)
+        .or(resumes)
+        .where(
+          "reviewables.category_id IS NULL OR reviewables.category_id IN (?)",
+          guardian.allowed_category_ids,
+        )
     result = exclude_private_messages_hidden_from(result, user)
     visible_posts = guardian.reviewable_post_scope
     result =
@@ -68,8 +75,7 @@ module DiscourseAcademyRoles::ModeratorReview
 
   def editable_for(guardian, args = nil)
     return super unless guardian.academy_restricted_moderator?
-    permission =
-      DiscourseAcademyRoles::ModeratorPermissions.resource?(self) ? :manage_resources : :edit_others
+    permission = DiscourseAcademyRoles::ModeratorPermissions.review_edit_permission(self)
     unless can_review_target?(guardian) && guardian.academy_can?(permission)
       return Reviewable::EditableFields.new(self, guardian, args)
     end
@@ -78,14 +84,7 @@ module DiscourseAcademyRoles::ModeratorReview
 
   def update_fields(params, performed_by, version: nil)
     if DiscourseAcademyRoles::ModeratorPermissions.restricted?(performed_by) && params.present?
-      permission =
-        (
-          if DiscourseAcademyRoles::ModeratorPermissions.resource?(self)
-            :manage_resources
-          else
-            :edit_others
-          end
-        )
+      permission = DiscourseAcademyRoles::ModeratorPermissions.review_edit_permission(self)
       raise Discourse::InvalidAccess unless performed_by.guardian.academy_can?(permission)
     end
     super

@@ -1,0 +1,20 @@
+zh_CN:
+  isbf_resume:
+    sharing:
+      untitled: "分享的简历"
+      invalid_submission: "请检查 PDF 文件、分享同意选项及填写长度。"
+      invalid_pdf: "请上传可正常打开、未加密的 PDF，文件大小不超过 10 MiB。"
+      submit_failed: "简历提交失败，请稍后重试。"
+      review_description_required: "通过审核前请填写简要描述，并选择有效的审核结果。"
+      review_conflict: "此投稿已被修改或审核，请刷新页面。"
+      review_failed: "审核结果保存失败，请刷新页面后重试。"
+    reviewables:
+      actions:
+        approve_resume:
+          title: "通过并公开"
+          description: "通过并公开"
+          complete: "审核结果已保存。"
+        reject_resume:
+          title: "不通过"
+          description: "不通过"
+          complete: "审核结果已保存。"

@@ -20,6 +20,7 @@ module DiscourseAcademyRoles
       publish_activities: :academy_moderators_publish_activities,
       publish_official: :academy_moderators_publish_official,
       review_resources: :academy_moderators_review_resources,
+      review_resumes: :academy_moderators_review_resumes,
       manage_resources: :academy_moderators_manage_resources,
       view_emails: :moderators_view_emails,
       trace_anonymous: :academy_moderators_trace_anonymous,
@@ -80,11 +81,17 @@ module DiscourseAcademyRoles
     end
 
     def self.review_permission(reviewable)
+      return :review_resumes if reviewable.type == "ReviewableIsbfResume"
       if resource?(reviewable) || reviewable.type == "ReviewableIsbfLearningCourse"
         :review_resources
       else
         :review
       end
+    end
+
+    def self.review_edit_permission(reviewable)
+      return :review_resumes if reviewable.type == "ReviewableIsbfResume"
+      resource?(reviewable) ? :manage_resources : :edit_others
     end
 
     def self.review_action_allowed?(user, reviewable, action)

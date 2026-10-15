@@ -6,12 +6,15 @@ export default class IsbfResumeRoute extends DiscourseRoute {
   @service currentUser;
   @service siteSettings;
 
-  beforeModel() {
+  beforeModel(transition) {
     if (!this.siteSettings.isbf_resume_enabled) {
       return this.replaceWith("unknown", { path: "/404" });
     }
     if (!this.currentUser) {
       return this.replaceWith("login");
+    }
+    if (transition.to.name === "isbfResume") {
+      return this.replaceWith("isbfResumeShares.index");
     }
   }
 

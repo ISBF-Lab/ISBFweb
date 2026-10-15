@@ -1,5 +1,22 @@
 # 简历发布
 
+## 2026-10-15：分享与原生审核
+
+简历专区默认进入分享页，左侧“简历分享 / 简历生成”，生成器位于 `/generate`。
+仅 PDF 的投稿经原生 `/review` 审核通过后公开，保留审核人姓名与描述修改记录。
+权限开关 `academy_moderators_review_resumes` 默认关闭，关闭时仅开发者审核。
+
+本轮增加两张分享/审核表。正式迁移仅执行 `20261014104229`，保留数据与私有附件。
+分享文件默认位于 `/shared/isbf-resume-shares-private`，权限 700，属主 discourse。
+已有 `ReviewableIsbfResume` 后不得回退到不注册该类型的插件，采用兼容回滚或向前修复。
+
+固定发布使用 `deploy/install-sharing.py <merged-commit>`；共享发布目录需含校验清单
+`sharing-release.json`、固定插件源码和 Academy 的本功能增量。先 `--check` 核对现场，
+备份后安装。安装器拒绝覆盖未知的源码/链接，保留其余插件和已有文件权限；
+已满足锁定依赖时复用现有运行时，并精确失效变更插件的 Bootsnap 编译项。
+发布 hook 固定该 commit，不导入整套主题或覆盖完整 Core。主题只扩展简历子路由判断。
+资源沿用下文先公开文件、再合并清单的顺序，重载前必须可解析全部新脚本。
+
 本插件随 ISBFweb 的 `plugins/isbf-resume` 维护。2026-10-13 用户完成真实网页测试并明确同意上线；验收功能源码来自 `ba949585bc431808d2d52c0620887eb45bb2811e`。接入时只补充工作台简历链接、路由归属及首页判断，保留正在运行主题的其他功能。仓库主题与数据库主题有协作差异，不能整份覆盖。
 
 依赖安装入口是 `deploy/install-runtime.sh`：Python 虚拟环境位于 `/opt/resume-venv`，本地 LibreOffice Writer 转换 PDF，Poppler 生成实际 PDF 的逐页图片，Noto CJK 提供字体。生成不访问外部 API。新增文档 CI 与已有 Core lint、前后端测试同时运行。

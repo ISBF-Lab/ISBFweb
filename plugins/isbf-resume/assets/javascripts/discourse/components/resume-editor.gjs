@@ -324,16 +324,10 @@ export default class ResumeEditor extends Component {
 
   <template>
     <main class="isbf-resume" data-stage={{this.activeStage}}>
-      <header class="isbf-resume__header">
-        <a
-          aria-label={{i18n "isbf_resume.back"}}
-          class="isbf-resume__back"
-          href={{getURL "/isbf/workbench"}}
-        >
-          {{dIcon "arrow-left"}}
-          <h1>{{i18n "isbf_resume.title"}}</h1>
-        </a>
-      </header>
+      <a class="isbf-resume__back" href={{getURL "/isbf/workbench"}}>{{i18n
+          "isbf_resume.back"
+        }}</a>
+      <h1>{{i18n "isbf_resume.title"}}</h1>
       <p class="isbf-resume__intro">{{i18n "isbf_resume.intro"}}</p>
       <div class="isbf-resume__layout">
         <Form
@@ -373,7 +367,9 @@ export default class ResumeEditor extends Component {
                     open={{this.expanded.basic}}
                     {{on "toggle" (fn this.setExpanded "basic")}}
                   >
-                    <summary>{{i18n "isbf_resume.more"}}</summary>
+                    <summary>{{i18n "isbf_resume.more"}}{{dIcon
+                        "chevron-down"
+                      }}</summary>
                     <ResumeFields
                       @disabled={{this.busy}}
                       @fields={{this.extraFields}}
@@ -390,7 +386,9 @@ export default class ResumeEditor extends Component {
                   open={{moduleDefinition.expanded}}
                   {{on "toggle" (fn this.setExpanded moduleDefinition.id)}}
                 >
-                  <summary>{{i18n moduleDefinition.labelKey}}</summary>
+                  <summary>{{i18n moduleDefinition.labelKey}}{{dIcon
+                      "chevron-down"
+                    }}</summary>
                   <p>{{i18n moduleDefinition.descriptionKey}}</p>
                   <form.Object @name={{moduleDefinition.id}} as |group|>
                     {{#if moduleDefinition.repeatable}}
@@ -439,6 +437,7 @@ export default class ResumeEditor extends Component {
                 </details>
               {{/each}}
               <DButton
+                class="btn-primary"
                 @action={{fn this.setStage "templates"}}
                 @label="isbf_resume.next_template"
               />
@@ -477,6 +476,7 @@ export default class ResumeEditor extends Component {
                 </form.Field>
               </section>
               <DButton
+                class="btn-primary"
                 @action={{fn this.setStage "preview"}}
                 @label="isbf_resume.next_preview"
               />
@@ -505,7 +505,7 @@ export default class ResumeEditor extends Component {
               }}
             />
             <DButton
-              class="btn-default isbf-resume__generate-english"
+              class="btn-primary isbf-resume__generate-english"
               @action={{this.submitEnglish}}
               @disabled={{this.disabled}}
               @label="isbf_resume.generate_english"

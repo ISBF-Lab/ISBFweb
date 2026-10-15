@@ -1,7 +1,7 @@
 en:
   js:
     isbf_resume:
-      title: "Resume"
+      title: "Resume generator"
       intro: "Enter your content, choose a template, and generate DOCX and PDF. Your wording is placed in a fixed layout."
       back: "Back to workbench"
       stages: "Resume editing stages"
@@ -21,7 +21,7 @@ en:
       photo_reading: "Reading photo…"
       photo_failed: "The photo could not be read. Choose it again."
       photo_ready: "Photo selected"
-      generate: "Generate DOCX and PDF"
+      generate: "Generate Chinese version"
       generate_english: "Generate English version"
       confirmation_title: "Confirm before generating"
       english_confirmation_title: "Confirm English resume generation"

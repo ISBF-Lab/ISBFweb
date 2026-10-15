@@ -1,7 +1,7 @@
 zh_CN:
   js:
     isbf_resume:
-      title: "简历"
+      title: "简历生成"
       intro: "填写内容，选择模板，生成 DOCX 和 PDF。你的原文将按固定布局排版。"
       back: "返回工作台"
       stages: "简历编辑阶段"
@@ -21,7 +21,7 @@ zh_CN:
       photo_reading: "正在读取照片…"
       photo_failed: "照片读取失败，请重新选择。"
       photo_ready: "照片已选择"
-      generate: "生成 DOCX 和 PDF"
+      generate: "生成中文版"
       generate_english: "生成英文版"
       confirmation_title: "生成前请确认"
       english_confirmation_title: "生成英文版前请确认"

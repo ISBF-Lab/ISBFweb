@@ -18,12 +18,19 @@ end
 require_relative "lib/isbf_resume/generator"
 require_relative "lib/isbf_resume/engine"
 register_asset "stylesheets/isbf-resume.scss"
+register_asset "stylesheets/isbf-resume-sharing.scss"
 register_svg_icon "file-lines"
 register_svg_icon "file-arrow-down"
 
 after_initialize do
   Discourse::Application.routes.prepend do
     get "/isbf/workbench/resume" => "isbf_resume/pages#index"
+    get "/isbf/workbench/resume/generate" => "isbf_resume/pages#index"
+    get "/isbf/workbench/resume/shares" => "isbf_resume/pages#index"
+    get "/isbf/workbench/resume/shares/new" => "isbf_resume/pages#index"
+    get "/isbf/workbench/resume/shares/mine" => "isbf_resume/pages#index"
+    get "/isbf/workbench/resume/shares/review" => "isbf_resume/pages#index"
+    get "/isbf/workbench/resume/shares/:id" => "isbf_resume/pages#index"
     mount ::IsbfResume::Engine, at: "/isbf-resume"
   end
 
@@ -32,7 +39,23 @@ after_initialize do
   require_relative "app/serializers/isbf_resume/export_serializer"
   require_relative "lib/isbf_resume/guardian_extension"
 
+  require_relative "lib/isbf_resume/shared_pdf"
+  require_relative "app/models/isbf_resume/shared_resume"
+  require_relative "app/models/isbf_resume/share_review"
+  require_relative "app/services/isbf_resume/shared_resume/submit"
+  require_relative "app/services/isbf_resume/shared_resume/review"
+  require_relative "app/serializers/isbf_resume/share_review_serializer"
+  require_relative "app/serializers/isbf_resume/shared_resume_serializer"
+  require_relative "app/serializers/isbf_resume/private_shared_resume_serializer"
+  require_relative "app/models/reviewable_isbf_resume"
+  require_relative "app/serializers/reviewable_isbf_resume_serializer"
+  require_relative "lib/isbf_resume/reviewable_scope_extension"
+
+  register_reviewable_type ReviewableIsbfResume
+
   reloadable_patch { Guardian.prepend ::IsbfResume::GuardianExtension }
+  reloadable_patch { Reviewable.singleton_class.prepend ::IsbfResume::ReviewableScopeExtension }
 
   Rails.application.config.filter_parameters += %i[resume photo]
+  Rails.application.config.filter_parameters += %i[shared_resume share_review]
 end

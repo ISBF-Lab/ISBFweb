@@ -80,6 +80,11 @@ academy_roles:
     client: true
     refresh: true
     area: "group_permissions"
+  academy_moderators_review_resumes:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
   academy_moderators_manage_resources:
     default: false
     client: true

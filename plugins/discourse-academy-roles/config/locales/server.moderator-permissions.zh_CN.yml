@@ -16,5 +16,6 @@ zh_CN:
     academy_moderators_publish_activities: "允许管理员在配置的校园活动分类中发布主题。"
     academy_moderators_publish_official: "允许管理员在配置的官方分类中使用官方身份发布。"
     academy_moderators_review_resources: "允许管理员审核学习资源与课程申请。直接发布及修改资源另需资源管理权限。"
+    academy_moderators_review_resumes: "允许管理员审核简历分享、补充或修改发布描述并查看审核记录。默认关闭，关闭时仅开发者可审核。"
     academy_moderators_manage_resources: "允许管理员直接发布、编辑、删除及恢复学习资源。"
     academy_moderators_trace_anonymous: "允许管理员仅查询其有访问权限内容的匿名作者。"
