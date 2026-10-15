@@ -81,11 +81,17 @@ module DiscourseAcademyRoles
     end
 
     def self.review_permission(reviewable)
+      return :review_resumes if reviewable.type == "ReviewableIsbfResume"
       if resource?(reviewable) || reviewable.type == "ReviewableIsbfLearningCourse"
         :review_resources
       else
         :review
       end
+    end
+
+    def self.review_edit_permission(reviewable)
+      return :review_resumes if reviewable.type == "ReviewableIsbfResume"
+      resource?(reviewable) ? :manage_resources : :edit_others
     end
 
     def self.review_action_allowed?(user, reviewable, action)

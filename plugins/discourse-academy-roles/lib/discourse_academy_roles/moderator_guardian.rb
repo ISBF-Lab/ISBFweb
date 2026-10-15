@@ -27,7 +27,7 @@ module DiscourseAcademyRoles::ModeratorGuardian
 
   def can_see_review_queue?
     return super unless academy_restricted_moderator?
-    academy_can?(:review) || academy_can?(:review_resources)
+    academy_can?(:review) || academy_can?(:review_resources) || academy_can?(:review_resumes)
   end
 
   def secure_category_ids
