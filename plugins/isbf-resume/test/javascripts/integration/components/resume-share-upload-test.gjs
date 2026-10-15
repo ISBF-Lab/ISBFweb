@@ -22,6 +22,10 @@ module("Integration | Component | ResumeShareUpload", function (hooks) {
       type: "application/pdf",
     });
     let body;
+    let destination;
+    this.owner.lookup("service:router").transitionTo = (...args) => {
+      destination = args;
+    };
     pretender.post("/isbf-resume/shares.json", (request) => {
       body = request.requestBody;
       return response(201, { id: 42, status: "pending" });
@@ -40,6 +44,11 @@ module("Integration | Component | ResumeShareUpload", function (hooks) {
     await formKit().submit();
 
     assert.true(body instanceof FormData, "submits multipart form data");
+    assert.deepEqual(
+      destination,
+      ["isbfResumeShares.show", 42],
+      "opens the submitted resume after upload"
+    );
     const submittedFile = body.get("shared_resume[file]");
     assert.true(
       submittedFile instanceof File,
@@ -145,7 +154,11 @@ module("Integration | Component | ResumeShareUpload", function (hooks) {
       assert
         .dom(".isbf-resume-share-upload")
         .includesText(
-          i18n("isbf_resume.sharing.invalid_pdf"),
+          i18n(
+            file.size > 10 * 1024 * 1024
+              ? "isbf_resume.sharing.pdf_too_large"
+              : "isbf_resume.sharing.invalid_pdf"
+          ),
           `${file.name} has an explanatory error`
         );
       assert

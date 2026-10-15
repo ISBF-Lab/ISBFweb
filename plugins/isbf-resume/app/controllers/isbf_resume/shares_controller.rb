@@ -82,7 +82,7 @@ module IsbfResume
         on_model_not_found(:shared_resume) do |model_result|
           error_key =
             if model_result.exception.is_a?(SharedPdf::InvalidPdf)
-              "isbf_resume.sharing.invalid_pdf"
+              "isbf_resume.sharing.#{model_result.exception.reason}"
             else
               "isbf_resume.sharing.submit_failed"
             end
@@ -152,11 +152,14 @@ module IsbfResume
     def preview
       shared_resume = SharedResume.find_by(id: params[:id])
       raise Discourse::NotFound unless guardian.can_view_shared_isbf_resume?(shared_resume)
-      path = shared_resume.pdf.preview_path(params[:page])
-      raise Discourse::NotFound unless path
       response.headers["Cache-Control"] = "private, no-store"
       response.headers["X-Content-Type-Options"] = "nosniff"
+      path = shared_resume.pdf.render_preview!(params[:page])
+      raise Discourse::NotFound unless path
       send_file(path, filename: File.basename(path), type: "image/png", disposition: "inline")
+    rescue SharedPdf::PreviewUnavailable
+      response.headers["Retry-After"] = "5"
+      head :service_unavailable
     end
 
     private

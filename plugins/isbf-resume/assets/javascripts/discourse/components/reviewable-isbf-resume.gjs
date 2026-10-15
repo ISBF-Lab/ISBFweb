@@ -1,19 +1,28 @@
 import Component from "@glimmer/component";
+import { action } from "@ember/object";
+import { service } from "@ember/service";
 import getURL from "discourse/lib/get-url";
 import DButton from "discourse/ui-kit/d-button";
 import { i18n } from "discourse-i18n";
+import ResumeShareEditModal from "./resume-share-edit-modal";
 import ResumeShareMetadata from "./resume-share-metadata";
+import ResumeSharePreview from "./resume-share-preview";
 
 export default class ReviewableIsbfResume extends Component {
+  @service modal;
+
   get share() {
-    return this.args.reviewable.shared_resume;
+    return {
+      ...this.args.reviewable.shared_resume,
+      ...this.args.reviewable.payload,
+    };
   }
 
-  get pages() {
-    return this.share.preview_urls.map((url, index) => ({
-      url: getURL(url),
-      alt: i18n("isbf_resume.sharing.preview_page", { page: index + 1 }),
-    }));
+  @action
+  editDetails() {
+    this.modal.show(ResumeShareEditModal, {
+      model: { reviewable: this.args.reviewable },
+    });
   }
 
   <template>
@@ -28,9 +37,15 @@ export default class ReviewableIsbfResume extends Component {
       <p
         class="isbf-resume-review__description"
       >{{@reviewable.payload.description}}</p>
-      {{#if @reviewable.can_edit}}<p>{{i18n
+      {{#if @reviewable.can_edit_resume}}<p>{{i18n
             "isbf_resume.sharing.native_review_help"
-          }}</p>{{/if}}
+          }}</p>
+        <DButton
+          class="btn-primary"
+          @action={{this.editDetails}}
+          @label="isbf_resume.sharing.edit_details"
+        />
+      {{/if}}
       <DButton
         class="btn-primary"
         data-auto-route="false"
@@ -39,12 +54,7 @@ export default class ReviewableIsbfResume extends Component {
       />
       <details>
         <summary>{{i18n "isbf_resume.sharing.preview"}}</summary>
-        {{#each this.pages key="url" as |page|}}<img
-            alt={{page.alt}}
-            class="isbf-resume-review__preview"
-            loading="lazy"
-            src={{page.url}}
-          />{{/each}}
+        <ResumeSharePreview @urls={{this.share.preview_urls}} />
       </details>
       {{#if this.share.reviews.length}}
         <h4>{{i18n "isbf_resume.sharing.history"}}</h4>

@@ -3,7 +3,12 @@ zh_CN:
     sharing:
       untitled: "分享的简历"
       invalid_submission: "请检查 PDF 文件、分享同意选项及填写长度。"
-      invalid_pdf: "请上传可正常打开、未加密的 PDF，文件大小不超过 10 MiB。"
+      invalid_pdf: "无法读取这份 PDF，请确认文件可正常打开，或重新导出为 PDF 后上传。"
+      pdf_too_large: "PDF 大小超过 10 MiB，请压缩文件后再上传。"
+      pdf_encrypted: "这份 PDF 已加密，请移除密码保护后再上传。"
+      pdf_too_many_pages: "PDF 超过 100 页，请拆分文件后再上传。"
+      pdf_validation_timeout: "PDF 校验超时，请稍后重试；这不代表文件已损坏。"
+      pdf_validation_failed: "暂时无法校验 PDF，请稍后重试。"
       submit_failed: "简历提交失败，请稍后重试。"
       review_description_required: "通过审核前请填写简要描述，并选择有效的审核结果。"
       review_conflict: "此投稿已被修改或审核，请刷新页面。"

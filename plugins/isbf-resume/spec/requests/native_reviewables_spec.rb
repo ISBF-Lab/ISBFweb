@@ -25,8 +25,16 @@ RSpec.describe ReviewablesController do
       get "/review/#{reviewable.id}.json"
       expect(response.status).to eq(200)
       data = response.parsed_body.fetch("reviewable")
-      expect(data).to include("type" => "ReviewableIsbfResume", "can_edit" => true)
-      expect(data.fetch("payload")).to eq("description" => submission.submitted_description)
+      expect(data).to include(
+        "type" => "ReviewableIsbfResume",
+        "can_edit" => false,
+        "can_edit_resume" => true,
+      )
+      expect(data.fetch("payload")).to include(
+        "title" => submission.title,
+        "industry" => submission.industry,
+        "description" => submission.submitted_description,
+      )
       expect(data.fetch("shared_resume")).to include("id" => submission.id, "status" => "pending")
     end
 
@@ -90,6 +98,29 @@ RSpec.describe ReviewablesController do
   end
 
   describe "#update" do
+    it "prefills legacy submissions and rejects invalid field types or lengths without saving" do
+      reviewable.update!(payload: { shared_resume_id: submission.id, description: "Original" })
+      sign_in(developer)
+      get "/review/#{reviewable.id}.json"
+      expect(response.parsed_body.fetch("reviewable").fetch("payload")).to include(
+        "title" => submission.title,
+        "position" => submission.position,
+        "description" => "Original",
+      )
+      version = reviewable.version
+      [{ salary: ["untrusted"] }, { title: "a" * 201 }].each do |invalid|
+        put "/review/#{reviewable.id}.json",
+            params: {
+              version: version,
+              reviewable: {
+                payload: invalid,
+              },
+            }
+        expect(response.status).to eq(400)
+        expect(reviewable.reload.version).to eq(version)
+      end
+    end
+
     it "refuses to retarget a native review through payload.shared_resume_id" do
       other_submission = Fabricate(:shared_isbf_resume)
       original_payload = reviewable.payload.deep_dup
@@ -171,6 +202,11 @@ RSpec.describe ReviewablesController do
             reviewable: {
               payload: {
                 description: "  Administrator's native summary  ",
+                title: "Reviewed title",
+                industry: "Finance",
+                position: "Analyst",
+                salary: "20k per month",
+                experience: "3 years",
               },
             },
           }
@@ -178,6 +214,13 @@ RSpec.describe ReviewablesController do
       expect(submission.reload).to be_pending
       expect(submission.reviews).to be_empty
       version = response.parsed_body.fetch("version")
+      edited_history =
+        reviewable.reviewable_histories.where(type: ReviewableHistory.types[:edited]).sole
+      expect(edited_history).to have_attributes(created_by_id: administrator.id)
+      expect(edited_history.edited.fetch("payload").last).to include(
+        "salary" => "20k per month",
+        "submitted_details" => include("title" => submission.title),
+      )
 
       put "/review/#{reviewable.id}/perform/approve_resume.json",
           params: {
@@ -193,6 +236,11 @@ RSpec.describe ReviewablesController do
         status: "approved",
         description: "Administrator's native summary",
         submitted_description: original_description,
+        title: "Reviewed title",
+        industry: "Finance",
+        position: "Analyst",
+        salary: "20k per month",
+        experience: "3 years",
       )
       review = submission.reviews.sole
       expect(review).to have_attributes(

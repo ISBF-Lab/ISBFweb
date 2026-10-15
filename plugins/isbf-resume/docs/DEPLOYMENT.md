@@ -10,6 +10,8 @@
 分享文件默认位于 `/shared/isbf-resume-shares-private`，权限 700，属主 discourse。
 已有 `ReviewableIsbfResume` 后不得回退到不注册该类型的插件，采用兼容回滚或向前修复。
 
+多页上传与完整审核编辑修复无需新增迁移或依赖。部署时保留现有上传页整行布局修复，仅更新简历插件的增量源码及其原生资源；无需修改主题或 Academy 权限设置。既有投稿和预览缓存继续有效，新增预览按页生成。恢复时保留审核类型、现有数据和原 PDF，比较后恢复本次覆盖的源码及资源清单。
+
 固定发布使用 `deploy/install-sharing.py <merged-commit>`；共享发布目录需含校验清单
 `sharing-release.json`、固定插件源码和 Academy 的本功能增量。先 `--check` 核对现场，
 备份后安装。安装器拒绝覆盖未知的源码/链接，保留其余插件和已有文件权限；

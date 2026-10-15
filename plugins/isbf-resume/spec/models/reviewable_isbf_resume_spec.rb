@@ -11,7 +11,7 @@ RSpec.describe ReviewableIsbfResume do
   describe "#perform" do
     it "rolls back both native review state and the audit if publication cannot be saved" do
       reviewable = shared_resume.reviewable
-      shared_resume.update_column(:title, "a" * 201)
+      shared_resume.update_column(:file_sha256, "")
       version = reviewable.version
 
       expect do

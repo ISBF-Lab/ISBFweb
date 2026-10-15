@@ -24,16 +24,39 @@ class ReviewableIsbfResume < Reviewable
   end
 
   def build_editable_fields(fields, guardian, _args)
-    fields.add("payload.description", :textarea) if pending? && can_review_target?(guardian)
+    return unless pending? && can_review_target?(guardian)
+    IsbfResume::SharedResume::FIELD_LIMITS.each_key do |field|
+      fields.add("payload.#{field}", field == :description ? :textarea : :text)
+    end
   end
 
   def update_fields(params, performed_by, version: nil)
-    description = params.dig(:payload, :description)
-    if !description.is_a?(String) ||
-         description.length > IsbfResume::SharedResume::FIELD_LIMITS[:description]
-      raise Discourse::InvalidParameters.new(:description)
+    raise Discourse::InvalidAccess unless pending? && can_review_target?(performed_by.guardian)
+    updates = params[:payload]
+    raise Discourse::InvalidParameters.new(:payload) unless updates.respond_to?(:each_pair)
+    edited_payload = payload.merge(editable_payload)
+    edited_payload["submitted_details"] ||= shared_resume
+      .attributes
+      .slice(*IsbfResume::SharedResume::FIELD_LIMITS.keys.map(&:to_s))
+      .merge("description" => shared_resume.submitted_description)
+    updates.each_pair do |field, value|
+      limit = IsbfResume::SharedResume::FIELD_LIMITS[field.to_sym]
+      unless limit && value.is_a?(String) && value.length <= limit
+        raise Discourse::InvalidParameters.new(field)
+      end
+      edited_payload[field.to_s] = value
     end
-    super
+    super({ payload: edited_payload }, performed_by, version: version)
+  end
+
+  def editable_payload
+    return {} unless shared_resume
+    fields = IsbfResume::SharedResume::FIELD_LIMITS.keys.map(&:to_s)
+    shared_resume
+      .attributes
+      .slice(*fields)
+      .merge("description" => shared_resume.submitted_description)
+      .merge(payload.slice(*fields))
   end
 
   def perform_approve_resume(performed_by, args)
@@ -54,10 +77,14 @@ class ReviewableIsbfResume < Reviewable
     shared_resume.review!(
       reviewer: performed_by,
       decision: decision,
-      description: args.fetch(:description) { payload["description"] },
+      description: args.fetch(:description) { editable_payload["description"] },
+      metadata: editable_payload.except("description"),
       expected_version: args.fetch(:expected_version) { shared_resume.lock_version },
     )
-    self.payload = payload.merge("description" => shared_resume.description)
+    self.payload =
+      payload.merge(
+        shared_resume.attributes.slice(*IsbfResume::SharedResume::FIELD_LIMITS.keys.map(&:to_s)),
+      )
     create_result(:success, decision == "approve" ? :approved : :rejected)
   rescue Discourse::InvalidParameters
     create_result(:failure).tap do |result|

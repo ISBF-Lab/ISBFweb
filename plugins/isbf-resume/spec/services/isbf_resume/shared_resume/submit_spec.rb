@@ -107,9 +107,7 @@ RSpec.describe IsbfResume::SharedResume::Submit do
         expect(shared_resume.reviews).to be_empty
         expect(IsbfResume::SharedResume.published).to be_empty
         expect(File.binread(shared_resume.pdf.available_path, 5)).to eq("%PDF-")
-        expect(File.binread(shared_resume.pdf.preview_path(1), 8)).to eq(
-          IsbfResume::SharedPdf::PNG_SIGNATURE,
-        )
+        expect(shared_resume.pdf.preview_path(1)).to eq(nil)
       end
     end
 

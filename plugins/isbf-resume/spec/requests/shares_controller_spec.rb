@@ -534,7 +534,7 @@ RSpec.describe IsbfResume::SharesController do
           get "/isbf-resume/shares/#{shared_resume.id}/previews/1"
           expect(response.status).to eq(404)
           expect(response.media_type).not_to eq("image/png")
-          expect(response.body.b).not_to eq(File.binread(shared_resume.pdf.preview_path(1)))
+          expect(shared_resume.pdf.preview_path(1)).to eq(nil)
         end
       end
     end
@@ -554,6 +554,22 @@ RSpec.describe IsbfResume::SharesController do
       get "/isbf-resume/shares/#{approved.id}/previews/1"
 
       expect(response.status).to eq(403)
+    end
+
+    it "returns a retryable response if preview processing is unavailable without losing the PDF" do
+      materialize_shared_pdf(approved)
+      sign_in(member)
+
+      with_sharing_environment("ISBF_RESUME_PYTHON" => "/missing-preview-python") do
+        get "/isbf-resume/shares/#{approved.id}/previews/1"
+      end
+
+      expect(response.status).to eq(503)
+      expect(response.headers["Retry-After"]).to eq("5")
+      expect(response.headers["Cache-Control"]).to include("private", "no-store")
+      get "/isbf-resume/shares/#{approved.id}/pdf"
+      expect(response.status).to eq(200)
+      expect(response.media_type).to eq("application/pdf")
     end
   end
 end

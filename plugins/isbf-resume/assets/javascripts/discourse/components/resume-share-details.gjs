@@ -3,6 +3,7 @@ import getURL from "discourse/lib/get-url";
 import DButton from "discourse/ui-kit/d-button";
 import { i18n } from "discourse-i18n";
 import ResumeShareMetadata from "./resume-share-metadata";
+import ResumeSharePreview from "./resume-share-preview";
 import ResumeSharingHeader from "./resume-sharing-header";
 
 export default class ResumeShareDetails extends Component {
@@ -18,13 +19,6 @@ export default class ResumeShareDetails extends Component {
     return this.share.status !== "approved"
       ? i18n(`isbf_resume.sharing.statuses.${this.share.status}`)
       : null;
-  }
-
-  get pages() {
-    return this.share.preview_urls.map((url, index) => ({
-      url: getURL(url),
-      alt: i18n("isbf_resume.sharing.preview_page", { page: index + 1 }),
-    }));
   }
 
   <template>
@@ -49,14 +43,7 @@ export default class ResumeShareDetails extends Component {
       <ResumeShareMetadata @share={{this.share}} />
       <section class="isbf-resume-share-details__preview isbf-resume__preview">
         <h2>{{i18n "isbf_resume.sharing.preview"}}</h2>
-        <div class="isbf-resume__pages">
-          {{#each this.pages key="url" as |page|}}<img
-              alt={{page.alt}}
-              class="isbf-resume__paper"
-              loading="lazy"
-              src={{page.url}}
-            />{{/each}}
-        </div>
+        <ResumeSharePreview @urls={{this.share.preview_urls}} />
       </section>
     </main>
   </template>
