@@ -1,0 +1,88 @@
+zh_CN:
+  js:
+    isbf_resume:
+      sharing:
+        native_review_help: "点击“编辑”补充或修改发布描述，保存后再通过审核。通过时必须有简要描述。"
+        workspace_navigation: "简历专区导航"
+        generate_navigation: "简历生成"
+        share_navigation: "简历分享"
+        hub_title: "简历专区"
+        title: "真实简历分享"
+        generate: "个人简历生成"
+        intro: "这些简历由ISBF One 成员无偿分享，审核通过后供所有成员参考和下载。"
+        navigation: "简历分享导航"
+        upload: "上传简历"
+        upload_title: "上传简历，免费分享给ISBF One 成员"
+        mine: "我的投稿"
+        review: "简历审核"
+        history: "审核记录"
+        optional_notice: "欢迎填写行业、岗位、薪资范围、工作年限和简历特点，帮助大家了解这份简历。这些信息均为选填，不填写也可以提交。"
+        pdf: "简历 PDF"
+        pdf_help: "仅接受可正常打开的 PDF，最大 10 MiB。上传后进入审核，通过前不会公开。"
+        invalid_pdf: "请选择 PDF 文件，文件大小应在 10 MiB 以内。"
+        consent: "我有权分享此文件，同意审核通过后免费分享给所有成员。"
+        privacy_notice: "请先检查 PDF 中的联系方式等个人资料，按自己的意愿保留或删去。"
+        submit: "提交审核"
+        submitted: "简历已提交，等待审核。"
+        empty: "暂无简历。"
+        loaded: "简历列表已更新。"
+        load_more: "加载更多"
+        open: "查看预览与下载"
+        download: "下载 PDF"
+        preview: "简历预览"
+        preview_page: "简历第 %{page} 页"
+        review_help: "请先检查 PDF 内容和分享信息。上传者没填描述时需要补充；已填写的描述也可以修改。"
+        review_description: "发布时的简要描述"
+        review_description_help: "通过审核时必填，最多 2000 字。审核者姓名、账号、时间及修改前后描述会保存在后台。"
+        description_required: "通过审核前请填写简要描述。"
+        decision: "审核结果"
+        approve: "通过并公开"
+        reject: "不通过"
+        save_review: "提交审核结果"
+        reviewed: "审核结果已保存。"
+        original_description: "上传者原始描述"
+        review_by: "审核者：%{name}（@%{username}）"
+        statuses:
+          pending: "待审核，尚未公开"
+          approved: "审核通过，已公开分享"
+          rejected: "审核未通过，未公开"
+        fields:
+          title:
+            title: "简历标题"
+            help: "便于大家识别这份简历；不填时使用 PDF 文件名。"
+            placeholder: "例如：金融行业应届生简历"
+          industry:
+            title: "从事行业"
+            help: "可以填写目前或目标行业。"
+            placeholder: "例如：金融、互联网、制造业"
+          position:
+            title: "岗位"
+            help: "可以填写目前岗位或求职方向。"
+            placeholder: "例如：数据分析、产品经理"
+          salary:
+            title: "个人薪资"
+            help: "可填范围，并注明币种及月薪或年薪。"
+            placeholder: "例如：15k–20k 元/月"
+          experience:
+            title: "工作年限"
+            help: "也可以填写应届生、在校生等经历阶段。"
+            placeholder: "例如：应届生、3 年"
+          description:
+            title: "简要描述"
+            help: "可以介绍经历背景或这份简历的特点。不填时由审核者在发布前补充。"
+            placeholder: "例如：包含两段实习和一个研究项目，求职方向为投资分析。"
+      reviewables:
+        actions:
+          approve_resume:
+            title: "通过并公开"
+            description: "通过并公开"
+            complete: "审核结果已保存。"
+          reject_resume:
+            title: "不通过"
+            description: "不通过"
+            complete: "审核结果已保存。"
+    review:
+      types:
+        reviewable_isbf_resume:
+          title: "简历分享"
+          noun: "简历"

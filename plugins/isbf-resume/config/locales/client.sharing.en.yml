@@ -1,0 +1,88 @@
+en:
+  js:
+    isbf_resume:
+      sharing:
+        native_review_help: "Use Edit to add or change the published description, then save before approving. Approval requires a description."
+        workspace_navigation: "Resume workspace navigation"
+        generate_navigation: "Resume builder"
+        share_navigation: "Resume sharing"
+        hub_title: "Resume area"
+        title: "Shared real resumes"
+        generate: "Personal resume generator"
+        intro: "ISBF One members share these resumes free of charge. Reviewed submissions are available to all members."
+        navigation: "Resume sharing navigation"
+        upload: "Upload resume"
+        upload_title: "Upload a resume to share for free"
+        mine: "My submissions"
+        review: "Resume review"
+        history: "Review history"
+        optional_notice: "Industry, position, salary range, experience and a short description help others understand the resume. All of this information is optional."
+        pdf: "Resume PDF"
+        pdf_help: "Upload a readable PDF up to 10 MiB. It stays private until approved."
+        invalid_pdf: "Choose a PDF file no larger than 10 MiB."
+        consent: "I have the right to share this file and agree to share it free of charge with all ISBF One members after approval."
+        privacy_notice: "Check any contact details and other personal information in the PDF before submitting."
+        submit: "Submit for review"
+        submitted: "Your resume was submitted for review."
+        empty: "No resumes yet."
+        loaded: "The resume list was updated."
+        load_more: "Load more"
+        open: "View preview and download"
+        download: "Download PDF"
+        preview: "Resume preview"
+        preview_page: "Resume page %{page}"
+        review_help: "Check the PDF and sharing details. Add a description if the author left it blank, or revise the submitted description."
+        review_description: "Published description"
+        review_description_help: "Required for approval, up to 2000 characters. The reviewer name, account, time and description changes are saved privately."
+        description_required: "Add a short description before approving."
+        decision: "Review decision"
+        approve: "Approve and publish"
+        reject: "Reject"
+        save_review: "Save review decision"
+        reviewed: "The review decision was saved."
+        original_description: "Author's original description"
+        review_by: "Reviewed by %{name} (@%{username})"
+        statuses:
+          pending: "Pending review, private"
+          approved: "Approved and shared"
+          rejected: "Rejected, private"
+        fields:
+          title:
+            title: "Resume title"
+            help: "Leave blank to use the PDF filename."
+            placeholder: "For example: Graduate resume for finance"
+          industry:
+            title: "Industry"
+            help: "Your current or target industry."
+            placeholder: "For example: Finance, technology, manufacturing"
+          position:
+            title: "Position"
+            help: "Your current or target role."
+            placeholder: "For example: Data analyst, product manager"
+          salary:
+            title: "Personal salary"
+            help: "A range is welcome. Include currency and monthly or annual units."
+            placeholder: "For example: CNY 15k–20k per month"
+          experience:
+            title: "Experience"
+            help: "You can also describe your career stage."
+            placeholder: "For example: Graduate, 3 years"
+          description:
+            title: "Short description"
+            help: "Describe your background or resume highlights. A reviewer will add a description before publishing if you leave it blank."
+            placeholder: "For example: Two internships and a research project, targeting investment analysis."
+      reviewables:
+        actions:
+          approve_resume:
+            title: "Approve and publish"
+            description: "Approve and publish"
+            complete: "Review saved."
+          reject_resume:
+            title: "Reject"
+            description: "Reject"
+            complete: "Review saved."
+    review:
+      types:
+        reviewable_isbf_resume:
+          title: "Resume submission"
+          noun: "resume"

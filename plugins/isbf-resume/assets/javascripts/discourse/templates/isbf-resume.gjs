@@ -1,3 +1,3 @@
-import ResumeEditor from "../components/resume-editor";
+import ResumeHub from "../components/resume-hub";
 
-export default <template><ResumeEditor /></template>
+export default <template><ResumeHub /></template>

@@ -1,0 +1,20 @@
+en:
+  isbf_resume:
+    sharing:
+      untitled: "Shared resume"
+      invalid_submission: "Check the file, sharing consent and field lengths."
+      invalid_pdf: "Upload a valid, readable, unencrypted PDF no larger than 10 MiB."
+      submit_failed: "The resume could not be submitted. Try again later."
+      review_description_required: "Approval requires a short description and a valid review decision."
+      review_conflict: "This submission changed or was already reviewed. Refresh the page."
+      review_failed: "The review could not be saved. Refresh and try again."
+    reviewables:
+      actions:
+        approve_resume:
+          title: "Approve and publish"
+          description: "Approve and publish"
+          complete: "Review saved."
+        reject_resume:
+          title: "Reject"
+          description: "Reject"
+          complete: "Review saved."

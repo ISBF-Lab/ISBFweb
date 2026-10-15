@@ -1,0 +1,235 @@
+# frozen_string_literal: true
+
+require_relative "../support/isbf_resume_sharing_helpers"
+
+RSpec.describe ReviewablesController do
+  include_context "with resume review permissions"
+
+  fab!(:developer, :admin)
+  fab!(:administrator, :moderator)
+  fab!(:owner, :user)
+  fab!(:submission) { Fabricate(:shared_isbf_resume, user: owner) }
+
+  let(:reviewable) { submission.reviewable }
+
+  describe "#index and #show" do
+    it "shows developers the native queue and linked resume with administrator review disabled" do
+      sign_in(developer)
+
+      get "/review.json", params: { type: "ReviewableIsbfResume" }
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.fetch("reviewables").map { |item| item.fetch("id") }).to eq(
+        [reviewable.id],
+      )
+      get "/review/#{reviewable.id}.json"
+      expect(response.status).to eq(200)
+      data = response.parsed_body.fetch("reviewable")
+      expect(data).to include("type" => "ReviewableIsbfResume", "can_edit" => true)
+      expect(data.fetch("payload")).to eq("description" => submission.submitted_description)
+      expect(data.fetch("shared_resume")).to include("id" => submission.id, "status" => "pending")
+    end
+
+    it "revokes list, details and old edit or decision requests in the same administrator session" do
+      SiteSetting.academy_moderators_review_content = true
+      SiteSetting.academy_moderators_review_resumes = true
+      sign_in(administrator)
+      get "/review/#{reviewable.id}.json"
+      expect(response.status).to eq(200)
+      version = response.parsed_body.fetch("reviewable").fetch("version")
+      SiteSetting.academy_moderators_review_resumes = false
+
+      get "/review.json", params: { type: "ReviewableIsbfResume" }
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.fetch("reviewables")).to be_empty
+      get "/review/#{reviewable.id}.json"
+      expect(response.status).to eq(404)
+      put "/review/#{reviewable.id}.json",
+          params: {
+            version: version,
+            reviewable: {
+              payload: {
+                description: "Old editor draft",
+              },
+            },
+          }
+      expect(response.status).to eq(404)
+      put "/review/#{reviewable.id}/perform/approve_resume.json", params: { version: version }
+      expect(response.status).to eq(404)
+      expect(submission.reload).to be_pending
+      expect(submission.reviews).to be_empty
+      expect(reviewable.reload).to have_attributes(status: "pending", version: version)
+    end
+
+    it "denies ordinary uploaders access to the native list, details, editing and decisions" do
+      sign_in(owner)
+      SiteSetting.academy_moderators_review_resumes = true
+
+      get "/review.json", params: { type: "ReviewableIsbfResume" }
+      expect(response.status).to eq(403)
+      get "/review/#{reviewable.id}.json"
+      expect(response.status).to eq(403)
+      put "/review/#{reviewable.id}.json",
+          params: {
+            version: reviewable.version,
+            reviewable: {
+              payload: {
+                description: "Self approval",
+              },
+            },
+          }
+      expect(response.status).to eq(403)
+      put "/review/#{reviewable.id}/perform/approve_resume.json",
+          params: {
+            version: reviewable.version,
+          }
+      expect(response.status).to eq(403)
+      expect(submission.reload).to be_pending
+      expect(submission.reviews).to be_empty
+    end
+  end
+
+  describe "#update" do
+    it "refuses to retarget a native review through payload.shared_resume_id" do
+      other_submission = Fabricate(:shared_isbf_resume)
+      original_payload = reviewable.payload.deep_dup
+      version = reviewable.version
+      sign_in(developer)
+
+      put "/review/#{reviewable.id}.json",
+          params: {
+            version: version,
+            reviewable: {
+              payload: {
+                description: "Retargeted draft",
+                shared_resume_id: other_submission.id,
+              },
+            },
+          }
+
+      expect(response.status).to eq(403)
+      expect(reviewable.reload).to have_attributes(payload: original_payload, version: version)
+      expect(submission.reload).to be_pending
+      expect(other_submission.reload).to be_pending
+      expect(submission.reviews).to be_empty
+      expect(other_submission.reviews).to be_empty
+    end
+  end
+
+  describe "#perform" do
+    it "keeps a resume with no description pending when native approval fails" do
+      SiteSetting.default_locale = "en"
+      blank_submission = Fabricate(:shared_isbf_resume, submitted_description: "")
+      blank_review = blank_submission.reviewable
+      version = blank_review.version
+      sign_in(developer)
+
+      put "/review/#{blank_review.id}/perform/approve_resume.json", params: { version: version }
+
+      expect(response.status).to eq(422)
+      expect(response.parsed_body.fetch("errors")).to include(
+        I18n.t("isbf_resume.sharing.review_description_required"),
+      )
+      expect(blank_submission.reload).to have_attributes(
+        status: "pending",
+        description: "",
+        reviewed_at: nil,
+      )
+      expect(blank_submission.reviews).to be_empty
+      expect(blank_review.reload).to have_attributes(status: "pending", version: version)
+      expect(IsbfResume::SharedResume.published).not_to include(blank_submission)
+    end
+
+    it "edits and approves with only the resume capability while ordinary review remains forbidden" do
+      SiteSetting.academy_moderators_review_resumes = true
+      SiteSetting.academy_moderators_review_content = false
+      SiteSetting.academy_moderators_edit_others_content = false
+      unrelated = Fabricate(:reviewable_queued_post, force_review: true)
+      recorded_name = administrator.name.presence || administrator.username
+      recorded_username = administrator.username
+      original_description = submission.submitted_description
+      original_version = reviewable.version
+      sign_in(administrator)
+
+      get "/review.json"
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.fetch("reviewables").map { |item| item.fetch("id") }).to eq(
+        [reviewable.id],
+      )
+      get "/review/#{unrelated.id}.json"
+      expect(response.status).to eq(404)
+      put "/review/#{unrelated.id}/perform/approve_post.json",
+          params: {
+            version: unrelated.version,
+          }
+      expect(response.status).to eq(404)
+      expect(unrelated.reload).to be_pending
+
+      put "/review/#{reviewable.id}.json",
+          params: {
+            version: original_version,
+            reviewable: {
+              payload: {
+                description: "  Administrator's native summary  ",
+              },
+            },
+          }
+      expect(response.status).to eq(200)
+      expect(submission.reload).to be_pending
+      expect(submission.reviews).to be_empty
+      version = response.parsed_body.fetch("version")
+
+      put "/review/#{reviewable.id}/perform/approve_resume.json",
+          params: {
+            version: original_version,
+          }
+      expect(response.status).to eq(409)
+      expect(submission.reload).to be_pending
+      put "/review/#{reviewable.id}/perform/approve_resume.json", params: { version: version }
+      expect(response.status).to eq(200)
+      expect(reviewable.reload).to have_attributes(status: "approved")
+      expect(reviewable.payload).to include("description" => "Administrator's native summary")
+      expect(submission.reload).to have_attributes(
+        status: "approved",
+        description: "Administrator's native summary",
+        submitted_description: original_description,
+      )
+      review = submission.reviews.sole
+      expect(review).to have_attributes(
+        reviewer_id: administrator.id,
+        reviewer_name: recorded_name,
+        reviewer_username: recorded_username,
+        original_description: original_description,
+        description: "Administrator's native summary",
+      )
+      administrator.update!(name: "Later native reviewer name", username: "renamed_native_user")
+      expect(review.reload).to have_attributes(
+        reviewer_name: recorded_name,
+        reviewer_username: recorded_username,
+      )
+      expect(IsbfResume::SharedResume.published).to contain_exactly(submission)
+    end
+
+    it "rejects through native review without publishing or requiring a public description" do
+      blank_submission = Fabricate(:shared_isbf_resume, submitted_description: "")
+      native_review = blank_submission.reviewable
+      sign_in(developer)
+
+      put "/review/#{native_review.id}/perform/reject_resume.json",
+          params: {
+            version: native_review.version,
+          }
+
+      expect(response.status).to eq(200)
+      expect(native_review.reload).to be_rejected
+      expect(blank_submission.reload).to have_attributes(status: "rejected", description: "")
+      expect(blank_submission.reviews.sole).to have_attributes(
+        reviewer_id: developer.id,
+        decision: "reject",
+        original_description: "",
+        description: "",
+      )
+      expect(IsbfResume::SharedResume.published).to be_empty
+    end
+  end
+end
