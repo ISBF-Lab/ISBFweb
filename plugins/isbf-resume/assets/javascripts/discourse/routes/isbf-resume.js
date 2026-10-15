@@ -4,17 +4,18 @@ import { i18n } from "discourse-i18n";
 
 export default class IsbfResumeRoute extends DiscourseRoute {
   @service currentUser;
+  @service router;
   @service siteSettings;
 
   beforeModel(transition) {
     if (!this.siteSettings.isbf_resume_enabled) {
-      return this.replaceWith("unknown", { path: "/404" });
+      return this.router.replaceWith("unknown", { path: "/404" });
     }
     if (!this.currentUser) {
-      return this.replaceWith("login");
+      return this.router.replaceWith("login");
     }
     if (transition.to.name === "isbfResume") {
-      return this.replaceWith("isbfResumeShares.index");
+      return this.router.replaceWith("isbfResumeShares.index");
     }
   }
 
