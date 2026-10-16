@@ -29,6 +29,11 @@ export default class ResumeShareEditModal extends Component {
     return Object.entries(FIELD_LIMITS).map(([name, limit]) => ({
       name,
       limit,
+      validation:
+        name === "description" &&
+        this.args.model.reviewable.shared_resume?.status === "approved"
+          ? "required"
+          : null,
       title: i18n(`isbf_resume.sharing.fields.${name}.title`),
       help:
         name === "description"
@@ -81,6 +86,7 @@ export default class ResumeShareEditModal extends Component {
               @name={{field.name}}
               @title={{field.title}}
               @type={{field.type}}
+              @validation={{field.validation}}
               as |control|
             >
               <control.Control

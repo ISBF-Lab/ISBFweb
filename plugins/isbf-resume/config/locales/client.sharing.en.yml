@@ -2,7 +2,7 @@ en:
   js:
     isbf_resume:
       sharing:
-        native_review_help: "Edit the title, industry, position, salary, experience and description, then save before approving. A description is required for approval. Changes and the editor are recorded in review history."
+        native_review_help: "Edit the title, industry, position, salary, experience and description. Pending items still need approval after saving; approved items update their public content immediately. Published resumes require a description. Changes and the editor are recorded in review history."
         edit_details: "Edit resume details"
         details_saved: "Resume details saved. You can continue reviewing."
         workspace_navigation: "Resume workspace navigation"
@@ -41,9 +41,9 @@ en:
         preview_failed: "This page preview is temporarily unavailable. Retry or download the PDF to view it."
         retry_preview: "Retry preview"
         review_help: "Check the PDF and sharing details. Add a description if the author left it blank, or revise the submitted description."
-        review_description: "Published description"
+        review_description: "Current description"
         review_title_help: "Change the title, or leave it blank to keep the current title."
-        review_description_help: "Required for approval, up to 2000 characters. The reviewer name, account, time and description changes are saved privately."
+        review_description_help: "Published resumes require a description, up to 2000 characters. The reviewer name, account, time and description changes are saved privately."
         description_required: "Add a short description before approving."
         decision: "Review decision"
         approve: "Approve and publish"

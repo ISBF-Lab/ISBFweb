@@ -24,14 +24,14 @@ class ReviewableIsbfResume < Reviewable
   end
 
   def build_editable_fields(fields, guardian, _args)
-    return unless pending? && can_review_target?(guardian)
+    return unless editable_resume?(guardian)
     IsbfResume::SharedResume::FIELD_LIMITS.each_key do |field|
       fields.add("payload.#{field}", field == :description ? :textarea : :text)
     end
   end
 
   def update_fields(params, performed_by, version: nil)
-    raise Discourse::InvalidAccess unless pending? && can_review_target?(performed_by.guardian)
+    raise Discourse::InvalidAccess unless editable_resume?(performed_by.guardian)
     updates = params[:payload]
     raise Discourse::InvalidParameters.new(:payload) unless updates.respond_to?(:each_pair)
     edited_payload = payload.merge(editable_payload)
@@ -44,9 +44,26 @@ class ReviewableIsbfResume < Reviewable
       unless limit && value.is_a?(String) && value.length <= limit
         raise Discourse::InvalidParameters.new(field)
       end
-      edited_payload[field.to_s] = value
+      edited_payload[field.to_s] = approved? ? value.strip : value
     end
-    super({ payload: edited_payload }, performed_by, version: version)
+    if approved?
+      edited_payload["title"] = shared_resume.title if edited_payload["title"].blank?
+      raise Discourse::InvalidParameters.new(:description) if edited_payload["description"].blank?
+    end
+    result = false
+    Reviewable.transaction do
+      result = super({ payload: edited_payload }, performed_by, version: version)
+      raise ActiveRecord::Rollback unless result
+      if approved?
+        shared_resume.revise!(
+          reviewer: performed_by,
+          details: edited_payload.slice(*IsbfResume::SharedResume::FIELD_LIMITS.keys.map(&:to_s)),
+        )
+      end
+    end
+    result
+  rescue IsbfResume::SharedResume::ReviewConflict
+    raise Reviewable::UpdateConflict
   end
 
   def editable_payload
@@ -55,7 +72,10 @@ class ReviewableIsbfResume < Reviewable
     shared_resume
       .attributes
       .slice(*fields)
-      .merge("description" => shared_resume.submitted_description)
+      .merge(
+        "description" =>
+          shared_resume.approved? ? shared_resume.description : shared_resume.submitted_description,
+      )
       .merge(payload.slice(*fields))
   end
 
@@ -68,6 +88,10 @@ class ReviewableIsbfResume < Reviewable
   end
 
   private
+
+  def editable_resume?(guardian)
+    (pending? || approved?) && can_review_target?(guardian) && shared_resume.status == status
+  end
 
   def can_review_target?(guardian)
     guardian.can_review_isbf_resumes? && shared_resume.present? && super

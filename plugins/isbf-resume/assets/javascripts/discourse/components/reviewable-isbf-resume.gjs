@@ -1,4 +1,6 @@
 import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
+import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import getURL from "discourse/lib/get-url";
@@ -10,6 +12,8 @@ import ResumeSharePreview from "./resume-share-preview";
 
 export default class ReviewableIsbfResume extends Component {
   @service modal;
+
+  @tracked previewOpen = false;
 
   get share() {
     return {
@@ -23,6 +27,11 @@ export default class ReviewableIsbfResume extends Component {
     this.modal.show(ResumeShareEditModal, {
       model: { reviewable: this.args.reviewable },
     });
+  }
+
+  @action
+  togglePreview(event) {
+    this.previewOpen = event.currentTarget.open;
   }
 
   <template>
@@ -52,9 +61,11 @@ export default class ReviewableIsbfResume extends Component {
         @href={{getURL this.share.pdf_url}}
         @label="isbf_resume.sharing.download"
       />
-      <details>
+      <details {{on "toggle" this.togglePreview}}>
         <summary>{{i18n "isbf_resume.sharing.preview"}}</summary>
-        <ResumeSharePreview @urls={{this.share.preview_urls}} />
+        {{#if this.previewOpen}}
+          <ResumeSharePreview @urls={{this.share.preview_urls}} />
+        {{/if}}
       </details>
       {{#if this.share.reviews.length}}
         <h4>{{i18n "isbf_resume.sharing.history"}}</h4>
