@@ -1,0 +1,17 @@
+{
+  "verified_at_utc": "2026-10-15T00:27:57.309423+00:00",
+  "checks": [
+    {
+      "path": "/join/",
+      "status": 200,
+      "anonymous": true
+    },
+    {
+      "path": "/isbf/join/admin/applications.json",
+      "status": 403,
+      "anonymous": true
+    }
+  ],
+  "method": "GET",
+  "production_form_submitted": false
+}

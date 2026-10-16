@@ -1,0 +1,20 @@
+[
+  {
+    "target": "common_theme",
+    "sha256": "70491c3efb50719aad83393e290f2d3664885bdf26ad1bab42d0eb338b173fdd",
+    "bytes": 268326,
+    "http_asset_verified": true
+  },
+  {
+    "target": "desktop_theme",
+    "sha256": "431622fc8841158521a9e45bce66fe23d25e1786c400244ef7c7745f3ba611e9",
+    "bytes": 108,
+    "http_asset_verified": true
+  },
+  {
+    "target": "mobile_theme",
+    "sha256": "d690d35cc075aaf0f8cd007845d3eeba7a4b23f2f01e9ecbaa43ee4e08b503b2",
+    "bytes": 107,
+    "http_asset_verified": true
+  }
+]

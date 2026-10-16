@@ -1,0 +1,9 @@
+{
+  "source_sha256": "5f7e2e4110cdacc283af0697f925a1240aa30003c68ba9f7ef20751110536839",
+  "source_files_including_marker": 71,
+  "archive": "deploy-work/isbf-join-release-20261015/release-final.tar.gz",
+  "archive_sha256": "5e062e3067f3316f967ea4a7108e7574a01d5a035f0fbf55c7f37b72e0bbeab2",
+  "installer_sha256": "f8fdda94a085d083ea98c63334ae585fffa137185ac738bccc15538c6ddedb3e",
+  "manifest_sha256": "5d10f28c5e2e5e4a1ab394acc9e556dd48e28444998901930da609fc1a59f2e0",
+  "public_font_link": "/var/www/discourse/public/join/fonts/inter-latin-variable.woff2"
+}

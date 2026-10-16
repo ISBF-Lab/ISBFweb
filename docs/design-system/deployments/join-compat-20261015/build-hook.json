@@ -1,0 +1,9 @@
+{
+  "fixed_hook_updated": true,
+  "source_sha256": "6bd9dcac4b8923527410608e09194585c12af82d553ff07cb05c2f4a2b26dc76",
+  "previous_source_sha256": "5f7e2e4110cdacc283af0697f925a1240aa30003c68ba9f7ef20751110536839",
+  "before_sha256": "f1585d0d2fb118e658147b224e1f7a2035ee37c5835df5cc8e0a5a3fe91ea31c",
+  "after_sha256": "c8c5251aa0d4fb51db03ecfd6026a239de1c46cfbb1c5c73a3f04b6ba90f8c7a",
+  "other_configuration_preserved": true,
+  "backup": "/config/isbf_app.yml.before-isbf-join-compat-20261015"
+}

@@ -1,0 +1,11 @@
+# Prepared configuration only. This file is not loaded by the application.
+# Apply only with the separately reviewed core build and merged active theme.
+site_settings:
+  nested_replies_enabled: true
+  nested_replies_default: true
+  nested_replies_cap_nesting_depth: true
+  nested_replies_max_depth: 1
+  nested_replies_default_sort: old
+
+scope: "All existing and new regular topics through Topic#nested_view?; private messages remain excluded"
+status: "Prepared; not applied to production"

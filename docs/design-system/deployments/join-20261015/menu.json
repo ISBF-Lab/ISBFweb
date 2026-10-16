@@ -1,0 +1,16 @@
+{
+  "applied": true,
+  "published_at_utc": "2026-10-14T23:40:10Z",
+  "theme_id": 4,
+  "field_id": 328,
+  "fields_before": 190,
+  "fields_after": 190,
+  "other_fields_preserved": 189,
+  "settings_preserved": true,
+  "menu_before_sha256": "fe9fdc6561c3bd2d9414fd929cda61f7acac131e521bd6453c7eec9a143e157a",
+  "menu_after_sha256": "4c309f6616908ec2e94991674581c9d432aedef68793f7970ef915b71be11a26",
+  "javascript_url": "/theme-javascripts/93d9dd20f7b92f341d425866ead8e2ccdaa17798.js?__ws=isbf-one.com",
+  "javascript_sha256": "1bc648da5a6b865415fc48e9c20c7f99820a8f25545e790ae8be1a04203d89ac",
+  "original_menu_template_preserved": true,
+  "theme_backup": "/var/www/discourse/tmp/isbf-join-release-20261015/theme-before-menu.json"
+}

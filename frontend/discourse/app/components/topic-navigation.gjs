@@ -203,6 +203,7 @@ export default class TopicNavigation extends Component {
       this.modal.show(JumpToPost, {
         model: {
           topic: this.args.topic,
+          postCount: this.args.postCount,
           jumpToIndex: this.args.jumpToIndex,
           jumpToDate: this.args.jumpToDate,
         },

@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "babel": "7.29.7",
+  "results": [
+    {
+      "filename": "plugins/isbf-join/assets/javascripts/discourse/isbf-join-route-map.js",
+      "sha256": "1ff1f79cb8762b99e2efb35555bb88072355c0232a6dfa78652010b0917f4ab1",
+      "parsed": true,
+      "output_bytes": 82
+    },
+    {
+      "filename": "plugins/isbf-join/assets/javascripts/discourse/routes/isbf-join.js",
+      "sha256": "3fc998e90d3fb5f77afa66c0add1093792597b52ff8c95bea637836b5545ec1a",
+      "parsed": true,
+      "output_bytes": 259
+    },
+    {
+      "filename": "plugins/isbf-join/test/javascripts/acceptance/join-navigation-test.js",
+      "sha256": "171e4328080e9e6917c740951b2362c21c67bed2cb79478c86574d9d583f2d73",
+      "parsed": true,
+      "output_bytes": 1048
+    }
+  ],
+  "qunit_executed": false
+}

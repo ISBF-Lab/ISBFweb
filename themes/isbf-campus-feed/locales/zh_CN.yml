@@ -5,6 +5,28 @@ zh_CN:
       brand_show_logo: "显示徽标：使用后台「徽标」页配置的对应场景图片及深色版本。"
       brand_show_name: "显示名称：显示平台名称，可与徽标同时显示；两个开关均关闭时隐藏品牌区域。"
   isbf_v2:
+    continue_reading:
+      title: "接着看看"
+      suggested: "新帖与未读"
+      related: "相关话题"
+      sources: "更多话题来源"
+      browse: "浏览更多话题"
+      browse_all: "浏览全部 →"
+      browse_category: "浏览%{category}中的全部话题"
+      all_categories: "所有分类"
+      replies:
+        other: "%{count} 回复"
+      remaining_new:
+        other: "还有 %{count} 个新话题"
+      remaining_unread:
+        other: "%{count} 个未读话题"
+    reply_conversations:
+      progress: "%{current} / %{total}"
+      reply_to: "回复 %{name} · #%{number}"
+      original_post: "原帖"
+      go_to_original: "定位原文"
+      context_loaded: "已加载原回复"
+      context_unavailable: "该回复不可查看，或暂时无法加载。"
     learning_request_course: "申请添加课程"
     learning_submit_request: "提交申请"
     learning_course_pending: "课程申请已提交，审核通过后展示"

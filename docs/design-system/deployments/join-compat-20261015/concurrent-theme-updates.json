@@ -1,0 +1,49 @@
+{
+  "original_theme_fields": 190,
+  "current_theme_fields": 192,
+  "unrelated_changes_preserved": [
+    {
+      "id": 202,
+      "name": "en",
+      "target_id": 4,
+      "change": "updated"
+    },
+    {
+      "id": 203,
+      "name": "zh_CN",
+      "target_id": 4,
+      "change": "updated"
+    },
+    {
+      "id": 227,
+      "name": "discourse/components/isbf-v2-feed-card.gjs",
+      "target_id": 6,
+      "change": "updated"
+    },
+    {
+      "id": 229,
+      "name": "discourse/lib/feed-post-loader.js",
+      "target_id": 6,
+      "change": "updated"
+    },
+    {
+      "id": 416,
+      "name": "poll",
+      "target_id": 5,
+      "change": "updated"
+    },
+    {
+      "id": 437,
+      "name": "discourse/components/isbf-poll-previews.gjs",
+      "target_id": 6,
+      "change": "added"
+    },
+    {
+      "id": 438,
+      "name": "discourse/lib/poll-preview.js",
+      "target_id": 6,
+      "change": "added"
+    }
+  ],
+  "this_release_theme_writes": false
+}

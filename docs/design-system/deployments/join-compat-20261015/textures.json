@@ -1,0 +1,382 @@
+{
+  "scope": "Actual embedded WebP image decoding with 128px bitmap output under original and candidate document CSP; no 3D rendering",
+  "model_sha256": {
+    "desktop": "c3f83ddd823a0a2bd8494ee1e11a68bc5a31aa9e8ff2f7b8ad729741bc76b1b5",
+    "mobile": "9bb62015d44ffcca5675e4ed890e59c3a994d42b69a2e07b743452d2ae37d0fc"
+  },
+  "controller_sha256": "d3b3cdc8c5eb36dfe786f79aa15c936e5b18d4d592502dc7d47412f75bc4d1b2",
+  "checks": [
+    {
+      "textures": [
+        {
+          "variant": "desktop",
+          "index": 0,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "desktop",
+          "index": 1,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "desktop",
+          "index": 2,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "desktop",
+          "index": 3,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "desktop",
+          "index": 4,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "desktop",
+          "index": 5,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "desktop",
+          "index": 6,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "desktop",
+          "index": 7,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "desktop",
+          "index": 8,
+          "image": true,
+          "bitmap": false,
+          "width": 2048,
+          "height": 2048,
+          "error": "TypeError: Failed to fetch"
+        }
+      ],
+      "violations": [
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "https://external.invalid/blocked"
+        }
+      ],
+      "externalBlocked": true,
+      "policy": "original",
+      "variant": "desktop",
+      "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+    },
+    {
+      "textures": [
+        {
+          "variant": "mobile",
+          "index": 0,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "mobile",
+          "index": 1,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "mobile",
+          "index": 2,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "mobile",
+          "index": 3,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "mobile",
+          "index": 4,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "mobile",
+          "index": 5,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "mobile",
+          "index": 6,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "mobile",
+          "index": 7,
+          "image": null,
+          "bitmap": false,
+          "error": "TypeError: Failed to fetch"
+        },
+        {
+          "variant": "mobile",
+          "index": 8,
+          "image": true,
+          "bitmap": false,
+          "width": 2048,
+          "height": 2048,
+          "error": "TypeError: Failed to fetch"
+        }
+      ],
+      "violations": [
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "blob"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "https://external.invalid/blocked"
+        }
+      ],
+      "externalBlocked": true,
+      "policy": "original",
+      "variant": "mobile",
+      "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+    },
+    {
+      "textures": [
+        {
+          "variant": "desktop",
+          "index": 0,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "desktop",
+          "index": 1,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "desktop",
+          "index": 2,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "desktop",
+          "index": 3,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "desktop",
+          "index": 4,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "desktop",
+          "index": 5,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "desktop",
+          "index": 6,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "desktop",
+          "index": 7,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "desktop",
+          "index": 8,
+          "image": true,
+          "bitmap": true,
+          "width": 2048,
+          "height": 2048
+        }
+      ],
+      "violations": [
+        {
+          "directive": "connect-src",
+          "blocked": "https://external.invalid/blocked"
+        }
+      ],
+      "externalBlocked": true,
+      "policy": "candidate",
+      "variant": "desktop",
+      "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+    },
+    {
+      "textures": [
+        {
+          "variant": "mobile",
+          "index": 0,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "mobile",
+          "index": 1,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "mobile",
+          "index": 2,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "mobile",
+          "index": 3,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "mobile",
+          "index": 4,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "mobile",
+          "index": 5,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "mobile",
+          "index": 6,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "mobile",
+          "index": 7,
+          "image": null,
+          "bitmap": true
+        },
+        {
+          "variant": "mobile",
+          "index": 8,
+          "image": true,
+          "bitmap": true,
+          "width": 2048,
+          "height": 2048
+        }
+      ],
+      "violations": [
+        {
+          "directive": "connect-src",
+          "blocked": "https://external.invalid/blocked"
+        }
+      ],
+      "externalBlocked": true,
+      "policy": "candidate",
+      "variant": "mobile",
+      "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+    }
+  ],
+  "browser_version": "151.0.7922.34",
+  "passed": true
+}

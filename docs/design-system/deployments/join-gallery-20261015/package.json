@@ -1,0 +1,29 @@
+{
+  "source_sha256": "78709c643308a2258725b63a34a95ed85c3fefc47f0500d31fa9b682c7b2afa8",
+  "previous_source_sha256": "6bd9dcac4b8923527410608e09194585c12af82d553ff07cb05c2f4a2b26dc76",
+  "source_files_including_marker": 80,
+  "changed": [
+    "web/asset-manifest.json",
+    "web/dist/index.html",
+    "web/src/config.js"
+  ],
+  "added": [
+    "web/dist/assets/index-r26J2wOQ.js",
+    "web/dist/assets/scene-BNFbN7l3.js",
+    "web/public/gallery/01-orbit.png",
+    "web/public/gallery/02-ascent.png",
+    "web/public/gallery/03-current.png",
+    "web/public/gallery/04-aperture.png",
+    "web/public/gallery/05-connection.png",
+    "web/public/gallery/06-next.png"
+  ],
+  "removed": [
+    "web/dist/assets/index-CFbXBEqh.js",
+    "web/dist/assets/scene-vU8LyUtu.js"
+  ],
+  "original_images_preserved": true,
+  "layout_styles_models_and_backend_preserved": true,
+  "forum_plugin_javascript_reused": true,
+  "archive_sha256": "2be873095cb01968a841b94ebdb4c2fd12c0777d00497b3bb503857bc71b7178",
+  "installer_sha256": "af9924d98b69133450dad48a45024b658a7f62b6e19a0bf8d2216ac6b8bddd93"
+}

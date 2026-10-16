@@ -1,0 +1,15 @@
+{
+  "activated": true,
+  "activated_at_utc": "2026-10-15T04:45:45.622511+00:00",
+  "source_sha256": "78709c643308a2258725b63a34a95ed85c3fefc47f0500d31fa9b682c7b2afa8",
+  "web_restart_exit_code": 0,
+  "web_restarts_this_release": 1,
+  "theme_fields_written": false,
+  "database_migrations_run": false,
+  "container_recreated": false,
+  "postgres_redis_proxy_restarted": false,
+  "production_form_posted": false,
+  "forum_plugin_javascript_recompiled": false,
+  "browser_run": false,
+  "visual_acceptance": "User"
+}

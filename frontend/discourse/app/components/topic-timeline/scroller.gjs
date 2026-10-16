@@ -13,6 +13,9 @@ export default class TopicTimelineScroller extends Component {
   style = trustHTML(`height: ${SCROLLER_HEIGHT}px`);
 
   get repliesShort() {
+    if (this.args.translatedLabel) {
+      return this.args.translatedLabel;
+    }
     return i18n(`topic.timeline.replies_short`, {
       current: this.args.current,
       total: this.args.total,

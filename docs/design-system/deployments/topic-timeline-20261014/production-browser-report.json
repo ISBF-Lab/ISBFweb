@@ -1,0 +1,13 @@
+{
+  "passed": false,
+  "boundary": "Capped browser did not complete full-page loading verification; no claim of production interaction or visual acceptance.",
+  "verification_keys_removed": true,
+  "browser_memory_limit_mib": 512,
+  "browser_cpu_limit": 0.5,
+  "browser_pids_limit": 192,
+  "full_preview_started": false,
+  "production_content_or_preferences_submitted": false,
+  "initial_diagnosis": "Native class binding removed the floating marker; fixed and covered by offline class replacement and tracked setter revalidation.",
+  "remaining_tool_failure": "Production page verification incomplete",
+  "human_visual_acceptance": "Pending user review"
+}

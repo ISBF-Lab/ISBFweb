@@ -6,9 +6,11 @@ class NestedTopic::ListRoots
   params do
     attribute :sort, :string
     attribute :page, :integer
+    attribute :target_post_number, :integer
 
     validates :sort, presence: true
     validates :page, presence: true, numericality: { greater_than_or_equal_to: 0 }
+    validates :target_post_number, numericality: { greater_than: 1 }, allow_nil: true
   end
 
   model :loader, :build_loader
@@ -17,6 +19,7 @@ class NestedTopic::ListRoots
   step :load_roots
   only_if(:initial_page) { step :promote_pinned_roots }
   step :expand_reply_trees
+  only_if(:targeted_flat_descendant) { step :reveal_target }
   step :prepare_posts
   step :serialize_roots
   only_if(:initial_page) { step :enrich_with_topic_metadata }
@@ -46,7 +49,12 @@ class NestedTopic::ListRoots
   end
 
   def initial_page(params:)
-    params.page == 0
+    params.page == 0 || params.target_post_number.present?
+  end
+
+  def targeted_flat_descendant(params:, loader:, navigation:)
+    loader.flat_replies? && params.target_post_number.present? &&
+      navigation[:root_post_number] != params.target_post_number
   end
 
   def final_page(has_more_roots:)
@@ -54,21 +62,49 @@ class NestedTopic::ListRoots
   end
 
   def load_roots(params:, loader:, topic_view:)
-    pinned_post_ids = topic_view.topic.nested_topic&.pinned_post_ids.presence
-    scope = loader.root_posts_scope(params.sort)
-    scope = scope.where.not(id: pinned_post_ids) if pinned_post_ids.present?
-    roots =
-      scope.offset(params.page * NestedReplies::TreeLoader::ROOTS_PER_PAGE).limit(
-        NestedReplies::TreeLoader::ROOTS_PER_PAGE,
+    if loader.flat_replies?
+      navigation = NestedReplies::Navigation.new(loader)
+      context[:navigation] = navigation.metadata(
+        post_number: params.target_post_number,
+        root_index: params.page * NestedReplies::TreeLoader::ROOTS_PER_PAGE + 1,
       )
-    context[:roots] = loader.load_posts_for_tree(roots).to_a
-    context[:has_more_roots] = context[:roots].size == NestedReplies::TreeLoader::ROOTS_PER_PAGE
+      context[:root_page] = (
+        if params.target_post_number.present?
+          context[:navigation][:root_page]
+        else
+          params.page
+        end
+      )
+      scope = navigation.roots
+      context[:roots] = loader.load_posts_for_tree(
+        scope.offset(context[:root_page] * NestedReplies::TreeLoader::ROOTS_PER_PAGE).limit(
+          NestedReplies::TreeLoader::ROOTS_PER_PAGE,
+        ),
+      ).to_a
+      context[:has_more_roots] = (context[:root_page] + 1) *
+        NestedReplies::TreeLoader::ROOTS_PER_PAGE < context[:navigation][:root_count]
+    else
+      context[:navigation] = nil
+      context[:root_page] = params.page
+      pinned_post_ids = topic_view.topic.nested_topic&.pinned_post_ids.presence
+      scope = loader.root_posts_scope(params.sort)
+      scope = scope.where.not(id: pinned_post_ids) if pinned_post_ids.present?
+      roots =
+        scope.offset(params.page * NestedReplies::TreeLoader::ROOTS_PER_PAGE).limit(
+          NestedReplies::TreeLoader::ROOTS_PER_PAGE,
+        )
+      context[:roots] = loader.load_posts_for_tree(roots).to_a
+      context[:has_more_roots] = context[:roots].size == NestedReplies::TreeLoader::ROOTS_PER_PAGE
+    end
   end
 
   def promote_pinned_roots(loader:, topic_view:, roots:)
     pinned_post_ids = topic_view.topic.nested_topic&.pinned_post_ids.presence
     context[:pinned_post_ids] = pinned_post_ids
-    context[:roots] = loader.promote_pinned_roots(roots, pinned_post_ids)
+    context[:roots] = loader.promote_pinned_roots(
+      roots,
+      pinned_post_ids,
+    ) unless loader.flat_replies?
   end
 
   def expand_reply_trees(loader:, params:, roots:)
@@ -81,6 +117,22 @@ class NestedTopic::ListRoots
       )
     context[:children_map] = tree_data[:children_map]
     context[:all_posts] = tree_data[:all_posts]
+  end
+
+  def reveal_target(loader:, params:, navigation:, children_map:, all_posts:)
+    root_number = navigation[:root_post_number]
+    posts =
+      loader.load_posts_for_tree(
+        loader.flat_descendants_scope(
+          root_number,
+          sort: "old",
+          offset: navigation[:child_page] * NestedReplies::TreeLoader::CHILDREN_PER_PAGE,
+        ),
+      ).to_a
+    children_map[root_number] = (children_map.fetch(root_number, []) + posts).uniq(&:id).sort_by(
+      &:post_number
+    )
+    all_posts.concat(posts).uniq!(&:id)
   end
 
   def prepare_posts(params:, loader:, preloader:, all_posts:)
@@ -99,16 +151,28 @@ class NestedTopic::ListRoots
     children_map:,
     reply_counts:,
     descendant_counts:,
-    serializer:
+    serializer:,
+    navigation:,
+    root_page:
   )
     context[:response] = {
       roots:
-        roots.map do |root|
-          serializer.serialize_tree(root, children_map, reply_counts, descendant_counts)
+        roots.map.with_index do |root, index|
+          node = serializer.serialize_tree(root, children_map, reply_counts, descendant_counts)
+          if navigation
+            node[:root_index] = root_page * NestedReplies::TreeLoader::ROOTS_PER_PAGE + index + 1
+            if root.post_number == navigation[:root_post_number] &&
+                 params.target_post_number.present? && params.target_post_number != root.post_number
+              node[:target_post_number] = params.target_post_number
+              node[:children_page] = navigation[:child_page]
+            end
+          end
+          node
         end,
       has_more_roots: has_more_roots,
-      page: params.page,
+      page: root_page,
     }
+    context[:response][:navigation] = navigation if navigation
   end
 
   def enrich_with_topic_metadata(

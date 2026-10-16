@@ -1,0 +1,23 @@
+{
+  "source_sha256": "6bd9dcac4b8923527410608e09194585c12af82d553ff07cb05c2f4a2b26dc76",
+  "plugin_compiled": true,
+  "client_route_map_present": true,
+  "document_redirect_present": true,
+  "generated_directory": "/var/www/discourse/app/assets/generated/isbf-join-compat-20261015",
+  "plugin_manifest": {
+    "admin": {
+      "fileName": "isbf-join-compat-20261015_admin.CcvF8J-scejdpxb.digested.js",
+      "imports": [],
+      "externalPluginImports": [],
+      "routeBundles": []
+    },
+    "main": {
+      "fileName": "isbf-join-compat-20261015_main.DPuQyA-scejdpxb.digested.js",
+      "imports": [],
+      "externalPluginImports": [],
+      "routeBundles": []
+    }
+  },
+  "live_plugin_changed": false,
+  "theme_changed": false
+}

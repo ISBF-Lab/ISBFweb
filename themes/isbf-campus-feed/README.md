@@ -17,6 +17,30 @@ its stale theme cache.
 The bookmarks page hides Discourse's activity subnavigation so its content
 starts with the bookmark search and list. Other activity pages keep those tabs.
 
+The page-header, marketplace, learning, and alumni back links share the
+`isbf-back-navigation` service. Normal clicks traverse the current tab's browser
+history, retaining native scroll restoration and query parameters. The service
+records successful pushes and replacements by the browser history UUID, updates
+its position on `popstate`, and persists through `sessionStore`. Capture the
+current UUID before leaving or reloading: topic reading can replace it without
+a route event. Unknown UUIDs start a new history boundary, including new tabs
+with copied session storage. Without a recorded predecessor, page headers use
+`/latest`, and marketplace, learning, and alumni use `/isbf/workbench`.
+Modified clicks follow the rendered return URL as ordinary links. Regression
+coverage lives in `test/unit/back-navigation-history-test.js` and
+`test/integration/back-navigation-test.gjs`; validation is limited to these
+flows, changed-file lint, and theme JavaScript compilation.
+
+The production release also patches the current shared headers in
+`isbf-workbench-topic-page` (marketplace/teamup) and `isbf-resource-page`
+(learning/library). The marketplace and learning sources in this export use
+older layouts; the active theme delegates those headers to the shared views.
+The release merges into the live fields and preserves those delegated pages,
+the library, teamup, and other deployed features. Actual source versions and
+rollback details are recorded in
+`docs/design-system/deployments/back-navigation-20261014/`. Obtain a fresh live
+export before updating these fields; do not replace them with the older layouts.
+
 The October 2026 merge uses theme ID 4's current export as the baseline, including
 notifications, explore preferences, reporting, topic actions, and optional titles.
 Optional titles remain explicitly entered; do not derive them from post bodies.
@@ -135,21 +159,39 @@ width in `common/common.scss` aligned with Core's avatar column so the author
 metadata remains beside the avatar. Core renders the author label and falls back
 to the username when a user has no full name.
 
-Regular topic posts use the full central column. The A timeline layout reuses
-Core's single topic navigation instance and reading state; it does not move
-Ember-owned nodes or copy the timeline component. At the existing 1280px right
-rail breakpoint, the actual `.timeline-scrollarea-wrapper` enables a reading
-card below search. A ResizeObserver reserves its measured height above the
-remaining rail cards and releases that space when the topic or mode changes.
+`isbf-user-display` scopes name priority to regular feed-style topic posts without
+changing global name settings. The feed and grouped notification entries share
+`user-display`; received notification labels include the name and `@username`
+when a name is available. Native notification menus keep their renderers, links,
+counts, group names and read-state handling. Empty names fall back to usernames.
+The live feed includes home-pinning changes absent from this source export; merge
+only the author getter and import into its current field when deploying this fix.
+The actual merged source, checks and conditional rollback are recorded in
+`docs/design-system/deployments/user-display-20261013/`.
+
+Regular topic posts use the full central column. Reading reuses Core's single
+topic navigation instance and reading state without moving Ember-owned nodes.
+The timeline starts collapsed at every viewport width. When progress is available,
+the header button opens a content-sized frosted-glass panel at the viewport's
+right edge, below the header. The right rail reserves no reading space.
 Core keeps short single-post timelines hidden and long single-post timelines
 available. Remaining admin and language controls stay accessible.
 
-The header progress button uses Core's stream index and expansion event. Above
-600px, the expanded timeline is a compact card below the header, aligned to the
-button's right edge. Its width is capped at 340px and constrained by the central
-column; short windows scroll inside the card. At 600px and below, it remains a
-reading sheet above the mobile reply/navigation area and safe inset. The
-collapsed desktop rail keeps its existing 60dvh height cap.
+On feed-style topics, the hidden `.d-header-wrap` mirrors the visible 60px page
+header with a fixed, non-interactive measurement box. Core's header service and
+post jump lock then align the target article immediately below that header on
+desktop and mobile. Do not remove the measurement box or add a second scroll
+correction; other topic layouts keep their existing header measurements.
+
+The header progress button uses Core's stream index and expansion event. Dates,
+counts, and reading information appear on the left; the track and handle appear
+on the right. The panel uses 12px padding, 60% theme-background opacity,
+and 24px blur, as requested for this floating region. At 600px and below, it reserves the existing 130px
+bottom clearance plus safe inset; short windows scroll inside the panel.
+The header button, close control, outside press, and Escape dismiss reading.
+Explicit dismissal restores opener focus; outside dismissal preserves target
+focus. Native jump dialogs and nested menus retain their interactions.
+The panel cancels the old sheet swipe while retaining native pointer dragging.
 The blue track extends through the top half of Core's 50px scroller to meet the
 handle's center. Shared track and handle sizes keep their horizontal alignment
 without changing drag geometry or duplicating reading state. Private messages
@@ -157,6 +199,14 @@ and nested views keep their existing navigation. The layout lives in
 `stylesheets/topic-reading.scss`, imported by `common/common.scss`; sync that
 extra SCSS field with the two reading JavaScript modules and locale additions.
 The extra SCSS field is named `topic-reading` without its file extension.
+The return button sits in the footer beside jump and notification controls,
+using the native return threshold and filtered stream index. Native embedded
+return buttons are hidden only in this reading region. The theme's
+`isbf-close-on-click-outside` modifier extends the existing UI kit modifier and
+installs its listener during capture, so this release needs no Core changes.
+The proposal, source hashes, and validation boundaries are recorded in
+`docs/design-system/proposals/topic-timeline-floating-20261013.md` and its review
+directory. Final visual acceptance is pending the user's review.
 When syncing an older live export, limit the desktop navigation hiding rule with
 `:not(.isbf-topic-reading)`, and wrap the rail's existing panels with
 `isbf-v2-rail__content`.
@@ -199,3 +249,53 @@ Per-post anonymous publishing requires `plugins/isbf-anonymous`, Discourse's
 `/isbf-anonymous/api/posts` endpoint resolves all rotated identities for the
 logged-in owner. Anonymous posts cannot be edited or deleted by non-staff after
 publishing. The core full-session anonymous switch is denied by the plugin.
+
+## Reply conversations (candidate, not deployed)
+
+The [approved interaction plan](../../docs/design-system/proposals/reply-conversations-20261015.md)
+groups ordinary topic replies by their root. Descendants render once, oldest first,
+at one level of indentation derived from the avatar radius plus the existing 12px gap.
+The initial preview shows three replies; expansion pages
+through 50 replies and collapse restores the preview. Reply context loads on demand
+through the existing permission-checked post endpoint and links to the exact original floor.
+
+The `nested-topic-navigation` outlet mounts one native `TopicNavigation`/`TopicTimeline` pair.
+The optional timeline `navigation` adapter exposes `total`, `lastReadIndex`,
+`dateForIndex(index)`, `label(index)`, `loadedAllPosts`, and
+`excerpt(index)`. Labels show only the current / total group index, such as `1 / 2`.
+The theme adds `jumpToIndex(index)` and
+`jumpToPostNumber(number)`; the core container uses the optional adapter and retains
+its normal post-stream behavior otherwise. `topic:group-scrolled` carries the group
+index and fraction. Group navigation resolves server metadata before using canonical
+`/t/slug/id/floor` routes, so floor numbers are never treated as group ordinals.
+
+Server navigation and root responses share the same oldest-first ordering, pinned
+root priority and visible descendant relation. Targeted pages retain the first three
+replies plus the target's 50-reply page, with explicit controls for missing earlier
+replies and root pages. Requests and cached state are scoped to their topic.
+The selected straight-branch design starts its one-pixel trunk at the root avatar's
+bottom center and joins reply avatars with horizontal 12px branches. The resulting
+indent is currently 33px; the trunk ends at the last reply avatar's center. The earlier
+page control participates in the trunk to preserve its continuity across a target-page
+gap. Colors use the existing strong border token; the collapse button uses the normal
+Collapse label. See the [selected reference](../../docs/design-system/reviews/reply-conversations-20261015/guide-redesign/README.md).
+
+The [review directory](../../docs/design-system/reviews/reply-conversations-20261015/README.md)
+contains desktop/mobile light/dark previews, test sources, limitations, and prepared
+activation settings. It does not change default core settings or production. Existing
+and new regular topics enter this view when the site-wide nested default is enabled;
+private messages, embedded views, chat and admin interfaces keep their dedicated UI.
+
+## Continue reading footer (2026-10-16)
+
+The `more-topics-content` wrapper outlet presents the existing suggested and related topic records
+with `isbf-continue-reading` components and `stylesheets/continue-reading.scss`. It retains native
+mode selection, topic order, author data, unread semantics, navigation and tracking counts.
+Private messages and unknown plugin modes yield to the original components. The footer shares
+`BrowseMore.topicBrowseMoreData`; preserve its message-count dependency and all effective URLs.
+
+The stylesheet is imported locally by `common/common.scss`. Do not extend these rules to discovery
+lists or change the recommendation provider. Source snapshots, checks, local fixture instructions
+and acceptance boundaries are in `docs/design-system/reviews/continue-reading-20261016/README.md`.
+
+2026-10-16：继续阅读已技术发布，仅接管普通话题底部的两种已知来源。实际合并源码、原生检查和恢复见[发布记录](../../docs/design-system/deployments/continue-reading-20261016/README.md)，最终视觉仍待用户核验。

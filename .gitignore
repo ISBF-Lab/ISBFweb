@@ -36,6 +36,7 @@
 !/plugins/isbf-anonymous
 !/plugins/isbf-calendar
 !/plugins/isbf-explore
+!/plugins/isbf-join
 !/plugins/isbf-moderation
 !/plugins/isbf-notifications
 !/plugins/isbf-repost

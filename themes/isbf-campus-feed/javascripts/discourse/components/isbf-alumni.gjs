@@ -17,6 +17,7 @@ import ISBFAlumniProfile from "./isbf-alumni-profile";
 export default class ISBFAlumni extends Component {
   @service appEvents;
   @service currentUser;
+  @service isbfBackNavigation;
   @service site;
 
   @tracked country = "CN";
@@ -52,6 +53,10 @@ export default class ISBFAlumni extends Component {
     return alumniConfig(this.site);
   }
 
+  get backHref() {
+    return this.isbfBackNavigation.href("/isbf/workbench");
+  }
+
   get mapConfig() {
     return this.geography
       ? { ...this.config, countries: this.geography.countries }
@@ -72,6 +77,11 @@ export default class ISBFAlumni extends Component {
       location: alumniLocation(user),
       href: `/u/${encodeURIComponent(user.username)}`,
     }));
+  }
+
+  @action
+  goBack(event) {
+    this.isbfBackNavigation.back(event);
   }
 
   @action
@@ -177,7 +187,12 @@ export default class ISBFAlumni extends Component {
   <template>
     <main class="isbf-alumni">
       <header class="isbf-alumni__header">
-        <a class="isbf-alumni__back" href="/isbf/workbench">
+        <a
+          aria-label={{i18n "back_button"}}
+          class="isbf-alumni__back"
+          href={{this.backHref}}
+          {{on "click" this.goBack}}
+        >
           {{dIcon "arrow-left"}}<h1>{{i18n
               (themePrefix "isbf_v2.workbench_alumni")
             }}</h1>

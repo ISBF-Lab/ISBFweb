@@ -2,6 +2,8 @@ import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import { modifier } from "ember-modifier";
 import BrowseMore from "discourse/components/more-topics/browse-more";
+import PluginOutlet from "discourse/components/plugin-outlet";
+import lazyHash from "discourse/helpers/lazy-hash";
 import { eq } from "discourse/truth-helpers";
 import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
 
@@ -22,18 +24,23 @@ export default class MoreTopics extends Component {
   <template>
     <div class="more-topics__container" {{this.syncTopic @topic}}>
       {{#if this.moreTopicsTabs.selectedTab}}
-        <div
-          class={{dConcatClass
-            "more-topics__lists"
-            (if (eq this.moreTopicsTabs.tabs.length 1) "single-list")
-          }}
+        <PluginOutlet
+          @name="more-topics-content"
+          @outletArgs={{lazyHash topic=@topic}}
         >
-          <this.moreTopicsTabs.selectedTab.component @topic={{@topic}} />
-        </div>
+          <div
+            class={{dConcatClass
+              "more-topics__lists"
+              (if (eq this.moreTopicsTabs.tabs.length 1) "single-list")
+            }}
+          >
+            <this.moreTopicsTabs.selectedTab.component @topic={{@topic}} />
+          </div>
 
-        {{#if @topic.suggestedTopics.length}}
-          <BrowseMore @topic={{@topic}} />
-        {{/if}}
+          {{#if @topic.suggestedTopics.length}}
+            <BrowseMore @topic={{@topic}} />
+          {{/if}}
+        </PluginOutlet>
       {{/if}}
     </div>
   </template>

@@ -61,7 +61,7 @@ export default class BrowseMore extends Component {
     }
   }
 
-  get topicBrowseMoreMessage() {
+  get topicBrowseMoreData() {
     this.topicTrackingState.get("messageCount");
 
     let category = this.args.topic.get("category");
@@ -78,6 +78,32 @@ export default class BrowseMore extends Component {
       newTopics = this.topicTrackingState.countNew();
     }
 
+    return {
+      category,
+      newTopics,
+      unreadTopics,
+      newUrl: this.siteSettings.enable_unified_new
+        ? getURL("/new?subset=topics")
+        : getURL("/new"),
+      unreadUrl: this.siteSettings.enable_unified_new
+        ? getURL("/new?subset=replies")
+        : getURL("/unread"),
+      latestUrl: getURL("/latest"),
+      categoriesUrl: getURL("/categories"),
+    };
+  }
+
+  get topicBrowseMoreMessage() {
+    const {
+      category,
+      newTopics,
+      unreadTopics,
+      newUrl,
+      unreadUrl,
+      latestUrl,
+      categoriesUrl,
+    } = this.topicBrowseMoreData;
+
     if (newTopics + unreadTopics > 0) {
       return I18n.messageFormat("topic.read_more_MF", {
         HAS_UNREAD_AND_NEW: unreadTopics > 0 && newTopics > 0,
@@ -86,22 +112,18 @@ export default class BrowseMore extends Component {
         HAS_CATEGORY: !!category,
         categoryLink: category ? categoryBadgeHTML(category) : null,
         basePath: getURL(""),
-        unreadUrl: this.siteSettings.enable_unified_new
-          ? getURL("/new?subset=replies")
-          : getURL("/unread"),
-        newUrl: this.siteSettings.enable_unified_new
-          ? getURL("/new?subset=topics")
-          : getURL("/new"),
+        unreadUrl,
+        newUrl,
       });
     } else if (category) {
       return i18n("topic.read_more_in_category", {
         categoryLink: categoryBadgeHTML(category),
-        latestLink: getURL("/latest"),
+        latestLink: latestUrl,
       });
     } else {
       return i18n("topic.read_more", {
-        categoryLink: getURL("/categories"),
-        latestLink: getURL("/latest"),
+        categoryLink: categoriesUrl,
+        latestLink: latestUrl,
       });
     }
   }

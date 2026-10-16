@@ -1,0 +1,11 @@
+{
+  "container": "isbf_join_tools_20261014",
+  "oom_killed": false,
+  "memory_bytes": 536870912,
+  "memory_swap_bytes": 536870912,
+  "nano_cpus": 500000000,
+  "pids_limit": 192,
+  "network_mode": "none",
+  "removed": true,
+  "full_preview_status": "exited"
+}

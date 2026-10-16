@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "revision": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "core_files_preserved": 13858,
+  "plugin_count": 65,
+  "other_plugins_preserved": 64,
+  "plugin_hidden_files_and_symlink_targets_preserved": true,
+  "source_sha256": "6bd9dcac4b8923527410608e09194585c12af82d553ff07cb05c2f4a2b26dc76",
+  "source_files_verified": 74,
+  "font_bytes_preserved": true,
+  "previous_assets_preserved": true,
+  "new_assets_verified": 4
+}

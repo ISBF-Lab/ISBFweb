@@ -1,0 +1,71 @@
+{
+  "core_release": "da29b7352452fdb0d333377eae493f6ad8e8cd540731a1ba3261cb8b5846ac5f",
+  "files": [
+    {
+      "path": "frontend/discourse/app/components/nested.gjs",
+      "sha256": "79732813f4faf5d83abd4bd3785f31870e487bb2c854f11524e35db5329c708f",
+      "snapshot": "regressions-source/frontend/discourse/app/components/nested.gjs.txt"
+    },
+    {
+      "path": "frontend/discourse/app/components/nested/post-children.gjs",
+      "sha256": "00952b71f64b2ddbff90dbd826d89e90a144503736d55d54caaa93774f21e464",
+      "snapshot": "regressions-source/frontend/discourse/app/components/nested/post-children.gjs.txt"
+    },
+    {
+      "path": "frontend/discourse/app/components/nested/post.gjs",
+      "sha256": "031d228b1c0265d5c6bfd1528dbe181959c67dea08d3a739e6db9a10bdf2d6fc",
+      "snapshot": "regressions-source/frontend/discourse/app/components/nested/post.gjs.txt"
+    },
+    {
+      "path": "frontend/discourse/app/controllers/nested.js",
+      "sha256": "3ece86b84f9733188021499ebd73163ae24df4d7bd023e5c32097d3d7b456fba",
+      "snapshot": "regressions-source/frontend/discourse/app/controllers/nested.js.txt"
+    },
+    {
+      "path": "frontend/discourse/app/routes/topic/from-params.js",
+      "sha256": "03016eb29d3198e89aab0cbf3e4245fce1c5bf30f3ad4236474bfbc8f1eeac66",
+      "snapshot": "regressions-source/frontend/discourse/app/routes/topic/from-params.js.txt"
+    },
+    {
+      "path": "frontend/discourse/app/lib/nested-topic-model.js",
+      "sha256": "6074b22038d5d57841cfd1a6fd196b2d4c64044307dcbd1a3c05db7212f33781",
+      "snapshot": "regressions-source/frontend/discourse/app/lib/nested-topic-model.js.txt"
+    },
+    {
+      "path": "frontend/discourse/app/lib/nested-view-cache-snapshot.js",
+      "sha256": "c35ea54676c191704ad14ffd40eb48bd5b1c0db53c7e5e669012a8db61d1c1f9",
+      "snapshot": "regressions-source/frontend/discourse/app/lib/nested-view-cache-snapshot.js.txt"
+    },
+    {
+      "path": "frontend/discourse/app/lib/flat-reply-pages.js",
+      "sha256": "b32313ced7a3bafd600148a48caa557d81c3439498c5b9328e6e93fb9e02a9aa",
+      "snapshot": "regressions-source/frontend/discourse/app/lib/flat-reply-pages.js.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/reply-conversations.scss",
+      "sha256": "92bc35af7290794a0c34244cee2dbe442821a5f05160750ad7602b624baeaad3",
+      "snapshot": "regressions-source/themes/isbf-campus-feed/stylesheets/reply-conversations.scss.txt"
+    },
+    {
+      "path": "frontend/discourse/tests/unit/lib/flat-reply-pages-test.js",
+      "sha256": "68148ec0bfeb69f63450fb27a5f2e1f8a1858eccbd6b8ea59a7430936e3dd862",
+      "snapshot": "regressions-source/frontend/discourse/tests/unit/lib/flat-reply-pages-test.js.txt"
+    },
+    {
+      "path": "frontend/discourse/tests/unit/controllers/nested-test.js",
+      "sha256": "0dfb80bdc26d6ae64328b68515368a4c20135b54d91d0407f9119220c66edfc8",
+      "snapshot": "regressions-source/frontend/discourse/tests/unit/controllers/nested-test.js.txt"
+    },
+    {
+      "path": "frontend/discourse/tests/unit/routes/topic-from-params-test.js",
+      "sha256": "41c76d4b6bc4d76d0e6e2950c7bb30a43c6bc10ba70c55fb993c8391e8fd6658",
+      "snapshot": "regressions-source/frontend/discourse/tests/unit/routes/topic-from-params-test.js.txt"
+    },
+    {
+      "path": "frontend/discourse/tests/integration/components/nested/post-test.gjs",
+      "sha256": "d6880a940aa8929b55bab48c605c5eb580d41ecd0396789f7d5612b6c79ca098",
+      "snapshot": "regressions-source/frontend/discourse/tests/integration/components/nested/post-test.gjs.txt"
+    }
+  ],
+  "compiled_manifest_sha256": "a52b5dc669653e53219d5adcdd1c174575c8e58524c45519d831606d380443ef"
+}

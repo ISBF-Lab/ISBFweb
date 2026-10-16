@@ -1,0 +1,25 @@
+{
+  "styles": [
+    {
+      "target": "common_theme",
+      "url": "/stylesheets/common_theme_4_d6f32c98e8270ca0ff23f32ceca0e02b416d329b.css?__ws=isbf-one.com",
+      "sha256": "4402085ba13d7d210f8d06c40a0a89eac472e2c647464647082f140d408048e6",
+      "served_sha256_matches": true
+    },
+    {
+      "target": "desktop_theme",
+      "url": "/stylesheets/desktop_theme_4_9b8a01df65e4947798a19d6a72f1096c06e47da2.css?__ws=isbf-one.com",
+      "sha256": "431622fc8841158521a9e45bce66fe23d25e1786c400244ef7c7745f3ba611e9",
+      "served_sha256_matches": true
+    },
+    {
+      "target": "mobile_theme",
+      "url": "/stylesheets/mobile_theme_4_9b8a01df65e4947798a19d6a72f1096c06e47da2.css?__ws=isbf-one.com",
+      "sha256": "d690d35cc075aaf0f8cd007845d3eeba7a4b23f2f01e9ecbaa43ee4e08b503b2",
+      "served_sha256_matches": true
+    }
+  ],
+  "homepage_references_current_common_css": true,
+  "javascript_unchanged": true,
+  "production_browser_run": false
+}

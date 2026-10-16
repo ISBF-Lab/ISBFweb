@@ -1,0 +1,7 @@
+? Rails server not responding on :3000 (connection refused)
+
+? Dev environment not ready!
+Expected Rails to be running on 3000, but it is not responding.
+
+Start with: bin/rails server, or use --standalone mode to spin up automatically
+

@@ -1,0 +1,13 @@
+zh_CN:
+  isbf_join:
+    errors:
+      name: "请填写有效的姓名（最多 60 个字符）。"
+      student_id: "请填写有效的学号（最多 40 个字符）。"
+      phone: "请填写有效的手机号码，可包含国家区号。"
+      invalid: "请检查填写的信息。"
+      conflict: "提交标识已被使用，请重新打开表单。"
+      unavailable: "暂时无法保存登记信息，请稍后重试。"
+      json_required: "请使用 JSON 提交。"
+      too_large: "提交内容过长。"
+      rate_limited: "提交过于频繁，请稍后重试。"
+      cross_site: "不允许跨站提交。"

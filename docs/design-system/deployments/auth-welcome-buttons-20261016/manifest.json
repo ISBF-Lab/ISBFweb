@@ -1,0 +1,44 @@
+{
+  "published": true,
+  "theme_id": 4,
+  "field_id": 197,
+  "before_sha256": "0e9286bd138a09b9d54bb03cadd07fd7968ab1c5afc5626310b652e15dd2fbd4",
+  "after_sha256": "685648ab7d6a4c2cbe78c8b3c1bd9867675591a73fef5d41be663e6c839ae17b",
+  "other_fields_preserved": 211,
+  "theme_settings_preserved": true,
+  "theme_javascript_unchanged": true,
+  "styles": [
+    {
+      "target": "common_theme",
+      "url": "/stylesheets/common_theme_4_0311fbdd24bbe6806de5604ddc5f90792a0c0fe5.css?__ws=isbf-one.com",
+      "sha256": "b1acbb1f6a089808415f08df802253237c99f4924f6392b1200ecb0257e6ddd5",
+      "bytes": 309552
+    },
+    {
+      "target": "desktop_theme",
+      "url": "/stylesheets/desktop_theme_4_f63dd18f54122611263dc152f297c903ed32b5fe.css?__ws=isbf-one.com",
+      "sha256": "04c5f3e30e9f7e27e5ffb99a9f13083bbee7e5ffbf7341146b1dd655354d6056",
+      "bytes": 108
+    },
+    {
+      "target": "mobile_theme",
+      "url": "/stylesheets/mobile_theme_4_f63dd18f54122611263dc152f297c903ed32b5fe.css?__ws=isbf-one.com",
+      "sha256": "324bf4a874cedcc21e1d0c1898b417b4a6d047897ec8e31026df75db84bbbc69",
+      "bytes": 107
+    }
+  ],
+  "offset_px": 24,
+  "services_restarted": false,
+  "runtime_source_files_changed": false,
+  "image_changed": false,
+  "completed_at": "2026-10-16T07:44:12Z",
+  "browser_validation": "No production test backend; single stylesheet lint and native theme compilation only",
+  "source_path": "plugins/discourse-academy-roles/assets/stylesheets/common/academy-auth.scss",
+  "source_sha256": "5c0254529056a8d8e5fb28ebb2288b7ef24e0f83ed4dbb2e5218b460daaafecd",
+  "source_before_sha256": "f8101e7954cbb3aef61838043a557141ad97e46f3e8982812a4bfc64f209595c",
+  "accepted_auth_parent": "67706a5a30d71ff0b6793e5b8f55a85c4fe3ebb5",
+  "request_screenshot": "/home/codex/pic/截屏2026-10-16 15.29.24.png",
+  "lint_passed": true,
+  "visual_acceptance": "Pending user review; direction and target buttons explicitly requested",
+  "new_image_built": false
+}

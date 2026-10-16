@@ -1,0 +1,24 @@
+[
+  {
+    "platform": "desktop",
+    "source": "https://pub-6903216751f64c07b3cecf6009faf318.r2.dev/Sprint.glb",
+    "source_sha256": "0e70af6e2ed7d34dcf26011fefc0c949aaf00fa6bc9943adf628c15878c5ac5c",
+    "output_sha256": "c3f83ddd823a0a2bd8494ee1e11a68bc5a31aa9e8ff2f7b8ad729741bc76b1b5",
+    "source_bytes": 10418116,
+    "output_bytes": 7428768,
+    "nodes": 195,
+    "animations": 138,
+    "images": 9
+  },
+  {
+    "platform": "mobile",
+    "source": "https://pub-6903216751f64c07b3cecf6009faf318.r2.dev/Sprint_mobile.glb",
+    "source_sha256": "eb23b2aa3668cdf1e4ed9633139a9e124371de171dbe0863e8689139053538f7",
+    "output_sha256": "9bb62015d44ffcca5675e4ed890e59c3a994d42b69a2e07b743452d2ae37d0fc",
+    "source_bytes": 8107456,
+    "output_bytes": 5730972,
+    "nodes": 195,
+    "animations": 138,
+    "images": 9
+  }
+]

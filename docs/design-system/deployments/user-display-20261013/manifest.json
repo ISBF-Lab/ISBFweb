@@ -1,0 +1,148 @@
+{
+  "published_at_utc": "2026-10-13T10:08:56Z",
+  "theme_id": 4,
+  "fields_before": 169,
+  "fields_after": 173,
+  "unrelated_existing_fields_preserved": 167,
+  "global_name_settings_preserved": true,
+  "core_commit": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "plugins_preserved": 63,
+  "sources": [
+    {
+      "relative": "javascripts/discourse/lib/user-display.js",
+      "field_id": 406,
+      "sha256": "94c4373d314dc009600ac8d7b22e3cc8b32573d9e707bdba7d88182109e9f6cf",
+      "bytes": 2084,
+      "action": "add",
+      "archive_path": "sources/javascripts/discourse/lib/user-display.js.txt",
+      "origin": "Active database-backed theme ID 4 incremental release",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/lib/user-display.js",
+      "workspace_matches_published": true
+    },
+    {
+      "relative": "javascripts/discourse/api-initializers/isbf-user-display.js",
+      "field_id": 407,
+      "sha256": "8ba2b53f101638d0fdc2ab7690dc59bf899c7af056ed341f69e9abb3d15e86c7",
+      "bytes": 959,
+      "action": "add",
+      "archive_path": "sources/javascripts/discourse/api-initializers/isbf-user-display.js.txt",
+      "origin": "Active database-backed theme ID 4 incremental release",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-user-display.js",
+      "workspace_matches_published": true
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-v2-feed-card.gjs",
+      "field_id": 227,
+      "sha256": "a91967a715b0602992b5ccab9ec532afc2e453483ad1229486bb8c71a0cb867e",
+      "bytes": 23157,
+      "action": "update",
+      "archive_path": "sources/javascripts/discourse/components/isbf-v2-feed-card.gjs.txt",
+      "origin": "Active database-backed theme ID 4 incremental release",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-feed-card.gjs",
+      "workspace_matches_published": false
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-notification-entry.gjs",
+      "field_id": 236,
+      "sha256": "f07cbf139e0a28b09c262c1aa35d82dbdb3e6b01c42e1a73f1ea9b67c9cb3bfe",
+      "bytes": 2657,
+      "action": "update",
+      "archive_path": "sources/javascripts/discourse/components/isbf-notification-entry.gjs.txt",
+      "origin": "Active database-backed theme ID 4 incremental release",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-entry.gjs",
+      "workspace_matches_published": true
+    },
+    {
+      "relative": "test/unit/user-display-test.js",
+      "field_id": 408,
+      "sha256": "60539cbbcf085ab9f0fd3bccbd93314f042f70a7d3dda4254e07c464a5b6e122",
+      "bytes": 6277,
+      "action": "add",
+      "archive_path": "sources/test/unit/user-display-test.js.txt",
+      "origin": "Active database-backed theme ID 4 incremental release",
+      "workspace_path": "themes/isbf-campus-feed/test/unit/user-display-test.js",
+      "workspace_matches_published": true
+    },
+    {
+      "relative": "test/integration/user-display-test.gjs",
+      "field_id": 409,
+      "sha256": "30ed15ceeb0d0ec301e04cfd261ae494c3a88dc7863c397f4443916f87bc7dc5",
+      "bytes": 5644,
+      "action": "add",
+      "archive_path": "sources/test/integration/user-display-test.gjs.txt",
+      "origin": "Active database-backed theme ID 4 incremental release",
+      "workspace_path": "themes/isbf-campus-feed/test/integration/user-display-test.gjs",
+      "workspace_matches_published": true
+    }
+  ],
+  "javascript_url": "/theme-javascripts/92ced475a98359bfba9d63b7d1d34b65908d2b05.js?__ws=isbf-one.com",
+  "javascript_sha256": "8be05e136eccb1dfdbb7880cfecd2c9eb9fabd2dee30a8d5d589e1fa26f0d14d",
+  "styles": [
+    {
+      "target": "common_theme",
+      "bytes": 267834,
+      "sha256": "f8d2611469200ed421411b79dfada7525c9392293cd5713638661ebd836a967e",
+      "url": "/stylesheets/common_theme_4_c4da08cb0cc8cf74cb332af39e3dc5c08cfa94d2.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "desktop_theme",
+      "bytes": 108,
+      "sha256": "431622fc8841158521a9e45bce66fe23d25e1786c400244ef7c7745f3ba611e9",
+      "url": "/stylesheets/desktop_theme_4_9b8a01df65e4947798a19d6a72f1096c06e47da2.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "mobile_theme",
+      "bytes": 107,
+      "sha256": "d690d35cc075aaf0f8cd007845d3eeba7a4b23f2f01e9ecbaa43ee4e08b503b2",
+      "url": "/stylesheets/mobile_theme_4_9b8a01df65e4947798a19d6a72f1096c06e47da2.css?__ws=isbf-one.com"
+    }
+  ],
+  "checks": {
+    "lint": {
+      "command": "bin/lint --fix (six changed JavaScript/template files)",
+      "result": "passed",
+      "log": "deploy-work/user-display-20261013/lint.log",
+      "tool_memory_bytes": 536870912,
+      "tool_cpus": 0.5,
+      "tool_pids_limit": 192,
+      "tool_network": "none"
+    },
+    "logic": {
+      "runner": "deploy-work/user-display-20261013/verify.mjs",
+      "qunit_passed": 8,
+      "qunit_failed": 0,
+      "native_getter_assertions_passed": 14,
+      "boundaries": "Translation and Ember service boundaries stubbed; real core getter code and classPrepend executed"
+    },
+    "dom_regressions": {
+      "added": 6,
+      "run": false,
+      "reason": "Shared-host resource policy keeps full preview forum stopped; isolated application CI required"
+    },
+    "theme_field_compilation_errors": [],
+    "styles_compiled": [
+      "common_theme",
+      "desktop_theme",
+      "mobile_theme"
+    ],
+    "javascript_serving": {
+      "http_asset_verified": true,
+      "homepage_references_current_cache": true,
+      "url": "https://isbf-one.com/theme-javascripts/92ced475a98359bfba9d63b7d1d34b65908d2b05.js?__ws=isbf-one.com",
+      "javascript_sha256": "8be05e136eccb1dfdbb7880cfecd2c9eb9fabd2dee30a8d5d589e1fa26f0d14d",
+      "javascript_bytes": 378964,
+      "served_bytes": 379049,
+      "source_map_footer_bytes": 85,
+      "old_precommit_url_superseded": true,
+      "browser_run": false
+    },
+    "core_and_plugins_unchanged": true,
+    "production_browser_run": false,
+    "visual_acceptance": "Pending user review"
+  },
+  "rollback_script": "deploy-work/user-display-20261013/release.py rollback",
+  "private_backup": "deploy-work/user-display-20261013/theme-before.json",
+  "image_changed": false,
+  "services_restarted": false,
+  "approved_design_scope_expanded": false
+}

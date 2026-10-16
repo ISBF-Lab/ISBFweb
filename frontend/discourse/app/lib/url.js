@@ -331,12 +331,14 @@ class DiscourseURL extends EmberObject {
       return;
     }
 
-    if (oldPath === path && NESTED_URL_REGEXP.test(path)) {
-      // The nested context view caches its scroll target in the
-      // component's lifecycle, so a plain refresh() wouldn't re-trigger
-      // it. Fire an event the view listens for instead.
-      this.appEvents.trigger("nested:scroll-to-target");
-      return;
+    if (oldPath === path) {
+      const nestedTopicTarget =
+        TOPIC_URL_REGEXP.exec(path)?.[3] &&
+        this.container.lookup("controller:topic").shouldRenderNestedView;
+      if (NESTED_URL_REGEXP.test(path) || nestedTopicTarget) {
+        this.appEvents.trigger("nested:scroll-to-target");
+        return;
+      }
     }
 
     if (oldPath === path || this.refreshedHomepage(oldPath, path)) {

@@ -86,9 +86,9 @@ export default class TopicTimelineScrollArea extends Component {
   constructor() {
     super(...arguments);
 
-    if (this.site.desktopView) {
+    if (this.site.desktopView || this.args.navigation) {
       // listen for scrolling event to update timeline
-      this.appEvents.on("topic:current-post-scrolled", this.postScrolled);
+      this.appEvents.on(this.scrollEvent, this.postScrolled);
       // listen for composer sizing changes to update timeline
       this.appEvents.on("composer:opened", this.calculatePosition);
       this.appEvents.on("composer:resized", this.calculatePosition);
@@ -128,7 +128,7 @@ export default class TopicTimelineScrollArea extends Component {
   willDestroy() {
     super.willDestroy(...arguments);
 
-    if (this.site.desktopView) {
+    if (this.site.desktopView || this.args.navigation) {
       this.intersectionObserver?.disconnect();
       this.intersectionObserver = null;
 
@@ -136,12 +136,13 @@ export default class TopicTimelineScrollArea extends Component {
       this.appEvents.off("composer:resized", this.calculatePosition);
       this.appEvents.off("composer:closed", this.calculatePosition);
       this.appEvents.off("composer:preview-toggled", this.calculatePosition);
-      this.appEvents.off("topic:current-post-scrolled", this.postScrolled);
+      this.appEvents.off(this.scrollEvent, this.postScrolled);
     }
   }
 
   get displaySummary() {
     return (
+      !this.args.navigation &&
       this.siteSettings.summary_timeline_button &&
       !this.args.fullScreen &&
       this.args.model.has_summary &&
@@ -150,6 +151,9 @@ export default class TopicTimelineScrollArea extends Component {
   }
 
   get displayTimeLineScrollArea() {
+    if (this.args.navigation) {
+      return this.total > 0;
+    }
     if (this.site.mobileView) {
       return true;
     }
@@ -162,6 +166,16 @@ export default class TopicTimelineScrollArea extends Component {
     }
 
     return true;
+  }
+
+  get scrollEvent() {
+    return this.args.navigation
+      ? "topic:group-scrolled"
+      : "topic:current-post-scrolled";
+  }
+
+  get navigationLabel() {
+    return this.args.navigation?.label(this.current);
   }
 
   get canCreatePost() {
@@ -277,7 +291,7 @@ export default class TopicTimelineScrollArea extends Component {
 
     const topic = this.args.model;
     const postStream = topic.postStream;
-    this.total = postStream.filteredPostsCount;
+    this.total = this.args.navigation?.total ?? postStream.filteredPostsCount;
 
     this.scrollPosition =
       this.clamp(Math.floor(this.total * this.percentage), 0, this.total) + 1;
@@ -301,7 +315,9 @@ export default class TopicTimelineScrollArea extends Component {
       date = null;
     }
 
-    this.date = date;
+    this.date = this.args.navigation
+      ? this.args.navigation.dateForIndex(this.current)
+      : date;
 
     const lastReadNumber = topic.last_read_post_number;
     const lastReadId = topic.last_read_post_id;
@@ -310,6 +326,12 @@ export default class TopicTimelineScrollArea extends Component {
       const idx = postStream.stream.indexOf(lastReadId) + 1;
       this.lastRead = idx;
       this.lastReadPercentage = this._percentFor(topic, idx);
+    }
+    if (this.args.navigation) {
+      this.lastRead = this.args.navigation.lastReadIndex;
+      this.lastReadPercentage = this.lastRead
+        ? this._percentFor(topic, this.lastRead - 1)
+        : null;
     }
 
     if (this.position !== this.scrollPosition) {
@@ -341,7 +363,7 @@ export default class TopicTimelineScrollArea extends Component {
       return;
     }
 
-    const stream = this.args.model.postStream;
+    const stream = this.args.navigation || this.args.model.postStream;
 
     if (!this.position === scrollPosition) {
       return;
@@ -438,7 +460,8 @@ export default class TopicTimelineScrollArea extends Component {
     const positionTop = headerOffset() + window.pageYOffset;
     const currentPosition = positionTop + timelineHeight;
     const postStream = this.args.model.postStream;
-    const allPostsLoaded = postStream.loadedAllPosts;
+    const allPostsLoaded =
+      this.args.navigation?.loadedAllPosts ?? postStream.loadedAllPosts;
 
     this.dockBottom = false;
     if (positionTop < this.topicTop) {
@@ -497,7 +520,8 @@ export default class TopicTimelineScrollArea extends Component {
   }
 
   _percentFor(topic, postIndex) {
-    const total = topic.postStream.filteredPostsCount;
+    const total =
+      this.args.navigation?.total ?? topic.postStream.filteredPostsCount;
     switch (postIndex) {
       // if first post, no top padding
       case 0:
@@ -630,6 +654,7 @@ export default class TopicTimelineScrollArea extends Component {
             @onGoBack={{this.onGoBack}}
             @showDockedButton={{this.showDockedButton}}
             @total={{this.total}}
+            @translatedLabel={{this.navigationLabel}}
             {{didInsert this.registerScroller}}
           />
 
@@ -702,7 +727,11 @@ export default class TopicTimelineScrollArea extends Component {
 
         <PluginOutlet
           @name="timeline-footer-controls-after"
-          @outletArgs={{lazyHash model=@model fullscreen=@fullscreen}}
+          @outletArgs={{lazyHash
+            model=@model
+            fullscreen=@fullscreen
+            navigation=@navigation
+          }}
         />
       </div>
     {{/if}}

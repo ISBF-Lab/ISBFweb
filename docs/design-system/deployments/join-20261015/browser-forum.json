@@ -1,0 +1,13 @@
+{
+  "passed": false,
+  "verification_keys_removed": true,
+  "container_exit_code": 124,
+  "transport": {
+    "requests": 198,
+    "production_gets": 110,
+    "static_cache_hits": 88
+  },
+  "container_oom_killed": false,
+  "verification_keys_removed_count": 2,
+  "browser_container_removed": true
+}

@@ -1,0 +1,30 @@
+{
+  "core_release": "6589296721d2b48c09567eb3a622f1b1c643101e83933738335ad09ddbb91cba",
+  "theme_updated_at_utc": "2026-10-16T01:23:50Z",
+  "theme_fields_changed": 1,
+  "theme_fields_preserved": 211,
+  "files": [
+    {
+      "path": "frontend/discourse/app/components/nested.gjs",
+      "reference": "alignment-source/frontend/discourse/app/components/nested.gjs.txt",
+      "sha256": "4a01cb7896c96f3f9393847642eb037509656ad45ea9cc05dba4505b12f29cf9"
+    },
+    {
+      "path": "frontend/discourse/app/lib/url.js",
+      "reference": "alignment-source/frontend/discourse/app/lib/url.js.txt",
+      "sha256": "740cd2ca3c85075928a990634678c42821ec25cda66c417c578f1422f33c2b97"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/reply-conversations.scss",
+      "reference": "alignment-source/themes/isbf-campus-feed/stylesheets/reply-conversations.scss.txt",
+      "sha256": "372298e3671c43e75fc469e7642854ce415837258b4c824746c35f40903e5f8c"
+    },
+    {
+      "path": "frontend/discourse/tests/unit/lib/url-test.js",
+      "reference": "alignment-source/frontend/discourse/tests/unit/lib/url-test.js.txt",
+      "sha256": "4208ee50f47d4a3e66f6d535a76449f68cb4dcf717b3a85bb0b38526d1e37c96"
+    }
+  ],
+  "scope": "Mobile equal spacing and column alignment across original/root/child posts; exact original article highlight on both devices.",
+  "full_native_application_check": "pending"
+}

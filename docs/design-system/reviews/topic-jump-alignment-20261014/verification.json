@@ -1,0 +1,80 @@
+{
+  "scope": "Offline real DOM geometry using compiled theme SCSS and native recalculateHeaderOffset, headerOffset and LockOn source; application framework and production forum not started.",
+  "results": [
+    {
+      "case": "desktop-second-post",
+      "passed": true,
+      "headerOffset": 60,
+      "headerBottom": 60,
+      "postTop": 60,
+      "postBottom": 300,
+      "viewportHeight": 950,
+      "scrollY": 241,
+      "wrapperPointerEvents": "none"
+    },
+    {
+      "case": "desktop-jump-back",
+      "passed": true,
+      "headerOffset": 60,
+      "headerBottom": 60,
+      "postTop": 60,
+      "postBottom": 300,
+      "viewportHeight": 950,
+      "scrollY": 241,
+      "wrapperPointerEvents": "none"
+    },
+    {
+      "case": "desktop-tall-post-top",
+      "passed": true,
+      "headerOffset": 60,
+      "headerBottom": 60,
+      "postTop": 60,
+      "postBottom": 960,
+      "viewportHeight": 950,
+      "scrollY": 241,
+      "wrapperPointerEvents": "none"
+    },
+    {
+      "case": "desktop-outside-topic",
+      "passed": true
+    },
+    {
+      "case": "mobile-second-post",
+      "passed": true,
+      "headerOffset": 60,
+      "headerBottom": 60,
+      "postTop": 60,
+      "postBottom": 300,
+      "viewportHeight": 844,
+      "scrollY": 241,
+      "wrapperPointerEvents": "none"
+    },
+    {
+      "case": "mobile-jump-back",
+      "passed": true,
+      "headerOffset": 60,
+      "headerBottom": 60,
+      "postTop": 60,
+      "postBottom": 300,
+      "viewportHeight": 844,
+      "scrollY": 241,
+      "wrapperPointerEvents": "none"
+    },
+    {
+      "case": "mobile-tall-post-top",
+      "passed": true,
+      "headerOffset": 60,
+      "headerBottom": 60,
+      "postTop": 60,
+      "postBottom": 960,
+      "viewportHeight": 844,
+      "scrollY": 241,
+      "wrapperPointerEvents": "none"
+    },
+    {
+      "case": "mobile-outside-topic",
+      "passed": true
+    }
+  ],
+  "human_visual_acceptance": "Pending user review"
+}

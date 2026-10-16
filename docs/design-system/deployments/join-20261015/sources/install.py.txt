@@ -1,0 +1,48 @@
+import hashlib
+import json
+import os
+from pathlib import Path
+import sys
+
+
+release = Path(__file__).resolve().parent
+manifest = json.loads((release / 'release-manifest.json').read_text())
+expected_version = sys.argv[1]
+assert manifest['source_sha256'] == expected_version == release.name
+source = release / 'isbf-join'
+base_files = {name: value for name, value in manifest['files'].items() if name != '.release-sha256'}
+assert hashlib.sha256(json.dumps(base_files, sort_keys=True, separators=(',', ':')).encode()).hexdigest() == expected_version
+for name, expected in manifest['files'].items():
+    path = source / name
+    assert path.is_file() and not path.is_symlink(), name
+    digest = hashlib.sha256()
+    with path.open('rb') as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b''):
+            digest.update(block)
+    assert digest.hexdigest() == expected, name
+actual = {str(path.relative_to(source)) for path in source.rglob('*') if path.is_file()}
+assert actual == set(manifest['files'])
+target = Path('/var/www/discourse/plugins/isbf-join')
+if target.exists() or target.is_symlink():
+    assert target.is_symlink() and target.resolve() == source, 'Another Join release is present'
+else:
+    temporary = target.with_name('.isbf-join-' + expected_version[:12])
+    assert not temporary.exists() and not temporary.is_symlink()
+    temporary.symlink_to(source)
+    os.replace(temporary, target)
+public_fonts = Path('/var/www/discourse/public/join/fonts')
+font_source = source / 'web/public/fonts'
+public_fonts.parent.mkdir(parents=True, exist_ok=True)
+if public_fonts.is_symlink():
+    assert public_fonts.resolve() == font_source, 'Another Join font release is present'
+    public_fonts.unlink()
+public_fonts.mkdir(exist_ok=True)
+font_names = {Path(name).name for name in manifest['files'] if name.startswith('web/public/fonts/') and name.endswith('.woff2')}
+assert {path.name for path in public_fonts.iterdir()} <= font_names
+for name in font_names:
+    font = public_fonts / name
+    if font.exists() or font.is_symlink():
+        assert font.is_symlink() and font.resolve() == font_source / name, 'Another Join font is present'
+    else:
+        font.symlink_to(font_source / name)
+print(json.dumps({'installed': True, 'source_sha256': expected_version, 'link': str(source)}))

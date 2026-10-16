@@ -1514,6 +1514,7 @@ Discourse::Application.routes.draw do
       put "/pin" => "nested_topics#pin"
       put "/toggle" => "nested_topics#toggle"
       get "/activity" => "nested_topics#activity"
+      get "/navigation" => "nested_topics#navigation"
       get "/:post_number" => "nested_topics#context", :constraints => { post_number: /\d+/ }
       get "/" => "nested_topics#show"
     end

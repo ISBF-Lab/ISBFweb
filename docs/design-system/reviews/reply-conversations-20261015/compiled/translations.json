@@ -1,0 +1,76 @@
+{
+  "nested": {
+    "view_remaining_replies": {
+      "other": "查看其余 %{count} 条回复"
+    },
+    "load_previous_replies": "加载此前回复",
+    "load_previous_discussions": "加载此前讨论",
+    "replies_load_error": "回复加载失败，请重试。",
+    "nested_view": "嵌套视图",
+    "flat_view": "平面视图",
+    "sort": {
+      "label": "排序依据",
+      "top": "热门",
+      "hot": "热门",
+      "new": "新",
+      "old": "旧"
+    },
+    "load_more_children": {
+      "other": "其他 %{count} 条回复"
+    },
+    "load_more_children_generic": "更多回复",
+    "continue_thread": "继续此消息串",
+    "new_replies": {
+      "other": "%{count} 条新回复"
+    },
+    "collapsed_replies": {
+      "other": "%{count} 条回复"
+    },
+    "collapsed_post": "收起的帖子",
+    "collapse": "收起",
+    "collapse_parent": "收起父消息串",
+    "focused_path": "重点回复路径",
+    "return_to_branch": "返回到 %{username} 的分支",
+    "all_replies": "所有回复",
+    "category_settings": {
+      "default_nested_view": "为此类别中的话题默认使用嵌套视图。",
+      "convert_existing": "转换现有话题",
+      "convert_existing_description": "此类别下的现有话题在转换之前不会使用嵌套回复。运行一次即可将其切换到嵌套视图。",
+      "convert_existing_confirm": "将此类别中的所有现有话题转换为嵌套回复？",
+      "convert_existing_complete": "现有话题已转换为嵌套回复。",
+      "save_first": "在转换现有话题之前，请保存此类别设置。"
+    },
+    "no_replies": "暂无回复。",
+    "deleted_post_placeholder": "[已删除]",
+    "ignored_post_placeholder": "[已忽略]",
+    "toggle_ignored_content": "显示忽略的内容",
+    "op_badge": "OP",
+    "pinned_reply": "已置顶",
+    "pin_reply": "置顶",
+    "unpin_reply": "取消置顶",
+    "topic_admin_menu": {
+      "enable_nested_replies": "启用嵌套回复",
+      "disable_nested_replies": "禁用嵌套回复"
+    },
+    "activity_log": {
+      "link": "活动日志",
+      "title": "主题活动日志",
+      "empty": "没有可显示的话题活动。",
+      "load_more": "加载更多活动",
+      "updated": "话题活动已更新。"
+    },
+    "context": {
+      "banner": "您正在查看的是此话题中的单个消息串。",
+      "view_full_topic": "查看完整话题",
+      "view_parent_context": "查看父上下文"
+    }
+  },
+  "theme": {
+    "progress": "%{current} / %{total}",
+    "reply_to": "回复 %{name} · #%{number}",
+    "original_post": "原帖",
+    "go_to_original": "定位原文",
+    "context_loaded": "已加载原回复",
+    "context_unavailable": "该回复不可查看，或暂时无法加载。"
+  }
+}

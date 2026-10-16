@@ -1929,6 +1929,106 @@
       "implementation_source_map_sha256": "f1719da81ffd90653434e5630952e03fbdb328a40f30f8b784b12899b91d7ade",
       "verification": "../frontend-verification-20261012.json",
       "review": "../reviews/frontend-20261012-v2/index.html"
+    },
+    {
+      "date": "2026-10-14",
+      "kind": "join_recruitment_integration",
+      "evidence": "join-20261014/README.md",
+      "approved_scope": "Unchanged uploaded recruitment page at /join/, minimal navigation and request wiring, and administrator-only four-column application list with pagination",
+      "public_access": "Recruitment page and POST submissions only; saved records require Discourse admin",
+      "source_archive": "docs/isbf-one-join-app.zip",
+      "source_archive_sha256": "8a7e5606524b3498bc775d8cee41929fe080204ee6a3663dbb0c54d67a2a26df",
+      "source_manifest": "join-20261014/source-manifest.json",
+      "source_manifest_sha256": "e37eb19e48ce53ee4060e5e0287e044481d09a3126f8a0c142658e02d1c55ec5",
+      "implementation_path": "plugins/isbf-join",
+      "verification": "join-20261014/validation.md",
+      "deployment_status": "Deployed; final visual acceptance by user",
+      "excluded": [
+        "Global forum tokens",
+        "Other admin pages",
+        "Unrelated active theme fields"
+      ],
+      "implementation_manifest": "join-20261014/implementation-manifest.json",
+      "implementation_manifest_sha256": "1ec4a3e12dff0738c5ce1d54da060c6d795efcfd91749775854835c185035be1",
+      "deployment_record": "../deployments/join-20261015/README.md",
+      "release_source_sha256": "5f7e2e4110cdacc283af0697f925a1240aa30003c68ba9f7ef20751110536839",
+      "published_at_utc": "2026-10-14T23:40:10Z",
+      "deployment_image_tag": "local_discourse/isbf_app:join-20261015",
+      "deployment_image_id": "sha256:38308d121da3faee01d9c99fcdbdabcc40da13e0271361dd38c688bb85e84a24",
+      "current_release_source_sha256": "78709c643308a2258725b63a34a95ed85c3fefc47f0500d31fa9b682c7b2afa8",
+      "subsequent_releases": [
+        {
+          "kind": "texture_and_installed_app_navigation_fix",
+          "source_sha256": "6bd9dcac4b8923527410608e09194585c12af82d553ff07cb05c2f4a2b26dc76",
+          "deployment_record": "../deployments/join-compat-20261015/README.md",
+          "published_at_utc": "2026-10-15T04:15:59.016369+00:00",
+          "visual_acceptance": "User"
+        },
+        {
+          "kind": "six_gallery_images",
+          "source_sha256": "78709c643308a2258725b63a34a95ed85c3fefc47f0500d31fa9b682c7b2afa8",
+          "source_archive_sha256": "7d9a31021cfcf2e0dc1fdf25f4338595d064ee8f6626b736e9f2316849304a64",
+          "deployment_record": "../deployments/join-gallery-20261015/README.md",
+          "published_at_utc": "2026-10-15T04:45:45.622511+00:00",
+          "visual_acceptance": "User"
+        }
+      ]
+    },
+    {
+      "id": "reply-conversations-20261015",
+      "review_date": "2026-10-15",
+      "status": "Approved within the user-confirmed reply conversation scope; deployed; targeted native application checks passed",
+      "proposal": "../proposals/reply-conversations-20261015.md",
+      "verification": "../reviews/reply-conversations-20261015/README.md",
+      "source_manifest": "../reviews/reply-conversations-20261015/source-manifest.json",
+      "source_manifest_sha256": "211666d970241c9065ef67979b83c380daddc0f6e9d5ffd068414f8b82af6147",
+      "acceptance_scope": "User-confirmed ordinary-topic reply conversations from the supplied HTML/CSS: straight avatar trunk and branches, 33px indentation, compact progress and Collapse; mobile five equal action columns with reply icons 12px right of the main rail; original-article highlight; immediate successful replies and preserved expanded pages. Desktop action layout and global tokens retain their existing rules.",
+      "excluded": [
+        "Unrelated production settings",
+        "Global tokens",
+        "Private messages",
+        "Embedded views",
+        "Chat",
+        "Admin",
+        "Dedicated activity logs",
+        "Unrelated active theme features"
+      ],
+      "selected_design_reference": "../reviews/reply-conversations-20261015/guide-redesign/selected-straight-guide.css.txt",
+      "selected_design_reference_sha256": "7c162f7b510d70dfaa11cbcf425c858336a09d6a53581e9ef4b7d3d12a8c9798",
+      "deployment_record": "../deployments/reply-conversations-20261015/README.md",
+      "regression_supplement": "../deployments/reply-conversations-20261015/regressions-20261016.md",
+      "current_deployment_source_manifest": "../deployments/reply-conversations-20261015/regressions-source-manifest.json",
+      "current_deployment_source_manifest_sha256": "b6cea480473e870dca3ca95e4a7563ba1c7aa3701ffdaf4ea0081f43b511b73e"
+    },
+    {
+      "id": "auth-welcome-buttons-20261016",
+      "change_date": "2026-10-16",
+      "scope": "Authentication welcome choices only; user requested a small downward shift",
+      "status": "Published; final visual acceptance pending",
+      "accepted_parent_commit": "67706a5a30d71ff0b6793e5b8f55a85c4fe3ebb5",
+      "source_path": "../deployments/auth-welcome-buttons-20261016/sources/academy-auth.scss.txt",
+      "source_sha256": "5c0254529056a8d8e5fb28ebb2288b7ef24e0f83ed4dbb2e5218b460daaafecd",
+      "deployment_manifest": "../deployments/auth-welcome-buttons-20261016/manifest.json"
+    },
+    {
+      "id": "continue-reading-20261016",
+      "change_date": "2026-10-16",
+      "status": "Deployed with native and production checks; final visual acceptance pending",
+      "scope": "Ordinary-topic footer only: suggested and related topic sources share the continue-reading list; native data, order, permissions, unread state, mode preferences and navigation retained",
+      "evidence": "../reviews/continue-reading-20261016/README.md",
+      "source_manifest": "../reviews/continue-reading-20261016/source-manifest.json",
+      "excluded": [
+        "Homepage",
+        "Post body",
+        "Sidebars",
+        "Private messages",
+        "Unknown plugin modes"
+      ],
+      "deployment": "../deployments/continue-reading-20261016/README.md",
+      "deployed_source_manifest": "../deployments/continue-reading-20261016/source-manifest.json",
+      "deployed_source_version": "6f6680e493b02c39b3777aa192af8a4948cc7f54f3ac0d4f72a4001cd52630a9",
+      "latest_theme_refinement": "../deployments/continue-reading-20261016/square-border-20261017/source-manifest.json",
+      "confirmed_container_shape": "Square border; radius 0, user confirmed 2026-10-17"
     }
   ]
 }

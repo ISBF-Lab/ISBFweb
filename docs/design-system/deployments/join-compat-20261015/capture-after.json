@@ -1,0 +1,8 @@
+{
+  "phase": "after",
+  "theme_id": 4,
+  "theme_fields": 192,
+  "application_count": 0,
+  "snapshot_sha256": "108ffce538af581999696438caff28fb48046479fab533f8bb3d63ef800b1d8b",
+  "database_writes": false
+}

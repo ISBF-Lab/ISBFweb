@@ -1,0 +1,64 @@
+{
+  "status": "preview_only",
+  "application_sources_changed": false,
+  "checks": [
+    {
+      "variant": "avatar-axis",
+      "viewport": "mobile",
+      "no_horizontal_overflow": true,
+      "preview_replies": 3,
+      "indent_px": 0
+    },
+    {
+      "variant": "avatar-axis",
+      "viewport": "mobile-dark",
+      "no_horizontal_overflow": true,
+      "preview_replies": 3,
+      "indent_px": 0
+    },
+    {
+      "variant": "avatar-axis",
+      "viewport": "narrow",
+      "no_horizontal_overflow": true,
+      "preview_replies": 3,
+      "indent_px": 0
+    },
+    {
+      "variant": "avatar-axis",
+      "viewport": "desktop",
+      "no_horizontal_overflow": true,
+      "preview_replies": 3,
+      "indent_px": 0
+    },
+    {
+      "variant": "curved-branches",
+      "viewport": "mobile",
+      "no_horizontal_overflow": true,
+      "preview_replies": 3,
+      "indent_px": 16
+    },
+    {
+      "variant": "curved-branches",
+      "viewport": "mobile-dark",
+      "no_horizontal_overflow": true,
+      "preview_replies": 3,
+      "indent_px": 16
+    },
+    {
+      "variant": "curved-branches",
+      "viewport": "narrow",
+      "no_horizontal_overflow": true,
+      "preview_replies": 3,
+      "indent_px": 16
+    },
+    {
+      "variant": "curved-branches",
+      "viewport": "desktop",
+      "no_horizontal_overflow": true,
+      "preview_replies": 3,
+      "indent_px": 16
+    }
+  ],
+  "browser_errors": [],
+  "limits": "Offline synthetic DOM and API adapters; this does not boot Ember, Rails, or production"
+}

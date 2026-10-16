@@ -1,0 +1,18 @@
+[bin/lint] Running core linters via lefthook...
+sync hooks: ❌
+│  Skipping hook sync: could not replace the hook: remove /workspace/.git/hooks/pre-commit: read-only file system
+│  developer-docs-prettier (skip) no files for inspection
+│  eslint (skip) no files for inspection
+┃  prettier ❯ 
+- Starting...
+✔ Reformatted 0 / 1 files...
+
+│  rubocop (skip) no files for inspection
+┃  stylelint ❯ 
+
+│  syntax_tree (skip) no files for inspection
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 17.11 seconds)
+✔️ prettier (8.30 seconds)
+✔️ stylelint (8.81 seconds)
+[bin/lint] All lints passed

@@ -1,0 +1,22 @@
+{
+  "scope": "Container border radius only, explicitly confirmed square by user",
+  "published_at_utc": "2026-10-16T16:26:18Z",
+  "theme_id": 4,
+  "field_id": 463,
+  "path": "themes/isbf-campus-feed/stylesheets/continue-reading.scss",
+  "sha256": "a0cabbcfacde79c69e7d55ff4cd506a402a5933687bcc1f9abfaeb510fcfeaed",
+  "snapshot": "continue-reading.scss.txt",
+  "previous_sha256": "f822049a401e085eaa923fc2a646867385181b57ac21403cc4043475d5c34515",
+  "border_radius": 0,
+  "native_runtime_image_unchanged": "local_discourse/isbf_app:continue-reading-20261016-6f6680e493b0-runtime",
+  "active_theme_database_backed": true,
+  "runtime_theme_source_is_database_field": true,
+  "image_theme_source_archives_are_historical": true,
+  "checks": [
+    "bin/lint --fix (Prettier and Stylelint)",
+    "Native common/desktop/mobile stylesheet compilation",
+    "HTTPS CSS digest and square container rule"
+  ],
+  "layout_matrix_rerun": false,
+  "latest_snapshot_rollback_requires_field_digest_check": true
+}

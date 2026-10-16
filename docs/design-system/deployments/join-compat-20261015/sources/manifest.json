@@ -1,0 +1,22 @@
+{
+  "pages-controller.rb.txt": {
+    "source": "plugins/isbf-join/app/controllers/isbf_join/pages_controller.rb",
+    "sha256": "3cbf2bc52b7d15d1c1ef08f43b5cd47f76861118261572cda11faf51667cdabb"
+  },
+  "join-route.js.txt": {
+    "source": "plugins/isbf-join/assets/javascripts/discourse/routes/isbf-join.js",
+    "sha256": "3fc998e90d3fb5f77afa66c0add1093792597b52ff8c95bea637836b5545ec1a"
+  },
+  "route-map.js.txt": {
+    "source": "plugins/isbf-join/assets/javascripts/discourse/isbf-join-route-map.js",
+    "sha256": "1ff1f79cb8762b99e2efb35555bb88072355c0232a6dfa78652010b0917f4ab1"
+  },
+  "join-navigation-test.js.txt": {
+    "source": "plugins/isbf-join/test/javascripts/acceptance/join-navigation-test.js",
+    "sha256": "171e4328080e9e6917c740951b2362c21c67bed2cb79478c86574d9d583f2d73"
+  },
+  "install.py.txt": {
+    "source": "/shared/isbf-join-releases/6bd9dcac4b8923527410608e09194585c12af82d553ff07cb05c2f4a2b26dc76/install.py",
+    "sha256": "af9924d98b69133450dad48a45024b658a7f62b6e19a0bf8d2216ac6b8bddd93"
+  }
+}

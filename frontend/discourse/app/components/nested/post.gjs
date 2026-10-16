@@ -4,6 +4,7 @@ import { fn } from "@ember/helper";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { getOwner } from "@ember/owner";
+import didUpdate from "@ember/render-modifiers/modifiers/did-update";
 import { cancel, scheduleOnce } from "@ember/runloop";
 import { service } from "@ember/service";
 import { modifier } from "ember-modifier";
@@ -20,6 +21,7 @@ import lazyHash from "discourse/helpers/lazy-hash";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { isTesting } from "discourse/lib/environment";
+import { flatRepliesEnabled } from "discourse/lib/flat-replies";
 import getURL, { getAbsoluteURL } from "discourse/lib/get-url";
 import postActionFeedback from "discourse/lib/post-action-feedback";
 import { nativeShare } from "discourse/lib/pwa-utils";
@@ -93,7 +95,9 @@ export default class NestedPost extends Component {
       this.collapsed = cached.collapsed;
     } else {
       const wouldExpand =
-        (this.args.children?.length ?? 0) > 0 ||
+        (this.flatReplies
+          ? this.args.post.target_post_number > this.args.post.post_number
+          : (this.args.children?.length ?? 0) > 0) ||
         this.args.post.deleted_post_placeholder === true ||
         this.args.post.ignored_post_placeholder === true;
 
@@ -101,6 +105,7 @@ export default class NestedPost extends Component {
       // 0 for root view, 1 for context view). At/below it, the post renders
       // but its children start hidden behind an "Expand X replies" button.
       if (
+        !this.flatReplies &&
         this.args.collapseFromDepth != null &&
         this.args.depth >= this.args.collapseFromDepth
       ) {
@@ -116,6 +121,7 @@ export default class NestedPost extends Component {
       this,
       this._onChildCreated
     );
+    this.appEvents.on("nested-replies:reveal-root", this, this.#onRevealRoot);
     this.#postRegistrationTimer = scheduleOnce(
       "afterRender",
       this,
@@ -131,6 +137,7 @@ export default class NestedPost extends Component {
       this,
       this._onChildCreated
     );
+    this.appEvents.off("nested-replies:reveal-root", this, this.#onRevealRoot);
 
     if (this.#postRegistered) {
       this.appEvents.trigger(
@@ -142,6 +149,22 @@ export default class NestedPost extends Component {
 
   get isRoot() {
     return this.args.depth === 0;
+  }
+
+  get flatReplies() {
+    return flatRepliesEnabled(this.siteSettings);
+  }
+
+  get renderChildren() {
+    return (
+      !this.effectiveCollapsed &&
+      !this.atMaxDepth &&
+      (this.effectiveExpanded || (this.flatReplies && this.hasReplies))
+    );
+  }
+
+  get previewChildren() {
+    return this.flatReplies && !this.effectiveExpanded;
   }
 
   get cloakingData() {
@@ -208,7 +231,10 @@ export default class NestedPost extends Component {
   }
 
   get showDepthLine() {
-    return !this.hasReplies || !this.atMaxDepth || this.showContinueThread;
+    return (
+      !this.flatReplies &&
+      (!this.hasReplies || !this.atMaxDepth || this.showContinueThread)
+    );
   }
 
   get depthLineCollapsed() {
@@ -220,7 +246,12 @@ export default class NestedPost extends Component {
   }
 
   get showExpandRepliesButton() {
-    return this.hasReplies && !this.effectiveExpanded && !this.atMaxDepth;
+    return (
+      !this.flatReplies &&
+      this.hasReplies &&
+      !this.effectiveExpanded &&
+      !this.atMaxDepth
+    );
   }
 
   get childPath() {
@@ -231,7 +262,7 @@ export default class NestedPost extends Component {
   }
 
   get mobileFocusEnabled() {
-    return this.site.mobileView && this.args.focusPost;
+    return !this.flatReplies && this.site.mobileView && this.args.focusPost;
   }
 
   get childDepth() {
@@ -320,6 +351,16 @@ export default class NestedPost extends Component {
 
   @action
   toggleExpanded() {
+    if (this.flatReplies) {
+      this.expanded = !this.expanded;
+      this.collapsed = false;
+      this.args.expansionState?.set(this.args.post.post_number, {
+        expanded: this.expanded,
+        collapsed: false,
+      });
+      return;
+    }
+
     if (!this.hasReplies) {
       this.collapsed = !this.collapsed;
       this.lineHighlighted = false;
@@ -434,6 +475,17 @@ export default class NestedPost extends Component {
     }
 
     this.toggleExpanded();
+  }
+
+  @action
+  restoreExpansionState() {
+    if (this.flatReplies) {
+      const state = this.args.expansionState?.get(this.args.post.post_number);
+      if (state) {
+        this.expanded = state.expanded;
+        this.collapsed = state.collapsed;
+      }
+    }
   }
 
   @action
@@ -566,6 +618,21 @@ export default class NestedPost extends Component {
     this.appEvents.trigger("nested-replies:post-registered", this.args.post);
   }
 
+  #onRevealRoot({ topicId, rootPostNumber }) {
+    if (
+      this.flatReplies &&
+      String(topicId) === String(this.args.topic?.id) &&
+      rootPostNumber === this.args.post.post_number
+    ) {
+      this.expanded = true;
+      this.collapsed = false;
+      this.args.expansionState?.set(rootPostNumber, {
+        expanded: true,
+        collapsed: false,
+      });
+    }
+  }
+
   _onChildCreated({ topicId, post: childPost, parentPostNumber, isOwnPost }) {
     if (
       String(topicId) !== String(this.args.topic?.id) ||
@@ -579,7 +646,7 @@ export default class NestedPost extends Component {
     post.set("total_descendant_count", (post.total_descendant_count || 0) + 1);
     this._childWasCreated = true;
 
-    if (!this.expanded) {
+    if (!this.expanded && (!this.flatReplies || isOwnPost)) {
       this.expanded = true;
       this.collapsed = false;
       this.args.expansionState?.set(this.args.post.post_number, {
@@ -611,8 +678,10 @@ export default class NestedPost extends Component {
         (if this.cloakingData.active "nested-post--cloaked")
         (if this.selected "selected")
       }}
+      data-root-index={{if this.isRoot @post.root_index}}
       style={{this.cloakingData.style}}
       {{this.restoreScroll}}
+      {{didUpdate this.restoreExpansionState @expansionState @post.id}}
       {{! At depth 0, register wrapper with cloaking observer (captures full subtree height).
           At deeper depths, register as trackOnly (viewport tracking only, no cloaking). }}
       {{@registerPost @post trackOnly=(not this.isRoot)}}
@@ -880,13 +949,7 @@ export default class NestedPost extends Component {
             {{/let}}
           {{/if}}
 
-          {{#if
-            (and
-              this.effectiveExpanded
-              (not this.effectiveCollapsed)
-              (not this.atMaxDepth)
-            )
-          }}
+          {{#if this.renderChildren}}
             <NestedPostChildren
               @captureScrollAnchor={{@captureScrollAnchor}}
               @changeNotice={{@changeNotice}}
@@ -902,6 +965,7 @@ export default class NestedPost extends Component {
               @focusPost={{@focusPost}}
               @grantBadge={{@grantBadge}}
               @highlightParentLine={{this.highlightLine}}
+              @initialPage={{@post.children_page}}
               @lockPost={{@lockPost}}
               @multiSelect={{@multiSelect}}
               @parentLineHighlighted={{this.lineHighlighted}}
@@ -910,6 +974,7 @@ export default class NestedPost extends Component {
               @permanentlyDeletePost={{@permanentlyDeletePost}}
               @postSelected={{@postSelected}}
               @preloadedChildren={{@children}}
+              @preview={{this.previewChildren}}
               @rebakePost={{@rebakePost}}
               @recoverPost={{@recoverPost}}
               @registerPost={{@registerPost}}
@@ -923,6 +988,7 @@ export default class NestedPost extends Component {
               @sort={{@sort}}
               @togglePostSelection={{@togglePostSelection}}
               @togglePostType={{@togglePostType}}
+              @toggleReplies={{this.handleReplies}}
               @toggleWiki={{@toggleWiki}}
               @topic={{@topic}}
               @totalDescendantCount={{@post.total_descendant_count}}

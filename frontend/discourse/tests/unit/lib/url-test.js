@@ -437,6 +437,30 @@ module("Unit | Utility | url", function (hooks) {
     }
   });
 
+  test("repeated nested floor links restart target positioning without refreshing", function (assert) {
+    const router = {
+      currentURL: "/t/original/123/2",
+      refresh: sinon.spy(),
+    };
+    sinon.stub(DiscourseURL, "routerService").get(() => router);
+    sinon
+      .stub(this.owner.lookup("controller:topic"), "shouldRenderNestedView")
+      .get(() => true);
+    const trigger = sinon.spy(DiscourseURL.appEvents, "trigger");
+    const handleURL = sinon.stub(DiscourseURL, "handleURL");
+
+    DiscourseURL.routeTo(router.currentURL);
+    DiscourseURL.routeTo(router.currentURL);
+
+    assert.strictEqual(
+      trigger.withArgs("nested:scroll-to-target").callCount,
+      2,
+      "each click requests positioning and a new highlight"
+    );
+    assert.false(router.refresh.called, "the current floor is not reloaded");
+    assert.false(handleURL.called, "the canonical URL remains unchanged");
+  });
+
   test("anchor handling", async function (assert) {
     sinon.stub(DiscourseURL, "jumpToElement");
     sinon.stub(DiscourseURL, "replaceState");

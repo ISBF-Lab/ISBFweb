@@ -1,0 +1,6 @@
+[
+  "themes/isbf-campus-feed/stylesheets/topic-reading.scss",
+  "frontend/discourse/app/lib/offset-calculator.js",
+  "frontend/discourse/app/lib/lock-on.js",
+  "frontend/discourse/app/components/glimmer-site-header.gjs"
+]

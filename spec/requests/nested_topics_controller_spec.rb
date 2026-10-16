@@ -974,6 +974,143 @@ RSpec.describe NestedTopicsController, type: :request do
         expect(root_ids[1]).to eq(high_post.id)
       end
     end
+
+    context "when replies use flat conversations" do
+      before do
+        SiteSetting.nested_replies_cap_nesting_depth = true
+        SiteSetting.nested_replies_max_depth = 1
+        sign_in(user)
+      end
+
+      it "previews the first three descendants chronologically at one nesting level" do
+        root = Fabricate(:post, topic: topic, user: user, reply_to_post_number: 1)
+        left = Fabricate(:post, topic: topic, user: user, reply_to_post_number: root.post_number)
+        right = Fabricate(:post, topic: topic, user: user, reply_to_post_number: root.post_number)
+        grandchild =
+          Fabricate(:post, topic: topic, user: user, reply_to_post_number: left.post_number)
+        Fabricate(:post, topic: topic, user: user, reply_to_post_number: right.post_number)
+
+        get show_url(topic, sort: "new")
+
+        expect(response.status).to eq(200)
+        json = response.parsed_body
+        expect(json).to include("sort" => "old", "effective_sort" => "old")
+        expect(json["navigation"]).to include("root_count" => 1, "reply_count" => 5)
+        expect(json["roots"].map { |post_json| post_json["id"] }).to eq([root.id])
+        root_json = json["roots"].first
+        expect(root_json).to include("root_index" => 1, "total_descendant_count" => 4)
+        expect(root_json["children"].map { |post_json| post_json["id"] }).to eq(
+          [left.id, right.id, grandchild.id],
+        )
+        expect(root_json["children"].map { |post_json| post_json["children"] }).to eq([[], [], []])
+      end
+
+      it "keeps pin order and discussion indexes consistent across root pages" do
+        roots = 21.times.map { Fabricate(:post, topic: topic, user: user, reply_to_post_number: 1) }
+        pins = [roots.last, roots[4]]
+        Fabricate(:nested_topic, topic: topic, pinned_post_ids: pins.map(&:id))
+
+        get show_url(topic, page: 0)
+
+        expect(response.status).to eq(200)
+        first_page = response.parsed_body
+        expect(first_page["has_more_roots"]).to eq(true)
+        expect(first_page["roots"].length).to eq(20)
+
+        get show_url(topic, page: 1)
+
+        expect(response.status).to eq(200)
+        second_page = response.parsed_body
+        expect(second_page).to include("page" => 1, "has_more_roots" => false)
+        all_roots = first_page["roots"] + second_page["roots"]
+        expect(all_roots.map { |post_json| post_json["id"] }).to eq(
+          (pins + (roots - pins)).map(&:id),
+        )
+        expect(all_roots.map { |post_json| post_json["root_index"] }).to eq((1..21).to_a)
+      end
+    end
+  end
+
+  describe "#navigation" do
+    before do
+      SiteSetting.nested_replies_cap_nesting_depth = true
+      SiteSetting.nested_replies_max_depth = 1
+    end
+
+    it "returns the selected discussion and a descendant's actual discussion position" do
+      first_root = Fabricate(:post, topic: topic, user: user, reply_to_post_number: 1)
+      second_root = Fabricate(:post, topic: topic, user: user, reply_to_post_number: 1)
+      target =
+        Fabricate(:post, topic: topic, user: user, reply_to_post_number: first_root.post_number)
+      sign_in(user)
+
+      get "/n/#{topic.slug}/#{topic.id}/navigation.json", params: { root_index: 2 }
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body).to include(
+        "root_count" => 2,
+        "root_index" => 2,
+        "root_post_number" => second_root.post_number,
+        "root_post_id" => second_root.id,
+        "root_page" => 0,
+        "reply_count" => 3,
+        "child_page" => 0,
+      )
+
+      get "/n/#{topic.slug}/#{topic.id}/navigation.json",
+          params: {
+            post_number: target.post_number,
+          }
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body).to include("root_index" => 1, "root_post_id" => first_root.id)
+    end
+
+    it "returns 404 for private discussions for anonymous and unauthorized signed-in users" do
+      private_category = Fabricate(:private_category, group: Fabricate(:group))
+      private_topic = Fabricate(:topic_with_op, category: private_category)
+
+      get "/n/#{private_topic.slug}/#{private_topic.id}/navigation.json"
+      expect(response.status).to eq(404)
+
+      sign_in(user)
+      get "/n/#{private_topic.slug}/#{private_topic.id}/navigation.json"
+      expect(response.status).to eq(404)
+    end
+
+    it "returns 404 outside the flat conversation mode and when nested replies are disabled" do
+      sign_in(user)
+      SiteSetting.nested_replies_max_depth = 3
+
+      get "/n/#{topic.slug}/#{topic.id}/navigation.json"
+      expect(response.status).to eq(404)
+
+      SiteSetting.nested_replies_max_depth = 1
+      SiteSetting.nested_replies_enabled = false
+
+      get "/n/#{topic.slug}/#{topic.id}/navigation.json"
+      expect(response.status).to eq(404)
+    end
+
+    it "returns 404 for whisper targets that the viewer cannot see" do
+      SiteSetting.whispers_allowed_groups = "#{Group::AUTO_GROUPS[:staff]}"
+      whisper =
+        Fabricate(
+          :post,
+          topic: topic,
+          user: admin,
+          post_type: Post.types[:whisper],
+          reply_to_post_number: 1,
+        )
+      sign_in(user)
+
+      get "/n/#{topic.slug}/#{topic.id}/navigation.json",
+          params: {
+            post_number: whisper.post_number,
+          }
+
+      expect(response.status).to eq(404)
+    end
   end
 
   describe "PUT pin" do
@@ -1449,6 +1586,40 @@ RSpec.describe NestedTopicsController, type: :request do
       end
     end
 
+    it "keeps activity whispers out of flat child pages for whisperers" do
+      SiteSetting.nested_replies_cap_nesting_depth = true
+      SiteSetting.nested_replies_max_depth = 1
+      SiteSetting.whispers_allowed_groups = "#{Group::AUTO_GROUPS[:staff]}"
+      first_child =
+        Fabricate(:post, topic: topic, user: user, reply_to_post_number: root.post_number)
+      Fabricate(
+        :post,
+        topic: topic,
+        user: admin,
+        reply_to_post_number: root.post_number,
+        post_type: Post.types[:whisper],
+        action_code: "closed.enabled",
+      )
+      whisper =
+        Fabricate(
+          :post,
+          topic: topic,
+          user: admin,
+          reply_to_post_number: root.post_number,
+          post_type: Post.types[:whisper],
+        )
+      sign_in(admin)
+
+      stub_const(NestedReplies::TreeLoader, :CHILDREN_PER_PAGE, 2) do
+        get children_url(topic, root.post_number, sort: "new", depth: 1)
+
+        expect(response.status).to eq(200)
+        expect(response.parsed_body["children"].map { |post_json| post_json["id"] }).to eq(
+          [first_child.id, whisper.id],
+        )
+      end
+    end
+
     describe "deleted post placeholders" do
       it "shows deleted child as placeholder for non-staff" do
         child = Fabricate(:post, topic: topic, user: user, reply_to_post_number: root.post_number)
@@ -1516,6 +1687,96 @@ RSpec.describe NestedTopicsController, type: :request do
   end
 
   describe "GET context" do
+    context "when replies use flat conversations" do
+      before do
+        SiteSetting.nested_replies_cap_nesting_depth = true
+        SiteSetting.nested_replies_max_depth = 1
+        sign_in(user)
+      end
+
+      it "returns the target's root page with its preview and target child page merged once" do
+        roots = 21.times.map { Fabricate(:post, topic: topic, user: user, reply_to_post_number: 1) }
+        descendants =
+          55.times.map do
+            Fabricate(:post, topic: topic, user: user, reply_to_post_number: roots.last.post_number)
+          end
+
+        get context_url(topic, descendants.last.post_number, sort: "new")
+
+        expect(response.status).to eq(200)
+        json = response.parsed_body
+        expect(json).to include("page" => 1, "sort" => "old")
+        expect(json["op_post"]["id"]).to eq(op.id)
+        expect(json["navigation"]).to include(
+          "root_index" => 21,
+          "root_page" => 1,
+          "child_page" => 1,
+        )
+        expect(json["roots"].map { |post_json| post_json["id"] }).to eq([roots.last.id])
+        root_json = json["roots"].first
+        expect(root_json).to include(
+          "root_index" => 21,
+          "target_post_number" => descendants.last.post_number,
+          "children_page" => 1,
+        )
+        expect(root_json["children"].map { |post_json| post_json["id"] }).to eq(
+          (descendants.first(3) + descendants.drop(50)).map(&:id),
+        )
+
+        get context_url(topic, descendants[2].post_number)
+
+        expect(response.status).to eq(200)
+        expect(
+          response.parsed_body["roots"].first["children"].map { |post_json| post_json["id"] },
+        ).to eq(descendants.first(50).map(&:id))
+      end
+
+      it "keeps the target reachable through deleted parents without exposing their content" do
+        root = Fabricate(:post, topic: topic, user: user, reply_to_post_number: 1)
+        parent = Fabricate(:post, topic: topic, user: user, reply_to_post_number: root.post_number)
+        target =
+          Fabricate(:post, topic: topic, user: user, reply_to_post_number: parent.post_number)
+        [root, parent].each { |post| post.update!(deleted_at: Time.current) }
+
+        get context_url(topic, target.post_number)
+
+        expect(response.status).to eq(200)
+        root_json = response.parsed_body["roots"].first
+        expect(root_json).to include(
+          "id" => root.id,
+          "deleted_post_placeholder" => true,
+          "cooked" => "",
+          "raw" => nil,
+        )
+        expect(root_json["children"].map { |post_json| post_json["id"] }).to eq(
+          [parent.id, target.id],
+        )
+        expect(root_json["children"].first).to include(
+          "deleted_post_placeholder" => true,
+          "cooked" => "",
+          "raw" => nil,
+        )
+        expect(root_json["children"].last["reply_to_post_number"]).to eq(parent.post_number)
+      end
+
+      it "returns 404 for a whisper target that the viewer cannot see" do
+        SiteSetting.whispers_allowed_groups = "#{Group::AUTO_GROUPS[:staff]}"
+        root = Fabricate(:post, topic: topic, user: user, reply_to_post_number: 1)
+        whisper =
+          Fabricate(
+            :post,
+            topic: topic,
+            user: admin,
+            reply_to_post_number: root.post_number,
+            post_type: Post.types[:whisper],
+          )
+
+        get context_url(topic, whisper.post_number)
+
+        expect(response.status).to eq(404)
+      end
+    end
+
     it "returns ancestor chain, target post, and siblings" do
       chain = [op]
       3.times do |i|
@@ -1541,6 +1802,8 @@ RSpec.describe NestedTopicsController, type: :request do
       expect(json).to have_key("target_post")
       expect(json["effective_sort"]).to eq("top")
       expect(json).to have_key("message_bus_last_id")
+      expect(json).not_to have_key("navigation")
+      expect(json).not_to have_key("roots")
     end
 
     it "returns empty ancestors when context=0" do

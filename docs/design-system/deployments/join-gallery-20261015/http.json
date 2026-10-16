@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "requests": [
+    {
+      "path": "/join/",
+      "status": 200,
+      "sha256": "b14851fcad315d797b2e78aba6a81def76dcd9c02dc78bed85f8fd7a7b1a5740"
+    },
+    {
+      "path": "/join/gallery/01-orbit.png",
+      "status": 200,
+      "sha256": "917545bdd82e3c326243433ff4bb5c4e7d2e527f6519ccfc04f2305b82fb2ea5"
+    },
+    {
+      "path": "/join/gallery/02-ascent.png",
+      "status": 200,
+      "sha256": "815ac6ef20e8c58f3ad1395dccd3f974b439b35e8b0551a7d0e80e5972a24dd3"
+    },
+    {
+      "path": "/join/gallery/03-current.png",
+      "status": 200,
+      "sha256": "07f51cde873df806d771b559bed08112b4f9f50b59f5710c0e0605e9b228fbaa"
+    },
+    {
+      "path": "/join/gallery/04-aperture.png",
+      "status": 200,
+      "sha256": "2313101584ac07fe07d7945b42f73470de9a3e536eea1993bdabda6ed3bf988b"
+    },
+    {
+      "path": "/join/gallery/05-connection.png",
+      "status": 200,
+      "sha256": "dd36d5a0961d9546eb7361f18ea699f231d22550a844355508115771bbdcc35d"
+    },
+    {
+      "path": "/join/gallery/06-next.png",
+      "status": 200,
+      "sha256": "d0848f725b2901bf2d458aef520c4ad846439784d7c012039808f7508e77e3c8"
+    },
+    {
+      "path": "/join/assets/index-r26J2wOQ.js",
+      "status": 200,
+      "sha256": "86b39bb08d517fc2dfc275b7f41269bb80fd8b20854898164f916d3ddc4e9086"
+    }
+  ],
+  "image_count": 6,
+  "source_image_bytes_preserved": true,
+  "compatibility_csp_preserved": true,
+  "tls_verified": true,
+  "visual_acceptance": "User; no browser or screenshot checks"
+}

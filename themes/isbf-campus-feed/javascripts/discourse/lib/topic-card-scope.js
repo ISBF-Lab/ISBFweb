@@ -1,4 +1,24 @@
+import EmbedMode from "discourse/lib/embed-mode";
+
 const secondaryMenus = new WeakMap();
+
+export function isConversationTopic(topic, path, siteSettings) {
+  return (
+    !EmbedMode.enabled &&
+    /^\/t\//.test(path ?? "") &&
+    topic?.archetype === "regular" &&
+    topic.is_nested_view &&
+    siteSettings.nested_replies_enabled &&
+    siteSettings.nested_replies_cap_nesting_depth &&
+    siteSettings.nested_replies_max_depth === 1
+  );
+}
+
+export function isConversationPost(post, path, siteSettings) {
+  return (
+    post?.post_type === 1 && isConversationTopic(post.topic, path, siteSettings)
+  );
+}
 
 export function isFeedStyleTopic(topic, path) {
   return (

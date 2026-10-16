@@ -1,0 +1,48 @@
+{
+  "applied": true,
+  "theme_id": 4,
+  "published_at_utc": "2026-10-13T23:52:47Z",
+  "fields_before": 176,
+  "fields_after": 176,
+  "preserved_fields": 175,
+  "settings_preserved": true,
+  "compilation_errors": [],
+  "source": {
+    "relative": "stylesheets/topic-reading.scss",
+    "field_id": 261,
+    "before_sha256": "e4d6c1578c5f57320531c839667a86b9edf4de94addd8a886e0f13415d7a39b9",
+    "sha256": "ffac33f5ecdd99313625b78252e63ffdef504c1550a82fb86ce843df2659d91a",
+    "bytes": 6906
+  },
+  "styles": [
+    {
+      "target": "common_theme",
+      "bytes": 268431,
+      "sha256": "4402085ba13d7d210f8d06c40a0a89eac472e2c647464647082f140d408048e6",
+      "url": "/stylesheets/common_theme_4_d6f32c98e8270ca0ff23f32ceca0e02b416d329b.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "desktop_theme",
+      "bytes": 108,
+      "sha256": "431622fc8841158521a9e45bce66fe23d25e1786c400244ef7c7745f3ba611e9",
+      "url": "/stylesheets/desktop_theme_4_9b8a01df65e4947798a19d6a72f1096c06e47da2.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "mobile_theme",
+      "bytes": 107,
+      "sha256": "d690d35cc075aaf0f8cd007845d3eeba7a4b23f2f01e9ecbaa43ee4e08b503b2",
+      "url": "/stylesheets/mobile_theme_4_9b8a01df65e4947798a19d6a72f1096c06e47da2.css?__ws=isbf-one.com"
+    }
+  ],
+  "javascript_url": "/theme-javascripts/285b61b91b01bed8a2c05a6bd55175635b60e3c3.js?__ws=isbf-one.com",
+  "javascript_sha256": "40fb433f4e640527b15db149f5cda4fdec437a3b916836762ff185cc55636b1d",
+  "javascript_bytes": 382054,
+  "services_restarted": false,
+  "image_changed": false,
+  "production_browser_run": false,
+  "human_visual_acceptance": "Pending user review",
+  "core_and_plugins_unchanged": true,
+  "plugins": 64,
+  "core_revision": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "serving_verified": true
+}

@@ -8,6 +8,7 @@ import DRelativeDate from "discourse/ui-kit/d-relative-date";
 import dAvatar from "discourse/ui-kit/helpers/d-avatar";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
+import { displayIdentity } from "../lib/user-display";
 
 export default class ISBFNotificationEntry extends Component {
   @service siteSettings;
@@ -30,10 +31,10 @@ export default class ISBFNotificationEntry extends Component {
     if (!actor) {
       return null;
     }
-    const prioritizeName = this.siteSettings.prioritize_full_name_in_ux;
-    return this.siteSettings.enable_names && prioritizeName && actor.name
-      ? actor.name
-      : actor.username;
+    return displayIdentity({
+      name: this.siteSettings.enable_names ? actor.name : null,
+      username: actor.username,
+    });
   }
 
   @action

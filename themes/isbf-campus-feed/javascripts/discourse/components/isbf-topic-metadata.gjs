@@ -2,13 +2,26 @@ import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import DUserLink from "discourse/ui-kit/d-user-link";
 import { postCardTitle } from "../lib/post-card-helpers";
-import { isFeedStylePost } from "../lib/topic-card-scope";
+import { isConversationPost, isFeedStylePost } from "../lib/topic-card-scope";
+import ISBFReplyContext from "./isbf-reply-context";
 
 export default class ISBFTopicMetadata extends Component {
   @service router;
+  @service siteSettings;
 
   get enabled() {
-    return isFeedStylePost(this.args.outletArgs.post, this.router.currentURL);
+    return (
+      isFeedStylePost(this.args.outletArgs.post, this.router.currentURL) ||
+      this.conversation
+    );
+  }
+
+  get conversation() {
+    return isConversationPost(
+      this.args.outletArgs.post,
+      this.router.currentURL,
+      this.siteSettings
+    );
   }
 
   get title() {
@@ -29,6 +42,9 @@ export default class ISBFTopicMetadata extends Component {
           @{{@outletArgs.post.username}}
         </DUserLink>
       </div>
+      {{#if this.conversation}}
+        <ISBFReplyContext @post={{@outletArgs.post}} />
+      {{/if}}
       {{#if this.title}}
         <h1
           class="isbf-feed-card__title isbf-topic-card__title"

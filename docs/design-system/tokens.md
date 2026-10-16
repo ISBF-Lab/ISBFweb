@@ -254,3 +254,40 @@ D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用
 桌面纵向 space-4、返回横向 space-3、gap space-2、20px 图标/font-xl；≤600px 纵向 space-2、返回横向及 gap space-1、18px 图标/font-md。沿用站点字体、text/surface/border/focus-ring、1px 底部分隔线和最小 44px 点击高度。局部 content-gutter 保留桌面 26px/手机 16px 内容间距，无新增全站 token。
 
 [局部 token 映射](../../plugins/isbf-resume/docs/design-system/resume-approval.md#2026-10-14-简历紧凑页头设计确认)保存用户批准范围、来源版本和实现边界。
+
+## 2026-10-14 招募独立页
+
+用户批准沿用压缩包原样接入 `/join/`，颜色、字体、间距与动画仅作用于该独立文档，
+不作为论坛通用 token。原始 CSS 和资源摘要见 [来源记录](references/join-20261014/README.md)。
+后台申请列表复用已批准的后台组件接入方案，不新增颜色、间距或控件变体。
+
+## 2026-10-15 回复对话的局部复用
+
+2026-10-16确认的[手机操作栏对齐](deployments/reply-conversations-20261015/alignment-20261016.md)复用上述头像/列间距与33px缩进计算，仅在局部抵消操作栏缩进并采用五个等宽列；不修改全局token。定位提示复用既有`tertiary-low`和2秒淡出，减少动态效果时短暂静态显示。
+
+[C16方案](proposals/reply-conversations-20261015.md)复用现有42px头像及单层回复结构、
+space-3（12px）列间距、1px语义分隔线和font-md/1.45正文。操作采用UI kit按钮，手机目标至少44px。
+原文预览使用hover背景、border-strong边线和muted文字，最多两行；进度仅显示“当前 / 总数”，
+如“1 / 2”，复用已有页头和悬浮时间轴字体；按钮只写“收起”。
+用户已选定B的直线修订：主干从根头像底部沿中心线向下延伸，以1px border-strong直线接入子回复，
+缩进按头像半径与space-3计算，当前为`42px / 2 + 12px = 33px`；支线长space-3，末条头像中心处收尾。
+该尺寸仅是头像连接的几何计算，不新增全局token、颜色、圆角、阴影或字体。
+三条预览、50条子回复分页和20组根分页是行为常量，不是视觉token；当前仍待实际视觉验收。
+
+## 认证欢迎按钮位置修复（2026-10-16）
+
+认证欢迎态的按钮组采用局部 Y 轴 +24px 位移，沿用认证页既有24px间距尺度；这不是新的全局间距 token。
+
+来源与实施记录见[局部修复](deployments/auth-welcome-buttons-20261016/README.md)。
+
+## 2026-10-16 继续阅读局部尺寸
+
+[本次用户规格](reviews/continue-reading-20261016/README.md)限定帖子底部：直角（0圆角）、1px边框、
+桌面24px/手机16px内距、36px/30px头像、84px最小行高、16px/600标题和13px元信息。
+600px断点沿用现有主题；头像尺寸变量只定义在组件内，不新增全局token。
+次要文字使用已有primary-high色阶提高浅色可读性，主文字、背景、边框、强调和焦点复用现有V2语义变量。
+用户规格只确认该局部组合，最终视觉验收待完成。
+
+2026-10-16补充：用户明确授权上线，局部继续阅读已发布。原生及线上检查、实际源码版本、保留范围和回退见[发布记录](deployments/continue-reading-20261016/README.md)。最终视觉仍待用户核验，不扩大其他区域的Approved范围。
+
+2026-10-17继续阅读修订：用户明确要求容器直角，局部`border-radius: 0`取代初版16px圆角；其他组件的圆角token不变。源码及线上CSS验证见[修订记录](deployments/continue-reading-20261016/square-border-20261017/README.md)。

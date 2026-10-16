@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "checks": [
+    "320px: mobile icon columns and touch targets align, or desktop geometry matches the prior deployed stylesheet; light and dark",
+    "390px: mobile icon columns and touch targets align, or desktop geometry matches the prior deployed stylesheet; light and dark",
+    "600px: mobile icon columns and touch targets align, or desktop geometry matches the prior deployed stylesheet; light and dark",
+    "601px: mobile icon columns and touch targets align, or desktop geometry matches the prior deployed stylesheet; light and dark",
+    "1280px: mobile icon columns and touch targets align, or desktop geometry matches the prior deployed stylesheet; light and dark",
+    "Original topic, root and child replies highlight only the target article after positioning",
+    "Actual canonical URL routeTo restarts the highlight on a repeated floor click without refreshing",
+    "Rapid changes leave only the latest highlight and it disappears after two seconds",
+    "A target loaded after navigation is positioned and highlighted when its actual article appears",
+    "Reduced motion uses a temporary static tint with no animation",
+    "Leaving the view removes its highlight and cancels pending timers",
+    "Native flat-topic repeated navigation retains the existing refresh behavior"
+  ],
+  "actual_class_and_route_method": true,
+  "actual_compiled_current_and_previous_styles": true,
+  "served_native_core_styles_included": true,
+  "full_ember_application": false,
+  "production_backend_used": false,
+  "production_test_content_submitted": false
+}

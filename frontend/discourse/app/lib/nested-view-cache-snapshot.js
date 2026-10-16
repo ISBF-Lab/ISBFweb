@@ -1,6 +1,6 @@
 import { enumerateTrackedEntries } from "discourse/lib/tracked-tools";
 
-export const NESTED_VIEW_CACHE_FORMAT_VERSION = 3;
+export const NESTED_VIEW_CACHE_FORMAT_VERSION = 4;
 
 const EXCLUDED_RECORD_KEYS = new Set([
   "__munge",
@@ -22,6 +22,7 @@ export function snapshotNestedModelData(modelData) {
     opPost: snapshotRecord(modelData.opPost),
     rootNodes: snapshotNodes(modelData.rootNodes),
     page: modelData.page,
+    firstRootPage: modelData.firstRootPage,
     hasMoreRoots: modelData.hasMoreRoots,
     sort: modelData.sort,
     effectiveSort: modelData.effectiveSort || modelData.sort,
@@ -58,6 +59,7 @@ export function hydrateNestedModelData(store, snapshot) {
     opPost: hydratePost(store, topic, snapshot.opPost),
     rootNodes: hydrateNodes(store, topic, snapshot.rootNodes),
     page: snapshot.page,
+    firstRootPage: snapshot.firstRootPage || 0,
     hasMoreRoots: snapshot.hasMoreRoots,
     sort: snapshot.sort,
     effectiveSort: snapshot.effectiveSort || snapshot.sort,
@@ -100,6 +102,9 @@ export function snapshotFetchedChildrenCache(fetchedChildrenCache) {
         page: entry.page,
         hasMore: entry.hasMore,
         fetchedFromServer: entry.fetchedFromServer,
+        previousPage: entry.previousPage,
+        loadedPages: snapshotValue(entry.loadedPages),
+        positions: snapshotValue(entry.positions),
       },
     ]
   );
@@ -114,6 +119,9 @@ export function hydrateFetchedChildrenCache(store, topic, snapshot) {
         page: entry.page,
         hasMore: entry.hasMore,
         fetchedFromServer: entry.fetchedFromServer,
+        previousPage: entry.previousPage,
+        loadedPages: snapshotValue(entry.loadedPages),
+        positions: snapshotValue(entry.positions),
       },
     ])
   );

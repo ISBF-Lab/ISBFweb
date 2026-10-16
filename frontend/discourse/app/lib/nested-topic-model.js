@@ -21,6 +21,7 @@ export function processNestedRootResponse({
     opPost,
     rootNodes,
     page: data.page || 0,
+    firstRootPage: data.page || 0,
     hasMoreRoots: data.has_more_roots || false,
     sort: data.sort || siteSettings.nested_replies_default_sort || "top",
     effectiveSort:
@@ -51,6 +52,18 @@ export function processNestedContextResponse({
   site,
   store,
 }) {
+  if (data.navigation && data.roots) {
+    const model = processNestedRootResponse({
+      data,
+      params,
+      site,
+      siteSettings: { nested_replies_default_sort: "old" },
+      store,
+    });
+    model.targetPostNumber = Number(params.post_number);
+    return model;
+  }
+
   hydrateCategories(site, data);
 
   const topic = buildNestedTopic(store, data);
@@ -100,6 +113,7 @@ export function processNestedContextResponse({
       ancestors.length > 0 ? ancestors[0].post_number : null,
     rootNodes: [chainTip],
     page: 0,
+    firstRootPage: 0,
     hasMoreRoots: false,
     newRootPostIds: [],
     editingTopic: false,
@@ -117,6 +131,9 @@ function hydrateCategories(site, data) {
 function buildNestedTopic(store, data) {
   const topic = store.createRecord("topic", data.topic);
   topic.set("is_nested_view", true);
+  if (data.navigation) {
+    topic.set("reply_navigation", data.navigation);
+  }
 
   // Suggested/related are piggybacked at top-level on whichever response has
   // has_more_roots=false.

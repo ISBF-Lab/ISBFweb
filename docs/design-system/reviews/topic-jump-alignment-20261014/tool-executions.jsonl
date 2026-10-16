@@ -1,0 +1,2 @@
+{"command": ["bin/lint", "--fix", "themes/isbf-campus-feed/stylesheets/topic-reading.scss"], "exit_code": 0, "memory_limit_bytes": 536870912, "network": "none", "container_removed": true}
+{"command": ["python3", "/review/check-alignment.py"], "exit_code": 0, "memory_limit_bytes": 536870912, "network": "none", "container_removed": true}

@@ -1,7 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { helper } from "@ember/component/helper";
-import { fn } from "@ember/helper";
+import { array, fn } from "@ember/helper";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
@@ -11,7 +11,9 @@ import { service } from "@ember/service";
 import MoreTopics from "discourse/components/more-topics";
 import PluginOutlet from "discourse/components/plugin-outlet";
 import lazyHash from "discourse/helpers/lazy-hash";
+import { flatRepliesEnabled } from "discourse/lib/flat-replies";
 import getURL, { withoutPrefix } from "discourse/lib/get-url";
+import LockOn from "discourse/lib/lock-on";
 import DiscourseURL from "discourse/lib/url";
 import PostStreamViewportTracker from "discourse/modifiers/post-stream-viewport-tracker";
 import { and, gt, includes, not } from "discourse/truth-helpers";
@@ -59,11 +61,11 @@ export default class Nested extends Component {
   viewportTracker = new PostStreamViewportTracker();
   #initialFocusedPathKey = null;
   #focusedPathsByPostNumber = new Map();
-  #scrollAttempts = 0;
-  #maxScrollAttempts = 20;
   #nextTimer = null;
-  #retryTimer = null;
+  #targetLock = null;
   #highlightTimer = null;
+  #highlightFrame = null;
+  #highlightedPost = null;
   #lastScrollKey = null;
   #lastRestoredScrollY = null;
   #activeScrollAnchorKey = null;
@@ -149,9 +151,9 @@ export default class Nested extends Component {
       this.clearMobileReturnAnchor
     );
     cancel(this.#nextTimer);
-    cancel(this.#retryTimer);
+    this.#targetLock?.clearLock();
     this.#cancelScrollRestoration();
-    clearTimeout(this.#highlightTimer);
+    this.#clearTargetHighlight();
     this.persistScrollAnchor();
     window.removeEventListener("popstate", this.#onPopstate);
     window.removeEventListener("scroll", this.#onScroll);
@@ -171,7 +173,11 @@ export default class Nested extends Component {
   }
 
   get isMobileFocused() {
-    return this.site.mobileView && this.focusedPath.length > 0;
+    return (
+      !flatRepliesEnabled(this.siteSettings) &&
+      this.site.mobileView &&
+      this.focusedPath.length > 0
+    );
   }
 
   get viewClass() {
@@ -328,7 +334,7 @@ export default class Nested extends Component {
 
   @action
   persistScrollAnchor() {
-    if (this.isDestroying || this.#restoringStoredScroll) {
+    if (this.isDestroying || this.#restoringStoredScroll || this.#targetLock) {
       return;
     }
 
@@ -344,6 +350,9 @@ export default class Nested extends Component {
 
   @action
   restoreStoredScrollAnchor() {
+    if (this.args.targetPostNumber && !this.args.scrollAnchor) {
+      return;
+    }
     const anchor = this.args.scrollAnchor || this.#loadStoredScrollAnchor();
     if (!anchor) {
       return;
@@ -355,7 +364,7 @@ export default class Nested extends Component {
 
   @action
   restoreUpdatedScrollAnchor() {
-    if (!this.args.scrollAnchor) {
+    if (!this.args.scrollAnchor || this.#targetLock) {
       return;
     }
 
@@ -579,6 +588,7 @@ export default class Nested extends Component {
     this.#restoringStoredScroll = true;
 
     const initialScrollY = window.scrollY;
+    this.#lastRestoredScrollY = initialScrollY;
 
     schedule("afterRender", () => {
       if (!this.#restoringStoredScroll) {
@@ -745,6 +755,12 @@ export default class Nested extends Component {
     if (!this.args.targetPostNumber || this.isMobileFocused) {
       return;
     }
+    if (this.args.scrollAnchor && !force) {
+      cancel(this.#nextTimer);
+      this.#targetLock?.clearLock();
+      this.#clearTargetHighlight();
+      return;
+    }
 
     const scrollKey = this.targetScrollKey;
     if (!force && scrollKey === this.#lastScrollKey) {
@@ -753,9 +769,8 @@ export default class Nested extends Component {
 
     this.#lastScrollKey = scrollKey;
     cancel(this.#nextTimer);
-    cancel(this.#retryTimer);
-    clearTimeout(this.#highlightTimer);
-    this.#scrollAttempts = 0;
+    this.#targetLock?.clearLock();
+    this.#clearTargetHighlight();
     this.#nextTimer = next(this, this.#scrollToTarget);
   }
 
@@ -764,41 +779,74 @@ export default class Nested extends Component {
       return;
     }
 
+    this.#cancelScrollRestoration({ clearAnchor: true });
+    const topicId = this.args.topic.id;
     const postNumber = this.args.targetPostNumber;
-    const target = document.querySelector(
-      `.nested-view [data-post-number="${postNumber}"]`
-    );
-
-    if (target) {
-      const postEl = target.closest(".nested-post");
-      if (postEl) {
-        postEl.classList.add("nested-post--highlighted");
-        this.#highlightTimer = setTimeout(
-          () => postEl.classList.remove("nested-post--highlighted"),
-          2000
-        );
+    const viewSelector = `.nested-view[data-topic-id="${topicId}"]`;
+    const selector = `${viewSelector} [data-post-number="${postNumber}"]`;
+    let highlighted;
+    const lock = new LockOn(selector, {
+      finished: () => (this.#targetLock = null),
+    });
+    lock.elementTop = () => {
+      const target = document.querySelector(selector);
+      if (!target) {
+        return;
       }
+      if (target !== highlighted && this.#highlightFrame === null) {
+        this.#highlightFrame = window.requestAnimationFrame(() => {
+          this.#highlightFrame = null;
+          if (
+            this.isDestroying ||
+            this.args.topic.id !== topicId ||
+            this.args.targetPostNumber !== postNumber ||
+            !target.isConnected
+          ) {
+            return;
+          }
+          const { top, bottom } = target.getBoundingClientRect();
+          if (bottom <= 0 || top >= window.innerHeight) {
+            return;
+          }
+          highlighted = target;
+          this.#highlightedPost = target;
+          target.classList.add("nested-post--highlighted");
+          this.#highlightTimer = setTimeout(
+            () => this.#clearTargetHighlight(),
+            2000
+          );
+        });
+      }
+      let offset = Math.max(
+        this.header.headerOffset || 0,
+        this.#stickyHeaderBottom()
+      );
+      const view = document.querySelector(viewSelector);
+      for (const element of view.querySelectorAll(
+        ":scope > .nested-view__controls, :scope > .nested-context-view__banner"
+      )) {
+        const style = getComputedStyle(element);
+        if (["fixed", "sticky"].includes(style.position)) {
+          const top = parseFloat(style.top);
+          offset = Math.max(
+            offset,
+            (Number.isFinite(top) ? top : offset) + element.offsetHeight
+          );
+        }
+      }
+      return window.scrollY + target.getBoundingClientRect().top - offset;
+    };
+    this.#targetLock = lock;
+    lock.lock();
+  }
 
-      const controls = document.querySelector(
-        ".nested-view:not(.nested-context-view) > .nested-view__controls"
-      );
-      const banner = document.querySelector(
-        ".nested-context-view > .nested-context-view__banner"
-      );
-      const rect = target.getBoundingClientRect();
-      window.scrollTo({
-        top:
-          window.scrollY +
-          rect.top -
-          (this.header.headerOffset || 0) -
-          (controls?.offsetHeight || 0) -
-          (banner?.offsetHeight || 0),
-        behavior: "smooth",
-      });
-    } else if (this.#scrollAttempts < this.#maxScrollAttempts) {
-      this.#scrollAttempts++;
-      this.#retryTimer = schedule("afterRender", this, this.#scrollToTarget);
-    }
+  #clearTargetHighlight() {
+    window.cancelAnimationFrame(this.#highlightFrame);
+    clearTimeout(this.#highlightTimer);
+    this.#highlightedPost?.classList.remove("nested-post--highlighted");
+    this.#highlightFrame = null;
+    this.#highlightTimer = null;
+    this.#highlightedPost = null;
   }
 
   #nestedURL(postNumber = null) {
@@ -839,6 +887,12 @@ export default class Nested extends Component {
         topicId=@topic.id
       }}
     >
+      {{#each (array @topic) key="@identity" as |topic|}}
+        <PluginOutlet
+          @name="nested-topic-navigation"
+          @outletArgs={{lazyHash topic=topic}}
+        />
+      {{/each}}
       <NestedHeader
         @buffered={{@buffered}}
         @cancelEditingTopic={{@cancelEditingTopic}}
@@ -1056,6 +1110,14 @@ export default class Nested extends Component {
         {{/if}}
 
         <div class="nested-view__roots">
+          {{#if @firstRootPage}}
+            <DButton
+              class="btn-flat nested-view__previous-roots"
+              @action={{@loadPreviousRoots}}
+              @disabled={{@loadingPreviousRoots}}
+              @label="nested_replies.load_previous_discussions"
+            />
+          {{/if}}
           {{#each @rootNodes key="_renderKey" as |node index|}}
             <NestedPost
               @captureScrollAnchor={{this.captureScrollAnchor}}

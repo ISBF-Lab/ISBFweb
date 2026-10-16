@@ -1,4 +1,5 @@
 import { apiInitializer } from "discourse/lib/api";
+import ISBFReplyNavigation from "../components/isbf-reply-navigation";
 import {
   ISBFTopicBookmark,
   ISBFTopicLike,
@@ -9,6 +10,7 @@ import ISBFTopicMetadata from "../components/isbf-topic-metadata";
 import ISBFTopicMore from "../components/isbf-topic-more";
 import ISBFTopicViews from "../components/isbf-topic-views";
 import {
+  isConversationPost,
   isFeedStylePost,
   isFeedStyleTopic,
   rememberSecondaryMenu,
@@ -16,7 +18,15 @@ import {
 
 export default apiInitializer((api) => {
   const router = api.container.lookup("service:router");
+  const siteSettings = api.container.lookup("service:site-settings");
   api.renderInOutlet("post-metadata", ISBFTopicMetadata);
+  api.renderInOutlet("nested-topic-navigation", ISBFReplyNavigation);
+  api.registerValueTransformer("post-meta-data-infos", ({ value, context }) => {
+    if (isConversationPost(context.post, router.currentURL, siteSettings)) {
+      value.delete(context.metaDataInfoKeys.REPLY_TO_TAB);
+    }
+    return value;
+  });
 
   for (const [name, className] of [
     ["post-class", "isbf-topic-card"],
@@ -54,7 +64,8 @@ export default apiInitializer((api) => {
         context.post,
         router.currentURL,
         context.state.nestedReplyView
-      )
+      ) &&
+      !isConversationPost(context.post, router.currentURL, siteSettings)
     ) {
       return;
     }

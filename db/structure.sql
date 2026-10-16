@@ -180,6 +180,41 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: academy_student_registrations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.academy_student_registrations (
+    id bigint NOT NULL,
+    student_number character varying(64) NOT NULL,
+    invite_id bigint NOT NULL,
+    issued_by_id bigint NOT NULL,
+    user_id bigint,
+    registered_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: academy_student_registrations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.academy_student_registrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: academy_student_registrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.academy_student_registrations_id_seq OWNED BY public.academy_student_registrations.id;
+
+
+--
 -- Name: access_control_lists; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4438,6 +4473,127 @@ ALTER SEQUENCE public.discourse_automation_user_global_notices_id_seq OWNED BY p
 
 
 --
+-- Name: discourse_avatar_frames_frames; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.discourse_avatar_frames_frames (
+    id bigint NOT NULL,
+    key character varying(64) NOT NULL,
+    name character varying(100) DEFAULT ''::character varying NOT NULL,
+    description character varying(500) DEFAULT ''::character varying NOT NULL,
+    access_mode character varying(16) DEFAULT 'granted'::character varying NOT NULL,
+    builtin character varying(64) DEFAULT ''::character varying NOT NULL,
+    enabled boolean DEFAULT true NOT NULL,
+    "position" integer DEFAULT 0 NOT NULL,
+    image_upload_id bigint,
+    static_upload_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    scale double precision DEFAULT 120.0 NOT NULL,
+    offset_x double precision DEFAULT 0.0 NOT NULL,
+    offset_y double precision DEFAULT 0.0 NOT NULL,
+    calibration_confirmed boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: discourse_avatar_frames_frames_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.discourse_avatar_frames_frames_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: discourse_avatar_frames_frames_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.discourse_avatar_frames_frames_id_seq OWNED BY public.discourse_avatar_frames_frames.id;
+
+
+--
+-- Name: discourse_avatar_frames_grants; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.discourse_avatar_frames_grants (
+    id bigint NOT NULL,
+    frame_id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    granted_by_id bigint NOT NULL,
+    granted_at timestamp(6) without time zone NOT NULL,
+    notification_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: discourse_avatar_frames_grants_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.discourse_avatar_frames_grants_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: discourse_avatar_frames_grants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.discourse_avatar_frames_grants_id_seq OWNED BY public.discourse_avatar_frames_grants.id;
+
+
+--
+-- Name: discourse_avatar_frames_imports; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.discourse_avatar_frames_imports (
+    id bigint NOT NULL,
+    frame_id bigint NOT NULL,
+    created_by_id bigint NOT NULL,
+    status character varying(16) DEFAULT 'queued'::character varying NOT NULL,
+    user_ids jsonb DEFAULT '[]'::jsonb NOT NULL,
+    unmatched_entries jsonb DEFAULT '[]'::jsonb NOT NULL,
+    failures jsonb DEFAULT '[]'::jsonb NOT NULL,
+    matched_count integer DEFAULT 0 NOT NULL,
+    unmatched_count integer DEFAULT 0 NOT NULL,
+    duplicate_count integer DEFAULT 0 NOT NULL,
+    processed_count integer DEFAULT 0 NOT NULL,
+    granted_count integer DEFAULT 0 NOT NULL,
+    skipped_count integer DEFAULT 0 NOT NULL,
+    failed_count integer DEFAULT 0 NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: discourse_avatar_frames_imports_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.discourse_avatar_frames_imports_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: discourse_avatar_frames_imports_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.discourse_avatar_frames_imports_id_seq OWNED BY public.discourse_avatar_frames_imports.id;
+
+
+--
 -- Name: discourse_calendar_disabled_holidays; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -7208,6 +7364,116 @@ ALTER SEQUENCE public.invites_id_seq OWNED BY public.invites.id;
 
 
 --
+-- Name: isbf_account_links; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.isbf_account_links (
+    id bigint NOT NULL,
+    user_a_id integer NOT NULL,
+    user_b_id integer NOT NULL,
+    requester_id integer NOT NULL,
+    status integer DEFAULT 1 NOT NULL,
+    approved_by_id integer,
+    approved_at timestamp(6) without time zone,
+    rejected_by_id integer,
+    rejected_at timestamp(6) without time zone,
+    revoked_by_id integer,
+    revoked_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: isbf_account_links_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.isbf_account_links_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: isbf_account_links_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.isbf_account_links_id_seq OWNED BY public.isbf_account_links.id;
+
+
+--
+-- Name: isbf_account_switch_audit_events; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.isbf_account_switch_audit_events (
+    id bigint NOT NULL,
+    account_link_id integer,
+    actor_id integer,
+    action character varying NOT NULL,
+    metadata jsonb DEFAULT '{}'::jsonb NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: isbf_account_switch_audit_events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.isbf_account_switch_audit_events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: isbf_account_switch_audit_events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.isbf_account_switch_audit_events_id_seq OWNED BY public.isbf_account_switch_audit_events.id;
+
+
+--
+-- Name: isbf_account_switch_device_grants; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.isbf_account_switch_device_grants (
+    id bigint NOT NULL,
+    account_link_id integer NOT NULL,
+    user_id integer NOT NULL,
+    device_digest character varying NOT NULL,
+    expires_at timestamp(6) without time zone NOT NULL,
+    last_used_at timestamp(6) without time zone,
+    revoked_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: isbf_account_switch_device_grants_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.isbf_account_switch_device_grants_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: isbf_account_switch_device_grants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.isbf_account_switch_device_grants_id_seq OWNED BY public.isbf_account_switch_device_grants.id;
+
+
+--
 -- Name: isbf_anonymous_pool_accounts; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -7271,6 +7537,218 @@ CREATE SEQUENCE public.isbf_anonymous_pool_assignments_id_seq
 --
 
 ALTER SEQUENCE public.isbf_anonymous_pool_assignments_id_seq OWNED BY public.isbf_anonymous_pool_assignments.id;
+
+
+--
+-- Name: isbf_calendar_entries; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.isbf_calendar_entries (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    title character varying(120) NOT NULL,
+    starts_at timestamp(6) without time zone NOT NULL,
+    ends_at timestamp(6) without time zone NOT NULL,
+    all_day boolean DEFAULT false NOT NULL,
+    note text,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    source_item_id bigint,
+    schedule_kind character varying DEFAULT 'event'::character varying NOT NULL,
+    accepted_revision integer DEFAULT 0 NOT NULL,
+    dismissed_revision integer DEFAULT 0 NOT NULL,
+    notified_revision integer DEFAULT 0 NOT NULL
+);
+
+
+--
+-- Name: isbf_calendar_entries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.isbf_calendar_entries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: isbf_calendar_entries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.isbf_calendar_entries_id_seq OWNED BY public.isbf_calendar_entries.id;
+
+
+--
+-- Name: isbf_calendar_official_items; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.isbf_calendar_official_items (
+    id bigint NOT NULL,
+    topic_id bigint NOT NULL,
+    title character varying(120) NOT NULL,
+    schedule_kind character varying DEFAULT 'event'::character varying NOT NULL,
+    starts_at timestamp(6) without time zone NOT NULL,
+    ends_at timestamp(6) without time zone NOT NULL,
+    all_day boolean DEFAULT false NOT NULL,
+    cancelled boolean DEFAULT false NOT NULL,
+    revision integer DEFAULT 1 NOT NULL,
+    "position" integer DEFAULT 0 NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    location character varying(255) DEFAULT ''::character varying NOT NULL,
+    organizer character varying(120) DEFAULT ''::character varying NOT NULL,
+    registration_deadline_id bigint
+);
+
+
+--
+-- Name: isbf_calendar_official_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.isbf_calendar_official_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: isbf_calendar_official_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.isbf_calendar_official_items_id_seq OWNED BY public.isbf_calendar_official_items.id;
+
+
+--
+-- Name: isbf_join_applications; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.isbf_join_applications (
+    id bigint NOT NULL,
+    submission_id uuid NOT NULL,
+    name character varying(60) NOT NULL,
+    student_id character varying(40) NOT NULL,
+    phone character varying(30) NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: isbf_join_applications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.isbf_join_applications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: isbf_join_applications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.isbf_join_applications_id_seq OWNED BY public.isbf_join_applications.id;
+
+
+--
+-- Name: isbf_post_view_impressions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.isbf_post_view_impressions (
+    id bigint NOT NULL,
+    post_id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: isbf_post_view_impressions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.isbf_post_view_impressions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: isbf_post_view_impressions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.isbf_post_view_impressions_id_seq OWNED BY public.isbf_post_view_impressions.id;
+
+
+--
+-- Name: isbf_reposts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.isbf_reposts (
+    id bigint NOT NULL,
+    source_topic_id bigint NOT NULL,
+    repost_topic_id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: isbf_reposts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.isbf_reposts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: isbf_reposts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.isbf_reposts_id_seq OWNED BY public.isbf_reposts.id;
+
+
+--
+-- Name: isbf_view_impressions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.isbf_view_impressions (
+    id bigint NOT NULL,
+    topic_id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: isbf_view_impressions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.isbf_view_impressions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: isbf_view_impressions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.isbf_view_impressions_id_seq OWNED BY public.isbf_view_impressions.id;
 
 
 --
@@ -13839,6 +14317,13 @@ ALTER SEQUENCE public.web_hooks_id_seq OWNED BY public.web_hooks.id;
 
 
 --
+-- Name: academy_student_registrations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.academy_student_registrations ALTER COLUMN id SET DEFAULT nextval('public.academy_student_registrations_id_seq'::regclass);
+
+
+--
 -- Name: access_control_lists id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -14581,6 +15066,27 @@ ALTER TABLE ONLY public.discourse_automation_user_global_notices ALTER COLUMN id
 
 
 --
+-- Name: discourse_avatar_frames_frames id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.discourse_avatar_frames_frames ALTER COLUMN id SET DEFAULT nextval('public.discourse_avatar_frames_frames_id_seq'::regclass);
+
+
+--
+-- Name: discourse_avatar_frames_grants id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.discourse_avatar_frames_grants ALTER COLUMN id SET DEFAULT nextval('public.discourse_avatar_frames_grants_id_seq'::regclass);
+
+
+--
+-- Name: discourse_avatar_frames_imports id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.discourse_avatar_frames_imports ALTER COLUMN id SET DEFAULT nextval('public.discourse_avatar_frames_imports_id_seq'::regclass);
+
+
+--
 -- Name: discourse_calendar_disabled_holidays id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -15099,6 +15605,27 @@ ALTER TABLE ONLY public.invites ALTER COLUMN id SET DEFAULT nextval('public.invi
 
 
 --
+-- Name: isbf_account_links id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_account_links ALTER COLUMN id SET DEFAULT nextval('public.isbf_account_links_id_seq'::regclass);
+
+
+--
+-- Name: isbf_account_switch_audit_events id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_account_switch_audit_events ALTER COLUMN id SET DEFAULT nextval('public.isbf_account_switch_audit_events_id_seq'::regclass);
+
+
+--
+-- Name: isbf_account_switch_device_grants id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_account_switch_device_grants ALTER COLUMN id SET DEFAULT nextval('public.isbf_account_switch_device_grants_id_seq'::regclass);
+
+
+--
 -- Name: isbf_anonymous_pool_accounts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -15110,6 +15637,48 @@ ALTER TABLE ONLY public.isbf_anonymous_pool_accounts ALTER COLUMN id SET DEFAULT
 --
 
 ALTER TABLE ONLY public.isbf_anonymous_pool_assignments ALTER COLUMN id SET DEFAULT nextval('public.isbf_anonymous_pool_assignments_id_seq'::regclass);
+
+
+--
+-- Name: isbf_calendar_entries id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_calendar_entries ALTER COLUMN id SET DEFAULT nextval('public.isbf_calendar_entries_id_seq'::regclass);
+
+
+--
+-- Name: isbf_calendar_official_items id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_calendar_official_items ALTER COLUMN id SET DEFAULT nextval('public.isbf_calendar_official_items_id_seq'::regclass);
+
+
+--
+-- Name: isbf_join_applications id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_join_applications ALTER COLUMN id SET DEFAULT nextval('public.isbf_join_applications_id_seq'::regclass);
+
+
+--
+-- Name: isbf_post_view_impressions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_post_view_impressions ALTER COLUMN id SET DEFAULT nextval('public.isbf_post_view_impressions_id_seq'::regclass);
+
+
+--
+-- Name: isbf_reposts id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_reposts ALTER COLUMN id SET DEFAULT nextval('public.isbf_reposts_id_seq'::regclass);
+
+
+--
+-- Name: isbf_view_impressions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_view_impressions ALTER COLUMN id SET DEFAULT nextval('public.isbf_view_impressions_id_seq'::regclass);
 
 
 --
@@ -16324,6 +16893,14 @@ ALTER TABLE ONLY public.web_hooks ALTER COLUMN id SET DEFAULT nextval('public.we
 
 
 --
+-- Name: academy_student_registrations academy_student_registrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.academy_student_registrations
+    ADD CONSTRAINT academy_student_registrations_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: access_control_lists access_control_lists_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -17212,6 +17789,30 @@ ALTER TABLE ONLY public.discourse_automation_user_global_notices
 
 
 --
+-- Name: discourse_avatar_frames_frames discourse_avatar_frames_frames_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.discourse_avatar_frames_frames
+    ADD CONSTRAINT discourse_avatar_frames_frames_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: discourse_avatar_frames_grants discourse_avatar_frames_grants_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.discourse_avatar_frames_grants
+    ADD CONSTRAINT discourse_avatar_frames_grants_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: discourse_avatar_frames_imports discourse_avatar_frames_imports_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.discourse_avatar_frames_imports
+    ADD CONSTRAINT discourse_avatar_frames_imports_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: discourse_calendar_disabled_holidays discourse_calendar_disabled_holidays_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -17812,6 +18413,30 @@ ALTER TABLE ONLY public.invites
 
 
 --
+-- Name: isbf_account_links isbf_account_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_account_links
+    ADD CONSTRAINT isbf_account_links_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: isbf_account_switch_audit_events isbf_account_switch_audit_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_account_switch_audit_events
+    ADD CONSTRAINT isbf_account_switch_audit_events_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: isbf_account_switch_device_grants isbf_account_switch_device_grants_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_account_switch_device_grants
+    ADD CONSTRAINT isbf_account_switch_device_grants_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: isbf_anonymous_pool_accounts isbf_anonymous_pool_accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -17825,6 +18450,54 @@ ALTER TABLE ONLY public.isbf_anonymous_pool_accounts
 
 ALTER TABLE ONLY public.isbf_anonymous_pool_assignments
     ADD CONSTRAINT isbf_anonymous_pool_assignments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: isbf_calendar_entries isbf_calendar_entries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_calendar_entries
+    ADD CONSTRAINT isbf_calendar_entries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: isbf_calendar_official_items isbf_calendar_official_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_calendar_official_items
+    ADD CONSTRAINT isbf_calendar_official_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: isbf_join_applications isbf_join_applications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_join_applications
+    ADD CONSTRAINT isbf_join_applications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: isbf_post_view_impressions isbf_post_view_impressions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_post_view_impressions
+    ADD CONSTRAINT isbf_post_view_impressions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: isbf_reposts isbf_reposts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_reposts
+    ADD CONSTRAINT isbf_reposts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: isbf_view_impressions isbf_view_impressions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_view_impressions
+    ADD CONSTRAINT isbf_view_impressions_pkey PRIMARY KEY (id);
 
 
 --
@@ -19960,6 +20633,41 @@ CREATE UNIQUE INDEX idx_group_tag_notification_defaults_unique ON public.group_t
 
 
 --
+-- Name: idx_isbf_calendar_entries_source_user; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX idx_isbf_calendar_entries_source_user ON public.isbf_calendar_entries USING btree (user_id, source_item_id) WHERE (source_item_id IS NOT NULL);
+
+
+--
+-- Name: idx_isbf_calendar_items_topic; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_isbf_calendar_items_topic ON public.isbf_calendar_official_items USING btree (topic_id, "position");
+
+
+--
+-- Name: idx_isbf_calendar_user_start; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_isbf_calendar_user_start ON public.isbf_calendar_entries USING btree (user_id, starts_at);
+
+
+--
+-- Name: idx_isbf_switch_grants_device; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_isbf_switch_grants_device ON public.isbf_account_switch_device_grants USING btree (device_digest, expires_at);
+
+
+--
+-- Name: idx_isbf_switch_grants_unique; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX idx_isbf_switch_grants_unique ON public.isbf_account_switch_device_grants USING btree (account_link_id, user_id, device_digest);
+
+
+--
 -- Name: idx_kanban_boards_category_ids; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -20419,6 +21127,27 @@ CREATE UNIQUE INDEX idx_web_hook_event_types_hooks_on_ids ON public.web_hook_eve
 --
 
 CREATE INDEX idxtopicslug ON public.topics USING btree (slug) WHERE ((deleted_at IS NULL) AND (slug IS NOT NULL));
+
+
+--
+-- Name: index_academy_student_registrations_on_invite_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_academy_student_registrations_on_invite_id ON public.academy_student_registrations USING btree (invite_id);
+
+
+--
+-- Name: index_academy_student_registrations_on_student_number; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_academy_student_registrations_on_student_number ON public.academy_student_registrations USING btree (student_number);
+
+
+--
+-- Name: index_academy_student_registrations_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_academy_student_registrations_on_user_id ON public.academy_student_registrations USING btree (user_id) WHERE (user_id IS NOT NULL);
 
 
 --
@@ -20895,6 +21624,13 @@ CREATE UNIQUE INDEX index_assignments_on_target_id_and_target_type ON public.ass
 --
 
 CREATE INDEX index_assignments_on_topic_id ON public.assignments USING btree (topic_id);
+
+
+--
+-- Name: index_avatar_frame_grants_on_frame_and_user; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_avatar_frame_grants_on_frame_and_user ON public.discourse_avatar_frames_grants USING btree (frame_id, user_id);
 
 
 --
@@ -21560,6 +22296,27 @@ CREATE INDEX index_disabled_holidays_on_holiday_name_and_region_code ON public.d
 --
 
 CREATE UNIQUE INDEX index_discourse_automation_stats_on_automation_id_and_date ON public.discourse_automation_stats USING btree (automation_id, date);
+
+
+--
+-- Name: index_discourse_avatar_frames_frames_on_key; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_discourse_avatar_frames_frames_on_key ON public.discourse_avatar_frames_frames USING btree (key);
+
+
+--
+-- Name: index_discourse_avatar_frames_grants_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_discourse_avatar_frames_grants_on_user_id ON public.discourse_avatar_frames_grants USING btree (user_id);
+
+
+--
+-- Name: index_discourse_avatar_frames_imports_on_frame_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_discourse_avatar_frames_imports_on_frame_id ON public.discourse_avatar_frames_imports USING btree (frame_id);
 
 
 --
@@ -22403,6 +23160,41 @@ CREATE INDEX index_invites_on_invited_by_id ON public.invites USING btree (invit
 
 
 --
+-- Name: index_isbf_account_links_on_status; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_isbf_account_links_on_status ON public.isbf_account_links USING btree (status);
+
+
+--
+-- Name: index_isbf_account_links_on_user_a_id_and_user_b_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_isbf_account_links_on_user_a_id_and_user_b_id ON public.isbf_account_links USING btree (user_a_id, user_b_id);
+
+
+--
+-- Name: index_isbf_account_switch_audit_events_on_account_link_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_isbf_account_switch_audit_events_on_account_link_id ON public.isbf_account_switch_audit_events USING btree (account_link_id);
+
+
+--
+-- Name: index_isbf_account_switch_audit_events_on_actor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_isbf_account_switch_audit_events_on_actor_id ON public.isbf_account_switch_audit_events USING btree (actor_id);
+
+
+--
+-- Name: index_isbf_account_switch_audit_events_on_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_isbf_account_switch_audit_events_on_created_at ON public.isbf_account_switch_audit_events USING btree (created_at);
+
+
+--
 -- Name: index_isbf_anonymous_pool_accounts_on_slot; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -22428,6 +23220,83 @@ CREATE UNIQUE INDEX index_isbf_anonymous_pool_assignments_on_master_user_id ON p
 --
 
 CREATE INDEX index_isbf_anonymous_pool_assignments_on_pool_account_id ON public.isbf_anonymous_pool_assignments USING btree (pool_account_id);
+
+
+--
+-- Name: index_isbf_calendar_entries_on_source_item_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_isbf_calendar_entries_on_source_item_id ON public.isbf_calendar_entries USING btree (source_item_id);
+
+
+--
+-- Name: index_isbf_calendar_official_items_on_registration_deadline_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_isbf_calendar_official_items_on_registration_deadline_id ON public.isbf_calendar_official_items USING btree (registration_deadline_id);
+
+
+--
+-- Name: index_isbf_join_applications_on_created_at_and_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_isbf_join_applications_on_created_at_and_id ON public.isbf_join_applications USING btree (created_at DESC, id DESC);
+
+
+--
+-- Name: index_isbf_join_applications_on_submission_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_isbf_join_applications_on_submission_id ON public.isbf_join_applications USING btree (submission_id);
+
+
+--
+-- Name: index_isbf_post_view_impressions_on_post_id_and_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_isbf_post_view_impressions_on_post_id_and_user_id ON public.isbf_post_view_impressions USING btree (post_id, user_id);
+
+
+--
+-- Name: index_isbf_post_view_impressions_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_isbf_post_view_impressions_on_user_id ON public.isbf_post_view_impressions USING btree (user_id);
+
+
+--
+-- Name: index_isbf_reposts_on_repost_topic_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_isbf_reposts_on_repost_topic_id ON public.isbf_reposts USING btree (repost_topic_id);
+
+
+--
+-- Name: index_isbf_reposts_on_source_topic_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_isbf_reposts_on_source_topic_id ON public.isbf_reposts USING btree (source_topic_id);
+
+
+--
+-- Name: index_isbf_reposts_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_isbf_reposts_on_user_id ON public.isbf_reposts USING btree (user_id);
+
+
+--
+-- Name: index_isbf_view_impressions_on_topic_id_and_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_isbf_view_impressions_on_topic_id_and_user_id ON public.isbf_view_impressions USING btree (topic_id, user_id);
+
+
+--
+-- Name: index_isbf_view_impressions_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_isbf_view_impressions_on_user_id ON public.isbf_view_impressions USING btree (user_id);
 
 
 --
@@ -25618,6 +26487,14 @@ ALTER TABLE ONLY public.discourse_kanban_columns
 
 
 --
+-- Name: isbf_calendar_entries fk_rails_c3272f4675; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_calendar_entries
+    ADD CONSTRAINT fk_rails_c3272f4675 FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
 -- Name: ad_plugin_house_ads_categories fk_rails_c6e88d8af5; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -25688,7 +26565,19 @@ ALTER TABLE ONLY public.ad_plugin_house_ads_groups
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261014151020'),
+('20261011132124'),
+('20261010075218'),
+('20261006160545'),
+('20261006101910'),
+('20261004090640'),
 ('20261002060453'),
+('20261002000000'),
+('20261001000000'),
+('20260930000002'),
+('20260930000001'),
+('20260929000001'),
+('20260928000000'),
 ('20260923141924'),
 ('20260923080644'),
 ('20260923080642'),

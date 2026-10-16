@@ -1,0 +1,31 @@
+{
+  "source_inventory_exact": true,
+  "existing_plugins_preserved": 64,
+  "plugins_after": 65,
+  "core_revision": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "release_source_sha256": "5f7e2e4110cdacc283af0697f925a1240aa30003c68ba9f7ef20751110536839",
+  "image_tag": "local_discourse/isbf_app:join-20261015",
+  "image_id": "sha256:38308d121da3faee01d9c99fcdbdabcc40da13e0271361dd38c688bb85e84a24",
+  "previous_latest": "sha256:51dc77e355ca8a2a01b9e0e913f96a33716c67ae4222e8f86544b2788c46905c",
+  "latest_updated": true,
+  "running_container_image_id": "sha256:d7392bb5d64fd8cb127fdf0f594bf8e890faf6346a449f3fbde6fc190fef8ae8",
+  "container_recreated": false,
+  "production_container_paused": false,
+  "shared_source_mounts_required": [
+    "discourse-avatar-frames-releases",
+    "discourse-latest-created-order",
+    "isbf-alumni-releases",
+    "isbf-join-releases",
+    "isbf-learning-releases",
+    "isbf-marketplace-releases",
+    "isbf-official-releases",
+    "isbf-pinning-releases",
+    "isbf-resume-releases",
+    "isbf-teamup-releases"
+  ],
+  "database_theme_fields": 190,
+  "full_forum_browser_validation_complete": false,
+  "full_3d_animation_visual_validation_complete": false,
+  "docker_commit_stdout_notice": "Flag --pause has been deprecated, and enabled by default. Use --no-pause to disable pausing during commit.",
+  "image_id_verified_by_inspect": true
+}

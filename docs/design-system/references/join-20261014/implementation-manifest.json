@@ -1,0 +1,386 @@
+{
+  "scope": "Implementation source and build artifacts; production release and verification limits are recorded in docs/design-system/deployments/join-20261015/README.md. Existing generated schema baseline refresh is described in validation.md.",
+  "source_archive_sha256": "8a7e5606524b3498bc775d8cee41929fe080204ee6a3663dbb0c54d67a2a26df",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 3638,
+      "sha256": "6c9f9f18be25f4674e5789bd4c757dc7fd4b905a7f659bf40b63e28bc729f739"
+    },
+    {
+      "path": ".prettierignore",
+      "bytes": 871,
+      "sha256": "670dfa169ca605e5b23281f23b8f2e1a048c7225d9cee66eda6b6be0092f8ca3"
+    },
+    {
+      "path": "db/structure.sql",
+      "bytes": 778592,
+      "sha256": "1c98166512bd3e18da3f6c1366899462fc921e9270b3d82dfbe62369e63c8bfb"
+    },
+    {
+      "path": "eslint.config.mjs",
+      "bytes": 1167,
+      "sha256": "26739dda1dc1da2570947d4e37706601fdd84fecc7d489dabd610a497a52a5f2"
+    },
+    {
+      "path": "plugins/isbf-join/README.md",
+      "bytes": 3380,
+      "sha256": "5d7078039b403925be788d946879f3768f0016fcf9ea699efed9339d87e46764"
+    },
+    {
+      "path": "plugins/isbf-join/admin/assets/javascripts/discourse/controllers/admin-plugins/show/isbf-join-applications.js",
+      "bytes": 213,
+      "sha256": "63664117865fe9b2f7ff9a974c01d0ab9a3b1f5b0caeceed65cc79f1c96140c2"
+    },
+    {
+      "path": "plugins/isbf-join/admin/assets/javascripts/discourse/routes/admin-plugins/show/isbf-join-applications.js",
+      "bytes": 419,
+      "sha256": "ff83020d3a0d0d3ad9af3561df8ef029286a89d5ca2955f170241980eae26380"
+    },
+    {
+      "path": "plugins/isbf-join/admin/assets/javascripts/discourse/templates/admin-plugins/show/isbf-join-applications.gjs",
+      "bytes": 4865,
+      "sha256": "edca6c597bb033a64cc686ab3813ddd9d1e30a8c8d67e77b72b39d9499adf445"
+    },
+    {
+      "path": "plugins/isbf-join/app/controllers/isbf_join/admin/applications_controller.rb",
+      "bytes": 722,
+      "sha256": "b8fd89d3585867d099ed38de10bb44ab9bb45ea1786f39047f38a16e7ece6025"
+    },
+    {
+      "path": "plugins/isbf-join/app/controllers/isbf_join/applications_controller.rb",
+      "bytes": 2746,
+      "sha256": "7b1a3a04af6525beff295e0a109121d234f4228f82c5cd7add5efedd2406bdcb"
+    },
+    {
+      "path": "plugins/isbf-join/app/controllers/isbf_join/pages_controller.rb",
+      "bytes": 1480,
+      "sha256": "8d53e48d07e61dcaf31c18fd15bd829fde1cc063aaf02cba73994616b32dafc4"
+    },
+    {
+      "path": "plugins/isbf-join/app/controllers/isbf_join/public_controller.rb",
+      "bytes": 392,
+      "sha256": "f61e92e847f3567fb7fbf26159ec4c28def948ef41994eea445f0c2dc1b6c450"
+    },
+    {
+      "path": "plugins/isbf-join/app/models/isbf_join/application.rb",
+      "bytes": 728,
+      "sha256": "e870f7f2ff564ac8b25c739b7c72596b03c3c1a7b773f0ca0a1e049b3b1bc3dd"
+    },
+    {
+      "path": "plugins/isbf-join/app/serializers/isbf_join/application_serializer.rb",
+      "bytes": 175,
+      "sha256": "6ca58f3910cff7fa4e879167a6fc602a350b9dfcb549117d1ff205d7a4ee4215"
+    },
+    {
+      "path": "plugins/isbf-join/app/services/isbf_join/submit_application.rb",
+      "bytes": 711,
+      "sha256": "237c73d92fb5be0c632f6cd567a43f280961a8bd086db9799c540d5c8c560d96"
+    },
+    {
+      "path": "plugins/isbf-join/assets/javascripts/discourse/admin-isbf-join-plugin-route-map.js",
+      "bytes": 163,
+      "sha256": "bea094b4462217eb5e8ce87884ec4fb785d460c62455e948714c2d7e8830b9bf"
+    },
+    {
+      "path": "plugins/isbf-join/assets/javascripts/discourse/initializers/isbf-join-admin-nav.js",
+      "bytes": 568,
+      "sha256": "6b5479ed013298224c270688eada99a409b0a70811f07f6dc8fed50c2c6bd9c1"
+    },
+    {
+      "path": "plugins/isbf-join/config/locales/client.en.yml",
+      "bytes": 597,
+      "sha256": "cb9f616720a451648f333077c791e2311b6c71327985b98335c1a8efa7373d18"
+    },
+    {
+      "path": "plugins/isbf-join/config/locales/client.zh_CN.yml",
+      "bytes": 575,
+      "sha256": "28b233887238fdc092d2264141975ded10295e71fc232dacdaea62549fbe397a"
+    },
+    {
+      "path": "plugins/isbf-join/config/locales/server.en.yml",
+      "bytes": 701,
+      "sha256": "db993178c1f2272663211c48ef7d3490e16bdc8c55a0ab91d4800463f2949244"
+    },
+    {
+      "path": "plugins/isbf-join/config/locales/server.zh_CN.yml",
+      "bytes": 629,
+      "sha256": "87b58b4fddbb9ef69ba77b97ad199d5e044a93c1a9f8d3d6f0ea3f5187178335"
+    },
+    {
+      "path": "plugins/isbf-join/config/routes.rb",
+      "bytes": 175,
+      "sha256": "1ac0aea83da1bccf61b604366315497d835204c6eafb5373b13f76a8e00894a3"
+    },
+    {
+      "path": "plugins/isbf-join/db/migrate/20261014151020_create_isbf_join_applications.rb",
+      "bytes": 579,
+      "sha256": "e260f0ad15aa1cb20a5e5d558af863f1f32952dbde047cc81f8e97d8af931493"
+    },
+    {
+      "path": "plugins/isbf-join/lib/isbf_join/application_fields.rb",
+      "bytes": 1584,
+      "sha256": "65b51cf4645de9a6cd9c32259989883e2bc7a2a5e421ab97b1d56fb504508f86"
+    },
+    {
+      "path": "plugins/isbf-join/lib/isbf_join/assets.rb",
+      "bytes": 1312,
+      "sha256": "f8391400cf039887ca39d7b918e5c73234cf33a542cf858b4363e5894d0a595b"
+    },
+    {
+      "path": "plugins/isbf-join/lib/isbf_join/engine.rb",
+      "bytes": 151,
+      "sha256": "43db15f324849b52ed417ba3ec12789b2225896ddd09557dc8e52b91fc89be5e"
+    },
+    {
+      "path": "plugins/isbf-join/plugin.rb",
+      "bytes": 1093,
+      "sha256": "8530c549acb5b04b58adea2b9b39727badc1b2b37661a28cd3f34e0e7368bc2d"
+    },
+    {
+      "path": "plugins/isbf-join/spec/fabricators/isbf_join_application_fabricator.rb",
+      "bytes": 276,
+      "sha256": "b579d5ba257098a2f9e695ccad83cf70893699b98315b68af62d140e15e2be9f"
+    },
+    {
+      "path": "plugins/isbf-join/spec/models/isbf_join/application_spec.rb",
+      "bytes": 699,
+      "sha256": "7963b7876950704997a06f2ae44fdafc44a8ff5368d4d0fcb122d555e0b9124d"
+    },
+    {
+      "path": "plugins/isbf-join/spec/plugin_helper.rb",
+      "bytes": 118,
+      "sha256": "6e20ce4a20dbe3b3bfbe100372967270e326e1d10731d97374d74d502986ee88"
+    },
+    {
+      "path": "plugins/isbf-join/spec/requests/isbf_join/admin/applications_controller_spec.rb",
+      "bytes": 4313,
+      "sha256": "e1d1bd4e83135333074511a4cc6b9eecb37e79e0e1e24f8bc105391f8dba0ed1"
+    },
+    {
+      "path": "plugins/isbf-join/spec/requests/isbf_join/applications_controller_spec.rb",
+      "bytes": 9455,
+      "sha256": "37d254fb97baaac72efda7536d1ac9b198f641c521ef80d09916ef33b43f9641"
+    },
+    {
+      "path": "plugins/isbf-join/spec/requests/isbf_join/pages_controller_spec.rb",
+      "bytes": 2540,
+      "sha256": "0f67e3f133a46d0bd118a651f206418f168234b5f3f23dbb1073d42f17c46c94"
+    },
+    {
+      "path": "plugins/isbf-join/spec/services/isbf_join/submit_application_concurrency_spec.rb",
+      "bytes": 2413,
+      "sha256": "704aea1d773da0731aaa9b91b98b978cfeaae75e9d55bb0753fd81f662d8e8cf"
+    },
+    {
+      "path": "plugins/isbf-join/spec/services/isbf_join/submit_application_spec.rb",
+      "bytes": 4607,
+      "sha256": "15a84c26a70ec17caa24498070a7b0edd08e04bacf403f4ed1ce6a596c9a0666"
+    },
+    {
+      "path": "plugins/isbf-join/test/javascripts/acceptance/admin-applications-test.js",
+      "bytes": 5622,
+      "sha256": "0da609357e3600460a927330aa2f7f33255fd945234756be95d7e6509d3f3497"
+    },
+    {
+      "path": "plugins/isbf-join/web/.gitignore",
+      "bytes": 37,
+      "sha256": "beaba2942ff0f5154196d0670604379b070844758c64ec1e19564b57bf6f6f9f"
+    },
+    {
+      "path": "plugins/isbf-join/web/asset-manifest.json",
+      "bytes": 2857,
+      "sha256": "071147630a17c6a0941c11c3a5e99e430a208aa5ed48e5b0cfd5bed6f0b7bd23"
+    },
+    {
+      "path": "plugins/isbf-join/web/dist/assets/index-C9HHADaJ.css",
+      "bytes": 17176,
+      "sha256": "7c4f230bad1b8621641605767804735117d7be2d3e77be6840dc27b968039cda"
+    },
+    {
+      "path": "plugins/isbf-join/web/dist/assets/index-CFbXBEqh.js",
+      "bytes": 15325,
+      "sha256": "de088a0488e59db1132e69bc760cd140644468a49b5a631bbddaab1c10b68dba"
+    },
+    {
+      "path": "plugins/isbf-join/web/dist/assets/scene-vU8LyUtu.js",
+      "bytes": 14520,
+      "sha256": "161a60665e6e35c8fb12104b6b4d45f9d0995c9b91c5c6c7b53fccfdac304176"
+    },
+    {
+      "path": "plugins/isbf-join/web/dist/assets/three-DDksZyp6.js",
+      "bytes": 598491,
+      "sha256": "0a4e483fffc53ecba4254377f4966feab33b7fa007005ea2a80d72025bd063d3"
+    },
+    {
+      "path": "plugins/isbf-join/web/dist/index.html",
+      "bytes": 7628,
+      "sha256": "ca6eb046609de0503bf5b93fd6997271193f64042963f326f5fcf76fc3e2c863"
+    },
+    {
+      "path": "plugins/isbf-join/web/index.html",
+      "bytes": 7504,
+      "sha256": "de621da54bf9cc25b3d231bbd0f0630b73b348446c23ae40feac58a81e63c333"
+    },
+    {
+      "path": "plugins/isbf-join/web/package.json",
+      "bytes": 398,
+      "sha256": "a5eb4341aeab27ed1351993711a6da24f0d0fb07010d9e7f6a2786a393f9634f"
+    },
+    {
+      "path": "plugins/isbf-join/web/pnpm-lock.yaml",
+      "bytes": 20843,
+      "sha256": "852aa45521a95c42b6d6c0f03e09100ccd2bbd9bec8f731cbd9ed5bf2c442fd8"
+    },
+    {
+      "path": "plugins/isbf-join/web/public/THREE-LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d"
+    },
+    {
+      "path": "plugins/isbf-join/web/public/brand/isbf-one-mark.png",
+      "bytes": 341901,
+      "sha256": "2581b80a672eb34caa7e8279df60569b18df55218b87f37d41a1dc288052372f"
+    },
+    {
+      "path": "plugins/isbf-join/web/public/draco/LICENSE",
+      "bytes": 13898,
+      "sha256": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4"
+    },
+    {
+      "path": "plugins/isbf-join/web/public/draco/draco_decoder.js",
+      "bytes": 512465,
+      "sha256": "8625489da79a805f4f2a7d511c3e52d8b4085608a9d2a4d5f4f9de5db0aea04f"
+    },
+    {
+      "path": "plugins/isbf-join/web/public/draco/draco_decoder.wasm",
+      "bytes": 192420,
+      "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac"
+    },
+    {
+      "path": "plugins/isbf-join/web/public/draco/draco_wasm_wrapper.js",
+      "bytes": 58456,
+      "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6"
+    },
+    {
+      "path": "plugins/isbf-join/web/public/favicon.svg",
+      "bytes": 233,
+      "sha256": "b3f61c940e8fd32bf7ca9ae1f9adcbeafd7e3bdc840366ac9eb2132ed2d275ea"
+    },
+    {
+      "path": "plugins/isbf-join/web/public/fonts/OFL.txt",
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "plugins/isbf-join/web/public/fonts/inter-latin-variable.woff2",
+      "bytes": 48256,
+      "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+    },
+    {
+      "path": "plugins/isbf-join/web/public/gallery/README.md",
+      "bytes": 699,
+      "sha256": "2b4e9126c93b8baab97c0cd88b73e26a7ba1d69465049669119272e6e68f16d3"
+    },
+    {
+      "path": "plugins/isbf-join/web/public/models/journey-desktop.glb",
+      "bytes": 7428768,
+      "sha256": "c3f83ddd823a0a2bd8494ee1e11a68bc5a31aa9e8ff2f7b8ad729741bc76b1b5"
+    },
+    {
+      "path": "plugins/isbf-join/web/public/models/journey-mobile.glb",
+      "bytes": 5730972,
+      "sha256": "9bb62015d44ffcca5675e4ed890e59c3a994d42b69a2e07b743452d2ae37d0fc"
+    },
+    {
+      "path": "plugins/isbf-join/web/public/models/provenance.json",
+      "bytes": 828,
+      "sha256": "757d31ee9e873a2f08e36a724bd1521c284f6afae7ac5ce6796974b3bd4ca2fc"
+    },
+    {
+      "path": "plugins/isbf-join/web/scripts/write-asset-manifest.mjs",
+      "bytes": 1046,
+      "sha256": "8f30ffaa26db7dab5fffc293eca7b0c0accee343d3649db22976fd91d9e7965a"
+    },
+    {
+      "path": "plugins/isbf-join/web/shared/application.js",
+      "bytes": 989,
+      "sha256": "e7ce5dfb1bac7d179464727240a6d21c880c315c8861006fd499146c205997db"
+    },
+    {
+      "path": "plugins/isbf-join/web/src/ads.js",
+      "bytes": 13017,
+      "sha256": "d52d003b9606546b46e2940232ae1fdec7869e615ce44c0ff696f9ed7628b707"
+    },
+    {
+      "path": "plugins/isbf-join/web/src/application-transport.js",
+      "bytes": 902,
+      "sha256": "a500c3d678dc97ffb64c9656c75df5102db086056fee46600a1164a90fc6b475"
+    },
+    {
+      "path": "plugins/isbf-join/web/src/application.js",
+      "bytes": 4248,
+      "sha256": "74406cfda8b3420b20c23a981bf36f39e89efe119b803015e1c72480a87afba5"
+    },
+    {
+      "path": "plugins/isbf-join/web/src/brand.js",
+      "bytes": 1050,
+      "sha256": "9fd96fc6bdfb1c4ba6fe749947d21b79f30efeb2b22c5d33dda84c5d57c5674b"
+    },
+    {
+      "path": "plugins/isbf-join/web/src/config.js",
+      "bytes": 1197,
+      "sha256": "eb3f2ff5f6f84a24c3c9179e41b0f8900aaefa8372496dcd53601520bbce84c5"
+    },
+    {
+      "path": "plugins/isbf-join/web/src/gallery.js",
+      "bytes": 6524,
+      "sha256": "f3a10b505203611a382793f42105526631334a9c3a82e818dfe64a3429dd3726"
+    },
+    {
+      "path": "plugins/isbf-join/web/src/main.js",
+      "bytes": 8857,
+      "sha256": "31903e616e7c27eb4106efb30dc4424446cf9469b429a87afa7be50c935e7352"
+    },
+    {
+      "path": "plugins/isbf-join/web/src/scene.js",
+      "bytes": 13560,
+      "sha256": "c4b7321cf2853c22978b17a24c087f3479c4362a4fae8ac6dd09e23768db1534"
+    },
+    {
+      "path": "plugins/isbf-join/web/src/styles.css",
+      "bytes": 17369,
+      "sha256": "9cae88b2a6e9a7c0cd94e41dd2bea16b545927c8323012ad2e6e56bf884c36ee"
+    },
+    {
+      "path": "plugins/isbf-join/web/tests/ads.test.mjs",
+      "bytes": 3584,
+      "sha256": "ca735136e35cbaf2028ef2dd361b11497684d70205523cd500f8c3d624a8d04c"
+    },
+    {
+      "path": "plugins/isbf-join/web/tests/application-transport.test.mjs",
+      "bytes": 4944,
+      "sha256": "5d9ae5c3d3aea91da3f52dd2feb7e59aa0af07c09aeeae5cefd98f8912711418"
+    },
+    {
+      "path": "plugins/isbf-join/web/tests/application-validation.test.mjs",
+      "bytes": 2181,
+      "sha256": "453779b9ca0a1e0da5aebe21c47fabe7755ff24363e17dd3fb5f5be66469a260"
+    },
+    {
+      "path": "plugins/isbf-join/web/vite.config.js",
+      "bytes": 667,
+      "sha256": "be1962b16f220e6a5c9e531449ddeb27464f7f50b7d86052459d35f257eb8a70"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-utility-actions.gjs",
+      "bytes": 2758,
+      "sha256": "ac310f4e66cff82416a68fe227a69ebd8655b21891897ab43f28927f6134ea86"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/join-menu-test.gjs",
+      "bytes": 1909,
+      "sha256": "ed3bbd07dddbc1efabac92f5ea647efb03c6f4cba4d08e598b1937c940841bc8"
+    }
+  ]
+}

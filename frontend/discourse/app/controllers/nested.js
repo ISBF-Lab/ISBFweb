@@ -8,6 +8,11 @@ import NestedActivityLog from "discourse/components/modal/nested-activity-log";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { bind } from "discourse/lib/decorators";
+import { flatRepliesEnabled } from "discourse/lib/flat-replies";
+import {
+  mergeFlatReplyPage,
+  mergeFlatReplyPreload,
+} from "discourse/lib/flat-reply-pages";
 import {
   NESTED_VIEW_CACHE_FORMAT_VERSION,
   snapshotExpansionState,
@@ -16,6 +21,7 @@ import {
 } from "discourse/lib/nested-view-cache-snapshot";
 import { headerOffset } from "discourse/lib/offset-calculator";
 import QuoteState from "discourse/lib/quote-state";
+import DiscourseURL from "discourse/lib/url";
 import Composer from "discourse/models/composer";
 import Post from "discourse/models/post";
 import { i18n } from "discourse-i18n";
@@ -40,6 +46,8 @@ export default class NestedController extends Controller {
   @tracked opPost;
   @tracked rootNodes = [];
   @tracked page = 0;
+  @tracked firstRootPage = 0;
+  @tracked loadingPreviousRoots = false;
   @tracked hasMoreRoots = false;
   @tracked loadingMore = false;
   @tracked sort;
@@ -67,14 +75,14 @@ export default class NestedController extends Controller {
   // Externalized expansion state: postNumber → { expanded, collapsed }
   // Components read on construction, write on toggle.
   // Persisted across back/forward navigations via NestedViewCache.
-  expansionState = new Map();
+  @tracked expansionState = new Map();
 
   // Cache of dynamically loaded children: postNumber → { childNodes, page, hasMore, fetchedFromServer }
   // Populated by NestedPostChildren on every mutation, read on restoration.
-  fetchedChildrenCache = new Map();
+  @tracked fetchedChildrenCache = new Map();
 
   // Scroll anchor for cache restoration: { postNumber, offsetFromTop, scrollY? }
-  scrollAnchor = null;
+  @tracked scrollAnchor = null;
 
   quoteState = new QuoteState();
 
@@ -86,6 +94,7 @@ export default class NestedController extends Controller {
   #postEventsSubscribed = false;
   #messageBusChannel = null;
   #pendingPostIds = new Set();
+  #onRepeatTarget = () => this.revealFlatTarget(this.targetPostNumber);
 
   // The topic controller/route are hydrated in setupController so we can
   // delegate shared actions and read shared state instead of duplicating
@@ -126,6 +135,33 @@ export default class NestedController extends Controller {
     return this.contextMode ? 0 : this.newRootPostIds.length;
   }
 
+  get modelData() {
+    return {
+      topic: this.topic,
+      opPost: this.opPost,
+      rootNodes: this.rootNodes,
+      page: this.page,
+      firstRootPage: this.firstRootPage,
+      hasMoreRoots: this.hasMoreRoots,
+      sort: this.sort,
+      effectiveSort: this.effectiveSort,
+      messageBusLastId: this.messageBusLastId,
+      pinnedPostIds: this.pinnedPostIds,
+      postNumber: this.postNumber,
+      context: this.context,
+      contextMode: this.contextMode,
+      contextChain: this.contextChain,
+      initialFocusedPath: this.initialFocusedPath,
+      targetPostNumber: this.targetPostNumber,
+      contextNoAncestors: this.contextNoAncestors,
+      ancestorsTruncated: this.ancestorsTruncated,
+      topAncestorPostNumber: this.topAncestorPostNumber,
+      newRootPostIds: this.newRootPostIds,
+      editingTopic: this.editingTopic,
+      collapseReplies: this.collapseReplies,
+    };
+  }
+
   get canSelectAll() {
     return this.#nestedSelectablePostIds().some(
       (id) => !this.#topicController.selectedPostIds.includes(id)
@@ -156,6 +192,78 @@ export default class NestedController extends Controller {
 
   get canMergePosts() {
     return this.#topicController.canMergePosts;
+  }
+
+  hasFlatPost(postNumber) {
+    return postNumber === 1
+      ? Boolean(this.opPost)
+      : Boolean(this.#flatRootForPostNumber(postNumber));
+  }
+
+  flatModelForTarget(postNumber, incoming) {
+    const model = {
+      ...this.modelData,
+      postNumber,
+      targetPostNumber: postNumber,
+    };
+    if (incoming) {
+      const roots = new Map(this.rootNodes.map((node) => [node.post.id, node]));
+      for (const node of incoming.rootNodes) {
+        const current = roots.get(node.post.id) || node;
+        const key = `${this.topic.id}:${node.post.post_number}`;
+        const entry = mergeFlatReplyPreload(
+          this.fetchedChildrenCache.get(key) ||
+            mergeFlatReplyPreload(null, current.children || [], {
+              page: current.post.children_page,
+              count: current.post.total_descendant_count,
+            }),
+          node.children,
+          {
+            page: node.post.children_page,
+            count: node.post.total_descendant_count,
+          }
+        );
+        for (const child of entry.childNodes) {
+          child.post.topic = this.topic;
+          child.post =
+            registerPostInTopicPostStream(this.topic, child.post) || child.post;
+        }
+        this.fetchedChildrenCache.set(key, entry);
+        current.children = entry.childNodes;
+        current.post.set("children_page", null);
+        current.post.topic = this.topic;
+        roots.set(current.post.id, current);
+      }
+      model.rootNodes = [...roots.values()].sort(
+        (left, right) => left.post.post_number - right.post.post_number
+      );
+      this.topic.set("reply_navigation", incoming.topic.reply_navigation);
+    }
+    return model;
+  }
+
+  revealFlatTarget(postNumber) {
+    if (!flatRepliesEnabled(this.siteSettings) || !postNumber) {
+      return;
+    }
+    const root = this.#flatRootForPostNumber(postNumber);
+    if (!root || root.post.post_number === postNumber) {
+      return;
+    }
+    const rootPostNumber = root.post.post_number;
+    this.expansionState.set(rootPostNumber, {
+      expanded: true,
+      collapsed: false,
+    });
+    const topic = this.topic;
+    schedule("afterRender", () => {
+      if (this.topic === topic && !this.isDestroying) {
+        this.appEvents.trigger("nested-replies:reveal-root", {
+          topicId: topic.id,
+          rootPostNumber,
+        });
+      }
+    });
   }
 
   @bind
@@ -232,6 +340,7 @@ export default class NestedController extends Controller {
     }
 
     this.loadingMore = true;
+    const topicId = this.topic.id;
     try {
       const nextPage = this.page + 1;
       const query = new URLSearchParams({
@@ -241,12 +350,31 @@ export default class NestedController extends Controller {
       const data = await ajax(
         `/n/${this.topic.slug}/${this.topic.id}.json?${query}`
       );
+      if (this.isDestroying || this.topic?.id !== topicId) {
+        return;
+      }
 
       const newNodes = (data.roots || []).map((root) =>
         this.#processNode(root)
       );
 
-      this.rootNodes = [...this.rootNodes, ...newNodes];
+      this.rootNodes = [
+        ...this.rootNodes,
+        ...newNodes.filter(
+          (node) =>
+            !this.rootNodes.some(
+              (existing) => existing.post.id === node.post.id
+            )
+        ),
+      ];
+      if (flatRepliesEnabled(this.siteSettings)) {
+        this.rootNodes = this.rootNodes.sort(
+          (left, right) => left.post.post_number - right.post.post_number
+        );
+      }
+      if (data.navigation) {
+        this.topic.set("reply_navigation", data.navigation);
+      }
       this.page = data.page;
       this.hasMoreRoots = data.has_more_roots || false;
       this.#assignSuggestedAndRelated(data);
@@ -254,6 +382,47 @@ export default class NestedController extends Controller {
       popupAjaxError(e);
     } finally {
       this.loadingMore = false;
+    }
+  }
+
+  @action
+  async loadPreviousRoots() {
+    if (this.loadingPreviousRoots || this.firstRootPage < 1) {
+      return;
+    }
+    const topic = this.topic;
+    const roots = document.querySelector(".nested-view__roots");
+    const previousHeight = roots?.getBoundingClientRect().height || 0;
+    this.loadingPreviousRoots = true;
+    try {
+      const data = await ajax(`/n/${topic.slug}/${topic.id}.json`, {
+        data: { sort: "old", page: this.firstRootPage - 1 },
+      });
+      if (this.isDestroying || this.topic !== topic) {
+        return;
+      }
+      const existing = new Set(this.rootNodes.map((node) => node.post.id));
+      this.rootNodes = [
+        ...data.roots
+          .filter((node) => !existing.has(node.id))
+          .map((node) => this.#processNode(node)),
+        ...this.rootNodes,
+      ];
+      this.firstRootPage = data.page;
+      schedule("afterRender", () => {
+        if (!this.isDestroying && this.topic === topic && roots?.isConnected) {
+          window.scrollBy(
+            0,
+            roots.getBoundingClientRect().height - previousHeight
+          );
+        }
+      });
+    } catch (error) {
+      popupAjaxError(error);
+    } finally {
+      if (!this.isDestroying) {
+        this.loadingPreviousRoots = false;
+      }
     }
   }
 
@@ -317,27 +486,7 @@ export default class NestedController extends Controller {
       return;
     }
 
-    const modelData = {
-      topic: this.topic,
-      opPost: this.opPost,
-      rootNodes: this.rootNodes,
-      page: this.page,
-      hasMoreRoots: this.hasMoreRoots,
-      sort: this.sort,
-      effectiveSort: this.effectiveSort,
-      messageBusLastId: this.messageBusLastId,
-      pinnedPostIds: this.pinnedPostIds,
-      postNumber: this.postNumber,
-      context: this.context,
-      contextMode: this.contextMode,
-      contextChain: this.contextChain,
-      initialFocusedPath: this.initialFocusedPath,
-      targetPostNumber: this.targetPostNumber,
-      contextNoAncestors: this.contextNoAncestors,
-      ancestorsTruncated: this.ancestorsTruncated,
-      topAncestorPostNumber: this.topAncestorPostNumber,
-      newRootPostIds: this.newRootPostIds,
-    };
+    const modelData = this.modelData;
 
     const cacheKey = this.#cacheKey();
 
@@ -593,6 +742,8 @@ export default class NestedController extends Controller {
 
   subscribe() {
     this.unsubscribe();
+    this.appEvents.on("post:created", this, this.#onPostCreated);
+    this.appEvents.on("nested:scroll-to-target", this, this.#onRepeatTarget);
 
     this.appEvents.on(
       "nested-replies:post-registered",
@@ -628,6 +779,8 @@ export default class NestedController extends Controller {
 
   unsubscribe() {
     if (this.#postEventsSubscribed) {
+      this.appEvents.off("post:created", this, this.#onPostCreated);
+      this.appEvents.off("nested:scroll-to-target", this, this.#onRepeatTarget);
       this.appEvents.off(
         "nested-replies:post-registered",
         this,
@@ -661,6 +814,23 @@ export default class NestedController extends Controller {
 
     const ids = [...this.newRootPostIds];
     this.newRootPostIds = [];
+
+    if (flatRepliesEnabled(this.siteSettings) && ids.length > 0) {
+      try {
+        const topic = this.topic;
+        const navigation = await ajax(
+          `/n/${topic.slug}/${topic.id}/navigation.json`,
+          { data: { root_index: topic.reply_navigation?.root_count } }
+        );
+        if (this.topic === topic) {
+          DiscourseURL.routeTo(`${topic.url}/${navigation.root_post_number}`);
+        }
+      } catch (error) {
+        this.newRootPostIds = [...ids, ...this.newRootPostIds];
+        popupAjaxError(error);
+      }
+      return;
+    }
 
     const topicId = this.topic?.id;
     const results = await Promise.allSettled(
@@ -803,6 +973,99 @@ export default class NestedController extends Controller {
     this.scrollAnchor = null;
   }
 
+  #flatRootForPostNumber(postNumber) {
+    for (const node of this.rootNodes) {
+      if (
+        node.post.post_number === postNumber ||
+        node.children?.some((child) => child.post.post_number === postNumber) ||
+        this.fetchedChildrenCache
+          .get(`${this.topic.id}:${node.post.post_number}`)
+          ?.childNodes.some((child) => child.post.post_number === postNumber)
+      ) {
+        return node;
+      }
+    }
+  }
+
+  #onPostCreated(post) {
+    if (
+      flatRepliesEnabled(this.siteSettings) &&
+      this.#postBelongsToTopic(post) &&
+      this.#isVisibleInTree(post)
+    ) {
+      this.#insertOwnFlatReply(post);
+    }
+  }
+
+  #insertOwnFlatReply(post) {
+    if (this.#isPostKnown(post.id)) {
+      return;
+    }
+    const parent = post.reply_to_post_number;
+    const root = parent > 1 ? this.#flatRootForPostNumber(parent) : null;
+    if (parent > 1 && !root) {
+      return;
+    }
+    post.topic = this.topic;
+    post = registerPostInTopicPostStream(this.topic, post) || post;
+    const node = { post, children: [], _renderKey: post.id };
+    if (root) {
+      const rootPostNumber = root.post.post_number;
+      const key = `${this.topic.id}:${rootPostNumber}`;
+      const current =
+        this.fetchedChildrenCache.get(key) ||
+        mergeFlatReplyPreload(null, root.children || [], {
+          page: root.post.children_page,
+          count: root.post.total_descendant_count,
+        });
+      this.fetchedChildrenCache.set(
+        key,
+        mergeFlatReplyPage(current, [node], {
+          count: (root.post.total_descendant_count || 0) + 1,
+          saved: true,
+        })
+      );
+      root.children = [...root.children, node];
+      this.expansionState.set(rootPostNumber, {
+        expanded: true,
+        collapsed: false,
+      });
+      this.appEvents.trigger("nested-replies:child-created", {
+        topicId: this.topic.id,
+        post,
+        parentPostNumber: rootPostNumber,
+        isOwnPost: true,
+      });
+    } else {
+      this.rootNodes = [...this.rootNodes, node].sort(
+        (left, right) => left.post.post_number - right.post.post_number
+      );
+    }
+    this.postRegistry.set(post.post_number, post);
+    this.targetPostNumber = post.post_number;
+    this.scrollAnchor = null;
+    this.revealFlatTarget(post.post_number);
+    this.#refreshFlatNavigation(post.post_number);
+  }
+
+  async #refreshFlatNavigation(postNumber) {
+    const topic = this.topic;
+    try {
+      const navigation = await ajax(
+        `/n/${topic.slug}/${topic.id}/navigation.json`,
+        { data: { post_number: postNumber } }
+      );
+      if (this.topic === topic) {
+        topic.set("reply_navigation", navigation);
+        this.rootNodes
+          .find((node) => node.post.post_number === navigation.root_post_number)
+          ?.post.set("root_index", navigation.root_index);
+      }
+    } catch {
+      // A saved reply remains visible if navigation metadata cannot be refreshed.
+    }
+  }
+
   async #handleCreated(data) {
     // Skip if this post is already known (e.g. cache restore replaying
     // messages that were already processed before navigating away)
@@ -816,7 +1079,8 @@ export default class NestedController extends Controller {
       const postData = await ajax(`/posts/${data.id}.json`);
       if (
         this.topic?.id !== topicId ||
-        !this.#postBelongsToTopic(postData, topicId)
+        !this.#postBelongsToTopic(postData, topicId) ||
+        this.#isPostKnown(data.id)
       ) {
         return;
       }
@@ -832,6 +1096,21 @@ export default class NestedController extends Controller {
 
       const replyTo = postData.reply_to_post_number;
       const isRoot = !replyTo || replyTo === 1;
+      let flatNavigation;
+      if (flatRepliesEnabled(this.siteSettings)) {
+        if (data.user_id === this.currentUser?.id) {
+          this.#insertOwnFlatReply(this.#processNode(postData).post);
+          return;
+        }
+        flatNavigation = await ajax(
+          `/n/${this.topic.slug}/${topicId}/navigation.json`,
+          { data: { post_number: postData.post_number } }
+        );
+        if (this.topic?.id !== topicId) {
+          return;
+        }
+        this.topic.set("reply_navigation", flatNavigation);
+      }
 
       if (isRoot) {
         if (this.contextMode) {
@@ -849,7 +1128,9 @@ export default class NestedController extends Controller {
         this.appEvents.trigger("nested-replies:child-created", {
           topicId,
           post: node.post,
-          parentPostNumber: this.#visibleParentPostNumber(postData),
+          parentPostNumber:
+            flatNavigation?.root_post_number ||
+            this.#visibleParentPostNumber(postData),
           isOwnPost: data.user_id === this.currentUser?.id,
         });
       }
@@ -931,6 +1212,11 @@ export default class NestedController extends Controller {
     }
     for (const post of this.postRegistry.values()) {
       if (post.id === postId) {
+        return true;
+      }
+    }
+    for (const entry of this.fetchedChildrenCache.values()) {
+      if (entry.childNodes.some((node) => node.post.id === postId)) {
         return true;
       }
     }

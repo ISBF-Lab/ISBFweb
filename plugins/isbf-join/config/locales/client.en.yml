@@ -1,0 +1,18 @@
+en:
+  js:
+    isbf_join:
+      admin:
+        title: "Join us"
+        applications: "Applications"
+        description: "Recruitment contact details. Only site administrators can view these records."
+        name: "Name"
+        student_id: "Student ID"
+        phone: "Phone"
+        created_at: "Submitted at"
+        empty: "No applications have been submitted yet."
+        load_error: "Applications could not be loaded. Please try again."
+        retry: "Retry"
+        pagination: "Application pages"
+        previous: "Previous page"
+        next: "Next page"
+        page: "Page %{page}"

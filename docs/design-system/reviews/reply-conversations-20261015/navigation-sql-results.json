@@ -1,0 +1,140 @@
+{
+  "status": "passed",
+  "kind": "synthetic_postgresql_active_record_checks",
+  "full_rspec": false,
+  "rails_booted": false,
+  "active_record": "8.1.3.1",
+  "postgres": "18.6 (Debian 18.6-1.pgdg13+2)",
+  "checks": [
+    {
+      "name": "empty discussion count",
+      "passed": true
+    },
+    {
+      "name": "chronological roots",
+      "passed": true
+    },
+    {
+      "name": "first root page",
+      "passed": true
+    },
+    {
+      "name": "second root page",
+      "passed": true
+    },
+    {
+      "name": "window root index",
+      "passed": true
+    },
+    {
+      "name": "pin order",
+      "passed": true
+    },
+    {
+      "name": "pinned root index",
+      "passed": true
+    },
+    {
+      "name": "root index after pin promotion",
+      "passed": true
+    },
+    {
+      "name": "100-deep navigation",
+      "passed": true
+    },
+    {
+      "name": "50th child page",
+      "passed": true
+    },
+    {
+      "name": "51st child page",
+      "passed": true
+    },
+    {
+      "name": "first descendant page",
+      "passed": true
+    },
+    {
+      "name": "second descendant page",
+      "passed": true
+    },
+    {
+      "name": "completed descendant pages",
+      "passed": true
+    },
+    {
+      "name": "three-reply windows for separate branches",
+      "passed": true
+    },
+    {
+      "name": "branch resolves to its original root",
+      "passed": true
+    },
+    {
+      "name": "deleted root leaf omitted",
+      "passed": true
+    },
+    {
+      "name": "deleted parent still locates public descendant",
+      "passed": true
+    },
+    {
+      "name": "regular reply count excludes whispers",
+      "passed": true
+    },
+    {
+      "name": "regular viewer cannot locate whisper",
+      "passed": true
+    },
+    {
+      "name": "staff reply count excludes activity",
+      "passed": true
+    },
+    {
+      "name": "activity does not shift the 50th visible child",
+      "passed": true
+    },
+    {
+      "name": "staff page excludes activity and includes target",
+      "passed": true
+    },
+    {
+      "name": "activity is not a reply target",
+      "passed": true
+    },
+    {
+      "name": "corrupt target 3 rejects unrelated root fallback",
+      "passed": true
+    },
+    {
+      "name": "corrupt target 4 rejects unrelated root fallback",
+      "passed": true
+    },
+    {
+      "name": "corrupt target 5 rejects unrelated root fallback",
+      "passed": true
+    },
+    {
+      "name": "cyclic descendant relation terminates and deduplicates",
+      "passed": true
+    },
+    {
+      "name": "cyclic preview CTE terminates and deduplicates",
+      "passed": true
+    },
+    {
+      "name": "foreign topic post number stays unavailable",
+      "passed": true
+    }
+  ],
+  "limitations": "Synthetic models and visibility actors exercise actual Navigation, TreeLoader, Sort, and HotScoreCache code. This does not run Rails, controllers, serializers, permissions, or complete RSpec.",
+  "image": "local_discourse/isbf_app:join-20261015",
+  "memory_peak_bytes": 173756416,
+  "memory_limit_bytes": 536870912,
+  "cpu_limit": 0.5,
+  "pids_limit": 192,
+  "network": "none",
+  "oom_events": 0,
+  "oom_kill_events": 0,
+  "container_removed": true
+}
