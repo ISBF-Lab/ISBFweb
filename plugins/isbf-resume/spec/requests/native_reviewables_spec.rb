@@ -98,6 +98,184 @@ RSpec.describe ReviewablesController do
   end
 
   describe "#update" do
+    it "edits approved resumes from the approved queue while preserving approval and audit snapshots" do
+      reviewable.perform(
+        developer,
+        :approve_resume,
+        version: reviewable.version,
+        description: "Approved summary",
+      )
+      approval = submission.reviews.sole
+      approved_at = submission.reload.reviewed_at
+      SiteSetting.academy_moderators_review_content = true
+      SiteSetting.academy_moderators_review_resumes = true
+      sign_in(administrator)
+
+      get "/review.json", params: { type: "ReviewableIsbfResume", status: "approved" }
+      expect(response.status).to eq(200)
+      item =
+        response
+          .parsed_body
+          .fetch("reviewables")
+          .find { |entry| entry.fetch("id") == reviewable.id }
+      expect(item).to include("can_edit_resume" => true)
+      version = reviewable.reload.version
+      details = {
+        title: "Updated public title",
+        industry: "Finance",
+        position: "Analyst",
+        salary: "25k",
+        experience: "5 years",
+        description: "  Updated public summary  ",
+      }
+
+      put "/review/#{reviewable.id}.json",
+          params: {
+            version: version,
+            reviewable: {
+              payload: details,
+            },
+          }
+
+      expect(response.status).to eq(200)
+      expect(submission.reload).to have_attributes(
+        status: "approved",
+        reviewed_at: approved_at,
+        title: details[:title],
+        description: details[:description].strip,
+        salary: details[:salary],
+      )
+      expect(reviewable.reload).to be_approved
+      revision = submission.reviews.order(:id).last
+      expect(revision).to have_attributes(
+        decision: "edit",
+        reviewer_id: administrator.id,
+        reviewer_name: administrator.name.presence || administrator.username,
+        reviewer_username: administrator.username,
+        previous_description: approval.description,
+        description: details[:description].strip,
+        original_description: submission.submitted_description,
+      )
+      expect(approval.reload).to have_attributes(
+        decision: "approve",
+        reviewer_id: developer.id,
+        description: "Approved summary",
+      )
+      history = reviewable.reviewable_histories.where(type: ReviewableHistory.types[:edited]).sole
+      expect(history).to have_attributes(created_by_id: administrator.id)
+      expect(history.edited.fetch("payload").last).to include(
+        "description" => details[:description].strip,
+        "salary" => details[:salary],
+      )
+      administrator.update!(name: "Renamed editor", username: "resume_editor_new")
+      expect(revision.reload.reviewer_username).not_to eq(administrator.username)
+      get "/isbf-resume/shares.json"
+      expect(
+        response.parsed_body.fetch("shares").find { |entry| entry.fetch("id") == submission.id },
+      ).to include("description" => details[:description].strip, "title" => details[:title])
+
+      put "/review/#{reviewable.id}.json",
+          params: {
+            version: version,
+            reviewable: {
+              payload: {
+                description: "Stale published edit",
+              },
+            },
+          }
+      expect(response.status).to eq(409)
+      expect(submission.reload.description).to eq(details[:description].strip)
+      expect(submission.reviews.count).to eq(2)
+    end
+
+    it "keeps a published description nonempty and prefills the current text for legacy approved entries" do
+      reviewable.perform(
+        developer,
+        :approve_resume,
+        version: reviewable.version,
+        description: "Current public text",
+      )
+      reviewable.update!(payload: { shared_resume_id: submission.id })
+      sign_in(developer)
+      get "/review/#{reviewable.id}.json"
+      expect(response.parsed_body.fetch("reviewable").fetch("payload")).to include(
+        "description" => "Current public text",
+      )
+      version = reviewable.version
+
+      put "/review/#{reviewable.id}.json",
+          params: {
+            version: version,
+            reviewable: {
+              payload: {
+                description: "   ",
+              },
+            },
+          }
+
+      expect(response.status).to eq(400)
+      expect(reviewable.reload.version).to eq(version)
+      expect(submission.reload.description).to eq("Current public text")
+      expect(submission.reviews.count).to eq(1)
+    end
+
+    it "revokes approved edits immediately and denies uploaders and rejected entries" do
+      reviewable.perform(
+        developer,
+        :approve_resume,
+        version: reviewable.version,
+        description: "Approved summary",
+      )
+      SiteSetting.academy_moderators_review_content = true
+      SiteSetting.academy_moderators_review_resumes = true
+      sign_in(administrator)
+      get "/review/#{reviewable.id}.json"
+      expect(response.parsed_body.fetch("reviewable")).to include("can_edit_resume" => true)
+      version = reviewable.version
+      SiteSetting.academy_moderators_review_resumes = false
+      put "/review/#{reviewable.id}.json",
+          params: {
+            version: version,
+            reviewable: {
+              payload: {
+                description: "Revoked editor",
+              },
+            },
+          }
+      expect(response.status).to eq(404)
+      sign_in(owner)
+      put "/review/#{reviewable.id}.json",
+          params: {
+            version: version,
+            reviewable: {
+              payload: {
+                description: "Uploader edit",
+              },
+            },
+          }
+      expect(response.status).to eq(403)
+      expect(submission.reload.description).to eq("Approved summary")
+      expect(submission.reviews.count).to eq(1)
+      rejected = Fabricate(:shared_isbf_resume).reviewable
+      rejected.perform(
+        developer,
+        :reject_resume,
+        version: rejected.version,
+        description: "Rejected",
+      )
+      sign_in(developer)
+      put "/review/#{rejected.id}.json",
+          params: {
+            version: rejected.version,
+            reviewable: {
+              payload: {
+                description: "Rejected edit",
+              },
+            },
+          }
+      expect(response.status).to eq(403)
+    end
+
     it "prefills legacy submissions and rejects invalid field types or lengths without saving" do
       reviewable.update!(payload: { shared_resume_id: submission.id, description: "Original" })
       sign_in(developer)

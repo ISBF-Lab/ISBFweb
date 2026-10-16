@@ -2,7 +2,7 @@ zh_CN:
   js:
     isbf_resume:
       sharing:
-        native_review_help: "可编辑标题、行业、岗位、薪资、工作年限和描述，保存后再通过审核。通过时必须有简要描述，修改前后内容及操作人会记入审核历史。"
+        native_review_help: "可编辑标题、行业、岗位、薪资、工作年限和描述。待审核条目保存后仍需通过审核；已批准条目保存后直接更新公开内容。公开简历必须有简要描述，修改前后内容及操作人会记入审核历史。"
         edit_details: "编辑简历信息"
         details_saved: "简历信息已保存，可继续审核。"
         workspace_navigation: "简历专区导航"
@@ -41,9 +41,9 @@ zh_CN:
         preview_failed: "本页预览暂时无法加载，可以重试或直接下载 PDF 查看。"
         retry_preview: "重试预览"
         review_help: "请先检查 PDF 内容和分享信息。上传者没填描述时需要补充；已填写的描述也可以修改。"
-        review_description: "发布时的简要描述"
+        review_description: "当前简要描述"
         review_title_help: "可以修改标题；留空时保留当前标题。"
-        review_description_help: "通过审核时必填，最多 2000 字。审核者姓名、账号、时间及修改前后描述会保存在后台。"
+        review_description_help: "公开简历必须有描述，最多 2000 字。审核者姓名、账号、时间及修改前后描述会保存在后台。"
         description_required: "通过审核前请填写简要描述。"
         decision: "审核结果"
         approve: "通过并公开"

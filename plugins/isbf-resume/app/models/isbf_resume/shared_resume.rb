@@ -118,6 +118,34 @@ module IsbfResume
       end
     end
 
+    def revise!(reviewer:, details:)
+      with_lock do
+        raise Discourse::InvalidAccess unless reviewer.guardian.can_review_isbf_resumes?
+        raise ReviewConflict unless approved?
+        updates = details.symbolize_keys
+        updates.each do |field, value|
+          limit = FIELD_LIMITS[field]
+          unless limit && value.is_a?(String) && value.length <= limit
+            raise Discourse::InvalidParameters.new(field)
+          end
+        end
+        updates.transform_values!(&:strip)
+        updates[:title] = title if updates.key?(:title) && updates[:title].blank?
+        final_description = updates.fetch(:description, description)
+        raise Discourse::InvalidParameters.new(:description) if final_description.blank?
+        reviews.create!(
+          reviewer: reviewer,
+          reviewer_name: reviewer.name.presence || reviewer.username,
+          reviewer_username: reviewer.username,
+          decision: "edit",
+          original_description: submitted_description,
+          previous_description: description,
+          description: final_description,
+        )
+        update!(updates)
+      end
+    end
+
     private
 
     def queue_review

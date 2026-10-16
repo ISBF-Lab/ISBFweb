@@ -8,7 +8,7 @@ module IsbfResume
     belongs_to :reviewer, class_name: "User", optional: true
 
     validates :reviewer_id, :reviewer_name, :reviewer_username, presence: true
-    validates :decision, inclusion: { in: %w[approve reject] }
+    validates :decision, inclusion: { in: %w[approve reject edit] }
   end
 end
 

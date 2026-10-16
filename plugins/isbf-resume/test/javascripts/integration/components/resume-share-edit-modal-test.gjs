@@ -24,6 +24,7 @@ module("Integration | Component | ResumeShareEditModal", function (hooks) {
         id: 42,
         version: 3,
         payload,
+        shared_resume: { status: "approved" },
       });
     const model = { reviewable };
     let saved;
@@ -60,6 +61,18 @@ module("Integration | Component | ResumeShareEditModal", function (hooks) {
           `${name} has a visible label`
         );
     }
+    await formKit().field("description").fillIn("");
+    await formKit().submit();
+    assert.false(
+      closed,
+      "an approved resume stays open when its description is empty"
+    );
+    assert.strictEqual(
+      saved,
+      undefined,
+      "an empty published description is blocked before requesting a save"
+    );
+    await formKit().field("description").fillIn(payload.description);
     await formKit().field("title").fillIn("Reviewed title");
     await formKit().submit();
     assert.strictEqual(

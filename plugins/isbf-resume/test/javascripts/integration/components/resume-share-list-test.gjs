@@ -16,6 +16,7 @@ module("Integration | Component | ResumeShareList", function (hooks) {
           title: "Finance analyst resume",
           description: "Banking role, three years of experience",
           status: "approved",
+          preview_urls: ["/isbf-resume/shares/1/previews/1"],
         },
       ],
       can_submit: true,
@@ -32,6 +33,11 @@ module("Integration | Component | ResumeShareList", function (hooks) {
       </template>
     );
 
+    assert
+      .dom(
+        ".isbf-resume-share-list img, .isbf-resume-share-list iframe, .isbf-resume-share-list object, .isbf-resume-share-list embed"
+      )
+      .doesNotExist("listing resumes does not load PDF or image previews");
     assert
       .dom(".isbf-resume-share-list__file h2 a")
       .hasText(this.model.shares[0].title, "the file title opens its details");
