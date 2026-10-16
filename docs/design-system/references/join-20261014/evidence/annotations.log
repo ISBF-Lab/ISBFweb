@@ -1,0 +1,5 @@
+Starting postgres on port: 11000
+PG server is ready and DB is loaded
+Annotating models
+Annotated (1): plugins/isbf-join/app/models/isbf_join/application.rb
+Annotate executed successfully

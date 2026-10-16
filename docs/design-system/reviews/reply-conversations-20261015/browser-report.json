@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "scope": "Offline harness using actual component class methods and compiled source CSS; synthetic API and DOM rendering adapters. Ember, Rails, composer, browser history and production were not booted.",
+  "checks": [
+    "Header and timeline show only the compact current / total index",
+    "Default preview contains the first three replies",
+    "Collapse button uses only the requested short label",
+    "100-deep fixture expands in pages of 50, with each reply rendered once at depth one",
+    "Collapse restores the first three replies",
+    "Original preview is capped at two lines, retains canonical link and caches successful loads",
+    "Target page shows its missing-page gap and retries the earlier page without losing the target",
+    "Unavailable original reveals no body and retry recovers",
+    "Discussion index resolves to the actual root floor before canonical navigation",
+    "A destroyed navigation cannot route after an outstanding request resolves",
+    "Desktop and 390/320px mobile, light and dark: no horizontal overflow, natural 33px indent, floating group timeline within viewport",
+    "One-pixel straight branches meet reply avatars; the trunk starts at the parent avatar, remains aligned through the group and ends at the last avatar"
+  ],
+  "screenshots": [
+    {
+      "name": "desktop-light",
+      "width": 1440,
+      "height": 960,
+      "horizontal_overflow": false,
+      "indent_px": 33,
+      "thread_guide_width_px": 1,
+      "thread_guide_color": "rgb(169, 187, 208)",
+      "floating_timeline_inside_viewport": true
+    },
+    {
+      "name": "desktop-dark",
+      "width": 1440,
+      "height": 960,
+      "horizontal_overflow": false,
+      "indent_px": 33,
+      "thread_guide_width_px": 1,
+      "thread_guide_color": "rgb(119, 131, 136)",
+      "floating_timeline_inside_viewport": true
+    },
+    {
+      "name": "mobile-light",
+      "width": 390,
+      "height": 844,
+      "horizontal_overflow": false,
+      "indent_px": 33,
+      "thread_guide_width_px": 1,
+      "thread_guide_color": "rgb(169, 187, 208)",
+      "floating_timeline_inside_viewport": true
+    },
+    {
+      "name": "mobile-dark",
+      "width": 390,
+      "height": 844,
+      "horizontal_overflow": false,
+      "indent_px": 33,
+      "thread_guide_width_px": 1,
+      "thread_guide_color": "rgb(119, 131, 136)",
+      "floating_timeline_inside_viewport": true
+    },
+    {
+      "name": "mobile-320",
+      "width": 320,
+      "height": 780,
+      "horizontal_overflow": false,
+      "indent_px": 33,
+      "thread_guide_width_px": 1,
+      "thread_guide_color": "rgb(169, 187, 208)",
+      "floating_timeline_inside_viewport": true
+    }
+  ],
+  "browser_errors": [],
+  "source_files": [
+    "frontend/discourse/app/lib/flat-replies.js",
+    "frontend/discourse/app/components/nested/post-children.gjs",
+    "frontend/discourse/app/components/nested/post.gjs",
+    "themes/isbf-campus-feed/javascripts/discourse/components/isbf-reply-context.gjs",
+    "themes/isbf-campus-feed/javascripts/discourse/lib/reply-navigation.js"
+  ]
+}

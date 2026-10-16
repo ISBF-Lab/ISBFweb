@@ -6,6 +6,7 @@ import { isEmpty } from "@ember/utils";
 import { ajax } from "discourse/lib/ajax";
 import EmbedMode from "discourse/lib/embed-mode";
 import { isTesting } from "discourse/lib/environment";
+import { flatRepliesEnabled } from "discourse/lib/flat-replies";
 import {
   processNestedContextResponse,
   processNestedRootResponse,
@@ -47,6 +48,8 @@ export default class TopicFromParams extends DiscourseRoute {
   @service site;
   @service siteSettings;
   @service store;
+
+  #preservingNestedState = false;
 
   buildRouteInfoMetadata() {
     return {
@@ -232,16 +235,18 @@ export default class TopicFromParams extends DiscourseRoute {
   }
 
   async #loadNestedModel(topic, params, queryParams) {
+    this.#preservingNestedState = false;
     const sort =
       queryParams.sort ||
       this.siteSettings.nested_replies_default_sort ||
       "top";
     const postNumber = Number(params.nearPost);
     const targetsPost = Number.isInteger(postNumber) && postNumber > 1;
+    const explicitTarget = Number.isInteger(postNumber) && postNumber >= 1;
     const slug = topic.slug || params.slug || "topic";
     const nestedParams = {
       ...params,
-      post_number: targetsPost ? postNumber : null,
+      post_number: explicitTarget ? postNumber : null,
       context: queryParams.context,
     };
 
@@ -256,6 +261,20 @@ export default class TopicFromParams extends DiscourseRoute {
       params._nested.collapseReplies = this.#truthyQueryParam(
         queryParams.collapse_replies || queryParams.collapseReplies
       );
+      return params;
+    }
+
+    const current = this.controllerFor("nested");
+    const reuseCurrent =
+      explicitTarget &&
+      flatRepliesEnabled(this.siteSettings) &&
+      String(current.topic?.id) === String(topic.id) &&
+      !current.contextMode &&
+      (current.sort === sort || current.effectiveSort === sort) &&
+      (current.context ?? null) === (queryParams.context ?? null);
+    if (reuseCurrent && current.hasFlatPost(postNumber)) {
+      this.#preservingNestedState = true;
+      params._nested = current.flatModelForTarget(postNumber);
       return params;
     }
 
@@ -292,9 +311,19 @@ export default class TopicFromParams extends DiscourseRoute {
         siteSettings: this.siteSettings,
         store: this.store,
       });
+      if (explicitTarget) {
+        params._nested.targetPostNumber = postNumber;
+      }
     }
 
-    const scrollAnchor = this.#loadScrollAnchor(cacheKey);
+    if (reuseCurrent && String(current.topic?.id) === String(topic.id)) {
+      this.#preservingNestedState = true;
+      params._nested = current.flatModelForTarget(postNumber, params._nested);
+    }
+
+    const scrollAnchor = explicitTarget
+      ? null
+      : this.#loadScrollAnchor(cacheKey);
     if (scrollAnchor) {
       this._restoringFromCache = {
         expansionState: new Map(),
@@ -382,8 +411,14 @@ export default class TopicFromParams extends DiscourseRoute {
     const nestedController = this.controllerFor("nested");
 
     const restoringFromCache = this._restoringFromCache;
+    const preservingState =
+      this.#preservingNestedState && nestedController.topic === model.topic;
+    this.#preservingNestedState = false;
 
-    if (!this.#teardownCurrentNestedTopic(nestedController, model.topic.id)) {
+    if (
+      !preservingState &&
+      !this.#teardownCurrentNestedTopic(nestedController, model.topic.id)
+    ) {
       nestedController.unsubscribe();
     }
 
@@ -404,9 +439,12 @@ export default class TopicFromParams extends DiscourseRoute {
         restoringFromCache.fetchedChildrenCache;
       nestedController.scrollAnchor = restoringFromCache.scrollAnchor;
       this._restoringFromCache = null;
-    } else {
+    } else if (!preservingState) {
       nestedController.expansionState = new Map();
       nestedController.fetchedChildrenCache = new Map();
+      nestedController.scrollAnchor = null;
+    }
+    if (preservingState) {
       nestedController.scrollAnchor = null;
     }
 
@@ -431,7 +469,12 @@ export default class TopicFromParams extends DiscourseRoute {
     this.appEvents.trigger("page:topic-loaded", model.topic);
     this.#announceUnreadPosts(model.topic);
     topicController.subscribe();
-    nestedController.subscribe();
+    if (!preservingState) {
+      nestedController.subscribe();
+    }
+    if (!restoringFromCache) {
+      nestedController.revealFlatTarget?.(model.targetPostNumber);
+    }
     this.screenTrack.start(model.topic.id, nestedController);
 
     if (!isEmpty(model.topic.draft) && !EmbedMode.enabled) {
@@ -448,7 +491,11 @@ export default class TopicFromParams extends DiscourseRoute {
       schedule("afterRender", () =>
         this.#restoreScrollAnchor(restoringFromCache.scrollAnchor)
       );
-    } else if (!model.contextMode) {
+    } else if (
+      !model.contextMode &&
+      !preservingState &&
+      !model.targetPostNumber
+    ) {
       schedule("afterRender", () => window.scrollTo(0, 0));
     }
   }

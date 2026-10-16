@@ -23,6 +23,7 @@ import ISBFLearningShareDialog from "./isbf-learning-share-dialog";
 export default class ISBFLearning extends Component {
   @service appEvents;
   @service currentUser;
+  @service isbfBackNavigation;
   @service site;
 
   @tracked coursePending = false;
@@ -63,6 +64,10 @@ export default class ISBFLearning extends Component {
 
   get config() {
     return learningConfig(this.site);
+  }
+
+  get backHref() {
+    return this.isbfBackNavigation.href("/isbf/workbench");
   }
 
   get canManageCourses() {
@@ -145,6 +150,11 @@ export default class ISBFLearning extends Component {
       ? i18n(themePrefix("isbf_v2.learning_search_results"))
       : this.selectedCourse?.name ||
           i18n(themePrefix("isbf_v2.learning_select_course"));
+  }
+
+  @action
+  goBack(event) {
+    this.isbfBackNavigation.back(event);
   }
 
   @action
@@ -372,9 +382,10 @@ export default class ISBFLearning extends Component {
     <main class="isbf-learning">
       <header class="isbf-learning__header">
         <a
-          aria-label={{i18n (themePrefix "isbf_v2.learning_back")}}
+          aria-label={{i18n "back_button"}}
           class="isbf-learning__back"
-          href="/isbf/workbench"
+          href={{this.backHref}}
+          {{on "click" this.goBack}}
         >
           {{dIcon "arrow-left"}}
           <h1>{{i18n (themePrefix "isbf_v2.workbench_learning_resources")}}</h1>

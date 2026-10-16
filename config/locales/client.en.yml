@@ -4515,6 +4515,12 @@ en:
         description: "Switch the selected topics back to flat view."
 
     nested_replies:
+      view_remaining_replies:
+        one: "View %{count} more reply"
+        other: "View %{count} more replies"
+      load_previous_replies: "Load earlier replies"
+      load_previous_discussions: "Load earlier discussions"
+      replies_load_error: "Replies could not be loaded. Try again."
       nested_view: "Nested view"
       flat_view: "Flat view"
       sort:

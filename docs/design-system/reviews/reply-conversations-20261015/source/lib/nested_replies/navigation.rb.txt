@@ -1,0 +1,92 @@
+# frozen_string_literal: true
+
+module NestedReplies
+  class Navigation
+    attr_reader :loader
+
+    def initialize(loader)
+      @loader = loader
+    end
+
+    def roots
+      scope = loader.root_posts_scope("old").reorder(nil)
+      pinned_ids = loader.topic.nested_topic&.pinned_post_ids || []
+      pinned_order =
+        pinned_ids.map.with_index { |id, index| "WHEN #{id.to_i} THEN #{index}" }.join(" ")
+      order = "posts.post_number ASC"
+      order =
+        "CASE posts.id #{pinned_order} ELSE #{pinned_ids.length} END, #{order}" if pinned_ids.present?
+      scope.order(Arel.sql(order))
+    end
+
+    def metadata(post_number: nil, root_index: nil)
+      total = roots.count
+      if post_number.to_i > 1
+        root_number = root_for(post_number)
+        raise Discourse::NotFound unless root_number
+      end
+      entries =
+        roots.select(
+          "posts.*, ROW_NUMBER() OVER (ORDER BY #{roots.order_values.join(", ")}) AS root_index",
+        ).reorder(nil)
+      ranked = Post.unscoped.from("(#{entries.to_sql}) posts")
+      entry =
+        if root_number
+          ranked.find_by(post_number: root_number)
+        elsif total.positive?
+          ranked.find_by(root_index: root_index.to_i.clamp(1, total))
+        end
+
+      raise Discourse::NotFound if post_number.to_i > 1 && entry.blank?
+
+      index = entry&.root_index.to_i
+      {
+        root_count: total,
+        root_index: index,
+        root_post_number: entry&.post_number,
+        root_post_id: entry&.id,
+        root_created_at: entry&.created_at,
+        root_page: index.positive? ? (index - 1) / TreeLoader::ROOTS_PER_PAGE : 0,
+        reply_count:
+          loader
+            .apply_visibility(loader.topic.posts)
+            .where(post_number: 2.., deleted_at: nil)
+            .count,
+        child_page: child_page(entry&.post_number, post_number),
+      }
+    end
+
+    private
+
+    def root_for(post_number)
+      unless loader.apply_visibility(loader.topic.posts).exists?(post_number: post_number)
+        raise Discourse::NotFound
+      end
+
+      rows = DB.query(<<~SQL, topic_id: loader.topic.id, post_number: post_number.to_i)
+        WITH RECURSIVE ancestors AS (
+          SELECT post_number, reply_to_post_number FROM posts
+          WHERE topic_id = :topic_id AND post_number = :post_number
+          UNION
+          SELECT parent.post_number, parent.reply_to_post_number
+          FROM posts parent
+          JOIN ancestors ON parent.post_number = ancestors.reply_to_post_number
+          WHERE parent.topic_id = :topic_id AND parent.post_number > 1
+        )
+        SELECT post_number FROM ancestors
+        WHERE reply_to_post_number IS NULL OR reply_to_post_number = 1
+      SQL
+      rows.first&.post_number
+    end
+
+    def child_page(root_number, post_number)
+      return 0 if root_number.blank? || post_number.to_i <= root_number
+      position =
+        loader
+          .flat_descendants_relation(root_number)
+          .where("posts.post_number < ?", post_number.to_i)
+          .count
+      position / TreeLoader::CHILDREN_PER_PAGE
+    end
+  end
+end

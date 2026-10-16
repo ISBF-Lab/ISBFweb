@@ -1,0 +1,478 @@
+{
+  "cases": [
+    {
+      "width": 1440,
+      "height": 950,
+      "mode": "light",
+      "variant": "normal",
+      "geometry": {
+        "panel": {
+          "left": 1240.984375,
+          "right": 1428,
+          "top": 72,
+          "bottom": 552.5,
+          "width": 187.015625,
+          "height": 480.5
+        },
+        "date": {
+          "left": 1347.3125,
+          "right": 1395,
+          "top": 130.5,
+          "bottom": 156.5,
+          "width": 47.6875,
+          "height": 26
+        },
+        "text": {
+          "left": 1323.828125,
+          "right": 1397,
+          "top": 232,
+          "bottom": 275,
+          "width": 73.171875,
+          "height": 43
+        },
+        "handle": {
+          "left": 1397,
+          "right": 1413,
+          "top": 245.5,
+          "bottom": 261.5,
+          "width": 16,
+          "height": 16
+        },
+        "track": {
+          "left": 1253.984375,
+          "right": 1407,
+          "top": 158.5,
+          "bottom": 458.5,
+          "width": 153.015625,
+          "height": 300
+        },
+        "scrollerHeight": 50,
+        "backdrop": "blur(24px)",
+        "border": "4px",
+        "pageWidth": 1440
+      },
+      "handlers": "passed",
+      "modifier": {
+        "captureOrder": "close,target",
+        "defaultOrder": "target",
+        "excludedOrder": "target",
+        "afterCleanup": 0
+      }
+    },
+    {
+      "width": 1440,
+      "height": 950,
+      "mode": "dark",
+      "variant": "normal",
+      "geometry": {
+        "panel": {
+          "left": 1240.984375,
+          "right": 1428,
+          "top": 72,
+          "bottom": 552.5,
+          "width": 187.015625,
+          "height": 480.5
+        },
+        "date": {
+          "left": 1347.3125,
+          "right": 1395,
+          "top": 130.5,
+          "bottom": 156.5,
+          "width": 47.6875,
+          "height": 26
+        },
+        "text": {
+          "left": 1323.828125,
+          "right": 1397,
+          "top": 232,
+          "bottom": 275,
+          "width": 73.171875,
+          "height": 43
+        },
+        "handle": {
+          "left": 1397,
+          "right": 1413,
+          "top": 245.5,
+          "bottom": 261.5,
+          "width": 16,
+          "height": 16
+        },
+        "track": {
+          "left": 1253.984375,
+          "right": 1407,
+          "top": 158.5,
+          "bottom": 458.5,
+          "width": 153.015625,
+          "height": 300
+        },
+        "scrollerHeight": 50,
+        "backdrop": "blur(24px)",
+        "border": "4px",
+        "pageWidth": 1440
+      },
+      "handlers": "passed",
+      "modifier": {
+        "captureOrder": "close,target",
+        "defaultOrder": "target",
+        "excludedOrder": "target",
+        "afterCleanup": 0
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "mode": "light",
+      "variant": "normal",
+      "geometry": {
+        "panel": {
+          "left": 177.984375,
+          "right": 378,
+          "top": 72,
+          "bottom": 567.5,
+          "width": 200.015625,
+          "height": 495.5
+        },
+        "date": {
+          "left": 297.3125,
+          "right": 345,
+          "top": 138.5,
+          "bottom": 164.5,
+          "width": 47.6875,
+          "height": 26
+        },
+        "text": {
+          "left": 273.828125,
+          "right": 347,
+          "top": 240,
+          "bottom": 283,
+          "width": 73.171875,
+          "height": 43
+        },
+        "handle": {
+          "left": 347,
+          "right": 363,
+          "top": 253.5,
+          "bottom": 269.5,
+          "width": 16,
+          "height": 16
+        },
+        "track": {
+          "left": 190.984375,
+          "right": 357,
+          "top": 166.5,
+          "bottom": 466.5,
+          "width": 166.015625,
+          "height": 300
+        },
+        "scrollerHeight": 50,
+        "backdrop": "blur(24px)",
+        "border": "4px",
+        "pageWidth": 390
+      },
+      "handlers": "passed",
+      "modifier": {
+        "captureOrder": "close,target",
+        "defaultOrder": "target",
+        "excludedOrder": "target",
+        "afterCleanup": 0
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "mode": "dark",
+      "variant": "normal",
+      "geometry": {
+        "panel": {
+          "left": 177.984375,
+          "right": 378,
+          "top": 72,
+          "bottom": 567.5,
+          "width": 200.015625,
+          "height": 495.5
+        },
+        "date": {
+          "left": 297.3125,
+          "right": 345,
+          "top": 138.5,
+          "bottom": 164.5,
+          "width": 47.6875,
+          "height": 26
+        },
+        "text": {
+          "left": 273.828125,
+          "right": 347,
+          "top": 240,
+          "bottom": 283,
+          "width": 73.171875,
+          "height": 43
+        },
+        "handle": {
+          "left": 347,
+          "right": 363,
+          "top": 253.5,
+          "bottom": 269.5,
+          "width": 16,
+          "height": 16
+        },
+        "track": {
+          "left": 190.984375,
+          "right": 357,
+          "top": 166.5,
+          "bottom": 466.5,
+          "width": 166.015625,
+          "height": 300
+        },
+        "scrollerHeight": 50,
+        "backdrop": "blur(24px)",
+        "border": "4px",
+        "pageWidth": 390
+      },
+      "handlers": "passed",
+      "modifier": {
+        "captureOrder": "close,target",
+        "defaultOrder": "target",
+        "excludedOrder": "target",
+        "afterCleanup": 0
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "mode": "light",
+      "variant": "normal",
+      "geometry": {
+        "panel": {
+          "left": 107.984375,
+          "right": 308,
+          "top": 72,
+          "bottom": 438,
+          "width": 200.015625,
+          "height": 366
+        },
+        "date": {
+          "left": 227.3125,
+          "right": 275,
+          "top": 138.5,
+          "bottom": 164.5,
+          "width": 47.6875,
+          "height": 26
+        },
+        "text": {
+          "left": 203.828125,
+          "right": 277,
+          "top": 240,
+          "bottom": 283,
+          "width": 73.171875,
+          "height": 43
+        },
+        "handle": {
+          "left": 277,
+          "right": 293,
+          "top": 253.5,
+          "bottom": 269.5,
+          "width": 16,
+          "height": 16
+        },
+        "track": {
+          "left": 120.984375,
+          "right": 287,
+          "top": 166.5,
+          "bottom": 466.5,
+          "width": 166.015625,
+          "height": 300
+        },
+        "scrollerHeight": 50,
+        "backdrop": "blur(24px)",
+        "border": "4px",
+        "pageWidth": 320
+      },
+      "handlers": "passed",
+      "modifier": {
+        "captureOrder": "close,target",
+        "defaultOrder": "target",
+        "excludedOrder": "target",
+        "afterCleanup": 0
+      }
+    },
+    {
+      "width": 390,
+      "height": 450,
+      "mode": "dark",
+      "variant": "normal",
+      "geometry": {
+        "panel": {
+          "left": 177.984375,
+          "right": 378,
+          "top": 72,
+          "bottom": 320,
+          "width": 200.015625,
+          "height": 248
+        },
+        "date": {
+          "left": 297.3125,
+          "right": 345,
+          "top": 138.5,
+          "bottom": 164.5,
+          "width": 47.6875,
+          "height": 26
+        },
+        "text": {
+          "left": 273.828125,
+          "right": 347,
+          "top": 240,
+          "bottom": 283,
+          "width": 73.171875,
+          "height": 43
+        },
+        "handle": {
+          "left": 347,
+          "right": 363,
+          "top": 253.5,
+          "bottom": 269.5,
+          "width": 16,
+          "height": 16
+        },
+        "track": {
+          "left": 190.984375,
+          "right": 357,
+          "top": 166.5,
+          "bottom": 466.5,
+          "width": 166.015625,
+          "height": 300
+        },
+        "scrollerHeight": 50,
+        "backdrop": "blur(24px)",
+        "border": "4px",
+        "pageWidth": 390
+      },
+      "handlers": "passed",
+      "modifier": {
+        "captureOrder": "close,target",
+        "defaultOrder": "target",
+        "excludedOrder": "target",
+        "afterCleanup": 0
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "mode": "dark",
+      "variant": "long",
+      "geometry": {
+        "panel": {
+          "left": 177.984375,
+          "right": 378,
+          "top": 72,
+          "bottom": 561.5,
+          "width": 200.015625,
+          "height": 489.5
+        },
+        "date": {
+          "left": 231.078125,
+          "right": 345,
+          "top": 135.5,
+          "bottom": 161.5,
+          "width": 113.921875,
+          "height": 26
+        },
+        "text": {
+          "left": 207.109375,
+          "right": 347,
+          "top": 238.5,
+          "bottom": 278.5,
+          "width": 139.890625,
+          "height": 40
+        },
+        "handle": {
+          "left": 347,
+          "right": 363,
+          "top": 250.5,
+          "bottom": 266.5,
+          "width": 16,
+          "height": 16
+        },
+        "track": {
+          "left": 190.984375,
+          "right": 357,
+          "top": 163.5,
+          "bottom": 463.5,
+          "width": 166.015625,
+          "height": 300
+        },
+        "scrollerHeight": 50,
+        "backdrop": "blur(24px)",
+        "border": "4px",
+        "pageWidth": 390
+      },
+      "handlers": "passed",
+      "modifier": {
+        "captureOrder": "close,target",
+        "defaultOrder": "target",
+        "excludedOrder": "target",
+        "afterCleanup": 0
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "mode": "light",
+      "variant": "long",
+      "geometry": {
+        "panel": {
+          "left": 107.984375,
+          "right": 308,
+          "top": 72,
+          "bottom": 438,
+          "width": 200.015625,
+          "height": 366
+        },
+        "date": {
+          "left": 161.078125,
+          "right": 275,
+          "top": 135.5,
+          "bottom": 161.5,
+          "width": 113.921875,
+          "height": 26
+        },
+        "text": {
+          "left": 137.109375,
+          "right": 277,
+          "top": 238.5,
+          "bottom": 278.5,
+          "width": 139.890625,
+          "height": 40
+        },
+        "handle": {
+          "left": 277,
+          "right": 293,
+          "top": 250.5,
+          "bottom": 266.5,
+          "width": 16,
+          "height": 16
+        },
+        "track": {
+          "left": 120.984375,
+          "right": 287,
+          "top": 163.5,
+          "bottom": 463.5,
+          "width": 166.015625,
+          "height": 300
+        },
+        "scrollerHeight": 50,
+        "backdrop": "blur(24px)",
+        "border": "4px",
+        "pageWidth": 320
+      },
+      "handlers": "passed",
+      "modifier": {
+        "captureOrder": "close,target",
+        "defaultOrder": "target",
+        "excludedOrder": "target",
+        "afterCleanup": 0
+      }
+    }
+  ],
+  "page_errors": [],
+  "boundary": "Actual SCSS and source event-handler bodies, synthetic markup/data and framework adapters; full Ember application tests and final human visual acceptance remain separate."
+}

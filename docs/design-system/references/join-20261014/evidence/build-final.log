@@ -1,0 +1,15 @@
+
+> isbf-one-careers@1.0.0 build /home/codex/discourse/plugins/isbf-join/web
+> vite build && node scripts/write-asset-manifest.mjs
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 18 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   7.63 kB │ gzip:   2.63 kB
+dist/assets/index-C9HHADaJ.css   17.18 kB │ gzip:   4.75 kB
+dist/assets/scene-vU8LyUtu.js    14.52 kB │ gzip:   6.34 kB
+dist/assets/index-CFbXBEqh.js    15.33 kB │ gzip:   6.26 kB
+dist/assets/three-DDksZyp6.js   598.49 kB │ gzip: 154.97 kB
+✓ built in 19.40s

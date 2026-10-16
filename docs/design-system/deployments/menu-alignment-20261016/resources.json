@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "javascript_matches": true,
+  "styles_match": true,
+  "homepage_references_current_theme": true,
+  "production_test_content_submitted": false,
+  "api_credentials_created": false,
+  "core_or_plugins_changed": false,
+  "web_restarted": false
+}

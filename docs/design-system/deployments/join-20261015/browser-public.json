@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "scope": "Anonymous standalone UI using the exact SHA-verified production payloads",
+  "webgl_disabled": true,
+  "full_3d_scene_verified": false,
+  "form_submitted": false,
+  "views": [
+    {
+      "viewport": "desktop",
+      "anonymous": true,
+      "ready": true,
+      "original_contact_form_visible": true,
+      "fields": 3,
+      "scene": "fallback"
+    },
+    {
+      "viewport": "mobile",
+      "anonymous": true,
+      "ready": true,
+      "original_contact_form_visible": true,
+      "fields": 3,
+      "scene": "fallback"
+    }
+  ],
+  "resources": {
+    "failure": null,
+    "peak_working_bytes": 421187584,
+    "oom_before": {
+      "low": 0,
+      "high": 0,
+      "max": 0,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0,
+      "sock_throttled": 0
+    },
+    "oom_after": {
+      "low": 0,
+      "high": 0,
+      "max": 5274,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0,
+      "sock_throttled": 0
+    }
+  }
+}

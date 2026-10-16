@@ -2722,7 +2722,8 @@ body:has(.isbf-v2-shell--profile) {
   #main-outlet .user-navigation-primary .user-nav__notifications,
   #main-outlet .about .secondary dl > div:has(> .created-at),
   #main-outlet .about .secondary dl > div:has(> .last-posted-at),
-  #main-outlet .about .secondary dl > div:has(> .last-seen-at) {
+  #main-outlet .about .secondary dl > div:has(> .last-seen-at),
+  #main-outlet .about .secondary dl > div:has(> .invited-by) {
     display: none;
   }
 
@@ -3927,9 +3928,11 @@ body:has(.isbf-v2-shell--grouped-notifications) #main-outlet {
 
     a,
     button {
+      justify-content: flex-start;
       padding: var(--isbf-v2-space-3);
+      border: 0;
       color: var(--isbf-v2-text);
-      text-align: left;
+      text-align: start;
       background: transparent;
     }
 
@@ -4097,6 +4100,24 @@ body:has(.isbf-v2-shell--grouped-notifications) #main-outlet {
   .d-icon {
     margin-right: var(--isbf-v2-space-2);
   }
+}
+
+.isbf-topic-card__menu .dropdown-menu__item > .double-button {
+  display: flex;
+
+  .post-action-menu__flag {
+    order: -1;
+    min-width: 0;
+  }
+
+  .button-count {
+    flex: none;
+    width: auto;
+  }
+}
+
+.fk-d-menu-modal .isbf-topic-card__menu .double-button > .btn {
+  padding: 0.75em 1rem;
 }
 
 body:has(.isbf-v2-shell--topic-feed-style) {
@@ -4311,7 +4332,8 @@ body:has(.isbf-v2-shell--topic-feed-style) {
     .isbf-topic-card__article
     > .post__row
     > .post__body:not(.embedded-posts)
-    .post-controls {
+    .post-controls,
+  .nested-view .post-controls {
     position: static;
     overflow: visible;
     margin: var(--isbf-v2-space-2) 0 0;
@@ -4348,7 +4370,7 @@ body:has(.isbf-v2-shell--topic-feed-style) {
     }
   }
 
-  .isbf-topic-card
+  :is(.isbf-topic-card, .nested-view)
     :is(
       .isbf-topic-card__reply,
       .isbf-topic-card__repost,
@@ -4357,7 +4379,7 @@ body:has(.isbf-v2-shell--topic-feed-style) {
       .isbf-topic-card__bookmark,
       .isbf-topic-card__more
     ),
-  .isbf-topic-card
+  :is(.isbf-topic-card, .nested-view)
     :is(.isbf-topic-card__like, .isbf-topic-card__bookmark)
     button {
     display: inline-flex;
@@ -4396,12 +4418,13 @@ body:has(.isbf-v2-shell--topic-feed-style) {
     }
   }
 
-  .isbf-topic-card :is(.isbf-topic-card__like, .isbf-topic-card__bookmark) {
+  :is(.isbf-topic-card, .nested-view)
+    :is(.isbf-topic-card__like, .isbf-topic-card__bookmark) {
     min-width: 0;
     padding: 0;
   }
 
-  .isbf-topic-card .isbf-topic-card__like .double-button {
+  :is(.isbf-topic-card, .nested-view) .isbf-topic-card__like .double-button {
     display: flex;
     align-items: center;
     max-width: 100%;
@@ -4437,19 +4460,20 @@ body:has(.isbf-v2-shell--topic-feed-style) {
     }
   }
 
-  .isbf-topic-card .isbf-topic-card__like:is(.has-like, .liked),
-  .isbf-topic-card .isbf-topic-card__like .has-like,
-  .isbf-topic-card .isbf-topic-card__like .has-liked {
+  :is(.isbf-topic-card, .nested-view)
+    .isbf-topic-card__like:is(.has-like, .liked),
+  :is(.isbf-topic-card, .nested-view) .isbf-topic-card__like .has-like,
+  :is(.isbf-topic-card, .nested-view) .isbf-topic-card__like .has-liked {
     color: var(--love);
   }
 
-  .isbf-topic-card .isbf-topic-card__bookmark.bookmarked,
-  .isbf-topic-card .isbf-topic-card__bookmark .bookmarked {
+  :is(.isbf-topic-card, .nested-view) .isbf-topic-card__bookmark.bookmarked,
+  :is(.isbf-topic-card, .nested-view) .isbf-topic-card__bookmark .bookmarked {
     color: var(--isbf-v2-accent);
   }
 
   // The menu stays in Core's action DAG while its trigger anchors to the author row.
-  .isbf-topic-card .isbf-topic-card__more-menu {
+  :is(.isbf-topic-card, .nested-view) .isbf-topic-card__more-menu {
     position: absolute;
     top: 0;
     right: 0;
@@ -4457,12 +4481,12 @@ body:has(.isbf-v2-shell--topic-feed-style) {
     height: 36px;
   }
 
-  .isbf-topic-card .isbf-topic-card__more {
+  :is(.isbf-topic-card, .nested-view) .isbf-topic-card__more {
     width: 36px;
     padding: 0;
   }
 
-  .isbf-topic-card :is(a, button):focus-visible,
+  :is(.isbf-topic-card, .nested-view) :is(a, button):focus-visible,
   .topic-navigation :is(a, button, [tabindex]):focus-visible {
     outline: 3px solid var(--isbf-v2-focus-ring);
     outline-offset: 2px;
@@ -4525,7 +4549,7 @@ body:has(.isbf-v2-shell--topic-feed-style) {
       padding-bottom: calc(108px + env(safe-area-inset-bottom));
     }
 
-    .isbf-topic-card
+    :is(.isbf-topic-card, .nested-view)
       :is(
         .isbf-topic-card__reply,
         .isbf-topic-card__repost,
@@ -4534,14 +4558,14 @@ body:has(.isbf-v2-shell--topic-feed-style) {
         .isbf-topic-card__bookmark,
         .isbf-topic-card__more
       ),
-    .isbf-topic-card
+    :is(.isbf-topic-card, .nested-view)
       :is(.isbf-topic-card__like, .isbf-topic-card__bookmark)
       button {
       min-width: 44px;
       min-height: 44px;
     }
 
-    .isbf-topic-card .isbf-topic-card__like .double-button {
+    :is(.isbf-topic-card, .nested-view) .isbf-topic-card__like .double-button {
       &:has(.toggle-like) > :not(.toggle-like) {
         min-width: 0;
         max-width: calc(100% - 44px);
@@ -4552,8 +4576,8 @@ body:has(.isbf-v2-shell--topic-feed-style) {
       }
     }
 
-    .isbf-topic-card .isbf-topic-card__more-menu,
-    .isbf-topic-card .isbf-topic-card__more {
+    :is(.isbf-topic-card, .nested-view) .isbf-topic-card__more-menu,
+    :is(.isbf-topic-card, .nested-view) .isbf-topic-card__more {
       width: 44px;
       height: 44px;
     }
@@ -5194,6 +5218,7 @@ body:has(.isbf-v2-shell):has(.isbf-v2-shell--feedback) {
 }
 
 @import "topic-reading";
+@import "reply-conversations";
 @import "reporting";
 @import "official-filters";
 @import "learning-resources";
@@ -5440,6 +5465,7 @@ body:has(.isbf-v2-shell) .pswp {
 
 @import "marketplace";
 @import "frontend-consistency";
+@import "continue-reading";
 
 .isbf-avatar {
   position: relative;

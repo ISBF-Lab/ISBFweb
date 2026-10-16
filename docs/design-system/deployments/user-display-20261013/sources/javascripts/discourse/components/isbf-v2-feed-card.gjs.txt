@@ -1,0 +1,818 @@
+import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
+import { on } from "@ember/modifier";
+import { action } from "@ember/object";
+import didInsert from "@ember/render-modifiers/modifiers/did-insert";
+import { schedule } from "@ember/runloop";
+import { service } from "@ember/service";
+import { trustHTML } from "@ember/template";
+import { settings, themePrefix } from "virtual:theme";
+import PluginOutlet from "discourse/components/plugin-outlet";
+import lazyHash from "discourse/helpers/lazy-hash";
+import { ajax } from "discourse/lib/ajax";
+import Composer from "discourse/models/composer";
+import Draft from "discourse/models/draft";
+import { loadTopicView } from "discourse/models/topic";
+import DDecoratedHtml from "discourse/ui-kit/d-decorated-html";
+import dIcon from "discourse/ui-kit/helpers/d-icon";
+import { i18n } from "discourse-i18n";
+import { loadCookedPost, loadRepostCount } from "../lib/feed-post-loader";
+import { recordVisibleView } from "../lib/feed-view-tracker";
+import { isOfficialCalendarPath } from "../lib/official-calendar";
+import { isPinningContext, pinningMeta, saveHomePin } from "../lib/pinning";
+import {
+  compactNumber,
+  openQuotedRepost,
+  plainText,
+  postCardTitle,
+} from "../lib/post-card-helpers";
+import { isReportedHidden, openPostReport } from "../lib/report-post";
+import { displayName } from "../lib/user-display";
+import ISBFHomePinDialog from "./isbf-home-pin-dialog";
+import { ISBFMarketplacePrice } from "./isbf-marketplace-card";
+import ISBFOfficialActivitySummary from "./isbf-official-activity-summary";
+import ISBFOfficialCalendarItems from "./isbf-official-calendar-items";
+
+export default class ISBFV2FeedCard extends Component {
+  @service appEvents;
+  @service composer;
+  @service currentUser;
+  @service dialog;
+  @service modal;
+  @service router;
+  @service site;
+  @service siteSettings;
+  @service store;
+
+  @tracked body = null;
+  @tracked bodyFailed = false;
+  @tracked bookmarked;
+  @tracked expanded = false;
+  @tracked hidden = false;
+  @tracked isFlagging = false;
+  @tracked isLiking = false;
+  @tracked isPinning = false;
+  @tracked isReplying = false;
+  @tracked liked;
+  @tracked likeCount;
+  @tracked menuOpen = false;
+  @tracked pinNow = Date.now();
+  @tracked repostCount = null;
+  @tracked viewCount = null;
+
+  #bodyRequest = 0;
+  #observer;
+  #rootElement;
+  #viewInFlight = false;
+  #viewObserver;
+
+  constructor() {
+    super(...arguments);
+    this.hidden =
+      isReportedHidden(this.args.topic.first_post_id) ||
+      Boolean(this.args.topic.hidden);
+    this.appEvents.on("isbf:post-hidden", this.onPostHidden);
+    this.appEvents.on("isbf:home-pins-changed", this.onHomePinsChanged);
+    this.bookmarked = Boolean(this.args.topic.bookmarked);
+    this.liked = Boolean(this.args.topic.op_liked);
+    this.likeCount = Number(this.args.topic.op_like_count) || 0;
+  }
+
+  willDestroy() {
+    super.willDestroy(...arguments);
+    this.appEvents.off("isbf:post-hidden", this.onPostHidden);
+    this.appEvents.off("isbf:home-pins-changed", this.onHomePinsChanged);
+    this.#observer?.disconnect();
+    this.#viewObserver?.disconnect();
+    document.removeEventListener(
+      "visibilitychange",
+      this.onDocumentVisibilityChange,
+    );
+    document.removeEventListener("pointerdown", this.onOutsidePointer, true);
+    document.removeEventListener("keydown", this.onDocumentKeydown, true);
+  }
+
+  get avatarUrl() {
+    return this.args.topic.creator?.avatar_template?.replace("{size}", "96");
+  }
+
+  get bodyHtml() {
+    if (this.hidden) {
+      return null;
+    }
+    if (this.body) {
+      return trustHTML(this.body);
+    }
+    if (this.args.topic.excerpt) {
+      return trustHTML(`<p>${this.args.topic.excerpt}</p>`);
+    }
+    return null;
+  }
+
+  get contentReady() {
+    return this.body !== null || this.bodyFailed;
+  }
+
+  get officialLayout() {
+    return (
+      this.args.officialLayout ||
+      isOfficialCalendarPath(this.router.currentURL, settings.official_path)
+    );
+  }
+
+  get canFlag() {
+    return (
+      Boolean(this.currentUser) &&
+      !this.hidden &&
+      (((this.site.isbf_severe_reports_enabled ??
+        this.siteSettings.isbf_severe_reports_enabled) === true &&
+        this.args.topic.isbf_can_severe_report) ||
+        this.args.topic.op_can_flag === true ||
+        this.currentUser.id !== this.args.topic.creator?.id)
+    );
+  }
+
+  get canLike() {
+    return (
+      Boolean(this.currentUser) && (this.args.topic.op_can_like || this.liked)
+    );
+  }
+
+  get pinMetadata() {
+    return pinningMeta(this.args.topic, this.pinNow);
+  }
+
+  get showHomePin() {
+    return (
+      !this.hidden &&
+      isPinningContext(this.router, this.site, this.siteSettings) &&
+      this.pinMetadata?.active === true
+    );
+  }
+
+  get canManageHomePin() {
+    const config = this.site.isbf_pinning;
+    return (
+      !this.hidden &&
+      this.currentUser?.admin === true &&
+      config?.enabled === true &&
+      config?.home_actions_enabled === true &&
+      isPinningContext(this.router, this.site, this.siteSettings) &&
+      this.pinMetadata?.can_manage === true
+    );
+  }
+
+  get creatorName() {
+    return displayName(this.args.topic.creator);
+  }
+
+  get displayTitle() {
+    if (this.hidden) {
+      return null;
+    }
+    return postCardTitle(this.args.topic.title, this.body);
+  }
+
+  get formattedLikeCount() {
+    return compactNumber(this.likeCount);
+  }
+
+  get formattedReplyCount() {
+    return compactNumber(this.args.topic.replyCount);
+  }
+
+  get formattedRepostCount() {
+    return compactNumber(this.repostCount);
+  }
+
+  get formattedViewCount() {
+    return this.viewCount === null ? "" : compactNumber(this.viewCount) || "0";
+  }
+
+  get viewLabel() {
+    return this.viewCount === null
+      ? i18n(themePrefix("isbf_v2.views"))
+      : i18n(themePrefix("isbf_v2.views_count"), { count: this.viewCount });
+  }
+
+  get profileUrl() {
+    return `/u/${this.args.topic.creator?.username}`;
+  }
+
+  get showExpand() {
+    return (
+      !this.hidden &&
+      plainText(this.body || this.args.topic.excerpt).length > 900
+    );
+  }
+
+  get relativeTime() {
+    const date = new Date(this.args.topic.createdAt);
+    const seconds = Math.round((date.getTime() - Date.now()) / 1000);
+    const formatter = new Intl.RelativeTimeFormat(undefined, {
+      numeric: "auto",
+    });
+    if (Math.abs(seconds) < 60) {
+      return formatter.format(seconds, "second");
+    }
+    const minutes = Math.round(seconds / 60);
+    if (Math.abs(minutes) < 60) {
+      return formatter.format(minutes, "minute");
+    }
+    const hours = Math.round(minutes / 60);
+    if (Math.abs(hours) < 24) {
+      return formatter.format(hours, "hour");
+    }
+    return formatter.format(Math.round(hours / 24), "day");
+  }
+
+  get topicUrl() {
+    return this.args.topic.url;
+  }
+
+  @action
+  observe(element) {
+    this.#rootElement = element;
+    if (this.args.measureOnly) {
+      this.#loadContent();
+      return;
+    }
+    this.#observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          this.#observer.disconnect();
+          this.#loadContent();
+        }
+      },
+      { rootMargin: "320px 0px" },
+    );
+    this.#observer.observe(element);
+  }
+
+  @action
+  observeVisibleView(element) {
+    if (!this.currentUser || this.args.measureOnly) {
+      return;
+    }
+
+    this.#rootElement = element;
+    this.#viewObserver = new IntersectionObserver(
+      (entries) => {
+        if (
+          document.visibilityState === "visible" &&
+          entries.some(
+            (entry) =>
+              entry.isIntersecting &&
+              entry.intersectionRect.width > 0 &&
+              entry.intersectionRect.height > 0,
+          )
+        ) {
+          this.#recordView();
+        }
+      },
+      { rootMargin: "0px", threshold: 0 },
+    );
+    this.#viewObserver.observe(element);
+    document.addEventListener(
+      "visibilitychange",
+      this.onDocumentVisibilityChange,
+    );
+  }
+
+  @action
+  onDocumentVisibilityChange() {
+    if (document.visibilityState !== "visible" || !this.#rootElement) {
+      return;
+    }
+    const rect = this.#rootElement.getBoundingClientRect();
+    if (
+      rect.top < window.innerHeight &&
+      rect.bottom > 0 &&
+      rect.left < window.innerWidth &&
+      rect.right > 0
+    ) {
+      this.#recordView();
+    }
+  }
+
+  @action
+  toggleExpanded() {
+    this.expanded = !this.expanded;
+  }
+
+  @action
+  openTopic(event) {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey ||
+      window.getSelection()?.toString() ||
+      event.target.closest(
+        "a, button, input, select, textarea, summary, audio, video, [contenteditable], [role='button'], [role='link']",
+      )
+    ) {
+      return;
+    }
+
+    event.stopPropagation();
+    this.args.navigateToTopic(this.args.topic);
+  }
+
+  @action
+  async reply() {
+    if (this.isReplying) {
+      return;
+    }
+    if (!this.currentUser) {
+      this.router.transitionTo("login");
+      return;
+    }
+
+    const topic = this.args.topic;
+    this.isReplying = true;
+    try {
+      await loadTopicView(topic, {});
+      if (!topic.get("details.can_create_post")) {
+        await this.router.transitionTo(this.topicUrl);
+        return;
+      }
+
+      const draftData = await Draft.get(topic.draft_key);
+      const options = {
+        action: Composer.REPLY,
+        draftKey: topic.draft_key,
+        draftSequence: draftData.draft_sequence,
+        topic,
+      };
+
+      if (draftData.draft) {
+        const draft = JSON.parse(draftData.draft);
+        options.reply = draft.reply;
+        options.whisper = draft.whisper;
+        if (Composer.isEditDraft(draft)) {
+          options.draft = draft;
+        }
+      }
+
+      await this.composer.open(options);
+    } catch (error) {
+      await this.#showError(error);
+    } finally {
+      this.isReplying = false;
+    }
+  }
+
+  @action
+  async toggleLike() {
+    if (!this.canLike || this.isLiking) {
+      return;
+    }
+    this.isLiking = true;
+    try {
+      if (this.liked) {
+        await ajax(`/post_actions/${this.args.topic.first_post_id}`, {
+          data: { post_action_type_id: 2 },
+          type: "DELETE",
+        });
+        this.liked = false;
+        this.likeCount = Math.max(0, this.likeCount - 1);
+      } else {
+        await ajax("/post_actions", {
+          data: {
+            id: this.args.topic.first_post_id,
+            post_action_type_id: 2,
+          },
+          type: "POST",
+        });
+        this.liked = true;
+        this.likeCount += 1;
+      }
+    } catch (error) {
+      await this.#showError(error);
+    } finally {
+      this.isLiking = false;
+    }
+  }
+
+  @action
+  async toggleBookmark() {
+    if (!this.currentUser) {
+      this.router.transitionTo("login");
+      return;
+    }
+    try {
+      if (this.bookmarked) {
+        await ajax(`/t/${this.args.topic.id}/remove_bookmarks`, {
+          type: "PUT",
+        });
+      } else {
+        await ajax(`/t/${this.args.topic.id}/bookmark`, { type: "PUT" });
+      }
+      this.bookmarked = !this.bookmarked;
+    } catch (error) {
+      await this.#showError(error);
+    }
+  }
+
+  @action
+  async repost() {
+    await openQuotedRepost({
+      composer: this.composer,
+      router: this.router,
+      currentUser: this.currentUser,
+      topicId: this.args.topic.id,
+      postNumber: 1,
+      username: this.args.topic.creator?.username,
+      cookedHtml: this.body || this.args.topic.excerpt,
+      title: this.args.topic.title,
+    });
+  }
+
+  @action
+  toggleMenu(event) {
+    event.stopPropagation();
+    this.menuOpen = !this.menuOpen;
+    if (this.menuOpen) {
+      document.addEventListener("pointerdown", this.onOutsidePointer, true);
+      document.addEventListener("keydown", this.onDocumentKeydown, true);
+    } else {
+      this.#closeMenu();
+    }
+  }
+
+  @action
+  onOutsidePointer(event) {
+    if (
+      !this.#rootElement
+        ?.querySelector(".isbf-feed-card__menu-wrap")
+        ?.contains(event.target)
+    ) {
+      this.#closeMenu();
+    }
+  }
+
+  @action
+  onDocumentKeydown(event) {
+    if (event.key === "Escape") {
+      this.#closeMenu();
+      this.#rootElement
+        ?.querySelector(".isbf-feed-card__menu-trigger")
+        ?.focus();
+    }
+  }
+
+  @action
+  async flag() {
+    if (this.isFlagging) {
+      return;
+    }
+    if (!this.currentUser) {
+      this.appEvents.trigger("show-login");
+      return;
+    }
+    this.isFlagging = true;
+    try {
+      const post = await this.store.find("post", this.args.topic.first_post_id);
+      if (this.isDestroying) {
+        return;
+      }
+      post.set("topic", this.args.topic);
+      this.#closeMenu();
+      this.#rootElement
+        ?.querySelector(".isbf-feed-card__menu-trigger")
+        ?.focus();
+      openPostReport({
+        post,
+        modal: this.modal,
+        siteSettings: this.siteSettings,
+        site: this.site,
+        appEvents: this.appEvents,
+      });
+    } catch (error) {
+      await this.#showError(error);
+    } finally {
+      this.isFlagging = false;
+    }
+  }
+
+  @action
+  onHomePinsChanged() {
+    this.pinNow = Date.now();
+  }
+
+  @action
+  async openHomePin() {
+    if (!this.canManageHomePin || this.isPinning) {
+      return;
+    }
+    this.isPinning = true;
+    try {
+      await this.#closePinMenu();
+      if (this.isDestroying || !this.canManageHomePin) {
+        return;
+      }
+      this.modal.show(ISBFHomePinDialog, {
+        model: { topic: this.args.topic, onSaved: this.onHomePinSaved },
+      });
+    } finally {
+      if (!this.isDestroying) {
+        this.isPinning = false;
+      }
+    }
+  }
+
+  @action
+  onHomePinSaved() {
+    if (!this.isDestroying) {
+      this.pinNow = Date.now();
+      this.appEvents.trigger("isbf:home-pin-saved");
+    }
+  }
+
+  @action
+  async cancelHomePin() {
+    if (!this.canManageHomePin || this.isPinning) {
+      return;
+    }
+    this.isPinning = true;
+    try {
+      await this.#closePinMenu();
+      if (this.isDestroying) {
+        return;
+      }
+      await saveHomePin(this.args.topic, { enabled: false });
+      this.onHomePinSaved();
+    } catch (error) {
+      if (!this.isDestroying) {
+        await this.#showError(error);
+      }
+    } finally {
+      if (!this.isDestroying) {
+        this.isPinning = false;
+      }
+    }
+  }
+
+  @action
+  onPostHidden(postId, hidden = true) {
+    if (Number(postId) === Number(this.args.topic.first_post_id)) {
+      this.hidden = hidden;
+      this.#bodyRequest += 1;
+      this.body = null;
+      this.bodyFailed = false;
+      this.#closeMenu();
+      if (!hidden) {
+        this.#loadContent();
+      }
+    }
+  }
+
+  async #recordView() {
+    if (this.#viewInFlight || this.viewCount !== null) {
+      return;
+    }
+    this.#viewInFlight = true;
+    const count = await recordVisibleView(
+      this.args.topic.id,
+      this.currentUser.id,
+    );
+    this.#viewInFlight = false;
+    if (count !== null && !this.isDestroying) {
+      this.viewCount = count;
+      this.#viewObserver?.disconnect();
+      document.removeEventListener(
+        "visibilitychange",
+        this.onDocumentVisibilityChange,
+      );
+    }
+  }
+
+  async #loadContent() {
+    const request = ++this.#bodyRequest;
+    const postId = this.args.topic.first_post_id;
+    if (this.hidden) {
+      return;
+    }
+    if (!postId) {
+      this.bodyFailed = true;
+      return;
+    }
+    const [body, count] = await Promise.allSettled([
+      loadCookedPost(postId),
+      this.args.measureOnly
+        ? Promise.resolve(null)
+        : loadRepostCount(this.args.topic.id),
+    ]);
+    if (
+      this.isDestroying ||
+      this.hidden ||
+      isReportedHidden(postId) ||
+      request !== this.#bodyRequest
+    ) {
+      return;
+    }
+    if (body.status === "fulfilled") {
+      this.body = body.value;
+    } else {
+      this.bodyFailed = true;
+    }
+    if (count.status === "fulfilled") {
+      this.repostCount = count.value;
+    }
+  }
+
+  async #closePinMenu() {
+    this.#closeMenu();
+    this.#rootElement?.querySelector(".isbf-feed-card__menu-trigger")?.focus();
+    await new Promise((resolve) => schedule("afterRender", resolve));
+  }
+
+  #closeMenu() {
+    this.menuOpen = false;
+    document.removeEventListener("pointerdown", this.onOutsidePointer, true);
+    document.removeEventListener("keydown", this.onDocumentKeydown, true);
+  }
+
+  async #showError(error) {
+    const message =
+      error?.jqXHR?.responseJSON?.errors?.[0] ||
+      i18n(themePrefix("isbf_v2.action_failed"));
+    await this.dialog.alert(message);
+  }
+
+  <template>
+    {{! eslint-disable ember/template-no-invalid-interactive }}
+    <article
+      class="isbf-feed-card"
+      data-content-ready={{if this.contentReady "true" "false"}}
+      {{didInsert this.observe}}
+      {{didInsert this.observeVisibleView}}
+      {{on "click" this.openTopic}}
+    >
+      <a class="isbf-feed-card__avatar isbf-avatar" href={{this.profileUrl}}>
+        <img
+          alt=""
+          height="42"
+          loading="lazy"
+          src={{this.avatarUrl}}
+          width="42"
+        />
+        <PluginOutlet
+          @name="user-avatar-frame"
+          @outletArgs={{lazyHash user=@topic.creator motion="static"}}
+        />
+      </a>
+      <div class="isbf-feed-card__main">
+        {{#if this.showHomePin}}
+          <div class="isbf-feed-card__pin">
+            {{dIcon "thumbtack"}}{{i18n (themePrefix "isbf_v2.pinned")}}
+          </div>
+        {{/if}}
+        <header class="isbf-feed-card__header">
+          <a
+            class="isbf-feed-card__author"
+            href={{this.profileUrl}}
+          >{{this.creatorName}}</a>
+          <a
+            class="isbf-feed-card__username"
+            href={{this.profileUrl}}
+          >@{{@topic.creator.username}}</a>
+          <span aria-hidden="true">·</span>
+          <a
+            class="isbf-feed-card__time"
+            href={{this.topicUrl}}
+            title={{@topic.createdAt}}
+          >{{this.relativeTime}}</a>
+          <div class="isbf-feed-card__menu-wrap">
+            <button
+              aria-expanded={{if this.menuOpen "true" "false"}}
+              aria-label={{i18n (themePrefix "isbf_v2.more_actions")}}
+              class="isbf-feed-card__menu-trigger"
+              type="button"
+              {{on "click" this.toggleMenu}}
+            >{{dIcon "ellipsis"}}</button>
+            {{#if this.menuOpen}}
+              <div class="isbf-feed-card__menu" role="menu">
+                {{#if this.canManageHomePin}}
+                  <button
+                    class="isbf-feed-card__pin-action"
+                    disabled={{this.isPinning}}
+                    role="menuitem"
+                    type="button"
+                    {{on "click" this.openHomePin}}
+                  >{{dIcon "thumbtack"}}{{i18n
+                      (themePrefix
+                        (if this.showHomePin "isbf_v2.pin_update" "isbf_v2.pin")
+                      )
+                    }}</button>
+                  {{#if this.showHomePin}}
+                    <button
+                      class="isbf-feed-card__pin-action"
+                      disabled={{this.isPinning}}
+                      role="menuitem"
+                      type="button"
+                      {{on "click" this.cancelHomePin}}
+                    >{{dIcon "thumbtack"}}{{i18n
+                        (themePrefix "isbf_v2.pin_cancel")
+                      }}</button>
+                  {{/if}}
+                {{/if}}
+                {{#if this.canFlag}}<button
+                    disabled={{this.isFlagging}}
+                    role="menuitem"
+                    type="button"
+                    {{on "click" this.flag}}
+                  >{{dIcon "flag"}}{{i18n
+                      (themePrefix "isbf_v2.report")
+                    }}</button>{{/if}}
+              </div>
+            {{/if}}
+          </div>
+        </header>
+        {{#if this.displayTitle}}<a
+            class="isbf-feed-card__title"
+            href={{this.topicUrl}}
+          >{{this.displayTitle}}</a>{{/if}}
+        <div
+          class={{if
+            this.expanded
+            "isbf-feed-card__body is-expanded"
+            "isbf-feed-card__body"
+          }}
+        >{{#if this.hidden}}{{i18n
+              (themePrefix "isbf_v2.report_hidden")
+            }}{{else}}<DDecoratedHtml
+              @className="isbf-content-images"
+              @html={{this.bodyHtml}}
+              @preservePointerTarget={{true}}
+            />{{/if}}</div>
+        {{#if this.bodyFailed}}<a
+            class="isbf-feed-card__fallback"
+            href={{this.topicUrl}}
+          >{{i18n (themePrefix "isbf_v2.view_post")}}</a>{{/if}}
+        {{#if this.showExpand}}<button
+            class="isbf-feed-card__expand"
+            type="button"
+            {{on "click" this.toggleExpanded}}
+          >{{i18n
+              (themePrefix
+                (if this.expanded "isbf_v2.show_less" "isbf_v2.show_more")
+              )
+            }}</button>{{/if}}
+        {{#unless this.hidden}}
+          {{#if this.officialLayout}}
+            <ISBFOfficialActivitySummary
+              @campusIds={{@topic.isbf_official_campuses}}
+              @items={{@topic.isbf_official_calendar_items}}
+            />
+          {{else}}
+            <ISBFOfficialCalendarItems
+              @items={{@topic.isbf_official_calendar_items}}
+              @readOnly={{true}}
+            />
+          {{/if}}
+        {{/unless}}
+        {{#unless this.hidden}}<ISBFMarketplacePrice
+            @metadata={{@topic.isbf_marketplace}}
+          />{{/unless}}
+        <footer class="isbf-feed-card__actions">
+          <button
+            aria-label={{i18n (themePrefix "isbf_v2.reply")}}
+            disabled={{this.isReplying}}
+            type="button"
+            {{on "click" this.reply}}
+          >{{dIcon "comment"}}{{#if this.formattedReplyCount}}<span
+              >{{this.formattedReplyCount}}</span>{{/if}}</button>
+          <button
+            aria-label={{i18n (themePrefix "isbf_v2.repost")}}
+            type="button"
+            {{on "click" this.repost}}
+          >{{dIcon "retweet"}}{{#if this.formattedRepostCount}}<span
+              >{{this.formattedRepostCount}}</span>{{/if}}</button>
+          <button
+            aria-label={{i18n (themePrefix "isbf_v2.like")}}
+            class={{if this.liked "is-liked"}}
+            disabled={{this.isLiking}}
+            type="button"
+            {{on "click" this.toggleLike}}
+          >{{dIcon "heart"}}{{#if this.formattedLikeCount}}<span
+              >{{this.formattedLikeCount}}</span>{{/if}}</button>
+          <span
+            aria-label={{this.viewLabel}}
+            class="isbf-feed-card__views"
+          >{{dIcon "chart-bar"}}{{#if this.formattedViewCount}}<span
+              >{{this.formattedViewCount}}</span>{{/if}}</span>
+          <button
+            aria-label={{i18n (themePrefix "isbf_v2.bookmark_action")}}
+            class={{if this.bookmarked "is-bookmarked"}}
+            type="button"
+            {{on "click" this.toggleBookmark}}
+          >{{dIcon "bookmark"}}</button>
+        </footer>
+      </div>
+    </article>
+  </template>
+}

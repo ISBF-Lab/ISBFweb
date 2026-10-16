@@ -1,0 +1,50 @@
+[
+  {
+    "file": "app/controllers/nested_topics_controller.rb",
+    "parsed": true
+  },
+  {
+    "file": "app/services/nested_topic/list_roots.rb",
+    "parsed": true
+  },
+  {
+    "file": "config/routes.rb",
+    "parsed": true
+  },
+  {
+    "file": "config/locales/client.en.yml",
+    "parsed": true
+  },
+  {
+    "file": "config/locales/client.zh_CN.yml",
+    "parsed": true
+  },
+  {
+    "file": "lib/nested_replies/navigation.rb",
+    "parsed": true
+  },
+  {
+    "file": "lib/nested_replies/tree_loader.rb",
+    "parsed": true
+  },
+  {
+    "file": "spec/lib/nested_replies/navigation_spec.rb",
+    "parsed": true
+  },
+  {
+    "file": "spec/requests/nested_topics_controller_spec.rb",
+    "parsed": true
+  },
+  {
+    "file": "spec/services/nested_topic/list_roots_spec.rb",
+    "parsed": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/locales/en.yml",
+    "parsed": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/locales/zh_CN.yml",
+    "parsed": true
+  }
+]

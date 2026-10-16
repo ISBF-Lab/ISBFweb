@@ -5,6 +5,31 @@ en:
       brand_show_logo: "Show the logo from the native logo settings for the current layout and color mode."
       brand_show_name: "Show the platform name, with or without its logo. Turning both switches off hides the brand area."
   isbf_v2:
+    continue_reading:
+      title: "Keep reading"
+      suggested: "New & unread"
+      related: "Related topics"
+      sources: "More topic sources"
+      browse: "Browse more topics"
+      browse_all: "Browse all →"
+      browse_category: "Browse all topics in %{category}"
+      all_categories: "All categories"
+      replies:
+        one: "%{count} reply"
+        other: "%{count} replies"
+      remaining_new:
+        one: "%{count} new topic remaining"
+        other: "%{count} new topics remaining"
+      remaining_unread:
+        one: "%{count} unread topic"
+        other: "%{count} unread topics"
+    reply_conversations:
+      progress: "%{current} / %{total}"
+      reply_to: "Replying to %{name} · #%{number}"
+      original_post: "Original post"
+      go_to_original: "Go to original"
+      context_loaded: "Original reply loaded"
+      context_unavailable: "This reply is unavailable or could not be loaded."
     learning_request_course: "Request a course"
     learning_submit_request: "Submit request"
     learning_course_pending: "Course request submitted and awaiting review"

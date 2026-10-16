@@ -1,0 +1,115 @@
+{
+  "passed": true,
+  "source_version": "da29b7352452fdb0d333377eae493f6ad8e8cd540731a1ba3261cb8b5846ac5f",
+  "logic": {
+    "passed": true,
+    "checks": [
+      "a preview cannot replace a complete loaded page",
+      "disjoint target pages keep separate loadable gaps",
+      "a saved tail reply stays visible while earlier pages are missing",
+      "Successful save inserts the actual root immediately without navigation or bus, then deduplicates later events",
+      "Saving a child in a collapsed paginated group reveals it, retains it across a late page response, and counts once",
+      "Actual route model and setup preserve loaded replies and expansion for originals, roots and OP floor 1",
+      "Collapse and re-expand after original navigation retains the complete loaded window and own reply",
+      "Merging an unloaded original page preserves prior nodes, fills its gap, and cannot be overwritten at teardown"
+    ],
+    "actual_source_methods": true,
+    "full_ember_application": false
+  },
+  "layout": {
+    "passed": true,
+    "checks": [
+      "320px: mobile icon columns and touch targets align, or desktop geometry matches the prior deployed stylesheet; light and dark",
+      "390px: mobile icon columns and touch targets align, or desktop geometry matches the prior deployed stylesheet; light and dark",
+      "600px: mobile icon columns and touch targets align, or desktop geometry matches the prior deployed stylesheet; light and dark",
+      "601px: mobile icon columns and touch targets align, or desktop geometry matches the prior deployed stylesheet; light and dark",
+      "1280px: mobile icon columns and touch targets align, or desktop geometry matches the prior deployed stylesheet; light and dark",
+      "Original topic, root and child replies highlight only the target article after positioning",
+      "A scroll lock finishing before the next frame does not cancel the original highlight",
+      "Actual canonical URL routeTo restarts the highlight on a repeated floor click without refreshing",
+      "Rapid changes leave only the latest highlight and it disappears after two seconds",
+      "A target loaded after navigation is positioned and highlighted when its actual article appears",
+      "Reduced motion uses a temporary static tint with no animation",
+      "Leaving the view removes its highlight and cancels pending timers",
+      "Native flat-topic repeated navigation retains the existing refresh behavior"
+    ],
+    "actual_class_and_route_method": true,
+    "actual_compiled_current_and_previous_styles": true,
+    "served_native_core_styles_included": true,
+    "full_ember_application": false,
+    "production_backend_used": false,
+    "production_test_content_submitted": false
+  },
+  "native_application": {
+    "passed": true,
+    "full_ember_application": true,
+    "production_backend_used": false,
+    "production_content_submitted": false,
+    "checks": [],
+    "errors": [],
+    "missing_assets": [],
+    "views": [
+      {
+        "mobile": true,
+        "checks": [
+          "Real OP/root/child menus align equally at 320/390/600px with reply icons 12px to the right of the rail and 44px targets",
+          "An original link from beyond the preview retains its source and all expanded replies, highlights the target and can collapse/re-expand",
+          "Actual composer POST success immediately reveals root, child, deeper and paginated replies without any bus injection"
+        ],
+        "saves": 4,
+        "saved_numbers": [
+          130,
+          131,
+          132,
+          133
+        ],
+        "passed": true
+      },
+      {
+        "mobile": false,
+        "checks": [
+          "An original link from beyond the preview retains its source and all expanded replies, highlights the target and can collapse/re-expand",
+          "Actual composer POST success immediately reveals root, child, deeper and paginated replies without any bus injection"
+        ],
+        "saves": 4,
+        "saved_numbers": [
+          130,
+          131,
+          132,
+          133
+        ],
+        "passed": true
+      }
+    ],
+    "compiled_manifest_sha256": "a52b5dc669653e53219d5adcdd1c174575c8e58524c45519d831606d380443ef",
+    "resumed_mobile_for_identical_compiled_artifact": true
+  },
+  "published_resources": {
+    "passed": true,
+    "javascript_matches": true,
+    "styles_match": true,
+    "core_entry_matches": true,
+    "page_references_new_assets": true,
+    "production_test_content_submitted": false,
+    "api_credentials_created": false,
+    "web_cache_reloaded": true
+  },
+  "full_qunit_suite_run": false,
+  "production_test_posts_submitted": false,
+  "plugins_preserved": 66,
+  "theme_fields_changed": 1,
+  "theme_fields_preserved": 211,
+  "concurrent_plugin_update_preserved": {
+    "preserved": true,
+    "plugin": "isbf-resume",
+    "before": "/shared/isbf-resume-releases/5814560a31dedd67b6c064dbdfdef70341d14301/isbf-resume",
+    "current": "/shared/isbf-resume-releases/f0db4986b1b3bf2c363251e47eec7ee72923ffe6/isbf-resume",
+    "core_sources_unchanged": true,
+    "compiled_asset": "js/plugins/isbf-resume_main.CJUFjX-lwgdm5nb.digested.js",
+    "compiled_asset_sha256": "b17b6668d9818e9c59dccd7bba80f34c5bc28a05fe840dbdf9e330818a2ba7b4",
+    "independent_plugin_bundle": true,
+    "shared_plugin_release_preserved": true,
+    "all_current_assets_retained": true,
+    "reply_core_manifest_unchanged": true
+  }
+}

@@ -20,6 +20,10 @@ module NestedReplies
 
     attr_reader :topic, :guardian
 
+    def flat_replies?
+      SiteSetting.nested_replies_cap_nesting_depth && configured_max_depth == 1
+    end
+
     def initialize(topic:, guardian:)
       @topic = topic
       @guardian = guardian
@@ -451,6 +455,14 @@ module NestedReplies
     end
 
     def flat_descendants_scope(parent_post_number, sort:, offset: 0, limit: CHILDREN_PER_PAGE)
+      if flat_replies?
+        return(
+          apply_sort(flat_descendants_relation(parent_post_number), sort).offset(offset).limit(
+            limit,
+          )
+        )
+      end
+
       sort = effective_sort(sort)
       descendant_post_numbers =
         flat_descendant_post_numbers_by_parent(
@@ -465,6 +477,25 @@ module NestedReplies
       NestedReplies::Sort.apply(scope, sort)
     end
 
+    def flat_descendants_relation(parent_post_number)
+      descendants_sql = <<~SQL
+        WITH RECURSIVE descendants AS (
+          SELECT post_number FROM posts
+          WHERE topic_id = :topic_id AND reply_to_post_number = :parent_post_number AND post_number > 1
+          UNION
+          SELECT child.post_number FROM posts child
+          JOIN descendants ON child.reply_to_post_number = descendants.post_number
+          WHERE child.topic_id = :topic_id AND child.post_number > 1
+        )
+        SELECT post_number FROM descendants
+      SQL
+      apply_visibility(topic.posts).where(
+        "posts.post_number IN (#{descendants_sql})",
+        topic_id: topic.id,
+        parent_post_number: parent_post_number,
+      )
+    end
+
     def flat_descendant_post_numbers_by_parent(parent_post_numbers, sort:, offset: 0, limit:)
       return {} if parent_post_numbers.empty?
 
@@ -477,8 +508,7 @@ module NestedReplies
           <<~SQL,
             WITH RECURSIVE descendants AS (
               SELECT parents.post_number AS root_post_number,
-                     children.post_number,
-                     1 AS depth
+                     children.post_number
               FROM posts parents
               JOIN posts children
                 ON children.topic_id = parents.topic_id
@@ -487,17 +517,15 @@ module NestedReplies
                 AND parents.post_number IN (:parent_post_numbers)
                 AND children.post_number > 1
 
-              UNION ALL
+              UNION
 
               SELECT descendants.root_post_number,
-                     children.post_number,
-                     descendants.depth + 1
+                     children.post_number
               FROM descendants
               JOIN posts children
                 ON children.topic_id = :topic_id
                AND children.reply_to_post_number = descendants.post_number
               WHERE children.post_number > 1
-                AND descendants.depth < :max_cte_depth
             ), ranked AS (
               SELECT descendants.root_post_number,
                      posts.post_number,
@@ -506,7 +534,7 @@ module NestedReplies
                        ORDER BY #{order_expr}
                      ) AS row_number
               FROM descendants
-              JOIN posts
+              JOIN (#{apply_visibility(topic.posts).to_sql}) posts
                 ON posts.topic_id = :topic_id
                AND posts.post_number = descendants.post_number
               #{hot_join}
@@ -523,7 +551,6 @@ module NestedReplies
           post_types: visible_post_types,
           offset: offset,
           limit: limit,
-          max_cte_depth: 500,
         )
 
       rows
@@ -605,6 +632,11 @@ module NestedReplies
 
     def tree_counts(posts)
       reply_counts = direct_reply_counts(posts.map(&:post_number))
+      if flat_replies?
+        return(
+          { reply_counts: reply_counts, descendant_counts: live_total_descendant_counts(posts) }
+        )
+      end
       {
         reply_counts: reply_counts,
         descendant_counts: total_descendant_counts(posts, reply_counts: reply_counts),
@@ -646,8 +678,7 @@ module NestedReplies
           WITH RECURSIVE descendants AS (
             SELECT roots.post_number AS root_post_number,
                    child.post_number,
-                   child.post_type,
-                   1 AS depth
+                   child.post_type
             FROM posts roots
             JOIN posts child
               ON child.topic_id = roots.topic_id
@@ -655,27 +686,24 @@ module NestedReplies
             WHERE roots.topic_id = :topic_id
               AND roots.id IN (:post_ids)
               AND child.post_number > 1
-            UNION ALL
+            UNION
             SELECT descendants.root_post_number,
                    child.post_number,
-                   child.post_type,
-                   descendants.depth + 1
+                   child.post_type
             FROM descendants
             JOIN posts child
               ON child.topic_id = :topic_id
              AND child.reply_to_post_number = descendants.post_number
             WHERE child.post_number > 1
-              AND descendants.depth < :max_cte_depth
           )
           SELECT root_post_number, COUNT(*) AS total_descendant_count
           FROM descendants
-          WHERE post_type IN (:post_types)
+          WHERE post_number IN (#{apply_visibility(topic.posts).select(:post_number).to_sql})
           GROUP BY root_post_number
         SQL
           topic_id: topic.id,
           post_ids: post_ids_by_number.values,
           post_types: visible_post_types,
-          max_cte_depth: 500,
         )
 
       rows.each_with_object({}) do |row, counts|

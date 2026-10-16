@@ -1,0 +1,29 @@
+{
+  "core": {
+    "command": [
+      "ruby",
+      "bin/qunit",
+      "frontend/discourse/tests/acceptance/more-topics-plugin-api-test.gjs",
+      "frontend/discourse/tests/integration/components/more-topics/browse-more-test.gjs"
+    ],
+    "exit_code": 1,
+    "log": "qunit-core.log"
+  },
+  "theme": {
+    "command": [
+      "ruby",
+      "bin/qunit",
+      "--theme-name",
+      "ISBF Campus Feed",
+      "--qunit-path",
+      "/theme-qunit",
+      "--filter",
+      "ContinueReading"
+    ],
+    "exit_code": 1,
+    "log": "qunit-theme.log"
+  },
+  "preview_forum_started": false,
+  "production_backend_used": false,
+  "tests_executed": 0
+}

@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "administrator_status": 200,
+  "member_status": 403,
+  "application_count_returned": 0,
+  "page": 1,
+  "has_more": false,
+  "contact_data_exported": false,
+  "production_form_posted": false
+}

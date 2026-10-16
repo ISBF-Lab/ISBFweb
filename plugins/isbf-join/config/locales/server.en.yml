@@ -1,0 +1,13 @@
+en:
+  isbf_join:
+    errors:
+      name: "Enter a valid name (up to 60 characters)."
+      student_id: "Enter a valid student ID (up to 40 characters)."
+      phone: "Enter a valid phone number, including a country code if needed."
+      invalid: "Please check the information you entered."
+      conflict: "This submission ID has already been used. Please reopen the form."
+      unavailable: "We could not save your application. Please try again later."
+      json_required: "Please submit your application as JSON."
+      too_large: "The submitted content is too long."
+      rate_limited: "Too many submissions. Please try again later."
+      cross_site: "Cross-site submissions are not allowed."

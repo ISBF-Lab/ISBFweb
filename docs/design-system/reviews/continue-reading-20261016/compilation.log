@@ -1,0 +1,34 @@
+[
+  {
+    "file": "frontend/discourse/app/components/more-topics.gjs",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/app/components/more-topics/browse-more.gjs",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/tests/acceptance/more-topics-plugin-api-test.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-continue-reading.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-item.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-footer.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/test/integration/continue-reading-test.gjs",
+    "compiled": true
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "tls_verified": true,
+  "anonymous_requests_only": true,
+  "production_form_posted": false,
+  "page_bytes_preserved": true,
+  "updated_csp_served": true,
+  "new_client_route_modules_served": true,
+  "fresh_forum_document_references_new_plugin": true,
+  "administrator_records_reject_anonymous_access": true,
+  "visual_acceptance": "User will perform final visual acceptance; no further browser checks requested",
+  "requests": [
+    {
+      "path": "/join/",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "ca6eb046609de0503bf5b93fd6997271193f64042963f326f5fcf76fc3e2c863"
+    },
+    {
+      "path": "/assets/js/plugins/isbf-join-compat-20261015_admin.CcvF8J-scejdpxb.digested.js",
+      "status": 200,
+      "content_type": "application/javascript",
+      "sha256": "adbc68ed562a92981f2c6f4ae8693e3deb86e09a0e915fb126b2abf8ebf64daf"
+    },
+    {
+      "path": "/assets/js/plugins/isbf-join-compat-20261015_main.DPuQyA-scejdpxb.digested.js",
+      "status": 200,
+      "content_type": "application/javascript",
+      "sha256": "333eb634e74150baad9ccda8f4dae43ffeb622928af968d70ebc84ede6cba588"
+    },
+    {
+      "path": "/login",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "d97fcb61a75e967beb3b3d29013c4019f852abb7c237246f14f736f1604d28d5"
+    },
+    {
+      "path": "/isbf/join/admin/applications.json",
+      "status": 403,
+      "content_type": "application/json; charset=utf-8",
+      "sha256": "3db79957b7445465156287bcc6fdbde4582c05d184fb2a2539151d7c1c4fa903"
+    },
+    {
+      "path": "/join/fonts/inter-latin-variable.woff2",
+      "status": 200,
+      "content_type": "font/woff2",
+      "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+    }
+  ]
+}

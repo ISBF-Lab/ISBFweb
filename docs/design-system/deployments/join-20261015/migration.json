@@ -1,0 +1,65 @@
+{
+  "migrated": true,
+  "version": 20261014151020,
+  "columns": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "null": false
+    },
+    {
+      "name": "submission_id",
+      "type": "uuid",
+      "null": false
+    },
+    {
+      "name": "name",
+      "type": "character varying(60)",
+      "null": false
+    },
+    {
+      "name": "student_id",
+      "type": "character varying(40)",
+      "null": false
+    },
+    {
+      "name": "phone",
+      "type": "character varying(30)",
+      "null": false
+    },
+    {
+      "name": "created_at",
+      "type": "timestamp(6) without time zone",
+      "null": false
+    },
+    {
+      "name": "updated_at",
+      "type": "timestamp(6) without time zone",
+      "null": false
+    }
+  ],
+  "indexes": [
+    {
+      "name": "index_isbf_join_applications_on_created_at_and_id",
+      "unique": false,
+      "columns": [
+        "created_at",
+        "id"
+      ],
+      "orders": "desc"
+    },
+    {
+      "name": "index_isbf_join_applications_on_submission_id",
+      "unique": true,
+      "columns": [
+        "submission_id"
+      ],
+      "orders": {}
+    }
+  ],
+  "application_count": 0,
+  "plugin_loaded": true,
+  "login_required": true,
+  "unrelated_migrations_run": false,
+  "synthetic_applications_created": false
+}

@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "actual_component_styles_and_tokens": true,
+  "palettes": [
+    "light",
+    "dark"
+  ],
+  "translation_yaml_parsed": true,
+  "cached_native_and_theme_styles_retained": true
+}

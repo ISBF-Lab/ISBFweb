@@ -1,0 +1,31 @@
+{
+  "source_version": "f5fc3abaabbe3bf5c2e228584095b7cac63424b7cf86151b47aec45c49687fcb",
+  "published_at_utc": "2026-10-16T08:11:50Z",
+  "theme_id": 4,
+  "changed_fields": 3,
+  "preserved_fields": 209,
+  "settings_preserved": true,
+  "files": [
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "field_id": 197,
+      "before_sha256": "685648ab7d6a4c2cbe78c8b3c1bd9867675591a73fef5d41be663e6c839ae17b",
+      "sha256": "8fe796eb22466dbef3546a0e6026f6fd99e155a358c6144da724e211c4799549",
+      "snapshot": "source/common/common.scss.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/reply-conversations.scss",
+      "field_id": 448,
+      "before_sha256": "92bc35af7290794a0c34244cee2dbe442821a5f05160750ad7602b624baeaad3",
+      "sha256": "8d08e39ac151188f96a2ba623449e6191ccb12eceeeae74c359b85ca752faef2",
+      "snapshot": "source/stylesheets/reply-conversations.scss.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-more.gjs",
+      "field_id": 243,
+      "before_sha256": "7849d32617093618712d66d667201b1805d2033a571fe45421248b6aa0ff4d54",
+      "sha256": "82e5defa07bad38ba962c5566f90279beca107072d39fe83ba35aad3895f1f7c",
+      "snapshot": "source/javascripts/discourse/components/isbf-topic-more.gjs.txt"
+    }
+  ]
+}

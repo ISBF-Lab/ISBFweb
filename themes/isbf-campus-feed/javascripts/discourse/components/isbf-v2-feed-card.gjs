@@ -25,6 +25,7 @@ import {
   postCardTitle,
 } from "../lib/post-card-helpers";
 import { isReportedHidden, openPostReport } from "../lib/report-post";
+import { displayName } from "../lib/user-display";
 import { ISBFMarketplacePrice } from "./isbf-marketplace-card";
 import ISBFOfficialActivitySummary from "./isbf-official-activity-summary";
 import ISBFOfficialCalendarItems from "./isbf-official-calendar-items";
@@ -131,7 +132,7 @@ export default class ISBFV2FeedCard extends Component {
   }
 
   get creatorName() {
-    return this.args.topic.creator?.name || this.args.topic.creator?.username;
+    return displayName(this.args.topic.creator);
   }
 
   get displayTitle() {

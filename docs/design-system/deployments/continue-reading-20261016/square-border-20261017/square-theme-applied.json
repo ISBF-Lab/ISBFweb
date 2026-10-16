@@ -1,0 +1,38 @@
+{
+  "published_at_utc": "2026-10-16T16:26:18Z",
+  "theme_id": 4,
+  "fields_before": 217,
+  "fields_after": 217,
+  "preserved_fields": 216,
+  "sources": [
+    {
+      "relative": "stylesheets/continue-reading.scss",
+      "sha256": "a0cabbcfacde79c69e7d55ff4cd506a402a5933687bcc1f9abfaeb510fcfeaed",
+      "previous_id": 463,
+      "field_id": 463
+    }
+  ],
+  "settings_preserved": true,
+  "javascript_url": "/theme-javascripts/6186141eb28f8960b965465bc23ac1adeed3df57.js?__ws=isbf-one.com",
+  "javascript_sha256": "80d0c76e9c22a624263cf341a865ae403400ca41ccee0774b2c297ce1a0abbce",
+  "styles": [
+    {
+      "target": "common_theme",
+      "bytes": 315725,
+      "sha256": "857ebfe5bad7ce71cdc49f090eb31a36303e21bae9b8bb2dfd391896929ebb80",
+      "url": "/stylesheets/common_theme_4_8ab192f570bdd8c6d961a55ce0546812f7529bb9.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "desktop_theme",
+      "bytes": 108,
+      "sha256": "04c5f3e30e9f7e27e5ffb99a9f13083bbee7e5ffbf7341146b1dd655354d6056",
+      "url": "/stylesheets/desktop_theme_4_f63dd18f54122611263dc152f297c903ed32b5fe.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "mobile_theme",
+      "bytes": 107,
+      "sha256": "324bf4a874cedcc21e1d0c1898b417b4a6d047897ec8e31026df75db84bbbc69",
+      "url": "/stylesheets/mobile_theme_4_f63dd18f54122611263dc152f297c903ed32b5fe.css?__ws=isbf-one.com"
+    }
+  ]
+}

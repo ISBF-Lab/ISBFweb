@@ -1,0 +1,98 @@
+{
+  "THREE-LICENSE.txt": {
+    "file": "public/THREE-LICENSE.txt",
+    "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d"
+  },
+  "brand/isbf-one-mark.png": {
+    "file": "public/brand/isbf-one-mark.png",
+    "sha256": "2581b80a672eb34caa7e8279df60569b18df55218b87f37d41a1dc288052372f"
+  },
+  "draco/LICENSE": {
+    "file": "public/draco/LICENSE",
+    "sha256": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4"
+  },
+  "draco/draco_decoder.js": {
+    "file": "public/draco/draco_decoder.js",
+    "sha256": "8625489da79a805f4f2a7d511c3e52d8b4085608a9d2a4d5f4f9de5db0aea04f"
+  },
+  "draco/draco_decoder.wasm": {
+    "file": "public/draco/draco_decoder.wasm",
+    "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac"
+  },
+  "draco/draco_wasm_wrapper.js": {
+    "file": "public/draco/draco_wasm_wrapper.js",
+    "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6"
+  },
+  "favicon.svg": {
+    "file": "public/favicon.svg",
+    "sha256": "b3f61c940e8fd32bf7ca9ae1f9adcbeafd7e3bdc840366ac9eb2132ed2d275ea"
+  },
+  "fonts/OFL.txt": {
+    "file": "public/fonts/OFL.txt",
+    "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+  },
+  "fonts/inter-latin-variable.woff2": {
+    "file": "public/fonts/inter-latin-variable.woff2",
+    "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+  },
+  "gallery/01-orbit.png": {
+    "file": "public/gallery/01-orbit.png",
+    "sha256": "917545bdd82e3c326243433ff4bb5c4e7d2e527f6519ccfc04f2305b82fb2ea5"
+  },
+  "gallery/02-ascent.png": {
+    "file": "public/gallery/02-ascent.png",
+    "sha256": "815ac6ef20e8c58f3ad1395dccd3f974b439b35e8b0551a7d0e80e5972a24dd3"
+  },
+  "gallery/03-current.png": {
+    "file": "public/gallery/03-current.png",
+    "sha256": "07f51cde873df806d771b559bed08112b4f9f50b59f5710c0e0605e9b228fbaa"
+  },
+  "gallery/04-aperture.png": {
+    "file": "public/gallery/04-aperture.png",
+    "sha256": "2313101584ac07fe07d7945b42f73470de9a3e536eea1993bdabda6ed3bf988b"
+  },
+  "gallery/05-connection.png": {
+    "file": "public/gallery/05-connection.png",
+    "sha256": "dd36d5a0961d9546eb7361f18ea699f231d22550a844355508115771bbdcc35d"
+  },
+  "gallery/06-next.png": {
+    "file": "public/gallery/06-next.png",
+    "sha256": "d0848f725b2901bf2d458aef520c4ad846439784d7c012039808f7508e77e3c8"
+  },
+  "gallery/README.md": {
+    "file": "public/gallery/README.md",
+    "sha256": "2b4e9126c93b8baab97c0cd88b73e26a7ba1d69465049669119272e6e68f16d3"
+  },
+  "models/journey-desktop.glb": {
+    "file": "public/models/journey-desktop.glb",
+    "sha256": "c3f83ddd823a0a2bd8494ee1e11a68bc5a31aa9e8ff2f7b8ad729741bc76b1b5"
+  },
+  "models/journey-mobile.glb": {
+    "file": "public/models/journey-mobile.glb",
+    "sha256": "9bb62015d44ffcca5675e4ed890e59c3a994d42b69a2e07b743452d2ae37d0fc"
+  },
+  "models/provenance.json": {
+    "file": "public/models/provenance.json",
+    "sha256": "757d31ee9e873a2f08e36a724bd1521c284f6afae7ac5ce6796974b3bd4ca2fc"
+  },
+  "assets/index-C9HHADaJ.css": {
+    "file": "dist/assets/index-C9HHADaJ.css",
+    "sha256": "7c4f230bad1b8621641605767804735117d7be2d3e77be6840dc27b968039cda"
+  },
+  "assets/index-r26J2wOQ.js": {
+    "file": "dist/assets/index-r26J2wOQ.js",
+    "sha256": "86b39bb08d517fc2dfc275b7f41269bb80fd8b20854898164f916d3ddc4e9086"
+  },
+  "assets/scene-BNFbN7l3.js": {
+    "file": "dist/assets/scene-BNFbN7l3.js",
+    "sha256": "3582f6b272f3aa7e18f6c44198bc355645e3b368811b97c611429b18aa6c849c"
+  },
+  "assets/three-DDksZyp6.js": {
+    "file": "dist/assets/three-DDksZyp6.js",
+    "sha256": "0a4e483fffc53ecba4254377f4966feab33b7fa007005ea2a80d72025bd063d3"
+  },
+  "index.html": {
+    "file": "dist/index.html",
+    "sha256": "b14851fcad315d797b2e78aba6a81def76dcd9c02dc78bed85f8fd7a7b1a5740"
+  }
+}

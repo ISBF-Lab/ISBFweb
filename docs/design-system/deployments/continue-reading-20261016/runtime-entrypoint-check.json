@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "container": "isbf_continue_reading_startup_freeze_20261016",
+  "command": [
+    "/usr/bin/env",
+    "/usr/bin/test",
+    "-x",
+    "/sbin/boot"
+  ],
+  "exit_code": 0,
+  "forum_started": false,
+  "production_backend_used": false
+}

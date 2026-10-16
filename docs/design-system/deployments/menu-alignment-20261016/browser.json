@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "width": 1280,
+      "original_bugs_reproduced": true,
+      "post_menu_at_author_row": true,
+      "bookmark_overlap": false,
+      "action_columns_unchanged": true,
+      "flag_labels_align_with_and_without_counts": true,
+      "notification_labels_align": true
+    },
+    {
+      "width": 390,
+      "original_bugs_reproduced": true,
+      "post_menu_at_author_row": true,
+      "bookmark_overlap": false,
+      "action_columns_unchanged": true,
+      "flag_labels_align_with_and_without_counts": true,
+      "notification_labels_align": true
+    }
+  ],
+  "native_core_css": true,
+  "actual_candidate_theme_styles": true,
+  "local_markup_fixture": true,
+  "full_ember_application": false,
+  "production_backend_used": false
+}

@@ -1,0 +1,211 @@
+{"passed":true,"actual_component_styles_and_tokens":true,"palettes":["light","dark"],"translation_yaml_parsed":true,"cached_native_and_theme_styles_retained":true}
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+13 │ @import "common/foundation/variables";
+   │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    /workspace/stdin 13:9  root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+14 │ @import "color_definitions";
+   │         ^^^^^^^^^^^^^^^^^^^
+   ╵
+    /workspace/stdin 14:9  root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+    ╷
+229 │ @import "color_transformations";
+    │         ^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 229:9  @import
+    /workspace/stdin 13:9                                                     root stylesheet
+DEPRECATION WARNING [color-functions]: color.red() is deprecated. Suggestion:
+
+color.channel($color, "red", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+160 │     (color.red($color) * 0.299) + (color.green($color) * 0.587) +
+    │      ^^^^^^^^^^^^^^^^^
+    ╵
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 160:6             dc-color-brightness()
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 200:7             dark-light-diff()
+    /workspace/app/assets/stylesheets/common/foundation/color_transformations.scss 8:20  @import
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 229:9             @import
+    /workspace/stdin 13:9                                                                root stylesheet
+DEPRECATION WARNING [color-functions]: color.green() is deprecated. Suggestion:
+
+color.channel($color, "green", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+160 │     (color.red($color) * 0.299) + (color.green($color) * 0.587) +
+    │                                    ^^^^^^^^^^^^^^^^^^^
+    ╵
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 160:36            dc-color-brightness()
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 200:7             dark-light-diff()
+    /workspace/app/assets/stylesheets/common/foundation/color_transformations.scss 8:20  @import
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 229:9             @import
+    /workspace/stdin 13:9                                                                root stylesheet
+DEPRECATION WARNING [color-functions]: color.blue() is deprecated. Suggestion:
+
+color.channel($color, "blue", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+161 │       (color.blue($color) * 0.114)
+    │        ^^^^^^^^^^^^^^^^^^
+    ╵
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 161:8             dc-color-brightness()
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 200:7             dark-light-diff()
+    /workspace/app/assets/stylesheets/common/foundation/color_transformations.scss 8:20  @import
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 229:9             @import
+    /workspace/stdin 13:9                                                                root stylesheet
+DEPRECATION WARNING [color-functions]: color.red() is deprecated. Suggestion:
+
+color.channel($color, "red", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+169 │   $f_r2: color.red($foreground) * color.red($foreground);
+    │          ^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 169:10             srgb-scale()
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 191:11             blend-header-primary-background()
+    /workspace/app/assets/stylesheets/common/foundation/color_transformations.scss 26:22  @import
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 229:9              @import
+    /workspace/stdin 13:9                                                                 root stylesheet
+DEPRECATION WARNING [color-functions]: color.red() is deprecated. Suggestion:
+
+color.channel($color, "red", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+169 │   $f_r2: color.red($foreground) * color.red($foreground);
+    │                                   ^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 169:35             srgb-scale()
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 191:11             blend-header-primary-background()
+    /workspace/app/assets/stylesheets/common/foundation/color_transformations.scss 26:22  @import
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 229:9              @import
+    /workspace/stdin 13:9                                                                 root stylesheet
+WARNING: 10 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+13 │ @import "common/foundation/variables";
+   │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    /workspace/stdin 13:9  root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+14 │ @import "color_definitions";
+   │         ^^^^^^^^^^^^^^^^^^^
+   ╵
+    /workspace/stdin 14:9  root stylesheet
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+    ╷
+229 │ @import "color_transformations";
+    │         ^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 229:9  @import
+    /workspace/stdin 13:9                                                     root stylesheet
+DEPRECATION WARNING [color-functions]: color.red() is deprecated. Suggestion:
+
+color.channel($color, "red", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+160 │     (color.red($color) * 0.299) + (color.green($color) * 0.587) +
+    │      ^^^^^^^^^^^^^^^^^
+    ╵
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 160:6             dc-color-brightness()
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 200:7             dark-light-diff()
+    /workspace/app/assets/stylesheets/common/foundation/color_transformations.scss 8:20  @import
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 229:9             @import
+    /workspace/stdin 13:9                                                                root stylesheet
+DEPRECATION WARNING [color-functions]: color.green() is deprecated. Suggestion:
+
+color.channel($color, "green", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+160 │     (color.red($color) * 0.299) + (color.green($color) * 0.587) +
+    │                                    ^^^^^^^^^^^^^^^^^^^
+    ╵
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 160:36            dc-color-brightness()
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 200:7             dark-light-diff()
+    /workspace/app/assets/stylesheets/common/foundation/color_transformations.scss 8:20  @import
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 229:9             @import
+    /workspace/stdin 13:9                                                                root stylesheet
+DEPRECATION WARNING [color-functions]: color.blue() is deprecated. Suggestion:
+
+color.channel($color, "blue", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+161 │       (color.blue($color) * 0.114)
+    │        ^^^^^^^^^^^^^^^^^^
+    ╵
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 161:8             dc-color-brightness()
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 200:7             dark-light-diff()
+    /workspace/app/assets/stylesheets/common/foundation/color_transformations.scss 8:20  @import
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 229:9             @import
+    /workspace/stdin 13:9                                                                root stylesheet
+DEPRECATION WARNING [color-functions]: color.red() is deprecated. Suggestion:
+
+color.channel($color, "red", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+169 │   $f_r2: color.red($foreground) * color.red($foreground);
+    │          ^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 169:10             srgb-scale()
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 191:11             blend-header-primary-background()
+    /workspace/app/assets/stylesheets/common/foundation/color_transformations.scss 26:22  @import
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 229:9              @import
+    /workspace/stdin 13:9                                                                 root stylesheet
+DEPRECATION WARNING [color-functions]: color.red() is deprecated. Suggestion:
+
+color.channel($color, "red", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+169 │   $f_r2: color.red($foreground) * color.red($foreground);
+    │                                   ^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 169:35             srgb-scale()
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 191:11             blend-header-primary-background()
+    /workspace/app/assets/stylesheets/common/foundation/color_transformations.scss 26:22  @import
+    /workspace/app/assets/stylesheets/common/foundation/variables.scss 229:9              @import
+    /workspace/stdin 13:9                                                                 root stylesheet
+WARNING: 10 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.

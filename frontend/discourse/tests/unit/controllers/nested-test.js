@@ -1,7 +1,9 @@
 import { settled } from "@ember/test-helpers";
 import { setupTest } from "ember-qunit";
 import { module, test } from "qunit";
+import sinon from "sinon";
 import { NESTED_VIEW_CACHE_FORMAT_VERSION } from "discourse/lib/nested-view-cache-snapshot";
+import DiscourseURL from "discourse/lib/url";
 import pretender, { response } from "discourse/tests/helpers/create-pretender";
 import { logIn } from "discourse/tests/helpers/qunit-helpers";
 
@@ -23,6 +25,8 @@ module("Unit | Controller | nested", function (hooks) {
     this.controller.contextMode = false;
     this.controller.rootNodes = [];
     this.controller.newRootPostIds = [];
+    this.controller.fetchedChildrenCache = new Map();
+    this.controller.expansionState = new Map();
   });
 
   function buildTopic(store, id) {
@@ -41,6 +45,107 @@ module("Unit | Controller | nested", function (hooks) {
     post.topic = topic;
     return post;
   }
+
+  test("a successful composer save immediately inserts an own flat root without a message", async function (assert) {
+    const settings = this.owner.lookup("service:site-settings");
+    Object.assign(settings, {
+      nested_replies_enabled: true,
+      nested_replies_cap_nesting_depth: true,
+      nested_replies_max_depth: 1,
+    });
+    const topic = buildTopic(this.store, 724);
+    const post = buildPost(this.store, topic, 2001, 2);
+    post.setProperties({
+      topic_id: topic.id,
+      reply_to_post_number: 1,
+      user_id: this.currentUser.id,
+      post_type: 1,
+    });
+    this.controller.topic = topic;
+    this.controller.subscribe();
+    pretender.get("/n/topic-724/724/navigation.json", () => response(503, {}));
+
+    this.appEvents.trigger("post:created", post);
+
+    assert.strictEqual(
+      this.controller.rootNodes[0].post,
+      post,
+      "immediately renders the saved Post record"
+    );
+    assert.strictEqual(
+      this.controller.targetPostNumber,
+      2,
+      "targets the saved reply before navigation metadata arrives"
+    );
+    this.controller._onMessage({
+      type: "created",
+      id: post.id,
+      user_id: this.currentUser.id,
+    });
+    await settled();
+    assert.strictEqual(
+      this.controller.rootNodes.length,
+      1,
+      "a later message does not insert it twice"
+    );
+  });
+
+  test("saving a reply to a child retains a paginated group and expands it", async function (assert) {
+    const settings = this.owner.lookup("service:site-settings");
+    Object.assign(settings, {
+      nested_replies_enabled: true,
+      nested_replies_cap_nesting_depth: true,
+      nested_replies_max_depth: 1,
+    });
+    const topic = buildTopic(this.store, 724);
+    const root = buildPost(this.store, topic, 2001, 2);
+    root.set("total_descendant_count", 100);
+    const parent = buildPost(this.store, topic, 2002, 80);
+    const post = buildPost(this.store, topic, 2003, 103);
+    post.setProperties({
+      topic_id: topic.id,
+      reply_to_post_number: 80,
+      user_id: this.currentUser.id,
+      post_type: 1,
+    });
+    this.controller.topic = topic;
+    this.controller.rootNodes = [{ post: root, children: [] }];
+    this.controller.fetchedChildrenCache.set("724:2", {
+      childNodes: [{ post: parent, children: [] }],
+      loadedPages: [1],
+      positions: { 2002: 77 },
+      page: 1,
+      hasMore: false,
+    });
+    this.controller.expansionState.set(2, {
+      expanded: false,
+      collapsed: false,
+    });
+    this.controller.subscribe();
+    pretender.get("/n/topic-724/724/navigation.json", () =>
+      response({ root_count: 1, root_index: 1, root_post_number: 2 })
+    );
+
+    this.appEvents.trigger("post:created", post);
+    assert.deepEqual(
+      this.controller.fetchedChildrenCache
+        .get("724:2")
+        .childNodes.map((node) => node.post.id),
+      [parent.id, post.id],
+      "keeps the loaded parent and inserts its saved reply"
+    );
+    assert.true(
+      this.controller.expansionState.get(2).expanded,
+      "reveals the owning group"
+    );
+    this.appEvents.trigger("post:created", post);
+    await settled();
+    assert.strictEqual(
+      this.controller.fetchedChildrenCache.get("724:2").childNodes.length,
+      2,
+      "duplicate save events do not duplicate replies"
+    );
+  });
 
   test("post registry events are scoped to the current topic", function (assert) {
     const previousTopic = buildTopic(this.store, 509);
@@ -128,6 +233,56 @@ module("Unit | Controller | nested", function (hooks) {
       [],
       "does not queue own root replies behind the new replies banner"
     );
+  });
+
+  test("a flat own reply message does not restart an in-flight composer navigation", async function (assert) {
+    const topic = buildTopic(this.store, 724);
+    const settings = this.owner.lookup("service:site-settings");
+    settings.nested_replies_enabled = true;
+    settings.nested_replies_cap_nesting_depth = true;
+    settings.nested_replies_max_depth = 1;
+    this.controller.topic = topic;
+    this.controller.rootNodes = [
+      { post: buildPost(this.store, topic, 2001, 2), children: [] },
+    ];
+    this.controller.subscribe();
+    this.owner.lookup("service:router").trigger("routeWillChange", {
+      to: { params: { id: topic.id, nearPost: "3" } },
+    });
+    const route = sinon.stub(DiscourseURL, "routeTo");
+    pretender.get("/posts/2002.json", () =>
+      response({
+        id: 2002,
+        topic_id: topic.id,
+        post_number: 3,
+        post_type: 1,
+        user_id: this.currentUser.id,
+        username: this.currentUser.username,
+        cooked: "<p>New root</p>",
+        reply_to_post_number: 1,
+        actions_summary: [],
+      })
+    );
+    pretender.get("/n/topic-724/724/navigation.json", () =>
+      response({ root_count: 2, root_index: 2, root_post_number: 3 })
+    );
+    try {
+      this.controller._onMessage({
+        type: "created",
+        id: 2002,
+        user_id: this.currentUser.id,
+      });
+      await settled();
+
+      assert.strictEqual(
+        topic.reply_navigation.root_post_number,
+        3,
+        "updates navigation metadata from the live reply"
+      );
+      assert.false(route.called, "preserves the already requested target");
+    } finally {
+      route.restore();
+    }
   });
 
   test("context view ignores live root replies", async function (assert) {

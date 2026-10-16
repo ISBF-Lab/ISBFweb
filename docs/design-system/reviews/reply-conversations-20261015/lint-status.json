@@ -1,0 +1,10 @@
+{
+  "command": [
+    "ruby",
+    "bin/lint",
+    "--fix",
+    "themes/isbf-campus-feed/stylesheets/reply-conversations.scss"
+  ],
+  "exit_code": 0,
+  "configuration": "Existing offline tools/lefthook-serial.yml; serial execution, repository CI gates unchanged"
+}

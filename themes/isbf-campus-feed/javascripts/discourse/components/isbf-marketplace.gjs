@@ -1,5 +1,6 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { scheduleOnce } from "@ember/runloop";
 import { service } from "@ember/service";
@@ -15,6 +16,7 @@ export default class ISBFMarketplace extends Component {
   @service appEvents;
   @service composer;
   @service currentUser;
+  @service isbfBackNavigation;
   @service site;
   @service store;
 
@@ -32,6 +34,10 @@ export default class ISBFMarketplace extends Component {
     return marketplaceConfig(this.site);
   }
 
+  get backHref() {
+    return this.isbfBackNavigation.href("/isbf/workbench");
+  }
+
   get canLoadMore() {
     return Boolean(this.topicList?.canLoadMore);
   }
@@ -44,6 +50,11 @@ export default class ISBFMarketplace extends Component {
         (category) => category.id === this.config?.category_id
       )?.canCreateTopic
     );
+  }
+
+  @action
+  goBack(event) {
+    this.isbfBackNavigation.back(event);
   }
 
   @action
@@ -124,8 +135,9 @@ export default class ISBFMarketplace extends Component {
     <main aria-busy={{this.loading}} class="isbf-marketplace">
       <header class="isbf-marketplace__header">
         <a
-          aria-label={{i18n (themePrefix "isbf_v2.marketplace_back")}}
-          href="/isbf/workbench"
+          aria-label={{i18n "back_button"}}
+          href={{this.backHref}}
+          {{on "click" this.goBack}}
         >{{dIcon "arrow-left"}}</a>
         <h1>{{i18n (themePrefix "isbf_v2.workbench_marketplace")}}</h1>
       </header>

@@ -1,0 +1,184 @@
+{
+  "origin": "https://isbf-one.com",
+  "production_form_posted": false,
+  "assets": [
+    {
+      "path": "/join/THREE-LICENSE.txt",
+      "status": 200,
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "bytes": 1081,
+      "content_type": "text/plain; charset=utf-8",
+      "nosniff": true
+    },
+    {
+      "path": "/join/brand/isbf-one-mark.png",
+      "status": 200,
+      "sha256": "2581b80a672eb34caa7e8279df60569b18df55218b87f37d41a1dc288052372f",
+      "bytes": 341901,
+      "content_type": "image/png",
+      "nosniff": true
+    },
+    {
+      "path": "/join/draco/LICENSE",
+      "status": 200,
+      "sha256": "d3709b0fb4b8a94bbb1d02b8a2e484f258b0d9c5c5a01f940391f3fe662cd1a4",
+      "bytes": 13898,
+      "content_type": "application/octet-stream",
+      "nosniff": true
+    },
+    {
+      "path": "/join/draco/draco_decoder.js",
+      "status": 200,
+      "sha256": "8625489da79a805f4f2a7d511c3e52d8b4085608a9d2a4d5f4f9de5db0aea04f",
+      "bytes": 512465,
+      "content_type": "text/javascript; charset=utf-8",
+      "nosniff": true
+    },
+    {
+      "path": "/join/draco/draco_decoder.wasm",
+      "status": 200,
+      "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac",
+      "bytes": 192420,
+      "content_type": "application/wasm",
+      "nosniff": true
+    },
+    {
+      "path": "/join/draco/draco_wasm_wrapper.js",
+      "status": 200,
+      "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6",
+      "bytes": 58456,
+      "content_type": "text/javascript; charset=utf-8",
+      "nosniff": true
+    },
+    {
+      "path": "/join/favicon.svg",
+      "status": 200,
+      "sha256": "b3f61c940e8fd32bf7ca9ae1f9adcbeafd7e3bdc840366ac9eb2132ed2d275ea",
+      "bytes": 233,
+      "content_type": "image/svg+xml",
+      "nosniff": true
+    },
+    {
+      "path": "/join/fonts/OFL.txt",
+      "status": 200,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345",
+      "bytes": 4477,
+      "content_type": "text/plain; charset=utf-8",
+      "nosniff": true
+    },
+    {
+      "path": "/join/fonts/inter-latin-variable.woff2",
+      "status": 200,
+      "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+      "bytes": 48256,
+      "content_type": "font/woff2",
+      "nosniff": false
+    },
+    {
+      "path": "/join/gallery/README.md",
+      "status": 200,
+      "sha256": "2b4e9126c93b8baab97c0cd88b73e26a7ba1d69465049669119272e6e68f16d3",
+      "bytes": 699,
+      "content_type": "text/plain; charset=utf-8",
+      "nosniff": true
+    },
+    {
+      "path": "/join/models/journey-desktop.glb",
+      "status": 200,
+      "sha256": "c3f83ddd823a0a2bd8494ee1e11a68bc5a31aa9e8ff2f7b8ad729741bc76b1b5",
+      "bytes": 7428768,
+      "content_type": "model/gltf-binary",
+      "nosniff": true
+    },
+    {
+      "path": "/join/models/journey-mobile.glb",
+      "status": 200,
+      "sha256": "9bb62015d44ffcca5675e4ed890e59c3a994d42b69a2e07b743452d2ae37d0fc",
+      "bytes": 5730972,
+      "content_type": "model/gltf-binary",
+      "nosniff": true
+    },
+    {
+      "path": "/join/models/provenance.json",
+      "status": 200,
+      "sha256": "757d31ee9e873a2f08e36a724bd1521c284f6afae7ac5ce6796974b3bd4ca2fc",
+      "bytes": 828,
+      "content_type": "application/json; charset=utf-8",
+      "nosniff": true
+    },
+    {
+      "path": "/join/assets/index-C9HHADaJ.css",
+      "status": 200,
+      "sha256": "7c4f230bad1b8621641605767804735117d7be2d3e77be6840dc27b968039cda",
+      "bytes": 17176,
+      "content_type": "text/css; charset=utf-8",
+      "nosniff": true
+    },
+    {
+      "path": "/join/assets/index-CFbXBEqh.js",
+      "status": 200,
+      "sha256": "de088a0488e59db1132e69bc760cd140644468a49b5a631bbddaab1c10b68dba",
+      "bytes": 15325,
+      "content_type": "text/javascript; charset=utf-8",
+      "nosniff": true
+    },
+    {
+      "path": "/join/assets/scene-vU8LyUtu.js",
+      "status": 200,
+      "sha256": "161a60665e6e35c8fb12104b6b4d45f9d0995c9b91c5c6c7b53fccfdac304176",
+      "bytes": 14520,
+      "content_type": "text/javascript; charset=utf-8",
+      "nosniff": true
+    },
+    {
+      "path": "/join/assets/three-DDksZyp6.js",
+      "status": 200,
+      "sha256": "0a4e483fffc53ecba4254377f4966feab33b7fa007005ea2a80d72025bd063d3",
+      "bytes": 598491,
+      "content_type": "text/javascript; charset=utf-8",
+      "nosniff": true
+    },
+    {
+      "path": "/join/",
+      "status": 200,
+      "sha256": "ca6eb046609de0503bf5b93fd6997271193f64042963f326f5fcf76fc3e2c863",
+      "bytes": 7628,
+      "content_type": "text/html; charset=utf-8",
+      "nosniff": true
+    }
+  ],
+  "anonymous_join": {
+    "status": 200,
+    "html_sha256": "ca6eb046609de0503bf5b93fd6997271193f64042963f326f5fcf76fc3e2c863",
+    "login_required_for_forum": true
+  },
+  "anonymous_admin_denied": [
+    {
+      "path": "/isbf/join/admin/applications.json",
+      "status": 403
+    },
+    {
+      "path": "/admin/plugins/isbf-join/applications",
+      "status": 404
+    }
+  ],
+  "plugin_assets": [
+    {
+      "path": "js/plugins/isbf-join-candidate-20261015_admin.CcvF8J-n6tq9ort.digested.js",
+      "sha256": "75ec5f76f2c59d82dcdbab2ab06195aeadc3644412217ffa1e741847a6d1f4c1",
+      "status": 200
+    },
+    {
+      "path": "js/plugins/isbf-join-candidate-20261015_main.Bg6UHU-n6tq9ort.digested.js",
+      "sha256": "919b44682c613ab8a47a1f8e657cbc1b50aad6cd67c97cb806f94ea649713777",
+      "status": 200
+    }
+  ],
+  "menu_javascript": {
+    "status": 200,
+    "served_sha256": "542a402a9411721b7d2ce2eccbee4c896353564b7841735da486bb7cfdc379c3",
+    "compiled_sha256": "1bc648da5a6b865415fc48e9c20c7f99820a8f25545e790ae8be1a04203d89ac",
+    "url": "/theme-javascripts/93d9dd20f7b92f341d425866ead8e2ccdaa17798.js?__ws=isbf-one.com"
+  },
+  "passed": true
+}

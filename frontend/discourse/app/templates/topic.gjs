@@ -124,12 +124,15 @@ export default <template>
             @expansionState={{nested.expansionState}}
             @fetchedChildrenCache={{nested.fetchedChildrenCache}}
             @finishedEditingTopic={{nested.finishedEditingTopic}}
+            @firstRootPage={{nested.firstRootPage}}
             @grantBadge={{nested.grantBadge}}
             @hasMoreRoots={{nested.hasMoreRoots}}
             @initialFocusedPath={{nested.initialFocusedPath}}
             @loadingMore={{nested.loadingMore}}
+            @loadingPreviousRoots={{nested.loadingPreviousRoots}}
             @loadMoreRoots={{nested.loadMoreRoots}}
             @loadNewRoots={{nested.loadNewRoots}}
+            @loadPreviousRoots={{nested.loadPreviousRoots}}
             @lockPost={{nested.lockPost}}
             @minimumRequiredTags={{nested.minimumRequiredTags}}
             @multiSelect={{nested.multiSelect}}

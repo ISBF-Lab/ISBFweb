@@ -1,0 +1,18 @@
+zh_CN:
+  js:
+    isbf_join:
+      admin:
+        title: "加入我们"
+        applications: "申请记录"
+        description: "招募登记的联系信息，仅站点开发者可查看。"
+        name: "姓名"
+        student_id: "学号"
+        phone: "手机联系方式"
+        created_at: "提交时间"
+        empty: "暂无申请记录。"
+        load_error: "暂时无法加载申请记录，请重试。"
+        retry: "重试"
+        pagination: "申请记录分页"
+        previous: "上一页"
+        next: "下一页"
+        page: "第 %{page} 页"

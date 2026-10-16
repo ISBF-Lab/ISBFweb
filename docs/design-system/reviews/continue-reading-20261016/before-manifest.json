@@ -1,0 +1,22 @@
+[
+  {
+    "path": "frontend/discourse/app/components/more-topics.gjs",
+    "sha256": "f2afe1fb8f4f37aac73d944ed8f424a7d70e1060de0e62c7d1275d5a282cdfc6"
+  },
+  {
+    "path": "frontend/discourse/app/components/more-topics/browse-more.gjs",
+    "sha256": "819d89d8fa87d78d6579fb7573e8122f8af288a84bcb0deca03084a2b8312546"
+  },
+  {
+    "path": "themes/isbf-campus-feed/common/common.scss",
+    "sha256": "c9e80664cf945cb41b537eb80a664f31e5a70e5733f21c961eb2299bdab2f759"
+  },
+  {
+    "path": "themes/isbf-campus-feed/locales/en.yml",
+    "sha256": "b85f3611a5c94d41f328a01f5bd400fb53f13b9dfca5cf2076666a133078f2af"
+  },
+  {
+    "path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+    "sha256": "d05edf4a0c519cdcb07eb94d5125aaa7ceede1a4e8e8d7bc8e63154543848178"
+  }
+]

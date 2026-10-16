@@ -1,0 +1,21 @@
+{
+  "source_sha256": "6bd9dcac4b8923527410608e09194585c12af82d553ff07cb05c2f4a2b26dc76",
+  "previous_source_sha256": "5f7e2e4110cdacc283af0697f925a1240aa30003c68ba9f7ef20751110536839",
+  "source_files_including_marker": 74,
+  "changed": [
+    "README.md",
+    "app/controllers/isbf_join/pages_controller.rb",
+    "plugin.rb",
+    "spec/requests/isbf_join/pages_controller_spec.rb"
+  ],
+  "added": [
+    "assets/javascripts/discourse/isbf-join-route-map.js",
+    "assets/javascripts/discourse/routes/isbf-join.js",
+    "test/javascripts/acceptance/join-navigation-test.js"
+  ],
+  "all_web_files_preserved": true,
+  "archive_sha256": "960a53a4235cdce1851607f9326af4fde0597a752d93d7ce7f0f5efd47d77e51",
+  "installer_sha256": "af9924d98b69133450dad48a45024b658a7f62b6e19a0bf8d2216ac6b8bddd93",
+  "initial_archive_sha256": "ad7fc09f2196803e48892b33767d404f81b426c7214db22462409f3b95d96486",
+  "initial_installer_sha256": "3177c7a2d4a9878c880d90a36042445900c0268c0b4bf61d9ce385ebdf62a968"
+}

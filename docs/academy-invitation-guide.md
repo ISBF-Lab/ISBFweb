@@ -108,6 +108,93 @@
 
 该按钮仅在邮箱验证码功能启用时显示，登录二次验证阶段不显示。
 
+## 机构官方账号
+
+经站点负责人确认的机构账号，由站点开发者（Discourse `admin`）通过后台运维
+创建，可以不绑定学号。这类账号不使用学生邀请码，也不创建学号注册记录；
+普通学生仍按上述邀请码流程注册。
+
+系统要求每个账号有唯一邮箱。机构不提供真实邮箱时，使用
+`<用户名>@official.isbf.invalid`，通过原生 `User` 模型保存独立随机密码，
+设置批准状态，再用 `User#activate` 完成激活。核心邮件发送器会跳过以
+`.invalid` 结尾的地址；同时将账号的邮件通知、私信邮件、摘要和邮件列表关闭。
+
+账号加入 `academy_official_group` 指定的官方认证组，保留普通用户身份、
+信任等级锁定为 0，`admin` 和 `moderator` 均为 false。确认该组在
+`academy_official_category` 指定的分类具有创建主题权限；缺少时，通过原生
+分类权限接口仅补上该组的权限，保留原有分类权限，并记录管理日志。
+不要运行会重置站点配置的 `academy_roles:setup`。
+
+批量创建前检查用户名、邮箱和现有同名机构账号；账号、激活、组成员关系及
+必要的分类权限调整在同一数据库事务中完成，冲突或校验失败时整批回滚。
+提交前后核对密码、激活和批准状态、官方发布权限、无学号绑定及无管理权限，
+无需在生产发布测试帖子。
+
+登录信息仅通过权限为 `600`、位于私有目录且被 Git 忽略的文件交付。
+密码不写入管理日志、仓库文档或执行输出；运维记录保存账号 ID、用户名、
+验证结果和权限变更。文件交付后由机构保管，按需在账号设置中修改密码。
+这类账号使用用户名和密码登录，无法使用邮箱验证码或邮件找回密码；
+忘记密码时由站点开发者通过受保护的后台运维流程重置。
+
+2026-10-14 已按此流程开通团委（`isbf_tuanwei`）、学生会（`isbf_xueshenghui`）、
+青媒（`isbf_qingmei`）和国金男篮（`isbf_nanlan`）。官方分类保留原有
+`everyone` 回复权限和 `staff` 创建主题权限，增加官方认证组的创建主题权限。
+四个账号在提交前后均通过密码、激活、官方发布及无学号、无管理权限检查。
+
+### 手动开通单个机构账号
+
+当前网页后台没有免学号新建机构账号的入口，需要能访问服务器终端的站点开发者
+操作。在服务器打开正式站控制台：
+
+```bash
+docker exec -it -u discourse -w /var/www/discourse isbf_app bin/rails console -e production
+```
+
+修改以下示例的名称和用户名，再将整个代码块一起粘贴到控制台。
+密码在提示时输入两次，输入过程不回显，也不写进控制台命令历史。
+
+```ruby
+begin
+  require "io/console"
+  name = "新的机构名称"
+  username = "isbf_new_org"
+  raise "用户名已存在" if User.username_exists?(username)
+  password = IO.console.getpass("设置登录密码：")
+  raise "两次密码不一致" unless password == IO.console.getpass("再次输入密码：")
+
+  User.transaction do
+    actor = Discourse.system_user
+    user = User.create!(
+      name: name, username: username,
+      email: "#{username}@official.isbf.invalid", password: password,
+      active: true, approved: true, approved_by: actor, approved_at: Time.current,
+      admin: false, moderator: false, trust_level: 0, manual_locked_trust_level: 0
+    )
+    user.activate
+    user.user_option.update!(
+      email_level: UserOption.email_level_types[:never],
+      email_messages_level: UserOption.email_level_types[:never],
+      email_digests: false, mailing_list_mode: false,
+      email_in_reply_to: false, chat_email_frequency: "never"
+    )
+    Group.find(SiteSetting.academy_official_group.to_i).add(user, notify: false)
+    category = Category.find(SiteSetting.academy_official_category.to_i)
+    raise "尚未取得官方发布权限" unless user.reload.guardian.can_create_topic_on_category?(category)
+    StaffActionLogger.new(actor).log_user_activate(user, "站点负责人手动开通机构官方账号")
+  end
+  puts "已创建：#{username}"
+ensure
+  password = nil
+end
+```
+
+出现“已创建”后输入 `exit` 离开控制台，使用新用户名和刚设置的密码登录论坛。
+用户名或邮箱冲突、密码不符合规则、官方权限缺失时会报错，事务内账号创建回滚。
+
+已有账号只需授予官方身份时，开发者打开 `/g/academy_official` 的成员页，
+点击“添加用户”，选择已有用户名并确认，以普通成员方式加入。
+此操作不新建账号，不移除原有学号，也不授予开发者或管理员身份。
+
 ## 管理员查看绑定
 
 邀请码列表显示学号、状态和已注册账号，可点击账号进入管理员用户详情。

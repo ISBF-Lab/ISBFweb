@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-16",
+  "base_git_commit": "e97b491ce2e1f1659fa74758090ac82e3f097089",
+  "workspace_had_unrelated_uncommitted_changes": true,
+  "implementation_sha256": "ee7605d2144962e357a083e82158915e0883bb27aeca31fb1f0e3270e46098cb",
+  "scope": "Ordinary-topic footer; suggested and related sources only",
+  "design_direction_confirmed": true,
+  "final_visual_acceptance_pending": true,
+  "production_deployed": false,
+  "source_files": [
+    {
+      "path": "frontend/discourse/app/components/more-topics.gjs",
+      "sha256": "671c4c2fd40e6387fbd55c1adf15f8875457944704f350c32933e8468c54ea77",
+      "bytes": 1446,
+      "snapshot": "source/frontend/discourse/app/components/more-topics.gjs.txt",
+      "before_sha256": "f2afe1fb8f4f37aac73d944ed8f424a7d70e1060de0e62c7d1275d5a282cdfc6"
+    },
+    {
+      "path": "frontend/discourse/app/components/more-topics/browse-more.gjs",
+      "sha256": "83b4c4af8ecadf4baff9de366044b02b7fc82752b434ae4dca0bf465fb5e2e6b",
+      "bytes": 4268,
+      "snapshot": "source/frontend/discourse/app/components/more-topics/browse-more.gjs.txt",
+      "before_sha256": "819d89d8fa87d78d6579fb7573e8122f8af288a84bcb0deca03084a2b8312546"
+    },
+    {
+      "path": "frontend/discourse/tests/acceptance/more-topics-plugin-api-test.gjs",
+      "sha256": "04dfcfc49e88bba3dde4651a7c2c09972299f2d7aed33cee2559a71ebaaacccf",
+      "bytes": 2531,
+      "snapshot": "source/frontend/discourse/tests/acceptance/more-topics-plugin-api-test.gjs.txt",
+      "before_sha256": null
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-continue-reading.gjs",
+      "sha256": "aacfb77d391cb9da91720bff5cb49441254d6488b200c15e4262cffedffac1fd",
+      "bytes": 235,
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-continue-reading.gjs.txt",
+      "before_sha256": null
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading.gjs",
+      "sha256": "ff18039db5cdd3a72b21db4b05c72c859e2a2a4f97be84be55de3df1de7136af",
+      "bytes": 3811,
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading.gjs.txt",
+      "before_sha256": null
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-item.gjs",
+      "sha256": "d9afd79c8bd461041d460fadae10391fc7af10f8ecc33ed2ed0f73b041e0a9e6",
+      "bytes": 4489,
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-item.gjs.txt",
+      "before_sha256": null
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-footer.gjs",
+      "sha256": "89f90dc6908b90579f35332390fad5084666d4705041f39a193676ae0f08d4b0",
+      "bytes": 2625,
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-footer.gjs.txt",
+      "before_sha256": null
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/continue-reading.scss",
+      "sha256": "f822049a401e085eaa923fc2a646867385181b57ac21403cc4043475d5c34515",
+      "bytes": 6110,
+      "snapshot": "source/themes/isbf-campus-feed/stylesheets/continue-reading.scss.txt",
+      "before_sha256": null
+    },
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "sha256": "05927212ea9f88b720cfe841b86806482530c85525439e876bdd87922d62c764",
+      "bytes": 113432,
+      "snapshot": "source/themes/isbf-campus-feed/common/common.scss.txt",
+      "before_sha256": "c9e80664cf945cb41b537eb80a664f31e5a70e5733f21c961eb2299bdab2f759"
+    },
+    {
+      "path": "themes/isbf-campus-feed/locales/en.yml",
+      "sha256": "747079e636bf0dc9d4cff1491698c24d0aedbbd6047b6ac910b165efabd477a2",
+      "bytes": 17414,
+      "snapshot": "source/themes/isbf-campus-feed/locales/en.yml.txt",
+      "before_sha256": "b85f3611a5c94d41f328a01f5bd400fb53f13b9dfca5cf2076666a133078f2af"
+    },
+    {
+      "path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+      "sha256": "f46c1c12128522f713215686d0742c4d895c3938afa3c187067968192f4504ce",
+      "bytes": 16640,
+      "snapshot": "source/themes/isbf-campus-feed/locales/zh_CN.yml.txt",
+      "before_sha256": "d05edf4a0c519cdcb07eb94d5125aaa7ceede1a4e8e8d7bc8e63154543848178"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/continue-reading-test.gjs",
+      "sha256": "90e29ff361f5c5f589fdd71e4fa1c892b5bcb11c273427430158b4ab70840cc3",
+      "bytes": 14166,
+      "snapshot": "source/themes/isbf-campus-feed/test/integration/continue-reading-test.gjs.txt",
+      "before_sha256": null
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "compilation.json",
+      "sha256": "e719c1d201af1b47e30d053c98451463be906a6a94fe728ec8410921140b0d7c"
+    },
+    {
+      "path": "style-compilation.json",
+      "sha256": "217a7c578f826927f97d943dc3a0ec8b72993d550fbec94b34f0ffa52c58da4f"
+    },
+    {
+      "path": "lint-status.json",
+      "sha256": "b8cbd1a8c3e042bcae95f04a7d7995cc359ae2551b100732b5bd37dc8108475d"
+    },
+    {
+      "path": "lint-revision-status.json",
+      "sha256": "6af84d2e8be38016429dcddae50a0ee2c1a449ed4feec6a420ad626ca1324b15"
+    },
+    {
+      "path": "browser-report.json",
+      "sha256": "837d29d408e66bab0666192c98bf6bad4612ca9328bbc1e80ab667eccef2bffc"
+    },
+    {
+      "path": "qunit-attempts.json",
+      "sha256": "e6171362d380b4da3b42c70e8e1e2f52825a6990288ca966c43c20b39e307556"
+    },
+    {
+      "path": "320-light.png",
+      "sha256": "b37600275ba7dca48692eabf3a1325d1700e4526cc99ff09e4808b6a8a6d50a8"
+    },
+    {
+      "path": "320-dark.png",
+      "sha256": "7e226999e1585aad3faaa82f86a4809e8c1da21096d2a461d4f77e10fcb99a38"
+    },
+    {
+      "path": "390-light.png",
+      "sha256": "6f93a87ac655613185450fe9e6f34a2e204bb23695e00be3497f1c24e0055d54"
+    },
+    {
+      "path": "390-dark.png",
+      "sha256": "0cc8c2576be296d4b6f3da680a38ee23f2c2b46f2bc3278961e1a6562644a5c3"
+    },
+    {
+      "path": "1280-light.png",
+      "sha256": "36d343407c34ee9e139908af82989f88f8e93d167af689b26c5e22449b9cd10e"
+    },
+    {
+      "path": "1280-dark.png",
+      "sha256": "e6a5af1850ec792071091bc1970a0ec253c4c22a18321667050cd142ff6ee669"
+    },
+    {
+      "path": "related-desktop-dark.png",
+      "sha256": "9886aad3173debb2c682e4f6893d0687b418410345c835a98f27053a9c5e851d"
+    }
+  ]
+}

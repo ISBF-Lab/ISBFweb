@@ -1,0 +1,34 @@
+.isbf-reply-conversations .nested-post-children {
+  margin-inline-start: 0;
+}
+
+.isbf-reply-conversations .nested-post-children::before {
+  content: none;
+}
+
+.isbf-reply-conversations .nested-post-children .nested-post {
+  border-block-start: 0;
+}
+
+.isbf-reply-conversations .nested-post__gutter {
+  position: relative;
+  align-self: stretch;
+}
+
+.isbf-reply-conversations
+  .nested-post.--depth-0:has(.nested-post-children)
+  > .nested-post__gutter::after,
+.isbf-reply-conversations
+  .nested-post-children
+  .nested-post:has(~ .nested-post)
+  > .nested-post__gutter::after {
+  position: absolute;
+  inset-block: calc(var(--nested-avatar-size) + var(--isbf-v2-space-2))
+    calc(-1 * var(--isbf-v2-space-4));
+  inset-inline-start: calc(50% - var(--isbf-v2-border-width) / 2);
+  width: var(--isbf-v2-border-width);
+  border-radius: var(--isbf-v2-radius-pill);
+  background: var(--isbf-v2-border-strong);
+  content: "";
+  pointer-events: none;
+}

@@ -1,0 +1,80 @@
+{
+  "published_at_utc": "2026-10-16T12:52:08Z",
+  "theme_id": 4,
+  "fields_before": 212,
+  "fields_after": 217,
+  "preserved_fields": 209,
+  "sources": [
+    {
+      "relative": "javascripts/discourse/api-initializers/isbf-continue-reading.gjs",
+      "sha256": "aacfb77d391cb9da91720bff5cb49441254d6488b200c15e4262cffedffac1fd",
+      "previous_id": null,
+      "field_id": 459
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-continue-reading.gjs",
+      "sha256": "ff18039db5cdd3a72b21db4b05c72c859e2a2a4f97be84be55de3df1de7136af",
+      "previous_id": null,
+      "field_id": 460
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-continue-reading-item.gjs",
+      "sha256": "d9afd79c8bd461041d460fadae10391fc7af10f8ecc33ed2ed0f73b041e0a9e6",
+      "previous_id": null,
+      "field_id": 461
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-continue-reading-footer.gjs",
+      "sha256": "89f90dc6908b90579f35332390fad5084666d4705041f39a193676ae0f08d4b0",
+      "previous_id": null,
+      "field_id": 462
+    },
+    {
+      "relative": "stylesheets/continue-reading.scss",
+      "sha256": "f822049a401e085eaa923fc2a646867385181b57ac21403cc4043475d5c34515",
+      "previous_id": null,
+      "field_id": 463
+    },
+    {
+      "relative": "common/common.scss",
+      "sha256": "ac622f25ec8f9da894c5de97c845b2afc5e330c358efde3862284bdb21166fbf",
+      "previous_id": 197,
+      "field_id": 197
+    },
+    {
+      "relative": "locales/en.yml",
+      "sha256": "3c8b45800c0cdd7e3e858f5b8868d4433b637e4a73366c8709b61e4e3549cbd5",
+      "previous_id": 202,
+      "field_id": 202
+    },
+    {
+      "relative": "locales/zh_CN.yml",
+      "sha256": "ef72b287456e35c283ecd6d978b8059b56ad04440f53c2bdbc36cf25f40b722b",
+      "previous_id": 203,
+      "field_id": 203
+    }
+  ],
+  "settings_preserved": true,
+  "javascript_url": "/theme-javascripts/6186141eb28f8960b965465bc23ac1adeed3df57.js?__ws=isbf-one.com",
+  "javascript_sha256": "80d0c76e9c22a624263cf341a865ae403400ca41ccee0774b2c297ce1a0abbce",
+  "styles": [
+    {
+      "target": "common_theme",
+      "bytes": 315748,
+      "sha256": "71ce2b83957dfe1e2e9a4f0fcb044bdcd801d49b691eec9a998a47cdccb75e1c",
+      "url": "/stylesheets/common_theme_4_fa40cc9c3dd5c0f9ecfc073e8a1f37c6735da7d0.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "desktop_theme",
+      "bytes": 108,
+      "sha256": "04c5f3e30e9f7e27e5ffb99a9f13083bbee7e5ffbf7341146b1dd655354d6056",
+      "url": "/stylesheets/desktop_theme_4_f63dd18f54122611263dc152f297c903ed32b5fe.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "mobile_theme",
+      "bytes": 107,
+      "sha256": "324bf4a874cedcc21e1d0c1898b417b4a6d047897ec8e31026df75db84bbbc69",
+      "url": "/stylesheets/mobile_theme_4_f63dd18f54122611263dc152f297c903ed32b5fe.css?__ws=isbf-one.com"
+    }
+  ]
+}

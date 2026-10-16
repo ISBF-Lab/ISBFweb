@@ -1,0 +1,11 @@
+[
+  "config/locales/client.en.yml",
+  "config/locales/client.zh_CN.yml",
+  "frontend/discourse/app/components/nested/post-children.gjs",
+  "frontend/discourse/app/components/topic-timeline/container.gjs",
+  "frontend/discourse/app/components/topic-timeline/scroller.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/lib/reply-navigation.js",
+  "themes/isbf-campus-feed/stylesheets/reply-conversations.scss",
+  "themes/isbf-campus-feed/locales/en.yml",
+  "themes/isbf-campus-feed/locales/zh_CN.yml"
+]

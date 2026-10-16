@@ -1,0 +1,13 @@
+{
+  "verified_at_utc": "2026-10-15T00:26:55.034259+00:00",
+  "runtime_still_matches_candidate_image": true,
+  "existing_plugins_preserved": 64,
+  "plugins_after": 65,
+  "no_container_pause_events_during_snapshot": true,
+  "own_tool_containers_removed": true,
+  "private_key_file_removed": true,
+  "temporary_keys_cleanup_confirmed_by_browser_finally": true,
+  "full_preview_status": "exited",
+  "production_form_submitted": false,
+  "installer_sha256": "f8fdda94a085d083ea98c63334ae585fffa137185ac738bccc15538c6ddedb3e"
+}

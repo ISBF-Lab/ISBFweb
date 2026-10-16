@@ -1,10 +1,21 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+import { fn } from "@ember/helper";
 import { action } from "@ember/object";
 import didUpdate from "@ember/render-modifiers/modifiers/did-update";
 import { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
+import {
+  CHILDREN_PAGE_SIZE,
+  flatRepliesEnabled,
+  REPLY_PREVIEW_COUNT,
+} from "discourse/lib/flat-replies";
+import {
+  flatReplyItems,
+  mergeFlatReplyPage,
+  mergeFlatReplyPreload,
+} from "discourse/lib/flat-reply-pages";
 import DButton from "discourse/ui-kit/d-button";
 import DConditionalLoadingSpinner from "discourse/ui-kit/d-conditional-loading-spinner";
 import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
@@ -23,7 +34,18 @@ export default class NestedPostChildren extends Component {
   @tracked hasMore = false;
   @tracked loadingMore = false;
   @tracked loaded = false;
+  @tracked error = false;
+  @tracked previousPage = 0;
+  @tracked loadingPrevious = false;
+  @tracked loadedPages = [];
+  @tracked positions = {};
 
+  #failedRequest = null;
+  #failedPage = null;
+  #preloadedChildren;
+  #initialPage;
+  #cacheStore;
+  #flatRequests = new Set();
   // Tracks whether we've fetched from the server yet (vs only having preloaded data)
   _fetchedFromServer = false;
   _identityKey = null;
@@ -47,7 +69,6 @@ export default class NestedPostChildren extends Component {
       this,
       this._onChildCreated
     );
-    this._reportToCache();
   }
 
   get identityKey() {
@@ -56,6 +77,43 @@ export default class NestedPostChildren extends Component {
       this.args.parentPostNumber,
       this.args.sort,
     ].join(":");
+  }
+
+  get flatReplies() {
+    return flatRepliesEnabled(this.siteSettings);
+  }
+
+  get displayItems() {
+    if (this.flatReplies && !this.args.preview) {
+      return flatReplyItems(this);
+    }
+    const nodes =
+      this.flatReplies && this.args.preview
+        ? this.childNodes.slice(0, REPLY_PREVIEW_COUNT)
+        : this.childNodes;
+    const items = nodes.map((node) => ({ key: node.post.id, node }));
+    if (this.flatReplies && !this.args.preview && this.previousPage > 0) {
+      items.splice(REPLY_PREVIEW_COUNT, 0, { key: "gap", gap: true });
+    }
+    return items;
+  }
+
+  get canExpandPreview() {
+    return (
+      this.flatReplies &&
+      this.args.preview &&
+      this.expectedCount > REPLY_PREVIEW_COUNT
+    );
+  }
+
+  get previewLabel() {
+    return i18n("nested_replies.view_remaining_replies", {
+      count: Math.max(
+        this.expectedCount -
+          Math.min(this.childNodes.length, REPLY_PREVIEW_COUNT),
+        0
+      ),
+    });
   }
 
   get childDepth() {
@@ -93,10 +151,14 @@ export default class NestedPostChildren extends Component {
   }
 
   async loadChildren() {
+    if (this.flatReplies) {
+      return this.#loadFlatPage(0, "children");
+    }
     const identityKey = this.identityKey;
     const topicId = this.args.topic?.id;
 
     this.loading = true;
+    this.error = false;
     try {
       const query = new URLSearchParams({
         sort: this.args.sort || "top",
@@ -117,11 +179,16 @@ export default class NestedPostChildren extends Component {
       this._fetchedFromServer = true;
       this._reportToCache();
     } catch (e) {
-      if (!this.isDestroying) {
-        popupAjaxError(e);
+      if (!this.isDestroying && this.identityKey === identityKey) {
+        if (this.flatReplies) {
+          this.error = true;
+          this.#failedRequest = "children";
+        } else {
+          popupAjaxError(e);
+        }
       }
     } finally {
-      if (!this.isDestroying) {
+      if (!this.isDestroying && this.identityKey === identityKey) {
         this.loading = false;
       }
     }
@@ -129,6 +196,15 @@ export default class NestedPostChildren extends Component {
 
   @action
   async loadMore() {
+    if (this.flatReplies) {
+      if (this.hasMore) {
+        return this.#loadFlatPage(
+          this.loadedPages.length ? this.page + 1 : 0,
+          "next"
+        );
+      }
+      return;
+    }
     if (this.loadingMore || !this.hasMore) {
       return;
     }
@@ -137,6 +213,7 @@ export default class NestedPostChildren extends Component {
     const topicId = this.args.topic?.id;
 
     this.loadingMore = true;
+    this.error = false;
     try {
       // First server fetch after preloaded data: get page 0 and merge
       // to preserve expanded state on already-loaded nodes.
@@ -179,12 +256,165 @@ export default class NestedPostChildren extends Component {
       this.hasMore = data.has_more || false;
       this._reportToCache();
     } catch (e) {
-      if (!this.isDestroying) {
-        popupAjaxError(e);
+      if (!this.isDestroying && this.identityKey === identityKey) {
+        if (this.flatReplies) {
+          this.error = true;
+          this.#failedRequest = "next";
+        } else {
+          popupAjaxError(e);
+        }
       }
     } finally {
-      if (!this.isDestroying) {
+      if (!this.isDestroying && this.identityKey === identityKey) {
         this.loadingMore = false;
+      }
+    }
+  }
+
+  @action
+  async expandPreview() {
+    this.args.toggleReplies?.();
+    if (this.flatReplies && this.loadedPages.length === 0) {
+      await this.#loadFlatPage(0, "next");
+    } else if (!this._fetchedFromServer) {
+      await this.loadMore();
+    }
+  }
+
+  @action
+  async loadPrevious(page) {
+    if (this.flatReplies) {
+      const previous = Number.isInteger(page)
+        ? page
+        : flatReplyItems(this).find((item) => item.gap)?.page;
+      if (previous != null) {
+        return this.#loadFlatPage(previous, "previous");
+      }
+      return;
+    }
+    if (this.loadingPrevious || this.previousPage < 1) {
+      return;
+    }
+    const identityKey = this.identityKey;
+    this.loadingPrevious = true;
+    this.error = false;
+    try {
+      const query = new URLSearchParams({
+        sort: "old",
+        depth: this.childDepth,
+        page: this.previousPage - 1,
+      });
+      const data = await ajax(
+        `/n/${this.args.topic.slug}/${this.args.topic.id}/children/${this.args.parentPostNumber}.json?${query}`
+      );
+      if (this.isDestroying || this.identityKey !== identityKey) {
+        return;
+      }
+      this.childNodes = this.#mergeNodes(
+        this._childrenForTopic(data.children, this.args.topic.id).map((node) =>
+          this._processNode(node)
+        )
+      );
+      this.previousPage--;
+      this._reportToCache();
+    } catch {
+      if (!this.isDestroying && this.identityKey === identityKey) {
+        this.error = true;
+        this.#failedRequest = "previous";
+      }
+    } finally {
+      if (!this.isDestroying && this.identityKey === identityKey) {
+        this.loadingPrevious = false;
+      }
+    }
+  }
+
+  @action
+  retry() {
+    if (this.flatReplies && this.#failedPage != null) {
+      return this.#loadFlatPage(this.#failedPage, this.#failedRequest);
+    }
+    if (this.#failedRequest === "previous") {
+      return this.loadPrevious();
+    }
+    return this.#failedRequest === "next"
+      ? this.loadMore()
+      : this.loadChildren();
+  }
+
+  #mergeNodes(nodes) {
+    return [...this.childNodes, ...nodes]
+      .filter(
+        (node, index, all) =>
+          all.findIndex((item) => item.post.id === node.post.id) === index
+      )
+      .sort((left, right) => left.post.post_number - right.post.post_number);
+  }
+
+  #applyFlatEntry(entry) {
+    this.childNodes = entry.childNodes;
+    this.positions = entry.positions;
+    this.loadedPages = entry.loadedPages;
+    this.page = entry.page;
+    this.hasMore = entry.hasMore;
+    this._fetchedFromServer = entry.fetchedFromServer;
+    this.previousPage =
+      (flatReplyItems(entry).find((item) => item.gap)?.page ?? -1) + 1;
+    this.loaded = true;
+    this._reportToCache();
+  }
+
+  async #loadFlatPage(page, kind) {
+    if (this.#flatRequests.has(page)) {
+      return;
+    }
+    const identityKey = this.identityKey;
+    const cacheStore = this.args.fetchedChildrenCache;
+    const requests = this.#flatRequests;
+    requests.add(page);
+    this.loading = kind === "children";
+    this.loadingMore = kind === "next";
+    this.loadingPrevious = kind === "previous";
+    this.error = false;
+    try {
+      const data = await ajax(
+        `/n/${this.args.topic.slug}/${this.args.topic.id}/children/${this.args.parentPostNumber}.json`,
+        { data: { sort: "old", depth: this.childDepth, page } }
+      );
+      if (
+        this.isDestroying ||
+        this.identityKey !== identityKey ||
+        this.args.fetchedChildrenCache !== cacheStore
+      ) {
+        return;
+      }
+      const entry = mergeFlatReplyPage(
+        cacheStore?.get(this._activeCacheKey) || this,
+        this._childrenForTopic(data.children, this.args.topic.id).map((child) =>
+          this._processNode(child)
+        ),
+        { page: data.page, count: this.expectedCount }
+      );
+      if (data.has_more === false && data.page === entry.page) {
+        entry.hasMore = false;
+      }
+      this.#applyFlatEntry(entry);
+    } catch {
+      if (
+        !this.isDestroying &&
+        this.identityKey === identityKey &&
+        this.args.fetchedChildrenCache === cacheStore
+      ) {
+        this.error = true;
+        this.#failedRequest = kind;
+        this.#failedPage = page;
+      }
+    } finally {
+      requests.delete(page);
+      if (!this.isDestroying && this.#flatRequests === requests) {
+        this.loading = false;
+        this.loadingMore = false;
+        this.loadingPrevious = false;
       }
     }
   }
@@ -197,6 +427,52 @@ export default class NestedPostChildren extends Component {
   }
 
   _hydrateFromArgs() {
+    if (this.flatReplies) {
+      const cacheStore = this.args.fetchedChildrenCache;
+      if (
+        this._identityKey !== this.identityKey ||
+        this.#cacheStore !== cacheStore
+      ) {
+        this._identityKey = this.identityKey;
+        this._activeCacheKey = this._cacheKeyFor();
+        this.#cacheStore = cacheStore;
+        this.#flatRequests = new Set();
+        this.#preloadedChildren = null;
+        this.#initialPage = undefined;
+        this.childNodes = [];
+        this.positions = {};
+        this.loadedPages = [];
+        this.loaded = false;
+        this.loading = false;
+        this.loadingMore = false;
+        this.loadingPrevious = false;
+        this.#failedPage = null;
+        this.error = false;
+      }
+      if (
+        this.#preloadedChildren !== this.args.preloadedChildren ||
+        this.#initialPage !== this.args.initialPage
+      ) {
+        this.#preloadedChildren = this.args.preloadedChildren;
+        this.#initialPage = this.args.initialPage;
+        this.#applyFlatEntry(
+          mergeFlatReplyPreload(
+            cacheStore?.get(this._activeCacheKey),
+            this.args.preloadedChildren || [],
+            { page: this.args.initialPage, count: this.expectedCount }
+          )
+        );
+      }
+      if (
+        (!this.childNodes.length && this.expectedCount > 0) ||
+        (!this.args.preview &&
+          !this.loadedPages.length &&
+          this.expectedCount > this.childNodes.length)
+      ) {
+        this.#loadFlatPage(0, "next");
+      }
+      return;
+    }
     if (this._identityKey === this.identityKey) {
       return;
     }
@@ -210,16 +486,23 @@ export default class NestedPostChildren extends Component {
     this.loadingMore = false;
     this.loaded = false;
     this._fetchedFromServer = false;
+    this.error = false;
+    this.previousPage = 0;
+    this.loadingPrevious = false;
+    this.#failedRequest = null;
 
     const cached = this.args.fetchedChildrenCache?.get(this._activeCacheKey);
     if (cached) {
       this.childNodes = cached.childNodes;
       this.page = cached.page;
-      this.hasMore = this.usesFlatDescendantPagination
-        ? this.expectedCount > this.childNodes.length
-        : cached.hasMore;
+      this.hasMore = this.flatReplies
+        ? cached.hasMore
+        : this.usesFlatDescendantPagination
+          ? this.expectedCount > this.childNodes.length
+          : cached.hasMore;
       this.loaded = true;
       this._fetchedFromServer = cached.fetchedFromServer;
+      this.previousPage = cached.previousPage || 0;
       return;
     }
 
@@ -227,13 +510,25 @@ export default class NestedPostChildren extends Component {
       this.childNodes = this.args.preloadedChildren;
       this.loaded = true;
       this.hasMore = this.expectedCount > this.childNodes.length;
+      if (this.flatReplies && this.args.initialPage != null) {
+        this.page = this.args.initialPage;
+        this.previousPage = this.page;
+        this._fetchedFromServer = true;
+        this.hasMore =
+          this.expectedCount > (this.page + 1) * CHILDREN_PAGE_SIZE;
+      }
     } else if (this.args.directReplyCount > 0) {
       this.loadChildren();
     }
   }
 
   _reportToCache(cacheKey = this._activeCacheKey) {
-    if (!this.loaded || !cacheKey || !this.args.fetchedChildrenCache) {
+    if (
+      !this.loaded ||
+      !cacheKey ||
+      !this.args.fetchedChildrenCache ||
+      (this.flatReplies && this.args.fetchedChildrenCache !== this.#cacheStore)
+    ) {
       return;
     }
     this.args.fetchedChildrenCache.set(cacheKey, {
@@ -241,10 +536,14 @@ export default class NestedPostChildren extends Component {
       page: this.page,
       hasMore: this.hasMore,
       fetchedFromServer: this._fetchedFromServer,
+      previousPage: this.previousPage,
+      ...(this.flatReplies
+        ? { loadedPages: this.loadedPages, positions: this.positions }
+        : {}),
     });
   }
 
-  _onChildCreated({ topicId, post, parentPostNumber }) {
+  _onChildCreated({ topicId, post, parentPostNumber, isOwnPost }) {
     if (
       String(topicId) !== String(this.args.topic?.id) ||
       parentPostNumber !== this.args.parentPostNumber
@@ -256,8 +555,27 @@ export default class NestedPostChildren extends Component {
     if (alreadyExists) {
       return;
     }
+    if (this.flatReplies && this.hasMore && !isOwnPost) {
+      return;
+    }
 
-    this.childNodes = [{ post, children: [] }, ...this.childNodes];
+    if (this.flatReplies) {
+      this.#applyFlatEntry(
+        mergeFlatReplyPage(
+          this,
+          [{ post, children: [], _renderKey: post.id }],
+          {
+            count: this.expectedCount,
+            saved: true,
+          }
+        )
+      );
+      return;
+    }
+
+    this.childNodes = this.flatReplies
+      ? this.#mergeNodes([{ post, children: [] }])
+      : [{ post, children: [] }, ...this.childNodes];
     this.loaded = true;
     this._reportToCache();
   }
@@ -283,64 +601,107 @@ export default class NestedPostChildren extends Component {
   <template>
     <div
       class="nested-post-children"
-      {{didUpdate this.hydrateFromArgs @topic.id @parentPostNumber @sort}}
+      {{didUpdate
+        this.hydrateFromArgs
+        @topic.id
+        @parentPostNumber
+        @sort
+        @preloadedChildren
+        @initialPage
+        @fetchedChildrenCache
+        @preview
+      }}
     >
       <DConditionalLoadingSpinner @condition={{this.loading}}>
-        {{#each this.childNodes key="post.id" as |node|}}
-          <NestedPost
-            @captureScrollAnchor={{@captureScrollAnchor}}
-            @changeNotice={{@changeNotice}}
-            @changePostOwner={{@changePostOwner}}
-            @children={{node.children}}
-            @collapseFromDepth={{@collapseFromDepth}}
-            @collapseParent={{@collapseParent}}
-            @deletePost={{@deletePost}}
-            @depth={{this.childDepth}}
-            @editPost={{@editPost}}
-            @expansionState={{@expansionState}}
-            @fetchedChildrenCache={{@fetchedChildrenCache}}
-            @focusPost={{@focusPost}}
-            @grantBadge={{@grantBadge}}
-            @highlightParentLine={{@highlightParentLine}}
-            @lockPost={{@lockPost}}
-            @multiSelect={{@multiSelect}}
-            @parentLineHighlighted={{@parentLineHighlighted}}
-            @path={{@path}}
-            @permanentlyDeletePost={{@permanentlyDeletePost}}
-            @post={{node.post}}
-            @postSelected={{@postSelected}}
-            @rebakePost={{@rebakePost}}
-            @recoverPost={{@recoverPost}}
-            @registerPost={{@registerPost}}
-            @replyToPost={{@replyToPost}}
-            @scrollAnchor={{@scrollAnchor}}
-            @selectBelow={{@selectBelow}}
-            @selectReplies={{@selectReplies}}
-            @showFlags={{@showFlags}}
-            @showHistory={{@showHistory}}
-            @showPagePublish={{@showPagePublish}}
-            @sort={{@sort}}
-            @togglePostSelection={{@togglePostSelection}}
-            @togglePostType={{@togglePostType}}
-            @toggleWiki={{@toggleWiki}}
-            @topic={{@topic}}
-            @unhidePost={{@unhidePost}}
-            @unhighlightParentLine={{@unhighlightParentLine}}
-            @unlockPost={{@unlockPost}}
-          />
+        {{#each this.displayItems key="key" as |item|}}
+          {{#if item.gap}}
+            <DButton
+              class="btn-flat nested-post-children__previous"
+              @action={{fn this.loadPrevious item.page}}
+              @disabled={{this.loadingPrevious}}
+              @label="nested_replies.load_previous_replies"
+            />
+          {{else}}
+            {{#let item.node as |node|}}
+              <NestedPost
+                @captureScrollAnchor={{@captureScrollAnchor}}
+                @changeNotice={{@changeNotice}}
+                @changePostOwner={{@changePostOwner}}
+                @children={{node.children}}
+                @collapseFromDepth={{@collapseFromDepth}}
+                @collapseParent={{@collapseParent}}
+                @deletePost={{@deletePost}}
+                @depth={{this.childDepth}}
+                @editPost={{@editPost}}
+                @expansionState={{@expansionState}}
+                @fetchedChildrenCache={{@fetchedChildrenCache}}
+                @focusPost={{@focusPost}}
+                @grantBadge={{@grantBadge}}
+                @highlightParentLine={{@highlightParentLine}}
+                @lockPost={{@lockPost}}
+                @multiSelect={{@multiSelect}}
+                @parentLineHighlighted={{@parentLineHighlighted}}
+                @path={{@path}}
+                @permanentlyDeletePost={{@permanentlyDeletePost}}
+                @post={{node.post}}
+                @postSelected={{@postSelected}}
+                @rebakePost={{@rebakePost}}
+                @recoverPost={{@recoverPost}}
+                @registerPost={{@registerPost}}
+                @replyToPost={{@replyToPost}}
+                @scrollAnchor={{@scrollAnchor}}
+                @selectBelow={{@selectBelow}}
+                @selectReplies={{@selectReplies}}
+                @showFlags={{@showFlags}}
+                @showHistory={{@showHistory}}
+                @showPagePublish={{@showPagePublish}}
+                @sort={{@sort}}
+                @togglePostSelection={{@togglePostSelection}}
+                @togglePostType={{@togglePostType}}
+                @toggleWiki={{@toggleWiki}}
+                @topic={{@topic}}
+                @unhidePost={{@unhidePost}}
+                @unhighlightParentLine={{@unhighlightParentLine}}
+                @unlockPost={{@unlockPost}}
+              />
+            {{/let}}
+          {{/if}}
         {{/each}}
 
-        {{#if this.hasMore}}
+        {{#if this.error}}
+          <p class="nested-post-children__error">{{i18n
+              "nested_replies.replies_load_error"
+            }}</p>
+          <DButton class="btn-flat" @action={{this.retry}} @label="retry" />
+        {{/if}}
+        {{#if this.canExpandPreview}}
           <DButton
-            class={{dConcatClass
-              "btn-flat"
-              "nested-post-children__load-more"
-              (if @parentLineHighlighted "--parent-line-highlighted")
-            }}
-            @action={{this.loadMore}}
-            @disabled={{this.loadingMore}}
-            @translatedLabel={{this.loadMoreLabel}}
+            class="btn-flat nested-post-children__expand"
+            @action={{this.expandPreview}}
+            @translatedLabel={{this.previewLabel}}
           />
+        {{else if this.hasMore}}
+          {{#unless @preview}}
+            <DButton
+              class={{dConcatClass
+                "btn-flat"
+                "nested-post-children__load-more"
+                (if @parentLineHighlighted "--parent-line-highlighted")
+              }}
+              @action={{this.loadMore}}
+              @disabled={{this.loadingMore}}
+              @translatedLabel={{this.loadMoreLabel}}
+            />
+          {{/unless}}
+        {{/if}}
+        {{#if this.flatReplies}}
+          {{#unless @preview}}
+            <DButton
+              class="btn-flat nested-post-children__collapse"
+              @action={{@toggleReplies}}
+              @label="nested_replies.collapse"
+            />
+          {{/unless}}
         {{/if}}
       </DConditionalLoadingSpinner>
     </div>

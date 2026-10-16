@@ -72,7 +72,7 @@ export default class ISBFTopicMore extends Component {
         @triggerClass="btn-flat isbf-topic-card__more show-more-actions"
       >
         <:content as |menu|>
-          <DDropdownMenu as |dropdown|>
+          <DDropdownMenu class="isbf-topic-card__menu" as |dropdown|>
             {{#each this.buttons key="key" as |button|}}
               <dropdown.item>
                 <PostMenuButtonWrapper

@@ -1,0 +1,14 @@
+{
+  "menu.gjs.txt": {
+    "source": "deploy-work/isbf-join-release-20261015/menu-candidate.gjs",
+    "sha256": "4c309f6616908ec2e94991674581c9d432aedef68793f7970ef915b71be11a26"
+  },
+  "plugin.rb.txt": {
+    "source": "plugins/isbf-join/plugin.rb",
+    "sha256": "8530c549acb5b04b58adea2b9b39727badc1b2b37661a28cd3f34e0e7368bc2d"
+  },
+  "install.py.txt": {
+    "source": "deploy-work/isbf-join-release-20261015/install.py",
+    "sha256": "f8fdda94a085d083ea98c63334ae585fffa137185ac738bccc15538c6ddedb3e"
+  }
+}

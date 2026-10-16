@@ -1,0 +1,29 @@
+{
+  "sources": [
+    {
+      "file": "themes/isbf-campus-feed/stylesheets/topic-reading.scss",
+      "sha256": "ffac33f5ecdd99313625b78252e63ffdef504c1550a82fb86ce843df2659d91a",
+      "bytes": 6906,
+      "role": "changed theme source"
+    },
+    {
+      "file": "frontend/discourse/app/lib/offset-calculator.js",
+      "sha256": "098dba66fd14c270a4c55c0cbcb46d7eba522666737ea2c637ede00a53380dcf",
+      "bytes": 2027,
+      "role": "unchanged native source used by offline verification"
+    },
+    {
+      "file": "frontend/discourse/app/lib/lock-on.js",
+      "sha256": "c8cb5aa86da0eed9da1827472c16d3cd2b57c9d8b4d5697ef37e837f725a315a",
+      "bytes": 3987,
+      "role": "unchanged native source used by offline verification"
+    },
+    {
+      "file": "frontend/discourse/app/components/glimmer-site-header.gjs",
+      "sha256": "8987996d19c29db8ccab265373f3ca8d6128f0d545e5b052e5214460779c5934",
+      "bytes": 14186,
+      "role": "unchanged native source used by offline verification"
+    }
+  ],
+  "human_visual_acceptance": "Pending user review"
+}

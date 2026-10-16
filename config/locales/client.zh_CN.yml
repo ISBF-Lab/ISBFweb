@@ -4020,6 +4020,11 @@ zh_CN:
         name: "禁用嵌套回复"
         description: "将所选话题切换回平铺视图。"
     nested_replies:
+      view_remaining_replies:
+        other: "查看其余 %{count} 条回复"
+      load_previous_replies: "加载此前回复"
+      load_previous_discussions: "加载此前讨论"
+      replies_load_error: "回复加载失败，请重试。"
       nested_view: "嵌套视图"
       flat_view: "平面视图"
       sort:

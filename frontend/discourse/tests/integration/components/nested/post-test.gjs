@@ -1,5 +1,5 @@
 import { getOwner } from "@ember/owner";
-import { click, render } from "@ember/test-helpers";
+import { click, render, settled } from "@ember/test-helpers";
 import { modifier } from "ember-modifier";
 import { module, test } from "qunit";
 import sinon from "sinon";
@@ -12,6 +12,7 @@ const noop = () => {};
 const registerPost = modifier(() => {});
 
 function renderComponent(context) {
+  const state = context.stateController || context;
   return render(
     <template>
       <NestedPost
@@ -22,8 +23,8 @@ function renderComponent(context) {
         @deletePost={{noop}}
         @depth={{context.depth}}
         @editPost={{noop}}
-        @expansionState={{context.expansionState}}
-        @fetchedChildrenCache={{context.fetchedChildrenCache}}
+        @expansionState={{state.expansionState}}
+        @fetchedChildrenCache={{state.fetchedChildrenCache}}
         @focusPost={{context.focusPost}}
         @grantBadge={{noop}}
         @lockPost={{noop}}
@@ -92,6 +93,226 @@ module("Integration | Component | Nested | Post", function (hooks) {
 
   hooks.afterEach(function () {
     sinon.restore();
+  });
+
+  function flatChild(context, number) {
+    const data = {
+      id: 1000 + number,
+      topic_id: context.topic.id,
+      post_number: number,
+      reply_to_post_number: number - 1,
+      username: "reply-user",
+      avatar_template: "/letter_avatar_proxy/v4/letter/r/25/{size}.png",
+      cooked: `<p>Reply ${number}</p>`,
+      created_at: "2026-01-01T00:00:00.000Z",
+      actions_summary: [],
+    };
+    return {
+      post: context.store.createRecord("post", {
+        ...data,
+        topic: context.topic,
+      }),
+      data,
+      children: [],
+    };
+  }
+
+  test("replacing route state keeps loaded replies in the active controller cache", async function (assert) {
+    this.siteSettings.nested_replies_enabled = true;
+    this.siteSettings.nested_replies_cap_nesting_depth = true;
+    this.siteSettings.nested_replies_max_depth = 1;
+    this.stateController = this.owner.lookup("controller:nested");
+    this.post.setProperties({
+      direct_reply_count: 1,
+      total_descendant_count: 6,
+    });
+    const nodes = Array.from({ length: 6 }, (_, index) =>
+      flatChild(this, index + 3)
+    );
+    this.children = nodes.slice(0, 3);
+    pretender.get("/n/nested-topic/1/children/2.json", () =>
+      response({
+        children: nodes.map((node) => node.data),
+        page: 0,
+        has_more: false,
+      })
+    );
+
+    await renderComponent(this);
+    const previous = this.stateController.fetchedChildrenCache;
+    this.stateController.expansionState = new Map();
+    this.stateController.fetchedChildrenCache = new Map();
+    await settled();
+    await click(".nested-post-children__expand");
+
+    assert.strictEqual(
+      this.stateController.fetchedChildrenCache.get("1:2").childNodes.length,
+      6,
+      "the controller can locate replies loaded beyond the preview"
+    );
+    assert.strictEqual(previous.get("1:2").childNodes.length, 3);
+  });
+
+  test("an own reply remains visible across expansion and a late first-page response", async function (assert) {
+    this.siteSettings.nested_replies_enabled = true;
+    this.siteSettings.nested_replies_cap_nesting_depth = true;
+    this.siteSettings.nested_replies_max_depth = 1;
+    this.post.setProperties({
+      direct_reply_count: 1,
+      total_descendant_count: 100,
+    });
+    const nodes = Array.from({ length: 101 }, (_, index) =>
+      flatChild(this, index + 3)
+    );
+    this.children = nodes.slice(0, 3);
+    pretender.get("/n/nested-topic/1/children/2.json", () =>
+      response({
+        children: nodes.slice(0, 50).map((node) => node.data),
+        page: 0,
+        has_more: true,
+      })
+    );
+    await renderComponent(this);
+    this.owner
+      .lookup("service:app-events")
+      .trigger("nested-replies:child-created", {
+        topicId: 1,
+        post: nodes[100].post,
+        parentPostNumber: 2,
+        isOwnPost: true,
+      });
+    await settled();
+
+    assert
+      .dom(".nested-post__article[data-post-number='103']")
+      .exists("shows the saved reply despite a missing middle page");
+    assert
+      .dom(".nested-post__article[data-post-number='52']")
+      .exists("also merges the first server page");
+    await click(".nested-post-children__collapse");
+    await click(".nested-post-children__expand");
+    assert
+      .dom(".nested-post__article[data-post-number='103']")
+      .exists("re-expanding keeps the saved reply");
+    assert
+      .dom(".nested-post-children__previous")
+      .exists("the missing middle page remains loadable");
+  });
+
+  test("revealing an original in an expanded group preserves replies and can expand again", async function (assert) {
+    this.siteSettings.nested_replies_enabled = true;
+    this.siteSettings.nested_replies_cap_nesting_depth = true;
+    this.siteSettings.nested_replies_max_depth = 1;
+    this.post.setProperties({
+      direct_reply_count: 1,
+      total_descendant_count: 6,
+    });
+    const nodes = Array.from({ length: 6 }, (_, index) =>
+      flatChild(this, index + 3)
+    );
+    this.children = nodes.slice(0, 3);
+    pretender.get("/n/nested-topic/1/children/2.json", () =>
+      response({
+        children: nodes.map((node) => node.data),
+        page: 0,
+        has_more: false,
+      })
+    );
+    await renderComponent(this);
+    await click(".nested-post-children__expand");
+    this.owner
+      .lookup("service:app-events")
+      .trigger("nested-replies:reveal-root", { topicId: 1, rootPostNumber: 2 });
+    await settled();
+    assert
+      .dom(".nested-post-children .nested-post")
+      .exists({ count: 6 }, "keeps the expanded replies during target reveal");
+    await click(".nested-post-children__collapse");
+    await click(".nested-post-children__expand");
+    assert
+      .dom(".nested-post-children .nested-post")
+      .exists({ count: 6 }, "restores every reply after collapsing again");
+  });
+
+  test("flat conversations preview three replies and expand in place on mobile", async function (assert) {
+    this.siteSettings.nested_replies_enabled = true;
+    this.siteSettings.nested_replies_cap_nesting_depth = true;
+    this.siteSettings.nested_replies_max_depth = 1;
+    sinon.stub(getOwner(this).lookup("service:site"), "mobileView").value(true);
+    this.focusPost = sinon.spy();
+    this.post.setProperties({
+      direct_reply_count: 1,
+      total_descendant_count: 6,
+    });
+    const nodes = Array.from({ length: 6 }, (_, index) =>
+      flatChild(this, index + 3)
+    );
+    this.children = nodes.slice(0, 3);
+    pretender.get("/n/nested-topic/1/children/2.json", () =>
+      response({
+        children: nodes.map((node) => ({ ...node.data, children: [] })),
+        page: 0,
+        has_more: false,
+      })
+    );
+
+    await renderComponent(this);
+    assert.dom(".nested-post-children .nested-post").exists({ count: 3 });
+    await click(".nested-post-children__expand");
+    assert.dom(".nested-post-children .nested-post").exists({ count: 6 });
+    assert.false(
+      this.focusPost.called,
+      "expands in place without entering mobile focus mode"
+    );
+    await click(".nested-post-children__collapse");
+    assert.dom(".nested-post-children .nested-post").exists({ count: 3 });
+    assert
+      .dom(".nested-post__article[data-post-number='2']")
+      .exists("the outer reply remains visible");
+  });
+
+  test("flat target pages expose a gap and merge earlier replies without duplicates", async function (assert) {
+    this.collapseFromDepth = 0;
+    this.siteSettings.nested_replies_enabled = true;
+    this.siteSettings.nested_replies_cap_nesting_depth = true;
+    this.siteSettings.nested_replies_max_depth = 1;
+    this.post.setProperties({
+      direct_reply_count: 1,
+      total_descendant_count: 100,
+      target_post_number: 80,
+      children_page: 1,
+    });
+    const nodes = Array.from({ length: 100 }, (_, index) =>
+      flatChild(this, index + 3)
+    );
+    this.children = [...nodes.slice(0, 3), ...nodes.slice(50)];
+    let attempts = 0;
+    pretender.get("/n/nested-topic/1/children/2.json", (request) => {
+      assert.strictEqual(
+        request.queryParams.page,
+        "0",
+        "retries the missing earlier page"
+      );
+      if (attempts++ === 0) {
+        return response(503, { errors: ["Unavailable"] });
+      }
+      return response({
+        children: nodes
+          .slice(0, 50)
+          .map((node) => ({ ...node.data, children: [] })),
+        page: 0,
+        has_more: true,
+      });
+    });
+
+    await renderComponent(this);
+    assert.dom(".nested-post-children__previous").exists();
+    assert.dom(".nested-post__article[data-post-number='80']").exists();
+    await click(".nested-post-children__previous");
+    assert.dom(".nested-post-children__error").exists();
+    await click(".nested-post-children__error + button");
+    assert.dom(".nested-post-children .nested-post").exists({ count: 100 });
+    assert.dom(".nested-post-children__previous").doesNotExist();
   });
 
   test("uses nested replies affordance instead of flat post-menu replies button", async function (assert) {

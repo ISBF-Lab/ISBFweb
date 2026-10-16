@@ -1,0 +1,35 @@
+{
+  "archive_sha256": "7d9a31021cfcf2e0dc1fdf25f4338595d064ee8f6626b736e9f2316849304a64",
+  "images": [
+    {
+      "file": "01-orbit.png",
+      "bytes": 1002000,
+      "sha256": "917545bdd82e3c326243433ff4bb5c4e7d2e527f6519ccfc04f2305b82fb2ea5"
+    },
+    {
+      "file": "02-ascent.png",
+      "bytes": 938518,
+      "sha256": "815ac6ef20e8c58f3ad1395dccd3f974b439b35e8b0551a7d0e80e5972a24dd3"
+    },
+    {
+      "file": "03-current.png",
+      "bytes": 1123309,
+      "sha256": "07f51cde873df806d771b559bed08112b4f9f50b59f5710c0e0605e9b228fbaa"
+    },
+    {
+      "file": "04-aperture.png",
+      "bytes": 998756,
+      "sha256": "2313101584ac07fe07d7945b42f73470de9a3e536eea1993bdabda6ed3bf988b"
+    },
+    {
+      "file": "05-connection.png",
+      "bytes": 1017589,
+      "sha256": "dd36d5a0961d9546eb7361f18ea699f231d22550a844355508115771bbdcc35d"
+    },
+    {
+      "file": "06-next.png",
+      "bytes": 1017740,
+      "sha256": "d0848f725b2901bf2d458aef520c4ad846439784d7c012039808f7508e77e3c8"
+    }
+  ]
+}

@@ -33,7 +33,7 @@ class NestedTopicsController < ApplicationController
   skip_before_action :check_xhr, only: %i[show context]
 
   before_action :ensure_nested_replies_enabled
-  before_action :find_topic_with_topic_view, only: %i[show children context]
+  before_action :find_topic_with_topic_view, only: %i[show children context navigation]
   before_action :find_topic, only: %i[pin toggle activity]
   before_action :ensure_not_pm
   before_action :set_embed_class, only: %i[show context]
@@ -68,6 +68,17 @@ class NestedTopicsController < ApplicationController
       on_failed_contract { raise Discourse::NotFound }
       on_failure { raise Discourse::NotFound }
     end
+  end
+
+  def navigation
+    loader = NestedReplies::TreeLoader.new(topic: @topic, guardian: guardian)
+    raise Discourse::NotFound unless loader.flat_replies?
+
+    render json:
+             NestedReplies::Navigation.new(loader).metadata(
+               post_number: params[:post_number],
+               root_index: params[:root_index],
+             )
   end
 
   # GET /n/:slug/:topic_id/:post_number (HTML + JSON)
@@ -157,13 +168,14 @@ class NestedTopicsController < ApplicationController
     guardian.filter_hidden_posts(posts, category: @topic.category)
   end
 
-  def list_roots_response(page:)
+  def list_roots_response(page:, target_post_number: nil)
     result = nil
     NestedTopic::ListRoots.call(
       service_params.deep_merge(
         params: {
           sort: validated_sort,
           page: page,
+          target_post_number: target_post_number,
         },
         topic_view: @topic_view,
       ),
@@ -176,6 +188,11 @@ class NestedTopicsController < ApplicationController
   end
 
   def show_context_response
+    loader = NestedReplies::TreeLoader.new(topic: @topic, guardian: guardian)
+    if loader.flat_replies?
+      return list_roots_response(page: 0, target_post_number: params[:post_number].to_i)
+    end
+
     result = nil
     NestedTopic::ShowContext.call(
       service_params.deep_merge(
@@ -289,6 +306,10 @@ class NestedTopicsController < ApplicationController
   end
 
   def validated_sort
+    if SiteSetting.nested_replies_cap_nesting_depth && SiteSetting.nested_replies_max_depth == 1
+      return "old"
+    end
+
     sort = params[:sort].to_s.downcase
     NestedReplies::Sort.valid?(sort) ? sort : SiteSetting.nested_replies_default_sort
   end

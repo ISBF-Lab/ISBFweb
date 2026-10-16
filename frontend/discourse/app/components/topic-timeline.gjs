@@ -55,6 +55,7 @@ export default class TopicTimeline extends Component {
           @jumpTop={{@jumpTop}}
           @jumpToPostPrompt={{@jumpToPostPrompt}}
           @model={{@model}}
+          @navigation={{@navigation}}
           @recoverTopic={{@recoverTopic}}
           @replyToPost={{@replyToPost}}
           @resetBumpDate={{@resetBumpDate}}

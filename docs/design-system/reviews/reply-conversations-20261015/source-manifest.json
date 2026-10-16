@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-15T12:04:35.732636+00:00",
+  "git_head": "e97b491ce2e1f1659fa74758090ac82e3f097089",
+  "source_state": "Uncommitted candidate; workspace contained unrelated existing changes which were preserved",
+  "status": "Interaction plan approved; visual acceptance and complete application regression pending; not deployed",
+  "scope": "Ordinary regular topic reply conversations, one nesting level with avatar-aligned 1px trunk and straight branches, natural avatar-radius-plus-gap indentation, compact current / total progress and Collapse label; private messages, embed, chat, admin and activity logs retain their dedicated presentation",
+  "proposal": "../../proposals/reply-conversations-20261015.md",
+  "reference_scope": [
+    "A01",
+    "A04",
+    "C01",
+    "C03",
+    "C09",
+    "C16 candidate"
+  ],
+  "files": [
+    {
+      "path": "app/controllers/nested_topics_controller.rb",
+      "snapshot": "source/app/controllers/nested_topics_controller.rb.txt",
+      "bytes": 10025,
+      "sha256": "ff3338836665c91d2a23ea487546cca70f6c88a325c633a6c3c51066c317d39b"
+    },
+    {
+      "path": "app/services/nested_topic/list_roots.rb",
+      "snapshot": "source/app/services/nested_topic/list_roots.rb.txt",
+      "bytes": 7524,
+      "sha256": "3114ea53d33bade466eea356a07e9feccd006f9bd7e22d496f915ce9e6cb70a5"
+    },
+    {
+      "path": "config/routes.rb",
+      "snapshot": "source/config/routes.rb.txt",
+      "bytes": 86441,
+      "sha256": "b96629ed120a85e2264be110b190775ccff257d13c83e255f857713320f3ffcd"
+    },
+    {
+      "path": "config/locales/client.en.yml",
+      "snapshot": "source/config/locales/client.en.yml.txt",
+      "bytes": 508441,
+      "sha256": "5067d181cd21c5a418d2fd78bc458c9814eac8c1fba5ad3ff404e6a766999ed4"
+    },
+    {
+      "path": "config/locales/client.zh_CN.yml",
+      "snapshot": "source/config/locales/client.zh_CN.yml.txt",
+      "bytes": 473067,
+      "sha256": "524a45f5f23ee10ad0c850e31d43aa937f07f220e080e4a44aee2affabac3312"
+    },
+    {
+      "path": "lib/nested_replies/navigation.rb",
+      "snapshot": "source/lib/nested_replies/navigation.rb.txt",
+      "bytes": 3075,
+      "sha256": "e4d534c692fd4875567dcb154dacd6e2385f2f276b1c2c1d46a9f56d12598a76"
+    },
+    {
+      "path": "lib/nested_replies/tree_loader.rb",
+      "snapshot": "source/lib/nested_replies/tree_loader.rb.txt",
+      "bytes": 25719,
+      "sha256": "7de58f4faa2b21b9b7dc4cab8937c10c5fc1ac89f2b4e139b77320436db63341"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/jump-to-post.gjs",
+      "snapshot": "source/frontend/discourse/app/components/modal/jump-to-post.gjs.txt",
+      "bytes": 2698,
+      "sha256": "07c686eeeddc24025b5e337be17a0865d9ba6d24a5bd5b59da678dff7ed0ed06"
+    },
+    {
+      "path": "frontend/discourse/app/components/nested.gjs",
+      "snapshot": "source/frontend/discourse/app/components/nested.gjs.txt",
+      "bytes": 35908,
+      "sha256": "b26e979492f9567a49db79e505c493a8a2014c56f80636c0cf33adff76dea7df"
+    },
+    {
+      "path": "frontend/discourse/app/components/nested/post.gjs",
+      "snapshot": "source/frontend/discourse/app/components/nested/post.gjs.txt",
+      "bytes": 30873,
+      "sha256": "13993da6892544e2ff0885a0ce49358500a64860984b1584cb36d2161d182d87"
+    },
+    {
+      "path": "frontend/discourse/app/components/nested/post-children.gjs",
+      "snapshot": "source/frontend/discourse/app/components/nested/post-children.gjs.txt",
+      "bytes": 15774,
+      "sha256": "b4baba4aae28310a00733322a7548d127ce1d6497d16474ccc86e127b3e0985d"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-navigation.gjs",
+      "snapshot": "source/frontend/discourse/app/components/topic-navigation.gjs.txt",
+      "bytes": 8918,
+      "sha256": "87edb8d009bbe294bd2b7d9b1270d3257ca1b1fda88e92432810311859444798"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-timeline.gjs",
+      "snapshot": "source/frontend/discourse/app/components/topic-timeline.gjs.txt",
+      "bytes": 2426,
+      "sha256": "f3668e2da2d901cc2f5b514001975b2380c559e5a759853132e5f6e1de712318"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-timeline/container.gjs",
+      "snapshot": "source/frontend/discourse/app/components/topic-timeline/container.gjs.txt",
+      "bytes": 21758,
+      "sha256": "dce70a587f62e76a3f84d0f288d859f5d619dfcda40d4c7eaf663be83d34c731"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-timeline/scroller.gjs",
+      "snapshot": "source/frontend/discourse/app/components/topic-timeline/scroller.gjs.txt",
+      "bytes": 2250,
+      "sha256": "93c8dcdc392eba8d91ff80727596f2c0808e1559080ffe1fff11b4873bd60ce5"
+    },
+    {
+      "path": "frontend/discourse/app/controllers/nested.js",
+      "snapshot": "source/frontend/discourse/app/controllers/nested.js.txt",
+      "bytes": 29487,
+      "sha256": "bd7013297c4ed8aded7fc45c76508f9444c027e82f8f070e9a640c87d67e9281"
+    },
+    {
+      "path": "frontend/discourse/app/templates/topic.gjs",
+      "snapshot": "source/frontend/discourse/app/templates/topic.gjs.txt",
+      "bytes": 36857,
+      "sha256": "15dfce296d4be34c6adc3eb6ca7f554ae26a491bb08cd23fff500ce6fe74a3aa"
+    },
+    {
+      "path": "frontend/discourse/app/lib/flat-replies.js",
+      "snapshot": "source/frontend/discourse/app/lib/flat-replies.js.txt",
+      "bytes": 290,
+      "sha256": "a964955332d129653cce4cc332f7644bdb30432cbf2ac24e62498b6bbdf5fbfd"
+    },
+    {
+      "path": "frontend/discourse/app/lib/nested-topic-model.js",
+      "snapshot": "source/frontend/discourse/app/lib/nested-topic-model.js.txt",
+      "bytes": 4832,
+      "sha256": "abfb942f49600617297eee36479422e4446d65e0c0bb00618c17b2c3794b8f02"
+    },
+    {
+      "path": "frontend/discourse/app/lib/nested-view-cache-snapshot.js",
+      "snapshot": "source/frontend/discourse/app/lib/nested-view-cache-snapshot.js.txt",
+      "bytes": 7861,
+      "sha256": "11f21785616b1a7057bae892f53230076ae958b6df739024229a7bf64d2c71ef"
+    },
+    {
+      "path": "spec/lib/nested_replies/navigation_spec.rb",
+      "snapshot": "source/spec/lib/nested_replies/navigation_spec.rb.txt",
+      "bytes": 7281,
+      "sha256": "e20b8f88fdaf1e3e664b01e5aef5fc098b90202ec9d5511a7a41632d7995aa4e"
+    },
+    {
+      "path": "spec/requests/nested_topics_controller_spec.rb",
+      "snapshot": "source/spec/requests/nested_topics_controller_spec.rb.txt",
+      "bytes": 85524,
+      "sha256": "90cbc877b49d6db960dd0db98b1d6306a28547ca8f1c4c002c49f2a740dd405f"
+    },
+    {
+      "path": "spec/services/nested_topic/list_roots_spec.rb",
+      "snapshot": "source/spec/services/nested_topic/list_roots_spec.rb.txt",
+      "bytes": 8206,
+      "sha256": "fc4a54679cee67c09c232ebbeb84ffdcb894a43e2a2e851e7b83ddd697db24df"
+    },
+    {
+      "path": "frontend/discourse/tests/unit/lib/nested-topic-model-test.js",
+      "snapshot": "source/frontend/discourse/tests/unit/lib/nested-topic-model-test.js.txt",
+      "bytes": 2638,
+      "sha256": "fabbb66972457febe103de78a325a188172d68947332e96ab49e20ec36461363"
+    },
+    {
+      "path": "frontend/discourse/tests/integration/components/nested/post-test.gjs",
+      "snapshot": "source/frontend/discourse/tests/integration/components/nested/post-test.gjs.txt",
+      "bytes": 16880,
+      "sha256": "856321201faf85acda16df05d3d21599b9a742350a7a8c2cc7bcdaaa2692ca14"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/reply-context-test.gjs",
+      "snapshot": "source/themes/isbf-campus-feed/test/integration/reply-context-test.gjs.txt",
+      "bytes": 2654,
+      "sha256": "80c42562b43c3acb3c781115181dc313ccf5b8de448afc74ead05cb233449ae8"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/unit/reply-navigation-test.js",
+      "snapshot": "source/themes/isbf-campus-feed/test/unit/reply-navigation-test.js.txt",
+      "bytes": 2190,
+      "sha256": "eed56f85ad5376ab92583cee001df76e2d59193a65c25221d5e2a02cc0f2447d"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-topic-card.gjs",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-topic-card.gjs.txt",
+      "bytes": 3094,
+      "sha256": "ba434d234257811fc79047e794fd2b14af07322efa2963f65a9b8c2648bc3a2b"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-actions.gjs",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-actions.gjs.txt",
+      "bytes": 4938,
+      "sha256": "b1362912e0f7f0cca3530e2d3981b5a01cda597d77164e1edbdf2824ceafde5c"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-metadata.gjs",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-metadata.gjs.txt",
+      "bytes": 1486,
+      "sha256": "f5d1993887935001942fb3b832c4c0775130ac03613f8e332f1d7d2703cec1f1"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-reading.gjs",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-reading.gjs.txt",
+      "bytes": 8985,
+      "sha256": "c8bf8a506107dde4d73582d9b16fee7ee5b31c39e5dd5cca375d3aaab4641c7d"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs.txt",
+      "bytes": 16970,
+      "sha256": "e288236ad1be2b417a839118cb8050944f4725774a39e5df1fc14954f109eb87"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-reply-context.gjs",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-reply-context.gjs.txt",
+      "bytes": 3896,
+      "sha256": "5a5a256e55564c836a2dc40f51991b3858aaca2f5cebf5ee40d4a837dac63f9f"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-reply-navigation.gjs",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-reply-navigation.gjs.txt",
+      "bytes": 5216,
+      "sha256": "69a8038c18915f3b7ce978c095baf41a0cdca2144e4af47a34efe8c6d4e2d92a"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/topic-card-scope.js",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/lib/topic-card-scope.js.txt",
+      "bytes": 1309,
+      "sha256": "a06a8c26367bc4cdc93bfcc97c50a321f70f7c5f8edb3464175554b2764cb674"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/reply-navigation.js",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/lib/reply-navigation.js.txt",
+      "bytes": 2801,
+      "sha256": "23c07153c5aa6db16ba03c1839c32d14ccca811424d39eb3cebe25030988d5cd"
+    },
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "snapshot": "source/themes/isbf-campus-feed/common/common.scss.txt",
+      "bytes": 112693,
+      "sha256": "3acf598fe6db158f0ff4c3a41bf025fe3d882354b7a0d6e0d22ddb164b1363ca"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/reply-conversations.scss",
+      "snapshot": "source/themes/isbf-campus-feed/stylesheets/reply-conversations.scss.txt",
+      "bytes": 6005,
+      "sha256": "41a364a22044b432ba014e71606c019fb5c91f1258d4244049c89250be2b6cb0"
+    },
+    {
+      "path": "themes/isbf-campus-feed/locales/en.yml",
+      "snapshot": "source/themes/isbf-campus-feed/locales/en.yml.txt",
+      "bytes": 16805,
+      "sha256": "b85f3611a5c94d41f328a01f5bd400fb53f13b9dfca5cf2076666a133078f2af"
+    },
+    {
+      "path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+      "snapshot": "source/themes/isbf-campus-feed/locales/zh_CN.yml.txt",
+      "bytes": 16138,
+      "sha256": "d05edf4a0c519cdcb07eb94d5125aaa7ceede1a4e8e8d7bc8e63154543848178"
+    }
+  ],
+  "selected_design_reference": {
+    "path": "guide-redesign/selected-straight-guide.css.txt",
+    "sha256": "7c162f7b510d70dfaa11cbcf425c858336a09d6a53581e9ef4b7d3d12a8c9798",
+    "source": "User-provided HTML/CSS after selecting B; straight branches and parent-avatar trunk explicitly requested"
+  }
+}

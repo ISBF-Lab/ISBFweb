@@ -1,0 +1,11 @@
+{
+  "verified": true,
+  "tag": "local_discourse/isbf_app:reply-regressions-20261016-da29b7352452",
+  "image_id": "sha256:c828b357f640dd11d930352906b95302df92ba20b4bfc11425ff4e892ebc8d5b",
+  "source_version": "da29b7352452fdb0d333377eae493f6ad8e8cd540731a1ba3261cb8b5846ac5f",
+  "plugins": 66,
+  "shared_plugin_releases_required": true,
+  "database_theme_id": 4,
+  "global_latest_changed": false,
+  "production_container_recreated": false
+}

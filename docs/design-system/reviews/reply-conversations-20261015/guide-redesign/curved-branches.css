@@ -1,0 +1,56 @@
+.isbf-reply-conversations .nested-post-children::before {
+  content: none;
+}
+
+.isbf-reply-conversations .nested-post-children .nested-post {
+  border-block-start: 0;
+}
+
+.isbf-reply-conversations .nested-post-children .nested-post::before {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: calc(-1 * var(--isbf-v2-space-3));
+  width: 0;
+  height: auto;
+  border: 0;
+  border-inline-start: var(--isbf-v2-border-width) solid var(--isbf-v2-border-strong);
+  border-radius: 0;
+  background: none;
+  content: "";
+  pointer-events: none;
+}
+
+.isbf-reply-conversations .nested-post-children .nested-post:first-child::before {
+  inset-block-start: calc(
+    var(--isbf-v2-space-3) + var(--nested-avatar-size) / 2
+  );
+}
+
+.isbf-reply-conversations
+  .nested-post-children
+  .nested-post:not(:has(~ .nested-post))::before {
+  inset-block-end: auto;
+  height: calc(var(--isbf-v2-space-3) + var(--nested-avatar-size) / 2);
+}
+
+.isbf-reply-conversations .nested-post-children .nested-post:first-child:not(:has(~ .nested-post))::before {
+  height: 0;
+}
+
+.isbf-reply-conversations .nested-post-children .nested-post::after {
+  position: absolute;
+  inset-block: calc(
+      var(--isbf-v2-space-3) + var(--nested-avatar-size) / 2 -
+        var(--isbf-v2-radius-sm)
+    ) auto;
+  inset-inline-start: calc(-1 * var(--isbf-v2-space-3));
+  width: var(--isbf-v2-space-3);
+  height: var(--isbf-v2-radius-sm);
+  border: 0;
+  border-inline-start: var(--isbf-v2-border-width) solid var(--isbf-v2-border-strong);
+  border-block-end: var(--isbf-v2-border-width) solid var(--isbf-v2-border-strong);
+  border-end-start-radius: var(--isbf-v2-radius-sm);
+  background: none;
+  content: "";
+  pointer-events: none;
+}

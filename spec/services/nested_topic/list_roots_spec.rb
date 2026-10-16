@@ -7,6 +7,8 @@ RSpec.describe NestedTopic::ListRoots do
     it { is_expected.to validate_presence_of(:sort) }
     it { is_expected.to validate_presence_of(:page) }
     it { is_expected.not_to allow_value(-1).for(:page) }
+    it { is_expected.to allow_values(nil, 2).for(:target_post_number) }
+    it { is_expected.not_to allow_values(0, 1).for(:target_post_number) }
   end
 
   describe ".call" do

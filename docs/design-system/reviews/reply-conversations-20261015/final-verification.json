@@ -1,0 +1,19 @@
+{
+  "candidate_sources_verified": 40,
+  "source_snapshots_match": true,
+  "reference_manifest_matches": true,
+  "lint_exit_code": 0,
+  "compiled_modules": 26,
+  "ruby_yaml_files": 12,
+  "synthetic_sql_checks_passed": 30,
+  "offline_browser_checks_passed": true,
+  "diff_check": true,
+  "full_rspec_examples_run": 0,
+  "full_qunit_run": false,
+  "deployed": false,
+  "revision": "Selected B: parent-avatar trunk, straight one-pixel branches and natural indentation",
+  "revision_linted_files": 1,
+  "revision_browser_checks": 12,
+  "thread_guide_width_px": 1,
+  "natural_indent_px": 33
+}

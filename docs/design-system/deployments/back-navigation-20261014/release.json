@@ -1,0 +1,90 @@
+{
+  "applied": true,
+  "theme_id": 4,
+  "published_at_utc": "2026-10-14T04:15:51Z",
+  "fields_before": 181,
+  "fields_after": 186,
+  "preserved_fields": 177,
+  "settings_preserved": true,
+  "name_settings_preserved": true,
+  "compilation_errors": [],
+  "sources": [
+    {
+      "relative": "javascripts/discourse/api-initializers/isbf-back-navigation.js",
+      "field_id": 423,
+      "sha256": "32aa3aa26ee7991fd8676b3a489f54ed3b7a28bbd3229907a51ccee20c4c97b2",
+      "bytes": 299,
+      "action": "add"
+    },
+    {
+      "relative": "javascripts/discourse/lib/back-navigation-history.js",
+      "field_id": 424,
+      "sha256": "ea33aa5f7e7d5b784890d2cd125c04c33fc478ccc9a99ddafdeecfc88d84de9c",
+      "bytes": 2600,
+      "action": "add"
+    },
+    {
+      "relative": "javascripts/discourse/services/isbf-back-navigation.js",
+      "field_id": 425,
+      "sha256": "d77a654180f8a4dc92166bec78e52050c31244bf9344ca7d40b230075e44783e",
+      "bytes": 2191,
+      "action": "add"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-v2-shell.gjs",
+      "field_id": 200,
+      "sha256": "eb784d5fa8124b6ceca74d016d9a17bb69f6ce0be2f59951f9b4e7c86c288f0d",
+      "bytes": 18069,
+      "action": "update"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-workbench-topic-page.gjs",
+      "field_id": 368,
+      "sha256": "3d94577c63ede13e3195e996b42d4f3f561499e4ecddc570139c112c76ec6311",
+      "bytes": 2816,
+      "action": "update"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-resource-page.gjs",
+      "field_id": 386,
+      "sha256": "716a690d0fa07a0298915f0a6a65095158a3dd830c7c120dadfea12251e9bddc",
+      "bytes": 15180,
+      "action": "update"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-alumni.gjs",
+      "field_id": 324,
+      "sha256": "6e9eac15c3a2bd69da9b8eff8e2ce6cc008e71b35868f3a1e3de054d3c38b2fa",
+      "bytes": 8727,
+      "action": "update"
+    },
+    {
+      "relative": "test/unit/back-navigation-history-test.js",
+      "field_id": 426,
+      "sha256": "596db8216e6d9debbbd23b9a2774df30b455aa1b8c4602277c984dfb171faacf",
+      "bytes": 5518,
+      "action": "add"
+    },
+    {
+      "relative": "test/integration/back-navigation-test.gjs",
+      "field_id": 427,
+      "sha256": "bd86eb0726d7cd0e3401b1a221fdf96773b03daa19d7b8fce18135a7ed0eaf05",
+      "bytes": 3691,
+      "action": "add"
+    }
+  ],
+  "javascript_url": "/theme-javascripts/a6ba55d4802b49110a70615912a8fb4a006e91c5.js?__ws=isbf-one.com",
+  "javascript_sha256": "7072325338130879ae5ae9cd359199deb0766f207af97e03ff158bffba92a52e",
+  "javascript_bytes": 391846,
+  "styles": [],
+  "visual_acceptance": "Pending user review",
+  "production_browser_run": false,
+  "services_restarted": false,
+  "image_changed": false,
+  "core_and_plugins_unchanged": true,
+  "plugins": 64,
+  "precommit_javascript_url": "/theme-javascripts/a6ba55d4802b49110a70615912a8fb4a006e91c5.js?__ws=isbf-one.com",
+  "precommit_javascript_sha256": "7072325338130879ae5ae9cd359199deb0766f207af97e03ff158bffba92a52e",
+  "precommit_javascript_bytes": 391846,
+  "serving_verified": true
+}

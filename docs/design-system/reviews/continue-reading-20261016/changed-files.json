@@ -1,0 +1,14 @@
+[
+  "frontend/discourse/app/components/more-topics.gjs",
+  "frontend/discourse/app/components/more-topics/browse-more.gjs",
+  "frontend/discourse/tests/acceptance/more-topics-plugin-api-test.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-continue-reading.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-item.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-footer.gjs",
+  "themes/isbf-campus-feed/stylesheets/continue-reading.scss",
+  "themes/isbf-campus-feed/common/common.scss",
+  "themes/isbf-campus-feed/locales/en.yml",
+  "themes/isbf-campus-feed/locales/zh_CN.yml",
+  "themes/isbf-campus-feed/test/integration/continue-reading-test.gjs"
+]

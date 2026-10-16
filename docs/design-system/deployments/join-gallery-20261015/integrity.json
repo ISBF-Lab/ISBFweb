@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "core_revision": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "core_files_preserved": 13858,
+  "plugin_count": 65,
+  "other_plugins_preserved": 64,
+  "source_files_verified": 80,
+  "font_bytes_preserved": true,
+  "forum_plugin_javascript_preserved": true,
+  "source_sha256": "78709c643308a2258725b63a34a95ed85c3fefc47f0500d31fa9b682c7b2afa8"
+}

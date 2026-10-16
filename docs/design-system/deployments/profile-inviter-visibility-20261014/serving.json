@@ -1,0 +1,26 @@
+{
+  "styles": [
+    {
+      "target": "common_theme",
+      "url": "/stylesheets/common_theme_4_c93440b3065c908c7a63d1f08e156e24386e7c9c.css?__ws=isbf-one.com",
+      "sha256": "ead9dc9c2137f7b12b431b259c5653f57d472d13e91f71889dcf9dfcfe1e86f0",
+      "served_sha256_matches": true
+    },
+    {
+      "target": "desktop_theme",
+      "url": "/stylesheets/desktop_theme_4_9b8a01df65e4947798a19d6a72f1096c06e47da2.css?__ws=isbf-one.com",
+      "sha256": "431622fc8841158521a9e45bce66fe23d25e1786c400244ef7c7745f3ba611e9",
+      "served_sha256_matches": true
+    },
+    {
+      "target": "mobile_theme",
+      "url": "/stylesheets/mobile_theme_4_9b8a01df65e4947798a19d6a72f1096c06e47da2.css?__ws=isbf-one.com",
+      "sha256": "d690d35cc075aaf0f8cd007845d3eeba7a4b23f2f01e9ecbaa43ee4e08b503b2",
+      "served_sha256_matches": true
+    }
+  ],
+  "homepage_references_current_common_css": true,
+  "inviter_selector_present": true,
+  "production_browser_run": false,
+  "human_visual_acceptance": "Pending user review"
+}

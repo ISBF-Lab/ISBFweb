@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "views": [
+    {
+      "viewport": "mobile",
+      "checks": [
+        "native deployed topic footer renders the continue-reading list",
+        "the deployed locale resolves the continue-reading heading",
+        "reply counts retain their translated label",
+        "suggested preserves real source order and unread flags",
+        "native topic, category and reply links remain separate",
+        "390px native footer fits its content column",
+        "320px native footer fits its content column",
+        "existing marketplace and alumni entries remain available",
+        "marketplace data request completes",
+        "alumni map completes initialization"
+      ],
+      "topic_rows": 5,
+      "marketplace_products_loaded": 2
+    },
+    {
+      "viewport": "desktop",
+      "checks": [
+        "native deployed topic footer renders the continue-reading list",
+        "the deployed locale resolves the continue-reading heading",
+        "reply counts retain their translated label",
+        "suggested preserves real source order and unread flags",
+        "native topic, category and reply links remain separate",
+        "1280px native footer fits its content column",
+        "existing marketplace and alumni entries remain available",
+        "marketplace data request completes",
+        "alumni map completes initialization"
+      ],
+      "topic_rows": 5,
+      "marketplace_products_loaded": 2
+    }
+  ],
+  "javascript_errors": [],
+  "console_errors": [
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED"
+  ],
+  "failed_assets": [],
+  "blocked_writes": 19,
+  "production_content_submitted": false,
+  "mobile_result_reused_from_completed_run": true,
+  "desktop_retry_reason": "Return only topic IDs and flags from page.evaluate; avoid serializing the application container",
+  "transport": {
+    "tls_verified": true,
+    "browser_network": "none",
+    "production_write_requests": 0,
+    "request_counts_recorded": false,
+    "reason": "Host report replacement recovered from container-created file ownership after browser completion"
+  },
+  "report_write_recovered_without_rerunning_checks": true
+}

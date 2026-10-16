@@ -13,7 +13,10 @@ export default class JumpToPost extends Component {
   @tracked postDate;
 
   get filteredPostsCount() {
-    return this.args.model.topic.postStream.filteredPostsCount;
+    return (
+      this.args.model.postCount ??
+      this.args.model.topic.postStream.filteredPostsCount
+    );
   }
 
   @action

@@ -1,0 +1,64 @@
+import hashlib
+import json
+import os
+from pathlib import Path
+import sys
+
+
+release = Path(__file__).resolve().parent
+manifest = json.loads((release / 'release-manifest.json').read_text())
+version = sys.argv[1]
+assert version == manifest['source_sha256'] == release.name
+source = release / 'isbf-join'
+previous = Path('/shared/isbf-join-releases') / manifest['previous_source_sha256'] / 'isbf-join'
+base_files = {name: digest for name, digest in manifest['files'].items() if name != '.release-sha256'}
+assert hashlib.sha256(json.dumps(base_files, sort_keys=True, separators=(',', ':')).encode()).hexdigest() == version
+for name, digest in manifest['files'].items():
+    path = source / name
+    assert path.is_file() and not path.is_symlink(), name
+    checksum = hashlib.sha256()
+    with path.open('rb') as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b''):
+            checksum.update(block)
+    assert checksum.hexdigest() == digest, name
+assert {str(path.relative_to(source)) for path in source.rglob('*') if path.is_file()} == set(manifest['files'])
+
+target = Path('/var/www/discourse/plugins/isbf-join')
+if target.exists() or target.is_symlink():
+    assert target.is_symlink() and target.resolve() in [source, previous], 'Unexpected Join release'
+fonts = Path('/var/www/discourse/public/join/fonts')
+if fonts.exists() or fonts.is_symlink():
+    assert fonts.is_dir() and not fonts.is_symlink(), 'Unexpected Join font directory'
+font_names = {Path(name).name for name in manifest['files'] if name.startswith('web/public/fonts/') and name.endswith('.woff2')}
+assert not fonts.exists() or {path.name for path in fonts.iterdir()} <= font_names
+for name in font_names:
+    font = fonts / name
+    if font.exists() or font.is_symlink():
+        assert font.is_symlink() and font.resolve() in [root / 'web/public/fonts' / name for root in [source, previous]], 'Unexpected Join font'
+
+def replace_link(path, destination):
+    temporary = path.with_name('.' + path.name + '-join-compat-' + version[:12])
+    assert not temporary.exists() and not temporary.is_symlink()
+    temporary.symlink_to(destination)
+    os.replace(temporary, path)
+
+replace_link(target, source)
+fonts.mkdir(parents=True, exist_ok=True)
+for name in font_names:
+    replace_link(fonts / name, source / 'web/public/fonts' / name)
+
+# Cached instruction sequences can retain the previous engine's absolute path.
+cache_root = Path('/var/www/discourse/tmp/cache/bootsnap/compile-cache-iseq')
+invalidated = 0
+for relative in ['lib/isbf_join/application_fields.rb', 'lib/isbf_join/engine.rb', 'lib/isbf_join/assets.rb']:
+    key = 0xcbf29ce484222325
+    for byte in str(target / relative).encode():
+        key = ((key ^ byte) * 0x100000001b3) & 0xffffffffffffffff
+    encoded = format(key, '016x')
+    for namespace in ['', '-fstr']:
+        cached = Path(str(cache_root) + namespace) / encoded[:2] / encoded[2:]
+        if cached.is_file():
+            cached.unlink()
+            invalidated += 1
+print(json.dumps({'installed': True, 'source_sha256': version, 'previous_source_sha256': manifest['previous_source_sha256'],
+                  'plugin_cache_entries_invalidated': invalidated}))

@@ -1,0 +1,46 @@
+ENV["GEM_PATH"] = "/var/www/discourse/vendor/bundle/ruby/3.4.0:#{Gem.path.join(":") }"
+Gem.clear_paths
+require "sassc"
+require "json"
+
+root = "/workspace"
+schemes = JSON.parse(File.read("#{root}/themes/isbf-campus-feed/about.json"))["color_schemes"]
+light = schemes.find { |name, _| name.include?("Light") }.last
+palette = light.map { |name, value| "$#{name}: ##{value.delete_prefix("#")};" }.join("\n")
+common = File.read("#{root}/themes/isbf-campus-feed/common/common.scss")
+nav_start = common.index("  .topic-navigation {\n")
+depth = 0
+nav_end = nil
+common[nav_start..].each_char.with_index do |char, offset|
+  depth += 1 if char == "{"
+  depth -= 1 if char == "}"
+  if char == "}" && depth == 0
+    nav_end = nav_start + offset
+    break
+  end
+end
+source = <<~SCSS
+  #{palette}
+  @import "common/foundation/variables";
+  @import "common/foundation/mixins";
+  @import "common/topic-timeline";
+  body:has(.isbf-v2-shell--topic-feed-style) {
+    #{common[nav_start..nav_end]}
+  }
+  @import "#{root}/themes/isbf-campus-feed/stylesheets/topic-reading";
+SCSS
+css = SassC::Engine.new(
+  source,
+  load_paths: ["#{root}/app/assets/stylesheets"],
+  style: :expanded,
+  quiet: true,
+).render
+File.write("/review/compiled/timeline.css", css)
+schemes.each do |name, colors|
+  mode = name.include?("Dark") ? "dark" : "light"
+  color_source = colors.map { |key, value| "$#{key}: ##{value.delete_prefix("#")};" }.join("\n")
+  color_source += "\n@import \"common/foundation/variables\";\n@import \"color_definitions\";"
+  definitions = SassC::Engine.new(color_source, load_paths: ["#{root}/app/assets/stylesheets"], quiet: true).render
+  File.write("/review/compiled/colors-#{mode}.css", definitions)
+end
+puts JSON.generate({scss_compiled: true, bytes: css.bytesize})

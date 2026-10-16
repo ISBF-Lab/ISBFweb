@@ -1,0 +1,106 @@
+[
+  {
+    "file": "frontend/discourse/app/components/modal/jump-to-post.gjs",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/app/components/nested.gjs",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/app/components/nested/post.gjs",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/app/components/nested/post-children.gjs",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/app/components/topic-navigation.gjs",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/app/components/topic-timeline.gjs",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/app/components/topic-timeline/container.gjs",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/app/components/topic-timeline/scroller.gjs",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/app/controllers/nested.js",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/app/templates/topic.gjs",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/app/lib/flat-replies.js",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/app/lib/nested-topic-model.js",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/app/lib/nested-view-cache-snapshot.js",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/tests/unit/lib/nested-topic-model-test.js",
+    "compiled": true
+  },
+  {
+    "file": "frontend/discourse/tests/integration/components/nested/post-test.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/test/integration/reply-context-test.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/test/unit/reply-navigation-test.js",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-topic-card.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-actions.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-metadata.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-reading.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-reply-context.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-reply-navigation.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/lib/topic-card-scope.js",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/lib/reply-navigation.js",
+    "compiled": true
+  }
+]

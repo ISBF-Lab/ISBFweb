@@ -27,3 +27,11 @@ tmp/
 !**/tsconfig.json
 **/*.md
 **/*.d.ts
+
+# Keep the reviewed standalone page sources and bundled dependencies intact.
+plugins/isbf-join/web/public/
+plugins/isbf-join/web/dist/
+plugins/isbf-join/web/shared/
+plugins/isbf-join/web/src/*
+!plugins/isbf-join/web/src/application-transport.js
+plugins/isbf-join/web/tests/ads.test.mjs

@@ -1,0 +1,486 @@
+{
+  "passed": true,
+  "full_ember_client": true,
+  "production_backend_used": false,
+  "checks": [
+    "one actual continue-reading panel replaces the original footer",
+    "the topic sources render semantic lists without tables",
+    "the Chinese heading is translated",
+    "suggestions preserve exact source IDs and ordering",
+    "zero replies are explicit",
+    "actual reply counts retain their label",
+    "only flat unread replies or the native nested new-reply flag produce a dot",
+    "a missing creator gets a default image without a fabricated profile",
+    "locked state remains identifiable",
+    "topic, category, activity and reply links are never nested",
+    "topic, replies, activity and category retain their exact native targets",
+    "browse all retains the original category target",
+    "remaining new-topic copy uses the real tracking count",
+    "new and unread browse entries both remain available",
+    "reading an unread topic updates the footer without changing new-topic counts",
+    "320px light: long titles and metadata stay within the content column",
+    "320px light: unbroken long titles clamp to two lines",
+    "320px light: avatar size matches the approved local dimensions",
+    "320px light: the actual theme palette is active",
+    "320px light: only single subtle row separators remain",
+    "320px light: secondary text and read titles remain readable",
+    "320px dark: long titles and metadata stay within the content column",
+    "320px dark: unbroken long titles clamp to two lines",
+    "320px dark: avatar size matches the approved local dimensions",
+    "320px dark: the actual theme palette is active",
+    "320px dark: only single subtle row separators remain",
+    "320px dark: secondary text and read titles remain readable",
+    "390px light: long titles and metadata stay within the content column",
+    "390px light: unbroken long titles clamp to two lines",
+    "390px light: avatar size matches the approved local dimensions",
+    "390px light: the actual theme palette is active",
+    "390px light: only single subtle row separators remain",
+    "390px light: secondary text and read titles remain readable",
+    "390px dark: long titles and metadata stay within the content column",
+    "390px dark: unbroken long titles clamp to two lines",
+    "390px dark: avatar size matches the approved local dimensions",
+    "390px dark: the actual theme palette is active",
+    "390px dark: only single subtle row separators remain",
+    "390px dark: secondary text and read titles remain readable",
+    "1280px light: long titles and metadata stay within the content column",
+    "1280px light: unbroken long titles clamp to two lines",
+    "1280px light: avatar size matches the approved local dimensions",
+    "1280px light: the actual theme palette is active",
+    "1280px light: only single subtle row separators remain",
+    "1280px light: secondary text and read titles remain readable",
+    "1280px dark: long titles and metadata stay within the content column",
+    "1280px dark: unbroken long titles clamp to two lines",
+    "1280px dark: avatar size matches the approved local dimensions",
+    "1280px dark: the actual theme palette is active",
+    "1280px dark: only single subtle row separators remain",
+    "1280px dark: secondary text and read titles remain readable",
+    "the existing related-topic switch remains available",
+    "related topics use their own original source and order",
+    "native mode preference persistence is retained",
+    "keyboard focus is visible on the native topic link",
+    "native formatted title content keeps the anchor as the click target",
+    "normal title clicks retain native route and list history",
+    "modified clicks retain the browser's native link behavior",
+    "all code and styles are served from local cached assets",
+    "the real Ember component flow produces no browser exceptions"
+  ],
+  "layouts": [
+    {
+      "width": 320,
+      "padding": "16px",
+      "avatar": 30,
+      "overflowing": [],
+      "panelOverflow": false,
+      "titleHeight": 52.78125,
+      "titleLineHeight": 22.4,
+      "titlePadding": 8,
+      "rowHeights": [
+        84,
+        92.625,
+        84,
+        92.625,
+        84,
+        84,
+        115.46875
+      ],
+      "rowBorders": [
+        {
+          "top": "0px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        }
+      ],
+      "metadataColor": "rgb(70, 98, 128)",
+      "readTitleColor": "rgb(23, 32, 42)",
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": false,
+      "metadataContrast": 6.33,
+      "readTitleContrast": 16.45,
+      "viewport": 320,
+      "palette": "light"
+    },
+    {
+      "width": 320,
+      "padding": "16px",
+      "avatar": 30,
+      "overflowing": [],
+      "panelOverflow": false,
+      "titleHeight": 52.78125,
+      "titleLineHeight": 22.4,
+      "titlePadding": 8,
+      "rowHeights": [
+        84,
+        92.625,
+        84,
+        92.625,
+        84,
+        84,
+        115.46875
+      ],
+      "rowBorders": [
+        {
+          "top": "0px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        }
+      ],
+      "metadataColor": "rgb(169, 176, 180)",
+      "readTitleColor": "rgb(231, 233, 234)",
+      "background": "rgb(16, 20, 19)",
+      "bodyOverflow": false,
+      "metadataContrast": 8.45,
+      "readTitleContrast": 15.24,
+      "viewport": 320,
+      "palette": "dark"
+    },
+    {
+      "width": 390,
+      "padding": "16px",
+      "avatar": 30,
+      "overflowing": [],
+      "panelOverflow": false,
+      "titleHeight": 52.78125,
+      "titleLineHeight": 22.4,
+      "titlePadding": 8,
+      "rowHeights": [
+        84,
+        92.625,
+        84,
+        84,
+        84,
+        84,
+        115.46875
+      ],
+      "rowBorders": [
+        {
+          "top": "0px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        }
+      ],
+      "metadataColor": "rgb(70, 98, 128)",
+      "readTitleColor": "rgb(23, 32, 42)",
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": false,
+      "metadataContrast": 6.33,
+      "readTitleContrast": 16.45,
+      "viewport": 390,
+      "palette": "light"
+    },
+    {
+      "width": 390,
+      "padding": "16px",
+      "avatar": 30,
+      "overflowing": [],
+      "panelOverflow": false,
+      "titleHeight": 52.78125,
+      "titleLineHeight": 22.4,
+      "titlePadding": 8,
+      "rowHeights": [
+        84,
+        92.625,
+        84,
+        84,
+        84,
+        84,
+        115.46875
+      ],
+      "rowBorders": [
+        {
+          "top": "0px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        }
+      ],
+      "metadataColor": "rgb(169, 176, 180)",
+      "readTitleColor": "rgb(231, 233, 234)",
+      "background": "rgb(16, 20, 19)",
+      "bodyOverflow": false,
+      "metadataContrast": 8.45,
+      "readTitleContrast": 15.24,
+      "viewport": 390,
+      "palette": "dark"
+    },
+    {
+      "width": 598,
+      "padding": "24px",
+      "avatar": 36,
+      "overflowing": [],
+      "panelOverflow": false,
+      "titleHeight": 52.78125,
+      "titleLineHeight": 22.4,
+      "titlePadding": 8,
+      "rowHeights": [
+        84,
+        92.625,
+        84,
+        84,
+        84,
+        84,
+        115.46875
+      ],
+      "rowBorders": [
+        {
+          "top": "0px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        }
+      ],
+      "metadataColor": "rgb(70, 98, 128)",
+      "readTitleColor": "rgb(23, 32, 42)",
+      "background": "rgb(255, 255, 255)",
+      "bodyOverflow": false,
+      "metadataContrast": 6.33,
+      "readTitleContrast": 16.45,
+      "viewport": 1280,
+      "palette": "light"
+    },
+    {
+      "width": 598,
+      "padding": "24px",
+      "avatar": 36,
+      "overflowing": [],
+      "panelOverflow": false,
+      "titleHeight": 52.78125,
+      "titleLineHeight": 22.4,
+      "titlePadding": 8,
+      "rowHeights": [
+        84,
+        92.625,
+        84,
+        84,
+        84,
+        84,
+        115.46875
+      ],
+      "rowBorders": [
+        {
+          "top": "0px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        },
+        {
+          "top": "1px",
+          "bottom": "0px"
+        }
+      ],
+      "metadataColor": "rgb(169, 176, 180)",
+      "readTitleColor": "rgb(231, 233, 234)",
+      "background": "rgb(16, 20, 19)",
+      "bodyOverflow": false,
+      "metadataContrast": 8.45,
+      "readTitleContrast": 15.24,
+      "viewport": 1280,
+      "palette": "dark"
+    }
+  ],
+  "errors": [],
+  "console_errors": [
+    "Failed to load resource: net::ERR_FAILED"
+  ],
+  "missing_assets": [],
+  "api_requests": [
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "POST",
+      "path": "/isbf/views/impressions"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "POST",
+      "path": "/isbf/views/impressions"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "POST",
+      "path": "/isbf/views/impressions"
+    }
+  ],
+  "computed_styles": {
+    ".isbf-continue-reading__item": {
+      "borderTop": "0px none rgb(231, 233, 234)",
+      "borderBottom": "0px none rgb(231, 233, 234)",
+      "color": "rgb(231, 233, 234)",
+      "fontWeight": "400"
+    },
+    ".isbf-continue-reading__item + .isbf-continue-reading__item": {
+      "borderTop": "1px solid rgb(48, 52, 55)",
+      "borderBottom": "0px none rgb(231, 233, 234)",
+      "color": "rgb(231, 233, 234)",
+      "fontWeight": "400"
+    },
+    ".visited .isbf-continue-reading__title": {
+      "borderTop": "0px none rgb(231, 233, 234)",
+      "borderBottom": "0px none rgb(231, 233, 234)",
+      "color": "rgb(231, 233, 234)",
+      "fontWeight": "400"
+    },
+    ".isbf-continue-reading__metadata": {
+      "borderTop": "0px none rgb(169, 176, 180)",
+      "borderBottom": "0px none rgb(169, 176, 180)",
+      "color": "rgb(169, 176, 180)",
+      "fontWeight": "400"
+    }
+  },
+  "navigation": {
+    "expected": "http://127.0.0.1:8765/t/reading-item/901/1",
+    "actual": "http://127.0.0.1:8765/t/reading-item/901/1",
+    "history": [
+      [
+        "lastTopicIdViewed",
+        901
+      ]
+    ]
+  }
+}

@@ -1,4 +1,5 @@
 import Component from "@glimmer/component";
+import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { getOwner } from "@ember/owner";
 import { service } from "@ember/service";
@@ -16,7 +17,7 @@ import {
 import { frontendConsistencyScope } from "../lib/frontend-consistency-scope";
 import { notificationsEnabled } from "../lib/notification-groups";
 import { officialConfig } from "../lib/official-filters";
-import { isFeedStyleTopic } from "../lib/topic-card-scope";
+import { isConversationTopic, isFeedStyleTopic } from "../lib/topic-card-scope";
 import ISBFAlumni from "./isbf-alumni";
 import ISBFExplore from "./isbf-explore";
 import ISBFLearning from "./isbf-learning";
@@ -34,6 +35,7 @@ import ISBFV2Workbench from "./isbf-v2-workbench";
 export default class ISBFV2Shell extends Component {
   @service categoryTypeChooser;
   @service currentUser;
+  @service isbfBackNavigation;
   @service router;
   @service site;
   @service siteSettings;
@@ -344,7 +346,18 @@ export default class ISBFV2Shell extends Component {
   }
 
   get topicFeedStyle() {
-    return isFeedStyleTopic(this.topicController.get("model"), this.path);
+    return (
+      isFeedStyleTopic(this.topicController.get("model"), this.path) ||
+      this.topicConversations
+    );
+  }
+
+  get topicConversations() {
+    return isConversationTopic(
+      this.topicController.get("model"),
+      this.path,
+      this.siteSettings
+    );
   }
 
   get shellClass() {
@@ -352,6 +365,9 @@ export default class ISBFV2Shell extends Component {
 
     if (this.topicFeedStyle) {
       classes.push("isbf-v2-shell--topic-feed-style");
+      if (this.topicConversations) {
+        classes.push("isbf-v2-shell--topic-conversations");
+      }
       if (this.topicController.get("editingTopic")) {
         classes.push("isbf-v2-shell--topic-editing");
       }
@@ -400,6 +416,15 @@ export default class ISBFV2Shell extends Component {
     return this.currentUser
       ? "/u/" + this.currentUser.username + "/notifications"
       : "/login";
+  }
+
+  get backHref() {
+    return this.isbfBackNavigation.href("/latest");
+  }
+
+  @action
+  goBack(event) {
+    this.isbfBackNavigation.back(event);
   }
 
   @action
@@ -495,9 +520,10 @@ export default class ISBFV2Shell extends Component {
         {{else if this.showPageHeader}}
           <header class="isbf-v2-page-header">
             <a
-              aria-label={{i18n (themePrefix "isbf_v2.back_home")}}
+              aria-label={{i18n "back_button"}}
               class="isbf-v2-page-header__back"
-              href="/latest"
+              href={{this.backHref}}
+              {{on "click" this.goBack}}
             >{{dIcon "arrow-left"}}</a>
             <span>{{this.pageTitle}}</span>
             {{#if this.isOwnProfile}}<ISBFV2AccountMenu

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#86C3F5" />
+    <meta name="description" content="加入 ISBF-One。和一群相信行动的人，一起探索、创造，把下一步变成新的可能。" />
+    <link rel="icon" type="image/png" href="/brand/isbf-one-mark.png" />
+    <title>加入我们 — ISBF-One</title>
+  </head>
+  <body class="is-blue-scene">
+    <a class="skip-link" href="#join">跳至加入我们</a>
+
+    <a class="wordmark brand-mark" href="https://isbf-one.com" aria-label="ISBF-One 首页">
+      <img class="brand-symbol" src="/brand/isbf-one-mark.png" width="44" height="44" alt="" fetchpriority="high" />
+      <span class="wordmark-main">ISBF-One</span>
+    </a>
+
+    <main>
+      <section class="journey" id="journey" aria-label="向下滚动，跟随人物前行，进入 ISBF-One">
+        <div class="stage">
+          <div class="scene" id="scene" aria-hidden="true"></div>
+          <div class="scene-vignette" aria-hidden="true"></div>
+          <div class="tunnel-fade" id="tunnel-fade" aria-hidden="true"></div>
+
+          <div class="journey-footer">
+            <button class="scroll-cue" id="scroll-cue" type="button" aria-label="向下探索人物动画">
+              <span class="mouse-icon" aria-hidden="true"><span></span></span>
+              <span id="scroll-label">向下滚动，开启下一步</span>
+              <svg class="icon scroll-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18m-7-7 7 7 7-7"/></svg>
+            </button>
+            <button class="replay-button" id="replay-button" type="button" aria-label="重播开场动画">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v6h6M4.5 10a8 8 0 1 1-.1 4"/></svg> <span>重新出发</span>
+            </button>
+          </div>
+          <div class="timeline" aria-hidden="true"><div id="timeline-progress"></div></div>
+        </div>
+      </section>
+
+      <section class="gallery-section" id="join" aria-labelledby="join-title" tabindex="-1">
+        <div class="gallery-intro">
+          <h1 id="join-title">ISBF-One</h1>
+          <p>把好奇变成行动。与 ISBF-One 同行，<strong>下一步，一起创造。</strong><br />让每个想法，走向真实发生。</p>
+        </div>
+        <div class="gallery-band">
+          <div class="gallery-window" id="gallery-window" role="region" aria-label="团队影像，支持横向滑动或方向键滚动" tabindex="0">
+            <div class="gallery-track" id="gallery-track" role="list"></div>
+          </div>
+        </div>
+        <div class="gallery-statement"><p>YOUR NEXT CHAPTER</p></div>
+        <div class="gallery-bottom">
+          <p>不止是加入。是一起创造。<br /><span>把你的好奇、想法和行动力带来。</span></p>
+          <button class="contact-button" id="contact-button" type="button">向 ISBF-One 介绍自己 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button>
+        </div>
+        <div class="join-footer"><a href="https://isbf-one.com">ISBF-One</a><button id="back-to-start" type="button">回到起点 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V3m-7 7 7-7 7 7"/></svg></button></div>
+      </section>
+    </main>
+
+    <div class="loader" id="loader" role="status" aria-live="polite">
+      <div class="loader-logo"><img src="/brand/isbf-one-mark.png" width="56" height="56" alt="" /><span>ISBF-One</span></div>
+      <div class="loader-bottom"><p>下一步，即将开启<span id="loader-progress">00%</span></p><div class="loader-track"><span id="loader-bar"></span></div></div>
+    </div>
+
+    <dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-title">
+      <div class="dialog-header">
+        <h2 id="contact-title">加入我们</h2>
+        <button class="dialog-close" id="dialog-close" type="button" aria-label="关闭弹窗"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 14 14M5 19 19 5"/></svg></button>
+      </div>
+      <form id="application-form" class="application-form" novalidate>
+        <div class="dialog-body">
+          <p class="application-kicker">简历投递入口</p>
+          <a class="recruitment-email" id="recruitment-email" href="mailto:hr@isbf-one.com">hr@isbf-one.com <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a>
+          <p class="dialog-description">请将简历发送至以上邮箱，并填写以下信息，方便我们与您联系。</p>
+          <fieldset class="application-fields" id="application-fields">
+            <div class="form-field">
+              <label for="application-name">姓名 <span aria-hidden="true">*</span></label>
+              <input id="application-name" name="name" type="text" autocomplete="name" maxlength="60" placeholder="请输入您的姓名" required aria-describedby="name-error" />
+              <p class="field-error" id="name-error" hidden></p>
+            </div>
+            <div class="form-field">
+              <label for="application-student-id">学号 <span aria-hidden="true">*</span></label>
+              <input id="application-student-id" name="studentId" type="text" autocomplete="off" maxlength="40" placeholder="请输入您的学号" required aria-describedby="student-id-error" />
+              <p class="field-error" id="student-id-error" hidden></p>
+            </div>
+            <div class="form-field">
+              <label for="application-phone">手机联系方式 <span aria-hidden="true">*</span></label>
+              <input id="application-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" placeholder="请输入您的手机号码" required aria-describedby="phone-error" />
+              <p class="field-error" id="phone-error" hidden></p>
+            </div>
+          </fieldset>
+          <p class="application-note">以上信息用于本次招募登记与联系，请确认填写准确。</p>
+          <p class="form-error" id="application-error" role="alert" hidden></p>
+        </div>
+        <div class="dialog-actions">
+          <button class="dialog-submit" id="application-submit" type="submit">提交信息 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button>
+          <button class="dialog-secondary" type="button" data-dialog-close>关闭</button>
+        </div>
+      </form>
+      <div class="application-success" id="application-success" role="status" tabindex="-1" hidden>
+        <span class="success-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="m8 16 5 5 11-11" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3>感谢您的投递，我们会尽快联系您</h3>
+        <p>登记信息已收到。简历请发送至 <a href="mailto:hr@isbf-one.com">hr@isbf-one.com</a>。</p>
+        <button class="dialog-submit" type="button" data-dialog-close>完成</button>
+      </div>
+    </dialog>
+
+    <noscript><style>.loader{display:none}.journey{height:100svh;height:100dvh}.scene{display:none}</style><p class="noscript-note">开启 JavaScript 即可体验人物行走与镜头动画。</p></noscript>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+.isbf-reply-conversations .nested-post__gutter {
+  position: relative;
+  align-self: stretch;
+}
+
+.isbf-reply-conversations
+  .nested-post.--depth-0:has(.nested-post-children)
+  > .nested-post__gutter::after {
+  position: absolute;
+  inset-block: var(--nested-avatar-size) calc(-1 * var(--isbf-v2-space-3));
+  inset-inline-start: calc(var(--nested-avatar-size) / 2);
+  width: 0;
+  border-inline-start: var(--isbf-v2-border-width) solid var(--isbf-v2-border-strong);
+  content: "";
+  pointer-events: none;
+}
+
+.isbf-reply-conversations .nested-post-children {
+  margin-inline-start: calc(
+    var(--nested-avatar-size) / 2 + var(--isbf-v2-space-3)
+  );
+}
+
+.isbf-reply-conversations .nested-post-children::before {
+  content: none;
+}
+
+.isbf-reply-conversations
+  .nested-post-children
+  .nested-post:not(.--depth-0) {
+  margin-block-start: 0;
+  border-block-start: 0;
+}
+
+.isbf-reply-conversations .nested-post-children .nested-post-children__previous {
+  position: relative;
+}
+
+.isbf-reply-conversations .nested-post-children .nested-post::before,
+.isbf-reply-conversations
+  .nested-post-children
+  .nested-post-children__previous::before {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: calc(-1 * var(--isbf-v2-space-3));
+  width: 0;
+  height: auto;
+  border: 0;
+  border-inline-start: var(--isbf-v2-border-width) solid var(--isbf-v2-border-strong);
+  border-radius: 0;
+  background: none;
+  content: "";
+  pointer-events: none;
+}
+
+.isbf-reply-conversations
+  .nested-post-children
+  .nested-post:not(:has(~ .nested-post))::before {
+  inset-block-end: auto;
+  height: calc(var(--isbf-v2-space-3) + var(--nested-avatar-size) / 2);
+}
+
+.isbf-reply-conversations .nested-post-children .nested-post::after {
+  position: absolute;
+  inset-block: calc(var(--isbf-v2-space-3) + var(--nested-avatar-size) / 2) auto;
+  inset-inline-start: calc(-1 * var(--isbf-v2-space-3));
+  width: var(--isbf-v2-space-3);
+  height: 0;
+  border: 0;
+  border-block-start: var(--isbf-v2-border-width) solid var(--isbf-v2-border-strong);
+  border-radius: 0;
+  background: none;
+  content: "";
+  pointer-events: none;
+}

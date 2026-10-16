@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "tls_verified": true,
+  "resources": [
+    {
+      "kind": "core",
+      "url": "/assets/js/discourse-h3w44o6r.digested.js",
+      "sha256": "4706d9bb124f316b59fe7158144b4fbdf3e2f5535f0d0f3ded0d5672c75a6120",
+      "bytes": 3923764
+    },
+    {
+      "kind": "theme_javascript",
+      "url": "/theme-javascripts/6186141eb28f8960b965465bc23ac1adeed3df57.js?__ws=isbf-one.com",
+      "sha256": "410c1dde6c8abf330dc8a62675ed2d0712713a89580becdb2038da4ebe990912",
+      "compiled_content_sha256": "80d0c76e9c22a624263cf341a865ae403400ca41ccee0774b2c297ce1a0abbce",
+      "bytes": 456440
+    },
+    {
+      "kind": "common_theme",
+      "url": "/stylesheets/common_theme_4_fa40cc9c3dd5c0f9ecfc073e8a1f37c6735da7d0.css?__ws=isbf-one.com",
+      "sha256": "71ce2b83957dfe1e2e9a4f0fcb044bdcd801d49b691eec9a998a47cdccb75e1c",
+      "bytes": 315748
+    },
+    {
+      "kind": "desktop_theme",
+      "url": "/stylesheets/desktop_theme_4_f63dd18f54122611263dc152f297c903ed32b5fe.css?__ws=isbf-one.com",
+      "sha256": "04c5f3e30e9f7e27e5ffb99a9f13083bbee7e5ffbf7341146b1dd655354d6056",
+      "bytes": 108
+    },
+    {
+      "kind": "mobile_theme",
+      "url": "/stylesheets/mobile_theme_4_f63dd18f54122611263dc152f297c903ed32b5fe.css?__ws=isbf-one.com",
+      "sha256": "324bf4a874cedcc21e1d0c1898b417b4a6d047897ec8e31026df75db84bbbc69",
+      "bytes": 107
+    }
+  ],
+  "shell_references_native_core_and_new_theme": true,
+  "plugins_preserved": 66,
+  "core_changes": [
+    "frontend/discourse/app/components/more-topics.gjs",
+    "frontend/discourse/app/components/more-topics/browse-more.gjs",
+    "themes/isbf-campus-feed/common/common.scss",
+    "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-continue-reading.gjs",
+    "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-footer.gjs",
+    "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-item.gjs",
+    "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading.gjs",
+    "themes/isbf-campus-feed/locales/en.yml",
+    "themes/isbf-campus-feed/locales/zh_CN.yml",
+    "themes/isbf-campus-feed/stylesheets/continue-reading.scss"
+  ],
+  "source_version": "6f6680e493b02c39b3777aa192af8a4948cc7f54f3ac0d4f72a4001cd52630a9"
+}

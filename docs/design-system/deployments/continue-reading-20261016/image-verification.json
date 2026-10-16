@@ -1,0 +1,28 @@
+{
+  "image_tag": "local_discourse/isbf_app:continue-reading-20261016-6f6680e493b0-runtime",
+  "image_id": "sha256:15cc16f18816ee12dc809ab66f8afd6e838463375d2b6522d4f7fd69fa5dad8c",
+  "source_version": "6f6680e493b02c39b3777aa192af8a4948cc7f54f3ac0d4f72a4001cd52630a9",
+  "complete_runtime_inventory_matches": true,
+  "plugins_verified": 66,
+  "plugin_links_markers_and_hidden_files_verified": true,
+  "runtime_configuration_inherited_from": "Native candidate environment; env exec invokes the production /sbin/boot command",
+  "runtime_environment_copied": false,
+  "latest_tag_changed": false,
+  "active_theme_database_backed": true,
+  "production_container_recreated": false,
+  "production_container_paused": false,
+  "freeze_method": "Verified native candidate plus missing immutable assets and combined manifest; original image environment verified and command restored",
+  "runtime_startup_matches_production": true,
+  "runtime_startup": {
+    "Entrypoint": [
+      "/usr/bin/env"
+    ],
+    "Cmd": [
+      "/sbin/boot"
+    ]
+  },
+  "startup_exec_wrapper": "/usr/bin/env",
+  "runtime_filesystem_unchanged_after_startup_correction": true,
+  "historical_base_inherited_tool_startup_corrected": true,
+  "runtime_environment_matches_original_production_image": true
+}

@@ -1,0 +1,918 @@
+<!doctype html><html><meta charset="utf-8"><style>:root {
+  --isbf-v2-font-family: var(--font-family, system-ui, sans-serif);
+  --isbf-v2-font-xs: 13px;
+  --isbf-v2-font-sm: 15px;
+  --isbf-v2-font-md: 16px;
+  --isbf-v2-font-lg: 18px;
+  --isbf-v2-font-xl: 20px;
+  --isbf-v2-weight-medium: 600;
+  --isbf-v2-weight-bold: 750;
+  --isbf-v2-space-1: 4px;
+  --isbf-v2-space-2: 8px;
+  --isbf-v2-space-3: 12px;
+  --isbf-v2-space-4: 16px;
+  --isbf-v2-space-5: 20px;
+  --isbf-v2-space-6: 24px;
+  --isbf-v2-space-8: 32px;
+  --isbf-v2-radius-sm: 8px;
+  --isbf-v2-radius-md: 16px;
+  --isbf-v2-radius-pill: 999px;
+  --isbf-v2-border-width: 1px;
+  --isbf-v2-transition-fast: 120ms ease;
+  --isbf-v2-shadow-menu: 0 8px 28px rgb(0 0 0 / 22%);
+  --isbf-v2-background: var(--secondary);
+  --isbf-v2-surface: var(--secondary);
+  --isbf-v2-text: var(--primary);
+  --isbf-v2-muted: var(--primary-medium);
+  --isbf-v2-border: var(--primary-low);
+  --isbf-v2-border-strong: var(--primary-low-mid);
+  --isbf-v2-hover: var(--primary-very-low);
+  --isbf-v2-active-surface: var(--primary-very-low);
+  --isbf-v2-accent: var(--tertiary);
+  --isbf-v2-accent-contrast: var(--secondary);
+  --isbf-v2-focus-ring: color-mix(
+    in srgb,
+    var(--isbf-v2-accent) 65%,
+    var(--isbf-v2-text)
+  );
+  --isbf-v2-left-width: 260px;
+  --isbf-v2-feed-width: 600px;
+  --isbf-v2-rail-width: 340px;
+  --isbf-v2-gap: 24px;
+  --isbf-v2-layout-max: 1260px;
+  --isbf-v2-page-left: max(16px, calc((100vw - var(--isbf-v2-layout-max)) / 2));
+  --isbf-v2-feed-left: calc(
+    var(--isbf-v2-page-left) + var(--isbf-v2-left-width) + var(--isbf-v2-gap)
+  );
+}
+.isbf-v2-page-header {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: var(--isbf-v2-feed-left);
+  z-index: 30;
+  box-sizing: border-box;
+  align-items: center;
+  gap: 24px;
+  width: var(--isbf-v2-feed-width);
+  height: 60px;
+  padding: 0 16px;
+  border-inline: 1px solid var(--isbf-v2-border);
+  border-bottom: 1px solid var(--isbf-v2-border);
+  background: color-mix(in srgb, var(--isbf-v2-background) 94%, transparent);
+  backdrop-filter: blur(16px);
+  font-size: 20px;
+  font-weight: 750;
+}
+.isbf-v2-page-header__back {
+  display: grid;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 50%;
+}
+.d-header-wrap {
+  position: sticky;
+  top: 0;
+  z-index: z("header");
+}
+/* breakpoint is a legacy mixin. Use `@use "lib/viewport"` instead. */
+.timeline-loading {
+  width: 900px;
+}
+
+.timeline-container {
+  box-sizing: border-box;
+  z-index: 100;
+}
+.timeline-container.timeline-docked-bottom .timeline-footer-controls {
+  opacity: 0;
+  pointer-events: none;
+  cursor: default;
+}
+.timeline-container.timeline-fullscreen.show {
+  max-height: 700px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .timeline-container.timeline-fullscreen.show {
+    transition: max-height 0.4s ease-out;
+  }
+}
+@media screen and (height <= 425px) {
+  .timeline-container.timeline-fullscreen.show {
+    max-height: 75vh;
+  }
+}
+.timeline-container.timeline-fullscreen.show .topic-timeline .timeline-footer-controls {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: calc(100% - 9em);
+}
+.timeline-container.timeline-fullscreen.show .timeline-controls {
+  display: table-cell;
+  vertical-align: top;
+}
+.timeline-container.timeline-fullscreen {
+  max-height: 0;
+  position: fixed;
+  margin-left: 0;
+  background-color: var(--secondary);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid var(--content-border-color);
+  box-shadow: var(--shadow-composer);
+  padding: 20px 0;
+  z-index: 1150;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .timeline-container.timeline-fullscreen {
+    transition: max-height 0.3s ease-in;
+  }
+}
+@media screen and (height <= 425px) {
+  .timeline-container.timeline-fullscreen {
+    padding-top: 10px;
+  }
+}
+.timeline-container.timeline-fullscreen .back-button {
+  display: none;
+}
+.timeline-container.timeline-fullscreen .topic-timeline {
+  width: 100%;
+  table-layout: fixed;
+  margin-left: 0;
+  margin-right: 0;
+  display: table;
+  touch-action: none;
+}
+.timeline-container.timeline-fullscreen .topic-timeline .topic-category {
+  margin-bottom: var(--space-2);
+}
+.timeline-container.timeline-fullscreen .topic-timeline .timeline-date-wrapper {
+  text-align: right;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.timeline-container.timeline-fullscreen .topic-timeline .post-excerpt {
+  max-width: 650px;
+  line-height: var(--line-height-large);
+  display: block;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+}
+@media screen and (height <= 425px) {
+  .timeline-container.timeline-fullscreen .topic-timeline .post-excerpt {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+}
+.timeline-container.timeline-fullscreen .topic-timeline .username {
+  color: var(--primary-high-or-secondary-low);
+  overflow-wrap: break-word;
+  font-weight: bold;
+}
+.timeline-container.timeline-fullscreen .topic-timeline .title {
+  margin-top: 0;
+  padding-left: 1em;
+  display: table-cell;
+  vertical-align: top;
+  width: 100%;
+}
+.timeline-container.timeline-fullscreen .topic-timeline .title h2 {
+  margin-top: 0;
+  display: block;
+  line-height: var(--line-height-medium);
+  font-size: var(--font-up-2);
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+.timeline-container.timeline-fullscreen .topic-timeline .title a {
+  color: var(--primary);
+}
+.timeline-container.timeline-fullscreen .topic-timeline .timeline-last-read {
+  right: 0;
+  margin-left: 0;
+}
+.timeline-container.timeline-fullscreen .topic-timeline .timeline-last-read .progress {
+  display: none;
+}
+.timeline-container.timeline-fullscreen .topic-timeline .timeline-footer-controls {
+  display: none;
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+}
+.timeline-container.timeline-fullscreen .topic-timeline .timeline-footer-controls .topic-admin-menu {
+  display: flex;
+}
+.timeline-container.timeline-fullscreen .topic-timeline .timeline-scrollarea-wrapper {
+  display: table-cell;
+  padding-right: 1.5em;
+  width: 7em;
+}
+.timeline-container.timeline-fullscreen .topic-timeline .timeline-scrollarea {
+  border-right: 1px solid var(--tertiary-low-or-tertiary-high);
+  border-left: none;
+  max-width: 120px;
+}
+.timeline-container.timeline-fullscreen .topic-timeline .timeline-scrollarea .timeline-scroller {
+  position: relative;
+  margin-right: -1.5em;
+  padding-right: 1.5em;
+  justify-content: flex-end;
+}
+.timeline-container.timeline-fullscreen .topic-timeline .timeline-scrollarea .timeline-scroller .timeline-scroller-content {
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+  text-align: right;
+  padding-left: 0;
+  padding-right: 1em;
+}
+.timeline-container.timeline-fullscreen .topic-timeline .timeline-scrollarea .timeline-scroller .timeline-handle {
+  float: none;
+  width: 11px;
+  position: relative;
+  right: -6px;
+}
+.timeline-container.timeline-fullscreen .topic-timeline .timeline-scrollarea .timeline-padding {
+  margin-left: 0;
+  margin-right: -1em;
+}
+.timeline-container.timeline-fullscreen .timeline-scrollarea-wrapper::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.timeline-container.timeline-fullscreen .start-date,
+.timeline-container.timeline-fullscreen .now-date {
+  padding: 0.5em 0;
+}
+.timeline-container .topic-timeline {
+  transition: opacity 0.2s ease-in;
+  touch-action: none;
+  min-width: 6em;
+}
+.timeline-container .topic-timeline .topic-admin-menu .btn {
+  height: 100%;
+}
+.timeline-container .topic-timeline .timeline-controls {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.timeline-container .topic-timeline .timeline-date-wrapper {
+  max-width: 9em;
+  overflow-wrap: anywhere;
+}
+.timeline-container .topic-timeline .timeline-footer-controls {
+  position: absolute;
+  margin-top: 1em;
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .timeline-container .topic-timeline .timeline-footer-controls {
+    transition: opacity 0.2s ease-in;
+  }
+}
+.timeline-container .topic-timeline .timeline-footer-controls button:last-child {
+  margin-right: 0;
+}
+.timeline-container .topic-timeline .start-date {
+  color: var(--primary-med-or-secondary-med);
+}
+.timeline-container .topic-timeline .timeline-scrollarea {
+  margin-top: 0.5em;
+  margin-left: 0.5em;
+  border-left: 1px solid var(--topic-timeline-border-color);
+  position: relative;
+  max-width: 100%;
+  transform: translateZ(0);
+}
+.timeline-container .topic-timeline .timeline-scrollarea.--dragging .timeline-padding {
+  transition: none;
+}
+.timeline-container .topic-timeline .timeline-padding {
+  transition: height 0.15s ease-out;
+  cursor: pointer;
+  margin-left: -1em;
+}
+.timeline-container .topic-timeline .timeline-handle {
+  border-radius: 0.8em;
+  width: 0.35em;
+  background-color: var(--topic-timeline-handle-color);
+  height: 100%;
+  float: left;
+  flex-shrink: 0;
+  z-index: 2;
+  outline: 1px solid transparent;
+  margin-left: 0.5px;
+}
+.timeline-container .topic-timeline .timeline-scroller-content {
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+  padding-left: var(--space-4);
+  position: absolute;
+  max-height: 3em;
+}
+.timeline-container .topic-timeline .timeline-ago {
+  color: var(--primary-med-or-secondary-med);
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.timeline-container .topic-timeline .timeline-scroller {
+  cursor: default;
+  user-select: none;
+  margin-left: -0.22em;
+  cursor: ns-resize;
+  display: flex;
+  align-items: center;
+}
+.timeline-container .topic-timeline .timeline-scroller .back-button {
+  margin-top: var(--space-4);
+}
+.timeline-container .topic-timeline .timeline-replies {
+  overflow: hidden;
+  overflow-wrap: break-word;
+  font-weight: bold;
+}
+.timeline-container .topic-timeline .timeline-last-read {
+  position: absolute;
+  margin-left: -0.35em;
+  z-index: 3;
+}
+.timeline-container .topic-timeline .timeline-last-read .progress {
+  font-size: 0.8em;
+  color: var(--tertiary);
+  margin-right: var(--space-4);
+}
+.timeline-container .topic-timeline .back-button {
+  min-height: unset;
+  padding: 2px 5px;
+}
+.timeline-container .topic-timeline .now-date {
+  display: inline-block;
+  color: var(--primary-med-or-secondary-med);
+  margin-top: var(--space-2);
+}
+
+body:has(.isbf-v2-shell--topic-feed-style) .topic-navigation {
+  color: var(--isbf-v2-muted);
+  font-size: var(--isbf-v2-font-xs);
+}
+body:has(.isbf-v2-shell--topic-feed-style) .topic-navigation .timeline-container {
+  box-sizing: border-box;
+  background: var(--isbf-v2-surface);
+  color: var(--isbf-v2-muted);
+  border: 1px solid var(--isbf-v2-border);
+  border-radius: var(--isbf-v2-radius-sm);
+}
+body:has(.isbf-v2-shell--topic-feed-style) .topic-navigation .timeline-scrollarea {
+  border-color: var(--isbf-v2-border-strong);
+}
+body:has(.isbf-v2-shell--topic-feed-style) .topic-navigation .timeline-handle {
+  background: var(--isbf-v2-accent);
+}
+body:has(.isbf-v2-shell--topic-feed-style) .topic-navigation .timeline-scroller,
+body:has(.isbf-v2-shell--topic-feed-style) .topic-navigation .timeline-date-wrapper a,
+body:has(.isbf-v2-shell--topic-feed-style) .topic-navigation .timeline-footer-controls .btn {
+  color: var(--isbf-v2-text);
+  font-size: var(--isbf-v2-font-xs);
+}
+body:has(.isbf-v2-shell--topic-feed-style) .topic-navigation .timeline-scroller .timeline-replies {
+  font-size: 14px;
+}
+
+body:has(.isbf-v2-shell--topic-feed-style) .d-header-wrap {
+  position: fixed;
+  height: 60px;
+  pointer-events: none;
+}
+
+body:has(.isbf-v2-shell--topic) #main-outlet .container.posts.has-isbf-topic-reading {
+  grid-template-areas: "posts" "timeline";
+  grid-template-columns: minmax(0, 1fr);
+}
+body:has(.isbf-v2-shell--topic) #main-outlet .container.posts > .topic-navigation.isbf-topic-reading:not(.topic-progress-expanded) {
+  position: static;
+  grid-area: timeline;
+  grid-row: auto;
+  justify-self: end;
+  margin-inline: var(--isbf-v2-space-4);
+  pointer-events: auto;
+}
+
+.isbf-topic-reading__heading {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--isbf-v2-space-2);
+  margin-block-end: var(--isbf-v2-space-3);
+}
+.isbf-topic-reading__heading h2 {
+  margin: 0;
+  color: var(--isbf-v2-text);
+  font-size: var(--isbf-v2-font-lg);
+}
+
+.isbf-topic-reading__close {
+  flex: none;
+  min-width: 36px;
+  min-height: 36px;
+}
+
+.isbf-v2-page-header .isbf-topic-reading__toggle {
+  margin-inline-start: auto;
+  min-height: 36px;
+  padding-inline: var(--isbf-v2-space-3);
+  border: 1px solid var(--isbf-v2-border-strong);
+  border-radius: var(--isbf-v2-radius-pill);
+  background: var(--isbf-v2-surface);
+  color: var(--isbf-v2-accent);
+  font-size: var(--isbf-v2-font-sm);
+}
+
+#main-outlet .topic-navigation.isbf-topic-reading {
+  --isbf-topic-reading-track-width: 4px;
+  --isbf-topic-reading-handle-size: 16px;
+}
+#main-outlet .topic-navigation.isbf-topic-reading:not(.topic-progress-expanded) .timeline-scrollarea-wrapper,
+#main-outlet .topic-navigation.isbf-topic-reading:not(.topic-progress-expanded) .timeline-footer-controls {
+  display: none;
+}
+#main-outlet .topic-navigation.isbf-topic-reading #topic-progress {
+  display: none;
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-container {
+  border: 0;
+  background: transparent;
+}
+#main-outlet .topic-navigation.isbf-topic-reading .topic-timeline {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  min-width: 0;
+  touch-action: pan-y;
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-controls {
+  order: 2;
+  justify-content: flex-end;
+  margin-block: var(--isbf-v2-space-3) 0;
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-scrollarea-wrapper {
+  display: block;
+  width: auto;
+  padding: 0;
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-date-wrapper {
+  max-width: none;
+  padding-inline-end: calc(var(--isbf-topic-reading-handle-size) / 2 + var(--isbf-v2-space-3));
+  text-align: end;
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-scrollarea {
+  max-width: none;
+  margin-inline: 0 calc(var(--isbf-topic-reading-handle-size) / 2);
+  border-inline-start: 0;
+  border-inline-end: var(--isbf-topic-reading-track-width) solid var(--isbf-v2-border);
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-padding {
+  position: relative;
+  margin-inline: 0;
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-padding:first-child::before {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: calc(-1 * var(--isbf-topic-reading-track-width));
+  width: var(--isbf-topic-reading-track-width);
+  background: var(--isbf-v2-accent);
+  content: "";
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-scroller {
+  position: relative;
+  justify-content: flex-end;
+  margin-inline: 0 calc((var(--isbf-topic-reading-track-width) + var(--isbf-topic-reading-handle-size)) / -2);
+  padding-inline: 0;
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-scroller::before {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: calc((var(--isbf-topic-reading-handle-size) - var(--isbf-topic-reading-track-width)) / 2);
+  width: var(--isbf-topic-reading-track-width);
+  height: 50%;
+  background: var(--isbf-v2-accent);
+  content: "";
+  pointer-events: none;
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-handle {
+  order: 1;
+  flex: none;
+  position: relative;
+  inset: auto;
+  width: var(--isbf-topic-reading-handle-size);
+  height: var(--isbf-topic-reading-handle-size);
+  margin: 0;
+  border-radius: 50%;
+  background: var(--isbf-v2-accent);
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-scroller-content {
+  position: static;
+  max-height: none;
+  padding-inline: 0 var(--isbf-v2-space-3);
+  text-align: end;
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-last-read {
+  inset-inline: auto calc(-1 * var(--isbf-topic-reading-track-width));
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-inline: 0;
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-last-read .back-button,
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-scroller .back-button {
+  display: none;
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-scroller .timeline-replies {
+  font-size: var(--isbf-v2-font-xl);
+  font-weight: var(--isbf-v2-weight-bold);
+}
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-footer-controls {
+  position: static;
+  max-width: none;
+  gap: var(--isbf-v2-space-2);
+  justify-content: flex-end;
+  margin-block-start: var(--isbf-v2-space-3);
+  opacity: 1;
+  pointer-events: auto;
+}
+#main-outlet .topic-navigation.isbf-topic-reading .isbf-topic-reading__jump,
+#main-outlet .topic-navigation.isbf-topic-reading .isbf-topic-reading__back,
+#main-outlet .topic-navigation.isbf-topic-reading .timeline-open-jump-to-post-prompt-btn {
+  order: -1;
+  width: auto;
+  border-radius: var(--isbf-v2-radius-sm);
+  color: var(--isbf-v2-accent);
+}
+#main-outlet .topic-navigation.isbf-topic-reading .isbf-topic-reading__back {
+  order: -2;
+  min-height: 36px;
+}
+#main-outlet .topic-navigation.isbf-topic-reading.topic-progress-expanded {
+  --isbf-topic-reading-top: calc(
+    60px + var(--isbf-v2-space-3) + env(safe-area-inset-top)
+  );
+  --isbf-topic-reading-bottom: calc(
+    var(--isbf-v2-space-3) + env(safe-area-inset-bottom)
+  );
+  display: block;
+  position: fixed;
+  inset-block: var(--isbf-topic-reading-top) auto;
+  inset-inline: auto calc(var(--isbf-v2-space-3) + env(safe-area-inset-right));
+  z-index: 1150;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: calc(100dvw - 2 * var(--isbf-v2-space-3) - env(safe-area-inset-left) - env(safe-area-inset-right));
+  max-height: calc(100dvh - var(--isbf-topic-reading-top) - var(--isbf-topic-reading-bottom));
+  overflow-y: auto;
+  margin: 0;
+  padding: var(--isbf-v2-space-3);
+  border: 1px solid var(--isbf-v2-border);
+  border-radius: var(--isbf-v2-radius-md);
+  background: color-mix(in srgb, var(--isbf-v2-background) 60%, transparent);
+  backdrop-filter: blur(24px);
+  touch-action: pan-y;
+}
+#main-outlet .topic-navigation.isbf-topic-reading.topic-progress-expanded .isbf-topic-reading__heading {
+  display: flex;
+}
+#main-outlet .topic-navigation.isbf-topic-reading.topic-progress-expanded .timeline-fullscreen {
+  position: static;
+  inset: auto;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  transition: none;
+}
+#main-outlet .topic-navigation.isbf-topic-reading.topic-progress-expanded .timeline-fullscreen .title {
+  display: none;
+}
+#main-outlet .topic-navigation.isbf-topic-reading.topic-progress-expanded .timeline-footer-controls {
+  display: flex;
+  inset: auto;
+}
+
+@media (width <= 600px) {
+  #main-outlet .topic-navigation.isbf-topic-reading.topic-progress-expanded {
+    --isbf-topic-reading-bottom: calc(130px + env(safe-area-inset-bottom));
+  }
+  #main-outlet .topic-navigation.isbf-topic-reading.topic-progress-expanded .isbf-topic-reading__close,
+  #main-outlet .topic-navigation.isbf-topic-reading.topic-progress-expanded .back-button,
+  #main-outlet .topic-navigation.isbf-topic-reading.topic-progress-expanded .timeline-footer-controls .btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .isbf-v2-page-header .isbf-topic-reading__toggle {
+    min-height: 44px;
+  }
+}
+
+html,body{margin:0} .d-header{display:none} #main-outlet{padding-top:60px}.topic-post{border-bottom:1px solid #ddd} article{box-sizing:border-box;padding:16px;height:240px}article p{margin:12px 0} .tall article{height:900px}#topic-bottom{height:900px} .isbf-v2-page-header{left:0;width:100%}</style><body><div class="discourse-root"><div class="d-header-wrap"><header class="d-header"></header></div><div id="main-outlet-wrapper"><div class="isbf-v2-shell--topic-feed-style"><header class="isbf-v2-page-header"><button class="isbf-v2-page-header__back">返回</button><span>帖子</span></header></div><main id="main-outlet"><div class="topic-post"><article id="post_1"><strong>第1条帖子</strong><p>定位验证正文。</p><button>回复</button></article></div><div class="topic-post"><article id="post_2"><strong>第2条帖子</strong><p>定位验证正文。</p><button>回复</button></article></div><div class="topic-post"><article id="post_3"><strong>第3条帖子</strong><p>定位验证正文。</p><button>回复</button></article></div><div class="topic-post"><article id="post_4"><strong>第4条帖子</strong><p>定位验证正文。</p><button>回复</button></article></div><div class="topic-post"><article id="post_5"><strong>第5条帖子</strong><p>定位验证正文。</p><button>回复</button></article></div><div class="topic-post"><article id="post_6"><strong>第6条帖子</strong><p>定位验证正文。</p><button>回复</button></article></div><div class="topic-post"><article id="post_7"><strong>第7条帖子</strong><p>定位验证正文。</p><button>回复</button></article></div><div class="topic-post"><article id="post_8"><strong>第8条帖子</strong><p>定位验证正文。</p><button>回复</button></article></div><div class="topic-post"><article id="post_9"><strong>第9条帖子</strong><p>定位验证正文。</p><button>回复</button></article></div><div class="topic-post"><article id="post_10"><strong>第10条帖子</strong><p>定位验证正文。</p><button>回复</button></article></div><div id="topic-bottom"></div></main></div></div><script>const DEBUG=false;
+function recalculateHeaderOffset() {
+    if (this.isDestroying) {
+      return;
+    }
+
+    // We expect this to be zero, but when overscrolling in Safari it can have a non-zero value:
+    const overscrollPx = Math.max(
+      0,
+      document.documentElement.getBoundingClientRect().top
+    );
+
+    // Tends to be zero, but is set higher when on iPad PWA with the 'footer-navigation' at top of screen
+    const headerCssTop =
+      parseInt(
+        window.getComputedStyle(this._headerWrap).getPropertyValue("top"),
+        10
+      ) || 0;
+
+    let headerWrapBottom =
+      this._headerWrap.getBoundingClientRect().bottom - overscrollPx;
+
+    // iOS Safari bug: when overscrolling at the bottom of the page on iOS, fixed/sticky elements report their position incorrectly.
+    // Clamp the headerWrapBottom to the minimum possible value (top + height) to avoid this.
+    const minimumPossibleHeaderWrapBottom =
+      headerCssTop + this._headerWrap.getBoundingClientRect().height;
+    headerWrapBottom = Math.max(
+      headerWrapBottom,
+      minimumPossibleHeaderWrapBottom
+    );
+
+    // Safari bug: while scrolling on iOS, fixed elements can have a viewport position which fluctuates by sub-pixel amounts.
+    // To avoid that fluctuation affecting the header offset, we subtract that tiny fluctuation from the header-offset.
+    const headerWrapTopDiff =
+      this._headerWrap.getBoundingClientRect().top -
+      overscrollPx -
+      headerCssTop;
+    if (Math.abs(headerWrapTopDiff) < 1) {
+      headerWrapBottom -= headerWrapTopDiff;
+    }
+
+    let mainOutletOffsetTop = Math.max(
+      0,
+      this._mainOutletWrapper.getBoundingClientRect().top -
+        headerWrapBottom -
+        overscrollPx
+    );
+
+    if (DEBUG && isTesting()) {
+      mainOutletOffsetTop -= document
+        .getElementById("ember-testing-container")
+        .getBoundingClientRect().top;
+
+      mainOutletOffsetTop -= 1; // For 1px border on testing container
+    }
+
+    const docStyle = document.documentElement.style;
+
+    const currentHeaderOffset =
+      parseInt(docStyle.getPropertyValue("--header-offset"), 10) || 0;
+    const newHeaderOffset = Math.floor(headerWrapBottom);
+    if (currentHeaderOffset !== newHeaderOffset) {
+      this.header.headerOffset = newHeaderOffset;
+      docStyle.setProperty("--header-offset", `${newHeaderOffset}px`);
+    }
+
+    const currentMainOutletOffset =
+      parseInt(docStyle.getPropertyValue("--main-outlet-offset"), 10) || 0;
+    const newMainOutletOffset = Math.floor(
+      headerWrapBottom + mainOutletOffsetTop
+    );
+    if (currentMainOutletOffset !== newMainOutletOffset) {
+      this.header.mainOutletOffset = newMainOutletOffset;
+      docStyle.setProperty("--main-outlet-offset", `${newMainOutletOffset}px`);
+    }
+  }
+
+function scrollTopFor(y) {
+  return y - offsetCalculator();
+}
+
+function minimumOffset() {
+  deprecated(
+    "The minimumOffset() helper is deprecated, please use headerOffset() instead.",
+    {
+      since: "2.8.0.beta10",
+      id: "discourse.offset-calculator.minimumOffset",
+    }
+  );
+
+  const header = document.querySelector("header.d-header"),
+    iPadNav = document.querySelector(".footer-nav-ipad .footer-nav"),
+    iPadNavHeight = iPadNav ? iPadNav.offsetHeight : 0;
+
+  // if the header has a positive offset from the top of the window, we need to include the offset
+  // this covers cases where a site has a custom header above d-header (covers fixed and unfixed)
+  const headerWrap = document.querySelector(".d-header-wrap"),
+    headerWrapOffset = headerWrap.getBoundingClientRect();
+
+  return header
+    ? header.offsetHeight + headerWrapOffset.top + iPadNavHeight
+    : 0;
+}
+
+function headerOffset() {
+  return (
+    parseInt(
+      document.documentElement.style.getPropertyValue("--header-offset"),
+      10
+    ) || 0
+  );
+}
+
+function offsetCalculator() {
+  const min = headerOffset();
+
+  // on mobile, just use the header
+  if (document.documentElement.classList.contains("mobile-view")) {
+    return min;
+  }
+
+  const windowHeight = window.innerHeight;
+  const documentHeight = document.body.clientHeight;
+  const topicBottomOffsetTop =
+    document.getElementById("topic-bottom").offsetTop;
+
+  // the footer is bigger than the window, we can scroll down past the last post
+  if (documentHeight - windowHeight > topicBottomOffsetTop) {
+    return min;
+  }
+
+  const scrollTop = window.scrollY;
+  const visibleBottomHeight = scrollTop + windowHeight - topicBottomOffsetTop;
+
+  if (visibleBottomHeight > 0) {
+    const bottomHeight = documentHeight - topicBottomOffsetTop;
+    const offset =
+      ((windowHeight - bottomHeight) * visibleBottomHeight) / bottomHeight;
+    return Math.max(min, offset);
+  }
+
+  return min;
+}
+
+
+// Dear traveler, you are entering a zone where we are at war with the browser.
+// The browser is insisting on positioning scrollTop per the location it was in
+// the past, we are insisting on it being where we want it to be.
+// The hack is just to keep trying over and over to position the scrollbar (up to 1 second).
+//
+// The root cause is that a "refresh" on a topic page will almost never be at the
+// same position it was in the past, the URL points to the post at the top of the
+// page, so a refresh will try to bring that post into view causing drift.
+//
+// Additionally if you loaded multiple batches of posts, on refresh they will not
+// be loaded.
+//
+// This hack leads to a slight jerky experience, however other workarounds are more
+// complex, the 2 options we have are
+//
+// 1. onbeforeunload ensure we are scrolled to the right spot
+// 2. give up on the scrollbar and implement it ourselves (something that will happen)
+
+const LOCK_DURATION_MS = 1000;
+const LOCK_TIMEOUT_MS = 5000;
+const SCROLL_EVENTS = ["scroll", "touchmove", "mousedown", "wheel", "keyup"];
+const SCROLL_TYPES = ["mousedown", "mousewheel", "touchmove", "wheel"];
+
+function within(threshold, x, y) {
+  return Math.abs(x - y) < threshold;
+}
+
+class LockOn {
+  constructor(selector, options) {
+    this.selector = selector;
+    this.options = options || {};
+  }
+
+  elementTop() {
+    const element = document.querySelector(this.selector);
+    if (!element) {
+      return;
+    }
+
+    const { top } = element.getBoundingClientRect();
+    let offset = top + window.scrollY;
+    if (this.options.originalTopOffset) {
+      // if element's original top offset is in the bottom half of the viewport
+      // jump to it, otherwise respect the offset
+      if (window.innerHeight / 2.25 > this.options.originalTopOffset) {
+        return offset - this.options.originalTopOffset;
+      }
+    }
+
+    return offset - headerOffset();
+  }
+
+  clearLock() {
+    this._removeListener();
+    window.cancelAnimationFrame(this._requestId);
+
+    if (this.options.finished) {
+      this.options.finished();
+    }
+  }
+
+  lock() {
+    this.startedAt = Date.now();
+    this.previousTop = this.elementTop();
+
+    if (this.previousTop) {
+      window.scrollTo(window.pageXOffset, this.previousTop);
+    }
+
+    this._requestId = window.requestAnimationFrame(this._performLocking);
+
+    this._removeListener();
+    this._addListener();
+  }
+
+  _scrollListener(event) {
+    if (event.which > 0 || SCROLL_TYPES.includes(event.type)) {
+      this.clearLock();
+    }
+  }
+
+  _addListener() {
+    SCROLL_EVENTS.forEach((event) => {
+      document.body.addEventListener(event, this._scrollListener, {
+        passive: true,
+      });
+    });
+  }
+
+  _removeListener() {
+    SCROLL_EVENTS.forEach((event) => {
+      document.body.removeEventListener(event, this._scrollListener);
+    });
+  }
+
+  _performLocking() {
+    const elementTop = this.elementTop();
+
+    // If we can't find the element yet, wait a little bit more
+    if (!this.previousTop && !elementTop) {
+      // …but not too long
+      if (Date.now() - this.startedAt > LOCK_TIMEOUT_MS) {
+        this.clearLock();
+      }
+
+      this._requestId = window.requestAnimationFrame(this._performLocking);
+      return;
+    }
+
+    const top = Math.max(0, elementTop);
+
+    if (isNaN(top)) {
+      return this.clearLock();
+    }
+
+    if (!within(4, top, this.previousTop) || !within(4, window.scrollY, top)) {
+      window.scrollTo(window.pageXOffset, top);
+      this.previousTop = top;
+    }
+
+    // Stop early when maintaining the original offset
+    if (this.options.originalTopOffset) {
+      return this.clearLock();
+    }
+
+    // Stop after a little while
+    if (Date.now() - this.startedAt > LOCK_DURATION_MS) {
+      return this.clearLock();
+    }
+
+    this._requestId = window.requestAnimationFrame(this._performLocking);
+  }
+}
+
+const nativeHeader={header:{},_headerWrap:document.querySelector(".d-header-wrap"),_mainOutletWrapper:document.querySelector("#main-outlet-wrapper")};window.remeasure=()=>recalculateHeaderOffset.call(nativeHeader);window.jump=(number)=>{const lock=new LockOn("#post_"+number);lock._performLocking=lock._performLocking.bind(lock);lock._scrollListener=lock._scrollListener.bind(lock);lock.lock();return lock;};window.readGeometry=()=>({headerOffset:headerOffset(),headerBottom:document.querySelector(".isbf-v2-page-header").getBoundingClientRect().bottom,postTop:document.querySelector("#post_2").getBoundingClientRect().top,postBottom:document.querySelector("#post_2").getBoundingClientRect().bottom,viewportHeight:innerHeight,scrollY:scrollY,wrapperPointerEvents:getComputedStyle(nativeHeader._headerWrap).pointerEvents});</script></body></html>
