@@ -31,6 +31,12 @@ coverage lives in `test/unit/back-navigation-history-test.js` and
 `test/integration/back-navigation-test.gjs`; validation is limited to these
 flows, changed-file lint, and theme JavaScript compilation.
 
+The `discourse/initializers/isbf-back-navigation` initializer registers and starts
+the service through the application owner, the second initializer argument.
+The first argument is the lookup container and does not support registration.
+Rendering tests invoke this entry point with the actual container and owner so
+startup errors are covered alongside the back-link behavior.
+
 The production release also patches the current shared headers in
 `isbf-workbench-topic-page` (marketplace/teamup) and `isbf-resource-page`
 (learning/library). The marketplace and learning sources in this export use

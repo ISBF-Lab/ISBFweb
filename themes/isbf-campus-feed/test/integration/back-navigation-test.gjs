@@ -6,7 +6,7 @@ import { i18n } from "discourse-i18n";
 import ISBFAlumni from "../../discourse/components/isbf-alumni";
 import ISBFLearning from "../../discourse/components/isbf-learning";
 import ISBFMarketplace from "../../discourse/components/isbf-marketplace";
-import ISBFBackNavigation from "../../discourse/services/isbf-back-navigation";
+import { initialize } from "../../discourse/initializers/isbf-back-navigation";
 
 module("ISBF | Integration | Service | isbf-back-navigation", function (hooks) {
   setupRenderingTest(hooks, { stubRouter: true });
@@ -16,7 +16,6 @@ module("ISBF | Integration | Service | isbf-back-navigation", function (hooks) {
       uuid: "current-page",
     }));
     this.backStub = sinon.stub(window.history, "back");
-    this.owner.register("service:isbf-back-navigation", ISBFBackNavigation);
     this.owner.lookup("service:session-store").setObject({
       key: "isbfBackNavigation",
       value: {
@@ -35,6 +34,7 @@ module("ISBF | Integration | Service | isbf-back-navigation", function (hooks) {
   });
 
   test("the marketplace arrow returns to its source through browser history", async function (assert) {
+    initialize(this.owner.__container__, this.owner);
     await render(<template><ISBFMarketplace /></template>);
     assert
       .dom(".isbf-marketplace__header a")
@@ -59,6 +59,7 @@ module("ISBF | Integration | Service | isbf-back-navigation", function (hooks) {
 
   test("directly opened functional pages retain their workbench fallback", async function (assert) {
     this.owner.lookup("service:session-store").remove("isbfBackNavigation");
+    initialize(this.owner.__container__, this.owner);
     await render(<template><ISBFMarketplace /></template>);
     assert
       .dom(".isbf-marketplace__header a")
@@ -92,6 +93,7 @@ module("ISBF | Integration | Service | isbf-back-navigation", function (hooks) {
   });
 
   test("modified clicks retain ordinary link behavior", function (assert) {
+    initialize(this.owner.__container__, this.owner);
     const navigation = this.owner.lookup("service:isbf-back-navigation");
     const preventDefault = sinon.spy();
     for (const modifier of ["ctrlKey", "metaKey", "shiftKey", "altKey"]) {
