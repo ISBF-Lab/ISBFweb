@@ -12,8 +12,17 @@ import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 const TOPIC = "/t/internationalization-localization/280";
 const TOGGLE = ".isbf-topic-reading__toggle";
 
+function topicReadingPretender(server, helper) {
+  server.get("/filter.json", () =>
+    helper.response({ users: [], topic_list: { topics: [] } })
+  );
+  server.post("/isbf/views/impressions", () => helper.response({}));
+  server.post("/isbf/views/post-impressions", () => helper.response({}));
+}
+
 acceptance("ISBF floating topic reading", function (needs) {
   needs.user();
+  needs.pretender(topicReadingPretender);
 
   test("the header controls the single native timeline at desktop widths", async function (assert) {
     await visit(TOPIC);
@@ -143,6 +152,7 @@ acceptance("ISBF floating topic reading", function (needs) {
 acceptance("ISBF floating topic reading on touch", function (needs) {
   needs.user();
   needs.mobileView();
+  needs.pretender(topicReadingPretender);
 
   test("reading does not start the bottom-sheet swipe behavior", async function (assert) {
     await visit(TOPIC);
