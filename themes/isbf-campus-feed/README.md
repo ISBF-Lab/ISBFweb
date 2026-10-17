@@ -96,6 +96,8 @@ settings and components, check both stylesheet and JavaScript compilation, and
 re-export to confirm the repository and live source match.
 Keep the frontend build running during browser tests. `THEME_IDS` also supplies
 the `id` query parameter needed to select the runner rather than its index page.
+Timeline acceptance tests must stub `/t/280/excerpts.json` with an array response;
+the shared `/t/280/:post_number.json` fixture otherwise returns a topic object.
 
 Official activity times and deadlines are provided by `isbf-calendar` 0.3.0.
 The calendar pre-initializer runs after the campus/type extension and preserves

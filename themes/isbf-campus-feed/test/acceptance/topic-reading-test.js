@@ -13,6 +13,7 @@ const TOPIC = "/t/internationalization-localization/280";
 const TOGGLE = ".isbf-topic-reading__toggle";
 
 function topicReadingPretender(server, helper) {
+  server.get("/t/280/excerpts.json", () => helper.response([]));
   server.get("/filter.json", () =>
     helper.response({ users: [], topic_list: { topics: [] } })
   );
