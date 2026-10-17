@@ -37,6 +37,12 @@ The first argument is the lookup container and does not support registration.
 Rendering tests invoke this entry point with the actual container and owner so
 startup errors are covered alongside the back-link behavior.
 
+The theme loader wraps initializer objects so `initialize` receives the
+application owner when called from tests. Reset a service registered during
+application boot before invoking its registration entry point in a rendering
+test. Components reading mutable legacy Topic fields in JavaScript getters use
+`topic.get(...)` so native tracking updates invalidate their unread indicators.
+
 The production release also patches the current shared headers in
 `isbf-workbench-topic-page` (marketplace/teamup) and `isbf-resource-page`
 (learning/library). The marketplace and learning sources in this export use

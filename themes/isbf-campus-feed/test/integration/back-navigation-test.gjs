@@ -12,6 +12,7 @@ module("ISBF | Integration | Service | isbf-back-navigation", function (hooks) {
   setupRenderingTest(hooks, { stubRouter: true });
 
   hooks.beforeEach(function () {
+    this.owner.unregister("service:isbf-back-navigation");
     this.stateStub = sinon.stub(window.history, "state").get(() => ({
       uuid: "current-page",
     }));

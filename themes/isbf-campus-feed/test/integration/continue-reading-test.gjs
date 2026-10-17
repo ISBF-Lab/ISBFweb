@@ -136,6 +136,15 @@ module(
       assert
         .dom(".isbf-continue-reading__unread")
         .exists("actual unread replies show a dot");
+      this.topic.set("unread_posts", 2);
+      await settled();
+      assert
+        .dom(".isbf-continue-reading__unread")
+        .hasAttribute(
+          "title",
+          i18n("topic.unread_posts", { count: 2 }),
+          "the unread label follows tracking updates"
+        );
       this.topic.set("is_nested_view", true);
       await settled();
       assert
@@ -146,6 +155,11 @@ module(
       assert
         .dom(".isbf-continue-reading__unread")
         .exists("the native nested reply signal shows a dot");
+      this.topic.set("has_new_replies", false);
+      await settled();
+      assert
+        .dom(".isbf-continue-reading__unread")
+        .doesNotExist("reading the nested replies clears the dot");
     });
 
     test("retains lock state, keyboard focus and native click history", async function (assert) {
@@ -306,7 +320,7 @@ module("ISBF | Integration | Component | ContinueReading", function (hooks) {
       key: "more-topics-preference-topic",
       value: "suggested-topics",
     });
-    continueReadingInitializer.initialize();
+    continueReadingInitializer.initialize(this.owner);
     this.originalTabs = [...registeredTabs];
     registeredTabs.splice(
       0,

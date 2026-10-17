@@ -26,9 +26,9 @@ export default class ISBFContinueReadingItem extends TopicListItem {
 
   get hasUnread() {
     const topic = this.args.topic;
-    return topic.is_nested_view
-      ? Boolean(topic.has_new_replies)
-      : topic.unread_posts > 0;
+    return topic.get("is_nested_view")
+      ? Boolean(topic.get("has_new_replies"))
+      : topic.get("unread_posts") > 0;
   }
 
   get showCategory() {
@@ -41,9 +41,10 @@ export default class ISBFContinueReadingItem extends TopicListItem {
   }
 
   get unreadLabel() {
-    return this.args.topic.is_nested_view
+    const topic = this.args.topic;
+    return topic.get("is_nested_view")
       ? i18n("topic.has_new_replies")
-      : i18n("topic.unread_posts", { count: this.args.topic.unread_posts });
+      : i18n("topic.unread_posts", { count: topic.get("unread_posts") });
   }
 
   <template>
