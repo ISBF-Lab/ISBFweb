@@ -8,12 +8,14 @@ import {
   feedbackComposeHref,
   isFeedbackPath,
 } from "../lib/feedback-category";
+import ISBFNotificationBell from "./isbf-notification-bell";
 import ISBFV2AccountMenu from "./isbf-v2-account-menu";
 import ISBFV2Brand from "./isbf-v2-brand";
 import ISBFV2MoreMenu from "./isbf-v2-more-menu";
 
 export default class ISBFV2SideNav extends Component {
   @service currentUser;
+  @service isbfNotifications;
   @service router;
   @service site;
 
@@ -121,9 +123,10 @@ export default class ISBFV2SideNav extends Component {
             }}</span></a>
         <a
           aria-current={{if this.notificationsActive "page"}}
+          aria-label={{this.isbfNotifications.linkLabel}}
           class={{if this.notificationsActive "is-active"}}
           href={{this.notificationsHref}}
-        >{{dIcon "bell"}}<span>{{i18n
+        ><ISBFNotificationBell /><span>{{i18n
               (themePrefix "isbf_v2.notifications")
             }}</span></a>
         <a

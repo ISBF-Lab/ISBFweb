@@ -11,6 +11,7 @@ import { ajax } from "discourse/lib/ajax";
 import UserMenuNotificationItem from "discourse/lib/user-menu/notification-item";
 import Notification from "discourse/models/notification";
 import DButton from "discourse/ui-kit/d-button";
+import DToggleSwitch from "discourse/ui-kit/d-toggle-switch";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import { consumeInitialNotificationTab } from "../lib/notification-groups";
@@ -19,35 +20,48 @@ import ISBFNotificationAction from "./isbf-notification-action";
 import ISBFNotificationEntry from "./isbf-notification-entry";
 
 export default class ISBFNotifications extends Component {
+  @service a11y;
   @service appEvents;
   @service currentUser;
+  @service isbfNotifications;
   @service modal;
   @service site;
   @service siteSettings;
 
   @tracked error = false;
+  @tracked filter = "all";
   @tracked groups = [];
   @tracked loaded = false;
   @tracked loading = false;
   @tracked markingRead = false;
   @tracked markReadError = false;
   @tracked nextCursor = null;
+  @tracked revision = 0;
   @tracked tab = "all";
 
   #generation = 0;
   #models = new Map();
-  #markedReadAt = 0;
 
   constructor() {
     super(...arguments);
     this.tab = consumeInitialNotificationTab();
     this.appEvents.on("isbf:notification-tab", this, this.selectTab);
+    this.appEvents.on(
+      "isbf:notifications-updated",
+      this,
+      this.onNotificationUpdate
+    );
     scheduleOnce("afterRender", this, this.loadMore);
   }
 
   willDestroy() {
     super.willDestroy(...arguments);
     this.appEvents.off("isbf:notification-tab", this, this.selectTab);
+    this.appEvents.off(
+      "isbf:notifications-updated",
+      this,
+      this.onNotificationUpdate
+    );
   }
 
   get allSelected() {
@@ -60,6 +74,10 @@ export default class ISBFNotifications extends Component {
 
   get isEmpty() {
     return this.loaded && !this.groups.length;
+  }
+
+  get unreadOnly() {
+    return this.filter === "unread";
   }
 
   @action
@@ -79,57 +97,33 @@ export default class ISBFNotifications extends Component {
   }
 
   @action
-  async loadMore() {
-    if (this.loading || (this.loaded && !this.nextCursor)) {
-      return;
+  loadMore() {
+    return this.#loadGroups(false);
+  }
+
+  @action
+  refresh() {
+    return this.#loadGroups(true);
+  }
+
+  @action
+  onNotificationUpdate(data) {
+    for (const [id, read] of data?.recent || []) {
+      this.#models.get(id)?.set("read", read);
     }
-    const generation = this.#generation;
-    this.loading = true;
-    this.error = false;
-    try {
-      const response = await ajax("/isbf/notifications/groups.json", {
-        data: { tab: this.tab, cursor: this.nextCursor, limit: 20 },
-      });
-      const raw = response.groups.flatMap((group) =>
-        group.kind === "topic"
-          ? group.actions.map((item) => item.latest.notification)
-          : [group.latest.notification]
-      );
-      await this.#initializeModels(raw);
-      if (this.#stale(generation)) {
-        return;
-      }
-      const existing = new Set(this.groups.map((group) => group.key));
-      const groups = response.groups
-        .filter((group) => !existing.has(group.key))
-        .map((group) => ({
-          ...group,
-          ...(group.kind === "topic"
-            ? {
-                actions: group.actions.map((item) => ({
-                  ...item,
-                  latest: this.prepareEntry(item.latest),
-                })),
-              }
-            : { latest: this.prepareEntry(group.latest) }),
-        }));
-      this.groups = [...this.groups, ...groups];
-      this.nextCursor = response.next_cursor;
-      this.loaded = true;
-    } catch {
-      if (!this.#stale(generation)) {
-        this.error = true;
-      }
-    } finally {
-      if (!this.#stale(generation)) {
-        this.loading = false;
-      }
-    }
+    scheduleOnce("afterRender", this, this.refresh);
   }
 
   @action
   async prepareEntries(entries) {
-    await this.#initializeModels(entries.map((entry) => entry.notification));
+    const generation = this.#generation;
+    await this.#initializeModels(
+      entries.map((entry) => entry.notification),
+      generation
+    );
+    if (this.#stale(generation)) {
+      return [];
+    }
     return entries.map((entry) => this.prepareEntry(entry));
   }
 
@@ -156,14 +150,14 @@ export default class ISBFNotifications extends Component {
     if (this.tab === tab) {
       return;
     }
-    this.#generation++;
     this.tab = tab;
-    this.groups = [];
-    this.nextCursor = null;
-    this.loaded = false;
-    this.loading = false;
-    this.error = false;
-    this.loadMore();
+    this.#reset();
+  }
+
+  @action
+  toggleUnreadOnly() {
+    this.filter = this.unreadOnly ? "all" : "unread";
+    this.#reset();
   }
 
   @action
@@ -191,20 +185,31 @@ export default class ISBFNotifications extends Component {
     }
     this.markingRead = true;
     this.markReadError = false;
+    const version = this.isbfNotifications.version;
     try {
       await ajax("/notifications/mark-read", { type: "PUT" });
       if (this.isDestroying) {
         return;
       }
-      this.#markedReadAt = Date.now();
-      this.#models.forEach((notification) => notification.set("read", true));
-      this.currentUser.set("grouped_unread_notifications", {});
-      this.currentUser.set("unread_high_priority_notifications", 0);
-      this.currentUser.set("unread_notifications", 0);
+      // A notification state received during this request may include a newer notice.
+      if (this.isbfNotifications.version === version) {
+        this.#models.forEach((notification) => notification.set("read", true));
+        this.currentUser.setProperties({
+          grouped_unread_notifications: {},
+          unread_high_priority_notifications: 0,
+          unread_notifications: 0,
+          all_unread_notifications_count: 0,
+        });
+      }
       this.markReadError = false;
+      this.refresh();
     } catch {
       if (!this.isDestroying) {
         this.markReadError = true;
+        this.a11y.announce(
+          i18n(themePrefix("isbf_v2.action_failed")),
+          "assertive"
+        );
       }
     } finally {
       if (!this.isDestroying) {
@@ -229,7 +234,7 @@ export default class ISBFNotifications extends Component {
       : title;
   }
 
-  async #initializeModels(raw) {
+  async #initializeModels(raw, generation) {
     const missing = [
       ...new Map(
         raw
@@ -238,14 +243,103 @@ export default class ISBFNotifications extends Component {
       ).values(),
     ];
     const models = await Notification.initializeNotifications(missing);
+    if (this.#stale(generation)) {
+      return;
+    }
     for (const model of models) {
-      if (Date.parse(model.created_at) <= this.#markedReadAt) {
-        model.set("read", true);
-      }
       if (!this.#models.has(model.id)) {
         this.#models.set(model.id, model);
       }
     }
+    for (const notification of raw) {
+      this.#models.get(notification.id).setProperties(notification);
+    }
+  }
+
+  async #loadGroups(refresh) {
+    if (
+      this.isDestroying ||
+      (!refresh && (this.loading || (this.loaded && !this.nextCursor)))
+    ) {
+      return;
+    }
+    if (refresh) {
+      this.#generation++;
+    }
+    const generation = this.#generation;
+    const target = refresh ? Math.max(this.groups.length, 20) : 0;
+    let cursor = refresh ? null : this.nextCursor;
+    const incoming = [];
+    this.loading = true;
+    this.error = false;
+    try {
+      do {
+        const response = await ajax("/isbf/notifications/groups.json", {
+          data: { tab: this.tab, filter: this.filter, cursor, limit: 20 },
+        });
+        if (this.#stale(generation)) {
+          return;
+        }
+        incoming.push(...response.groups);
+        cursor = response.next_cursor;
+      } while (refresh && cursor && incoming.length < target);
+      await this.#initializeModels(
+        incoming.flatMap((group) =>
+          group.kind === "topic"
+            ? group.actions.map((item) => item.latest.notification)
+            : [group.latest.notification]
+        ),
+        generation
+      );
+      if (this.#stale(generation)) {
+        return;
+      }
+      const existing = new Set(
+        refresh ? [] : this.groups.map((group) => group.key)
+      );
+      const groups = incoming
+        .filter((group) => !existing.has(group.key))
+        .map((group) => ({
+          ...group,
+          ...(group.kind === "topic"
+            ? {
+                actions: group.actions.map((item) => ({
+                  ...item,
+                  latest: this.prepareEntry(item.latest),
+                })),
+              }
+            : { latest: this.prepareEntry(group.latest) }),
+        }));
+      this.groups = refresh ? groups : [...this.groups, ...groups];
+      this.nextCursor = cursor;
+      this.loaded = true;
+      if (this.unreadOnly && !this.groups.length) {
+        this.a11y.announce(
+          i18n(themePrefix("isbf_v2.notifications_unread_empty"))
+        );
+      }
+      if (refresh) {
+        this.revision++;
+      }
+    } catch {
+      if (!this.#stale(generation)) {
+        this.error = true;
+      }
+    } finally {
+      if (!this.#stale(generation)) {
+        this.loading = false;
+      }
+    }
+  }
+
+  #reset() {
+    this.#generation++;
+    this.groups = [];
+    this.nextCursor = null;
+    this.loaded = false;
+    this.loading = false;
+    this.error = false;
+    this.loadMore();
   }
 
   #stale(generation) {
@@ -272,6 +366,46 @@ export default class ISBFNotifications extends Component {
             <a href="/my/preferences/notifications">{{i18n
                 (themePrefix "isbf_v2.notifications_settings")
               }}</a>
+            <div class="isbf-notifications__filter">
+              <DToggleSwitch
+                @label={{themePrefix "isbf_v2.notifications_unread_only"}}
+                @state={{this.unreadOnly}}
+                {{on "click" this.toggleUnreadOnly}}
+              />
+            </div>
+            <div
+              aria-label={{i18n
+                (themePrefix "isbf_v2.notifications_badge_style")
+              }}
+              class="isbf-notifications__badge-options"
+              role="group"
+            >
+              <p>{{i18n (themePrefix "isbf_v2.notifications_badge_style")}}</p>
+              <DButton
+                @action={{fn this.isbfNotifications.saveBadgeStyle "number"}}
+                @ariaPressed={{this.isbfNotifications.numberStyle}}
+                @disabled={{this.isbfNotifications.savingStyle}}
+                @label={{themePrefix "isbf_v2.notifications_badge_number"}}
+              />
+              <DButton
+                @action={{fn this.isbfNotifications.saveBadgeStyle "dot"}}
+                @ariaPressed={{this.isbfNotifications.dotStyle}}
+                @disabled={{this.isbfNotifications.savingStyle}}
+                @label={{themePrefix "isbf_v2.notifications_badge_dot"}}
+              />
+            </div>
+            {{#if this.isbfNotifications.styleError}}
+              <div class="isbf-notifications__preference-error" role="alert">
+                <p>{{i18n
+                    (themePrefix "isbf_v2.notifications_badge_error")
+                  }}</p>
+                <DButton
+                  @action={{this.isbfNotifications.retryBadgeStyle}}
+                  @disabled={{this.isbfNotifications.savingStyle}}
+                  @label={{themePrefix "isbf_v2.notifications_retry"}}
+                />
+              </div>
+            {{/if}}
           </div>
         </details>
       </header>
@@ -300,27 +434,34 @@ export default class ISBFNotifications extends Component {
             @action={{this.markRead}}
             @label={{themePrefix "isbf_v2.notifications_retry"}}
           /></div>{{/if}}
-      {{#each this.groups key="key" as |group|}}
-        {{#if group.topic}}
-          <article class="isbf-notifications__topic">
-            <h2><a href={{group.topic.url}}>{{this.topicTitle
-                  group.topic.title
-                }}</a></h2>
-            {{#each group.actions key="key" as |item|}}
-              <ISBFNotificationAction
-                @actionLabel={{this.actionLabel}}
-                @group={{item}}
-                @prepareEntries={{this.prepareEntries}}
-              />
-            {{/each}}
-          </article>
-        {{else}}
-          <article class="isbf-notifications__standalone"><ISBFNotificationEntry
-              @entry={{group.latest}}
-              @standalone={{true}}
-            /></article>
-        {{/if}}
-      {{/each}}
+      {{#if this.groups.length}}
+        <div class="isbf-notifications__groups">
+          {{#each this.groups key="key" as |group|}}
+            {{#if group.topic}}
+              <article class="isbf-notifications__topic">
+                <h2 class="isbf-notifications__topic-title"><a
+                    href={{group.topic.url}}
+                  >{{this.topicTitle group.topic.title}}</a></h2>
+                {{#each group.actions key="key" as |item|}}
+                  <ISBFNotificationAction
+                    @actionLabel={{this.actionLabel}}
+                    @group={{item}}
+                    @prepareEntries={{this.prepareEntries}}
+                    @revision={{this.revision}}
+                  />
+                {{/each}}
+              </article>
+            {{else}}
+              <article
+                class="isbf-notifications__standalone"
+              ><ISBFNotificationEntry
+                  @entry={{group.latest}}
+                  @standalone={{true}}
+                /></article>
+            {{/if}}
+          {{/each}}
+        </div>
+      {{/if}}
       {{#if this.loading}}<p
           class="isbf-notifications__status"
           role="status"
@@ -333,7 +474,13 @@ export default class ISBFNotifications extends Component {
             @label={{themePrefix "isbf_v2.notifications_retry"}}
           /></div>
       {{else if this.isEmpty}}<p class="isbf-notifications__status">{{i18n
-            (themePrefix "isbf_v2.notifications_empty")
+            (themePrefix
+              (if
+                this.unreadOnly
+                "isbf_v2.notifications_unread_empty"
+                "isbf_v2.notifications_empty"
+              )
+            )
           }}</p>{{/if}}
       {{#if this.nextCursor}}<DButton
           class="isbf-notifications__more"

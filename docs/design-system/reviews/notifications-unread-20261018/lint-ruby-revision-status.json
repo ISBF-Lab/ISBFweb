@@ -1,0 +1,10 @@
+{
+  "command": [
+    "ruby",
+    "bin/lint",
+    "--fix",
+    "plugins/isbf-notifications/lib/isbf_notifications/grouped_notifications.rb"
+  ],
+  "exit_code": 0,
+  "configuration": "Existing offline tools/lefthook-serial.yml; serial execution, repository CI gates unchanged"
+}

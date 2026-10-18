@@ -1,0 +1,15 @@
+[
+  "themes/isbf-campus-feed/common/common.scss",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-action.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+  "themes/isbf-campus-feed/test/integration/notifications-test.gjs",
+  "themes/isbf-campus-feed/README.md",
+  "docs/design-system/ui-status.md",
+  "docs/design-system/tokens.md",
+  "docs/design-system/components.md",
+  "docs/design-system/reference-map.md",
+  "docs/design-system/references/README.md",
+  "docs/design-system/references/manifest.json",
+  "docs/design-system/reviews/notifications-unread-20261018/README.md",
+  "docs/design-system/reviews/notifications-unread-20261018/layout-revision/README.md"
+]

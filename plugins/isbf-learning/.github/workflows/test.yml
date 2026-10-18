@@ -1,0 +1,23 @@
+name: Learning plugin tests
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  discourse:
+    uses: discourse/.github/.github/workflows/discourse-plugin.yml@main
+    with:
+      name: isbf-learning
+      skip_linting: true
+      skip_annotations: true
+      core_ref: f18a1985b22e5d4c0a0fffd6f91812105467afdb
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+      - run: find . -name '*.rb' -not -path './.git/*' -print0 | xargs -0 -n1 ruby -c
+      - run: bash -n deploy/install-plugin.sh

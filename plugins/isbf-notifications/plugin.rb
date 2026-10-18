@@ -11,12 +11,31 @@ enabled_site_setting :isbf_notifications_enabled
 
 after_initialize do
   module ::IsbfNotifications
+    BADGE_STYLE_FIELD = "isbf_notification_badge_style"
+    BADGE_STYLES = %w[number dot].freeze
+
     class Engine < ::Rails::Engine
       engine_name "isbf-notifications"
       isolate_namespace IsbfNotifications
     end
   end
   require_relative "lib/isbf_notifications/grouped_notifications"
+
+  register_user_custom_field_type(IsbfNotifications::BADGE_STYLE_FIELD, :string, max_length: 6)
+  register_editable_user_custom_field(IsbfNotifications::BADGE_STYLE_FIELD)
+
+  add_model_callback(:user, :validate) do
+    next if custom_fields_clean?
+
+    style = custom_fields[IsbfNotifications::BADGE_STYLE_FIELD]
+    if !style.nil? && IsbfNotifications::BADGE_STYLES.exclude?(style)
+      errors.add(:base, I18n.t("isbf_notifications.invalid_badge_style"))
+    end
+  end
+
+  add_to_serializer(:current_user, :isbf_notification_badge_style) do
+    object.custom_fields[IsbfNotifications::BADGE_STYLE_FIELD] == "dot" ? "dot" : "number"
+  end
 
   class ::IsbfNotifications::GroupsController < ::ApplicationController
     requires_login
@@ -51,6 +70,7 @@ after_initialize do
         current_user,
         guardian,
         tab: params[:tab] || "all",
+        filter: params[:filter] || "all",
       )
     end
   end

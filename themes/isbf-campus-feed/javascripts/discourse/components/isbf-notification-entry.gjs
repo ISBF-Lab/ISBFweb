@@ -71,6 +71,7 @@ export default class ISBFNotificationEntry extends Component {
             /></ul>
         {{else}}
           <a
+            class="isbf-notification-entry__link"
             href={{@entry.item.linkHref}}
             title={{@entry.item.linkTitle}}
             {{on "click" this.open}}

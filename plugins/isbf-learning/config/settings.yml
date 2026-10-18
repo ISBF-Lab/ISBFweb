@@ -1,0 +1,19 @@
+plugins:
+  isbf_learning_enabled:
+    default: true
+    client: true
+  isbf_learning_category_id:
+    default: 0
+    type: integer
+    min: 0
+  isbf_learning_storage_limit_mb:
+    default: 512
+    min: 1
+    max: 2048
+  isbf_library_enabled:
+    default: false
+    client: true
+  isbf_library_category_id:
+    default: 0
+    type: integer
+    min: 0

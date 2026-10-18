@@ -1,0 +1,78 @@
+{
+  "source_version": "8055e271058147d25004a7d483ace084b51740252c91cfd7dac7ee264011ee28",
+  "lint": {
+    "passed": true,
+    "command_record": "lint-status.json"
+  },
+  "frontend_compilation": [
+    {
+      "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-action.gjs",
+      "compiled": true
+    },
+    {
+      "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-bell.gjs",
+      "compiled": true
+    },
+    {
+      "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-unread.gjs",
+      "compiled": true
+    },
+    {
+      "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+      "compiled": true
+    },
+    {
+      "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+      "compiled": true
+    },
+    {
+      "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-side-nav.gjs",
+      "compiled": true
+    },
+    {
+      "file": "themes/isbf-campus-feed/javascripts/discourse/initializers/isbf-notifications.js",
+      "compiled": true
+    },
+    {
+      "file": "themes/isbf-campus-feed/javascripts/discourse/services/isbf-notifications.js",
+      "compiled": true
+    },
+    {
+      "file": "themes/isbf-campus-feed/test/integration/notifications-test.gjs",
+      "compiled": true
+    }
+  ],
+  "style_compilation": {
+    "passed": true,
+    "complete_workspace_common_scss": true,
+    "palettes": [
+      "light",
+      "dark"
+    ],
+    "locales": [
+      "en",
+      "zh_CN"
+    ]
+  },
+  "browser": {
+    "passed": true,
+    "checks": 87,
+    "layouts": 8,
+    "screenshots": 16,
+    "action_dot_center_tolerance_px": 0.5,
+    "topic_heading_dots": 0,
+    "unread_switch": "inside the top-right three-dot menu",
+    "runtime_errors": 0,
+    "production_backend_used": false
+  },
+  "native_tests": {
+    "executed_this_revision": 0,
+    "unchanged_environment_limits": "../native-test-attempts.json"
+  },
+  "source_snapshots_verified": 20,
+  "changed_product_files_from_initial": 5,
+  "preview_forum_state": "exited",
+  "temporary_tool_container_removed": true,
+  "deployed": false,
+  "final_visual_acceptance": "pending user review"
+}

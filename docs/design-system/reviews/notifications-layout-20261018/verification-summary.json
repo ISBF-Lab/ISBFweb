@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "source_version": "29c1d7e8c45f283a6cb3ababd3d0599d2b85a38dc4e688ece767b75957820808",
+  "source_snapshots": 13,
+  "source_hashes_match": true,
+  "javascript_compilation_files": 10,
+  "style_compilation": {
+    "passed": true,
+    "complete_workspace_common_scss": true,
+    "palettes": [
+      "light",
+      "dark"
+    ],
+    "locales": [
+      "en",
+      "zh_CN"
+    ],
+    "common_scss_sha256": "dfb46bcd606a06ec1519cfe2c4fac6fc8adc7c34d090df19ef5dd39c6c0a265e"
+  },
+  "lint_passed": true,
+  "browser_assertions": 159,
+  "responsive_layouts": 8,
+  "layout_regression_assertions": 101,
+  "row_click_assertions": 58,
+  "native_qunit": {
+    "command": [
+      "ruby",
+      "bin/qunit",
+      "--theme-name",
+      "ISBF Campus Feed",
+      "--qunit-path",
+      "/theme-qunit",
+      "--filter",
+      "/ISBFNotificationEntry|ISBFNotifications/i"
+    ],
+    "exit_code": 1,
+    "log": "qunit-attempt.log",
+    "preview_forum_started": false,
+    "production_backend_used": false,
+    "tests_executed": 0,
+    "blocked_reason": "No isolated Rails test server; full preview remains stopped"
+  },
+  "last_browser_resources": {
+    "command": [
+      "python3",
+      "/review/check-browser.py",
+      "--clicks-only"
+    ],
+    "image": "local_discourse/isbf_app:join-20261015",
+    "exit_code": 0,
+    "network": "none",
+    "memory_limit_bytes": 1476395008,
+    "swap_total_bytes": 1476395008,
+    "reserve_bytes": 536870912,
+    "initial": {
+      "host_available": 2052321280,
+      "effective_available": 2052321280,
+      "cgroups": []
+    },
+    "peak_bytes": 978321408,
+    "minimum_host_available_bytes": 1310232576,
+    "elapsed_seconds": 148.0,
+    "stop_reason": null,
+    "container_removed": true
+  },
+  "cleanup": {
+    "task_tools": {
+      "exit_code": 0,
+      "output": ""
+    },
+    "preview": {
+      "exit_code": 0,
+      "output": "exited"
+    }
+  },
+  "deployed": false,
+  "final_visual_acceptance": "Pending user review of the confirmed local design"
+}

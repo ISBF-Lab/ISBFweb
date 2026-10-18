@@ -1,0 +1,18 @@
+zh_CN:
+  js:
+    review:
+      types:
+        reviewable_isbf_learning_course:
+          title: "课程申请"
+          noun: "课程申请"
+    isbf_learning:
+      reviewables:
+        actions:
+          approve_course:
+            title: "批准课程"
+            description: "将课程添加到对应年级。"
+            complete: "课程已批准。"
+          reject_course:
+            title: "拒绝课程"
+            description: "拒绝申请，不添加课程。"
+            complete: "课程申请已拒绝。"

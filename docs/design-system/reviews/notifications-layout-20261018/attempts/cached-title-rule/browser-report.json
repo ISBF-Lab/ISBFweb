@@ -1,0 +1,322 @@
+{
+  "passed": false,
+  "full_ember_client": true,
+  "production_backend_used": false,
+  "checks": [
+    "the actual compiled shell and notification components boot",
+    "one grouped notification page is rendered",
+    "all unread records count even when the header's unseen count is zero",
+    "history remains visible by default",
+    "both unread actions retain a dot",
+    "topic headings have no unread dot",
+    "the unread switch belongs to the closed three-dot menu",
+    "opening the page never marks notices read",
+    "both entrances handle unread boundary 0",
+    "both entrances handle unread boundary 1",
+    "both entrances handle unread boundary 99",
+    "both entrances handle unread boundary 100",
+    "unread filtering selects an older unread representative before grouping",
+    "the consolidated like notice expands into its existing actor rows",
+    "lazy detail requests retain the unread filter",
+    "expansion never consumes unread counts",
+    "the mentions tab composes with unread filtering",
+    "all actors sharing one consolidated notification change read state together",
+    "clicking a second actor never deducts the same notice twice",
+    "a failed preference save preserves numeric badges",
+    "retry saves the dot preference through the user update endpoint",
+    "dot mode retains a translated accessible count",
+    "a fresh client restores the account preference and defaults to all notifications",
+    "Escape closes the notification menu",
+    "1280px light uses its actual theme palette",
+    "one visible badge survives 1280px light, including collapsed navigation",
+    "1280px light has no horizontal overflow",
+    "1280px light badge text contrast meets AA",
+    "1280px light centers each action dot on its label",
+    "1280px light has no separate filter row"
+  ],
+  "layouts": [],
+  "errors": [],
+  "console_errors": [
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "Failed to load resource: net::ERR_FAILED"
+  ],
+  "missing_assets": [],
+  "api_requests": [
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "unread"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "mentions"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json"
+    },
+    {
+      "method": "GET",
+      "path": "/favicon/proxied"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json"
+    }
+  ],
+  "failure": "1280px light applies the confirmed group boundary and text hierarchy",
+  "debug": {
+    "failure": null,
+    "source_installed": true,
+    "body": "跳到主要内容\nISBF - One\n首页\n探索\n2\n通知\n日历\n工作台\n书签\n个人资料\n更多\n发布\n审核\n预览用户\n@preview-user\n搜索\n社区入口\n官方\n浏览分类\n精华内容\n通知\n全部\n提及\n校园讨论\n回复 · 2\n未读通知\n同学201 @student-201 回复\n7 小时\n点赞 · 3\n未读通知\n未读通知\n同学201 @student-201 点赞\n7 小时\nstudent 校园讨论\n7 小时\n \n "
+  }
+}

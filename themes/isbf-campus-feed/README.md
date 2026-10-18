@@ -317,3 +317,38 @@ lists or change the recommendation provider. Source snapshots, checks, local fix
 and acceptance boundaries are in `docs/design-system/reviews/continue-reading-20261016/README.md`.
 
 2026-10-16：继续阅读已技术发布，仅接管普通话题底部的两种已知来源。实际合并源码、原生检查和恢复见[发布记录](../../docs/design-system/deployments/continue-reading-20261016/README.md)，最终视觉仍待用户核验。
+
+## Unread notification indicators (2026-10-18)
+
+The shared `isbf-notifications` service supplies both navigation bells from native
+`grouped_unread_notifications`, including seen notices that remain unread. Numeric badges
+show up to 99 and then `99+`; zero hides the indicator. The notification menu saves a
+private account preference for numeric or dot badges through the existing user update API.
+
+The grouped page defaults to all notices. Its top-right menu contains an unread-only switch
+for both tabs and their lazy detail endpoints. Unread dots are vertically centered beside
+action labels; topic headings have no dot. Opening the page or expanding an action never consumes unread
+state. Private notification-channel updates refresh loaded groups and expanded details,
+discard obsolete requests, and preserve notices arriving during a bulk marking request.
+Source versions, acceptance scope, and offline verification are recorded in
+`docs/design-system/reviews/notifications-unread-20261018/README.md`.
+
+## Notification hierarchy and row links (2026-10-18)
+
+Topic groups use the confirmed 1px border, 8px radius and 16px padding/gap.
+Topic titles, action categories, notification text and times use the existing
+18/15/16/13px tokens. Native notification icons distinguish actions, which keep
+their independent expansion, retry and pagination. Standalone notices share the
+group boundary and retain their native renderer.
+
+Each entry's original primary link covers its avatar, time and whitespace using
+a row-scoped pseudo-element. The native click handler still owns navigation and
+read state, and keyboard focus outlines the row. Native outlet controls remain
+above that link layer. Topic headings keep their separate links and no unread
+dot; the unread-only switch stays in the three-dot menu. No new data requests or
+backend interfaces are introduced. Source snapshots, preview and acceptance limits:
+`docs/design-system/reviews/notifications-layout-20261018/README.md`.
+
+The native notification menu's rendering test uses `checkVisibility()` for closed
+`details` content: its descendants can retain nonzero layout rectangles while the
+browser hides them. It checks the initial closed state, opening, and closing again.

@@ -1,0 +1,1002 @@
+{
+  "passed": false,
+  "full_ember_client": true,
+  "production_backend_used": false,
+  "checks": [
+    "the actual compiled shell and notification components boot",
+    "one grouped notification page is rendered",
+    "all unread records count even when the header's unseen count is zero",
+    "history remains visible by default",
+    "both unread actions retain a dot",
+    "topic headings have no unread dot",
+    "the unread switch belongs to the closed three-dot menu",
+    "opening the page never marks notices read",
+    "both entrances handle unread boundary 0",
+    "both entrances handle unread boundary 1",
+    "both entrances handle unread boundary 99",
+    "both entrances handle unread boundary 100",
+    "unread filtering selects an older unread representative before grouping",
+    "the consolidated like notice expands into its existing actor rows",
+    "lazy detail requests retain the unread filter",
+    "expansion never consumes unread counts",
+    "the mentions tab composes with unread filtering",
+    "all actors sharing one consolidated notification change read state together",
+    "clicking a second actor never deducts the same notice twice",
+    "a failed preference save preserves numeric badges",
+    "retry saves the dot preference through the user update endpoint",
+    "dot mode retains a translated accessible count",
+    "a fresh client restores the account preference and defaults to all notifications",
+    "Escape closes the notification menu",
+    "1280px light uses its actual theme palette",
+    "one visible badge survives 1280px light, including collapsed navigation",
+    "1280px light has no horizontal overflow",
+    "1280px light badge text contrast meets AA",
+    "1280px light centers each action dot on its label",
+    "1280px light has no separate filter row",
+    "1280px light applies the confirmed group boundary and text hierarchy",
+    "1280px light gives avatars, times and row whitespace to the original links",
+    "1280px light keeps the filter inside the visible menu",
+    "1280px dark uses its actual theme palette",
+    "one visible badge survives 1280px dark, including collapsed navigation",
+    "1280px dark has no horizontal overflow",
+    "1280px dark badge text contrast meets AA",
+    "1280px dark centers each action dot on its label",
+    "1280px dark has no separate filter row",
+    "1280px dark applies the confirmed group boundary and text hierarchy",
+    "1280px dark gives avatars, times and row whitespace to the original links",
+    "1280px dark keeps the filter inside the visible menu",
+    "900px light uses its actual theme palette",
+    "one visible badge survives 900px light, including collapsed navigation",
+    "900px light has no horizontal overflow",
+    "900px light badge text contrast meets AA",
+    "900px light centers each action dot on its label",
+    "900px light has no separate filter row",
+    "900px light applies the confirmed group boundary and text hierarchy",
+    "900px light gives avatars, times and row whitespace to the original links",
+    "900px light keeps the filter inside the visible menu",
+    "900px dark uses its actual theme palette",
+    "one visible badge survives 900px dark, including collapsed navigation",
+    "900px dark has no horizontal overflow",
+    "900px dark badge text contrast meets AA",
+    "900px dark centers each action dot on its label",
+    "900px dark has no separate filter row",
+    "900px dark applies the confirmed group boundary and text hierarchy",
+    "900px dark gives avatars, times and row whitespace to the original links",
+    "900px dark keeps the filter inside the visible menu",
+    "390px light uses its actual theme palette",
+    "one visible badge survives 390px light, including collapsed navigation",
+    "390px light has no horizontal overflow",
+    "390px light badge text contrast meets AA",
+    "390px light centers each action dot on its label",
+    "390px light has no separate filter row",
+    "390px light applies the confirmed group boundary and text hierarchy",
+    "390px light gives avatars, times and row whitespace to the original links",
+    "390px light keeps the filter inside the visible menu",
+    "390px dark uses its actual theme palette",
+    "one visible badge survives 390px dark, including collapsed navigation",
+    "390px dark has no horizontal overflow",
+    "390px dark badge text contrast meets AA",
+    "390px dark centers each action dot on its label",
+    "390px dark has no separate filter row",
+    "390px dark applies the confirmed group boundary and text hierarchy",
+    "390px dark gives avatars, times and row whitespace to the original links",
+    "390px dark keeps the filter inside the visible menu",
+    "320px light uses its actual theme palette",
+    "one visible badge survives 320px light, including collapsed navigation",
+    "320px light has no horizontal overflow",
+    "320px light badge text contrast meets AA",
+    "320px light centers each action dot on its label",
+    "320px light has no separate filter row",
+    "320px light applies the confirmed group boundary and text hierarchy",
+    "320px light gives avatars, times and row whitespace to the original links",
+    "320px light keeps the filter inside the visible menu",
+    "320px dark uses its actual theme palette",
+    "one visible badge survives 320px dark, including collapsed navigation",
+    "320px dark has no horizontal overflow",
+    "320px dark badge text contrast meets AA",
+    "320px dark centers each action dot on its label",
+    "320px dark has no separate filter row",
+    "320px dark applies the confirmed group boundary and text hierarchy",
+    "320px dark gives avatars, times and row whitespace to the original links",
+    "320px dark keeps the filter inside the visible menu",
+    "failed bulk marking retains unread indicators",
+    "the delayed bulk request reaches the synthetic backend",
+    "a notification arriving during bulk marking survives the response",
+    "cross-tab reading clears both badge and unread list",
+    "a slow old response cannot replace a newer unread-filter result",
+    "1280px replied avatar opens the exact native target once and consumes one unread notice",
+    "1280px replied content opens the exact native target once and consumes one unread notice",
+    "1280px replied time opens the exact native target once and consumes one unread notice",
+    "1280px replied whitespace opens the exact native target once and consumes one unread notice",
+    "1280px reopening replied never consumes another notice",
+    "1280px mentioned avatar opens the exact native target once and consumes one unread notice",
+    "1280px mentioned content opens the exact native target once and consumes one unread notice",
+    "1280px mentioned time opens the exact native target once and consumes one unread notice",
+    "1280px mentioned whitespace opens the exact native target once and consumes one unread notice",
+    "1280px reopening mentioned never consumes another notice"
+  ],
+  "layouts": [
+    {
+      "width": 1280,
+      "mode": "light",
+      "background": "rgb(255, 255, 255)",
+      "badge_text_contrast": 5.77,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 1280,
+      "mode": "dark",
+      "background": "rgb(16, 20, 19)",
+      "badge_text_contrast": 9.79,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 900,
+      "mode": "light",
+      "background": "rgb(255, 255, 255)",
+      "badge_text_contrast": 5.77,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 900,
+      "mode": "dark",
+      "background": "rgb(16, 20, 19)",
+      "badge_text_contrast": 9.79,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "mode": "light",
+      "background": "rgb(255, 255, 255)",
+      "badge_text_contrast": 5.77,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "mode": "dark",
+      "background": "rgb(16, 20, 19)",
+      "badge_text_contrast": 9.79,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 320,
+      "mode": "light",
+      "background": "rgb(255, 255, 255)",
+      "badge_text_contrast": 5.77,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 320,
+      "mode": "dark",
+      "background": "rgb(16, 20, 19)",
+      "badge_text_contrast": 9.79,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "console_errors": [
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "Failed to load resource: net::ERR_FAILED"
+  ],
+  "missing_assets": [],
+  "api_requests": [
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "unread"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "mentions"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json"
+    },
+    {
+      "method": "GET",
+      "path": "/favicon/proxied"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/notifications/mark-read"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/notifications/mark-read"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/favicon/proxied"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    }
+  ],
+  "hierarchies": [
+    {
+      "width": 1280,
+      "mode": "light",
+      "border": "1px",
+      "radius": "8px",
+      "padding": "16px",
+      "gap": "16px",
+      "outer": "16px",
+      "title": "18px",
+      "weight": "750",
+      "action": "15px",
+      "row": "16px",
+      "time": "13px",
+      "distinct": true
+    },
+    {
+      "width": 1280,
+      "mode": "dark",
+      "border": "1px",
+      "radius": "8px",
+      "padding": "16px",
+      "gap": "16px",
+      "outer": "16px",
+      "title": "18px",
+      "weight": "750",
+      "action": "15px",
+      "row": "16px",
+      "time": "13px",
+      "distinct": true
+    },
+    {
+      "width": 900,
+      "mode": "light",
+      "border": "1px",
+      "radius": "8px",
+      "padding": "16px",
+      "gap": "16px",
+      "outer": "16px",
+      "title": "18px",
+      "weight": "750",
+      "action": "15px",
+      "row": "16px",
+      "time": "13px",
+      "distinct": true
+    },
+    {
+      "width": 900,
+      "mode": "dark",
+      "border": "1px",
+      "radius": "8px",
+      "padding": "16px",
+      "gap": "16px",
+      "outer": "16px",
+      "title": "18px",
+      "weight": "750",
+      "action": "15px",
+      "row": "16px",
+      "time": "13px",
+      "distinct": true
+    },
+    {
+      "width": 390,
+      "mode": "light",
+      "border": "1px",
+      "radius": "8px",
+      "padding": "16px",
+      "gap": "16px",
+      "outer": "16px",
+      "title": "18px",
+      "weight": "750",
+      "action": "15px",
+      "row": "16px",
+      "time": "13px",
+      "distinct": true
+    },
+    {
+      "width": 390,
+      "mode": "dark",
+      "border": "1px",
+      "radius": "8px",
+      "padding": "16px",
+      "gap": "16px",
+      "outer": "16px",
+      "title": "18px",
+      "weight": "750",
+      "action": "15px",
+      "row": "16px",
+      "time": "13px",
+      "distinct": true
+    },
+    {
+      "width": 320,
+      "mode": "light",
+      "border": "1px",
+      "radius": "8px",
+      "padding": "16px",
+      "gap": "16px",
+      "outer": "16px",
+      "title": "18px",
+      "weight": "750",
+      "action": "15px",
+      "row": "16px",
+      "time": "13px",
+      "distinct": true
+    },
+    {
+      "width": 320,
+      "mode": "dark",
+      "border": "1px",
+      "radius": "8px",
+      "padding": "16px",
+      "gap": "16px",
+      "outer": "16px",
+      "title": "18px",
+      "weight": "750",
+      "action": "15px",
+      "row": "16px",
+      "time": "13px",
+      "distinct": true
+    }
+  ],
+  "failure": "Locator.scroll_into_view_if_needed: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\".isbf-notification-entry\").filter(has=locator(\"a[href='/t/topic/314/4']\")).first\n",
+  "debug": {
+    "failure": null,
+    "source_installed": true,
+    "body": "跳到主要内容\nISBF - One\n首页\n探索\n4\n通知\n日历\n工作台\n书签\n个人资料\n更多\n发布\n审核\n预览用户\n@preview-user\n搜索\n社区入口\n官方\n浏览分类\n精华内容\n通知\n全部\n提及\n校园讨论\n点赞 · 3\n未读通知\n未读通知\n同学201 @student-201 点赞\n7 小时\n提及了你 · 1\n未读通知\n未读通知\n同学201 @student-201 提及了你\n7 小时\n回复 · 1\n未读通知\n未读通知\n同学201 @student-201 回复\n7 小时\n未读通知\n获得了 '欢迎'\n7 小时\n \n "
+  }
+}

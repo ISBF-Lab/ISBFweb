@@ -1,0 +1,55 @@
+{
+  "source_version": "aa2ec39288efa913c66ba492e0f989749afdca8614b9fb6efdf4ae8802b46174",
+  "lint": {
+    "eslint": "passed",
+    "prettier": "passed",
+    "stylelint": "passed",
+    "syntax_tree": "passed",
+    "rubocop": "passed after targeted cursor-expression correction",
+    "shared_service_revision": "passed"
+  },
+  "compiled_frontend_files": 9,
+  "complete_common_scss_compiled": true,
+  "browser": {
+    "passed": true,
+    "checks": 61,
+    "layouts": 8,
+    "runtime_errors": 0,
+    "production_backend_used": false
+  },
+  "native_tests": {
+    "preview_forum_started": false,
+    "production_backend_used": false,
+    "rspec": {
+      "command": [
+        "ruby",
+        "bin/rspec",
+        "plugins/isbf-notifications/spec/requests/groups_controller_spec.rb",
+        "plugins/isbf-notifications/spec/requests/users_controller_spec.rb"
+      ],
+      "exit_code": 1,
+      "log": "rspec-attempt.log",
+      "tests_executed": 0,
+      "blocked_reason": "Required Ruby test gems are absent in the offline image"
+    },
+    "qunit": {
+      "command": [
+        "ruby",
+        "bin/qunit",
+        "--theme-name",
+        "ISBF Campus Feed",
+        "--qunit-path",
+        "/theme-qunit",
+        "--filter",
+        "/ISBFNotificationBell|ISBFNotifications/i"
+      ],
+      "exit_code": 1,
+      "log": "qunit-attempt.log",
+      "tests_executed": 0,
+      "blocked_reason": "No isolated Rails test server; full preview remains stopped"
+    }
+  },
+  "source_snapshots_verified": 20,
+  "deployed": false,
+  "final_visual_acceptance": "pending user review"
+}

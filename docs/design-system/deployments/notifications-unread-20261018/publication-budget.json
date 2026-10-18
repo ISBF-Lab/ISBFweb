@@ -1,0 +1,12 @@
+{
+  "user_authorization": "2026-10-18: increase memory to the server's sustainable upper limit",
+  "available_before_bytes": 1491881984,
+  "rss_limit_bytes": 1073741824,
+  "host_reserve_bytes": 402653184,
+  "v8_old_space_mib": 512,
+  "peak_rss_bytes": 982056960,
+  "lowest_host_available_bytes": 781807616,
+  "exit_code": 0,
+  "stop_reason": null,
+  "elapsed_seconds": 50.7
+}

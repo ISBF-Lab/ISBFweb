@@ -1,0 +1,318 @@
+--- before/themes/isbf-campus-feed/common/common.scss
++++ after/themes/isbf-campus-feed/common/common.scss
+@@ -4080,16 +4080,30 @@
+     }
+   }
+ 
++  &__groups {
++    display: grid;
++    gap: var(--isbf-v2-space-4);
++    padding: var(--isbf-v2-space-4);
++  }
++
+   &__topic,
+   &__standalone {
+-    border-bottom: 1px solid var(--isbf-v2-border);
++    min-width: 0;
++    border: var(--isbf-v2-border-width) solid var(--isbf-v2-border);
++    border-radius: var(--isbf-v2-radius-sm);
+     padding: var(--isbf-v2-space-4);
+   }
+ 
+-  &__topic h2 {
++  &__topic-title {
+     margin: 0 0 var(--isbf-v2-space-3);
+-    font-size: var(--isbf-v2-font-md);
++    font-size: var(--isbf-v2-font-lg);
++    font-weight: var(--isbf-v2-weight-bold);
++    line-height: 1.45;
+     overflow-wrap: anywhere;
++
++    a {
++      color: var(--isbf-v2-text);
++    }
+   }
+ 
+   &__status {
+@@ -4105,6 +4119,8 @@
+ .isbf-notification-action {
+   & + & {
+     margin-top: var(--isbf-v2-space-3);
++    padding-top: var(--isbf-v2-space-3);
++    border-top: var(--isbf-v2-border-width) solid var(--isbf-v2-border);
+   }
+ 
+   &__toggle {
+@@ -4117,6 +4133,8 @@
+     background: transparent;
+     color: var(--isbf-v2-muted);
+     font: inherit;
++    font-size: var(--isbf-v2-font-sm);
++    font-weight: var(--isbf-v2-weight-medium);
+     cursor: pointer;
+   }
+ 
+@@ -4132,14 +4150,22 @@
+ }
+ 
+ .isbf-notification-entry {
++  position: relative;
++  isolation: isolate;
+   display: flex;
+   align-items: flex-start;
+   gap: var(--isbf-v2-space-3);
+   padding: var(--isbf-v2-space-3);
+   border-radius: var(--isbf-v2-radius-sm);
++  font-size: var(--isbf-v2-font-md);
++  line-height: 1.45;
+   overflow-wrap: anywhere;
+ 
+-  &:hover {
++  & + & {
++    margin-top: var(--isbf-v2-space-2);
++  }
++
++  html.discourse-no-touch &:hover {
+     background: var(--isbf-v2-hover);
+   }
+ 
+@@ -4164,6 +4190,29 @@
+   &__content {
+     flex: 1;
+     min-width: 0;
++  }
++
++  &__link,
++  &__native > li > a {
++    color: var(--isbf-v2-text);
++
++    &::after {
++      content: "";
++      position: absolute;
++      z-index: 1;
++      inset: 0;
++      border-radius: var(--isbf-v2-radius-sm);
++    }
++
++    &:focus-visible::after {
++      outline: 2px solid var(--isbf-v2-focus-ring);
++      outline-offset: -2px;
++    }
++  }
++
++  &__native > li > :not(a) {
++    position: relative;
++    z-index: 2;
+   }
+ 
+   &__name {
+@@ -4200,13 +4249,13 @@
+     display: none;
+   }
+ 
+-  a {
++  > li > a {
+     display: block;
+     padding: 0;
+   }
+ 
+   .d-icon {
+-    margin-right: var(--isbf-v2-space-2);
++    margin-inline-end: var(--isbf-v2-space-2);
+   }
+ }
+ 
+--- before/themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs
++++ after/themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs
+@@ -434,28 +434,34 @@
+             @action={{this.markRead}}
+             @label={{themePrefix "isbf_v2.notifications_retry"}}
+           /></div>{{/if}}
+-      {{#each this.groups key="key" as |group|}}
+-        {{#if group.topic}}
+-          <article class="isbf-notifications__topic">
+-            <h2><a href={{group.topic.url}}>{{this.topicTitle
+-                  group.topic.title
+-                }}</a></h2>
+-            {{#each group.actions key="key" as |item|}}
+-              <ISBFNotificationAction
+-                @actionLabel={{this.actionLabel}}
+-                @group={{item}}
+-                @prepareEntries={{this.prepareEntries}}
+-                @revision={{this.revision}}
+-              />
+-            {{/each}}
+-          </article>
+-        {{else}}
+-          <article class="isbf-notifications__standalone"><ISBFNotificationEntry
+-              @entry={{group.latest}}
+-              @standalone={{true}}
+-            /></article>
+-        {{/if}}
+-      {{/each}}
++      {{#if this.groups.length}}
++        <div class="isbf-notifications__groups">
++          {{#each this.groups key="key" as |group|}}
++            {{#if group.topic}}
++              <article class="isbf-notifications__topic">
++                <h2 class="isbf-notifications__topic-title"><a
++                    href={{group.topic.url}}
++                  >{{this.topicTitle group.topic.title}}</a></h2>
++                {{#each group.actions key="key" as |item|}}
++                  <ISBFNotificationAction
++                    @actionLabel={{this.actionLabel}}
++                    @group={{item}}
++                    @prepareEntries={{this.prepareEntries}}
++                    @revision={{this.revision}}
++                  />
++                {{/each}}
++              </article>
++            {{else}}
++              <article
++                class="isbf-notifications__standalone"
++              ><ISBFNotificationEntry
++                  @entry={{group.latest}}
++                  @standalone={{true}}
++                /></article>
++            {{/if}}
++          {{/each}}
++        </div>
++      {{/if}}
+       {{#if this.loading}}<p
+           class="isbf-notifications__status"
+           role="status"
+--- before/themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-action.gjs
++++ after/themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-action.gjs
+@@ -110,6 +110,9 @@
+         {{on "click" this.toggle}}
+       >
+         <span class="isbf-notification-action__label">
++          {{#if @group.latest.item.icon}}
++            {{dIcon @group.latest.item.icon}}
++          {{/if}}
+           <span>{{this.label}}</span>
+           <ISBFNotificationUnread @unread={{@group.unread}} />
+         </span>
+--- before/themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-entry.gjs
++++ after/themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-entry.gjs
+@@ -71,6 +71,7 @@
+             /></ul>
+         {{else}}
+           <a
++            class="isbf-notification-entry__link"
+             href={{@entry.item.linkHref}}
+             title={{@entry.item.linkTitle}}
+             {{on "click" this.open}}
+--- before/themes/isbf-campus-feed/test/integration/notifications-test.gjs
++++ after/themes/isbf-campus-feed/test/integration/notifications-test.gjs
+@@ -1,6 +1,10 @@
+ import { click, render, settled } from "@ember/test-helpers";
+ import { module, test } from "qunit";
++import sinon from "sinon";
+ import { themePrefix } from "virtual:theme";
++import DiscourseURL from "discourse/lib/url";
++import UserMenuNotificationItem from "discourse/lib/user-menu/notification-item";
++import Notification from "discourse/models/notification";
+ import { setupRenderingTest } from "discourse/tests/helpers/component-test";
+ import pretender, {
+   parsePostData,
+@@ -9,8 +13,99 @@
+ import { publishToMessageBus } from "discourse/tests/helpers/qunit-helpers";
+ import { i18n } from "discourse-i18n";
+ import ISBFNotificationBell from "../../discourse/components/isbf-notification-bell";
++import ISBFNotificationEntry from "../../discourse/components/isbf-notification-entry";
+ import ISBFNotifications from "../../discourse/components/isbf-notifications";
+ import NotificationState from "../../discourse/services/isbf-notifications";
++
++module(
++  "ISBF | Integration | Component | ISBFNotificationEntry",
++  function (hooks) {
++    setupRenderingTest(hooks);
++
++    for (const standalone of [false, true]) {
++      test(`opens the ${standalone ? "native" : "grouped"} notification target and consumes its unread count once`, async function (assert) {
++        const type = this.site.notification_types.replied;
++        this.currentUser.set("grouped_unread_notifications", { [type]: 1 });
++        const [notification] = await Notification.initializeNotifications([
++          {
++            id: 93001,
++            notification_type: type,
++            read: false,
++            topic_id: 930,
++            post_number: 2,
++            slug: "campus",
++            data: {
++              display_username: "student",
++              topic_title: "Campus discussion",
++            },
++          },
++        ]);
++        const appEvents = this.owner.lookup("service:app-events");
++        const events = sinon.spy(appEvents, "trigger");
++        const routeTo = sinon.stub(DiscourseURL, "routeTo");
++        const item = new UserMenuNotificationItem({
++          notification,
++          appEvents,
++          currentUser: this.currentUser,
++          site: this.site,
++          siteSettings: this.siteSettings,
++        });
++        const entry = {
++          action: "replied",
++          actionLabel: "replied",
++          actor: {
++            username: "student",
++            avatar_template: "/images/avatar.png",
++          },
++          created_at: "2026-10-18T01:00:00Z",
++          item,
++          notification,
++        };
++        await render(
++          <template>
++            <ISBFNotificationEntry
++              @entry={{entry}}
++              @standalone={{standalone}}
++            />
++          </template>
++        );
++        const link = standalone
++          ? ".isbf-notification-entry__native > li > a"
++          : ".isbf-notification-entry__link";
++
++        await click(link);
++        assert.true(
++          routeTo.calledOnceWithExactly(item.linkHref),
++          "navigation retains the original notification target"
++        );
++        assert.strictEqual(
++          events.withArgs("user-menu:notification-click").callCount,
++          1,
++          "one click publishes one native notification event"
++        );
++        assert.true(
++          notification.read,
++          "the original notification becomes read"
++        );
++        assert
++          .dom(".isbf-notification-entry")
++          .doesNotHaveClass("is-unread", "the row reflects the read state");
++        assert.strictEqual(
++          this.currentUser.grouped_unread_notifications[type],
++          0,
++          "the native unread count is consumed"
++        );
++
++        await click(link);
++        assert.strictEqual(
++          this.currentUser.grouped_unread_notifications[type],
++          0,
++          "opening the same notification again does not consume another count"
++        );
++      });
++    }
++  }
++);
+ 
+ module(
+   "ISBF | Integration | Component | ISBFNotificationBell",

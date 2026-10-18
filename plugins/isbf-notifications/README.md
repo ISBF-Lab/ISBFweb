@@ -6,10 +6,15 @@ after installing the matching ISBF-UI theme.
 
 Authenticated read APIs:
 
-- `GET /isbf/notifications/groups.json?tab=all|mentions`: complete topic groups and
+- `GET /isbf/notifications/groups.json?tab=all|mentions&filter=all|unread`: complete topic groups and
   standalone native notices, ordered by latest notification; signed cursor pagination.
 - `GET /isbf/notifications/groups/:topic_id/actions/:action.json`: lazy action details.
   `limit` defaults to 20 and is capped at 50.
+
+Both APIs default to `filter=all`. Unread filtering runs before topic/action
+grouping and applies to lazy details as well. Detail URLs carry the selected tab
+and filter; signed cursors are bound to both. Existing cursors without a filter
+remain valid for `all`.
 
 The mentions tab includes mentions, group mentions, replies, and reactions.
 Likes/reactions use existing surviving actions on posts referenced by the recipient's
@@ -20,3 +25,9 @@ Historical cross-topic summaries remain standalone. Purged events are not recons
 Both APIs enforce recipient, topic, and post visibility. Expanding groups never marks
 notifications read. Navigation and bulk marking remain native Discourse operations.
 Disabling the setting restores the native notification page in the matching theme.
+
+The private user custom field `isbf_notification_badge_style` accepts `number` or
+`dot` through the native user update API. The current-user serializer supplies
+`number` when no preference exists. The field is not published on public profiles.
+The matching theme uses native grouped unread counters, rather than counters that
+exclude already-seen notices, and retains native marking/navigation behavior.

@@ -1,0 +1,52 @@
+[
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-action.gjs",
+    "compiled": true,
+    "sha256": "39dca2608f3cc46a9656ef8ae74e8abf7ea01aeb4563d97f853e9b06f6d3fe8e"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-bell.gjs",
+    "compiled": true,
+    "sha256": "9480a2d60cde7bc750bd63c7bdbf43234bbb6227188b01329b064bc798f5dfce"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-unread.gjs",
+    "compiled": true,
+    "sha256": "f5d90c19d16791e41ffb4d6c801f41ebb266388da33939fa707372f9ae70a1da"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+    "compiled": true,
+    "sha256": "d97fcf0dfc36b4060b5a05fde038f18b1b77823ce67b0ed2723b7144af40ef4f"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+    "compiled": true,
+    "sha256": "b3dd023bc7f6c2f94e69f4955c8eaa2a0c0caad6f2cdff50775528d9b9794ced"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-side-nav.gjs",
+    "compiled": true,
+    "sha256": "fef3e0cc6fb7527161e2d548cfa6d60e7986027a61c03c06db1414a6624074f6"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/initializers/isbf-notifications.js",
+    "compiled": true,
+    "sha256": "bb5d692ef930435682d00975f88218ee5548eeb78b916f6f319eaee1d8c53917"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/services/isbf-notifications.js",
+    "compiled": true,
+    "sha256": "8530db24a044e6d416a720af2a164fa19df78ad86e4174bfc8a62671fbb5b4fe"
+  },
+  {
+    "file": "themes/isbf-campus-feed/test/integration/notifications-test.gjs",
+    "compiled": true,
+    "sha256": "4e623d1a9c87cb73060fed02426e409eb96d5df64798ab794a59d91fef6369e0"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-entry.gjs",
+    "compiled": true,
+    "sha256": "7d7a923418791f798e707e05f5e27c524e016f470e701fc3b1ff72aabedd19d0"
+  }
+]

@@ -1,0 +1,5 @@
+zh_CN:
+  isbf_notifications:
+    invalid_badge_style: "通知角标请选择数字或圆点。"
+  site_settings:
+    isbf_notifications_enabled: "启用 ISBF 按帖子和动作分组的通知。"

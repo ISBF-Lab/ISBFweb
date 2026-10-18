@@ -22,6 +22,7 @@ import ISBFAlumni from "./isbf-alumni";
 import ISBFExplore from "./isbf-explore";
 import ISBFLearning from "./isbf-learning";
 import ISBFMarketplace from "./isbf-marketplace";
+import ISBFNotificationBell from "./isbf-notification-bell";
 import ISBFNotifications from "./isbf-notifications";
 import ISBFOfficialFeed from "./isbf-official-feed";
 import ISBFV2AccountMenu from "./isbf-v2-account-menu";
@@ -36,6 +37,7 @@ export default class ISBFV2Shell extends Component {
   @service categoryTypeChooser;
   @service currentUser;
   @service isbfBackNavigation;
+  @service isbfNotifications;
   @service router;
   @service site;
   @service siteSettings;
@@ -585,9 +587,10 @@ export default class ISBFV2Shell extends Component {
               }}</span></a>
           <a
             aria-current={{if this.isNotifications "page"}}
+            aria-label={{this.isbfNotifications.linkLabel}}
             class={{if this.isNotifications "is-active"}}
             href={{this.notificationsHref}}
-          >{{dIcon "bell"}}<span>{{i18n
+          ><ISBFNotificationBell /><span>{{i18n
                 (themePrefix "isbf_v2.notifications")
               }}</span></a>
           <a

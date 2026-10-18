@@ -1,0 +1,23 @@
+[bin/lint] No core linter for: themes/isbf-campus-feed/README.md, docs/design-system/ui-status.md, docs/design-system/tokens.md, docs/design-system/components.md, docs/design-system/reference-map.md, docs/design-system/references/README.md, docs/design-system/references/manifest.json, docs/design-system/reviews/notifications-layout-20261018/README.md
+[bin/lint] Running core linters via lefthook...
+sync hooks: ❌
+│  Skipping hook sync: could not replace the hook: remove /workspace/.git/hooks/pre-commit: read-only file system
+│  developer-docs-prettier (skip) no files for inspection
+┃  eslint ❯ 
+
+┃  prettier ❯ 
+- Starting...
+notifications-test.gjs
+- Reformatted 1 / 5 files...
+✔ Reformatted 1 / 5 files...
+
+│  rubocop (skip) no files for inspection
+┃  stylelint ❯ 
+
+│  syntax_tree (skip) no files for inspection
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 53.10 seconds)
+✔️ eslint (23.29 seconds)
+✔️ prettier (14.82 seconds)
+✔️ stylelint (14.99 seconds)
+[bin/lint] All lints passed

@@ -1,0 +1,73 @@
+{
+  "source_version": "29c1d7e8c45f283a6cb3ababd3d0599d2b85a38dc4e688ece767b75957820808",
+  "scope": "C19 notification topic-group hierarchy and full-row original links; C18 behavior retained",
+  "design_status": "design_confirmed_final_visual_pending",
+  "deployed": false,
+  "files": [
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "sha256": "dfb46bcd606a06ec1519cfe2c4fac6fc8adc7c34d090df19ef5dd39c6c0a265e",
+      "snapshot": "source/themes__isbf-campus-feed__common__common.scss.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-action.gjs",
+      "sha256": "39dca2608f3cc46a9656ef8ae74e8abf7ea01aeb4563d97f853e9b06f6d3fe8e",
+      "snapshot": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notification-action.gjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-bell.gjs",
+      "sha256": "9480a2d60cde7bc750bd63c7bdbf43234bbb6227188b01329b064bc798f5dfce",
+      "snapshot": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notification-bell.gjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-entry.gjs",
+      "sha256": "7d7a923418791f798e707e05f5e27c524e016f470e701fc3b1ff72aabedd19d0",
+      "snapshot": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notification-entry.gjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-unread.gjs",
+      "sha256": "f5d90c19d16791e41ffb4d6c801f41ebb266388da33939fa707372f9ae70a1da",
+      "snapshot": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notification-unread.gjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+      "sha256": "d97fcf0dfc36b4060b5a05fde038f18b1b77823ce67b0ed2723b7144af40ef4f",
+      "snapshot": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notifications.gjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+      "sha256": "b3dd023bc7f6c2f94e69f4955c8eaa2a0c0caad6f2cdff50775528d9b9794ced",
+      "snapshot": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-v2-shell.gjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-side-nav.gjs",
+      "sha256": "fef3e0cc6fb7527161e2d548cfa6d60e7986027a61c03c06db1414a6624074f6",
+      "snapshot": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-v2-side-nav.gjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/initializers/isbf-notifications.js",
+      "sha256": "bb5d692ef930435682d00975f88218ee5548eeb78b916f6f319eaee1d8c53917",
+      "snapshot": "source/themes__isbf-campus-feed__javascripts__discourse__initializers__isbf-notifications.js.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/services/isbf-notifications.js",
+      "sha256": "8530db24a044e6d416a720af2a164fa19df78ad86e4174bfc8a62671fbb5b4fe",
+      "snapshot": "source/themes__isbf-campus-feed__javascripts__discourse__services__isbf-notifications.js.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/locales/en.yml",
+      "sha256": "dfd72ec46d5a065587e6f2bdfa1a08707df894ffeeb11bb2cc33f297748cc628",
+      "snapshot": "source/themes__isbf-campus-feed__locales__en.yml.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+      "sha256": "dbca7a4f98792a8fb97883645ea3687133e986de6493662b2f19c40c028b4431",
+      "snapshot": "source/themes__isbf-campus-feed__locales__zh_CN.yml.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/notifications-test.gjs",
+      "sha256": "4e623d1a9c87cb73060fed02426e409eb96d5df64798ab794a59d91fef6369e0",
+      "snapshot": "source/themes__isbf-campus-feed__test__integration__notifications-test.gjs.txt"
+    }
+  ]
+}

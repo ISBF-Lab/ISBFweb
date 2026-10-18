@@ -1,0 +1,38 @@
+[
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-action.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-bell.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-unread.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-side-nav.gjs",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/initializers/isbf-notifications.js",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/services/isbf-notifications.js",
+    "compiled": true
+  },
+  {
+    "file": "themes/isbf-campus-feed/test/integration/notifications-test.gjs",
+    "compiled": true
+  }
+]

@@ -1,0 +1,101 @@
+{
+  "source_version": "cb03378611ddef5044a5439a373b9b8f1bc66511c8da53c361f8aeb2706d13fd",
+  "review_source_version": "8055e271058147d25004a7d483ace084b51740252c91cfd7dac7ee264011ee28",
+  "review_manifest": "../../reviews/notifications-unread-20261018/layout-revision/source-manifest.json",
+  "scope": "Notification bell indicators, private badge preference, menu-only unread filter and centered action dots",
+  "production_theme_id": 4,
+  "active_theme_database_backed": true,
+  "production_deployed": true,
+  "files": [
+    {
+      "source_path": "plugins/isbf-notifications/config/locales/server.en.yml",
+      "snapshot_path": "source/plugins__isbf-notifications__config__locales__server.en.yml.txt",
+      "sha256": "34c6f8475e48ce8d3c78b531f235a2aad15479a4f5d2fb627f277977140db91a",
+      "before_sha256": "0b461542b54780b50647902f66c435e22f20a1b65063b1c587209b56b1ec3746"
+    },
+    {
+      "source_path": "plugins/isbf-notifications/config/locales/server.zh_CN.yml",
+      "snapshot_path": "source/plugins__isbf-notifications__config__locales__server.zh_CN.yml.txt",
+      "sha256": "fbcc794c749f67759a53e9d81fa5e1fe6f79b8ca7d9f0ac816f0db3283bde0ba",
+      "before_sha256": "18643f52f6b42337be74b73c6ac6852662694bb0fb4c56cbf84f8dfc6c61f0d4"
+    },
+    {
+      "source_path": "plugins/isbf-notifications/lib/isbf_notifications/grouped_notifications.rb",
+      "snapshot_path": "source/plugins__isbf-notifications__lib__isbf_notifications__grouped_notifications.rb.txt",
+      "sha256": "5f817b9a0ee473a12af5c33da2809e37172ab97204b88564facd11e65dc6f42f",
+      "before_sha256": "282e7e4f6f8e4049d5cc73dad727ed1b79a1dec7e95e53209e72c7d396f3c968"
+    },
+    {
+      "source_path": "plugins/isbf-notifications/plugin.rb",
+      "snapshot_path": "source/plugins__isbf-notifications__plugin.rb.txt",
+      "sha256": "80568e666cdc89d274870f9a22a896427e91c0cffe65505183b7c873acb0cdb5",
+      "before_sha256": "e83f4a3efc330ae9b3712d6db32a4f8ee3f02ac9f67d54369fbb01b57fba43a4"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/common/common.scss",
+      "snapshot_path": "source/themes__isbf-campus-feed__common__common.scss.txt",
+      "sha256": "f33a1e9e62e5c28d23ecbb826bdc221ab136b32c1e75295bcbae5aad25c48578",
+      "before_sha256": "ac622f25ec8f9da894c5de97c845b2afc5e330c358efde3862284bdb21166fbf"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-action.gjs",
+      "snapshot_path": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notification-action.gjs.txt",
+      "sha256": "ba261264ce7373f6918da5530f12a4cea4d25e9badd8aab145c8fd1a4fe33092",
+      "before_sha256": "91695664454ea9cb87600fb6eb43d36eab7c6c1c1f143c158faab112ee5c8395"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-bell.gjs",
+      "snapshot_path": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notification-bell.gjs.txt",
+      "sha256": "9480a2d60cde7bc750bd63c7bdbf43234bbb6227188b01329b064bc798f5dfce",
+      "before_sha256": null
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-unread.gjs",
+      "snapshot_path": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notification-unread.gjs.txt",
+      "sha256": "f5d90c19d16791e41ffb4d6c801f41ebb266388da33939fa707372f9ae70a1da",
+      "before_sha256": null
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+      "snapshot_path": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notifications.gjs.txt",
+      "sha256": "5ba42859365ba1fa61df800f103f115f0a4068ffe7137adbb2c7d68a978e5d77",
+      "before_sha256": "38c89d142a95e5e1c651e3040d7c2d27b231c02b2a34d21247c0543c53b75c44"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+      "snapshot_path": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-v2-shell.gjs.txt",
+      "sha256": "19542e4308ab1e00f85e8b5bae914d49f860bfd9c2c1e81f5714771f305215ed",
+      "before_sha256": "60e7539c9ee2421948a8d9a1fd770dab008e68395166ffcca66b1f080d29012c"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-side-nav.gjs",
+      "snapshot_path": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-v2-side-nav.gjs.txt",
+      "sha256": "fef3e0cc6fb7527161e2d548cfa6d60e7986027a61c03c06db1414a6624074f6",
+      "before_sha256": "b044b36cab119f55da3cd1e3447bdb08740d13b972230bef75032d6681b6c8b4"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/initializers/isbf-notifications.js",
+      "snapshot_path": "source/themes__isbf-campus-feed__javascripts__discourse__initializers__isbf-notifications.js.txt",
+      "sha256": "bb5d692ef930435682d00975f88218ee5548eeb78b916f6f319eaee1d8c53917",
+      "before_sha256": null
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/services/isbf-notifications.js",
+      "snapshot_path": "source/themes__isbf-campus-feed__javascripts__discourse__services__isbf-notifications.js.txt",
+      "sha256": "8530db24a044e6d416a720af2a164fa19df78ad86e4174bfc8a62671fbb5b4fe",
+      "before_sha256": null
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/locales/en.yml",
+      "snapshot_path": "source/themes__isbf-campus-feed__locales__en.yml.txt",
+      "sha256": "6450817cd64f29e54178fced000a3503fd798ce61f2b7eafc2fc7a4bfc6a632c",
+      "before_sha256": "3c8b45800c0cdd7e3e858f5b8868d4433b637e4a73366c8709b61e4e3549cbd5"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+      "snapshot_path": "source/themes__isbf-campus-feed__locales__zh_CN.yml.txt",
+      "sha256": "851e8069307842b9a2fb325a63b9fa0200d468cf53eb923cd43ceffa3137a9bc",
+      "before_sha256": "ef72b287456e35c283ecd6d978b8059b56ad04440f53c2bdbc36cf25f40b722b"
+    }
+  ]
+}

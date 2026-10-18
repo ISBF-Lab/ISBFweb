@@ -302,4 +302,85 @@ RSpec.describe IsbfNotifications::GroupsController do
     )
     expect(recipient.reload.seen_notification_id).to eq(seen_notification_id)
   end
+
+  describe "#index" do
+    it "selects unread records before grouping and retains notices that have been seen" do
+      post = topic_post
+      unread_reply = notice(:replied, post: post, at: 3.minutes.ago)
+      notice(:replied, post: post, at: 1.minute.ago, read: true)
+      notice(:mentioned, post: post, read: true)
+      standalone = notice(:custom, at: 2.minutes.ago)
+      notice(:custom, read: true)
+      notice(:mentioned, post: topic_post, read: true)
+      recipient.update!(seen_notification_id: recipient.notifications.maximum(:id))
+
+      body = groups(filter: "unread")
+
+      expect(response).to have_http_status(:ok)
+      expect(body["groups"].map { |group| group["kind"] }).to eq(%w[standalone topic])
+      expect(body["groups"].first.dig("latest", "notification", "id")).to eq(standalone.id)
+      action = body["groups"].last["actions"].sole
+      expect(action).to include("key" => "replied", "count" => 1, "unread" => true)
+      expect(action.dig("latest", "notification", "id")).to eq(unread_reply.id)
+      expect(unread_reply.reload.read).to eq(false)
+      expect(recipient.reload.all_unread_notifications_count).to eq(0)
+      expect(recipient.grouped_unread_notifications.values.sum).to eq(2)
+    end
+
+    it "combines unread filtering with tabs and paginates complete groups" do
+      first_post = topic_post
+      second_post = topic_post
+      notice(:replied, post: first_post, at: 1.minute.ago)
+      notice(:mentioned, post: second_post, at: 2.minutes.ago)
+      notice(:liked, post: topic_post)
+      notice(:replied, post: topic_post, read: true)
+
+      first = groups(filter: "unread", tab: "mentions", limit: 1)
+      second = groups(filter: "unread", tab: "mentions", limit: 1, cursor: first["next_cursor"])
+
+      expect(first["groups"].map { |group| group.dig("topic", "id") }).to eq([first_post.topic_id])
+      expect(second["groups"].map { |group| group.dig("topic", "id") }).to eq(
+        [second_post.topic_id],
+      )
+      expect(second["next_cursor"]).to be_nil
+      expect(first["groups"].first["actions"].first["detail_url"]).to end_with(
+        "?tab=mentions&filter=unread",
+      )
+
+      groups(filter: "all", tab: "mentions", cursor: first["next_cursor"])
+      expect(response).to have_http_status(:bad_request)
+    end
+
+    it "rejects invalid filters and keeps unread endpoints recipient-scoped" do
+      private_post = topic_post(user: actor)
+      private_post.topic.update!(category: Fabricate(:private_category, group: Fabricate(:group)))
+      notice(:mentioned, post: private_post)
+      notice(:mentioned, post: topic_post(user: other_recipient), user: other_recipient)
+
+      expect(groups(filter: "unread")["groups"]).to be_empty
+
+      groups(filter: "unknown")
+      expect(response).to have_http_status(:bad_request)
+    end
+  end
+
+  describe "#show" do
+    it "paginates unread details without including read records or reusing all-record cursors" do
+      post = topic_post
+      older = notice(:replied, post: post, at: 3.minutes.ago)
+      newer = notice(:replied, post: post, at: 2.minutes.ago)
+      notice(:replied, post: post, at: 1.minute.ago, read: true)
+
+      first = details(post, "replied", filter: "unread", limit: 1)
+      second = details(post, "replied", filter: "unread", limit: 1, cursor: first["next_cursor"])
+
+      expect(first["entries"].map { |entry| entry.dig("notification", "id") }).to eq([newer.id])
+      expect(second["entries"].map { |entry| entry.dig("notification", "id") }).to eq([older.id])
+      expect(second["next_cursor"]).to be_nil
+      expect([older.reload.read, newer.reload.read]).to eq([false, false])
+
+      details(post, "replied", filter: "all", cursor: first["next_cursor"])
+      expect(response).to have_http_status(:bad_request)
+    end
+  end
 end

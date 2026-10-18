@@ -1,0 +1,18 @@
+en:
+  js:
+    review:
+      types:
+        reviewable_isbf_learning_course:
+          title: "Course request"
+          noun: "course request"
+    isbf_learning:
+      reviewables:
+        actions:
+          approve_course:
+            title: "Approve course"
+            description: "Add this course to its year."
+            complete: "Course approved."
+          reject_course:
+            title: "Reject course"
+            description: "Resolve this request without adding a course."
+            complete: "Course request rejected."

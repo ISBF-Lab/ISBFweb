@@ -1,0 +1,14 @@
+{
+  "image_tag": "local_discourse/isbf_app:notifications-layout-20261018-b1dab68ab8ea",
+  "image_id": "sha256:1df0471a314c4af83f822974cb2c71ae117018dbdefd66fb3fedc0892802a3c7",
+  "source_version": "b1dab68ab8ea60e731378ce42380a3e23aa72fd9cd23698b835347247859892a",
+  "complete_runtime_inventory_matches": true,
+  "plugins_verified": 66,
+  "plugin_links_markers_and_hidden_files_verified": true,
+  "active_theme_database_backed": true,
+  "runtime_startup_matches_production": true,
+  "latest_tag_changed": false,
+  "production_container_recreated": false,
+  "production_services_restarted": false,
+  "shared_plugin_releases_required": true
+}

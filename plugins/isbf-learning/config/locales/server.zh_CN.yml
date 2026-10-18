@@ -1,0 +1,44 @@
+zh_CN:
+  site_settings:
+    isbf_learning_enabled: "开启课程资源与资料库插件总开关。"
+    isbf_learning_category_id: "课程资源实际分类 ID。"
+    isbf_learning_storage_limit_mb: "学习资源私有文件总容量上限（MiB）。"
+    isbf_library_enabled: "启用独立资料库（需开启 ISBF Learning 插件总开关）。"
+    isbf_library_category_id: "资料库实际分类 ID，必须与课程资源分类不同。"
+  isbf_learning:
+    course_deleted: "管理员删除了所属科目"
+    course_delete_failed: "删除科目失败，所有更改均未保存。"
+    invalid_contributor: "贡献者须为不超过 15 字的单行纯文本。"
+    unknown_contributor: "未知贡献者"
+    contributor_label: "贡献者"
+    delete_failed: "资料未能删除，请重试。"
+    invalid_link: "请填写一个完整的外部 HTTP 或 HTTPS 链接（最多 2048 字符）。"
+    invalid: "请选择有效课程，填写标题，并添加至少一个资料文件或外部链接。"
+    duplicate_course: "该年级已存在同名课程。"
+    storage_error: "文件未能保存，请检查存储额度或重试。"
+    invalid_description: "简要介绍须为不超过 300 字的纯文本。"
+    course_storage_error: "课程未能保存，请重试。"
+    reviewables:
+      actions:
+        approve_course:
+          title: "批准课程"
+          description: "将课程添加到对应年级。"
+          complete: "课程已批准。"
+        reject_course:
+          title: "拒绝课程"
+          description: "拒绝申请，不添加课程。"
+          complete: "课程申请已拒绝。"
+  isbf_library:
+    invalid: "请选择有效分组，并填写标题和外部链接。"
+    duplicate_directory: "当前目录下已存在同名分类或分组。"
+    directory_storage_error: "目录保存失败，请重试。"
+    reviewables:
+      actions:
+        approve_directory:
+          title: "批准目录申请"
+          description: "将分类或分组加入资料库。"
+          complete: "目录申请已批准。"
+        reject_directory:
+          title: "拒绝目录申请"
+          description: "拒绝申请，不添加分类或分组。"
+          complete: "目录申请已拒绝。"
