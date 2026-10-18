@@ -17,7 +17,7 @@ module("ISBF | Integration | Component | UserDisplay", function (hooks) {
     this.siteSettings.prioritize_username_in_ux = true;
     this.siteSettings.prioritize_full_name_in_ux = false;
     this.siteSettings.display_name_on_posts = false;
-    userDisplayInitializer.initialize();
+    userDisplayInitializer.initialize(this.owner);
     const store = this.owner.lookup("service:store");
     const topic = store.createRecord("topic", {
       id: 990001,

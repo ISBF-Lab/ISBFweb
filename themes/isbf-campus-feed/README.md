@@ -31,6 +31,18 @@ coverage lives in `test/unit/back-navigation-history-test.js` and
 `test/integration/back-navigation-test.gjs`; validation is limited to these
 flows, changed-file lint, and theme JavaScript compilation.
 
+The `discourse/initializers/isbf-back-navigation` initializer registers and starts
+the service through the application owner, the second initializer argument.
+The first argument is the lookup container and does not support registration.
+Rendering tests invoke this entry point with the actual container and owner so
+startup errors are covered alongside the back-link behavior.
+
+The theme loader wraps initializer objects so `initialize` receives the
+application owner when called from tests. Reset a service registered during
+application boot before invoking its registration entry point in a rendering
+test. Components reading mutable legacy Topic fields in JavaScript getters use
+`topic.get(...)` so native tracking updates invalidate their unread indicators.
+
 The production release also patches the current shared headers in
 `isbf-workbench-topic-page` (marketplace/teamup) and `isbf-resource-page`
 (learning/library). The marketplace and learning sources in this export use
@@ -84,6 +96,12 @@ settings and components, check both stylesheet and JavaScript compilation, and
 re-export to confirm the repository and live source match.
 Keep the frontend build running during browser tests. `THEME_IDS` also supplies
 the `id` query parameter needed to select the runner rather than its index page.
+Timeline acceptance tests must stub `/t/280/excerpts.json` with an array response;
+the shared `/t/280/:post_number.json` fixture otherwise returns a topic object.
+Pass a `cloneJSON` copy of fixtures into legacy model factories, which can attach
+store and owner context to their input. Keep shared HTTP fixtures as plain data.
+Topic-switching tests use a multi-post fixture because Core hides reading
+controls on short single-post topics.
 
 Official activity times and deadlines are provided by `isbf-calendar` 0.3.0.
 The calendar pre-initializer runs after the campus/type extension and preserves

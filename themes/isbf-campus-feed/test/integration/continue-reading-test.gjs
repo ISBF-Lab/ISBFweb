@@ -5,6 +5,7 @@ import sinon from "sinon";
 import { themePrefix } from "virtual:theme";
 import MoreTopics, { registeredTabs } from "discourse/components/more-topics";
 import { NotificationLevels } from "discourse/lib/notification-levels";
+import { cloneJSON } from "discourse/lib/object";
 import DiscourseURL from "discourse/lib/url";
 import Topic from "discourse/models/topic";
 import topicFixtures from "discourse/tests/fixtures/topic";
@@ -14,7 +15,7 @@ import continueReadingInitializer from "../../discourse/api-initializers/isbf-co
 import ISBFContinueReadingFooter from "../../discourse/components/isbf-continue-reading-footer";
 import ISBFContinueReadingItem from "../../discourse/components/isbf-continue-reading-item";
 
-const fixture = topicFixtures["/t/280/1.json"];
+const fixture = cloneJSON(topicFixtures["/t/280/1.json"]);
 
 module(
   "ISBF | Integration | Component | ContinueReadingItem",
@@ -23,7 +24,7 @@ module(
 
     hooks.beforeEach(function () {
       this.topic = Topic.create({
-        ...structuredClone(fixture.suggested_topics[0]),
+        ...cloneJSON(fixture.suggested_topics[0]),
         posts_count: 1,
         highest_post_number: 1,
         last_read_post_number: 1,
@@ -136,6 +137,15 @@ module(
       assert
         .dom(".isbf-continue-reading__unread")
         .exists("actual unread replies show a dot");
+      this.topic.set("unread_posts", 2);
+      await settled();
+      assert
+        .dom(".isbf-continue-reading__unread")
+        .hasAttribute(
+          "title",
+          i18n("topic.unread_posts", { count: 2 }),
+          "the unread label follows tracking updates"
+        );
       this.topic.set("is_nested_view", true);
       await settled();
       assert
@@ -146,6 +156,11 @@ module(
       assert
         .dom(".isbf-continue-reading__unread")
         .exists("the native nested reply signal shows a dot");
+      this.topic.set("has_new_replies", false);
+      await settled();
+      assert
+        .dom(".isbf-continue-reading__unread")
+        .doesNotExist("reading the nested replies clears the dot");
     });
 
     test("retains lock state, keyboard focus and native click history", async function (assert) {
@@ -268,7 +283,7 @@ module(
     test("zero counts preserve category browsing and the extra latest link", async function (assert) {
       this.tracking.updateSeen(990101, 2);
       this.tracking.updateSeen(990102, 1);
-      const category = Topic.create(fixture).category;
+      const category = Topic.create(cloneJSON(fixture)).category;
       this.topic.set("category", category);
       await render(
         <template><ISBFContinueReadingFooter @topic={{this.topic}} /></template>
@@ -306,7 +321,7 @@ module("ISBF | Integration | Component | ContinueReading", function (hooks) {
       key: "more-topics-preference-topic",
       value: "suggested-topics",
     });
-    continueReadingInitializer.initialize();
+    continueReadingInitializer.initialize(this.owner);
     this.originalTabs = [...registeredTabs];
     registeredTabs.splice(
       0,
@@ -324,9 +339,9 @@ module("ISBF | Integration | Component | ContinueReading", function (hooks) {
         condition: ({ topic }) => topic.relatedTopics?.length > 0,
       }
     );
-    this.topic = Topic.create(structuredClone(fixture));
+    this.topic = Topic.create(cloneJSON(fixture));
     this.topic.set("relatedTopics", [
-      Topic.create({ ...fixture.suggested_topics[0], id: 990201 }),
+      Topic.create({ ...cloneJSON(fixture.suggested_topics[0]), id: 990201 }),
     ]);
   });
 

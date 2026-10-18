@@ -12,8 +12,18 @@ import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 const TOPIC = "/t/internationalization-localization/280";
 const TOGGLE = ".isbf-topic-reading__toggle";
 
+function topicReadingPretender(server, helper) {
+  server.get("/t/280/excerpts.json", () => helper.response([]));
+  server.get("/filter.json", () =>
+    helper.response({ users: [], topic_list: { topics: [] } })
+  );
+  server.post("/isbf/views/impressions", () => helper.response({}));
+  server.post("/isbf/views/post-impressions", () => helper.response({}));
+}
+
 acceptance("ISBF floating topic reading", function (needs) {
   needs.user();
+  needs.pretender(topicReadingPretender);
 
   test("the header controls the single native timeline at desktop widths", async function (assert) {
     await visit(TOPIC);
@@ -107,7 +117,7 @@ acceptance("ISBF floating topic reading", function (needs) {
   test("another topic starts collapsed after navigating with reading open", async function (assert) {
     await visit(TOPIC);
     await click(TOGGLE);
-    await visit("/t/another-topic/281");
+    await visit("/t/1-3-0beta9-no-rate-limit-popups/28830");
     assert
       .dom(TOGGLE)
       .hasAttribute(
@@ -143,6 +153,7 @@ acceptance("ISBF floating topic reading", function (needs) {
 acceptance("ISBF floating topic reading on touch", function (needs) {
   needs.user();
   needs.mobileView();
+  needs.pretender(topicReadingPretender);
 
   test("reading does not start the bottom-sheet swipe behavior", async function (assert) {
     await visit(TOPIC);

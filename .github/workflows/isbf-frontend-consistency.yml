@@ -61,6 +61,9 @@ jobs:
           bundle install --jobs 1
           pnpm install --frozen-lockfile
 
+      - name: Install Playwright Chromium
+        run: pnpm playwright-install
+
       - name: Prepare test database and assets
         run: |
           bin/rake db:create db:migrate
