@@ -1,0 +1,22 @@
+{
+  "image_tag": "local_discourse/isbf_app:notifications-unread-20261018-cb03378611dd",
+  "image_id": "sha256:2f7b2b607ce38224d5c63321563224d448e0ee62fe3f0c38037f868d6738df86",
+  "source_version": "cb03378611ddef5044a5439a373b9b8f1bc66511c8da53c361f8aeb2706d13fd",
+  "complete_runtime_inventory_matches": true,
+  "plugins_verified": 66,
+  "plugin_links_markers_and_hidden_files_verified": true,
+  "active_theme_database_backed": true,
+  "runtime_startup_matches_production": true,
+  "production_startup": {
+    "Entrypoint": [
+      "/usr/bin/env"
+    ],
+    "Cmd": [
+      "/sbin/boot"
+    ]
+  },
+  "latest_tag_changed": false,
+  "production_container_recreated": false,
+  "production_container_paused": false,
+  "shared_plugin_releases_required": true
+}

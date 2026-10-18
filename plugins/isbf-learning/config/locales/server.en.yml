@@ -1,0 +1,44 @@
+en:
+  site_settings:
+    isbf_learning_enabled: "Enable the ISBF course-resource and library plugin."
+    isbf_learning_category_id: "Authenticated course-resource category ID."
+    isbf_learning_storage_limit_mb: "Maximum private learning file storage in MiB."
+    isbf_library_enabled: "Enable the independent resource library (requires the ISBF Learning plugin)."
+    isbf_library_category_id: "Resource library category ID, different from the course-resource category."
+  isbf_learning:
+    course_deleted: "The parent course was deleted by an administrator"
+    course_delete_failed: "The course could not be deleted. No changes were saved."
+    invalid_contributor: "Contributor must be a single-line name of at most 15 characters."
+    unknown_contributor: "Unknown contributor"
+    contributor_label: "Contributor"
+    delete_failed: "The resource could not be deleted. Please retry."
+    invalid_link: "Enter one complete external HTTP or HTTPS link (up to 2048 characters)."
+    invalid: "Select a valid course and supply a title and at least one protected file or external link."
+    duplicate_course: "This course already exists in the selected year."
+    storage_error: "The private file could not be saved. Check the storage quota or try again."
+    invalid_description: "Brief introduction must be plain text of at most 300 characters."
+    course_storage_error: "The course could not be saved. Please retry."
+    reviewables:
+      actions:
+        approve_course:
+          title: "Approve course"
+          description: "Add this course to its year."
+          complete: "Course approved."
+        reject_course:
+          title: "Reject course"
+          description: "Resolve this request without adding a course."
+          complete: "Course request rejected."
+  isbf_library:
+    invalid: "Select a valid resource group and provide a title and external link."
+    duplicate_directory: "This directory name already exists in the selected scope."
+    directory_storage_error: "The directory could not be saved. Please retry."
+    reviewables:
+      actions:
+        approve_directory:
+          title: "Approve directory"
+          description: "Add this category or group to the resource library."
+          complete: "Directory approved."
+        reject_directory:
+          title: "Reject directory"
+          description: "Resolve this request without adding a directory."
+          complete: "Directory request rejected."

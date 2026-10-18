@@ -1,0 +1,6 @@
+compiled/
+asset-cache/
+native-fixture.json
+*.log
+tool-executions.jsonl
+__pycache__/

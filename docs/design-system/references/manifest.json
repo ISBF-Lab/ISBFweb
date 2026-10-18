@@ -2029,6 +2029,67 @@
       "deployed_source_version": "6f6680e493b02c39b3777aa192af8a4948cc7f54f3ac0d4f72a4001cd52630a9",
       "latest_theme_refinement": "../deployments/continue-reading-20261016/square-border-20261017/source-manifest.json",
       "confirmed_container_shape": "Square border; radius 0, user confirmed 2026-10-17"
+    },
+    {
+      "id": "notifications-unread-20261018",
+      "change_date": "2026-10-18",
+      "status": "design_confirmed_final_visual_pending",
+      "scope": "C18: notification bell indicators, account display preference, unread-only filter and group state; existing delivery and permissions retained",
+      "evidence": "../reviews/notifications-unread-20261018/README.md",
+      "source_manifest": "../reviews/notifications-unread-20261018/source-manifest.json",
+      "source_version": "aa2ec39288efa913c66ba492e0f989749afdca8614b9fb6efdf4ae8802b46174",
+      "excluded": [
+        "notification delivery",
+        "other navigation controls",
+        "production deployment"
+      ],
+      "latest_refinement": {
+        "change_date": "2026-10-18",
+        "status": "design_confirmed_final_visual_pending",
+        "scope": "Center unread dots beside action labels; omit topic-heading dots; move unread-only switch into the top-right three-dot menu",
+        "evidence": "../reviews/notifications-unread-20261018/layout-revision/README.md",
+        "source_manifest": "../reviews/notifications-unread-20261018/layout-revision/source-manifest.json",
+        "source_version": "8055e271058147d25004a7d483ace084b51740252c91cfd7dac7ee264011ee28"
+      }
+    },
+    {
+      "id": "notifications-unread-deployed-20261018",
+      "change_date": "2026-10-18",
+      "status": "published_user_authorized",
+      "scope": "C18 notification unread indicators and menu filter; existing delivery and unrelated UI retained",
+      "related_review": "notifications-unread-20261018",
+      "evidence": "../deployments/notifications-unread-20261018/README.md",
+      "source_manifest": "../deployments/notifications-unread-20261018/source-manifest.json",
+      "source_version": "cb03378611ddef5044a5439a373b9b8f1bc66511c8da53c361f8aeb2706d13fd",
+      "verified_image": "local_discourse/isbf_app:notifications-unread-20261018-cb03378611dd",
+      "final_visual_acceptance": "No broader UI region promoted by technical verification"
+    },
+    {
+      "id": "notifications-layout-20261018",
+      "change_date": "2026-10-18",
+      "status": "design_confirmed_final_visual_pending",
+      "scope": "C19: current-user notification topic-group boundaries, confirmed text hierarchy and full-row primary links; C18 unread and menu behavior retained",
+      "evidence": "../reviews/notifications-layout-20261018/README.md",
+      "source_manifest": "../reviews/notifications-layout-20261018/source-manifest.json",
+      "excluded": [
+        "notification delivery",
+        "backend interface changes",
+        "body previews",
+        "production deployment"
+      ],
+      "source_version": "29c1d7e8c45f283a6cb3ababd3d0599d2b85a38dc4e688ece767b75957820808"
+    },
+    {
+      "id": "notifications-layout-deployed-20261018",
+      "change_date": "2026-10-18",
+      "status": "published_user_authorized",
+      "scope": "C19 notification hierarchy and full-row links; C18 rules and unrelated deployed features retained",
+      "related_review": "notifications-layout-20261018",
+      "evidence": "../deployments/notifications-layout-20261018/README.md",
+      "source_manifest": "../deployments/notifications-layout-20261018/source-manifest.json",
+      "source_version": "b1dab68ab8ea60e731378ce42380a3e23aa72fd9cd23698b835347247859892a",
+      "verified_image": "local_discourse/isbf_app:notifications-layout-20261018-b1dab68ab8ea",
+      "final_visual_acceptance": "No broader UI region promoted by technical verification"
     }
   ]
 }

@@ -34,6 +34,7 @@ Discourse is large with long history. Understand context before changes.
 - Continue to use UI kit, FormKit, float-kit, BEM, translations, and the frontend skills required above. Their APIs provide engineering behaviour; their default appearance does not establish this project's design standard.
 - When a new region is explicitly approved, persist its actual source version, acceptance scope, tokens, component rules, and reference mapping in `docs/design-system/`. Do not classify a region as Approved solely because it renders or has custom CSS.
 - Keep this rollout's worktree and snapshots in persistent storage and follow [its resource policy](docs/design-system/resource-policy.md): serialize work, use one capped browser tool, and keep the full preview forum stopped on this shared host. Do not use production as a test backend.
+- Set memory limits for each new tool or deployment process from the server's current sustainable capacity, accounting for current usage, effective cgroup limits, and service headroom. Reassess before each run; historical fixed GiB limits are not current limits. Follow the resource policy for monitoring and stop conditions.
 
 ### Comments & Types
 - Prefer self-documenting code. Comments should only be added when future misunderstanding is likely. They should be terse, and should describe 'why', not 'what'. They should not be used to describe history.

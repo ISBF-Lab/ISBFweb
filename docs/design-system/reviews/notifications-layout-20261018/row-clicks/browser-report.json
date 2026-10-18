@@ -1,0 +1,1556 @@
+{
+  "harness_sha256": "086e2cd04836395eef178cf7585617824d9a5f675250e39afee67835c42a0b39",
+  "passed": true,
+  "full_ember_client": true,
+  "production_backend_used": false,
+  "checks": [
+    "the actual compiled shell and notification components boot",
+    "1280px replied avatar opens the exact native target once and consumes one unread notice",
+    "1280px replied content opens the exact native target once and consumes one unread notice",
+    "1280px replied time opens the exact native target once and consumes one unread notice",
+    "1280px replied whitespace opens the exact native target once and consumes one unread notice",
+    "1280px reopening replied never consumes another notice",
+    "1280px mentioned avatar opens the exact native target once and consumes one unread notice",
+    "1280px mentioned content opens the exact native target once and consumes one unread notice",
+    "1280px mentioned time opens the exact native target once and consumes one unread notice",
+    "1280px mentioned whitespace opens the exact native target once and consumes one unread notice",
+    "1280px reopening mentioned never consumes another notice",
+    "1280px liked avatar opens the exact native target once and consumes one unread notice",
+    "1280px liked content opens the exact native target once and consumes one unread notice",
+    "1280px liked time opens the exact native target once and consumes one unread notice",
+    "1280px liked whitespace opens the exact native target once and consumes one unread notice",
+    "1280px reopening liked never consumes another notice",
+    "1280px granted_badge avatar opens the exact native target once and consumes one unread notice",
+    "1280px granted_badge content opens the exact native target once and consumes one unread notice",
+    "1280px granted_badge time opens the exact native target once and consumes one unread notice",
+    "1280px granted_badge whitespace opens the exact native target once and consumes one unread notice",
+    "1280px reopening granted_badge never consumes another notice",
+    "390px replied avatar opens the exact native target once and consumes one unread notice",
+    "390px replied content opens the exact native target once and consumes one unread notice",
+    "390px replied time opens the exact native target once and consumes one unread notice",
+    "390px replied whitespace opens the exact native target once and consumes one unread notice",
+    "390px reopening replied never consumes another notice",
+    "390px mentioned avatar opens the exact native target once and consumes one unread notice",
+    "390px mentioned content opens the exact native target once and consumes one unread notice",
+    "390px mentioned time opens the exact native target once and consumes one unread notice",
+    "390px mentioned whitespace opens the exact native target once and consumes one unread notice",
+    "390px reopening mentioned never consumes another notice",
+    "390px liked avatar opens the exact native target once and consumes one unread notice",
+    "390px liked content opens the exact native target once and consumes one unread notice",
+    "390px liked time opens the exact native target once and consumes one unread notice",
+    "390px liked whitespace opens the exact native target once and consumes one unread notice",
+    "390px reopening liked never consumes another notice",
+    "390px granted_badge avatar opens the exact native target once and consumes one unread notice",
+    "390px granted_badge content opens the exact native target once and consumes one unread notice",
+    "390px granted_badge time opens the exact native target once and consumes one unread notice",
+    "390px granted_badge whitespace opens the exact native target once and consumes one unread notice",
+    "390px reopening granted_badge never consumes another notice",
+    "expanding a failed detail request never opens or marks a notification",
+    "detail retry and pagination load both additional actors without opening a notice",
+    "action groups remain independently expanded",
+    "an expanded actor row also opens from its whitespace",
+    "keyboard focus outlines the complete row",
+    "Enter follows the focused notification's original target",
+    "Control-click retains native new-tab semantics; the review cancels the browser default after observation to keep one page",
+    "Meta-click retains native new-tab semantics; the review cancels the browser default after observation to keep one page",
+    "middle-click retains its native default without opening a second review page",
+    "1280px long titles and account names wrap within their group",
+    "900px long titles and account names wrap within their group",
+    "390px long titles and account names wrap within their group",
+    "320px long titles and account names wrap within their group",
+    "failed loading renders an error without an empty group container",
+    "the retried first group page retains its next cursor",
+    "outer pagination appends the standalone group without duplicating the existing topic",
+    "the real client has no JavaScript runtime errors"
+  ],
+  "layouts": [],
+  "errors": [],
+  "console_errors": [
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ],
+  "missing_assets": [],
+  "api_requests": [
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/favicon/proxied"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "cursor": [
+          "actors-page-2"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/replied.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/replied.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/replied.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/replied.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/replied.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/replied.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/favicon/proxied"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "cursor": [
+          "groups-page-2"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    }
+  ]
+}

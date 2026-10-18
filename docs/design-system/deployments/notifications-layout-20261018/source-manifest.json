@@ -1,0 +1,35 @@
+{
+  "source_version": "b1dab68ab8ea60e731378ce42380a3e23aa72fd9cd23698b835347247859892a",
+  "review_source_version": "29c1d7e8c45f283a6cb3ababd3d0599d2b85a38dc4e688ece767b75957820808",
+  "review_manifest": "../../reviews/notifications-layout-20261018/source-manifest.json",
+  "scope": "C19 notification topic-group boundaries, text hierarchy and full-row original links; C18 unread rules retained",
+  "production_theme_id": 4,
+  "active_theme_database_backed": true,
+  "production_deployed": true,
+  "files": [
+    {
+      "source_path": "themes/isbf-campus-feed/common/common.scss",
+      "snapshot_path": "source/themes__isbf-campus-feed__common__common.scss.txt",
+      "sha256": "94de45e882ef1b37f8cca4ac0e809dd25e3150b42c11cd0925b364996b45932b",
+      "runtime_before_sha256": "f33a1e9e62e5c28d23ecbb826bdc221ab136b32c1e75295bcbae5aad25c48578"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+      "snapshot_path": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notifications.gjs.txt",
+      "sha256": "d97fcf0dfc36b4060b5a05fde038f18b1b77823ce67b0ed2723b7144af40ef4f",
+      "runtime_before_sha256": "5ba42859365ba1fa61df800f103f115f0a4068ffe7137adbb2c7d68a978e5d77"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-action.gjs",
+      "snapshot_path": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notification-action.gjs.txt",
+      "sha256": "39dca2608f3cc46a9656ef8ae74e8abf7ea01aeb4563d97f853e9b06f6d3fe8e",
+      "runtime_before_sha256": "ba261264ce7373f6918da5530f12a4cea4d25e9badd8aab145c8fd1a4fe33092"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-entry.gjs",
+      "snapshot_path": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notification-entry.gjs.txt",
+      "sha256": "7d7a923418791f798e707e05f5e27c524e016f470e701fc3b1ff72aabedd19d0",
+      "runtime_before_sha256": "df863611922de0651e78bebf78c9a785933f6d6efd3856bb6d4f13dd1972943c"
+    }
+  ]
+}

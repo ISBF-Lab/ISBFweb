@@ -291,3 +291,27 @@ space-3（12px）列间距、1px语义分隔线和font-md/1.45正文。操作采
 2026-10-16补充：用户明确授权上线，局部继续阅读已发布。原生及线上检查、实际源码版本、保留范围和回退见[发布记录](deployments/continue-reading-20261016/README.md)。最终视觉仍待用户核验，不扩大其他区域的Approved范围。
 
 2026-10-17继续阅读修订：用户明确要求容器直角，局部`border-radius: 0`取代初版16px圆角；其他组件的圆角token不变。源码及线上CSS验证见[修订记录](deployments/continue-reading-20261016/square-border-20261017/README.md)。
+
+## 2026-10-18 通知未读局部组合
+
+C18仅用于通知铃铛及分组页：数字角标最小宽高space-5、内距space-1、
+font-xs/weight-bold/radius-pill，圆点宽高space-2；颜色复用accent及accent-contrast。
+动作未读点使用space-2及同尺寸文字间距，以flex与文字垂直居中；主题标题无点。
+只看未读开关移入右上角菜单，菜单行使用space-3、font-sm；
+UI kit开关使用space-6高、两倍space-6宽，点击区域高度space-6+space-5。
+不新增全局token。设计确认、实际源码和验证见[局部记录](reviews/notifications-unread-20261018/README.md)。
+
+2026-10-18通知未读提示已按用户授权发布；精确线上合并源、已验证镜像、两端功能与资源核对见[发布记录](deployments/notifications-unread-20261018/README.md)。C18的角标、动作点和菜单筛选规则保持局部范围。
+
+## 2026-10-18 通知层级局部组合
+
+C19仅用于当前用户的分组通知：组外距、组间距及内距复用space-4，
+边框复用border-width/border，圆角radius-sm；不加阴影。
+帖子标题font-lg/weight-bold/1.45，主文字色；动作分类font-sm/weight-medium、muted，
+配已有通知图标；条目font-md/1.45，时间font-xs/muted。
+动作间距及分隔线内距space-3，行内距和头像间距space-3、头像40px沿用C13。
+整行主链接的键盘焦点复用2px focus-ring、offset -2px。
+上述组合经用户明确确认，仅扩展本地通知区域，不新增全局token。
+来源与验证见[审阅记录](reviews/notifications-layout-20261018/README.md)。
+
+2026-10-18通知页层级与整行点击已按用户授权发布；活动主题4项字段的确切合并源、插件及镜像核对、两端只读验证见[发布记录](deployments/notifications-layout-20261018/README.md)。C19仅限本次通知区域。

@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "views": [
+    {
+      "viewport": "mobile",
+      "checks": [
+        "the actual deployed notification page finishes loading",
+        "the real notification API loads without an error",
+        "the current-user serializer supplies the badge preference and all unread counters",
+        "the visible navigation badge matches the real account state",
+        "topic headings have no unread dot",
+        "existing unread action dots are vertically centered",
+        "the deployed notification groups use the confirmed border, radius and spacing",
+        "topic titles and notification content retain their distinct confirmed sizes",
+        "avatar, content, time and whitespace hit the original notification link on the real page",
+        "four real row positions invoke the native target once each; browser writes and marking headers are withheld",
+        "only-unread is contained in the closed three-dot menu",
+        "the unread switch is visible inside a menu that fits the viewport",
+        "the menu switch requests unread-filtered real notification groups",
+        "Escape closes the three-dot menu",
+        "mentions retains the unread filter",
+        "the notification page has no horizontal overflow",
+        "existing marketplace and alumni links remain available",
+        "marketplace data request completes",
+        "marketplace finishes loading without an error",
+        "the existing alumni map finishes initialization"
+      ],
+      "unread_action_dots_checked": 0,
+      "notification_rows_loaded": 21,
+      "marketplace_products_loaded": 2
+    },
+    {
+      "viewport": "desktop",
+      "checks": [
+        "the actual deployed notification page finishes loading",
+        "the real notification API loads without an error",
+        "the current-user serializer supplies the badge preference and all unread counters",
+        "the visible navigation badge matches the real account state",
+        "topic headings have no unread dot",
+        "existing unread action dots are vertically centered",
+        "the deployed notification groups use the confirmed border, radius and spacing",
+        "topic titles and notification content retain their distinct confirmed sizes",
+        "avatar, content, time and whitespace hit the original notification link on the real page",
+        "four real row positions invoke the native target once each; browser writes and marking headers are withheld",
+        "only-unread is contained in the closed three-dot menu",
+        "the unread switch is visible inside a menu that fits the viewport",
+        "the menu switch requests unread-filtered real notification groups",
+        "Escape closes the three-dot menu",
+        "mentions retains the unread filter",
+        "the notification page has no horizontal overflow",
+        "collapsed desktop navigation retains its notification bell and badge",
+        "existing marketplace and alumni links remain available",
+        "marketplace data request completes",
+        "marketplace finishes loading without an error",
+        "the existing alumni map finishes initialization"
+      ],
+      "unread_action_dots_checked": 0,
+      "notification_rows_loaded": 21,
+      "marketplace_products_loaded": 2
+    }
+  ],
+  "javascript_errors": [],
+  "failed_assets": [],
+  "blocked_writes": 10,
+  "production_content_submitted": false,
+  "account_preferences_changed": false,
+  "transport": {
+    "get_requests": 139,
+    "static_cache_hits": 180,
+    "tls_verified": true,
+    "browser_network": "none",
+    "production_write_requests": 0
+  },
+  "transport_error_count": 0
+}

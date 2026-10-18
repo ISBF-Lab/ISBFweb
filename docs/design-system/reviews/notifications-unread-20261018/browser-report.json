@@ -1,0 +1,511 @@
+{
+  "passed": true,
+  "full_ember_client": true,
+  "production_backend_used": false,
+  "checks": [
+    "the actual compiled shell and notification components boot",
+    "one grouped notification page is rendered",
+    "all unread records count even when the header's unseen count is zero",
+    "history remains visible by default",
+    "topic and both actions expose their unread state",
+    "opening the page never marks notices read",
+    "both entrances handle unread boundary 0",
+    "both entrances handle unread boundary 1",
+    "both entrances handle unread boundary 99",
+    "both entrances handle unread boundary 100",
+    "unread filtering selects an older unread representative before grouping",
+    "the consolidated like notice expands into its existing actor rows",
+    "lazy detail requests retain the unread filter",
+    "expansion never consumes unread counts",
+    "the mentions tab composes with unread filtering",
+    "all actors sharing one consolidated notification change read state together",
+    "clicking a second actor never deducts the same notice twice",
+    "a failed preference save preserves numeric badges",
+    "retry saves the dot preference through the user update endpoint",
+    "dot mode retains a translated accessible count",
+    "a fresh client restores the account preference and defaults to all notifications",
+    "Escape closes the notification menu",
+    "1280px light uses its actual theme palette",
+    "one visible badge survives 1280px light, including collapsed navigation",
+    "1280px light has no horizontal overflow",
+    "1280px light badge text contrast meets AA",
+    "1280px dark uses its actual theme palette",
+    "one visible badge survives 1280px dark, including collapsed navigation",
+    "1280px dark has no horizontal overflow",
+    "1280px dark badge text contrast meets AA",
+    "900px light uses its actual theme palette",
+    "one visible badge survives 900px light, including collapsed navigation",
+    "900px light has no horizontal overflow",
+    "900px light badge text contrast meets AA",
+    "900px dark uses its actual theme palette",
+    "one visible badge survives 900px dark, including collapsed navigation",
+    "900px dark has no horizontal overflow",
+    "900px dark badge text contrast meets AA",
+    "390px light uses its actual theme palette",
+    "one visible badge survives 390px light, including collapsed navigation",
+    "390px light has no horizontal overflow",
+    "390px light badge text contrast meets AA",
+    "390px dark uses its actual theme palette",
+    "one visible badge survives 390px dark, including collapsed navigation",
+    "390px dark has no horizontal overflow",
+    "390px dark badge text contrast meets AA",
+    "320px light uses its actual theme palette",
+    "one visible badge survives 320px light, including collapsed navigation",
+    "320px light has no horizontal overflow",
+    "320px light badge text contrast meets AA",
+    "320px dark uses its actual theme palette",
+    "one visible badge survives 320px dark, including collapsed navigation",
+    "320px dark has no horizontal overflow",
+    "320px dark badge text contrast meets AA",
+    "failed bulk marking retains unread indicators",
+    "the delayed bulk request reaches the synthetic backend",
+    "a notification arriving during bulk marking survives the response",
+    "cross-tab reading clears both badge and unread list",
+    "a slow old response cannot replace a newer unread-filter result",
+    "the real client has no JavaScript runtime errors",
+    "all script and style dependencies are local"
+  ],
+  "layouts": [
+    {
+      "width": 1280,
+      "mode": "light",
+      "background": "rgb(255, 255, 255)",
+      "badge_text_contrast": 5.77,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 1280,
+      "mode": "dark",
+      "background": "rgb(16, 20, 19)",
+      "badge_text_contrast": 9.79,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 900,
+      "mode": "light",
+      "background": "rgb(255, 255, 255)",
+      "badge_text_contrast": 5.77,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 900,
+      "mode": "dark",
+      "background": "rgb(16, 20, 19)",
+      "badge_text_contrast": 9.79,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "mode": "light",
+      "background": "rgb(255, 255, 255)",
+      "badge_text_contrast": 5.77,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "mode": "dark",
+      "background": "rgb(16, 20, 19)",
+      "badge_text_contrast": 9.79,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 320,
+      "mode": "light",
+      "background": "rgb(255, 255, 255)",
+      "badge_text_contrast": 5.77,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 320,
+      "mode": "dark",
+      "background": "rgb(16, 20, 19)",
+      "badge_text_contrast": 9.79,
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "console_errors": [
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ],
+  "missing_assets": [],
+  "api_requests": [
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "unread"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "mentions"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/liked.json",
+      "query": {
+        "filter": [
+          "all"
+        ],
+        "tab": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json"
+    },
+    {
+      "method": "GET",
+      "path": "/favicon/proxied"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/notifications/mark-read"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/notifications/mark-read"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    }
+  ]
+}

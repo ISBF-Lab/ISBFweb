@@ -1,0 +1,56 @@
+{
+  "published_at_utc": "2026-10-18T08:38:24Z",
+  "theme_id": 4,
+  "fields_before": 221,
+  "fields_after": 221,
+  "preserved_fields": 217,
+  "sources": [
+    {
+      "relative": "common/common.scss",
+      "sha256": "94de45e882ef1b37f8cca4ac0e809dd25e3150b42c11cd0925b364996b45932b",
+      "previous_id": 197,
+      "field_id": 197
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-notifications.gjs",
+      "sha256": "d97fcf0dfc36b4060b5a05fde038f18b1b77823ce67b0ed2723b7144af40ef4f",
+      "previous_id": 237,
+      "field_id": 237
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-notification-action.gjs",
+      "sha256": "39dca2608f3cc46a9656ef8ae74e8abf7ea01aeb4563d97f853e9b06f6d3fe8e",
+      "previous_id": 235,
+      "field_id": 235
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-notification-entry.gjs",
+      "sha256": "7d7a923418791f798e707e05f5e27c524e016f470e701fc3b1ff72aabedd19d0",
+      "previous_id": 236,
+      "field_id": 236
+    }
+  ],
+  "settings_preserved": true,
+  "javascript_url": "/theme-javascripts/fb3a093886189062f531c0336aef27d135d55a09.js?__ws=isbf-one.com",
+  "javascript_sha256": "6e8f0a7274cb2bec7b67071fa5091e86486b03896f68cabac0d52deee623b2ea",
+  "styles": [
+    {
+      "target": "common_theme",
+      "bytes": 319309,
+      "sha256": "f76e3a484bcd931075a61581062d7f6540d97d437894213377afea49b6a05edb",
+      "url": "/stylesheets/common_theme_4_1bd4e5632ea8566b9f2fe0aa4c787b93548c454a.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "desktop_theme",
+      "bytes": 108,
+      "sha256": "04c5f3e30e9f7e27e5ffb99a9f13083bbee7e5ffbf7341146b1dd655354d6056",
+      "url": "/stylesheets/desktop_theme_4_f63dd18f54122611263dc152f297c903ed32b5fe.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "mobile_theme",
+      "bytes": 107,
+      "sha256": "324bf4a874cedcc21e1d0c1898b417b4a6d047897ec8e31026df75db84bbbc69",
+      "url": "/stylesheets/mobile_theme_4_f63dd18f54122611263dc152f297c903ed32b5fe.css?__ws=isbf-one.com"
+    }
+  ]
+}

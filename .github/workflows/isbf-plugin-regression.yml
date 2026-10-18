@@ -1,0 +1,70 @@
+name: ISBF plugin regression
+
+on:
+  pull_request:
+    paths:
+      - "plugins/isbf-learning/**"
+      - "plugins/isbf-notifications/**"
+      - ".github/workflows/isbf-plugin-regression.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: isbf-plugins-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  plugins:
+    runs-on: ubuntu-latest
+    container: discourse/discourse_test:release
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    env:
+      RAILS_ENV: test
+      PGUSER: discourse
+      PGPASSWORD: discourse
+      LOAD_PLUGINS: "1"
+      PARALLEL_TEST_PROCESSORS: "1"
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+
+      - name: Prepare database services
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          redis-server /etc/redis/redis.conf --daemonize yes --logfile ""
+          chown -R postgres /var/run/postgresql
+          sudo -E -u postgres script/start_test_db.rb
+          sudo -u postgres psql -c "CREATE ROLE discourse LOGIN SUPERUSER PASSWORD 'discourse';"
+
+      - name: Install dependencies
+        run: |
+          ln -s /var/www/discourse/vendor/bundle vendor/bundle
+          bundle config --local path vendor/bundle
+          bundle config --local deployment true
+          bundle config --local without development
+          bundle install --jobs 1
+          pnpm install --frozen-lockfile
+
+      - name: Prepare the synthetic test database
+        run: bin/rake db:create db:migrate
+
+      - name: Learning resources and notification behavior
+        run: |
+          mkdir -p tmp
+          bin/rspec plugins/isbf-learning/spec plugins/isbf-notifications/spec | tee tmp/isbf-plugin-rspec.log
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: isbf-plugin-results-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 14
+          path: tmp/isbf-plugin-rspec.log

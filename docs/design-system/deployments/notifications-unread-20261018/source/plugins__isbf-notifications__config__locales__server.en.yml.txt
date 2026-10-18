@@ -1,0 +1,5 @@
+en:
+  isbf_notifications:
+    invalid_badge_style: "Choose numbers or a dot for the notification badge."
+  site_settings:
+    isbf_notifications_enabled: "Enable grouped ISBF notifications."

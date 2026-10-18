@@ -1,0 +1,37 @@
+[
+  {
+    "command": [
+      "node",
+      "/review/compile.cjs"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "ruby",
+      "/review/compile-style.rb"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "node",
+      "/review/compile-browser.cjs"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "python3",
+      "/review/attempt-qunit.py"
+    ],
+    "exit_code": 1
+  },
+  {
+    "command": [
+      "python3",
+      "/review/check-browser.py"
+    ],
+    "exit_code": 1
+  }
+]

@@ -13,11 +13,13 @@ module IsbfNotifications
       original_username
     ].freeze
 
-    def initialize(user, guardian, tab: "all")
+    def initialize(user, guardian, tab: "all", filter: "all")
       raise Discourse::InvalidParameters.new(:tab) if %w[all mentions].exclude?(tab)
+      raise Discourse::InvalidParameters.new(:filter) if %w[all unread].exclude?(filter)
       @user = user
       @guardian = guardian
       @tab = tab
+      @filter = filter
       @types = Notification.types.to_h.invert
     end
 
@@ -87,7 +89,8 @@ module IsbfNotifications
                     count: actor ? actor.total.to_i : items.length,
                     unread: items.any? { |item| !item.read },
                     latest: latest,
-                    detail_url: "/isbf/notifications/groups/#{topic_id}/actions/#{action}.json",
+                    detail_url:
+                      "/isbf/notifications/groups/#{topic_id}/actions/#{action}.json?tab=#{@tab}&filter=#{@filter}",
                   }
                 end
                 .sort_by { |action| action[:latest][:created_at] }
@@ -154,6 +157,7 @@ module IsbfNotifications
       @scope ||=
         begin
           notifications = Notification.where(user_id: @user.id).visible
+          notifications = notifications.where(read: false) if @filter == "unread"
           notifications =
             notifications.where(
               notification_type: MENTION_TYPES.filter_map { |type| Notification.types[type] },
@@ -320,12 +324,16 @@ module IsbfNotifications
     end
 
     def encode_cursor(purpose, **values)
-      verifier.generate(values.merge(user_id: @user.id, tab: @tab), purpose: purpose)
+      verifier.generate(
+        values.merge(user_id: @user.id, tab: @tab, filter: @filter),
+        purpose: purpose,
+      )
     end
 
     def decode_cursor(cursor, purpose)
       values = verifier.verified(cursor, purpose: purpose)&.stringify_keys
-      unless values && values["user_id"] == @user.id && values["tab"] == @tab
+      unless values && values["user_id"] == @user.id && values["tab"] == @tab &&
+               values.fetch("filter", "all") == @filter
         raise Discourse::InvalidParameters.new(:cursor)
       end
       offset = values["offset"]

@@ -1,0 +1,146 @@
+{
+  "date": "2026-10-18",
+  "git_parent_commit": "40687391a705728511f6eaeaba8e9be29686694e",
+  "previous_source_manifest": "../source-manifest.json",
+  "previous_source_version": "aa2ec39288efa913c66ba492e0f989749afdca8614b9fb6efdf4ae8802b46174",
+  "source_version": "8055e271058147d25004a7d483ace084b51740252c91cfd7dac7ee264011ee28",
+  "source_version_algorithm": "SHA256 of compact sorted-key JSON array containing source_path and sha256, sorted by source_path",
+  "scope": "Vertically centered action unread dots, no topic-heading dots, unread-only switch in top-right three-dot menu",
+  "design_acceptance": "User explicitly requested these three revisions; final visual acceptance pending",
+  "approved_references": [
+    "A01",
+    "A05",
+    "C05",
+    "C06",
+    "C13"
+  ],
+  "production_deployed": false,
+  "changed_product_files_from_initial": 5,
+  "files": [
+    {
+      "source_path": "plugins/isbf-notifications/README.md",
+      "snapshot_path": "../sources/plugins__isbf-notifications__README.md.txt",
+      "sha256": "b866756ffbd76abd9d77a3857a3d66fa909e57c21ff506302ebb53e899643576",
+      "base_sha256": "f3c48e5b25c8d2b7bb8c0f46f6099382cb2c2b7c577251f6d869d8a4900b68f2"
+    },
+    {
+      "source_path": "plugins/isbf-notifications/config/locales/server.en.yml",
+      "snapshot_path": "../sources/plugins__isbf-notifications__config__locales__server.en.yml.txt",
+      "sha256": "34c6f8475e48ce8d3c78b531f235a2aad15479a4f5d2fb627f277977140db91a",
+      "base_sha256": "0b461542b54780b50647902f66c435e22f20a1b65063b1c587209b56b1ec3746"
+    },
+    {
+      "source_path": "plugins/isbf-notifications/config/locales/server.zh_CN.yml",
+      "snapshot_path": "../sources/plugins__isbf-notifications__config__locales__server.zh_CN.yml.txt",
+      "sha256": "fbcc794c749f67759a53e9d81fa5e1fe6f79b8ca7d9f0ac816f0db3283bde0ba",
+      "base_sha256": "18643f52f6b42337be74b73c6ac6852662694bb0fb4c56cbf84f8dfc6c61f0d4"
+    },
+    {
+      "source_path": "plugins/isbf-notifications/lib/isbf_notifications/grouped_notifications.rb",
+      "snapshot_path": "../sources/plugins__isbf-notifications__lib__isbf_notifications__grouped_notifications.rb.txt",
+      "sha256": "5f817b9a0ee473a12af5c33da2809e37172ab97204b88564facd11e65dc6f42f",
+      "base_sha256": "282e7e4f6f8e4049d5cc73dad727ed1b79a1dec7e95e53209e72c7d396f3c968"
+    },
+    {
+      "source_path": "plugins/isbf-notifications/plugin.rb",
+      "snapshot_path": "../sources/plugins__isbf-notifications__plugin.rb.txt",
+      "sha256": "80568e666cdc89d274870f9a22a896427e91c0cffe65505183b7c873acb0cdb5",
+      "base_sha256": "e83f4a3efc330ae9b3712d6db32a4f8ee3f02ac9f67d54369fbb01b57fba43a4"
+    },
+    {
+      "source_path": "plugins/isbf-notifications/spec/requests/groups_controller_spec.rb",
+      "snapshot_path": "../sources/plugins__isbf-notifications__spec__requests__groups_controller_spec.rb.txt",
+      "sha256": "2c25b5349f24f2281c67d076638f442ce541e5843a11225374a3c96a9e480d9f",
+      "base_sha256": "bd22fb240d3da117a0aede24cb49cd34e3fc49b87dbf8ebd7bcf4dfd867c9100"
+    },
+    {
+      "source_path": "plugins/isbf-notifications/spec/requests/users_controller_spec.rb",
+      "snapshot_path": "../sources/plugins__isbf-notifications__spec__requests__users_controller_spec.rb.txt",
+      "sha256": "cfbc6321ba2dfb09a266523bbff83d31224625bb3173450e8cfa12db9ce290c9",
+      "base_sha256": null
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/README.md",
+      "snapshot_path": "sources/themes__isbf-campus-feed__README.md.txt",
+      "sha256": "7837e28b506e7334b95e3ba33f42582b28857068c19343f9f8745da781b386c8",
+      "base_sha256": "51f74a4c33d020e116f251d4e3aa8ef946cb175e794f3bdc7e66db1e32c53eaf",
+      "previous_sha256": "131b5071429bffd30d7988eba0bbf61a0904d67ea0f67d0aef47ff193387d139"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/common/common.scss",
+      "snapshot_path": "sources/themes__isbf-campus-feed__common__common.scss.txt",
+      "sha256": "67939845a20783181faa57353e0526df8f064ad1d57d8e7af3c990d59d1c5f71",
+      "base_sha256": "05927212ea9f88b720cfe841b86806482530c85525439e876bdd87922d62c764",
+      "previous_sha256": "3e91381b3ac70c3671263d2d68c596c91cf4ab95b27dec8b3ec1ffcf8d898187"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-action.gjs",
+      "snapshot_path": "sources/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notification-action.gjs.txt",
+      "sha256": "ba261264ce7373f6918da5530f12a4cea4d25e9badd8aab145c8fd1a4fe33092",
+      "base_sha256": "98e9e8b06280f14aec36b971927a1b9657b471bccbcd6cbfcd7eeffc178f7f40",
+      "previous_sha256": "d2eb3b3fe28ea9912bae5f6e8162d779ae564da32ab3e5655204f76f44c0c275"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-bell.gjs",
+      "snapshot_path": "../sources/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notification-bell.gjs.txt",
+      "sha256": "9480a2d60cde7bc750bd63c7bdbf43234bbb6227188b01329b064bc798f5dfce",
+      "base_sha256": null
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-unread.gjs",
+      "snapshot_path": "../sources/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notification-unread.gjs.txt",
+      "sha256": "f5d90c19d16791e41ffb4d6c801f41ebb266388da33939fa707372f9ae70a1da",
+      "base_sha256": null
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+      "snapshot_path": "sources/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notifications.gjs.txt",
+      "sha256": "5ba42859365ba1fa61df800f103f115f0a4068ffe7137adbb2c7d68a978e5d77",
+      "base_sha256": "64a6994bea908dc21f2df72807637cc37858c7eb780a6c7b753482db33e4e44f",
+      "previous_sha256": "d2b8d82836c090d5834e05502e4a9b290263502f971257ce7af3f8a0ce5a160e"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+      "snapshot_path": "../sources/themes__isbf-campus-feed__javascripts__discourse__components__isbf-v2-shell.gjs.txt",
+      "sha256": "b3dd023bc7f6c2f94e69f4955c8eaa2a0c0caad6f2cdff50775528d9b9794ced",
+      "base_sha256": "afef1c00764520574c46ec104aeef17a876395185de17fe30aa1847a28122473"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-side-nav.gjs",
+      "snapshot_path": "../sources/themes__isbf-campus-feed__javascripts__discourse__components__isbf-v2-side-nav.gjs.txt",
+      "sha256": "fef3e0cc6fb7527161e2d548cfa6d60e7986027a61c03c06db1414a6624074f6",
+      "base_sha256": "b044b36cab119f55da3cd1e3447bdb08740d13b972230bef75032d6681b6c8b4"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/initializers/isbf-notifications.js",
+      "snapshot_path": "../sources/themes__isbf-campus-feed__javascripts__discourse__initializers__isbf-notifications.js.txt",
+      "sha256": "bb5d692ef930435682d00975f88218ee5548eeb78b916f6f319eaee1d8c53917",
+      "base_sha256": null
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/services/isbf-notifications.js",
+      "snapshot_path": "../sources/themes__isbf-campus-feed__javascripts__discourse__services__isbf-notifications.js.txt",
+      "sha256": "8530db24a044e6d416a720af2a164fa19df78ad86e4174bfc8a62671fbb5b4fe",
+      "base_sha256": null
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/locales/en.yml",
+      "snapshot_path": "../sources/themes__isbf-campus-feed__locales__en.yml.txt",
+      "sha256": "dfd72ec46d5a065587e6f2bdfa1a08707df894ffeeb11bb2cc33f297748cc628",
+      "base_sha256": "747079e636bf0dc9d4cff1491698c24d0aedbbd6047b6ac910b165efabd477a2"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+      "snapshot_path": "../sources/themes__isbf-campus-feed__locales__zh_CN.yml.txt",
+      "sha256": "dbca7a4f98792a8fb97883645ea3687133e986de6493662b2f19c40c028b4431",
+      "base_sha256": "f46c1c12128522f713215686d0742c4d895c3938afa3c187067968192f4504ce"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/test/integration/notifications-test.gjs",
+      "snapshot_path": "sources/themes__isbf-campus-feed__test__integration__notifications-test.gjs.txt",
+      "sha256": "fdeca0f96c2940a0a4f45319e7b074575b1238c45cbd5988f8010c48653ea2df",
+      "base_sha256": null,
+      "previous_sha256": "0518c52e2c2c07f1e662d0872145b782a169b73953e9d090e1c8934bbcaaa190"
+    }
+  ]
+}
