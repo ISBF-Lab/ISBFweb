@@ -98,6 +98,10 @@ Keep the frontend build running during browser tests. `THEME_IDS` also supplies
 the `id` query parameter needed to select the runner rather than its index page.
 Timeline acceptance tests must stub `/t/280/excerpts.json` with an array response;
 the shared `/t/280/:post_number.json` fixture otherwise returns a topic object.
+Pass a `cloneJSON` copy of fixtures into legacy model factories, which can attach
+store and owner context to their input. Keep shared HTTP fixtures as plain data.
+Topic-switching tests use a multi-post fixture because Core hides reading
+controls on short single-post topics.
 
 Official activity times and deadlines are provided by `isbf-calendar` 0.3.0.
 The calendar pre-initializer runs after the campus/type extension and preserves

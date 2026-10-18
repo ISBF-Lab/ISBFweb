@@ -5,6 +5,7 @@ import sinon from "sinon";
 import { themePrefix } from "virtual:theme";
 import MoreTopics, { registeredTabs } from "discourse/components/more-topics";
 import { NotificationLevels } from "discourse/lib/notification-levels";
+import { cloneJSON } from "discourse/lib/object";
 import DiscourseURL from "discourse/lib/url";
 import Topic from "discourse/models/topic";
 import topicFixtures from "discourse/tests/fixtures/topic";
@@ -14,7 +15,7 @@ import continueReadingInitializer from "../../discourse/api-initializers/isbf-co
 import ISBFContinueReadingFooter from "../../discourse/components/isbf-continue-reading-footer";
 import ISBFContinueReadingItem from "../../discourse/components/isbf-continue-reading-item";
 
-const fixture = topicFixtures["/t/280/1.json"];
+const fixture = cloneJSON(topicFixtures["/t/280/1.json"]);
 
 module(
   "ISBF | Integration | Component | ContinueReadingItem",
@@ -23,7 +24,7 @@ module(
 
     hooks.beforeEach(function () {
       this.topic = Topic.create({
-        ...structuredClone(fixture.suggested_topics[0]),
+        ...cloneJSON(fixture.suggested_topics[0]),
         posts_count: 1,
         highest_post_number: 1,
         last_read_post_number: 1,
@@ -282,7 +283,7 @@ module(
     test("zero counts preserve category browsing and the extra latest link", async function (assert) {
       this.tracking.updateSeen(990101, 2);
       this.tracking.updateSeen(990102, 1);
-      const category = Topic.create(fixture).category;
+      const category = Topic.create(cloneJSON(fixture)).category;
       this.topic.set("category", category);
       await render(
         <template><ISBFContinueReadingFooter @topic={{this.topic}} /></template>
@@ -338,9 +339,9 @@ module("ISBF | Integration | Component | ContinueReading", function (hooks) {
         condition: ({ topic }) => topic.relatedTopics?.length > 0,
       }
     );
-    this.topic = Topic.create(structuredClone(fixture));
+    this.topic = Topic.create(cloneJSON(fixture));
     this.topic.set("relatedTopics", [
-      Topic.create({ ...fixture.suggested_topics[0], id: 990201 }),
+      Topic.create({ ...cloneJSON(fixture.suggested_topics[0]), id: 990201 }),
     ]);
   });
 

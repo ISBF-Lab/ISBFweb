@@ -117,7 +117,7 @@ acceptance("ISBF floating topic reading", function (needs) {
   test("another topic starts collapsed after navigating with reading open", async function (assert) {
     await visit(TOPIC);
     await click(TOGGLE);
-    await visit("/t/another-topic/281");
+    await visit("/t/1-3-0beta9-no-rate-limit-popups/28830");
     assert
       .dom(TOGGLE)
       .hasAttribute(
