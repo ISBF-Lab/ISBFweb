@@ -4,6 +4,8 @@ The course catalog lock creates its `PluginStoreRow` with explicit plugin/key
 attributes for Active Record's `create_or_find_by!` contract, then holds the row
 lock through the surrounding transaction. Course creation and review regressions
 run in `.github/workflows/isbf-plugin-regression.yml` with the notification suite.
+The catalog owns a savepoint. Failed native review results propagate rollback to
+that boundary, preserving the pending record and its version when storage fails.
 
 Discourse 学习资源库插件。课程与资源入口为 `/isbf/learning`，主题、回复、审核和搜索复用 Discourse。课程按大一至大四归类；staff 可直接添加，普通成员可申请并由 staff 在原生 `/review` 批准或拒绝。已登录成员可以阅读资源并提交材料。所有非管理员（包括版主）的资料提交进入原生审核队列，仅管理员可直接发布、审核、编辑和删除学习资料。课程申请仍使用原有 staff 权限。资料贡献者名称与真实提交账号分别保存，名称不会改变 Topic/Post 作者。
 

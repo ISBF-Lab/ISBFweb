@@ -348,3 +348,7 @@ above that link layer. Topic headings keep their separate links and no unread
 dot; the unread-only switch stays in the three-dot menu. No new data requests or
 backend interfaces are introduced. Source snapshots, preview and acceptance limits:
 `docs/design-system/reviews/notifications-layout-20261018/README.md`.
+
+The native notification menu's rendering test uses `checkVisibility()` for closed
+`details` content: its descendants can retain nonzero layout rectangles while the
+browser hides them. It checks the initial closed state, opening, and closing again.

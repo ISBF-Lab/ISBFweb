@@ -47,7 +47,12 @@ module IsbfLearning
         return super
       end
 
-      Courses.with_catalog_lock { super }
+      result = nil
+      Courses.with_catalog_lock do
+        result = super
+        raise ActiveRecord::Rollback unless result.success?
+      end
+      result
     end
 
     def perform_approve_post(performed_by, args)

@@ -1,4 +1,4 @@
-import { click, render, settled } from "@ember/test-helpers";
+import { click, find, render, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
 import { themePrefix } from "virtual:theme";
@@ -274,10 +274,18 @@ module("ISBF | Integration | Component | ISBFNotifications", function (hooks) {
       .dom(".isbf-notifications__topic h2 .isbf-notification-unread")
       .doesNotExist("topic headings have no unread dot");
     assert
-      .dom(".isbf-notifications__menu .isbf-notifications__filter")
-      .isNotVisible("the filter is inside the closed menu");
+      .dom(".isbf-notifications__menu")
+      .doesNotHaveAttribute("open", "the native menu starts closed");
+    assert.false(
+      find(".isbf-notifications__filter").checkVisibility(),
+      "the filter is inside the closed menu"
+    );
 
     await click(".isbf-notifications__menu summary");
+    assert.true(
+      find(".isbf-notifications__filter").checkVisibility(),
+      "opening the native menu reveals the filter"
+    );
     await click(".isbf-notifications__filter [role='switch']");
     assert.strictEqual(
       this.requests.at(-1).filter,
@@ -285,6 +293,10 @@ module("ISBF | Integration | Component | ISBFNotifications", function (hooks) {
       "the filter reaches the API"
     );
     await click(".isbf-notifications__menu summary");
+    assert.false(
+      find(".isbf-notifications__filter").checkVisibility(),
+      "closing the native menu hides the filter again"
+    );
     await click(".isbf-notifications__tabs button:last-child");
     assert.strictEqual(
       this.requests.at(-1).tab,

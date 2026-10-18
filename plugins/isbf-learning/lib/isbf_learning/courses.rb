@@ -27,7 +27,7 @@ module IsbfLearning
     end
 
     def self.with_catalog_lock
-      PluginStoreRow.transaction do
+      PluginStoreRow.transaction(requires_new: true) do
         scope = PluginStoreRow.where(plugin_name: STORE, key: "courses")
         row =
           scope.first ||

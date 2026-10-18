@@ -20,7 +20,12 @@ class ReviewableIsbfLearningCourse < Reviewable
   end
 
   def perform(performed_by, action_id, args = nil)
-    IsbfLearning::Courses.synchronize { super }
+    result = nil
+    IsbfLearning::Courses.synchronize do
+      result = super
+      raise ActiveRecord::Rollback unless result.success?
+    end
+    result
   end
 
   def perform_approve_course(performed_by, _args)
