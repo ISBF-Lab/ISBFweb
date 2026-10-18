@@ -91,10 +91,20 @@ jobs:
         env:
           DISCOURSE_DEV_DB: discourse_test
           QUNIT_RAILS_ENV: development
-        run: bin/rake 'themes:qunit[name,ISBF Campus Feed]'
+        run: |
+          mkdir -p tmp/isbf-frontend-results
+          bin/rake 'themes:qunit[name,ISBF Campus Feed]' | tee tmp/isbf-frontend-results/theme-qunit.log
+
+      - name: Upload failed theme test logs
+        uses: actions/upload-artifact@v7
+        if: failure() && steps.theme_qunit.outcome == 'failure'
+        with:
+          name: isbf-theme-failure-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 14
+          path: tmp/isbf-frontend-results/theme-qunit.log
 
       - name: Real page appearance and preservation checks
-        if: success() || (failure() && steps.theme_qunit.outcome == 'failure')
         run: bin/rspec themes/isbf-campus-feed/spec/system/frontend_consistency_spec.rb
 
       - uses: actions/upload-artifact@v7
@@ -105,4 +115,5 @@ jobs:
           retention-days: 14
           path: |
             tmp/isbf-frontend-screenshots/
+            tmp/isbf-frontend-results/
             tmp/capybara/

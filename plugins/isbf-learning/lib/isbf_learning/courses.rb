@@ -31,7 +31,7 @@ module IsbfLearning
         scope = PluginStoreRow.where(plugin_name: STORE, key: "courses")
         row =
           scope.first ||
-            scope.create_or_find_by! do |record|
+            scope.create_or_find_by!(plugin_name: STORE, key: "courses") do |record|
               record.type_name = "JSON"
               record.value = "[]"
             end
