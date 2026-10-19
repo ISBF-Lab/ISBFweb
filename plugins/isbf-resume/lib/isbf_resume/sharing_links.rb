@@ -24,8 +24,11 @@ module IsbfResume
     end
 
     def self.valid_collection?(value)
-      valid?(value) && URI.parse(value).host == "f.wps.cn" &&
-        URI.parse(value).path.match?(%r{\A/g/[A-Za-z0-9_-]+/?\z})
+      return false unless value.is_a?(String) && value.length.between?(1, MAX_LENGTH)
+      uri = URI.parse(value)
+      uri.is_a?(URI::HTTP) && !uri.host.to_s.empty?
+    rescue URI::InvalidURIError
+      false
     end
   end
 end

@@ -35,14 +35,29 @@ RSpec.describe IsbfResume::SharingLinks do
   end
 
   describe ".valid_collection?" do
-    it "accepts only HTTPS WPS collection-form links" do
-      expect(described_class.valid_collection?("https://f.wps.cn/g/resume-form")).to eq(true)
-      invalid = %w[
+    it "accepts HTTP and HTTPS collection links from any host" do
+      links = %w[
+        https://f.wps.cn/g/resume-form
+        https://forms.example.com/resume
+        http://example.com:8080/form?q=1
         https://www.kdocs.cn/l/resume
-        https://f.wps.cn/unrelated-path
-        https://f.wps.cn/g/
-        https://f.wps.cn.example.com/g/resume
-        http://f.wps.cn/g/resume
+      ]
+
+      expect(links.map { |url| described_class.valid_collection?(url) }).to eq([true] * links.size)
+    end
+
+    it "rejects missing URLs, unsafe schemes and malformed syntax" do
+      invalid = [
+        nil,
+        "",
+        "example.com",
+        "not a URL",
+        "javascript:alert(1)",
+        "data:text/html,test",
+        "file:///tmp/form",
+        "https://",
+        "https://ex ample.com",
+        "https://example.com/#{"a" * described_class::MAX_LENGTH}",
       ]
 
       expect(invalid.map { |url| described_class.valid_collection?(url) }).to eq(
