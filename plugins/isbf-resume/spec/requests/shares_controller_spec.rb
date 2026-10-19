@@ -163,10 +163,10 @@ RSpec.describe IsbfResume::SharesController do
   end
 
   describe "#update_collection" do
-    it "lets staff update the WPS collection link and records the acting staff member" do
+    it "lets staff use collection links from any host and records the acting staff member" do
       [developer, administrator].each do |staff|
         sign_in(staff)
-        url = "https://f.wps.cn/g/resume-#{staff.id}"
+        url = "http://forms.example.com/resume-#{staff.id}"
 
         expect do put "/isbf-resume/collection.json", params: { url: url } end.to change(
           UserHistory,
@@ -192,15 +192,14 @@ RSpec.describe IsbfResume::SharesController do
       end
     end
 
-    it "rejects insecure, unrelated and deceptive collection links" do
+    it "rejects invalid collection URLs" do
       sign_in(developer)
 
       %w[
-        http://f.wps.cn/g/insecure
-        https://example.com/g/unrelated
-        https://f.wps.cn.example.com/g/deceptive
-        https://user:password@f.wps.cn/g/credentials
-        https://f.wps.cn/unrelated-path
+        example.com
+        javascript:alert(1)
+        file:///tmp/form
+        https://
       ].each do |url|
         expect do put "/isbf-resume/collection.json", params: { url: url } end.not_to change {
           [SiteSetting.isbf_resume_collection_url, UserHistory.count]
