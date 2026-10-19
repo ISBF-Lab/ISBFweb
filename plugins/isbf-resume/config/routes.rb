@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 IsbfResume::Engine.routes.draw do
+  get "/collection" => "shares#collection"
+  put "/collection" => "shares#update_collection"
+  get "/contributor-users" => "shares#contributor_users"
   resources :shares, only: %i[index show create] do
     post :review, on: :member
     get :download, path: "pdf", on: :member, format: false

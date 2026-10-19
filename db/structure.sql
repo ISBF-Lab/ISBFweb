@@ -7721,6 +7721,95 @@ ALTER SEQUENCE public.isbf_reposts_id_seq OWNED BY public.isbf_reposts.id;
 
 
 --
+-- Name: isbf_resume_share_reviews; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.isbf_resume_share_reviews (
+    id bigint NOT NULL,
+    shared_resume_id bigint NOT NULL,
+    reviewer_id integer NOT NULL,
+    reviewer_name text NOT NULL,
+    reviewer_username text NOT NULL,
+    decision character varying NOT NULL,
+    original_description text DEFAULT ''::text NOT NULL,
+    previous_description text DEFAULT ''::text NOT NULL,
+    description text DEFAULT ''::text NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: isbf_resume_share_reviews_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.isbf_resume_share_reviews_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: isbf_resume_share_reviews_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.isbf_resume_share_reviews_id_seq OWNED BY public.isbf_resume_share_reviews.id;
+
+
+--
+-- Name: isbf_resume_shared_resumes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.isbf_resume_shared_resumes (
+    id bigint NOT NULL,
+    user_id integer NOT NULL,
+    storage_key character varying NOT NULL,
+    file_sha256 character varying(64) NOT NULL,
+    file_bytes bigint NOT NULL,
+    pages integer NOT NULL,
+    status character varying DEFAULT 'pending'::character varying NOT NULL,
+    title text DEFAULT ''::text NOT NULL,
+    industry text DEFAULT ''::text NOT NULL,
+    "position" text DEFAULT ''::text NOT NULL,
+    salary text DEFAULT ''::text NOT NULL,
+    experience text DEFAULT ''::text NOT NULL,
+    submitted_description text DEFAULT ''::text NOT NULL,
+    description text DEFAULT ''::text NOT NULL,
+    uploader_name text DEFAULT ''::text NOT NULL,
+    uploader_username text DEFAULT ''::text NOT NULL,
+    lock_version integer DEFAULT 0 NOT NULL,
+    reviewed_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    download_url text DEFAULT ''::text NOT NULL,
+    contributor text DEFAULT ''::text NOT NULL,
+    student_number text DEFAULT ''::text NOT NULL,
+    contributor_user_id integer
+);
+
+
+--
+-- Name: isbf_resume_shared_resumes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.isbf_resume_shared_resumes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: isbf_resume_shared_resumes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.isbf_resume_shared_resumes_id_seq OWNED BY public.isbf_resume_shared_resumes.id;
+
+
+--
 -- Name: isbf_view_impressions; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -15675,6 +15764,20 @@ ALTER TABLE ONLY public.isbf_reposts ALTER COLUMN id SET DEFAULT nextval('public
 
 
 --
+-- Name: isbf_resume_share_reviews id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_resume_share_reviews ALTER COLUMN id SET DEFAULT nextval('public.isbf_resume_share_reviews_id_seq'::regclass);
+
+
+--
+-- Name: isbf_resume_shared_resumes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_resume_shared_resumes ALTER COLUMN id SET DEFAULT nextval('public.isbf_resume_shared_resumes_id_seq'::regclass);
+
+
+--
 -- Name: isbf_view_impressions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -18490,6 +18593,22 @@ ALTER TABLE ONLY public.isbf_post_view_impressions
 
 ALTER TABLE ONLY public.isbf_reposts
     ADD CONSTRAINT isbf_reposts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: isbf_resume_share_reviews isbf_resume_share_reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_resume_share_reviews
+    ADD CONSTRAINT isbf_resume_share_reviews_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: isbf_resume_shared_resumes isbf_resume_shared_resumes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_resume_shared_resumes
+    ADD CONSTRAINT isbf_resume_shared_resumes_pkey PRIMARY KEY (id);
 
 
 --
@@ -23286,6 +23405,20 @@ CREATE INDEX index_isbf_reposts_on_user_id ON public.isbf_reposts USING btree (u
 
 
 --
+-- Name: index_isbf_resume_shared_resumes_on_contributor_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_isbf_resume_shared_resumes_on_contributor_user_id ON public.isbf_resume_shared_resumes USING btree (contributor_user_id);
+
+
+--
+-- Name: index_isbf_resume_shared_resumes_on_storage_key; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_isbf_resume_shared_resumes_on_storage_key ON public.isbf_resume_shared_resumes USING btree (storage_key);
+
+
+--
 -- Name: index_isbf_view_impressions_on_topic_id_and_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -26065,6 +26198,34 @@ CREATE INDEX index_web_hook_events_on_web_hook_id ON public.web_hook_events USIN
 
 
 --
+-- Name: isbf_resume_review_history; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX isbf_resume_review_history ON public.isbf_resume_share_reviews USING btree (shared_resume_id, id);
+
+
+--
+-- Name: isbf_resume_shares_owner; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX isbf_resume_shares_owner ON public.isbf_resume_shared_resumes USING btree (user_id, created_at, id);
+
+
+--
+-- Name: isbf_resume_shares_published; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX isbf_resume_shares_published ON public.isbf_resume_shared_resumes USING btree (status, reviewed_at, id);
+
+
+--
+-- Name: isbf_resume_shares_queue; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX isbf_resume_shares_queue ON public.isbf_resume_shared_resumes USING btree (status, created_at, id);
+
+
+--
 -- Name: post_timings_unique; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -26565,7 +26726,9 @@ ALTER TABLE ONLY public.ad_plugin_house_ads_groups
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261018210240'),
 ('20261014151020'),
+('20261014104229'),
 ('20261011132124'),
 ('20261010075218'),
 ('20261006160545'),

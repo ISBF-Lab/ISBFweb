@@ -17,6 +17,8 @@ end
 
 require_relative "lib/isbf_resume/generator"
 require_relative "lib/isbf_resume/shared_pdf"
+require_relative "lib/isbf_resume/sharing_links"
+require_relative "lib/isbf_resume/contributors"
 require_relative "lib/isbf_resume/engine"
 register_asset "stylesheets/isbf-resume.scss"
 register_asset "stylesheets/isbf-resume-sharing.scss"
@@ -45,6 +47,7 @@ after_initialize do
   require_relative "app/services/isbf_resume/shared_resume/submit"
   require_relative "app/services/isbf_resume/shared_resume/review"
   require_relative "app/serializers/isbf_resume/share_review_serializer"
+  require_relative "app/serializers/isbf_resume/contributor_serializer"
   require_relative "app/serializers/isbf_resume/shared_resume_serializer"
   require_relative "app/serializers/isbf_resume/private_shared_resume_serializer"
   require_relative "app/models/reviewable_isbf_resume"
@@ -57,5 +60,5 @@ after_initialize do
   reloadable_patch { Reviewable.singleton_class.prepend ::IsbfResume::ReviewableScopeExtension }
 
   Rails.application.config.filter_parameters += %i[resume photo]
-  Rails.application.config.filter_parameters += %i[shared_resume share_review]
+  Rails.application.config.filter_parameters += %i[shared_resume share_review student_number]
 end

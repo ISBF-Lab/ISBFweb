@@ -2,9 +2,11 @@ en:
   isbf_resume:
     sharing:
       untitled: "Shared resume"
-      invalid_submission: "Check the file, sharing consent and field lengths."
+      invalid_submission: "Check the preview files, WPS document link, sharing consent and field lengths."
+      invalid_image: "The preview images could not be read. Upload up to three PNG, JPG or WebP images."
+      invalid_preview_source: "Choose one preview source: a PDF, or up to three images."
       invalid_pdf: "This PDF could not be read. Check that it opens correctly, or export it again before uploading."
-      pdf_too_large: "The PDF exceeds 10 MiB. Compress it before uploading."
+      pdf_too_large: "The preview files exceed 10 MiB in total. Compress them before uploading."
       pdf_encrypted: "This PDF is encrypted. Remove its password protection before uploading."
       pdf_too_many_pages: "The PDF exceeds 100 pages. Split it before uploading."
       pdf_validation_timeout: "PDF validation timed out. Try again later; this does not mean the file is damaged."

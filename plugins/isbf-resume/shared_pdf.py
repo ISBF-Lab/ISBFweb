@@ -7,6 +7,7 @@ import math
 import os
 import subprocess
 import sys
+import warnings
 
 from pypdf import PdfReader
 from pypdf.errors import PdfReadError
@@ -14,6 +15,7 @@ from pypdf.errors import PdfReadError
 MAX_BYTES = 10 * 1024 * 1024
 MAX_PAGES = 100
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
+PREVIEW_PAGES = 3
 
 
 def validate_pdf(directory: Path) -> int:
@@ -64,11 +66,35 @@ def render_page(directory: Path, page: int, output: Path) -> None:
     output.chmod(0o600)
 
 
+def prepare_images(directory: Path, count: int) -> None:
+    from PIL import Image, ImageOps
+
+    if not 1 <= count <= PREVIEW_PAGES:
+        raise ValueError("invalid_image")
+    Image.MAX_IMAGE_PIXELS = 16_000_000
+    warnings.simplefilter("error", Image.DecompressionBombWarning)
+    for page in range(1, count + 1):
+        source = directory / f"input-{page}"
+        output = directory / f"preview-{page}.png"
+        if source.is_symlink() or output.exists() or output.is_symlink():
+            raise ValueError("invalid_image")
+        with Image.open(source) as image:
+            if image.format not in {"PNG", "JPEG", "WEBP"} or getattr(image, "n_frames", 1) != 1:
+                raise ValueError("invalid_image")
+            image = ImageOps.exif_transpose(image)
+            image.thumbnail((1400, 1400))
+            foreground = image.convert("RGBA")
+            background = Image.new("RGBA", image.size, "white")
+            Image.alpha_composite(background, foreground).convert("RGB").save(output, format="PNG")
+        output.chmod(0o600)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("directory", type=Path)
     parser.add_argument("--page", type=int)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--images", type=int)
     args = parser.parse_args()
     os.umask(0o077)
     if sys.platform == "linux":
@@ -76,6 +102,10 @@ def main() -> int:
         resource.setrlimit(resource.RLIMIT_AS, (256 * 1024 * 1024, 256 * 1024 * 1024))
         resource.setrlimit(resource.RLIMIT_CPU, (22, 24))
     try:
+        if args.images is not None:
+            prepare_images(args.directory, args.images)
+            print(json.dumps({"pages": args.images}))
+            return 0
         count = validate_pdf(args.directory)
         if args.page is not None:
             if not 1 <= args.page <= count or args.output is None:
@@ -85,14 +115,14 @@ def main() -> int:
         return 0
     except ValueError as error:
         code = str(error)
-        if code not in {"invalid_pdf", "pdf_too_large", "pdf_encrypted", "pdf_too_many_pages", "preview_failed"}:
+        if code not in {"invalid_pdf", "pdf_too_large", "pdf_encrypted", "pdf_too_many_pages", "preview_failed", "invalid_image"}:
             code = "invalid_pdf"
     except PdfReadError:
         code = "invalid_pdf"
     except subprocess.TimeoutExpired:
         code = "preview_timeout"
     except Exception:
-        code = "preview_failed" if args.page is not None else "pdf_validation_failed"
+        code = "invalid_image" if args.images is not None else "preview_failed" if args.page is not None else "pdf_validation_failed"
     print(json.dumps({"error": code}))
     return 2
 

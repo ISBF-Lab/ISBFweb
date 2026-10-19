@@ -17,14 +17,26 @@ module IsbfResume
                :created_at,
                :reviewed_at,
                :pdf_url,
+               :download_url,
+               :contributor,
                :preview_urls
 
+    has_one :contributor_user, serializer: ContributorSerializer, embed: :objects
+
+    def pages
+      object.preview_pages
+    end
+
+    def contributor
+      object.contributor_label
+    end
+
     def pdf_url
-      "/isbf-resume/shares/#{object.id}/pdf"
+      object.download_url.presence
     end
 
     def preview_urls
-      (1..object.pages).map { |page| "/isbf-resume/shares/#{object.id}/previews/#{page}" }
+      (1..object.preview_pages).map { |page| "/isbf-resume/shares/#{object.id}/previews/#{page}" }
     end
   end
 end

@@ -11,7 +11,7 @@ module IsbfResume
     end
 
     def can_submit_isbf_resume?
-      can_generate_isbf_resume? && !user.silenced?
+      can_generate_isbf_resume? && !user.silenced? && (user[:admin] || user[:moderator])
     end
 
     def can_review_isbf_resumes?
@@ -22,7 +22,10 @@ module IsbfResume
 
     def can_view_shared_isbf_resume?(shared_resume)
       can_generate_isbf_resume? && shared_resume &&
-        (shared_resume.approved? || shared_resume.user_id == user.id || can_review_isbf_resumes?)
+        (
+          shared_resume.approved? || shared_resume.user_id == user.id ||
+            shared_resume.contributor_user_id == user.id || can_review_isbf_resumes?
+        )
     end
   end
 end

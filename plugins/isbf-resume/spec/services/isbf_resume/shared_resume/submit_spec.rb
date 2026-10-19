@@ -7,7 +7,7 @@ RSpec.describe IsbfResume::SharedResume::Submit do
   include_context "with resume review permissions"
 
   describe described_class::Contract, type: :model do
-    it { is_expected.to validate_presence_of(:file) }
+    it { is_expected.to validate_presence_of(:download_url) }
     it { is_expected.to allow_value(true).for(:consent) }
     it { is_expected.not_to allow_values(false, nil).for(:consent) }
     it { is_expected.to validate_length_of(:title).is_at_most(200) }
@@ -16,15 +16,22 @@ RSpec.describe IsbfResume::SharedResume::Submit do
     it { is_expected.to validate_length_of(:salary).is_at_most(120) }
     it { is_expected.to validate_length_of(:experience).is_at_most(80) }
     it { is_expected.to validate_length_of(:description).is_at_most(2000) }
+    it { is_expected.to validate_length_of(:download_url).is_at_most(2048) }
+    it { is_expected.to validate_length_of(:contributor).is_at_most(80) }
+    it { is_expected.to validate_length_of(:student_number).is_at_most(64) }
     it { is_expected.to allow_values("", nil).for(:description) }
   end
 
   describe ".call" do
     subject(:result) { described_class.call(params:, **dependencies) }
 
-    fab!(:acting_user, :user)
+    fab!(:acting_user, :admin)
 
-    let(:params) { { file: upload, consent: true }.merge(metadata) }
+    let(:params) do
+      { file: upload, consent: true, download_url: "https://www.kdocs.cn/l/shared-resume" }.merge(
+        metadata,
+      )
+    end
     let(:dependencies) { { guardian: acting_user&.guardian || Guardian.new } }
     let(:upload) { sharing_pdf_upload }
     let(:metadata) do
@@ -51,14 +58,20 @@ RSpec.describe IsbfResume::SharedResume::Submit do
 
     context "when the actor is suspended" do
       fab!(:acting_user) do
-        Fabricate(:user, suspended_at: 1.hour.ago, suspended_till: 1.day.from_now)
+        Fabricate(:admin, suspended_at: 1.hour.ago, suspended_till: 1.day.from_now)
       end
 
       it { is_expected.to fail_a_policy(:can_submit) }
     end
 
     context "when the actor is silenced" do
-      fab!(:acting_user) { Fabricate(:user, silenced_till: 1.day.from_now) }
+      fab!(:acting_user) { Fabricate(:admin, silenced_till: 1.day.from_now) }
+
+      it { is_expected.to fail_a_policy(:can_submit) }
+    end
+
+    context "when the actor is an ordinary member" do
+      fab!(:acting_user, :user)
 
       it { is_expected.to fail_a_policy(:can_submit) }
     end
@@ -85,7 +98,7 @@ RSpec.describe IsbfResume::SharedResume::Submit do
     end
 
     context "when all optional details are blank" do
-      it "stores a private pending PDF owned by the actor with a filename title" do
+      it "stores private pending previews owned by the actor without inferring a contributor" do
         expect { expect(result).to run_successfully }.to change(
           IsbfResume::SharedResume,
           :count,
@@ -103,11 +116,17 @@ RSpec.describe IsbfResume::SharedResume::Submit do
           submitted_description: "",
           uploader_name: acting_user.name.presence || acting_user.username,
           uploader_username: acting_user.username,
+          download_url: params[:download_url],
+          contributor: "",
+          contributor_user_id: nil,
+          student_number: "",
         )
         expect(shared_resume.reviews).to be_empty
         expect(IsbfResume::SharedResume.published).to be_empty
-        expect(File.binread(shared_resume.pdf.available_path, 5)).to eq("%PDF-")
-        expect(shared_resume.pdf.preview_path(1)).to eq(nil)
+        expect(shared_resume.pdf.available_path).to eq(nil)
+        expect(File.binread(shared_resume.pdf.preview_path(1), 8)).to eq(
+          IsbfResume::SharedPdf::PNG_SIGNATURE,
+        )
       end
     end
 
@@ -120,6 +139,8 @@ RSpec.describe IsbfResume::SharedResume::Submit do
           salary: " 15,000 monthly ",
           experience: " 3 years ",
           description: " My original summary ",
+          contributor: " Graduate contributor ",
+          student_number: " 20261019 ",
         }
       end
 
@@ -134,7 +155,27 @@ RSpec.describe IsbfResume::SharedResume::Submit do
           submitted_description: "My original summary",
           description: "",
           status: "pending",
+          contributor: "Graduate contributor",
+          student_number: "20261019",
+          contributor_user_id: nil,
         )
+      end
+    end
+
+    context "when an administrator provides images with review permission disabled" do
+      fab!(:acting_user, :moderator)
+
+      let(:params) { super().except(:file).merge(preview_images: [sharing_image_upload]) }
+
+      it "creates a pending resume while keeping review access independent" do
+        expect(result).to run_successfully
+        expect(result.shared_resume.reload).to have_attributes(
+          user_id: acting_user.id,
+          status: "pending",
+          pages: 1,
+        )
+        expect(result.shared_resume.pdf.available_path).to eq(nil)
+        expect(acting_user.guardian.can_review_isbf_resumes?).to eq(false)
       end
     end
   end

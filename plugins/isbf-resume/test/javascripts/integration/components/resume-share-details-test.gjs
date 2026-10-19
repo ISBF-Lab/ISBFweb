@@ -12,7 +12,7 @@ module("Integration | Component | ResumeShareDetails", function (hooks) {
       title: "Finance analyst resume",
       description: "Reviewed summary",
       status: "approved",
-      pdf_url: "/isbf-resume/shares/42/pdf",
+      pdf_url: "https://365.kdocs.cn/l/resume",
       preview_urls: [
         "/isbf-resume/shares/42/previews/1",
         "/isbf-resume/shares/42/previews/2",
@@ -20,7 +20,7 @@ module("Integration | Component | ResumeShareDetails", function (hooks) {
     };
   });
 
-  test("shows the reviewed description with image previews and PDF download for a forum member", async function (assert) {
+  test("shows the reviewed description with one preview and a direct WPS download link", async function (assert) {
     await render(
       <template><ResumeShareDetails @share={{this.share}} /></template>
     );
@@ -32,8 +32,11 @@ module("Integration | Component | ResumeShareDetails", function (hooks) {
       .dom(".isbf-resume-share-details__description")
       .hasText(this.share.description, "uses the approved summary");
     assert
-      .dom('.isbf-resume-sharing-header a[href="/isbf-resume/shares/42/pdf"]')
-      .exists("offers the PDF download")
+      .dom(
+        '.isbf-resume-sharing-header a[href="https://365.kdocs.cn/l/resume"]'
+      )
+      .exists("opens the WPS document directly")
+      .hasAttribute("target", "_blank")
       .hasAttribute(
         "data-auto-route",
         "false",

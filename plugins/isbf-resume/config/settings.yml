@@ -2,3 +2,7 @@ plugins:
   isbf_resume_enabled:
     default: false
     client: true
+  isbf_resume_collection_url:
+    default: "https://f.wps.cn/g/yhH9i8lN/"
+    client: true
+    regex: '\Ahttps://f\.wps\.cn/g/[A-Za-z0-9_-]+/?(?:\?[^\s\\<>]*)?\z'

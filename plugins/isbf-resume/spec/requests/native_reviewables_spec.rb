@@ -107,6 +107,7 @@ RSpec.describe ReviewablesController do
       )
       approval = submission.reviews.sole
       approved_at = submission.reload.reviewed_at
+      original_download_url = submission.download_url
       SiteSetting.academy_moderators_review_content = true
       SiteSetting.academy_moderators_review_resumes = true
       sign_in(administrator)
@@ -120,6 +121,7 @@ RSpec.describe ReviewablesController do
           .find { |entry| entry.fetch("id") == reviewable.id }
       expect(item).to include("can_edit_resume" => true)
       version = reviewable.reload.version
+      registration = Fabricate(:registered_academy_student, user: owner)
       details = {
         title: "Updated public title",
         industry: "Finance",
@@ -127,6 +129,10 @@ RSpec.describe ReviewablesController do
         salary: "25k",
         experience: "5 years",
         description: "  Updated public summary  ",
+        download_url: "https://www.kdocs.cn/l/revised-resume",
+        contributor: "Reviewed contributor",
+        student_number: registration.student_number,
+        contributor_user_id: owner.id,
       }
 
       put "/review/#{reviewable.id}.json",
@@ -144,6 +150,10 @@ RSpec.describe ReviewablesController do
         title: details[:title],
         description: details[:description].strip,
         salary: details[:salary],
+        download_url: details[:download_url],
+        contributor: details[:contributor],
+        student_number: registration.student_number,
+        contributor_user_id: owner.id,
       )
       expect(reviewable.reload).to be_approved
       revision = submission.reviews.order(:id).last
@@ -166,6 +176,9 @@ RSpec.describe ReviewablesController do
       expect(history.edited.fetch("payload").last).to include(
         "description" => details[:description].strip,
         "salary" => details[:salary],
+        "download_url" => details[:download_url],
+        "contributor" => details[:contributor],
+        "submitted_details" => include("download_url" => original_download_url),
       )
       administrator.update!(name: "Renamed editor", username: "resume_editor_new")
       expect(revision.reload.reviewer_username).not_to eq(administrator.username)
@@ -217,6 +230,38 @@ RSpec.describe ReviewablesController do
       expect(reviewable.reload.version).to eq(version)
       expect(submission.reload.description).to eq("Current public text")
       expect(submission.reviews.count).to eq(1)
+    end
+
+    it "rolls back approved edits with an invalid document link or mismatched contributor" do
+      reviewable.perform(
+        developer,
+        :approve_resume,
+        version: reviewable.version,
+        description: "Approved summary",
+      )
+      registration = Fabricate(:registered_academy_student, user: owner)
+      original_payload = reviewable.reload.payload.deep_dup
+      version = reviewable.version
+      original_details = submission.reload.attributes
+      sign_in(developer)
+
+      [
+        { download_url: "https://example.com/untrusted" },
+        { student_number: registration.student_number, contributor_user_id: administrator.id },
+      ].each do |invalid|
+        put "/review/#{reviewable.id}.json",
+            params: {
+              version: version,
+              reviewable: {
+                payload: invalid,
+              },
+            }
+
+        expect(response.status).to eq(400)
+        expect(reviewable.reload).to have_attributes(payload: original_payload, version: version)
+        expect(submission.reload.attributes).to eq(original_details)
+        expect(submission.reviews.count).to eq(1)
+      end
     end
 
     it "revokes approved edits immediately and denies uploaders and rejected entries" do
@@ -436,8 +481,8 @@ RSpec.describe ReviewablesController do
       expect(IsbfResume::SharedResume.published).to contain_exactly(submission)
     end
 
-    it "rejects through native review without publishing or requiring a public description" do
-      blank_submission = Fabricate(:shared_isbf_resume, submitted_description: "")
+    it "rejects legacy submissions without a WPS link or public description" do
+      blank_submission = Fabricate(:shared_isbf_resume, submitted_description: "", download_url: "")
       native_review = blank_submission.reviewable
       sign_in(developer)
 
@@ -448,7 +493,11 @@ RSpec.describe ReviewablesController do
 
       expect(response.status).to eq(200)
       expect(native_review.reload).to be_rejected
-      expect(blank_submission.reload).to have_attributes(status: "rejected", description: "")
+      expect(blank_submission.reload).to have_attributes(
+        status: "rejected",
+        description: "",
+        download_url: "",
+      )
       expect(blank_submission.reviews.sole).to have_attributes(
         reviewer_id: developer.id,
         decision: "reject",

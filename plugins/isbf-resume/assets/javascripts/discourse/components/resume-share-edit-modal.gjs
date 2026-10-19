@@ -7,6 +7,7 @@ import { extractError } from "discourse/lib/ajax-error";
 import DButton from "discourse/ui-kit/d-button";
 import DModal from "discourse/ui-kit/d-modal";
 import { i18n } from "discourse-i18n";
+import ResumeContributorFields from "./resume-contributor-fields";
 
 const FIELD_LIMITS = {
   title: 200,
@@ -15,6 +16,7 @@ const FIELD_LIMITS = {
   salary: 120,
   experience: 80,
   description: 2000,
+  download_url: 2048,
 };
 
 export default class ResumeShareEditModal extends Component {
@@ -25,13 +27,18 @@ export default class ResumeShareEditModal extends Component {
 
   data = { ...this.args.model.reviewable.payload };
 
+  get contributorUser() {
+    return this.args.model.reviewable.shared_resume?.contributor_user;
+  }
+
   get fields() {
     return Object.entries(FIELD_LIMITS).map(([name, limit]) => ({
       name,
       limit,
       validation:
-        name === "description" &&
-        this.args.model.reviewable.shared_resume?.status === "approved"
+        name === "download_url" ||
+        (name === "description" &&
+          this.args.model.reviewable.shared_resume?.status === "approved")
           ? "required"
           : null,
       title: i18n(`isbf_resume.sharing.fields.${name}.title`),
@@ -42,7 +49,12 @@ export default class ResumeShareEditModal extends Component {
             ? i18n("isbf_resume.sharing.review_title_help")
             : i18n(`isbf_resume.sharing.fields.${name}.help`),
       placeholder: i18n(`isbf_resume.sharing.fields.${name}.placeholder`),
-      type: name === "description" ? "textarea" : "input-text",
+      type:
+        name === "description"
+          ? "textarea"
+          : name === "download_url"
+            ? "input-url"
+            : "input-text",
     }));
   }
 
@@ -54,6 +66,13 @@ export default class ResumeShareEditModal extends Component {
       const payload = Object.fromEntries(
         Object.keys(FIELD_LIMITS).map((name) => [name, data[name] || ""])
       );
+      for (const name of [
+        "contributor",
+        "student_number",
+        "contributor_user_id",
+      ]) {
+        payload[name] = data[name] || "";
+      }
       await this.args.model.reviewable.update({ payload });
       this.a11y.announce(i18n("isbf_resume.sharing.details_saved"));
       this.args.closeModal();
@@ -95,6 +114,12 @@ export default class ResumeShareEditModal extends Component {
               />
             </form.Field>
           {{/each}}
+          <ResumeContributorFields
+            @contributorUser={{this.contributorUser}}
+            @data={{this.data}}
+            @disabled={{this.busy}}
+            @form={{form}}
+          />
           <form.Submit @label="review.save" />
           <DButton
             class="btn-default"

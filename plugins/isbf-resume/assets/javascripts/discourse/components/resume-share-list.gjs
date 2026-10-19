@@ -9,11 +9,14 @@ import { eq } from "discourse/truth-helpers";
 import DButton from "discourse/ui-kit/d-button";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
+import ResumeCollectionModal from "./resume-collection-modal";
+import ResumeShareContributor from "./resume-share-contributor";
 import ResumeShareMetadata from "./resume-share-metadata";
 import ResumeSharingHeader from "./resume-sharing-header";
 
 export default class ResumeShareList extends Component {
   @service a11y;
+  @service modal;
 
   @tracked busy = false;
   @tracked error;
@@ -45,6 +48,18 @@ export default class ResumeShareList extends Component {
 
   get canLoadMore() {
     return this.model.can_load_more;
+  }
+
+  @action
+  editCollection() {
+    this.modal.show(ResumeCollectionModal, {
+      model: { url: this.model.collection_url, onSaved: this.collectionSaved },
+    });
+  }
+
+  @action
+  collectionSaved(url) {
+    this.response = { ...this.model, collection_url: url };
   }
 
   @action
@@ -90,16 +105,23 @@ export default class ResumeShareList extends Component {
     >
       <ResumeSharingHeader @title={{this.title}}>
         <div class="isbf-resume-share-list__actions">
+          {{#if this.model.can_manage_collection}}
+            <DButton
+              class="btn-primary"
+              @action={{this.editCollection}}
+              @label="isbf_resume.sharing.edit_collection"
+            />
+          {{/if}}
           {{#if (eq @list "published")}}<DButton
               class="btn-primary isbf-resume-share-list__mine"
               @href={{getURL "/isbf/workbench/resume/shares/mine"}}
               @label="isbf_resume.sharing.mine"
             />{{/if}}
-          {{#if this.model.can_submit}}<DButton
-              class="btn-primary isbf-resume-share-list__upload"
-              @href={{getURL "/isbf/workbench/resume/shares/new"}}
-              @label="isbf_resume.sharing.upload"
-            />{{/if}}
+          <DButton
+            class="btn-primary isbf-resume-share-list__upload"
+            @href={{getURL "/isbf/workbench/resume/shares/new"}}
+            @label="isbf_resume.sharing.upload"
+          />
         </div>
       </ResumeSharingHeader>
       {{#if this.error}}<p
@@ -114,7 +136,10 @@ export default class ResumeShareList extends Component {
               class="isbf-resume-share-list__icon"
             >{{dIcon "file-lines"}}</span>
             <div class="isbf-resume-share-list__content">
-              <h2><a href={{share.href}}>{{share.title}}</a></h2>
+              <div class="isbf-resume-share-list__heading">
+                <h2><a href={{share.href}}>{{share.title}}</a></h2>
+                <ResumeShareContributor @share={{share}} />
+              </div>
               {{#if share.summary}}<p
                   class="isbf-resume-share-list__description"
                 >{{share.summary}}</p>{{/if}}

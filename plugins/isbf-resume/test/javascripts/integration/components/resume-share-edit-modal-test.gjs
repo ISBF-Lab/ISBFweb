@@ -1,4 +1,4 @@
-import { render } from "@ember/test-helpers";
+import { fillIn as fillInput, render } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import pretender, { response } from "discourse/tests/helpers/create-pretender";
@@ -17,6 +17,9 @@ module("Integration | Component | ResumeShareEditModal", function (hooks) {
       salary: "20k",
       experience: "3 years",
       description: "Original summary",
+      download_url: "https://365.kdocs.cn/l/original",
+      contributor: "Original contributor",
+      student_number: "",
     };
     const reviewable = this.owner
       .lookup("service:store")
@@ -50,6 +53,10 @@ module("Integration | Component | ResumeShareEditModal", function (hooks) {
     );
 
     for (const name of Object.keys(payload)) {
+      if (name === "download_url") {
+        assert.dom('[data-name="download_url"] input').hasValue(payload[name]);
+        continue;
+      }
       assert
         .form()
         .field(name)
@@ -74,11 +81,24 @@ module("Integration | Component | ResumeShareEditModal", function (hooks) {
     );
     await formKit().field("description").fillIn(payload.description);
     await formKit().field("title").fillIn("Reviewed title");
+    await fillInput(
+      '[data-name="download_url"] input',
+      "https://365.kdocs.cn/l/reviewed"
+    );
+    await formKit().field("contributor").fillIn("Reviewed contributor");
     await formKit().submit();
     assert.strictEqual(
       saved.reviewable.payload.title,
       "Reviewed title",
       "saves the edited title"
+    );
+    assert.strictEqual(
+      saved.reviewable.payload.download_url,
+      "https://365.kdocs.cn/l/reviewed"
+    );
+    assert.strictEqual(
+      saved.reviewable.payload.contributor,
+      "Reviewed contributor"
     );
     assert.strictEqual(
       reviewable.version,

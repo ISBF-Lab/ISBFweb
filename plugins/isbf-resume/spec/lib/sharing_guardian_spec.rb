@@ -14,17 +14,22 @@ RSpec.describe Guardian do
   fab!(:rejected) { Fabricate(:rejected_shared_isbf_resume, user: owner) }
 
   describe "#can_submit_isbf_resume?" do
-    it "requires an authenticated, active account with sharing enabled" do
-      suspended = Fabricate(:user, suspended_at: 1.hour.ago, suspended_till: 1.day.from_now)
-      silenced = Fabricate(:user, silenced_till: 1.day.from_now)
+    it "requires active staff independently of the resume review switch" do
+      suspended = Fabricate(:admin, suspended_at: 1.hour.ago, suspended_till: 1.day.from_now)
+      silenced = Fabricate(:moderator, silenced_till: 1.day.from_now)
 
       expect(
-        [member.guardian, Guardian.new, suspended.guardian, silenced.guardian].map(
-          &:can_submit_isbf_resume?
-        ),
-      ).to eq([true, false, false, false])
+        [
+          developer.guardian,
+          administrator.guardian,
+          member.guardian,
+          Guardian.new,
+          suspended.guardian,
+          silenced.guardian,
+        ].map(&:can_submit_isbf_resume?),
+      ).to eq([true, true, false, false, false, false])
       SiteSetting.isbf_resume_enabled = false
-      expect(member.guardian.can_submit_isbf_resume?).to eq(false)
+      expect(developer.guardian.can_submit_isbf_resume?).to eq(false)
     end
   end
 
@@ -91,6 +96,13 @@ RSpec.describe Guardian do
     it "requires authentication and denies missing submissions" do
       expect(Guardian.new.can_view_shared_isbf_resume?(approved)).to eq(false)
       expect(member.guardian.can_view_shared_isbf_resume?(nil)).to be_falsey
+    end
+
+    it "allows an associated contributor to inspect their own private submission" do
+      pending.update!(contributor_user_id: member.id)
+
+      expect(member.guardian.can_view_shared_isbf_resume?(pending)).to eq(true)
+      expect(member.guardian.can_view_shared_isbf_resume?(rejected)).to eq(false)
     end
   end
 end

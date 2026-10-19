@@ -14,10 +14,15 @@ module IsbfResume
       salary: 120,
       experience: 80,
       description: 2000,
+      download_url: SharingLinks::MAX_LENGTH,
+      contributor: 80,
+      student_number: 64,
     }.freeze
+    EDITABLE_FIELDS = (FIELD_LIMITS.keys + [:contributor_user_id]).freeze
     STATUSES = %w[pending approved rejected].freeze
 
     belongs_to :user, optional: true
+    belongs_to :contributor_user, class_name: "User", optional: true
     has_many :reviews, class_name: "IsbfResume::ShareReview", foreign_key: :shared_resume_id
 
     validates :user_id, :storage_key, :file_sha256, presence: true
@@ -40,8 +45,11 @@ module IsbfResume
       ReviewableIsbfResume.find_by("payload ->> 'shared_resume_id' = ?", id.to_s)
     end
 
-    def self.submit(file:, user:, details:)
-      pdf = SharedPdf.store(file)
+    def self.submit(file: nil, images: nil, user:, details:)
+      details = normalize_details(details)
+      SharingLinks.validate!(details[:download_url])
+      Contributors.validate!(details)
+      pdf = SharedPdf.store_preview(file: file, images: images)
       shared_resume =
         create(
           details.except(:description).merge(
@@ -68,6 +76,45 @@ module IsbfResume
       status == "approved"
     end
 
+    def self.normalize_details(details)
+      updates = details.each_pair.to_h.symbolize_keys
+      updates.each do |field, value|
+        if field == :contributor_user_id &&
+             (
+               value.nil? || value == "" ||
+                 (
+                   (value.is_a?(String) || value.is_a?(Integer)) &&
+                     value.to_s.match?(/\A[1-9]\d{0,18}\z/)
+                 )
+             )
+          next
+        end
+        limit = FIELD_LIMITS[field]
+        unless limit && value.is_a?(String) && value.length <= limit
+          raise Discourse::InvalidParameters.new(field)
+        end
+      end
+      updates.transform_values! { |value| value.is_a?(String) ? value.strip : value }
+      if updates.key?(:contributor_user_id)
+        updates[:contributor_user_id] = updates[:contributor_user_id].presence&.to_i
+      end
+      updates
+    end
+
+    def preview_pages
+      [pages, SharedPdf::PREVIEW_PAGES].min
+    end
+
+    def contributor_label
+      contributor.presence || contributor_user&.name.presence || contributor_user&.username
+    end
+
+    def editable_details
+      attributes.slice(*EDITABLE_FIELDS.map(&:to_s)).merge(
+        "contributor_user_id" => contributor_user_id.to_s,
+      )
+    end
+
     def pending?
       status == "pending"
     end
@@ -86,14 +133,11 @@ module IsbfResume
              (decision == "approve" && final_description.blank?)
           raise Discourse::InvalidParameters.new(:description)
         end
-        final_metadata = metadata.symbolize_keys
-        final_metadata.each do |field, value|
-          limit = FIELD_LIMITS.except(:description)[field]
-          unless limit && value.is_a?(String) && value.length <= limit
-            raise Discourse::InvalidParameters.new(field)
-          end
+        final_metadata = self.class.normalize_details(metadata)
+        validate_managed_details!(final_metadata, allow_blank_url: decision == "reject")
+        if decision == "approve" && final_metadata.fetch(:download_url, download_url).blank?
+          raise Discourse::InvalidParameters.new(:download_url)
         end
-        final_metadata.transform_values!(&:strip)
         final_metadata[:title] = title if final_metadata.key?(:title) &&
           final_metadata[:title].blank?
         timestamp = Time.now.utc
@@ -122,14 +166,8 @@ module IsbfResume
       with_lock do
         raise Discourse::InvalidAccess unless reviewer.guardian.can_review_isbf_resumes?
         raise ReviewConflict unless approved?
-        updates = details.symbolize_keys
-        updates.each do |field, value|
-          limit = FIELD_LIMITS[field]
-          unless limit && value.is_a?(String) && value.length <= limit
-            raise Discourse::InvalidParameters.new(field)
-          end
-        end
-        updates.transform_values!(&:strip)
+        updates = self.class.normalize_details(details)
+        validate_managed_details!(updates)
         updates[:title] = title if updates.key?(:title) && updates[:title].blank?
         final_description = updates.fetch(:description, description)
         raise Discourse::InvalidParameters.new(:description) if final_description.blank?
@@ -148,6 +186,18 @@ module IsbfResume
 
     private
 
+    def validate_managed_details!(updates, allow_blank_url: false)
+      if updates.key?(:download_url) && !(allow_blank_url && updates[:download_url].blank?)
+        SharingLinks.validate!(updates[:download_url])
+      end
+      identity =
+        attributes
+          .symbolize_keys
+          .slice(:student_number, :contributor_user_id)
+          .merge(updates.slice(:student_number, :contributor_user_id))
+      Contributors.validate!(identity)
+    end
+
     def queue_review
       ReviewableIsbfResume.create!(
         created_by: user,
@@ -156,10 +206,7 @@ module IsbfResume
         force_review: true,
         status: status,
         payload:
-          attributes.slice(*FIELD_LIMITS.keys.map(&:to_s)).merge(
-            "shared_resume_id" => id,
-            "description" => submitted_description,
-          ),
+          editable_details.merge("shared_resume_id" => id, "description" => submitted_description),
       )
     end
   end
@@ -170,7 +217,9 @@ end
 # Table name: isbf_resume_shared_resumes
 #
 #  id                    :bigint           not null, primary key
+#  contributor           :text             default(""), not null
 #  description           :text             default(""), not null
+#  download_url          :text             default(""), not null
 #  experience            :text             default(""), not null
 #  file_bytes            :bigint           not null
 #  file_sha256           :string(64)       not null
@@ -182,18 +231,21 @@ end
 #  salary                :text             default(""), not null
 #  status                :string           default("pending"), not null
 #  storage_key           :string           not null
+#  student_number        :text             default(""), not null
 #  submitted_description :text             default(""), not null
 #  title                 :text             default(""), not null
 #  uploader_name         :text             default(""), not null
 #  uploader_username     :text             default(""), not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  contributor_user_id   :integer
 #  user_id               :integer          not null
 #
 # Indexes
 #
-#  index_isbf_resume_shared_resumes_on_storage_key  (storage_key) UNIQUE
-#  isbf_resume_shares_owner                         (user_id,created_at,id)
-#  isbf_resume_shares_published                     (status,reviewed_at,id)
-#  isbf_resume_shares_queue                         (status,created_at,id)
+#  index_isbf_resume_shared_resumes_on_contributor_user_id  (contributor_user_id)
+#  index_isbf_resume_shared_resumes_on_storage_key          (storage_key) UNIQUE
+#  isbf_resume_shares_owner                                 (user_id,created_at,id)
+#  isbf_resume_shares_published                             (status,reviewed_at,id)
+#  isbf_resume_shares_queue                                 (status,created_at,id)
 #

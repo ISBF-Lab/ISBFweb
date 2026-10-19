@@ -1,3 +1,3 @@
 import ResumeShareUpload from "../../components/resume-share-upload";
 
-export default <template><ResumeShareUpload /></template>
+export default <template><ResumeShareUpload @model={{@model}} /></template>

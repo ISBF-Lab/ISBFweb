@@ -1,6 +1,7 @@
 import {
   click,
   currentURL,
+  fillIn,
   find,
   triggerEvent,
   visit,
@@ -12,9 +13,15 @@ import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 import { i18n } from "discourse-i18n";
 
 acceptance("Resume sharing route", function (needs) {
-  needs.user({ admin: false, moderator: false });
+  needs.user({ admin: true, moderator: false });
   needs.settings({ isbf_resume_enabled: true });
   needs.pretender((server, helper) => {
+    server.get("/isbf-resume/collection.json", () =>
+      helper.response({
+        can_submit: true,
+        collection_url: "https://f.wps.cn/g/yhH9i8lN/",
+      })
+    );
     const uploadedShare = {
       id: 43,
       title: "Uploaded PDF resume",
@@ -123,6 +130,10 @@ acceptance("Resume sharing route", function (needs) {
     );
     find('input[type="file"]').files = transfer.files;
     await triggerEvent('input[type="file"]', "change");
+    await fillIn(
+      '[data-name="download_url"] input',
+      "https://365.kdocs.cn/l/document"
+    );
     await formKit().field("consent").toggle();
     await formKit().submit();
 
