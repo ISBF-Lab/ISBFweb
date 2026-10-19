@@ -28,6 +28,7 @@ class ReviewableIsbfResume < Reviewable
     IsbfResume::SharedResume::FIELD_LIMITS.each_key do |field|
       fields.add("payload.#{field}", field == :description ? :textarea : :text)
     end
+    fields.add("payload.contributor_user_id", :text)
   end
 
   def update_fields(params, performed_by, version: nil)
@@ -35,17 +36,20 @@ class ReviewableIsbfResume < Reviewable
     updates = params[:payload]
     raise Discourse::InvalidParameters.new(:payload) unless updates.respond_to?(:each_pair)
     edited_payload = payload.merge(editable_payload)
-    edited_payload["submitted_details"] ||= shared_resume
-      .attributes
-      .slice(*IsbfResume::SharedResume::FIELD_LIMITS.keys.map(&:to_s))
-      .merge("description" => shared_resume.submitted_description)
-    updates.each_pair do |field, value|
-      limit = IsbfResume::SharedResume::FIELD_LIMITS[field.to_sym]
-      unless limit && value.is_a?(String) && value.length <= limit
-        raise Discourse::InvalidParameters.new(field)
+    edited_payload["submitted_details"] ||= shared_resume.editable_details.merge(
+      "description" => shared_resume.submitted_description,
+    )
+    IsbfResume::SharedResume
+      .normalize_details(updates)
+      .each_pair do |field, value|
+        edited_payload[field.to_s] = field == :contributor_user_id ? value.to_s : value
       end
-      edited_payload[field.to_s] = approved? ? value.strip : value
+    if updates.key?("download_url") || updates.key?(:download_url)
+      IsbfResume::SharingLinks.validate!(edited_payload["download_url"])
     end
+    IsbfResume::Contributors.validate!(
+      edited_payload.symbolize_keys.slice(:student_number, :contributor_user_id),
+    )
     if approved?
       edited_payload["title"] = shared_resume.title if edited_payload["title"].blank?
       raise Discourse::InvalidParameters.new(:description) if edited_payload["description"].blank?
@@ -57,7 +61,7 @@ class ReviewableIsbfResume < Reviewable
       if approved?
         shared_resume.revise!(
           reviewer: performed_by,
-          details: edited_payload.slice(*IsbfResume::SharedResume::FIELD_LIMITS.keys.map(&:to_s)),
+          details: edited_payload.slice(*IsbfResume::SharedResume::EDITABLE_FIELDS.map(&:to_s)),
         )
       end
     end
@@ -68,10 +72,9 @@ class ReviewableIsbfResume < Reviewable
 
   def editable_payload
     return {} unless shared_resume
-    fields = IsbfResume::SharedResume::FIELD_LIMITS.keys.map(&:to_s)
+    fields = IsbfResume::SharedResume::EDITABLE_FIELDS.map(&:to_s)
     shared_resume
-      .attributes
-      .slice(*fields)
+      .editable_details
       .merge(
         "description" =>
           shared_resume.approved? ? shared_resume.description : shared_resume.submitted_description,
@@ -105,10 +108,7 @@ class ReviewableIsbfResume < Reviewable
       metadata: editable_payload.except("description"),
       expected_version: args.fetch(:expected_version) { shared_resume.lock_version },
     )
-    self.payload =
-      payload.merge(
-        shared_resume.attributes.slice(*IsbfResume::SharedResume::FIELD_LIMITS.keys.map(&:to_s)),
-      )
+    self.payload = payload.merge(shared_resume.editable_details)
     create_result(:success, decision == "approve" ? :approved : :rejected)
   rescue Discourse::InvalidParameters
     create_result(:failure).tap do |result|
@@ -119,3 +119,42 @@ class ReviewableIsbfResume < Reviewable
     raise Reviewable::UpdateConflict
   end
 end
+
+# == Schema Information
+#
+# Table name: reviewables
+#
+#  id                      :bigint           not null, primary key
+#  force_review            :boolean          default(FALSE), not null
+#  latest_score            :datetime
+#  payload                 :json
+#  potential_spam          :boolean          default(FALSE), not null
+#  potentially_illegal     :boolean          default(FALSE)
+#  reject_reason           :text
+#  reviewable_by_moderator :boolean          default(FALSE), not null
+#  score                   :float            default(0.0), not null
+#  status                  :integer          default("pending"), not null
+#  target_type             :string
+#  type                    :string           not null
+#  type_source             :string           default("unknown"), not null
+#  version                 :integer          default(0), not null
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  category_id             :integer
+#  created_by_id           :integer          not null
+#  target_created_by_id    :integer
+#  target_id               :integer
+#  topic_id                :integer
+#
+# Indexes
+#
+#  idx_reviewables_score_desc_created_at_desc                  (score,created_at)
+#  index_reviewables_on_reviewable_by_group_id                 (reviewable_by_group_id)
+#  index_reviewables_on_status_and_created_at                  (status,created_at)
+#  index_reviewables_on_status_and_score                       (status,score)
+#  index_reviewables_on_status_and_type                        (status,type)
+#  index_reviewables_on_target_created_by_id                   (target_created_by_id)
+#  index_reviewables_on_target_id_where_post_type_eq_post      (target_id) WHERE ((target_type)::text = 'Post'::text)
+#  index_reviewables_on_topic_id_and_status_and_created_by_id  (topic_id,status,created_by_id)
+#  index_reviewables_on_type_and_target_id                     (type,target_id) UNIQUE
+#

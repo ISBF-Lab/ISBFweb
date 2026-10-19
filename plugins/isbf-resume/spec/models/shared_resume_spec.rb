@@ -26,6 +26,10 @@ RSpec.describe IsbfResume::SharedResume do
       expect(reviewable.payload).to include(
         "shared_resume_id" => submission.id,
         "description" => submission.submitted_description,
+        "download_url" => submission.download_url,
+        "contributor" => submission.contributor,
+        "student_number" => submission.student_number,
+        "contributor_user_id" => "",
       )
       expect do
         submission.update!(salary: "Optional salary update")
@@ -43,6 +47,64 @@ RSpec.describe IsbfResume::SharedResume do
     end
   end
 
+  describe ".submit" do
+    include_context "with private shared resume storage"
+
+    it "removes only the new upload's previews when persistence fails" do
+      historical = materialize_shared_pdf(Fabricate(:shared_isbf_resume))
+      original_pdf = File.binread(historical.pdf.available_path)
+      submission = nil
+
+      expect do
+        submission =
+          described_class.submit(
+            file: sharing_pdf_upload,
+            user: Fabricate.build(:admin, username: ""),
+            details: {
+              title: "Valid title",
+              description: "",
+              download_url: "https://www.kdocs.cn/l/failed-submission",
+            },
+          )
+      end.not_to change { [described_class.count, ReviewableIsbfResume.count] }
+
+      expect(submission).not_to be_persisted
+      expect(File.binread(historical.pdf.available_path)).to eq(original_pdf)
+      expect(Dir.glob(File.join(IsbfResume::SharedPdf.storage_path, "*"))).to eq(
+        [historical.pdf.directory],
+      )
+    end
+
+    it "rejects mismatched, staged and missing selected users before storing a submission" do
+      contributor = Fabricate(:user)
+      registration = Fabricate(:registered_academy_student, user: contributor)
+      staged_user = Fabricate(:user, staged: true)
+      staged_registration = Fabricate(:registered_academy_student, user: staged_user)
+      upload = sharing_image_upload
+      invalid_identities = [
+        { student_number: "DifferentStudent", contributor_user_id: contributor.id },
+        { student_number: registration.student_number, contributor_user_id: reviewer.id },
+        { student_number: staged_registration.student_number, contributor_user_id: staged_user.id },
+        { student_number: registration.student_number, contributor_user_id: User.maximum(:id) + 1 },
+      ]
+
+      invalid_identities.each do |identity|
+        expect do
+          described_class.submit(
+            images: [upload],
+            user: reviewer,
+            details: {
+              description: "",
+              download_url: "https://www.kdocs.cn/l/student-resume",
+            }.merge(identity),
+          )
+        end.to raise_error(Discourse::InvalidParameters)
+      end
+
+      expect(Dir.glob(File.join(IsbfResume::SharedPdf.storage_path, "*"))).to be_empty
+    end
+  end
+
   describe "#review!" do
     let(:review_attributes) do
       {
@@ -57,6 +119,25 @@ RSpec.describe IsbfResume::SharedResume do
       expect {
         shared_resume.review!(**review_attributes.merge(description: "\n\t "))
       }.to raise_error(Discourse::InvalidParameters)
+      expect(shared_resume.reload).to be_pending
+      expect(shared_resume.reviews).to be_empty
+    end
+
+    it "keeps the submission pending when review metadata names a mismatched student user" do
+      contributor = Fabricate(:user)
+      registration = Fabricate(:registered_academy_student, user: contributor)
+
+      expect do
+        shared_resume.review!(
+          **review_attributes.merge(
+            metadata: {
+              student_number: registration.student_number,
+              contributor_user_id: reviewer.id,
+            },
+          ),
+        )
+      end.to raise_error(Discourse::InvalidParameters)
+
       expect(shared_resume.reload).to be_pending
       expect(shared_resume.reviews).to be_empty
     end

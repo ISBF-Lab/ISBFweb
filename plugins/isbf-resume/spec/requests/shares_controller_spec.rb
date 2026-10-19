@@ -34,14 +34,16 @@ RSpec.describe IsbfResume::SharesController do
       expect(payload.fetch("shares").sole).to include(
         "title" => approved.title,
         "description" => approved.description,
-        "pdf_url" => "/isbf-resume/shares/#{approved.id}/pdf",
+        "pdf_url" => approved.download_url,
         "preview_urls" => ["/isbf-resume/shares/#{approved.id}/previews/1"],
       )
       expect(payload).to include(
         "page" => 1,
         "can_load_more" => false,
-        "can_submit" => true,
+        "can_submit" => false,
         "can_review" => false,
+        "can_manage_collection" => false,
+        "collection_url" => SiteSetting.isbf_resume_collection_url,
       )
       expect(payload.fetch("shares").sole.keys).not_to include(
         "reviews",
@@ -49,6 +51,7 @@ RSpec.describe IsbfResume::SharesController do
         "submitted_description",
         "storage_key",
         "file_sha256",
+        "student_number",
       )
       expect(response.body).not_to include(pending.title, rejected.title, review.reviewer_username)
       expect(response.headers["Cache-Control"]).to include("private", "no-store")
@@ -76,6 +79,13 @@ RSpec.describe IsbfResume::SharesController do
     end
 
     it "limits the owner's list to their own submissions without exposing administrator history" do
+      associated =
+        Fabricate(
+          :shared_isbf_resume,
+          user: developer,
+          contributor_user_id: owner.id,
+          student_number: "20261019",
+        )
       Fabricate(
         :isbf_resume_share_review,
         shared_resume: rejected,
@@ -90,7 +100,7 @@ RSpec.describe IsbfResume::SharesController do
       expect(response.status).to eq(200)
       expect(
         response.parsed_body.fetch("shares").map { |share| share.fetch("id") },
-      ).to contain_exactly(pending.id, rejected.id)
+      ).to contain_exactly(pending.id, rejected.id, associated.id)
       expect(response.parsed_body.fetch("shares").map(&:keys).flatten).not_to include(
         "reviews",
         "review_ids",
@@ -136,10 +146,138 @@ RSpec.describe IsbfResume::SharesController do
       get "/isbf-resume/shares.json", params: { list: "review" }
       expect(response.status).to eq(403)
     end
+
+    it "shows staff submission and collection controls independently of review permission" do
+      sign_in(administrator)
+
+      get "/isbf-resume/shares.json"
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body).to include(
+        "can_submit" => true,
+        "can_manage_collection" => true,
+        "can_review" => false,
+        "collection_url" => SiteSetting.isbf_resume_collection_url,
+      )
+    end
+  end
+
+  describe "#update_collection" do
+    it "lets staff update the WPS collection link and records the acting staff member" do
+      [developer, administrator].each do |staff|
+        sign_in(staff)
+        url = "https://f.wps.cn/g/resume-#{staff.id}"
+
+        expect do put "/isbf-resume/collection.json", params: { url: url } end.to change(
+          UserHistory,
+          :count,
+        ).by(1)
+
+        expect(response.status).to eq(200)
+        expect(response.parsed_body).to include("collection_url" => url)
+        expect(SiteSetting.isbf_resume_collection_url).to eq(url)
+        expect(UserHistory.order(:id).last.acting_user_id).to eq(staff.id)
+      end
+    end
+
+    it "denies visitors and ordinary members without changing the collection link" do
+      [nil, member].each do |viewer|
+        sign_in(viewer) if viewer
+
+        expect do
+          put "/isbf-resume/collection.json", params: { url: "https://f.wps.cn/g/forbidden" }
+        end.not_to change { [SiteSetting.isbf_resume_collection_url, UserHistory.count] }
+
+        expect(response.status).to eq(403)
+      end
+    end
+
+    it "rejects insecure, unrelated and deceptive collection links" do
+      sign_in(developer)
+
+      %w[
+        http://f.wps.cn/g/insecure
+        https://example.com/g/unrelated
+        https://f.wps.cn.example.com/g/deceptive
+        https://user:password@f.wps.cn/g/credentials
+        https://f.wps.cn/unrelated-path
+      ].each do |url|
+        expect do put "/isbf-resume/collection.json", params: { url: url } end.not_to change {
+          [SiteSetting.isbf_resume_collection_url, UserHistory.count]
+        }
+
+        expect(response.status).to eq(400)
+      end
+    end
+  end
+
+  describe "#contributor_users" do
+    it "returns only the exact registered student's public user fields to staff" do
+      registration = Fabricate(:registered_academy_student, user: owner)
+      sign_in(administrator)
+
+      get "/isbf-resume/contributor-users.json",
+          params: {
+            student_number: registration.student_number,
+          }
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.fetch("users")).to contain_exactly(
+        {
+          "id" => owner.id,
+          "username" => owner.username,
+          "name" => owner.name,
+          "avatar_template" => owner.avatar_template,
+        },
+      )
+      expect(response.body).not_to include(registration.student_number)
+
+      get "/isbf-resume/contributor-users.json",
+          params: {
+            student_number: registration.student_number[0...-1],
+          }
+      expect(response.parsed_body.fetch("users")).to be_empty
+    end
+
+    it "excludes unclaimed registrations and staged users" do
+      unclaimed = Fabricate(:academy_student_registration)
+      staged = Fabricate(:registered_academy_student, user: Fabricate(:user, staged: true))
+      sign_in(developer)
+
+      [unclaimed, staged].each do |registration|
+        get "/isbf-resume/contributor-users.json",
+            params: {
+              student_number: registration.student_number,
+            }
+
+        expect(response.status).to eq(200)
+        expect(response.parsed_body.fetch("users")).to be_empty
+      end
+    end
+
+    it "denies visitors and ordinary members access to student-number searches" do
+      registration = Fabricate(:registered_academy_student, user: owner)
+      [nil, member].each do |viewer|
+        sign_in(viewer) if viewer
+
+        get "/isbf-resume/contributor-users.json",
+            params: {
+              student_number: registration.student_number,
+            }
+
+        expect(response.status).to eq(403)
+        expect(response.body).not_to include(registration.student_number, owner.username)
+      end
+    end
   end
 
   describe "#show" do
     it "returns approved details to forum members without private review identity" do
+      approved.update!(
+        contributor: "Resume contributor",
+        contributor_user_id: owner.id,
+        student_number: "20261019",
+      )
       Fabricate(:isbf_resume_share_review, shared_resume: approved, reviewer: developer)
       sign_in(member)
 
@@ -149,6 +287,14 @@ RSpec.describe IsbfResume::SharesController do
       expect(response.parsed_body).to include(
         "id" => approved.id,
         "description" => approved.description,
+        "contributor" => approved.contributor,
+        "contributor_user" =>
+          include(
+            "id" => owner.id,
+            "username" => owner.username,
+            "name" => owner.name,
+            "avatar_template" => owner.avatar_template,
+          ),
       )
       expect(response.parsed_body.keys).not_to include(
         "reviews",
@@ -156,7 +302,9 @@ RSpec.describe IsbfResume::SharesController do
         "submitted_description",
         "lock_version",
         "storage_key",
+        "student_number",
       )
+      expect(response.body).not_to include(approved.student_number)
     end
 
     it "hides pending and rejected metadata from ordinary members and unauthorized administrators" do
@@ -217,8 +365,8 @@ RSpec.describe IsbfResume::SharesController do
   end
 
   describe "#create" do
-    it "accepts a real PDF with blank optional metadata and explicit free-sharing consent" do
-      sign_in(owner)
+    it "accepts an administrator's PDF and WPS link with blank optional contributor details" do
+      sign_in(developer)
       upload = sharing_request_upload(filename: "Portfolio.pdf")
       details = {
         file: upload,
@@ -229,6 +377,7 @@ RSpec.describe IsbfResume::SharesController do
         industry: "",
         position: "",
         experience: "",
+        download_url: "https://www.kdocs.cn/l/portfolio",
       }
 
       expect do post "/isbf-resume/shares.json", params: { shared_resume: details } end.to change(
@@ -243,13 +392,21 @@ RSpec.describe IsbfResume::SharesController do
         "status" => "pending",
         "description" => "",
         "submitted_description" => "",
+        "download_url" => details[:download_url],
+        "contributor" => nil,
+        "contributor_user" => nil,
       )
-      expect(payload.keys).not_to include("storage_key", "file_sha256", "reviews")
+      expect(payload.keys).not_to include("storage_key", "file_sha256")
+      expect(payload.fetch("reviews")).to be_empty
       created_submission = IsbfResume::SharedResume.find(payload.fetch("id"))
-      expect(created_submission.user_id).to eq(owner.id)
+      expect(created_submission.user_id).to eq(developer.id)
       expect(created_submission.reviewable).to have_attributes(
         status: "pending",
-        created_by_id: owner.id,
+        created_by_id: developer.id,
+      )
+      expect(created_submission.pdf.available_path).to eq(nil)
+      expect(File.binread(created_submission.pdf.preview_path(1), 8)).to eq(
+        IsbfResume::SharedPdf::PNG_SIGNATURE,
       )
     end
 
@@ -259,6 +416,7 @@ RSpec.describe IsbfResume::SharesController do
              shared_resume: {
                file: sharing_request_upload,
                consent: "true",
+               download_url: "https://www.kdocs.cn/l/portfolio",
              },
            }
 
@@ -267,12 +425,13 @@ RSpec.describe IsbfResume::SharesController do
     end
 
     it "returns a contract error for absent consent and an upload error for invalid PDF content" do
-      sign_in(owner)
+      sign_in(developer)
       post "/isbf-resume/shares.json",
            params: {
              shared_resume: {
                file: sharing_request_upload,
                consent: "false",
+               download_url: "https://www.kdocs.cn/l/portfolio",
              },
            }
       expect(response.status).to eq(400)
@@ -284,6 +443,7 @@ RSpec.describe IsbfResume::SharesController do
              shared_resume: {
                file: invalid_request,
                consent: "true",
+               download_url: "https://www.kdocs.cn/l/portfolio",
              },
            }
 
@@ -294,13 +454,14 @@ RSpec.describe IsbfResume::SharesController do
     end
 
     it "uses the signed-in uploader instead of identity supplied in the request" do
-      sign_in(owner)
+      sign_in(developer)
 
       post "/isbf-resume/shares.json",
            params: {
              shared_resume: {
                file: sharing_request_upload,
                consent: "true",
+               download_url: "https://www.kdocs.cn/l/portfolio",
                user_id: member.id,
                uploader_name: member.name,
                uploader_username: member.username,
@@ -311,11 +472,143 @@ RSpec.describe IsbfResume::SharesController do
       expect(response.status).to eq(201)
       shared_resume = IsbfResume::SharedResume.find(response.parsed_body.fetch("id"))
       expect(shared_resume).to have_attributes(
-        user_id: owner.id,
-        uploader_name: owner.name.presence || owner.username,
-        uploader_username: owner.username,
+        user_id: developer.id,
+        uploader_name: developer.name.presence || developer.username,
+        uploader_username: developer.username,
         status: "pending",
       )
+    end
+
+    it "denies an ordinary member's direct upload without creating files or review entries" do
+      sign_in(member)
+
+      expect do
+        post "/isbf-resume/shares.json",
+             params: {
+               shared_resume: {
+                 file: sharing_request_upload,
+                 consent: "true",
+                 download_url: "https://www.kdocs.cn/l/forbidden",
+               },
+             }
+      end.not_to change { [IsbfResume::SharedResume.count, ReviewableIsbfResume.count] }
+
+      expect(response.status).to eq(403)
+      expect(Dir.children(IsbfResume::SharedPdf.storage_path)).to be_empty
+    end
+
+    it "lets administrators submit images while their resume review switch is disabled" do
+      sign_in(administrator)
+
+      post "/isbf-resume/shares.json",
+           params: {
+             shared_resume: {
+               preview_images: [sharing_request_image_upload],
+               title: "Image preview",
+               consent: "true",
+               download_url: "https://www.kdocs.cn/l/image-preview",
+               contributor: "Named contributor",
+             },
+           }
+
+      expect(response.status).to eq(201)
+      expect(response.parsed_body).to include(
+        "pages" => 1,
+        "contributor" => "Named contributor",
+        "contributor_user" => nil,
+      )
+      created_submission = IsbfResume::SharedResume.find(response.parsed_body.fetch("id"))
+      expect(created_submission.user_id).to eq(administrator.id)
+      expect(created_submission.pdf.available_path).to eq(nil)
+      expect(administrator.guardian.can_review_isbf_resumes?).to eq(false)
+    end
+
+    it "associates a selected registered contributor while preserving the staff uploader" do
+      registration = Fabricate(:registered_academy_student, user: owner)
+      sign_in(developer)
+
+      post "/isbf-resume/shares.json",
+           params: {
+             shared_resume: {
+               preview_images: [sharing_request_image_upload],
+               title: "Student contribution",
+               consent: "true",
+               download_url: "https://www.kdocs.cn/l/student-contribution",
+               contributor: "Graduate contributor",
+               student_number: registration.student_number,
+               contributor_user_id: owner.id,
+             },
+           }
+
+      expect(response.status).to eq(201)
+      payload = response.parsed_body
+      expect(payload).to include(
+        "student_number" => registration.student_number,
+        "contributor" => "Graduate contributor",
+        "contributor_user" => include("id" => owner.id),
+      )
+      shared_resume = IsbfResume::SharedResume.find(payload.fetch("id"))
+      expect(shared_resume).to have_attributes(
+        user_id: developer.id,
+        contributor_user_id: owner.id,
+        student_number: registration.student_number,
+      )
+      sign_in(owner)
+      get "/isbf-resume/shares.json", params: { list: "mine" }
+      expect(response.parsed_body.fetch("shares").map { |entry| entry.fetch("id") }).to include(
+        shared_resume.id,
+      )
+    end
+
+    it "rejects a forged contributor association without storing files or queue entries" do
+      registration = Fabricate(:registered_academy_student, user: owner)
+      sign_in(developer)
+
+      expect do
+        post "/isbf-resume/shares.json",
+             params: {
+               shared_resume: {
+                 preview_images: [sharing_request_image_upload],
+                 consent: "true",
+                 download_url: "https://www.kdocs.cn/l/forged-contributor",
+                 student_number: registration.student_number,
+                 contributor_user_id: member.id,
+               },
+             }
+      end.not_to change { [IsbfResume::SharedResume.count, ReviewableIsbfResume.count] }
+
+      expect(response.status).to eq(422)
+      expect(Dir.glob(File.join(IsbfResume::SharedPdf.storage_path, "*"))).to be_empty
+    end
+
+    it "rejects a missing download link and simultaneous PDF and image sources" do
+      sign_in(developer)
+      image = sharing_request_image_upload
+
+      expect do
+        post "/isbf-resume/shares.json",
+             params: {
+               shared_resume: {
+                 preview_images: [image],
+                 consent: "true",
+               },
+             }
+      end.not_to change { [IsbfResume::SharedResume.count, ReviewableIsbfResume.count] }
+      expect(response.status).to eq(400)
+
+      expect do
+        post "/isbf-resume/shares.json",
+             params: {
+               shared_resume: {
+                 file: sharing_request_upload,
+                 preview_images: [image],
+                 consent: "true",
+                 download_url: "https://www.kdocs.cn/l/mixed-sources",
+               },
+             }
+      end.not_to change { [IsbfResume::SharedResume.count, ReviewableIsbfResume.count] }
+      expect(response.status).to eq(422)
+      expect(Dir.glob(File.join(IsbfResume::SharedPdf.storage_path, "*"))).to be_empty
     end
   end
 
@@ -458,21 +751,19 @@ RSpec.describe IsbfResume::SharesController do
   end
 
   describe "#download" do
-    it "serves approved PDF bytes to every forum member with private cache headers" do
+    it "redirects forum members to the WPS document instead of serving the historical PDF" do
       materialize_shared_pdf(approved)
+      original_pdf = File.binread(approved.pdf.available_path)
       sign_in(member)
 
       get "/isbf-resume/shares/#{approved.id}/pdf"
 
-      expect(response.status).to eq(200)
-      expect(response.media_type).to eq("application/pdf")
-      expect(response.body.b).to eq(File.binread(approved.pdf.available_path))
-      expect(response.headers["Content-Disposition"]).to include(
-        "attachment",
-        "resume-#{approved.id}.pdf",
-      )
+      expect(response.status).to eq(302)
+      expect(response.headers["Location"]).to eq(approved.download_url)
+      expect(response.media_type).not_to eq("application/pdf")
+      expect(response.body.b).not_to eq(original_pdf)
       expect(response.headers["Cache-Control"]).to include("private", "no-store")
-      expect(response.headers["X-Content-Type-Options"]).to eq("nosniff")
+      expect(File.binread(approved.pdf.available_path)).to eq(original_pdf)
     end
 
     it "hides pending and rejected PDF bytes from ordinary members and unauthorized administrators" do
@@ -488,23 +779,28 @@ RSpec.describe IsbfResume::SharesController do
       end
     end
 
-    it "lets the owner and authorized reviewers inspect private PDF bytes" do
+    it "redirects the owner and authorized reviewers to a private submission's WPS link" do
       materialize_shared_pdf(pending)
       SiteSetting.academy_moderators_review_resumes = true
       [owner, developer, administrator].each do |viewer|
         sign_in(viewer)
         get "/isbf-resume/shares/#{pending.id}/pdf"
-        expect(response.status).to eq(200)
-        expect(response.body.b).to eq(File.binread(pending.pdf.available_path))
+        expect(response.status).to eq(302)
+        expect(response.headers["Location"]).to eq(pending.download_url)
       end
     end
 
-    it "requires authentication and handles a missing document safely" do
+    it "requires authentication and keeps historical PDFs without links inaccessible" do
+      materialize_shared_pdf(approved)
+      approved.update!(download_url: "")
       get "/isbf-resume/shares/#{approved.id}/pdf"
       expect(response.status).to eq(403)
       sign_in(member)
       get "/isbf-resume/shares/#{approved.id}/pdf"
       expect(response.status).to eq(404)
+      expect(File.binread(approved.pdf.available_path, 5)).to eq("%PDF-")
+      get "/isbf-resume/shares/#{approved.id}.json"
+      expect(response.parsed_body.fetch("pdf_url")).to eq(nil)
     end
   end
 
@@ -568,8 +864,43 @@ RSpec.describe IsbfResume::SharesController do
       expect(response.headers["Retry-After"]).to eq("5")
       expect(response.headers["Cache-Control"]).to include("private", "no-store")
       get "/isbf-resume/shares/#{approved.id}/pdf"
+      expect(response.status).to eq(302)
+      expect(response.headers["Location"]).to eq(approved.download_url)
+      expect(File.binread(approved.pdf.available_path, 5)).to eq("%PDF-")
+    end
+
+    it "exposes only three pages for historical documents with more pages" do
+      pdf = IsbfResume::SharedPdf.store(sharing_pdf_upload(pages: 58))
+      approved.update!(storage_key: pdf.key, pages: pdf.pages)
+      sign_in(member)
+
+      get "/isbf-resume/shares/#{approved.id}.json"
+
+      expect(response.parsed_body).to include(
+        "pages" => 3,
+        "preview_urls" =>
+          (1..3).map { |page| "/isbf-resume/shares/#{approved.id}/previews/#{page}" },
+      )
+      get "/isbf-resume/shares/#{approved.id}/previews/3"
       expect(response.status).to eq(200)
-      expect(response.media_type).to eq("application/pdf")
+      %w[4 58].each do |page|
+        get "/isbf-resume/shares/#{approved.id}/previews/#{page}"
+        expect(response.status).to eq(404)
+      end
+      expect(Dir.children(pdf.directory)).to contain_exactly("resume.pdf", "preview-3.png")
+      expect(approved.reload.pages).to eq(58)
+    end
+
+    it "serves cached previews after the uploaded PDF has been discarded" do
+      materialize_shared_preview(approved)
+      sign_in(member)
+
+      get "/isbf-resume/shares/#{approved.id}/previews/1"
+
+      expect(response.status).to eq(200)
+      expect(response.media_type).to eq("image/png")
+      expect(response.body.b).to eq(File.binread(approved.pdf.preview_path(1)))
+      expect(approved.pdf.available_path).to eq(nil)
     end
   end
 end

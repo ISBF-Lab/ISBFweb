@@ -15,7 +15,7 @@ export default class ResumeSharePreview extends Component {
   @tracked _result;
 
   get count() {
-    return this.args.urls?.length || 0;
+    return Math.min(this.args.urls?.length || 0, 3);
   }
 
   get pageNumber() {
@@ -108,6 +108,9 @@ export default class ResumeSharePreview extends Component {
       ...attributes
       aria-busy={{this.loading}}
     >
+      <p class="isbf-resume-share-preview__notice">{{i18n
+          "isbf_resume.sharing.preview_notice"
+        }}</p>
       {{#if this.count}}
         <div class="isbf-resume-share-preview__controls">
           <DButton

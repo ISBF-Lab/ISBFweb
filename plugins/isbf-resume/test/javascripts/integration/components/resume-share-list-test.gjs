@@ -26,6 +26,42 @@ module("Integration | Component | ResumeShareList", function (hooks) {
     };
   });
 
+  test("credits the linked contributor beside the title without loading a preview", async function (assert) {
+    this.model.shares[0].contributor = "Shared by Alice";
+    this.model.shares[0].contributor_user = {
+      id: 99,
+      username: "alice",
+      name: "Alice",
+      avatar_template: "/letter_avatar_proxy/v4/letter/a/aaa/{size}.png",
+    };
+    await render(
+      <template>
+        <ResumeShareList @list="published" @model={{this.model}} />
+      </template>
+    );
+    assert
+      .dom(".isbf-resume-share-list__heading .isbf-resume-share-contributor")
+      .includesText("Shared by Alice");
+    assert.dom('a[data-user-card="alice"]').hasAttribute("href", "/u/alice");
+    assert.dom('img[src*="/previews/"]').doesNotExist();
+    assert
+      .dom(".isbf-resume-share-list__actions button")
+      .doesNotExist("members have no settings button");
+  });
+
+  test("staff have a collection settings action while member upload stays available", async function (assert) {
+    this.model.can_manage_collection = true;
+    await render(
+      <template>
+        <ResumeShareList @list="published" @model={{this.model}} />
+      </template>
+    );
+    assert
+      .dom(".isbf-resume-share-list__actions button")
+      .hasText(i18n("isbf_resume.sharing.edit_collection"));
+    assert.dom(".isbf-resume-share-list__upload").exists();
+  });
+
   test("shows file titles and descriptions with the upload link in the header", async function (assert) {
     await render(
       <template>

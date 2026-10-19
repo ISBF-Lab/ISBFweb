@@ -6,6 +6,7 @@ Fabricator(:shared_isbf_resume, class_name: "IsbfResume::SharedResume") do
   file_sha256 { "a" * 64 }
   file_bytes 512
   pages 1
+  download_url "https://www.kdocs.cn/l/resume-example"
   status "pending"
   title { sequence(:shared_resume_title) { |number| "Shared resume #{number}" } }
   submitted_description "Uploader's original description"

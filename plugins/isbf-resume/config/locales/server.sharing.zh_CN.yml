@@ -2,9 +2,11 @@ zh_CN:
   isbf_resume:
     sharing:
       untitled: "分享的简历"
-      invalid_submission: "请检查 PDF 文件、分享同意选项及填写长度。"
+      invalid_submission: "请检查预览文件、WPS 云文档链接、分享同意选项及填写长度。"
+      invalid_image: "无法读取预览图片，请上传最多三张 PNG、JPG 或 WebP 图片。"
+      invalid_preview_source: "请选择一种预览来源：一个 PDF，或最多三张预览图片。"
       invalid_pdf: "无法读取这份 PDF，请确认文件可正常打开，或重新导出为 PDF 后上传。"
-      pdf_too_large: "PDF 大小超过 10 MiB，请压缩文件后再上传。"
+      pdf_too_large: "预览文件合计超过 10 MiB，请压缩后再上传。"
       pdf_encrypted: "这份 PDF 已加密，请移除密码保护后再上传。"
       pdf_too_many_pages: "PDF 超过 100 页，请拆分文件后再上传。"
       pdf_validation_timeout: "PDF 校验超时，请稍后重试；这不代表文件已损坏。"

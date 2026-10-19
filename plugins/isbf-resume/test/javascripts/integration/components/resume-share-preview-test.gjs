@@ -57,4 +57,21 @@ module("Integration | Component | ResumeSharePreview", function (hooks) {
         "the previous page remains accessible"
       );
   });
+
+  test("caps legacy preview arrays at three pages", async function (assert) {
+    const urls = Array.from(
+      { length: 58 },
+      (_, page) => `/isbf-resume/shares/42/previews/${page + 1}`
+    );
+    await render(<template><ResumeSharePreview @urls={{urls}} /></template>);
+    await triggerEvent("img", "load");
+    await click(".isbf-resume-share-preview__controls button:last-child");
+    await triggerEvent("img", "load");
+    await click(".isbf-resume-share-preview__controls button:last-child");
+    assert.dom("img").hasAttribute("src", urls[2]);
+    assert
+      .dom(".isbf-resume-share-preview__controls button:last-child")
+      .isDisabled();
+    assert.dom("img").exists({ count: 1 });
+  });
 });

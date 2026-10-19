@@ -226,6 +226,14 @@ body:has(.isbf-resume-workspace) .powered-by-discourse {
 }
 
 .isbf-resume-share-list {
+  &__heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--isbf-v2-space-2, 8px) var(--isbf-v2-space-4, 16px);
+  }
+
   &__actions {
     margin-inline-start: auto;
   }
@@ -330,6 +338,11 @@ body:has(.isbf-resume-workspace) .powered-by-discourse {
 }
 
 .isbf-resume-share-preview {
+  &__notice {
+    font-size: var(--isbf-v2-font-xs, 13px);
+    color: var(--isbf-v2-muted, var(--primary-medium));
+  }
+
   &__controls {
     display: flex;
     flex-wrap: wrap;
@@ -337,6 +350,24 @@ body:has(.isbf-resume-workspace) .powered-by-discourse {
     justify-content: center;
     gap: var(--isbf-v2-space-2, 8px);
     margin-block: var(--isbf-v2-space-4, 16px);
+  }
+}
+
+.isbf-resume-share-contributor {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--isbf-v2-space-1, 4px);
+  max-width: 100%;
+  font-size: var(--isbf-v2-font-xs, 13px);
+  overflow-wrap: anywhere;
+
+  a {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--isbf-v2-space-1, 4px);
+    max-width: 100%;
   }
 }
 

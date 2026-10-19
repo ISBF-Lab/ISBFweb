@@ -70,6 +70,43 @@ module IsbfResumeSharingSpecHelpers
     )
   end
 
+  def sharing_image_upload(filename: "preview.png", format: "PNG")
+    tempfile = Tempfile.new(["resume-sharing-", File.extname(filename)], @sharing_fixture_directory)
+    (@sharing_uploads ||= []) << tempfile
+    program = <<~PYTHON
+      import sys
+      from PIL import Image
+      image = Image.new("RGB", (80, 120), (40, 80, 120))
+      image.save(sys.argv[1], format=sys.argv[2])
+    PYTHON
+    _output, error, status =
+      Open3.capture3(
+        ENV.fetch("ISBF_RESUME_PYTHON", "/opt/resume-venv/bin/python"),
+        "-I",
+        "-c",
+        program,
+        tempfile.path,
+        format,
+      )
+    raise "Synthetic image fixture failed: #{error}" unless status.success?
+    tempfile.rewind
+    ActionDispatch::Http::UploadedFile.new(
+      tempfile: tempfile,
+      filename: filename,
+      type: "image/#{format == "JPEG" ? "jpeg" : format.downcase}",
+    )
+  end
+
+  def sharing_request_image_upload(**options)
+    upload = sharing_image_upload(**options)
+    Rack::Test::UploadedFile.new(
+      upload.path,
+      upload.content_type,
+      true,
+      original_filename: upload.original_filename,
+    )
+  end
+
   def materialize_shared_pdf(shared_resume)
     stored_pdf = IsbfResume::SharedPdf.store(sharing_pdf_upload)
     shared_resume.update!(
@@ -77,6 +114,17 @@ module IsbfResumeSharingSpecHelpers
       file_sha256: stored_pdf.sha256,
       file_bytes: stored_pdf.bytes,
       pages: stored_pdf.pages,
+    )
+    shared_resume
+  end
+
+  def materialize_shared_preview(shared_resume)
+    preview = IsbfResume::SharedPdf.store_preview(images: [sharing_image_upload])
+    shared_resume.update!(
+      storage_key: preview.key,
+      file_sha256: preview.sha256,
+      file_bytes: preview.bytes,
+      pages: preview.pages,
     )
     shared_resume
   end

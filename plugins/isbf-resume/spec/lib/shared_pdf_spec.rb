@@ -112,6 +112,129 @@ RSpec.describe IsbfResume::SharedPdf do
     end
   end
 
+  describe ".store_preview" do
+    it "renders only the first three PDF pages and removes this upload's stored original" do
+      upload = sharing_pdf_upload(filename: "Long resume.pdf", pages: 5)
+      original_bytes = File.binread(upload.path)
+
+      preview = described_class.store_preview(file: upload)
+
+      expect(preview).to have_attributes(
+        pages: 3,
+        filename_title: "Long resume",
+        bytes: original_bytes.bytesize,
+        sha256: Digest::SHA256.hexdigest(original_bytes),
+        available_path: nil,
+      )
+      expect(Dir.children(preview.directory)).to contain_exactly(
+        "preview-1.png",
+        "preview-2.png",
+        "preview-3.png",
+      )
+      (1..3).each do |page|
+        path = preview.preview_path(page)
+        expect(File.binread(path, 8)).to eq(described_class::PNG_SIGNATURE)
+        expect(File.stat(path).mode & 0o777).to eq(0o600)
+      end
+      expect(preview.preview_path(4)).to eq(nil)
+      expect(File.stat(preview.directory).mode & 0o777).to eq(0o700)
+    end
+
+    it "converts PNG, JPEG and WebP uploads into three ordered private PNG previews" do
+      images = [
+        sharing_image_upload,
+        sharing_image_upload(filename: "second.jpg", format: "JPEG"),
+        sharing_image_upload(filename: "third.webp", format: "WEBP"),
+      ]
+
+      preview = described_class.store_preview(images: images)
+
+      expect(preview.pages).to eq(3)
+      expect(preview.available_path).to eq(nil)
+      expect(preview.sha256).to match(/\A[0-9a-f]{64}\z/)
+      expect(preview.bytes).to eq(images.sum(&:size))
+      expect(Dir.children(preview.directory)).to contain_exactly(
+        "preview-1.png",
+        "preview-2.png",
+        "preview-3.png",
+      )
+      expect((1..3).map { |page| File.binread(preview.preview_path(page), 8) }).to eq(
+        [described_class::PNG_SIGNATURE] * 3,
+      )
+    end
+
+    it "requires exactly one uploaded preview source and at most three images" do
+      pdf = sharing_pdf_upload
+      image = sharing_image_upload
+      [
+        {},
+        { images: [] },
+        { file: pdf, images: [image] },
+        { images: [image] * 4 },
+        { images: ["/tmp/forged.png"] },
+      ].each do |sources|
+        expect { described_class.store_preview(**sources) }.to raise_error(
+          described_class::InvalidPdf,
+        )
+      end
+
+      expect(Dir.glob(File.join(described_class.storage_path, "*"))).to be_empty
+    end
+
+    it "checks image content and rejects a mixed upload without retaining partial previews" do
+      invalid = sharing_raw_upload(content: "%PDF-1.7\nnot an image", filename: "spoofed.png")
+      renamed = sharing_image_upload(filename: "unsupported.gif")
+
+      [[sharing_image_upload, invalid], [renamed]].each do |images|
+        expect { described_class.store_preview(images: images) }.to raise_error(
+          described_class::InvalidPdf,
+        )
+      end
+
+      expect(Dir.glob(File.join(described_class.storage_path, "*"))).to be_empty
+    end
+
+    it "rejects image uploads whose combined size exceeds ten MiB before retaining files" do
+      bytes = described_class::PNG_SIGNATURE + ("x" * (described_class::MAX_BYTES / 2))
+      images =
+        %w[first.png second.png].map do |filename|
+          sharing_raw_upload(content: bytes, filename: filename, content_type: "image/png")
+        end
+
+      expect { described_class.store_preview(images: images) }.to raise_error(
+        described_class::InvalidPdf,
+      )
+
+      expect(Dir.glob(File.join(described_class.storage_path, "*"))).to be_empty
+    end
+
+    it "keeps an existing historical PDF intact while a new preview upload is rejected" do
+      historical = described_class.store(sharing_pdf_upload)
+      original_bytes = File.binread(historical.available_path)
+      invalid = sharing_raw_upload(content: "%PDF-1.7\ntruncated document")
+
+      expect { described_class.store_preview(file: invalid) }.to raise_error(
+        described_class::InvalidPdf,
+      )
+
+      expect(File.binread(historical.available_path)).to eq(original_bytes)
+      expect(Dir.glob(File.join(described_class.storage_path, "*"))).to eq([historical.directory])
+    end
+
+    it "discards a new PDF when preview generation is busy" do
+      upload = sharing_pdf_upload
+      File.open(File.join(described_class.storage_path, ".preview.lock"), "w", 0o600) do |lock|
+        lock.flock(File::LOCK_EX)
+
+        expect { described_class.store_preview(file: upload) }.to raise_error(
+          described_class::PreviewUnavailable,
+        )
+
+        expect(Dir.glob(File.join(described_class.storage_path, "*"))).to be_empty
+      end
+    end
+  end
+
   describe "#available_path" do
     it "refuses a symlinked PDF even when its target is a valid file" do
       pdf = described_class.store(sharing_pdf_upload)

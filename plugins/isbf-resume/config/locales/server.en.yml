@@ -1,5 +1,6 @@
 en:
   site_settings:
+    isbf_resume_collection_url: "WPS form link used to collect resume submissions from members."
     isbf_resume_enabled: "Enable the workbench resume editor and private DOCX/PDF generation. Requires local Python, LibreOffice and Chinese fonts on the server."
   isbf_resume:
     invalid_request: "The resume request is invalid or too large. Check the content and try again."

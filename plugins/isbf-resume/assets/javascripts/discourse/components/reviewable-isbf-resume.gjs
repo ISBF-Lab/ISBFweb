@@ -6,6 +6,7 @@ import { service } from "@ember/service";
 import getURL from "discourse/lib/get-url";
 import DButton from "discourse/ui-kit/d-button";
 import { i18n } from "discourse-i18n";
+import ResumeShareContributor from "./resume-share-contributor";
 import ResumeShareEditModal from "./resume-share-edit-modal";
 import ResumeShareMetadata from "./resume-share-metadata";
 import ResumeSharePreview from "./resume-share-preview";
@@ -38,6 +39,7 @@ export default class ReviewableIsbfResume extends Component {
     <section class="isbf-resume-review" ...attributes>
       <h3>{{this.share.title}}</h3>
       <ResumeShareMetadata @share={{this.share}} />
+      <ResumeShareContributor @share={{this.share}} />
       <h4>{{i18n "isbf_resume.sharing.original_description"}}</h4>
       <p
         class="isbf-resume-review__description"
@@ -55,12 +57,16 @@ export default class ReviewableIsbfResume extends Component {
           @label="isbf_resume.sharing.edit_details"
         />
       {{/if}}
-      <DButton
-        class="btn-primary"
-        data-auto-route="false"
-        @href={{getURL this.share.pdf_url}}
-        @label="isbf_resume.sharing.download"
-      />
+      {{#if this.share.pdf_url}}
+        <DButton
+          class="btn-primary"
+          data-auto-route="false"
+          rel="noopener noreferrer"
+          target="_blank"
+          @href={{getURL this.share.pdf_url}}
+          @label="isbf_resume.sharing.download"
+        />
+      {{/if}}
       <details {{on "toggle" this.togglePreview}}>
         <summary>{{i18n "isbf_resume.sharing.preview"}}</summary>
         {{#if this.previewOpen}}

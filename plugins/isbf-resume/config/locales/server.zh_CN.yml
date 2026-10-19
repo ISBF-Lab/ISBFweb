@@ -1,5 +1,6 @@
 zh_CN:
   site_settings:
+    isbf_resume_collection_url: "收集成员简历投稿的 WPS 表单链接。"
     isbf_resume_enabled: "启用工作台简历编辑器及私有 DOCX/PDF 生成。需在服务器配置本地 Python、LibreOffice 与中文字体。"
   isbf_resume:
     invalid_request: "简历请求格式有误或内容过大，请检查后重试。"

@@ -15,6 +15,8 @@ module IsbfResume
         pdf_too_many_pages
         pdf_validation_failed
         pdf_validation_timeout
+        invalid_image
+        invalid_preview_source
       ].freeze
 
       attr_reader :reason
@@ -30,6 +32,7 @@ module IsbfResume
 
     MAX_BYTES = 10.megabytes
     MAX_PAGES = 100
+    PREVIEW_PAGES = 3
     VALIDATION_TIMEOUT = 10
     PREVIEW_TIMEOUT = 25
     STORAGE_KEY = /\A[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\z/
@@ -59,6 +62,40 @@ module IsbfResume
       Dir.mkdir(pdf.directory, 0o700)
       File.open(pdf.pdf_path, "wx", 0o600) { |output| IO.copy_stream(upload.tempfile, output) }
       pdf.inspect_pdf!(upload.original_filename)
+      pdf
+    rescue StandardError
+      pdf&.discard!
+      raise
+    end
+
+    def self.store_preview(file: nil, images: nil)
+      uploads = Array(images)
+      raise InvalidPdf.new("invalid_preview_source") if file.present? == uploads.present?
+      return store_images(uploads) unless file
+      pdf = store(file)
+      pdf.prepare_preview!
+      pdf
+    rescue StandardError
+      pdf&.discard!
+      raise
+    end
+
+    def self.store_images(uploads)
+      unless uploads.length.between?(1, PREVIEW_PAGES) &&
+               uploads.all? { |upload|
+                 upload.is_a?(ActionDispatch::Http::UploadedFile) && upload.size.positive? &&
+                   %w[.png .jpg .jpeg .webp].include?(
+                     File.extname(upload.original_filename.to_s).downcase,
+                   )
+               }
+        raise InvalidPdf.new("invalid_image")
+      end
+      raise InvalidPdf.new("pdf_too_large") if uploads.sum(&:size) > MAX_BYTES
+      FileUtils.mkdir_p(storage_path, mode: 0o700)
+      raise InvalidPdf.new("invalid_image") if File.symlink?(storage_path)
+      pdf = new(key: SecureRandom.uuid, pages: uploads.length)
+      Dir.mkdir(pdf.directory, 0o700)
+      pdf.prepare_images!(uploads)
       pdf
     rescue StandardError
       pdf&.discard!
@@ -95,6 +132,35 @@ module IsbfResume
       nil
     end
 
+    def prepare_preview!
+      count = [pages, PREVIEW_PAGES].min
+      (1..count).each { |page| render_preview!(page) }
+      @pages = count
+      File.unlink(pdf_path)
+    end
+
+    def prepare_images!(uploads)
+      digest = Digest::SHA256.new
+      @bytes = uploads.sum(&:size)
+      uploads.each_with_index do |upload, index|
+        input = File.join(directory, "input-#{index + 1}")
+        upload.rewind
+        File.open(input, "wx", 0o600) { |output| IO.copy_stream(upload.tempfile, output) }
+        digest.update(Digest::SHA256.file(input).digest)
+      end
+      @sha256 = digest.hexdigest
+      @filename_title =
+        File.basename(uploads.first.original_filename.to_s).sub(/\.[^.]+\z/, "").first(200)
+      manifest, success = run_processor("--images", uploads.length.to_s, timeout: PREVIEW_TIMEOUT)
+      unless success && manifest["pages"] == uploads.length &&
+               (1..pages).all? { |page| preview_path(page) }
+        raise InvalidPdf.new("invalid_image")
+      end
+      (1..uploads.length).each { |page| File.unlink(File.join(directory, "input-#{page}")) }
+    rescue Timeout::Error, Errno::ENOENT, JSON::ParserError, TypeError
+      raise InvalidPdf.new("invalid_image")
+    end
+
     def inspect_pdf!(filename)
       manifest, success = run_processor(timeout: VALIDATION_TIMEOUT)
       raise InvalidPdf.new(manifest.fetch("error", "pdf_validation_failed")) unless success
@@ -118,9 +184,9 @@ module IsbfResume
     def render_preview!(page)
       number = page.to_s
       return unless /\A[1-9]\d{0,2}\z/.match?(number) && pages && number.to_i <= pages
-      return unless available_path
       cached = preview_path(number)
       return cached if cached
+      return unless available_path
 
       lock_path = File.join(self.class.storage_path, ".preview.lock")
       File.open(lock_path, File::RDWR | File::CREAT | File::NOFOLLOW, 0o600) do |lock|
@@ -146,7 +212,7 @@ module IsbfResume
     def discard!
       return if File.symlink?(directory) || !File.directory?(directory)
       names =
-        ["resume.pdf"] +
+        %w[resume.pdf input-1 input-2 input-3] +
           (1..MAX_PAGES).flat_map do |page|
             [
               "preview-#{page}.png",
