@@ -1,0 +1,8 @@
+{
+  "installed": true,
+  "plugin_files": 3,
+  "web_restarted": true,
+  "database_restarted": false,
+  "redis_restarted": false,
+  "container_recreated": false
+}

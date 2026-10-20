@@ -1,0 +1,4 @@
+- name: Dialog policy and checker regression
+  run: |
+    pnpm lint:dialogs
+    pnpm exec node --test script/check-isbf-dialogs.test.mjs

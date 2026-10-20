@@ -1,4 +1,4 @@
-import { click, find, render, settled } from "@ember/test-helpers";
+import { clearRender, click, find, render, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
 import { themePrefix } from "virtual:theme";
@@ -187,9 +187,11 @@ module("ISBF | Integration | Component | ISBFNotifications", function (hooks) {
         [this.site.notification_types.replied]: 1,
       },
       unread_high_priority_notifications: 0,
+      isbf_notification_filter: null,
     });
     this.owner.register("service:isbf-notifications", NotificationState);
     this.requests = [];
+    this.savedFilters = [];
     this.markReadRequests = 0;
     this.unread = true;
     const notification = {
@@ -258,6 +260,13 @@ module("ISBF | Integration | Component | ISBFNotifications", function (hooks) {
       this.unread = false;
       return response({ success: true });
     });
+    pretender.put("/u/eviltrout.json", (request) => {
+      this.savedFilters.push(
+        parsePostData(request.requestBody).custom_fields
+          .isbf_notification_filter
+      );
+      return response({ success: true });
+    });
   });
 
   test("starts with all notifications, filters both tabs and expands without marking read", async function (assert) {
@@ -292,6 +301,11 @@ module("ISBF | Integration | Component | ISBFNotifications", function (hooks) {
       "unread",
       "the filter reaches the API"
     );
+    assert.deepEqual(
+      this.savedFilters,
+      ["unread"],
+      "the selection is saved to the account"
+    );
     await click(".isbf-notifications__menu summary");
     assert.false(
       find(".isbf-notifications__filter").checkVisibility(),
@@ -318,6 +332,103 @@ module("ISBF | Integration | Component | ISBFNotifications", function (hooks) {
       this.markReadRequests,
       0,
       "browsing and expansion have no marking side effect"
+    );
+  });
+
+  test("restores the saved filter before loading and remembers turning it off", async function (assert) {
+    this.currentUser.set("isbf_notification_filter", "unread");
+    await render(<template><ISBFNotifications /></template>);
+    assert.strictEqual(
+      this.requests[0].filter,
+      "unread",
+      "the first request uses the account preference"
+    );
+
+    await clearRender();
+    this.requests = [];
+    await render(<template><ISBFNotifications /></template>);
+    assert.strictEqual(
+      this.requests[0].filter,
+      "unread",
+      "returning restores the same preference"
+    );
+    await click(".isbf-notifications__menu summary");
+    assert
+      .dom(".isbf-notifications__filter [role='switch']")
+      .hasAttribute(
+        "aria-checked",
+        "true",
+        "the switch restores its saved state"
+      );
+    await click(".isbf-notifications__filter [role='switch']");
+    assert.deepEqual(
+      this.savedFilters,
+      ["all"],
+      "turning the filter off also saves the selection"
+    );
+
+    await clearRender();
+    this.requests = [];
+    await render(<template><ISBFNotifications /></template>);
+    assert.strictEqual(
+      this.requests[0].filter,
+      "all",
+      "the next visit includes history again"
+    );
+  });
+
+  test("keeps the previous filter when saving fails and applies a successful retry", async function (assert) {
+    let fail = true;
+    let saved;
+    pretender.put("/u/eviltrout.json", (request) => {
+      saved = parsePostData(request.requestBody).custom_fields;
+      return fail
+        ? response(500, { errors: ["Failed"] })
+        : response({ success: true });
+    });
+    this.currentUser.set("isbf_notification_badge_style", "dot");
+    await render(<template><ISBFNotifications /></template>);
+    await click(".isbf-notifications__menu summary");
+    await click(".isbf-notifications__filter [role='switch']");
+    assert
+      .dom(".isbf-notifications__filter-error")
+      .exists("the failed save offers a retry");
+    assert
+      .dom(".isbf-notifications__filter [role='switch']")
+      .hasAttribute("aria-checked", "false", "the previous selection remains");
+    assert.strictEqual(
+      this.requests.length,
+      1,
+      "failure preserves the loaded list"
+    );
+
+    fail = false;
+    await click(".isbf-notifications__filter-error button");
+    assert.deepEqual(
+      saved,
+      { isbf_notification_filter: "unread" },
+      "retry saves only the selected filter"
+    );
+    assert.strictEqual(
+      this.currentUser.isbf_notification_badge_style,
+      "dot",
+      "the badge preference stays intact"
+    );
+    assert
+      .dom(".isbf-notifications__filter-error")
+      .doesNotExist("a successful retry clears the error");
+    assert
+      .dom(".isbf-notifications__menu summary")
+      .isFocused("retry keeps focus in the menu when its button disappears");
+    assert.strictEqual(
+      this.requests.at(-1).filter,
+      "unread",
+      "success reloads the selected list"
+    );
+    assert.strictEqual(
+      this.markReadRequests,
+      0,
+      "saving never marks notices read"
     );
   });
 

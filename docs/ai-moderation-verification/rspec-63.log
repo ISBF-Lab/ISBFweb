@@ -1,0 +1,39 @@
+Prepared /tmp/spec-work; application sources remain read-only
+Prepared isolated plugin and gem paths
+The Gemfile's dependencies are satisfied
+waiting for server to start.... done
+server started
+ set_config 
+------------
+ 
+(1 row)
+
+`/home/discourse` is not writable.
+Bundler will use `/tmp/bundler20261018-51-8bn5ih51' as your home directory temporarily.
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+Seeding theme and color schemes
+`/home/discourse` is not writable.
+Bundler will use `/tmp/bundler20261018-152-7abtqy152' as your home directory temporarily.
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+
+Randomized with seed 58585
+..........................hostname: Temporary failure in name resolution
+.....................................
+
+Finished in 1 minute 25.66 seconds (files took 19.23 seconds to load)
+63 examples, 0 failures
+
+Randomized with seed 58585
+
+1027497984
+low 0
+high 0
+max 0
+oom 0
+oom_kill 0
+oom_group_kill 0
+sock_throttled 0

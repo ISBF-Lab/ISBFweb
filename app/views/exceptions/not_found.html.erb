@@ -6,8 +6,14 @@
 
 <% content_for :no_ember_head do %>
   <meta id="discourse-error" data-discourse-error="true">
+  <% if @elastic_not_found %>
+    <%= preload_script("js/elastic-not-found", type_module: true) %>
+  <% end %>
 <% end %>
 
+<% if @elastic_not_found %>
+  <%= render partial: "exceptions/elastic_not_found" %>
+<% else %>
 <div class="page-not-found">
 
 <div class="heading">
@@ -61,3 +67,4 @@
 <%= build_plugin_html 'server:not-found-before-topics' %>
 
 <%= @topics_partial %>
+<% end %>

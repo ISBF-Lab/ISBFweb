@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "checks": [
+    "1280px light: landscape box follows its declared aspect ratio",
+    "1280px light: wide box follows its declared aspect ratio",
+    "1280px light: portrait box follows its declared aspect ratio",
+    "1280px light: square box follows its declared aspect ratio",
+    "1280px light: delayed box follows its declared aspect ratio",
+    "1280px light: image and metadata share the same bottom edge"
+  ],
+  "layouts": [],
+  "errors": [],
+  "production_backend": false
+}

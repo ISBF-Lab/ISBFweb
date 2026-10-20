@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "plugins_preserved": 66,
+  "audited_core_files": 13860,
+  "unchanged_core_files": 13860,
+  "theme_fields_preserved": 437,
+  "targeted_404_initializer_updated": true,
+  "theme_settings_preserved": true,
+  "site_settings_unchanged_during_hotfix": true,
+  "concurrent_setting_changes_preserved": [
+    {
+      "name": "isbf_resume_collection_url",
+      "updated_at": "2026-10-19T13:44:47.027363"
+    }
+  ],
+  "migration_list_preserved": true,
+  "single_manifest_restored": true,
+  "new_filename": "isbf-resume_main.BLzK0z-s1msry4j.digested.js",
+  "public_manifest_entries_preserved": 480,
+  "public_asset_contents_preserved": 480,
+  "other_generated_manifests_preserved": 60,
+  "js_sha256": "9a1af608011252f2d1374662a208edafd1b88c2e823c2b78b7cd00df909b4630"
+}

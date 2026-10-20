@@ -30,6 +30,7 @@ en:
         success: "Registration complete"
         redirect_notice: "Entering the forum homepage in 5 seconds"
         new_account_required: "This invitation creates a new account. Sign out before registering."
+        username_hint: "Your username cannot be changed once set"
       student_invites:
         title: "Student invitations"
         description: "Issue single-use invitation codes and view the student number bound to each registered account."

@@ -1,0 +1,57 @@
+{
+  "harness_sha256": "9d78b800720456299f6468792d1a35de8d39b0469e6611add0507bba44b4d4fd",
+  "passed": false,
+  "full_ember_client": true,
+  "production_backend_used": false,
+  "checks": [
+    "the internal title is absent before loading or scrolling",
+    "suggestions preserve exact source order",
+    "hidden topics are not requested",
+    "untitled rows render clean first-post text",
+    "a missing body retains the neutral link label",
+    "hidden excerpts remain hidden",
+    "the footer displays no thumbnails or image filenames",
+    "loaded and failed rows expose neither filenames nor placeholder codes",
+    "explicit titles retain native rendering",
+    "titled and hidden rows make no body requests",
+    "body previews always read post one",
+    "unread, reply, time and category links retain their exact targets",
+    "preview links contain no nested anchors",
+    "untitled rows retain the native unread indicator",
+    "untitled rows retain locked status",
+    "read topics retain their accessible announcement",
+    "keyboard focus retains native row selection",
+    "pointer clicks retain native unread navigation",
+    "preview clicks retain native history"
+  ],
+  "layouts": [],
+  "errors": [],
+  "console_errors": [],
+  "missing_assets": [],
+  "api_requests": [
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "POST",
+      "path": "/isbf/views/impressions"
+    }
+  ],
+  "template_overrides": false,
+  "full_native_theme": true,
+  "expected_missing_body_status": 404,
+  "debug": {
+    "body": "跳转到您离开的地方（最后一条回复，帖子 10）\n跳到主要内容\nISBF - One\n首页\n探索\n通知\n日历\n工作台\n书签\n个人资料\n更多\n发布\n审核\nRobin Ward\n@eviltrout\n搜索\n社区入口\n官方\n浏览分类\n精华内容\n帖子\n由 fixture-user 于 4 天前 发布\n预览用户\n4 天\n@fixture-user\n继续阅读隔离验收\n\n此正文来自合成夹具，仅用于检查帖子底部组件。\n\n\n\n​\n​\n​\n\n\n接着看看\n新帖与未读\n推荐\n相关\n首帖正文，校园活动照片。\n 已读\n校园交流\n·\n4 天\n0 回复\n首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳…\n您在此话题中有 3 个未读帖子\n校园交流\n·\n4 天\n3 回复\n图片\n新话题\n校园交流\n·\n4 天\n0 回复\n查看帖子\n 已读\n校园交流\n·\n4 天\n3 回复\n嵌套话题的真实新回复\n上次访问后的新回复\n校园交流\n·\n4 天\n3 回复\n查看帖子\n校园交流\n·\n4 天\n3 回复\nZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ\n 已读\n仅限成员查看的分类名称与连续字符MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n·\n4 天\n3 回复\n浏览最新话题\n浏览全部 →\n \n ",
+    "requests": [
+      "/posts/by_number/903/1.json",
+      "/posts/by_number/901/1.json",
+      "/posts/by_number/902/1.json",
+      "/posts/by_number/904/1.json"
+    ]
+  }
+}

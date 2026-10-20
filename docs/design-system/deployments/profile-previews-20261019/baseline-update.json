@@ -1,0 +1,15 @@
+{
+  "reason": "Preserve the independent resume shared release published during this review.",
+  "previous_link": "/shared/isbf-resume-releases/0abffc811661d9e09c0623576b988792e207472e/isbf-resume",
+  "current_link": "/shared/isbf-resume-releases/24a63ae0ea2dab917a9502db8c257b404e29e722/isbf-resume",
+  "files": [
+    ".release-commit",
+    "config/settings.yml",
+    "lib/isbf_resume/sharing_links.rb",
+    "spec/lib/sharing_links_spec.rb",
+    "spec/requests/shares_controller_spec.rb"
+  ],
+  "initial_inventory": "inventory-initial.json",
+  "active_inventory": "inventory-before.json",
+  "own_sources_unchanged": true
+}

@@ -1,0 +1,23 @@
+{
+  "image": "local_discourse/isbf_app:reply-regressions-20261016-da29b7352452",
+  "command": [
+    "bash",
+    "/review/run-specs.sh",
+    "plugins/isbf-moderation/spec"
+  ],
+  "available_bytes": 1515945984,
+  "reserve_bytes": 536870912,
+  "memory_limit_bytes": 939524096,
+  "network": "none",
+  "exit_code": 0,
+  "elapsed_seconds": 200.6,
+  "examples": 65,
+  "failures": 0,
+  "seed": 38025,
+  "peak_memory_bytes": 939524096,
+  "ruby_version": "3.4.10",
+  "real_model_called": false,
+  "production_changed": false,
+  "full_preview_started": false,
+  "container_removed": true
+}

@@ -115,7 +115,7 @@ module PageObjects
       end
 
       def has_scoped_dialog?
-        page.has_css?("body.has-frontend-dialog") && page.has_css?(".d-modal[role='dialog']")
+        page.has_css?(".d-modal[role='dialog']")
       end
 
       def has_invitation_fields?
@@ -127,8 +127,26 @@ module PageObjects
         self
       end
 
+      def has_consistent_dialog_shape?
+        page.has_css?(
+          ".d-modal__container",
+          style: {
+            "border-top-left-radius" => "16px",
+            "border-bottom-right-radius" => "16px",
+          },
+        ) && page.has_css?(".d-modal__footer .btn-primary", style: { "border-radius" => "999px" })
+      end
+
+      def has_dialog_inside_viewport?
+        page.has_css?(".d-modal__container") do |element|
+          element.evaluate_script(
+            "((r) => r.left >= 15 && r.right <= innerWidth - 15 && r.top >= 15 && r.bottom <= innerHeight - 15)(this.getBoundingClientRect())",
+          )
+        end
+      end
+
       def has_no_scoped_dialog?
-        page.has_no_css?(".d-modal") && page.has_no_css?("body.has-frontend-dialog")
+        page.has_no_css?(".d-modal")
       end
 
       def visit_bookmarks(user)
@@ -146,7 +164,7 @@ module PageObjects
       end
 
       def has_scoped_confirmation?
-        page.has_css?("body.has-frontend-dialog") && page.has_css?(".dialog-container")
+        page.has_css?(".dialog-container")
       end
 
       def cancel_confirmation

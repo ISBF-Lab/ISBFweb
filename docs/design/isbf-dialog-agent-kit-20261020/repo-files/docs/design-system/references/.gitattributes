@@ -1,0 +1,3 @@
+# Preserve archived bytes so manifest digests remain valid after checkout.
+*.txt -text whitespace=-blank-at-eof,-blank-at-eol,cr-at-eol
+evidence/*.md -text whitespace=-blank-at-eof,-blank-at-eol,cr-at-eol

@@ -138,7 +138,7 @@ A01：[account-menu](references/theme-4/javascripts/discourse/components/isbf-v2
 - 账号触发器桌面 `36px`、圆形、图标 `20px`；手机 `44px`。
 - 账号面板宽 `max(220px, 100%)`，padding `8px`、border、`radius-md`、shadow-menu；手机宽 `min(280px, calc(100vw - 32px))`。菜单项最小高 `44px`、padding `8px 12px`、`radius-sm`、`15px/600`，hover 背景 hover。
 - More 菜单内部面板同样使用 border、radius-md、shadow-menu，但入口复用侧栏的大字号规则，不套账号菜单字体。
-- 通知菜单另用最小宽 `190px`、padding `8px`、radius-sm、局部 `0 4px 16px rgb(0 0 0 / 12%)` 阴影。
+- 通知菜单按最长一行内容确定宽度，最大为视口减两侧space-4；padding `8px`、radius-sm、局部 `0 4px 16px rgb(0 0 0 / 12%)` 阴影。宽度按[2026-10-19用户修订](reviews/notifications-menu-memory-20261019/README.md)取代原190px最小宽度。
 - 官方 picker 已组合 `DMenu`、`DDropdownMenu`、`DButton`；选项、placement 和多选行为读该组件与 scoped stylesheet，不复制账号菜单定位。
 
 ### Usage Rules
@@ -157,7 +157,7 @@ A07：[official-calendar-editor](references/theme-4/javascripts/discourse/compon
 
 ### Visual Rules
 
-现有日历弹窗使用 `DModal`，标题及 actions 来自具体流程。时间编辑项 padding/margin-bottom `space-4`、border、radius-sm；变更查看 snapshot/latest padding-block `space-3`，latest 有上分隔线；错误文字 danger。公共 modal 的最大宽度、遮罩透明度和内距**没有形成独立 Approved 视觉规范，需要人工确认**，不能从 DModal 默认值提取目标规则。
+现有日历弹窗使用 `DModal`，标题及 actions 来自具体流程。时间编辑项 padding/margin-bottom `space-4`、border、radius-sm；变更查看 snapshot/latest padding-block `space-3`，latest 有上分隔线；错误文字 danger。公共外框、操作和手机留边现按下方2026-10-20用户确认的C07补充执行；业务宽度与原生遮罩保留，不把默认遮罩升级为新视觉token。
 
 补充代码事实：[reporting.scss](references/theme-4/stylesheets/reporting.scss.txt) 已有举报专用弹窗：desktop `>=601px` 对齐 feed-left、feed-width；容器 border/radius-md，手机顶部两角 radius-md、底部 `0`；textarea 最小高 `140px`。其完整视觉状态未在本次证据中批准，因此只供理解已有实现，不能扩展为通用 Modal 标准。
 
@@ -430,3 +430,49 @@ C01 的 A13 欢迎按钮只调整 `.academy-auth__choices` 的 Y 轴位置（+24
 本次组合只用于当前用户的通知页，不作为全站Card规范。
 
 2026-10-18通知页层级与整行点击已按用户授权发布；活动主题4项字段的确切合并源、插件及镜像核对、两端只读验证见[发布记录](deployments/notifications-layout-20261018/README.md)。C19仅限本次通知区域。
+
+2026-10-19用户确认[通知菜单与账号筛选记忆修订](reviews/notifications-menu-memory-20261019/README.md)：
+菜单随内容收窄；只看未读开关通过私有账号字段保存，首次请求恢复已保存值，未设置时仍显示全部。
+保存中禁用重复操作，成功后更新开关和列表，失败保持原选择并提供重试。
+仅修订C06/C18/C19的通知区域，最终视觉待核验，尚未上线。
+
+2026-10-19通知菜单收窄与账号筛选记忆已按用户授权上线；精确增量源码、完整插件及镜像核对、两端只读页面和验证边界见[发布记录](deployments/notifications-menu-memory-20261019/README.md)。最终视觉待用户核验。
+
+## 2026-10-19 C12个人总结补充
+
+[本次用户确认](reviews/profile-previews-20261019/README.md)将C12正文预览用于公开个人总结的无标题条目：只显示两行文字，图片帖使用既有文字回退；保留原始帖子/回复楼层链接、日期与点赞。公开活动继续最多三图及原生展开。`--summary`仅限该文字列表，不变更右栏最近讨论、通知或全局Card规则；最终视觉待用户核验。
+
+2026-10-19补充：个人活动与总结预览修复已上线，用户确认“没有问题，可以了”。本次验收仅限这两页的无标题正文与图片预览；确切合并源、原生22项布局检查、资源/镜像核对及线上自动化限制见[发布记录](deployments/profile-previews-20261019/README.md)。不扩大其他区域的Approved范围。
+
+## C20 · 弹性404与隐藏弹球（当前交付已验收）
+
+复用A01品牌和V2字体、背景、文字、强调、边框及焦点变量；404显示数字和游戏Canvas也读取同一色板。根容器覆盖动态视口，装饰画布占据可用宽高，品牌在左上、返回入口在底部；标题font-xl/weight-bold，说明font-sm/muted，主入口132px最小宽、44px最小高与pill半径仅用于本次404。游戏区域3:2、radius-md和语义边框，按钮最小44px。
+
+拖开0揭示按钮，键盘Enter/空格提供等价入口。用户后续明确修订为覆盖动态视口，数字采用二维局部弹性，游戏逐渐加速且没有暂停/继续状态；失败、后台、失焦或退出结算，当前浏览器最佳记录持续保留。尺寸变化与掉帧使用归一化连续计算，不暂停。普通404与站内片段共享引擎；原权限/群组说明保持原模板。当前范围、实际参考证据和验证见[修订记录](reviews/elastic-404-fullscreen-20261019/README.md)，[首版记录](reviews/elastic-404-20261019/README.md)作为历史保留，不构成全站错误态或游戏组件标准。
+
+用户回复“可以了，我验证了”，本次404交付已验收；实际源版本和验证边界见[发布记录](deployments/elastic-404-fullscreen-20261019/README.md)，停止额外测试。
+
+## 注册用户名提醒（2026-10-19）
+
+C08 的认证用户名字段下方使用既有说明文字排版与主题强调色，文案为“用户名填写后不可更改”。可选参数只由本次注册入口传入；其他字段与认证状态不扩展。
+见[局部实现与来源](reviews/auth-username-hint-20261019/README.md)。
+
+2026-10-20补充：注册用户名主题蓝色提醒已按授权增量发布，既有内容保留；
+见[确切来源及恢复边界](deployments/auth-username-hint-20261019/README.md)。最终视觉待用户核验。
+
+## 2026-10-20 接着看看无标题修复
+
+用户确认将此前的无标题正文规则补齐到C17两种推荐来源。新增文字预览模式沿用现有两行标题、字体、颜色和直角边框，首帖摘要与原未读跳转位置分别保留。实际三字段来源、两端验证与回退见[发布记录](deployments/continue-reading-previews-20261020/README.md)；不扩大其他区域的Approved范围。
+
+## 2026-10-20 C07共享前台外框与操作
+
+[用户截图与确认范围](reviews/dialog-consistency-20261020/README.md)作为C07的新增来源。外观由主题dialog-consistency.scss集中维护，原DModal、dialog服务、DButton和FormKit接口继续使用；直接渲染和插件弹窗无需页面或组件名单。
+
+16px四角、1px语义边框、16px分区内距及细线；文字动作pill/44px/15px/600，颜色跟随语义token。手机≤600px四周16px加安全区，正文滚动且操作可访问；既有宽度及全屏用途保留。图标关闭、工具栏、菜单项不是普通文字动作。
+
+后台、用户卡、图片查看器、编辑器、独立认证面板、手机菜单和招募独立页不套此外框。原C15禁止扩大作用域的约束继续适用于页面和全局控件；本次C07明确授权的前台对话框共享层按其独立范围执行。
+
+[开发规范与示例](dialogs.md)、[精确例外](dialog-exceptions.json)及CI共同约束新增实现。设计确认不等于全部弹窗业务流程验收，最终视觉仍待用户核验。
+
+2026-10-20补充：前台弹窗共享外观已按授权上线，184个模块与132个样式目标完整编译，
+既有功能及数据加载经两端只读确认；[源码、证据和恢复边界](deployments/dialog-consistency-20261020/README.md)。最终视觉待用户核验。

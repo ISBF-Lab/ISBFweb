@@ -1,0 +1,247 @@
+{
+  "reference_url": "https://boc.studio/404",
+  "analysis_kind": "static shipped JavaScript; no claim of observed reference execution",
+  "evidence_id": "ev_05822775e7e25a5ead53c52c63b44ccb6bc88753d3e3452f8a61f73dbf66aa6a",
+  "parent_evidence_id": "ev_764150d14a2e28b7b2b50c0c38b1ac0d813145f861c736bd432945f67e263f1f",
+  "artifact": {
+    "path": "/home/codex/discourse/deploy-work/boc-404-rea-20261019/artifacts",
+    "sha256": "ac400694cec2b51b40997a0e52da2d8b6eee5561fbc53a41bf6679f037881b9c"
+  },
+  "statistics": {
+    "relevant_files": 11,
+    "nested_asar_containers": 0,
+    "text_bytes_read": 15906,
+    "invalid_utf8_files": 0,
+    "parsed_javascript_files": 1,
+    "skipped_javascript_files": 0,
+    "visited_ast_nodes": 4860,
+    "findings": 0,
+    "modules": 0,
+    "parse_failures": 0
+  },
+  "source_selection": {
+    "requested_paths": [
+      "9.js"
+    ],
+    "unselected_files": 10
+  },
+  "coverage": {
+    "application": {
+      "status": "partial",
+      "truncated": false,
+      "omitted_count": null,
+      "limits": []
+    },
+    "semantic": {
+      "status": "partial",
+      "truncated": true,
+      "omitted_unknown_occurrences": [
+        {
+          "family": "boundary",
+          "reason": "incomplete-module",
+          "occurrences": 10
+        },
+        {
+          "family": "call-flow",
+          "reason": "dynamic-call",
+          "occurrences": 243
+        },
+        {
+          "family": "call-flow",
+          "reason": "incomplete-module",
+          "occurrences": 10
+        },
+        {
+          "family": "child-process",
+          "reason": "incomplete-module",
+          "occurrences": 10
+        },
+        {
+          "family": "closure",
+          "reason": "incomplete-module",
+          "occurrences": 10
+        },
+        {
+          "family": "configuration",
+          "reason": "incomplete-module",
+          "occurrences": 10
+        },
+        {
+          "family": "data-flow",
+          "reason": "incomplete-module",
+          "occurrences": 10
+        },
+        {
+          "family": "event",
+          "reason": "incomplete-module",
+          "occurrences": 10
+        },
+        {
+          "family": "object-flow",
+          "reason": "dynamic-property",
+          "occurrences": 35
+        },
+        {
+          "family": "object-flow",
+          "reason": "incomplete-module",
+          "occurrences": 10
+        },
+        {
+          "family": "promise-ownership",
+          "reason": "incomplete-module",
+          "occurrences": 10
+        },
+        {
+          "family": "request",
+          "reason": "incomplete-module",
+          "occurrences": 10
+        },
+        {
+          "family": "resource-lifecycle",
+          "reason": "incomplete-module",
+          "occurrences": 10
+        },
+        {
+          "family": "timer",
+          "reason": "incomplete-module",
+          "occurrences": 10
+        }
+      ],
+      "omitted_nodes": null,
+      "omitted_relations": null,
+      "limits": [
+        {
+          "name": "semantic_graph_file_node_ceiling",
+          "value": 1600,
+          "unit": "items"
+        },
+        {
+          "name": "semantic_graph_file_unknown_ceiling",
+          "value": 800,
+          "unit": "items"
+        },
+        {
+          "name": "semantic_graph_node_ceiling",
+          "value": 1600,
+          "unit": "items"
+        },
+        {
+          "name": "semantic_graph_unknown_ceiling",
+          "value": 800,
+          "unit": "items"
+        }
+      ],
+      "families": [
+        {
+          "family": "boundary",
+          "status": "partial",
+          "retained_relations": 0,
+          "omitted_relations": null,
+          "unknown_count": 0
+        },
+        {
+          "family": "call-flow",
+          "status": "partial",
+          "retained_relations": 25,
+          "omitted_relations": null,
+          "unknown_count": 30
+        },
+        {
+          "family": "child-process",
+          "status": "partial",
+          "retained_relations": 0,
+          "omitted_relations": null,
+          "unknown_count": 0
+        },
+        {
+          "family": "closure",
+          "status": "partial",
+          "retained_relations": 415,
+          "omitted_relations": null,
+          "unknown_count": 0
+        },
+        {
+          "family": "configuration",
+          "status": "partial",
+          "retained_relations": 0,
+          "omitted_relations": null,
+          "unknown_count": 0
+        },
+        {
+          "family": "data-flow",
+          "status": "partial",
+          "retained_relations": 1622,
+          "omitted_relations": null,
+          "unknown_count": 247
+        },
+        {
+          "family": "event",
+          "status": "partial",
+          "retained_relations": 0,
+          "omitted_relations": null,
+          "unknown_count": 0
+        },
+        {
+          "family": "object-flow",
+          "status": "partial",
+          "retained_relations": 0,
+          "omitted_relations": null,
+          "unknown_count": 523
+        },
+        {
+          "family": "promise-ownership",
+          "status": "partial",
+          "retained_relations": 0,
+          "omitted_relations": null,
+          "unknown_count": 0
+        },
+        {
+          "family": "request",
+          "status": "partial",
+          "retained_relations": 0,
+          "omitted_relations": null,
+          "unknown_count": 0
+        },
+        {
+          "family": "resource-lifecycle",
+          "status": "partial",
+          "retained_relations": 0,
+          "omitted_relations": null,
+          "unknown_count": 0
+        },
+        {
+          "family": "timer",
+          "status": "partial",
+          "retained_relations": 0,
+          "omitted_relations": null,
+          "unknown_count": 0
+        }
+      ]
+    },
+    "application_unknowns": 10,
+    "semantic_unknowns": 800
+  },
+  "limitations": [
+    "Boundary extraction covers unshadowed JSON/global coercions plus parse and validation method candidates.",
+    "Caller-selected source analysis leaves 10 inventoried files outside analysis scope. Inventory identity covers the complete artifact; relationships through unselected sources remain unknown.",
+    "Child-process extraction covers asynchronous node:child_process creation, literal argv/env/stdio options, exit/error listeners, and kill signals.",
+    "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+    "Configuration extraction covers process.env, process.argv, node:fs reads, and direct logical defaults.",
+    "Event extraction covers EventEmitter-style literal registrations, removals, and dispatch candidates; dynamic names remain unknown.",
+    "Function fingerprints are static candidates; equal digests can remain ambiguous and do not prove behavioral equivalence.",
+    "Graph coverage is incomplete; unavailable facts remain explicit and must not be read as absence.",
+    "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+    "Local data flow does not claim control-flow-sensitive reaching definitions or arbitrary dynamic property resolution.",
+    "Promise ownership covers explicit unshadowed Promise construction, static factories, aggregation, chaining, and await syntax only.",
+    "Request extraction covers fetch, WebSocket, node:http/node:https construction, direct option fields, and exact local response consumers.",
+    "Resource extraction covers built-in filesystem/network acquisition and exact local close/destroy/end handles.",
+    "Semantic unknown retention reached an effective capacity. Omission coverage counts examined emission occurrences by family and reason, including repeats; it does not count unexamined source frontiers or distinct discarded identities.",
+    "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+    "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+    "The semantic graph contains static syntax observations and conservative relationship candidates; it does not claim runtime execution.",
+    "Timer extraction covers global or node:timers scheduling and exact local-handle cancellation.",
+    "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+  ],
+  "complete_bundle": "deploy-work/boc-404-rea-20261019/rea-evidence.json",
+  "renderer_module_evidence": "ev_b7ae6e17b9ff979aea5056caacbbc72fa0e0e782cac89962e19da221d8eaeee6"
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "command": [
+      "pnpm",
+      "lint:dialogs",
+      "--report",
+      "/review/inventory.json"
+    ],
+    "exit_code": 0,
+    "log": "policy.log"
+  },
+  {
+    "command": [
+      "pnpm",
+      "exec",
+      "node",
+      "--test",
+      "script/check-isbf-dialogs.test.mjs"
+    ],
+    "exit_code": 0,
+    "log": "policy-tests.log"
+  }
+]

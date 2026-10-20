@@ -1,0 +1,16 @@
+{
+  "theme_only": true,
+  "theme_id": 4,
+  "source_version": "43461f2438335eaa2828528cd243fba391602746a76f1176ece9ee99e9fc0955",
+  "sources": [
+    {
+      "relative": "common/common.scss",
+      "field_id": 197,
+      "before_sha256": "fc808956c91ad23b8921ba432415486b9e4265ca4469947958fe91975b319058",
+      "sha256": "a159206d0e6a47234e0116bdd43fda0c5cb7205645b31ae035e5bd7f17452a35",
+      "workspace_matches": false
+    }
+  ],
+  "plugins": 66,
+  "base_image_reference": "local_discourse/isbf_app:dialog-consistency-20261020-5109370e6bf4"
+}

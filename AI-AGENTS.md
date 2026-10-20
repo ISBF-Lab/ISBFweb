@@ -36,6 +36,14 @@ Discourse is large with long history. Understand context before changes.
 - Keep this rollout's worktree and snapshots in persistent storage and follow [its resource policy](docs/design-system/resource-policy.md): serialize work, use one capped browser tool, and keep the full preview forum stopped on this shared host. Do not use production as a test backend.
 - Set memory limits for each new tool or deployment process from the server's current sustainable capacity, accounting for current usage, effective cgroup limits, and service headroom. Reassess before each run; historical fixed GiB limits are not current limits. Follow the resource policy for monitoring and stop conditions.
 
+
+### Dialog Consistency
+
+- Follow [the foreground dialog contract](docs/design-system/dialogs.md): use DModal, the dialog service, DButton, and FormKit. The theme supplies the shared frame and text-action appearance automatically.
+- Keep dialog chrome in the shared theme stylesheet. Preserve task widths through documented layout variants; do not add private frame/button radii, mobile edge overrides, or inline modal styles.
+- Run `pnpm lint:dialogs` when adding or changing dialog templates or styles. Reviewed exceptions require a reason, design reference, and verification entry in `docs/design-system/dialog-exceptions.json`.
+- Admin, popup cards, image viewers, editor surfaces, mobile menus, and the accepted standalone recruitment page retain their own presentation. DModal usage alone does not make a mobile menu a task dialog.
+
 ### Comments & Types
 - Prefer self-documenting code. Comments should only be added when future misunderstanding is likely. They should be terse, and should describe 'why', not 'what'. They should not be used to describe history.
 - In the frontend, typescript is typically used for platform-level code, javascript for business-logic

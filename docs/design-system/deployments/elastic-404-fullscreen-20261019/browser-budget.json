@@ -1,0 +1,11 @@
+{
+  "host_available_bytes": 1111490560,
+  "effective_available_bytes": 1111490560,
+  "memory_limit_bytes": 536870912,
+  "reserve_bytes": 536870912,
+  "waited_for_capacity_seconds": 0.0,
+  "rendering_mode": "WebGL disabled and reduced motion; real application fallback",
+  "peak_bytes": 536870912,
+  "lowest_host_available_bytes": 929271808,
+  "stop_reason": null
+}

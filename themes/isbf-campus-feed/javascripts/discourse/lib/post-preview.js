@@ -1,5 +1,14 @@
 const PUBLIC_ACTION_TYPES = new Set([1, 2, 4, 5, 6, 7, 9, 11, 17]);
 
+export function hasPostPreviewTarget({ postId, topicId, postNumber }) {
+  const positiveInteger = (value) =>
+    Number.isSafeInteger(Number(value)) && Number(value) > 0;
+  return (
+    positiveInteger(postId) ||
+    (positiveInteger(topicId) && positiveInteger(postNumber))
+  );
+}
+
 export function isActivityPreview(item, path) {
   const pathname = (path ?? "").split(/[?#]/)[0];
   return (
@@ -7,7 +16,11 @@ export function isActivityPreview(item, path) {
     !/\/(?:drafts|bookmarks|pending|messages|notifications)(?:\/|$)/.test(
       pathname
     ) &&
-    Number(item?.post_id) > 0 &&
+    hasPostPreviewTarget({
+      postId: item?.post_id,
+      topicId: item?.topic_id,
+      postNumber: item?.post_number,
+    }) &&
     PUBLIC_ACTION_TYPES.has(Number(item?.action_type)) &&
     (!item.post_type || Number(item.post_type) === 1) &&
     !item.draft_key

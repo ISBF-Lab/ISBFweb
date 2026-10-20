@@ -1,0 +1,25 @@
+{
+  "passed": false,
+  "views": [
+    {
+      "viewport": "mobile",
+      "checks": [
+        "direct navigation preserves HTTP404",
+        "the standalone error page loads the configured brand",
+        "the page occupies the entire viewport",
+        "the decorative canvas fills the available viewport width",
+        "canvas uses the active site accent",
+        "dragging zero discovers the button without starting a game"
+      ],
+      "failure_message": "a started round has no pause or resume state"
+    }
+  ],
+  "javascript_errors": [],
+  "console_errors": [],
+  "failed_assets": [],
+  "blocked_writes": 0,
+  "blocked_preference_writes": 0,
+  "production_content_submitted": false,
+  "account_preferences_changed": false,
+  "rendering_mode": "WebGL disabled and reduced motion for live resource budget; actual WebGL pixels verified offline"
+}

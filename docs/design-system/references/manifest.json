@@ -1955,7 +1955,7 @@
       "published_at_utc": "2026-10-14T23:40:10Z",
       "deployment_image_tag": "local_discourse/isbf_app:join-20261015",
       "deployment_image_id": "sha256:38308d121da3faee01d9c99fcdbdabcc40da13e0271361dd38c688bb85e84a24",
-      "current_release_source_sha256": "78709c643308a2258725b63a34a95ed85c3fefc47f0500d31fa9b682c7b2afa8",
+      "current_release_source_sha256": "27bec5c18ad7c823ea0909a589fe1a17c6c96b574f1cbb2533cf2db1e24162e3",
       "subsequent_releases": [
         {
           "kind": "texture_and_installed_app_navigation_fix",
@@ -1970,6 +1970,13 @@
           "source_archive_sha256": "7d9a31021cfcf2e0dc1fdf25f4338595d064ee8f6626b736e9f2316849304a64",
           "deployment_record": "../deployments/join-gallery-20261015/README.md",
           "published_at_utc": "2026-10-15T04:45:45.622511+00:00",
+          "visual_acceptance": "User"
+        },
+        {
+          "kind": "opening_shoe_camera_clipping_fix",
+          "source_sha256": "27bec5c18ad7c823ea0909a589fe1a17c6c96b574f1cbb2533cf2db1e24162e3",
+          "deployment_record": "../deployments/join-camera-20261019/README.md",
+          "published_at_utc": "2026-10-19T09:34:08.660826+00:00",
           "visual_acceptance": "User"
         }
       ]
@@ -2090,6 +2097,126 @@
       "source_version": "b1dab68ab8ea60e731378ce42380a3e23aa72fd9cd23698b835347247859892a",
       "verified_image": "local_discourse/isbf_app:notifications-layout-20261018-b1dab68ab8ea",
       "final_visual_acceptance": "No broader UI region promoted by technical verification"
+    },
+    {
+      "id": "notifications-menu-memory-20261019",
+      "change_date": "2026-10-19",
+      "status": "design_confirmed_final_visual_pending",
+      "scope": "A05/C06/C18/C19 notification menu content width and account-persisted unread filter",
+      "evidence": "../reviews/notifications-menu-memory-20261019/README.md",
+      "source_manifest": "../reviews/notifications-menu-memory-20261019/source-manifest.json",
+      "source_version": "01242893e94754ad6ac27c90cc5689e9db260da417a44c9dae76730ab023e6b6",
+      "excluded": [
+        "notification delivery",
+        "other menus",
+        "production deployment"
+      ]
+    },
+    {
+      "id": "notifications-menu-memory-deployed-20261019",
+      "change_date": "2026-10-19",
+      "status": "published_user_authorized",
+      "scope": "A05/C06/C18/C19 content-width notification menu and account-persisted unread filter",
+      "related_review": "notifications-menu-memory-20261019",
+      "evidence": "../deployments/notifications-menu-memory-20261019/README.md",
+      "source_manifest": "../deployments/notifications-menu-memory-20261019/source-manifest.json",
+      "source_version": "2b714d7f1091b87bd448dfcb9ce3f084781b3d2bf5f8c1d5f2115f47c4790f0e",
+      "verified_image": "local_discourse/isbf_app:notifications-menu-memory-20261019-2b714d7f1091",
+      "final_visual_acceptance": "Pending user review; technical verification does not expand other UI scopes"
+    },
+    {
+      "id": "profile-previews-20261019",
+      "change_date": "2026-10-19",
+      "status": "user_confirmed_implementation",
+      "scope": "A12/C12 historical public activity target fallback and user-confirmed compact summary body text",
+      "evidence": "../reviews/profile-previews-20261019/README.md",
+      "source_manifest": "../reviews/profile-previews-20261019/source-manifest.json",
+      "source_version": "f2c65be4f093bbd14f5f4e413551f42178c3c5600f849cf268bafbf2883e9fb6",
+      "final_visual_acceptance": "User confirmed the affected activity and summary previews; no other UI regions accepted"
+    },
+    {
+      "id": "profile-previews-deployed-20261019",
+      "change_date": "2026-10-19",
+      "status": "published_user_accepted_affected_region",
+      "scope": "A12/C12 historical public activity fallback and compact personal summary body previews",
+      "evidence": "../deployments/profile-previews-20261019/README.md",
+      "source_manifest": "../deployments/profile-previews-20261019/source-manifest.json",
+      "source_version": "2900e9585452c7d693917a4e98996c9a64e85a44afc4315f4d0072385a9c3917",
+      "verified_image": "local_discourse/isbf_app:profile-previews-20261019-2900e9585452",
+      "final_visual_acceptance": "User confirmed the affected two pages; other UI regions unchanged",
+      "automated_online_browser_completed": false
+    },
+    {
+      "id": "elastic-404-20261019",
+      "source_version": "6fcd94a055a857c87a3fb37aebaaaf2308629ad6624c742ee5168401c184b174",
+      "approval_scope": "C20普通404局部设计确认，不扩大其他错误态",
+      "source_manifest": "../reviews/elastic-404-20261019/source-manifest.json",
+      "source_manifest_sha256": "ffa192f3ebbc09e9e81c3265c56cae3a7233f883490d4c0055c6795eeb55c3de",
+      "evidence": "../reviews/elastic-404-20261019/README.md",
+      "visual_acceptance": "pending_user_review"
+    },
+    {
+      "id": "elastic-404-fullscreen-20261019",
+      "source_version": "fa5783f6e305267a08c186429c1d3dbba8d82d646a06abe550bb8476ded2142a",
+      "approval_scope": "C20当前404交付：全屏、本站配色、二维局部弹性、渐加速且无暂停的计时游戏与本地最佳记录；不扩展至其他错误页或整站回归",
+      "source_manifest": "../reviews/elastic-404-fullscreen-20261019/source-manifest.json",
+      "source_manifest_sha256": "0fe93e67cf6df1dd0f85eb3189258f3058cb241741cf51322b6035989fbbf141",
+      "evidence": "../reviews/elastic-404-fullscreen-20261019/README.md",
+      "reference_analysis": "../reviews/elastic-404-fullscreen-20261019/reference-analysis.json",
+      "visual_acceptance": "accepted_by_user",
+      "user_acceptance": "../deployments/elastic-404-fullscreen-20261019/user-acceptance.json",
+      "deployment": "../deployments/elastic-404-fullscreen-20261019/README.md",
+      "saved_image": "local_discourse/isbf_app:elastic-404-fullscreen-20261019-fa5783f6e305",
+      "status": "published_user_accepted_affected_region"
+    },
+    {
+      "id": "auth-username-hint-20261019",
+      "status": "Published; final visual verification pending",
+      "scope": "A13/C08 registration username reminder only",
+      "reference": "../reviews/auth-username-hint-20261019/source-manifest.json",
+      "text": "用户名填写后不可更改",
+      "color": "var(--tertiary)",
+      "acceptance": "User approved implementation and specified theme blue; no other authentication regions reclassified",
+      "deployment": "../deployments/auth-username-hint-20261019/manifest.json",
+      "source_version": "9e77b7072c01e3f70398a199489f48f825f44002a411cfbe5b0466a872673eac"
+    },
+    {
+      "id": "continue-reading-previews-20261020",
+      "change_date": "2026-10-20",
+      "status": "published_final_visual_acceptance_pending",
+      "scope": "C17 untitled suggested and related topic body text; existing layout and reading targets retained",
+      "evidence": "../reviews/continue-reading-previews-20261020/README.md",
+      "deployment": "../deployments/continue-reading-previews-20261020/README.md",
+      "source_manifest": "../deployments/continue-reading-previews-20261020/source-manifest.json",
+      "source_version": "5db32d52dcd99e50fb64dada7e66358e79b4bfd58443a59c8a7bdefb1c5d58af",
+      "theme_only": true,
+      "production_desktop_mobile_verified": true
+    },
+    {
+      "date": "2026-10-20",
+      "kind": "foreground_dialog_chrome_design_acceptance",
+      "reference": "../reviews/dialog-consistency-20261020/reference.png",
+      "reference_sha256": "4e52d0b15b8c74afa80f4565fcf958aa0f1edddffb80c5e9cc8a4368a48b8ecc",
+      "review": "../reviews/dialog-consistency-20261020/README.md",
+      "contract": "../dialogs.md",
+      "exceptions": "../dialog-exceptions.json",
+      "confirmed_scope": "Foreground task dialogs and confirmations: frame, text actions and mobile gutters",
+      "excluded": [
+        "admin",
+        "menus",
+        "popup cards",
+        "image viewers",
+        "editor surfaces",
+        "standalone authentication panels",
+        "standalone recruitment page"
+      ],
+      "implementation_status": "Published; desktop/mobile technical verification passed; final visual acceptance pending",
+      "source_manifest": "../reviews/dialog-consistency-20261020/source-manifest.json",
+      "production_deployed": true,
+      "deployment": "../deployments/dialog-consistency-20261020/README.md",
+      "deployed_source_manifest": "../deployments/dialog-consistency-20261020/source-manifest.json",
+      "deployed_source_version": "5109370e6bf46175d9d15788dd0b5830a541cb3bee0df3e61746cf734d42adf3",
+      "recovery_image": "local_discourse/isbf_app:dialog-consistency-20261020-5109370e6bf4"
     }
   ]
 }

@@ -1,0 +1,13 @@
+{
+  "label": "lint",
+  "available_before_bytes": 1632342016,
+  "memory_limit_bytes": 805306368,
+  "reserve_bytes": 536870912,
+  "lowest_available_bytes": 1332289536,
+  "peak_bytes": 598913024,
+  "exit_code": 0,
+  "stopped_reason": null,
+  "network": "none",
+  "container_removed": true,
+  "elapsed_seconds": 72.6
+}

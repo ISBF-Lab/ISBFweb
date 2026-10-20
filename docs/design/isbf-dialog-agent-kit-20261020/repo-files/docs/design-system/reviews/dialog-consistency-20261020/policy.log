@@ -1,0 +1,5 @@
+
+> @ lint:dialogs /workspace
+> node script/check-isbf-dialogs.mjs --report /review/inventory.json
+
+Dialog policy: 174 source candidates, 0 violations

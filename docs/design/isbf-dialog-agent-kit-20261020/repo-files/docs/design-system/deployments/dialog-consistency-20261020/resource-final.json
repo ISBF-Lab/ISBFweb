@@ -1,0 +1,23 @@
+{
+  "source_snapshots_verified": 14,
+  "recovery_image_id_verified": true,
+  "temporary_credentials_removed": true,
+  "containers": [
+    {
+      "name": "isbf_dialog_consistency_release_20261020",
+      "state": "absent"
+    },
+    {
+      "name": "isbf_dialog_consistency_live_check_20261020",
+      "state": "absent"
+    },
+    {
+      "name": "isbf_dialogs_config_20261020",
+      "state": "absent"
+    },
+    {
+      "name": "isbf_frontend_preview_20261012",
+      "state": "exited"
+    }
+  ]
+}

@@ -1,0 +1,591 @@
+---
+en:
+  theme_metadata:
+    description: ISBF campus community theme built on Discourse's native topic feed.
+    settings:
+      brand_show_logo: Show the logo from the native logo settings for the current
+        layout and color mode.
+      brand_show_name: Show the platform name, with or without its logo. Turning both
+        switches off hides the brand area.
+  isbf_v2:
+    continue_reading:
+      title: Keep reading
+      suggested: New & unread
+      related: Related topics
+      sources: More topic sources
+      browse: Browse more topics
+      browse_all: Browse all →
+      browse_category: Browse all topics in %{category}
+      all_categories: All categories
+      replies:
+        one: "%{count} reply"
+        other: "%{count} replies"
+      remaining_new:
+        one: "%{count} new topic remaining"
+        other: "%{count} new topics remaining"
+      remaining_unread:
+        one: "%{count} unread topic"
+        other: "%{count} unread topics"
+    reply_conversations:
+      progress: "%{current} / %{total}"
+      reply_to: 'Replying to %{name} · #%{number}'
+      original_post: Original post
+      go_to_original: Go to original
+      context_loaded: Original reply loaded
+      context_unavailable: This reply is unavailable or could not be loaded.
+    poll_button: Poll
+    poll_button_title: Create poll
+    solved_accept: Accept answer
+    solved_unaccept: Unaccept answer
+    solved_accepted: Accepted
+    solved_view_answer: Accepted · View answer
+    solved_accepted_by: Accepted by %{username}
+    library_directory_error: Could not save this directory. Check the name and permissions
+      and try again.
+    library_delete_confirm: Delete this resource?
+    library_category: Category
+    library_groups: Groups
+    library_add_category: Add category
+    library_request_category: Request category
+    library_add_group: Add group
+    library_request_group: Request group
+    library_search: Search all library resources
+    library_select_group: Select a group
+    library_unavailable: Library is unavailable.
+    library_no_groups: No groups in this category. Add or request a group first.
+    library_directory_pending: Directory request submitted for review
+    library_directory_name: Name
+    library_search_hint: Search covers all library categories and groups. Clear search
+      to return to the selected group.
+    library_empty: No resources yet
+    library_login_required: Log in to view and share library resources.
+    learning_request_course: Request a course
+    learning_submit_request: Submit request
+    learning_course_pending: Course request submitted and awaiting review
+    learning_resource_description: Brief introduction (optional)
+    learning_description_hint: Up to 300 characters
+    learning_grade_1: Year 1
+    learning_grade_2: Year 2
+    learning_grade_3: Year 3
+    learning_grade_4: Year 4
+    learning_grade: Year
+    learning_back: Back to workbench
+    learning_search: Search all course resources
+    learning_search_results: Search results
+    learning_search_hint: Search covers all years and courses. Clear search to return
+      to your selected course.
+    learning_select_course: Select a course
+    learning_no_courses: No courses in this year yet
+    learning_apply_share: Apply to share resources
+    learning_resource_contributor: Contributor
+    learning_contributor_hint: Up to 15 characters; leave blank to use your display
+      name
+    learning_unknown_contributor: Unknown
+    learning_contributor_credit: 'Contributor: '
+    learning_edit: Edit resource
+    learning_save_changes: Save changes
+    learning_edit_error: Could not update the resource. Check the fields and try again.
+    learning_edit_load_error: Could not load the resource. Try again.
+    learning_edit_unavailable: This resource cannot currently be edited. Close this
+      dialog and refresh the list.
+    learning_retry: Retry
+    learning_edit_contributor_hint: Up to 15 characters; leave blank to use the original
+      contributor’s display name
+    learning_delete: Delete
+    learning_delete_confirm: Delete this course resource?
+    learning_delete_error: Could not delete the resource. Please retry.
+    learning_share: Share resources
+    learning_resource_title: Title
+    learning_resource_link: Link
+    learning_share_error: Could not share the resource. Check the title and link,
+      then retry.
+    learning_share_pending: Application submitted, awaiting administrator review
+    learning_share_unavailable: Resource sharing is temporarily unavailable. Please
+      try again later.
+    learning_files: Attachments
+    learning_links: Related links
+    learning_loading: Loading…
+    learning_load_error: Could not load. Please retry.
+    learning_empty: No course resources yet
+    learning_unavailable: Course resources are not available yet.
+    learning_login_required: Sign in to view and share course resources.
+    learning_add_course: Add course
+    learning_course_name: Course name
+    learning_course_save_error: Could not save the course. Check its name and your
+      permissions, then retry.
+    learning_save: Save
+    official_campus: Campus
+    official_type: Type
+    official_inactive: 'Inactive: %{label}'
+    official_classification_stale: Official classifications have changed. Remove unavailable
+      selections and select again. Your draft has been kept.
+    official_refresh_error: Could not refresh official classifications. Your draft
+      has been kept. Please retry.
+    official_tags: Tags
+    official_all_campuses: All campuses
+    official_all_types: All types
+    official_loading: Loading official posts…
+    official_load_error: Could not load official posts. Please retry.
+    official_empty: No official posts match these filters.
+    official_retry: Retry
+    schedule_activity_start_line: 'Start: %{date}'
+    schedule_activity_end_line: 'End: %{date}'
+    schedule_activity_day_value: "%{date} · All day"
+    official_campus_optional: Campus (optional)
+    official_campus_separator: ", "
+    official_required: Choose at least one official type.
+    official_selection_hint: Official posts require at least one type. Campus is optional.
+      Multiple selections are allowed.
+    sidebar_more: More
+    sidebar_settings: Settings
+    appearance: Appearance
+    appearance_light: Light
+    appearance_dark: Dark
+    appearance_auto: System
+    appearance_unavailable: Appearance switching is currently unavailable.
+    feedback: Feedback
+    feedback_prompt: Share a question or suggestion
+    feedback_unavailable: Feedback is currently unavailable. Please try again later.
+    join_us: Join us
+    join_us_pending: Recruitment information is being prepared
+    severe_report: Severe violation
+    severe_description: Report a severe violation. The post will be hidden immediately
+      and sent to moderators for review.
+    severe_reason: Reason
+    severe_hint: Enter 10–2000 characters explaining the violation.
+    severe_confirm: Submitting will hide this post immediately. Please confirm.
+    severe_submit: Submit and hide post
+    severe_back: Back
+    severe_failed: Could not submit the report. Please retry.
+    report_hidden: This post is hidden pending review.
+    explore_categories: Categories
+    explore_tags: Tags
+    explore_selected_count: "%{label} · %{count}"
+    explore_search_categories: Search categories
+    explore_search_tags: Search tags
+    explore_clear: Clear
+    explore_no_options: No matches
+    explore_create_category: New category
+    explore_hot: Popular
+    explore_new_topic: New topic
+    explore_create_restricted: You cannot create topics in the selected category
+    explore_loading: Loading…
+    explore_restore_error: Could not restore filters. Please retry.
+    explore_filter_unavailable: The explore filter plugin needs updating. Refresh
+      the page or contact a developer.
+    explore_save_error: Could not save filters. Please retry.
+    explore_search_error: Search failed. Please retry.
+    explore_retry: Retry
+    explore_saving: Saving…
+    explore_saved: Saved
+    explore_guest_preferences: Sign in to remember your filters
+    explore_all_topics: All posts
+    explore_matching_tags: Posts matching tags
+    explore_load_error: Could not load posts. Please retry.
+    explore_empty: No matching posts
+    explore_expand: Expand post list
+    explore_collapse: Collapse
+    explore_load_more: Load more
+    explore_end: All posts shown
+    anonymous_post: Post anonymously
+    anonymous_post_hint: After publishing, you cannot edit or delete this post.
+    my_anonymous_posts: My anonymous posts
+    anonymous_posts_empty: You have not posted anonymously yet.
+    anonymous_posts_load_error: Could not load anonymous posts.
+    load_more: Load more
+    home: Home
+    explore: Explore
+    notifications: Notifications
+    bookmarks: Bookmarks
+    profile: Profile
+    account_actions: Account actions
+    switch_account: Switch account
+    link_account: Link another account
+    account_username: Target account username
+    account_username_placeholder: Enter a username
+    send_link_request: Send link request
+    account_link_pending: Awaiting developer approval
+    verify_device: Verify this device
+    switch_now: Switch
+    target_password: Target account password
+    device_verification_method: Device verification method
+    password_verification: Password
+    email_code_verification: Email code
+    target_email_code: Target account email code
+    send_email_code: Send code
+    resend_email_code: Resend code
+    email_code_sent: A code was sent to the target account's email. It is valid for
+      %{minutes} minutes.
+    authenticator_code_help: Get the current code from the authenticator app linked
+      to the target account. This is separate from the email code.
+    backup_code_help: Enter a single-use backup code saved from the target account's
+      Preferences → Security.
+    second_factor_code: Target account two-factor code
+    second_factor_method: Verification method
+    authenticator_code: Authenticator code
+    backup_code: Backup code
+    verify_and_switch: Verify and switch
+    account_action_failed: The account action failed. Please try again.
+    logout: Log out
+    logout_confirm: Log out of @%{username}?
+    logout_failed: Could not log out. Please try again.
+    compose: Post
+    review: Review
+    quick_post: New post
+    compose_prompt: What's happening on campus?
+    compose_cancel: Cancel
+    optional_title: Title (optional)
+    compose_options: Post options
+    reply: Reply
+    repost: Quote repost
+    like: Like
+    bookmark_action: Bookmark
+    views: Views
+    views_count: "%{count} views"
+    report: Report
+    more_actions: More actions
+    show_more: Show more
+    show_less: Show less
+    view_post: View post
+    preview_open: View update
+    preview_image: View image
+    action_failed: The action failed. Please try again.
+    latest: Latest
+    official: Official
+    search: Search
+    search_placeholder: Search ISBF
+    rail_label: Community links
+    recent: Recent discussions
+    view_all: View all topics
+    hot: Popular topics
+    top: Top topics
+    categories: Browse categories
+    navigation_label: Main navigation
+    feed_label: Feed filters
+    quick_label: Quick navigation
+    topic: Post
+    reading_progress: Reading progress
+    back_home: Back to home
+    workbench: Workbench
+    workbench_pending: Coming soon
+    workbench_intro: The tools you use for campus life will gradually come together
+      here.
+    workbench_modules: Future services
+    workbench_learning_resources: Course resources
+    workbench_courses: Courses
+    workbench_careers: Jobs and internships
+    workbench_resume: Resume tools
+    workbench_campus_services: Campus services
+    workbench_student_identity: Student verification
+    workbench_library: Resource library
+    workbench_alumni: Alumni network
+    calendar: Calendar
+    calendar_filter_label: Filter calendar contents
+    calendar_all: All
+    calendar_personal: Personal schedule
+    calendar_community: Community events
+    calendar_add_personal: Add schedule
+    calendar_publish_event: Publish event
+    calendar_today: Today
+    calendar_previous: Previous month
+    calendar_next: Next month
+    calendar_selected: Selected day
+    calendar_all_day: All day
+    calendar_loading: Loading calendar…
+    calendar_load_error: Some calendar items could not be loaded. Please try again.
+    calendar_empty: Nothing planned for this day
+    calendar_title: Title
+    calendar_start: Start
+    calendar_end: End
+    calendar_note: Note
+    calendar_edit: Edit
+    calendar_delete: Delete
+    calendar_delete_confirm: Delete this personal schedule entry?
+    calendar_close: Close
+    calendar_cancel: Cancel
+    calendar_save: Save
+    calendar_save_error: Check the title and times, then try again.
+    week_mon: Mon
+    week_tue: Tue
+    week_wed: Wed
+    week_thu: Thu
+    week_fri: Fri
+    week_sat: Sat
+    week_sun: Sun
+    notifications_menu: Notification actions
+    notifications_mark_read: Mark all as read
+    notifications_settings: Notification settings
+    notifications_tabs: Notification filters
+    notifications_all: All
+    notifications_mentions: Mentions
+    notifications_loading: Loading notifications…
+    notifications_error: Could not load notifications. Please try again.
+    notifications_retry: Retry
+    notifications_empty: No notifications yet.
+    notifications_unread_empty: You have no unread notifications.
+    notifications_unread_only: Only unread
+    notifications_filter_error: "Could not save the notification filter. Please retry."
+    notifications_badge_style: Badge display
+    notifications_badge_number: Numbers
+    notifications_badge_dot: Dot
+    notifications_badge_error: Could not save the badge display. Please retry.
+    notifications_badge_count:
+      one: Notifications, %{count} unread notification
+      other: Notifications, %{count} unread notifications
+    notifications_badge_many: Notifications, more than 99 unread notifications
+    notification_liked: Liked
+    notification_reaction: Reacted
+    notification_replied: Replied
+    notification_mentioned: Mentioned you
+    notification_group_mentioned: Mentioned your group
+    notification_activity: Activity
+    notification_action_count: "%{action} · %{count}"
+    notifications_unread: Unread notification
+    topic_info: Topic information and notifications
+    topic_edit_title: Edit title, category and tags
+    schedule_editor_title: Activity times and deadlines
+    schedule_timezone_hint: Enter all dates and times in Beijing time (Asia/Shanghai).
+    schedule_post_title: Title (required)
+    schedule_title_required: Official posts with time items require a post title.
+    schedule_save_error: Could not save time items. Please try again.
+    schedule_name: Name
+    schedule_type: Type
+    schedule_event: Activity
+    schedule_deadline: Deadline
+    schedule_date_only: Date only
+    schedule_due: Due date or time
+    schedule_start: Activity start time
+    schedule_end_optional: Activity end time
+    schedule_date_placeholder: Year/Month/Day
+    schedule_remove_item: Remove time item
+    schedule_add_item: Add time item
+    schedule_save_items: Save time items
+    schedule_invalid_time: Check the dates and times. An end cannot be before its
+      start.
+    schedule_item_count: Times and deadlines · %{count}
+    schedule_add: Add to my calendar
+    schedule_add_event: Add event to calendar
+    schedule_add_deadline: Add registration deadline to calendar
+    schedule_added: Added
+    schedule_add_error: Could not add this item. Its information may have changed;
+      check the times and try again.
+    schedule_deadline_day: Due %{date} · Date only · Beijing time
+    schedule_deadline_time: Due %{date} · Beijing time
+    schedule_event_day: "%{date} · All day · Beijing time"
+    schedule_event_time: "%{date} · Beijing time"
+    schedule_event_range: "%{start} – %{end} · Beijing time"
+    schedule_imported: From an official announcement
+    schedule_source: View announcement
+    schedule_unavailable: The source announcement is currently unavailable.
+    schedule_changed: Changed
+    schedule_cancelled: Cancelled
+    schedule_cancelled_hint: The official time item has been cancelled or removed.
+      Your calendar record and note remain until you remove them.
+    schedule_pending_count: Changes to confirm · %{count}
+    schedule_pending_hint: Includes changes outside this month. Your saved times stay
+      the same until you confirm an update.
+    schedule_updates_error: Could not load changes to confirm. Please try again.
+    schedule_review: Review change
+    schedule_current: Saved in your calendar
+    schedule_latest: Latest official information
+    schedule_accept: Update my calendar
+    schedule_keep: Keep saved information
+    schedule_version_changed: The official information changed again. Review the refreshed
+      information before confirming.
+    schedule_update_error: Could not confirm this change. Please try again.
+    schedule_edit_note: Edit private note
+    schedule_note_error: Could not save your note. Please try again.
+    schedule_activity_time: Activity time
+    schedule_registration_deadline: Registration deadline
+    schedule_has_registration_deadline: Set a registration deadline
+    schedule_registration_date_only: Registration deadline is date only
+    schedule_registration_name: Registration deadline for %{name}
+    schedule_standalone_deadline: Standalone deadline
+    schedule_location: Location
+    schedule_organizer: Organizer
+    schedule_none: None
+    schedule_not_provided: Not provided
+    schedule_too_many_items: You can add up to %{max} time items. Activities and their
+      registration deadlines count separately.
+    alumni_return_china: Return to China
+    alumni_my_profile: My alumni profile
+    alumni_country: Country
+    alumni_region: Province / state
+    alumni_city: City
+    alumni_all: All areas
+    alumni_directory: Alumni directory
+    alumni_name: Display name
+    alumni_industry: Industry
+    alumni_select: Select an area
+    alumni_city_optional: Leave city unspecified
+    alumni_visible: Show in the alumni directory
+    alumni_load_error: Could not load alumni. Please retry.
+    alumni_save_error: Could not read or save your profile. Please retry.
+    alumni_empty: No public alumni profiles in this area.
+    alumni_unavailable: Alumni network is unavailable.
+    alumni_login: Log in to browse the alumni network.
+    alumni_map: Alumni region map. Pan and zoom, or use the region menus above.
+    alumni_map_error: Could not load the map. Region menus remain available.
+    workbench_marketplace: Marketplace
+    marketplace_back: Back to workbench
+    marketplace_unavailable: Marketplace is not available yet.
+    marketplace_error: Could not load products. Please retry.
+    marketplace_empty: No products yet.
+    marketplace_login: Log in to browse the marketplace.
+    marketplace_publish: List a product
+    marketplace_price: Price (yuan)
+    marketplace_home: Also show on home
+    marketplace_composer_hint: Enter a product name and description. Images are optional;
+      attach, drag or paste them into the editor.
+    marketplace_validation: Enter a product name, description and a nonnegative price
+      with at most two decimal places.
+    marketplace_name: Product name
+    marketplace_description: Product description
+    image_retry: Retry
+    untitled_topic: Campus update
+    preview_picture: Picture
+    preview_post: View post
+    workbench_teamup: Team up
+    teamup_back: Back to workbench
+    teamup_error: Unable to load team-up posts. Please retry.
+    teamup_empty: No team-up posts yet.
+    teamup_publish: Publish team-up
+    teamup_login: Sign in to view and publish team-up posts.
+    teamup_unavailable: Team-up is unavailable.
+    teamup_validation: Please enter a title and description.
+    pin: Pin
+    pinned: Pinned
+    pin_update: Adjust pin duration
+    pin_cancel: Unpin
+    pin_until: Pin until
+    pin_save: Save pin
+    pin_error: Unable to save pin. Please try again.
+    pin_validation: Choose a future date and time.
+    schedule_activity_count: Activity time · %{count}
+    schedule_registration_count: Registration deadline · %{count}
+    schedule_related_event: Related activity
+    schedule_independent_deadline: Independent deadline
+    schedule_unnamed_event: Activity %{number}
+    schedule_invalid_item: Check the item name, date/time and related activity.
+    poll_type_regular: Single choice
+    poll_type_multiple: Multiple choice
+    poll_type_number: Number poll
+    poll_type_ranked_choice: Ranked choice
+    poll_participants: "%{count} participants"
+    poll_more_options: "%{count} more options"
+    poll_view: View poll
+    poll_closed: Closed
+    poll_results_unavailable: Results are unavailable. Open the topic to view the
+      poll.
+    calendar_subscribe_apple: Subscribe in Apple Calendar
+    calendar_subscription_name: My ISBF schedule
+    calendar_subscription_description: Subscribe to your saved personal entries, including
+      manual schedules, added official activities and registration deadlines. Covers
+      the past year and next two years.
+    calendar_subscription_refresh: Edit schedules on ISBF; your calendar app updates
+      them when it refreshes the read-only subscription. App changes are not written
+      back. Refresh timing is controlled by the provider. Official changes still require
+      your confirmation.
+    calendar_subscription_loading: Processing subscription…
+    calendar_subscription_unavailable: Calendar subscriptions are unavailable. Please
+      try again later.
+    calendar_subscription_private: 'Keep this link private: it grants read access
+      to your schedules and private notes. It is kept only while this page remains
+      open; old links cannot be retrieved after leaving. You can revoke it here or
+      in native calendar preferences.'
+    calendar_subscription_existing: You already generated calendar subscriptions.
+      The native system cannot show old links again. Regenerating invalidates all
+      existing bookmark and event subscription links; update them in your calendar
+      app.
+    calendar_subscription_replace: Regenerating invalidates all existing native calendar
+      subscription links for this account, including bookmarks and events. Continue?
+    calendar_subscription_generate: Generate private subscription link
+    calendar_subscription_regenerate: Regenerate subscription links
+    calendar_subscription_copy: Copy subscription link
+    calendar_subscription_copied: Copied
+    calendar_subscription_revoke: Revoke all calendar subscription links
+    calendar_subscription_revoke_confirm: This revokes all native calendar subscription
+      links for this account, including bookmarks and events. Your ISBF schedules
+      will remain. Continue?
+    calendar_subscription_error: The operation failed. Please retry. Your saved schedules
+      are unchanged.
+    calendar_subscribe: Subscribe
+    calendar_subscription_apple: Apple
+    calendar_subscription_apple_guide: Generate a link, then choose Subscribe in Apple
+      Calendar and confirm in the app. You can also copy the link and add a new calendar
+      subscription manually.
+    calendar_subscription_apple_title: Subscribe in Apple Calendar
+    calendar_subscription_google: Google
+    calendar_subscription_google_guide: Generate and copy the link. In Google Calendar
+      on the web, select Other calendars → + → From URL, paste the link and add the
+      calendar. Subscribe from a URL so future changes can refresh; importing a file
+      only copies events once.
+    calendar_subscription_google_title: Subscribe in Google Calendar
+    calendar_subscription_link: Link
+    calendar_subscription_link_guide: Generate and copy the HTTPS link, then paste
+      it into your calendar app's Subscribe from URL or New calendar subscription
+      option. If copying fails, select and copy the link below manually. Importing
+      an ICS file only copies events once.
+    calendar_subscription_link_title: Calendar subscription link
+    calendar_subscription_open_google: Open Google Calendar
+    calendar_subscription_open_outlook_personal: Open Outlook (personal)
+    calendar_subscription_open_outlook_work: Open Outlook (work or school)
+    calendar_subscription_outlook: Outlook
+    calendar_subscription_outlook_guide: Generate and copy the link. In Outlook on
+      the web, select Add calendar → Subscribe from web, paste the link and save.
+      Choose your personal or work/school account below. Subscribe from the web so
+      future changes can refresh; importing a file only copies events once.
+    calendar_subscription_outlook_title: Subscribe in Outlook
+    calendar_subscription_url_label: Private subscription link
+    careers_back: Back to workbench
+    careers_description: Describe the role, internship requirements, or your job search…
+    careers_empty: No careers or internship posts yet
+    careers_error: Could not load posts. Try again.
+    careers_home: Also publish to home
+    careers_login: Log in to view careers and internships
+    careers_name: Title
+    careers_publish: Create post
+    careers_salary: Salary and benefits (optional)
+    careers_unavailable: Careers and internships are unavailable
+    careers_validation: Enter a title and description. Salary and benefits must be
+      at most 120 characters and contain no control characters.
+    learning_my_contributions: My contributions
+    learning_all_resources: All resources
+    learning_contributions_empty: No published contributions yet.
+    learning_student_number: Student number (optional)
+    learning_student_hint: Search by student number and select a user to attribute
+      the resource to their contributions. Leave blank to use the uploading account.
+    learning_find_user: Find user
+    learning_no_user: No registered user matches this student number. Check it or
+      leave it blank.
+    learning_lookup_error: Could not find users. Please try again.
+    learning_selected_user: 'Linked to: %{user}'
+    learning_linked_user: Previously linked contributor
+    learning_user_option: "%{name} (@%{username})"
+    learning_course_option: "%{grade} · %{name}"
+    learning_edit_course: Edit course
+    learning_edit_course_named: Edit %{name}
+    learning_edit_grade: Edit parent category
+    learning_library_time: 'Added to library: %{time}'
+    learning_wps_collection: "[WPS form] You are invited to complete the ISBF-One
+      learning resource collection. Approved submissions will enter the ISBF-One resource
+      library."
+    learning_delete_course: Delete course
+    learning_delete_grade: Delete parent category
+    learning_delete_step_1: 'First confirmation: delete “%{name}”?'
+    learning_delete_step_2: 'Second confirmation: “%{name}” contains %{courses} courses
+      and %{resources} resources. Deleted content will be removed from Course resources
+      and My contributions.'
+    learning_delete_step_3: 'Third confirmation: “%{name}” and all its contents (%{courses}
+      courses and %{resources} resources) will be deleted.'
+    learning_delete_course_warning: Deleting this course will also delete all of its
+      resources. Please confirm.
+    learning_delete_grade_warning: Deleting this category will also delete all of
+      its courses and resources. Please confirm.
+    learning_confirm_delete: Confirm deletion
+    learning_delete_continue: Continue confirmation
+    learning_delete_back: Back
+    learning_directory_delete_error: Deletion failed. Content has been kept. Please
+      confirm again to retry.
+    learning_directory_delete_load_error: Could not load the content to delete. Please
+      retry.

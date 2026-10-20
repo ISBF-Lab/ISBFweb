@@ -1,0 +1,31 @@
+[
+  {
+    "suite": "qunit",
+    "command": [
+      "ruby",
+      "bin/qunit",
+      "--theme-name",
+      "ISBF Campus Feed",
+      "--qunit-path",
+      "/theme-qunit",
+      "--filter",
+      "/ISBF.*(Dialog consistency|ISBFV2Calendar|ISBFFrontendScope)/i"
+    ],
+    "exit_code": 1,
+    "full_preview_started": false,
+    "production_backend_used": false,
+    "log": "native-qunit.log"
+  },
+  {
+    "suite": "rspec",
+    "command": [
+      "ruby",
+      "bin/rspec",
+      "themes/isbf-campus-feed/spec/system/frontend_consistency_spec.rb"
+    ],
+    "exit_code": 1,
+    "full_preview_started": false,
+    "production_backend_used": false,
+    "log": "native-rspec.log"
+  }
+]

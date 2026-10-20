@@ -1,0 +1,12 @@
+{
+  "preserved_runtime_deltas": [
+    {
+      "plugin": "isbf-resume",
+      "base_link": "/shared/isbf-resume-releases/f0db4986b1b3bf2c363251e47eec7ee72923ffe6/isbf-resume",
+      "live_link": "/shared/isbf-resume-releases/24a63ae0ea2dab917a9502db8c257b404e29e722/isbf-resume"
+    },
+    {
+      "current_public_manifest_preserved": true
+    }
+  ]
+}

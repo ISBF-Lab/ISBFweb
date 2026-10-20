@@ -1,0 +1,16 @@
+{
+  "activated_at_utc": "2026-10-18T15:01:56Z",
+  "settings": {
+    "isbf_ai_moderation_enabled": true,
+    "isbf_ai_moderation_model": "1",
+    "isbf_ai_moderation_images_enabled": true,
+    "isbf_ai_moderation_exempt_groups": ""
+  },
+  "scope_categories": {
+    "academy_official_category": "6",
+    "isbf_learning_category_id": 7
+  },
+  "jobs_loaded": true,
+  "severe_protections_loaded": true,
+  "historical_scan_enqueued": false
+}

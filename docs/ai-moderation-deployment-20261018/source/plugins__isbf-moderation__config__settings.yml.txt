@@ -1,0 +1,18 @@
+plugins:
+  isbf_severe_reports_enabled:
+    default: true
+    client: true
+  isbf_ai_moderation_enabled:
+    default: false
+    validator: "IsbfModeration::AiSettingsValidator"
+  isbf_ai_moderation_model:
+    default: ""
+    type: enum
+    enum: "IsbfModeration::AiModelEnumerator"
+    validator: "IsbfModeration::AiSettingsValidator"
+  isbf_ai_moderation_images_enabled:
+    default: true
+    validator: "IsbfModeration::AiSettingsValidator"
+  isbf_ai_moderation_exempt_groups:
+    default: ""
+    type: group_list

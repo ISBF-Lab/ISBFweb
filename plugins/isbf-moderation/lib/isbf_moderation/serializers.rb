@@ -134,6 +134,13 @@ module IsbfModeration
   module ScoreSerializerProtection
     def reason
       return nil if isbf_restricted_score?
+      if details = AiReview.details(object)
+        label = CGI.escapeHTML(I18n.t("isbf_moderation.ai.label"))
+        rule = CGI.escapeHTML(I18n.t("isbf_moderation.ai.rules.#{details.fetch("rule")}"))
+        explanation = CGI.escapeHTML(details.fetch("reason"))
+        evidence = CGI.escapeHTML(details.fetch("evidence"))
+        return "<p>#{label}: #{rule} — #{explanation}</p><p>#{evidence}</p>#{super}"
+      end
       details = Audit.details(object)
       return super if details.blank?
 

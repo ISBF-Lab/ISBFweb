@@ -1,0 +1,174 @@
+{
+  "harness_sha256": "117bfdacf5c26d958426c43ebbe31a72f1c8682170a12fe08888623b5f7593e9",
+  "passed": true,
+  "full_ember_client": true,
+  "production_backend_used": false,
+  "checks": [
+    "1280px light: the approved palette is actually active",
+    "1280px light: summary stays inside the viewport",
+    "1280px light: summary retains the compact two-line rule",
+    "1280px light: activity thumbnails finish loading",
+    "1280px light: activity stays inside the viewport",
+    "1280px dark: the approved palette is actually active",
+    "1280px dark: summary stays inside the viewport",
+    "1280px dark: summary retains the compact two-line rule",
+    "1280px dark: activity thumbnails finish loading",
+    "1280px dark: activity stays inside the viewport",
+    "390px light: the approved palette is actually active",
+    "390px light: summary stays inside the viewport",
+    "390px light: summary retains the compact two-line rule",
+    "390px light: activity thumbnails finish loading",
+    "390px light: activity stays inside the viewport",
+    "390px dark: the approved palette is actually active",
+    "390px dark: summary stays inside the viewport",
+    "390px dark: summary retains the compact two-line rule",
+    "390px dark: activity thumbnails finish loading",
+    "390px dark: activity stays inside the viewport",
+    "the client loads the complete native theme without review module injection",
+    "both regions finish all palette and viewport checks without client exceptions"
+  ],
+  "layouts": [
+    {
+      "width": 1280,
+      "mode": "light",
+      "primary": "#17202a",
+      "secondary": "#ffffff"
+    },
+    {
+      "width": 1280,
+      "mode": "dark",
+      "primary": "#e7e9ea",
+      "secondary": "#101413"
+    },
+    {
+      "width": 390,
+      "mode": "light",
+      "primary": "#17202a",
+      "secondary": "#ffffff"
+    },
+    {
+      "width": 390,
+      "mode": "dark",
+      "primary": "#e7e9ea",
+      "secondary": "#101413"
+    }
+  ],
+  "errors": [],
+  "console_errors": [],
+  "missing_assets": [],
+  "api_requests": [
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    }
+  ],
+  "native_theme_responses": [
+    "/fixture/native-theme.js",
+    "/theme-javascripts/bae3c2073d26f434cdd33555957d70ad53111629.js"
+  ],
+  "native_core_entrypoint": "assets/js/discourse-dldn5i50.digested.js",
+  "native_theme_sha256": "bf42eafed898c224d9d3cdaf0f655a0a5d0e9c5f86045c23ad26202c94e65c8f",
+  "template_overrides": false,
+  "actual_palettes_verified": true,
+  "fixture_dialogs": [
+    "抱歉，出错了。"
+  ],
+  "activity_render_debug": [
+    {
+      "tag": "ARTICLE",
+      "class": "isbf-activity-preview",
+      "display": "block",
+      "visibility": "visible",
+      "width": 341.0625,
+      "height": 202.390625
+    },
+    {
+      "tag": "DIV",
+      "class": "post-list-item user-stream-item isbf-activity-item",
+      "display": "block",
+      "visibility": "visible",
+      "width": 358,
+      "height": 235.390625
+    },
+    {
+      "tag": "DIV",
+      "class": "post-list user-stream",
+      "display": "block",
+      "visibility": "visible",
+      "width": 358,
+      "height": 350.78125
+    },
+    {
+      "tag": "DIV",
+      "class": "",
+      "display": "block",
+      "visibility": "visible",
+      "width": 358,
+      "height": 351.78125
+    },
+    {
+      "tag": "SECTION",
+      "class": "user-content",
+      "display": "block",
+      "visibility": "visible",
+      "width": 390,
+      "height": 383.78125
+    },
+    {
+      "tag": "DIV",
+      "class": "new-user-content-wrapper",
+      "display": "block",
+      "visibility": "visible",
+      "width": 390,
+      "height": 454.875
+    },
+    {
+      "tag": "DIV",
+      "class": "new-user-wrapper",
+      "display": "block",
+      "visibility": "visible",
+      "width": 390,
+      "height": 495.03125
+    },
+    {
+      "tag": "SECTION",
+      "class": "user-main",
+      "display": "block",
+      "visibility": "visible",
+      "width": 390,
+      "height": 836.640625
+    }
+  ]
+}

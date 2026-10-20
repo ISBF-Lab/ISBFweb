@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "plugins": 66,
+  "startup_matches_production": true,
+  "source_and_assets_preserved": true,
+  "old_shared_path_bootsnap_entries_cleared": true,
+  "image_tag": "local_discourse/isbf_app:dialog-consistency-20261020-5109370e6bf4",
+  "image_id": "sha256:a76b5933e5758ba4767c4e6eb39174fa111b3d607952fc688e4169e0e0a47c5b"
+}

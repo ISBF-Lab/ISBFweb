@@ -1,0 +1,13 @@
+{
+  "containers": [
+    {
+      "name": "isbf_dialogs_review_20261020",
+      "state": "absent"
+    },
+    {
+      "name": "isbf_frontend_preview_20261012",
+      "state": "exited"
+    }
+  ],
+  "production_inspected_or_used": false
+}

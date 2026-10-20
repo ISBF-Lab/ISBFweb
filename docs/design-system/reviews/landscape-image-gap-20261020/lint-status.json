@@ -1,0 +1,15 @@
+{
+  "commands": [
+    {
+      "command": [
+        "ruby",
+        "bin/lint",
+        "--fix",
+        "themes/isbf-campus-feed/common/common.scss"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "exit_code": 0,
+  "serial": true
+}

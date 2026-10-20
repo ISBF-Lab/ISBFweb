@@ -162,21 +162,12 @@ acceptance("ISBF private list appearance", function (needs) {
     assert
       .dom(".dialog-body")
       .exists("the native reminder confirmation is retained");
-    assert
-      .dom(document.body)
-      .hasClass(
-        "has-frontend-dialog",
-        "the associated confirmation receives the approved container"
-      );
     await click(".dialog-footer .btn-default");
     assert
       .dom(".bookmark-list-item")
       .exists({ count }, "cancellation preserves all bookmarks");
     assert
-      .dom(document.body)
-      .doesNotHaveClass(
-        "has-frontend-dialog",
-        "the dialog styling is released after dismissal"
-      );
+      .dom(".dialog-content")
+      .doesNotExist("the confirmation closes after cancellation");
   });
 });

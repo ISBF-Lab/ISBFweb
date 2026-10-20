@@ -283,7 +283,6 @@ body:has(.isbf-v2-shell.isbf-v2-shell--resume) #main-outlet {
 }
 
 .isbf-resume-confirmation {
-  --d-button-border-radius: var(--isbf-v2-radius-sm, 8px);
   color: var(--isbf-v2-text, var(--primary));
   font-family: var(--isbf-v2-font-family, var(--font-family));
 
@@ -292,19 +291,10 @@ body:has(.isbf-v2-shell.isbf-v2-shell--resume) #main-outlet {
     width: var(--isbf-v2-feed-width, 600px);
     max-width: calc(100vw - var(--isbf-v2-space-8, 32px));
     margin-inline: auto;
-    background: var(--isbf-v2-surface, var(--secondary));
-    border: 1px solid var(--isbf-v2-border, var(--primary-low));
-    border-radius: var(--isbf-v2-radius-md, 16px);
   }
 
   .d-modal__title-text {
     font-size: var(--isbf-v2-font-lg, 18px);
-  }
-
-  .d-modal__header,
-  .d-modal__body,
-  .d-modal__footer {
-    padding: var(--isbf-v2-space-4, 16px);
   }
 
   .d-modal__body {
@@ -315,7 +305,6 @@ body:has(.isbf-v2-shell.isbf-v2-shell--resume) #main-outlet {
 
   .d-modal__footer {
     flex-wrap: wrap;
-    gap: var(--isbf-v2-space-3, 12px);
   }
 
   &__language,

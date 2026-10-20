@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "lint:dialogs": "node script/check-isbf-dialogs.mjs"
+  }
+}

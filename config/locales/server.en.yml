@@ -5358,6 +5358,20 @@ en:
   site_setting_missing: "`%{name}` site setting has to be set."
 
   page_not_found:
+    elastic:
+      title: "Page not found"
+      description: "You can head home and keep exploring."
+      reveal: "Move the zero to discover what is behind it"
+      play: "Open the hidden paddle game"
+      start: "Start"
+      retry: "Play again"
+      current: "This round"
+      best: "Personal best"
+      instructions: "Move with your mouse, drag a finger, or use the left and right arrow keys."
+      exit: "Exit game"
+      ready: "Keep the zero in play for as long as you can."
+      over: "Round finished"
+      found: "You found the hidden game."
     page_title: "Page Not Found"
     title: "Oops! That page doesn’t exist or is private."
     subtitle: "We looked everywhere but couldn't find the page you were looking for."

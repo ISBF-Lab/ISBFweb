@@ -1,0 +1,12 @@
+{
+  "verification_keys_removed": true,
+  "count": 1,
+  "browser_container_removed": true,
+  "temporary_tools_removed": [
+    "isbf_ai_moderation_release_20261018",
+    "isbf_ai_moderation_compat_release_20261018",
+    "isbf_ai_moderation_live_check_20261018",
+    "isbf_ai_moderation_verification"
+  ],
+  "full_preview_forum_state": "exited"
+}

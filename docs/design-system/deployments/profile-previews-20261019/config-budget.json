@@ -1,0 +1,11 @@
+{
+  "host_available_bytes": 1170743296,
+  "memory_limit_bytes": 134217728,
+  "swap_total_bytes": 134217728,
+  "reserve_bytes": 536870912,
+  "network": "none",
+  "production_config_mount": "single specified file only",
+  "configuration_dumped": false,
+  "root_backup": "hook-config-task/launcher-before.yml",
+  "container_removed": true
+}

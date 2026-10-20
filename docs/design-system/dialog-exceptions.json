@@ -1,0 +1,492 @@
+{
+  "sources": [
+    {
+      "path": "frontend/discourse/app/ui-kit/d-modal.gts",
+      "reason": "The shared modal primitive owns modal semantics and accessibility",
+      "reference": "components.md#c07--modal",
+      "verification": "frontend/discourse/tests/integration/ui-kit/d-modal-test.gjs"
+    },
+    {
+      "path": "frontend/discourse/app/components/card-container.gjs",
+      "reason": "Avatar and group popup cards are outside this dialog redesign",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Existing user card regression and foreground dialog exclusion checks"
+    },
+    {
+      "path": "frontend/discourse/app/components/composer-container.gjs",
+      "reason": "The composer is an editor surface with its own responsive behavior",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Existing composer acceptance tests"
+    },
+    {
+      "path": "frontend/discourse/app/static/development-error/index.js",
+      "reason": "Standalone development error document must work before the Ember application can boot",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Development error document remains outside the forum dialog shell"
+    }
+  ],
+  "excluded_surfaces": [
+    {
+      "selector": ".admin-interface",
+      "reason": "User selected frontend dialogs only",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Offline browser regression verifies the admin dialog remains outside the shared foreground frame"
+    },
+    {
+      "selector": ".fk-d-menu-modal",
+      "reason": "Float-kit menu presented through the modal primitive",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Offline browser regression verifies the float-kit menu retains its own frame"
+    },
+    {
+      "selector": ".chat-message-actions",
+      "reason": "Chat message action menu",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Explicit shared-selector exclusion; existing chat menu behavior tests remain applicable"
+    },
+    {
+      "path": "plugins/isbf-join/web",
+      "reason": "User explicitly retained the accepted standalone recruitment design",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Explicit source-path exclusion; no recruitment sources are changed by this task"
+    },
+    {
+      "selector": ".insert-table-modal",
+      "reason": "The table editor retains its full-size grid layout and editor controls",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Core editor/viewer modal styles and foreground dialog scope regression checks"
+    },
+    {
+      "selector": ".fullscreen-code-modal",
+      "reason": "The full-screen code viewer retains its own height and container chrome",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Core editor/viewer modal styles and foreground dialog scope regression checks"
+    },
+    {
+      "selector": ".fullscreen-table-modal",
+      "reason": "The full-screen table viewer retains its own height and grid layout",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Core editor/viewer modal styles and foreground dialog scope regression checks"
+    }
+  ],
+  "declarations": [
+    {
+      "file": "app/assets/stylesheets/common/base/dialog.scss",
+      "selectors": ".dialog-content",
+      "property": "background-color",
+      "value": "var(--secondary)",
+      "sha256": "6aa5a428c34371312e0c1fd189cfe7fee2bc4c0d3a0f5984cd63eadaa9ef9660",
+      "reason": "Existing platform or bundled extension fallback; the foreground theme overrides this declaration. Its exact selector and value are frozen to prevent new private chrome.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style tests and desktop/mobile light/dark browser checks"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/dialog.scss",
+      "selectors": ".dialog-content",
+      "property": "box-shadow",
+      "value": "var(--shadow-card)",
+      "sha256": "d59c3dd5a287d94a27d9759bf8706b13ebccbdb1f0d07a2d256ada7b2d6d1e01",
+      "reason": "Existing platform or bundled extension fallback; the foreground theme overrides this declaration. Its exact selector and value are frozen to prevent new private chrome.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style tests and desktop/mobile light/dark browser checks"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/modal.scss",
+      "selectors": "html:not(.keyboard-visible).mobile-device .d-modal__container",
+      "property": "padding-bottom",
+      "value": "env(safe-area-inset-bottom, 1rem)",
+      "sha256": "251429611101d75115fef37dbb05047336aff0281e115d6da41640d971849cde",
+      "reason": "Existing platform or bundled extension fallback; the foreground theme overrides this declaration. Its exact selector and value are frozen to prevent new private chrome.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style tests and desktop/mobile light/dark browser checks"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/modal.scss",
+      "selectors": ".d-modal__container",
+      "property": "border-radius",
+      "value": "var(--d-border-radius)",
+      "sha256": "27da5558f282d32ed64521dc73a568573c85cb614a44688b768db42de5f9c702",
+      "reason": "Existing platform or bundled extension fallback; the foreground theme overrides this declaration. Its exact selector and value are frozen to prevent new private chrome.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style tests and desktop/mobile light/dark browser checks"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/modal.scss",
+      "selectors": ".d-modal__container",
+      "property": "background-color",
+      "value": "var(--secondary)",
+      "sha256": "724b3433bd39bdfa5f9217c683a278e3e438482874248fa8f799d933fada00ba",
+      "reason": "Existing platform or bundled extension fallback; the foreground theme overrides this declaration. Its exact selector and value are frozen to prevent new private chrome.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style tests and desktop/mobile light/dark browser checks"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/modal.scss",
+      "selectors": ".d-modal__container",
+      "property": "box-shadow",
+      "value": "var(--shadow-modal)",
+      "sha256": "67d84e6cb4679c0c8b6a60f2284f4323f0882c0b6efa58d94c85858e4de31551",
+      "reason": "Existing platform or bundled extension fallback; the foreground theme overrides this declaration. Its exact selector and value are frozen to prevent new private chrome.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style tests and desktop/mobile light/dark browser checks"
+    },
+    {
+      "file": "app/assets/stylesheets/common/float-kit/d-menu-modal.scss",
+      "selectors": ".fk-d-menu-modal .dropdown-menu__item .btn",
+      "property": "border-radius",
+      "value": "0",
+      "sha256": "3c81ddc954ef0bc607b56987041eb7ceb69da2d6dc8d161b5e579d57a7029f69",
+      "reason": "Existing platform or bundled extension fallback; the foreground theme overrides this declaration. Its exact selector and value are frozen to prevent new private chrome.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style tests and desktop/mobile light/dark browser checks"
+    },
+    {
+      "file": "app/assets/stylesheets/common/modal/modal-overrides.scss",
+      "selectors": ".d-modal.chat-modal-new-message.--quick-palette .d-modal__container",
+      "property": "border-radius",
+      "value": "0",
+      "sha256": "607526d71b8eebc55c92344b52c139cd548a9ad70fd3dfd1e59a4cf07062f67e",
+      "reason": "Existing platform or bundled extension fallback; the foreground theme overrides this declaration. Its exact selector and value are frozen to prevent new private chrome.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style tests and desktop/mobile light/dark browser checks"
+    },
+    {
+      "file": "app/assets/stylesheets/common/modal/modal-overrides.scss",
+      "selectors": ".d-modal.--quick-palette .d-modal__container",
+      "property": "padding-block",
+      "value": "1rem",
+      "sha256": "630efef58ef6d68c0378cc268db1e6847cee741721c193d261ce3a8e061e0829",
+      "reason": "Existing platform or bundled extension fallback; the foreground theme overrides this declaration. Its exact selector and value are frozen to prevent new private chrome.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style tests and desktop/mobile light/dark browser checks"
+    },
+    {
+      "file": "app/assets/stylesheets/common/modal/modal-overrides.scss",
+      "selectors": ".reply-where-modal .btn",
+      "property": "border-radius",
+      "value": "var(--d-button-border-radius)",
+      "sha256": "e2f6d02a55dc480c084cf42b6e141dd499f6642336c559deadbc7497359a807f",
+      "reason": "Existing platform or bundled extension fallback; the foreground theme overrides this declaration. Its exact selector and value are frozen to prevent new private chrome.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style tests and desktop/mobile light/dark browser checks"
+    },
+    {
+      "file": "app/assets/stylesheets/common/modal/modal-overrides.scss",
+      "selectors": ".permanently-delete-confirm-modal.--fire-easter-egg-modal .d-modal__container",
+      "property": "background-color",
+      "value": "transparent",
+      "sha256": "8377ddc8d00bad981ff1df1e577430360532c4111209ecd5c5866ed28fdd585c",
+      "reason": "Existing platform or bundled extension fallback; the foreground theme overrides this declaration. Its exact selector and value are frozen to prevent new private chrome.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style tests and desktop/mobile light/dark browser checks"
+    },
+    {
+      "file": "app/assets/stylesheets/common/table-builder/insert-table-modal.scss",
+      "selectors": ".insert-table-modal .d-modal__container",
+      "property": "border-radius",
+      "value": "0",
+      "sha256": "77e593e07406659ee401f82bd52c99fd51e3146fc1f136bc71c38d14ff2af366",
+      "reason": "Existing platform or bundled extension fallback; the foreground theme overrides this declaration. Its exact selector and value are frozen to prevent new private chrome.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style tests and desktop/mobile light/dark browser checks"
+    },
+    {
+      "file": "plugins/discourse-ai/assets/stylesheets/modules/summarization/desktop/ai-summary.scss",
+      "selectors": ".ai-summary-modal .d-modal__container",
+      "property": "box-shadow",
+      "value": "var(--shadow-menu-panel)",
+      "sha256": "58b0d31ebb66d04444a7418050b6a816ce5764e501651f8df4ddf1ff1a713717",
+      "reason": "Existing platform or bundled extension fallback; the foreground theme overrides this declaration. Its exact selector and value are frozen to prevent new private chrome.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style tests and desktop/mobile light/dark browser checks"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/dialog.scss",
+      "selectors": ".dialog-body",
+      "property": "padding",
+      "value": "1em",
+      "sha256": "a447e7af69c0448834e4fe9a0367aaad8cc65f7952c0422fc6e648a939caaa96",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/dialog.scss",
+      "selectors": ".dialog-header",
+      "property": "padding",
+      "value": "10px 15px",
+      "sha256": "26adbe8e087183c44736754477ba733533b9c122010d3b1723ea821a4707ba02",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/dialog.scss",
+      "selectors": ".dialog-header",
+      "property": "border-bottom",
+      "value": "1px solid var(--content-border-color)",
+      "sha256": "73a2ba27d4f626f9d7f70a73d3cc86d079bd4a3d10dac55c6b139fdea290eda1",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/dialog.scss",
+      "selectors": ".dialog-footer",
+      "property": "padding",
+      "value": "14px 15px 10px",
+      "sha256": "e0ae0bb8eaa297ac3f0fbb0e561853c279d98e29898ca6ec614eb316a99c147b",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/dialog.scss",
+      "selectors": ".dialog-footer",
+      "property": "border-top",
+      "value": "1px solid var(--content-border-color)",
+      "sha256": "58ff2859e2fb5e01043bad6e5fd0213aa5b4de3212a7eb6cf2acdf08116f63e7",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/modal.scss",
+      "selectors": ".d-modal__header",
+      "property": "padding",
+      "value": "0.5rem",
+      "sha256": "744f1bb79778bf9665373503c70f347aff4518085179cf0ce8e0962100952e27",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/modal.scss",
+      "selectors": ".d-modal__header",
+      "property": "border-bottom",
+      "value": "1px solid var(--content-border-color)",
+      "sha256": "39d9ba9c6b2aad504b75e21fd2db8dee7c025fd95bc6b54204cdf3f6160bf1a8",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/modal.scss",
+      "selectors": ".d-modal__header:not(.--has-primary-action)",
+      "property": "padding",
+      "value": "0.5rem 0.5rem 0.5rem 1.5rem",
+      "sha256": "43da6229603f0cbfbbbe9b668a62de7128b4b5b4a008fef22f20ded11986d4bf",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/modal.scss",
+      "selectors": ".d-modal__body",
+      "property": "padding",
+      "value": "1rem 1.5rem",
+      "sha256": "c6f9d3b2ff3eb2b49f2ab96d6ffbfc6de8c31202e5ed6fb4063fa2ffc0cb7764",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/modal.scss",
+      "selectors": ".d-modal__footer",
+      "property": "padding",
+      "value": "1rem 1.5rem",
+      "sha256": "2874d9b80a990e2812c7bd7ab01f11bd7706153a74dee8a9740c46a13ba01af9",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/modal.scss",
+      "selectors": ".d-modal__footer",
+      "property": "border-top",
+      "value": "1px solid var(--content-border-color)",
+      "sha256": "4d1a4e79ae6ea4c4d2a40eb07ecd3ce7155eb96cbc20d78bb52c1604c1a41ccb",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/topic-post.scss",
+      "selectors": ".fullscreen-table-modal .d-modal__body",
+      "property": "padding-top",
+      "value": "0",
+      "sha256": "4450ecc6fe5f2805bb1c50071811e2a20ad82989bac033358b0fc847aec8dd78",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/components/d-icon-grid-picker.scss",
+      "selectors": ".fk-d-menu-modal.d-icon-grid-picker-content .d-modal__body",
+      "property": "padding",
+      "value": "0",
+      "sha256": "9bd44cec2ee25ea2f3095687ec6963f49d3c02705d5c94004356f8bb38f88c7f",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/components/emoji-picker.scss",
+      "selectors": ".fk-d-menu-modal.emoji-picker-content .d-modal__body",
+      "property": "padding",
+      "value": "0",
+      "sha256": "89b4abe422b47efd2c650b358fefea51cbf074c98b57b61574b71733f79e462b",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/float-kit/d-menu-modal.scss",
+      "selectors": ".fk-d-menu-modal .d-modal__body",
+      "property": "padding",
+      "value": "1em 0",
+      "sha256": "ba871309a1e1142ea6953c6d8996a31e9495a5d07b016096212aff860e3b61e6",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/modal/change-reply-to.scss",
+      "selectors": ".change-reply-to-modal .d-modal__body",
+      "property": "padding-bottom",
+      "value": "0",
+      "sha256": "195e263563c06462fb5ffea76f09f6e61dd5ded18e929f8e31b03d05005857cb",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/modal/discourse-reactions-popup.scss",
+      "selectors": ".fk-d-menu-modal.discourse-reactions-users-menu-content,\n.fk-d-menu-modal.post-liked-users-menu-content,\n.fk-d-menu-modal.chat-message-reaction-users-content .d-modal__body",
+      "property": "padding-top",
+      "value": "0",
+      "sha256": "7c497affc2194bde0139372330c96f1a5955bf12e0cadd7cd1e0343d92b30864",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/modal/manageable-row-list.scss",
+      "selectors": ".manageable-row-list .d-modal__body",
+      "property": "padding-inline",
+      "value": "0",
+      "sha256": "ade73893cc41d121bf0cfd7a981bce413694a0e8b0157c1f409d7c8be892d2e4",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/modal/manageable-row-list.scss",
+      "selectors": ".manageable-row-list .d-modal__body",
+      "property": "padding-block",
+      "value": "var(--space-3)",
+      "sha256": "f61d6b986316dfcdf98856a39c0b1ef8e4c01476db1ce0e85182e6137fb9b97d",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/modal/modal-overrides.scss",
+      "selectors": ".d-modal.--quick-palette .d-modal__body",
+      "property": "padding",
+      "value": "0",
+      "sha256": "0c10e1a5d43946c1238703b21211c87ea8eb40db6015227274061457cf432b1e",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/table-builder/insert-table-modal.scss",
+      "selectors": ".insert-table-modal .d-modal__body",
+      "property": "padding",
+      "value": "0 4px 0 0",
+      "sha256": "be4f028daf10ca8e8b3095eefa383c73d4e186de9379a949c0016c6f76632e3f",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "plugins/boards/assets/stylesheets/boards-manage.scss",
+      "selectors": ".discourse-boards-board-settings-modal,\n.discourse-boards-card-detail-modal,\n.discourse-boards-column-settings-modal .d-modal__body",
+      "property": "padding",
+      "value": "0",
+      "sha256": "51c7837cf5f52d804ba1f462c71792d48eec346aec5cecd5d31b7564740bb875",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "plugins/chat/assets/stylesheets/mobile/chat-message-actions.scss",
+      "selectors": ".chat-message-actions .d-modal__body",
+      "property": "padding",
+      "value": "0",
+      "sha256": "ea43db913cb86cca6d510ffb422f3f0b885e810be8ae2110282ed68b55d914f6",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "plugins/discourse-ai/assets/stylesheets/modules/ai-bot/common/bot-replies.scss",
+      "selectors": ".ai-share-modal .d-modal__footer",
+      "property": "padding",
+      "value": "10px 20px 25px",
+      "sha256": "4808a536023b56e189f9c0722eee8e9591b9ebf462a10fdca23db34bd87cd002",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "plugins/discourse-events/assets/stylesheets/mobile/livestream.scss",
+      "selectors": "body.livestream-topic.chat-enabled .livestream-chat-modal .d-modal__body",
+      "property": "padding",
+      "value": "1em 0.4em 0.4em 0.4em",
+      "sha256": "6ac613c589dcba9caecdbc1e57f66bdf0c83dcbc9e1bf99b89dd4b08b16c050e",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "plugins/discourse-workflows/assets/stylesheets/common/configurator/configurator-modal.scss",
+      "selectors": ".workflows-configurator-modal .d-modal__body",
+      "property": "padding",
+      "value": "0",
+      "sha256": "35222fa2940cff3ebf1e315f992cd89093ff54fe26abaa6a10b30d565447442c",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    },
+    {
+      "file": "plugins/discourse-workflows/assets/stylesheets/common/configurator/configurator-modal.scss",
+      "selectors": ".workflows-configurator-modal .d-modal__body",
+      "property": "border-radius",
+      "value": "var(--d-border-radius)",
+      "sha256": "a6ea5eaacd10039737ddaea703256af3a8929575f2d8bdabfd86928ebd4b1608",
+      "reason": "Existing platform/extension layout or menu fallback, overridden only inside the approved foreground task-dialog scope. Exact declaration preserved for other contexts.",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Shared computed-style regression and menu/admin exclusions"
+    }
+  ],
+  "layout_variants": [
+    {
+      "selector": ".d-modal.--large",
+      "purpose": "Existing wide task layout",
+      "max_width": "800px"
+    },
+    {
+      "selector": ".d-modal.--max",
+      "purpose": "Existing full-width code/table views",
+      "max_width": "90vw"
+    },
+    {
+      "selector": ".isbf-calendar-entry-editor",
+      "purpose": "Retain the original personal calendar editor width",
+      "min_width": "480px",
+      "max_width": "480px"
+    }
+  ]
+}

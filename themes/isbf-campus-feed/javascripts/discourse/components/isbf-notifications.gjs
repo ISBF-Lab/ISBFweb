@@ -29,7 +29,6 @@ export default class ISBFNotifications extends Component {
   @service siteSettings;
 
   @tracked error = false;
-  @tracked filter = "all";
   @tracked groups = [];
   @tracked loaded = false;
   @tracked loading = false;
@@ -47,6 +46,11 @@ export default class ISBFNotifications extends Component {
     this.tab = consumeInitialNotificationTab();
     this.appEvents.on("isbf:notification-tab", this, this.selectTab);
     this.appEvents.on(
+      "isbf:notification-filter-changed",
+      this,
+      this.onFilterChange
+    );
+    this.appEvents.on(
       "isbf:notifications-updated",
       this,
       this.onNotificationUpdate
@@ -58,6 +62,11 @@ export default class ISBFNotifications extends Component {
     super.willDestroy(...arguments);
     this.appEvents.off("isbf:notification-tab", this, this.selectTab);
     this.appEvents.off(
+      "isbf:notification-filter-changed",
+      this,
+      this.onFilterChange
+    );
+    this.appEvents.off(
       "isbf:notifications-updated",
       this,
       this.onNotificationUpdate
@@ -66,6 +75,10 @@ export default class ISBFNotifications extends Component {
 
   get allSelected() {
     return this.tab === "all";
+  }
+
+  get filter() {
+    return this.isbfNotifications.filter;
   }
 
   get mentionsSelected() {
@@ -107,11 +120,26 @@ export default class ISBFNotifications extends Component {
   }
 
   @action
+  onFilterChange() {
+    this.#reset();
+  }
+
+  @action
   onNotificationUpdate(data) {
     for (const [id, read] of data?.recent || []) {
       this.#models.get(id)?.set("read", read);
     }
     scheduleOnce("afterRender", this, this.refresh);
+  }
+
+  @action
+  retryFilter(_value, event) {
+    // Keep focus in the menu when the retry control disappears.
+    event.target
+      .closest(".isbf-notifications__menu")
+      ?.querySelector("summary")
+      ?.focus();
+    return this.isbfNotifications.retryFilter();
   }
 
   @action
@@ -156,8 +184,9 @@ export default class ISBFNotifications extends Component {
 
   @action
   toggleUnreadOnly() {
-    this.filter = this.unreadOnly ? "all" : "unread";
-    this.#reset();
+    return this.isbfNotifications.saveFilter(
+      this.unreadOnly ? "all" : "unread"
+    );
   }
 
   @action
@@ -368,11 +397,28 @@ export default class ISBFNotifications extends Component {
               }}</a>
             <div class="isbf-notifications__filter">
               <DToggleSwitch
+                disabled={{this.isbfNotifications.savingFilter}}
                 @label={{themePrefix "isbf_v2.notifications_unread_only"}}
                 @state={{this.unreadOnly}}
                 {{on "click" this.toggleUnreadOnly}}
               />
             </div>
+            {{#if this.isbfNotifications.filterError}}
+              <div
+                class="isbf-notifications__filter-error isbf-notifications__preference-error"
+                role="alert"
+              >
+                <p>{{i18n
+                    (themePrefix "isbf_v2.notifications_filter_error")
+                  }}</p>
+                <DButton
+                  @action={{this.retryFilter}}
+                  @disabled={{this.isbfNotifications.savingFilter}}
+                  @forwardEvent={{true}}
+                  @label={{themePrefix "isbf_v2.notifications_retry"}}
+                />
+              </div>
+            {{/if}}
             <div
               aria-label={{i18n
                 (themePrefix "isbf_v2.notifications_badge_style")

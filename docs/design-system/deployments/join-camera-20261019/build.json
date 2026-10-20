@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "container_budget": {
+    "label": "isolated-page-build",
+    "available_bytes": 1441173504,
+    "effective_remaining_bytes": 1441173504,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 536870912
+  },
+  "node_heap_mib": 256,
+  "container_memory_peak": {
+    "/sys/fs/cgroup/memory.peak": 536875008
+  },
+  "browser_run": false,
+  "backend_tests_repeated": false
+}

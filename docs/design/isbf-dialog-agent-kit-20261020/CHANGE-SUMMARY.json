@@ -1,0 +1,17 @@
+{
+  "actual_deployed_source_changes": 12,
+  "theme_fields_changed": 11,
+  "theme_fields_added": 2,
+  "theme_fields_modified": 9,
+  "plugin_styles_changed": 1,
+  "review_delivery_files": 33,
+  "inventory_candidates": 174,
+  "covered_source_entries": 167,
+  "covered_dmodal_source_files": 166,
+  "confirmation_service_entries": 1,
+  "excluded_or_primitive_entries": 7,
+  "complete_compiled_modules": 184,
+  "compiled_style_targets": 132,
+  "offline_browser_checks": 170,
+  "online_browser_checks": 45
+}

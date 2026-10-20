@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "views": [
+    {
+      "viewport": "mobile",
+      "checks": [
+        "all four native moderation controls finish loading",
+        "the native main switch reflects the enabled production setting",
+        "the independent image switch reflects the verified connector capability",
+        "the existing model connection is selected in the native dropdown",
+        "the exempt-groups setting renders the native multiple-choice selector",
+        "the exemption selector offers the existing site groups",
+        "the deployed admin descriptions and labels resolve translations",
+        "the native staff review queue completes its real data request",
+        "existing marketplace and alumni links remain available",
+        "marketplace data request completes",
+        "marketplace finishes loading without an error",
+        "the existing alumni map finishes initialization"
+      ],
+      "existing_reviewables_loaded": 2,
+      "marketplace_products_loaded": 8
+    },
+    {
+      "viewport": "desktop",
+      "checks": [
+        "all four native moderation controls finish loading",
+        "the native main switch reflects the enabled production setting",
+        "the independent image switch reflects the verified connector capability",
+        "the existing model connection is selected in the native dropdown",
+        "the exempt-groups setting renders the native multiple-choice selector",
+        "the exemption selector offers the existing site groups",
+        "the deployed admin descriptions and labels resolve translations",
+        "the native staff review queue completes its real data request",
+        "existing marketplace and alumni links remain available",
+        "marketplace data request completes",
+        "marketplace finishes loading without an error",
+        "the existing alumni map finishes initialization"
+      ],
+      "existing_reviewables_loaded": 2,
+      "marketplace_products_loaded": 8
+    }
+  ],
+  "javascript_errors": [],
+  "failed_assets": [],
+  "blocked_writes": 12,
+  "production_content_submitted": false,
+  "account_preferences_changed": false,
+  "transport": {
+    "get_requests": 133,
+    "static_cache_hits": 169,
+    "tls_verified": true,
+    "browser_network": "none",
+    "production_write_requests": 0
+  }
+}

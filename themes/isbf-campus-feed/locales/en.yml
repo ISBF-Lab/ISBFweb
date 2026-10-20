@@ -270,6 +270,7 @@ en:
     notifications_empty: "No notifications yet."
     notifications_unread_empty: "You have no unread notifications."
     notifications_unread_only: "Only unread"
+    notifications_filter_error: "Could not save the notification filter. Please retry."
     notifications_badge_style: "Badge display"
     notifications_badge_number: "Numbers"
     notifications_badge_dot: "Dot"

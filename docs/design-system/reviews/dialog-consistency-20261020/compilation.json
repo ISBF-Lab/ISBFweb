@@ -1,0 +1,57 @@
+[
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-frontend-scope.gjs",
+    "compiled": true,
+    "sha256": "558832aeee434aaae7da845a51826dab1d029a55fecccfa35e47a78f2bb5d822"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-calendar.gjs",
+    "compiled": true,
+    "sha256": "a2a1f01424b2416e748084266fca9c7e1c1bb00bae1f4a30058b2706dd3c6948"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-calendar-entry-editor.gjs",
+    "compiled": true,
+    "sha256": "e714dc7947607159d7edbe189dcbf99f6e7b700c71d96fd0d03eb136fc06455d"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-course-dialog.gjs",
+    "compiled": true,
+    "sha256": "d9c793678f55158f5dccc58ffec281e9958552751d0ad5db534185c603c04058"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-resource-directory-dialog.gjs",
+    "compiled": true,
+    "sha256": "5fbaf465b61fdd87463833fd004a1a801aef5be526c91a4b227aed0dc7664afe"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-grade-picker.gjs",
+    "compiled": true,
+    "sha256": "5bc6ecbd17717bef5085508fdc47dccca4da8466e38abf927453b39b2314426f"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-resource-parent-picker.gjs",
+    "compiled": true,
+    "sha256": "8af4f686983e516f1b66a7cbc7a10c8c895cfc5027f2a5801f53ea5dc01aec68"
+  },
+  {
+    "file": "themes/isbf-campus-feed/test/integration/frontend-scope-test.gjs",
+    "compiled": true,
+    "sha256": "dadf44cc7f7629fe871baa0a8a31f2bca964d82c2ca64580b47c69dc785740f4"
+  },
+  {
+    "file": "themes/isbf-campus-feed/test/integration/calendar-test.gjs",
+    "compiled": true,
+    "sha256": "8a737df2fb4ea1ec9c42b2e32e0150d33d46de70f3746c0ade477d33877847a7"
+  },
+  {
+    "file": "themes/isbf-campus-feed/test/integration/dialog-consistency-test.gjs",
+    "compiled": true,
+    "sha256": "cc10983b1c4a560ac607859549217d1de163c47a7b1db3f1fb88ef62fec86bab"
+  },
+  {
+    "file": "docs/design-system/reviews/dialog-consistency-20261020/dialog-fixtures.gjs",
+    "compiled": true,
+    "sha256": "0d695e3dbaac097d8ce6a91742d25d77c262d7e8af2b745fe91c61f554d2ee88"
+  }
+]

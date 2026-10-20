@@ -1,0 +1,34 @@
+TAP version 13
+# Subtest: detects custom modal markup without treating selector strings or ordinary controls as dialogs
+ok 1 - detects custom modal markup without treating selector strings or ordinary controls as dialogs
+  ---
+  duration_ms: 50.883902
+  type: 'test'
+  ...
+# Subtest: finds nested shell and button overrides while preserving unrelated content styling
+ok 2 - finds nested shell and button overrides while preserving unrelated content styling
+  ---
+  duration_ms: 4.396281
+  type: 'test'
+  ...
+# Subtest: an exception cannot authorize a different selector, value or source file
+ok 3 - an exception cannot authorize a different selector, value or source file
+  ---
+  duration_ms: 1.531841
+  type: 'test'
+  ...
+# Subtest: tracks button overrides even when the owning modal has an arbitrary class name
+ok 4 - tracks button overrides even when the owning modal has an arbitrary class name
+  ---
+  duration_ms: 0.719164
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 504.774593

@@ -1,0 +1,9 @@
+请在目标Discourse/ISBF项目中实现新功能，并保持当前前台弹窗样式一致。
+
+先阅读项目自己的AGENTS.md，再阅读本包README.md、AGENTS.md、CHANGELOG.md以及repo-files/docs/design-system/dialogs.md，继续按要求读取设计状态、tokens、组件、参考映射和相应技能。
+
+任务弹窗使用DModal，确认/删除/提示使用dialog服务，按钮使用DButton，表单使用FormKit。外框、分区细线、胶囊文字操作及手机留边继承共享样式。保留业务宽度、焦点/键盘、危险/禁用/加载状态和真实权限及接口。
+
+按照INTEGRATION.md核对已有共享层；在目标仓库逐项合并缺少的工程入口。现有菜单、后台、卡片、编辑器、图片查看器及独立认证/招募页沿用自身呈现。新增外观例外需要批准依据和登记。
+
+完成后运行pnpm lint:dialogs、pnpm exec node --test script/check-isbf-dialogs.test.mjs，以及修改文件的bin/lint --fix和相应业务验证。报告实际改动文件、适用范围与检查结果，保留其他已有功能。

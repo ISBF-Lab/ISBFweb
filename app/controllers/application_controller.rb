@@ -962,6 +962,10 @@ class ApplicationController < ActionController::Base
       end
     @subtitle = opts[:subtitle] || I18n.t("page_not_found.subtitle")
     @group = opts[:group]
+    @elastic_not_found = [200, 404].include?(opts[:status]) && !opts[:custom_message] && !@group
+    if @elastic_not_found
+      @custom_body_class = [@custom_body_class, "elastic-not-found-page"].compact.join(" ")
+    end
     @hide_search = true if SiteSetting.login_required || !guardian.can_search?
 
     params[:slug] = params[:slug].first if params[:slug].kind_of?(Array)

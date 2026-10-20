@@ -1,0 +1,131 @@
+name: ISBF frontend consistency
+
+on:
+  pull_request:
+    paths:
+      - "themes/isbf-campus-feed/**"
+      - "frontend/discourse/app/**"
+      - "frontend/discourse/dialog-holder/**"
+      - "frontend/discourse/float-kit/**"
+      - "app/assets/stylesheets/**"
+      - "plugins/**"
+      - "script/check-isbf-dialogs*"
+      - "docs/design-system/dialog-exceptions.json"
+      - "package.json"
+      - ".github/workflows/isbf-frontend-consistency.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: isbf-frontend-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  theme:
+    runs-on: ubuntu-latest
+    container: discourse/discourse_test:release
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    env:
+      RAILS_ENV: test
+      PGUSER: discourse
+      PGPASSWORD: discourse
+      LOAD_PLUGINS: "1"
+      QUNIT_PARALLEL: "1"
+      PARALLEL_TEST_PROCESSORS: "1"
+      QUNIT_REUSE_BUILD: "1"
+      NODE_OPTIONS: --max-old-space-size=2048
+      CHEAP_SOURCE_MAPS: "1"
+      EMBER_ENV: development
+      CAPYBARA_DEFAULT_MAX_WAIT_TIME: "20"
+      PLAYWRIGHT_BROWSERS_PATH: /home/discourse/.cache/ms-playwright
+      DBUS_SESSION_BUS_ADDRESS: unix:path=/dev/null
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+
+      - name: Prepare database services
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          redis-server /etc/redis/redis.conf --daemonize yes --logfile ""
+          chown -R postgres /var/run/postgresql
+          sudo -E -u postgres script/start_test_db.rb
+          sudo -u postgres psql -c "CREATE ROLE discourse LOGIN SUPERUSER PASSWORD 'discourse';"
+
+      - name: Install dependencies
+        run: |
+          ln -s /var/www/discourse/vendor/bundle vendor/bundle
+          bundle config --local path vendor/bundle
+          bundle config --local deployment true
+          bundle config --local without development
+          bundle install --jobs 1
+          pnpm install --frozen-lockfile
+
+      - name: Dialog architecture and appearance policy
+        run: |
+          pnpm lint:dialogs
+          pnpm exec node --test script/check-isbf-dialogs.test.mjs
+
+      - name: Install Playwright Chromium
+        run: pnpm playwright-install
+
+      - name: Prepare test database and assets
+        run: |
+          bin/rake db:create db:migrate
+          script/assemble_ember_build.rb
+          mkdir -p "$HOME/.pki/nssdb" "$HOME/.local/share/pki/nssdb"
+          dbus-daemon --system --fork 2>/dev/null || true
+          isbf_bus_address=$(dbus-daemon --session --fork --print-address 2>/dev/null)
+          echo "DBUS_SESSION_BUS_ADDRESS=$isbf_bus_address" >> "$GITHUB_ENV"
+
+      - name: Native frontend behavior regression
+        env:
+          LOAD_PLUGINS: "0"
+          FILTER: "/User.*preferences|User.*directory|User.*invited|Invite|Bookmark|Draft|Private Message|Pending Post|Group|Search|Badge|User Card|User.*summary|Tag|Modal|Dialog/i"
+        run: bin/qunit --standalone --filter "$FILTER"
+
+      - name: Install the project theme in the synthetic test database
+        env:
+          RAILS_ENV: development
+          DISCOURSE_DEV_DB: discourse_test
+        run: |
+          bin/rails runner 'theme = RemoteTheme.import_theme_from_directory(Rails.root.join("themes/isbf-campus-feed")); theme.set_default!'
+
+      - name: Project theme QUnit
+        id: theme_qunit
+        env:
+          DISCOURSE_DEV_DB: discourse_test
+          QUNIT_RAILS_ENV: development
+        run: |
+          mkdir -p tmp/isbf-frontend-results
+          bin/rake 'themes:qunit[name,ISBF Campus Feed]' | tee tmp/isbf-frontend-results/theme-qunit.log
+
+      - name: Upload failed theme test logs
+        uses: actions/upload-artifact@v7
+        if: failure() && steps.theme_qunit.outcome == 'failure'
+        with:
+          name: isbf-theme-failure-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 14
+          path: tmp/isbf-frontend-results/theme-qunit.log
+
+      - name: Real page appearance and preservation checks
+        run: bin/rspec themes/isbf-campus-feed/spec/system/frontend_consistency_spec.rb
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: isbf-frontend-review-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            tmp/isbf-frontend-screenshots/
+            tmp/isbf-frontend-results/
+            tmp/capybara/

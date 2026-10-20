@@ -1,0 +1,308 @@
+#!/usr/bin/env python3
+"""Compare original/integrated static pages in one capped browser and page."""
+
+from pathlib import Path
+from urllib.parse import urlsplit
+import argparse
+import hashlib
+import json
+import os
+import signal
+import threading
+import time
+
+from serve_join_reference import ARCHIVE, CONTROLLER, PreviewServer, ROOT
+
+
+TOOLS = ROOT / "deploy-work/frontend-consistency-20261012/tools"
+OUTPUT = ROOT / "docs/design-system/references/join-20261014"
+GENERIC_ERROR = "暂时无法提交，请稍后重试。您也可以先将简历发送至以上邮箱。"
+MARKER = "--isbf-join-static-validation"
+MIB = 1024 * 1024
+OPENING = [".brand-mark", "#journey", ".stage", "#scene", ".journey-footer", "#scroll-cue", "#replay-button"]
+DIALOG = ["#contact-dialog", ".dialog-header", "#contact-title", ".dialog-body", "#recruitment-email", "#application-fields", "#application-name", "#application-student-id", "#application-phone", ".dialog-actions", "#application-submit"]
+GEOMETRY = """selectors => Object.fromEntries(selectors.map(selector => {
+  const element = document.querySelector(selector);
+  const box = element.getBoundingClientRect();
+  const style = getComputedStyle(element);
+  return [selector, {
+    x: box.x, y: box.y, width: box.width, height: box.height,
+    fontFamily: style.fontFamily, fontSize: style.fontSize, fontWeight: style.fontWeight,
+    lineHeight: style.lineHeight, color: style.color, background: style.backgroundColor,
+    borderRadius: style.borderRadius, padding: style.padding,
+  }];
+}))"""
+
+
+def file_hash(path):
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(MIB), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def available_memory():
+    for line in Path("/proc/meminfo").read_text().splitlines():
+        if line.startswith("MemAvailable:"):
+            return int(line.split()[1]) * 1024
+    raise RuntimeError("Host available memory could not be read")
+
+
+class MemoryGuard:
+    def __init__(self):
+        self.done = threading.Event()
+        self.failure = None
+        self.peak_current = 0
+        self.peak_working = 0
+        self.oom_initial = self.events()
+        self.worker = threading.Thread(target=self.monitor, daemon=True)
+
+    @staticmethod
+    def events():
+        return {key: int(value) for key, value in (line.split() for line in Path("/sys/fs/cgroup/memory.events").read_text().splitlines())}
+
+    def start(self):
+        if available_memory() < 1024 * MIB:
+            raise RuntimeError("Less than 1 GiB host memory is available")
+        self.worker.start()
+
+    def stop(self):
+        self.done.set()
+        if self.worker.is_alive():
+            self.worker.join(timeout=2)
+
+    def monitor(self):
+        while not self.done.wait(0.2):
+            current = int(Path("/sys/fs/cgroup/memory.current").read_text())
+            stats = dict(line.split() for line in Path("/sys/fs/cgroup/memory.stat").read_text().splitlines())
+            working = current - int(stats.get("inactive_file", "0"))
+            self.peak_current = max(self.peak_current, current)
+            self.peak_working = max(self.peak_working, working)
+            events = self.events()
+            if available_memory() < 512 * MIB:
+                self.failure = "Host available memory fell below 512 MiB"
+            elif events.get("oom", 0) > self.oom_initial.get("oom", 0):
+                self.failure = "The capped tool container reported an OOM event"
+            elif working >= 492 * MIB:
+                self.failure = "Browser workload approached the 512 MiB cap"
+            if self.failure:
+                print(json.dumps({"safety_stop": self.failure}), flush=True)
+                for process in Path("/proc").iterdir():
+                    if not process.name.isdigit():
+                        continue
+                    try:
+                        command = (process / "cmdline").read_bytes().split(b"\0")
+                        if MARKER.encode() in command and not any(part.startswith(b"--type=") for part in command):
+                            os.kill(int(process.name), signal.SIGTERM)
+                    except (FileNotFoundError, PermissionError, ProcessLookupError):
+                        pass
+                return
+
+
+def differences(original, integrated):
+    result = []
+    for selector, properties in original.items():
+        for name, expected in properties.items():
+            actual = integrated[selector][name]
+            equal = abs(actual - expected) <= 1 if isinstance(expected, (int, float)) else actual == expected
+            if not equal:
+                result.append({"selector": selector, "property": name, "baseline": expected, "integrated": actual})
+    return result
+
+
+def run_verification():
+    from playwright.sync_api import sync_playwright
+
+    OUTPUT.mkdir(parents=True, exist_ok=True)
+    screenshots = OUTPUT / "screenshots"
+    screenshots.mkdir(exist_ok=True)
+    report = {
+        "scope": "Static source-preservation comparison; browser transport responses are mocked",
+        "backend_validation": "Separate isolated PostgreSQL/Redis RSpec suite: 44 examples, 0 failures",
+        "mock_validates_database": False,
+        "source_zip_sha256": file_hash(ARCHIVE),
+        "controller_sha256": file_hash(CONTROLLER),
+        "viewports": [],
+        "page_errors": [],
+        "failed_required_assets": [],
+        "blocked_external_requests": [],
+        "passed": False,
+    }
+    server = PreviewServer(("127.0.0.1", 0))
+    server_thread = threading.Thread(target=server.serve_forever, daemon=True)
+    server_thread.start()
+    origin = f"http://127.0.0.1:{server.server_port}"
+    report["integrated_csp"] = server.state.csp
+    guard = MemoryGuard()
+    phase = {"name": "startup"}
+    browser = None
+    context = None
+    try:
+        guard.start()
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch(
+                executable_path=str(TOOLS / "chromium-1234/chrome-linux64/chrome"),
+                headless=True,
+                timeout=60_000,
+                args=[
+                    MARKER, "--no-sandbox", "--disable-dev-shm-usage", "--disable-background-networking",
+                    "--disable-extensions", "--disable-component-update", "--disable-default-apps",
+                    "--disable-sync", "--no-first-run", "--disable-gpu-sandbox", "--disable-gpu-watchdog",
+                    "--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader",
+                    "--renderer-process-limit=1", "--num-raster-threads=1", "--disable-site-isolation-trials",
+                    "--disable-features=BackForwardCache,MediaRouter,OptimizationHints,Translate",
+                    "--js-flags=--max-old-space-size=96 --single-threaded --single-threaded-gc",
+                ],
+                env={**os.environ, "MALLOC_ARENA_MAX": "2", "LP_NUM_THREADS": "1", "OMP_NUM_THREADS": "1"},
+            )
+            report["browser_version"] = browser.version
+            for label, width, height, mobile in [("desktop", 1365, 900, False), ("mobile", 390, 844, True)]:
+                context = browser.new_context(
+                    viewport={"width": width, "height": height}, device_scale_factor=1,
+                    is_mobile=mobile, has_touch=mobile, reduced_motion="reduce", color_scheme="light",
+                    locale="zh-CN", timezone_id="Asia/Shanghai",
+                )
+
+                def allow_local(route):
+                    if route.request.url.startswith((origin + "/", "blob:" + origin + "/", "data:")):
+                        route.continue_()
+                    else:
+                        report["blocked_external_requests"].append(route.request.url)
+                        route.abort()
+
+                context.route("**/*", allow_local)
+                page = context.new_page()
+                page.set_default_timeout(30_000)
+                page.on("pageerror", lambda error: report["page_errors"].append({"phase": phase["name"], "message": str(error)}))
+
+                def check_response(response):
+                    path = urlsplit(response.url).path
+                    required = path.startswith(("/assets/", "/join/", "/models/", "/draco/", "/fonts/", "/brand/"))
+                    if required and response.status >= 400:
+                        report["failed_required_assets"].append({"phase": phase["name"], "path": path, "status": response.status})
+
+                page.on("response", check_response)
+                page.on("requestfailed", lambda request: report["failed_required_assets"].append({"phase": phase["name"], "url": request.url, "failure": request.failure}))
+                viewport_result = {"name": label, "viewport": {"width": width, "height": height}, "reduced_motion": True, "versions": {}}
+                report["viewports"].append(viewport_result)
+                baseline_success = None
+                for version, route_path in [("baseline", "/baseline/"), ("integrated", "/join/")]:
+                    phase["name"] = f"{label}-{version}"
+                    print(json.dumps({"phase": phase["name"], "state": "loading"}), flush=True)
+                    response = page.goto(origin + route_path, wait_until="networkidle", timeout=120_000)
+                    assert response.status == 200
+                    if version == "integrated":
+                        assert response.headers.get("content-security-policy") == server.state.csp
+                    page.wait_for_function("document.body.classList.contains('is-ready')", timeout=120_000)
+                    page.wait_for_selector("#loader", state="detached", timeout=10_000)
+                    page.evaluate("() => document.fonts.ready")
+                    scene_state = page.locator("body").get_attribute("data-scene")
+                    if scene_state != "ready":
+                        viewport_result["reduced_fallback"] = {"version": version, "scene": scene_state}
+                        page.screenshot(path=str(screenshots / f"{label}-{version}-fallback-unvalidated.png"), full_page=False)
+                        raise RuntimeError(f"{phase['name']} used scene fallback; full scene comparison stopped")
+                    version_result = {"scene": scene_state, "opening": page.evaluate(GEOMETRY, OPENING)}
+                    version_result["webgl"] = page.evaluate("""() => {
+                      const canvas = document.querySelector('#scene canvas');
+                      const context = canvas?.getContext('webgl2');
+                      if (!context || context.isContextLost()) throw new Error('WebGL context is unavailable');
+                      const debug = context.getExtension('WEBGL_debug_renderer_info');
+                      return { width: canvas.width, height: canvas.height,
+                        renderer: debug ? context.getParameter(debug.UNMASKED_RENDERER_WEBGL) : 'unavailable' };
+                    }""")
+                    viewport_result["versions"][version] = version_result
+                    page.screenshot(path=str(screenshots / f"{label}-{version}-opening.png"), full_page=False, animations="disabled")
+                    page.locator("#contact-button").click()
+                    page.wait_for_selector("#contact-dialog[open]")
+                    assert page.locator("#contact-dialog").get_attribute("data-state") == "idle"
+                    version_result["dialog"] = page.evaluate(GEOMETRY, DIALOG)
+                    version_result["success_text"] = " ".join(page.locator("#application-success").text_content().split())
+                    page.screenshot(path=str(screenshots / f"{label}-{version}-dialog-idle.png"), full_page=False, animations="disabled")
+                    print(json.dumps({"phase": phase["name"], "state": "ready", "scene": scene_state}), flush=True)
+                    if version == "baseline":
+                        baseline_success = version_result["success_text"]
+                        page.goto("about:blank")
+                        continue
+
+                    server.state.reset_mock()
+                    values = {"name": "静态验证", "studentId": "JOIN-STATIC-20261014", "phone": "13800138000"}
+                    for field, selector in [("name", "#application-name"), ("studentId", "#application-student-id"), ("phone", "#application-phone")]:
+                        page.locator(selector).fill(values[field])
+                    page.locator("#application-submit").click()
+                    page.wait_for_function("document.querySelector('#contact-dialog').dataset.state === 'error'")
+                    assert page.locator("#application-error").inner_text() == GENERIC_ERROR
+                    assert page.locator("#application-form").is_visible()
+                    assert page.locator("#application-submit").is_enabled()
+                    for field, selector in [("name", "#application-name"), ("studentId", "#application-student-id"), ("phone", "#application-phone")]:
+                        assert page.locator(selector).input_value() == values[field]
+                    page.screenshot(path=str(screenshots / f"{label}-integrated-dialog-error-mock503.png"), full_page=False, animations="disabled")
+                    page.locator("#application-submit").click()
+                    page.wait_for_function("document.querySelector('#contact-dialog').dataset.state === 'success'")
+                    assert page.locator("#application-success").is_visible()
+                    assert not page.locator("#application-form").is_visible()
+                    assert " ".join(page.locator("#application-success").text_content().split()) == baseline_success
+                    page.screenshot(path=str(screenshots / f"{label}-integrated-dialog-success-mock201.png"), full_page=False, animations="disabled")
+                    assert [post["status"] for post in server.state.posts] == [503, 201]
+                    assert all(post["protocol_valid"] for post in server.state.posts)
+                    assert server.state.posts[0]["fields"] == server.state.posts[1]["fields"]
+                    assert len(server.state.csrf_requests) == 2
+                    assert all(request["xhr"] == "XMLHttpRequest" for request in server.state.csrf_requests)
+                    viewport_result["mock_transport"] = {"csrf": server.state.csrf_requests, "posts": server.state.posts, "database_access": False}
+                viewport_result["geometry_differences"] = {
+                    state: differences(viewport_result["versions"]["baseline"][state], viewport_result["versions"]["integrated"][state])
+                    for state in ["opening", "dialog"]
+                }
+                viewport_result["screenshot_byte_comparisons"] = {
+                    state: file_hash(screenshots / f"{label}-baseline-{state}.png") == file_hash(screenshots / f"{label}-integrated-{state}.png")
+                    for state in ["opening", "dialog-idle"]
+                }
+                assert not any(viewport_result["geometry_differences"].values()), "Original/integrated geometry differs"
+                context.close()
+                context = None
+            assert not report["failed_required_assets"], "Required static assets failed"
+            assert not report["page_errors"], "The page reported JavaScript errors"
+            assert not report["blocked_external_requests"], "Unexpected external requests were blocked"
+            assert not guard.failure, guard.failure
+            report["passed"] = True
+            browser.close()
+            browser = None
+    except Exception as failure:
+        report["failure"] = guard.failure or str(failure)
+    finally:
+        if context is not None:
+            try:
+                context.close()
+            except Exception:
+                pass
+        if browser is not None:
+            try:
+                browser.close()
+            except Exception:
+                pass
+        guard.stop()
+        server.shutdown()
+        server_thread.join(timeout=5)
+        server.server_close()
+        server.state.close()
+        report["resources"] = {
+            "peak_cgroup_current_bytes": guard.peak_current,
+            "peak_cgroup_working_bytes": guard.peak_working,
+            "oom_before": guard.oom_initial,
+            "oom_after": guard.events(),
+            "safety_failure": guard.failure,
+        }
+        report["screenshots"] = [
+            {"file": str(path.relative_to(OUTPUT)), "sha256": file_hash(path)}
+            for path in sorted(screenshots.glob("*.png"))
+        ]
+        (OUTPUT / "browser-validation.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
+    return report
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.parse_args()
+    result = run_verification()
+    print(json.dumps({"passed": result["passed"], "failure": result.get("failure"), "report": str(OUTPUT / "browser-validation.json")}, ensure_ascii=False))
+    raise SystemExit(0 if result["passed"] else 1)

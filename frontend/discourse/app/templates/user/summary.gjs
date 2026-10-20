@@ -179,6 +179,7 @@ export default <template>
           <UserSummaryTopic
             @createdAt={{reply.createdAt}}
             @likes={{reply.like_count}}
+            @postNumber={{reply.post_number}}
             @topic={{reply.topic}}
             @url={{reply.url}}
           />
@@ -195,6 +196,7 @@ export default <template>
           <UserSummaryTopic
             @createdAt={{topic.created_at}}
             @likes={{topic.like_count}}
+            @postNumber={{1}}
             @topic={{topic}}
             @url={{topic.url}}
           />
@@ -226,9 +228,18 @@ export default <template>
                 {{! eslint-enable ember/template-link-rel-noopener }}
                 <br />
 
-                <a href={{link.post_url}}>
-                  {{trustHTML link.topic.fancyTitle}}
-                </a>
+                <PluginOutlet
+                  @name="user-summary-topic-title"
+                  @outletArgs={{lazyHash
+                    topic=link.topic
+                    url=link.post_url
+                    postNumber=link.post_number
+                  }}
+                >
+                  <a href={{link.post_url}}>
+                    {{trustHTML link.topic.fancyTitle}}
+                  </a>
+                </PluginOutlet>
               </li>
             {{/each}}
           </ul>

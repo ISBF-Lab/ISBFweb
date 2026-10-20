@@ -1,0 +1,178 @@
+[
+  {
+    "label": "inventory-before",
+    "available_bytes": 1446801408,
+    "effective_remaining_bytes": 1446801408,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "database-names",
+    "available_bytes": 1491939328,
+    "effective_remaining_bytes": 1491939328,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "data-before",
+    "available_bytes": 1457745920,
+    "effective_remaining_bytes": 1457745920,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "isolated-page-build",
+    "available_bytes": 1441173504,
+    "effective_remaining_bytes": 1441173504,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 536870912
+  },
+  {
+    "label": "build",
+    "available_bytes": 1441173504,
+    "effective_remaining_bytes": 1441173504,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "prepare",
+    "available_bytes": 1574719488,
+    "effective_remaining_bytes": 1574719488,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "service-configuration",
+    "available_bytes": 1555812352,
+    "effective_remaining_bytes": 1555812352,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "service-usage",
+    "available_bytes": 1548849152,
+    "effective_remaining_bytes": 1548849152,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "copy-release.json",
+    "available_bytes": 1478139904,
+    "effective_remaining_bytes": 1478139904,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "copy-release.tar.gz",
+    "available_bytes": 1479712768,
+    "effective_remaining_bytes": 1479712768,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "staging",
+    "available_bytes": 1466744832,
+    "effective_remaining_bytes": 1466744832,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "fixed-hook-container",
+    "available_bytes": 1452515328,
+    "effective_remaining_bytes": 1452515328,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 201326592
+  },
+  {
+    "label": "build-hook",
+    "available_bytes": 1452515328,
+    "effective_remaining_bytes": 1452515328,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "installation",
+    "available_bytes": 1467555840,
+    "effective_remaining_bytes": 1467555840,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "web-reload-headroom",
+    "available_bytes": 1469194240,
+    "effective_remaining_bytes": 1469194240,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 536870912
+  },
+  {
+    "label": "web-reload",
+    "available_bytes": 1469194240,
+    "effective_remaining_bytes": 1469194240,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "ready",
+    "available_bytes": 1457221632,
+    "effective_remaining_bytes": 1457221632,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "ready",
+    "available_bytes": 1063038976,
+    "effective_remaining_bytes": 1063038976,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "http-index",
+    "available_bytes": 1090301952,
+    "effective_remaining_bytes": 1090301952,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "http-scene",
+    "available_bytes": 1086693376,
+    "effective_remaining_bytes": 1086693376,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "inventory-after",
+    "available_bytes": 1082732544,
+    "effective_remaining_bytes": 1082732544,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  },
+  {
+    "label": "data-after",
+    "available_bytes": 1087791104,
+    "effective_remaining_bytes": 1087791104,
+    "cgroup_limits": [],
+    "reserved_bytes": 536870912,
+    "budget_bytes": 134217728
+  }
+]

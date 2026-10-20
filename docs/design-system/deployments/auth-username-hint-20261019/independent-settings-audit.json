@@ -1,0 +1,9 @@
+{
+  "theme_fields_unchanged": 228,
+  "theme_settings_unchanged": true,
+  "changed_invariant_only": "site_settings_digest",
+  "original_backup_retained": true,
+  "latest_setting_state_preserved": true,
+  "pre_and_post_publication_guards_retained": true,
+  "site_settings_written_by_this_release": false
+}

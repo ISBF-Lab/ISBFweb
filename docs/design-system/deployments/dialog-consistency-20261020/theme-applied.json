@@ -1,0 +1,110 @@
+{
+  "published_at_utc": "2026-10-20T02:35:11Z",
+  "theme_id": 4,
+  "fields_before": 228,
+  "fields_after": 230,
+  "preserved_fields": 219,
+  "sources": [
+    {
+      "relative": "common/common.scss",
+      "sha256": "fc808956c91ad23b8921ba432415486b9e4265ca4469947958fe91975b319058",
+      "previous_id": 197,
+      "field_id": 197
+    },
+    {
+      "relative": "stylesheets/frontend-consistency.scss",
+      "sha256": "63c38e0e2a690c3dbfafa584c78ee90c61c6fd286919763ca0cd3f5fd34bc331",
+      "previous_id": 404,
+      "field_id": 404
+    },
+    {
+      "relative": "stylesheets/reporting.scss",
+      "sha256": "27be90b9f7ac462f45704e9eebebfc08ccf0c84bc4d0ff6e0626c513c294ccf8",
+      "previous_id": 271,
+      "field_id": 271
+    },
+    {
+      "relative": "stylesheets/learning-resources.scss",
+      "sha256": "5c26b9cf4d274b12a26813f9b5782001daa167d2f6267c7902a06065b95f2644",
+      "previous_id": 314,
+      "field_id": 314
+    },
+    {
+      "relative": "stylesheets/official-calendar.scss",
+      "sha256": "f6b3aa43a72660d21d507a230963d0c79ed608c3b347732a4485b70ffd5a7d41",
+      "previous_id": 300,
+      "field_id": 300
+    },
+    {
+      "relative": "stylesheets/dialog-consistency.scss",
+      "sha256": "3efe1dc3b05daa691ba9d09cfd4ce66c4ed87dfe221856f51373db647d811d54",
+      "previous_id": null,
+      "field_id": 482
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-frontend-scope.gjs",
+      "sha256": "558832aeee434aaae7da845a51826dab1d029a55fecccfa35e47a78f2bb5d822",
+      "previous_id": 401,
+      "field_id": 401
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-v2-calendar.gjs",
+      "sha256": "fda0f2a75565a0e03c09dd26f524e6f1f3a8425e90ca39b5773179b6562ee094",
+      "previous_id": 206,
+      "field_id": 206
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-calendar-entry-editor.gjs",
+      "sha256": "e714dc7947607159d7edbe189dcbf99f6e7b700c71d96fd0d03eb136fc06455d",
+      "previous_id": null,
+      "field_id": 483
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-resource-directory-dialog.gjs",
+      "sha256": "5fbaf465b61fdd87463833fd004a1a801aef5be526c91a4b227aed0dc7664afe",
+      "previous_id": 383,
+      "field_id": 383
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-resource-parent-picker.gjs",
+      "sha256": "7b6051a2b36cc246fba50541d17570a3ad3e9e37e0460ece3e252c04668c9f96",
+      "previous_id": 387,
+      "field_id": 387
+    }
+  ],
+  "settings_preserved": true,
+  "javascript_url": "/theme-javascripts/464b2ecb3c57ff27fbc51559ead5f159b10e8f6d.js?__ws=isbf-one.com",
+  "javascript_sha256": "6f378b4208d3ce1618a7e8706f0a5f87e9f5d9f04d145dc91e74381165f1e9cb",
+  "styles": [
+    {
+      "target": "common_theme",
+      "bytes": 315978,
+      "sha256": "2b8e3bd38bfd51d77f6730233ff3fdfbffe14d55569909ffc451f9603246ce9a",
+      "url": "/stylesheets/common_theme_4_61832d0d240b16657e86b7816b8bfbddd8cc5793.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "desktop_theme",
+      "bytes": 108,
+      "sha256": "fd75ddb1bd2e9c345d128f8e33237b126bbf6cba19af0299798810afc1cf72a2",
+      "url": "/stylesheets/desktop_theme_4_df84dcd46b693e6112a5b69757d5cea01422d09b.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "mobile_theme",
+      "bytes": 107,
+      "sha256": "52341de8468af5918e5f7171436473311225e8b212f36f8c7e657af4b8a54a38",
+      "url": "/stylesheets/mobile_theme_4_df84dcd46b693e6112a5b69757d5cea01422d09b.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "isbf-resume",
+      "bytes": 17052,
+      "sha256": "f552f1e7933f37805dab7db31fdc21f32adcf12f5a5f00873fa4c19b8b628c00",
+      "url": "/stylesheets/isbf-resume_549927c50d24186ba0b6e3ed44cc43aad9668271.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "isbf-resume_rtl",
+      "bytes": 16950,
+      "sha256": "1f111de32829160dc1c522c66e75f3cb662219522f866bf19c6616f0c13907be",
+      "url": "/stylesheets/isbf-resume_rtl_549927c50d24186ba0b6e3ed44cc43aad9668271.css?__ws=isbf-one.com"
+    }
+  ]
+}

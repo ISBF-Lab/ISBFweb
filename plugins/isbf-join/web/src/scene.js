@@ -161,7 +161,7 @@ export async function createJourneyScene(container, { onProgress, reducedMotion 
 
   const camera = gltf.cameras.find((item) => /DutchCamera|Camera/i.test(item.name)) || gltf.cameras[0];
   if (!camera) throw new Error('The journey model has no camera.');
-  camera.near = 0.08;
+  const authoredNear = camera.near;
   camera.far = 1000;
   camera.aspect = container.clientWidth / container.clientHeight;
   camera.updateProjectionMatrix();
@@ -211,9 +211,11 @@ export async function createJourneyScene(container, { onProgress, reducedMotion 
       : progress <= 0.86
         ? THREE.MathUtils.lerp(0.9, 0.952, (progress - 0.72) / 0.14)
         : THREE.MathUtils.lerp(0.952, config.scene.end, (progress - 0.86) / 0.14);
-    // Keep depth precision for the distant extruded ONE; only bring the near
-    // plane in when the camera enters the billboard/tunnel at close range.
-    const near = THREE.MathUtils.lerp(0.08, 0.008, THREE.MathUtils.smoothstep(progress, 0.76, 0.86));
+    // Preserve the shoe close-up and tunnel clearance while retaining depth
+    // precision for the distant lettering.
+    const openingNear = THREE.MathUtils.lerp(authoredNear, 0.08, THREE.MathUtils.smoothstep(progress, 0.12, 0.18));
+    const tunnelNear = THREE.MathUtils.lerp(0.08, 0.008, THREE.MathUtils.smoothstep(progress, 0.76, 0.86));
+    const near = reducedMotion ? 0.08 : Math.min(openingNear, tunnelNear);
     if (camera.near !== near) { camera.near = near; camera.updateProjectionMatrix(); }
     if (lastProgress !== sample) {
       mixer.setTime(Math.min(sample * duration, duration - 0.012));

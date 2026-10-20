@@ -1,0 +1,118 @@
+{
+  "published": true,
+  "published_at": "2026-10-19T17:26:16Z",
+  "source_version": "9e77b7072c01e3f70398a199489f48f825f44002a411cfbe5b0466a872673eac",
+  "files": [
+    {
+      "path": "frontend/discourse/app/components/code-login-form.gjs",
+      "before_sha256": "cd90486d5d4f17928716dfb0a631752293f139e1ea0b473f0401d158bceea972",
+      "sha256": "fdd657aa0a07df64db94d4b8d91fad35f65957a5b2aeb2e2f957ec3238fbaa12",
+      "workspace_matches": true,
+      "snapshot": "sources/frontend/discourse/app/components/code-login-form.gjs.txt"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/components/academy-auth-page.gjs",
+      "before_sha256": "a8ba466abc267c766a98694d876e65bf8b049ece40e30bc8b716004e61c755b3",
+      "sha256": "6ea58d12cebfe55696249d57e491d46a0ae36ae31e0ad5f309a3f4b3e8c52402",
+      "workspace_matches": true,
+      "snapshot": "sources/plugins/discourse-academy-roles/assets/javascripts/discourse/components/academy-auth-page.gjs.txt"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/stylesheets/common/academy-auth.scss",
+      "before_sha256": "f8101e7954cbb3aef61838043a557141ad97e46f3e8982812a4bfc64f209595c",
+      "sha256": "177aaff9a92a3ebe23b9b6f8986a7cfd6f667fd0fa660b454385e664831246c6",
+      "workspace_matches": false,
+      "snapshot": "sources/plugins/discourse-academy-roles/assets/stylesheets/common/academy-auth.scss.txt"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/client.en.yml",
+      "before_sha256": "e76a72cca19cc2eb99d015925f60f0daedaf521e5ec9de4828bcde0d02cc5160",
+      "sha256": "4b6b285a6b66ca0baa38d6fa28cdcd5d82126b68e51697751d017509840a6263",
+      "workspace_matches": true,
+      "snapshot": "sources/plugins/discourse-academy-roles/config/locales/client.en.yml.txt"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/client.zh_CN.yml",
+      "before_sha256": "b2c18bdf4a98fe92e3454eca5d5c7f630be25d9e6e31261da7f6ec90793fae13",
+      "sha256": "62a04f73473540d709a6cc0b6a11dfb541bdbe5b92a5e7d08f6769fa2aac7ba8",
+      "workspace_matches": true,
+      "snapshot": "sources/plugins/discourse-academy-roles/config/locales/client.zh_CN.yml.txt"
+    }
+  ],
+  "text": "用户名填写后不可更改",
+  "color": "var(--tertiary)",
+  "alignment": "center",
+  "build": {
+    "compiled": true,
+    "core_compiled": true,
+    "authentication_plugin_compiled": true,
+    "plugins_preserved": 66,
+    "source_files": 5,
+    "native_assets": 78,
+    "network": "none",
+    "production_data_mounted": false
+  },
+  "preservation": {
+    "passed": true,
+    "plugins": 66,
+    "complete_source_inventory_matches_candidate": true,
+    "all_plugin_links_markers_hidden_files_preserved": true,
+    "generated_manifests_checked": 61,
+    "generated_manifests_unchanged": 60,
+    "theme_fields_unchanged": 228,
+    "theme_and_site_settings_preserved": true,
+    "independent_setting_update_retained": true,
+    "old_public_asset_entries_preserved": true
+  },
+  "resources": {
+    "passed": true,
+    "tls_verified": true,
+    "unauthenticated_get_only": true,
+    "resources": [
+      {
+        "kind": "core",
+        "url": "/assets/js/discourse-f0ivhmdn-auth-91a1fe14fd79.digested.js",
+        "sha256": "2efa281043a7cbabd1ef9c648698a543baa841564b7dbaf43ca6abc0870eb79e",
+        "bytes": 3925536
+      },
+      {
+        "kind": "plugin",
+        "url": "/assets/js/plugins/discourse-academy-roles_main.CX9evS-m4covnx7.digested.js",
+        "sha256": "1903407857da6f7404d3ec7b3d8fec0131bede29ec409d1f2ae95916cf3f0839",
+        "bytes": 151632
+      },
+      {
+        "kind": "stylesheet",
+        "url": "/stylesheets/discourse-academy-roles_891035595865c96f498d3c698c65c903629e1e0f.css?__ws=isbf-one.com",
+        "sha256": "2f9e2b310c0e489b8284154b76a642a316813d3cfa605eb5e01d37f26547ae53"
+      }
+    ],
+    "full_signup_performed": false,
+    "production_browser_run": false,
+    "budget": {
+      "host_available_bytes": 1498714112,
+      "effective_available_bytes": 1498714112,
+      "memory_limit_bytes": 939524096,
+      "reserve_bytes": 536870912
+    },
+    "elapsed_seconds": 26.9
+  },
+  "asset_graph_version": "91a1fe14fd79",
+  "recovery_image": {
+    "image_tag": "local_discourse/isbf_app:auth-username-hint-20261019-9e77b7072c01",
+    "image_id": "sha256:4e1bb7357305146d0c216d82ea9886afa28516212ccabfa8791f118501828b92",
+    "source_version": "9e77b7072c01e3f70398a199489f48f825f44002a411cfbe5b0466a872673eac",
+    "complete_runtime_source_inventory_matches": true,
+    "plugins": 66,
+    "generated_manifests": 61,
+    "public_manifest_assets_present": true,
+    "missing_base_assets_retained": [],
+    "shared_sources_and_database_theme_required": true,
+    "latest_tag_changed": false,
+    "production_container_recreated": false,
+    "full_production_browser_regression": false
+  },
+  "production_browser_validation": false,
+  "full_signup_performed": false,
+  "final_visual_acceptance": "Pending user review"
+}

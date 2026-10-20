@@ -1,0 +1,11 @@
+{
+  "recorded_at_utc": "2026-10-19T13:24:42.400608+00:00",
+  "user_quote": "可以了，我验证了",
+  "status": "accepted_by_user",
+  "source_version": "fa5783f6e305267a08c186429c1d3dbba8d82d646a06abe550bb8476ded2142a",
+  "scope": "当前交付的C20全屏404；不推定用户逐项执行测试或完成整站回归",
+  "additional_automated_testing_stopped": true,
+  "automated_online_suite_complete": false,
+  "temporary_verification_credentials_removed": true,
+  "temporary_browser_container_removed": true
+}

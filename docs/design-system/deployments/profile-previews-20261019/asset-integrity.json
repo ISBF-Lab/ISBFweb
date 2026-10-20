@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "immutable_assets_checked": 479,
+  "retained_missing_assets": [
+    "js/plugins/isbf-resume_main.BLzK0z-s1msry4j.digested.js",
+    "map/plugins/isbf-resume_main.BLzK0z-s1msry4j.digested.js.map"
+  ],
+  "complete_candidate_and_package_hashes_match": true
+}

@@ -13,7 +13,7 @@ import dReplaceEmoji from "discourse/ui-kit/helpers/d-replace-emoji";
 import { i18n } from "discourse-i18n";
 import { loadCookedPost } from "../lib/feed-post-loader";
 import { optionalTopicTitle } from "../lib/optional-topic-title";
-import { postPreview } from "../lib/post-preview";
+import { hasPostPreviewTarget, postPreview } from "../lib/post-preview";
 
 export default class ISBFPostPreview extends Component {
   #generation = 0;
@@ -27,6 +27,20 @@ export default class ISBFPostPreview extends Component {
     return this.args.variant === "rail";
   }
 
+  get isSummary() {
+    return this.args.variant === "summary";
+  }
+
+  get isTextOnly() {
+    return (
+      this.isRail || this.isSummary || this.args.variant === "continue-reading"
+    );
+  }
+
+  get variantClass() {
+    return this.isTextOnly ? `--${this.args.variant}` : "--activity";
+  }
+
   @cached
   get preview() {
     return this.args.disabled
@@ -35,7 +49,7 @@ export default class ISBFPostPreview extends Component {
   }
 
   get images() {
-    if (this.args.disabled || this.isRail) {
+    if (this.args.disabled || this.isTextOnly) {
       return [];
     }
     return (this._preview?.images ?? [])
@@ -49,7 +63,7 @@ export default class ISBFPostPreview extends Component {
       this.preview.text ||
       i18n(
         themePrefix(
-          this.isRail
+          this.isTextOnly
             ? this.preview.images.length
               ? "isbf_v2.preview_picture"
               : "isbf_v2.preview_post"
@@ -72,8 +86,7 @@ export default class ISBFPostPreview extends Component {
     this._failedImages = [];
     if (
       this.args.disabled ||
-      Number(this.args.postId) <= 0 ||
-      !this.args.postId ||
+      !hasPostPreviewTarget(this.args) ||
       (this.isRail && this.title)
     ) {
       return;
@@ -109,7 +122,10 @@ export default class ISBFPostPreview extends Component {
     this.#requested = true;
     const generation = this.#generation;
     try {
-      const cooked = await loadCookedPost(this.args.postId);
+      const cooked = await loadCookedPost(this.args.postId, {
+        topicId: this.args.topicId,
+        postNumber: this.args.postNumber,
+      });
       if (!this.isDestroying && generation === this.#generation) {
         this._preview = postPreview(cooked);
       }
@@ -120,14 +136,20 @@ export default class ISBFPostPreview extends Component {
 
   <template>
     <a
-      class={{dConcatClass
-        "isbf-post-preview"
-        (if this.isRail "--rail" "--activity")
-      }}
+      class={{dConcatClass "isbf-post-preview" this.variantClass}}
       href={{@href}}
       ...attributes
       {{didInsert this.observe}}
-      {{didUpdate this.observe @postId @disabled @title @excerpt @variant}}
+      {{didUpdate
+        this.observe
+        @postId
+        @topicId
+        @postNumber
+        @disabled
+        @title
+        @excerpt
+        @variant
+      }}
       {{willDestroy this.destroyObserver}}
     >
       <span class="isbf-post-preview__text">{{dReplaceEmoji this.text}}</span>
@@ -146,6 +168,7 @@ export default class ISBFPostPreview extends Component {
         </span>
       {{/if}}
       {{#if this.isRail}}{{dIcon "chevron-right"}}{{/if}}
+      {{yield}}
     </a>
   </template>
 }

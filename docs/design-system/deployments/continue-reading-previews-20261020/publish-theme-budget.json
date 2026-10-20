@@ -1,0 +1,12 @@
+{
+  "host_available_bytes": 1902706688,
+  "effective_available_bytes": 1902706688,
+  "memory_limit_bytes": 1342177280,
+  "reserve_bytes": 536870912,
+  "v8_old_space_mib": 512,
+  "peak_rss_bytes": 1005539328,
+  "lowest_host_available_bytes": 937025536,
+  "exit_code": 0,
+  "stop_reason": null,
+  "elapsed_seconds": 54.5
+}

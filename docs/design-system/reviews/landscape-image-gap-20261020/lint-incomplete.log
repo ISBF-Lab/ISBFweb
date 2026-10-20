@@ -1,0 +1,3 @@
+[bin/lint] Running core linters via lefthook...
+│  Config file "/review/lefthook-serial.yml" not found!
+[bin/lint] All lints passed

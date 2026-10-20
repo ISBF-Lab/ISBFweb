@@ -114,7 +114,7 @@ module IsbfModeration
       raise Discourse::InvalidAccess unless Policy.staff_reviewer?(performed_by, post)
 
       result = nil
-      Notifications.defer do
+      Notifications.defer(post: post) do
         post.with_lock(requires_new: true) do
           @isbf_severe_reviewer_id = performed_by.id
           result = super
@@ -142,6 +142,7 @@ module IsbfModeration
 
       result = super
       if held && result.success? && !post.trashed? && !post.hidden?
+        AiScanner.approve!(post) if payload[AiReview::KEY].present?
         Notifications.publish_after_commit(post, hidden: false)
       end
       result
@@ -152,6 +153,28 @@ module IsbfModeration
     # Core's restore message contains the original raw body. Do not enqueue it until
     # the validated restore transaction has committed successfully.
     def notify_poster(performed_by)
+      if payload[AiReview::KEY].present?
+        return unless performed_by.human? && performed_by.staff?
+
+        post_id = post.id
+        ActiveRecord.after_all_transactions_commit do
+          restored = Post.find_by(id: post_id)
+          recipient = Notifications.recipient_for(restored) if restored
+          if recipient
+            Jobs.enqueue(
+              :send_system_message,
+              user_id: recipient.id,
+              message_type: "flags_disagreed",
+              message_options: {
+                flagged_post_raw_content: restored.raw,
+                url: restored.url,
+              },
+            )
+          end
+        end
+        return
+      end
+
       return super unless Notifications.deferred?
 
       reviewable_id = id

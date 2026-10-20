@@ -1,0 +1,233 @@
+@mixin isbf-dialog-actions {
+  .btn:not(
+    .no-text,
+    .btn-transparent,
+    .btn-link,
+    .emoji-picker-trigger,
+    .select-kit *,
+    .dropdown-menu *,
+    .d-editor-button-bar *,
+    [role="menu"] *
+  ) {
+    --d-button-border-radius: var(--isbf-v2-radius-pill);
+    min-block-size: 44px;
+    padding: var(--isbf-v2-space-2) var(--isbf-v2-space-4);
+    border: 1px solid var(--isbf-v2-border);
+    border-radius: var(--isbf-v2-radius-pill);
+    font-size: var(--isbf-v2-font-sm);
+    font-weight: var(--isbf-v2-weight-medium);
+
+    &:not(
+      :disabled,
+      .disabled,
+      [aria-disabled="true"],
+      .active,
+      [aria-pressed="true"]
+    ) {
+      color: var(--isbf-v2-text);
+      background: var(--isbf-v2-surface);
+
+      .d-icon {
+        color: currentcolor;
+      }
+
+      &.btn-primary {
+        border-color: var(--isbf-v2-accent);
+        color: var(--isbf-v2-accent-contrast);
+        background: var(--isbf-v2-accent);
+      }
+
+      &.btn-danger,
+      &.isbf-flag-modal__severe {
+        border-color: var(--danger);
+        color: var(--secondary);
+        background: var(--danger);
+      }
+
+      &:hover {
+        &:is(.btn-primary, .btn-danger, .isbf-flag-modal__severe) {
+          filter: brightness(0.92);
+        }
+
+        &:not(.btn-primary, .btn-danger, .isbf-flag-modal__severe) {
+          background: var(--isbf-v2-hover);
+        }
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--isbf-v2-focus-ring);
+      outline-offset: 2px;
+    }
+  }
+}
+
+body:not(.admin-interface) {
+  .isbf-calendar-entry-editor {
+    --modal-min-width: 480px;
+    --modal-max-width: 480px;
+  }
+
+  // Mobile menus use DModal for behavior, but retain their menu presentation.
+  .d-modal:not(
+    .fk-d-menu-modal,
+    .chat-message-actions,
+    .insert-table-modal,
+    .fullscreen-code-modal,
+    .fullscreen-table-modal
+  ),
+  .dialog-container {
+    --isbf-dialog-gutter: var(--isbf-v2-space-4);
+    --isbf-dialog-max-height: calc(
+      var(--composer-vh, 1dvh) * 100 - 2 *
+        var(--isbf-dialog-gutter) - env(safe-area-inset-top, 0px) - env(
+          safe-area-inset-bottom,
+          0px
+        )
+    );
+    font-family: var(--isbf-v2-font-family);
+
+    @include isbf-dialog-actions;
+  }
+
+  .d-modal:not(
+    .fk-d-menu-modal,
+    .chat-message-actions,
+    .insert-table-modal,
+    .fullscreen-code-modal,
+    .fullscreen-table-modal
+  ) {
+    &.--large {
+      --modal-max-width: 800px;
+    }
+
+    &.--max {
+      --modal-max-width: 90vw;
+    }
+
+    .d-modal__container {
+      min-inline-size: min(
+        var(--modal-min-width, 0px),
+        calc(100vw - 2 * var(--isbf-dialog-gutter))
+      );
+      max-inline-size: min(
+        var(--modal-max-width, 600px),
+        calc(100vw - 2 * var(--isbf-dialog-gutter))
+      );
+      max-block-size: min(
+        var(--modal-max-height, 80vh),
+        var(--isbf-dialog-max-height)
+      );
+      border: 1px solid var(--isbf-v2-border);
+      border-radius: var(--isbf-v2-radius-md);
+      color: var(--isbf-v2-text);
+      background: var(--isbf-v2-surface);
+      box-shadow: none;
+    }
+
+    :is(.d-modal__header, .d-modal__body, .d-modal__footer) {
+      padding: var(--isbf-v2-space-4);
+      border-color: var(--isbf-v2-border);
+      background: var(--isbf-v2-surface);
+    }
+
+    .d-modal__header {
+      border-start-start-radius: inherit;
+      border-start-end-radius: inherit;
+    }
+
+    .d-modal__body {
+      min-block-size: 0;
+      overscroll-behavior: contain;
+
+      &:first-child {
+        border-start-start-radius: inherit;
+        border-start-end-radius: inherit;
+      }
+
+      &:last-child {
+        border-end-start-radius: inherit;
+        border-end-end-radius: inherit;
+      }
+    }
+
+    .d-modal__header,
+    .d-modal__footer {
+      flex-shrink: 0;
+    }
+
+    .d-modal__footer {
+      gap: var(--isbf-v2-space-2);
+      border-end-start-radius: inherit;
+      border-end-end-radius: inherit;
+    }
+  }
+
+  .dialog-content {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-inline-size: 0;
+    inline-size: min(600px, calc(100vw - 2 * var(--isbf-dialog-gutter)));
+    max-inline-size: calc(100vw - 2 * var(--isbf-dialog-gutter));
+    max-block-size: var(--isbf-dialog-max-height);
+    border: 1px solid var(--isbf-v2-border);
+    border-radius: var(--isbf-v2-radius-md);
+    color: var(--isbf-v2-text);
+    background: var(--isbf-v2-surface);
+    box-shadow: none;
+
+    :is(.dialog-header, .dialog-body, .dialog-footer) {
+      padding: var(--isbf-v2-space-4);
+      border-color: var(--isbf-v2-border);
+    }
+
+    .dialog-header,
+    .dialog-footer {
+      flex-shrink: 0;
+    }
+
+    .dialog-body {
+      min-block-size: 0;
+      max-block-size: none;
+      overscroll-behavior: contain;
+    }
+
+    .dialog-footer {
+      gap: var(--isbf-v2-space-2);
+
+      .btn {
+        margin: 0;
+      }
+    }
+  }
+
+  @media (width <= 600px) {
+    .d-modal:not(
+      .fk-d-menu-modal,
+      .chat-message-actions,
+      .insert-table-modal,
+      .fullscreen-code-modal,
+      .fullscreen-table-modal
+    ) {
+      box-sizing: border-box;
+      padding-inline: var(--isbf-dialog-gutter);
+      padding-block: calc(
+          var(--isbf-dialog-gutter) + env(safe-area-inset-top, 0px)
+        )
+        calc(var(--isbf-dialog-gutter) + env(safe-area-inset-bottom, 0px));
+
+      .d-modal__container {
+        position: relative;
+        inline-size: 100%;
+        min-inline-size: 0;
+        max-inline-size: 100%;
+        block-size: auto;
+        min-block-size: 0;
+        max-block-size: var(--isbf-dialog-max-height);
+        margin: 0 auto;
+        padding-block-end: 0;
+      }
+    }
+  }
+}

@@ -79,13 +79,13 @@
     "file": "dist/assets/index-C9HHADaJ.css",
     "sha256": "7c4f230bad1b8621641605767804735117d7be2d3e77be6840dc27b968039cda"
   },
-  "assets/index-r26J2wOQ.js": {
-    "file": "dist/assets/index-r26J2wOQ.js",
-    "sha256": "86b39bb08d517fc2dfc275b7f41269bb80fd8b20854898164f916d3ddc4e9086"
+  "assets/index-COff8pLO.js": {
+    "file": "dist/assets/index-COff8pLO.js",
+    "sha256": "649ef58467104748aa738879e0ee75bec48c76e1f4fc1df8f0721512180b378f"
   },
-  "assets/scene-BNFbN7l3.js": {
-    "file": "dist/assets/scene-BNFbN7l3.js",
-    "sha256": "3582f6b272f3aa7e18f6c44198bc355645e3b368811b97c611429b18aa6c849c"
+  "assets/scene-B67rpNrn.js": {
+    "file": "dist/assets/scene-B67rpNrn.js",
+    "sha256": "2671b2281c0161f06eb71003d1283aaf70a89123bdefd0d1fd46038c6af34fe0"
   },
   "assets/three-DDksZyp6.js": {
     "file": "dist/assets/three-DDksZyp6.js",
@@ -93,6 +93,6 @@
   },
   "index.html": {
     "file": "dist/index.html",
-    "sha256": "b14851fcad315d797b2e78aba6a81def76dcd9c02dc78bed85f8fd7a7b1a5740"
+    "sha256": "a9fd044583a42dff86a957d82a6adf229ecae70aa0e87fd4f079e9173002c733"
   }
 }

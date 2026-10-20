@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "complete_database_theme_scss": true,
+  "extra_stylesheets": 20,
+  "plugin_styles": [
+    "isbf-resume"
+  ],
+  "results": [
+    {
+      "palette": "ISBF Community Light",
+      "theme_sha256": "81b97f83125d09d353d050c89712e418308576d110402e9bd8224f2e62407519",
+      "theme_bytes": 315732,
+      "resume_sha256": "667b388374f04ebee23830b66c8e82f55eecd15d16df31682d8c0261b918d335",
+      "resume_bytes": 9022
+    },
+    {
+      "palette": "ISBF Community Dark",
+      "theme_sha256": "81b97f83125d09d353d050c89712e418308576d110402e9bd8224f2e62407519",
+      "theme_bytes": 315732,
+      "resume_sha256": "667b388374f04ebee23830b66c8e82f55eecd15d16df31682d8c0261b918d335",
+      "resume_bytes": 9022
+    }
+  ]
+}

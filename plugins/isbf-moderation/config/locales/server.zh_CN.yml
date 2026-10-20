@@ -1,14 +1,37 @@
 zh_CN:
   site_settings:
     isbf_severe_reports_enabled: "允许正常登录账号提交严重举报；关闭后，已有内容保留与审核保护仍然生效。"
+    isbf_ai_moderation_enabled: "自动审核新发布和编辑后的普通公开讨论，包括匿名帖和回复；命中后严格隐藏，等待人工处理。排除私信、内部版块、官方分类和学习资源。关闭后已有待审内容继续保留。需要配置 {{setting:isbf_ai_moderation_model}}。"
+    isbf_ai_moderation_model: "用于自动审核的模型连接；以后可在此切换模型，无需修改审核规则。开启 {{setting:isbf_ai_moderation_images_enabled}} 时，模型需要支持原生视觉或已配置视觉委托。"
+    isbf_ai_moderation_images_enabled: "审核帖子中的上传图片；需要支持图片的模型。关闭后仅审核文字。"
+    isbf_ai_moderation_exempt_groups: "作者属于任一所选群组就跳过 AI 审核；匿名帖按真实作者的群组判断，不向模型提供身份信息。留空表示不设置群组豁免。不会自动恢复已有待审内容，也不影响人工举报。"
   isbf_moderation:
-    held_notice: "该内容因严重举报暂时隐藏，正在等待管理人员审核。"
+    held_notice: "该内容暂时隐藏，正在等待管理人员审核。"
     severe_label: "严重举报"
     review_required: "严重举报必须由管理人员在原生审核队列中处理。"
+    ai:
+      label: "AI 审核"
+      configuration:
+        unavailable: "请先启用 Discourse AI，再开启自动审核。"
+        model_required: "请先选择已有的模型连接，再开启自动审核。"
+        vision_required: "请先选择支持图片的模型，或关闭图片审核。"
+      rules:
+        fraud: "诈骗或商业垃圾广告"
+        harassment: "严重辱骂、骚扰或威胁"
+        privacy: "泄露敏感个人信息"
+        sexual: "露骨色情内容"
   reviewables:
     reasons:
       isbf_severe_report: "社区成员确认提交了严重举报，内容已暂时隐藏并等待管理人员审核。"
+      isbf_ai_moderation: "AI 发现疑似违规内容，帖子已严格隐藏，等待管理人员作出人工审核决定。"
   system_messages:
+    isbf_ai_post_hidden:
+      title: "内容暂时隐藏，等待人工审核"
+      subject_template: "你的内容正在等待人工审核"
+      text_body_template: |
+        自动审核发现你的[内容](%{url})可能存在问题，现已暂时隐藏并转交人工审核。
+
+        这不是最终处理结论。编辑内容不会自动恢复展示；管理人员将决定恢复展示或移除内容。
     isbf_severe_post_hidden:
       title: "内容暂时隐藏，等待管理人员审核"
       subject_template: "你的内容正在等待管理人员审核"

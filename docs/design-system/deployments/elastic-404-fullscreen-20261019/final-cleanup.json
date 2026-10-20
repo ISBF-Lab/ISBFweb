@@ -1,0 +1,9 @@
+{
+  "recorded_at_utc": "2026-10-19T13:24:42.400608+00:00",
+  "verification_keys_removed": true,
+  "temporary_404_containers_present": false,
+  "full_preview_forum": "isbf_frontend_preview_20261012",
+  "full_preview_state": "stopped",
+  "evidence": "Existing key-deletion receipt and final docker ps -a filtered to this task and the preview forum",
+  "additional_tests_run": false
+}

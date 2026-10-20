@@ -1,0 +1,9 @@
+{
+  "fixed_hook_updated": true,
+  "source_sha256": "27bec5c18ad7c823ea0909a589fe1a17c6c96b574f1cbb2533cf2db1e24162e3",
+  "previous_source_sha256": "78709c643308a2258725b63a34a95ed85c3fefc47f0500d31fa9b682c7b2afa8",
+  "before_sha256": "fa442096e9ab7f2cded8383cbfe6dea5f94389ddc067a6f83f0097e9e1bb96d8",
+  "after_sha256": "140e2bf0327aac5f545d7b64167aced71de2eea7964d8af60568c35c98d81f36",
+  "other_configuration_preserved": true,
+  "backup": "/config/isbf_app.yml.before-isbf-join-camera-20261019"
+}

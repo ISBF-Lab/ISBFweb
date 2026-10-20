@@ -10,12 +10,17 @@ import DiscourseURL from "discourse/lib/url";
 import Topic from "discourse/models/topic";
 import topicFixtures from "discourse/tests/fixtures/topic";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
+import pretender, { response } from "discourse/tests/helpers/create-pretender";
 import { i18n } from "discourse-i18n";
 import continueReadingInitializer from "../../discourse/api-initializers/isbf-continue-reading";
 import ISBFContinueReadingFooter from "../../discourse/components/isbf-continue-reading-footer";
 import ISBFContinueReadingItem from "../../discourse/components/isbf-continue-reading-item";
+import { invalidateCookedPost } from "../../discourse/lib/feed-post-loader";
 
 const fixture = cloneJSON(topicFixtures["/t/280/1.json"]);
+const UNTITLED =
+  "校园动态 [isbf-untitled:0ebf0f60-4f19-4cb0-a820-e10d4ac5c501]";
+let nextPreviewId = 790900;
 
 module(
   "ISBF | Integration | Component | ContinueReadingItem",
@@ -201,6 +206,218 @@ module(
         history.restore();
         route.restore();
       }
+    });
+  }
+);
+
+module(
+  "ISBF | Integration | Component | ISBFContinueReadingItem",
+  function (hooks) {
+    setupRenderingTest(hooks);
+
+    hooks.beforeEach(function () {
+      this.topic = Topic.create({
+        ...cloneJSON(fixture.suggested_topics[0]),
+        id: ++nextPreviewId,
+        title: UNTITLED,
+        fancy_title: UNTITLED,
+        excerpt: null,
+        posts_count: 5,
+        highest_post_number: 5,
+        last_read_post_number: 2,
+        unread_posts: 3,
+      });
+      this.requests = [];
+      this.cooked =
+        '<p>Campus photos.</p><a class="lightbox"><img src="/images/avatar.png" alt="internal-filename"></a>';
+      this.observers = [];
+      const observers = this.observers;
+      this.observerStub = sinon
+        .stub(window, "IntersectionObserver")
+        .callsFake(function (callback) {
+          observers.push(callback);
+          return { observe() {}, disconnect() {} };
+        });
+      invalidateCookedPost(this.topic.id, false);
+      pretender.get("/posts/by_number/:topicId/:postNumber.json", (request) => {
+        this.requests.push(request.url);
+        return response({ id: this.topic.id, cooked: this.cooked });
+      });
+    });
+
+    hooks.afterEach(function () {
+      this.observerStub.restore();
+    });
+
+    test("loads the first-post text lazily while retaining the unread target", async function (assert) {
+      await render(
+        <template>
+          <ul><ISBFContinueReadingItem @topic={{this.topic}} /></ul>
+        </template>
+      );
+      assert
+        .dom(".isbf-post-preview__text")
+        .hasText(
+          i18n(themePrefix("isbf_v2.preview_post")),
+          "the internal title is absent even before the body loads"
+        );
+      assert.strictEqual(this.requests.length, 0, "offscreen rows do not load");
+      this.observers[0]([{ isIntersecting: true }]);
+      await settled();
+      assert.deepEqual(
+        this.requests,
+        [`/posts/by_number/${this.topic.id}/1.json`],
+        "the preview reads the first post rather than the unread reply"
+      );
+      assert
+        .dom(".isbf-post-preview__text")
+        .hasText("Campus photos.", "clean body text replaces the placeholder");
+      assert
+        .dom(".isbf-continue-reading__title")
+        .hasAttribute(
+          "href",
+          this.topic.lastUnreadUrl,
+          "the unread target remains"
+        );
+      assert
+        .dom(".isbf-post-preview__image")
+        .doesNotExist("the footer remains a text list");
+      assert.dom("a a").doesNotExist("the preview contains no nested links");
+    });
+
+    test("a pure-image post has a readable label without a filename", async function (assert) {
+      this.cooked =
+        '<a class="lightbox"><img src="/images/avatar.png" alt="internal-filename"></a>';
+      await render(
+        <template>
+          <ul><ISBFContinueReadingItem @topic={{this.topic}} /></ul>
+        </template>
+      );
+      this.observers[0]([{ isIntersecting: true }]);
+      await settled();
+      assert
+        .dom(".isbf-post-preview__text")
+        .hasText(
+          i18n(themePrefix("isbf_v2.preview_picture")),
+          "image-only content uses the existing label"
+        );
+    });
+
+    test("a missing body retains the neutral label and linked-post target", async function (assert) {
+      this.topic.set("linked_post_number", 4);
+      pretender.get("/posts/by_number/:topicId/:postNumber.json", () =>
+        response(404, { errors: ["Not found"] })
+      );
+      await render(
+        <template>
+          <ul><ISBFContinueReadingItem @topic={{this.topic}} /></ul>
+        </template>
+      );
+      this.observers[0]([{ isIntersecting: true }]);
+      await settled();
+      assert
+        .dom(".isbf-post-preview__text")
+        .hasText(
+          i18n(themePrefix("isbf_v2.preview_post")),
+          "failure does not restore the internal title"
+        );
+      assert
+        .dom(".isbf-continue-reading__title")
+        .hasAttribute(
+          "href",
+          this.topic.urlForPostNumber(4),
+          "the explicit post target survives"
+        );
+    });
+
+    test("hidden topics do not expose an excerpt or request their body", async function (assert) {
+      this.topic.setProperties({ hidden: true, excerpt: "Hidden text" });
+      await render(
+        <template>
+          <ul><ISBFContinueReadingItem @topic={{this.topic}} /></ul>
+        </template>
+      );
+      assert
+        .dom(".isbf-post-preview__text")
+        .hasText(
+          i18n(themePrefix("isbf_v2.preview_post")),
+          "hidden content uses a neutral label"
+        );
+      assert.strictEqual(
+        this.observers.length,
+        0,
+        "hidden content is not observed"
+      );
+      assert.strictEqual(
+        this.requests.length,
+        0,
+        "hidden content is not fetched"
+      );
+    });
+
+    test("untitled links retain read announcements, focus and native history", async function (assert) {
+      this.topic.set("last_read_post_number", 5);
+      const route = sinon.stub(DiscourseURL, "routeTo");
+      const history = sinon.spy(
+        this.owner.lookup("service:history-store"),
+        "set"
+      );
+      try {
+        await render(
+          <template>
+            <ul><ISBFContinueReadingItem @topic={{this.topic}} /></ul>
+          </template>
+        );
+        assert
+          .dom(".isbf-continue-reading__title .sr-only")
+          .hasText(
+            `\u00a0${i18n("topic.sr_read")}`,
+            "the native read announcement remains"
+          );
+        await focus(".isbf-continue-reading__title");
+        assert
+          .dom(".isbf-continue-reading__item")
+          .hasClass("selected", "focus selects the row");
+        await click(".isbf-continue-reading__title");
+        assert.true(
+          route.calledOnceWithExactly(
+            new URL(this.topic.lastUnreadUrl, window.location.href).href
+          ),
+          "clicks retain the native reading route"
+        );
+        assert.true(
+          history.calledWithExactly("lastTopicIdViewed", this.topic.id),
+          "clicks retain list history"
+        );
+      } finally {
+        history.restore();
+        route.restore();
+      }
+    });
+
+    test("a real title keeps native formatting without a body request", async function (assert) {
+      this.topic.setProperties({
+        title: "Campus news",
+        fancy_title: "Campus <em>news</em>",
+      });
+      await render(
+        <template>
+          <ul><ISBFContinueReadingItem @topic={{this.topic}} /></ul>
+        </template>
+      );
+      assert
+        .dom(".isbf-continue-reading__title em")
+        .hasText("news", "native title formatting remains");
+      assert.strictEqual(
+        this.observers.length,
+        0,
+        "a titled row needs no preview observer"
+      );
+      assert.strictEqual(
+        this.requests.length,
+        0,
+        "a titled row makes no body request"
+      );
     });
   }
 );

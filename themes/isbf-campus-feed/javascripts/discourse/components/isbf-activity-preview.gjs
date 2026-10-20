@@ -84,6 +84,8 @@ export default class ISBFActivityPreview extends Component {
               @excerpt={{this.post.excerpt}}
               @href={{this.post.postUrl}}
               @postId={{this.post.post_id}}
+              @postNumber={{this.post.post_number}}
+              @topicId={{this.post.topic_id}}
               @variant="activity"
             />
           {{/if}}

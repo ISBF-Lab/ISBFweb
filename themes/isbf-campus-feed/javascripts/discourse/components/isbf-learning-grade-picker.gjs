@@ -32,12 +32,13 @@ export default class ISBFLearningGradePicker extends Component {
   <template>
     <DMenu
       @ariaLabel={{i18n (themePrefix "isbf_v2.learning_grade")}}
+      @beforeTrigger={{this.configureMenu}}
       @contentClass="isbf-learning-grade-menu"
+      @disabled={{@disabled}}
       @icon="chevron-down"
       @label={{this.label}}
       @matchTriggerMinWidth={{true}}
       @modalForMobile={{false}}
-      @onRegisterApi={{this.configureMenu}}
       @placement="bottom-start"
       @triggerClass="btn-flat isbf-learning__grade"
       @visibilityOptimizer="none"

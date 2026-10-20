@@ -1,0 +1,19 @@
+{
+  "endpoint_host": "api.deepseek.com",
+  "model_name": "deepseek-flash",
+  "native_structured_output_disabled": null,
+  "logs": [
+    {
+      "id": 32,
+      "status": 400,
+      "attempts": null,
+      "error": {
+        "type": "invalid_request_error",
+        "code": "invalid_request_error",
+        "param": "",
+        "message": "This response_format type is unavailable now (request_id: 08941263-6692-4b6c-b3fa-c12f3acec5ed)"
+      },
+      "created_at": "2026-10-18T14:31:33Z"
+    }
+  ]
+}

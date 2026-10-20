@@ -1,0 +1,27 @@
+{
+  "host_available_bytes": 1669361664,
+  "effective_available_bytes": 1669361664,
+  "memory_limit_bytes": 1073741824,
+  "reserve_bytes": 536870912,
+  "image": "local_discourse/isbf_app:ai-moderation-20261018-c9541cf33a0a",
+  "network": "none",
+  "swap_total_bytes": 1073741824,
+  "shared_prefixes": [
+    "discourse-avatar-frames-releases",
+    "discourse-latest-created-order",
+    "isbf-alumni-releases",
+    "isbf-calendar-releases",
+    "isbf-careers-releases",
+    "isbf-join-releases",
+    "isbf-learning-releases",
+    "isbf-marketplace-releases",
+    "isbf-official-releases",
+    "isbf-pinning-releases",
+    "isbf-resume-releases",
+    "isbf-teamup-releases"
+  ],
+  "peak_bytes": 490057728,
+  "stop_reason": null,
+  "lowest_host_available_bytes": 1589399552,
+  "elapsed_seconds": 40.6
+}

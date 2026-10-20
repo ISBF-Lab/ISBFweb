@@ -1,14 +1,37 @@
 en:
   site_settings:
     isbf_severe_reports_enabled: "Allow signed-in normal accounts to submit severe reports. Existing content holds remain protected when disabled."
+    isbf_ai_moderation_enabled: "Automatically review new and edited public discussion posts, including anonymous posts and replies. Matches are hidden until staff review. Personal messages, restricted categories, official categories and learning resources are excluded. Existing holds remain when disabled. Requires {{setting:isbf_ai_moderation_model}}."
+    isbf_ai_moderation_model: "Model connection used for automatic post review. Change this selection to switch models without changing the review rules. Images require native vision or a configured vision delegate when {{setting:isbf_ai_moderation_images_enabled}} is enabled."
+    isbf_ai_moderation_images_enabled: "Include uploaded images in automatic post review. Requires an image-capable model. Disable to review text only."
+    isbf_ai_moderation_exempt_groups: "Skip AI review for authors in any selected group. Anonymous posts use the real author's groups without sending identity to the model. Empty means no group exemptions. Existing holds and manual reports are unaffected."
   isbf_moderation:
-    held_notice: "This content is temporarily hidden while staff reviews a severe report."
+    held_notice: "This content is temporarily hidden while awaiting staff review."
     severe_label: "Severe report"
     review_required: "A severe report must be resolved through the staff review queue."
+    ai:
+      label: "AI review"
+      configuration:
+        unavailable: "Enable Discourse AI before enabling automatic post review."
+        model_required: "Select an existing model connection before enabling automatic post review."
+        vision_required: "Select an image-capable model or disable image review first."
+      rules:
+        fraud: "Scams or commercial spam"
+        harassment: "Severe harassment or threats"
+        privacy: "Disclosure of sensitive personal information"
+        sexual: "Explicit sexual content"
   reviewables:
     reasons:
       isbf_severe_report: "A community member confirmed a severe report. The content is held for staff review."
+      isbf_ai_moderation: "AI found content that needs human review. The content is held until staff resolves the review."
   system_messages:
+    isbf_ai_post_hidden:
+      title: "Content temporarily held for review"
+      subject_template: "Your content is awaiting staff review"
+      text_body_template: |
+        Automated review found a possible issue with your [content](%{url}). It has been temporarily hidden for human review.
+
+        This is not a final decision. Editing does not restore visibility; staff will decide whether to restore or remove the content.
     isbf_severe_post_hidden:
       title: "Content temporarily held for staff review"
       subject_template: "Your content is awaiting staff review"

@@ -1,0 +1,538 @@
+--- before/themes/isbf-campus-feed/common/common.scss
++++ after/themes/isbf-campus-feed/common/common.scss
+@@ -3962,9 +3962,11 @@
+   &__menu-items {
+     position: absolute;
+     z-index: 10;
+-    right: 0;
++    inset-inline-end: 0;
+     display: grid;
+-    min-width: 190px;
++    box-sizing: border-box;
++    inline-size: max-content;
++    max-inline-size: calc(100vw - 2 * var(--isbf-v2-space-4));
+     padding: var(--isbf-v2-space-2);
+     border: 1px solid var(--isbf-v2-border);
+     border-radius: var(--isbf-v2-radius-sm);
+@@ -4044,8 +4046,10 @@
+   }
+ 
+   &__preference-error {
++    contain: inline-size;
+     padding: var(--isbf-v2-space-3);
+     font-size: var(--isbf-v2-font-xs);
++    overflow-wrap: anywhere;
+ 
+     p {
+       margin: 0;
+--- before/themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs
++++ after/themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs
+@@ -29,7 +29,6 @@
+   @service siteSettings;
+ 
+   @tracked error = false;
+-  @tracked filter = "all";
+   @tracked groups = [];
+   @tracked loaded = false;
+   @tracked loading = false;
+@@ -47,6 +46,11 @@
+     this.tab = consumeInitialNotificationTab();
+     this.appEvents.on("isbf:notification-tab", this, this.selectTab);
+     this.appEvents.on(
++      "isbf:notification-filter-changed",
++      this,
++      this.onFilterChange
++    );
++    this.appEvents.on(
+       "isbf:notifications-updated",
+       this,
+       this.onNotificationUpdate
+@@ -58,6 +62,11 @@
+     super.willDestroy(...arguments);
+     this.appEvents.off("isbf:notification-tab", this, this.selectTab);
+     this.appEvents.off(
++      "isbf:notification-filter-changed",
++      this,
++      this.onFilterChange
++    );
++    this.appEvents.off(
+       "isbf:notifications-updated",
+       this,
+       this.onNotificationUpdate
+@@ -66,6 +75,10 @@
+ 
+   get allSelected() {
+     return this.tab === "all";
++  }
++
++  get filter() {
++    return this.isbfNotifications.filter;
+   }
+ 
+   get mentionsSelected() {
+@@ -107,11 +120,26 @@
+   }
+ 
+   @action
++  onFilterChange() {
++    this.#reset();
++  }
++
++  @action
+   onNotificationUpdate(data) {
+     for (const [id, read] of data?.recent || []) {
+       this.#models.get(id)?.set("read", read);
+     }
+     scheduleOnce("afterRender", this, this.refresh);
++  }
++
++  @action
++  retryFilter(_value, event) {
++    // Keep focus in the menu when the retry control disappears.
++    event.target
++      .closest(".isbf-notifications__menu")
++      ?.querySelector("summary")
++      ?.focus();
++    return this.isbfNotifications.retryFilter();
+   }
+ 
+   @action
+@@ -156,8 +184,9 @@
+ 
+   @action
+   toggleUnreadOnly() {
+-    this.filter = this.unreadOnly ? "all" : "unread";
+-    this.#reset();
++    return this.isbfNotifications.saveFilter(
++      this.unreadOnly ? "all" : "unread"
++    );
+   }
+ 
+   @action
+@@ -368,11 +397,28 @@
+               }}</a>
+             <div class="isbf-notifications__filter">
+               <DToggleSwitch
++                disabled={{this.isbfNotifications.savingFilter}}
+                 @label={{themePrefix "isbf_v2.notifications_unread_only"}}
+                 @state={{this.unreadOnly}}
+                 {{on "click" this.toggleUnreadOnly}}
+               />
+             </div>
++            {{#if this.isbfNotifications.filterError}}
++              <div
++                class="isbf-notifications__filter-error isbf-notifications__preference-error"
++                role="alert"
++              >
++                <p>{{i18n
++                    (themePrefix "isbf_v2.notifications_filter_error")
++                  }}</p>
++                <DButton
++                  @action={{this.retryFilter}}
++                  @disabled={{this.isbfNotifications.savingFilter}}
++                  @forwardEvent={{true}}
++                  @label={{themePrefix "isbf_v2.notifications_retry"}}
++                />
++              </div>
++            {{/if}}
+             <div
+               aria-label={{i18n
+                 (themePrefix "isbf_v2.notifications_badge_style")
+--- before/themes/isbf-campus-feed/javascripts/discourse/services/isbf-notifications.js
++++ after/themes/isbf-campus-feed/javascripts/discourse/services/isbf-notifications.js
+@@ -13,12 +13,15 @@
+   @service messageBus;
+   @service siteSettings;
+ 
++  @tracked filterError = false;
++  @tracked savingFilter = false;
+   @tracked savingStyle = false;
+   @tracked styleError = false;
+ 
+   version = 0;
+ 
+   #channel;
++  #requestedFilter;
+   #requestedStyle;
+ 
+   constructor() {
+@@ -52,6 +55,12 @@
+ 
+   get dotStyle() {
+     return this.currentUser?.get("isbf_notification_badge_style") === "dot";
++  }
++
++  get filter() {
++    return this.currentUser?.get("isbf_notification_filter") === "unread"
++      ? "unread"
++      : "all";
+   }
+ 
+   get linkLabel() {
+@@ -102,6 +111,11 @@
+   }
+ 
+   @bind
++  retryFilter() {
++    return this.saveFilter(this.#requestedFilter);
++  }
++
++  @bind
+   async saveBadgeStyle(style) {
+     if (
+       !this.currentUser ||
+@@ -137,6 +151,43 @@
+     }
+   }
+ 
++  @bind
++  async saveFilter(filter) {
++    if (
++      !this.currentUser ||
++      this.savingFilter ||
++      !["all", "unread"].includes(filter)
++    ) {
++      return;
++    }
++    const userId = this.currentUser.id;
++    this.#requestedFilter = filter;
++    this.savingFilter = true;
++    this.filterError = false;
++    try {
++      await ajax(`/u/${encodeURIComponent(this.currentUser.username)}.json`, {
++        type: "PUT",
++        data: { custom_fields: { isbf_notification_filter: filter } },
++      });
++      if (!this.isDestroying && this.currentUser?.id === userId) {
++        this.currentUser.set("isbf_notification_filter", filter);
++        this.appEvents.trigger("isbf:notification-filter-changed");
++      }
++    } catch {
++      if (!this.isDestroying && this.currentUser?.id === userId) {
++        this.filterError = true;
++        this.a11y.announce(
++          i18n(themePrefix("isbf_v2.notifications_filter_error")),
++          "assertive"
++        );
++      }
++    } finally {
++      if (!this.isDestroying) {
++        this.savingFilter = false;
++      }
++    }
++  }
++
+   #notifyLocalChange() {
+     if (!this.isDestroying) {
+       this.appEvents.trigger("isbf:notifications-updated");
+--- before/themes/isbf-campus-feed/locales/en.yml
++++ after/themes/isbf-campus-feed/locales/en.yml
+@@ -270,6 +270,7 @@
+     notifications_empty: "No notifications yet."
+     notifications_unread_empty: "You have no unread notifications."
+     notifications_unread_only: "Only unread"
++    notifications_filter_error: "Could not save the notification filter. Please retry."
+     notifications_badge_style: "Badge display"
+     notifications_badge_number: "Numbers"
+     notifications_badge_dot: "Dot"
+--- before/themes/isbf-campus-feed/locales/zh_CN.yml
++++ after/themes/isbf-campus-feed/locales/zh_CN.yml
+@@ -267,6 +267,7 @@
+     notifications_empty: "暂时没有通知。"
+     notifications_unread_empty: "当前没有未读通知。"
+     notifications_unread_only: "只看未读"
++    notifications_filter_error: "筛选方式保存失败，请重试。"
+     notifications_badge_style: "角标显示"
+     notifications_badge_number: "数字"
+     notifications_badge_dot: "圆点"
+--- before/plugins/isbf-notifications/plugin.rb
++++ after/plugins/isbf-notifications/plugin.rb
+@@ -13,6 +13,8 @@
+   module ::IsbfNotifications
+     BADGE_STYLE_FIELD = "isbf_notification_badge_style"
+     BADGE_STYLES = %w[number dot].freeze
++    FILTER_FIELD = "isbf_notification_filter"
++    FILTERS = %w[all unread].freeze
+ 
+     class Engine < ::Rails::Engine
+       engine_name "isbf-notifications"
+@@ -23,6 +25,8 @@
+ 
+   register_user_custom_field_type(IsbfNotifications::BADGE_STYLE_FIELD, :string, max_length: 6)
+   register_editable_user_custom_field(IsbfNotifications::BADGE_STYLE_FIELD)
++  register_user_custom_field_type(IsbfNotifications::FILTER_FIELD, :string, max_length: 6)
++  register_editable_user_custom_field(IsbfNotifications::FILTER_FIELD)
+ 
+   add_model_callback(:user, :validate) do
+     next if custom_fields_clean?
+@@ -31,10 +35,19 @@
+     if !style.nil? && IsbfNotifications::BADGE_STYLES.exclude?(style)
+       errors.add(:base, I18n.t("isbf_notifications.invalid_badge_style"))
+     end
++
++    filter = custom_fields[IsbfNotifications::FILTER_FIELD]
++    if !filter.nil? && IsbfNotifications::FILTERS.exclude?(filter)
++      errors.add(:base, I18n.t("isbf_notifications.invalid_filter"))
++    end
+   end
+ 
+   add_to_serializer(:current_user, :isbf_notification_badge_style) do
+     object.custom_fields[IsbfNotifications::BADGE_STYLE_FIELD] == "dot" ? "dot" : "number"
++  end
++
++  add_to_serializer(:current_user, :isbf_notification_filter) do
++    object.custom_fields[IsbfNotifications::FILTER_FIELD] == "unread" ? "unread" : "all"
+   end
+ 
+   class ::IsbfNotifications::GroupsController < ::ApplicationController
+--- before/plugins/isbf-notifications/config/locales/server.en.yml
++++ after/plugins/isbf-notifications/config/locales/server.en.yml
+@@ -1,5 +1,6 @@
+ en:
+   isbf_notifications:
+     invalid_badge_style: "Choose numbers or a dot for the notification badge."
++    invalid_filter: "Choose all notifications or only unread notifications."
+   site_settings:
+     isbf_notifications_enabled: "Enable grouped ISBF notifications."
+--- before/plugins/isbf-notifications/config/locales/server.zh_CN.yml
++++ after/plugins/isbf-notifications/config/locales/server.zh_CN.yml
+@@ -1,5 +1,6 @@
+ zh_CN:
+   isbf_notifications:
+     invalid_badge_style: "通知角标请选择数字或圆点。"
++    invalid_filter: "通知筛选请选择全部或只看未读。"
+   site_settings:
+     isbf_notifications_enabled: "启用 ISBF 按帖子和动作分组的通知。"
+--- before/themes/isbf-campus-feed/test/integration/notifications-test.gjs
++++ after/themes/isbf-campus-feed/test/integration/notifications-test.gjs
+@@ -1,4 +1,4 @@
+-import { click, find, render, settled } from "@ember/test-helpers";
++import { clearRender, click, find, render, settled } from "@ember/test-helpers";
+ import { module, test } from "qunit";
+ import sinon from "sinon";
+ import { themePrefix } from "virtual:theme";
+@@ -187,9 +187,11 @@
+         [this.site.notification_types.replied]: 1,
+       },
+       unread_high_priority_notifications: 0,
++      isbf_notification_filter: null,
+     });
+     this.owner.register("service:isbf-notifications", NotificationState);
+     this.requests = [];
++    this.savedFilters = [];
+     this.markReadRequests = 0;
+     this.unread = true;
+     const notification = {
+@@ -258,6 +260,13 @@
+       this.unread = false;
+       return response({ success: true });
+     });
++    pretender.put("/u/eviltrout.json", (request) => {
++      this.savedFilters.push(
++        parsePostData(request.requestBody).custom_fields
++          .isbf_notification_filter
++      );
++      return response({ success: true });
++    });
+   });
+ 
+   test("starts with all notifications, filters both tabs and expands without marking read", async function (assert) {
+@@ -292,6 +301,11 @@
+       "unread",
+       "the filter reaches the API"
+     );
++    assert.deepEqual(
++      this.savedFilters,
++      ["unread"],
++      "the selection is saved to the account"
++    );
+     await click(".isbf-notifications__menu summary");
+     assert.false(
+       find(".isbf-notifications__filter").checkVisibility(),
+@@ -318,6 +332,103 @@
+       this.markReadRequests,
+       0,
+       "browsing and expansion have no marking side effect"
++    );
++  });
++
++  test("restores the saved filter before loading and remembers turning it off", async function (assert) {
++    this.currentUser.set("isbf_notification_filter", "unread");
++    await render(<template><ISBFNotifications /></template>);
++    assert.strictEqual(
++      this.requests[0].filter,
++      "unread",
++      "the first request uses the account preference"
++    );
++
++    await clearRender();
++    this.requests = [];
++    await render(<template><ISBFNotifications /></template>);
++    assert.strictEqual(
++      this.requests[0].filter,
++      "unread",
++      "returning restores the same preference"
++    );
++    await click(".isbf-notifications__menu summary");
++    assert
++      .dom(".isbf-notifications__filter [role='switch']")
++      .hasAttribute(
++        "aria-checked",
++        "true",
++        "the switch restores its saved state"
++      );
++    await click(".isbf-notifications__filter [role='switch']");
++    assert.deepEqual(
++      this.savedFilters,
++      ["all"],
++      "turning the filter off also saves the selection"
++    );
++
++    await clearRender();
++    this.requests = [];
++    await render(<template><ISBFNotifications /></template>);
++    assert.strictEqual(
++      this.requests[0].filter,
++      "all",
++      "the next visit includes history again"
++    );
++  });
++
++  test("keeps the previous filter when saving fails and applies a successful retry", async function (assert) {
++    let fail = true;
++    let saved;
++    pretender.put("/u/eviltrout.json", (request) => {
++      saved = parsePostData(request.requestBody).custom_fields;
++      return fail
++        ? response(500, { errors: ["Failed"] })
++        : response({ success: true });
++    });
++    this.currentUser.set("isbf_notification_badge_style", "dot");
++    await render(<template><ISBFNotifications /></template>);
++    await click(".isbf-notifications__menu summary");
++    await click(".isbf-notifications__filter [role='switch']");
++    assert
++      .dom(".isbf-notifications__filter-error")
++      .exists("the failed save offers a retry");
++    assert
++      .dom(".isbf-notifications__filter [role='switch']")
++      .hasAttribute("aria-checked", "false", "the previous selection remains");
++    assert.strictEqual(
++      this.requests.length,
++      1,
++      "failure preserves the loaded list"
++    );
++
++    fail = false;
++    await click(".isbf-notifications__filter-error button");
++    assert.deepEqual(
++      saved,
++      { isbf_notification_filter: "unread" },
++      "retry saves only the selected filter"
++    );
++    assert.strictEqual(
++      this.currentUser.isbf_notification_badge_style,
++      "dot",
++      "the badge preference stays intact"
++    );
++    assert
++      .dom(".isbf-notifications__filter-error")
++      .doesNotExist("a successful retry clears the error");
++    assert
++      .dom(".isbf-notifications__menu summary")
++      .isFocused("retry keeps focus in the menu when its button disappears");
++    assert.strictEqual(
++      this.requests.at(-1).filter,
++      "unread",
++      "success reloads the selected list"
++    );
++    assert.strictEqual(
++      this.markReadRequests,
++      0,
++      "saving never marks notices read"
+     );
+   });
+ 
+--- before/plugins/isbf-notifications/spec/requests/users_controller_spec.rb
++++ after/plugins/isbf-notifications/spec/requests/users_controller_spec.rb
+@@ -43,6 +43,67 @@
+       expect(user.reload.custom_fields[IsbfNotifications::BADGE_STYLE_FIELD]).to eq("number")
+     end
+ 
++    it "restores a private filter across sessions without changing the badge preference" do
++      get "/session/current.json"
++      expect(response.parsed_body.dig("current_user", "isbf_notification_filter")).to eq("all")
++
++      user.custom_fields[IsbfNotifications::BADGE_STYLE_FIELD] = "dot"
++      user.save!
++      put "/u/#{user.username}.json",
++          params: {
++            custom_fields: {
++              isbf_notification_filter: "unread",
++            },
++          }
++      expect(response).to have_http_status(:ok)
++      expect(user.reload.custom_fields).to include(
++        IsbfNotifications::FILTER_FIELD => "unread",
++        IsbfNotifications::BADGE_STYLE_FIELD => "dot",
++      )
++
++      sign_in(other_user)
++      get "/session/current.json"
++      expect(response.parsed_body.dig("current_user", "isbf_notification_filter")).to eq("all")
++
++      sign_in(user)
++      get "/session/current.json"
++      expect(response.parsed_body.dig("current_user", "isbf_notification_filter")).to eq("unread")
++      get "/u/#{user.username}.json"
++      expect(response.parsed_body["user"]).not_to have_key("isbf_notification_filter")
++      expect(response.parsed_body.dig("user", "custom_fields").to_h).not_to have_key(
++        IsbfNotifications::FILTER_FIELD,
++      )
++
++      put "/u/#{user.username}.json", params: { custom_fields: { isbf_notification_filter: "all" } }
++      expect(response).to have_http_status(:ok)
++      expect(user.reload.custom_fields[IsbfNotifications::FILTER_FIELD]).to eq("all")
++    end
++
++    it "rejects unsupported filters and changes to another account" do
++      user.custom_fields[IsbfNotifications::FILTER_FIELD] = "unread"
++      user.save!
++
++      %w[none UNREAD].each do |filter|
++        put "/u/#{user.username}.json",
++            params: {
++              custom_fields: {
++                isbf_notification_filter: filter,
++              },
++            }
++        expect(response).to have_http_status(:unprocessable_entity)
++        expect(user.reload.custom_fields[IsbfNotifications::FILTER_FIELD]).to eq("unread")
++      end
++
++      put "/u/#{other_user.username}.json",
++          params: {
++            custom_fields: {
++              isbf_notification_filter: "unread",
++            },
++          }
++      expect(response).to have_http_status(:forbidden)
++      expect(other_user.reload.custom_fields[IsbfNotifications::FILTER_FIELD]).to be_nil
++    end
++
+     it "rejects unsupported styles and changes to another account" do
+       user.custom_fields[IsbfNotifications::BADGE_STYLE_FIELD] = "dot"
+       user.save!
+--- before/plugins/isbf-notifications/README.md
++++ after/plugins/isbf-notifications/README.md
+@@ -31,3 +31,10 @@
+ `number` when no preference exists. The field is not published on public profiles.
+ The matching theme uses native grouped unread counters, rather than counters that
+ exclude already-seen notices, and retains native marking/navigation behavior.
++
++The private user custom field `isbf_notification_filter` accepts `all` or `unread`
++through the same user update API. It is serialized only for the current user and
++defaults to `all`. The theme reads it before its first grouped request and applies
++a new selection after a successful save. Both tabs share the preference; returning,
++refreshing, or signing in on another device restores the saved selection. A failed
++save preserves the previous selection and offers a retry in the notification menu.

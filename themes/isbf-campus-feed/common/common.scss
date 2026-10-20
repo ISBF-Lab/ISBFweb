@@ -535,18 +535,6 @@ body:has(.isbf-v2-shell--no-page-header) {
   }
 }
 
-.isbf-v2-appearance-modal,
-.isbf-v2-join-modal {
-  .d-modal__container,
-  .d-modal__header,
-  .d-modal__body,
-  .d-modal__footer {
-    background: var(--isbf-v2-surface);
-    color: var(--isbf-v2-text);
-    border-color: var(--isbf-v2-border);
-  }
-}
-
 .isbf-v2-appearance-modal {
   @media (width >= 601px) {
     align-items: center;
@@ -1063,6 +1051,11 @@ body:has(.isbf-v2-shell) tr.isbf-v2-topic {
       flex: none;
     }
   }
+
+  &.--summary {
+    --isbf-preview-lines: 2;
+    color: var(--isbf-v2-accent);
+  }
 }
 
 .isbf-v2-rail__panel .isbf-post-preview.--rail {
@@ -1412,6 +1405,10 @@ body:has(.isbf-v2-shell) tr.isbf-v2-topic > td.isbf-feed-card-cell {
   overflow: hidden;
   max-height: 520px;
   margin-top: 3px;
+
+  img:not(.thumbnail, .ytp-thumbnail-image, .emoji) {
+    height: auto;
+  }
 
   &.is-expanded {
     max-height: none;
@@ -2109,8 +2106,7 @@ body:has(.isbf-v2-shell--workbench) {
 
 .isbf-v2-calendar__heading,
 .isbf-v2-calendar__month-toolbar,
-.isbf-v2-calendar__agenda-heading,
-.isbf-v2-calendar__editor-heading {
+.isbf-v2-calendar__agenda-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2365,91 +2361,6 @@ body:has(.isbf-v2-shell--workbench) {
 .isbf-v2-calendar__error {
   color: var(--danger);
   font-size: 13px;
-}
-
-.isbf-v2-calendar__editor-backdrop {
-  display: grid;
-  position: fixed;
-  inset: 0;
-  z-index: 350;
-  overflow-y: auto;
-  place-items: center;
-  padding: 20px;
-  background: rgb(0, 0, 0, 0.6);
-}
-
-.isbf-v2-calendar__editor {
-  box-sizing: border-box;
-  width: min(480px, 100%);
-  padding: 24px;
-  border: 1px solid var(--isbf-v2-border);
-  border-radius: var(--isbf-v2-radius-md);
-  background: var(--isbf-v2-surface);
-  box-shadow: 0 20px 50px rgb(0, 0, 0, 0.32);
-}
-
-.isbf-v2-calendar__editor-heading h2 {
-  margin: 0;
-  font-size: 20px;
-}
-
-.isbf-v2-calendar__editor-heading button {
-  border: 0;
-  background: transparent;
-  color: var(--isbf-v2-text);
-}
-
-.isbf-v2-calendar__editor label {
-  display: grid;
-  gap: 7px;
-  margin-top: 18px;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.isbf-v2-calendar__editor input,
-.isbf-v2-calendar__editor textarea {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 38px;
-  padding: 8px 10px;
-  border: 1px solid var(--isbf-v2-border-strong);
-  border-radius: 9px;
-  background: var(--isbf-v2-background);
-  color: var(--isbf-v2-text);
-}
-
-.isbf-v2-calendar__editor .isbf-v2-calendar__checkbox {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.isbf-v2-calendar__checkbox input {
-  width: 16px;
-  min-height: 16px;
-}
-
-.isbf-v2-calendar__form-dates {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.isbf-v2-calendar__form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 22px;
-}
-
-.isbf-v2-calendar__form-actions button:first-child {
-  min-height: 42px;
-  padding: 0 14px;
-  border: 0;
-  border-radius: var(--isbf-v2-radius-pill);
-  background: var(--isbf-v2-hover);
-  color: var(--isbf-v2-text);
 }
 
 @media (width <= 1099px) {
@@ -3962,9 +3873,11 @@ body:has(.isbf-v2-shell--grouped-notifications) #main-outlet {
   &__menu-items {
     position: absolute;
     z-index: 10;
-    right: 0;
+    inset-inline-end: 0;
     display: grid;
-    min-width: 190px;
+    box-sizing: border-box;
+    inline-size: max-content;
+    max-inline-size: calc(100vw - 2 * var(--isbf-v2-space-4));
     padding: var(--isbf-v2-space-2);
     border: 1px solid var(--isbf-v2-border);
     border-radius: var(--isbf-v2-radius-sm);
@@ -4044,8 +3957,10 @@ body:has(.isbf-v2-shell--grouped-notifications) #main-outlet {
   }
 
   &__preference-error {
+    contain: inline-size;
     padding: var(--isbf-v2-space-3);
     font-size: var(--isbf-v2-font-xs);
+    overflow-wrap: anywhere;
 
     p {
       margin: 0;
@@ -5661,3 +5576,6 @@ body:has(.isbf-v2-shell) .pswp {
     flex: none;
   }
 }
+
+@import "elastic-not-found";
+@import "dialog-consistency";

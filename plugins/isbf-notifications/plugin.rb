@@ -13,6 +13,8 @@ after_initialize do
   module ::IsbfNotifications
     BADGE_STYLE_FIELD = "isbf_notification_badge_style"
     BADGE_STYLES = %w[number dot].freeze
+    FILTER_FIELD = "isbf_notification_filter"
+    FILTERS = %w[all unread].freeze
 
     class Engine < ::Rails::Engine
       engine_name "isbf-notifications"
@@ -23,6 +25,8 @@ after_initialize do
 
   register_user_custom_field_type(IsbfNotifications::BADGE_STYLE_FIELD, :string, max_length: 6)
   register_editable_user_custom_field(IsbfNotifications::BADGE_STYLE_FIELD)
+  register_user_custom_field_type(IsbfNotifications::FILTER_FIELD, :string, max_length: 6)
+  register_editable_user_custom_field(IsbfNotifications::FILTER_FIELD)
 
   add_model_callback(:user, :validate) do
     next if custom_fields_clean?
@@ -31,10 +35,19 @@ after_initialize do
     if !style.nil? && IsbfNotifications::BADGE_STYLES.exclude?(style)
       errors.add(:base, I18n.t("isbf_notifications.invalid_badge_style"))
     end
+
+    filter = custom_fields[IsbfNotifications::FILTER_FIELD]
+    if !filter.nil? && IsbfNotifications::FILTERS.exclude?(filter)
+      errors.add(:base, I18n.t("isbf_notifications.invalid_filter"))
+    end
   end
 
   add_to_serializer(:current_user, :isbf_notification_badge_style) do
     object.custom_fields[IsbfNotifications::BADGE_STYLE_FIELD] == "dot" ? "dot" : "number"
+  end
+
+  add_to_serializer(:current_user, :isbf_notification_filter) do
+    object.custom_fields[IsbfNotifications::FILTER_FIELD] == "unread" ? "unread" : "all"
   end
 
   class ::IsbfNotifications::GroupsController < ::ApplicationController

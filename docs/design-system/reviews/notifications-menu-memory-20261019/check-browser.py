@@ -1,0 +1,327 @@
+"""Exercise the current compiled theme against isolated, persistent fixture accounts."""
+
+from pathlib import Path
+
+base_harness = Path("/workspace/docs/design-system/reviews/notifications-layout-20261018/check-browser.py")
+base_source = base_harness.read_text().split("\nserver = ThreadingHTTPServer(", 1)[0]
+base_source = base_source.replace(
+    'if "text/css" in kind:',
+    'if "text/css" in kind:\n                    body = re.sub(rb"\\.isbf-notifications__menu-items\\s*\\{[^}]*\\}", b"", body)',
+)
+exec(compile(base_source, str(base_harness), "exec"))
+
+phase = sys.argv[1] if len(sys.argv) > 1 else "layout"
+OUTPUT = ART
+report["phase"] = phase
+report["base_harness_sha256"] = hashlib.sha256(base_harness.read_bytes()).hexdigest()
+report["fixture_accounts_are_synthetic"] = True
+snapshots = ART / "harness-snapshots"
+snapshots.mkdir(exist_ok=True)
+(snapshots / (report["harness_sha256"] + ".py.txt")).write_bytes(Path(__file__).read_bytes())
+control.update(fail_filter=False, hold_filter=False)
+filter_started = threading.Event()
+release_filter = threading.Event()
+OriginalHandler = Handler
+
+
+class Handler(OriginalHandler):
+    def end_headers(self):
+        path = urlsplit(self.path).path
+        static = path.startswith(("/assets/", "/stylesheets/", "/theme-javascripts/", "/svg-sprite/", "/fixture/"))
+        self.send_header("Cache-Control", "public, max-age=31536000, immutable" if static else "no-store")
+        return super().end_headers()
+
+    def do_GET(self):
+        with (ART / f"requests-{phase}.jsonl").open("a") as log:
+            log.write(json.dumps({"path": urlsplit(self.path).path, "time": time.time()}) + "\n")
+        return super().do_GET()
+
+    def do_PUT(self):
+        path = urlsplit(self.path).path
+        if path != f"/u/{fixture['user']['username']}.json":
+            return super().do_PUT()
+        params = parse_qs(self.rfile.read(int(self.headers.get("Content-Length", 0))).decode())
+        account = fixture["user"]
+        report["api_requests"].append({"method": "PUT", "path": path, "fields": params})
+        field = "isbf_notification_filter"
+        if f"custom_fields[{field}]" in params:
+            value = params[f"custom_fields[{field}]"][0]
+            if value not in ["all", "unread"]:
+                return self.send_json({"errors": ["Invalid filter"]}, 422)
+            filter_started.set()
+            if control["hold_filter"]:
+                release_filter.wait(8)
+            if control["fail_filter"]:
+                return self.send_json({"errors": ["Synthetic filter save failure"]}, 500)
+            account[field] = value
+        else:
+            if control["fail_style"]:
+                return self.send_json({"errors": ["Synthetic badge save failure"]}, 500)
+            account["isbf_notification_badge_style"] = params["custom_fields[isbf_notification_badge_style]"][0]
+        self.send_json({"success": True})
+
+
+def group_requests(start=0):
+    return [item for item in report["api_requests"][start:] if item["method"] == "GET" and item["path"] == "/isbf/notifications/groups.json"]
+
+
+def filter_saves():
+    return [item for item in report["api_requests"] if "custom_fields[isbf_notification_filter]" in item.get("fields", {})]
+
+
+def wait_filter(page, value):
+    page.wait_for_function("""value => {
+      const node = document.querySelector('.isbf-notifications__filter [role=switch]');
+      return node && !node.disabled && node.getAttribute('aria-checked') === String(value === 'unread');
+    }""", arg=value)
+    page.wait_for_load_state("networkidle")
+
+
+def select_filter(page, value):
+    open_menu(page)
+    switch = page.locator(".isbf-notifications__filter [role='switch']")
+    if switch.get_attribute("aria-checked") != str(value == "unread").lower():
+        switch.click()
+    wait_filter(page, value)
+
+
+def palette(page, mode):
+    page.evaluate("""({css, mode}) => {
+      let node = document.getElementById('review-palette');
+      if (!node) { node = document.createElement('style'); node.id = 'review-palette'; document.body.append(node); }
+      node.textContent = css; document.documentElement.style.colorScheme = mode;
+    }""", {"css": (ART / f"compiled/colors-{mode}.css").read_text(), "mode": mode})
+
+
+def boot(page):
+    start = len(report["api_requests"])
+    print(json.dumps({"stage": "loading client", "phase": phase}), flush=True)
+    page.goto(f"http://127.0.0.1:8765/u/{fixture['user']['username']}/notifications", wait_until="domcontentloaded", timeout=60000)
+    print(json.dumps({"stage": "client DOM loaded", "phase": phase}), flush=True)
+    page.wait_for_selector(".isbf-notifications__tabs", timeout=60000)
+    page.wait_for_function("!document.querySelector('.isbf-notifications__status[role=status]')", timeout=60000)
+    page.wait_for_load_state("networkidle", timeout=30000)
+    page.evaluate("window.reviewOwner=window.moduleBroker.lookup('discourse/lib/get-owner').getOwnerWithFallback()")
+    check(not page.evaluate("window.fixtureFailure || null"), "the actual compiled notification theme boots")
+    return group_requests(start)
+
+
+def menu_geometry(page):
+    return page.locator(".isbf-notifications__menu-items").evaluate("""menu => {
+      const box = menu.getBoundingClientRect(), style = getComputedStyle(menu);
+      const textEnd = node => {const range = document.createRange(); range.selectNodeContents(node); return range.getBoundingClientRect().right;};
+      const nodes = [menu.querySelector(':scope > button .d-button-label'), menu.querySelector(':scope > a'), menu.querySelector('.d-toggle-switch__checkbox-label')];
+      const end = Math.max(...nodes.map(textEnd));
+      return {x:box.x, right:box.right, width:box.width, trailing:box.right-end,
+        padding:style.paddingInlineEnd, radius:style.borderRadius, border:style.borderInlineEndWidth,
+        triggerEnd:menu.parentElement.getBoundingClientRect().right};
+    }""")
+
+
+server = ThreadingHTTPServer(("127.0.0.1", 8765), Handler)
+threading.Thread(target=server.serve_forever, daemon=True).start()
+browser = None
+page = None
+playwright = None
+try:
+    playwright = sync_playwright().start()
+    if playwright:
+        def client(width=1280):
+            global browser, page
+            if browser:
+                browser.close()
+            browser = playwright.chromium.launch(
+                executable_path=os.environ["ISBF_REVIEW_CHROMIUM"], headless=True,
+                args=["--no-sandbox", "--no-zygote", "--disable-dev-shm-usage", "--disable-gpu", "--renderer-process-limit=1", "--num-raster-threads=1", "--disable-site-isolation-trials", "--disable-features=BackForwardCache,MediaRouter,OptimizationHints,Translate", "--js-flags=--max-old-space-size=128 --optimize-for-size", "--no-proxy-server", "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1, EXCLUDE localhost"],
+            )
+            options = {"viewport": {"width": width, "height": 900}, "locale": "zh-CN", "service_workers": "block"}
+            if width <= 600:
+                options.update(is_mobile=True, has_touch=True, device_scale_factor=1,
+                               user_agent="Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36")
+            context = browser.new_context(**options)
+            page = context.new_page()
+            page.on("pageerror", lambda error: report["errors"].append(str(error)))
+            page.on("console", lambda message: report["console_errors"].append(message.text[:1200]) if message.type == "error" else None)
+            return page
+
+        if phase == "layout":
+            page = client()
+            boot(page)
+            centers = page.locator(".isbf-notification-action__label:has(.isbf-notification-unread)").evaluate_all("""labels => labels.map(label => {
+              const text=label.querySelector('span').getBoundingClientRect();
+              const dot=label.querySelector('.isbf-notification-unread').getBoundingClientRect();
+              return Math.abs((text.top+text.bottom-dot.top-dot.bottom)/2);
+            })""")
+            check(page.locator(".isbf-notifications__topic h2 .isbf-notification-unread").count() == 0 and len(centers) == 2 and max(centers) <= 0.5, "unread dots remain centered on actions and absent from topic titles")
+            for width in [1280, 900, 390, 320]:
+                page.set_viewport_size({"width": width, "height": 900})
+                for mode in ["light", "dark"]:
+                    palette(page, mode)
+                    open_menu(page)
+                    geometry = menu_geometry(page)
+                    report["layouts"].append({"viewport": width, "mode": mode, **geometry})
+                    check(geometry["width"] < 190 and geometry["trailing"] <= 22, f"{width}px {mode} fits the longest control without extra trailing space")
+                    check(geometry["x"] >= 16 and geometry["right"] <= width - 16 and abs(geometry["right"] - geometry["triggerEnd"]) < 1, f"{width}px {mode} keeps the menu aligned to its trigger and inside the viewport")
+                    check(geometry["padding"] == "8px" and geometry["radius"] == "8px" and geometry["border"] == "1px", f"{width}px {mode} retains the approved menu spacing and border")
+                    check(not page.evaluate("document.documentElement.scrollWidth > innerWidth + 1"), f"{width}px {mode} has no horizontal overflow")
+                    page.screenshot(path=str(ART / f"{width}-{mode}-menu.png"))
+                    page.locator(".isbf-notifications__filter [role='switch']").focus()
+                    page.keyboard.press("Escape")
+                    check(not page.locator(".isbf-notifications__menu").evaluate("node=>node.open") and page.locator(".isbf-notifications__menu summary").evaluate("node=>node===document.activeElement"), f"{width}px {mode} Escape restores focus to the trigger")
+            page.set_viewport_size({"width": 1280, "height": 900})
+            page.locator(".isbf-notifications").evaluate("node=>node.dir='rtl'")
+            open_menu(page)
+            rtl = page.locator(".isbf-notifications__menu-items").evaluate("""node => ({
+              direction:getComputedStyle(node).direction, left:node.getBoundingClientRect().left,
+              triggerLeft:node.parentElement.getBoundingClientRect().left,
+              right:getComputedStyle(node).right, logicalEnd:getComputedStyle(node).insetInlineEnd
+            })""")
+            report["rtl"] = rtl
+            check(rtl["direction"] == "rtl" and abs(rtl["left"]-rtl["triggerLeft"])<1, "RTL positions the menu at the logical end of its trigger")
+
+        elif phase == "memory":
+            fixture["user"].pop("isbf_notification_filter", None)
+            fixture["user"]["isbf_notification_badge_style"] = "dot"
+            page = client()
+            requests = boot(page)
+            check(requests[0]["query"]["filter"] == ["all"] and not filter_saves(), "a new account starts with all notifications without an automatic write")
+            open_menu(page)
+            width = menu_geometry(page)["width"]
+            control["fail_filter"] = True
+            page.locator(".isbf-notifications__filter [role='switch']").click()
+            page.wait_for_selector(".isbf-notifications__filter-error")
+            check(page.locator(".isbf-notifications__filter [role='switch']").get_attribute("aria-checked") == "false" and len(group_requests()) == 1, "a failed save preserves both the switch and the existing list")
+            check(abs(menu_geometry(page)["width"] - width) < 1, "the translated save error wraps without widening the menu")
+            palette(page, "dark")
+            page.screenshot(path=str(ART / "1280-dark-filter-error.png"))
+
+            control.update(fail_filter=False, hold_filter=True)
+            filter_started.clear()
+            release_filter.clear()
+            previous = len(filter_saves())
+            page.locator(".isbf-notifications__filter-error button").click()
+            check(filter_started.wait(3), "retry reaches the isolated preference endpoint")
+            check(page.locator(".isbf-notifications__menu summary").evaluate("node=>node===document.activeElement"), "retry keeps keyboard focus in the menu when its button disappears")
+            switch = page.locator(".isbf-notifications__filter [role='switch']")
+            check(switch.is_disabled() and switch.get_attribute("aria-checked") == "false", "the saved selection remains visible and disabled while saving")
+            box = switch.bounding_box()
+            page.mouse.click(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
+            check(len(filter_saves()) == previous + 1, "clicking the disabled switch sends no duplicate preference request")
+            control["hold_filter"] = False
+            release_filter.set()
+            wait_filter(page, "unread")
+            check(fixture["user"]["isbf_notification_filter"] == "unread" and page.locator(".isbf-notifications__filter-error").count() == 0, "a successful retry persists and applies the unread selection")
+            check(page.locator(".isbf-notifications__standalone").count() == 0 and page.locator(".isbf-notification-bell__badge.--dot").count() == 2, "filter saves preserve badge preferences and filter the list")
+            page.locator(".isbf-notifications__menu summary").focus()
+            page.keyboard.press("Escape")
+            page.locator(".isbf-notifications__tabs button").nth(1).click()
+            page.wait_for_load_state("networkidle")
+            check(group_requests()[-1]["query"]["filter"] == ["unread"] and group_requests()[-1]["query"]["tab"] == ["mentions"], "the mentions tab shares the saved unread preference")
+            page.locator(".isbf-notification-action__toggle").click()
+            page.wait_for_load_state("networkidle")
+            details = [item for item in report["api_requests"] if "/actions/" in item["path"]]
+            check(details[-1]["query"]["filter"] == ["unread"], "lazy details inherit the saved filter")
+
+            requests = boot(page)
+            check(requests[0]["query"]["filter"] == ["unread"] and all(item["query"]["filter"] == ["unread"] for item in requests), "a full reload begins with unread and never flashes an all-notifications request")
+            page = client(390)
+            requests = boot(page)
+            check(requests[0]["query"]["filter"] == ["unread"], "a fresh mobile browser restores the account preference without local browser storage")
+            open_menu(page)
+            switch = page.locator(".isbf-notifications__filter [role='switch']")
+            switch.focus()
+            page.keyboard.press("Space")
+            wait_filter(page, "all")
+            requests = boot(page)
+            check(requests[0]["query"]["filter"] == ["all"] and fixture["user"]["isbf_notification_filter"] == "all", "turning the switch off with the keyboard persists across reloads")
+            select_filter(page, "unread")
+            first_account = fixture["user"]
+            second_account = copy.deepcopy(first_account)
+            second_account.update(id=84, username="second-user", name="第二位用户")
+            second_account.pop("isbf_notification_filter", None)
+            fixture["user"] = second_account
+            requests = boot(page)
+            check(requests[0]["query"]["filter"] == ["all"], "another account starts with its own default selection")
+            fixture["user"] = first_account
+            requests = boot(page)
+            check(requests[0]["query"]["filter"] == ["unread"], "signing back into the first fixture account restores its saved selection")
+
+            for record in records:
+                record["read"] = True
+            fixture["user"]["grouped_unread_notifications"] = {}
+            publish(page, {}, [[record["id"], True] for record in records])
+            page.wait_for_function("!document.querySelector('.isbf-notifications__topic')")
+            requests = boot(page)
+            check(requests[0]["query"]["filter"] == ["unread"] and "当前没有未读通知" in page.locator(".isbf-notifications__status").inner_text(), "an empty unread list keeps the account selection on the next visit")
+            select_filter(page, "all")
+            control["delay_filter"] = "all"
+            page.evaluate("reviewOwner.lookup('service:app-events').trigger('isbf:notifications-updated')")
+            page.wait_for_timeout(120)
+            select_filter(page, "unread")
+            page.wait_for_timeout(1300)
+            check(page.locator(".isbf-notifications__topic").count() == 0 and page.locator(".isbf-notifications__filter [role='switch']").get_attribute("aria-checked") == "true", "a delayed response for the previous filter cannot overwrite the saved unread list")
+            check(not any(item["method"] == "PUT" and item["path"] == "/notifications/mark-read" for item in report["api_requests"]), "saving or restoring filters never marks notifications read")
+
+        elif phase == "regression":
+            for width in [1280, 390]:
+                records[1]["read"] = False
+                counts = {str(types["replied"]): 1, str(types["liked_consolidated"]): 1}
+                fixture["user"]["grouped_unread_notifications"] = counts
+                page = client(width)
+                boot(page)
+                page.evaluate("""() => {
+                  window.reviewNavigation=[]; window.reviewClicks=[];
+                  window.moduleBroker.lookup('discourse/lib/url').default.routeTo=href=>reviewNavigation.push(href);
+                  reviewOwner.lookup('service:app-events').on('user-menu:notification-click', data=>reviewClicks.push(data.notification.id));
+                }""")
+                href = "/u/preview-user/notifications/likes-received?acting_username=student"
+                row = page.locator(".isbf-notification-entry").filter(has=page.locator(f"a[href='{href}']"))
+                for target in ["avatar", "content", "time", "whitespace"]:
+                    records[1]["read"] = False
+                    publish(page, counts, [[93002, False]])
+                    page.wait_for_load_state("networkidle")
+                    page.wait_for_function("document.querySelectorAll('.isbf-notification-entry.is-unread').length === 1")
+                    row.scroll_into_view_if_needed()
+                    node = row if target == "whitespace" else row.locator(f".isbf-notification-entry__{target}")
+                    box = node.bounding_box()
+                    x = box["x"] + box["width"] - 4 if target == "whitespace" else box["x"] + box["width"] / 2
+                    y = box["y"] + box["height"] - 4 if target == "whitespace" else box["y"] + box["height"] / 2
+                    previous = page.evaluate("reviewNavigation.length")
+                    if width <= 600:
+                        page.touchscreen.tap(x, y)
+                    else:
+                        page.mouse.click(x, y)
+                    page.wait_for_function("before=>reviewNavigation.length>before", arg=previous)
+                    page.wait_for_load_state("networkidle")
+                    result = page.evaluate("({href:reviewNavigation.at(-1), count:reviewNavigation.length, events:reviewClicks.length})")
+                    check(result == {"href": href, "count": previous + 1, "events": previous + 1} and page.locator(".isbf-notification-bell__badge").first.inner_text() == "1", f"{width}px {target} invokes the original notification target once and consumes one unread count")
+                row.locator("a").first.focus()
+                previous = page.evaluate("reviewNavigation.length")
+                page.keyboard.press("Enter")
+                page.wait_for_function("before=>reviewNavigation.length>before", arg=previous)
+                check(page.locator(".isbf-notification-bell__badge").first.inner_text() == "1", f"{width}px keyboard navigation preserves the read state without another deduction")
+                open_menu(page)
+                page.locator(".isbf-notifications__badge-options button").nth(1).click()
+                page.wait_for_selector(".isbf-notification-bell__badge.--dot:visible")
+                check(page.evaluate("reviewOwner.lookup('service:isbf-notifications').filter") == "all", f"{width}px changing the badge style preserves the selected filter")
+                page.locator(".isbf-notifications__badge-options button").first.click()
+                page.wait_for_function("!document.querySelector('.isbf-notification-bell__badge.--dot')")
+        else:
+            raise ValueError(f"Unknown phase: {phase}")
+        check(not report["errors"], "the client has no JavaScript runtime errors")
+        check(not report["missing_assets"], "all JavaScript and stylesheet assets are available offline")
+        report["passed"] = True
+except Exception as error:
+    report["failure"] = str(error)
+    if page and not page.is_closed():
+        report["debug"] = {"body": page.locator("body").inner_text()[-2200:]}
+        page.screenshot(path=str(ART / f"failure-{phase}.png"))
+    raise
+finally:
+    release_filter.set()
+    if browser:
+        browser.close()
+    if playwright:
+        playwright.stop()
+    server.shutdown()
+    (ART / f"browser-{phase}.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")

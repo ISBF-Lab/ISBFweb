@@ -1,3 +1,4 @@
+import { later } from "@ember/runloop";
 import { ajax } from "discourse/lib/ajax";
 
 export function createViewTracker(endpoint, idParameter) {
@@ -37,7 +38,7 @@ export function createViewTracker(endpoint, idParameter) {
     }
 
     if (pendingKeys.size) {
-      timer = setTimeout(flush, 40);
+      timer = later(flush, 40);
     }
   }
 
@@ -56,7 +57,7 @@ export function createViewTracker(endpoint, idParameter) {
     });
     requests.set(key, { promise, resolve, id });
     pendingKeys.add(key);
-    timer ??= setTimeout(flush, 40);
+    timer ??= later(flush, 40);
     return promise;
   };
 }

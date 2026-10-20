@@ -6,6 +6,7 @@ import Composer from "discourse/models/composer";
 import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
 import { i18n } from "discourse-i18n";
 import ISBFActivityPreview from "../components/isbf-activity-preview";
+import ISBFSummaryTopicTitle from "../components/isbf-summary-topic-title";
 import ISBFV2ComposerCancel from "../components/isbf-v2-composer-cancel";
 import ISBFV2ComposerOptions from "../components/isbf-v2-composer-options";
 import ISBFV2ComposerTitle from "../components/isbf-v2-composer-title";
@@ -46,6 +47,7 @@ export default apiInitializer((api) => {
       }
   );
   api.renderInOutlet("user-stream-item-above", ISBFActivityPreview);
+  api.renderInOutlet("user-summary-topic-title", ISBFSummaryTopicTitle);
 
   Composer.serializeOnCreate(
     "isbf_repost_source_topic_id",

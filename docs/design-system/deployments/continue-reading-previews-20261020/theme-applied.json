@@ -1,0 +1,50 @@
+{
+  "published_at_utc": "2026-10-20T00:35:10Z",
+  "theme_id": 4,
+  "fields_before": 228,
+  "fields_after": 228,
+  "preserved_fields": 225,
+  "sources": [
+    {
+      "relative": "javascripts/discourse/components/isbf-continue-reading-item.gjs",
+      "sha256": "401d041c6816356f376a8dbe11c40af78d5f1e4e2875e4449d14ea712eac9b82",
+      "previous_id": 461,
+      "field_id": 461
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-post-preview.gjs",
+      "sha256": "b6ab018436d6ed3c8fe9bd239587fe469aba4d2c6f9fed31fdf252cf6729faab",
+      "previous_id": 330,
+      "field_id": 330
+    },
+    {
+      "relative": "stylesheets/continue-reading.scss",
+      "sha256": "8dbec22ef9b591c4db044ccd146bfe5748697974df645b39b0bb64c7eeaa75e4",
+      "previous_id": 463,
+      "field_id": 463
+    }
+  ],
+  "settings_preserved": true,
+  "javascript_url": "/theme-javascripts/7305024d4d83d39bac80b4d035f9c4ce4cfa933a.js?__ws=isbf-one.com",
+  "javascript_sha256": "30f1bea2d9cc119a28379d9aad7a991f52e57258d313551ca4213ac77ef0ae26",
+  "styles": [
+    {
+      "target": "common_theme",
+      "bytes": 326931,
+      "sha256": "9c5fca38adf0210264c4914101fe36c59ecfcefec4d378766e11caa0e1884753",
+      "url": "/stylesheets/common_theme_4_dc5c5e6130368a94d4ab47337ddd1950dba9348c.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "desktop_theme",
+      "bytes": 108,
+      "sha256": "8b4014c2cefd3a637089e690671e9b911917d2c3e68c37003a229a7af72e6460",
+      "url": "/stylesheets/desktop_theme_4_55227e0ff68ea41609c0b7b5f205e72fd2f66b16.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "mobile_theme",
+      "bytes": 107,
+      "sha256": "a220e0a9f91522556034826b56ce0ab2b9c7f9856fde5ffa0775c8c426a7a929",
+      "url": "/stylesheets/mobile_theme_4_55227e0ff68ea41609c0b7b5f205e72fd2f66b16.css?__ws=isbf-one.com"
+    }
+  ]
+}

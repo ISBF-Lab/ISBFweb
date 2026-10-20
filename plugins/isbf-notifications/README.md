@@ -31,3 +31,10 @@ The private user custom field `isbf_notification_badge_style` accepts `number` o
 `number` when no preference exists. The field is not published on public profiles.
 The matching theme uses native grouped unread counters, rather than counters that
 exclude already-seen notices, and retains native marking/navigation behavior.
+
+The private user custom field `isbf_notification_filter` accepts `all` or `unread`
+through the same user update API. It is serialized only for the current user and
+defaults to `all`. The theme reads it before its first grouped request and applies
+a new selection after a successful save. Both tabs share the preference; returning,
+refreshing, or signing in on another device restores the saved selection. A failed
+save preserves the previous selection and offers a retry in the notification menu.

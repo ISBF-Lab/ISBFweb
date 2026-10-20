@@ -1,0 +1,10 @@
+{
+  "host_available_bytes": 2097180672,
+  "effective_available_bytes": 2097180672,
+  "memory_limit_bytes": 1543503872,
+  "reserve_bytes": 536870912,
+  "graceful_web_reload": true,
+  "database_restarted": false,
+  "redis_restarted": false,
+  "container_recreated": false
+}

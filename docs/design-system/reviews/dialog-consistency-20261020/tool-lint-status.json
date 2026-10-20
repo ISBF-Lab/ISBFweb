@@ -1,0 +1,29 @@
+{
+  "commands": [
+    {
+      "command": [
+        "pnpm",
+        "exec",
+        "prettier",
+        "--write",
+        "script/check-isbf-dialogs.mjs",
+        "script/check-isbf-dialogs.test.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "pnpm",
+        "exec",
+        "eslint",
+        "--fix",
+        "--no-warn-ignored",
+        "script/check-isbf-dialogs.mjs",
+        "script/check-isbf-dialogs.test.mjs"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "exit_code": 0,
+  "serial": true
+}

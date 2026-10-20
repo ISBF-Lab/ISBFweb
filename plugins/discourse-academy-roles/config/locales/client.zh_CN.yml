@@ -67,3 +67,4 @@ zh_CN:
         success: 注册成功
         redirect_notice: 5 秒后进入论坛首页
         new_account_required: 邀请码仅用于创建新账号，请先退出当前账号。
+        username_hint: 用户名填写后不可更改

@@ -1,0 +1,80 @@
+{
+  "source_version": "5109370e6bf46175d9d15788dd0b5830a541cb3bee0df3e61746cf734d42adf3",
+  "review_source_version": "4b99203c0fa076d70b5883ed3c4ee385f6bcf35218d25fc7059e61ace83fe216",
+  "sources": [
+    {
+      "relative": "common/common.scss",
+      "before_sha256": "20389961304d4481173f0fca78fe38ea1140a6aea6a220b1393cc03176005781",
+      "sha256": "fc808956c91ad23b8921ba432415486b9e4265ca4469947958fe91975b319058"
+    },
+    {
+      "relative": "stylesheets/frontend-consistency.scss",
+      "before_sha256": "b690f4d7259df258c1dcc0dcd3b584b9cfc98d5051c46e88fe8e420ae9bf5c49",
+      "sha256": "63c38e0e2a690c3dbfafa584c78ee90c61c6fd286919763ca0cd3f5fd34bc331"
+    },
+    {
+      "relative": "stylesheets/reporting.scss",
+      "before_sha256": "ce2cca589858163a314473c8d8a02fffef9019293b419e64bf04fddbaaae2355",
+      "sha256": "27be90b9f7ac462f45704e9eebebfc08ccf0c84bc4d0ff6e0626c513c294ccf8"
+    },
+    {
+      "relative": "stylesheets/learning-resources.scss",
+      "before_sha256": "b48c6d09ec6a1901f1701de2463b86b65897eef9addb3cb90270ad77442972d3",
+      "sha256": "5c26b9cf4d274b12a26813f9b5782001daa167d2f6267c7902a06065b95f2644"
+    },
+    {
+      "relative": "stylesheets/official-calendar.scss",
+      "before_sha256": "20eb17543c0860060722ebb8fc7a33e420481ec066958a220b7992917ae34e13",
+      "sha256": "f6b3aa43a72660d21d507a230963d0c79ed608c3b347732a4485b70ffd5a7d41"
+    },
+    {
+      "relative": "stylesheets/dialog-consistency.scss",
+      "before_sha256": null,
+      "sha256": "3efe1dc3b05daa691ba9d09cfd4ce66c4ed87dfe221856f51373db647d811d54"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-frontend-scope.gjs",
+      "before_sha256": "d0cc3f6afb5539aa73a51ecfd47ccd3baa4c255f2bc53a68e221002dda3f31e3",
+      "sha256": "558832aeee434aaae7da845a51826dab1d029a55fecccfa35e47a78f2bb5d822"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-v2-calendar.gjs",
+      "before_sha256": "55fcdf87d97abd87c528d9a1c05907409e3a3d61d900ba60ee26a1ca629c19fd",
+      "sha256": "fda0f2a75565a0e03c09dd26f524e6f1f3a8425e90ca39b5773179b6562ee094"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-calendar-entry-editor.gjs",
+      "before_sha256": null,
+      "sha256": "e714dc7947607159d7edbe189dcbf99f6e7b700c71d96fd0d03eb136fc06455d"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-learning-course-dialog.gjs",
+      "before_sha256": "13fd185bcbe7d4f37ad90fda90994269dda28ace3fe3bd2de0ccbe285b16951b",
+      "sha256": "13fd185bcbe7d4f37ad90fda90994269dda28ace3fe3bd2de0ccbe285b16951b"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-resource-directory-dialog.gjs",
+      "before_sha256": "a4d0ff3b4c109dffc94e11fa215fd6b341472dc487e9f38f7e40da221ab9839f",
+      "sha256": "5fbaf465b61fdd87463833fd004a1a801aef5be526c91a4b227aed0dc7664afe"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-learning-grade-picker.gjs",
+      "before_sha256": "2034bb0109533038157d75afd11f437babef9ef06e192bb7698af6a364615c15",
+      "sha256": "2034bb0109533038157d75afd11f437babef9ef06e192bb7698af6a364615c15"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-resource-parent-picker.gjs",
+      "before_sha256": "627c4e0a2f6ea80c3bf025c05b7ebba691a733cf230e4e83ecb74476a2f76cfb",
+      "sha256": "7b6051a2b36cc246fba50541d17570a3ad3e9e37e0460ece3e252c04668c9f96"
+    },
+    {
+      "path": "plugins/isbf-resume/assets/stylesheets/isbf-resume.scss",
+      "before_sha256": "8fe40770f403a118c7a6fd25c50d8ebb49c9968bc26962ab4522b602e9347ea0",
+      "sha256": "c6f4c3538f000aedccd4d770ea2399853e6219bd268559f42a92d30c930721ca",
+      "workspace_matches": true
+    }
+  ],
+  "image_tag": "local_discourse/isbf_app:dialog-consistency-20261020-5109370e6bf4",
+  "base_image": "local_discourse/isbf_app:auth-username-hint-20261019-9e77b7072c01",
+  "image_id": "sha256:8179d4c6c2476f4e48bbe5142edb4a4feeb8222dfc50f02c62cab5e6c3c38101"
+}
