@@ -83,7 +83,11 @@ acceptance("ISBF profile previews", function (needs) {
     const preview = observations.find(({ element }) =>
       element.classList.contains("isbf-post-preview")
     );
-    assert.ok(preview, "the activity preview observes its visibility");
+    assert.notStrictEqual(
+      preview,
+      undefined,
+      "the activity preview observes its visibility"
+    );
     await preview.trigger();
     await waitUntil(() => find(".isbf-post-preview__image"));
     assert
