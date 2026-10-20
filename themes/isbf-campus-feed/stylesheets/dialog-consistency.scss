@@ -204,12 +204,12 @@ body:not(.admin-interface) {
 
   @media (width <= 600px) {
     .d-modal:not(
-    .fk-d-menu-modal,
-    .chat-message-actions,
-    .insert-table-modal,
-    .fullscreen-code-modal,
-    .fullscreen-table-modal
-  ) {
+      .fk-d-menu-modal,
+      .chat-message-actions,
+      .insert-table-modal,
+      .fullscreen-code-modal,
+      .fullscreen-table-modal
+    ) {
       box-sizing: border-box;
       padding-inline: var(--isbf-dialog-gutter);
       padding-block: calc(

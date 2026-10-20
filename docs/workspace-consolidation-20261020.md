@@ -64,6 +64,12 @@ YAML lint 属于锁定的 development 依赖，前端 CI 因原先排除该组�
 本次三份 JavaScript 源码及测试的定向 `bin/lint --fix` 已通过 ESLint 与 Prettier；
 ERB 模板不属于该入口支持的 lint 类型，由 CI 渲染验证。
 
+推送前发现远端并发修复 `5d59662bc1f6f7b58d03d4874a9d9287aa0aa5b3`，已保留并整合
+编辑器弹窗排除范围、无障碍文本断言及曝光接口测试桩；同时整合最新 `main`
+`cadf70ee826` 的简历菜单加载与响应式修复。后续 CI 以该整合结果为基线。
+整合文件的定向 `bin/lint --fix` 已通过 ESLint、Prettier 和 Stylelint，
+`pnpm lint:dialogs` 为 175 个候选、0 违规；工具容器均已移除。
+
 本地工具按启动时可用内存和有效 cgroup 余量减至少 512MiB 服务余量设置预算并监控。
 工具串行运行；完整业务回归交由隔离 CI。历史上线记录不等于本轮重新验证，
 本次不操作生产环境，不扩大任何设计验收范围。

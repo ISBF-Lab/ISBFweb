@@ -11,7 +11,9 @@ module(
 
     hooks.beforeEach(function () {
       // View tracking is independent of these rendering assertions.
-      pretender.post("/isbf/views/post-impressions", () => response({ counts: {} }));
+      pretender.post("/isbf/views/post-impressions", () =>
+        response({ counts: {} })
+      );
       this.activity = {
         id: 8,
         title: "Campus briefing",
