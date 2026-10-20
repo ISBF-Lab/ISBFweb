@@ -63,7 +63,7 @@
         }
       </style>
 
-      <%= discourse_stylesheet_link_tag(:common, theme_id: nil) %>
+      <%= discourse_stylesheet_link_tag(:common, theme_id: request.env[:resolved_theme_id]) %>
       <%= discourse_stylesheet_link_tag(:admin) %>
       <%= discourse_stylesheet_link_tag(:wizard) %>
 

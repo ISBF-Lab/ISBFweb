@@ -10,6 +10,7 @@ on:
       - "frontend/discourse/scripts/js/elastic-not-found.js"
       - "frontend/discourse/lib/elastic-not-found.test.mjs"
       - "app/assets/stylesheets/**"
+      - "app/views/qunit/**"
       - "plugins/**"
       - "script/check-isbf-dialogs*"
       - "docs/design-system/dialog-exceptions.json"
@@ -133,12 +134,6 @@ jobs:
           isbf_bus_address=$(dbus-daemon --session --fork --print-address 2>/dev/null)
           echo "DBUS_SESSION_BUS_ADDRESS=$isbf_bus_address" >> "$GITHUB_ENV"
 
-      - name: Native frontend behavior regression
-        env:
-          LOAD_PLUGINS: "0"
-          FILTER: "/User.*preferences|User.*directory|User.*invited|Invite|Bookmark|Draft|Private Message|Pending Post|Group|Search|Badge|User Card|User.*summary|Tag|Modal|Dialog/i"
-        run: bin/qunit --standalone --filter "$FILTER"
-
       - name: Install the project theme in the synthetic test database
         env:
           RAILS_ENV: development
@@ -163,6 +158,12 @@ jobs:
           if-no-files-found: warn
           retention-days: 14
           path: tmp/isbf-frontend-results/theme-qunit.log
+
+      - name: Native frontend behavior regression
+        env:
+          LOAD_PLUGINS: "0"
+          FILTER: "/User.*preferences|User.*directory|User.*invited|Invite|Bookmark|Draft|Private Message|Pending Post|Group|Search|Badge|User Card|User.*summary|Tag|Modal|Dialog/i"
+        run: bin/qunit --standalone --filter "$FILTER"
 
       - name: Real page appearance and preservation checks
         run: bin/rspec themes/isbf-campus-feed/spec/system/frontend_consistency_spec.rb

@@ -8,7 +8,9 @@ on:
       - "plugins/isbf-moderation/**"
       - "app/controllers/application_controller.rb"
       - "app/views/exceptions/**"
+      - "app/views/qunit/**"
       - "spec/requests/exceptions_controller_spec.rb"
+      - "spec/requests/qunit_controller_spec.rb"
       - "config/locales/server.*.yml"
       - ".github/workflows/isbf-plugin-regression.yml"
   workflow_dispatch:
@@ -64,7 +66,7 @@ jobs:
       - name: Error pages, moderation, learning resources and notifications
         run: |
           mkdir -p tmp
-          bin/rspec spec/requests/exceptions_controller_spec.rb plugins/isbf-moderation/spec plugins/isbf-learning/spec plugins/isbf-notifications/spec | tee tmp/isbf-plugin-rspec.log
+          bin/rspec spec/requests/exceptions_controller_spec.rb spec/requests/qunit_controller_spec.rb plugins/isbf-moderation/spec plugins/isbf-learning/spec plugins/isbf-notifications/spec | tee tmp/isbf-plugin-rspec.log
 
       - uses: actions/upload-artifact@v7
         if: always()

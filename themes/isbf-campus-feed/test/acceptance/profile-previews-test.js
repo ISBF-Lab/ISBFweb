@@ -1,8 +1,7 @@
 import { find, visit, waitUntil } from "@ember/test-helpers";
 import { test } from "qunit";
-import { cloneJSON } from "discourse/lib/object";
-import userFixtures from "discourse/tests/fixtures/user-fixtures";
 import { acceptance } from "discourse/tests/helpers/qunit-helpers";
+import stubIntersectionObserver from "discourse/tests/helpers/stub-intersection-observer";
 
 const TITLE = "校园动态 [isbf-untitled:0ebf0f60-4f19-4cb0-a820-e10d4ac5c501]";
 
@@ -40,23 +39,35 @@ acceptance("ISBF profile previews", function (needs) {
       });
     });
     server.get("/u/eviltrout/summary.json", () => {
-      const data = cloneJSON(userFixtures["/u/eviltrout/summary.json"]);
-      const topic = data.topics[0];
-      topic.id = 970001;
-      topic.title = TITLE;
-      topic.fancy_title = TITLE;
-      topic.slug = "campus";
-      data.user_summary.topic_ids = [topic.id];
-      data.user_summary.replies = [
-        {
-          topic_id: topic.id,
-          post_number: 7,
-          like_count: 3,
-          created_at: "2026-10-19T00:00:00Z",
+      return helper.response({
+        topics: [
+          {
+            id: 970001,
+            title: TITLE,
+            fancy_title: TITLE,
+            slug: "campus",
+          },
+        ],
+        users: [],
+        badges: [],
+        user_summary: {
+          topic_ids: [970001],
+          replies: [
+            {
+              topic_id: 970001,
+              post_number: 7,
+              like_count: 3,
+              created_at: "2026-10-19T00:00:00Z",
+            },
+          ],
+          links: [],
+          most_replied_to_users: [],
+          most_liked_by_users: [],
+          most_liked_users: [],
+          badges: [],
+          top_categories: [],
         },
-      ];
-      data.user_summary.links = [];
-      return helper.response(data);
+      });
     });
     server.get("/filter.json", () =>
       helper.response({
@@ -67,7 +78,13 @@ acceptance("ISBF profile previews", function (needs) {
   });
 
   test("historical activity previews its body and image through the real route", async function (assert) {
+    const observations = stubIntersectionObserver();
     await visit("/u/eviltrout/activity");
+    const preview = observations.find(({ element }) =>
+      element.classList.contains("isbf-post-preview")
+    );
+    assert.ok(preview, "the activity preview observes its visibility");
+    await preview.trigger();
     await waitUntil(() => find(".isbf-post-preview__image"));
     assert
       .dom(".user-stream-item")
@@ -85,7 +102,19 @@ acceptance("ISBF profile previews", function (needs) {
   });
 
   test("the real summary route preserves each original post target", async function (assert) {
+    const observations = stubIntersectionObserver();
     await visit("/u/eviltrout/summary");
+    const previews = observations.filter(({ element }) =>
+      element.classList.contains("isbf-post-preview")
+    );
+    assert.strictEqual(
+      previews.length,
+      2,
+      "both summary previews observe visibility"
+    );
+    for (const preview of previews) {
+      await preview.trigger();
+    }
     await waitUntil(() =>
       find(".replies-section .isbf-post-preview__text")?.textContent.includes(
         "A popular reply."
