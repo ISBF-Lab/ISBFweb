@@ -115,8 +115,8 @@ acceptance("Resume sharing route", function (needs) {
     assert
       .dom(".isbf-resume-sharing-header .isbf-resume-share-list__upload")
       .hasText(
-        i18n("isbf_resume.sharing.upload"),
-        "the upload link is translated"
+        i18n("isbf_resume.sharing.apply_share"),
+        "the sharing link uses the short action label"
       );
   });
 
