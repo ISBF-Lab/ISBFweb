@@ -11,8 +11,8 @@ import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import ResumeCollectionModal from "./resume-collection-modal";
 import ResumeShareContributor from "./resume-share-contributor";
+import ResumeShareListHeader from "./resume-share-list-header";
 import ResumeShareMetadata from "./resume-share-metadata";
-import ResumeSharingHeader from "./resume-sharing-header";
 
 export default class ResumeShareList extends Component {
   @service a11y;
@@ -103,27 +103,12 @@ export default class ResumeShareList extends Component {
       class="isbf-resume isbf-resume-share-list"
       ...attributes
     >
-      <ResumeSharingHeader @title={{this.title}}>
-        <div class="isbf-resume-share-list__actions">
-          {{#if this.model.can_manage_collection}}
-            <DButton
-              class="btn-primary"
-              @action={{this.editCollection}}
-              @label="isbf_resume.sharing.edit_collection"
-            />
-          {{/if}}
-          {{#if (eq @list "published")}}<DButton
-              class="btn-primary isbf-resume-share-list__mine"
-              @href={{getURL "/isbf/workbench/resume/shares/mine"}}
-              @label="isbf_resume.sharing.mine"
-            />{{/if}}
-          <DButton
-            class="btn-primary isbf-resume-share-list__upload"
-            @href={{getURL "/isbf/workbench/resume/shares/new"}}
-            @label="isbf_resume.sharing.upload"
-          />
-        </div>
-      </ResumeSharingHeader>
+      <ResumeShareListHeader
+        @canManageCollection={{this.model.can_manage_collection}}
+        @onEditCollection={{this.editCollection}}
+        @published={{eq @list "published"}}
+        @title={{this.title}}
+      />
       {{#if this.error}}<p
           class="isbf-resume__error"
           role="alert"
