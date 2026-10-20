@@ -67,7 +67,7 @@ jobs:
           ln -s /var/www/discourse/vendor/bundle vendor/bundle
           bundle config --local path vendor/bundle
           bundle config --local deployment true
-          bundle config --local without development
+          bundle config --local without ""
           bundle install --jobs 1
           pnpm install --frozen-lockfile
 

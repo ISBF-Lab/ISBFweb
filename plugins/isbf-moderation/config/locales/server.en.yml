@@ -1,7 +1,7 @@
 en:
   site_settings:
     isbf_severe_reports_enabled: "Allow signed-in normal accounts to submit severe reports. Existing content holds remain protected when disabled."
-    isbf_ai_moderation_enabled: "Automatically review new and edited public discussion posts, including anonymous posts and replies. Matches are hidden until staff review. Private messages, restricted categories, official categories and learning resources are excluded. Existing holds remain when disabled. Requires {{setting:isbf_ai_moderation_model}}."
+    isbf_ai_moderation_enabled: "Automatically review new and edited public discussion posts, including anonymous posts and replies. Matches are hidden until staff review. Personal messages, restricted categories, official categories and learning resources are excluded. Existing holds remain when disabled. Requires {{setting:isbf_ai_moderation_model}}."
     isbf_ai_moderation_model: "Model connection used for automatic post review. Change this selection to switch models without changing the review rules. Images require native vision or a configured vision delegate when {{setting:isbf_ai_moderation_images_enabled}} is enabled."
     isbf_ai_moderation_images_enabled: "Include uploaded images in automatic post review. Requires an image-capable model. Disable to review text only."
     isbf_ai_moderation_exempt_groups: "Skip AI review for authors in any selected group. Anonymous posts use the real author's groups without sending identity to the model. Empty means no group exemptions. Existing holds and manual reports are unaffected."
