@@ -29,7 +29,7 @@ acceptance("ISBF profile previews", function (needs) {
       })
     );
     server.get("/posts/by_number/:topicId/:postNumber.json", (request) => {
-      const number = Number(request.params.postNumber);
+      const number = Number.parseInt(request.params["postNumber.json"], 10);
       return helper.response({
         id: 970010 + number,
         cooked:

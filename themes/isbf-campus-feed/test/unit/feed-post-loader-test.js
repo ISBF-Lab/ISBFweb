@@ -209,7 +209,7 @@ module("ISBF | Unit | Lib | feed-post-loader", function (hooks) {
   test("different replies in one topic keep separate bodies", async function (assert) {
     pretender.get("/posts/by_number/:topicId/:postNumber.json", (request) => {
       this.requests.push(request);
-      const number = Number(request.params.postNumber);
+      const number = Number.parseInt(request.params["postNumber.json"], 10);
       return response({ id: this.firstId + number, cooked: `Reply ${number}` });
     });
     assert.strictEqual(

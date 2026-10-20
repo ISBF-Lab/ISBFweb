@@ -10,18 +10,20 @@ import pretender, { response } from "discourse/tests/helpers/create-pretender";
 import { i18n } from "discourse-i18n";
 import ISBFActivityPreview from "../../discourse/components/isbf-activity-preview";
 import ISBFPostPreview from "../../discourse/components/isbf-post-preview";
-import { invalidateCookedPost } from "../../discourse/lib/feed-post-loader";
 
 const TITLE = "校园动态 [isbf-untitled:0ebf0f60-4f19-4cb0-a820-e10d4ac5c501]";
 const COOKED =
   '<p>Campus photos.</p><a class="lightbox"><img src="/images/d-logo-sketch-small.png?preview=a" alt="2488243601b3ff3b12a9ad5fad7462c7"></a><img src="/images/d-logo-sketch-small.png?preview=b">';
+let nextPreviewId = 780000;
 
 module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
   setupRenderingTest(hooks, { stubRouter: true });
 
   hooks.beforeEach(function () {
-    this.postId = 780001;
-    invalidateCookedPost(this.postId, false);
+    this.postId = nextPreviewId;
+    nextPreviewId += 10;
+    this.topicId = this.postId + 1;
+    this.href = `/t/campus/${this.topicId}`;
     this.requests = 0;
     this.observers = [];
     const observers = this.observers;
@@ -37,12 +39,10 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
     });
     pretender.get("/posts/by_number/:topicId/:postNumber.json", (request) => {
       this.requests++;
+      const number = Number.parseInt(request.params["postNumber.json"], 10);
       return response({
-        id: this.postId,
-        cooked:
-          Number(request.params.postNumber) === 1
-            ? COOKED
-            : "<p>This is the popular reply.</p>",
+        id: this.postId + number - 1,
+        cooked: number === 1 ? COOKED : "<p>This is the popular reply.</p>",
       });
     });
     this.owner
@@ -52,7 +52,7 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
       action_type: 4,
       post_id: this.postId,
       post_number: 1,
-      topic_id: 780001,
+      topic_id: this.topicId,
       slug: "campus",
       title: TITLE,
       user_id: this.currentUser.id,
@@ -138,7 +138,7 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
   });
 
   test("the native summary topic link uses the body for an untitled topic", async function (assert) {
-    this.summaryTopic = { id: 780001, title: TITLE, fancyTitle: TITLE };
+    this.summaryTopic = { id: this.topicId, title: TITLE, fancyTitle: TITLE };
     await render(
       <template>
         <UserSummaryTopic
@@ -146,7 +146,7 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
           @likes={{4}}
           @postNumber={{1}}
           @topic={{this.summaryTopic}}
-          @url="/t/campus/780001"
+          @url={{this.href}}
         />
       </template>
     );
@@ -165,14 +165,15 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
   });
 
   test("an untitled popular reply previews its own post number", async function (assert) {
-    this.summaryTopic = { id: 780002, title: TITLE, fancyTitle: TITLE };
+    this.summaryTopic = { id: this.topicId, title: TITLE, fancyTitle: TITLE };
+    this.replyHref = `${this.href}/7`;
     await render(
       <template>
         <UserSummaryTopic
           @createdAt={{this.item.created_at}}
           @postNumber={{7}}
           @topic={{this.summaryTopic}}
-          @url="/t/campus/780002/7"
+          @url={{this.replyHref}}
         />
       </template>
     );
@@ -188,7 +189,7 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
       .dom(".isbf-post-preview")
       .hasAttribute(
         "href",
-        "/t/campus/780002/7",
+        this.replyHref,
         "the original reply target is preserved"
       );
   });
@@ -197,7 +198,7 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
     await render(
       <template>
         <ISBFPostPreview
-          @href="/t/campus/780001"
+          @href={{this.href}}
           @postId={{this.postId}}
           @title="Campus news"
           @variant="rail"
@@ -220,7 +221,7 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
     await render(
       <template>
         <ISBFPostPreview
-          @href="/t/campus/780001"
+          @href={{this.href}}
           @postId={{this.postId}}
           @title={{this.title}}
           @variant="rail"
@@ -237,7 +238,7 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
       .doesNotExist("the production rail does not show thumbnails");
     assert
       .dom(".isbf-post-preview")
-      .hasAttribute("href", "/t/campus/780001", "the post link remains usable");
+      .hasAttribute("href", this.href, "the post link remains usable");
   });
 
   test("failed activity images are removed while the post link remains usable", async function (assert) {
@@ -314,7 +315,7 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
   });
 
   test("the native expand control still displays and folds the full body", async function (assert) {
-    pretender.get("/posts/by_number/780001/1.json", () =>
+    pretender.get(`/posts/by_number/${this.topicId}/1.json`, () =>
       response({ cooked: "<p>Full campus post.</p>" })
     );
     await render(

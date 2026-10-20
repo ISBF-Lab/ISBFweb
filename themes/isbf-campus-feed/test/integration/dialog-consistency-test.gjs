@@ -49,8 +49,11 @@ module("ISBF | Integration | Dialog consistency", function (hooks) {
       "the secondary action retains a touch target"
     );
 
-    this.region = "admin-interface";
+    this.set("region", "admin-interface");
     await settled();
+    assert
+      .dom(document.body)
+      .hasClass("admin-interface", "the fixture enters the admin scope");
     const appearance = () => {
       const style = getComputedStyle(frame);
       return [style.borderRadius, style.borderTopWidth, style.boxShadow];
