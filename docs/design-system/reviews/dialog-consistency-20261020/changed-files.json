@@ -1,0 +1,13 @@
+[
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-frontend-scope.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-calendar.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-calendar-entry-editor.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-course-dialog.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-resource-directory-dialog.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-grade-picker.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-resource-parent-picker.gjs",
+  "themes/isbf-campus-feed/test/integration/frontend-scope-test.gjs",
+  "themes/isbf-campus-feed/test/integration/calendar-test.gjs",
+  "themes/isbf-campus-feed/test/integration/dialog-consistency-test.gjs",
+  "docs/design-system/reviews/dialog-consistency-20261020/dialog-fixtures.gjs"
+]

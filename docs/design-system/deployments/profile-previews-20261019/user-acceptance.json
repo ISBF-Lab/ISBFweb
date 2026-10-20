@@ -1,0 +1,12 @@
+{
+  "accepted": true,
+  "user_statement": "没有问题，可以了",
+  "scope": [
+    "https://isbf-one.com/u/Gin/activity",
+    "https://isbf-one.com/u/Gin/summary"
+  ],
+  "additional_browser_checks_stopped_at_user_confirmation": true,
+  "automated_online_browser_completed": false,
+  "native_offline_checks_passed": 22,
+  "functional_offline_checks_passed": 39
+}

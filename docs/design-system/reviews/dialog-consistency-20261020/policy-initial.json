@@ -1,0 +1,2062 @@
+{
+  "errors": [
+    {
+      "file": "frontend/discourse/app/static/development-error/index.js",
+      "message": "Use DModal for modal dialogs; non-modal surfaces and native dialog exceptions need a reviewed entry"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/dialog.scss",
+      "selectors": ".dialog-content",
+      "context": ".dialog-content",
+      "property": "background-color",
+      "value": "var(--secondary)",
+      "line": 47,
+      "sha256": "6aa5a428c34371312e0c1fd189cfe7fee2bc4c0d3a0f5984cd63eadaa9ef9660",
+      "message": "Dialog chrome belongs in the shared theme stylesheet; register reviewed exceptions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/dialog.scss",
+      "selectors": ".dialog-content",
+      "context": ".dialog-content",
+      "property": "box-shadow",
+      "value": "var(--shadow-card)",
+      "line": 48,
+      "sha256": "d59c3dd5a287d94a27d9759bf8706b13ebccbdb1f0d07a2d256ada7b2d6d1e01",
+      "message": "Dialog chrome belongs in the shared theme stylesheet; register reviewed exceptions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/modal.scss",
+      "selectors": "html:not(.keyboard-visible).mobile-device .d-modal__container",
+      "context": "html:not(.keyboard-visible).mobile-device .d-modal__container",
+      "property": "padding-bottom",
+      "value": "env(safe-area-inset-bottom, 1rem)",
+      "line": 23,
+      "sha256": "251429611101d75115fef37dbb05047336aff0281e115d6da41640d971849cde",
+      "message": "Dialog chrome belongs in the shared theme stylesheet; register reviewed exceptions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/modal.scss",
+      "selectors": ".d-modal__container",
+      "context": ".d-modal &__container",
+      "property": "border-radius",
+      "value": "var(--d-border-radius)",
+      "line": 53,
+      "sha256": "27da5558f282d32ed64521dc73a568573c85cb614a44688b768db42de5f9c702",
+      "message": "Dialog chrome belongs in the shared theme stylesheet; register reviewed exceptions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/modal.scss",
+      "selectors": ".d-modal__container",
+      "context": ".d-modal &__container",
+      "property": "background-color",
+      "value": "var(--secondary)",
+      "line": 55,
+      "sha256": "724b3433bd39bdfa5f9217c683a278e3e438482874248fa8f799d933fada00ba",
+      "message": "Dialog chrome belongs in the shared theme stylesheet; register reviewed exceptions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/base/modal.scss",
+      "selectors": ".d-modal__container",
+      "context": ".d-modal &__container",
+      "property": "box-shadow",
+      "value": "var(--shadow-modal)",
+      "line": 56,
+      "sha256": "67d84e6cb4679c0c8b6a60f2284f4323f0882c0b6efa58d94c85858e4de31551",
+      "message": "Dialog chrome belongs in the shared theme stylesheet; register reviewed exceptions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/float-kit/d-menu-modal.scss",
+      "selectors": ".fk-d-menu-modal .dropdown-menu__item .btn",
+      "context": ".fk-d-menu-modal .dropdown-menu &__item .btn",
+      "property": "border-radius",
+      "value": "0",
+      "line": 31,
+      "sha256": "3c81ddc954ef0bc607b56987041eb7ceb69da2d6dc8d161b5e579d57a7029f69",
+      "message": "Dialog chrome belongs in the shared theme stylesheet; register reviewed exceptions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/modal/modal-overrides.scss",
+      "selectors": ".d-modal.chat-modal-new-message.--quick-palette .d-modal__container",
+      "context": ".d-modal.chat-modal-new-message.--quick-palette @media screen and (width <= 768px) .d-modal &__container",
+      "property": "border-radius",
+      "value": "0",
+      "line": 333,
+      "sha256": "607526d71b8eebc55c92344b52c139cd548a9ad70fd3dfd1e59a4cf07062f67e",
+      "message": "Dialog chrome belongs in the shared theme stylesheet; register reviewed exceptions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/modal/modal-overrides.scss",
+      "selectors": ".d-modal.--quick-palette .d-modal__container",
+      "context": ".d-modal.--quick-palette .d-modal &__container",
+      "property": "padding-block",
+      "value": "1rem",
+      "line": 579,
+      "sha256": "630efef58ef6d68c0378cc268db1e6847cee741721c193d261ce3a8e061e0829",
+      "message": "Dialog chrome belongs in the shared theme stylesheet; register reviewed exceptions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/modal/modal-overrides.scss",
+      "selectors": ".reply-where-modal .btn",
+      "context": ".reply-where-modal .btn",
+      "property": "border-radius",
+      "value": "var(--d-button-border-radius)",
+      "line": 648,
+      "sha256": "e2f6d02a55dc480c084cf42b6e141dd499f6642336c559deadbc7497359a807f",
+      "message": "Dialog chrome belongs in the shared theme stylesheet; register reviewed exceptions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/modal/modal-overrides.scss",
+      "selectors": ".permanently-delete-confirm-modal.--fire-easter-egg-modal .d-modal__container",
+      "context": ".permanently-delete-confirm-modal &.--fire-easter-egg-modal .d-modal__container",
+      "property": "background-color",
+      "value": "transparent",
+      "line": 1024,
+      "sha256": "8377ddc8d00bad981ff1df1e577430360532c4111209ecd5c5866ed28fdd585c",
+      "message": "Dialog chrome belongs in the shared theme stylesheet; register reviewed exceptions"
+    },
+    {
+      "file": "app/assets/stylesheets/common/table-builder/insert-table-modal.scss",
+      "selectors": ".insert-table-modal .d-modal__container",
+      "context": ".insert-table-modal .d-modal__container",
+      "property": "border-radius",
+      "value": "0",
+      "line": 32,
+      "sha256": "77e593e07406659ee401f82bd52c99fd51e3146fc1f136bc71c38d14ff2af366",
+      "message": "Dialog chrome belongs in the shared theme stylesheet; register reviewed exceptions"
+    },
+    {
+      "file": "plugins/discourse-ai/assets/stylesheets/modules/summarization/desktop/ai-summary.scss",
+      "selectors": ".ai-summary-modal .d-modal__container",
+      "context": ".ai-summary-modal .d-modal__container",
+      "property": "box-shadow",
+      "value": "var(--shadow-menu-panel)",
+      "line": 15,
+      "sha256": "58b0d31ebb66d04444a7418050b6a816ce5764e501651f8df4ddf1ff1a713717",
+      "message": "Dialog chrome belongs in the shared theme stylesheet; register reviewed exceptions"
+    }
+  ],
+  "inventory": [
+    {
+      "path": "frontend/discourse/app/components/admin-onboarding/modal/predefined-topics-options.gjs",
+      "sha256": "95dc873a18436e275ac51411d46e48bf0d0a08f647cdb3b8f45d8301bdf6c194",
+      "implementation": "DModal",
+      "classes": [
+        "predefined-topic-options-modal",
+        "predefined-topic-options-modal__list",
+        "predefined-topic-options-modal__card",
+        "predefined-topic-options-modal__title",
+        "predefined-topic-options-modal__body"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/admin-onboarding/modal/start-posting-options.gjs",
+      "sha256": "ef0c996887afddacf14ab1f5cc3efc9b46a848d023cdefc3cdbe64307c125a2f",
+      "implementation": "DModal",
+      "classes": [
+        "start-posting-options-modal",
+        "modal-options"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/card-container.gjs",
+      "sha256": "dcf4854aa72fe7843efa98d389243afc43b7a5f0492cbb153c2ac53ba7d8165a",
+      "implementation": "custom surface",
+      "classes": [],
+      "classification": "Avatar and group popup cards are outside this dialog redesign",
+      "verification": "Existing user card regression and foreground dialog exclusion checks"
+    },
+    {
+      "path": "frontend/discourse/app/components/composer-container.gjs",
+      "sha256": "a1fd2f8392daa84b8dc5505960c54411055b911611c30321ae12db2dcd88e3d0",
+      "implementation": "custom surface",
+      "classes": [],
+      "classification": "The composer is an editor surface with its own responsive behavior",
+      "verification": "Existing composer acceptance tests"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/activation-edit.gjs",
+      "sha256": "1dd7f6a42497f07bbbeadfb2bee87577b63b810b81d714e77176183d28da01ff",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/activation-resent.gjs",
+      "sha256": "8e855858ac3a1b93fc134152cf85b138f3991953a50c96fe80c6196fb54f1c3e",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/add-pm-participants.gjs",
+      "sha256": "a3fb8b833edc7e03505dd82a54e3e6c090fc3f0e3f4e7c8966fc1687aa9a1791",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/anonymous-flag.gjs",
+      "sha256": "7e982b777ed87eab95d16dfb7c1bd8d87da55ac7a916df8764f4c4acd57a509a",
+      "implementation": "DModal",
+      "classes": [
+        "anonymous-flag-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/associate-account-confirm.gjs",
+      "sha256": "a2f1e90c5ed36013fb3c909781e07a527fdf1e21fced0d4fefb341c79aeda079",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/auth-token.gjs",
+      "sha256": "a15246f73d61f1bb9e2cd32d69e81238418191dda585f92e2fb33d9333f5f862",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/avatar-selector.gjs",
+      "sha256": "8c90e68bfa3b1d0bceaf18132a3f01344b64d3c26033bf0eabc1c9cb14d2d1fb",
+      "implementation": "DModal",
+      "classes": [
+        "avatar-selector-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/bookmark.gjs",
+      "sha256": "b571ad120a030180aec250a3255cb10e1b585e7b8ff6bfeed7c1ad361902c10c",
+      "implementation": "DModal",
+      "classes": [
+        "bookmark-reminder-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/bulk-topic-actions.gjs",
+      "sha256": "786f0e6807fabf434d319758131fa07f290edc2431ef07de2e5275afc635b6d7",
+      "implementation": "DModal",
+      "classes": [
+        "topic-bulk-actions-modal",
+        "topic-bulk-actions-modal__errors",
+        "topic-bulk-actions-modal__description",
+        "btn-transparent d-modal-cancel"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/change-owner.gjs",
+      "sha256": "a00cae79d77851035a4b19eae5cccc172d29cc40d4adb144099346f58c2e561c",
+      "implementation": "DModal",
+      "classes": [
+        "change-ownership-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/change-post-notice.gjs",
+      "sha256": "2c9afc01ac498818c3a573fa2fa73aa2fad01b95b411a3ca095da1015c36884a",
+      "implementation": "DModal",
+      "classes": [
+        "change-post-notice-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/change-reply-to.gjs",
+      "sha256": "4dbed5e4f16bd52808cc7deb23e7cab773ee2d5ef73a32072209da0676e7e340",
+      "implementation": "DModal",
+      "classes": [
+        "change-reply-to-modal",
+        "change-reply-to-modal__selection",
+        "change-reply-to-modal__hint"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/change-timestamp.gjs",
+      "sha256": "8fb44e9b78729cc5e2ba567be0c5dc332ce1d9008a8dc5f91555d06a7ca7a638",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/content-language-preferences.gjs",
+      "sha256": "2b202f351d55c7db1653b5ec00dca06d6e13403a6744776de4c20cf7d7d910f0",
+      "implementation": "DModal",
+      "classes": [
+        "content-language-preferences-modal",
+        "content-language-preferences-modal__understood"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/convert-to-public-topic.gjs",
+      "sha256": "25750195c94081d7880634c9a3f207da3e95980cb476af3e839ac3d29408caef",
+      "implementation": "DModal",
+      "classes": [
+        "btn-flat d-modal-cancel"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/create-invite-bulk.gjs",
+      "sha256": "25682a83634f88cc0a8065b458fe02cf7a63c112f6fa60e41a198fdb80f4d9d9",
+      "implementation": "DModal",
+      "classes": [
+        "create-invite-bulk-modal --large"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/create-invite-with-roles.gjs",
+      "sha256": "07b468a75dad88a2cdb4d4d68590f31df9e2435ab2987cd9cc76f30686f51b10",
+      "implementation": "DModal",
+      "classes": [
+        "create-invite-with-roles-modal",
+        "create-invite-with-roles-modal__role",
+        "create-invite-with-roles-modal__staff-role-description",
+        "create-invite-with-roles-modal__member-form",
+        "create-invite-with-roles-modal__summary",
+        "create-invite-with-roles-modal__sent-to",
+        "create-invite-with-roles-modal__link-share",
+        "create-invite-with-roles-modal__summary-rows",
+        "create-invite-with-roles-modal__summary-row",
+        "create-invite-with-roles-modal__email-sent"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/create-invite.gjs",
+      "sha256": "199bfa5a8d736fa1a68668cc0b6c6e618854c77f707a3df8b03552fc28c97d5f",
+      "implementation": "DModal",
+      "classes": [
+        "create-invite-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/customize-form-template-view.gjs",
+      "sha256": "dcf5111b663580ab646710088a9812e57ab4e1a2a848538d8607969ba600580d",
+      "implementation": "DModal",
+      "classes": [
+        "customize-form-template-view-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/delete-themes-confirm.gjs",
+      "sha256": "bfebbf9f2b058c0f20a1669b56fdafe61e73711aac29b97d9e8acf274d3e77ed",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/delete-topic-confirm.gjs",
+      "sha256": "5969f1823e8d407d326f11fa84bd50c50eb79cf21620a924926f310dd2f15b33",
+      "implementation": "DModal",
+      "classes": [
+        "delete-topic-confirm-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/delete-topic-disallowed.gjs",
+      "sha256": "c4572e65c5bb40c0979d685c7e0213184c141dce6bbdf291d38330b5734ca577",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/discard-draft.gjs",
+      "sha256": "a9780b6ff7dd31a8ae907e7726fab527649a97263800ddf76c27b22569055d82",
+      "implementation": "DModal",
+      "classes": [
+        "discard-draft-modal --stacked",
+        "btn-danger discard-draft-modal__discard-btn",
+        "btn-transparent discard-draft-modal__cancel-btn"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/dismiss-new.gjs",
+      "sha256": "8733cb15ddd6d390057a3b23ee27b0eadabde133ee49a2ad406200e8935a6dce",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/dismiss-notification-confirmation.gjs",
+      "sha256": "d8e454e0f9bd4c4995582cc67c2f7c96344f8779b455280aed4428c58313e8f2",
+      "implementation": "DModal",
+      "classes": [
+        "dismiss-notification-confirmation"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/dismiss-read.gjs",
+      "sha256": "6e6b49d08af78dad63f41b0068bdcd83592215105d3d508f90933e74df4afbf7",
+      "implementation": "DModal",
+      "classes": [
+        "dismiss-read-modal",
+        "dismiss-read-modal__stop-tracking"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/do-not-disturb.gjs",
+      "sha256": "33c0197d8c71cbbfb5015579d816b61b6a8ca63eeab1363550648c5ea702cdf1",
+      "implementation": "DModal",
+      "classes": [
+        "do-not-disturb-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/download-calendar.gjs",
+      "sha256": "2d52044465abc8fca908a7a4d9ea6d65f6c79d75c2314ee8131d7525380d6de7",
+      "implementation": "DModal",
+      "classes": [
+        "download-calendar-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/edit-slow-mode.gjs",
+      "sha256": "8c8e50aafcffcf8a0b80fd47d41d528be3d5a0db5c7cc60636edd74682921d72",
+      "implementation": "DModal",
+      "classes": [
+        "edit-slow-mode-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/edit-topic-timer.gjs",
+      "sha256": "85bbfbf8deb98e55530f687a84410d66108a792413b82c4c19af5cd2a902a275",
+      "implementation": "DModal",
+      "classes": [
+        "edit-topic-timer-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/edit-user-directory-columns.gjs",
+      "sha256": "6ec736459c684db8332d431ed2e0017ab2ded9beaf2568dd329f4ca4062ae662",
+      "implementation": "DModal",
+      "classes": [
+        "edit-user-directory-columns-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/embed-auth-flow.gjs",
+      "sha256": "5a0a0bb3f9972f7114c636433c1bdf99bcc8665748b8cf9dbd671a64f441ec07",
+      "implementation": "DModal",
+      "classes": [
+        "embed-auth-flow-modal",
+        "embed-auth-flow-modal__waiting"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/explain-reviewable.gjs",
+      "sha256": "f365017bcfba0c50bad3075d3934c84faccee99c619c714772191e823976a00b",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/fast-edit.gjs",
+      "sha256": "0ddb180b8158a03645a4178f196e712c6625f60aeb75831f34a0836e60c9cd29",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/feature-topic-on-profile.gjs",
+      "sha256": "1924945319a32c7c5c5e0fc70b1e5aa589870fcd0e9ac490271411357036a870",
+      "implementation": "DModal",
+      "classes": [
+        "feature-topic-on-profile choose-topic-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/feature-topic.gjs",
+      "sha256": "1fec02057c409f44f628f15ccf88b27f419218cb35d8cfce3be30d67d3040de1",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/flag.gjs",
+      "sha256": "284198e08329033958b9276482ffdfa1e75baa7d32a29a400ab279bf5c5e3e91",
+      "implementation": "DModal",
+      "classes": [
+        "flag-modal",
+        "btn-primary flag-modal__create-flag",
+        "btn-danger flag-modal__send-warning",
+        "flag-modal__take-action",
+        "btn-danger flag-modal__flag-for-review",
+        "btn-danger delete-spammer flag-modal__delete-spammer"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/forgot-password.gjs",
+      "sha256": "c50e5e265b18514aa4bfb96b82e658694af6529f9ee198d05354338719ad2d38",
+      "implementation": "DModal",
+      "classes": [
+        "forgot-password-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/form-template-form-preview.gjs",
+      "sha256": "6722867a01c8628ae0768f5b485abbd614c9eae7e6a62d853604d77c4ae0ae21",
+      "implementation": "DModal",
+      "classes": [
+        "form-template-form-preview-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/fullscreen-code.gjs",
+      "sha256": "d434cd27126bb50ceb4d6b7fdc0029a5945757c61fa8a404f516dadaf2706493",
+      "implementation": "DModal",
+      "classes": [
+        "fullscreen-code-modal --max"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/fullscreen-table.gjs",
+      "sha256": "00f3cb5853e890847215ba2c24a94f4111880cd5c6871a173300de8a2e961c5d",
+      "implementation": "DModal",
+      "classes": [
+        "fullscreen-table-modal --max"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/gifs.gjs",
+      "sha256": "30454630d39f94994ad2826810bfae9dd49929cbe9336e3e97d9d8117680019b",
+      "implementation": "DModal",
+      "classes": [
+        "gifs-modal",
+        "gifs-modal__input",
+        "gifs-modal__input-spinner",
+        "gifs-modal__content",
+        "gifs-modal__box",
+        "gifs-modal__content",
+        "gifs-modal__categories-header",
+        "gifs-modal__box",
+        "gifs-modal__loading",
+        "gifs-modal__no-results",
+        "gifs-modal__branding"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/grant-badge.gjs",
+      "sha256": "a94b6a8069b51a95e647ca930f31af5da9309d8f837cbe190500002344cf6b61",
+      "implementation": "DModal",
+      "classes": [
+        "grant-badge-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/group-add-members.gjs",
+      "sha256": "509508d93aace6172fc7df462f5a48f1638ab33b01d64dbd96e015c594604bb0",
+      "implementation": "DModal",
+      "classes": [
+        "group-add-members-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/group-default-notifications.gjs",
+      "sha256": "ed700efa8ecff62de509646af9628e9a3ff6160b1e0e88b2d0a2841b926ee68f",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/history.gjs",
+      "sha256": "e1da524499540faa6035a19b8dfac68072a640d68f9a8d3ced095681314f7a37",
+      "implementation": "DModal",
+      "classes": [
+        "history-modal --max\n        {{concat '--mode-' (dDasherize this.viewMode)}}"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/ignore-duration-with-username.gjs",
+      "sha256": "ed3bd7d83540cbe04584c2532f5c31d67aae62f5c78061798b355c5023d4900f",
+      "implementation": "DModal",
+      "classes": [
+        "ignore-duration-with-username-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/json-schema-editor.gjs",
+      "sha256": "fec65bcbba00b5d7fd22bcc0bbbfbe0e09ccc563be14c5455d2311ad50bcbc78",
+      "implementation": "DModal",
+      "classes": [
+        "json-schema-editor-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/jump-to-post.gjs",
+      "sha256": "07c686eeeddc24025b5e337be17a0865d9ba6d24a5bd5b59da678dff7ed0ed06",
+      "implementation": "DModal",
+      "classes": [
+        "jump-to-post-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/keyboard-shortcuts-help.gjs",
+      "sha256": "95ce184d062b1b05f832d3978f1890dd90de845c2a6cd349a052cfd429cc2e2e",
+      "implementation": "DModal",
+      "classes": [
+        "keyboard-shortcuts-modal --max"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/move-to-topic.gjs",
+      "sha256": "ec5dd7ea77f182a62bc91d1f3822f33a53dd76ed19ee44f3a3baaccb970785b9",
+      "implementation": "DModal",
+      "classes": [
+        "choose-topic-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/nested-activity-log.gjs",
+      "sha256": "dfe00773f6034590337a732f8c63256e67e83c7c1b35e6e920767b67b769f6ec",
+      "implementation": "DModal",
+      "classes": [
+        "nested-activity-log-modal",
+        "nested-activity-log-modal__list",
+        "nested-activity-log-modal__empty",
+        "nested-activity-log-modal__load-more"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/not-activated.gjs",
+      "sha256": "fc2efe8e57524626a1d59141116cc85a3607554f985744681ac3718f9722dde2",
+      "implementation": "DModal",
+      "classes": [
+        "not-activated-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/permanently-delete-confirm.gjs",
+      "sha256": "630061803631b3755cf9019baa19e617877b5bcfb633db522689cab49dd1e5d0",
+      "implementation": "DModal",
+      "classes": [
+        "permanently-delete-confirm-modal__message",
+        "permanently-delete-confirm-modal__instruction",
+        "confirmation-phrase"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/post-enqueued.gjs",
+      "sha256": "5b81419d7e2c97db6a7d8cd92dd135f0f171fd8e22ea7af5822edbb6405e1db6",
+      "implementation": "DModal",
+      "classes": [
+        "post-enqueued-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/post-translations.gjs",
+      "sha256": "41493548f03def74bf6ad1179e2a95d3ff847daf1f4b7cd29fd2e6c195be4509",
+      "implementation": "DModal",
+      "classes": [
+        "post-translations-modal",
+        "post-translations-modal__language-settings",
+        "post-translations-modal__language-form post-translations-modal__topic-language",
+        "post-translations-modal__language-control",
+        "post-translations-modal__language-form post-translations-modal__post-language",
+        "post-translations-modal__language-control",
+        "post-translations-modal__locale",
+        "post-translations-modal__edit-action",
+        "post-translations-modal__delete-action"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/publish-page.gjs",
+      "sha256": "90b798956f4685bb6ce3f695e7ba2035f373a70892c2b285e8d5462ece3fe931",
+      "implementation": "DModal",
+      "classes": [
+        "publish-page-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/raw-email.gjs",
+      "sha256": "17b857469efd74ad7da2098c00cf66b65373abccb0cbf0bc66f4ceaac874f41c",
+      "implementation": "DModal",
+      "classes": [
+        "incoming-email-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/reject-reason-reviewable.gjs",
+      "sha256": "f313e69b8d02e6202ee459291582d7f53c2e01001c45d5f5bc0a88ae8bd3524b",
+      "implementation": "DModal",
+      "classes": [
+        "reject-reason-reviewable-modal",
+        "reject-reason-reviewable-modal__send_email--inline"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/reorder-categories.gjs",
+      "sha256": "b31f95a76cc6012951b2cec3fe43aee218d5d92f1884ae636d4589361f1bc968",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/request-group-membership-form.gjs",
+      "sha256": "211450c91341ef0c9b6b7d1cb8c48e2554b6980db594f2a0af5e9b99a57de95a",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/revise-and-reject-post-reviewable.gjs",
+      "sha256": "4e856aa2a15b8866bbbf26f3bb4d620c98b0f9dfed9f1dd0b96c1cfe5faaf6f4",
+      "implementation": "DModal",
+      "classes": [
+        "btn-flat d-modal-cancel"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/second-factor-add-security-key.gjs",
+      "sha256": "304c55656a08307a2ff8b4b349d240d6e3d2028be233bb5a59802ba2abccd4be",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/second-factor-add-totp.gjs",
+      "sha256": "2f3ead27845efd38ea24b1e89ebb34d17d34d4d246b03ba28111cf06fd5e0057",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/second-factor-backup-edit.gjs",
+      "sha256": "c3713a3fe711076fd7d64d77d5abe455463ba2fef4eb447f03c8e2e82c868498",
+      "implementation": "DModal",
+      "classes": [
+        "second-factor-backup-edit-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/second-factor-edit-security-key.gjs",
+      "sha256": "1168eb1cbe47419864eeb8370f4cc28f585934e67b35c371f50f74072f343ac8",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/second-factor-edit.gjs",
+      "sha256": "7f06d72ed4bac9bd1c99b355a69483b39f32847e1c040266976c808145b2de67",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/share-target.gjs",
+      "sha256": "1f67e245b5dea649262a8e60f283df36314a96ac959f7a75929bf49f7cff5918",
+      "implementation": "DModal",
+      "classes": [
+        "share-target-modal",
+        "share-target-modal__intro",
+        "share-target-modal__preview-text",
+        "share-target-modal__files",
+        "share-target-modal__thumbnail",
+        "share-target-modal__file-name",
+        "btn-primary share-target-modal__new-topic",
+        "share-target-modal__new-message",
+        "share-target-modal__add-to-reply"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/share-topic.gjs",
+      "sha256": "3eb02e41a3cdbcc51692e39eaa765d8d1f002656a2861c8310670d1225301c91",
+      "implementation": "DModal",
+      "classes": [
+        "share-topic-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/sidebar-section-form.gjs",
+      "sha256": "4b06d2b51eac3de9539515d40b4185b4a755fc122fed0bb23b659129dfab00b3",
+      "implementation": "DModal",
+      "classes": [
+        "sidebar-section-form-modal --large"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/spreadsheet-editor.gjs",
+      "sha256": "ab3643d9f82e3abbcb4e8ae09ae24d6b8f313caad9105f95e4b163c8de143b87",
+      "implementation": "DModal",
+      "classes": [
+        "insert-table-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/update-default-text-size.gjs",
+      "sha256": "1ff83b2e575de4b7d3cd8cb7de75cffbd94bb566986c5021f3078a79d8e9f534",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/upsert-hyperlink.gjs",
+      "sha256": "969dd7a1d8bc883128694ce84917af0db789d5868bfe3b7a8eb6325b6e5c76ac",
+      "implementation": "DModal",
+      "classes": [
+        "upsert-hyperlink-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/user-status.gjs",
+      "sha256": "6401efaf3238c3d8c55a82ca15056fc76f14313e606566d6901409a3c4c97fac",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/reviewable/ip-lookup.gjs",
+      "sha256": "91b9bf10c64d33386d6c8c0bd13b276e99fa1f53ed95db6d581f75d257d79f10",
+      "implementation": "DModal",
+      "classes": [
+        "ip-lookup-other-accounts-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/sidebar/edit-navigation-menu/modal.gjs",
+      "sha256": "1f69de202db41bc8ae67ac2dd0a1f332a4278578c140461f95290085ddff8efd",
+      "implementation": "DModal",
+      "classes": [
+        "sidebar__edit-navigation-menu__modal --large"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/components/wrap-attributes-modal.gjs",
+      "sha256": "cf21e234f438ecec2b6aa149db4d98b456d470237b810910f00c68f4cbaad87e",
+      "implementation": "DModal",
+      "classes": [
+        "wrap-attributes-modal",
+        "wrap-modal__attribute-row",
+        "btn-danger wrap-attributes-modal__unwrap"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/services/modal.js",
+      "sha256": "d3e4e981be458b521f669b258a0759cbe37b9a9fc3a13b84cac28a6c14a01541",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/static/development-error/index.js",
+      "sha256": "0b9cd225d84fdda5dcf37fce15c15424b624d5c1dc40bbfd0c287b294f3c854b",
+      "implementation": "native dialog",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-modal.gts",
+      "sha256": "6e8f6f7eddff7e70a1333c55dbf59b93202f102e3808470fb2ea63c0b31033f6",
+      "implementation": "custom surface",
+      "classes": [
+        "d-modal__container",
+        "d-modal__dismiss-action",
+        "btn-transparent d-modal__dismiss-action-button",
+        "d-modal__title",
+        "d-modal__title-text",
+        "d-modal__subtitle-text",
+        "d-modal__primary-action",
+        "btn-transparent modal-close",
+        "d-modal__footer",
+        "d-modal__backdrop"
+      ],
+      "classification": "The shared modal primitive owns modal semantics and accessibility",
+      "verification": "frontend/discourse/tests/integration/ui-kit/d-modal-test.gjs"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit-shims.js",
+      "sha256": "9a1a5659d296df5c98c1c2ae39973e06ef6cbd283c7357a3706be076292900a3",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/float-kit/components/d-inline-float.gts",
+      "sha256": "d98c23c689d121769a8f7236a7c06d0c27f896f62563b7d894d2b45395e73682",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "frontend/discourse/float-kit/components/d-menu.gts",
+      "sha256": "14a7f65dcfc41adb39ecd511d987cc00e50ef2470d6350b7760283ca2ece1386",
+      "implementation": "DModal",
+      "classes": [
+        "fk-d-menu-modal__grip"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-alumni-profile.gjs",
+      "sha256": "50f6bc796cbe89d91aefaf20901cfddc0c1c6385bc603b51c758eb76e9dfc755",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-calendar-entry-editor.gjs",
+      "sha256": "36da456717e98386974b470e84aa79fa9c386cf034f29e7e5a69545a2c949d02",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-calendar-note-editor.gjs",
+      "sha256": "6a0d372fb142bb94f0fb85733336d7d465f0e1f7d7a8d90c0f5dfb5046965a40",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-calendar-update-dialog.gjs",
+      "sha256": "c92d0da4cde6eaa9602f2e69e757d8c22df03e4faefb8ebacee7c09a0d7ae70f",
+      "implementation": "DModal",
+      "classes": [
+        "isbf-calendar-update-dialog",
+        "isbf-calendar-update-dialog__snapshot",
+        "isbf-calendar-update-dialog__latest",
+        "isbf-calendar-update-dialog__error",
+        "btn-primary isbf-calendar-update-dialog__accept",
+        "isbf-calendar-update-dialog__dismiss",
+        "btn-danger isbf-calendar-update-dialog__remove"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-flag-modal.gjs",
+      "sha256": "6859c94efb123b9e8773c065e965cc55402877e641f3608c8863bd090495e7a2",
+      "implementation": "DModal",
+      "classes": [
+        "flag-modal isbf-flag-modal",
+        "isbf-flag-modal__hint",
+        "isbf-flag-modal__confirmation",
+        "isbf-flag-modal__error",
+        "btn-danger isbf-flag-modal__severe",
+        "btn-primary flag-modal__create-flag",
+        "btn-danger isbf-flag-modal__severe",
+        "btn-danger flag-modal__send-warning",
+        "flag-modal__take-action",
+        "btn-danger flag-modal__flag-for-review",
+        "btn-danger delete-spammer flag-modal__delete-spammer"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-course-dialog.gjs",
+      "sha256": "a2662b61a70ba293c080555d40b2616dc3956a2b08b06477649355ca9ec643c6",
+      "implementation": "DModal",
+      "classes": [
+        "isbf-learning-course-dialog"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-share-dialog.gjs",
+      "sha256": "70b761c28bdef231d898fca9fbdfed124b554452b3f1e8b13a997da5f248b7b4",
+      "implementation": "DModal",
+      "classes": [
+        "isbf-learning-share-dialog",
+        "isbf-learning-share-dialog__course",
+        "isbf-learning-share-dialog__actions"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-calendar-editor.gjs",
+      "sha256": "0676aa6276e7a095d3a8b3bb3a6d77baf72a8b6e2785fc276542764cc08897ca",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-resource-directory-dialog.gjs",
+      "sha256": "7f78f04fc2281ffea22aed2298a1b553e1b43e550a4a0da6f7c55e7ceabf1bd6",
+      "implementation": "DModal",
+      "classes": [
+        "isbf-learning-course-dialog"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-resource-share-dialog.gjs",
+      "sha256": "51d716619807000c2f8de7f493d557150149e876c05f631e3c53ca83ee78d0cd",
+      "implementation": "DModal",
+      "classes": [
+        "isbf-learning-share-dialog",
+        "isbf-learning-share-dialog__course",
+        "isbf-learning-share-dialog__actions"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-info.gjs",
+      "sha256": "0b73163593ec6b91b7c18abfb7a217ac81387b7a2b1f39e0c44205e38faec539",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-appearance-modal.gjs",
+      "sha256": "fc26434a19982f6a5ff5ccf49b01993556638369d1d4a4f7ae184930ee398b2d",
+      "implementation": "DModal",
+      "classes": [
+        "isbf-v2-appearance-modal",
+        "isbf-v2-appearance-modal__options",
+        "btn-flat isbf-v2-appearance-modal__option",
+        "isbf-v2-appearance-modal__selected"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-join-modal.gjs",
+      "sha256": "c5b57cb3513a19ce51bf6ba4c8792c298643257baf43742a176ed71d92c6558e",
+      "implementation": "DModal",
+      "classes": [
+        "isbf-v2-join-modal",
+        "isbf-v2-join-modal__description"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/boards/assets/javascripts/discourse/components/modal/boards-add-topic-as-card.gjs",
+      "sha256": "d6881c550025fc44bbd75694ea0add9d5dffb7623f4e2cb8efd4a7fb7c39f3b9",
+      "implementation": "DModal",
+      "classes": [
+        "discourse-boards-add-topic-as-card-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/boards/assets/javascripts/discourse/components/modal/boards-archive.gjs",
+      "sha256": "d2ccb4e81e8ffe77df433ec29f4df402442bde2a6df72b0f3e2f705fd8f241f4",
+      "implementation": "DModal",
+      "classes": [
+        "discourse-boards-archive-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/boards/assets/javascripts/discourse/components/modal/boards-board-settings.gjs",
+      "sha256": "0be3cd5c81f48287803b80bf40170d9da588831075c9db6e53cfcd899690c1e9",
+      "implementation": "DModal",
+      "classes": [
+        "discourse-boards-board-settings-modal",
+        "discourse-boards-board-settings-modal__wrapper",
+        "discourse-boards-board-settings-modal__save-board",
+        "btn-danger discourse-boards-board-settings-modal__delete-board"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/boards/assets/javascripts/discourse/components/modal/boards-card-detail.gjs",
+      "sha256": "84ca3cccf8a99f8ca5fe2ec939864e75137836a9a7310d4841dfc88edcbb98fb",
+      "implementation": "DModal",
+      "classes": [
+        "discourse-boards-card-detail-modal",
+        "btn-flat d-modal-cancel",
+        "btn-flat discourse-boards-card-detail-modal__close"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/boards/assets/javascripts/discourse/components/modal/boards-column-settings.gjs",
+      "sha256": "7b60e4253934258973b44b6c518f16c651529614d8974cf26de6c5e046fd5acf",
+      "implementation": "DModal",
+      "classes": [
+        "discourse-boards-column-settings-modal",
+        "discourse-boards-column-settings-modal__wrapper",
+        "discourse-boards-column-settings-modal__save",
+        "btn-flat d-modal-cancel discourse-boards-column-settings-modal__cancel"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/boards/assets/javascripts/discourse/components/modal/boards-constraint-fix.gjs",
+      "sha256": "71fa212df2930183eed8409ce49afdf97970289c84d8291078a175b42255b705",
+      "implementation": "DModal",
+      "classes": [
+        "discourse-boards-constraint-fix-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/boards/assets/javascripts/discourse/components/modal/boards-floater-assign.gjs",
+      "sha256": "14653e0b88d4d3035b540a8d269877dab60bc944ffd48f15ac160e77461ded72",
+      "implementation": "DModal",
+      "classes": [
+        "discourse-boards-floater-assign-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/boards/assets/javascripts/discourse/components/modal/boards-topic-card-detail.gjs",
+      "sha256": "b1f067f6b46c23559a03178de32a35fa4ab398be8a33a753ec1f9e415d083406",
+      "implementation": "DModal",
+      "classes": [
+        "discourse-boards-topic-card-detail-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/chat/assets/javascripts/discourse/components/chat/modal/archive-channel.gjs",
+      "sha256": "3dd129cf671622a628c5cc16ff7dca7cc76a460b411c07234135bda6368b8415",
+      "implementation": "DModal",
+      "classes": [
+        "chat-modal-archive-channel",
+        "chat-modal-archive-channel__instructions"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/chat/assets/javascripts/discourse/components/chat/modal/create-channel.gjs",
+      "sha256": "f00ed480144d4936c09fb26fbdf4cfd898fcaf0b1c129dfab68a0c7273d3eaa2",
+      "implementation": "DModal",
+      "classes": [
+        "chat-modal-create-channel",
+        "chat-modal-create-channel__form"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/chat/assets/javascripts/discourse/components/chat/modal/delete-channel.gjs",
+      "sha256": "d0fc1fa79955524956ebf932e499b884e96e866080d950c1537633ae4411a61a",
+      "implementation": "DModal",
+      "classes": [
+        "chat-modal-delete-channel",
+        "chat-modal-delete-channel__instructions"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/chat/assets/javascripts/discourse/components/chat/modal/delete-messages-confirm.gjs",
+      "sha256": "9e986503cff0e03f76ee5ff795537345ecd2b40f4ff48d05d5579f206034e485",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/chat/assets/javascripts/discourse/components/chat/modal/edit-channel-description.gjs",
+      "sha256": "1a81e6445f4d5513c356c71374658024783015efded1f8a3ae161de7d960c2f6",
+      "implementation": "DModal",
+      "classes": [
+        "chat-modal-edit-channel-description",
+        "chat-modal-edit-channel-description__description",
+        "chat-modal-edit-channel-description__description-input"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/chat/assets/javascripts/discourse/components/chat/modal/edit-channel-name.gjs",
+      "sha256": "feccd4a6913a221e51a5e07505478ff2612879456b08a392c292ab7273fd505f",
+      "implementation": "DModal",
+      "classes": [
+        "chat-modal-edit-channel-name",
+        "chat-channel-edit-name-slug-modal__name-input",
+        "chat-channel-edit-name-slug-modal__slug-input"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/chat/assets/javascripts/discourse/components/chat/modal/move-message-to-channel.gjs",
+      "sha256": "37ece3d6a4204029b1d040d1a33d0bc3347f5c41b7bb8c9af9d1ef1bd10acab8",
+      "implementation": "DModal",
+      "classes": [
+        "chat-modal-move-message-to-channel",
+        "chat-modal-move-message-to-channel__channel-chooser"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/chat/assets/javascripts/discourse/components/chat/modal/new-message.gjs",
+      "sha256": "4abba363392ba9b53494f05e31cf56910f650c8813c64bf97b392e61a395cb08",
+      "implementation": "DModal",
+      "classes": [
+        "chat-modal-new-message --quick-palette"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/chat/assets/javascripts/discourse/components/chat/modal/thread-settings.gjs",
+      "sha256": "351ae72acba7fbc1a17f2d2718f28d0941860c12415bde0e5cdf11740f0fb07e",
+      "implementation": "DModal",
+      "classes": [
+        "chat-modal-thread-settings",
+        "chat-modal-thread-settings__title-input"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/chat/assets/javascripts/discourse/components/chat/modal/toggle-channel-status.gjs",
+      "sha256": "9db220ff6cda2f0f1f55ea3ac5fb11e733fa5d11495e90bb1e051dbe82847292",
+      "implementation": "DModal",
+      "classes": [
+        "chat-modal-toggle-channel-status",
+        "chat-modal-toggle-channel-status__instructions"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/chat/assets/javascripts/discourse/components/chat-message-actions-mobile.gjs",
+      "sha256": "c9f39d89cd2a919e54dd14219c271d431524e0ef5cc9bdab895f6708ea006d33",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/components/modal/academy-student-invite.gjs",
+      "sha256": "31f5c0b0e69272ed67297cb430c376cd5231072d0bc2c6a175c6a5b596b40d41",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/ai-agent-mcp-tool-selector-modal.gjs",
+      "sha256": "c4c13412b26cbe3f7f8c9c41e8c542e2ff2e56cea72ef4e08514c4dfe2189745",
+      "implementation": "DModal",
+      "classes": [
+        "ai-agent-mcp-tools-modal",
+        "ai-agent-mcp-tools-modal__summary",
+        "ai-agent-mcp-tools-modal__controls",
+        "ai-agent-mcp-tools-modal__filter",
+        "btn-default btn-small ai-agent-mcp-tools-modal__select-all",
+        "btn-default btn-small ai-agent-mcp-tools-modal__clear-all",
+        "ai-agent-mcp-tools-modal__selection-summary",
+        "ai-agent-mcp-tools-modal__tool",
+        "ai-agent-mcp-tools-modal__tool-header",
+        "ai-agent-mcp-tools-modal__tool-checkbox",
+        "ai-agent-mcp-tools-modal__tool-header-content",
+        "ai-agent-mcp-tools-modal__tool-title",
+        "ai-agent-mcp-tools-modal__tool-name",
+        "ai-agent-mcp-tools-modal__tool-token-count",
+        "ai-agent-mcp-tools-modal__empty"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/ai-llm-quota-modal.gjs",
+      "sha256": "68c71f24956fbfaa38a8ea050b0330b0b25f128c69efb4a69c261d0a16de7623",
+      "implementation": "DModal",
+      "classes": [
+        "ai-llm-quota-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/ai-mcp-server-tools-modal.gjs",
+      "sha256": "66e1d633fddeec4db009abda3ec0800c88e41de41385d76b520e6cb4b69b1fba",
+      "implementation": "DModal",
+      "classes": [
+        "ai-mcp-server-tools-modal",
+        "ai-mcp-server-tools-modal__summary",
+        "ai-mcp-server-tools-modal__tool",
+        "ai-mcp-server-tools-modal__header",
+        "ai-mcp-server-tools-modal__title",
+        "ai-mcp-server-tools-modal__name",
+        "ai-mcp-server-tools-modal__description",
+        "ai-mcp-server-tools-modal__parameters-title",
+        "ai-mcp-server-tools-modal__parameters",
+        "ai-mcp-server-tools-modal__parameter",
+        "ai-mcp-server-tools-modal__parameter-meta",
+        "ai-mcp-server-tools-modal__parameter-name",
+        "ai-mcp-server-tools-modal__parameter-type",
+        "ai-mcp-server-tools-modal__parameter-required",
+        "ai-mcp-server-tools-modal__parameter-description",
+        "ai-mcp-server-tools-modal__no-parameters"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/ai-post-image-caption-editor.gjs",
+      "sha256": "826152a48cd7e26e3122e9cbcc6a5502974e6b5f0bebf3cd8946c44255fb648c",
+      "implementation": "DModal",
+      "classes": [
+        "ai-post-image-caption-editor-modal",
+        "ai-post-image-caption-editor-modal__textarea"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/ai-regen-summaries-modal.gjs",
+      "sha256": "c755c3dc2a1880bbd1d3593cc527b7578749b07fbeba28109081f50f643636c9",
+      "implementation": "DModal",
+      "classes": [
+        "ai-regen-summaries-modal",
+        "ai-regen-summaries-modal__description",
+        "ai-regen-summaries-modal__buttons"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/ai-secret-create-modal.gjs",
+      "sha256": "2d43a09bcd6a3ffec346320138d556cd93f9048c33cec7c9144825a3ab64e59c",
+      "implementation": "DModal",
+      "classes": [
+        "ai-secret-create-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/ai-summary-modal.gjs",
+      "sha256": "787e14ed1d62e832c80d61e7897be5b9613059c3f93a499af733901e19a6cf73",
+      "implementation": "DModal",
+      "classes": [
+        "ai-summary-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/ai-theme-translation-modal.gjs",
+      "sha256": "64ef4204d5d3de07a5fe1fb1de0922cd99c3e6c7eb2d7bd40a13a378f664c4c6",
+      "implementation": "DModal",
+      "classes": [
+        "ai-theme-translation-modal",
+        "ai-theme-translation-modal__languages"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/ai-tool-test-modal.gjs",
+      "sha256": "1f4840b02be4363538a9d77b5f4c6cb1d99585cf9f8b58b12b6a1de39c2b282c",
+      "implementation": "DModal",
+      "classes": [
+        "ai-tool-test-modal",
+        "ai-tool-test-modal__test-result",
+        "ai-tool-test-modal__custom-raw",
+        "btn-primary ai-tool-test-modal__run-button"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/chat-modal-channel-summary.gjs",
+      "sha256": "5e0a0644302f0307a8a0b5f1768bf1a6231258d5864beb318cc758f78e722a6e",
+      "implementation": "DModal",
+      "classes": [
+        "chat-modal-channel-summary"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/debug-ai-modal.gjs",
+      "sha256": "49e7a0448c464c3f601dc99c9e57611368d8b79b663df77e9de22a2131c45976",
+      "implementation": "DModal",
+      "classes": [
+        "ai-debug-modal",
+        "nav nav-pills ai-debug-modal__nav",
+        "ai-debug-modal__stats",
+        "ai-debug-modal__stats-line",
+        "ai-debug-modal__stats-line__label",
+        "ai-debug-modal__stats-line__cache",
+        "ai-debug-modal__stats-line__cost",
+        "ai-debug-modal__stats-line ai-debug-modal__duration",
+        "ai-debug-modal__stats-line__label",
+        "ai-debug-modal__stats-line",
+        "ai-debug-modal__stats-line__label",
+        "ai-debug-modal__stats-line__cache",
+        "ai-debug-modal__stats-line__cost",
+        "ai-debug-modal__preview",
+        "ai-debug-modal__preview",
+        "btn ai-debug-modal__previous",
+        "btn ai-debug-modal__next",
+        "ai-debug-modal__copy-actions",
+        "btn-default ai-debug-modal__response-toggle",
+        "btn-default ai-debug-modal__copy"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/diff-modal.gjs",
+      "sha256": "1cfb94432543106a7e9b5aa133bfbcf4684e2891c1afaeae097fea321f4a60f1",
+      "implementation": "DModal",
+      "classes": [
+        "composer-ai-helper-modal",
+        "composer-ai-helper-modal__old-value",
+        "composer-ai-helper-modal__new-value"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/rag-document-sources-modal.gjs",
+      "sha256": "4ba79d6d78087729bfc7fbd1ba9d725c371fe0f1cdfffeabee7fa9207b54aa24",
+      "implementation": "DModal",
+      "classes": [
+        "rag-document-sources-modal",
+        "rag-document-sources-modal__urls"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/share-full-topic-modal.gjs",
+      "sha256": "ba5bbe9fbc88ee1c1beb9fa21e739f9142157551d0c143c5b77d3e425795cb46",
+      "implementation": "DModal",
+      "classes": [
+        "ai-share-full-topic-modal",
+        "ai-share-full-topic-modal__body"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/share-modal.gjs",
+      "sha256": "39d8a2c57f944a72968b3310dbb53e51a1ce6bf1b9c0fd8dee5d71e7e8a6daba",
+      "implementation": "DModal",
+      "classes": [
+        "ai-share-modal",
+        "ai-share-modal__preview",
+        "ai-share-modal__slider",
+        "ai-share-modal__context",
+        "ai-share-modal__just-copied",
+        "ai-share-modal__share-tip"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/spam-test-modal.gjs",
+      "sha256": "e71c0975eb4f3505a825c057a27d0eace2556e42e083093c9b258f289099926a",
+      "implementation": "DModal",
+      "classes": [
+        "spam-test-modal",
+        "spam-test-modal__results",
+        "spam-test-modal__verdict\n                {{if this.isSpam 'is-spam' 'not-spam'}}",
+        "spam-test-modal__info-box spam-test-modal__info-box--reason",
+        "spam-test-modal__info-box-title",
+        "spam-test-modal__info-box-content",
+        "spam-test-modal__info-grid",
+        "spam-test-modal__info-box spam-test-modal__info-box--llm",
+        "spam-test-modal__info-box-title",
+        "spam-test-modal__info-box-content",
+        "spam-test-modal__info-box spam-test-modal__info-box--history",
+        "spam-test-modal__info-box-title",
+        "spam-test-modal__info-box-content",
+        "spam-test-modal__info-box spam-test-modal__info-box--message",
+        "spam-test-modal__info-box-title",
+        "spam-test-modal__info-box-content",
+        "spam-test-modal__info-box spam-test-modal__info-box--prompt",
+        "spam-test-modal__info-box-title",
+        "spam-test-modal__info-box-content",
+        "btn-primary spam-test-modal__run-button"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/modal/thumbnail-suggestions.gjs",
+      "sha256": "a7e29fe7c790f74698bc3af4dac6a7ed20532fc217e568f8308749969c4a8107",
+      "implementation": "DModal",
+      "classes": [
+        "thumbnail-suggestions-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-assign/assets/javascripts/discourse/components/modal/assign-user.gjs",
+      "sha256": "d359e744e9dd54e6404aaa1a0407659961ad3c3ae800a72345021210706d2bf5",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-assign/assets/javascripts/discourse/components/modal/edit-topic-assignments.gjs",
+      "sha256": "567c140a87c79f11442f8ad6014bdb226fdfbfe1d0d525a7d24351020dcc245d",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-data-explorer/assets/javascripts/discourse/components/modal/query-help.gjs",
+      "sha256": "178033f2118a32cdeb2dc71a24455eb091a2797a1dade36f5bf92381d5ffca6d",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-events/assets/javascripts/discourse/components/livestream/modal/mobile-embeddable-chat-modal.gjs",
+      "sha256": "87b2fa678b1a5acb4f7755a6840b4037ae7be33504a5e516794e34a9ff9c0497",
+      "implementation": "DModal",
+      "classes": [
+        "livestream-chat-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-events/assets/javascripts/discourse/components/modal/post-event-builder.gjs",
+      "sha256": "5203a5c3a253a73c9f745bf85988c6513cd713b4ae1216f0a66203e2e6ca07b6",
+      "implementation": "DModal",
+      "classes": [
+        "post-event-builder-modal\n        {{if this.isAdvancedScreen 'is-advanced' 'is-compact'}}"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-events/assets/javascripts/discourse/components/modal/post-event-bulk-invite.gjs",
+      "sha256": "820c83809ec6caa73307df00d50633fbfb5f9a5f622a1dddd1ec2e905bfacc95",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-events/assets/javascripts/discourse/components/modal/post-event-invite-user-or-group.gjs",
+      "sha256": "39e6f53e047573db20b735e03a2b6787db75f65aaca955d289546418473a3903",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-events/assets/javascripts/discourse/components/modal/post-event-invitees/index.gjs",
+      "sha256": "ea12ec0c5eb828a1f8ea2974d6bc5c8d5d255c967377285efbee5e8772d3039e",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-gamification/assets/javascripts/discourse/components/modal/leaderboard-info.gjs",
+      "sha256": "336cf598a7324009cbc0a4433263c223735a084dd3ebf3c187f45e94c084c178",
+      "implementation": "DModal",
+      "classes": [
+        "leaderboard-info-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-gamification/assets/javascripts/discourse/components/modal/recalculate-scores-form.gjs",
+      "sha256": "b5fd60deb45953fb9368a2bf3b50c067085d7a79933bb2d0dd656fedbf9d5d0c",
+      "implementation": "DModal",
+      "classes": [
+        "recalculate-scores-form-modal",
+        "recalculate-modal__status",
+        "recalculate-modal__status is-success",
+        "recalculate-modal__date-range",
+        "recalculate-modal__footer-text"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-graphviz/assets/javascripts/discourse/components/graphviz-fullscreen.gjs",
+      "sha256": "38b74a5f175838b3a1ac658d977b29eeb154dd621e6bd56f98986df41cc24585",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-local-dates/assets/javascripts/discourse/components/modal/local-dates-create.gjs",
+      "sha256": "ed9d3986136ea9506c0fd08c68b9bbd70a3f5356db619fb37b79d9c2a6b33e58",
+      "implementation": "DModal",
+      "classes": [
+        "discourse-local-dates-create-modal --large"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-math/assets/javascripts/discourse/components/modal/math-edit.gjs",
+      "sha256": "28b8bc1e13ffb5092c229ddc9f6ce0e72c0f4aead7a8b7607253dd0d46370232",
+      "implementation": "DModal",
+      "classes": [
+        "math-edit-modal",
+        "math-edit-modal__textarea",
+        "btn-primary math-edit-modal__apply"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-math/assets/javascripts/discourse/components/modal/math-insert.gjs",
+      "sha256": "5b8331e761c071133497f05f568de22a7ba5dfab4db3476063b7a1b31d102ae1",
+      "implementation": "DModal",
+      "classes": [
+        "math-insert-modal",
+        "math-insert-modal__toggle",
+        "math-insert-modal__textarea",
+        "btn-primary math-insert-modal__insert"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-policy/assets/javascripts/discourse/components/modal/policy-builder.gjs",
+      "sha256": "47c16c1fdd36135197c25e760208abb240a0254be0539f9ef30c3e6900bb3b2c",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-solved/assets/javascripts/discourse/components/modal/move-solution-confirmation.gjs",
+      "sha256": "30577638dc287be6569c81d84a511b44ad744559ef070b142ab1fad419aab479",
+      "implementation": "DModal",
+      "classes": [
+        "move-solution-confirmation-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-solved/assets/javascripts/discourse/components/modal/solved-removal-confirmation.gjs",
+      "sha256": "c2797663fe30004c8cdb69c24a1313f770d4915e2f61569650ba1bd4e9d16632",
+      "implementation": "DModal",
+      "classes": [
+        "solved-removal-confirmation-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-subscriptions/assets/javascripts/discourse/components/modal/admin-cancel-subscription.gjs",
+      "sha256": "b2eb9c682e948d7678afb2fba9b021f7f7dc740f6cf63115558d6faba23451c0",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-templates/assets/javascripts/discourse/components/d-templates/modal/form.gjs",
+      "sha256": "650bb658729cefa24a15b922a46d761e4f29959697caeaf415eb3ad3fad17827",
+      "implementation": "DModal",
+      "classes": [
+        "d-templates d-templates-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-user-notes/assets/javascripts/discourse/components/modal/user-notes.gjs",
+      "sha256": "50d1a930dc8132ee20e66d779457d741583e166ce9f611800cc0985315b7d09c",
+      "implementation": "DModal",
+      "classes": [
+        "user-notes-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/discourse-workflows/assets/javascripts/discourse/components/workflows-user-modal.gjs",
+      "sha256": "e94df03af73442abe833ae7a8c72ca49284f2930dfde43b6c9ba696e465ad4e5",
+      "implementation": "DModal",
+      "classes": [
+        "workflows-user-modal",
+        "workflows-user-modal__body"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/isbf-anonymous/assets/javascripts/discourse/components/modal/isbf-anonymous-author.gjs",
+      "sha256": "63e767216de2b81459fe5adcefe4adfcbc5d4701abe04e5fe4b99cc1effe3ea7",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/isbf-resume/assets/javascripts/discourse/components/resume-generate-confirmation.gjs",
+      "sha256": "50b9ba8195b8d996a878ff2606a89f8d08a3ea4768e4b80980556445805832cb",
+      "implementation": "DModal",
+      "classes": [
+        "isbf-resume-confirmation",
+        "isbf-resume-confirmation__language",
+        "isbf-resume-confirmation__frequency"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/isbf-resume/assets/javascripts/discourse/components/resume-share-edit-modal.gjs",
+      "sha256": "d5c750d7ef4f5e7d7e93a30b160711ecaef0dc8ec1da0ce00b66d72ed7884fd6",
+      "implementation": "DModal",
+      "classes": [
+        "isbf-resume-confirmation isbf-resume-share-edit"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/poll/assets/javascripts/discourse/components/modal/poll-breakdown.gjs",
+      "sha256": "cbe0acc01018e3515c94f122c7c4ed90210ece7cd20d37446495f7b55f421ee4",
+      "implementation": "DModal",
+      "classes": [
+        "modal-tabs"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/poll/assets/javascripts/discourse/components/modal/poll-ui-builder.gjs",
+      "sha256": "429dc5fa3336e6168d127a7a4c0eda49ca8043b8963afc02ab27a8d453c3a5a0",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/styleguide/assets/javascripts/discourse/components/sections/organisms/modal.gjs",
+      "sha256": "82391ab8e993b475974f0710a1b6fea9a190888c6bf24661f9329d02b80a197c",
+      "implementation": "DModal",
+      "classes": [],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/voice/assets/javascripts/discourse/components/modal/voice-create-room.gjs",
+      "sha256": "7ccf5e2a3999a0e8ccea4edd8773d62739961777b103c687b8f8704a8f8f0b16",
+      "implementation": "DModal",
+      "classes": [
+        "voice-create-room-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/voice/assets/javascripts/discourse/components/modal/voice-incoming-call.gjs",
+      "sha256": "8ab9787d02d735906ca48da7738d4babf6f7f4ce779d4c11cf9d59e46cc0df66",
+      "implementation": "DModal",
+      "classes": [
+        "voice-incoming-call-modal",
+        "voice-incoming-call-modal__caller",
+        "voice-incoming-call-modal__avatar",
+        "voice-incoming-call-modal__name",
+        "voice-incoming-call-modal__state",
+        "btn-primary voice-incoming-call-modal__answer",
+        "btn-danger voice-incoming-call-modal__decline"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/voice/assets/javascripts/discourse/components/modal/voice-invite-agent.gjs",
+      "sha256": "672ece0aa01a0aadbebda40bb29fbf50ff5d380acdebe431bf3a939bf35b736a",
+      "implementation": "DModal",
+      "classes": [
+        "voice-invite-agent-modal",
+        "voice-invite-agent-modal__hint",
+        "voice-invite-agent-modal__picker",
+        "btn-flat voice-invite-agent-modal__toggle",
+        "btn-flat voice-invite-agent-modal__refresh",
+        "voice-invite-agent-modal__picker",
+        "btn-flat voice-invite-agent-modal__toggle",
+        "btn-flat voice-invite-agent-modal__refresh"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/voice/assets/javascripts/discourse/components/modal/voice-invite-users.gjs",
+      "sha256": "73dd6ac6c3ff80df113aa094cc492f1d21f9f050e02d2adc74de44e89202deab",
+      "implementation": "DModal",
+      "classes": [
+        "voice-invite-modal",
+        "voice-invite-modal__search",
+        "voice-invite-modal__label",
+        "voice-invite-modal__search-row",
+        "voice-invite-modal__user-chooser",
+        "btn-primary voice-invite-modal__send",
+        "voice-invite-modal__loading",
+        "voice-invite-modal__suggestions",
+        "voice-invite-modal__section-title",
+        "voice-invite-modal__suggestion-list",
+        "voice-invite-modal__suggestion",
+        "voice-invite-modal__suggestion-avatar",
+        "voice-invite-modal__suggestion-details",
+        "voice-invite-modal__suggestion-username",
+        "voice-invite-modal__suggestion-time",
+        "voice-invite-modal__suggestion-invited",
+        "btn-small voice-invite-modal__suggestion-invite",
+        "voice-invite-modal__link",
+        "voice-invite-modal__label",
+        "voice-invite-modal__link-row",
+        "voice-invite-modal__link-input",
+        "voice-invite-modal__copy"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/voice/assets/javascripts/discourse/components/modal/voice-mesh-privacy-warning.gjs",
+      "sha256": "541aa560554386cd8e8de75259448fd19ec025d9171cc3642fa1ae94bf688537",
+      "implementation": "DModal",
+      "classes": [
+        "voice-mesh-privacy-warning-modal",
+        "voice-mesh-privacy-warning-modal__body",
+        "voice-mesh-privacy-warning-modal__dont-show-again",
+        "btn-primary voice-mesh-privacy-warning-modal__join",
+        "btn-flat voice-mesh-privacy-warning-modal__cancel"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/voice/assets/javascripts/discourse/components/modal/voice-mic-permission.gjs",
+      "sha256": "9f389f11fda46d2c62fe7077eb45ad489f139f850a1f582273c5013972c5fd11",
+      "implementation": "DModal",
+      "classes": [
+        "voice-mic-permission-modal",
+        "voice-mic-permission-modal__body",
+        "voice-mic-permission-modal__instructions",
+        "btn-primary voice-mic-permission-modal__ok"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/voice/assets/javascripts/discourse/components/modal/voice-room-info.gjs",
+      "sha256": "e61b27f79377cd71452c479224dec62261a319b4598cba0395c0984dd9d4521a",
+      "implementation": "DModal",
+      "classes": [
+        "voice-room-info-modal",
+        "voice-room-info-modal__edit-form",
+        "voice-room-info-modal__header",
+        "voice-room-info-modal__icon",
+        "voice-room-info-modal__icon-badge",
+        "voice-room-info-modal__header-content",
+        "voice-room-info-modal__room-name",
+        "voice-room-info-modal__description cooked",
+        "btn-flat voice-room-info-modal__edit-btn",
+        "voice-room-info-modal__stats",
+        "voice-room-info-modal__stat",
+        "voice-room-info-modal__stat-value",
+        "voice-room-info-modal__stat-label",
+        "voice-room-info-modal__stat",
+        "voice-room-info-modal__stat-value",
+        "voice-room-info-modal__stat-label",
+        "voice-room-info-modal__stat",
+        "voice-room-info-modal__stat-value",
+        "voice-room-info-modal__stat-label",
+        "voice-room-info-modal__members",
+        "voice-room-info-modal__section-header",
+        "voice-room-info-modal__loading",
+        "voice-room-info-modal__member-list",
+        "voice-room-info-modal__member\n                        {{if\n                          (eq membership.user_id this.room.creator_id)\n                          '--creator'\n                        }}",
+        "voice-room-info-modal__member-avatar",
+        "voice-room-info-modal__member-details",
+        "voice-room-info-modal__member-username",
+        "voice-room-info-modal__member-role --creator",
+        "voice-room-info-modal__member-role --{{membership.role_name}}",
+        "voice-room-info-modal__member-actions",
+        "voice-room-info-modal__role-select",
+        "btn-flat btn-small voice-room-info-modal__remove-btn",
+        "voice-room-info-modal__add-member",
+        "voice-room-info-modal__add-row",
+        "voice-room-info-modal__user-chooser",
+        "voice-room-info-modal__role-chooser",
+        "btn-primary voice-room-info-modal__add-btn"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/voice/assets/javascripts/discourse/components/modal/voice-video-settings.gjs",
+      "sha256": "3029ca37ee4a80d1c330d40f1a8305dab356725e74b9d88d5981af3be32f2f02",
+      "implementation": "DModal",
+      "classes": [
+        "voice-video-settings-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    },
+    {
+      "path": "plugins/voice/assets/javascripts/discourse/components/modal/voice-voice-settings.gjs",
+      "sha256": "d91f9ce3e20062e727764787301e6d6c9dfeab888734850711f8a44c18bb6e06",
+      "implementation": "DModal",
+      "classes": [
+        "voice-voice-settings-modal"
+      ],
+      "classification": "Shared foreground dialog appearance; business widths retained",
+      "verification": "Shared computed-style regression; individual business coverage varies"
+    }
+  ]
+}

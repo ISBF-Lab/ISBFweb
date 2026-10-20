@@ -559,6 +559,7 @@ export default class AcademyAuthPage extends Component {
               @initialEmail={{this.invitation.email}}
               @inviteKey={{this.invitation.token}}
               @onAuthenticated={{this.authenticated}}
+              @usernameHint={{i18n "academy_roles.auth.username_hint"}}
             />
           {{else}}
             <h1 class="academy-auth__title">{{i18n

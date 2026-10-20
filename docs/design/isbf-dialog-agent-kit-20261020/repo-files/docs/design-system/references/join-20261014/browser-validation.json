@@ -1,0 +1,81 @@
+{
+  "scope": "Static source-preservation comparison; browser transport responses are mocked",
+  "backend_validation": "Separate isolated PostgreSQL/Redis RSpec suite: 44 examples, 0 failures",
+  "mock_validates_database": false,
+  "source_zip_sha256": "8a7e5606524b3498bc775d8cee41929fe080204ee6a3663dbb0c54d67a2a26df",
+  "controller_sha256": "8d53e48d07e61dcaf31c18fd15bd829fde1cc063aaf02cba73994616b32dafc4",
+  "viewports": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1365,
+        "height": 900
+      },
+      "reduced_motion": true,
+      "versions": {}
+    }
+  ],
+  "page_errors": [],
+  "failed_required_assets": [],
+  "blocked_external_requests": [],
+  "passed": false,
+  "integrated_csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
+  "browser_version": "151.0.7922.34",
+  "failure": "Page.wait_for_function: Timeout 120000ms exceeded.",
+  "resources": {
+    "peak_cgroup_current_bytes": 536870912,
+    "peak_cgroup_working_bytes": 484143104,
+    "oom_before": {
+      "low": 0,
+      "high": 0,
+      "max": 21819,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0,
+      "sock_throttled": 0
+    },
+    "oom_after": {
+      "low": 0,
+      "high": 0,
+      "max": 311123,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0,
+      "sock_throttled": 0
+    },
+    "safety_failure": null
+  },
+  "screenshots": [],
+  "outer_deadline_observation": {
+    "reason": "Baseline did not complete within the six-minute outer browser deadline",
+    "elapsed_seconds": 443.4800000000105,
+    "outer_limit_seconds": 360,
+    "scene_ready_confirmed": false,
+    "screenshots_completed": false,
+    "second_launch": false,
+    "memory_events": "low 0\nhigh 0\nmax 310949\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0\n"
+  },
+  "coverage": {
+    "desktop_baseline_navigation": true,
+    "desktop_baseline_scene_ready": false,
+    "original_integrated_screenshot_comparison": false,
+    "integrated_csp_browser_check": false,
+    "mobile_browser_check": false,
+    "mock503_retry201_browser_check": false,
+    "database_accessed_by_browser_harness": false
+  },
+  "cleanup": {
+    "verified": true,
+    "live_browser_processes": 0,
+    "live_static_server_processes": 0,
+    "live_database_processes": 0,
+    "observation": "Only container sleep and defunct process remnants remain; no live Chromium, Python static server, Playwright driver, PostgreSQL or Redis process. The owner may remove the tool container."
+  },
+  "limitations": [
+    "Desktop baseline did not satisfy the original 120000ms page-readiness wait. Root cause is unestablished.",
+    "No screenshots or integrated/mobile/transport browser results were produced; no visual-equivalence or successful 3D-scene claim is made.",
+    "No page errors, failed required assets or external requests were observed before termination; complete asset loading was not established.",
+    "The external six-minute deadline reached the browser at approximately 443 seconds; the exact observation is retained. No second browser launch occurred.",
+    "All observed oom and oom_kill counters remained zero. Separate backend and Node results do not establish browser behavior."
+  ]
+}

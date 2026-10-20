@@ -1,0 +1,12 @@
+{
+  "host_available_bytes": 1514622976,
+  "effective_available_bytes": 1514622976,
+  "memory_limit_bytes": 939524096,
+  "reserve_bytes": 536870912,
+  "v8_old_space_mib": 512,
+  "peak_rss_bytes": 939843584,
+  "lowest_host_available_bytes": 863584256,
+  "exit_code": 137,
+  "stop_reason": "Runner RSS budget reached",
+  "elapsed_seconds": 70.7
+}

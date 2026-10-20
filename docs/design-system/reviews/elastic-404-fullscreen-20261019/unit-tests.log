@@ -1,0 +1,74 @@
+TAP version 13
+# (node:2073729) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/codex/discourse/frontend/discourse/scripts/js/elastic-not-found.js is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /home/codex/discourse/frontend/discourse/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the clock counts continuous play and a finished round cannot resume
+ok 1 - the clock counts continuous play and a finished round cannot resume
+  ---
+  duration_ms: 6.196072
+  type: 'test'
+  ...
+# Subtest: a delayed frame resolves the actual miss before recording survival time
+ok 2 - a delayed frame resolves the actual miss before recording survival time
+  ---
+  duration_ms: 0.606342
+  type: 'test'
+  ...
+# Subtest: a paddle hit reflects the ball at the current accelerated speed
+ok 3 - a paddle hit reflects the ball at the current accelerated speed
+  ---
+  duration_ms: 0.734415
+  type: 'test'
+  ...
+# Subtest: the ball gradually accelerates, stays bounded, and resets for a new round
+ok 4 - the ball gradually accelerates, stays bounded, and resets for a new round
+  ---
+  duration_ms: 20.552177
+  type: 'test'
+  ...
+# Subtest: ordinary delayed frames keep playing without a pause state
+ok 5 - ordinary delayed frames keep playing without a pause state
+  ---
+  duration_ms: 1.097448
+  type: 'test'
+  ...
+# Subtest: missing the paddle ends the round and freezes its time
+ok 6 - missing the paddle ends the round and freezes its time
+  ---
+  duration_ms: 0.479323
+  type: 'test'
+  ...
+# Subtest: walls reflect the ball and controls keep the paddle inside the arena
+ok 7 - walls reflect the ball and controls keep the paddle inside the arena
+  ---
+  duration_ms: 0.790371
+  type: 'test'
+  ...
+# Subtest: records survive a fresh instance and never replace a better stored result
+ok 8 - records survive a fresh instance and never replace a better stored result
+  ---
+  duration_ms: 0.800801
+  type: 'test'
+  ...
+# Subtest: unavailable or corrupt storage keeps a session record
+ok 9 - unavailable or corrupt storage keeps a session record
+  ---
+  duration_ms: 1.182634
+  type: 'test'
+  ...
+# Subtest: times display minutes, seconds, and tenths
+ok 10 - times display minutes, seconds, and tenths
+  ---
+  duration_ms: 1.787932
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 235.337135

@@ -1,0 +1,199 @@
+#!/usr/bin/env python3
+"""Serve the original ZIP and integrated build with explicit transport mocks."""
+
+from http import HTTPStatus
+from http.cookies import SimpleCookie
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from urllib.parse import unquote, urlsplit
+from zipfile import ZipFile
+import argparse
+import hashlib
+import json
+import re
+import shutil
+import threading
+import uuid
+
+
+ROOT = Path(__file__).resolve().parents[3]
+WEB = ROOT / "plugins/isbf-join/web"
+ARCHIVE = ROOT / "docs/isbf-one-join-app.zip"
+CONTROLLER = ROOT / "plugins/isbf-join/app/controllers/isbf_join/pages_controller.rb"
+TOKEN = "isbf-join-static-verification-token"
+COOKIE = "isbf_join_static_session=verification-only"
+TYPES = {
+    ".html": "text/html; charset=utf-8",
+    ".js": "text/javascript; charset=utf-8",
+    ".css": "text/css; charset=utf-8",
+    ".json": "application/json; charset=utf-8",
+    ".woff2": "font/woff2",
+    ".wasm": "application/wasm",
+    ".glb": "model/gltf-binary",
+    ".png": "image/png",
+    ".svg": "image/svg+xml",
+    ".txt": "text/plain; charset=utf-8",
+    ".md": "text/plain; charset=utf-8",
+}
+
+
+def controller_csp():
+    source = CONTROLLER.read_text()
+    array = re.search(r"CONTENT_SECURITY_POLICY = \[(.*?)\]\.join", source, re.S)
+    if not array:
+        raise RuntimeError("The actual page CSP could not be read")
+    return "; ".join(json.loads(value) for value in re.findall(r'"[^"\n]*"', array[1]))
+
+
+class PreviewState:
+    def __init__(self):
+        self.manifest = json.loads((WEB / "asset-manifest.json").read_text())
+        self.archive = ZipFile(ARCHIVE)
+        self.archive_names = set(self.archive.namelist())
+        self.csp = controller_csp()
+        self.lock = threading.Lock()
+        self.requests = []
+        self.reset_mock()
+
+    def reset_mock(self):
+        with self.lock:
+            self.posts = []
+            self.csrf_requests = []
+
+    def close(self):
+        self.archive.close()
+
+
+class PreviewServer(ThreadingHTTPServer):
+    daemon_threads = True
+    allow_reuse_address = False
+
+    def __init__(self, address):
+        self.state = PreviewState()
+        super().__init__(address, PreviewHandler)
+
+
+class PreviewHandler(BaseHTTPRequestHandler):
+    server_version = "ISBFJoinStaticVerification"
+
+    def log_message(self, *_arguments):
+        pass
+
+    def do_GET(self):
+        path = unquote(urlsplit(self.path).path)
+        with self.server.state.lock:
+            self.server.state.requests.append({"method": "GET", "path": path})
+        if path == "/session/csrf.json":
+            with self.server.state.lock:
+                self.server.state.csrf_requests.append({
+                    "cookie": self.headers.get("Cookie", ""),
+                    "xhr": self.headers.get("X-Requested-With"),
+                })
+            return self.json_response(200, {"csrf": TOKEN}, cookie=True)
+        if path in {"/join", "/join/"}:
+            return self.integrated_asset("index.html", page=True)
+        if path.startswith("/join/"):
+            return self.integrated_asset(path.removeprefix("/join/"))
+        if path in {"/baseline", "/baseline/"}:
+            return self.zip_asset("dist/index.html")
+        if path.startswith(("/assets/", "/models/", "/draco/", "/fonts/", "/brand/")) or path == "/favicon.svg":
+            return self.zip_asset("dist" + path)
+        self.send_error(404)
+
+    def do_POST(self):
+        if urlsplit(self.path).path != "/api/applications":
+            return self.send_error(404)
+        length = int(self.headers.get("Content-Length", "0"))
+        if length > 4096:
+            return self.json_response(413, {"ok": False})
+        try:
+            fields = json.loads(self.rfile.read(length))
+        except (ValueError, UnicodeDecodeError):
+            return self.json_response(400, {"ok": False})
+        cookies = SimpleCookie(self.headers.get("Cookie", ""))
+        session_cookie = cookies.get("isbf_join_static_session")
+        valid = (
+            isinstance(fields, dict)
+            and set(fields) == {"name", "studentId", "phone", "submissionId"}
+            and all(isinstance(value, str) for value in fields.values())
+            and self.headers.get("Content-Type") == "application/json"
+            and self.headers.get("X-CSRF-Token") == TOKEN
+            and self.headers.get("X-Requested-With") == "XMLHttpRequest"
+            and session_cookie is not None
+            and session_cookie.value == "verification-only"
+        )
+        try:
+            valid = valid and uuid.UUID(fields["submissionId"]).version == 4
+        except (KeyError, TypeError, ValueError):
+            valid = False
+        with self.server.state.lock:
+            status = (503 if not self.server.state.posts else 201) if valid else 400
+            self.server.state.posts.append({
+                "fields": fields,
+                "headers": {
+                    key: self.headers.get(key)
+                    for key in ["Content-Type", "X-CSRF-Token", "X-Requested-With", "Cookie"]
+                },
+                "status": status,
+                "protocol_valid": valid,
+            })
+        payload = {"ok": status == 201}
+        if status == 201:
+            payload["id"] = fields["submissionId"]
+        self.json_response(status, payload)
+
+    def integrated_asset(self, name, page=False):
+        if name == "index.html" and not page:
+            return self.send_error(404)
+        entry = self.server.state.manifest.get(name)
+        if not entry:
+            return self.send_error(404)
+        path = (WEB / entry["file"]).resolve()
+        if not path.is_relative_to(WEB.resolve()) or not path.is_file():
+            return self.send_error(404)
+        self.asset_headers(path.suffix, path.stat().st_size, self.server.state.csp if page else None)
+        with path.open("rb") as stream:
+            shutil.copyfileobj(stream, self.wfile, length=128 * 1024)
+
+    def zip_asset(self, name):
+        if name not in self.server.state.archive_names or Path(name).suffix not in TYPES:
+            return self.send_error(404)
+        info = self.server.state.archive.getinfo(name)
+        self.asset_headers(Path(name).suffix, info.file_size)
+        with self.server.state.archive.open(info) as stream:
+            shutil.copyfileobj(stream, self.wfile, length=128 * 1024)
+
+    def asset_headers(self, suffix, length, csp=None):
+        self.send_response(HTTPStatus.OK)
+        self.send_header("Content-Type", TYPES[suffix])
+        self.send_header("Content-Length", str(length))
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("Referrer-Policy", "strict-origin-when-cross-origin")
+        if csp:
+            self.send_header("Content-Security-Policy", csp)
+        self.end_headers()
+
+    def json_response(self, status, payload, cookie=False):
+        body = json.dumps(payload, ensure_ascii=False).encode()
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-store")
+        if cookie:
+            self.send_header("Set-Cookie", COOKIE + "; Path=/; SameSite=Lax; HttpOnly")
+        self.end_headers()
+        self.wfile.write(body)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--port", type=int, default=0)
+    arguments = parser.parse_args()
+    server = PreviewServer(("127.0.0.1", arguments.port))
+    try:
+        print(json.dumps({"port": server.server_port, "transport": "mocked; no database"}), flush=True)
+        server.serve_forever()
+    finally:
+        server.server_close()
+        server.state.close()

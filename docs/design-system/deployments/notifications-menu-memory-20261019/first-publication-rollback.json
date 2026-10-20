@@ -1,0 +1,11 @@
+{
+  "all_theme_fields_rolled_back": 224,
+  "theme_and_site_settings_preserved": true,
+  "backend_remains_loaded": true,
+  "current_capacity": {
+    "host_available_bytes": 1912872960,
+    "effective_available_bytes": 1912872960,
+    "memory_limit_bytes": 1342177280,
+    "reserve_bytes": 536870912
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "plugins": 66,
+  "unrelated_plugins_preserved": 65,
+  "complete_hidden_sources_links_markers_verified": true,
+  "generated_manifests_and_public_assets_unchanged": 1279,
+  "theme_unrelated_fields_preserved": 219,
+  "settings_preserved": true,
+  "core_entrypoint_unchanged": true
+}

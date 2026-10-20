@@ -1,0 +1,49 @@
+{
+  "harness_sha256": "2548899029e27f9f697706f73fcd795fe38984a93700119624a34998958dc10b",
+  "passed": false,
+  "full_ember_client": true,
+  "production_backend_used": false,
+  "checks": [
+    "the internal title is absent before loading or scrolling",
+    "suggestions preserve exact source order",
+    "hidden topics are not requested"
+  ],
+  "layouts": [],
+  "errors": [],
+  "console_errors": [],
+  "missing_assets": [],
+  "api_requests": [
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "POST",
+      "path": "/isbf/views/impressions"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "POST",
+      "path": "/topics/timings"
+    }
+  ],
+  "template_overrides": false,
+  "full_native_theme": true,
+  "expected_missing_body_status": 404,
+  "debug": {
+    "body": "跳转到您离开的地方（最后一条回复，帖子 10）\n跳到主要内容\nISBF - One\n[zh_CN.theme_translations.4.isbf_v2.home]\n[zh_CN.theme_translations.4.isbf_v2.explore]\n[zh_CN.theme_translations.4.isbf_v2.notifications]\n[zh_CN.theme_translations.4.isbf_v2.calendar]\n[zh_CN.theme_translations.4.isbf_v2.workbench]\n[zh_CN.theme_translations.4.isbf_v2.bookmarks]\n[zh_CN.theme_translations.4.isbf_v2.profile]\n[zh_CN.theme_translations.4.isbf_v2.sidebar_more]\n[zh_CN.theme_translations.4.isbf_v2.compose]\n[zh_CN.theme_translations.4.isbf_v2.review]\nRobin Ward\n@eviltrout\n[zh_CN.theme_translations.4.isbf_v2.search]\n[zh_CN.theme_translations.4.isbf_v2.rail_label]\n[zh_CN.theme_translations.4.isbf_v2.official]\n[zh_CN.theme_translations.4.isbf_v2.categories]\n[zh_CN.theme_translations.4.isbf_v2.top]\n[zh_CN.theme_translations.4.isbf_v2.topic]\n由 fixture-user 于 4 天前 发布\n预览用户\n4 天\n@fixture-user\n继续阅读隔离验收\n\n此正文来自合成夹具，仅用于检查帖子底部组件。\n\n\n\n​\n​\n​\n\n\n[zh_CN.theme_translations.4.isbf_v2.continue_reading.title]\n[zh_CN.theme_translations.4.isbf_v2.continue_reading.suggested]\n推荐\n相关\n首帖正文，校园活动照片。\n 已读\n校园交流\n·\n4 天\n[zh_CN.theme_translations.4.isbf_v2.continue_reading.replies count=0]\n首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳转位置。首帖正文摘要，保留原来的未读跳…\n您在此话题中有 3 个未读帖子\n校园交流\n·\n4 天\n[zh_CN.theme_translations.4.isbf_v2.continue_reading.replies count=3]\n[zh_CN.theme_translations.4.isbf_v2.preview_picture]\n新话题\n校园交流\n·\n4 天\n[zh_CN.theme_translations.4.isbf_v2.continue_reading.replies count=0]\n[zh_CN.theme_translations.4.isbf_v2.preview_post]\n 已读\n校园交流\n·\n4 天\n[zh_CN.theme_translations.4.isbf_v2.continue_reading.replies count=3]\n嵌套话题的真实新回复\n上次访问后的新回复\n校园交流\n·\n4 天\n[zh_CN.theme_translations.4.isbf_v2.continue_reading.replies count=3]\n[zh_CN.theme_translations.4.isbf_v2.preview_post]\n校园交流\n·\n4 天\n[zh_CN.theme_translations.4.isbf_v2.continue_reading.replies count=3]\nZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ\n 已读\n仅限成员查看的分类名称与连续字符MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n·\n4 天\n[zh_CN.theme_translations.4.isbf_v2.continue_reading.replies count=3]\n浏览最新话题\n[zh_CN.theme_translations.4.isbf_v2.continue_reading.browse_all]\n \n ",
+    "requests": [
+      "/posts/by_number/902/1.json",
+      "/posts/by_number/904/1.json",
+      "/posts/by_number/901/1.json",
+      "/posts/by_number/903/1.json"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "url": "https://isbf-one.com/stylesheets/color_definitions_scheme_21_4_cbe7b97fcf67f2edfc286afd87533ad2391dd9f3.css?__ws=isbf-one.com",
+    "media": "(prefers-color-scheme: light)",
+    "sha256": "115d2e876ef8c0fa8c051313370ae9daaf574560394d906e03e417fa731aed41"
+  },
+  {
+    "url": "https://isbf-one.com/stylesheets/color_definitions_scheme_22_4_e9cdefe0dc617246e8be1fce7416dcd7f40983b9.css?__ws=isbf-one.com",
+    "media": "(prefers-color-scheme: dark)",
+    "sha256": "6d2795ba2e415635fc71dab1e45bdcd33c9ef4380bf30979243dbe7881002348"
+  }
+]

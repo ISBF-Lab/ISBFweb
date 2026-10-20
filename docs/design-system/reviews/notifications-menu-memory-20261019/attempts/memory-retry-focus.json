@@ -1,0 +1,97 @@
+{
+  "harness_sha256": "78af9d0bc7ff80082dd649457702f05cac8be859b6284a8fed0462b8c21d0591",
+  "passed": false,
+  "full_ember_client": true,
+  "production_backend_used": false,
+  "checks": [
+    "the actual compiled notification theme boots",
+    "a new account starts with all notifications without an automatic write",
+    "a failed save preserves both the switch and the existing list",
+    "the translated save error wraps without widening the menu",
+    "retry reaches the isolated preference endpoint",
+    "the saved selection remains visible and disabled while saving",
+    "clicking the disabled switch sends no duplicate preference request",
+    "a successful retry persists and applies the unread selection",
+    "filter saves preserve badge preferences and filter the list"
+  ],
+  "layouts": [],
+  "errors": [],
+  "console_errors": [
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ],
+  "missing_assets": [],
+  "api_requests": [
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json",
+      "fields": {
+        "custom_fields[isbf_notification_filter]": [
+          "unread"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json",
+      "fields": {
+        "custom_fields[isbf_notification_filter]": [
+          "unread"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    }
+  ],
+  "phase": "memory",
+  "base_harness_sha256": "086e2cd04836395eef178cf7585617824d9a5f675250e39afee67835c42a0b39",
+  "fixture_accounts_are_synthetic": true,
+  "failure": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\".isbf-notifications__tabs button\").nth(1)\n    - locator resolved to <button type=\"button\" aria-pressed=\"false\">提及</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <button class=\"btn\" type=\"button\">…</button> from <header class=\"isbf-notifications__heading\">…</header> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <button class=\"btn\" type=\"button\">…</button> from <header class=\"isbf-notifications__heading\">…</header> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    57 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <button class=\"btn\" type=\"button\">…</button> from <header class=\"isbf-notifications__heading\">…</header> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n",
+  "debug": {
+    "body": "跳到主要内容\nISBF - One\n首页\n探索\n通知\n日历\n工作台\n书签\n个人资料\n更多\n发布\n审核\n预览用户\n@preview-user\n搜索\n社区入口\n官方\n浏览分类\n精华内容\n通知\n全部标为已读\n通知设置\n只看未读\n\n角标显示\n\n数字\n圆点\n全部\n提及\n校园讨论\n点赞 · 3\n未读通知\n未读通知\n同学201 @student-201 点赞\n1 天\n回复 · 1\n未读通知\n未读通知\n同学201 @student-201 回复\n1 天\n \n "
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "host_available_bytes": 1766793216,
+  "effective_available_bytes": 1766793216,
+  "memory_limit_bytes": 1207959552,
+  "reserve_bytes": 536870912,
+  "elapsed_seconds": 0.6,
+  "output": "ok: run: /etc/service/unicorn: (pid 827024) 0s",
+  "only_web_reloaded": true
+}

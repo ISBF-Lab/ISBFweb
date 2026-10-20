@@ -1,0 +1,71 @@
+{
+  "source_version": "6fcd94a055a857c87a3fb37aebaaaf2308629ad6624c742ee5168401c184b174",
+  "date": "2026-10-19",
+  "approval_scope": "C20普通404、隐藏弹球、最长活跃时长和当前浏览器最佳记录；最终视觉待核验",
+  "files": [
+    {
+      "path": "app/controllers/application_controller.rb",
+      "sha256": "db3beb2743dc730c0961b28ab90ef50d89f21f50a15160c303edc0508b6cf3a0",
+      "snapshot": "source/app__controllers__application_controller.rb.txt",
+      "workspace_matches": true
+    },
+    {
+      "path": "app/views/exceptions/not_found.html.erb",
+      "sha256": "20aa67339d18f14dddfc524f1a86464935626489cc5a7eaddded6b404ebf0306",
+      "snapshot": "source/app__views__exceptions__not_found.html.erb.txt",
+      "workspace_matches": true
+    },
+    {
+      "path": "app/views/exceptions/_elastic_not_found.html.erb",
+      "sha256": "68f6934d2cd8babca1953daf442cbbfe04e780a83fca6ea236152ae86f9882f6",
+      "snapshot": "source/app__views__exceptions___elastic_not_found.html.erb.txt",
+      "workspace_matches": true
+    },
+    {
+      "path": "config/locales/server.en.yml",
+      "sha256": "f328d9a51ff595aea28347307783f854972d2c917d7b7012bc473655e092e493",
+      "snapshot": "source/config__locales__server.en.yml.txt",
+      "workspace_matches": true
+    },
+    {
+      "path": "config/locales/server.zh_CN.yml",
+      "sha256": "79c244ea3555f9c9dd34357b405e828f52ed63adeb019a9fb9ee3dc30383e762",
+      "snapshot": "source/config__locales__server.zh_CN.yml.txt",
+      "workspace_matches": true
+    },
+    {
+      "path": "frontend/discourse/scripts/js/elastic-not-found.js",
+      "sha256": "5ad1e241ccaa038324997c73db2df6817b843155834107fbaca397bd832010af",
+      "snapshot": "source/frontend__discourse__scripts__js__elastic-not-found.js.txt",
+      "workspace_matches": true
+    },
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "sha256": "20389961304d4481173f0fca78fe38ea1140a6aea6a220b1393cc03176005781",
+      "snapshot": "source/themes__isbf-campus-feed__common__common.scss.txt",
+      "workspace_matches": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/elastic-not-found.scss",
+      "sha256": "bf6bfdfda2414b72f19704b94742899ca2adaf4012788119eff98da11f5abef7",
+      "snapshot": "source/themes__isbf-campus-feed__stylesheets__elastic-not-found.scss.txt",
+      "workspace_matches": true
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/elastic-not-found.js",
+      "sha256": "59416d1a298fdf3f57d367db0dda19e783daa9cc8f2170cb9388741c616d3028",
+      "snapshot": "source/themes__isbf-campus-feed__javascripts__discourse__api-initializers__elastic-not-found.js.txt",
+      "workspace_matches": true
+    },
+    {
+      "path": "frontend/discourse/lib/elastic-not-found.test.mjs",
+      "sha256": "aa052299dc5def5f52d5baafacf5b9706682a22f932d56719551c19db71305b0",
+      "snapshot": "source/frontend__discourse__lib__elastic-not-found.test.mjs.txt"
+    },
+    {
+      "path": "spec/requests/exceptions_controller_spec.rb",
+      "sha256": "24af2dffa38c679da136e040b547d6fd98e747148e77471fbf06772ff0f38436",
+      "snapshot": "source/spec__requests__exceptions_controller_spec.rb.txt"
+    }
+  ]
+}

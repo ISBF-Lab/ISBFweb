@@ -1,0 +1,52 @@
+1280-light: actual localized template renders
+1280-light: no horizontal overflow
+1280-light: the page occupies the entire viewport
+1280-light: digits use the available viewport width
+1280-light: digits use the active site accent
+1280-light: actual light/dark palette is active
+the actual two-dimensional WebGL field renders
+pointer movement deforms the rendered field in two dimensions
+1280-light: discovering the button does not start a game
+1280-light: clock begins after launch
+1280-light: no pause or resume control exists
+1280-light: play and the clock continue without pause
+1280-light: leaving the active window ends the round and saves its time
+1280-light: missing the paddle ends the round and saves its time
+1280-light: replay resets the clock
+1280-light: exit restores the discovered 404
+1280-light: best record survives reload
+390-dark: actual localized template renders
+390-dark: no horizontal overflow
+390-dark: the page occupies the entire viewport
+390-dark: digits use the available viewport width
+390-dark: digits use the active site accent
+390-dark: actual light/dark palette is active
+390-dark: discovering the button does not start a game
+390-dark: clock begins after launch
+390-dark: no pause or resume control exists
+390-dark: play and the clock continue without pause
+390-dark: leaving the active window ends the round and saves its time
+390-dark: missing the paddle ends the round and saves its time
+390-dark: replay resets the clock
+390-dark: exit restores the discovered 404
+390-dark: best record survives reload
+1280-dark: actual localized template renders
+1280-dark: no horizontal overflow
+1280-dark: the page occupies the entire viewport
+1280-dark: digits use the available viewport width
+1280-dark: digits use the active site accent
+1280-dark: actual light/dark palette is active
+390-light: actual localized template renders
+390-light: no horizontal overflow
+390-light: the page occupies the entire viewport
+390-light: digits use the available viewport width
+390-light: digits use the active site accent
+390-light: actual light/dark palette is active
+reduced motion disables the decorative WebGL layer
+keyboard discovery works with reduced motion and English copy
+keyboard play and Escape exit work without a pause state
+resizing preserves continuous play and normalized rules
+shared mount is idempotent and cleanup restores the surrounding page
+blocked browser storage still permits play and a session best
+without JavaScript the error message and home link remain usable
+no browser JavaScript errors

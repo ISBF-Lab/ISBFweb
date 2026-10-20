@@ -1,0 +1,31 @@
+Resource-limited isolated plugin test runtime (2026-10-14)
+
+Only isbf_join_tools_20261014 is used, capped at 512 MiB / 0.5 CPU / 192 pids,
+with no external network. PostgreSQL and Redis run inside it; the disposable
+database is isbf_join_test_20261014. No production backend is used.
+
+Rails is booted with LOAD_PLUGINS=isbf-join to load only this plugin. Current core
+spec/support/suite_setup.rb requires the exact value "1" to avoid resetting the
+plugin registry. After requiring spec/rails_helper, set LOAD_PLUGINS to "1" and
+invoke bin/rspec. The plugin is selected before Rails boot; the post-boot value
+only satisfies this test harness guard. The plugin helper explicitly loads its
+fabricator. Core files are unchanged.
+
+Runner inside the existing container:
+  bundle exec ruby -r ./spec/rails_helper -e 'ENV["LOAD_PLUGINS"] = "1"; load "./bin/rspec"' -- plugins/isbf-join/spec
+
+Standard CI with sufficient resources should instead use:
+  LOAD_PLUGINS=1 bin/rspec plugins/isbf-join/spec
+
+Runtime environment passed to docker exec:
+  BUNDLE_PATH=/home/discourse/.bundle/gems
+  RAILS_ENV=test
+  RAILS_DB=isbf_join_test_20261014
+  PGUSER=postgres
+  PGHOST=/var/run/postgresql
+  LOAD_PLUGINS=isbf-join
+  SKIP_MULTISITE=1
+  SKIP_OPTIMIZE_ICONS=1
+  GIT_CONFIG_COUNT=1
+  GIT_CONFIG_KEY_0=safe.directory
+  GIT_CONFIG_VALUE_0=/home/codex/discourse

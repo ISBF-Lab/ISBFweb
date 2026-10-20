@@ -1,0 +1,11 @@
+{
+  "command": [
+    "ruby",
+    "bin/lint",
+    "--fix",
+    "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+    "themes/isbf-campus-feed/test/integration/notifications-test.gjs"
+  ],
+  "exit_code": 0,
+  "configuration": "Existing offline tools/lefthook-serial.yml; serial execution, repository CI gates unchanged"
+}

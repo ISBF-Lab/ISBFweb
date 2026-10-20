@@ -1,0 +1,130 @@
+{
+  "harness_sha256": "0793d2bb4d86a53e8dd8e8b65da7529a274cf3be940affe0c7929c90679b1d50",
+  "passed": true,
+  "full_ember_client": true,
+  "production_backend_used": false,
+  "checks": [
+    "the internal title is absent before loading or scrolling",
+    "suggestions preserve exact source order",
+    "hidden topics are not requested",
+    "untitled rows render clean first-post text",
+    "a missing body retains the neutral link label",
+    "hidden excerpts remain hidden",
+    "the footer displays no thumbnails or image filenames",
+    "loaded and failed rows expose neither filenames nor placeholder codes",
+    "explicit titles retain native rendering",
+    "titled and hidden rows make no body requests",
+    "body previews always read post one",
+    "unread, reply, time and category links retain their exact targets",
+    "preview links contain no nested anchors",
+    "untitled rows retain the native unread indicator",
+    "untitled rows retain locked status",
+    "read topics retain their accessible announcement",
+    "keyboard focus retains native row selection",
+    "pointer clicks retain native unread navigation",
+    "preview clicks retain native history",
+    "1280px light: no horizontal overflow",
+    "1280px light: body preview stays within two lines",
+    "1280px light: square border and avatar dimensions remain",
+    "1280px light: the actual theme palette is active",
+    "1280px dark: no horizontal overflow",
+    "1280px dark: body preview stays within two lines",
+    "1280px dark: square border and avatar dimensions remain",
+    "1280px dark: the actual theme palette is active",
+    "390px light: no horizontal overflow",
+    "390px light: body preview stays within two lines",
+    "390px light: square border and avatar dimensions remain",
+    "390px light: the actual theme palette is active",
+    "390px dark: no horizontal overflow",
+    "390px dark: body preview stays within two lines",
+    "390px dark: square border and avatar dimensions remain",
+    "390px dark: the actual theme palette is active",
+    "related topics retain source order and use the same untitled preview",
+    "switching sources reuses the shared body cache",
+    "the native client finishes without exceptions"
+  ],
+  "layouts": [
+    {
+      "width": 1280,
+      "borderRadius": "0px",
+      "avatar": 36,
+      "textHeight": 44.78125,
+      "lineHeight": 22.4,
+      "clamp": "2",
+      "bodyOverflow": false,
+      "panelOverflow": false,
+      "secondary": "#ffffff",
+      "mode": "light"
+    },
+    {
+      "width": 1280,
+      "borderRadius": "0px",
+      "avatar": 36,
+      "textHeight": 44.78125,
+      "lineHeight": 22.4,
+      "clamp": "2",
+      "bodyOverflow": false,
+      "panelOverflow": false,
+      "secondary": "#101413",
+      "mode": "dark"
+    },
+    {
+      "width": 390,
+      "borderRadius": "0px",
+      "avatar": 30,
+      "textHeight": 44.78125,
+      "lineHeight": 22.4,
+      "clamp": "2",
+      "bodyOverflow": false,
+      "panelOverflow": false,
+      "secondary": "#ffffff",
+      "mode": "light"
+    },
+    {
+      "width": 390,
+      "borderRadius": "0px",
+      "avatar": 30,
+      "textHeight": 44.78125,
+      "lineHeight": 22.4,
+      "clamp": "2",
+      "bodyOverflow": false,
+      "panelOverflow": false,
+      "secondary": "#101413",
+      "mode": "dark"
+    }
+  ],
+  "errors": [],
+  "console_errors": [],
+  "missing_assets": [],
+  "api_requests": [
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "POST",
+      "path": "/isbf/views/impressions"
+    }
+  ],
+  "template_overrides": false,
+  "full_native_theme": true,
+  "expected_missing_body_status": 404,
+  "body_requests": [
+    "/posts/by_number/901/1.json",
+    "/posts/by_number/902/1.json",
+    "/posts/by_number/904/1.json",
+    "/posts/by_number/903/1.json",
+    "/posts/by_number/908/1.json",
+    "/posts/by_number/904/1.json"
+  ],
+  "initial_body_requests": [
+    "/posts/by_number/901/1.json",
+    "/posts/by_number/902/1.json",
+    "/posts/by_number/904/1.json",
+    "/posts/by_number/903/1.json"
+  ]
+}

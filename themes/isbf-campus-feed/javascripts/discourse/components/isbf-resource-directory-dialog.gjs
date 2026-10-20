@@ -1,11 +1,13 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { on } from "@ember/modifier";
 import { action } from "@ember/object";
-import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import { themePrefix } from "virtual:theme";
+import Form from "discourse/components/form";
 import { ajax } from "discourse/lib/ajax";
+import { not } from "discourse/truth-helpers";
 import DButton from "discourse/ui-kit/d-button";
+import DModal from "discourse/ui-kit/d-modal";
+import dUniqueId from "discourse/ui-kit/helpers/d-unique-id";
 import { i18n } from "discourse-i18n";
 import ISBFResourceParentPicker from "./isbf-resource-parent-picker";
 
@@ -14,6 +16,9 @@ export default class ISBFResourceDirectoryDialog extends Component {
   @tracked grade;
   @tracked name = "";
   @tracked saving = false;
+
+  formData = { name: "", grade: this.args.grade };
+  formId = dUniqueId();
 
   #closed = false;
 
@@ -66,15 +71,12 @@ export default class ISBFResourceDirectoryDialog extends Component {
   }
 
   @action
-  changeGrade(id) {
-    if (!this.saving) {
-      this.grade = id;
+  formChanged(name, value) {
+    if (name === "name") {
+      this.name = value;
+    } else if (name === "grade") {
+      this.grade = value;
     }
-  }
-
-  @action
-  changeName(event) {
-    this.name = event.target.value;
   }
 
   @action
@@ -87,21 +89,7 @@ export default class ISBFResourceDirectoryDialog extends Component {
   }
 
   @action
-  focusName(element) {
-    element.focus();
-  }
-
-  @action
-  handleKeydown(event) {
-    if (event.key === "Escape" && !this.saving) {
-      event.stopPropagation();
-      this.close();
-    }
-  }
-
-  @action
-  async save(event) {
-    event.preventDefault();
+  async save() {
     if (this.#closed || this.saveDisabled) {
       return;
     }
@@ -169,17 +157,26 @@ export default class ISBFResourceDirectoryDialog extends Component {
   }
 
   <template>
-    <section
-      aria-label={{this.title}}
+    <DModal
       class="isbf-learning-course-dialog"
-      role="dialog"
-      tabindex="-1"
-      {{on "keydown" this.handleKeydown}}
+      ...attributes
+      @closeModal={{this.close}}
+      @dismissable={{not this.saving}}
+      @title={{this.title}}
     >
-      <h2>{{this.title}}</h2>
-      <form {{on "submit" this.save}}>
-        <label>
-          <span>{{i18n
+      <:body>
+        <Form
+          id={{this.formId}}
+          @data={{this.formData}}
+          @onSet={{this.formChanged}}
+          @onSubmit={{this.save}}
+          as |form|
+        >
+          <form.Field
+            @disabled={{this.saving}}
+            @format="full"
+            @name="name"
+            @title={{i18n
               (themePrefix
                 (if
                   @library
@@ -187,37 +184,52 @@ export default class ISBFResourceDirectoryDialog extends Component {
                   "isbf_v2.learning_course_name"
                 )
               )
-            }}</span>
-          <input
-            disabled={{this.saving}}
-            maxlength="80"
-            required
-            type="text"
-            value={{this.name}}
-            {{on "input" this.changeName}}
-            {{didInsert this.focusName}}
-          />
-        </label>
-        {{#unless @library}}<ISBFResourceParentPicker
-            @grades={{@grades}}
-            @onChange={{this.changeGrade}}
-            @value={{this.grade}}
-          />{{/unless}}
-        {{#if this.error}}<p role="alert">{{this.error}}</p>{{/if}}
-        <div class="isbf-learning-course-dialog__actions">
-          <DButton
-            @action={{this.close}}
-            @disabled={{this.saving}}
-            @translatedLabel={{i18n (themePrefix "isbf_v2.compose_cancel")}}
-          />
-          <DButton
-            class="btn-primary"
-            @disabled={{this.saveDisabled}}
-            @translatedLabel={{this.submitLabel}}
-            @type="submit"
-          />
-        </div>
-      </form>
-    </section>
+            }}
+            @type="input-text"
+            @validation="required"
+            as |field|
+          >
+            <field.Control maxlength="80" />
+          </form.Field>
+          {{#unless @library}}
+            <form.Field
+              @disabled={{this.saving}}
+              @format="full"
+              @name="grade"
+              @title={{i18n (themePrefix "isbf_v2.learning_grade")}}
+              @type="custom"
+              as |field|
+            >
+              <field.Control>
+                <ISBFResourceParentPicker
+                  @disabled={{this.saving}}
+                  @grades={{@grades}}
+                  @onChange={{field.set}}
+                  @value={{field.value}}
+                />
+              </field.Control>
+            </form.Field>
+          {{/unless}}
+          {{#if this.error}}
+            <form.Alert @type="error">{{this.error}}</form.Alert>
+          {{/if}}
+        </Form>
+      </:body>
+      <:footer>
+        <DButton
+          class="btn-primary"
+          @disabled={{this.saveDisabled}}
+          @form={{this.formId}}
+          @translatedLabel={{this.submitLabel}}
+          @type="submit"
+        />
+        <DButton
+          class="btn-default"
+          @action={{this.close}}
+          @disabled={{this.saving}}
+          @translatedLabel={{i18n (themePrefix "isbf_v2.compose_cancel")}}
+        />
+      </:footer>
+    </DModal>
   </template>
 }

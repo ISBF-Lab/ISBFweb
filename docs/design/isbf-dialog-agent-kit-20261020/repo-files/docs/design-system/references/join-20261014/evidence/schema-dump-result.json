@@ -1,0 +1,30 @@
+{
+  "command": "bundle exec rake -f deploy-work/isbf-join-20261014/tools/schema-tasks.rake db:dump_structure",
+  "status": "passed",
+  "log_bytes": 1305856,
+  "log_sha256": "02e59257dde88b23a273acbcf6fa46cb5b86f5cbeb3ef16ae90a0ffd56b0e385",
+  "log_tail": [
+    "-- add_column(:discourse_avatar_frames_frames, :offset_x, :float, {null: false, default: 0})",
+    "   -> 0.0033s",
+    "-- add_column(:discourse_avatar_frames_frames, :offset_y, :float, {null: false, default: 0})",
+    "   -> 0.0587s",
+    "-- add_column(:discourse_avatar_frames_frames, :calibration_confirmed, :boolean, {null: false, default: true})",
+    "   -> 0.0028s",
+    "-- change_column_default(:discourse_avatar_frames_frames, :calibration_confirmed, {from: true, to: false})",
+    "   -> 0.0062s",
+    "== 20261011132124 AddAvatarFrameCalibration: migrated (0.0773s) ===============",
+    "",
+    "== 20261014151020 CreateIsbfJoinApplications: migrating =======================",
+    "-- create_table(:isbf_join_applications)",
+    "   -> 0.0070s",
+    "-- add_index(:isbf_join_applications, :submission_id, {unique: true})",
+    "   -> 0.0021s",
+    "-- add_index(:isbf_join_applications, [:created_at, :id], {order: {created_at: :desc, id: :desc}})",
+    "   -> 0.0022s",
+    "== 20261014151020 CreateIsbfJoinApplications: migrated (0.0124s) ==============",
+    "",
+    "Wrote db/structure.sql"
+  ],
+  "generated_file": "db/structure.sql",
+  "scope": "Official clean structure dump including currently bundled plugins; no production database used."
+}

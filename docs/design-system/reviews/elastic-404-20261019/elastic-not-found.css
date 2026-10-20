@@ -1,0 +1,225 @@
+.elastic-not-found-page {
+  background: var(--isbf-v2-background, var(--secondary));
+  color: var(--isbf-v2-text, var(--primary));
+}
+.elastic-not-found-page .d-header,
+.elastic-not-found-page .sidebar-wrapper,
+.elastic-not-found-page .isbf-v2-shell,
+.elastic-not-found-page .welcome-banner {
+  display: none;
+}
+.elastic-not-found-page #main-outlet-wrapper,
+.elastic-not-found-page #main-outlet,
+.elastic-not-found-page #main-outlet.not-found-container {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--isbf-v2-background, var(--secondary));
+}
+
+.elastic-not-found {
+  --elastic-404-accent: var(--isbf-v2-accent, var(--tertiary));
+  --elastic-404-text: var(--isbf-v2-text, var(--primary));
+  --elastic-404-border: var(--isbf-v2-border-strong, var(--primary-low-mid));
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(var(--isbf-v2-feed-width), 100% - 2 * var(--isbf-v2-space-4));
+  min-block-size: 100dvh;
+  margin-inline: auto;
+  margin-block: 0;
+  padding-block: var(--isbf-v2-space-6) var(--isbf-v2-space-8);
+  color: var(--elastic-404-text);
+  font-family: var(--isbf-v2-font-family);
+  text-align: center;
+}
+.elastic-not-found [hidden] {
+  display: none;
+}
+.elastic-not-found button,
+.elastic-not-found a {
+  -webkit-tap-highlight-color: transparent;
+}
+.elastic-not-found button:focus-visible,
+.elastic-not-found a:focus-visible {
+  outline: 2px solid var(--isbf-v2-focus-ring);
+  outline-offset: 4px;
+}
+.elastic-not-found__brand {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  min-height: 44px;
+  margin-block-end: var(--isbf-v2-space-8);
+  color: var(--elastic-404-text);
+  font-size: var(--isbf-v2-font-lg);
+  font-weight: var(--isbf-v2-weight-bold);
+}
+.elastic-not-found__brand img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 2rem;
+}
+.elastic-not-found__stage {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  aspect-ratio: 3/2;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: var(--isbf-v2-radius-md);
+}
+.elastic-not-found__fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--elastic-404-accent);
+  font-size: clamp(112px, 31vw, 312px);
+  font-weight: var(--isbf-v2-weight-bold);
+  line-height: 1;
+}
+.elastic-not-found__canvas {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.elastic-not-found__reveal {
+  position: absolute;
+  z-index: 1;
+  inset-block: 12% 16%;
+  inset-inline: 34%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--isbf-v2-radius-pill);
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+}
+.elastic-not-found__play {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: 46%;
+  inset-inline-start: 50%;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--elastic-404-border);
+  border-radius: var(--isbf-v2-radius-pill);
+  background: var(--isbf-v2-surface);
+  color: var(--elastic-404-accent);
+  cursor: pointer;
+}
+.elastic-not-found__play .d-icon {
+  width: var(--isbf-v2-space-4);
+  height: var(--isbf-v2-space-4);
+}
+.elastic-not-found__game-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--isbf-v2-space-4);
+  background: var(--isbf-v2-surface);
+}
+.elastic-not-found__game-status {
+  margin: 0;
+  padding-inline: var(--isbf-v2-space-4);
+  font-size: var(--isbf-v2-font-md);
+}
+.elastic-not-found__game-button, .elastic-not-found__home {
+  min-width: 132px;
+  min-height: 44px;
+  padding-inline: var(--isbf-v2-space-6);
+  border-radius: var(--isbf-v2-radius-pill);
+  background: var(--elastic-404-accent);
+  color: var(--isbf-v2-accent-contrast);
+  font-size: var(--isbf-v2-font-sm);
+  font-weight: var(--isbf-v2-weight-medium);
+}
+.elastic-not-found__game {
+  display: grid;
+  gap: var(--isbf-v2-space-2);
+  width: 100%;
+  margin-block-start: var(--isbf-v2-space-4);
+}
+.elastic-not-found__times {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: var(--isbf-v2-space-8);
+  row-gap: var(--isbf-v2-space-2);
+  font-size: var(--isbf-v2-font-xs);
+  color: var(--isbf-v2-muted);
+}
+.elastic-not-found__times output {
+  display: block;
+  margin-block-start: var(--isbf-v2-space-1);
+  color: var(--elastic-404-text);
+  font-size: var(--isbf-v2-font-xl);
+  font-weight: var(--isbf-v2-weight-medium);
+  font-variant-numeric: tabular-nums;
+}
+.elastic-not-found__instructions, .elastic-not-found__description {
+  margin: 0;
+  color: var(--isbf-v2-muted);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.elastic-not-found__instructions {
+  font-size: var(--isbf-v2-font-xs);
+}
+.elastic-not-found__game-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--isbf-v2-space-4);
+}
+.elastic-not-found__text-button {
+  min-height: 44px;
+  padding: var(--isbf-v2-space-2) var(--isbf-v2-space-3);
+  border: 0;
+  border-radius: var(--isbf-v2-radius-sm);
+  background: transparent;
+  color: var(--elastic-404-accent);
+  font-size: var(--isbf-v2-font-sm);
+  cursor: pointer;
+}
+.elastic-not-found__title {
+  margin-block: var(--isbf-v2-space-4) var(--isbf-v2-space-2);
+  font-size: var(--isbf-v2-font-xl);
+  font-weight: var(--isbf-v2-weight-bold);
+  line-height: 1.45;
+}
+.elastic-not-found__description {
+  max-width: 40ch;
+  font-size: var(--isbf-v2-font-sm);
+}
+.elastic-not-found__home {
+  margin-block-start: var(--isbf-v2-space-6);
+}
+.elastic-not-found.--enhanced .elastic-not-found__fallback {
+  display: none;
+}
+.elastic-not-found.--enhanced .elastic-not-found__canvas {
+  display: block;
+}
+.elastic-not-found.--dragging .elastic-not-found__reveal {
+  cursor: grabbing;
+}
+.elastic-not-found[data-game-state] .elastic-not-found__stage {
+  border-color: var(--elastic-404-border);
+  touch-action: none;
+}

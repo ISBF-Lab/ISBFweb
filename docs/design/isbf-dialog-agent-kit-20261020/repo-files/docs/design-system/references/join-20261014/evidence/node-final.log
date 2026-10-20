@@ -1,0 +1,110 @@
+
+> isbf-one-careers@1.0.0 test /home/codex/discourse/plugins/isbf-join/web
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: only the graphic and round side boards have cut-through apertures
+ok 1 - only the graphic and round side boards have cut-through apertures
+  ---
+  duration_ms: 5.89444
+  type: 'test'
+  ...
+# Subtest: the star is a real hole through both the face and extruded back
+ok 2 - the star is a real hole through both the face and extruded back
+  ---
+  duration_ms: 172.31844
+  type: 'test'
+  ...
+# Subtest: round slots pass through while preserving the round frame and text area
+ok 3 - round slots pass through while preserving the round frame and text area
+  ---
+  duration_ms: 490.062441
+  type: 'test'
+  ...
+# Subtest: round board rotation is deterministic, scroll-driven and reversible
+ok 4 - round board rotation is deterministic, scroll-driven and reversible
+  ---
+  duration_ms: 0.73643
+  type: 'test'
+  ...
+# Subtest: the round board turns about the ground-normal Y axis, not its face normal
+ok 5 - the round board turns about the ground-normal Y axis, not its face normal
+  ---
+  duration_ms: 1.201845
+  type: 'test'
+  ...
+# Subtest: the extruded ONE including its bevel stays clear of its backing face
+ok 6 - the extruded ONE including its bevel stays clear of its backing face
+  ---
+  duration_ms: 101.871547
+  type: 'test'
+  ...
+# Subtest: gets a session CSRF token before posting the unchanged contact fields
+ok 7 - gets a session CSRF token before posting the unchanged contact fields
+  ---
+  duration_ms: 118.959517
+  type: 'test'
+  ...
+# Subtest: uses the configured endpoint and returns an HTTP failure for the existing UI to handle
+ok 8 - uses the configured endpoint and returns an HTTP failure for the existing UI to handle
+  ---
+  duration_ms: 1.644565
+  type: 'test'
+  ...
+# Subtest: never submits when the CSRF endpoint fails or returns an unusable token
+ok 9 - never submits when the CSRF endpoint fails or returns an unusable token
+  ---
+  duration_ms: 5.697363
+  type: 'test'
+  ...
+# Subtest: never submits after a CSRF network or JSON parsing failure
+ok 10 - never submits after a CSRF network or JSON parsing failure
+  ---
+  duration_ms: 2.252058
+  type: 'test'
+  ...
+# Subtest: cancelling the CSRF request never sends a submission
+ok 11 - cancelling the CSRF request never sends a submission
+  ---
+  duration_ms: 1.692187
+  type: 'test'
+  ...
+# Subtest: passes cancellation through to the submission request
+ok 12 - passes cancellation through to the submission request
+  ---
+  duration_ms: 1.91689
+  type: 'test'
+  ...
+# Subtest: normalizes browser whitespace without changing contact field names
+ok 13 - normalizes browser whitespace without changing contact field names
+  ---
+  duration_ms: 3.944185
+  type: 'test'
+  ...
+# Subtest: text limits count UTF-16 code units, including supplementary characters
+ok 14 - text limits count UTF-16 code units, including supplementary characters
+  ---
+  duration_ms: 0.794673
+  type: 'test'
+  ...
+# Subtest: rejects non-string values and internal control characters
+ok 15 - rejects non-string values and internal control characters
+  ---
+  duration_ms: 0.953291
+  type: 'test'
+  ...
+# Subtest: accepts international phone formatting and enforces digit and total length limits
+ok 16 - accepts international phone formatting and enforces digit and total length limits
+  ---
+  duration_ms: 3.277704
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2196.332456

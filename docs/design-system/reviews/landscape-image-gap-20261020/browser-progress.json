@@ -1,0 +1,805 @@
+{
+  "passed": false,
+  "checks": [
+    "1280px light: landscape box follows its declared aspect ratio",
+    "1280px light: wide box follows its declared aspect ratio",
+    "1280px light: portrait box follows its declared aspect ratio",
+    "1280px light: square box follows its declared aspect ratio",
+    "1280px light: delayed box follows its declared aspect ratio",
+    "1280px light: image and metadata share the same bottom edge",
+    "1280px light: the loaded image has no internal blank space",
+    "1280px light: content stays within the viewport",
+    "1280px light: original landscape whitespace is reproduced and removed",
+    "1280px light: emoji dimensions remain unchanged",
+    "1280px light: thumbnail dimensions remain unchanged",
+    "1280px light: video dimensions remain unchanged",
+    "1280px light: grid1 dimensions remain unchanged",
+    "1280px light: grid2 dimensions remain unchanged",
+    "1280px light: topic dimensions remain unchanged",
+    "1280px dark: landscape box follows its declared aspect ratio",
+    "1280px dark: wide box follows its declared aspect ratio",
+    "1280px dark: portrait box follows its declared aspect ratio",
+    "1280px dark: square box follows its declared aspect ratio",
+    "1280px dark: delayed box follows its declared aspect ratio",
+    "1280px dark: image and metadata share the same bottom edge",
+    "1280px dark: the loaded image has no internal blank space",
+    "1280px dark: content stays within the viewport",
+    "1280px dark: original landscape whitespace is reproduced and removed",
+    "1280px dark: emoji dimensions remain unchanged",
+    "1280px dark: thumbnail dimensions remain unchanged",
+    "1280px dark: video dimensions remain unchanged",
+    "1280px dark: grid1 dimensions remain unchanged",
+    "1280px dark: grid2 dimensions remain unchanged",
+    "1280px dark: topic dimensions remain unchanged",
+    "390px light: landscape box follows its declared aspect ratio",
+    "390px light: wide box follows its declared aspect ratio",
+    "390px light: portrait box follows its declared aspect ratio",
+    "390px light: square box follows its declared aspect ratio",
+    "390px light: delayed box follows its declared aspect ratio",
+    "390px light: image and metadata share the same bottom edge",
+    "390px light: the loaded image has no internal blank space",
+    "390px light: content stays within the viewport",
+    "390px light: original landscape whitespace is reproduced and removed",
+    "390px light: emoji dimensions remain unchanged",
+    "390px light: thumbnail dimensions remain unchanged",
+    "390px light: video dimensions remain unchanged",
+    "390px light: grid1 dimensions remain unchanged",
+    "390px light: grid2 dimensions remain unchanged",
+    "390px light: topic dimensions remain unchanged",
+    "390px dark: landscape box follows its declared aspect ratio",
+    "390px dark: wide box follows its declared aspect ratio",
+    "390px dark: portrait box follows its declared aspect ratio",
+    "390px dark: square box follows its declared aspect ratio",
+    "390px dark: delayed box follows its declared aspect ratio",
+    "390px dark: image and metadata share the same bottom edge",
+    "390px dark: the loaded image has no internal blank space",
+    "390px dark: content stays within the viewport",
+    "390px dark: original landscape whitespace is reproduced and removed",
+    "390px dark: emoji dimensions remain unchanged",
+    "390px dark: thumbnail dimensions remain unchanged",
+    "390px dark: video dimensions remain unchanged",
+    "390px dark: grid1 dimensions remain unchanged",
+    "390px dark: grid2 dimensions remain unchanged",
+    "390px dark: topic dimensions remain unchanged"
+  ],
+  "layouts": [
+    {
+      "width": 1280,
+      "mode": "light",
+      "before": {
+        "landscape": {
+          "width": 512,
+          "height": 347,
+          "bottom": 441.09375,
+          "top": 94.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        },
+        "wide": {
+          "width": 512,
+          "height": 388,
+          "bottom": 841.09375,
+          "top": 453.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 388"
+        },
+        "portrait": {
+          "width": 311.796875,
+          "height": 620,
+          "bottom": 1473.09375,
+          "top": 853.09375,
+          "objectFit": "contain",
+          "aspectRatio": "347 / 690"
+        },
+        "square": {
+          "width": 512,
+          "height": 620,
+          "bottom": 2105.09375,
+          "top": 1485.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 690"
+        },
+        "emoji": {
+          "width": 20,
+          "height": 20,
+          "bottom": 2508.09375,
+          "top": 2488.09375,
+          "objectFit": "contain",
+          "aspectRatio": "auto 20 / 20"
+        },
+        "thumbnail": {
+          "width": 100,
+          "height": 60,
+          "bottom": 2568.09375,
+          "top": 2508.09375,
+          "objectFit": "contain",
+          "aspectRatio": "auto 100 / 60"
+        },
+        "video": {
+          "width": 512,
+          "height": 360,
+          "bottom": 2940.09375,
+          "top": 2580.09375,
+          "objectFit": "contain",
+          "aspectRatio": "auto 640 / 360"
+        },
+        "grid1": {
+          "width": 253,
+          "height": 503.078125,
+          "bottom": 3443.171875,
+          "top": 2940.09375,
+          "objectFit": "cover",
+          "aspectRatio": "347 / 690"
+        },
+        "grid2": {
+          "width": 253,
+          "height": 503.078125,
+          "bottom": 3443.171875,
+          "top": 2940.09375,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "topic": {
+          "width": 512,
+          "height": 257.46875,
+          "bottom": 3706.640625,
+          "top": 3449.171875,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "delayed": {
+          "width": 512,
+          "height": 347,
+          "bottom": 2464.09375,
+          "top": 2117.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        }
+      },
+      "after": {
+        "landscape": {
+          "width": 511.96875,
+          "height": 257.46875,
+          "bottom": 335.5625,
+          "top": 78.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        },
+        "wide": {
+          "width": 511.984375,
+          "height": 287.90625,
+          "bottom": 635.46875,
+          "top": 347.5625,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 388"
+        },
+        "portrait": {
+          "width": 311.78125,
+          "height": 619.984375,
+          "bottom": 1267.453125,
+          "top": 647.46875,
+          "objectFit": "contain",
+          "aspectRatio": "347 / 690"
+        },
+        "square": {
+          "width": 512,
+          "height": 512,
+          "bottom": 1791.453125,
+          "top": 1279.453125,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 690"
+        },
+        "emoji": {
+          "width": 20,
+          "height": 20,
+          "bottom": 1847.453125,
+          "top": 1827.453125,
+          "objectFit": "contain",
+          "aspectRatio": "auto 20 / 20"
+        },
+        "thumbnail": {
+          "width": 100,
+          "height": 60,
+          "bottom": 1907.453125,
+          "top": 1847.453125,
+          "objectFit": "contain",
+          "aspectRatio": "auto 100 / 60"
+        },
+        "video": {
+          "width": 512,
+          "height": 360,
+          "bottom": 2279.453125,
+          "top": 1919.453125,
+          "objectFit": "contain",
+          "aspectRatio": "auto 640 / 360"
+        },
+        "grid1": {
+          "width": 253,
+          "height": 503.078125,
+          "bottom": 2782.53125,
+          "top": 2279.453125,
+          "objectFit": "cover",
+          "aspectRatio": "347 / 690"
+        },
+        "grid2": {
+          "width": 253,
+          "height": 503.078125,
+          "bottom": 2782.53125,
+          "top": 2279.453125,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "topic": {
+          "width": 512,
+          "height": 257.46875,
+          "bottom": 3046,
+          "top": 2788.53125,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "delayed": {
+          "width": 0,
+          "height": 0,
+          "bottom": 1803.453125,
+          "top": 1803.453125,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        }
+      }
+    },
+    {
+      "width": 1280,
+      "mode": "dark",
+      "before": {
+        "landscape": {
+          "width": 512,
+          "height": 347,
+          "bottom": 425.09375,
+          "top": 78.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        },
+        "wide": {
+          "width": 512,
+          "height": 388,
+          "bottom": 825.09375,
+          "top": 437.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 388"
+        },
+        "portrait": {
+          "width": 311.796875,
+          "height": 620,
+          "bottom": 1457.09375,
+          "top": 837.09375,
+          "objectFit": "contain",
+          "aspectRatio": "347 / 690"
+        },
+        "square": {
+          "width": 512,
+          "height": 620,
+          "bottom": 2089.09375,
+          "top": 1469.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 690"
+        },
+        "emoji": {
+          "width": 20,
+          "height": 20,
+          "bottom": 2492.09375,
+          "top": 2472.09375,
+          "objectFit": "contain",
+          "aspectRatio": "auto 20 / 20"
+        },
+        "thumbnail": {
+          "width": 100,
+          "height": 60,
+          "bottom": 2552.09375,
+          "top": 2492.09375,
+          "objectFit": "contain",
+          "aspectRatio": "auto 100 / 60"
+        },
+        "video": {
+          "width": 512,
+          "height": 360,
+          "bottom": 2924.09375,
+          "top": 2564.09375,
+          "objectFit": "contain",
+          "aspectRatio": "auto 640 / 360"
+        },
+        "grid1": {
+          "width": 253,
+          "height": 503.078125,
+          "bottom": 3427.171875,
+          "top": 2924.09375,
+          "objectFit": "cover",
+          "aspectRatio": "347 / 690"
+        },
+        "grid2": {
+          "width": 253,
+          "height": 503.078125,
+          "bottom": 3427.171875,
+          "top": 2924.09375,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "topic": {
+          "width": 512,
+          "height": 257.46875,
+          "bottom": 3690.640625,
+          "top": 3433.171875,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "delayed": {
+          "width": 512,
+          "height": 347,
+          "bottom": 2448.09375,
+          "top": 2101.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        }
+      },
+      "after": {
+        "landscape": {
+          "width": 511.96875,
+          "height": 257.46875,
+          "bottom": 335.5625,
+          "top": 78.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        },
+        "wide": {
+          "width": 511.984375,
+          "height": 287.90625,
+          "bottom": 635.46875,
+          "top": 347.5625,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 388"
+        },
+        "portrait": {
+          "width": 311.78125,
+          "height": 619.984375,
+          "bottom": 1267.453125,
+          "top": 647.46875,
+          "objectFit": "contain",
+          "aspectRatio": "347 / 690"
+        },
+        "square": {
+          "width": 512,
+          "height": 512,
+          "bottom": 1791.453125,
+          "top": 1279.453125,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 690"
+        },
+        "emoji": {
+          "width": 20,
+          "height": 20,
+          "bottom": 1847.453125,
+          "top": 1827.453125,
+          "objectFit": "contain",
+          "aspectRatio": "auto 20 / 20"
+        },
+        "thumbnail": {
+          "width": 100,
+          "height": 60,
+          "bottom": 1907.453125,
+          "top": 1847.453125,
+          "objectFit": "contain",
+          "aspectRatio": "auto 100 / 60"
+        },
+        "video": {
+          "width": 512,
+          "height": 360,
+          "bottom": 2279.453125,
+          "top": 1919.453125,
+          "objectFit": "contain",
+          "aspectRatio": "auto 640 / 360"
+        },
+        "grid1": {
+          "width": 253,
+          "height": 503.078125,
+          "bottom": 2782.53125,
+          "top": 2279.453125,
+          "objectFit": "cover",
+          "aspectRatio": "347 / 690"
+        },
+        "grid2": {
+          "width": 253,
+          "height": 503.078125,
+          "bottom": 2782.53125,
+          "top": 2279.453125,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "topic": {
+          "width": 512,
+          "height": 257.46875,
+          "bottom": 3046,
+          "top": 2788.53125,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "delayed": {
+          "width": 0,
+          "height": 0,
+          "bottom": 1803.453125,
+          "top": 1803.453125,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        }
+      }
+    },
+    {
+      "width": 390,
+      "mode": "light",
+      "before": {
+        "landscape": {
+          "width": 324,
+          "height": 347,
+          "bottom": 425.09375,
+          "top": 78.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        },
+        "wide": {
+          "width": 324,
+          "height": 388,
+          "bottom": 825.09375,
+          "top": 437.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 388"
+        },
+        "portrait": {
+          "width": 324,
+          "height": 665,
+          "bottom": 1502.09375,
+          "top": 837.09375,
+          "objectFit": "contain",
+          "aspectRatio": "347 / 690"
+        },
+        "square": {
+          "width": 324,
+          "height": 665,
+          "bottom": 2179.09375,
+          "top": 1514.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 690"
+        },
+        "emoji": {
+          "width": 324,
+          "height": 20,
+          "bottom": 2582.09375,
+          "top": 2562.09375,
+          "objectFit": "contain",
+          "aspectRatio": "auto 20 / 20"
+        },
+        "thumbnail": {
+          "width": 324,
+          "height": 60,
+          "bottom": 2642.09375,
+          "top": 2582.09375,
+          "objectFit": "contain",
+          "aspectRatio": "auto 100 / 60"
+        },
+        "video": {
+          "width": 324,
+          "height": 360,
+          "bottom": 3014.09375,
+          "top": 2654.09375,
+          "objectFit": "contain",
+          "aspectRatio": "auto 640 / 360"
+        },
+        "grid1": {
+          "width": 159,
+          "height": 316.15625,
+          "bottom": 3330.25,
+          "top": 3014.09375,
+          "objectFit": "cover",
+          "aspectRatio": "347 / 690"
+        },
+        "grid2": {
+          "width": 159,
+          "height": 316.15625,
+          "bottom": 3330.25,
+          "top": 3014.09375,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "topic": {
+          "width": 324,
+          "height": 162.9375,
+          "bottom": 3499.1875,
+          "top": 3336.25,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "delayed": {
+          "width": 324,
+          "height": 347,
+          "bottom": 2538.09375,
+          "top": 2191.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        }
+      },
+      "after": {
+        "landscape": {
+          "width": 324,
+          "height": 162.9375,
+          "bottom": 241.03125,
+          "top": 78.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        },
+        "wide": {
+          "width": 324,
+          "height": 182.1875,
+          "bottom": 435.21875,
+          "top": 253.03125,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 388"
+        },
+        "portrait": {
+          "width": 324,
+          "height": 644.25,
+          "bottom": 1091.46875,
+          "top": 447.21875,
+          "objectFit": "contain",
+          "aspectRatio": "347 / 690"
+        },
+        "square": {
+          "width": 324,
+          "height": 324,
+          "bottom": 1427.46875,
+          "top": 1103.46875,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 690"
+        },
+        "emoji": {
+          "width": 324,
+          "height": 20,
+          "bottom": 1483.46875,
+          "top": 1463.46875,
+          "objectFit": "contain",
+          "aspectRatio": "auto 20 / 20"
+        },
+        "thumbnail": {
+          "width": 324,
+          "height": 60,
+          "bottom": 1543.46875,
+          "top": 1483.46875,
+          "objectFit": "contain",
+          "aspectRatio": "auto 100 / 60"
+        },
+        "video": {
+          "width": 324,
+          "height": 360,
+          "bottom": 1915.46875,
+          "top": 1555.46875,
+          "objectFit": "contain",
+          "aspectRatio": "auto 640 / 360"
+        },
+        "grid1": {
+          "width": 159,
+          "height": 316.15625,
+          "bottom": 2231.625,
+          "top": 1915.46875,
+          "objectFit": "cover",
+          "aspectRatio": "347 / 690"
+        },
+        "grid2": {
+          "width": 159,
+          "height": 316.15625,
+          "bottom": 2231.625,
+          "top": 1915.46875,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "topic": {
+          "width": 324,
+          "height": 162.9375,
+          "bottom": 2400.5625,
+          "top": 2237.625,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "delayed": {
+          "width": 0,
+          "height": 0,
+          "bottom": 1439.46875,
+          "top": 1439.46875,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        }
+      }
+    },
+    {
+      "width": 390,
+      "mode": "dark",
+      "before": {
+        "landscape": {
+          "width": 324,
+          "height": 347,
+          "bottom": 425.09375,
+          "top": 78.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        },
+        "wide": {
+          "width": 324,
+          "height": 388,
+          "bottom": 825.09375,
+          "top": 437.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 388"
+        },
+        "portrait": {
+          "width": 324,
+          "height": 665,
+          "bottom": 1502.09375,
+          "top": 837.09375,
+          "objectFit": "contain",
+          "aspectRatio": "347 / 690"
+        },
+        "square": {
+          "width": 324,
+          "height": 665,
+          "bottom": 2179.09375,
+          "top": 1514.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 690"
+        },
+        "emoji": {
+          "width": 324,
+          "height": 20,
+          "bottom": 2582.09375,
+          "top": 2562.09375,
+          "objectFit": "contain",
+          "aspectRatio": "auto 20 / 20"
+        },
+        "thumbnail": {
+          "width": 324,
+          "height": 60,
+          "bottom": 2642.09375,
+          "top": 2582.09375,
+          "objectFit": "contain",
+          "aspectRatio": "auto 100 / 60"
+        },
+        "video": {
+          "width": 324,
+          "height": 360,
+          "bottom": 3014.09375,
+          "top": 2654.09375,
+          "objectFit": "contain",
+          "aspectRatio": "auto 640 / 360"
+        },
+        "grid1": {
+          "width": 159,
+          "height": 316.15625,
+          "bottom": 3330.25,
+          "top": 3014.09375,
+          "objectFit": "cover",
+          "aspectRatio": "347 / 690"
+        },
+        "grid2": {
+          "width": 159,
+          "height": 316.15625,
+          "bottom": 3330.25,
+          "top": 3014.09375,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "topic": {
+          "width": 324,
+          "height": 162.9375,
+          "bottom": 3499.1875,
+          "top": 3336.25,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "delayed": {
+          "width": 324,
+          "height": 347,
+          "bottom": 2538.09375,
+          "top": 2191.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        }
+      },
+      "after": {
+        "landscape": {
+          "width": 324,
+          "height": 162.9375,
+          "bottom": 241.03125,
+          "top": 78.09375,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        },
+        "wide": {
+          "width": 324,
+          "height": 182.1875,
+          "bottom": 435.21875,
+          "top": 253.03125,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 388"
+        },
+        "portrait": {
+          "width": 324,
+          "height": 644.25,
+          "bottom": 1091.46875,
+          "top": 447.21875,
+          "objectFit": "contain",
+          "aspectRatio": "347 / 690"
+        },
+        "square": {
+          "width": 324,
+          "height": 324,
+          "bottom": 1427.46875,
+          "top": 1103.46875,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 690"
+        },
+        "emoji": {
+          "width": 324,
+          "height": 20,
+          "bottom": 1483.46875,
+          "top": 1463.46875,
+          "objectFit": "contain",
+          "aspectRatio": "auto 20 / 20"
+        },
+        "thumbnail": {
+          "width": 324,
+          "height": 60,
+          "bottom": 1543.46875,
+          "top": 1483.46875,
+          "objectFit": "contain",
+          "aspectRatio": "auto 100 / 60"
+        },
+        "video": {
+          "width": 324,
+          "height": 360,
+          "bottom": 1915.46875,
+          "top": 1555.46875,
+          "objectFit": "contain",
+          "aspectRatio": "auto 640 / 360"
+        },
+        "grid1": {
+          "width": 159,
+          "height": 316.15625,
+          "bottom": 2231.625,
+          "top": 1915.46875,
+          "objectFit": "cover",
+          "aspectRatio": "347 / 690"
+        },
+        "grid2": {
+          "width": 159,
+          "height": 316.15625,
+          "bottom": 2231.625,
+          "top": 1915.46875,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "topic": {
+          "width": 324,
+          "height": 162.9375,
+          "bottom": 2400.5625,
+          "top": 2237.625,
+          "objectFit": "cover",
+          "aspectRatio": "690 / 347"
+        },
+        "delayed": {
+          "width": 0,
+          "height": 0,
+          "bottom": 1439.46875,
+          "top": 1439.46875,
+          "objectFit": "contain",
+          "aspectRatio": "690 / 347"
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "production_backend": false
+}

@@ -1,0 +1,13 @@
+{
+  "activated": true,
+  "activated_at_utc": "2026-10-19T09:34:08.660826+00:00",
+  "source_sha256": "27bec5c18ad7c823ea0909a589fe1a17c6c96b574f1cbb2533cf2db1e24162e3",
+  "web_restarts": 1,
+  "theme_written": false,
+  "migrations_run": false,
+  "forms_posted": false,
+  "container_recreated": false,
+  "postgres_redis_proxy_restarted": false,
+  "browser_run": false,
+  "visual_acceptance": "User"
+}

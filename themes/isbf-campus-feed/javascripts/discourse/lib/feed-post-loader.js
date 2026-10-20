@@ -1,11 +1,27 @@
 import { ajax } from "discourse/lib/ajax";
+import { hasPostPreviewTarget } from "./post-preview";
 
 const cache = new Map();
 const pendingRequests = new Map();
 const invalidatedPosts = new Set();
 const generations = new Map();
+const postNumbers = new Map();
 const queue = [];
+const pollCache = new Map();
+const pendingPolls = new Map();
 let activeRequests = 0;
+let generation = 0;
+
+function rememberPostNumber(key, postId) {
+  if (!key) {
+    return;
+  }
+  postNumbers.delete(key);
+  postNumbers.set(key, postId);
+  if (postNumbers.size > 50) {
+    postNumbers.delete(postNumbers.keys().next().value);
+  }
+}
 
 function runQueue() {
   while (activeRequests < 4 && queue.length) {
@@ -15,14 +31,25 @@ function runQueue() {
 }
 
 function runJob(job) {
-  const { generation, postId } = job;
-  ajax(`/posts/${job.postId}/cooked`)
+  const isPoll = job.kind === "polls";
+  ajax(isPoll ? `/posts/${job.postId}.json` : job.url)
     .then((result) => {
+      const postId = job.postId || Number(result.id);
+      if (!Number.isSafeInteger(postId) || postId <= 0) {
+        throw new Error("Post response is missing its ID");
+      }
+      rememberPostNumber(job.postNumberKey, postId);
       if (
         invalidatedPosts.has(postId) ||
-        generation !== generations.get(postId)
+        (generations.get(postId) || 0) > job.startedGeneration
       ) {
-        job.resolve("");
+        job.resolve(isPoll ? null : "");
+      } else if (isPoll) {
+        pollCache.set(job.key, { value: result, at: Date.now() });
+        if (pollCache.size > 100) {
+          pollCache.delete(pollCache.keys().next().value);
+        }
+        job.resolve(result);
       } else {
         cache.set(postId, result.cooked);
         if (cache.size > 50) {
@@ -33,16 +60,28 @@ function runJob(job) {
     })
     .catch(job.reject)
     .finally(() => {
-      if (pendingRequests.get(postId)?.promise === job.promise) {
-        pendingRequests.delete(postId);
+      if (!isPoll && pendingRequests.get(job.key)?.promise === job.promise) {
+        pendingRequests.delete(job.key);
       }
       activeRequests -= 1;
       runQueue();
     });
 }
 
-export function loadCookedPost(postId) {
-  postId = Number(postId);
+export function loadCookedPost(postId, { topicId, postNumber } = {}) {
+  if (!hasPostPreviewTarget({ postId, topicId, postNumber })) {
+    return Promise.reject(new Error("Post preview target is missing"));
+  }
+  const postNumberKey = hasPostPreviewTarget({ topicId, postNumber })
+    ? `${Number(topicId)}/${Number(postNumber)}`
+    : null;
+  postId =
+    Number.isSafeInteger(Number(postId)) && Number(postId) > 0
+      ? Number(postId)
+      : postNumbers.get(postNumberKey);
+  if (postId) {
+    rememberPostNumber(postNumberKey, postId);
+  }
   if (invalidatedPosts.has(postId)) {
     return Promise.resolve("");
   }
@@ -52,30 +91,83 @@ export function loadCookedPost(postId) {
     cache.set(postId, cooked);
     return Promise.resolve(cooked);
   }
-  const generation = generations.get(postId);
-  const pending = pendingRequests.get(postId);
-  if (pending && pending.generation === generation) {
+  const key = postId || postNumberKey;
+  const targetGeneration = postId ? generations.get(postId) || 0 : generation;
+  const pending = pendingRequests.get(key);
+  if (pending && pending.targetGeneration === targetGeneration) {
     return pending.promise;
   }
-  const job = { generation, postId };
+  const job = {
+    key,
+    postId,
+    postNumberKey,
+    startedGeneration: generation,
+    targetGeneration,
+    url: postId
+      ? `/posts/${postId}/cooked`
+      : `/posts/by_number/${postNumberKey}.json`,
+  };
   job.promise = new Promise((resolve, reject) => {
     Object.assign(job, { reject, resolve });
   });
-  pendingRequests.set(postId, job);
+  pendingRequests.set(key, job);
   queue.push(job);
   runQueue();
   return job.promise;
 }
 
+export function loadPostPolls(postId, userId, { refresh = false } = {}) {
+  const id = Number(postId);
+  if (!Number.isSafeInteger(id) || id <= 0 || invalidatedPosts.has(id)) {
+    return Promise.resolve(null);
+  }
+  const key = `${userId || "guest"}:${id}`;
+  if (pendingPolls.has(key)) {
+    return pendingPolls.get(key);
+  }
+  const cached = pollCache.get(key);
+  if (!refresh && cached && Date.now() - cached.at < 30000) {
+    return Promise.resolve(cached.value);
+  }
+  pollCache.delete(key);
+  const promise = new Promise((resolve, reject) => {
+    queue.push({
+      kind: "polls",
+      key,
+      postId: id,
+      reject,
+      resolve,
+      startedGeneration: generation,
+    });
+    runQueue();
+  }).finally(() => {
+    if (pendingPolls.get(key) === promise) {
+      pendingPolls.delete(key);
+    }
+  });
+  pendingPolls.set(key, promise);
+  return promise;
+}
+
 export function invalidateCookedPost(postId, hidden = true) {
   const id = Number(postId);
-  generations.set(id, (generations.get(id) || 0) + 1);
+  generations.set(id, ++generation);
   if (hidden) {
     invalidatedPosts.add(id);
   } else {
     invalidatedPosts.delete(id);
   }
   cache.delete(id);
+  for (const key of pollCache.keys()) {
+    if (key.endsWith(`:${id}`)) {
+      pollCache.delete(key);
+    }
+  }
+  for (const key of pendingPolls.keys()) {
+    if (key.endsWith(`:${id}`)) {
+      pendingPolls.delete(key);
+    }
+  }
 }
 
 const countCache = new Map();

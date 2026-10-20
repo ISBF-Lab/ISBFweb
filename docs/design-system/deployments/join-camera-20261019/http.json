@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "anonymous_get_requests": [
+    {
+      "path": "/join/",
+      "status": 200,
+      "sha256": "a9fd044583a42dff86a957d82a6adf229ecae70aa0e87fd4f079e9173002c733"
+    },
+    {
+      "path": "/join/assets/index-COff8pLO.js",
+      "status": 200,
+      "sha256": "649ef58467104748aa738879e0ee75bec48c76e1f4fc1df8f0721512180b378f"
+    },
+    {
+      "path": "/join/assets/scene-B67rpNrn.js",
+      "status": 200,
+      "sha256": "2671b2281c0161f06eb71003d1283aaf70a89123bdefd0d1fd46038c6af34fe0"
+    }
+  ],
+  "tls_verified": true,
+  "compatibility_csp_preserved": true,
+  "visual_acceptance": "User"
+}

@@ -103,4 +103,30 @@ module("ISBF | Unit | Lib | post-preview", function (hooks) {
       "other profile pages are excluded"
     );
   });
+
+  test("historical activity can locate its post by topic and post number", function (assert) {
+    const item = {
+      action_type: 4,
+      post_id: null,
+      topic_id: 123,
+      post_number: 1,
+      post_type: null,
+    };
+    assert.true(
+      isActivityPreview(item, "/u/Gin/activity"),
+      "a topic action without a post ID still receives the public preview"
+    );
+    assert.false(
+      isActivityPreview({ ...item, topic_id: null }, "/u/Gin/activity"),
+      "an action with no usable post locator remains native"
+    );
+    assert.false(
+      isActivityPreview({ ...item, post_number: -1 }, "/u/Gin/activity"),
+      "an invalid post number cannot trigger a preview request"
+    );
+    assert.false(
+      isActivityPreview(item, "/u/Gin/activity/bookmarks"),
+      "the fallback does not admit private bookmark tools"
+    );
+  });
 });

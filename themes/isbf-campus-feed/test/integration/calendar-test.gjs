@@ -78,23 +78,23 @@ module("ISBF | Integration | Component | ISBFV2Calendar", function (hooks) {
   });
 
   test("the entry editor focuses the title and closes with Escape", async function (assert) {
-    await render(<template><ISBFV2Calendar /></template>);
+    await render(<template><ISBFV2Calendar /><ModalContainer /></template>);
     await click(".isbf-v2-calendar__heading .isbf-v2-calendar__primary");
 
     assert
-      .dom('.isbf-v2-calendar__editor input[type="text"]')
+      .dom('.isbf-calendar-entry-editor input[type="text"]')
       .isFocused("the title receives keyboard focus");
     assert
-      .dom(".isbf-v2-calendar__editor-backdrop")
-      .hasAttribute("tabindex", "-1", "the dialog can receive focus");
+      .dom(".isbf-calendar-entry-editor")
+      .hasAttribute("aria-modal", "true", "the shared dialog is modal");
 
     await triggerKeyEvent(
-      '.isbf-v2-calendar__editor input[type="text"]',
+      '.isbf-calendar-entry-editor input[type="text"]',
       "keydown",
       "Escape"
     );
     assert
-      .dom(".isbf-v2-calendar__editor-backdrop")
+      .dom(".isbf-calendar-entry-editor")
       .doesNotExist("Escape closes the editor");
   });
 

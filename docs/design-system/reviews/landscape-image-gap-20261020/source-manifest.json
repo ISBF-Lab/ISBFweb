@@ -1,0 +1,22 @@
+{
+  "source_version": "43461f2438335eaa2828528cd243fba391602746a76f1176ece9ee99e9fc0955",
+  "source_files": [
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "snapshot": "source/common.scss",
+      "sha256": "cc0ebb1eb91c076b16b582d4a01b96a1c52f6a5e8e7e5cce17d49499bf5c6911"
+    }
+  ],
+  "production_delta": [
+    {
+      "relative": "common/common.scss",
+      "field_id": 197,
+      "before_sha256": "fc808956c91ad23b8921ba432415486b9e4265ca4469947958fe91975b319058",
+      "sha256": "a159206d0e6a47234e0116bdd43fda0c5cb7205645b31ae035e5bd7f17452a35",
+      "workspace_matches": false
+    }
+  ],
+  "reference": "A02/C09 plus reported screenshot",
+  "public_apis_changed": false,
+  "migrations": false
+}

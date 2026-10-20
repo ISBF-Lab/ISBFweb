@@ -1,0 +1,26 @@
+Writing lockfile to /tmp/lint/Gemfile.lock
+Resolving dependencies...
+[bin/lint] Running core linters via lefthook...
+sync hooks: ❌
+│  Skipping hook sync: could not replace the hook: remove /workspace/.git/hooks/pre-commit: read-only file system
+│  developer-docs-prettier (skip) no files for inspection
+│  eslint (skip) no files for inspection
+│  prettier (skip) no files for inspection
+┃  rubocop ❯ 
+Inspecting 2 files
+..
+
+2 files inspected, no offenses detected
+
+│  stylelint (skip) no files for inspection
+┃  syntax_tree ❯ 
+[38;5;102mplugins/isbf-moderation/lib/isbf_moderation/ai_classifier.rb[0m 152ms
+[38;5;102mGemfile[0m 152ms
+plugins/isbf-moderation/spec/lib/ai_moderation_spec.rb 218ms
+
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 8.02 seconds)
+✔️ rubocop (6.21 seconds)
+✔️ syntax_tree (1.81 seconds)
+[bin/lint] All lints passed
+317304832

@@ -1,0 +1,42 @@
+[bin/lint] No core linter for: script/check-isbf-dialogs.mjs, script/check-isbf-dialogs.test.mjs, docs/design-system/dialog-exceptions.json, package.json
+[bin/lint] Running core linters via lefthook...
+sync hooks: ❌
+│  Skipping hook sync: could not replace the hook: remove /workspace/.git/hooks/pre-commit: read-only file system
+│  developer-docs-prettier (skip) no files for inspection
+┃  eslint ❯ 
+
+┃  prettier ❯ 
+- Starting...
+dialog-consistency.scss
+frontend-consistency.scss
+reporting.scss
+official-calendar.scss
+frontend-scope-test.gjs
+isbf-resource-directory-dialog.gjs
+dialog-consistency-test.gjs
+isbf-v2-calendar.gjs
+- Reformatted 8 / 18 files...
+✔ Reformatted 8 / 18 files...
+
+┃  rubocop ❯ 
+Resolving dependencies...
+Inspecting 2 files
+..
+
+2 files inspected, no offenses detected
+
+┃  stylelint ❯ 
+
+┃  syntax_tree ❯ 
+[38;5;102mthemes/isbf-campus-feed/spec/system/frontend_consistency_spec.rb[0m 269ms
+[38;5;102mGemfile[0m 269ms
+themes/isbf-campus-feed/spec/system/page_objects/pages/frontend_consistency.rb 30ms
+
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 63.40 seconds)
+✔️ eslint (23.46 seconds)
+✔️ prettier (17.62 seconds)
+✔️ rubocop (5.92 seconds)
+✔️ stylelint (15.56 seconds)
+✔️ syntax_tree (0.84 seconds)
+[bin/lint] All lints passed

@@ -2,6 +2,8 @@ import { click, render, settled, triggerEvent } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
 import { themePrefix } from "virtual:theme";
+import UserStream from "discourse/components/user-stream";
+import UserSummaryTopic from "discourse/components/user-summary-topic";
 import UserAction from "discourse/models/user-action";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import pretender, { response } from "discourse/tests/helpers/create-pretender";
@@ -32,6 +34,16 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
     pretender.get("/posts/:id/cooked", () => {
       this.requests++;
       return response({ cooked: COOKED });
+    });
+    pretender.get("/posts/by_number/:topicId/:postNumber.json", (request) => {
+      this.requests++;
+      return response({
+        id: this.postId,
+        cooked:
+          Number(request.params.postNumber) === 1
+            ? COOKED
+            : "<p>This is the popular reply.</p>",
+      });
     });
     this.owner
       .lookup("service:router")
@@ -87,6 +99,98 @@ module("ISBF | Integration | Component | ISBFPostPreview", function (hooks) {
     assert
       .dom(".isbf-activity-preview__metadata .badge-category.--style-square")
       .exists("the native square category badge is used");
+  });
+
+  test("the real activity stream previews a historical topic without a post ID", async function (assert) {
+    this.item.set("post_id", null);
+    this.stream = {
+      content: [this.item],
+      loading: false,
+      canLoadMore: false,
+      findItems: async () => [],
+    };
+    await render(<template><UserStream @stream={{this.stream}} /></template>);
+    assert
+      .dom(".user-stream-item")
+      .hasClass(
+        "isbf-activity-item",
+        "the native row and outlet agree that the historical topic is eligible"
+      );
+    assert
+      .dom(".isbf-activity-preview__title")
+      .doesNotExist(
+        "the internal title is omitted through the real stream outlet"
+      );
+    assert
+      .dom(".isbf-post-preview__text")
+      .hasText(
+        "Campus photos.",
+        "the initial preview omits the image filename"
+      );
+    this.observers.forEach((callback) => callback([{ isIntersecting: true }]));
+    await settled();
+    assert
+      .dom(".isbf-post-preview__image")
+      .exists(
+        { count: 2 },
+        "a record without a post ID still loads both thumbnails"
+      );
+  });
+
+  test("the native summary topic link uses the body for an untitled topic", async function (assert) {
+    this.summaryTopic = { id: 780001, title: TITLE, fancyTitle: TITLE };
+    await render(
+      <template>
+        <UserSummaryTopic
+          @createdAt={{this.item.created_at}}
+          @likes={{4}}
+          @postNumber={{1}}
+          @topic={{this.summaryTopic}}
+          @url="/t/campus/780001"
+        />
+      </template>
+    );
+    this.observers[0]([{ isIntersecting: true }]);
+    await settled();
+    assert
+      .dom(".isbf-post-preview.--summary")
+      .hasText(
+        "Campus photos.",
+        "the topic's first post replaces its internal title"
+      );
+    assert.dom(".like-count").hasText("4", "the original like count remains");
+    assert
+      .dom(".isbf-post-preview__image")
+      .doesNotExist("the summary remains a compact text list");
+  });
+
+  test("an untitled popular reply previews its own post number", async function (assert) {
+    this.summaryTopic = { id: 780002, title: TITLE, fancyTitle: TITLE };
+    await render(
+      <template>
+        <UserSummaryTopic
+          @createdAt={{this.item.created_at}}
+          @postNumber={{7}}
+          @topic={{this.summaryTopic}}
+          @url="/t/campus/780002/7"
+        />
+      </template>
+    );
+    this.observers[0]([{ isIntersecting: true }]);
+    await settled();
+    assert
+      .dom(".isbf-post-preview__text")
+      .hasText(
+        "This is the popular reply.",
+        "the reply body is used instead of the topic's first post"
+      );
+    assert
+      .dom(".isbf-post-preview")
+      .hasAttribute(
+        "href",
+        "/t/campus/780002/7",
+        "the original reply target is preserved"
+      );
   });
 
   test("an explicitly titled recent discussion needs no body request", async function (assert) {

@@ -43,7 +43,8 @@
     "lint-progress": "pnpm lttf:output && npx html-pages ./lint-progress --no-cache",
     "playwright-install": "playwright install --no-shell chromium",
     "build": "pnpm --silent --dir=frontend/discourse build",
-    "start": "pnpm --silent --dir=frontend/discourse start"
+    "start": "pnpm --silent --dir=frontend/discourse start",
+    "lint:dialogs": "node script/check-isbf-dialogs.mjs"
   },
   "engines": {
     "node": ">= 20",

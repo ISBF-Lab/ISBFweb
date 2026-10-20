@@ -1,0 +1,30 @@
+{
+  "source_version": "5db32d52dcd99e50fb64dada7e66358e79b4bfd58443a59c8a7bdefb1c5d58af",
+  "theme_id": 4,
+  "sources": [
+    {
+      "relative": "javascripts/discourse/components/isbf-continue-reading-item.gjs",
+      "field_id": 461,
+      "before_sha256": "d9afd79c8bd461041d460fadae10391fc7af10f8ecc33ed2ed0f73b041e0a9e6",
+      "sha256": "401d041c6816356f376a8dbe11c40af78d5f1e4e2875e4449d14ea712eac9b82",
+      "workspace_matches": false
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-post-preview.gjs",
+      "field_id": 330,
+      "before_sha256": "a2a9a01e85b8816e2c4e765a70d9e4f15be6574339c63f66610951a4b3436946",
+      "sha256": "b6ab018436d6ed3c8fe9bd239587fe469aba4d2c6f9fed31fdf252cf6729faab",
+      "workspace_matches": true
+    },
+    {
+      "relative": "stylesheets/continue-reading.scss",
+      "field_id": 463,
+      "before_sha256": "a0cabbcfacde79c69e7d55ff4cd506a402a5933687bcc1f9abfaeb510fcfeaed",
+      "sha256": "8dbec22ef9b591c4db044ccd146bfe5748697974df645b39b0bb64c7eeaa75e4",
+      "workspace_matches": true
+    }
+  ],
+  "theme_only": true,
+  "plugins": 66,
+  "base_image": "local_discourse/isbf_app:auth-username-hint-20261019-9e77b7072c01"
+}

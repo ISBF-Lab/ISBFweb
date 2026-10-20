@@ -1,0 +1,58 @@
+{
+  "source_version": "fa5783f6e305267a08c186429c1d3dbba8d82d646a06abe550bb8476ded2142a",
+  "sources": [
+    {
+      "path": "app/controllers/application_controller.rb",
+      "before_sha256": "db3beb2743dc730c0961b28ab90ef50d89f21f50a15160c303edc0508b6cf3a0",
+      "sha256": "db3beb2743dc730c0961b28ab90ef50d89f21f50a15160c303edc0508b6cf3a0",
+      "workspace_matches": true
+    },
+    {
+      "path": "app/views/exceptions/not_found.html.erb",
+      "before_sha256": "20aa67339d18f14dddfc524f1a86464935626489cc5a7eaddded6b404ebf0306",
+      "sha256": "20aa67339d18f14dddfc524f1a86464935626489cc5a7eaddded6b404ebf0306",
+      "workspace_matches": true
+    },
+    {
+      "path": "app/views/exceptions/_elastic_not_found.html.erb",
+      "before_sha256": "68f6934d2cd8babca1953daf442cbbfe04e780a83fca6ea236152ae86f9882f6",
+      "sha256": "78e730b32c123a5f504a1699e668b00c3e1e14f6948bfe2daaf527c2f2ce1326",
+      "workspace_matches": true
+    },
+    {
+      "path": "config/locales/server.en.yml",
+      "before_sha256": "f328d9a51ff595aea28347307783f854972d2c917d7b7012bc473655e092e493",
+      "sha256": "97c7881ddcca9ab79a8d9870a044fd22654387c69d3190fbd3139a9999186e35",
+      "workspace_matches": true
+    },
+    {
+      "path": "config/locales/server.zh_CN.yml",
+      "before_sha256": "79c244ea3555f9c9dd34357b405e828f52ed63adeb019a9fb9ee3dc30383e762",
+      "sha256": "862928f138c342de9f97895e2ce51023cefdba6fd0a04888d80ccd1c2349e71c",
+      "workspace_matches": true
+    },
+    {
+      "path": "frontend/discourse/scripts/js/elastic-not-found.js",
+      "before_sha256": "5ad1e241ccaa038324997c73db2df6817b843155834107fbaca397bd832010af",
+      "sha256": "68af550fcd57890c058fb13d88059a4f6c32279188c7a96b5f9f3dff75af287f",
+      "workspace_matches": true
+    },
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "sha256": "20389961304d4481173f0fca78fe38ea1140a6aea6a220b1393cc03176005781",
+      "before_sha256": "20389961304d4481173f0fca78fe38ea1140a6aea6a220b1393cc03176005781"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/elastic-not-found.scss",
+      "sha256": "461aec837fe2a10275b7ac2ce09096024581fc79173e38e47ad91308bac3ad61",
+      "before_sha256": "bf6bfdfda2414b72f19704b94742899ca2adaf4012788119eff98da11f5abef7"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/elastic-not-found.js",
+      "sha256": "59416d1a298fdf3f57d367db0dda19e783daa9cc8f2170cb9388741c616d3028",
+      "before_sha256": "59416d1a298fdf3f57d367db0dda19e783daa9cc8f2170cb9388741c616d3028"
+    }
+  ],
+  "image_tag": "local_discourse/isbf_app:elastic-404-fullscreen-20261019-fa5783f6e305",
+  "image_id": "sha256:319d60a5739f61b74cf071c6506d605af6c62f9c6fb8d83123cf264c1d5a2265"
+}

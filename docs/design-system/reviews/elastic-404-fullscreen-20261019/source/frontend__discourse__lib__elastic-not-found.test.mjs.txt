@@ -1,0 +1,146 @@
+import assert from "node:assert/strict";
+import { test } from "node:test";
+import {
+  BestTime,
+  formatTime,
+  PaddleGame,
+} from "../scripts/js/elastic-not-found.js";
+
+function advance(game, from, to, direction = 0) {
+  for (let now = from + 10; now <= to; now += 10) {
+    game.advance(now, direction);
+  }
+}
+
+test("the clock counts continuous play and a finished round cannot resume", () => {
+  const game = new PaddleGame();
+  game.start(0);
+  advance(game, 0, 100);
+  game.finish();
+  game.advance(60000);
+  assert.equal(Math.round(game.elapsedMs), 100);
+  assert.equal(game.state, "over");
+  advance(game, 60000, 60100);
+  assert.equal(Math.round(game.elapsedMs), 100);
+});
+
+test("a delayed frame resolves the actual miss before recording survival time", () => {
+  const game = new PaddleGame();
+  game.start(0);
+  game.ball = { x: 0.1, y: 0.6, vx: 0, vy: 0.48 };
+  game.advance(5000);
+  assert.equal(game.state, "over");
+  assert.ok(game.elapsedMs > 0 && game.elapsedMs < 1000);
+});
+
+test("a paddle hit reflects the ball at the current accelerated speed", () => {
+  const game = new PaddleGame();
+  game.start(0);
+  game.ball = { x: 0.53, y: 0.59, vx: 0, vy: 0.48 };
+  advance(game, 0, 100);
+  assert.ok(game.ball.vy < 0);
+  assert.ok(
+    Math.abs(Math.hypot(game.ball.vx, game.ball.vy) - game.speed) < 0.000001
+  );
+  assert.equal(game.state, "playing");
+});
+
+test("the ball gradually accelerates, stays bounded, and resets for a new round", () => {
+  const game = new PaddleGame();
+  game.start(0);
+  const initial = Math.hypot(game.ball.vx, game.ball.vy);
+  for (let now = 10; now <= 10000; now += 10) {
+    game.move(game.ball.x);
+    game.advance(now);
+  }
+  const afterTenSeconds = Math.hypot(game.ball.vx, game.ball.vy);
+  assert.equal(game.state, "playing");
+  assert.ok(afterTenSeconds > initial && afterTenSeconds < initial * 1.2);
+  for (let now = 10010; now <= 90000; now += 10) {
+    game.move(game.ball.x);
+    game.advance(now);
+  }
+  assert.equal(game.state, "playing");
+  assert.ok(
+    Math.abs(Math.hypot(game.ball.vx, game.ball.vy) - initial * 2) < 0.000001
+  );
+  game.finish();
+  game.start(100000);
+  assert.equal(Math.hypot(game.ball.vx, game.ball.vy), initial);
+  assert.equal(game.elapsedMs, 0);
+});
+
+test("ordinary delayed frames keep playing without a pause state", () => {
+  const game = new PaddleGame();
+  game.start(0);
+  game.advance(500);
+  assert.equal(game.state, "playing");
+  assert.equal(Math.round(game.elapsedMs), 500);
+  assert.ok(Math.hypot(game.ball.vx, game.ball.vy) > 0.48);
+});
+
+test("missing the paddle ends the round and freezes its time", () => {
+  const game = new PaddleGame();
+  game.start(0);
+  game.ball = { x: 0.1, y: 0.6, vx: 0, vy: 0.48 };
+  advance(game, 0, 250);
+  assert.equal(game.state, "over");
+  const elapsed = game.elapsedMs;
+  advance(game, 250, 500);
+  assert.equal(game.elapsedMs, elapsed);
+  game.start(1000);
+  assert.equal(game.elapsedMs, 0);
+  assert.equal(game.state, "playing");
+});
+
+test("walls reflect the ball and controls keep the paddle inside the arena", () => {
+  const game = new PaddleGame();
+  game.start(0);
+  game.ball = { x: 0.02, y: 0.02, vx: -0.3, vy: -0.3 };
+  advance(game, 0, 20, -1);
+  assert.ok(game.ball.vx > 0);
+  assert.ok(game.ball.vy > 0);
+  game.move(-100);
+  assert.equal(game.paddle, 0.115);
+  game.move(100);
+  assert.equal(game.paddle, 0.885);
+});
+
+test("records survive a fresh instance and never replace a better stored result", () => {
+  const values = new Map();
+  const storage = {
+    getItem: (key) => values.get(key),
+    setItem: (key, value) => values.set(key, value),
+  };
+  const record = new BestTime(storage);
+  assert.equal(record.value, 0);
+  assert.equal(record.save(12345.67), 12345);
+  const another = new BestTime(storage);
+  assert.equal(another.value, 12345);
+  another.save(23456);
+  assert.equal(record.save(15000), 23456);
+  assert.equal(record.save(NaN), 23456);
+});
+
+test("unavailable or corrupt storage keeps a session record", () => {
+  for (const initial of ["NaN", "Infinity", "-10", "broken"]) {
+    const record = new BestTime({ getItem: () => initial, setItem() {} });
+    assert.equal(record.value, 0);
+  }
+  const record = new BestTime({
+    getItem() {
+      throw new Error("denied");
+    },
+    setItem() {
+      throw new Error("quota");
+    },
+  });
+  assert.equal(record.save(1234), 1234);
+  assert.equal(record.save(500), 1234);
+});
+
+test("times display minutes, seconds, and tenths", () => {
+  assert.equal(formatTime(0), "00:00.0");
+  assert.equal(formatTime(12345), "00:12.3");
+  assert.equal(formatTime(60123), "01:00.1");
+});

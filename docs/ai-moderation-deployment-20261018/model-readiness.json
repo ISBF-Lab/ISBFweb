@@ -1,0 +1,9 @@
+{
+  "model_id": 1,
+  "display_name": "ChatGPTeek",
+  "text": true,
+  "vision": true,
+  "synthetic_inputs_only": true,
+  "production_posts_created": 0,
+  "historical_posts_scanned": 0
+}

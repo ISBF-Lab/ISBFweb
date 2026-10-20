@@ -1,0 +1,2222 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-10-10",
+  "purpose": "Documentation-only UI reference evidence; never import into the application.",
+  "approved_policy": "User selected completed UI regions supported by code integration and explicit review or completed verification records.",
+  "baseline": {
+    "theme_id": 4,
+    "production_core_commit": "c0f4739d143a4efbb4e7f19dafadcd56a5302a58",
+    "accepted_release_record": "docs/avatar-frames-deployment-20261010.md",
+    "comparison_manifest": "deploy-work/avatar-frames-20261010/management/state-before.json",
+    "comparison_manifest_sha256": "3ab4a26212cc22930d49856bc3fae74ce8f0de7ba7f315dd1d7a1515cb6f7cbc",
+    "verification": {
+      "field_count": 128,
+      "matched_fields": 128,
+      "algorithm": "sha256(UTF-8 field value)"
+    }
+  },
+  "field_digests": [
+    {
+      "id": 196,
+      "target_id": 9,
+      "name": "about",
+      "sha256": "be6f4cc306615e8bc03ccc665723c6826cb56e18478e433689f2f8f8c88688ca"
+    },
+    {
+      "id": 197,
+      "target_id": 0,
+      "name": "scss",
+      "sha256": "9878f3a38bac37dd717a1139252f9e700dfdcbc112af4d2fb51fd6d5f30e265f"
+    },
+    {
+      "id": 198,
+      "target_id": 6,
+      "name": "discourse/api-initializers/isbf-campus-feed.gjs",
+      "sha256": "b56b544716d11b12a99eafa4d3604f89dac648511a10182cd589e4f631dcf598"
+    },
+    {
+      "id": 199,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-right-rail.gjs",
+      "sha256": "36004a845919ab5f6d21a0bd295dc07f8bb9fd4b246f06d429dcb13c03b8043b"
+    },
+    {
+      "id": 200,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-shell.gjs",
+      "sha256": "f7458edaf309697208faf922f7f713dc6af6aeb8eb782f701ecbbb1a38a8a19f"
+    },
+    {
+      "id": 201,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-side-nav.gjs",
+      "sha256": "efdd4904020a2ae0e5915072300b31952c8a807e266917fad8e3b6d0b6968ca6"
+    },
+    {
+      "id": 202,
+      "target_id": 4,
+      "name": "en",
+      "sha256": "8600afe2ba70f7e044af3c1adffe3a14d79c552958219d480b78dfa3bd452bc7"
+    },
+    {
+      "id": 203,
+      "target_id": 4,
+      "name": "zh_CN",
+      "sha256": "d7da0e95dd3931fa64b3e38bc18e318cfdb7419da43d376ae0f50b274b1238c1"
+    },
+    {
+      "id": 204,
+      "target_id": 3,
+      "name": "yaml",
+      "sha256": "c9b83da12b3892b316e50589716de453dd34770c5cd9a7ab8c6f878d8aeeb258"
+    },
+    {
+      "id": 205,
+      "target_id": 6,
+      "name": "discourse/lib/quick-post-title.js",
+      "sha256": "cc51274ca2cf4f6963a9172e7b3b00d37b16357539337a4de6129f5b90acbc3f"
+    },
+    {
+      "id": 206,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-calendar.gjs",
+      "sha256": "11b5581f843293843fa1bf8095ac4e7dc71abc8abca4aeb5972ad81f36b24300"
+    },
+    {
+      "id": 207,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-workbench.gjs",
+      "sha256": "cafa3ca03b88038b8ce95ba31a83356c6bb5ca7df481f59816d2ba1d526ba74b"
+    },
+    {
+      "id": 223,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-composer-cancel.gjs",
+      "sha256": "654b3ccb3df5d792d5c24dfada1e3f549734a0ce35e03760eb1a5295adaf2959"
+    },
+    {
+      "id": 224,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-composer-options.gjs",
+      "sha256": "c7c0f7f94105eda089ce609a4d7b5f42a5fee0978cd8aae451575ed8905d6745"
+    },
+    {
+      "id": 225,
+      "target_id": 6,
+      "name": "discourse/lib/quick-post-scope.js",
+      "sha256": "038b119e4723022a1f67b7379986675ec0f14ac196737706a6b596e869b234cd"
+    },
+    {
+      "id": 226,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-account-menu.gjs",
+      "sha256": "b020a86e306b0fe9749e02bc72bd15ac07d12963fdc9c5684ac3620b4776b690"
+    },
+    {
+      "id": 227,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-feed-card.gjs",
+      "sha256": "a9add3eeff30b8007ef0f4fac2b90cc02fe6111a09f849cb4bfae46f5a71d26e"
+    },
+    {
+      "id": 228,
+      "target_id": 6,
+      "name": "discourse/connectors/topic-list-item/isbf-feed-card.gjs",
+      "sha256": "9695aba1bcbc31dc0eae9d74af668e0db27e438488ad45f1f889551662726b09"
+    },
+    {
+      "id": 229,
+      "target_id": 6,
+      "name": "discourse/lib/feed-post-loader.js",
+      "sha256": "fd1428048241f03f99cc67769e9e9a737f3edd3c04d96b5052361677ebb3e547"
+    },
+    {
+      "id": 230,
+      "target_id": 6,
+      "name": "discourse/lib/anonymous-post-scope.js",
+      "sha256": "737c40996f9290971bc98d80e02fffff36357b3ff245f47485683585aa208d8e"
+    },
+    {
+      "id": 231,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-anonymous-posts.gjs",
+      "sha256": "d0ca9a5ff8473629274245af281d0009d04147bc55e75106316d92c36b0a258e"
+    },
+    {
+      "id": 232,
+      "target_id": 6,
+      "name": "discourse/connectors/topic-footer-main-buttons-before-create/isbf-topic-more.gjs",
+      "sha256": "73abe7df6567e8a4a1c160f4fa9433fca714499e9d8dc4688f4ef4e7ac4ff1ff"
+    },
+    {
+      "id": 233,
+      "target_id": 6,
+      "name": "discourse/lib/feed-view-tracker.js",
+      "sha256": "71562362f873996a86f68b8b43ff25512613dac4b40fd468226db6e91b45df35"
+    },
+    {
+      "id": 234,
+      "target_id": 6,
+      "name": "discourse/api-initializers/isbf-notifications.gjs",
+      "sha256": "f1f7c7380f9ffc9f28e0250165175d34862b5c55260a08f91ae06ed86fb9d73f"
+    },
+    {
+      "id": 235,
+      "target_id": 6,
+      "name": "discourse/components/isbf-notification-action.gjs",
+      "sha256": "98e9e8b06280f14aec36b971927a1b9657b471bccbcd6cbfcd7eeffc178f7f40"
+    },
+    {
+      "id": 236,
+      "target_id": 6,
+      "name": "discourse/components/isbf-notification-entry.gjs",
+      "sha256": "df863611922de0651e78bebf78c9a785933f6d6efd3856bb6d4f13dd1972943c"
+    },
+    {
+      "id": 237,
+      "target_id": 6,
+      "name": "discourse/components/isbf-notifications.gjs",
+      "sha256": "d536dfb237df7d2e69943233a2542c6c5d78e5bbfa23c60eb79f2fcec0d4cd28"
+    },
+    {
+      "id": 238,
+      "target_id": 6,
+      "name": "discourse/lib/notification-groups.js",
+      "sha256": "1214c9339265519915b193564866b0acf67923bf5f6b75337a08990333571051"
+    },
+    {
+      "id": 239,
+      "target_id": 6,
+      "name": "discourse/api-initializers/isbf-topic-card.gjs",
+      "sha256": "6378f737a7423652773daec2c7940c923a8b203933de0ba21f22c1aedee6d13a"
+    },
+    {
+      "id": 240,
+      "target_id": 6,
+      "name": "discourse/components/isbf-topic-actions.gjs",
+      "sha256": "4a0a3069a4862f36172fb2ee2487024b2f1536a67be9a6afd1f22d31d0c72ce6"
+    },
+    {
+      "id": 241,
+      "target_id": 6,
+      "name": "discourse/components/isbf-topic-info.gjs",
+      "sha256": "0b73163593ec6b91b7c18abfb7a217ac81387b7a2b1f39e0c44205e38faec539"
+    },
+    {
+      "id": 242,
+      "target_id": 6,
+      "name": "discourse/components/isbf-topic-metadata.gjs",
+      "sha256": "6366301d063d05d9fa5373fd0bfb8a3fe4652b7cdc7a012998fd63d3f3ddb5b0"
+    },
+    {
+      "id": 243,
+      "target_id": 6,
+      "name": "discourse/components/isbf-topic-more.gjs",
+      "sha256": "86bfbb4c863e450f07880e769ff5df2272e47ae55b0b8684c2964b4e85073095"
+    },
+    {
+      "id": 244,
+      "target_id": 6,
+      "name": "discourse/components/isbf-topic-views.gjs",
+      "sha256": "883611e734c208bd0c77502563637fde2b00a933c7bfd36eb95b985d8b92659a"
+    },
+    {
+      "id": 245,
+      "target_id": 6,
+      "name": "discourse/lib/post-card-helpers.js",
+      "sha256": "101ded2eab1bca3a65196cc0c277bad91a8ff62187b0d128a0920fa6ed87cf87"
+    },
+    {
+      "id": 246,
+      "target_id": 6,
+      "name": "discourse/lib/topic-card-scope.js",
+      "sha256": "ab4d80f4523893d50a09ecc875b23344a32673c7fa89f8f50f50e756a006bf1c"
+    },
+    {
+      "id": 247,
+      "target_id": 6,
+      "name": "discourse/lib/view-tracker.js",
+      "sha256": "214cca39b8aa53bd5f5060bff0210f6e7c0523022dbc1aa88c982b92b2eaaa30"
+    },
+    {
+      "id": 250,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-composer-title.gjs",
+      "sha256": "3d643872786923a3878140789f6b081034015e4fc66ff6ccc5e0fbc6e5f37ea6"
+    },
+    {
+      "id": 251,
+      "target_id": 6,
+      "name": "discourse/lib/optional-topic-title.js",
+      "sha256": "bea46dced6800f92d7f4c24929a467639488775c3d9285bb8e31f66f32951a34"
+    },
+    {
+      "id": 252,
+      "target_id": 6,
+      "name": "discourse/api-initializers/isbf-composer-category-menu.gjs",
+      "sha256": "d78a17129b6872904878d258eadec70f7aba038eeb5cd3353af1c594c302d38e"
+    },
+    {
+      "id": 259,
+      "target_id": 6,
+      "name": "discourse/api-initializers/isbf-topic-reading.gjs",
+      "sha256": "7003193d99c36667e0f1173aed6cf39cca8c5d08a1c4a06942403af169a2dc5c"
+    },
+    {
+      "id": 260,
+      "target_id": 6,
+      "name": "discourse/components/isbf-topic-reading.gjs",
+      "sha256": "0bd50c652265bc72d23056a4ec3b493772bce8a0d32dee4ff82a281d1b837453"
+    },
+    {
+      "id": 261,
+      "target_id": 5,
+      "name": "topic-reading",
+      "sha256": "83a1a1314a7096484c56fd5b48889c133fee914885b2499bf1c1bbbfab51588f"
+    },
+    {
+      "id": 262,
+      "target_id": 6,
+      "name": "discourse/components/isbf-explore-group.gjs",
+      "sha256": "80bc7ae34c0947f6b7f90c19f8747065df3015c90659eff6d7ef1b7f106f068f"
+    },
+    {
+      "id": 263,
+      "target_id": 6,
+      "name": "discourse/components/isbf-explore-picker.gjs",
+      "sha256": "841c20d087a69fc6d859ebe33703abc8b5f6381a28b225761df551129f0bde7c"
+    },
+    {
+      "id": 264,
+      "target_id": 6,
+      "name": "discourse/components/isbf-explore.gjs",
+      "sha256": "13ad744927c9381466762f1fb52f26c9a92ea81dc6cb33a6234081127e05eeb2"
+    },
+    {
+      "id": 265,
+      "target_id": 6,
+      "name": "discourse/lib/explore-preferences.js",
+      "sha256": "7ea8c2de85308d49509032ce33bbc84a2037e201a05eb30d1c2c573126e6276e"
+    },
+    {
+      "id": 266,
+      "target_id": 6,
+      "name": "discourse/lib/explore-preview.js",
+      "sha256": "348f1337e2ba3cccddc6cd95a8cf4052e33cce5db8c9a2111074410452dc4d72"
+    },
+    {
+      "id": 267,
+      "target_id": 6,
+      "name": "discourse/lib/explore-query.js",
+      "sha256": "7bd767e6cf419ff19ce0cd44083a6bc52f795b93d1d178d7f71dd46574327fb8"
+    },
+    {
+      "id": 268,
+      "target_id": 6,
+      "name": "discourse/api-initializers/isbf-reporting.gjs",
+      "sha256": "8c061741ebf4219614e41983882ed91a8ff519a7c8267208f5f7545acc0ac5cc"
+    },
+    {
+      "id": 269,
+      "target_id": 6,
+      "name": "discourse/components/isbf-flag-modal.gjs",
+      "sha256": "6859c94efb123b9e8773c065e965cc55402877e641f3608c8863bd090495e7a2"
+    },
+    {
+      "id": 270,
+      "target_id": 6,
+      "name": "discourse/lib/report-post.js",
+      "sha256": "1bf4148be84b3389e4c1da37785d675db9493dd4d19cf8da7f1e6b4f04849e38"
+    },
+    {
+      "id": 271,
+      "target_id": 5,
+      "name": "reporting",
+      "sha256": "ce2cca589858163a314473c8d8a02fffef9019293b419e64bf04fddbaaae2355"
+    },
+    {
+      "id": 272,
+      "target_id": 6,
+      "name": "discourse/pre-initializers/isbf-composer-optional-title.js",
+      "sha256": "f3a0647d9209085518dbe9075020a5a179cd513d5ad860fe98eb4fa8ba0a8531"
+    },
+    {
+      "id": 273,
+      "target_id": 7,
+      "name": "integration/calendar-test.gjs",
+      "sha256": "4d94500f54006106ec3d0eeeb1e89d8cde868ce52c2aaf0ab0d4c81d241f5dde"
+    },
+    {
+      "id": 274,
+      "target_id": 7,
+      "name": "unit/composer-optional-title-test.js",
+      "sha256": "f50e7c713685a8620b27349da4078b2358d034ea72120b8b028fc1c1a9e4f86e"
+    },
+    {
+      "id": 275,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-more-menu.gjs",
+      "sha256": "4df6769afd0987515f9b1e7bb3b32199d95e54c2bf0da58c1dab55b6d009c9ed"
+    },
+    {
+      "id": 276,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-join-modal.gjs",
+      "sha256": "c5b57cb3513a19ce51bf6ba4c8792c298643257baf43742a176ed71d92c6558e"
+    },
+    {
+      "id": 277,
+      "target_id": 6,
+      "name": "discourse/lib/feedback-category.js",
+      "sha256": "6defd8c51e0bd1dd83406c5a9d1eaaedf9650d3a0dfc4095f339daa101f71eaf"
+    },
+    {
+      "id": 279,
+      "target_id": 6,
+      "name": "discourse/components/isbf-official-composer.gjs",
+      "sha256": "647401ee80dd18e19ce9ba759df969712789b7341ecd6112b8ac1a16f60fc048"
+    },
+    {
+      "id": 280,
+      "target_id": 6,
+      "name": "discourse/components/isbf-official-feed.gjs",
+      "sha256": "32fd0739a68b818a0fa1d64b4e28649ee2306ebfb85f115fac5f4b72efe3ed41"
+    },
+    {
+      "id": 281,
+      "target_id": 6,
+      "name": "discourse/components/isbf-official-picker.gjs",
+      "sha256": "69d8e3276a9590e8553ab75cc1af7c8fce78e4c1100a9018b4ca34f00aae5f65"
+    },
+    {
+      "id": 282,
+      "target_id": 6,
+      "name": "discourse/lib/official-filters.js",
+      "sha256": "0a8522f75a90a5a4f659b50caa44b0ee3c2ebf2e2e97d9e63950279ea79c44c6"
+    },
+    {
+      "id": 283,
+      "target_id": 5,
+      "name": "official-filters",
+      "sha256": "8ec34b6192560f27cef339be966bd36539438df488b6672bd80a8a0725653bd9"
+    },
+    {
+      "id": 284,
+      "target_id": 6,
+      "name": "discourse/pre-initializers/isbf-official-composer.js",
+      "sha256": "ea24d3b2ebf75705016abdf5556f6af175e1181ffc9a4ec1f624f8f98f274aae"
+    },
+    {
+      "id": 285,
+      "target_id": 7,
+      "name": "unit/composer-official-test.js",
+      "sha256": "ed3123903afcb6a513fc98112bf810616741627437e8c0b77a6ca1cfdafd34d4"
+    },
+    {
+      "id": 286,
+      "target_id": 6,
+      "name": "discourse/lib/official-calendar.js",
+      "sha256": "6fa3784c06d4c9bc24a6b9dcd83da14aa13e1262b7277026d4d4b6ebdd4c872c"
+    },
+    {
+      "id": 287,
+      "target_id": 6,
+      "name": "discourse/pre-initializers/isbf-official-calendar.js",
+      "sha256": "11b4e69649ea57fe99bb94c3d42d6854ab2de9605a65b0594a5db5ab5fae43f6"
+    },
+    {
+      "id": 288,
+      "target_id": 6,
+      "name": "discourse/api-initializers/isbf-official-calendar.gjs",
+      "sha256": "a1e9374cf6ab1141556cb05ebc6ee194f8c5a065a1d836b1b25cb708f609a696"
+    },
+    {
+      "id": 289,
+      "target_id": 6,
+      "name": "discourse/components/isbf-official-calendar-composer.gjs",
+      "sha256": "1caf4e4cea8b6a02a22f8d486d0d24590b6782bd0867b30d4b8261ca4231ff38"
+    },
+    {
+      "id": 290,
+      "target_id": 6,
+      "name": "discourse/components/isbf-official-calendar-editor.gjs",
+      "sha256": "0676aa6276e7a095d3a8b3bb3a6d77baf72a8b6e2785fc276542764cc08897ca"
+    },
+    {
+      "id": 291,
+      "target_id": 6,
+      "name": "discourse/components/isbf-official-calendar-items.gjs",
+      "sha256": "b00c12ceb9baa6993dd6b05d945b8ffac1b7fa343a87e4ecbe3db570c088b1bb"
+    },
+    {
+      "id": 292,
+      "target_id": 6,
+      "name": "discourse/components/isbf-calendar-note-editor.gjs",
+      "sha256": "6a0d372fb142bb94f0fb85733336d7d465f0e1f7d7a8d90c0f5dfb5046965a40"
+    },
+    {
+      "id": 293,
+      "target_id": 6,
+      "name": "discourse/components/isbf-calendar-update-dialog.gjs",
+      "sha256": "c92d0da4cde6eaa9602f2e69e757d8c22df03e4faefb8ebacee7c09a0d7ae70f"
+    },
+    {
+      "id": 294,
+      "target_id": 7,
+      "name": "unit/official-calendar-test.js",
+      "sha256": "e73efabb25341df32f260f2a61aefe24d044be7d7246edf3c1e83fd7490e38b4"
+    },
+    {
+      "id": 295,
+      "target_id": 7,
+      "name": "unit/composer-official-calendar-test.js",
+      "sha256": "b8a3320b9e57e05b316eb9e9b8d279c80a8b418072b6a435e03efb04241cf8d0"
+    },
+    {
+      "id": 296,
+      "target_id": 7,
+      "name": "unit/calendar-notification-test.js",
+      "sha256": "6c5fd11003f07b128d396e7bb0dce70db1cdc32e645feffd98cb9e1ee4c4c48b"
+    },
+    {
+      "id": 297,
+      "target_id": 7,
+      "name": "integration/official-calendar-items-test.gjs",
+      "sha256": "a66d492bddc69472c12806067fd7ec11b4fea79f93d404f8a7526e31df5a9bb5"
+    },
+    {
+      "id": 298,
+      "target_id": 7,
+      "name": "integration/official-calendar-editor-test.gjs",
+      "sha256": "f5c7aacba2ccf41817ac2d81cb87527fe3412b40060c829d342042f5a3c0d454"
+    },
+    {
+      "id": 299,
+      "target_id": 7,
+      "name": "integration/calendar-update-dialog-test.gjs",
+      "sha256": "2ce687eb97efbcc6447e082b8bd66365661480b82a0cbecf91f89cced8ba7596"
+    },
+    {
+      "id": 300,
+      "target_id": 5,
+      "name": "official-calendar",
+      "sha256": "f49c2bd5a5416d33a77f8b0d91c26a1516b7172451617d5076986b9de536edd5"
+    },
+    {
+      "id": 301,
+      "target_id": 6,
+      "name": "discourse/api-initializers/isbf-learning.gjs",
+      "sha256": "95b2b197cd2d5dbaa9a30c2769b89a8ba386a505ba202e87d8cea460941ddda7"
+    },
+    {
+      "id": 302,
+      "target_id": 6,
+      "name": "discourse/components/isbf-learning-composer.gjs",
+      "sha256": "d0ee1e13de96164284965b11ef4e2db78dfe757dc42d50bd5f6b3792c06ad2b1"
+    },
+    {
+      "id": 303,
+      "target_id": 6,
+      "name": "discourse/components/isbf-learning-course-dialog.gjs",
+      "sha256": "d79d27c4afb983f166492d13b3249f20355007cd45cca9f7983d27eb9037e76d"
+    },
+    {
+      "id": 304,
+      "target_id": 6,
+      "name": "discourse/components/isbf-learning-grade-picker.gjs",
+      "sha256": "1bfbdaf8debcf2c8ef9fe5a12f202c0b07bf028b1ea905b9f2f032b5f60b0cec"
+    },
+    {
+      "id": 305,
+      "target_id": 6,
+      "name": "discourse/components/isbf-learning-resource.gjs",
+      "sha256": "413af3a5524139575c98afaf1582550fd2b5c4d52fcba6871c66831e8205fb04"
+    },
+    {
+      "id": 306,
+      "target_id": 6,
+      "name": "discourse/components/isbf-learning.gjs",
+      "sha256": "2aeccda224c924518a95b53b379c939467bb13deeee0ea9d9759d91063ed7ef3"
+    },
+    {
+      "id": 307,
+      "target_id": 6,
+      "name": "discourse/isbf-learning-route-map.js",
+      "sha256": "430b0867c9f17aac4a06c1b1f1da9c7858e4fa4c6f421f28a945a92253183fb6"
+    },
+    {
+      "id": 308,
+      "target_id": 6,
+      "name": "discourse/lib/learning-composer.js",
+      "sha256": "163b9ad5f76ac5a9ad5368531f1ca2125b5a0c12b0c08a9d8558e982a909ceba"
+    },
+    {
+      "id": 309,
+      "target_id": 6,
+      "name": "discourse/lib/learning-resources.js",
+      "sha256": "b912791c712b7e18c689d0e898f3416d2d5f36998f8e6045a91d2edf7f7dd767"
+    },
+    {
+      "id": 310,
+      "target_id": 6,
+      "name": "discourse/lib/learning-upload.js",
+      "sha256": "0b8316a4ddbb10c9ffce499c0b376251bda10c5c9f6615c0e2d451a5f757e2cb"
+    },
+    {
+      "id": 311,
+      "target_id": 6,
+      "name": "discourse/routes/isbf-learning.js",
+      "sha256": "3a4cc61880899b85354aa22b3b0280b35d67a9c68838e5be6aa41dcda4d04414"
+    },
+    {
+      "id": 312,
+      "target_id": 6,
+      "name": "discourse/templates/isbf-learning.gjs",
+      "sha256": "ccf73ea5b22790598e249b2e652d2d2afdae35387852c30630007ae4d12143d3"
+    },
+    {
+      "id": 313,
+      "target_id": 5,
+      "name": "learning-composer",
+      "sha256": "6996f1880d1b6d370c3b1268eba11d54d32ea06aaf99fb8ef210b3ac4e897025"
+    },
+    {
+      "id": 314,
+      "target_id": 5,
+      "name": "learning-resources",
+      "sha256": "836978d2d625318fd92d88ca8563d283c0d40adf13717e63c21bd634789d044b"
+    },
+    {
+      "id": 315,
+      "target_id": 7,
+      "name": "integration/composer-title-test.gjs",
+      "sha256": "f51d618d695916c527db85399034ba9ad97d3ecbc01a6abff7d3bdb97d586afe"
+    },
+    {
+      "id": 316,
+      "target_id": 6,
+      "name": "discourse/components/isbf-learning-share-dialog.gjs",
+      "sha256": "254e52d4e4a7783a37c7309703c898421b7434485bfa42fa4669ee7b7431b517"
+    },
+    {
+      "id": 317,
+      "target_id": 6,
+      "name": "discourse/components/isbf-official-activity-summary.gjs",
+      "sha256": "1a48d5184a9d39fdc4114eb75d283ed76608ed5bc6a885124711816b7f05d561"
+    },
+    {
+      "id": 318,
+      "target_id": 7,
+      "name": "unit/official-activities-test.js",
+      "sha256": "92e24af9c18cfead415d09c6ac3d9d894b002d7452828505c2fd3e2e724a9929"
+    },
+    {
+      "id": 319,
+      "target_id": 7,
+      "name": "integration/official-activity-summary-test.gjs",
+      "sha256": "dc5dde264b92e31177ddbbd0a831f4065ba375824410fb01a78a0fe4862cfc4f"
+    },
+    {
+      "id": 320,
+      "target_id": 6,
+      "name": "discourse/components/reviewable-isbf-learning-course.gjs",
+      "sha256": "101639dcea89c29b3ddd6bd42afb54effe0103dd3974a2f9c533431b76c7cf48"
+    },
+    {
+      "id": 321,
+      "target_id": 6,
+      "name": "discourse/lib/composer-model-extensions.js",
+      "sha256": "df4784b2bd9a0471ebe0d0ad36c60c168ced685d7d78369419757a81ca0d6493"
+    },
+    {
+      "id": 322,
+      "target_id": 6,
+      "name": "discourse/components/isbf-alumni-map.gjs",
+      "sha256": "4d614fe4f1bbaf32c34316cf6bb2ecd2991ecce95e6ec741c3b8569a02a0b9d4"
+    },
+    {
+      "id": 323,
+      "target_id": 6,
+      "name": "discourse/components/isbf-alumni-profile.gjs",
+      "sha256": "50f6bc796cbe89d91aefaf20901cfddc0c1c6385bc603b51c758eb76e9dfc755"
+    },
+    {
+      "id": 324,
+      "target_id": 6,
+      "name": "discourse/components/isbf-alumni.gjs",
+      "sha256": "9e5554ccf8c8d833051347548235c11a86db44bf45d8de84a41cfeae6d1db4c7"
+    },
+    {
+      "id": 325,
+      "target_id": 6,
+      "name": "discourse/isbf-alumni-route-map.js",
+      "sha256": "ffe70ab48ab0a5277065e4b7d5c8fb107503f4d91482c14ad685c7b3559389da"
+    },
+    {
+      "id": 326,
+      "target_id": 6,
+      "name": "discourse/lib/alumni.js",
+      "sha256": "105c94080ccea9897ebe1ef65f136a08b9e7beee7481b2cdb744a0d5ca738d00"
+    },
+    {
+      "id": 327,
+      "target_id": 6,
+      "name": "discourse/routes/isbf-alumni.js",
+      "sha256": "93da0dd43696b314f38f7d7252958518dbfbacdcd4c8469142b6dbfa49d56e5b"
+    },
+    {
+      "id": 328,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-utility-actions.gjs",
+      "sha256": "1c3c88720600fae53ec066039e8b660f643baa3ffef784b0073f47d47491a6be"
+    },
+    {
+      "id": 329,
+      "target_id": 6,
+      "name": "discourse/lib/alumni-map-labels.js",
+      "sha256": "7db7a25b232f9be1364f973dba9c11c122d576a3148f14cd4e103c9a87de1e6a"
+    },
+    {
+      "id": 330,
+      "target_id": 6,
+      "name": "discourse/components/isbf-post-preview.gjs",
+      "sha256": "61314b48292207d97c21c69e7779fba0b1af52503d3e8452aeb222ab9fe9e142"
+    },
+    {
+      "id": 331,
+      "target_id": 6,
+      "name": "discourse/components/isbf-activity-preview.gjs",
+      "sha256": "6ad9d2dde3854153518e5570cf5269a2a84404b50f5979671113fabf355c39e2"
+    },
+    {
+      "id": 332,
+      "target_id": 6,
+      "name": "discourse/lib/post-preview.js",
+      "sha256": "43f2e0153f0cad2da7bd2b475aaa45dd0eeadf5858e35ed652c46956c6c8ae16"
+    },
+    {
+      "id": 333,
+      "target_id": 7,
+      "name": "unit/post-preview-test.js",
+      "sha256": "39ff2b0385bd54a95b3338445140d63b67f0b160ba5a95b87294d7c8b9c55d44"
+    },
+    {
+      "id": 334,
+      "target_id": 7,
+      "name": "unit/feed-post-loader-test.js",
+      "sha256": "47e4b35bdbbef1c81eada2c67d7e3f5901d1b00932e7bb6534c5b9c76ca50a38"
+    },
+    {
+      "id": 335,
+      "target_id": 7,
+      "name": "integration/post-preview-test.gjs",
+      "sha256": "4401c049ad05673e8e1c6700dc9830f8a4fb4e0e4d0d1397c7f31ca8264d82b7"
+    },
+    {
+      "id": 336,
+      "target_id": 6,
+      "name": "discourse/components/isbf-v2-brand.gjs",
+      "sha256": "2b728a4708e65fc7c4adc1f64c3894cf8801805c84413be51c56661454d1906c"
+    },
+    {
+      "id": 348,
+      "target_id": 6,
+      "name": "discourse/api-initializers/isbf-marketplace.gjs",
+      "sha256": "f32843360c85cfb7963ffc7e9605640a1ec9e1dea6a825a73fd1e3910636d516"
+    },
+    {
+      "id": 349,
+      "target_id": 6,
+      "name": "discourse/components/isbf-marketplace-card.gjs",
+      "sha256": "9195b691de6274caf4c6ff4febc217817e6d50254eddd241fa4a9937094d9b63"
+    },
+    {
+      "id": 350,
+      "target_id": 6,
+      "name": "discourse/components/isbf-marketplace-composer.gjs",
+      "sha256": "97686f38469a756ad57213e816221a409e2523b6837b119c16e5899e27dcdcfb"
+    },
+    {
+      "id": 351,
+      "target_id": 6,
+      "name": "discourse/components/isbf-marketplace.gjs",
+      "sha256": "7b6fbf30c5b4440826245bc7323e712a2fd2147f37647ee0b98e53db5c8c6cde"
+    },
+    {
+      "id": 352,
+      "target_id": 6,
+      "name": "discourse/isbf-marketplace-route-map.js",
+      "sha256": "dc1473807842715ffeb784b56f6173ee4d5ea92050e6a331df86bb7f2224c0fd"
+    },
+    {
+      "id": 353,
+      "target_id": 6,
+      "name": "discourse/lib/marketplace-upload.js",
+      "sha256": "965c16cbaddaf8c6143105155769b97edf46f5af5bd36e299247fd2e5052ef43"
+    },
+    {
+      "id": 354,
+      "target_id": 6,
+      "name": "discourse/lib/marketplace.js",
+      "sha256": "abfc70e4713951642493ef4f1dcd82e38d1b22c1bdc6d0ae55a0382d88b94abf"
+    },
+    {
+      "id": 355,
+      "target_id": 6,
+      "name": "discourse/lib/private-upload-endpoint.js",
+      "sha256": "8c30d3a7c4862521564f0930346da5136444bf9516131f83aa4ed57da2393c24"
+    },
+    {
+      "id": 356,
+      "target_id": 6,
+      "name": "discourse/routes/isbf-marketplace.js",
+      "sha256": "88869bd2d2a622c04194185f4844035cab92fb2a47191ee8685d48c5830059d7"
+    },
+    {
+      "id": 357,
+      "target_id": 6,
+      "name": "discourse/templates/isbf-marketplace.gjs",
+      "sha256": "ccf73ea5b22790598e249b2e652d2d2afdae35387852c30630007ae4d12143d3"
+    },
+    {
+      "id": 358,
+      "target_id": 5,
+      "name": "marketplace",
+      "sha256": "2a0c47681d2389f93e5955c1b5d43ec1d3780cddc328b95981e1140fa62a7c0d"
+    }
+  ],
+  "files": [
+    {
+      "archive_path": "theme-4/about.json.txt",
+      "sha256": "be6f4cc306615e8bc03ccc665723c6826cb56e18478e433689f2f8f8c88688ca",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 196,
+      "target_id": 9,
+      "field_name": "about",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/about.json",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/common/common.scss.txt",
+      "sha256": "9878f3a38bac37dd717a1139252f9e700dfdcbc112af4d2fb51fd6d5f30e265f",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 197,
+      "target_id": 0,
+      "field_name": "scss",
+      "origin_path": "deploy-work/avatar-frames-20261010/tools/theme-changes.json",
+      "workspace_path": "themes/isbf-campus-feed/common/common.scss",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/api-initializers/isbf-campus-feed.gjs.txt",
+      "sha256": "b56b544716d11b12a99eafa4d3604f89dac648511a10182cd589e4f631dcf598",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 198,
+      "target_id": 6,
+      "field_name": "discourse/api-initializers/isbf-campus-feed.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-campus-feed.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-v2-right-rail.gjs.txt",
+      "sha256": "36004a845919ab5f6d21a0bd295dc07f8bb9fd4b246f06d429dcb13c03b8043b",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 199,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-v2-right-rail.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-right-rail.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-v2-shell.gjs.txt",
+      "sha256": "f7458edaf309697208faf922f7f713dc6af6aeb8eb782f701ecbbb1a38a8a19f",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 200,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-v2-shell.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/tools/theme-changes.json",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-v2-side-nav.gjs.txt",
+      "sha256": "efdd4904020a2ae0e5915072300b31952c8a807e266917fad8e3b6d0b6968ca6",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 201,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-v2-side-nav.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-side-nav.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-v2-calendar.gjs.txt",
+      "sha256": "11b5581f843293843fa1bf8095ac4e7dc71abc8abca4aeb5972ad81f36b24300",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 206,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-v2-calendar.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-calendar.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-v2-workbench.gjs.txt",
+      "sha256": "cafa3ca03b88038b8ce95ba31a83356c6bb5ca7df481f59816d2ba1d526ba74b",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 207,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-v2-workbench.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-workbench.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-v2-composer-cancel.gjs.txt",
+      "sha256": "654b3ccb3df5d792d5c24dfada1e3f549734a0ce35e03760eb1a5295adaf2959",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 223,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-v2-composer-cancel.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-composer-cancel.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-v2-composer-options.gjs.txt",
+      "sha256": "c7c0f7f94105eda089ce609a4d7b5f42a5fee0978cd8aae451575ed8905d6745",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 224,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-v2-composer-options.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/tools/theme-changes.json",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-composer-options.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-v2-account-menu.gjs.txt",
+      "sha256": "b020a86e306b0fe9749e02bc72bd15ac07d12963fdc9c5684ac3620b4776b690",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 226,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-v2-account-menu.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/tools/theme-changes.json",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-account-menu.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-v2-feed-card.gjs.txt",
+      "sha256": "a9add3eeff30b8007ef0f4fac2b90cc02fe6111a09f849cb4bfae46f5a71d26e",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 227,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-v2-feed-card.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/tools/theme-changes.json",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-feed-card.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/connectors/topic-list-item/isbf-feed-card.gjs.txt",
+      "sha256": "9695aba1bcbc31dc0eae9d74af668e0db27e438488ad45f1f889551662726b09",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 228,
+      "target_id": 6,
+      "field_name": "discourse/connectors/topic-list-item/isbf-feed-card.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/connectors/topic-list-item/isbf-feed-card.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/connectors/topic-footer-main-buttons-before-create/isbf-topic-more.gjs.txt",
+      "sha256": "73abe7df6567e8a4a1c160f4fa9433fca714499e9d8dc4688f4ef4e7ac4ff1ff",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 232,
+      "target_id": 6,
+      "field_name": "discourse/connectors/topic-footer-main-buttons-before-create/isbf-topic-more.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/connectors/topic-footer-main-buttons-before-create/isbf-topic-more.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/api-initializers/isbf-notifications.gjs.txt",
+      "sha256": "f1f7c7380f9ffc9f28e0250165175d34862b5c55260a08f91ae06ed86fb9d73f",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 234,
+      "target_id": 6,
+      "field_name": "discourse/api-initializers/isbf-notifications.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-notifications.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-notification-action.gjs.txt",
+      "sha256": "98e9e8b06280f14aec36b971927a1b9657b471bccbcd6cbfcd7eeffc178f7f40",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 235,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-notification-action.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-action.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-notification-entry.gjs.txt",
+      "sha256": "df863611922de0651e78bebf78c9a785933f6d6efd3856bb6d4f13dd1972943c",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 236,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-notification-entry.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-entry.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-notifications.gjs.txt",
+      "sha256": "d536dfb237df7d2e69943233a2542c6c5d78e5bbfa23c60eb79f2fcec0d4cd28",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 237,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-notifications.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/lib/notification-groups.js.txt",
+      "sha256": "1214c9339265519915b193564866b0acf67923bf5f6b75337a08990333571051",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 238,
+      "target_id": 6,
+      "field_name": "discourse/lib/notification-groups.js",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/lib/notification-groups.js",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/api-initializers/isbf-topic-card.gjs.txt",
+      "sha256": "6378f737a7423652773daec2c7940c923a8b203933de0ba21f22c1aedee6d13a",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 239,
+      "target_id": 6,
+      "field_name": "discourse/api-initializers/isbf-topic-card.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-topic-card.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-topic-actions.gjs.txt",
+      "sha256": "4a0a3069a4862f36172fb2ee2487024b2f1536a67be9a6afd1f22d31d0c72ce6",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 240,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-topic-actions.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-actions.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-topic-info.gjs.txt",
+      "sha256": "0b73163593ec6b91b7c18abfb7a217ac81387b7a2b1f39e0c44205e38faec539",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 241,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-topic-info.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-info.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-topic-metadata.gjs.txt",
+      "sha256": "6366301d063d05d9fa5373fd0bfb8a3fe4652b7cdc7a012998fd63d3f3ddb5b0",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 242,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-topic-metadata.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-metadata.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-topic-more.gjs.txt",
+      "sha256": "86bfbb4c863e450f07880e769ff5df2272e47ae55b0b8684c2964b4e85073095",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 243,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-topic-more.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-more.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-topic-views.gjs.txt",
+      "sha256": "883611e734c208bd0c77502563637fde2b00a933c7bfd36eb95b985d8b92659a",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 244,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-topic-views.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-views.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/lib/post-card-helpers.js.txt",
+      "sha256": "101ded2eab1bca3a65196cc0c277bad91a8ff62187b0d128a0920fa6ed87cf87",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 245,
+      "target_id": 6,
+      "field_name": "discourse/lib/post-card-helpers.js",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/lib/post-card-helpers.js",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/lib/topic-card-scope.js.txt",
+      "sha256": "ab4d80f4523893d50a09ecc875b23344a32673c7fa89f8f50f50e756a006bf1c",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 246,
+      "target_id": 6,
+      "field_name": "discourse/lib/topic-card-scope.js",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/lib/topic-card-scope.js",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-v2-composer-title.gjs.txt",
+      "sha256": "3d643872786923a3878140789f6b081034015e4fc66ff6ccc5e0fbc6e5f37ea6",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 250,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-v2-composer-title.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-composer-title.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/api-initializers/isbf-topic-reading.gjs.txt",
+      "sha256": "7003193d99c36667e0f1173aed6cf39cca8c5d08a1c4a06942403af169a2dc5c",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 259,
+      "target_id": 6,
+      "field_name": "discourse/api-initializers/isbf-topic-reading.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-topic-reading.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-topic-reading.gjs.txt",
+      "sha256": "0bd50c652265bc72d23056a4ec3b493772bce8a0d32dee4ff82a281d1b837453",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 260,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-topic-reading.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-reading.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/stylesheets/topic-reading.scss.txt",
+      "sha256": "83a1a1314a7096484c56fd5b48889c133fee914885b2499bf1c1bbbfab51588f",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 261,
+      "target_id": 5,
+      "field_name": "topic-reading",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/stylesheets/topic-reading.scss",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-explore-group.gjs.txt",
+      "sha256": "80bc7ae34c0947f6b7f90c19f8747065df3015c90659eff6d7ef1b7f106f068f",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 262,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-explore-group.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-explore-group.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-explore-picker.gjs.txt",
+      "sha256": "841c20d087a69fc6d859ebe33703abc8b5f6381a28b225761df551129f0bde7c",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 263,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-explore-picker.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-explore-picker.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-explore.gjs.txt",
+      "sha256": "13ad744927c9381466762f1fb52f26c9a92ea81dc6cb33a6234081127e05eeb2",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 264,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-explore.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-explore.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/api-initializers/isbf-reporting.gjs.txt",
+      "sha256": "8c061741ebf4219614e41983882ed91a8ff519a7c8267208f5f7545acc0ac5cc",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 268,
+      "target_id": 6,
+      "field_name": "discourse/api-initializers/isbf-reporting.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-reporting.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-flag-modal.gjs.txt",
+      "sha256": "6859c94efb123b9e8773c065e965cc55402877e641f3608c8863bd090495e7a2",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 269,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-flag-modal.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-flag-modal.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/stylesheets/reporting.scss.txt",
+      "sha256": "ce2cca589858163a314473c8d8a02fffef9019293b419e64bf04fddbaaae2355",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 271,
+      "target_id": 5,
+      "field_name": "reporting",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/stylesheets/reporting.scss",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-v2-more-menu.gjs.txt",
+      "sha256": "4df6769afd0987515f9b1e7bb3b32199d95e54c2bf0da58c1dab55b6d009c9ed",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 275,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-v2-more-menu.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-more-menu.gjs",
+      "workspace_exists_at_review": false,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-v2-join-modal.gjs.txt",
+      "sha256": "c5b57cb3513a19ce51bf6ba4c8792c298643257baf43742a176ed71d92c6558e",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 276,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-v2-join-modal.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-join-modal.gjs",
+      "workspace_exists_at_review": false,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-official-composer.gjs.txt",
+      "sha256": "647401ee80dd18e19ce9ba759df969712789b7341ecd6112b8ac1a16f60fc048",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 279,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-official-composer.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-composer.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-official-feed.gjs.txt",
+      "sha256": "32fd0739a68b818a0fa1d64b4e28649ee2306ebfb85f115fac5f4b72efe3ed41",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 280,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-official-feed.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-feed.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-official-picker.gjs.txt",
+      "sha256": "69d8e3276a9590e8553ab75cc1af7c8fce78e4c1100a9018b4ca34f00aae5f65",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 281,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-official-picker.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-picker.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/lib/official-filters.js.txt",
+      "sha256": "0a8522f75a90a5a4f659b50caa44b0ee3c2ebf2e2e97d9e63950279ea79c44c6",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 282,
+      "target_id": 6,
+      "field_name": "discourse/lib/official-filters.js",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/lib/official-filters.js",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/stylesheets/official-filters.scss.txt",
+      "sha256": "8ec34b6192560f27cef339be966bd36539438df488b6672bd80a8a0725653bd9",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 283,
+      "target_id": 5,
+      "field_name": "official-filters",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/stylesheets/official-filters.scss",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/lib/official-calendar.js.txt",
+      "sha256": "6fa3784c06d4c9bc24a6b9dcd83da14aa13e1262b7277026d4d4b6ebdd4c872c",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 286,
+      "target_id": 6,
+      "field_name": "discourse/lib/official-calendar.js",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/lib/official-calendar.js",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/api-initializers/isbf-official-calendar.gjs.txt",
+      "sha256": "a1e9374cf6ab1141556cb05ebc6ee194f8c5a065a1d836b1b25cb708f609a696",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 288,
+      "target_id": 6,
+      "field_name": "discourse/api-initializers/isbf-official-calendar.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-official-calendar.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-official-calendar-composer.gjs.txt",
+      "sha256": "1caf4e4cea8b6a02a22f8d486d0d24590b6782bd0867b30d4b8261ca4231ff38",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 289,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-official-calendar-composer.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-calendar-composer.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-official-calendar-editor.gjs.txt",
+      "sha256": "0676aa6276e7a095d3a8b3bb3a6d77baf72a8b6e2785fc276542764cc08897ca",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 290,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-official-calendar-editor.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-calendar-editor.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-official-calendar-items.gjs.txt",
+      "sha256": "b00c12ceb9baa6993dd6b05d945b8ffac1b7fa343a87e4ecbe3db570c088b1bb",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 291,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-official-calendar-items.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-calendar-items.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-calendar-note-editor.gjs.txt",
+      "sha256": "6a0d372fb142bb94f0fb85733336d7d465f0e1f7d7a8d90c0f5dfb5046965a40",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 292,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-calendar-note-editor.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-calendar-note-editor.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-calendar-update-dialog.gjs.txt",
+      "sha256": "c92d0da4cde6eaa9602f2e69e757d8c22df03e4faefb8ebacee7c09a0d7ae70f",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 293,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-calendar-update-dialog.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-calendar-update-dialog.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/stylesheets/official-calendar.scss.txt",
+      "sha256": "f49c2bd5a5416d33a77f8b0d91c26a1516b7172451617d5076986b9de536edd5",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 300,
+      "target_id": 5,
+      "field_name": "official-calendar",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/stylesheets/official-calendar.scss",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/stylesheets/learning-composer.scss.txt",
+      "sha256": "6996f1880d1b6d370c3b1268eba11d54d32ea06aaf99fb8ef210b3ac4e897025",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 313,
+      "target_id": 5,
+      "field_name": "learning-composer",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/stylesheets/learning-composer.scss",
+      "workspace_exists_at_review": false,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/stylesheets/learning-resources.scss.txt",
+      "sha256": "836978d2d625318fd92d88ca8563d283c0d40adf13717e63c21bd634789d044b",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 314,
+      "target_id": 5,
+      "field_name": "learning-resources",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/stylesheets/learning-resources.scss",
+      "workspace_exists_at_review": false,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-official-activity-summary.gjs.txt",
+      "sha256": "1a48d5184a9d39fdc4114eb75d283ed76608ed5bc6a885124711816b7f05d561",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 317,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-official-activity-summary.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-activity-summary.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-alumni-map.gjs.txt",
+      "sha256": "4d614fe4f1bbaf32c34316cf6bb2ecd2991ecce95e6ec741c3b8569a02a0b9d4",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 322,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-alumni-map.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-alumni-map.gjs",
+      "workspace_exists_at_review": false,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-alumni-profile.gjs.txt",
+      "sha256": "50f6bc796cbe89d91aefaf20901cfddc0c1c6385bc603b51c758eb76e9dfc755",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 323,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-alumni-profile.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-alumni-profile.gjs",
+      "workspace_exists_at_review": false,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-alumni.gjs.txt",
+      "sha256": "9e5554ccf8c8d833051347548235c11a86db44bf45d8de84a41cfeae6d1db4c7",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 324,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-alumni.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-alumni.gjs",
+      "workspace_exists_at_review": false,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-post-preview.gjs.txt",
+      "sha256": "61314b48292207d97c21c69e7779fba0b1af52503d3e8452aeb222ab9fe9e142",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 330,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-post-preview.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-post-preview.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-activity-preview.gjs.txt",
+      "sha256": "6ad9d2dde3854153518e5570cf5269a2a84404b50f5979671113fabf355c39e2",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 331,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-activity-preview.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-activity-preview.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/lib/post-preview.js.txt",
+      "sha256": "43f2e0153f0cad2da7bd2b475aaa45dd0eeadf5858e35ed652c46956c6c8ae16",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 332,
+      "target_id": 6,
+      "field_name": "discourse/lib/post-preview.js",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/lib/post-preview.js",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-v2-brand.gjs.txt",
+      "sha256": "2b728a4708e65fc7c4adc1f64c3894cf8801805c84413be51c56661454d1906c",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 336,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-v2-brand.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-brand.gjs",
+      "workspace_exists_at_review": false,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-marketplace-card.gjs.txt",
+      "sha256": "9195b691de6274caf4c6ff4febc217817e6d50254eddd241fa4a9937094d9b63",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 349,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-marketplace-card.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-marketplace-card.gjs",
+      "workspace_exists_at_review": false,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-marketplace-composer.gjs.txt",
+      "sha256": "97686f38469a756ad57213e816221a409e2523b6837b119c16e5899e27dcdcfb",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 350,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-marketplace-composer.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-marketplace-composer.gjs",
+      "workspace_exists_at_review": false,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/javascripts/discourse/components/isbf-marketplace.gjs.txt",
+      "sha256": "7b6fbf30c5b4440826245bc7323e712a2fd2147f37647ee0b98e53db5c8c6cde",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 351,
+      "target_id": 6,
+      "field_name": "discourse/components/isbf-marketplace.gjs",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-marketplace.gjs",
+      "workspace_exists_at_review": false,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "theme-4/stylesheets/marketplace.scss.txt",
+      "sha256": "2a0c47681d2389f93e5955c1b5d43ec1d3780cddc328b95981e1140fa62a7c0d",
+      "origin_kind": "accepted_theme_field",
+      "theme_id": 4,
+      "theme_field_id": 358,
+      "target_id": 5,
+      "field_name": "marketplace",
+      "origin_path": "deploy-work/avatar-frames-20261010/theme-current.jsonl",
+      "workspace_path": "themes/isbf-campus-feed/stylesheets/marketplace.scss",
+      "workspace_exists_at_review": false,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "plugins/discourse-academy-roles/assets/stylesheets/common/academy-auth.scss.txt",
+      "sha256": "c1056e5df35075193950dc7afadd8d2658c688ce48fd99cf78d9d47e617c7469",
+      "origin_kind": "accepted_plugin_source",
+      "origin_path": "deploy-work/avatar-frames-20261010/source/plugins/discourse-academy-roles/assets/stylesheets/common/academy-auth.scss",
+      "release_commit": null,
+      "workspace_path": "plugins/discourse-academy-roles/assets/stylesheets/common/academy-auth.scss",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": false
+    },
+    {
+      "archive_path": "plugins/discourse-academy-roles/assets/javascripts/discourse/components/academy-auth-page.gjs.txt",
+      "sha256": "4d565af5295ecabadc6d47b756d3e3378e72abd13384c6eefd0495d4a4e86634",
+      "origin_kind": "accepted_plugin_source",
+      "origin_path": "deploy-work/avatar-frames-20261010/source/plugins/discourse-academy-roles/assets/javascripts/discourse/components/academy-auth-page.gjs",
+      "release_commit": null,
+      "workspace_path": "plugins/discourse-academy-roles/assets/javascripts/discourse/components/academy-auth-page.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "plugins/discourse-avatar-frames/assets/stylesheets/common/avatar-frames.scss.txt",
+      "sha256": "0bf7df20c9d64421244d541205ba9f92f0386da5266f0b8908df0fc57720dff2",
+      "origin_kind": "accepted_plugin_source",
+      "origin_path": "deploy-work/avatar-frames-20261010/management/release-source/discourse-avatar-frames/assets/stylesheets/common/avatar-frames.scss",
+      "release_commit": "7799ffe00571fc8247c0aafff99b0132e9c74fb3",
+      "workspace_path": "plugins/discourse-avatar-frames/assets/stylesheets/common/avatar-frames.scss",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "plugins/discourse-avatar-frames/assets/javascripts/discourse/components/avatar-frame-overlay.gjs.txt",
+      "sha256": "e53e034c5871615deb8c3d51b26b6d3ac3e670f3ad69edf8d89cf1ac3a285ca0",
+      "origin_kind": "accepted_plugin_source",
+      "origin_path": "deploy-work/avatar-frames-20261010/management/release-source/discourse-avatar-frames/assets/javascripts/discourse/components/avatar-frame-overlay.gjs",
+      "release_commit": "7799ffe00571fc8247c0aafff99b0132e9c74fb3",
+      "workspace_path": "plugins/discourse-avatar-frames/assets/javascripts/discourse/components/avatar-frame-overlay.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true
+    },
+    {
+      "archive_path": "plugins/discourse-academy-roles/accepted-20261011/assets/stylesheets/common/academy-auth.scss.txt",
+      "sha256": "f8101e7954cbb3aef61838043a557141ad97e46f3e8982812a4bfc64f209595c",
+      "origin_kind": "accepted_auth_patch",
+      "origin_path": "deploy-work/auth-center-fix-20261011/release",
+      "release_commit": "67706a5a30d71ff0b6793e5b8f55a85c4fe3ebb5",
+      "workspace_path": "plugins/discourse-academy-roles/assets/stylesheets/common/academy-auth.scss",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true,
+      "review_date": "2026-10-11"
+    },
+    {
+      "archive_path": "plugins/discourse-academy-roles/accepted-20261011/assets/javascripts/discourse/components/academy-auth-page.gjs.txt",
+      "sha256": "a8ba466abc267c766a98694d876e65bf8b049ece40e30bc8b716004e61c755b3",
+      "origin_kind": "accepted_auth_patch",
+      "origin_path": "deploy-work/auth-center-fix-20261011/release",
+      "release_commit": "67706a5a30d71ff0b6793e5b8f55a85c4fe3ebb5",
+      "workspace_path": "plugins/discourse-academy-roles/assets/javascripts/discourse/components/academy-auth-page.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true,
+      "review_date": "2026-10-11"
+    },
+    {
+      "archive_path": "plugins/discourse-avatar-frames/accepted-20261011/assets/javascripts/discourse/components/avatar-frame-overlay.gjs.txt",
+      "sha256": "5586370f4a78ec03b6f97b4edd30a758158d76788d8b57a12091c61afbe2eeba",
+      "origin_kind": "accepted_avatar_calibration_patch",
+      "origin_path": "plugins/discourse-avatar-frames/assets/javascripts/discourse/components/avatar-frame-overlay.gjs",
+      "release_commit": "bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41",
+      "workspace_path": "plugins/discourse-avatar-frames/assets/javascripts/discourse/components/avatar-frame-overlay.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true,
+      "review_date": "2026-10-11"
+    },
+    {
+      "archive_path": "plugins/discourse-avatar-frames/accepted-20261011/assets/javascripts/discourse/modifiers/avatar-frame-position.js.txt",
+      "sha256": "2449350e72910c198cf6fcbcf18217b6bd5493efff8e3eb4fa96481de08fbbe3",
+      "origin_kind": "accepted_avatar_calibration_patch",
+      "origin_path": "plugins/discourse-avatar-frames/assets/javascripts/discourse/modifiers/avatar-frame-position.js",
+      "release_commit": "bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41",
+      "workspace_path": "plugins/discourse-avatar-frames/assets/javascripts/discourse/modifiers/avatar-frame-position.js",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true,
+      "review_date": "2026-10-11"
+    },
+    {
+      "archive_path": "plugins/discourse-avatar-frames/accepted-20261011/assets/stylesheets/common/avatar-frames.scss.txt",
+      "sha256": "77a751835eef154c4b1d63ed02912714a9409b59708e9ff8f231ce44783bb766",
+      "origin_kind": "accepted_avatar_calibration_patch",
+      "origin_path": "plugins/discourse-avatar-frames/assets/stylesheets/common/avatar-frames.scss",
+      "release_commit": "bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41",
+      "workspace_path": "plugins/discourse-avatar-frames/assets/stylesheets/common/avatar-frames.scss",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true,
+      "review_date": "2026-10-11"
+    },
+    {
+      "archive_path": "plugins/discourse-avatar-frames/accepted-20261011/assets/stylesheets/common/avatar-frames-admin.scss.txt",
+      "sha256": "8c3eefd1e4f84f01052d892d731f930ff250751a11dde36e7ab10ff85e77ed7e",
+      "origin_kind": "accepted_avatar_calibration_patch",
+      "origin_path": "plugins/discourse-avatar-frames/assets/stylesheets/common/avatar-frames-admin.scss",
+      "release_commit": "bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41",
+      "workspace_path": "plugins/discourse-avatar-frames/assets/stylesheets/common/avatar-frames-admin.scss",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true,
+      "review_date": "2026-10-11"
+    },
+    {
+      "archive_path": "plugins/discourse-avatar-frames/accepted-20261011/admin/assets/javascripts/admin/components/avatar-frame-upload.gjs.txt",
+      "sha256": "46b0d32ac2ed9c54094e1869bf252e4b0332d5a1d9bbe90781724e600ef77bdb",
+      "origin_kind": "accepted_avatar_calibration_patch",
+      "origin_path": "plugins/discourse-avatar-frames/admin/assets/javascripts/admin/components/avatar-frame-upload.gjs",
+      "release_commit": "bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41",
+      "workspace_path": "plugins/discourse-avatar-frames/admin/assets/javascripts/admin/components/avatar-frame-upload.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true,
+      "review_date": "2026-10-11"
+    },
+    {
+      "archive_path": "plugins/discourse-avatar-frames/accepted-20261011/admin/assets/javascripts/admin/components/avatar-frame-form.gjs.txt",
+      "sha256": "7ef1cec579c8fdc6994a1a751f52271c2221d15bfa3d084ca62d0936169dc350",
+      "origin_kind": "accepted_avatar_calibration_patch",
+      "origin_path": "plugins/discourse-avatar-frames/admin/assets/javascripts/admin/components/avatar-frame-form.gjs",
+      "release_commit": "bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41",
+      "workspace_path": "plugins/discourse-avatar-frames/admin/assets/javascripts/admin/components/avatar-frame-form.gjs",
+      "workspace_exists_at_review": true,
+      "workspace_matches_at_review": true,
+      "review_date": "2026-10-11"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ui-layout",
+      "archive_path": "evidence/ui-layout.md",
+      "source_path": "themes/isbf-campus-feed/README.md",
+      "source_sha256": "abaac4063f51f75f5cf7f814079acc7300222c2e4d680a034ead2f4e6549e2ee",
+      "sha256": "8c0c36eb46c13624f1add2c696588b9046da04502d5cff37d3bbcaa40c0fd4b0"
+    },
+    {
+      "id": "initial-ui",
+      "archive_path": "evidence/initial-ui.md",
+      "source_path": "docs/isbf-one-production-deployment.md",
+      "source_sha256": "2a1cfe74d8ea8451afeaa4a9ed83f1df7686be0af2e9767ec34164b768b27b73",
+      "sha256": "800aca34047058084979bc1e1735d066dce885ec0ddd7a82d5cf021184dc5759"
+    },
+    {
+      "id": "post-preview",
+      "archive_path": "evidence/post-preview.md",
+      "source_path": "docs/isbf-post-preview-production.md",
+      "source_sha256": "8ab9ea27d561fb87ee685ecc59fea2d28c0a479b79e901681fa548516febd70e",
+      "sha256": "84a81b3efc75cc1e45c26570f81985c526e289999e47e64648dbb1842d2aee52"
+    },
+    {
+      "id": "official-activity",
+      "archive_path": "evidence/official-activity.md",
+      "source_path": "docs/isbf-official-activity-layout.md",
+      "source_sha256": "87c4d54f925810465416c30f05510924c1599fb5ea81287903da08e7de3e2fe6",
+      "sha256": "0b1a50bf417bb63be84cea966ef85c88002c2a6875ff7d66f9cbe8a4944bcdab"
+    },
+    {
+      "id": "official-calendar",
+      "archive_path": "evidence/official-calendar.md",
+      "source_path": "docs/isbf-official-calendar-production.md",
+      "source_sha256": "7c699774def6a4f220396e4ffac390a54b88fcd74bd3684d60d9609ae8f05ec7",
+      "sha256": "d36d004abf433e29efb1d67da3a693b169dae88a792e6bdcb517de63f0f09ffa"
+    },
+    {
+      "id": "workbench-recovery",
+      "archive_path": "evidence/workbench-recovery.md",
+      "source_path": "docs/workbench-plugins-missing-20261010.md",
+      "source_sha256": "c4545aabf98772c1b1dcea5f1200729db60fcc12a5176714a4da4ccc40f409ab",
+      "sha256": "275cfa39885206cea34dac92d9b3eb7a7ffecdb0df0ce9c1143507ab541fbf2c"
+    },
+    {
+      "id": "auth-accepted",
+      "archive_path": "evidence/auth-accepted.md",
+      "source_path": "docs/isbf-auth-page-production.md",
+      "source_sha256": "913c0c417e0b80dd27b8b60b3e12d2816ace17caccc1eac7b145f0d76b990068",
+      "sha256": "efa4fc9b359f25228af8a81dd0e7deecbc9a94bc03fa60670deae7aeaf08d8c5"
+    },
+    {
+      "id": "auth-alignment",
+      "archive_path": "evidence/auth-alignment.md",
+      "source_path": "docs/isbf-auth-page-production.md",
+      "source_sha256": "913c0c417e0b80dd27b8b60b3e12d2816ace17caccc1eac7b145f0d76b990068",
+      "sha256": "2654f91f501258c2b1ba53b186f231a16d5c56cba7cb9c450cf6530e446b853a"
+    },
+    {
+      "id": "auth-pending",
+      "archive_path": "evidence/auth-pending.md",
+      "source_path": "docs/isbf-auth-page-production.md",
+      "source_sha256": "913c0c417e0b80dd27b8b60b3e12d2816ace17caccc1eac7b145f0d76b990068",
+      "sha256": "b2e88861b1bc55182427a222a9261e404ca12c559eeab6cbed1952c7ed4481ca"
+    },
+    {
+      "id": "avatar-management",
+      "archive_path": "evidence/avatar-management.md",
+      "source_path": "docs/avatar-frames-deployment-20261010.md",
+      "source_sha256": "8afd2ab1df0c90ec98870ccc69c913461aa19f2dfd66156e57da44b9653931ce",
+      "sha256": "bfbf4a90fff9ab784019580e8104e9358bbe46990d0a366aa78e433960f777f9"
+    },
+    {
+      "id": "auth-current",
+      "archive_path": "evidence/auth-current.md",
+      "source_path": "docs/isbf-auth-page-production.md",
+      "source_sha256": "a77e47210f72b3d2c20bb29af75daad4b53da4f5addd47ce4563de71eb79ab9e",
+      "sha256": "6c5c01930a67c2cbccead1f9a729046acbbda86fafc7e01373c58f14a1821d88",
+      "review_date": "2026-10-11"
+    },
+    {
+      "id": "topic-reading",
+      "archive_path": "evidence/topic-reading.md",
+      "source_path": "themes/isbf-campus-feed/README.md",
+      "source_sha256": "abaac4063f51f75f5cf7f814079acc7300222c2e4d680a034ead2f4e6549e2ee",
+      "sha256": "bdd587c8613758f842e94c09b66defb99bcf66accc505e3eb71b8e0df08930d6",
+      "review_date": "2026-10-11"
+    },
+    {
+      "id": "avatar-calibration",
+      "archive_path": "evidence/avatar-calibration.md",
+      "source_path": "docs/avatar-frame-calibration-production-20261011.md",
+      "source_sha256": "ce6e5c75f7308b46bf722510bad12df5a2b49fbfbfb2357a5abee331191cbeaa",
+      "sha256": "6078212c0c9f10ef1eec921975125160516b4f76248b7377892ce86a53161eef",
+      "review_date": "2026-10-11"
+    }
+  ],
+  "supplements": [
+    {
+      "review_date": "2026-10-11",
+      "scope": "accepted authentication component and stylesheet only; original theme baseline remains unchanged",
+      "release_commit": "67706a5a30d71ff0b6793e5b8f55a85c4fe3ebb5",
+      "acceptance_report": "deploy-work/auth-center-fix-20261011/production-report.json",
+      "acceptance_report_sha256": "5aabeaa6686e2e73a91e3a296fa5f733c88769159f71fe1595606c17173756e7",
+      "browser_report": "deploy-work/auth-center-fix-20261011/production-browser-report.json",
+      "browser_report_sha256": "375956749597f801cba02c6014073e2ca054d381d740ceeadae126771d2e66f3",
+      "verified": {
+        "browser_passed": true,
+        "auth_centering": true,
+        "theme_menu": true,
+        "mobile_touch_preserved": true,
+        "workspace_matches_git_commit": true
+      }
+    },
+    {
+      "review_date": "2026-10-11",
+      "scope": "Avatar content geometry and explicitly approved upload-field calibration region only; existing two frames left for user calibration; historical theme and authentication supplement unchanged",
+      "release_commit": "bbdabecf040bdbb6d5bb3f88d6e748738ddf7a41",
+      "user_acceptance_report": "deploy-work/avatar-frame-calibration-20261011/user-acceptance-report.json",
+      "user_acceptance_report_sha256": "a4fb2cd55d5c1e3dbcca411844b32f9724ecd1901c50a82048678098cc29cbb9",
+      "acceptance_report": "deploy-work/avatar-frame-calibration-20261011/production-installation-report.json",
+      "acceptance_report_sha256": "ef873985521b7fd48808e6829b1b3706ac72d1bd4bc46290906473160ff59563",
+      "preview_browser_report": "deploy-work/avatar-frame-calibration-20261011/preview-browser-report.json",
+      "preview_browser_report_sha256": "c986139c43012fb60853c53f8b0189f9adf1130bd0bf2293b38d75aa88c50adc",
+      "production_browser_report": "deploy-work/avatar-frame-calibration-20261011/production-browser-report.json",
+      "production_browser_report_sha256": "2e4c574e037c8b0a5e2b1e590c84ebecea1ab2061bd872e7cb4630ac7b263cff",
+      "verified": {
+        "production_ui_user_accepted": true,
+        "isolated_desktop_mobile_preview_passed": true,
+        "production_automated_browser_complete": false,
+        "production_automated_browser_stopped_by_user": true,
+        "workspace_matches_git_commit": true,
+        "verification_keys_removed": true,
+        "existing_frames_calibrated": false
+      },
+      "final_deployment_report": "deploy-work/avatar-frame-calibration-20261011/deployment-final-report.json",
+      "final_deployment_report_sha256": "02142608738e08980cc4698bd5fc06546b9940974ca78525e67382ae7a11071a"
+    },
+    {
+      "date": "2026-10-12",
+      "kind": "frontend_consistency_composition_acceptance",
+      "evidence": "evidence/frontend-consistency-acceptance-20261012.md",
+      "approved_scope": "D01-D06 and D07 associated dialogs; 19 page groups only",
+      "excluded": [
+        "user card",
+        "A11 profile upper region and primary navigation",
+        "A12 public activity previews",
+        "admin",
+        "authentication",
+        "existing calendar and reporting"
+      ],
+      "implementation_status": "In Progress",
+      "baseline_source_map": "../baselines/production-20261012/source-map.json",
+      "implementation_source_map": "../frontend-implementation-source-map-20261012.json",
+      "implementation_source_map_sha256": "f1719da81ffd90653434e5630952e03fbdb328a40f30f8b784b12899b91d7ade",
+      "verification": "../frontend-verification-20261012.json",
+      "review": "../reviews/frontend-20261012-v2/index.html"
+    },
+    {
+      "date": "2026-10-14",
+      "kind": "join_recruitment_integration",
+      "evidence": "join-20261014/README.md",
+      "approved_scope": "Unchanged uploaded recruitment page at /join/, minimal navigation and request wiring, and administrator-only four-column application list with pagination",
+      "public_access": "Recruitment page and POST submissions only; saved records require Discourse admin",
+      "source_archive": "docs/isbf-one-join-app.zip",
+      "source_archive_sha256": "8a7e5606524b3498bc775d8cee41929fe080204ee6a3663dbb0c54d67a2a26df",
+      "source_manifest": "join-20261014/source-manifest.json",
+      "source_manifest_sha256": "e37eb19e48ce53ee4060e5e0287e044481d09a3126f8a0c142658e02d1c55ec5",
+      "implementation_path": "plugins/isbf-join",
+      "verification": "join-20261014/validation.md",
+      "deployment_status": "Deployed; final visual acceptance by user",
+      "excluded": [
+        "Global forum tokens",
+        "Other admin pages",
+        "Unrelated active theme fields"
+      ],
+      "implementation_manifest": "join-20261014/implementation-manifest.json",
+      "implementation_manifest_sha256": "1ec4a3e12dff0738c5ce1d54da060c6d795efcfd91749775854835c185035be1",
+      "deployment_record": "../deployments/join-20261015/README.md",
+      "release_source_sha256": "5f7e2e4110cdacc283af0697f925a1240aa30003c68ba9f7ef20751110536839",
+      "published_at_utc": "2026-10-14T23:40:10Z",
+      "deployment_image_tag": "local_discourse/isbf_app:join-20261015",
+      "deployment_image_id": "sha256:38308d121da3faee01d9c99fcdbdabcc40da13e0271361dd38c688bb85e84a24",
+      "current_release_source_sha256": "27bec5c18ad7c823ea0909a589fe1a17c6c96b574f1cbb2533cf2db1e24162e3",
+      "subsequent_releases": [
+        {
+          "kind": "texture_and_installed_app_navigation_fix",
+          "source_sha256": "6bd9dcac4b8923527410608e09194585c12af82d553ff07cb05c2f4a2b26dc76",
+          "deployment_record": "../deployments/join-compat-20261015/README.md",
+          "published_at_utc": "2026-10-15T04:15:59.016369+00:00",
+          "visual_acceptance": "User"
+        },
+        {
+          "kind": "six_gallery_images",
+          "source_sha256": "78709c643308a2258725b63a34a95ed85c3fefc47f0500d31fa9b682c7b2afa8",
+          "source_archive_sha256": "7d9a31021cfcf2e0dc1fdf25f4338595d064ee8f6626b736e9f2316849304a64",
+          "deployment_record": "../deployments/join-gallery-20261015/README.md",
+          "published_at_utc": "2026-10-15T04:45:45.622511+00:00",
+          "visual_acceptance": "User"
+        },
+        {
+          "kind": "opening_shoe_camera_clipping_fix",
+          "source_sha256": "27bec5c18ad7c823ea0909a589fe1a17c6c96b574f1cbb2533cf2db1e24162e3",
+          "deployment_record": "../deployments/join-camera-20261019/README.md",
+          "published_at_utc": "2026-10-19T09:34:08.660826+00:00",
+          "visual_acceptance": "User"
+        }
+      ]
+    },
+    {
+      "id": "reply-conversations-20261015",
+      "review_date": "2026-10-15",
+      "status": "Approved within the user-confirmed reply conversation scope; deployed; targeted native application checks passed",
+      "proposal": "../proposals/reply-conversations-20261015.md",
+      "verification": "../reviews/reply-conversations-20261015/README.md",
+      "source_manifest": "../reviews/reply-conversations-20261015/source-manifest.json",
+      "source_manifest_sha256": "211666d970241c9065ef67979b83c380daddc0f6e9d5ffd068414f8b82af6147",
+      "acceptance_scope": "User-confirmed ordinary-topic reply conversations from the supplied HTML/CSS: straight avatar trunk and branches, 33px indentation, compact progress and Collapse; mobile five equal action columns with reply icons 12px right of the main rail; original-article highlight; immediate successful replies and preserved expanded pages. Desktop action layout and global tokens retain their existing rules.",
+      "excluded": [
+        "Unrelated production settings",
+        "Global tokens",
+        "Private messages",
+        "Embedded views",
+        "Chat",
+        "Admin",
+        "Dedicated activity logs",
+        "Unrelated active theme features"
+      ],
+      "selected_design_reference": "../reviews/reply-conversations-20261015/guide-redesign/selected-straight-guide.css.txt",
+      "selected_design_reference_sha256": "7c162f7b510d70dfaa11cbcf425c858336a09d6a53581e9ef4b7d3d12a8c9798",
+      "deployment_record": "../deployments/reply-conversations-20261015/README.md",
+      "regression_supplement": "../deployments/reply-conversations-20261015/regressions-20261016.md",
+      "current_deployment_source_manifest": "../deployments/reply-conversations-20261015/regressions-source-manifest.json",
+      "current_deployment_source_manifest_sha256": "b6cea480473e870dca3ca95e4a7563ba1c7aa3701ffdaf4ea0081f43b511b73e"
+    },
+    {
+      "id": "auth-welcome-buttons-20261016",
+      "change_date": "2026-10-16",
+      "scope": "Authentication welcome choices only; user requested a small downward shift",
+      "status": "Published; final visual acceptance pending",
+      "accepted_parent_commit": "67706a5a30d71ff0b6793e5b8f55a85c4fe3ebb5",
+      "source_path": "../deployments/auth-welcome-buttons-20261016/sources/academy-auth.scss.txt",
+      "source_sha256": "5c0254529056a8d8e5fb28ebb2288b7ef24e0f83ed4dbb2e5218b460daaafecd",
+      "deployment_manifest": "../deployments/auth-welcome-buttons-20261016/manifest.json"
+    },
+    {
+      "id": "continue-reading-20261016",
+      "change_date": "2026-10-16",
+      "status": "Deployed with native and production checks; final visual acceptance pending",
+      "scope": "Ordinary-topic footer only: suggested and related topic sources share the continue-reading list; native data, order, permissions, unread state, mode preferences and navigation retained",
+      "evidence": "../reviews/continue-reading-20261016/README.md",
+      "source_manifest": "../reviews/continue-reading-20261016/source-manifest.json",
+      "excluded": [
+        "Homepage",
+        "Post body",
+        "Sidebars",
+        "Private messages",
+        "Unknown plugin modes"
+      ],
+      "deployment": "../deployments/continue-reading-20261016/README.md",
+      "deployed_source_manifest": "../deployments/continue-reading-20261016/source-manifest.json",
+      "deployed_source_version": "6f6680e493b02c39b3777aa192af8a4948cc7f54f3ac0d4f72a4001cd52630a9",
+      "latest_theme_refinement": "../deployments/continue-reading-20261016/square-border-20261017/source-manifest.json",
+      "confirmed_container_shape": "Square border; radius 0, user confirmed 2026-10-17"
+    },
+    {
+      "id": "notifications-unread-20261018",
+      "change_date": "2026-10-18",
+      "status": "design_confirmed_final_visual_pending",
+      "scope": "C18: notification bell indicators, account display preference, unread-only filter and group state; existing delivery and permissions retained",
+      "evidence": "../reviews/notifications-unread-20261018/README.md",
+      "source_manifest": "../reviews/notifications-unread-20261018/source-manifest.json",
+      "source_version": "aa2ec39288efa913c66ba492e0f989749afdca8614b9fb6efdf4ae8802b46174",
+      "excluded": [
+        "notification delivery",
+        "other navigation controls",
+        "production deployment"
+      ],
+      "latest_refinement": {
+        "change_date": "2026-10-18",
+        "status": "design_confirmed_final_visual_pending",
+        "scope": "Center unread dots beside action labels; omit topic-heading dots; move unread-only switch into the top-right three-dot menu",
+        "evidence": "../reviews/notifications-unread-20261018/layout-revision/README.md",
+        "source_manifest": "../reviews/notifications-unread-20261018/layout-revision/source-manifest.json",
+        "source_version": "8055e271058147d25004a7d483ace084b51740252c91cfd7dac7ee264011ee28"
+      }
+    },
+    {
+      "id": "notifications-unread-deployed-20261018",
+      "change_date": "2026-10-18",
+      "status": "published_user_authorized",
+      "scope": "C18 notification unread indicators and menu filter; existing delivery and unrelated UI retained",
+      "related_review": "notifications-unread-20261018",
+      "evidence": "../deployments/notifications-unread-20261018/README.md",
+      "source_manifest": "../deployments/notifications-unread-20261018/source-manifest.json",
+      "source_version": "cb03378611ddef5044a5439a373b9b8f1bc66511c8da53c361f8aeb2706d13fd",
+      "verified_image": "local_discourse/isbf_app:notifications-unread-20261018-cb03378611dd",
+      "final_visual_acceptance": "No broader UI region promoted by technical verification"
+    },
+    {
+      "id": "notifications-layout-20261018",
+      "change_date": "2026-10-18",
+      "status": "design_confirmed_final_visual_pending",
+      "scope": "C19: current-user notification topic-group boundaries, confirmed text hierarchy and full-row primary links; C18 unread and menu behavior retained",
+      "evidence": "../reviews/notifications-layout-20261018/README.md",
+      "source_manifest": "../reviews/notifications-layout-20261018/source-manifest.json",
+      "excluded": [
+        "notification delivery",
+        "backend interface changes",
+        "body previews",
+        "production deployment"
+      ],
+      "source_version": "29c1d7e8c45f283a6cb3ababd3d0599d2b85a38dc4e688ece767b75957820808"
+    },
+    {
+      "id": "notifications-layout-deployed-20261018",
+      "change_date": "2026-10-18",
+      "status": "published_user_authorized",
+      "scope": "C19 notification hierarchy and full-row links; C18 rules and unrelated deployed features retained",
+      "related_review": "notifications-layout-20261018",
+      "evidence": "../deployments/notifications-layout-20261018/README.md",
+      "source_manifest": "../deployments/notifications-layout-20261018/source-manifest.json",
+      "source_version": "b1dab68ab8ea60e731378ce42380a3e23aa72fd9cd23698b835347247859892a",
+      "verified_image": "local_discourse/isbf_app:notifications-layout-20261018-b1dab68ab8ea",
+      "final_visual_acceptance": "No broader UI region promoted by technical verification"
+    },
+    {
+      "id": "notifications-menu-memory-20261019",
+      "change_date": "2026-10-19",
+      "status": "design_confirmed_final_visual_pending",
+      "scope": "A05/C06/C18/C19 notification menu content width and account-persisted unread filter",
+      "evidence": "../reviews/notifications-menu-memory-20261019/README.md",
+      "source_manifest": "../reviews/notifications-menu-memory-20261019/source-manifest.json",
+      "source_version": "01242893e94754ad6ac27c90cc5689e9db260da417a44c9dae76730ab023e6b6",
+      "excluded": [
+        "notification delivery",
+        "other menus",
+        "production deployment"
+      ]
+    },
+    {
+      "id": "notifications-menu-memory-deployed-20261019",
+      "change_date": "2026-10-19",
+      "status": "published_user_authorized",
+      "scope": "A05/C06/C18/C19 content-width notification menu and account-persisted unread filter",
+      "related_review": "notifications-menu-memory-20261019",
+      "evidence": "../deployments/notifications-menu-memory-20261019/README.md",
+      "source_manifest": "../deployments/notifications-menu-memory-20261019/source-manifest.json",
+      "source_version": "2b714d7f1091b87bd448dfcb9ce3f084781b3d2bf5f8c1d5f2115f47c4790f0e",
+      "verified_image": "local_discourse/isbf_app:notifications-menu-memory-20261019-2b714d7f1091",
+      "final_visual_acceptance": "Pending user review; technical verification does not expand other UI scopes"
+    },
+    {
+      "id": "profile-previews-20261019",
+      "change_date": "2026-10-19",
+      "status": "user_confirmed_implementation",
+      "scope": "A12/C12 historical public activity target fallback and user-confirmed compact summary body text",
+      "evidence": "../reviews/profile-previews-20261019/README.md",
+      "source_manifest": "../reviews/profile-previews-20261019/source-manifest.json",
+      "source_version": "f2c65be4f093bbd14f5f4e413551f42178c3c5600f849cf268bafbf2883e9fb6",
+      "final_visual_acceptance": "User confirmed the affected activity and summary previews; no other UI regions accepted"
+    },
+    {
+      "id": "profile-previews-deployed-20261019",
+      "change_date": "2026-10-19",
+      "status": "published_user_accepted_affected_region",
+      "scope": "A12/C12 historical public activity fallback and compact personal summary body previews",
+      "evidence": "../deployments/profile-previews-20261019/README.md",
+      "source_manifest": "../deployments/profile-previews-20261019/source-manifest.json",
+      "source_version": "2900e9585452c7d693917a4e98996c9a64e85a44afc4315f4d0072385a9c3917",
+      "verified_image": "local_discourse/isbf_app:profile-previews-20261019-2900e9585452",
+      "final_visual_acceptance": "User confirmed the affected two pages; other UI regions unchanged",
+      "automated_online_browser_completed": false
+    },
+    {
+      "id": "elastic-404-20261019",
+      "source_version": "6fcd94a055a857c87a3fb37aebaaaf2308629ad6624c742ee5168401c184b174",
+      "approval_scope": "C20普通404局部设计确认，不扩大其他错误态",
+      "source_manifest": "../reviews/elastic-404-20261019/source-manifest.json",
+      "source_manifest_sha256": "ffa192f3ebbc09e9e81c3265c56cae3a7233f883490d4c0055c6795eeb55c3de",
+      "evidence": "../reviews/elastic-404-20261019/README.md",
+      "visual_acceptance": "pending_user_review"
+    },
+    {
+      "id": "elastic-404-fullscreen-20261019",
+      "source_version": "fa5783f6e305267a08c186429c1d3dbba8d82d646a06abe550bb8476ded2142a",
+      "approval_scope": "C20当前404交付：全屏、本站配色、二维局部弹性、渐加速且无暂停的计时游戏与本地最佳记录；不扩展至其他错误页或整站回归",
+      "source_manifest": "../reviews/elastic-404-fullscreen-20261019/source-manifest.json",
+      "source_manifest_sha256": "0fe93e67cf6df1dd0f85eb3189258f3058cb241741cf51322b6035989fbbf141",
+      "evidence": "../reviews/elastic-404-fullscreen-20261019/README.md",
+      "reference_analysis": "../reviews/elastic-404-fullscreen-20261019/reference-analysis.json",
+      "visual_acceptance": "accepted_by_user",
+      "user_acceptance": "../deployments/elastic-404-fullscreen-20261019/user-acceptance.json",
+      "deployment": "../deployments/elastic-404-fullscreen-20261019/README.md",
+      "saved_image": "local_discourse/isbf_app:elastic-404-fullscreen-20261019-fa5783f6e305",
+      "status": "published_user_accepted_affected_region"
+    },
+    {
+      "id": "auth-username-hint-20261019",
+      "status": "Published; final visual verification pending",
+      "scope": "A13/C08 registration username reminder only",
+      "reference": "../reviews/auth-username-hint-20261019/source-manifest.json",
+      "text": "用户名填写后不可更改",
+      "color": "var(--tertiary)",
+      "acceptance": "User approved implementation and specified theme blue; no other authentication regions reclassified",
+      "deployment": "../deployments/auth-username-hint-20261019/manifest.json",
+      "source_version": "9e77b7072c01e3f70398a199489f48f825f44002a411cfbe5b0466a872673eac"
+    },
+    {
+      "id": "continue-reading-previews-20261020",
+      "change_date": "2026-10-20",
+      "status": "published_final_visual_acceptance_pending",
+      "scope": "C17 untitled suggested and related topic body text; existing layout and reading targets retained",
+      "evidence": "../reviews/continue-reading-previews-20261020/README.md",
+      "deployment": "../deployments/continue-reading-previews-20261020/README.md",
+      "source_manifest": "../deployments/continue-reading-previews-20261020/source-manifest.json",
+      "source_version": "5db32d52dcd99e50fb64dada7e66358e79b4bfd58443a59c8a7bdefb1c5d58af",
+      "theme_only": true,
+      "production_desktop_mobile_verified": true
+    },
+    {
+      "date": "2026-10-20",
+      "kind": "foreground_dialog_chrome_design_acceptance",
+      "reference": "../reviews/dialog-consistency-20261020/reference.png",
+      "reference_sha256": "4e52d0b15b8c74afa80f4565fcf958aa0f1edddffb80c5e9cc8a4368a48b8ecc",
+      "review": "../reviews/dialog-consistency-20261020/README.md",
+      "contract": "../dialogs.md",
+      "exceptions": "../dialog-exceptions.json",
+      "confirmed_scope": "Foreground task dialogs and confirmations: frame, text actions and mobile gutters",
+      "excluded": [
+        "admin",
+        "menus",
+        "popup cards",
+        "image viewers",
+        "editor surfaces",
+        "standalone authentication panels",
+        "standalone recruitment page"
+      ],
+      "implementation_status": "Published; desktop/mobile technical verification passed; final visual acceptance pending",
+      "source_manifest": "../reviews/dialog-consistency-20261020/source-manifest.json",
+      "production_deployed": true,
+      "deployment": "../deployments/dialog-consistency-20261020/README.md",
+      "deployed_source_manifest": "../deployments/dialog-consistency-20261020/source-manifest.json",
+      "deployed_source_version": "5109370e6bf46175d9d15788dd0b5830a541cb3bee0df3e61746cf734d42adf3",
+      "recovery_image": "local_discourse/isbf_app:dialog-consistency-20261020-5109370e6bf4"
+    }
+  ]
+}

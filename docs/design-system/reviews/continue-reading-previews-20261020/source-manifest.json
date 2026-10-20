@@ -1,0 +1,25 @@
+{
+  "source_version": "426e853f24d88382c5875a99804f6a4bc414919311a19037820dbec47417004b",
+  "files": [
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-item.gjs",
+      "sha256": "78a4065ca5a04846df5c39c9e092412152311f14e0c30ed0ea0156628e7a3076",
+      "snapshot": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-continue-reading-item.gjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-post-preview.gjs",
+      "sha256": "b6ab018436d6ed3c8fe9bd239587fe469aba4d2c6f9fed31fdf252cf6729faab",
+      "snapshot": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-post-preview.gjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/continue-reading.scss",
+      "sha256": "8dbec22ef9b591c4db044ccd146bfe5748697974df645b39b0bb64c7eeaa75e4",
+      "snapshot": "source/themes__isbf-campus-feed__stylesheets__continue-reading.scss.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/continue-reading-test.gjs",
+      "sha256": "012c24f060936fd5d7e8218686a44d2d1cd7e1638b785a7ce2c175c9f7ac99ca",
+      "snapshot": "source/themes__isbf-campus-feed__test__integration__continue-reading-test.gjs.txt"
+    }
+  ]
+}

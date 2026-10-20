@@ -11,6 +11,8 @@ import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
 import dFormatDate from "discourse/ui-kit/helpers/d-format-date";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
+import { optionalTopicTitle } from "../lib/optional-topic-title";
+import ISBFPostPreview from "./isbf-post-preview";
 
 export default class ISBFContinueReadingItem extends TopicListItem {
   get defaultAvatarUrl() {
@@ -29,6 +31,21 @@ export default class ISBFContinueReadingItem extends TopicListItem {
     return topic.get("is_nested_view")
       ? Boolean(topic.get("has_new_replies"))
       : topic.get("unread_posts") > 0;
+  }
+
+  get previewDisabled() {
+    return this.args.topic.hidden || this.args.topic.deleted;
+  }
+
+  get titled() {
+    return Boolean(optionalTopicTitle(this.args.topic.title).trim());
+  }
+
+  get titleUrl() {
+    const topic = this.args.topic;
+    return topic.linked_post_number
+      ? topic.urlForPostNumber(topic.linked_post_number)
+      : topic.lastUnreadUrl;
   }
 
   get showCategory() {
@@ -86,13 +103,34 @@ export default class ISBFContinueReadingItem extends TopicListItem {
           {{#if this.hasEssentialStatus}}
             <TopicStatus @context="topic-list" @topic={{@topic}} />
           {{/if}}
-          <TopicLink
-            class="isbf-continue-reading__title raw-topic-link"
-            @topic={{@topic}}
-            {{on "keydown" this.keyDown}}
-            {{on "focus" this.onTitleFocus}}
-            {{on "blur" this.onTitleBlur}}
-          />
+          {{#if this.titled}}
+            <TopicLink
+              class="isbf-continue-reading__title raw-topic-link"
+              @topic={{@topic}}
+              {{on "keydown" this.keyDown}}
+              {{on "focus" this.onTitleFocus}}
+              {{on "blur" this.onTitleBlur}}
+            />
+          {{else}}
+            <ISBFPostPreview
+              class="isbf-continue-reading__title title raw-topic-link"
+              data-topic-id={{@topic.id}}
+              @disabled={{this.previewDisabled}}
+              @excerpt={{@topic.excerpt}}
+              @href={{this.titleUrl}}
+              @postNumber={{1}}
+              @title={{@topic.title}}
+              @topicId={{@topic.id}}
+              @variant="continue-reading"
+              {{on "keydown" this.keyDown}}
+              {{on "focus" this.onTitleFocus}}
+              {{on "blur" this.onTitleBlur}}
+            >
+              {{#if @topic.visited}}
+                <span class="sr-only">&nbsp;{{i18n "topic.sr_read"}}</span>
+              {{/if}}
+            </ISBFPostPreview>
+          {{/if}}
           {{#if this.hasUnread}}
             <span
               class="isbf-continue-reading__unread"

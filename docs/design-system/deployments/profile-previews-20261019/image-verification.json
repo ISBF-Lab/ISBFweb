@@ -1,0 +1,14 @@
+{
+  "image_tag": "local_discourse/isbf_app:profile-previews-20261019-2900e9585452",
+  "image_id": "sha256:47e1bd8c3592590dfca9b690e021fbe18acd8294a8df94503d3c9245925685ed",
+  "source_version": "2900e9585452c7d693917a4e98996c9a64e85a44afc4315f4d0072385a9c3917",
+  "complete_runtime_inventory_matches": true,
+  "plugins_verified": 66,
+  "plugin_links_markers_and_hidden_files_verified": true,
+  "runtime_startup_matches_production": true,
+  "shared_plugin_releases_required": true,
+  "production_ui_acceptance_source": "user",
+  "automated_online_browser_completed": false,
+  "latest_tag_changed": false,
+  "production_container_recreated": false
+}

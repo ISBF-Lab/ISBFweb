@@ -1,0 +1,48 @@
+<div class="elastic-not-found page-not-found" data-elastic-not-found data-interaction-url="<%= script_asset_path("js/elastic-not-found") %>">
+  <a class="elastic-not-found__brand" href="<%= path "/" %>">
+    <% if application_logo_url.present? %>
+      <picture>
+        <% if application_logo_dark_url.present? %>
+          <source srcset="<%= application_logo_dark_url %>" media="<%= dark_elements_media_query %>">
+        <% end %>
+        <img alt="<%= SiteSetting.title %>" src="<%= application_logo_url %>">
+      </picture>
+    <% else %>
+      <span><%= SiteSetting.title %></span>
+    <% end %>
+  </a>
+
+  <div class="elastic-not-found__scene">
+    <div class="elastic-not-found__stage" data-stage>
+      <div class="elastic-not-found__fallback" aria-hidden="true">404</div>
+      <canvas class="elastic-not-found__canvas" aria-hidden="true" data-canvas></canvas>
+      <canvas class="elastic-not-found__elastic-canvas" aria-hidden="true" data-elastic-canvas hidden></canvas>
+      <button class="elastic-not-found__reveal" aria-label="<%= t "page_not_found.elastic.reveal" %>" type="button" data-reveal hidden></button>
+      <button class="elastic-not-found__play" aria-label="<%= t "page_not_found.elastic.play" %>" type="button" data-play hidden>
+        <%= SvgSprite.raw_svg("play") %>
+      </button>
+      <div class="elastic-not-found__game-overlay" data-overlay hidden>
+        <p class="elastic-not-found__game-status" data-status></p>
+        <button class="btn btn-primary elastic-not-found__game-button" type="button" data-start data-start-label="<%= t "page_not_found.elastic.start" %>" data-retry-label="<%= t "page_not_found.elastic.retry" %>"><%= t "page_not_found.elastic.start" %></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="elastic-not-found__game" data-game hidden>
+    <div class="elastic-not-found__times">
+      <span><%= t "page_not_found.elastic.current" %><output role="timer" aria-live="off" data-current>00:00.0</output></span>
+      <span><%= t "page_not_found.elastic.best" %><output data-best>00:00.0</output></span>
+    </div>
+    <p class="elastic-not-found__instructions"><%= t "page_not_found.elastic.instructions" %></p>
+    <div class="elastic-not-found__game-actions">
+      <button class="elastic-not-found__text-button" type="button" data-exit><%= t "page_not_found.elastic.exit" %></button>
+    </div>
+  </div>
+
+  <div class="elastic-not-found__message">
+    <h1 class="elastic-not-found__title"><%= t "page_not_found.elastic.title" %></h1>
+    <p class="elastic-not-found__description"><%= t "page_not_found.elastic.description" %></p>
+    <a class="btn btn-primary elastic-not-found__home" href="<%= path "/" %>"><%= t "page_not_found.home" %></a>
+  </div>
+  <span class="sr-only" data-announcement data-ready-label="<%= t "page_not_found.elastic.ready" %>" data-over-label="<%= t "page_not_found.elastic.over" %>" data-found-label="<%= t "page_not_found.elastic.found" %>"></span>
+</div>

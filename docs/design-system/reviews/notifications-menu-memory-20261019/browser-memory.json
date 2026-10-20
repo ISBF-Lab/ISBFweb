@@ -1,0 +1,448 @@
+{
+  "harness_sha256": "e93791525b7fcc4abba6ee57627c563e7da53a2760b5eb4e5ca095aa46530900",
+  "passed": true,
+  "full_ember_client": true,
+  "production_backend_used": false,
+  "checks": [
+    "the actual compiled notification theme boots",
+    "a new account starts with all notifications without an automatic write",
+    "a failed save preserves both the switch and the existing list",
+    "the translated save error wraps without widening the menu",
+    "retry reaches the isolated preference endpoint",
+    "retry keeps keyboard focus in the menu when its button disappears",
+    "the saved selection remains visible and disabled while saving",
+    "clicking the disabled switch sends no duplicate preference request",
+    "a successful retry persists and applies the unread selection",
+    "filter saves preserve badge preferences and filter the list",
+    "the mentions tab shares the saved unread preference",
+    "lazy details inherit the saved filter",
+    "the actual compiled notification theme boots",
+    "a full reload begins with unread and never flashes an all-notifications request",
+    "the actual compiled notification theme boots",
+    "a fresh mobile browser restores the account preference without local browser storage",
+    "the actual compiled notification theme boots",
+    "turning the switch off with the keyboard persists across reloads",
+    "the actual compiled notification theme boots",
+    "another account starts with its own default selection",
+    "the actual compiled notification theme boots",
+    "signing back into the first fixture account restores its saved selection",
+    "the actual compiled notification theme boots",
+    "an empty unread list keeps the account selection on the next visit",
+    "a delayed response for the previous filter cannot overwrite the saved unread list",
+    "saving or restoring filters never marks notifications read",
+    "the client has no JavaScript runtime errors",
+    "all JavaScript and stylesheet assets are available offline"
+  ],
+  "layouts": [],
+  "errors": [],
+  "console_errors": [
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED"
+  ],
+  "missing_assets": [],
+  "api_requests": [
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json",
+      "fields": {
+        "custom_fields[isbf_notification_filter]": [
+          "unread"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json",
+      "fields": {
+        "custom_fields[isbf_notification_filter]": [
+          "unread"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "mentions"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups/314/actions/replied.json",
+      "query": {
+        "filter": [
+          "unread"
+        ],
+        "tab": [
+          "mentions"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/favicon/proxied"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json",
+      "fields": {
+        "custom_fields[isbf_notification_filter]": [
+          "all"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/favicon/proxied"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json",
+      "fields": {
+        "custom_fields[isbf_notification_filter]": [
+          "unread"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/favicon/proxied"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/favicon/proxied"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/favicon/proxied"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json",
+      "fields": {
+        "custom_fields[isbf_notification_filter]": [
+          "all"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "PUT",
+      "path": "/u/preview-user.json",
+      "fields": {
+        "custom_fields[isbf_notification_filter]": [
+          "unread"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "unread"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    }
+  ],
+  "phase": "memory",
+  "base_harness_sha256": "086e2cd04836395eef178cf7585617824d9a5f675250e39afee67835c42a0b39",
+  "fixture_accounts_are_synthetic": true
+}

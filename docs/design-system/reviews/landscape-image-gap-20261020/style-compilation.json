@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "source": "complete current database theme with one image-height delta",
+  "extra_stylesheets": 20,
+  "results": [
+    {
+      "version": "before",
+      "palette": "light",
+      "bytes": 363973,
+      "sha256": "3d1d16cf2ea5cba7cad227863b1ed7785c941838696c0dabb99661e6f9225453"
+    },
+    {
+      "version": "candidate",
+      "palette": "light",
+      "bytes": 364065,
+      "sha256": "8a865d78f93c98d1e06f64656ddf68d048541f30646b7a950527c1ba1cd2f357"
+    },
+    {
+      "version": "before",
+      "palette": "dark",
+      "bytes": 363973,
+      "sha256": "3d1d16cf2ea5cba7cad227863b1ed7785c941838696c0dabb99661e6f9225453"
+    },
+    {
+      "version": "candidate",
+      "palette": "dark",
+      "bytes": 364065,
+      "sha256": "8a865d78f93c98d1e06f64656ddf68d048541f30646b7a950527c1ba1cd2f357"
+    }
+  ]
+}

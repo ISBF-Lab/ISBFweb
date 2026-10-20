@@ -5,11 +5,21 @@ on:
     paths:
       - "themes/isbf-campus-feed/**"
       - "frontend/discourse/app/**"
+      - "frontend/discourse/dialog-holder/**"
+      - "frontend/discourse/float-kit/**"
+      - "frontend/discourse/scripts/js/elastic-not-found.js"
+      - "frontend/discourse/lib/elastic-not-found.test.mjs"
+      - "app/assets/stylesheets/**"
+      - "plugins/**"
+      - "script/check-isbf-dialogs*"
+      - "docs/design-system/dialog-exceptions.json"
+      - "package.json"
       - ".github/workflows/isbf-frontend-consistency.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
   group: isbf-frontend-${{ github.head_ref || github.ref }}
@@ -61,6 +71,56 @@ jobs:
           bundle install --jobs 1
           pnpm install --frozen-lockfile
 
+      - name: Changed source lint
+        if: github.event_name == 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.number }}
+        run: |
+          pnpm exec node --input-type=module <<'JS'
+          import { mkdirSync, writeFileSync } from "node:fs";
+
+          const files = [];
+          for (let page = 1; ; page++) {
+            const response = await fetch(
+              `${process.env.GITHUB_API_URL}/repos/${process.env.GITHUB_REPOSITORY}/pulls/${process.env.PR_NUMBER}/files?per_page=100&page=${page}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+                  Accept: "application/vnd.github+json",
+                },
+              }
+            );
+            if (!response.ok) {
+              throw new Error(`Cannot read changed files: ${response.status}`);
+            }
+            const batch = await response.json();
+            files.push(
+              ...batch
+                .filter((file) => file.status !== "removed")
+                .map((file) => file.filename)
+                .filter(
+                  (file) =>
+                    !file.startsWith("docs/") ||
+                    file.startsWith("docs/ai-moderation-verification/")
+                )
+            );
+            if (batch.length < 100) {
+              break;
+            }
+          }
+          mkdirSync("tmp", { recursive: true });
+          writeFileSync("tmp/isbf-lint-files.json", JSON.stringify(files));
+          JS
+          ruby -rjson -e 'files = JSON.parse(File.read("tmp/isbf-lint-files.json")); exec("ruby", "bin/lint", *files) unless files.empty?'
+
+      - name: Dialog policy and standalone frontend checks
+        run: |
+          pnpm exec prettier --check script/check-isbf-dialogs.mjs script/check-isbf-dialogs.test.mjs
+          pnpm exec eslint --max-warnings 0 script/check-isbf-dialogs.mjs script/check-isbf-dialogs.test.mjs
+          pnpm lint:dialogs
+          pnpm exec node --test script/check-isbf-dialogs.test.mjs frontend/discourse/lib/elastic-not-found.test.mjs
+
       - name: Install Playwright Chromium
         run: pnpm playwright-install
 
@@ -76,7 +136,7 @@ jobs:
       - name: Native frontend behavior regression
         env:
           LOAD_PLUGINS: "0"
-          FILTER: "/User.*preferences|User.*directory|User.*invited|Invite|Bookmark|Draft|Private Message|Pending Post|Group|Search|Badge|User Card|User.*summary|Tag/i"
+          FILTER: "/User.*preferences|User.*directory|User.*invited|Invite|Bookmark|Draft|Private Message|Pending Post|Group|Search|Badge|User Card|User.*summary|Tag|Modal|Dialog/i"
         run: bin/qunit --standalone --filter "$FILTER"
 
       - name: Install the project theme in the synthetic test database

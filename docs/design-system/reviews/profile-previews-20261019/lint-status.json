@@ -1,0 +1,22 @@
+{
+  "command": [
+    "ruby",
+    "bin/lint",
+    "--fix",
+    "frontend/discourse/app/components/user-summary-topic.gjs",
+    "frontend/discourse/app/templates/user/summary.gjs",
+    "themes/isbf-campus-feed/common/common.scss",
+    "themes/isbf-campus-feed/javascripts/discourse/lib/post-preview.js",
+    "themes/isbf-campus-feed/javascripts/discourse/lib/feed-post-loader.js",
+    "themes/isbf-campus-feed/javascripts/discourse/components/isbf-post-preview.gjs",
+    "themes/isbf-campus-feed/javascripts/discourse/components/isbf-activity-preview.gjs",
+    "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-campus-feed.gjs",
+    "themes/isbf-campus-feed/test/unit/post-preview-test.js",
+    "themes/isbf-campus-feed/test/unit/feed-post-loader-test.js",
+    "themes/isbf-campus-feed/test/integration/post-preview-test.gjs",
+    "themes/isbf-campus-feed/javascripts/discourse/components/isbf-summary-topic-title.gjs",
+    "themes/isbf-campus-feed/test/acceptance/profile-previews-test.js"
+  ],
+  "exit_code": 0,
+  "configuration": "Existing offline tools/lefthook-serial.yml; serial execution, repository CI gates unchanged"
+}

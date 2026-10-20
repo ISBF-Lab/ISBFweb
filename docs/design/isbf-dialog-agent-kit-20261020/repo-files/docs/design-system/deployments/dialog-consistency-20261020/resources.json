@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "tls_verified": true,
+  "resources": [
+    {
+      "kind": "core",
+      "unchanged": true,
+      "sha256": "2efa281043a7cbabd1ef9c648698a543baa841564b7dbaf43ca6abc0870eb79e",
+      "bytes": 3925536
+    },
+    {
+      "kind": "theme_javascript",
+      "url": "/theme-javascripts/464b2ecb3c57ff27fbc51559ead5f159b10e8f6d.js?__ws=isbf-one.com",
+      "sha256": "e36e1486d73548826b000a50eba0908a1699ac5b4147fbc39069d89e1c9aa915",
+      "compiled_content_sha256": "6f378b4208d3ce1618a7e8706f0a5f87e9f5d9f04d145dc91e74381165f1e9cb",
+      "bytes": 496576
+    },
+    {
+      "kind": "common_theme",
+      "url": "/stylesheets/common_theme_4_61832d0d240b16657e86b7816b8bfbddd8cc5793.css?__ws=isbf-one.com",
+      "sha256": "2b8e3bd38bfd51d77f6730233ff3fdfbffe14d55569909ffc451f9603246ce9a",
+      "bytes": 315978
+    },
+    {
+      "kind": "desktop_theme",
+      "url": "/stylesheets/desktop_theme_4_df84dcd46b693e6112a5b69757d5cea01422d09b.css?__ws=isbf-one.com",
+      "sha256": "fd75ddb1bd2e9c345d128f8e33237b126bbf6cba19af0299798810afc1cf72a2",
+      "bytes": 108
+    },
+    {
+      "kind": "mobile_theme",
+      "url": "/stylesheets/mobile_theme_4_df84dcd46b693e6112a5b69757d5cea01422d09b.css?__ws=isbf-one.com",
+      "sha256": "52341de8468af5918e5f7171436473311225e8b212f36f8c7e657af4b8a54a38",
+      "bytes": 107
+    },
+    {
+      "kind": "isbf-resume",
+      "url": "/stylesheets/isbf-resume_549927c50d24186ba0b6e3ed44cc43aad9668271.css?__ws=isbf-one.com",
+      "sha256": "f552f1e7933f37805dab7db31fdc21f32adcf12f5a5f00873fa4c19b8b628c00",
+      "bytes": 17052
+    },
+    {
+      "kind": "isbf-resume_rtl",
+      "url": "/stylesheets/isbf-resume_rtl_549927c50d24186ba0b6e3ed44cc43aad9668271.css?__ws=isbf-one.com",
+      "sha256": "1f111de32829160dc1c522c66e75f3cb662219522f866bf19c6616f0c13907be",
+      "bytes": 16950
+    }
+  ],
+  "complete_theme_modules_verified": 184,
+  "complete_runtime_matches_candidate": true,
+  "plugins_preserved": 66,
+  "source_version": "5109370e6bf46175d9d15788dd0b5830a541cb3bee0df3e61746cf734d42adf3"
+}

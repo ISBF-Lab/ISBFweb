@@ -1,0 +1,25 @@
+{
+  "captured_records_match": true,
+  "records": {
+    "inventory-candidate.json": {
+      "matches_expected": true,
+      "file_sha256": "a922d69b449ad3b8b5377fa1a27d253f09ace99283c5df224af644b3ef6b9c74",
+      "plugins": 66
+    },
+    "inventory-installed.json": {
+      "matches_expected": true,
+      "file_sha256": "a922d69b449ad3b8b5377fa1a27d253f09ace99283c5df224af644b3ef6b9c74",
+      "plugins": 66
+    },
+    "inventory-after.json": {
+      "matches_expected": true,
+      "file_sha256": "a922d69b449ad3b8b5377fa1a27d253f09ace99283c5df224af644b3ef6b9c74",
+      "plugins": 66
+    }
+  },
+  "saved_image": "local_discourse/isbf_app:elastic-404-fullscreen-20261019-fa5783f6e305",
+  "saved_image_id": "sha256:319d60a5739f61b74cf071c6506d605af6c62f9c6fb8d83123cf264c1d5a2265",
+  "method": "Existing build, installed, and post-Web-reload records only",
+  "saved_image_reexecution_performed": false,
+  "additional_runtime_verification_after_user_acceptance": false
+}

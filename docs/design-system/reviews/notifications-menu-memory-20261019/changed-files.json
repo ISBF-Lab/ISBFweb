@@ -1,0 +1,20 @@
+[
+  "themes/isbf-campus-feed/common/common.scss",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-action.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-bell.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-unread.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-side-nav.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/initializers/isbf-notifications.js",
+  "themes/isbf-campus-feed/javascripts/discourse/services/isbf-notifications.js",
+  "themes/isbf-campus-feed/locales/en.yml",
+  "themes/isbf-campus-feed/locales/zh_CN.yml",
+  "themes/isbf-campus-feed/test/integration/notifications-test.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notification-entry.gjs",
+  "plugins/isbf-notifications/plugin.rb",
+  "plugins/isbf-notifications/config/locales/server.en.yml",
+  "plugins/isbf-notifications/config/locales/server.zh_CN.yml",
+  "plugins/isbf-notifications/spec/requests/users_controller_spec.rb",
+  "plugins/isbf-notifications/README.md"
+]

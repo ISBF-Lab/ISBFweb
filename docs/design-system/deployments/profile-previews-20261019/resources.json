@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "tls_verified": true,
+  "resources": [
+    {
+      "kind": "core",
+      "sha256": "0e5e23c09635775b40ae01056bd3eb0224d3880ab399cf86ea54ef5dca439e78",
+      "bytes": 3924284,
+      "new_native_entry": true
+    },
+    {
+      "kind": "theme_javascript",
+      "url": "/theme-javascripts/0872f5aa4b07643ee09d3ab5911583c435af04f6.js?__ws=isbf-one.com",
+      "sha256": "008eabeb895c7606a5373c5bac3e92441b066b348e71cfaa4f8c6f76758216bf",
+      "compiled_content_sha256": "6a90c2abc463d7153a4526f3fd5a248e50901ac97717ef01dfd48a705fcf1d0e",
+      "bytes": 493019
+    },
+    {
+      "kind": "common_theme",
+      "url": "/stylesheets/common_theme_4_908caecffd1911764d99be83415fa315b78bd1ec.css?__ws=isbf-one.com",
+      "sha256": "84d6974a9cea4eaeaf1042bbc763ec5fc2529eb23b248f6604a175f0fd582e40",
+      "bytes": 319905
+    },
+    {
+      "kind": "desktop_theme",
+      "url": "/stylesheets/desktop_theme_4_fb55cc14b464aae3335652bb1f7d67eb511cb91e.css?__ws=isbf-one.com",
+      "sha256": "f0418ae6abb8c92701bb8ffccca16c1a5d288e3c67891a3ff4ae1193f466b30d",
+      "bytes": 108
+    },
+    {
+      "kind": "mobile_theme",
+      "url": "/stylesheets/mobile_theme_4_fb55cc14b464aae3335652bb1f7d67eb511cb91e.css?__ws=isbf-one.com",
+      "sha256": "50fc5abf84cac8d3870b60884a084affc125f2dc467ba8b33421708424acf54d",
+      "bytes": 107
+    }
+  ],
+  "shell_references_current_core_and_new_theme": true,
+  "plugins_verified": 66,
+  "source_version": "2900e9585452c7d693917a4e98996c9a64e85a44afc4315f4d0072385a9c3917",
+  "complete_runtime_matches_candidate": true
+}

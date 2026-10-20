@@ -1,0 +1,12 @@
+{
+  "before_digest": "02db5a16e55af161121fcf9f6cf83a1e",
+  "current_digest": "397449eb3c2632b175b3507f88fee7f2",
+  "changes_preserved": [
+    {
+      "name": "isbf_resume_collection_url",
+      "updated_at": "2026-10-19T13:44:47.027363"
+    }
+  ],
+  "old_values_restored": false,
+  "settings_unchanged_during_hotfix": true
+}

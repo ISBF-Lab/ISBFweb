@@ -1,0 +1,10 @@
+{
+  "compiled": true,
+  "modules": 180,
+  "minified": false,
+  "sha256": "12583b29bf65723c4ffc8c71f2281835e80880943019f78e7354a7454f21a662",
+  "bytes": 873511,
+  "database_writes": false,
+  "native_filter_registry_verified": true,
+  "current_user_serializer_method_verified": true
+}

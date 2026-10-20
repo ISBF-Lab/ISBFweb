@@ -133,6 +133,7 @@
   }
 
   &__title.title {
+    --isbf-preview-lines: 2;
     display: -webkit-box;
     flex: 1;
     overflow: hidden;

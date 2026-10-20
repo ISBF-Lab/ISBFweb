@@ -13,12 +13,15 @@ export default class ISBFNotifications extends Service {
   @service messageBus;
   @service siteSettings;
 
+  @tracked filterError = false;
+  @tracked savingFilter = false;
   @tracked savingStyle = false;
   @tracked styleError = false;
 
   version = 0;
 
   #channel;
+  #requestedFilter;
   #requestedStyle;
 
   constructor() {
@@ -52,6 +55,12 @@ export default class ISBFNotifications extends Service {
 
   get dotStyle() {
     return this.currentUser?.get("isbf_notification_badge_style") === "dot";
+  }
+
+  get filter() {
+    return this.currentUser?.get("isbf_notification_filter") === "unread"
+      ? "unread"
+      : "all";
   }
 
   get linkLabel() {
@@ -102,6 +111,11 @@ export default class ISBFNotifications extends Service {
   }
 
   @bind
+  retryFilter() {
+    return this.saveFilter(this.#requestedFilter);
+  }
+
+  @bind
   async saveBadgeStyle(style) {
     if (
       !this.currentUser ||
@@ -133,6 +147,43 @@ export default class ISBFNotifications extends Service {
     } finally {
       if (!this.isDestroying) {
         this.savingStyle = false;
+      }
+    }
+  }
+
+  @bind
+  async saveFilter(filter) {
+    if (
+      !this.currentUser ||
+      this.savingFilter ||
+      !["all", "unread"].includes(filter)
+    ) {
+      return;
+    }
+    const userId = this.currentUser.id;
+    this.#requestedFilter = filter;
+    this.savingFilter = true;
+    this.filterError = false;
+    try {
+      await ajax(`/u/${encodeURIComponent(this.currentUser.username)}.json`, {
+        type: "PUT",
+        data: { custom_fields: { isbf_notification_filter: filter } },
+      });
+      if (!this.isDestroying && this.currentUser?.id === userId) {
+        this.currentUser.set("isbf_notification_filter", filter);
+        this.appEvents.trigger("isbf:notification-filter-changed");
+      }
+    } catch {
+      if (!this.isDestroying && this.currentUser?.id === userId) {
+        this.filterError = true;
+        this.a11y.announce(
+          i18n(themePrefix("isbf_v2.notifications_filter_error")),
+          "assertive"
+        );
+      }
+    } finally {
+      if (!this.isDestroying) {
+        this.savingFilter = false;
       }
     }
   }

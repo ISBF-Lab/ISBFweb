@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "plugins": 66,
+  "startup_matches_production": true,
+  "source_and_assets_preserved": true,
+  "old_shared_path_bootsnap_entries_cleared": true,
+  "image_tag": "local_discourse/isbf_app:dialog-consistency-20261020-5109370e6bf4",
+  "image_id": "sha256:8179d4c6c2476f4e48bbe5142edb4a4feeb8222dfc50f02c62cab5e6c3c38101",
+  "complete_runtime_matches_running_container": true,
+  "compiled_styles_and_cachebuster_preserved": 132,
+  "active_database_theme_required": true,
+  "shared_releases_required": true,
+  "latest_tag_changed": false,
+  "production_browser_passed": true
+}

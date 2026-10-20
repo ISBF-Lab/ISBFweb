@@ -1,0 +1,22 @@
+{
+  "source_sha256": "27bec5c18ad7c823ea0909a589fe1a17c6c96b574f1cbb2533cf2db1e24162e3",
+  "previous_source_sha256": "78709c643308a2258725b63a34a95ed85c3fefc47f0500d31fa9b682c7b2afa8",
+  "source_files_including_marker": 80,
+  "changed": [
+    "web/asset-manifest.json",
+    "web/dist/index.html",
+    "web/src/scene.js"
+  ],
+  "added": [
+    "web/dist/assets/index-COff8pLO.js",
+    "web/dist/assets/scene-B67rpNrn.js"
+  ],
+  "removed": [
+    "web/dist/assets/index-r26J2wOQ.js",
+    "web/dist/assets/scene-BNFbN7l3.js"
+  ],
+  "styles_models_images_config_and_backend_preserved": true,
+  "forum_plugin_javascript_reused": true,
+  "archive_sha256": "abbe2ea905412601dbd125532b9e007e4f1d815496000167d417143e7f02b0dc",
+  "installer_sha256": "af9924d98b69133450dad48a45024b658a7f62b6e19a0bf8d2216ac6b8bddd93"
+}

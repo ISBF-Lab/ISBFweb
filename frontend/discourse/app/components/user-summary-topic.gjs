@@ -31,7 +31,12 @@ export default class UserSummaryTopic extends Component {
           {{/if}}
         </span>
         <br />
-        <a href={{@url}}>{{trustHTML @topic.fancyTitle}}</a>
+        <PluginOutlet
+          @name="user-summary-topic-title"
+          @outletArgs={{lazyHash topic=@topic url=@url postNumber=@postNumber}}
+        >
+          <a href={{@url}}>{{trustHTML @topic.fancyTitle}}</a>
+        </PluginOutlet>
       </PluginOutlet>
     </li>
   </template>

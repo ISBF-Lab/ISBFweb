@@ -1,0 +1,9 @@
+require "active_support/all"
+require "fileutils"
+require "socket"
+$LOAD_PATH.unshift(File.expand_path("lib"))
+require "temporary_db"
+task :environment
+task "db:schema:dump"
+load "lib/tasks/db_structure.rake"
+load "lib/tasks/annotate.rake"

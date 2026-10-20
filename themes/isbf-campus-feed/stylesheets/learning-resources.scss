@@ -300,38 +300,7 @@ body:has(.isbf-v2-shell--learning) #main-outlet {
   }
 }
 
-.isbf-learning-course-dialog {
-  flex: 0 0 auto;
-  max-height: 50%;
-  padding: var(--isbf-v2-space-4);
-  border-bottom: 1px solid var(--isbf-v2-border);
-  background: var(--isbf-v2-hover);
-  overflow-y: auto;
-
-  label,
-  input {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  form {
-    margin-top: var(--isbf-v2-space-3);
-  }
-}
-
-.isbf-learning-course-dialog__actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--isbf-v2-space-2);
-}
-
 .isbf-learning-share-dialog {
-  .modal-inner-container {
-    background: var(--isbf-v2-surface);
-    color: var(--isbf-v2-text);
-  }
-
   form,
   label {
     display: flex;

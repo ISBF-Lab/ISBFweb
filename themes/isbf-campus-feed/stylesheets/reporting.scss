@@ -3,10 +3,6 @@
     width: 100%;
     min-width: 0;
     max-width: none;
-    border: 1px solid var(--isbf-v2-border);
-    border-radius: var(--isbf-v2-radius-md);
-    background: var(--isbf-v2-surface);
-    color: var(--isbf-v2-text);
   }
 
   .d-modal__body {
@@ -17,8 +13,6 @@
   .d-modal__footer {
     flex-shrink: 0;
     flex-wrap: wrap;
-    gap: var(--isbf-v2-space-2);
-    background: var(--isbf-v2-surface);
   }
 
   textarea {
@@ -59,11 +53,5 @@
       position: relative;
       margin: 0;
     }
-  }
-}
-
-@media (width <= 600px) {
-  .isbf-flag-modal .d-modal__container {
-    border-radius: var(--isbf-v2-radius-md) var(--isbf-v2-radius-md) 0 0;
   }
 }

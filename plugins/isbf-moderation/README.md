@@ -1,5 +1,27 @@
 # ISBF Moderation
 
+## AI automatic review
+
+Optional automatic post review reuses the installed Discourse AI model connections. Configure
+`isbf_ai_moderation_model`, `isbf_ai_moderation_images_enabled`, and
+`isbf_ai_moderation_exempt_groups`, then enable `isbf_ai_moderation_enabled`.
+The main switch defaults to off. Without Discourse AI, manual reporting and existing holds continue
+to work and automatic review cannot be enabled.
+
+Public discussion topics, replies and edits are eligible, including anonymous posts. Private
+messages, restricted/official categories and learning resources are excluded. Exempt groups are
+checked against the real anonymous owner without adding their identity to the model prompt.
+
+Matches use the existing strict content hold and native staff review. AI source, evidence and
+model selection are recorded separately from community severe reports. No account is automatically
+silenced or suspended. Author notifications resolve shared anonymous identities to the real owner.
+Failed requests leave content published and retry after 1, 5 and 15 minutes; local rate limits
+reschedule work. Stale responses cannot act on edited content or changed settings. Disabling the
+feature does not release existing holds.
+
+See the [Chinese configuration and implementation guide](../../docs/ai-post-moderation-setup.md)
+and [isolated verification instructions](../../docs/ai-moderation-verification/README.md).
+
 Discourse Plugin，为国金综合平台提供严重举报、暂时隐藏与原生管理审核。无需修改 Core 或新建数据表。
 
 ## 接口

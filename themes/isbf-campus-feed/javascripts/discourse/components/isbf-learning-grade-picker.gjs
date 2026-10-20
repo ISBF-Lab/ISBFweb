@@ -33,6 +33,7 @@ export default class ISBFLearningGradePicker extends Component {
     <DMenu
       @ariaLabel={{i18n (themePrefix "isbf_v2.learning_grade")}}
       @contentClass="isbf-learning-grade-menu"
+      @disabled={{@disabled}}
       @icon="chevron-down"
       @label={{this.label}}
       @matchTriggerMinWidth={{true}}

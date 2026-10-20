@@ -1,0 +1,12 @@
+/usr/local/lib/ruby/gems/3.4.0/gems/bundler-4.0.11/lib/bundler/definition.rb:703:in 'Bundler::Definition#materialize': Could not find capybara-3.40.0, webmock-3.26.4, simplecov-1.1.1, test-prof-1.6.3, capybara-playwright-driver-0.5.10, puma-8.0.2, rspec-3.13.2, listen-3.10.0, certified-1.0.0, fabrication-3.0.0, mocha-3.1.0, rb-fsevent-0.11.2, rspec-rails-8.0.4, shoulda-matchers-8.0.1, rspec-html-matchers-0.10.0, debug-1.11.1, parallel_tests-5.7.0, rswag-specs-2.17.0, annotaterb-4.20.0, rspec-multi-mock-0.3.1, ruby-prof-2.0.5, bullet-8.2.0, better_errors-2.10.1, yard-0.9.45, ruby-lsp-0.26.11, ruby-lsp-rails-0.4.8, ruby-lsp-rspec-0.1.29, discourse_dev_assets-0.0.6, faker-3.5.3, matrix-0.4.3, xpath-3.2.0, crack-1.0.1, hashdiff-1.2.1, playwright-ruby-client-1.62.0, nio4r-2.7.5, rspec-core-3.13.6, rspec-expectations-3.13.5, rspec-mocks-3.13.8, rb-inotify-0.11.1, rspec-support-3.13.7, json-schema-6.2.0, uniform_notifier-1.18.0, rouge-5.1.0, literate_randomizer-0.4.0, mime-types-3.7.0, diff-lcs-1.6.2, mime-types-data-3.2026.0701 in locally installed gems (Bundler::GemNotFound)
+	from /usr/local/lib/ruby/gems/3.4.0/gems/bundler-4.0.11/lib/bundler/definition.rb:240:in 'Bundler::Definition#specs'
+	from /usr/local/lib/ruby/gems/3.4.0/gems/bundler-4.0.11/lib/bundler/definition.rb:313:in 'Bundler::Definition#specs_for'
+	from /usr/local/lib/ruby/gems/3.4.0/gems/bundler-4.0.11/lib/bundler/runtime.rb:18:in 'Bundler::Runtime#setup'
+	from /usr/local/lib/ruby/gems/3.4.0/gems/bundler-4.0.11/lib/bundler.rb:165:in 'Bundler.setup'
+	from /usr/local/lib/ruby/gems/3.4.0/gems/bundler-4.0.11/lib/bundler/setup.rb:32:in 'block in <top (required)>'
+	from /usr/local/lib/ruby/gems/3.4.0/gems/bundler-4.0.11/lib/bundler/ui/shell.rb:177:in 'Bundler::UI::Shell#with_level'
+	from /usr/local/lib/ruby/gems/3.4.0/gems/bundler-4.0.11/lib/bundler/ui/shell.rb:122:in 'Bundler::UI::Shell#silence'
+	from /usr/local/lib/ruby/gems/3.4.0/gems/bundler-4.0.11/lib/bundler/setup.rb:32:in '<top (required)>'
+	from <internal:/usr/local/lib/ruby/3.4.0/rubygems/core_ext/kernel_require.rb>:136:in 'Kernel#require'
+	from <internal:/usr/local/lib/ruby/3.4.0/rubygems/core_ext/kernel_require.rb>:136:in 'Kernel#require'
+	from bin/rspec:15:in '<main>'

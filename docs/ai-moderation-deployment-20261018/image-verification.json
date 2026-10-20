@@ -1,0 +1,13 @@
+{
+  "image_tag": "local_discourse/isbf_app:ai-moderation-20261018-c9541cf33a0a",
+  "image_id": "sha256:ff68ca10346d9330b5366448abc97719c8ded23795294e6e9bc8be9fe3e37efd",
+  "source_version": "c9541cf33a0aca9cad7dab7557f7a37f8671b6b775255fb92a0d0a156ad4c12d",
+  "complete_runtime_inventory_matches": true,
+  "plugins_verified": 66,
+  "plugin_links_markers_and_hidden_files_verified": true,
+  "runtime_startup_matches_production": true,
+  "active_theme_database_backed": true,
+  "production_container_recreated": false,
+  "shared_plugin_releases_required": true,
+  "latest_tag_changed": false
+}

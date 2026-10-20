@@ -1,0 +1,191 @@
+{
+  "harness_sha256": "e93791525b7fcc4abba6ee57627c563e7da53a2760b5eb4e5ca095aa46530900",
+  "passed": true,
+  "full_ember_client": true,
+  "production_backend_used": false,
+  "checks": [
+    "the actual compiled notification theme boots",
+    "unread dots remain centered on actions and absent from topic titles",
+    "1280px light fits the longest control without extra trailing space",
+    "1280px light keeps the menu aligned to its trigger and inside the viewport",
+    "1280px light retains the approved menu spacing and border",
+    "1280px light has no horizontal overflow",
+    "1280px light Escape restores focus to the trigger",
+    "1280px dark fits the longest control without extra trailing space",
+    "1280px dark keeps the menu aligned to its trigger and inside the viewport",
+    "1280px dark retains the approved menu spacing and border",
+    "1280px dark has no horizontal overflow",
+    "1280px dark Escape restores focus to the trigger",
+    "900px light fits the longest control without extra trailing space",
+    "900px light keeps the menu aligned to its trigger and inside the viewport",
+    "900px light retains the approved menu spacing and border",
+    "900px light has no horizontal overflow",
+    "900px light Escape restores focus to the trigger",
+    "900px dark fits the longest control without extra trailing space",
+    "900px dark keeps the menu aligned to its trigger and inside the viewport",
+    "900px dark retains the approved menu spacing and border",
+    "900px dark has no horizontal overflow",
+    "900px dark Escape restores focus to the trigger",
+    "390px light fits the longest control without extra trailing space",
+    "390px light keeps the menu aligned to its trigger and inside the viewport",
+    "390px light retains the approved menu spacing and border",
+    "390px light has no horizontal overflow",
+    "390px light Escape restores focus to the trigger",
+    "390px dark fits the longest control without extra trailing space",
+    "390px dark keeps the menu aligned to its trigger and inside the viewport",
+    "390px dark retains the approved menu spacing and border",
+    "390px dark has no horizontal overflow",
+    "390px dark Escape restores focus to the trigger",
+    "320px light fits the longest control without extra trailing space",
+    "320px light keeps the menu aligned to its trigger and inside the viewport",
+    "320px light retains the approved menu spacing and border",
+    "320px light has no horizontal overflow",
+    "320px light Escape restores focus to the trigger",
+    "320px dark fits the longest control without extra trailing space",
+    "320px dark keeps the menu aligned to its trigger and inside the viewport",
+    "320px dark retains the approved menu spacing and border",
+    "320px dark has no horizontal overflow",
+    "320px dark Escape restores focus to the trigger",
+    "RTL positions the menu at the logical end of its trigger",
+    "the client has no JavaScript runtime errors",
+    "all JavaScript and stylesheet assets are available offline"
+  ],
+  "layouts": [
+    {
+      "viewport": 1280,
+      "mode": "light",
+      "x": 714.984375,
+      "right": 873,
+      "width": 158.015625,
+      "trailing": 21,
+      "padding": "8px",
+      "radius": "8px",
+      "border": "1px",
+      "triggerEnd": 873
+    },
+    {
+      "viewport": 1280,
+      "mode": "dark",
+      "x": 714.984375,
+      "right": 873,
+      "width": 158.015625,
+      "trailing": 21,
+      "padding": "8px",
+      "radius": "8px",
+      "border": "1px",
+      "triggerEnd": 873
+    },
+    {
+      "viewport": 900,
+      "mode": "light",
+      "x": 604.984375,
+      "right": 763,
+      "width": 158.015625,
+      "trailing": 21,
+      "padding": "8px",
+      "radius": "8px",
+      "border": "1px",
+      "triggerEnd": 763
+    },
+    {
+      "viewport": 900,
+      "mode": "dark",
+      "x": 604.984375,
+      "right": 763,
+      "width": 158.015625,
+      "trailing": 21,
+      "padding": "8px",
+      "radius": "8px",
+      "border": "1px",
+      "triggerEnd": 763
+    },
+    {
+      "viewport": 390,
+      "mode": "light",
+      "x": 215.984375,
+      "right": 374,
+      "width": 158.015625,
+      "trailing": 21,
+      "padding": "8px",
+      "radius": "8px",
+      "border": "1px",
+      "triggerEnd": 374
+    },
+    {
+      "viewport": 390,
+      "mode": "dark",
+      "x": 215.984375,
+      "right": 374,
+      "width": 158.015625,
+      "trailing": 21,
+      "padding": "8px",
+      "radius": "8px",
+      "border": "1px",
+      "triggerEnd": 374
+    },
+    {
+      "viewport": 320,
+      "mode": "light",
+      "x": 145.984375,
+      "right": 304,
+      "width": 158.015625,
+      "trailing": 21,
+      "padding": "8px",
+      "radius": "8px",
+      "border": "1px",
+      "triggerEnd": 304
+    },
+    {
+      "viewport": 320,
+      "mode": "dark",
+      "x": 145.984375,
+      "right": 304,
+      "width": 158.015625,
+      "trailing": 21,
+      "padding": "8px",
+      "radius": "8px",
+      "border": "1px",
+      "triggerEnd": 304
+    }
+  ],
+  "errors": [],
+  "console_errors": [
+    "Failed to load resource: net::ERR_NAME_NOT_RESOLVED"
+  ],
+  "missing_assets": [],
+  "api_requests": [
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/isbf/notifications/groups.json",
+      "query": {
+        "tab": [
+          "all"
+        ],
+        "filter": [
+          "all"
+        ],
+        "limit": [
+          "20"
+        ]
+      }
+    }
+  ],
+  "phase": "layout",
+  "base_harness_sha256": "086e2cd04836395eef178cf7585617824d9a5f675250e39afee67835c42a0b39",
+  "fixture_accounts_are_synthetic": true,
+  "rtl": {
+    "direction": "rtl",
+    "left": 327,
+    "triggerLeft": 327,
+    "right": "-126.016px",
+    "logicalEnd": "0px"
+  }
+}

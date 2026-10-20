@@ -81,6 +81,8 @@ RSpec.describe "Frontend consistency" do
         expect(review).to have_contained_lower_navigation
         review.open_invitation
         expect(review).to have_scoped_dialog
+        expect(review).to have_consistent_dialog_shape
+        expect(review).to have_dialog_inside_viewport
         expect(review).to have_invitation_fields
         review.save_review_screenshot("#{device}-#{mode}-invitation-dialog")
         review.dismiss_dialog

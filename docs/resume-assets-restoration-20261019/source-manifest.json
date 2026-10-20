@@ -1,0 +1,30 @@
+{
+  "resume_generated_manifest": {
+    "old_filename": "isbf-resume_main.CJUFjX-lwgdm5nb.digested.js",
+    "new_filename": "isbf-resume_main.BLzK0z-s1msry4j.digested.js",
+    "before_sha256": "2b7cfc81f48ce95e6ec948dee7e105591403ac7cf8bf22e54e77ab538564d258",
+    "after_sha256": "c059ddeb382387f661f95af656520179ee857abab4b88ae60fb2964b1441ba8a",
+    "js_sha256": "9a1af608011252f2d1374662a208edafd1b88c2e823c2b78b7cd00df909b4630",
+    "captured_at_utc": "2026-10-19T13:40:57.205952+00:00"
+  },
+  "initializer": {
+    "path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/elastic-not-found.js",
+    "field_id": 479,
+    "before_sha256": "59416d1a298fdf3f57d367db0dda19e783daa9cc8f2170cb9388741c616d3028",
+    "sha256": "3a8c8f68c65971ebcedfd1a19dc5ae43ae0c82cadbbfa96a9d20643c9d0b699e"
+  },
+  "theme_publication": {
+    "published": true,
+    "published_at_utc": "2026-10-19T14:06:55Z",
+    "theme_id": 4,
+    "field_id": 479,
+    "theme_field_count": 228,
+    "total_preserved_fields": 437,
+    "javascript_url": "/theme-javascripts/b4648931e47df0a36fe88c072523d8ec4502b242.js?__ws=isbf-one.com",
+    "javascript_sha256": "1bd15644ee546579d6fec08d0de25f6eff2c5ebf76fa2aeffb698bc04bb47d39",
+    "settings_preserved": true,
+    "styles_changed": false
+  },
+  "postfix_page_verification_requested": false,
+  "source_version": "0f5ecd32352a8dc0f4f78f0df52d356e072e13aeaebefb89fe1d16437f3dadd7"
+}

@@ -1,0 +1,9 @@
+{
+  "accepted_at_utc": "2026-10-20T07:20:25.146135+00:00",
+  "user_statement": "可以了我验证了",
+  "further_browser_checks_stopped": true,
+  "automated_production_checks": "Incomplete; user acceptance ends additional verification",
+  "driver_pids_interrupted": [
+    2259822
+  ]
+}

@@ -1,5 +1,6 @@
 en:
   isbf_notifications:
     invalid_badge_style: "Choose numbers or a dot for the notification badge."
+    invalid_filter: "Choose all notifications or only unread notifications."
   site_settings:
     isbf_notifications_enabled: "Enable grouped ISBF notifications."

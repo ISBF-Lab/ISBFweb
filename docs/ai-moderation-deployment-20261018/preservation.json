@@ -1,0 +1,14 @@
+{
+  "theme_id": 4,
+  "theme_fields_preserved": 223,
+  "theme_fields_sha256": "757d459353c991bbd57584a304f50ed3657dbc4ea368a3343480fa313491a1cb",
+  "theme_invariants_preserved": true,
+  "unrelated_site_settings_preserved": true,
+  "unrelated_site_settings_sha256": "a333886b50a8b84319836de1d208cc73bc3a75215b54d14055b1c3ea162a99a8",
+  "core_revision": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "plugins": 66,
+  "other_plugins_preserved": 65,
+  "database_migrations": false,
+  "historical_scan_enqueued": false,
+  "production_test_posts_created": 0
+}

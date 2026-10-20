@@ -1,0 +1,141 @@
+{
+  "passed": true,
+  "source_expression_evaluated": true,
+  "meshes_rendered": false,
+  "production_accessed": false,
+  "platforms": [
+    {
+      "platform": "desktop",
+      "authored_near": 0.009999999776482582,
+      "samples": [
+        {
+          "progress": 0.02,
+          "pointer": -1,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": 0.07915177837650587
+        },
+        {
+          "progress": 0.02,
+          "pointer": 0,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": 0.07926078002903837
+        },
+        {
+          "progress": 0.02,
+          "pointer": 1,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": 0.07941551884284694
+        },
+        {
+          "progress": 0.04,
+          "pointer": -1,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": 0.03575517318073906
+        },
+        {
+          "progress": 0.04,
+          "pointer": 0,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": 0.03583766257765575
+        },
+        {
+          "progress": 0.04,
+          "pointer": 1,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": 0.03596868523937857
+        },
+        {
+          "progress": 0.06,
+          "pointer": -1,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": -0.0037911217276445086
+        },
+        {
+          "progress": 0.06,
+          "pointer": 0,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": -0.0037381237956246594
+        },
+        {
+          "progress": 0.06,
+          "pointer": 1,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": -0.0036340371680019246
+        },
+        {
+          "progress": 0.08,
+          "pointer": -1,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": -0.0035261564556456904
+        },
+        {
+          "progress": 0.08,
+          "pointer": 0,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": -0.003472881434362308
+        },
+        {
+          "progress": 0.08,
+          "pointer": 1,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": -0.00336854353821181
+        },
+        {
+          "progress": 0.1,
+          "pointer": -1,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": -0.00912121220099138
+        },
+        {
+          "progress": 0.1,
+          "pointer": 0,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": -0.008971506684062545
+        },
+        {
+          "progress": 0.1,
+          "pointer": 1,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": -0.008770423440832786
+        }
+      ]
+    },
+    {
+      "platform": "mobile",
+      "authored_near": 0.009999999776482582,
+      "samples": [
+        {
+          "progress": 0.02,
+          "pointer": 0,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": 0.07670815419609056
+        },
+        {
+          "progress": 0.04,
+          "pointer": 0,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": 0.03376737659706563
+        },
+        {
+          "progress": 0.06,
+          "pointer": 0,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": -0.005581867343725122
+        },
+        {
+          "progress": 0.08,
+          "pointer": 0,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": -0.005065652938711197
+        },
+        {
+          "progress": 0.1,
+          "pointer": 0,
+          "near": 0.009999999776482582,
+          "rigid_sole_minimum_depth": -0.010286345721656431
+        }
+      ]
+    }
+  ],
+  "coverage": "Actual clipping expressions, animated foot-bone bounds and pointer extremes; final visual acceptance belongs to user"
+}

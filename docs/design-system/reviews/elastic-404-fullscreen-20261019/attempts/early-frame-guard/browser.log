@@ -1,0 +1,17 @@
+1280-light: actual localized template renders
+1280-light: no horizontal overflow
+1280-light: the page occupies the entire viewport
+1280-light: digits use the available viewport width
+1280-light: digits use the active site accent
+1280-light: actual light/dark palette is active
+the actual two-dimensional WebGL field renders
+pointer movement deforms the rendered field in two dimensions
+1280-light: discovering the button does not start a game
+Traceback (most recent call last):
+  File "/review/checks/browser.py", line 89, in <module>
+    check(page.locator("[data-current]").inner_text() != "00:00.0", label + ": clock begins after launch")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/review/checks/browser.py", line 25, in check
+    assert condition, message
+           ^^^^^^^^^
+AssertionError: 1280-light: clock begins after launch

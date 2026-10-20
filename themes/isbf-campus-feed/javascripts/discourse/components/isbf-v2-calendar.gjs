@@ -13,6 +13,7 @@ import {
   officialOccursOn,
   officialTimeLabel,
 } from "../lib/official-calendar";
+import ISBFCalendarEntryEditor from "./isbf-calendar-entry-editor";
 import ISBFCalendarNoteEditor from "./isbf-calendar-note-editor";
 import ISBFCalendarUpdateDialog from "./isbf-calendar-update-dialog";
 
@@ -52,14 +53,6 @@ export default class ISBFV2Calendar extends Component {
   @tracked focusedEntryId = null;
   @tracked isLoading = false;
   @tracked loadError = false;
-  @tracked isEditing = false;
-  @tracked editingId = null;
-  @tracked title = "";
-  @tracked note = "";
-  @tracked startInput = "";
-  @tracked endInput = "";
-  @tracked allDay = false;
-  @tracked saveError = false;
 
   weekdays = WEEKDAYS.map((day) => i18n(themePrefix(`isbf_v2.week_${day}`)));
   #requestNumber = 0;
@@ -363,15 +356,9 @@ export default class ISBFV2Calendar extends Component {
 
   @action
   newEntry() {
-    this.editingId = null;
-    this.title = "";
-    this.note = "";
-    this.startInput = `${this.selectedDate}T09:00`;
-    this.endInput = `${this.selectedDate}T10:00`;
-    this.allDay = false;
-    this.saveError = false;
-    this.isEditing = true;
-    scheduleOnce("afterRender", this, this.#focusEditor);
+    this.modal.show(ISBFCalendarEntryEditor, {
+      model: { selectedDate: this.selectedDate, onSaved: this.loadMonth },
+    });
   }
 
   @action
@@ -382,116 +369,9 @@ export default class ISBFV2Calendar extends Component {
       });
       return;
     }
-    this.editingId = entry.id;
-    this.title = entry.title;
-    this.note = entry.note || "";
-    this.allDay = entry.all_day;
-    this.startInput = entry.all_day
-      ? entry.starts_at.slice(0, 10)
-      : this.#localInput(entry.starts_at);
-    this.endInput = entry.all_day
-      ? new Date(new Date(entry.ends_at).getTime() - 86400000)
-          .toISOString()
-          .slice(0, 10)
-      : this.#localInput(entry.ends_at);
-    this.saveError = false;
-    this.isEditing = true;
-    scheduleOnce("afterRender", this, this.#focusEditor);
-  }
-
-  @action
-  closeEditor() {
-    this.isEditing = false;
-  }
-
-  @action
-  editorKeydown(event) {
-    if (event.key === "Escape") {
-      this.closeEditor();
-    }
-  }
-
-  @action
-  updateTitle(event) {
-    this.title = event.target.value;
-  }
-
-  @action
-  updateNote(event) {
-    this.note = event.target.value;
-  }
-
-  @action
-  updateStart(event) {
-    this.startInput = event.target.value;
-  }
-
-  @action
-  updateEnd(event) {
-    this.endInput = event.target.value;
-  }
-
-  @action
-  toggleAllDay(event) {
-    this.allDay = event.target.checked;
-    this.startInput = this.allDay
-      ? this.startInput.slice(0, 10)
-      : `${this.startInput.slice(0, 10)}T09:00`;
-    this.endInput = this.allDay
-      ? this.endInput.slice(0, 10)
-      : `${this.endInput.slice(0, 10)}T10:00`;
-  }
-
-  @action
-  async saveEntry(event) {
-    event.preventDefault();
-    this.saveError = false;
-
-    let startsAt;
-    let endsAt;
-
-    try {
-      startsAt = this.allDay
-        ? `${this.startInput}T00:00:00.000Z`
-        : new Date(this.startInput).toISOString();
-      endsAt = this.allDay
-        ? new Date(
-            new Date(`${this.endInput}T00:00:00.000Z`).getTime() + 86400000
-          ).toISOString()
-        : new Date(this.endInput).toISOString();
-    } catch {
-      this.saveError = true;
-      return;
-    }
-
-    if (!this.title.trim() || endsAt <= startsAt) {
-      this.saveError = true;
-      return;
-    }
-
-    try {
-      await ajax(
-        this.editingId
-          ? `/isbf/api/entries/${this.editingId}.json`
-          : "/isbf/api/entries.json",
-        {
-          type: this.editingId ? "PATCH" : "POST",
-          data: {
-            entry: {
-              title: this.title.trim(),
-              note: this.note.trim(),
-              starts_at: startsAt,
-              ends_at: endsAt,
-              all_day: this.allDay,
-            },
-          },
-        }
-      );
-      this.isEditing = false;
-      await this.loadMonth();
-    } catch {
-      this.saveError = true;
-    }
+    this.modal.show(ISBFCalendarEntryEditor, {
+      model: { entry, onSaved: this.loadMonth },
+    });
   }
 
   @action
@@ -542,17 +422,6 @@ export default class ISBFV2Calendar extends Component {
     );
     this.selectedDate = dateKey(this.visibleMonth);
     void this.loadMonth();
-  }
-
-  #focusEditor() {
-    document
-      .querySelector(".isbf-v2-calendar__editor input[type=text]")
-      ?.focus();
-  }
-
-  #localInput(value) {
-    const date = new Date(value);
-    return `${dateKey(date)}T${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
   }
 
   #occursOn(item, key) {
@@ -793,70 +662,6 @@ export default class ISBFV2Calendar extends Component {
         </section>
       </div>
 
-      {{#if this.isEditing}}
-        <div
-          aria-label={{i18n (themePrefix "isbf_v2.calendar_personal")}}
-          aria-modal="true"
-          class="isbf-v2-calendar__editor-backdrop"
-          role="dialog"
-          tabindex="-1"
-          {{on "keydown" this.editorKeydown}}
-        >
-          <form class="isbf-v2-calendar__editor" {{on "submit" this.saveEntry}}>
-            <div class="isbf-v2-calendar__editor-heading"><h2>{{i18n
-                  (themePrefix "isbf_v2.calendar_personal")
-                }}</h2><button
-                aria-label={{i18n (themePrefix "isbf_v2.calendar_close")}}
-                type="button"
-                {{on "click" this.closeEditor}}
-              >{{dIcon "xmark"}}</button></div>
-            <label>{{i18n (themePrefix "isbf_v2.calendar_title")}}<input
-                maxlength="120"
-                required
-                type="text"
-                value={{this.title}}
-                {{on "input" this.updateTitle}}
-              /></label>
-            <label class="isbf-v2-calendar__checkbox"><input
-                checked={{this.allDay}}
-                type="checkbox"
-                {{on "change" this.toggleAllDay}}
-              />{{i18n (themePrefix "isbf_v2.calendar_all_day")}}</label>
-            <div class="isbf-v2-calendar__form-dates"><label>{{i18n
-                  (themePrefix "isbf_v2.calendar_start")
-                }}<input
-                  required
-                  type={{if this.allDay "date" "datetime-local"}}
-                  value={{this.startInput}}
-                  {{on "input" this.updateStart}}
-                /></label><label>{{i18n
-                  (themePrefix "isbf_v2.calendar_end")
-                }}<input
-                  required
-                  type={{if this.allDay "date" "datetime-local"}}
-                  value={{this.endInput}}
-                  {{on "input" this.updateEnd}}
-                /></label></div>
-            <label>{{i18n (themePrefix "isbf_v2.calendar_note")}}<textarea
-                maxlength="2000"
-                rows="3"
-                value={{this.note}}
-                {{on "input" this.updateNote}}
-              ></textarea></label>
-            {{#if this.saveError}}<p
-                class="isbf-v2-calendar__error"
-                role="alert"
-              >{{i18n (themePrefix "isbf_v2.calendar_save_error")}}</p>{{/if}}
-            <div class="isbf-v2-calendar__form-actions"><button
-                type="button"
-                {{on "click" this.closeEditor}}
-              >{{i18n (themePrefix "isbf_v2.calendar_cancel")}}</button><button
-                class="isbf-v2-calendar__primary"
-                type="submit"
-              >{{i18n (themePrefix "isbf_v2.calendar_save")}}</button></div>
-          </form>
-        </div>
-      {{/if}}
     </main>
   </template>
 }

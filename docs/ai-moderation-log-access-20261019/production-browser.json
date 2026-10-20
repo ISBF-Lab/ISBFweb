@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "views": [
+    {
+      "viewport": "mobile",
+      "checks": [
+        "the fixed admin URL filters real logs to post moderation",
+        "the native moderation log table finishes rendering actual records",
+        "topic search finds the supplied post and reply moderation calls",
+        "each real record includes its source-post link and duration",
+        "the native detail view opens the correct real moderation record",
+        "the response tab displays the model's no-review decision",
+        "the log detail closes normally on this viewport"
+      ],
+      "rows_loaded": 9,
+      "retention": {
+        "detailed_days": 0,
+        "summary_days": 180
+      },
+      "topic_filter_post_ids": [
+        501,
+        502,
+        503,
+        504,
+        505,
+        508
+      ],
+      "topic_filter_topic_ids": [
+        280
+      ],
+      "verified_log_id": 35
+    },
+    {
+      "viewport": "desktop",
+      "checks": [
+        "the fixed admin URL filters real logs to post moderation",
+        "the native moderation log table finishes rendering actual records",
+        "topic search finds the supplied post and reply moderation calls",
+        "each real record includes its source-post link and duration",
+        "the native detail view opens the correct real moderation record",
+        "the response tab displays the model's no-review decision",
+        "the log detail closes normally on this viewport"
+      ],
+      "rows_loaded": 9,
+      "retention": {
+        "detailed_days": 0,
+        "summary_days": 180
+      },
+      "topic_filter_post_ids": [
+        501,
+        502,
+        503,
+        504,
+        505,
+        508
+      ],
+      "topic_filter_topic_ids": [
+        280
+      ],
+      "verified_log_id": 35
+    }
+  ],
+  "javascript_errors": [],
+  "failed_assets": [],
+  "blocked_writes": 2,
+  "production_content_submitted": false,
+  "account_preferences_changed": false,
+  "transport": {
+    "get_requests": 25,
+    "static_cache_hits": 239,
+    "tls_verified": true,
+    "browser_network": "none",
+    "production_write_requests": 0
+  }
+}

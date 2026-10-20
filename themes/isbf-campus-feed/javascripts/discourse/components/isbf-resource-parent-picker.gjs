@@ -39,6 +39,7 @@ export default class ISBFResourceParentPicker extends Component {
     <DMenu
       @ariaLabel={{this.ariaLabel}}
       @contentClass="isbf-learning-grade-menu"
+      @disabled={{@disabled}}
       @icon="chevron-down"
       @label={{this.label}}
       @matchTriggerMinWidth={{true}}

@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "complete_workspace_common_scss": true,
+  "palettes": [
+    "light",
+    "dark"
+  ],
+  "locales": [
+    "en",
+    "zh_CN"
+  ],
+  "common_scss_sha256": "a6d2663b9017c5dbb20301e942a07e028d0bf576cd518d1fa499b300d80225d8"
+}

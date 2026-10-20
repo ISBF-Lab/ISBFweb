@@ -1,0 +1,47 @@
+[
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-item.gjs",
+    "compiled": true,
+    "sha256": "78a4065ca5a04846df5c39c9e092412152311f14e0c30ed0ea0156628e7a3076"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-post-preview.gjs",
+    "compiled": true,
+    "sha256": "b6ab018436d6ed3c8fe9bd239587fe469aba4d2c6f9fed31fdf252cf6729faab"
+  },
+  {
+    "file": "themes/isbf-campus-feed/test/integration/continue-reading-test.gjs",
+    "compiled": true,
+    "sha256": "012c24f060936fd5d7e8218686a44d2d1cd7e1638b785a7ce2c175c9f7ac99ca"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading.gjs",
+    "compiled": true,
+    "sha256": "ff18039db5cdd3a72b21db4b05c72c859e2a2a4f97be84be55de3df1de7136af"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-footer.gjs",
+    "compiled": true,
+    "sha256": "89f90dc6908b90579f35332390fad5084666d4705041f39a193676ae0f08d4b0"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/lib/optional-topic-title.js",
+    "compiled": true,
+    "sha256": "7ee6b48b6017c112ea9ac9cc70ca7ca3f915c0dba38bcacaa5e78f20a8e882c6"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/lib/feed-post-loader.js",
+    "compiled": true,
+    "sha256": "2e4faba1cbbe6dab422a07b46733b59ac9d0aa13a27fee71a0b9f2752c1edc76"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/lib/post-preview.js",
+    "compiled": true,
+    "sha256": "926d1419dd9b3ff985aa00b7027b89eeabc7b063cd5aef7b622ce51c3c5505ce"
+  },
+  {
+    "file": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-continue-reading.gjs",
+    "compiled": true,
+    "sha256": "aacfb77d391cb9da91720bff5cb49441254d6488b200c15e4262cffedffac1fd"
+  }
+]

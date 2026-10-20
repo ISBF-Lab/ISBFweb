@@ -208,7 +208,7 @@
 ## 缺失与人工确认
 
 - 当前数据库实际色板和 `--font-family` 值。
-- 全局标题层级、通用 Card、设置表单，以及通用 modal 的宽度/页边距。
+- 全局标题层级、通用 Card及本轮以外设置表单；前台弹窗外框和留边见2026-10-20补充。
 - 所有按钮的 loading、disabled、危险/成功状态是否需要共同视觉规格。
 - 通用输入框的 hover、focus、invalid、disabled 视觉规则；已有认证输入和右栏搜索只是局部变体。
 - 全站空态、骨架屏、成功提示与错误容器的设计。
@@ -315,3 +315,43 @@ C19仅用于当前用户的分组通知：组外距、组间距及内距复用sp
 来源与验证见[审阅记录](reviews/notifications-layout-20261018/README.md)。
 
 2026-10-18通知页层级与整行点击已按用户授权发布；活动主题4项字段的确切合并源、插件及镜像核对、两端只读验证见[发布记录](deployments/notifications-layout-20261018/README.md)。C19仅限本次通知区域。
+
+## 2026-10-19 通知菜单宽度修订
+
+用户确认通知菜单改为按最长一行内容确定宽度，取代该菜单原190px最小宽度。
+面板最大宽度为视口减两侧space-4，内距space-2、行内距space-3、1px边框、radius-sm及既有阴影保持。
+保存错误的font-xs及space-3内距沿用已有账号偏好错误，文字按面板宽度换行。
+此规则仅用于通知菜单，不新增全局token；实际来源和验证见[局部记录](reviews/notifications-menu-memory-20261019/README.md)。
+
+2026-10-19通知菜单收窄与账号筛选记忆已按用户授权上线；精确增量源码、完整插件及镜像核对、两端只读页面和验证边界见[发布记录](deployments/notifications-menu-memory-20261019/README.md)。最终视觉待用户核验。
+
+## 2026-10-19 个人总结正文预览
+
+`.isbf-post-preview.--summary`沿用`--isbf-v2-accent`链接色，局部`--isbf-preview-lines: 2`来自用户确认的紧凑文字选择。活动缩略图继续复用C12的尺寸、radius-sm及space-2；无新增全局token。来源和边界见[本次记录](reviews/profile-previews-20261019/README.md)。
+
+2026-10-19补充：个人活动与总结预览修复已上线，用户确认“没有问题，可以了”。本次验收仅限这两页的无标题正文与图片预览；确切合并源、原生22项布局检查、资源/镜像核对及线上自动化限制见[发布记录](deployments/profile-previews-20261019/README.md)。不扩大其他区域的Approved范围。
+
+## 2026-10-19 弹性404局部组合
+
+C20不增加全局token。背景、数字/球、主文字、次级文字、边框和焦点分别沿用V2 background、accent、text、muted、border-strong和focus-ring；Canvas读取计算后的变量。3:2游戏比例、132px/44px入口及巨型数字的按容器比例绘制仅为本次确认的404局部规则。实际线上色板与媒体条件见[审阅记录](reviews/elastic-404-20261019/README.md)。
+
+后续用户明确要求全屏：404根容器覆盖动态视口，不复用600px信息流列宽；装饰数字按可用宽高绘制，3:2仅约束游戏区域。二维弹性网格参数与速度曲线是C20局部交互参数，不作为全站视觉token。实际BOC发布脚本的来源、REA证据及复用边界见[修订记录](reviews/elastic-404-fullscreen-20261019/README.md)。
+
+## 注册用户名提醒（2026-10-19）
+
+认证用户名提醒复用 13px、1.6 行高、居中及 `var(--tertiary)`。主题蓝色由用户明确指定，没有新增固定颜色或全局 token。
+见[局部实现与来源](reviews/auth-username-hint-20261019/README.md)。
+
+2026-10-20补充：注册用户名主题蓝色提醒已按授权增量发布，既有内容保留；
+见[确切来源及恢复边界](deployments/auth-username-hint-20261019/README.md)。最终视觉待用户核验。
+
+## 2026-10-20 接着看看无标题修复
+
+用户确认将此前的无标题正文规则补齐到C17两种推荐来源。新增文字预览模式沿用现有两行标题、字体、颜色和直角边框，首帖摘要与原未读跳转位置分别保留。实际三字段来源、两端验证与回退见[发布记录](deployments/continue-reading-previews-20261020/README.md)；不扩大其他区域的Approved范围。
+
+## 2026-10-20 前台弹窗复用
+
+用户以头像修改截图确认C07扩展：外框radius-md（16px）及1px语义边框，标题/正文/底部space-4；文字操作按钮radius-pill、44px最小高、font-sm/weight-medium，主动作accent/contrast，危险动作danger。手机≤600px四周space-4加安全区，正文滚动；取代旧D07在本范围的手机全宽外框。保留业务宽度、定位和已有large/max用途，不从截图估算新宽度。没有新增颜色、字体或全局圆角变量；例外和来源见[弹窗规范](dialogs.md)。
+
+2026-10-20补充：前台弹窗共享外观已按授权上线，184个模块与132个样式目标完整编译，
+既有功能及数据加载经两端只读确认；[源码、证据和恢复边界](deployments/dialog-consistency-20261020/README.md)。最终视觉待用户核验。

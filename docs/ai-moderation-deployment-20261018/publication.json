@@ -1,0 +1,15 @@
+{
+  "source_files_installed": 1,
+  "source_version": "c9541cf33a0aca9cad7dab7557f7a37f8671b6b775255fb92a0d0a156ad4c12d",
+  "before_restart_capacity": {
+    "host_available_bytes": 1682448384,
+    "effective_available_bytes": 1682448384
+  },
+  "web_restarted": true,
+  "database_migrations": false,
+  "theme_modified": false,
+  "restart_seconds": 0.6,
+  "initial_source_files_installed": 12,
+  "compatible_json_delta_files": 1,
+  "web_restarts_total": 2
+}

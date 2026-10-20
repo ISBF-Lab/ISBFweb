@@ -1,0 +1,32 @@
+{
+  "design_scope": "A13/C08 registration username hint only",
+  "text": "用户名填写后不可更改",
+  "color": "var(--tertiary)",
+  "files": [
+    {
+      "path": "frontend/discourse/app/components/code-login-form.gjs",
+      "snapshot": "sources/frontend/discourse/app/components/code-login-form.gjs.txt",
+      "sha256": "fdd657aa0a07df64db94d4b8d91fad35f65957a5b2aeb2e2f957ec3238fbaa12"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/components/academy-auth-page.gjs",
+      "snapshot": "sources/plugins/discourse-academy-roles/assets/javascripts/discourse/components/academy-auth-page.gjs.txt",
+      "sha256": "6ea58d12cebfe55696249d57e491d46a0ae36ae31e0ad5f309a3f4b3e8c52402"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/stylesheets/common/academy-auth.scss",
+      "snapshot": "sources/plugins/discourse-academy-roles/assets/stylesheets/common/academy-auth.scss.txt",
+      "sha256": "e55094b8809a97aadf90c9f544dd92a3d1f9f1a2f13af09d00b2fd02fac1fde4"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/client.en.yml",
+      "snapshot": "sources/plugins/discourse-academy-roles/config/locales/client.en.yml.txt",
+      "sha256": "4b6b285a6b66ca0baa38d6fa28cdcd5d82126b68e51697751d017509840a6263"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/client.zh_CN.yml",
+      "snapshot": "sources/plugins/discourse-academy-roles/config/locales/client.zh_CN.yml.txt",
+      "sha256": "62a04f73473540d709a6cc0b6a11dfb541bdbe5b92a5e7d08f6769fa2aac7ba8"
+    }
+  ]
+}

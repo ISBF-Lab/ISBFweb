@@ -1,0 +1,9 @@
+{
+  "shared_links_preserved_from_actual_runtime": [
+    {
+      "plugin": "isbf-learning",
+      "base_link": "/shared/isbf-learning-releases/e502a31a0951097d69c2410a69e07801f11e21fe/isbf-learning",
+      "live_link": "/shared/isbf-learning-releases/51724c588e988ff43f62b151119e997a17688c00/isbf-learning"
+    }
+  ]
+}

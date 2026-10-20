@@ -1,0 +1,77 @@
+{
+  "checked_at_utc": "2026-10-18T15:44:05Z",
+  "topic_id": 280,
+  "topic_url": "https://isbf-one.com/t/topic/280?sort=old",
+  "mode": "Read-only check of the user-supplied topic; no replay, new model request or content modification",
+  "posts": [
+    {
+      "id": 501,
+      "post_number": 1,
+      "created_at": "2026-10-18T15:29:27Z",
+      "hidden": false,
+      "pending": null,
+      "scan_state": {
+        "status": "completed",
+        "updated_at": "2026-10-18T15:29:33.231544Z"
+      },
+      "currently_eligible": true,
+      "exempt_author": false,
+      "strict_hold": false,
+      "reviewable_id": null
+    },
+    {
+      "id": 502,
+      "post_number": 2,
+      "created_at": "2026-10-18T15:30:18Z",
+      "hidden": false,
+      "pending": null,
+      "scan_state": {
+        "status": "completed",
+        "updated_at": "2026-10-18T15:30:22.185602Z"
+      },
+      "currently_eligible": true,
+      "exempt_author": false,
+      "strict_hold": false,
+      "reviewable_id": null
+    }
+  ],
+  "model_calls": [
+    {
+      "id": 36,
+      "post_id": 502,
+      "response_status": 200,
+      "created_at": "2026-10-18T15:30:19Z",
+      "duration_msecs": 2635,
+      "response_tokens": 266,
+      "decision": {
+        "needs_review": false,
+        "rule": "none"
+      },
+      "error": null
+    },
+    {
+      "id": 35,
+      "post_id": 501,
+      "response_status": 200,
+      "created_at": "2026-10-18T15:29:29Z",
+      "duration_msecs": 3952,
+      "response_tokens": 501,
+      "decision": {
+        "needs_review": false,
+        "rule": "none"
+      },
+      "error": null
+    }
+  ],
+  "pending_count": 0,
+  "queue_sizes": {
+    "default": 0,
+    "scheduled": 0,
+    "retry": 0
+  },
+  "state_counts": {
+    "completed": 2
+  },
+  "normal_pass_is_silent": true,
+  "post_body_exported": false
+}

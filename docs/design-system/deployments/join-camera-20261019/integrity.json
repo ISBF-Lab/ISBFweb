@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "core_revision": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "core_files_preserved": 13858,
+  "plugin_count": 66,
+  "other_plugins_preserved": 65,
+  "source_files_verified": 80,
+  "source_sha256": "27bec5c18ad7c823ea0909a589fe1a17c6c96b574f1cbb2533cf2db1e24162e3",
+  "hidden_files_symlinks_and_release_markers_preserved": true,
+  "forum_scripts_and_asset_manifest_preserved": true,
+  "active_theme_id": 4,
+  "active_theme_fields_preserved": 225,
+  "theme_and_site_settings_preserved": true,
+  "application_count_before": 1,
+  "application_count_after": 1,
+  "schema_preserved": true
+}

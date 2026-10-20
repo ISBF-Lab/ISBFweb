@@ -1,0 +1,434 @@
+{
+  "change": "foreground-dialog-consistency-20261020",
+  "git_head": "f0816996e77661b52d3c5c2aba8b68e178195fc6",
+  "source_version": "4b99203c0fa076d70b5883ed3c4ee385f6bcf35218d25fc7059e61ace83fe216",
+  "working_tree": "Contains unrelated existing changes; snapshots preserve the actual complete files, not exclusive ownership of all file content",
+  "before_capture": "22 original scope files captured before implementation; later added files have no before snapshot claim",
+  "reference": {
+    "path": "reference.png",
+    "sha256": "4e52d0b15b8c74afa80f4565fcf958aa0f1edddffb80c5e9cc8a4368a48b8ecc"
+  },
+  "acceptance": "User confirmed foreground frame, text actions and mobile gutters; final visual review pending",
+  "production_deployed": false,
+  "verification": {
+    "browser_checks_passed": 170,
+    "source_candidates": 174,
+    "policy_violations": 0,
+    "checker_tests_passed": 4,
+    "native_qunit": "Unavailable: Rails is stopped",
+    "native_rspec": "Unavailable: test gems missing"
+  },
+  "sources": [
+    {
+      "path": ".github/workflows/isbf-frontend-consistency.yml",
+      "sha256": "769a80e661faec9a199299ab401cedf6261d911306f3f43aff0ec09b8d5c14f8",
+      "snapshot": "source/.github/workflows/isbf-frontend-consistency.yml.txt",
+      "before_sha256": "7d05d6e4bb50ee40954bcc143b09e9d68f368ba560809777688333b9fdb841d7",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/.github/workflows/isbf-frontend-consistency.yml"
+    },
+    {
+      "path": "AI-AGENTS.md",
+      "sha256": "2197882a770e48bd6a5e811ec13de650b90a12fcd41502f68bb5cca683043d7c",
+      "snapshot": "source/AI-AGENTS.md.txt",
+      "before_sha256": "c0b8b652708b615935cd3abd1ca9043381fa580941f5e996304655adec44059e",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/AGENTS.md"
+    },
+    {
+      "path": "docs/design-system/components.md",
+      "sha256": "a0f420341134697c2c0533ef4aa615190c6ad4ade67ddc4f7fe6bd9e0d74ff0f",
+      "snapshot": "source/docs/design-system/components.md.txt",
+      "before_sha256": "7cfdd6b217f9c540d74d09d4071cab008e50ea1b42d6c5009bd467ad46b557c8",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/docs/design-system/components.md"
+    },
+    {
+      "path": "docs/design-system/dialog-exceptions.json",
+      "sha256": "0c32bfb1f5bce2845a0b151fc684f0afd54ccd01c71c896dc391a10eddf20caa",
+      "snapshot": "source/docs/design-system/dialog-exceptions.json.txt"
+    },
+    {
+      "path": "docs/design-system/dialogs.md",
+      "sha256": "2b5b5f84cf44b951f6e56b5f4a61c09f5a82fdc7d970cea8a681530da82cfa13",
+      "snapshot": "source/docs/design-system/dialogs.md.txt"
+    },
+    {
+      "path": "docs/design-system/reference-map.md",
+      "sha256": "ff89d8a5a7604a130462d6ccfa18a01234184652d3a0f4b49e304b377448550d",
+      "snapshot": "source/docs/design-system/reference-map.md.txt",
+      "before_sha256": "cd6b04b35c30dc2a96972b5361d6d1891197a7f640191616f3e50e8479c20297",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/docs/design-system/reference-map.md"
+    },
+    {
+      "path": "docs/design-system/references/README.md",
+      "sha256": "65bb282c9d80fd3058727eec845dd848cfa8f3602e729261f9de86bec7ff49db",
+      "snapshot": "source/docs/design-system/references/README.md.txt",
+      "before_sha256": "9b87efcce5c4f07a9c5072dea3bf135feb48754254a4d453243bd2fbebf064a3",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/docs/design-system/references/README.md"
+    },
+    {
+      "path": "docs/design-system/references/manifest.json",
+      "sha256": "8c34d8a13d66e73f6674b8defb594bf7cfd709cf21deae6f66b85c4bb0dd42bf",
+      "snapshot": "source/docs/design-system/references/manifest.json.txt",
+      "before_sha256": "052e9f59ea16a1dfff08a2cd34a8bc221e845856a7b53f7fbc532ac6dd19b73d",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/docs/design-system/references/manifest.json"
+    },
+    {
+      "path": "docs/design-system/tokens.md",
+      "sha256": "1f270dca388569f9c692a2482c3b099afa5912b7d29c59a8ca66857284c363d6",
+      "snapshot": "source/docs/design-system/tokens.md.txt",
+      "before_sha256": "83531b02be48fe97a30527c1ff3740dbcccdce4548806f264ed9bfc1c5c2f67f",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/docs/design-system/tokens.md"
+    },
+    {
+      "path": "docs/design-system/ui-status.md",
+      "sha256": "e686ade9fc449b0c254c8023cd59c3170f7a121cb7e787416d984d54b99407c0",
+      "snapshot": "source/docs/design-system/ui-status.md.txt",
+      "before_sha256": "22e4d35211ea3bd69eac6a6d664cebd4446097177333b745574d866fddbd4596",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/docs/design-system/ui-status.md"
+    },
+    {
+      "path": "package.json",
+      "sha256": "d83d8dc621b60af6ba1a15f029c296b37a75e04c6afe3e512b912750dc27931b",
+      "snapshot": "source/package.json.txt"
+    },
+    {
+      "path": "plugins/isbf-resume/assets/stylesheets/isbf-resume.scss",
+      "sha256": "c6f4c3538f000aedccd4d770ea2399853e6219bd268559f42a92d30c930721ca",
+      "snapshot": "source/plugins/isbf-resume/assets/stylesheets/isbf-resume.scss.txt",
+      "before_sha256": "8fe40770f403a118c7a6fd25c50d8ebb49c9968bc26962ab4522b602e9347ea0",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/plugins/isbf-resume/assets/stylesheets/isbf-resume.scss"
+    },
+    {
+      "path": "script/check-isbf-dialogs.mjs",
+      "sha256": "2fa788c31b5f7e8714decbfcf377c0fdad544c9532db74e64ae9659586f0cf1c",
+      "snapshot": "source/script/check-isbf-dialogs.mjs.txt"
+    },
+    {
+      "path": "script/check-isbf-dialogs.test.mjs",
+      "sha256": "2e888df28d3919474408bb868f3b455b3a7e142deaeef738b19cbe5796bd2553",
+      "snapshot": "source/script/check-isbf-dialogs.test.mjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "sha256": "9c2db62485dacda1be06532a01525bc5d5e937acabe44cf4865e3b2aea4f226d",
+      "snapshot": "source/themes/isbf-campus-feed/common/common.scss.txt",
+      "before_sha256": "a8c621ea3c582a37f1cb54a0fec833fd1881288ee62f2971e4630f119e7bc284",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/themes/isbf-campus-feed/common/common.scss"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-calendar-entry-editor.gjs",
+      "sha256": "e714dc7947607159d7edbe189dcbf99f6e7b700c71d96fd0d03eb136fc06455d",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-calendar-entry-editor.gjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-frontend-scope.gjs",
+      "sha256": "558832aeee434aaae7da845a51826dab1d029a55fecccfa35e47a78f2bb5d822",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-frontend-scope.gjs.txt",
+      "before_sha256": "d0cc3f6afb5539aa73a51ecfd47ccd3baa4c255f2bc53a68e221002dda3f31e3",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/themes/isbf-campus-feed/javascripts/discourse/components/isbf-frontend-scope.gjs"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-course-dialog.gjs",
+      "sha256": "d9c793678f55158f5dccc58ffec281e9958552751d0ad5db534185c603c04058",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-course-dialog.gjs.txt",
+      "before_sha256": "c525598642dbaa01e47a7e2017d5f3b2e36e2b020588e4bc5d645043739d6c10",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-course-dialog.gjs"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-grade-picker.gjs",
+      "sha256": "5bc6ecbd17717bef5085508fdc47dccca4da8466e38abf927453b39b2314426f",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-grade-picker.gjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-resource-directory-dialog.gjs",
+      "sha256": "5fbaf465b61fdd87463833fd004a1a801aef5be526c91a4b227aed0dc7664afe",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-resource-directory-dialog.gjs.txt",
+      "before_sha256": "104938ec70c5668402b565fcfa6bc2612d3d8631e8ca4659ec89f2d5779f603a",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/themes/isbf-campus-feed/javascripts/discourse/components/isbf-resource-directory-dialog.gjs"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-resource-parent-picker.gjs",
+      "sha256": "8af4f686983e516f1b66a7cbc7a10c8c895cfc5027f2a5801f53ea5dc01aec68",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-resource-parent-picker.gjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-calendar.gjs",
+      "sha256": "a2a1f01424b2416e748084266fca9c7e1c1bb00bae1f4a30058b2706dd3c6948",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-calendar.gjs.txt",
+      "before_sha256": "9931bec8b543a5b711623ac0c46ca07e041526ae60023a6bc16af2b8dcf953a7",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-calendar.gjs"
+    },
+    {
+      "path": "themes/isbf-campus-feed/spec/system/frontend_consistency_spec.rb",
+      "sha256": "f6e7b25a153e41b0187a45e0f8f8bef811af56fd02a517a579c56801f2b22e74",
+      "snapshot": "source/themes/isbf-campus-feed/spec/system/frontend_consistency_spec.rb.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/spec/system/page_objects/pages/frontend_consistency.rb",
+      "sha256": "c005135f91d8e9c5ebc8480b89025c0c6877c2fe8d1fa4e716b4ba922db7f7ee",
+      "snapshot": "source/themes/isbf-campus-feed/spec/system/page_objects/pages/frontend_consistency.rb.txt",
+      "before_sha256": "7034c4f43dc791f4088500ceb4ca5cd7200e7ae44381482e61b2f9859d8ce0cf",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/themes/isbf-campus-feed/spec/system/page_objects/pages/frontend_consistency.rb"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/dialog-consistency.scss",
+      "sha256": "3efe1dc3b05daa691ba9d09cfd4ce66c4ed87dfe221856f51373db647d811d54",
+      "snapshot": "source/themes/isbf-campus-feed/stylesheets/dialog-consistency.scss.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/frontend-consistency.scss",
+      "sha256": "63c38e0e2a690c3dbfafa584c78ee90c61c6fd286919763ca0cd3f5fd34bc331",
+      "snapshot": "source/themes/isbf-campus-feed/stylesheets/frontend-consistency.scss.txt",
+      "before_sha256": "b690f4d7259df258c1dcc0dcd3b584b9cfc98d5051c46e88fe8e420ae9bf5c49",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/themes/isbf-campus-feed/stylesheets/frontend-consistency.scss"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/learning-resources.scss",
+      "sha256": "8af2a5d07d19bdcbcdc6ca91c55a3897090206e5e14ace4443d135dbdcb92d96",
+      "snapshot": "source/themes/isbf-campus-feed/stylesheets/learning-resources.scss.txt",
+      "before_sha256": "01d52b9bee32b22dd86c1e5d4ff79b74d467a2dec15b6e8b3e3dbb150db56728",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/themes/isbf-campus-feed/stylesheets/learning-resources.scss"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/official-calendar.scss",
+      "sha256": "88b7ca8558f4aa0272e5a0bd2383e3619a5eaf2e2947af116c8b931a9b5f6391",
+      "snapshot": "source/themes/isbf-campus-feed/stylesheets/official-calendar.scss.txt",
+      "before_sha256": "f49c2bd5a5416d33a77f8b0d91c26a1516b7172451617d5076986b9de536edd5",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/themes/isbf-campus-feed/stylesheets/official-calendar.scss"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/reporting.scss",
+      "sha256": "27be90b9f7ac462f45704e9eebebfc08ccf0c84bc4d0ff6e0626c513c294ccf8",
+      "snapshot": "source/themes/isbf-campus-feed/stylesheets/reporting.scss.txt",
+      "before_sha256": "ce2cca589858163a314473c8d8a02fffef9019293b419e64bf04fddbaaae2355",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/themes/isbf-campus-feed/stylesheets/reporting.scss"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/acceptance/frontend-consistency-test.js",
+      "sha256": "fe56aa3f4c8a885c86645501d4f783fc4dd576b9b447c09b962b2638298efff7",
+      "snapshot": "source/themes/isbf-campus-feed/test/acceptance/frontend-consistency-test.js.txt",
+      "before_sha256": "551bf72b62643bcbb2e9f1405f0c0e297a641e48973a9d8511280e41a6bea17a",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/themes/isbf-campus-feed/test/acceptance/frontend-consistency-test.js"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/calendar-test.gjs",
+      "sha256": "8a737df2fb4ea1ec9c42b2e32e0150d33d46de70f3746c0ade477d33877847a7",
+      "snapshot": "source/themes/isbf-campus-feed/test/integration/calendar-test.gjs.txt",
+      "before_sha256": "4d94500f54006106ec3d0eeeb1e89d8cde868ce52c2aaf0ab0d4c81d241f5dde",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/themes/isbf-campus-feed/test/integration/calendar-test.gjs"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/dialog-consistency-test.gjs",
+      "sha256": "cc10983b1c4a560ac607859549217d1de163c47a7b1db3f1fb88ef62fec86bab",
+      "snapshot": "source/themes/isbf-campus-feed/test/integration/dialog-consistency-test.gjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/frontend-scope-test.gjs",
+      "sha256": "dadf44cc7f7629fe871baa0a8a31f2bca964d82c2ca64580b47c69dc785740f4",
+      "snapshot": "source/themes/isbf-campus-feed/test/integration/frontend-scope-test.gjs.txt",
+      "before_sha256": "8648d8d19b2f5dd3d1baf6ed19965e273bc05ba37f562e85b3ef51b2fe86deed",
+      "before_snapshot": "deploy-work/dialog-consistency-20261020/before/themes/isbf-campus-feed/test/integration/frontend-scope-test.gjs"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "1280-dark-calendar.png",
+      "sha256": "c1790d8e65b20bda0ba5566533054d4cd042804a38d5e0b6ba57edd061c8f44b"
+    },
+    {
+      "path": "1280-dark-jump-to-post.png",
+      "sha256": "cdbc7a86c38069ea713cfdb27621188d8da9c4f0a0ad6793703dec4af740198c"
+    },
+    {
+      "path": "1280-dark-resource.png",
+      "sha256": "4347b15be71a10a0d3059b432c4870226a4c69ae25577228b50a6a1b736cca91"
+    },
+    {
+      "path": "1280-light-calendar.png",
+      "sha256": "425c8e9c685bde5e665dbcd8c03ee848749a295df1b3fee295bda3b5acb3fc7d"
+    },
+    {
+      "path": "1280-light-jump-to-post.png",
+      "sha256": "531b6d08e1cc81f42db9152c32070468873a4aca90ebe666482a991e3e74a9c3"
+    },
+    {
+      "path": "1280-light-resource.png",
+      "sha256": "7bf0193df21b404754230cebd39a4da88204dd02623e57fc41d1428feac46b05"
+    },
+    {
+      "path": "390-dark-calendar.png",
+      "sha256": "fa3d79e4149682343ebda04a84e1ca1ee5528c7f8f696e6507dce9068d8bd966"
+    },
+    {
+      "path": "390-dark-jump-to-post.png",
+      "sha256": "7154feec2e0dfdf5b9de0ea5b6248147dee2e118781d8532229465ae1a14247c"
+    },
+    {
+      "path": "390-dark-resource.png",
+      "sha256": "d904a6880edf27d9b42a46bd7bc3d569731dc7b8b60a177d7dadbc9bbe530494"
+    },
+    {
+      "path": "390-light-calendar.png",
+      "sha256": "2ada7ecc9ff6f0883ab27fc165c8e91a4f21488f43990f663c45ab1fe819f80a"
+    },
+    {
+      "path": "390-light-jump-to-post.png",
+      "sha256": "cf71ee686a7d0a4b90751d0a86fedb69c7cc0703e46efbe31c07b8679897a535"
+    },
+    {
+      "path": "390-light-resource.png",
+      "sha256": "82d1da845fe1297d1b63f55b620499b690c5faedec536a0ecb054168745e03d9"
+    },
+    {
+      "path": "README.md",
+      "sha256": "9499a7f68de0b1b6d2f35b4791a0c240fa633e2a477c4910763ecfc108733c8f"
+    },
+    {
+      "path": "before-1280-dark-jump-to-post.png",
+      "sha256": "33aef8975368bf27c9e7d9f605ded63bca0b0961c12f2250a1e834111336d5a2"
+    },
+    {
+      "path": "before-1280-light-jump-to-post.png",
+      "sha256": "0352ae27e4c3bdda1e6538377ad1e12cc4b438d862b4c6d700010d3c2764aea4"
+    },
+    {
+      "path": "before-390-dark-jump-to-post.png",
+      "sha256": "be130bf337f21d1fdef6527dcacc69fc033e3db24be39ed4acbc2625a3018eda"
+    },
+    {
+      "path": "before-390-light-jump-to-post.png",
+      "sha256": "a881dedad88ed2d64f47768f024a629e20716c58136ab4bf69934cbd5823dcba"
+    },
+    {
+      "path": "browser-failure.png",
+      "sha256": "7852cc84bc3ddb163e15981650ce0b94bd25224311891f87d10a4df8b0b4ae86"
+    },
+    {
+      "path": "browser-report.json",
+      "sha256": "44e973c65a291efd231b12d8f248b41c0561bc4ef480dbda6e1f6900a77e337e"
+    },
+    {
+      "path": "changed-files.json",
+      "sha256": "19438ff3b60bbef3d1eea91834f754b0ac6e293c78255bb4db39baa1f4086dbf"
+    },
+    {
+      "path": "check-browser.py",
+      "sha256": "b82ccf6c8b7827933ab1d57ddf2dca5fde1486f9405448f65069177e388d033e"
+    },
+    {
+      "path": "check-native.py",
+      "sha256": "55017942b77cef6ecd7755b751634413fb6e6ea4f18541fe10811573fdcba2e4"
+    },
+    {
+      "path": "check-policy.py",
+      "sha256": "ae386c8145dd322e45ce80d5a30cee6f56b08e2049b7bbe48caed909d576658a"
+    },
+    {
+      "path": "compilation.json",
+      "sha256": "769df19a8738797848746b91c86ad64538b7c8ca182f01409dd49ccf0f0681f7"
+    },
+    {
+      "path": "compile-browser.cjs",
+      "sha256": "bc009913c041c4849774e5b31f26f14d279d00b41892fbe83e689d79fab74599"
+    },
+    {
+      "path": "compile-style.rb",
+      "sha256": "2ada542b9de427b989e886b9d77499cc0ad9cf4cabf2886ad9a5c7ebfcf0f138"
+    },
+    {
+      "path": "compile.cjs",
+      "sha256": "e0120b9b34e4a7429131468c150f49046ea78686536f2f7873bd6aea87cb3d4c"
+    },
+    {
+      "path": "dialog-fixtures.gjs",
+      "sha256": "0d695e3dbaac097d8ce6a91742d25d77c262d7e8af2b745fe91c61f554d2ee88"
+    },
+    {
+      "path": "inventory.json",
+      "sha256": "7f725b408f417d88b6733d6d060bb9d884cd70115e916da3eaed73ffa59ad042"
+    },
+    {
+      "path": "lefthook-serial.yml",
+      "sha256": "803c71578483de5dff284fecc3e1eb21ec69fc7c6217c5e3a90e6607d9fc7f93"
+    },
+    {
+      "path": "lint-files.json",
+      "sha256": "41bb42b04207beb16064e8fb46bfe195369da70baf873db4619d68b8d67b8d68"
+    },
+    {
+      "path": "lint-status.json",
+      "sha256": "5077c2228ffeb6282cc19fce1a37b73aba476d0a8c4121dfd454f6897c2864e3"
+    },
+    {
+      "path": "lint.log",
+      "sha256": "76db84bdc480865012f073adcdf49436644d7cfbd57561325a7a11031a2cd256"
+    },
+    {
+      "path": "native-fixture.json",
+      "sha256": "99494ec87869dd506ea770edd8b88bc2ee51eb0b771e63ea3953b2b4972dfffb"
+    },
+    {
+      "path": "native-qunit.log",
+      "sha256": "513cdc8349b198472c2e1e939ef4d133f57a72921a345ad3d2e6454a16f199f2"
+    },
+    {
+      "path": "native-rspec.log",
+      "sha256": "1dd0dcbf4666b0120cbee826314ce1912ea275cc72a8452443e21f4dda7dd48c"
+    },
+    {
+      "path": "native-test-attempt.json",
+      "sha256": "edb118fa3bc45cb1ec59f96e9e303bcc691bd2c11374a2e6a8efae69dc693dd5"
+    },
+    {
+      "path": "policy-initial.json",
+      "sha256": "ddf4aacb2ef4a04572350d0965c2952d4a111d1bca763f1c14ab5e7da500ac0e"
+    },
+    {
+      "path": "policy-status.json",
+      "sha256": "bb0b2c8a614499a492a361c7befa2474d4ecf48c83e3bb75f9300ec6f293eb33"
+    },
+    {
+      "path": "policy-tests.log",
+      "sha256": "4664c37d2867a03618c55203f74d3c23c98cac803c5105d8df90afa9bb1236de"
+    },
+    {
+      "path": "policy.log",
+      "sha256": "f45e15f6e15768d54b0fc22ce438fd5deadb5fbbe6bb20fff40ab15295ff5ebb"
+    },
+    {
+      "path": "record-source.py",
+      "sha256": "d312d2f98e777db53fdd708e3fd79e6407f4f9034e4fe96943cd62e1944174ee"
+    },
+    {
+      "path": "reference.png",
+      "sha256": "4e52d0b15b8c74afa80f4565fcf958aa0f1edddffb80c5e9cc8a4368a48b8ecc"
+    },
+    {
+      "path": "resource-final.json",
+      "sha256": "ebad922ab8d23db9296c126e565c09d0fbf428234395c5caf63bf7d3af8248e4"
+    },
+    {
+      "path": "run-lint.py",
+      "sha256": "3db79c78d5bf6bb858c645c0a99ed3b6d08de663230987da67346ad01f803dc8"
+    },
+    {
+      "path": "run-tool.py",
+      "sha256": "2f2b73932ba2cb7a6255340f5bd2b3c9759fc3aec06be58f0b374ca643d46bdc"
+    },
+    {
+      "path": "style-compilation.json",
+      "sha256": "77e5a397aee9371360704687377546d7dfb3ee2787500a714843c8ebafdb7ca7"
+    },
+    {
+      "path": "tool-executions.jsonl",
+      "sha256": "a185013725f98841eba99c8d55daf0d72e70a851c7e6fcc7ec07f78ec657ff11"
+    },
+    {
+      "path": "tool-lint-status.json",
+      "sha256": "cbdd1b1dcc7dfc7c6d51a1b71d4551dc687d99b4946c440e20107aaad4532282"
+    },
+    {
+      "path": "tool-lint.log",
+      "sha256": "71e626b63bfb4456f5a5f203c9d151dbfdb2ccc5b11d34c89e302227ef3c4273"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "host_available_bytes": 1464258560,
+  "effective_available_bytes": 1464258560,
+  "memory_limit_bytes": 872415232,
+  "reserve_bytes": 536870912,
+  "peak_bytes": 872415232,
+  "lowest_host_available_bytes": 1121476608,
+  "stop_reason": null
+}

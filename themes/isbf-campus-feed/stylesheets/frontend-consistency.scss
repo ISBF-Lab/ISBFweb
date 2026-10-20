@@ -1298,45 +1298,6 @@ body.user-activity-page:has(.isbf-v2-shell)
   }
 }
 
-.isbf-frontend.has-frontend-dialog .d-modal {
-  .d-modal__container {
-    box-sizing: border-box;
-    min-inline-size: 0;
-    inline-size: min(600px, calc(100vw - 32px));
-    max-inline-size: calc(100vw - 32px);
-    border: 1px solid var(--isbf-v2-border);
-    border-radius: var(--isbf-v2-radius-md);
-    color: var(--isbf-v2-text);
-    background: var(--isbf-v2-surface);
-    box-shadow: none;
-  }
-
-  :is(.d-modal__header, .d-modal__body, .d-modal__footer) {
-    padding: var(--isbf-v2-space-4);
-  }
-
-  .d-modal__body,
-  .d-modal__footer {
-    @include frontend-controls;
-  }
-}
-
-.isbf-frontend.has-frontend-dialog .dialog-content {
-  @include frontend-content;
-  @include frontend-controls;
-  box-sizing: border-box;
-  min-inline-size: 0;
-  inline-size: min(600px, calc(100vw - 32px));
-  max-inline-size: calc(100vw - 32px);
-  border: 1px solid var(--isbf-v2-border);
-  border-radius: var(--isbf-v2-radius-md);
-  box-shadow: none;
-
-  :is(.dialog-header, .dialog-body, .dialog-footer) {
-    padding: var(--isbf-v2-space-4);
-  }
-}
-
 @media (width <= 600px) {
   .isbf-frontend.has-frontend-page #main-outlet {
     inline-size: 100%;
@@ -1366,21 +1327,5 @@ body.user-activity-page:has(.isbf-v2-shell)
   .isbf-frontend.has-frontend-feature:not(.has-frontend-user-content)
     .isbf-v2-page-header {
     inline-size: 100%;
-  }
-
-  .isbf-frontend.has-frontend-dialog .d-modal .d-modal__container {
-    inline-size: 100vw;
-    max-inline-size: 100vw;
-  }
-
-  .isbf-frontend.has-frontend-dialog .dialog-content {
-    inline-size: 100vw;
-    max-inline-size: 100vw;
-  }
-
-  .isbf-frontend.has-frontend-dialog .d-modal .d-modal__body {
-    padding-block-end: calc(
-      var(--isbf-v2-space-4) + env(safe-area-inset-bottom)
-    );
   }
 }

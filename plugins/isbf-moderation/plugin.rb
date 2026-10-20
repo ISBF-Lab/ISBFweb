@@ -7,6 +7,8 @@
 # url: https://github.com/ISBF-Lab/ISBF-Moderation
 # required_version: 3.5.0
 
+require_relative "lib/isbf_moderation/ai_configuration"
+
 after_initialize do
   require_relative "lib/isbf_moderation/hold"
   require_relative "lib/isbf_moderation/policy"
@@ -16,8 +18,24 @@ after_initialize do
   require_relative "lib/isbf_moderation/protections"
   require_relative "lib/isbf_moderation/serializers"
   require_relative "lib/isbf_moderation/review_queue"
+  require_relative "lib/isbf_moderation/ai_classifier"
+  require_relative "lib/isbf_moderation/ai_review"
+  require_relative "lib/isbf_moderation/ai_scanner"
+  require_relative "app/jobs/regular/isbf_ai_moderation"
 
   register_post_custom_field_type(IsbfModeration::Hold::FIELD, :integer)
+  register_post_custom_field_type(IsbfModeration::AiScanner::PENDING_FIELD, :boolean)
+  register_post_custom_field_type(IsbfModeration::AiScanner::STATE_FIELD, :string)
+  register_post_custom_field_type(IsbfModeration::AiScanner::APPROVED_FIELD, :string)
+
+  on(:post_created) { |post| IsbfModeration::AiScanner.request(post) }
+  on(:post_edited) do |post, topic_changed, revisor|
+    if revisor.reviewable_content_changed? || topic_changed
+      IsbfModeration::AiScanner.request(post)
+      IsbfModeration::AiScanner.enqueue(post) unless revisor.raw_changed?
+    end
+  end
+  on(:post_process_cooked) { |_document, post| IsbfModeration::AiScanner.enqueue(post) }
   register_topic_preloader_associations(:first_post)
 
   # The setting controls submissions only. Existing holds must survive disabling it.

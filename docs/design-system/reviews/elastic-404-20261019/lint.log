@@ -1,0 +1,38 @@
+[bin/lint] Skipping app/views/exceptions/not_found.html.erb: not a lintable file type
+[bin/lint] Skipping app/views/exceptions/_elastic_not_found.html.erb: not a lintable file type
+[bin/lint] No core linter for: docs/design-system/reviews/elastic-404-20261019/README.md, docs/design-system/ui-status.md, docs/design-system/tokens.md, docs/design-system/components.md, docs/design-system/reference-map.md, docs/design-system/references/README.md
+[bin/lint] Running core linters via lefthook...
+sync hooks: ❌
+│  Skipping hook sync: could not create a checksum file: open /workspace/.git/info/lefthook.checksum: permission denied
+│  developer-docs-prettier (skip) no files for inspection
+┃  eslint ❯ 
+
+┃  prettier ❯ 
+- Starting...
+elastic-not-found.scss
+elastic-not-found.js
+- Reformatted 2 / 5 files...
+✔ Reformatted 2 / 5 files...
+
+┃  rubocop ❯ 
+Resolving dependencies...
+Inspecting 2 files
+..
+
+2 files inspected, no offenses detected
+
+┃  stylelint ❯ 
+
+┃  syntax_tree ❯ 
+[38;5;102mGemfile[0m 478ms
+app/controllers/application_controller.rb 478ms
+[38;5;102mspec/requests/exceptions_controller_spec.rb[0m 14ms
+
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 60.34 seconds)
+✔️ eslint (21.68 seconds)
+✔️ prettier (14.08 seconds)
+✔️ rubocop (7.79 seconds)
+✔️ stylelint (15.71 seconds)
+✔️ syntax_tree (1.09 seconds)
+[bin/lint] All lints passed

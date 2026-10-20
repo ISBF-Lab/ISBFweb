@@ -1,0 +1,104 @@
+{
+  "source_version": "c9541cf33a0aca9cad7dab7557f7a37f8671b6b775255fb92a0d0a156ad4c12d",
+  "core_revision": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "production_deployed": true,
+  "runtime_files": [
+    {
+      "path": "plugins/isbf-moderation/app/jobs/regular/isbf_ai_moderation.rb",
+      "relative": "app/jobs/regular/isbf_ai_moderation.rb",
+      "before_sha256": null,
+      "sha256": "4f6183fbdd757af4aea057bb97a39704a4b85a353f8ee85ac0e4d94d5f24aa20",
+      "bytes": 283,
+      "snapshot": "source/plugins__isbf-moderation__app__jobs__regular__isbf_ai_moderation.rb.txt"
+    },
+    {
+      "path": "plugins/isbf-moderation/config/locales/server.en.yml",
+      "relative": "config/locales/server.en.yml",
+      "before_sha256": "487457c30d834d42eb428ba8661e47afa3071197d9afac4cd61bcf7410b8e82d",
+      "sha256": "242e06c67fde9f341a9ff8d9f6bf5db56b7932e3ea85c3c16422e4dca2662be9",
+      "bytes": 3102,
+      "snapshot": "source/plugins__isbf-moderation__config__locales__server.en.yml.txt"
+    },
+    {
+      "path": "plugins/isbf-moderation/config/locales/server.zh_CN.yml",
+      "relative": "config/locales/server.zh_CN.yml",
+      "before_sha256": "a1fc6fc0a0672058023ab5554859962a48b93fd33d02c84539235a1bc4f5f001",
+      "sha256": "6f47c661e9cc9fdd7f9a4574f6d11f4d9fe926db6cc40601285512e0ce895661",
+      "bytes": 2952,
+      "snapshot": "source/plugins__isbf-moderation__config__locales__server.zh_CN.yml.txt"
+    },
+    {
+      "path": "plugins/isbf-moderation/config/settings.yml",
+      "relative": "config/settings.yml",
+      "before_sha256": "4a01f762be112328684b867c0c04f1e0f9e3c46affc50acbc91f47cdd3bb7bff",
+      "sha256": "6a34df0fbf78aaff0c3df6a3163933de8f6db0646d33d1edda515be71a5b6196",
+      "bytes": 516,
+      "snapshot": "source/plugins__isbf-moderation__config__settings.yml.txt"
+    },
+    {
+      "path": "plugins/isbf-moderation/lib/isbf_moderation/ai_classifier.rb",
+      "relative": "lib/isbf_moderation/ai_classifier.rb",
+      "before_sha256": null,
+      "sha256": "7faf3d15c81d099230c629fd501d0cc81a9c4411c665ddf4c00157b76de6f059",
+      "bytes": 4400,
+      "snapshot": "source/plugins__isbf-moderation__lib__isbf_moderation__ai_classifier.rb.txt"
+    },
+    {
+      "path": "plugins/isbf-moderation/lib/isbf_moderation/ai_configuration.rb",
+      "relative": "lib/isbf_moderation/ai_configuration.rb",
+      "before_sha256": null,
+      "sha256": "5b2c133470e2571e2034fad483c760ae6e5d7a3b49af3f0effec906a7cabc594",
+      "bytes": 2198,
+      "snapshot": "source/plugins__isbf-moderation__lib__isbf_moderation__ai_configuration.rb.txt"
+    },
+    {
+      "path": "plugins/isbf-moderation/lib/isbf_moderation/ai_review.rb",
+      "relative": "lib/isbf_moderation/ai_review.rb",
+      "before_sha256": null,
+      "sha256": "b21fe128dcac8ae4c30a15059922ebc5be6dca50c0468c108d1a69d837d4a608",
+      "bytes": 1540,
+      "snapshot": "source/plugins__isbf-moderation__lib__isbf_moderation__ai_review.rb.txt"
+    },
+    {
+      "path": "plugins/isbf-moderation/lib/isbf_moderation/ai_scanner.rb",
+      "relative": "lib/isbf_moderation/ai_scanner.rb",
+      "before_sha256": null,
+      "sha256": "285aa2ee502812122e2de0f431bc2356c6898aa3d31a5355ed8479242a790998",
+      "bytes": 6290,
+      "snapshot": "source/plugins__isbf-moderation__lib__isbf_moderation__ai_scanner.rb.txt"
+    },
+    {
+      "path": "plugins/isbf-moderation/lib/isbf_moderation/notifications.rb",
+      "relative": "lib/isbf_moderation/notifications.rb",
+      "before_sha256": "6894f7ab01b03ef1498805fef59020b458ef06d3d34e3de759a6490ce04c8abd",
+      "sha256": "b9bd46fea3af086a021a69dfdf12da9f7a0ff1e4bc90308ec9ebc244fdc47c90",
+      "bytes": 3369,
+      "snapshot": "source/plugins__isbf-moderation__lib__isbf_moderation__notifications.rb.txt"
+    },
+    {
+      "path": "plugins/isbf-moderation/lib/isbf_moderation/protections.rb",
+      "relative": "lib/isbf_moderation/protections.rb",
+      "before_sha256": "e0601c8fd8248ac7432f430cd7f73e9f6c2e46fbb9b876340fdae95a937c555d",
+      "sha256": "2a2fa77b841d963faec9458d89e82072cac46373a2b29a460afee1eba989a7fa",
+      "bytes": 5629,
+      "snapshot": "source/plugins__isbf-moderation__lib__isbf_moderation__protections.rb.txt"
+    },
+    {
+      "path": "plugins/isbf-moderation/lib/isbf_moderation/serializers.rb",
+      "relative": "lib/isbf_moderation/serializers.rb",
+      "before_sha256": "46298f8ae206189860715ce58b131a70b722354fd1b3588c5367288c3a844e1f",
+      "sha256": "cf961ac5457e7f5136d32b9a84a84e7248a6c99026135371c438807dccac8f44",
+      "bytes": 6262,
+      "snapshot": "source/plugins__isbf-moderation__lib__isbf_moderation__serializers.rb.txt"
+    },
+    {
+      "path": "plugins/isbf-moderation/plugin.rb",
+      "relative": "plugin.rb",
+      "before_sha256": "6b04cc65d44ef1783827c48018cab2a3ce7bb037cde98b3b29552ea2645c700f",
+      "sha256": "835464bff18d90bbf45caa1c55e735a73665bfcd6f51333041cc507813c8aec9",
+      "bytes": 4863,
+      "snapshot": "source/plugins__isbf-moderation__plugin.rb.txt"
+    }
+  ],
+  "ui_scope": "Four existing native site-setting controls; no theme, template, CSS or JavaScript changes"
+}

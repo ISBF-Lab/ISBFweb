@@ -1,0 +1,18 @@
+{
+  "command": [
+    "ruby",
+    "bin/qunit",
+    "--theme-name",
+    "ISBF Campus Feed",
+    "--qunit-path",
+    "/theme-qunit",
+    "--filter",
+    "/ISBF.*(post-preview|feed-post-loader|profile previews)/i"
+  ],
+  "exit_code": 1,
+  "full_preview_started": false,
+  "production_backend_used": false,
+  "tests_executed": 0,
+  "log": "qunit-attempt.log",
+  "blocked_reason": "No isolated Rails test server; full preview stays stopped"
+}

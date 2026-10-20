@@ -1,0 +1,15 @@
+{
+  "image_tag": "local_discourse/isbf_app:notifications-menu-memory-20261019-2b714d7f1091",
+  "image_id": "sha256:10b9d782828a740fa53bb02866fa1a16ce0c27f4357b9d8beca9afdd85807ced",
+  "source_version": "2b714d7f1091b87bd448dfcb9ce3f084781b3d2bf5f8c1d5f2115f47c4790f0e",
+  "complete_runtime_inventory_matches": true,
+  "plugins_verified": 66,
+  "plugin_links_markers_and_hidden_files_verified": true,
+  "active_theme_database_backed": true,
+  "runtime_startup_matches_production": true,
+  "latest_tag_changed": false,
+  "production_container_recreated": false,
+  "web_restarted_for_backend": true,
+  "database_or_redis_restarted": false,
+  "shared_plugin_releases_required": true
+}

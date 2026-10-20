@@ -1,0 +1,7 @@
+{
+  "passed": false,
+  "normal_layout_checks_observed_in_stdout": 42,
+  "failure": "The RTL assertion after setting html.dir did not match; the next attempt sets direction on the tested notification region and records its computed direction.",
+  "cleanup_error": "The first harness closed Playwright before collecting the failure; corrected lifecycle keeps it open until reporting.",
+  "product_source_changed": false
+}

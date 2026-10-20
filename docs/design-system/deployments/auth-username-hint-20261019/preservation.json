@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "plugins": 66,
+  "complete_source_inventory_matches_candidate": true,
+  "all_plugin_links_markers_hidden_files_preserved": true,
+  "generated_manifests_checked": 61,
+  "generated_manifests_unchanged": 60,
+  "theme_fields_unchanged": 228,
+  "theme_and_site_settings_preserved": true,
+  "independent_setting_update_retained": true,
+  "old_public_asset_entries_preserved": true
+}

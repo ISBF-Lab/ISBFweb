@@ -1274,7 +1274,11 @@ export default class CodeLoginForm extends Component {
               </label>
               <div class="code-login-form__username-input">
                 <input
-                  aria-describedby="code-login-username-error"
+                  aria-describedby={{if
+                    @usernameHint
+                    "code-login-username-hint code-login-username-error"
+                    "code-login-username-error"
+                  }}
                   aria-invalid={{if this.usernameError "true"}}
                   autocomplete="username"
                   class="code-login-form__new-account-username
@@ -1298,6 +1302,12 @@ export default class CodeLoginForm extends Component {
                   />
                 {{/if}}
               </div>
+              {{#if @usernameHint}}
+                <p
+                  class="code-login-form__instructions code-login-form__username-hint"
+                  id="code-login-username-hint"
+                >{{@usernameHint}}</p>
+              {{/if}}
               <div
                 aria-live="polite"
                 class="code-login-form__error"
@@ -1463,7 +1473,11 @@ export default class CodeLoginForm extends Component {
                 </label>
                 <div class="code-login-form__username-input">
                   <input
-                    aria-describedby="code-login-username-error"
+                    aria-describedby={{if
+                      @usernameHint
+                      "code-login-username-hint code-login-username-error"
+                      "code-login-username-error"
+                    }}
                     aria-invalid={{if this.usernameError "true"}}
                     autocomplete="off"
                     class="code-login-form__new-account-username
@@ -1489,6 +1503,12 @@ export default class CodeLoginForm extends Component {
                     />
                   {{/if}}
                 </div>
+                {{#if @usernameHint}}
+                  <p
+                    class="code-login-form__instructions code-login-form__username-hint"
+                    id="code-login-username-hint"
+                  >{{@usernameHint}}</p>
+                {{/if}}
                 <div
                   aria-live="polite"
                   class="code-login-form__error"

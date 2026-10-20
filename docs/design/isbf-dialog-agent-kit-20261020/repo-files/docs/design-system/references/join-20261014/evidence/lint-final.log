@@ -1,0 +1,71 @@
+[bin/lint] No core linter for: plugins/isbf-join/README.md, plugins/isbf-join/web/asset-manifest.json, plugins/isbf-join/web/package.json, plugins/isbf-join/web/public/gallery/README.md, plugins/isbf-join/web/public/models/provenance.json
+[bin/lint] Running core linters via lefthook...
+sync hooks: ✔️(pre-commit)
+│  developer-docs-prettier (skip) no files for inspection
+│  stylelint (skip) no files for inspection
+┃  i18n-lint ❯ 
+
+┃  yaml-syntax ❯ 
+Checking the content of ["plugins/isbf-join/config/locales/client.en.yml", "plugins/isbf-join/config/locales/client.zh_CN.yml", "plugins/isbf-join/config/locales/server.en.yml", "plugins/isbf-join/config/locales/server.zh_CN.yml", "plugins/isbf-join/web/pnpm-lock.yaml"]
+[32mFile : plugins/isbf-join/config/locales/client.en.yml, Syntax OK[0m
+[32mFile : plugins/isbf-join/config/locales/client.zh_CN.yml, Syntax OK[0m
+[32mFile : plugins/isbf-join/config/locales/server.en.yml, Syntax OK[0m
+[32mFile : plugins/isbf-join/config/locales/server.zh_CN.yml, Syntax OK[0m
+[32mFile : plugins/isbf-join/web/pnpm-lock.yaml, Syntax OK[0m
+Done.
+
+┃  syntax_tree ❯ 
+All files matched expected format.
+
+┃  prettier ❯ 
+- Starting...
+✔ Checked 13 files
+
+┃  rubocop ❯ 
+Inspecting 21 files
+...................C.
+
+Offenses:
+
+plugins/isbf-join/spec/services/isbf_join/submit_application_spec.rb:16:5: C: [Correctable] RSpec/EmptyLineAfterExample: Add an empty line after it.
+    it { is_expected.to allow_values("张三", "A" * 60, "😀" * 30).for(:name) }
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+plugins/isbf-join/spec/services/isbf_join/submit_application_spec.rb:19:5: C: [Correctable] RSpec/EmptyLineAfterExample: Add an empty line after it.
+    end
+    ^^^
+plugins/isbf-join/spec/services/isbf_join/submit_application_spec.rb:21:5: C: [Correctable] RSpec/EmptyLineAfterExample: Add an empty line after it.
+    it { is_expected.to allow_values("2026101401", "A" * 40, "😀" * 20).for(:student_id) }
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+plugins/isbf-join/spec/services/isbf_join/submit_application_spec.rb:26:5: C: [Correctable] RSpec/EmptyLineAfterExample: Add an empty line after it.
+    end
+    ^^^
+plugins/isbf-join/spec/services/isbf_join/submit_application_spec.rb:27:5: C: [Correctable] RSpec/EmptyLineAfterExample: Add an empty line after it.
+    it { is_expected.not_to allow_values("20\u000026", "20\t26", "20\u007f26").for(:student_id) }
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+plugins/isbf-join/spec/services/isbf_join/submit_application_spec.rb:30:5: C: [Correctable] RSpec/EmptyLineAfterExample: Add an empty line after it.
+    end
+    ^^^
+plugins/isbf-join/spec/services/isbf_join/submit_application_spec.rb:43:5: C: [Correctable] RSpec/EmptyLineAfterExample: Add an empty line after it.
+    end
+    ^^^
+plugins/isbf-join/spec/services/isbf_join/submit_application_spec.rb:46:5: C: [Correctable] RSpec/EmptyLineAfterExample: Add an empty line after it.
+    end
+    ^^^
+plugins/isbf-join/spec/services/isbf_join/submit_application_spec.rb:47:5: C: [Correctable] RSpec/EmptyLineAfterExample: Add an empty line after it.
+    it { is_expected.to allow_values("491E9A65-3270-4ACD-8BA9-DC726A6A0307").for(:submission_id) }
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+21 files inspected, 9 offenses detected, 9 offenses autocorrectable
+
+exit status 1
+┃  eslint ❯ 
+
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 74.59 seconds)
+✔️ i18n-lint (18.26 seconds)
+✔️ yaml-syntax (20.57 seconds)
+✔️ syntax_tree (24.62 seconds)
+✔️ prettier (48.32 seconds)
+✔️ eslint (74.59 seconds)
+🥊 rubocop (55.11 seconds)
+[bin/lint] core linters failed

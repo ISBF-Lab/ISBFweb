@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "tls_verified": true,
+  "unauthenticated_get_only": true,
+  "resources": [
+    {
+      "kind": "core",
+      "url": "/assets/js/discourse-f0ivhmdn-auth-91a1fe14fd79.digested.js",
+      "sha256": "2efa281043a7cbabd1ef9c648698a543baa841564b7dbaf43ca6abc0870eb79e",
+      "bytes": 3925536
+    },
+    {
+      "kind": "plugin",
+      "url": "/assets/js/plugins/discourse-academy-roles_main.CX9evS-m4covnx7.digested.js",
+      "sha256": "1903407857da6f7404d3ec7b3d8fec0131bede29ec409d1f2ae95916cf3f0839",
+      "bytes": 151632
+    },
+    {
+      "kind": "stylesheet",
+      "url": "/stylesheets/discourse-academy-roles_891035595865c96f498d3c698c65c903629e1e0f.css?__ws=isbf-one.com",
+      "sha256": "2f9e2b310c0e489b8284154b76a642a316813d3cfa605eb5e01d37f26547ae53"
+    }
+  ],
+  "full_signup_performed": false,
+  "production_browser_run": false,
+  "budget": {
+    "host_available_bytes": 1498714112,
+    "effective_available_bytes": 1498714112,
+    "memory_limit_bytes": 939524096,
+    "reserve_bytes": 536870912
+  },
+  "elapsed_seconds": 26.9
+}

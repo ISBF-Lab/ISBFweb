@@ -1,0 +1,99 @@
+{
+  "target": "https://boc.studio/404",
+  "tls_verified": true,
+  "method": "GET",
+  "files": [
+    {
+      "url": "https://boc.studio/404",
+      "status": 404,
+      "path": "page.html",
+      "sha256": "0a6f4b9b065de009bf082fe93e5a25c8d5e2bc7327d699a0e75e30edae4f3eaf",
+      "bytes": 35135
+    },
+    {
+      "url": "https://boc.studio/_next/static/chunks/06jrfjg30lnwl.css",
+      "status": 200,
+      "path": "artifacts/0.css",
+      "sha256": "d0df21873cfa7c07a50d220029686e40ef04356864c42f71d4e14ae610bfa068",
+      "bytes": 49184
+    },
+    {
+      "url": "https://boc.studio/_next/static/chunks/0-w966uza5eby.js",
+      "status": 200,
+      "path": "artifacts/1.js",
+      "sha256": "b07d0967bdd5eb76c15fdb15d5d6bd59ee4bd802559f1687aae4361d5c851a1a",
+      "bytes": 24146
+    },
+    {
+      "url": "https://boc.studio/_next/static/chunks/0c3w.r6wy.9ib.js",
+      "status": 200,
+      "path": "artifacts/2.js",
+      "sha256": "66b6aeca677702c7e753950d63500ab22e9fef8a64a26a132ae73e325834999b",
+      "bytes": 30902
+    },
+    {
+      "url": "https://boc.studio/_next/static/chunks/0rwwge57xnfls.js",
+      "status": 200,
+      "path": "artifacts/3.js",
+      "sha256": "bbc9524495c57d0da4b7aa7e9f0db51048caf70abe4a8718af0628b568d1fb56",
+      "bytes": 203393
+    },
+    {
+      "url": "https://boc.studio/_next/static/chunks/128aahewwf1we.js",
+      "status": 200,
+      "path": "artifacts/4.js",
+      "sha256": "db8151a57f0e61d9b7250ac30ae666c7067912a7268943a7fa0fa65732bd5dd7",
+      "bytes": 44491
+    },
+    {
+      "url": "https://boc.studio/_next/static/chunks/01.-sh3cgqu1l.js",
+      "status": 200,
+      "path": "artifacts/5.js",
+      "sha256": "3e1c741beed2cb59334aa3bfafcf97f30a22d710db095a5fbd164b3890928ce0",
+      "bytes": 138272
+    },
+    {
+      "url": "https://boc.studio/_next/static/chunks/turbopack-0q_3muohy65hs.js",
+      "status": 200,
+      "path": "artifacts/6.js",
+      "sha256": "86faed95fc2dc8b14edc710172426e250dd66a497cacd6f590bcd6af53627a8c",
+      "bytes": 11086
+    },
+    {
+      "url": "https://boc.studio/_next/static/chunks/0gd8m9610a291.js",
+      "status": 200,
+      "path": "artifacts/7.js",
+      "sha256": "fa31f5bfaf06585a4f74a053d9b59b1dbf51b6ca7ff7350affd7f32233ee66cf",
+      "bytes": 13721
+    },
+    {
+      "url": "https://boc.studio/_next/static/chunks/0i.l9589uvx0j.js",
+      "status": 200,
+      "path": "artifacts/8.js",
+      "sha256": "32e9576b2b87cbc03075cbfde10797120b73b5c6e486723cd9e58a66d99c585d",
+      "bytes": 54763
+    },
+    {
+      "url": "https://boc.studio/_next/static/chunks/16_jpe2u802_-.js",
+      "status": 200,
+      "path": "artifacts/9.js",
+      "sha256": "8ac799b21f24b4b12173d5f2ea4f6ae853d1cfe83deeb419f6f421484e21d5d7",
+      "bytes": 15906
+    },
+    {
+      "url": "https://boc.studio/_next/static/chunks/03~yq9q893hmn.js",
+      "status": 200,
+      "path": "artifacts/10.js",
+      "sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683",
+      "bytes": 112594
+    },
+    {
+      "url": "https://boc.studio/_next/static/chunks/0-hrh_uw98wb_.js",
+      "status": 200,
+      "path": "artifacts/11.js",
+      "sha256": "509d5198f1860e829e207d08b84a833f76c2790ec10e83403b9e4c61c7736136",
+      "bytes": 5598
+    }
+  ],
+  "complete": true
+}

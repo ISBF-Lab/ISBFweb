@@ -1,0 +1,14 @@
+{
+  "image_tag": "local_discourse/isbf_app:auth-username-hint-20261019-9e77b7072c01",
+  "image_id": "sha256:4e1bb7357305146d0c216d82ea9886afa28516212ccabfa8791f118501828b92",
+  "source_version": "9e77b7072c01e3f70398a199489f48f825f44002a411cfbe5b0466a872673eac",
+  "complete_runtime_source_inventory_matches": true,
+  "plugins": 66,
+  "generated_manifests": 61,
+  "public_manifest_assets_present": true,
+  "missing_base_assets_retained": [],
+  "shared_sources_and_database_theme_required": true,
+  "latest_tag_changed": false,
+  "production_container_recreated": false,
+  "full_production_browser_regression": false
+}

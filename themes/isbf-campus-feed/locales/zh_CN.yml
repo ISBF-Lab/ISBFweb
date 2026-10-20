@@ -267,6 +267,7 @@ zh_CN:
     notifications_empty: "暂时没有通知。"
     notifications_unread_empty: "当前没有未读通知。"
     notifications_unread_only: "只看未读"
+    notifications_filter_error: "筛选方式保存失败，请重试。"
     notifications_badge_style: "角标显示"
     notifications_badge_number: "数字"
     notifications_badge_dot: "圆点"

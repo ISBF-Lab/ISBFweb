@@ -27,3 +27,9 @@
 *.PDF  diff=astextplain
 *.rtf  diff=astextplain
 *.RTF  diff=astextplain
+
+# Keep archived evidence and package checksums stable across checkouts.
+docs/design/** -text whitespace=-blank-at-eof,-blank-at-eol,cr-at-eol
+docs/design-system/reviews/** -text whitespace=-blank-at-eof,-blank-at-eol,cr-at-eol
+docs/design-system/deployments/** -text whitespace=-blank-at-eof,-blank-at-eol,cr-at-eol
+docs/ai-moderation-verification/*.log -text whitespace=-blank-at-eof,-blank-at-eol,cr-at-eol

@@ -1,0 +1,11 @@
+{
+  "user_accepted": true,
+  "further_browser_checks_stopped": true,
+  "browser_container_removed": true,
+  "temporary_readonly_keys_removed": true,
+  "production_automated_checks_completed": false,
+  "offline_checks_passed": 61,
+  "theme_fields_preserved": 229,
+  "plugins_preserved": 66,
+  "services_restarted": false
+}

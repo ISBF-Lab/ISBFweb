@@ -1,0 +1,83 @@
+{
+  "passed": true,
+  "views": [
+    {
+      "viewport": "mobile",
+      "checks": [
+        "topic 196 uses body previews for its untitled recommendations",
+        "continue-reading contains no internal title codes",
+        "continue-reading labels use real translations",
+        "continue-reading remains a text list",
+        "untitled recommendations retain readable labels and usable links",
+        "untitled recommendations use two-line text",
+        "the approved square border remains",
+        "the topic stays within the viewport",
+        "existing marketplace and alumni links remain available",
+        "marketplace data request completes",
+        "marketplace finishes loading without an error",
+        "the existing alumni map finishes initialization"
+      ],
+      "untitled_preview_count": 2,
+      "body_requests": [
+        "/posts/by_number/284/1.json",
+        "/posts/by_number/89/1.json"
+      ],
+      "marketplace_products_loaded": 8
+    },
+    {
+      "viewport": "desktop",
+      "checks": [
+        "topic 196 uses body previews for its untitled recommendations",
+        "continue-reading contains no internal title codes",
+        "continue-reading labels use real translations",
+        "continue-reading remains a text list",
+        "untitled recommendations retain readable labels and usable links",
+        "untitled recommendations use two-line text",
+        "the approved square border remains",
+        "the topic stays within the viewport",
+        "existing marketplace and alumni links remain available",
+        "marketplace data request completes",
+        "marketplace finishes loading without an error",
+        "the existing alumni map finishes initialization"
+      ],
+      "untitled_preview_count": 1,
+      "body_requests": [
+        "/posts/by_number/284/1.json",
+        "/posts/by_number/89/1.json",
+        "/posts/by_number/284/1.json"
+      ],
+      "marketplace_products_loaded": 8
+    }
+  ],
+  "javascript_errors": [],
+  "console_errors": [
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED"
+  ],
+  "failed_assets": [],
+  "blocked_writes": 14,
+  "blocked_preference_writes": 0,
+  "production_content_submitted": false,
+  "account_preferences_changed": false,
+  "transport": {
+    "get_requests": 195,
+    "static_cache_hits": 149,
+    "tls_verified": true,
+    "browser_network": "none",
+    "production_write_requests": 0
+  }
+}

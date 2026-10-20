@@ -1,0 +1,35 @@
+[bin/lint] Running core linters via lefthook...
+sync hooks: ❌
+│  Skipping hook sync: could not replace the hook: remove /workspace/.git/hooks/pre-commit: read-only file system
+│  developer-docs-prettier (skip) no files for inspection
+┃  eslint ❯ 
+
+┃  prettier ❯ 
+- Starting...
+isbf-notifications.gjs
+notifications-test.gjs
+- Reformatted 2 / 4 files...
+✔ Reformatted 2 / 4 files...
+
+┃  rubocop ❯ 
+Resolving dependencies...
+Inspecting 2 files
+..
+
+2 files inspected, no offenses detected
+
+┃  stylelint ❯ 
+
+┃  syntax_tree ❯ 
+[38;5;102mplugins/isbf-notifications/plugin.rb[0m 20ms
+[38;5;102mGemfile[0m 114ms
+plugins/isbf-notifications/spec/requests/users_controller_spec.rb 126ms
+
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 74.18 seconds)
+✔️ eslint (24.58 seconds)
+✔️ prettier (16.13 seconds)
+✔️ rubocop (10.91 seconds)
+✔️ stylelint (21.76 seconds)
+✔️ syntax_tree (0.80 seconds)
+[bin/lint] All lints passed

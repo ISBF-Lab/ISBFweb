@@ -1,0 +1,2 @@
+{"phase": "desktop-baseline", "state": "loading"}
+{"passed": false, "failure": "Page.wait_for_function: Timeout 120000ms exceeded.", "report": "/home/codex/discourse/docs/design-system/references/join-20261014/browser-validation.json"}

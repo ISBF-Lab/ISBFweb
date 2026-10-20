@@ -1,0 +1,59 @@
+{
+  "source_version": "2b714d7f1091b87bd448dfcb9ce3f084781b3d2bf5f8c1d5f2115f47c4790f0e",
+  "review_source_version": "01242893e94754ad6ac27c90cc5689e9db260da417a44c9dae76730ab023e6b6",
+  "review_manifest": "../../reviews/notifications-menu-memory-20261019/source-manifest.json",
+  "scope": "A05/C06/C18/C19 content-width notification menu and account-persisted unread filtering",
+  "production_theme_id": 4,
+  "active_theme_database_backed": true,
+  "production_deployed": true,
+  "files": [
+    {
+      "source_path": "themes/isbf-campus-feed/common/common.scss",
+      "snapshot_path": "source/themes__isbf-campus-feed__common__common.scss.txt",
+      "sha256": "3eb62a0a4bafb8329a8c24b29397332623f8178fc5168cb34b8e648693541deb",
+      "runtime_before_sha256": "94de45e882ef1b37f8cca4ac0e809dd25e3150b42c11cd0925b364996b45932b"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+      "snapshot_path": "source/themes__isbf-campus-feed__javascripts__discourse__components__isbf-notifications.gjs.txt",
+      "sha256": "520da473ae54740533e7f364399f39eeee3138c20e4a1b825b51b092e7b0ab73",
+      "runtime_before_sha256": "d97fcf0dfc36b4060b5a05fde038f18b1b77823ce67b0ed2723b7144af40ef4f"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/javascripts/discourse/services/isbf-notifications.js",
+      "snapshot_path": "source/themes__isbf-campus-feed__javascripts__discourse__services__isbf-notifications.js.txt",
+      "sha256": "14066642f150e9bda85e0a79c89a1f0f638dbe43f56234f2250fd01b9e202f70",
+      "runtime_before_sha256": "8530db24a044e6d416a720af2a164fa19df78ad86e4174bfc8a62671fbb5b4fe"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/locales/en.yml",
+      "snapshot_path": "source/themes__isbf-campus-feed__locales__en.yml.txt",
+      "sha256": "3500b4e0412053f2cbd7ba8f95022435a4f6c80337399cbfb3cab1131046ac15",
+      "runtime_before_sha256": "6450817cd64f29e54178fced000a3503fd798ce61f2b7eafc2fc7a4bfc6a632c"
+    },
+    {
+      "source_path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+      "snapshot_path": "source/themes__isbf-campus-feed__locales__zh_CN.yml.txt",
+      "sha256": "0aa2bdad89ee9cff467cc052bcc01d50afdb645835f012bc0c69c9a54b1bde25",
+      "runtime_before_sha256": "851e8069307842b9a2fb325a63b9fa0200d468cf53eb923cd43ceffa3137a9bc"
+    },
+    {
+      "source_path": "plugins/isbf-notifications/plugin.rb",
+      "snapshot_path": "source/plugins__isbf-notifications__plugin.rb.txt",
+      "sha256": "d9ceb3ee2c634ac9a3f9d78e12e9bab6c1213ed079f100dae63425eb5bdb14d4",
+      "runtime_before_sha256": "80568e666cdc89d274870f9a22a896427e91c0cffe65505183b7c873acb0cdb5"
+    },
+    {
+      "source_path": "plugins/isbf-notifications/config/locales/server.en.yml",
+      "snapshot_path": "source/plugins__isbf-notifications__config__locales__server.en.yml.txt",
+      "sha256": "3f5f439f3690ab8e702387935324e82ec9fb086b7406512ad571b5e7049156d6",
+      "runtime_before_sha256": "34c6f8475e48ce8d3c78b531f235a2aad15479a4f5d2fb627f277977140db91a"
+    },
+    {
+      "source_path": "plugins/isbf-notifications/config/locales/server.zh_CN.yml",
+      "snapshot_path": "source/plugins__isbf-notifications__config__locales__server.zh_CN.yml.txt",
+      "sha256": "f8f5ecbd02788429ff34a853eae01258c334c74d8ad14191d12536808a1291e9",
+      "runtime_before_sha256": "fbcc794c749f67759a53e9d81fa5e1fe6f79b8ca7d9f0ac816f0db3283bde0ba"
+    }
+  ]
+}

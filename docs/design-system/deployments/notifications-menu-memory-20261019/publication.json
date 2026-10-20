@@ -1,0 +1,62 @@
+{
+  "published_at_utc": "2026-10-19T03:44:39Z",
+  "theme_id": 4,
+  "fields_before": 224,
+  "fields_after": 224,
+  "preserved_fields": 219,
+  "sources": [
+    {
+      "relative": "common/common.scss",
+      "sha256": "3eb62a0a4bafb8329a8c24b29397332623f8178fc5168cb34b8e648693541deb",
+      "previous_id": 197,
+      "field_id": 197
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-notifications.gjs",
+      "sha256": "520da473ae54740533e7f364399f39eeee3138c20e4a1b825b51b092e7b0ab73",
+      "previous_id": 237,
+      "field_id": 237
+    },
+    {
+      "relative": "javascripts/discourse/services/isbf-notifications.js",
+      "sha256": "14066642f150e9bda85e0a79c89a1f0f638dbe43f56234f2250fd01b9e202f70",
+      "previous_id": 471,
+      "field_id": 471
+    },
+    {
+      "relative": "locales/en.yml",
+      "sha256": "3500b4e0412053f2cbd7ba8f95022435a4f6c80337399cbfb3cab1131046ac15",
+      "previous_id": 202,
+      "field_id": 202
+    },
+    {
+      "relative": "locales/zh_CN.yml",
+      "sha256": "0aa2bdad89ee9cff467cc052bcc01d50afdb645835f012bc0c69c9a54b1bde25",
+      "previous_id": 203,
+      "field_id": 203
+    }
+  ],
+  "settings_preserved": true,
+  "javascript_url": "/theme-javascripts/4d07bf725ecd4f9a1f126a7f4c0c55ed1fdd13b6.js?__ws=isbf-one.com",
+  "javascript_sha256": "71f6b45ecb473c79e5f1242f4f04335a0d127adbe70b6e704f85ebfdcb75e4bd",
+  "styles": [
+    {
+      "target": "common_theme",
+      "bytes": 319824,
+      "sha256": "8f0baeabc0e47548c31c74c64a18471285e76f6dd452ce8f04287f1088af2514",
+      "url": "/stylesheets/common_theme_4_53df0dcdad3700f040fd40dae67404e0686c3d0f.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "desktop_theme",
+      "bytes": 108,
+      "sha256": "04c5f3e30e9f7e27e5ffb99a9f13083bbee7e5ffbf7341146b1dd655354d6056",
+      "url": "/stylesheets/desktop_theme_4_f63dd18f54122611263dc152f297c903ed32b5fe.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "mobile_theme",
+      "bytes": 107,
+      "sha256": "324bf4a874cedcc21e1d0c1898b417b4a6d047897ec8e31026df75db84bbbc69",
+      "url": "/stylesheets/mobile_theme_4_f63dd18f54122611263dc152f297c903ed32b5fe.css?__ws=isbf-one.com"
+    }
+  ]
+}

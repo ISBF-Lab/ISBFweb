@@ -1,0 +1,9 @@
+{
+  "compiled": true,
+  "modules": 183,
+  "minified": true,
+  "sha256": "7703616592128f0b6063b73b3e7bd5decfa7f99c8c79bf0564bb130acecc0469",
+  "bytes": 499305,
+  "database_writes": false,
+  "poll_extension_preserved": true
+}

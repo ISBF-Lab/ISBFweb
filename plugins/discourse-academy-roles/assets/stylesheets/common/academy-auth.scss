@@ -352,6 +352,11 @@ body.academy-auth-page {
       line-height: 1.6;
     }
 
+    .code-login-form__username-hint {
+      grid-column: 1 / -1;
+      color: var(--tertiary);
+    }
+
     .code-login-form__avatar {
       margin: 0 auto 18px;
     }

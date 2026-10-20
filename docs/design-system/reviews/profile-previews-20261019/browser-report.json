@@ -1,0 +1,81 @@
+{
+  "harness_sha256": "3b972d9a31cb6508eb0fff1cd828e6f94b0427527cda6b5048a47573075e387d",
+  "passed": true,
+  "full_ember_client": true,
+  "production_backend_used": false,
+  "checks": [
+    "the full client boots with the actual changed modules",
+    "the historical untitled activity omits its internal title",
+    "the initial image caption is replaced by the clean cooked body",
+    "historical activity thumbnails finish loading",
+    "the activity gallery remains bounded to three thumbnails",
+    "all public actions use the same preview eligibility as the row styles",
+    "the duplicate native title header is hidden",
+    "no visible internal title remains in the actual activity list",
+    "hidden activity does not fetch its body",
+    "a failed body request retains the clean excerpt",
+    "native expansion works without an original post ID",
+    "native collapse restores the bounded preview",
+    "the popular reply uses its actual post number",
+    "the reply keeps its original target",
+    "the reply keeps its original like count",
+    "the popular topic uses its first post",
+    "an explicitly titled summary item keeps the native title",
+    "the summary remains a text-only list",
+    "other summary topic links keep their original post targets",
+    "the real summary route displays no internal title markers",
+    "1280px light: summary has no horizontal overflow",
+    "1280px light: summary previews remain bounded to two lines",
+    "1280px dark: summary has no horizontal overflow",
+    "1280px dark: summary previews remain bounded to two lines",
+    "390px light: summary has no horizontal overflow",
+    "390px light: summary previews remain bounded to two lines",
+    "390px dark: summary has no horizontal overflow",
+    "390px dark: summary previews remain bounded to two lines",
+    "320px light: summary has no horizontal overflow",
+    "320px light: summary previews remain bounded to two lines",
+    "320px dark: summary has no horizontal overflow",
+    "320px dark: summary previews remain bounded to two lines",
+    "number lookups share the canonical post cache",
+    "concurrent and canonical callers need one body request",
+    "two replies in one topic never share the wrong body",
+    "hidden and edited posts reject stale number responses before their IDs were known",
+    "body codes survive while structural image captions are removed",
+    "the deployed poll loader keeps its per-user cache beside body previews",
+    "the actual client completes without JavaScript errors or missing resources"
+  ],
+  "layouts": [],
+  "errors": [],
+  "console_errors": [],
+  "missing_assets": [],
+  "api_requests": [
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    }
+  ],
+  "fixture_dialog": "抱歉，出错了。",
+  "post_requests": [
+    "/posts/by_number/910005/1.json",
+    "/posts/920002/cooked",
+    "/posts/by_number/910004/1.json",
+    "/posts/by_number/910001/1.json",
+    "/posts/by_number/910001/1.json",
+    "/posts/by_number/910001/7.json",
+    "/posts/by_number/910001/8.json",
+    "/posts/by_number/930001/2.json",
+    "/posts/by_number/930001/3.json",
+    "/posts/by_number/930002/7.json",
+    "/posts/by_number/930003/7.json",
+    "/posts/940001.json",
+    "/posts/940001.json"
+  ]
+}

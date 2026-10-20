@@ -1,0 +1,18 @@
+{
+  "passed": false,
+  "checks": [
+    "1280-light: actual localized template renders",
+    "1280-light: no horizontal overflow",
+    "1280-light: the page occupies the entire viewport",
+    "1280-light: digits use the available viewport width",
+    "1280-light: digits use the active site accent",
+    "1280-light: actual light/dark palette is active",
+    "the actual two-dimensional WebGL field renders",
+    "pointer movement deforms the rendered field in two dimensions",
+    "1280-light: discovering the button does not start a game"
+  ],
+  "javascript_errors": [],
+  "production_access": false,
+  "actual_erb_and_scss": true,
+  "single_browser": true
+}

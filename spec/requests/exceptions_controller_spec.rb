@@ -13,6 +13,17 @@ RSpec.describe ExceptionsController do
       )
 
       expect(response.body).to have_tag("img", with: { src: SiteSetting.site_logo_url })
+      expect(response.body).to have_tag("div", with: { "data-elastic-not-found" => "" })
+      expect(response.body).to have_tag("script", with: { type: "module" })
+      expect(response.body).to have_tag("a", text: I18n.t("page_not_found.home"))
+    end
+
+    it "serves the same interactive content for client navigation" do
+      get "/404-body"
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to have_tag("div", with: { "data-elastic-not-found" => "" })
+      expect(response.body).not_to have_tag("script")
     end
 
     describe "text site logo" do

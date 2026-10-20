@@ -1,0 +1,12 @@
+[
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-item.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-post-preview.gjs",
+  "themes/isbf-campus-feed/stylesheets/continue-reading.scss",
+  "themes/isbf-campus-feed/test/integration/continue-reading-test.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-continue-reading-footer.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/lib/optional-topic-title.js",
+  "themes/isbf-campus-feed/javascripts/discourse/lib/feed-post-loader.js",
+  "themes/isbf-campus-feed/javascripts/discourse/lib/post-preview.js",
+  "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-continue-reading.gjs"
+]
