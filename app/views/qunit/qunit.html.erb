@@ -63,12 +63,18 @@
         }
       </style>
 
-      <%= discourse_stylesheet_link_tag(:common, theme_id: request.env[:resolved_theme_id]) %>
+      <%= discourse_stylesheet_link_tag(:common, theme_id: nil) %>
       <%= discourse_stylesheet_link_tag(:admin) %>
       <%= discourse_stylesheet_link_tag(:wizard) %>
 
       <%- Discourse.find_plugin_css_assets(include_disabled: true, only: @required_plugins, mobile_view: false, desktop_view: true, request: request).each do |file| %>
         <%= discourse_stylesheet_link_tag(file) %>
+      <%- end %>
+
+      <%- if theme_id.present? %>
+        <%= discourse_stylesheet_link_tag(:common_theme) %>
+        <%= discourse_stylesheet_link_tag(:mobile_theme, media: "(width < 40rem)") %>
+        <%= discourse_stylesheet_link_tag(:desktop_theme, media: "(width >= 40rem)") %>
       <%- end %>
     <%- end %>
 
