@@ -220,19 +220,18 @@ body:has(.isbf-resume-workspace) .powered-by-discourse {
 .isbf-resume-share-list {
   & &__header {
     position: relative;
-    overflow: clip;
     flex-wrap: nowrap;
 
-    h1 > span {
-      display: inline-block;
+    h1 {
+      flex: 1 1 0;
+      overflow: hidden;
+      text-align: start;
+      text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    &.has-overflow .isbf-resume-share-list__actions {
-      // Keep intrinsic button widths measurable while the menu is displayed.
-      position: absolute;
-      visibility: hidden;
-      pointer-events: none;
+    h1 > span {
+      white-space: nowrap;
     }
   }
 
@@ -247,6 +246,7 @@ body:has(.isbf-resume-workspace) .powered-by-discourse {
   &__actions {
     flex-shrink: 0;
     flex-wrap: nowrap;
+    align-items: center;
     width: max-content;
     margin-inline-start: auto;
   }
