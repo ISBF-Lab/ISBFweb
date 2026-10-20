@@ -371,7 +371,7 @@ module(
         assert
           .dom(".isbf-continue-reading__title .sr-only")
           .hasText(
-            i18n("topic.sr_read"),
+            `\u00a0${i18n("topic.sr_read")}`,
             "the native read announcement remains"
           );
         await focus(".isbf-continue-reading__title");

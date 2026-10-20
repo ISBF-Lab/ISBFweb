@@ -49,6 +49,24 @@
       "reason": "User explicitly retained the accepted standalone recruitment design",
       "reference": "reviews/dialog-consistency-20261020/README.md",
       "verification": "Explicit source-path exclusion; no recruitment sources are changed by this task"
+    },
+    {
+      "selector": ".insert-table-modal",
+      "reason": "The table editor retains its full-size grid layout and editor controls",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Core editor/viewer modal styles and foreground dialog scope regression checks"
+    },
+    {
+      "selector": ".fullscreen-code-modal",
+      "reason": "The full-screen code viewer retains its own height and container chrome",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Core editor/viewer modal styles and foreground dialog scope regression checks"
+    },
+    {
+      "selector": ".fullscreen-table-modal",
+      "reason": "The full-screen table viewer retains its own height and grid layout",
+      "reference": "reviews/dialog-consistency-20261020/README.md",
+      "verification": "Core editor/viewer modal styles and foreground dialog scope regression checks"
     }
   ],
   "declarations": [
