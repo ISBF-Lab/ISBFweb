@@ -29,7 +29,7 @@ export default class ResumeShareListHeader extends Component {
     return () => observer.disconnect();
   });
 
-  get actions() {
+  get items() {
     const actions = [];
     if (this.args.canManageCollection) {
       actions.push({
@@ -73,7 +73,7 @@ export default class ResumeShareListHeader extends Component {
         class="isbf-resume-share-list__actions"
         inert={{this.collapsed}}
       >
-        {{#each this.actions as |item|}}
+        {{#each this.items as |item|}}
           <DButton
             class={{dConcatClass "btn-primary" item.className}}
             @action={{item.action}}
@@ -94,7 +94,7 @@ export default class ResumeShareListHeader extends Component {
           as |menu|
         >
           <DDropdownMenu as |dropdown|>
-            {{#each this.actions as |item|}}
+            {{#each this.items as |item|}}
               <dropdown.item>
                 {{#if item.href}}
                   <a
