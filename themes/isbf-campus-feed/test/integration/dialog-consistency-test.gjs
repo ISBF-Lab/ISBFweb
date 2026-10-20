@@ -2,6 +2,7 @@ import { click, find, render, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import ModalContainer from "discourse/components/modal-container";
 import DialogHolder from "discourse/dialog-holder/components/dialog-holder";
+import DMenus from "discourse/float-kit/components/d-menus";
 import bodyClass from "discourse/helpers/body-class";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import pretender, {
@@ -144,7 +145,10 @@ module("ISBF | Integration | Dialog consistency", function (hooks) {
   });
 
   test("directory requests preserve their pending result and selected parent", async function (assert) {
-    this.grades = [{ id: "2026", label: "2026" }];
+    this.grades = [
+      { id: "2025", label: "2025" },
+      { id: "2026", label: "2026" },
+    ];
     this.close = () => {};
     this.submitted = (result, grade) => {
       this.result = result;
@@ -153,12 +157,13 @@ module("ISBF | Integration | Dialog consistency", function (hooks) {
     pretender.post("/isbf/learning/courses", (request) => {
       const data = parsePostData(request.requestBody);
       assert.strictEqual(data.name, "Economics", "the name is trimmed");
-      assert.strictEqual(data.grade, "2026", "the selected parent is retained");
+      assert.strictEqual(data.grade, "2025", "the selected parent is retained");
       return response({ success: true, pending: true, reviewable_id: 321 });
     });
     await render(
       <template>
         <ModalContainer />
+        <DMenus />
         <ISBFResourceDirectoryDialog
           @grade="2026"
           @grades={{this.grades}}
@@ -171,6 +176,19 @@ module("ISBF | Integration | Dialog consistency", function (hooks) {
     assert
       .dom(".isbf-learning-course-dialog .btn-primary")
       .isDisabled("an empty name cannot submit");
+    await click(".isbf-learning__grade");
+    assert
+      .dom(".isbf-learning-grade-menu .dropdown-menu__item")
+      .exists({ count: 2 }, "the parent menu opens with both grades");
+    await click(
+      ".isbf-learning-grade-menu .dropdown-menu__item:first-child button"
+    );
+    assert
+      .dom(".isbf-learning__grade")
+      .hasText("2025", "the selected parent updates the form");
+    assert
+      .dom(".isbf-learning-grade-menu")
+      .doesNotExist("selecting a parent closes the menu");
     await formKit().field("name").fillIn("  Economics  ");
     await click(".isbf-learning-course-dialog .d-modal__footer .btn-primary");
     assert.strictEqual(
@@ -180,7 +198,7 @@ module("ISBF | Integration | Dialog consistency", function (hooks) {
     );
     assert.strictEqual(
       this.grade,
-      "2026",
+      "2025",
       "the caller receives the selected parent"
     );
   });
