@@ -69,7 +69,13 @@ body:not(.admin-interface) {
   }
 
   // Mobile menus use DModal for behavior, but retain their menu presentation.
-  .d-modal:not(.fk-d-menu-modal, .chat-message-actions),
+  .d-modal:not(
+    .fk-d-menu-modal,
+    .chat-message-actions,
+    .insert-table-modal,
+    .fullscreen-code-modal,
+    .fullscreen-table-modal
+  ),
   .dialog-container {
     --isbf-dialog-gutter: var(--isbf-v2-space-4);
     --isbf-dialog-max-height: calc(
@@ -84,7 +90,13 @@ body:not(.admin-interface) {
     @include isbf-dialog-actions;
   }
 
-  .d-modal:not(.fk-d-menu-modal, .chat-message-actions) {
+  .d-modal:not(
+    .fk-d-menu-modal,
+    .chat-message-actions,
+    .insert-table-modal,
+    .fullscreen-code-modal,
+    .fullscreen-table-modal
+  ) {
     &.--large {
       --modal-max-width: 800px;
     }
@@ -191,7 +203,13 @@ body:not(.admin-interface) {
   }
 
   @media (width <= 600px) {
-    .d-modal:not(.fk-d-menu-modal, .chat-message-actions) {
+    .d-modal:not(
+    .fk-d-menu-modal,
+    .chat-message-actions,
+    .insert-table-modal,
+    .fullscreen-code-modal,
+    .fullscreen-table-modal
+  ) {
       box-sizing: border-box;
       padding-inline: var(--isbf-dialog-gutter);
       padding-block: calc(

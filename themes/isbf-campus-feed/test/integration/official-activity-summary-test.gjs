@@ -1,6 +1,7 @@
 import { render } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
+import pretender, { response } from "discourse/tests/helpers/create-pretender";
 import ISBFOfficialActivitySummary from "../../discourse/components/isbf-official-activity-summary";
 
 module(
@@ -9,6 +10,8 @@ module(
     setupRenderingTest(hooks);
 
     hooks.beforeEach(function () {
+      // View tracking is independent of these rendering assertions.
+      pretender.post("/isbf/views/post-impressions", () => response({ counts: {} }));
       this.activity = {
         id: 8,
         title: "Campus briefing",
