@@ -220,6 +220,7 @@ body:has(.isbf-resume-workspace) .powered-by-discourse {
 .isbf-resume-share-list {
   & &__header {
     position: relative;
+    overflow: clip;
     flex-wrap: nowrap;
 
     h1 > span {
@@ -322,6 +323,7 @@ body:has(.isbf-resume-workspace) .powered-by-discourse {
 
 .isbf-resume-share-actions-menu {
   .fk-d-menu__inner-content {
+    box-sizing: border-box;
     width: max-content;
     max-width: calc(100vw - 2 * var(--isbf-v2-space-4, 16px));
     padding: var(--isbf-v2-space-2, 8px);
@@ -336,11 +338,13 @@ body:has(.isbf-resume-workspace) .powered-by-discourse {
   }
 
   & &__item {
+    box-sizing: border-box;
     display: flex;
+    align-items: center;
     justify-content: center;
     width: 100%;
     min-height: 44px;
-    padding: var(--isbf-v2-space-3, 12px);
+    padding: var(--isbf-v2-space-2, 8px) var(--isbf-v2-space-3, 12px);
     border: 0;
     border-radius: var(--isbf-v2-radius-sm, 8px);
     color: var(--isbf-v2-text, var(--primary));
