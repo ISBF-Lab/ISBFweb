@@ -33,6 +33,7 @@ en:
           publish_official: "Publish with the official identity"
           review_resources: "Review learning resources"
           review_resumes: "Review shared resumes"
+          review_alumni: "Review alumni applications"
           manage_resources: "Manage learning resources"
           view_emails: "View other members’ email addresses"
           trace_anonymous: "Look up anonymous authors"

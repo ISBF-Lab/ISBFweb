@@ -581,3 +581,19 @@ body.academy-auth-page {
     opacity: 1;
   }
 }
+
+.academy-auth__registration-options {
+  display: flex;
+  gap: 8px;
+  margin-block-end: 20px;
+
+  .btn {
+    flex: 1;
+    white-space: normal;
+  }
+
+  [aria-pressed="true"] {
+    background: var(--tertiary);
+    color: var(--secondary);
+  }
+}

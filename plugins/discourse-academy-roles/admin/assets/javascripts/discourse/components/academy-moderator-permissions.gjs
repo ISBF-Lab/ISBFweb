@@ -26,6 +26,7 @@ const GROUPS = {
     "review_resources",
     "review_resumes",
     "manage_resources",
+    "review_alumni",
   ],
   sensitive: ["view_emails", "trace_anonymous"],
 };

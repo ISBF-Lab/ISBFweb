@@ -1,5 +1,6 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+import { fn } from "@ember/helper";
 import { action } from "@ember/object";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import didUpdate from "@ember/render-modifiers/modifiers/did-update";
@@ -13,6 +14,7 @@ import LocalLoginForm from "discourse/components/local-login-form";
 import LoginButtons from "discourse/components/login-buttons";
 import LoginPageCta from "discourse/components/login-page-cta";
 import NoLoginMethods from "discourse/components/no-login-methods";
+import PluginOutlet from "discourse/components/plugin-outlet";
 import bodyClass from "discourse/helpers/body-class";
 import hideApplicationHeaderButtons from "discourse/helpers/hide-application-header-buttons";
 import hideApplicationSidebar from "discourse/helpers/hide-application-sidebar";
@@ -32,8 +34,10 @@ export default class AcademyAuthPage extends Component {
   @service interfaceColor;
   @service router;
   @service session;
+  @service site;
   @service siteSettings;
 
+  @tracked alumniRegistration = false;
   @tracked completing = false;
   @tracked formHidden = false;
   @tracked noticeVisible = false;
@@ -60,6 +64,8 @@ export default class AcademyAuthPage extends Component {
 
   constructor() {
     super(...arguments);
+    this.alumniRegistration =
+      new URLSearchParams(window.location.search).get("alumni") === "1";
     schedule("afterRender", () => {
       if (this.isDestroying || !this.interfaceColor.selectorAvailable) {
         return;
@@ -118,6 +124,10 @@ export default class AcademyAuthPage extends Component {
     return this.view === "register";
   }
 
+  get alumniRegistrationEnabled() {
+    return this.site.isbf_alumni?.registration_enabled === true;
+  }
+
   get invitation() {
     return this.args.inviteInfo || this.inviteInfo;
   }
@@ -138,6 +148,11 @@ export default class AcademyAuthPage extends Component {
     return this.paused
       ? "academy_roles.auth.play_motion"
       : "academy_roles.auth.pause_motion";
+  }
+
+  @action
+  selectRegistration(alumni) {
+    this.alumniRegistration = alumni;
   }
 
   @action
@@ -562,38 +577,60 @@ export default class AcademyAuthPage extends Component {
               @usernameHint={{i18n "academy_roles.auth.username_hint"}}
             />
           {{else}}
-            <h1 class="academy-auth__title">{{i18n
-                "academy_roles.auth.invite_title"
-              }}</h1>
-            <Form @onSubmit={{this.redeem}} as |form|>
-              <form.Field
-                class="academy-auth__invite-field"
-                @format="full"
-                @name="code"
-                @title={{i18n "academy_roles.invite_code"}}
-                @type="input"
-                @validation="required"
-                as |field|
+            {{#if this.alumniRegistrationEnabled}}
+              <div
+                aria-label={{i18n "academy_roles.auth.registration_method"}}
+                class="academy-auth__registration-options"
+                role="group"
               >
-                <field.Control
-                  autocomplete="off"
-                  autofocus="autofocus"
-                  maxlength="128"
-                  placeholder={{i18n "academy_roles.invite_code"}}
-                  spellcheck="false"
+                <DButton
+                  aria-pressed={{not this.alumniRegistration}}
+                  @action={{fn this.selectRegistration false}}
+                  @label="academy_roles.auth.invite_title"
                 />
-              </form.Field>
-              {{#if this.inviteError}}
-                <p
-                  class="academy-auth__error"
-                  role="alert"
-                >{{this.inviteError}}</p>
-              {{/if}}
-              <form.Submit
-                @disabled={{this.verifyingInvite}}
-                @label="continue"
-              />
-            </Form>
+                <DButton
+                  aria-pressed={{this.alumniRegistration}}
+                  @action={{fn this.selectRegistration true}}
+                  @label="academy_roles.auth.alumni_registration"
+                />
+              </div>
+            {{/if}}
+            {{#if (and this.alumniRegistrationEnabled this.alumniRegistration)}}
+              <PluginOutlet @name="academy-alumni-registration" />
+            {{else}}
+              <h1 class="academy-auth__title">{{i18n
+                  "academy_roles.auth.invite_title"
+                }}</h1>
+              <Form @onSubmit={{this.redeem}} as |form|>
+                <form.Field
+                  class="academy-auth__invite-field"
+                  @format="full"
+                  @name="code"
+                  @title={{i18n "academy_roles.invite_code"}}
+                  @type="input"
+                  @validation="required"
+                  as |field|
+                >
+                  <field.Control
+                    autocomplete="off"
+                    autofocus="autofocus"
+                    maxlength="128"
+                    placeholder={{i18n "academy_roles.invite_code"}}
+                    spellcheck="false"
+                  />
+                </form.Field>
+                {{#if this.inviteError}}
+                  <p
+                    class="academy-auth__error"
+                    role="alert"
+                  >{{this.inviteError}}</p>
+                {{/if}}
+                <form.Submit
+                  @disabled={{this.verifyingInvite}}
+                  @label="continue"
+                />
+              </Form>
+            {{/if}}
           {{/if}}
           <DButton
             class="btn-flat academy-auth__register-link"

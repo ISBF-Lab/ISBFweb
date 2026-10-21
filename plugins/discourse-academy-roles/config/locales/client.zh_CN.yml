@@ -58,6 +58,8 @@ zh_CN:
           csv_required: 请选择 CSV 文件。
           too_large: CSV 文件不能超过 1 MB。
       auth:
+        alumni_registration: "校友注册"
+        registration_method: "注册方式"
         welcome: 欢迎来到 ISBF - One
         register: 注册
         invite_title: 邀请码注册
@@ -67,4 +69,5 @@ zh_CN:
         success: 注册成功
         redirect_notice: 5 秒后进入论坛首页
         new_account_required: 邀请码仅用于创建新账号，请先退出当前账号。
+
         username_hint: 用户名填写后不可更改

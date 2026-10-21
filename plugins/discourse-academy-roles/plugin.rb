@@ -111,7 +111,8 @@ after_initialize do
     if SiteSetting.academy_roles_enabled? && max_redemptions_allowed != 1
       errors.add(:max_redemptions_allowed, I18n.t("academy_roles.single_use_invite"))
     end
-    if SiteSetting.academy_roles_enabled? && (email.present? || domain.present?)
+    if SiteSetting.academy_roles_enabled? && (email.present? || domain.present?) &&
+         !(defined?(IsbfAlumni::Registration) && IsbfAlumni::Registration.bound_invite?(self))
       errors.add(:email, I18n.t("academy_roles.unbound_invite"))
     end
   end

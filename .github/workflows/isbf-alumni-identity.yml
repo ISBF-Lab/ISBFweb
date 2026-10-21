@@ -1,0 +1,30 @@
+name: Alumni identity integration boundary
+on:
+  pull_request:
+    paths:
+      - "plugins/discourse-academy-roles/**"
+      - ".github/workflows/isbf-alumni-identity.yml"
+  push:
+    branches: [main]
+    paths:
+      - "plugins/discourse-academy-roles/**"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  syntax-and-auth-boundary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Identity Ruby syntax
+        run: find plugins/discourse-academy-roles -name '*.rb' -print0 | xargs -0 -n1 ruby -c
+      - name: Native login and optional alumni outlet remain independent
+        run: node plugins/discourse-academy-roles/scripts/check-alumni-auth-boundary.mjs

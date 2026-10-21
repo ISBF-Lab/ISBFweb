@@ -29,10 +29,13 @@ module DiscourseAcademyRoles::ModeratorReviewScope
     unless guardian.respond_to?(:can_review_isbf_resumes?) && guardian.can_review_isbf_resumes?
       resumes = resumes.none
     end
+    alumni = where(type: "ReviewableIsbfAlumni", reviewable_by_moderator: true, category_id: nil)
+    alumni = alumni.none unless guardian.academy_can?(:review_alumni)
     result =
       content
         .or(resources)
         .or(resumes)
+        .or(alumni)
         .where(
           "reviewables.category_id IS NULL OR reviewables.category_id IN (?)",
           guardian.allowed_category_ids,
