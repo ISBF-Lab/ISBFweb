@@ -11,6 +11,11 @@ RSpec.describe DiscourseAcademyRoles::ModeratorPermissions do
     SiteSetting.academy_official_group = official_group.id
     SiteSetting.academy_official_category = official_category.id
     SiteSetting.academy_roles_enabled = true
+    if defined?(IsbfAlumni::Registration)
+      alumni_group = Group.find_by(name: "alumni") || Fabricate(:group, name: "alumni")
+      SiteSetting.isbf_alumni_enabled = true
+      SiteSetting.isbf_alumni_group_name = alumni_group.name
+    end
   end
 
   it "scopes the native queue to alumni reviews and revokes access immediately" do
@@ -20,7 +25,12 @@ RSpec.describe DiscourseAcademyRoles::ModeratorPermissions do
       Class.new(Reviewable),
     )
     alumni = Fabricate(:reviewable_queued_post, topic: nil, category_id: nil)
-    alumni.update_columns(type: "ReviewableIsbfAlumni", reviewable_by_moderator: true)
+    alumni.update_columns(
+      type: "ReviewableIsbfAlumni",
+      reviewable_by_moderator: true,
+      target_type: nil,
+      target_id: nil,
+    )
     ordinary = Fabricate(:reviewable_queued_post, category_id: nil)
     visible_ids = -> { Reviewable.viewable_by(administrator, preload: false).pluck(:id) }
     expect(visible_ids.call).not_to include(alumni.id)
