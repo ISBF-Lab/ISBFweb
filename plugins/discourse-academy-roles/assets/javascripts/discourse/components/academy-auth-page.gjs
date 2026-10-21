@@ -125,7 +125,17 @@ export default class AcademyAuthPage extends Component {
   }
 
   get alumniRegistrationEnabled() {
-    return this.site.isbf_alumni?.registration_enabled === true;
+    if (this.site.isbf_alumni) {
+      return this.site.isbf_alumni.registration_enabled === true;
+    }
+
+    // Login-required sites omit plugin metadata from the anonymous Site payload.
+    // These public settings expose the entry; the Alumni API still authorizes it.
+    return (
+      this.siteSettings.login_required === true &&
+      this.siteSettings.isbf_alumni_enabled === true &&
+      this.siteSettings.isbf_alumni_registration_enabled === true
+    );
   }
 
   get invitation() {
