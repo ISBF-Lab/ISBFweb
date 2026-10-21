@@ -159,6 +159,12 @@ jobs:
           retention-days: 14
           path: tmp/isbf-frontend-results/theme-qunit.log
 
+      - name: Native academy authentication regression
+        env:
+          LOAD_PLUGINS: "1"
+        run: |
+          bin/qunit --standalone plugins/discourse-academy-roles/test/javascripts/acceptance/auth-page-test.js | tee tmp/isbf-frontend-results/academy-auth-qunit.log
+
       - name: Native frontend behavior regression
         env:
           LOAD_PLUGINS: "0"
