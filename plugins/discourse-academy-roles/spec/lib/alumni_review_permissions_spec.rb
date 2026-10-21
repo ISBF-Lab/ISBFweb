@@ -22,12 +22,13 @@ RSpec.describe DiscourseAcademyRoles::ModeratorPermissions do
     alumni = Fabricate(:reviewable_queued_post, topic: nil, category_id: nil)
     alumni.update_columns(type: "ReviewableIsbfAlumni", reviewable_by_moderator: true)
     ordinary = Fabricate(:reviewable_queued_post, category_id: nil)
-    expect(Reviewable.viewable_by(administrator).pluck(:id)).not_to include(alumni.id)
+    visible_ids = -> { Reviewable.viewable_by(administrator, preload: false).pluck(:id) }
+    expect(visible_ids.call).not_to include(alumni.id)
     SiteSetting.academy_moderators_review_alumni = true
-    expect(Reviewable.viewable_by(administrator).pluck(:id)).to include(alumni.id)
-    expect(Reviewable.viewable_by(administrator).pluck(:id)).not_to include(ordinary.id)
+    expect(visible_ids.call).to include(alumni.id)
+    expect(visible_ids.call).not_to include(ordinary.id)
     SiteSetting.academy_moderators_review_alumni = false
-    expect(Reviewable.viewable_by(administrator).pluck(:id)).not_to include(alumni.id)
+    expect(visible_ids.call).not_to include(alumni.id)
   end
 
   describe ".allowed?" do
