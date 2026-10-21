@@ -37,3 +37,43 @@
     width: 100%;
   }
 }
+
+.academy-name-color {
+  --d-input-bg-color: var(--isbf-v2-surface, var(--secondary));
+  --d-input-text-color: var(--isbf-v2-text, var(--primary));
+  --d-input-border: 1px solid var(--isbf-v2-border, var(--primary-low));
+  --d-input-border-radius: var(--isbf-v2-radius-sm, 8px);
+  --d-input-focused-color: var(--isbf-v2-focus-ring, var(--tertiary));
+  gap: var(--isbf-v2-space-4, 16px);
+  margin-block: var(--isbf-v2-space-4, 16px);
+  color: var(--isbf-v2-text, var(--primary));
+
+  &__title {
+    margin: 0;
+    font-size: var(--isbf-v2-font-md, 16px);
+  }
+
+  &__reset {
+    justify-self: start;
+    min-height: 44px;
+    color: var(--isbf-v2-accent, var(--tertiary));
+  }
+
+  &__preview {
+    display: flex;
+    gap: var(--isbf-v2-space-2, 8px);
+    flex-wrap: wrap;
+    color: var(--isbf-v2-muted, var(--primary-medium));
+  }
+
+  &__name {
+    overflow-wrap: anywhere;
+    font-size: var(--isbf-v2-font-sm, 15px);
+    font-weight: var(--isbf-v2-weight-bold, 750);
+    line-height: 1.35;
+  }
+
+  .form-kit__control-color-input-hex {
+    min-height: 44px;
+  }
+}

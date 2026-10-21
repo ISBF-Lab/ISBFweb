@@ -28,6 +28,9 @@ jobs:
         run: find plugins/discourse-academy-roles -name '*.rb' -print0 | xargs -0 -n1 ruby -c
       - name: Native login and optional alumni outlet remain independent
         run: node plugins/discourse-academy-roles/scripts/check-alumni-auth-boundary.mjs
+      - name: Preserve login and existing name-color translations
+        run: |
+          ruby -ryaml -e '%w[en zh_CN].each { |locale| data = YAML.load_file("plugins/discourse-academy-roles/config/locales/client.#{locale}.yml").fetch(locale).fetch("js").fetch("academy_roles"); raise "Missing auth username hint" unless data.fetch("auth").fetch("username_hint").is_a?(String); raise "Missing role-color title" unless data.fetch("name_color").fetch("title").is_a?(String) }'
       - name: Check native Ruby formatting
         run: |
           gem install syntax_tree --version 6.3.0 --no-document

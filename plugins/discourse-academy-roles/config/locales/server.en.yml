@@ -7,6 +7,10 @@ en:
     errors:
       academy_roles_not_configured: "Choose an existing official group and category before enabling academy roles."
   academy_roles:
+    name_color:
+      unavailable: Only administrators and developers can wear role colors.
+      custom_unavailable: Only developers can customize their name color.
+      invalid_color: Name colors must use three or six hexadecimal digits.
     auth:
       invite_invalid: "This invitation code is invalid. Check the code and try again."
       invite_expired: "This invitation code has expired. Request a new code from an administrator."

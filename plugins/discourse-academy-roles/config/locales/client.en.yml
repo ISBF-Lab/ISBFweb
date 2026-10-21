@@ -6,6 +6,15 @@ en:
           academy_roles: "Academy roles"
   js:
     academy_roles:
+      name_color:
+        title: Feed name color
+        enabled: Wear role color
+        description: Only your name on feed cards changes. Everyone sees the same color. Off by default.
+        color: Custom name color
+        color_description: Developers can choose any color. Leave the code empty for theme blue. Custom colors stay the same in light and dark modes.
+        invalid_color: Enter a three or six digit hexadecimal color code.
+        reset: Restore theme color
+        preview: Name preview
       invite_title: "Register with an invitation code"
       invite_code: "Invitation code"
       redeem: "Register"
@@ -32,6 +41,7 @@ en:
         success: "Registration complete"
         redirect_notice: "Entering the forum homepage in 5 seconds"
         new_account_required: "This invitation creates a new account. Sign out before registering."
+        username_hint: "Your username cannot be changed once set"
       student_invites:
         title: "Student invitations"
         description: "Issue single-use invitation codes and view the student number bound to each registered account."
@@ -69,5 +79,3 @@ en:
           registered: "Registered"
           expired: "Expired"
           revoked: "Revoked"
-
-        username_hint: "Your username cannot be changed once set"

@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 module DiscourseAcademyRoles::GuardianExtension
+  def can_wear_academy_name_color?(target)
+    user&.id == target.id && DiscourseAcademyRoles::NameColor.allowed?(target)
+  end
+
+  def can_customize_academy_name_color?(target)
+    user&.id == target.id && DiscourseAcademyRoles::NameColor.customizable?(target)
+  end
+
   def can_invite_to_forum?(groups = nil)
     return false if SiteSetting.academy_roles_enabled? && !is_admin?
 

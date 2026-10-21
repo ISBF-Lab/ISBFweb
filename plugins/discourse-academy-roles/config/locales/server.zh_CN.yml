@@ -7,6 +7,10 @@ zh_CN:
       academy_roles_not_configured: 启用学院身份前，请先选择已有的官方用户组和分类。
     academy_auth_page_enabled: 启用 {{setting:academy_roles_enabled}} 时显示粒子登录与邀请码注册页面。关闭可恢复原页面。
   academy_roles:
+    name_color:
+      unavailable: 只有管理员和开发者可以佩戴身份色。
+      custom_unavailable: 只有开发者可以自定义姓名颜色。
+      invalid_color: 姓名颜色必须是三位或六位十六进制色号。
     single_use_invite: 学院邀请码只能使用一次。
     unbound_invite: 邀请码不能绑定邮箱或邮箱域名。
     official_category_move: 官方话题必须保留在官方分类。
