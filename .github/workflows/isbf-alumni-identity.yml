@@ -28,3 +28,19 @@ jobs:
         run: find plugins/discourse-academy-roles -name '*.rb' -print0 | xargs -0 -n1 ruby -c
       - name: Native login and optional alumni outlet remain independent
         run: node plugins/discourse-academy-roles/scripts/check-alumni-auth-boundary.mjs
+      - name: Check native Ruby formatting
+        run: |
+          gem install syntax_tree --version 6.3.0 --no-document
+          stree write plugins/discourse-academy-roles/lib/discourse_academy_roles/student_invite_extension.rb plugins/discourse-academy-roles/lib/tasks/academy_roles.rake plugins/discourse-academy-roles/spec/lib/alumni_invite_compatibility_spec.rb plugins/discourse-academy-roles/spec/lib/alumni_review_permissions_spec.rb
+          git diff --exit-code -- plugins/discourse-academy-roles/lib/discourse_academy_roles/student_invite_extension.rb plugins/discourse-academy-roles/lib/tasks/academy_roles.rake plugins/discourse-academy-roles/spec/lib/alumni_invite_compatibility_spec.rb plugins/discourse-academy-roles/spec/lib/alumni_review_permissions_spec.rb
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: alumni-identity-formatted-${{ github.run_id }}
+          path: |
+            plugins/discourse-academy-roles/lib/discourse_academy_roles/student_invite_extension.rb
+            plugins/discourse-academy-roles/lib/tasks/academy_roles.rake
+            plugins/discourse-academy-roles/spec/lib/alumni_invite_compatibility_spec.rb
+            plugins/discourse-academy-roles/spec/lib/alumni_review_permissions_spec.rb
+          if-no-files-found: error
+          retention-days: 7

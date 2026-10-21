@@ -5,7 +5,8 @@ module DiscourseAcademyRoles::StudentInviteExtension
     return false unless super
     return true unless SiteSetting.academy_roles_enabled?
 
-    if defined?(IsbfAlumni::Registration) && IsbfAlumni::Registration.bound_invite?(self)
+    if defined?(IsbfAlumni::Registration) &&
+         IsbfAlumni::Registration.bound_invite?(self)
       return true
     end
 
@@ -25,12 +26,15 @@ end
 
 module DiscourseAcademyRoles::StudentInviteRedeemerExtension
   def redeem
-    if defined?(IsbfAlumni::Registration) && IsbfAlumni::Registration.bound_invite?(invite)
-      return IsbfAlumni::Registration.redeem(
-        invite: invite,
-        email: email,
-        redeeming_user: redeeming_user,
-      ) { super }
+    if defined?(IsbfAlumni::Registration) &&
+         IsbfAlumni::Registration.bound_invite?(invite)
+      return (
+        IsbfAlumni::Registration.redeem(
+          invite: invite,
+          email: email,
+          redeeming_user: redeeming_user
+        ) { super }
+      )
     end
 
     return super unless SiteSetting.academy_roles_enabled?
@@ -90,7 +94,8 @@ module DiscourseAcademyRoles::StudentUserMergerExtension
   def merge!
     if defined?(IsbfAlumni::Application) &&
          IsbfAlumni::Application.exists?(user_id: [@source_user.id, @target_user.id])
-      raise Discourse::InvalidParameters, I18n.t("isbf_alumni.errors.merge_not_allowed")
+      raise Discourse::InvalidParameters,
+            I18n.t("isbf_alumni.errors.merge_not_allowed")
     end
     if SiteSetting.academy_roles_enabled? &&
          DiscourseAcademyRoles::StudentRegistration.exists?(

@@ -77,13 +77,14 @@ task "academy_roles:invalidate_unbound_invites" => :environment do
   protected_invites = DiscourseAcademyRoles::StudentRegistration.select(:invite_id)
   unbound = Invite.where(invalidated_at: nil).where.not(id: protected_invites)
   if defined?(IsbfAlumni::Registration)
-    alumni_invites = IsbfAlumni::Application.where(status: "approved", user_id: nil)
-      .where.not(invite_id: nil).select(:invite_id)
+    alumni_invites =
+      IsbfAlumni::Application
+        .where(status: "approved", user_id: nil)
+        .where.not(invite_id: nil)
+        .select(:invite_id)
     unbound = unbound.where.not(id: alumni_invites)
   end
-  count =
-    unbound
-      .update_all(invalidated_at: Time.current)
+  count = unbound.update_all(invalidated_at: Time.current)
 
   puts "Invalidated #{count} invitations without student number bindings."
 end
