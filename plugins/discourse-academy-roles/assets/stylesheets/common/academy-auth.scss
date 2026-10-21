@@ -117,7 +117,6 @@ body.academy-auth-page {
   &__choices {
     display: flex;
     gap: 14px;
-    transform: translateY(24px);
     pointer-events: auto;
 
     .btn {
@@ -579,5 +578,21 @@ body.academy-auth-page {
 
   to {
     opacity: 1;
+  }
+}
+
+.academy-auth__registration-options {
+  display: flex;
+  gap: 8px;
+  margin-block-end: 20px;
+
+  .btn {
+    flex: 1;
+    white-space: normal;
+  }
+
+  [aria-pressed="true"] {
+    background: var(--tertiary);
+    color: var(--secondary);
   }
 }

@@ -80,6 +80,7 @@ after_initialize do
 
   require_relative "lib/discourse_academy_roles"
   require_relative "lib/discourse_academy_roles/guardian_extension"
+  require_relative "lib/discourse_academy_roles/name_color"
   require_relative "lib/discourse_academy_roles/topic_category_extension"
   require_relative "lib/discourse_academy_roles/daily_limits_extension"
   require_relative "lib/discourse_academy_roles/activity_level"
@@ -98,6 +99,23 @@ after_initialize do
   register_post_custom_field_type(DiscourseAcademyRoles::OFFICIAL_POST_FIELD, :boolean)
   TopicView.default_post_custom_fields << DiscourseAcademyRoles::OFFICIAL_POST_FIELD
   register_user_custom_field_type(DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD, :integer)
+  register_user_custom_field_type(DiscourseAcademyRoles::NameColor::ENABLED_FIELD, :boolean)
+  register_user_custom_field_type(
+    DiscourseAcademyRoles::NameColor::COLOR_FIELD,
+    :string,
+    max_length: 7,
+  )
+  DiscourseAcademyRoles::NameColor::FIELDS.each do |field|
+    register_editable_user_custom_field(field)
+  end
+
+  add_model_callback(:user, :validate) do
+    DiscourseAcademyRoles::NameColor.validate(self) if SiteSetting.academy_roles_enabled?
+  end
+
+  TopicView.on_preload do |view|
+    DiscourseAcademyRoles::NameColor.preload(view.posts.map(&:user).compact)
+  end
   register_user_custom_field_type(DiscourseAcademyRoles::LV3_SINCE_FIELD, :string, max_length: 40)
   register_user_custom_field_type(
     DiscourseAcademyRoles::LV3_CHECKED_AT_FIELD,
@@ -111,7 +129,8 @@ after_initialize do
     if SiteSetting.academy_roles_enabled? && max_redemptions_allowed != 1
       errors.add(:max_redemptions_allowed, I18n.t("academy_roles.single_use_invite"))
     end
-    if SiteSetting.academy_roles_enabled? && (email.present? || domain.present?)
+    if SiteSetting.academy_roles_enabled? && (email.present? || domain.present?) &&
+         !(defined?(IsbfAlumni::Registration) && IsbfAlumni::Registration.bound_invite?(self))
       errors.add(:email, I18n.t("academy_roles.unbound_invite"))
     end
   end
@@ -126,6 +145,8 @@ after_initialize do
 
   reloadable_patch do
     Guardian.prepend(DiscourseAcademyRoles::GuardianExtension)
+    UserLookup.prepend(DiscourseAcademyRoles::NameColor::UserLookupPreloader)
+    UserUpdater.prepend(DiscourseAcademyRoles::NameColor::UserUpdaterExtension)
     User.prepend(DiscourseAcademyRoles::ModeratorUser)
     Guardian.prepend(DiscourseAcademyRoles::ModeratorGuardian)
     Category.singleton_class.prepend(DiscourseAcademyRoles::ModeratorCategories)
@@ -214,6 +235,29 @@ after_initialize do
   end
 
   add_to_serializer(:current_user, :academy_moderator_role) { object[:moderator] }
+
+  add_to_serializer(:basic_user, :academy_display_name_color) do
+    DiscourseAcademyRoles::NameColor.effective_color(user)
+  end
+
+  %i[user current_user].each do |serializer|
+    own_preferences = -> { scope.user&.id == object.id }
+    add_to_serializer(
+      serializer,
+      :academy_name_color_preferences,
+      include_condition: own_preferences,
+    ) { DiscourseAcademyRoles::NameColor.preferences(object) }
+    add_to_serializer(
+      serializer,
+      :academy_can_wear_name_color,
+      include_condition: own_preferences,
+    ) { scope.can_wear_academy_name_color?(object) }
+    add_to_serializer(
+      serializer,
+      :academy_can_customize_name_color,
+      include_condition: own_preferences,
+    ) { scope.can_customize_academy_name_color?(object) }
+  end
 
   add_to_serializer(:current_user, :academy_moderator_permissions) do
     DiscourseAcademyRoles::ModeratorPermissions.for(object)

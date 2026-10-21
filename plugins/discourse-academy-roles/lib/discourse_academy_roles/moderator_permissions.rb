@@ -21,6 +21,7 @@ module DiscourseAcademyRoles
       publish_official: :academy_moderators_publish_official,
       review_resources: :academy_moderators_review_resources,
       review_resumes: :academy_moderators_review_resumes,
+      review_alumni: :academy_moderators_review_alumni,
       manage_resources: :academy_moderators_manage_resources,
       view_emails: :moderators_view_emails,
       trace_anonymous: :academy_moderators_trace_anonymous,
@@ -81,6 +82,7 @@ module DiscourseAcademyRoles
     end
 
     def self.review_permission(reviewable)
+      return :review_alumni if reviewable.type == "ReviewableIsbfAlumni"
       return :review_resumes if reviewable.type == "ReviewableIsbfResume"
       if resource?(reviewable) || reviewable.type == "ReviewableIsbfLearningCourse"
         :review_resources
@@ -90,6 +92,7 @@ module DiscourseAcademyRoles
     end
 
     def self.review_edit_permission(reviewable)
+      return :review_alumni if reviewable.type == "ReviewableIsbfAlumni"
       return :review_resumes if reviewable.type == "ReviewableIsbfResume"
       resource?(reviewable) ? :manage_resources : :edit_others
     end

@@ -6,6 +6,15 @@ en:
           academy_roles: "Academy roles"
   js:
     academy_roles:
+      name_color:
+        title: Feed name color
+        enabled: Wear role color
+        description: Only your name on feed cards changes. Everyone sees the same color. Off by default.
+        color: Custom name color
+        color_description: Developers can choose any color. Leave the code empty for theme blue. Custom colors stay the same in light and dark modes.
+        invalid_color: Enter a three or six digit hexadecimal color code.
+        reset: Restore theme color
+        preview: Name preview
       invite_title: "Register with an invitation code"
       invite_code: "Invitation code"
       redeem: "Register"
@@ -21,6 +30,8 @@ en:
       activity_value: "LV%{level}"
       student_number: "Student number"
       auth:
+        alumni_registration: "Alumni registration"
+        registration_method: "Registration method"
         welcome: "Welcome to ISBF - One"
         register: "Register"
         invite_title: "Invitation registration"

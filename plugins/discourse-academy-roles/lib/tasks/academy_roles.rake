@@ -3,15 +3,13 @@
 desc "Configure a closed academy site with official and ordinary categories"
 task "academy_roles:setup" => :environment do
   official_group =
-    Group.find_or_create_by!(name: "academy_official") do |group|
-      group.full_name = "学院官方认证"
-    end
+    Group.find_or_create_by!(name: "academy_official") { |group| group.full_name = "学院官方认证" }
   official_group.update!(
     public_admission: false,
     public_exit: false,
     allow_membership_requests: false,
     automatic_membership_email_domains: "",
-    grant_trust_level: 0
+    grant_trust_level: 0,
   )
 
   ordinary_category =
@@ -29,9 +27,7 @@ task "academy_roles:setup" => :environment do
   official_category.update!(name: "官方")
 
   ordinary_category.set_permissions(everyone: :full)
-  official_category.set_permissions(
-    { everyone: :create_post }.merge(official_group => :full)
-  )
+  official_category.set_permissions({ everyone: :create_post }.merge(official_group => :full))
 
   SiteSetting.login_required = true
   SiteSetting.invite_only = true
@@ -61,9 +57,9 @@ task "academy_roles:setup" => :environment do
 
   SiteSetting.academy_roles_enabled = true
 
-  Badge.where(
-    id: [Badge::BasicUser, Badge::Member, Badge::Regular, Badge::Leader]
-  ).update_all(enabled: false)
+  Badge.where(id: [Badge::BasicUser, Badge::Member, Badge::Regular, Badge::Leader]).update_all(
+    enabled: false,
+  )
 
   puts "Academy roles configured. Site admins can issue one-use invitations and manage #{official_group.name}."
 end
@@ -74,13 +70,17 @@ task "academy_roles:invalidate_unbound_invites" => :environment do
     abort "Enable academy_roles_enabled before invalidating invitations."
   end
 
-  count =
-    Invite
-      .where(invalidated_at: nil)
-      .where.not(
-        id: DiscourseAcademyRoles::StudentRegistration.select(:invite_id)
-      )
-      .update_all(invalidated_at: Time.current)
+  protected_invites = DiscourseAcademyRoles::StudentRegistration.select(:invite_id)
+  unbound = Invite.where(invalidated_at: nil).where.not(id: protected_invites)
+  if defined?(IsbfAlumni::Registration)
+    alumni_invites =
+      IsbfAlumni::Application
+        .where(status: "approved", user_id: nil)
+        .where.not(invite_id: nil)
+        .select(:invite_id)
+    unbound = unbound.where.not(id: alumni_invites)
+  end
+  count = unbound.update_all(invalidated_at: Time.current)
 
   puts "Invalidated #{count} invitations without student number bindings."
 end

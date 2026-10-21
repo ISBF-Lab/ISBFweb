@@ -17,5 +17,6 @@ en:
     academy_moderators_publish_official: "Allow moderators to publish with the official identity in the configured official category."
     academy_moderators_review_resources: "Allow moderators to review learning resources and course requests. Direct publishing and resource changes require resource management."
     academy_moderators_review_resumes: "Allow moderators to review shared resumes, revise descriptions and view review history. Disabled by default; only developers can review while disabled."
+    academy_moderators_review_alumni: "Allow moderators to review alumni applications and their private proof files. Does not grant user management or general email access."
     academy_moderators_manage_resources: "Allow moderators to publish, edit, delete and restore learning resources."
     academy_moderators_trace_anonymous: "Allow moderators to look up anonymous authors only for content they can access."

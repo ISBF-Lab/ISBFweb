@@ -1,0 +1,49 @@
+name: Alumni identity integration boundary
+on:
+  pull_request:
+    paths:
+      - "plugins/discourse-academy-roles/**"
+      - ".github/workflows/isbf-alumni-identity.yml"
+  push:
+    branches: [main]
+    paths:
+      - "plugins/discourse-academy-roles/**"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  syntax-and-auth-boundary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Identity Ruby syntax
+        run: find plugins/discourse-academy-roles -name '*.rb' -print0 | xargs -0 -n1 ruby -c
+      - name: Native login and optional alumni outlet remain independent
+        run: node plugins/discourse-academy-roles/scripts/check-alumni-auth-boundary.mjs
+      - name: Preserve login and existing name-color translations
+        run: |
+          ruby -ryaml -e '%w[en zh_CN].each { |locale| data = YAML.load_file("plugins/discourse-academy-roles/config/locales/client.#{locale}.yml").fetch(locale).fetch("js").fetch("academy_roles"); raise "Missing auth username hint" unless data.fetch("auth").fetch("username_hint").is_a?(String); raise "Missing role-color title" unless data.fetch("name_color").fetch("title").is_a?(String) }'
+      - name: Check native Ruby formatting
+        run: |
+          gem install syntax_tree --version 6.3.0 --no-document
+          stree write plugins/discourse-academy-roles/lib/discourse_academy_roles/student_invite_extension.rb plugins/discourse-academy-roles/lib/tasks/academy_roles.rake plugins/discourse-academy-roles/spec/lib/alumni_invite_compatibility_spec.rb plugins/discourse-academy-roles/spec/lib/alumni_review_permissions_spec.rb
+          git diff --exit-code -- plugins/discourse-academy-roles/lib/discourse_academy_roles/student_invite_extension.rb plugins/discourse-academy-roles/lib/tasks/academy_roles.rake plugins/discourse-academy-roles/spec/lib/alumni_invite_compatibility_spec.rb plugins/discourse-academy-roles/spec/lib/alumni_review_permissions_spec.rb
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: alumni-identity-formatted-${{ github.run_id }}
+          path: |
+            plugins/discourse-academy-roles/lib/discourse_academy_roles/student_invite_extension.rb
+            plugins/discourse-academy-roles/lib/tasks/academy_roles.rake
+            plugins/discourse-academy-roles/spec/lib/alumni_invite_compatibility_spec.rb
+            plugins/discourse-academy-roles/spec/lib/alumni_review_permissions_spec.rb
+          if-no-files-found: error
+          retention-days: 7

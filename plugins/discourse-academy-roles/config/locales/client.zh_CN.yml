@@ -6,6 +6,15 @@ zh_CN:
           academy_roles: 学院身份
   js:
     academy_roles:
+      name_color:
+        title: 信息流姓名颜色
+        enabled: 佩戴身份色
+        description: 仅改变信息流卡片中的姓名，所有人看到相同的颜色。默认关闭。
+        color: 自定义姓名颜色
+        color_description: 开发者可自由选色。色号留空时使用主题蓝；自选色在明暗模式下保持一致。
+        invalid_color: 请输入三位或六位十六进制色号。
+        reset: 恢复主题色
+        preview: 姓名预览
       invite_title: 通过邀请码注册
       invite_code: 邀请码
       redeem: 注册
@@ -58,6 +67,8 @@ zh_CN:
           csv_required: 请选择 CSV 文件。
           too_large: CSV 文件不能超过 1 MB。
       auth:
+        alumni_registration: "校友注册"
+        registration_method: "注册方式"
         welcome: 欢迎来到 ISBF - One
         register: 注册
         invite_title: 邀请码注册
