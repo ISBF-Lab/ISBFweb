@@ -45,8 +45,8 @@ module("Integration | Component | ResumeShareList", function (hooks) {
     assert.dom('a[data-user-card="alice"]').hasAttribute("href", "/u/alice");
     assert.dom('img[src*="/previews/"]').doesNotExist();
     assert
-      .dom(".isbf-resume-share-list__actions button")
-      .doesNotExist("members have no settings button");
+      .dom(".isbf-resume-share-actions-menu")
+      .doesNotExist("secondary actions stay collapsed initially");
   });
 
   test("staff have a collection settings action while member upload stays available", async function (assert) {
@@ -56,8 +56,9 @@ module("Integration | Component | ResumeShareList", function (hooks) {
         <ResumeShareList @list="published" @model={{this.model}} />
       </template>
     );
+    await click(".isbf-resume-share-list__more");
     assert
-      .dom(".isbf-resume-share-list__actions button")
+      .dom(".isbf-resume-share-actions-menu button")
       .hasText(i18n("isbf_resume.sharing.edit_collection"));
     assert.dom(".isbf-resume-share-list__upload").exists();
   });
@@ -109,8 +110,8 @@ module("Integration | Component | ResumeShareList", function (hooks) {
     assert
       .dom(".isbf-resume-share-list__actions .btn-primary")
       .exists(
-        { count: 2 },
-        "my submissions and upload use matching primary actions"
+        { count: 1 },
+        "only the application to share stays outside the menu"
       );
   });
 

@@ -13,6 +13,7 @@ en:
         generate: "Personal resume generator"
         intro: "ISBF One members share these resumes free of charge. Reviewed submissions are available to all members."
         navigation: "Resume sharing navigation"
+        apply_share: "Apply to share"
         upload: "Upload resume"
         upload_title: "Upload a resume to share for free"
         collection_notice: "Want to share your resume? Upload it through the WPS submission form. We will review and publish it. Industry, role, salary and other details are optional."
