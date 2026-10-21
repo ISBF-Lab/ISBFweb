@@ -3,6 +3,7 @@ import { i18n } from "discourse-i18n";
 import {
   displayIdentity,
   displayName,
+  feedAuthorColor,
   notificationDisplayLabel,
 } from "../../discourse/lib/user-display";
 
@@ -23,6 +24,56 @@ function notificationItem(
 }
 
 module("ISBF | Unit | Lib | user-display", function () {
+  test("feed colors accept saved theme or hex colors and ignore arbitrary CSS", function (assert) {
+    assert.strictEqual(
+      feedAuthorColor({ academy_display_name_color: "theme" }),
+      "var(--isbf-v2-accent)",
+      "theme colors follow the active palette"
+    );
+    assert.strictEqual(
+      feedAuthorColor({ academy_display_name_color: "#123abc" }),
+      "#123abc",
+      "validated custom colors retain their value"
+    );
+    for (const color of [
+      null,
+      "red",
+      "var(--danger)",
+      "#123abc;display:none",
+    ]) {
+      assert.strictEqual(
+        feedAuthorColor({ academy_display_name_color: color }),
+        null,
+        "unsupported values cannot become inline styles"
+      );
+    }
+  });
+
+  test("saved current-user appearance overrides an older list object", function (assert) {
+    const creator = { id: 1, academy_display_name_color: "theme" };
+    assert.strictEqual(
+      feedAuthorColor(creator, {
+        id: 1,
+        academy_display_name_color: "#123456",
+      }),
+      "#123456",
+      "a successful preference save updates already loaded cards"
+    );
+    assert.strictEqual(
+      feedAuthorColor(creator, { id: 1, academy_display_name_color: null }),
+      null,
+      "turning wear off clears stale list color"
+    );
+    assert.strictEqual(
+      feedAuthorColor(creator, {
+        id: 2,
+        academy_display_name_color: "#123456",
+      }),
+      "var(--isbf-v2-accent)",
+      "another viewer's preference does not change this author"
+    );
+  });
+
   test("a filled name is the primary name and retains the account identifier", function (assert) {
     const user = { name: "林同学", username: "student" };
     assert.strictEqual(

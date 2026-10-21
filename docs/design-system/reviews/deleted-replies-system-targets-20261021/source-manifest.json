@@ -1,0 +1,92 @@
+{
+  "source_version": "deeb83874f16187abeca003e4a12f583087b0d0ea738901c4d7fbc74b2f3fc9c",
+  "approved_by": "User approved the proposed deleted-reply grouping and first-post system-event fallback, then requested implementation.",
+  "approval_scope": [
+    "Adjacent loaded deleted leaves at the same level and parent form a compact collapsed group.",
+    "Deleted parents retain normal descendants; targets expand and highlight; successful recovery regroups.",
+    "Public system activity and visible old system-floor links open the complete first-post view while preserving sort."
+  ],
+  "sources": [
+    {
+      "path": "app/controllers/nested_topics_controller.rb",
+      "before_sha256": "ff3338836665c91d2a23ea487546cca70f6c88a325c633a6c3c51066c317d39b",
+      "sha256": "090ba1205924800252c36bcc1bca8b67c6a50cee337e4eb33b2160c993eceeab"
+    },
+    {
+      "path": "app/services/nested_topic/list_roots.rb",
+      "before_sha256": "3114ea53d33bade466eea356a07e9feccd006f9bd7e22d496f915ce9e6cb70a5",
+      "sha256": "0cfbf353f07b0364ba95fb1d12b4968d08c669060614abbe1842f37ab5fc3b39"
+    },
+    {
+      "path": "lib/nested_replies/tree_loader.rb",
+      "before_sha256": "7de58f4faa2b21b9b7dc4cab8937c10c5fc1ac89f2b4e139b77320436db63341",
+      "sha256": "5ddaa9da864af9cf4f382694f76078669f0cd54a64cdd7aed811131449be6109"
+    },
+    {
+      "path": "config/locales/client.en.yml",
+      "before_sha256": "5067d181cd21c5a418d2fd78bc458c9814eac8c1fba5ad3ff404e6a766999ed4",
+      "sha256": "c25155f3fd2ea5198c170627aa628c4d37df925599ab49c4ecbeb9326b1f62ac"
+    },
+    {
+      "path": "config/locales/client.zh_CN.yml",
+      "before_sha256": "524a45f5f23ee10ad0c850e31d43aa937f07f220e080e4a44aee2affabac3312",
+      "sha256": "149501a921c5638857d8bc17f87aa8c2a8258dd176e09cd274a85619de078f3e"
+    },
+    {
+      "path": "frontend/discourse/app/components/nested.gjs",
+      "before_sha256": "79732813f4faf5d83abd4bd3785f31870e487bb2c854f11524e35db5329c708f",
+      "sha256": "1b6b2852ffaa8960fd35c5acc44780632746f54651de07574bb8b986b87c67f7"
+    },
+    {
+      "path": "frontend/discourse/app/components/nested/post.gjs",
+      "before_sha256": "031d228b1c0265d5c6bfd1528dbe181959c67dea08d3a739e6db9a10bdf2d6fc",
+      "sha256": "33f8ba78a56be6fba3af26059c60db680c5a015aaf4e2e34e93fb3f7135c65cf"
+    },
+    {
+      "path": "frontend/discourse/app/components/nested/post-children.gjs",
+      "before_sha256": "00952b71f64b2ddbff90dbd826d89e90a144503736d55d54caaa93774f21e464",
+      "sha256": "652cfc6de3e2372a58e86fb00f7d5efd4c480b1f29fcf63966f993351c7cb4dd"
+    },
+    {
+      "path": "frontend/discourse/app/components/nested/deleted-posts.gjs",
+      "before_sha256": null,
+      "sha256": "bd68c8858f0b0757e40a07ae0d88c44bf3f767ca237d2e39a45503616100bd1a"
+    },
+    {
+      "path": "frontend/discourse/app/components/user-stream.gjs",
+      "before_sha256": "3dcaaa9bca1c42a418ff7e4ec673f3c9f8911fdc01579f1253869454f8cf2934",
+      "sha256": "0d2d57b77d772320cebab4e43d102e7aa629a477627028dab6ff48afce1512ed"
+    },
+    {
+      "path": "frontend/discourse/app/controllers/nested.js",
+      "before_sha256": "3ece86b84f9733188021499ebd73163ae24df4d7bd023e5c32097d3d7b456fba",
+      "sha256": "b5d4f0561ecd77e9f42ebe75ae7647a65e7a6765d5dfdab12f3a75ca6be1be8b"
+    },
+    {
+      "path": "frontend/discourse/app/lib/deleted-reply-items.js",
+      "before_sha256": null,
+      "sha256": "ed7f74e35da4435c4f1c55a4f6939805b784c656d68e24d5ee9a031123d6e717"
+    },
+    {
+      "path": "frontend/discourse/app/lib/nested-topic-model.js",
+      "before_sha256": "6074b22038d5d57841cfd1a6fd196b2d4c64044307dcbd1a3c05db7212f33781",
+      "sha256": "adeddbe5defddb936e980d4295e77f04e46c0b4f00015a021e239500ca1af6b2"
+    },
+    {
+      "path": "frontend/discourse/app/models/user-action.js",
+      "before_sha256": "e1d99b61a6f8130cc54156bf0179cdb99bfe4c1c35dc43b1d93ee4494b7eb5db",
+      "sha256": "b1f1e31212480227a903852a1abd845dc5785560237eb0c3e05ff62bece40884"
+    },
+    {
+      "path": "frontend/discourse/app/routes/topic/from-params.js",
+      "before_sha256": "03016eb29d3198e89aab0cbf3e4245fce1c5bf30f3ad4236474bfbc8f1eeac66",
+      "sha256": "d7168983fea2f8e5efee39333d9db49a17dde03016c1c686104ec6a4b0edd1da"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/reply-conversations.scss",
+      "before_sha256": "b9eea58a26ae94d25153b79c6faf6fbe0b5206d273971427f0266574b135eba3",
+      "sha256": "0e09e776847b92291410128f9680b7a0dd757341aa51752b8795141df90b3ba3",
+      "field_id": 448
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "plugins": 66,
+  "inventory_before_sha256": "7265ab5fbcc9783d9923210ec603df0e784c51e3230e088b196d147213bff109",
+  "inventory_after_sha256": "7265ab5fbcc9783d9923210ec603df0e784c51e3230e088b196d147213bff109",
+  "inventory_verified_sha256": "7265ab5fbcc9783d9923210ec603df0e784c51e3230e088b196d147213bff109",
+  "theme_fields": 232,
+  "preserved_fields": 230,
+  "settings_preserved": true,
+  "restarted_services": false,
+  "new_global_api_key_created": false
+}

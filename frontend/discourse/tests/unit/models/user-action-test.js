@@ -6,6 +6,23 @@ import UserAction from "discourse/models/user-action";
 module("Unit | Model | user-action", function (hooks) {
   setupTest(hooks);
 
+  test("public system activity links to the original post while other links retain their floor", function (assert) {
+    const store = this.owner.lookup("service:store");
+    const postTypes = this.owner.lookup("service:site").post_types;
+    const action = store.createRecord("user-action", {
+      topic_id: 134,
+      slug: "topic",
+      post_number: 9,
+      post_type: postTypes.small_action,
+      action_code: "pinned_globally.enabled",
+    });
+
+    assert.strictEqual(action.activityPostUrl, "/t/topic/134/1");
+    assert.strictEqual(action.postUrl, "/t/topic/134/9");
+    action.setProperties({ post_type: postTypes.regular, action_code: null });
+    assert.strictEqual(action.activityPostUrl, "/t/topic/134/9");
+  });
+
   test("collapsing likes", function (assert) {
     const store = getOwner(this).lookup("service:store");
     const actions = UserAction.collapseStream([

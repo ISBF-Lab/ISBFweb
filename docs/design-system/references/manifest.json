@@ -2217,6 +2217,38 @@
       "deployed_source_manifest": "../deployments/dialog-consistency-20261020/source-manifest.json",
       "deployed_source_version": "5109370e6bf46175d9d15788dd0b5830a541cb3bee0df3e61746cf734d42adf3",
       "recovery_image": "local_discourse/isbf_app:dialog-consistency-20261020-5109370e6bf4"
+    },
+    {
+      "id": "post-action-spacing-20261021",
+      "source_version": "1fdd1771500b6e8e255b33874f87796f08d0116fb1a4fabf48e46210d88760f0",
+      "scope": "A04/C09/C16 like/heat 4px gap and five equally spaced icons; distinct native actions retained",
+      "source_manifest": "../reviews/post-action-spacing-20261021/source-manifest.json",
+      "source_manifest_sha256": "06319ed0a7e5c53ff448d5fd1fa458a3c2aa3a5c8d092867dda3a5409c1a1d23",
+      "evidence": "../reviews/post-action-spacing-20261021/README.md",
+      "deployment": "../deployments/post-action-spacing-20261021/README.md",
+      "status": "published_offline_and_served_assets_verified_full_live_browser_incomplete",
+      "full_live_browser_verified": false,
+      "new_global_visual_tokens": false
+    },
+    {
+      "id": "feed-name-colors-20261021",
+      "source_version": "2baea2816f6a17d816987cc6e53b5b57325ad19c6e525bd0dd2fc3d8d44f019b",
+      "scope": "A02/C09 feed link colors and title spacing; owner-only role name color interface preference region",
+      "source_manifest": "../reviews/feed-name-colors-20261021/source-manifest.json",
+      "source_manifest_sha256": "1321758de508a6792f6b9321e7a5dcbcd9714741b8484abb0ffb41204212de27",
+      "evidence": "../reviews/feed-name-colors-20261021/README.md",
+      "verification": "../reviews/feed-name-colors-20261021/verification.json",
+      "status": "implemented_isolated_tests_and_static_browser_verified_full_client_and_safari_pending_not_deployed",
+      "complete_preferences_page_approved": false,
+      "new_global_visual_tokens": false
+    },
+    {
+      "id": "deleted-replies-system-targets-20261021",
+      "date": "2026-10-21",
+      "acceptance": "User explicitly approved compact deleted-reply groups and opening original topic content for system events, then requested implementation.",
+      "scope": "Single-level reply deletion states and public system-activity links; existing normal posts, private activity URLs and five-action appearance retained.",
+      "source_version": "2a00be87555d7d82c7e5eacf702f61451fc5eabb3e6875726494b0236134dfa7",
+      "manifest": "docs/design-system/reviews/deleted-replies-system-targets-20261021/source-manifest.json"
     }
   ]
 }

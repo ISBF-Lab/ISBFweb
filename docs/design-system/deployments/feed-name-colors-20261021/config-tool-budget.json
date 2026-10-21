@@ -1,0 +1,8 @@
+{
+  "host_available_bytes": 1480228864,
+  "effective_available_bytes": 1480228864,
+  "memory_limit_bytes": 134217728,
+  "reserve_bytes": 536870912,
+  "rounding_bytes": 16777216,
+  "peak_rss_bytes": 21143552
+}

@@ -29,6 +29,56 @@ RSpec.describe NestedReplies::TreeLoader do
     post.update_columns(deleted_at: Time.current)
   end
 
+  describe "#resolve_target_post_number" do
+    it "preserves normal replies and missing targets" do
+      reply = create_root
+      loader = described_class.new(topic: topic, guardian: user.guardian)
+
+      expect(
+        [nil, 1, reply.post_number, 99_999].map do |number|
+          loader.resolve_target_post_number(number)
+        end,
+      ).to eq([nil, 1, reply.post_number, 99_999])
+    end
+
+    it "resolves visible system events to the original post" do
+      actions =
+        %w[pinned_globally.enabled pinned_globally.disabled].map do |code|
+          Fabricate(:small_action, topic: topic, user: user, action_code: code)
+        end
+
+      [Guardian.new, user.guardian].each do |guardian|
+        loader = described_class.new(topic: topic, guardian: guardian)
+        expect(
+          actions.map { |action| loader.resolve_target_post_number(action.post_number) },
+        ).to eq([1, 1])
+      end
+    end
+
+    it "rejects inaccessible system events while retaining staff access" do
+      admin = Fabricate(:admin)
+      hidden_action = Fabricate(:small_action, topic: topic, user: admin, hidden: true)
+      deleted_action = Fabricate(:small_action, topic: topic, user: admin)
+      delete_post(deleted_action)
+
+      [Guardian.new, user.guardian].each do |guardian|
+        loader = described_class.new(topic: topic, guardian: guardian)
+        [hidden_action, deleted_action].each do |action|
+          expect { loader.resolve_target_post_number(action.post_number) }.to raise_error(
+            Discourse::NotFound,
+          )
+        end
+      end
+
+      loader = described_class.new(topic: topic, guardian: admin.guardian)
+      expect(
+        [hidden_action, deleted_action].map do |action|
+          loader.resolve_target_post_number(action.post_number)
+        end,
+      ).to eq([1, 1])
+    end
+  end
+
   describe "#root_posts_scope" do
     it "filters only deleted direct leaves for anonymous and ordinary users" do
       deleted_null_leaf = create_root

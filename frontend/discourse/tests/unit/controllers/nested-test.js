@@ -46,6 +46,46 @@ module("Unit | Controller | nested", function (hooks) {
     return post;
   }
 
+  test("recovering a deleted reply clears its placeholder only after success", async function (assert) {
+    const post = buildPost(this.store, buildTopic(this.store, 724), 2001, 2);
+    post.setProperties({
+      deleted_post_placeholder: true,
+      deleted_at: "2026-10-20T00:00:00Z",
+      can_recover: true,
+    });
+    const recover = sinon.stub(post, "recover").resolves();
+
+    await this.controller.recoverPost(post);
+    assert.true(
+      post.deleted_post_placeholder,
+      "retains the placeholder on failure"
+    );
+    recover.callsFake(async () => post.set("deleted_at", null));
+    await this.controller.recoverPost(post);
+    assert.false(post.deleted_post_placeholder);
+    assert.false(post.can_recover);
+  });
+
+  test("regrouping keeps loaded flat posts registered until they leave the model", function (assert) {
+    Object.assign(this.owner.lookup("service:site-settings"), {
+      nested_replies_enabled: true,
+      nested_replies_cap_nesting_depth: true,
+      nested_replies_max_depth: 1,
+    });
+    const topic = buildTopic(this.store, 724);
+    const post = buildPost(this.store, topic, 2001, 2);
+    this.controller.topic = topic;
+    this.controller.rootNodes = [{ post, children: [] }];
+    this.controller.subscribe();
+    this.appEvents.trigger("nested-replies:post-registered", post);
+    this.appEvents.trigger("nested-replies:post-unregistered", post);
+    assert.strictEqual(this.controller.postRegistry.get(2), post);
+
+    this.controller.rootNodes = [];
+    this.appEvents.trigger("nested-replies:post-unregistered", post);
+    assert.false(this.controller.postRegistry.has(2));
+  });
+
   test("a successful composer save immediately inserts an own flat root without a message", async function (assert) {
     const settings = this.owner.lookup("service:site-settings");
     Object.assign(settings, {

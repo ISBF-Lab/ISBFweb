@@ -6,6 +6,7 @@ import didUpdate from "@ember/render-modifiers/modifiers/did-update";
 import { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
+import deletedReplyItems from "discourse/lib/deleted-reply-items";
 import {
   CHILDREN_PAGE_SIZE,
   flatRepliesEnabled,
@@ -85,7 +86,7 @@ export default class NestedPostChildren extends Component {
 
   get displayItems() {
     if (this.flatReplies && !this.args.preview) {
-      return flatReplyItems(this);
+      return deletedReplyItems(flatReplyItems(this));
     }
     const nodes =
       this.flatReplies && this.args.preview
@@ -95,7 +96,7 @@ export default class NestedPostChildren extends Component {
     if (this.flatReplies && !this.args.preview && this.previousPage > 0) {
       items.splice(REPLY_PREVIEW_COUNT, 0, { key: "gap", gap: true });
     }
-    return items;
+    return this.flatReplies ? deletedReplyItems(items) : items;
   }
 
   get canExpandPreview() {
@@ -630,6 +631,7 @@ export default class NestedPostChildren extends Component {
                 @children={{node.children}}
                 @collapseFromDepth={{@collapseFromDepth}}
                 @collapseParent={{@collapseParent}}
+                @deletedPosts={{item.deletedPosts}}
                 @deletePost={{@deletePost}}
                 @depth={{this.childDepth}}
                 @editPost={{@editPost}}
@@ -656,6 +658,7 @@ export default class NestedPostChildren extends Component {
                 @showHistory={{@showHistory}}
                 @showPagePublish={{@showPagePublish}}
                 @sort={{@sort}}
+                @targetPostNumber={{@targetPostNumber}}
                 @togglePostSelection={{@togglePostSelection}}
                 @togglePostType={{@togglePostType}}
                 @toggleWiki={{@toggleWiki}}

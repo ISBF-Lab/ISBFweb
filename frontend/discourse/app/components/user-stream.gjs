@@ -76,6 +76,13 @@ export default class UserStreamComponent extends Component {
     return "username";
   }
 
+  get postUrlPath() {
+    const path = this.router.currentURL?.split("?")[0];
+    return /\/u\/[^/]+\/activity(?:\/(?:all|topics|replies))?\/?$/.test(path)
+      ? "activityPostUrl"
+      : "postUrl";
+  }
+
   @action
   updateBulkSelectPosts() {
     if (this.isDraftsRoute && this.args.stream?.content) {
@@ -195,7 +202,7 @@ export default class UserStreamComponent extends Component {
       @resumeDraft={{this.resumeDraft}}
       @showUserInfo={{false}}
       @titlePath="titleHtml"
-      @urlPath="postUrl"
+      @urlPath={{this.postUrlPath}}
       @usernamePath={{this.usernamePath}}
       {{on "click" this.handleClick}}
       {{didUpdate this.updateBulkSelectPosts @stream.content}}

@@ -4,6 +4,23 @@ export function displayName(user) {
   return user?.name?.trim() ? user.name : user?.username;
 }
 
+export function feedAuthorColor(user, currentUser) {
+  const source =
+    user?.id === currentUser?.id &&
+    currentUser?.academy_display_name_color !== undefined
+      ? currentUser
+      : user;
+  const color = source?.academy_display_name_color;
+  if (color === "theme") {
+    return "var(--isbf-v2-accent)";
+  }
+  return typeof color === "string" &&
+    color.length === 7 &&
+    /^#[0-9a-f]{6}$/i.test(color)
+    ? color
+    : null;
+}
+
 export function displayIdentity(user) {
   return user?.name?.trim() && user.username
     ? `${user.name} @${user.username}`

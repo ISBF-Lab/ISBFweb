@@ -42,6 +42,17 @@ module NestedReplies
       @op_post ||= load_posts_for_tree(apply_visibility(topic.posts.where(post_number: 1))).first
     end
 
+    def resolve_target_post_number(post_number)
+      return post_number if post_number.to_i <= 1
+
+      post = topic.posts.with_deleted.find_by(post_number: post_number)
+      return post_number unless post&.post_type == Post.types[:small_action]
+
+      raise Discourse::NotFound unless guardian.can_see_post?(post)
+
+      1
+    end
+
     def root_posts_scope(sort)
       scope =
         topic

@@ -20,12 +20,14 @@ function renderComponent(context) {
         @changePostOwner={{noop}}
         @children={{context.children}}
         @collapseFromDepth={{context.collapseFromDepth}}
+        @deletedPosts={{context.deletedPosts}}
         @deletePost={{noop}}
         @depth={{context.depth}}
         @editPost={{noop}}
         @expansionState={{state.expansionState}}
         @fetchedChildrenCache={{state.fetchedChildrenCache}}
         @focusPost={{context.focusPost}}
+        @getCloakingData={{context.getCloakingData}}
         @grantBadge={{noop}}
         @lockPost={{noop}}
         @multiSelect={{context.multiSelect}}
@@ -43,6 +45,7 @@ function renderComponent(context) {
         @showHistory={{noop}}
         @showPagePublish={{noop}}
         @sort="top"
+        @targetPostNumber={{context.targetPostNumber}}
         @togglePostSelection={{context.togglePostSelection}}
         @togglePostType={{noop}}
         @toggleWiki={{noop}}
@@ -116,6 +119,62 @@ module("Integration | Component | Nested | Post", function (hooks) {
       children: [],
     };
   }
+
+  test("deleted leaves use a compact row without an empty replies container", async function (assert) {
+    this.siteSettings.nested_replies_enabled = true;
+    this.siteSettings.nested_replies_cap_nesting_depth = true;
+    this.siteSettings.nested_replies_max_depth = 1;
+    this.post.setProperties({ deleted_post_placeholder: true, cooked: "" });
+
+    await renderComponent(this);
+
+    assert.dom(".nested-deleted-posts__entry").exists({ count: 1 });
+    assert.dom(".nested-post-children").doesNotExist();
+    assert.dom(".nested-post-children__collapse").doesNotExist();
+    assert.dom(".toggle-deleted-content").doesNotExist();
+  });
+
+  test("a targeted root stays rendered when it is outside the viewport", async function (assert) {
+    this.siteSettings.nested_replies_enabled = true;
+    this.siteSettings.nested_replies_cap_nesting_depth = true;
+    this.siteSettings.nested_replies_max_depth = 1;
+    this.getCloakingData = () => ({ active: true });
+    this.targetPostNumber = 2;
+
+    await renderComponent(this);
+
+    assert.dom(".nested-post__article[data-post-number='2']").exists();
+    assert.dom(".nested-post--cloaked").doesNotExist();
+  });
+
+  test("targeting a cached child keeps its parent rendered", async function (assert) {
+    this.siteSettings.nested_replies_enabled = true;
+    this.siteSettings.nested_replies_cap_nesting_depth = true;
+    this.siteSettings.nested_replies_max_depth = 1;
+    this.getCloakingData = () => ({ active: true });
+    this.targetPostNumber = 4;
+    this.fetchedChildrenCache.set("1:2", {
+      childNodes: [flatChild(this, 4)],
+    });
+
+    await renderComponent(this);
+
+    assert.dom(".nested-post__article[data-post-number='2']").exists();
+    assert.dom(".nested-post--cloaked").doesNotExist();
+  });
+
+  test("unrelated roots can still be cloaked", async function (assert) {
+    this.siteSettings.nested_replies_enabled = true;
+    this.siteSettings.nested_replies_cap_nesting_depth = true;
+    this.siteSettings.nested_replies_max_depth = 1;
+    this.getCloakingData = () => ({ active: true });
+    this.targetPostNumber = 20;
+
+    await renderComponent(this);
+
+    assert.dom(".nested-post__article").doesNotExist();
+    assert.dom(".nested-post--cloaked").exists();
+  });
 
   test("replacing route state keeps loaded replies in the active controller cache", async function (assert) {
     this.siteSettings.nested_replies_enabled = true;

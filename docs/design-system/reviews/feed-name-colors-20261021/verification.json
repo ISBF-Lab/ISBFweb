@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "source_version": "2baea2816f6a17d816987cc6e53b5b57325ad19c6e525bd0dd2fc3d8d44f019b",
+  "production_deployed": false,
+  "rspec": {
+    "duration": 16.510157215,
+    "example_count": 14,
+    "failure_count": 0,
+    "pending_count": 0,
+    "errors_outside_of_examples_count": 0
+  },
+  "client": {
+    "passed": true,
+    "assertions": 26,
+    "qunit": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "total": 2
+    },
+    "compiled": [
+      {
+        "source": "plugins/discourse-academy-roles/assets/javascripts/discourse/connectors/user-preferences-interface/academy-name-color.gjs",
+        "output": "/workspace/deploy-work/feed-name-colors-20261021/academy-name-color.gjs.compiled.js",
+        "bytes": 6659
+      },
+      {
+        "source": "plugins/discourse-academy-roles/test/javascripts/integration/components/academy-name-color-test.gjs",
+        "output": "/workspace/deploy-work/feed-name-colors-20261021/academy-name-color-test.gjs.compiled.js",
+        "bytes": 6737
+      },
+      {
+        "source": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-feed-card.gjs",
+        "output": "/workspace/deploy-work/feed-name-colors-20261021/isbf-v2-feed-card.gjs.compiled.js",
+        "bytes": 28453
+      }
+    ],
+    "full_formkit_integration_executed": false,
+    "full_acceptance_executed": false
+  },
+  "style": {
+    "passed": true,
+    "complete_workspace_theme": true,
+    "new_preferences_styles": true,
+    "results": [
+      {
+        "mode": "light",
+        "bytes": 302382,
+        "sha256": "cf3d5865a0a60a7982cc02fe26d265f218fad4776d8e92f39c459cdebbd6c79f"
+      },
+      {
+        "mode": "dark",
+        "bytes": 302382,
+        "sha256": "cf3d5865a0a60a7982cc02fe26d265f218fad4776d8e92f39c459cdebbd6c79f"
+      }
+    ],
+    "core_source": "https://isbf-one.com/stylesheets/common_ba11fc84668bc0321639a6d0591ae42b92269359.css?__ws=isbf-one.com",
+    "live_backend_used": false
+  },
+  "browser": {
+    "passed": true,
+    "checks": 325,
+    "views": 6,
+    "static_fixture": true,
+    "safari_executed": false
+  },
+  "lint": {
+    "complete_targeted_run": "passed",
+    "last_changed_files": "passed"
+  },
+  "full_formkit_integration_executed": false,
+  "full_acceptance_executed": false,
+  "resource_executions": [
+    {
+      "name": "lint-tools-fixed",
+      "available": 1631383552,
+      "reserve": 536870912,
+      "budget": 1090519040,
+      "command": [
+        "source /workspace/deploy-work/feed-name-colors-20261021/prepare-tools.sh\nexport NODE_OPTIONS=--max-old-space-size=512\nmapfile -t changed_files < /workspace/deploy-work/feed-name-colors-20261021/changed-files.txt\nruby bin/lint --fix \"${changed_files[@]}\""
+      ],
+      "mode": "container",
+      "exit_code": 0,
+      "peak": 547434496,
+      "seconds": 69.99,
+      "status": "passed"
+    },
+    {
+      "name": "style-and-client-final",
+      "available": 1808760832,
+      "reserve": 536870912,
+      "budget": 1258291200,
+      "command": [
+        "source /workspace/deploy-work/feed-name-colors-20261021/prepare-tools.sh\nexport NODE_OPTIONS=--max-old-space-size=512\nbundle exec ruby /workspace/deploy-work/feed-name-colors-20261021/compile-style.rb\nnode /workspace/deploy-work/feed-name-colors-20261021/check-client.cjs\nruby bin/lint --fix plugins/discourse-academy-roles/spec/lib/name_color_spec.rb plugins/discourse-academy-roles/assets/stylesheets/common/academy-roles.scss"
+      ],
+      "mode": "container",
+      "exit_code": 0,
+      "peak": 378159104,
+      "seconds": 41.32,
+      "status": "passed"
+    },
+    {
+      "name": "role-revocation-lint-client",
+      "available": 1892098048,
+      "reserve": 536870912,
+      "budget": 1342177280,
+      "command": [
+        "source /workspace/deploy-work/feed-name-colors-20261021/prepare-tools.sh\nexport NODE_OPTIONS=--max-old-space-size=512\nruby bin/lint --fix plugins/discourse-academy-roles/lib/discourse_academy_roles/name_color.rb plugins/discourse-academy-roles/spec/requests/name_color_preferences_spec.rb plugins/discourse-academy-roles/assets/javascripts/discourse/pre-initializers/academy-name-color.js plugins/discourse-academy-roles/test/javascripts/acceptance/name-color-preferences-test.js\nnode /workspace/deploy-work/feed-name-colors-20261021/check-client.cjs"
+      ],
+      "mode": "container",
+      "exit_code": 0,
+      "peak": 574033920,
+      "seconds": 52.17,
+      "status": "passed"
+    },
+    {
+      "name": "role-revocation-rspec",
+      "available": 1879552000,
+      "reserve": 536870912,
+      "budget": 1342177280,
+      "command": [
+        "bash /workspace/deploy-work/feed-name-colors-20261021/rspec.sh"
+      ],
+      "mode": "container",
+      "exit_code": 0,
+      "peak": 716603392,
+      "seconds": 96.78,
+      "status": "passed"
+    },
+    {
+      "name": "browser",
+      "available": 1799352320,
+      "reserve": 536870912,
+      "budget": 1258291200,
+      "command": [
+        "cd /workspace\nexport PYTHONPATH=/workspace/deploy-work/frontend-consistency-20261012/tools/python\nexport LD_LIBRARY_PATH=/workspace/deploy-work/frontend-consistency-20261012/tools/libs\nexport MALLOC_ARENA_MAX=2\nexport LP_NUM_THREADS=1\nexport OMP_NUM_THREADS=1\nln -s /workspace/deploy-work/frontend-consistency-20261012/tools/fonts-selected /usr/local/share/fonts/feed-color-review\npython3 /workspace/deploy-work/feed-name-colors-20261021/check-browser.py"
+      ],
+      "mode": "container",
+      "exit_code": 0,
+      "peak": 834768896,
+      "seconds": 46.37,
+      "status": "passed"
+    },
+    {
+      "name": "evidence-final",
+      "available": 1865203712,
+      "reserve": 536870912,
+      "budget": 1325400064,
+      "command": [
+        "python3",
+        "deploy-work/feed-name-colors-20261021/check-evidence.py"
+      ],
+      "mode": "host",
+      "exit_code": 0,
+      "peak": 18763776,
+      "seconds": 0.54,
+      "status": "passed"
+    }
+  ],
+  "locale_files_valid": true,
+  "english_i18n_lint": "passed",
+  "reference_and_source_hash_check": "passed",
+  "cleanup": {
+    "tool_containers_removed": true,
+    "browser_closed": true,
+    "test_databases_ephemeral": true,
+    "full_preview_forum": "exited",
+    "production_backend_used": false
+  }
+}

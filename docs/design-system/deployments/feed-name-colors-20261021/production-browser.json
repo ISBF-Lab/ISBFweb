@@ -1,0 +1,37 @@
+{
+  "passed": false,
+  "views": [
+    {
+      "viewport": "desktop",
+      "checks": [
+        "the live card uses the approved title and body sizes",
+        "the live title/body gap is 24px",
+        "title and author links have local state-independent color variables",
+        "username and time retain the same muted color",
+        "the homepage has no horizontal overflow",
+        "the account-owned name-color switch is present",
+        "developers have the hex input and native color picker",
+        "the original interface Save button remains available"
+      ],
+      "card": {
+        "titleSize": 18,
+        "bodySize": 16,
+        "bodyLineHeight": 23.2,
+        "gap": 24,
+        "titleColor": "rgb(23, 32, 42)",
+        "authorColor": "rgb(23, 32, 42)",
+        "titleLinkColor": "#17202a",
+        "authorLinkColor": "#17202a",
+        "handleColor": "rgb(111, 142, 176)",
+        "timeColor": "rgb(111, 142, 176)"
+      },
+      "failure_message": "Locator expected to have CSS 'rgb(18, 58, 188)'\nActual value: rgb(255, 215, 0) \nCall log:\n  - Expect \"to_have_css\" with timeout 5000ms\n  - waiting for locator(\".academy-name-color\").locator(\".academy-name-color__name\")\n    13 × locator resolved to <span class=\"academy-name-color__name\">Gin</span>\n       - unexpected value \"rgb(255, 215, 0)\"\n\nAria snapshot:\n- text: Gin"
+    }
+  ],
+  "javascript_errors": [],
+  "failed_assets": [],
+  "blocked_writes": 3,
+  "blocked_preference_writes": 0,
+  "production_content_submitted": false,
+  "preferences_saved": false
+}

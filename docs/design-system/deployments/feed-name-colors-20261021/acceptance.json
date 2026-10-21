@@ -1,0 +1,10 @@
+{
+  "accepted_by_user": true,
+  "user_message": "可以了我验证了",
+  "stop_additional_page_checks": true,
+  "scope": "User manual acceptance; device and individual feature scope not specified",
+  "automated_browser_suite_passed": false,
+  "desktop_checks_completed": 8,
+  "automated_preview_assertion": "Input 123abc expected rgb(18,58,188), observed rgb(255,215,0)",
+  "further_page_checks_after_acceptance": false
+}

@@ -33,6 +33,7 @@ import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import nestedPostUrl from "../../lib/nested-post-url";
 import processNode from "../../lib/process-node";
+import NestedDeletedPosts from "./deleted-posts";
 import NestedPostChildren from "./post-children";
 
 export default class NestedPost extends Component {
@@ -81,7 +82,7 @@ export default class NestedPost extends Component {
   });
   #restoredScrollAnchorKey = null;
 
-  #postRegistered = false;
+  #registeredPosts = new Map();
   #postRegistrationTimer;
 
   @tracked _childWasCreated = false;
@@ -139,11 +140,8 @@ export default class NestedPost extends Component {
     );
     this.appEvents.off("nested-replies:reveal-root", this, this.#onRevealRoot);
 
-    if (this.#postRegistered) {
-      this.appEvents.trigger(
-        "nested-replies:post-unregistered",
-        this.args.post
-      );
+    for (const post of this.#registeredPosts.values()) {
+      this.appEvents.trigger("nested-replies:post-unregistered", post);
     }
   }
 
@@ -157,6 +155,7 @@ export default class NestedPost extends Component {
 
   get renderChildren() {
     return (
+      this.hasReplies &&
       !this.effectiveCollapsed &&
       !this.atMaxDepth &&
       (this.effectiveExpanded || (this.flatReplies && this.hasReplies))
@@ -170,6 +169,17 @@ export default class NestedPost extends Component {
   get cloakingData() {
     if (!this.isRoot || !this.args.getCloakingData) {
       return { active: false };
+    }
+    if (this.flatReplies && this.args.targetPostNumber) {
+      const target = this.args.targetPostNumber;
+      const cached = this.args.fetchedChildrenCache?.get(this.childCacheKey);
+      if (
+        this.deletedPosts.some((post) => post.post_number === target) ||
+        this.args.children?.some((node) => node.post.post_number === target) ||
+        cached?.childNodes.some((node) => node.post.post_number === target)
+      ) {
+        return { active: false };
+      }
     }
     return this.args.getCloakingData(this.args.post, {
       above: this.args.cloakAbove,
@@ -193,6 +203,7 @@ export default class NestedPost extends Component {
     return (
       this._childWasCreated ||
       (this.args.post.direct_reply_count || 0) > 0 ||
+      (this.args.post.total_descendant_count || 0) > 0 ||
       (this.args.children?.length ?? 0) > 0
     );
   }
@@ -212,6 +223,10 @@ export default class NestedPost extends Component {
 
   get isDeletedPlaceholder() {
     return this.args.post.deleted_post_placeholder === true;
+  }
+
+  get deletedPosts() {
+    return this.args.deletedPosts || [this.args.post];
   }
 
   get isIgnoredPlaceholder() {
@@ -609,13 +624,32 @@ export default class NestedPost extends Component {
     getOwner(this).lookup("route:application").send("showLogin");
   }
 
+  @action
+  registerGroupedPosts() {
+    this.#postRegistrationTimer = scheduleOnce(
+      "afterRender",
+      this,
+      this.#registerPost
+    );
+  }
+
   #registerPost() {
     if (this.isDestroying) {
       return;
     }
 
-    this.#postRegistered = true;
-    this.appEvents.trigger("nested-replies:post-registered", this.args.post);
+    const posts = new Map(this.deletedPosts.map((post) => [post.id, post]));
+    for (const [id, post] of this.#registeredPosts) {
+      if (!posts.has(id)) {
+        this.appEvents.trigger("nested-replies:post-unregistered", post);
+      }
+    }
+    for (const [id, post] of posts) {
+      if (!this.#registeredPosts.has(id)) {
+        this.appEvents.trigger("nested-replies:post-registered", post);
+      }
+    }
+    this.#registeredPosts = posts;
   }
 
   #onRevealRoot({ topicId, rootPostNumber }) {
@@ -676,12 +710,17 @@ export default class NestedPost extends Component {
         (if @post.hidden "nested-post--hidden post--hidden post-hidden")
         (if (or @post.deleted @post.user_deleted) "nested-post--deleted")
         (if this.cloakingData.active "nested-post--cloaked")
+        (if
+          (and this.flatReplies this.isDeletedPlaceholder)
+          "--deleted-placeholder"
+        )
         (if this.selected "selected")
       }}
       data-root-index={{if this.isRoot @post.root_index}}
       style={{this.cloakingData.style}}
       {{this.restoreScroll}}
       {{didUpdate this.restoreExpansionState @expansionState @post.id}}
+      {{didUpdate this.registerGroupedPosts @deletedPosts}}
       {{! At depth 0, register wrapper with cloaking observer (captures full subtree height).
           At deeper depths, register as trackOnly (viewport tracking only, no cloaking). }}
       {{@registerPost @post trackOnly=(not this.isRoot)}}
@@ -775,45 +814,53 @@ export default class NestedPost extends Component {
               >{{this.collapsedBarLabel}}</span>
             </button>
           {{else if this.isDeletedPlaceholder}}
-            <div
-              class="nested-post__placeholder nested-post__placeholder--deleted"
-              data-post-number={{@post.post_number}}
-            >
-              <div class="nested-post__placeholder-actions">
-                <span class="nested-post__placeholder-label">{{i18n
-                    "nested_replies.deleted_post_placeholder"
-                  }}</span>
-                {{#if this.currentUser.staff}}
-                  <DButton
-                    class="btn-flat toggle-deleted-content"
-                    @action={{this.toggleDeletedContent}}
-                    @ariaLabel="post.controls.view_deleted"
-                    @icon={{if
-                      this.showDeletedContent
-                      "far-eye-slash"
-                      "far-eye"
-                    }}
-                  />
-                {{/if}}
-                {{#if @post.can_recover}}
-                  <DButton
-                    class="btn-flat recover"
-                    @action={{fn @recoverPost @post}}
-                    @ariaLabel="post.controls.undelete"
-                    @icon="arrow-rotate-left"
-                  />
+            {{#if this.flatReplies}}
+              <NestedDeletedPosts
+                @posts={{this.deletedPosts}}
+                @recoverPost={{@recoverPost}}
+                @targetPostNumber={{@targetPostNumber}}
+              />
+            {{else}}
+              <div
+                class="nested-post__placeholder nested-post__placeholder--deleted"
+                data-post-number={{@post.post_number}}
+              >
+                <div class="nested-post__placeholder-actions">
+                  <span class="nested-post__placeholder-label">{{i18n
+                      "nested_replies.deleted_post_placeholder"
+                    }}</span>
+                  {{#if this.currentUser.staff}}
+                    <DButton
+                      class="btn-flat toggle-deleted-content"
+                      @action={{this.toggleDeletedContent}}
+                      @ariaLabel="post.controls.view_deleted"
+                      @icon={{if
+                        this.showDeletedContent
+                        "far-eye-slash"
+                        "far-eye"
+                      }}
+                    />
+                  {{/if}}
+                  {{#if @post.can_recover}}
+                    <DButton
+                      class="btn-flat recover"
+                      @action={{fn @recoverPost @post}}
+                      @ariaLabel="post.controls.undelete"
+                      @icon="arrow-rotate-left"
+                    />
+                  {{/if}}
+                </div>
+                {{#if this.showDeletedContent}}
+                  <div class="nested-post__placeholder-reveal">
+                    <div class="nested-post__placeholder-reveal-header">
+                      <PostAvatar @post={{@post}} @size="small" />
+                      <PostMetaData @post={{@post}} />
+                    </div>
+                    <PostCookedHtml @post={{@post}} />
+                  </div>
                 {{/if}}
               </div>
-              {{#if this.showDeletedContent}}
-                <div class="nested-post__placeholder-reveal">
-                  <div class="nested-post__placeholder-reveal-header">
-                    <PostAvatar @post={{@post}} @size="small" />
-                    <PostMetaData @post={{@post}} />
-                  </div>
-                  <PostCookedHtml @post={{@post}} />
-                </div>
-              {{/if}}
-            </div>
+            {{/if}}
           {{else if this.renderIgnoredPlaceholder}}
             <div
               class="nested-post__placeholder nested-post__placeholder--ignored"
@@ -986,6 +1033,7 @@ export default class NestedPost extends Component {
               @showHistory={{@showHistory}}
               @showPagePublish={{@showPagePublish}}
               @sort={{@sort}}
+              @targetPostNumber={{@targetPostNumber}}
               @togglePostSelection={{@togglePostSelection}}
               @togglePostType={{@togglePostType}}
               @toggleReplies={{this.handleReplies}}

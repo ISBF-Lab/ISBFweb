@@ -1,0 +1,13 @@
+{
+  "host_available_bytes": 2183245824,
+  "effective_available_bytes": 2183245824,
+  "memory_limit_bytes": 1644167168,
+  "reserve_bytes": 536870912,
+  "rounding_bytes": 16777216,
+  "lowest_host_available_bytes": 2183245824,
+  "exit_code": 0,
+  "elapsed_seconds": 0.6,
+  "database_restarted": false,
+  "redis_restarted": false,
+  "container_recreated": false
+}

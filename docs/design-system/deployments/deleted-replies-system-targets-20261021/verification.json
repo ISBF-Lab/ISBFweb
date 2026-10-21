@@ -1,0 +1,102 @@
+{
+  "source_version": "deeb83874f16187abeca003e4a12f583087b0d0ea738901c4d7fbc74b2f3fc9c",
+  "published_at_utc": "2026-10-21T15:13:30Z",
+  "backend_examples_passed": 173,
+  "grouping_utility_examples_passed": 6,
+  "native_views": [
+    {
+      "mobile": true,
+      "checks": [
+        "four loaded deleted roots are grouped",
+        "deleted leaves have no empty replies or collapse control",
+        "summary keeps a 44px target",
+        "group expands to compact per-floor entries",
+        "a grouped floor target expands and highlights its row",
+        "deleted original content stays hidden",
+        "successful restore immediately renders the reply and regroups its neighbours",
+        "a restored group member remains registered for live updates",
+        "a deleted parent stays a compact individual row",
+        "normal descendants remain visible",
+        "locating a child keeps the expanded conversation",
+        "public system activity uses the first-post URL without changing other links",
+        "an old system-event URL resolves to a complete topic and keeps sorting",
+        "refreshing the normalized URL remains usable",
+        "a missing target is not silently normalized to the first post",
+        "a missing target renders the existing error page rather than a blank page"
+      ],
+      "passed": true
+    },
+    {
+      "mobile": false,
+      "checks": [
+        "four loaded deleted roots are grouped",
+        "deleted leaves have no empty replies or collapse control",
+        "summary keeps a 44px target",
+        "group expands to compact per-floor entries",
+        "a grouped floor target expands and highlights its row",
+        "deleted original content stays hidden",
+        "successful restore immediately renders the reply and regroups its neighbours",
+        "a restored group member remains registered for live updates",
+        "a deleted parent stays a compact individual row",
+        "normal descendants remain visible",
+        "locating a child keeps the expanded conversation",
+        "public system activity uses the first-post URL without changing other links",
+        "an old system-event URL resolves to a complete topic and keeps sorting",
+        "refreshing the normalized URL remains usable",
+        "a missing target is not silently normalized to the first post",
+        "a missing target renders the existing error page rather than a blank page"
+      ],
+      "passed": true
+    }
+  ],
+  "deployed_views": [
+    {
+      "mobile": false,
+      "checks": [
+        "reported topic loads actual first-post content",
+        "reported deleted replies use the compact renderer",
+        "deleted reply labels load from the deployed translations",
+        "deleted leaves have no empty collapse control",
+        "compact deleted rows retain 44px controls",
+        "existing reply action remains available",
+        "an existing system-event link resolves to actual first-post content and keeps sorting",
+        "refreshing the normalized system link remains usable",
+        "existing feature links remain available",
+        "existing marketplace data request completes",
+        "existing marketplace products finish loading",
+        "existing alumni map finishes initialization"
+      ],
+      "reused_passed_page_checks": 11,
+      "passed": true
+    },
+    {
+      "mobile": true,
+      "checks": [
+        "reported topic loads actual first-post content",
+        "reported deleted replies use the compact renderer",
+        "deleted reply labels load from the deployed translations",
+        "deleted leaves have no empty collapse control",
+        "compact deleted rows retain 44px controls",
+        "existing reply action remains available",
+        "an existing system-event link resolves to actual first-post content and keeps sorting",
+        "refreshing the normalized system link remains usable",
+        "existing feature links remain available",
+        "existing marketplace data request completes",
+        "existing marketplace products finish loading",
+        "existing alumni map finishes initialization"
+      ],
+      "reused_passed_page_checks": 11,
+      "passed": true
+    }
+  ],
+  "production_content_submitted": false,
+  "verification_key_removed": true,
+  "theme_fields_before": 233,
+  "theme_fields_after": 233,
+  "unrelated_theme_fields_preserved": 232,
+  "settings_preserved": true,
+  "inventory_directories": 67,
+  "image_tag": "local_discourse/isbf_app:deleted-replies-20261021-deeb83874f16",
+  "image_id": "sha256:b123c346da720576e70f15ceaf6baad20bf4cbac5f66c6bd43b402ede16e3cc2",
+  "global_latest_changed": false
+}

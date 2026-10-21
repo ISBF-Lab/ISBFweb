@@ -4515,6 +4515,10 @@ en:
         description: "Switch the selected topics back to flat view."
 
     nested_replies:
+      deleted_reply: "This reply was deleted"
+      deleted_replies:
+        one: "%{count} deleted reply"
+        other: "%{count} deleted replies"
       view_remaining_replies:
         one: "View %{count} more reply"
         other: "View %{count} more replies"

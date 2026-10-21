@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "assertions": 26,
+  "qunit": {
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "total": 2
+  },
+  "compiled": [
+    {
+      "source": "plugins/discourse-academy-roles/assets/javascripts/discourse/connectors/user-preferences-interface/academy-name-color.gjs",
+      "output": "/workspace/deploy-work/feed-name-colors-20261021/academy-name-color.gjs.compiled.js",
+      "bytes": 6659
+    },
+    {
+      "source": "plugins/discourse-academy-roles/test/javascripts/integration/components/academy-name-color-test.gjs",
+      "output": "/workspace/deploy-work/feed-name-colors-20261021/academy-name-color-test.gjs.compiled.js",
+      "bytes": 6737
+    },
+    {
+      "source": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-feed-card.gjs",
+      "output": "/workspace/deploy-work/feed-name-colors-20261021/isbf-v2-feed-card.gjs.compiled.js",
+      "bytes": 28453
+    }
+  ],
+  "full_formkit_integration_executed": false,
+  "full_acceptance_executed": false
+}

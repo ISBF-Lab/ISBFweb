@@ -25,7 +25,7 @@ import {
   postCardTitle,
 } from "../lib/post-card-helpers";
 import { isReportedHidden, openPostReport } from "../lib/report-post";
-import { displayName } from "../lib/user-display";
+import { displayName, feedAuthorColor } from "../lib/user-display";
 import { ISBFMarketplacePrice } from "./isbf-marketplace-card";
 import ISBFOfficialActivitySummary from "./isbf-official-activity-summary";
 import ISBFOfficialCalendarItems from "./isbf-official-calendar-items";
@@ -129,6 +129,11 @@ export default class ISBFV2FeedCard extends Component {
     return (
       Boolean(this.currentUser) && (this.args.topic.op_can_like || this.liked)
     );
+  }
+
+  get creatorColorStyle() {
+    const color = feedAuthorColor(this.args.topic.creator, this.currentUser);
+    return color ? trustHTML(`--isbf-feed-author-color: ${color};`) : null;
   }
 
   get creatorName() {
@@ -575,6 +580,7 @@ export default class ISBFV2FeedCard extends Component {
           <a
             class="isbf-feed-card__author"
             href={{this.profileUrl}}
+            style={{this.creatorColorStyle}}
           >{{this.creatorName}}</a>
           <a
             class="isbf-feed-card__username"

@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "complete_workspace_theme": true,
+  "new_preferences_styles": true,
+  "results": [
+    {
+      "mode": "light",
+      "bytes": 302382,
+      "sha256": "cf3d5865a0a60a7982cc02fe26d265f218fad4776d8e92f39c459cdebbd6c79f"
+    },
+    {
+      "mode": "dark",
+      "bytes": 302382,
+      "sha256": "cf3d5865a0a60a7982cc02fe26d265f218fad4776d8e92f39c459cdebbd6c79f"
+    }
+  ],
+  "core_source": "https://isbf-one.com/stylesheets/common_ba11fc84668bc0321639a6d0591ae42b92269359.css?__ws=isbf-one.com",
+  "live_backend_used": false
+}

@@ -1,5 +1,7 @@
 # Design tokens：真实数值与作用域
 
+2026-10-21局部增量：信息流标题采用已有`font-lg`（18px），标题至正文采用`space-6`（24px总间距）；正文16px/1.45不变。新增姓名颜色偏好区域采用`space-4`、已有surface/text/muted/border/focus-ring及`radius-sm`，范围和状态见[记录](reviews/feed-name-colors-20261021/README.md)。开发者自选色是账号数据，不是新全站token。
+
 只记录 [Approved 区域](ui-status.md) 的代码事实。`--isbf-v2-*` 是主题已定义的变量；其他数值是已有组件的局部规则，不能因重复出现而新建全局 token。没有匹配作用域的规则时标记“需要人工确认”。
 
 主题公共来源为 [common.scss](references/theme-4/common/common.scss.txt) 的 `:root` 及对应选择器；认证来源为 [2026-10-11 academy-auth.scss](references/plugins/discourse-academy-roles/accepted-20261011/assets/stylesheets/common/academy-auth.scss.txt)。文件版本及摘要见 [参考说明](references/README.md)。阅读样式时必须检查后续覆盖，不能只取首次命中。
@@ -355,3 +357,10 @@ C20不增加全局token。背景、数字/球、主文字、次级文字、边�
 
 2026-10-20补充：前台弹窗共享外观已按授权上线，184个模块与132个样式目标完整编译，
 既有功能及数据加载经两端只读确认；[源码、证据和恢复边界](deployments/dialog-consistency-20261020/README.md)。最终视觉待用户核验。
+
+## 2026-10-21 C09/C16操作栏间距修正
+
+本次用户指定的点赞图文距离复用热度的`space-1`（4px），五个图标采用等宽列。18px图标与36px/手机44px点赞目标保持，通过局部计算偏移抵消双按钮留白；本人入口左对齐，手机既有列起点和三层缩进规则保持。`--isbf-topic-action-width`和`--isbf-topic-action-icon-size`仅限帖子操作栏，不构成新全局token。确切来源、窄屏状态和复用边界见[记录](reviews/post-action-spacing-20261021/README.md)。
+
+
+2026-10-21[删除回复提示补充](reviews/deleted-replies-system-targets-20261021/README.md)沿用 isbf-v2-muted、isbf-v2-font-sm、space-2/3 和既有44px目标，不引入新的全局颜色、间距或组件变体。

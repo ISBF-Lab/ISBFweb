@@ -2,6 +2,8 @@
 
 This plugin configures a private academy Discourse site. Site admins are the developers with full site access; moderators are the academy administrators who manage content, suspensions, and silences. Verified official members use their own accounts to publish marked official content.
 
+Administrators and developers can opt into a public feed name color from their own **Preferences → Interface** page. Wear is off by default. Administrators use theme blue; developers can choose a three or six digit hex color or restore theme blue. Turning wear off retains the saved custom color. This cosmetic capability uses the persisted role independently of restricted moderator management permissions. Only the owner can change these preferences. The campus feed theme consumes the effective color on author names only; usernames, timestamps and other page regions keep their own styles. API fields, anonymous handling and verification are documented in the [implementation record](../../docs/design-system/reviews/feed-name-colors-20261021/README.md).
+
 Run `bin/rake academy_roles:setup` once, then restart the web and job processes. The task creates the **普通** and **官方** categories and the `academy_official` group, enables login-only access and invitation registration, fixes current and future members' internal trust level at 0, and removes trust-level editing privileges and badges. Posting, flagging, and messaging permissions are granted separately. It may be run again after configuration changes, but it resets these site settings and category permissions.
 
 For a local checkout where plugins are not loaded by default, run `LOAD_PLUGINS=1 bin/rake academy_roles:setup`.

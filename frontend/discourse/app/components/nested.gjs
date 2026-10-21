@@ -11,6 +11,7 @@ import { service } from "@ember/service";
 import MoreTopics from "discourse/components/more-topics";
 import PluginOutlet from "discourse/components/plugin-outlet";
 import lazyHash from "discourse/helpers/lazy-hash";
+import deletedReplyItems from "discourse/lib/deleted-reply-items";
 import { flatRepliesEnabled } from "discourse/lib/flat-replies";
 import getURL, { withoutPrefix } from "discourse/lib/get-url";
 import LockOn from "discourse/lib/lock-on";
@@ -166,6 +167,16 @@ export default class Nested extends Component {
     window.removeEventListener("pagehide", this.#onPageHide);
     this.router.off("routeWillChange", this.persistScrollAnchor);
     this.viewportTracker.destroy();
+  }
+
+  get rootItems() {
+    const items = (this.args.rootNodes || []).map((node) => ({
+      key: node._renderKey,
+      node,
+    }));
+    return flatRepliesEnabled(this.siteSettings)
+      ? deletedReplyItems(items)
+      : items;
   }
 
   get emptyPath() {
@@ -1118,52 +1129,56 @@ export default class Nested extends Component {
               @label="nested_replies.load_previous_discussions"
             />
           {{/if}}
-          {{#each @rootNodes key="_renderKey" as |node index|}}
-            <NestedPost
-              @captureScrollAnchor={{this.captureScrollAnchor}}
-              @changeNotice={{@changeNotice}}
-              @changePostOwner={{@changePostOwner}}
-              @children={{node.children}}
-              @cloakAbove={{this.cloakAbove}}
-              @cloakBelow={{this.cloakBelow}}
-              @collapseFromDepth={{this.collapseFromDepth}}
-              @deletePost={{@deletePost}}
-              @depth={{0}}
-              @editPost={{@editPost}}
-              @expansionState={{@expansionState}}
-              @fetchedChildrenCache={{@fetchedChildrenCache}}
-              @focusPost={{this.focusPath}}
-              @getCloakingData={{this.viewportTracker.getCloakingData}}
-              @grantBadge={{@grantBadge}}
-              @isPinned={{includes @pinnedPostIds node.post.id}}
-              @lockPost={{@lockPost}}
-              @multiSelect={{@multiSelect}}
-              @path={{this.emptyPath}}
-              @permanentlyDeletePost={{@permanentlyDeletePost}}
-              @post={{node.post}}
-              @postSelected={{@postSelected}}
-              @rebakePost={{@rebakePost}}
-              @recoverPost={{@recoverPost}}
-              @registerPost={{this.viewportTracker.registerPost}}
-              @replyToPost={{@replyToPost}}
-              @scrollAnchor={{this.rootPostScrollAnchor}}
-              @selectBelow={{@selectBelow}}
-              @selectReplies={{@selectReplies}}
-              @showFlags={{@showFlags}}
-              @showHistory={{@showHistory}}
-              @showPagePublish={{@showPagePublish}}
-              @sort={{@effectiveSort}}
-              @togglePostSelection={{@togglePostSelection}}
-              @togglePostType={{@togglePostType}}
-              @toggleWiki={{@toggleWiki}}
-              @topic={{@topic}}
-              @unhidePost={{@unhidePost}}
-              @unlockPost={{@unlockPost}}
-            />
-            <PluginOutlet
-              @name="nested-roots-between"
-              @outletArgs={{lazyHash topic=@topic index=index}}
-            />
+          {{#each this.rootItems key="key" as |item index|}}
+            {{#let item.node as |node|}}
+              <NestedPost
+                @captureScrollAnchor={{this.captureScrollAnchor}}
+                @changeNotice={{@changeNotice}}
+                @changePostOwner={{@changePostOwner}}
+                @children={{node.children}}
+                @cloakAbove={{this.cloakAbove}}
+                @cloakBelow={{this.cloakBelow}}
+                @collapseFromDepth={{this.collapseFromDepth}}
+                @deletedPosts={{item.deletedPosts}}
+                @deletePost={{@deletePost}}
+                @depth={{0}}
+                @editPost={{@editPost}}
+                @expansionState={{@expansionState}}
+                @fetchedChildrenCache={{@fetchedChildrenCache}}
+                @focusPost={{this.focusPath}}
+                @getCloakingData={{this.viewportTracker.getCloakingData}}
+                @grantBadge={{@grantBadge}}
+                @isPinned={{includes @pinnedPostIds node.post.id}}
+                @lockPost={{@lockPost}}
+                @multiSelect={{@multiSelect}}
+                @path={{this.emptyPath}}
+                @permanentlyDeletePost={{@permanentlyDeletePost}}
+                @post={{node.post}}
+                @postSelected={{@postSelected}}
+                @rebakePost={{@rebakePost}}
+                @recoverPost={{@recoverPost}}
+                @registerPost={{this.viewportTracker.registerPost}}
+                @replyToPost={{@replyToPost}}
+                @scrollAnchor={{this.rootPostScrollAnchor}}
+                @selectBelow={{@selectBelow}}
+                @selectReplies={{@selectReplies}}
+                @showFlags={{@showFlags}}
+                @showHistory={{@showHistory}}
+                @showPagePublish={{@showPagePublish}}
+                @sort={{@effectiveSort}}
+                @targetPostNumber={{@targetPostNumber}}
+                @togglePostSelection={{@togglePostSelection}}
+                @togglePostType={{@togglePostType}}
+                @toggleWiki={{@toggleWiki}}
+                @topic={{@topic}}
+                @unhidePost={{@unhidePost}}
+                @unlockPost={{@unlockPost}}
+              />
+              <PluginOutlet
+                @name="nested-roots-between"
+                @outletArgs={{lazyHash topic=@topic index=index}}
+              />
+            {{/let}}
           {{else}}
             <div class="nested-view__empty">
               {{i18n "nested_replies.no_replies"}}

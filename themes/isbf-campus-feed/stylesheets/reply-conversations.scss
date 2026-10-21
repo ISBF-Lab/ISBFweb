@@ -222,6 +222,52 @@ body:has(.isbf-v2-shell--topic-conversations) .nested-view {
     padding: 0;
   }
 
+  .nested-post.--deleted-placeholder {
+    padding-block: var(--isbf-v2-space-2);
+    row-gap: 0;
+
+    .nested-post__placeholder-avatar {
+      position: static;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+    }
+  }
+
+  .nested-deleted-posts {
+    color: var(--isbf-v2-muted);
+    font-size: var(--isbf-v2-font-sm);
+
+    &__entry {
+      margin: 0;
+      padding: 0;
+    }
+
+    &__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--isbf-v2-space-3);
+      min-height: 44px;
+    }
+
+    &__summary.btn {
+      justify-content: flex-start;
+      gap: var(--isbf-v2-space-2);
+      min-height: 44px;
+      padding: 0;
+      color: var(--isbf-v2-muted);
+      font-size: var(--isbf-v2-font-sm);
+    }
+
+    &__more {
+      min-width: 44px;
+      min-height: 44px;
+      color: var(--isbf-v2-muted);
+    }
+  }
+
   .post-controls {
     position: static;
     margin: 0;
@@ -246,31 +292,6 @@ body:has(.isbf-v2-shell--topic-conversations) .nested-view {
         -1 *
           (var(--nested-avatar-size) / 2 + var(--isbf-reply-action-indent, 0px))
       );
-    }
-
-    .post-controls .actions {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-
-      .d-icon {
-        margin-inline: 0;
-      }
-
-      > :is(
-        .isbf-topic-card__reply,
-        .isbf-topic-card__repost,
-        .isbf-topic-card__like,
-        .isbf-topic-card__views,
-        .isbf-topic-card__bookmark
-      ) {
-        width: 100%;
-        min-width: 0;
-      }
-    }
-
-    .isbf-topic-card__like,
-    .isbf-topic-card__bookmark {
-      justify-content: flex-start;
     }
 
     .isbf-topic-card__bookmark button {

@@ -1,0 +1,16 @@
+{
+  "host_available_bytes": 1067253760,
+  "effective_available_bytes": 1067253760,
+  "memory_limit_bytes": 520093696,
+  "reserve_bytes": 536870912,
+  "rounding_bytes": 16777216,
+  "v8_old_space_mib": 192,
+  "ruby_gc_growth_factor": 1.03,
+  "eager_load": false,
+  "peak_rss_bytes": 396890112,
+  "waited_for_capacity_seconds": 0.0,
+  "lowest_host_available_bytes": 581926912,
+  "exit_code": 0,
+  "stop_reason": null,
+  "elapsed_seconds": 49.0
+}
