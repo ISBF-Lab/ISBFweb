@@ -20,14 +20,18 @@ RSpec.describe DiscourseAcademyRoles::StudentInviteExtension do
           block.call
         end
       end
-    stub_const("IsbfAlumni::Registration", registration_service)
+    RSpec::Mocks::ExampleMethods.instance_method(:stub_const).bind_call(
+      self,
+      "IsbfAlumni::Registration",
+      registration_service,
+    )
     allow(IsbfAlumni::Registration).to receive(:bound_invite?).and_return(false)
   end
 
   it "keeps ordinary email and domain invitations forbidden" do
     [
       Fabricate.build(:invite, invited_by: admin, email: "alumni@example.com"),
-      Fabricate.build(:invite, invited_by: admin, email: nil, domain: "example.com")
+      Fabricate.build(:invite, invited_by: admin, email: nil, domain: "example.com"),
     ].each do |invite|
       invite.valid?
       expect(invite.errors[:email]).to include(I18n.t("academy_roles.unbound_invite"))
@@ -36,23 +40,19 @@ RSpec.describe DiscourseAcademyRoles::StudentInviteExtension do
 
   it "exempts only invitations verified by the alumni service and retains the single-use limit" do
     invite = Fabricate.build(:invite, invited_by: admin, email: "alumni@example.com")
-    allow(IsbfAlumni::Registration).to receive(:bound_invite?).with(
-      invite
-    ).and_return(true)
+    allow(IsbfAlumni::Registration).to receive(:bound_invite?).with(invite).and_return(true)
     invite.valid?
     expect(invite.errors[:email]).not_to include(I18n.t("academy_roles.unbound_invite"))
     invite.max_redemptions_allowed = 2
     invite.valid?
     expect(invite.errors[:max_redemptions_allowed]).to include(
-      I18n.t("academy_roles.single_use_invite")
+      I18n.t("academy_roles.single_use_invite"),
     )
   end
 
   it "still requires native validity and rejects existing-account redemption" do
     invite = Fabricate(:invite, invited_by: admin, email: nil)
-    allow(IsbfAlumni::Registration).to receive(:bound_invite?).with(
-      invite
-    ).and_return(true)
+    allow(IsbfAlumni::Registration).to receive(:bound_invite?).with(invite).and_return(true)
     expect(invite.redeemable?).to eq(true)
     expect(invite.can_be_redeemed_by?(member)).to eq(false)
     invite.expires_at = 1.day.ago
@@ -70,9 +70,7 @@ RSpec.describe DiscourseAcademyRoles::StudentInviteExtension do
 
   it "routes native redemption through the alumni transaction wrapper" do
     invite = Fabricate(:invite, invited_by: admin, email: nil)
-    allow(IsbfAlumni::Registration).to receive(:bound_invite?).with(
-      invite
-    ).and_return(true)
+    allow(IsbfAlumni::Registration).to receive(:bound_invite?).with(invite).and_return(true)
     base =
       Class.new do
         attr_reader :invite, :email, :redeeming_user
@@ -95,7 +93,7 @@ RSpec.describe DiscourseAcademyRoles::StudentInviteExtension do
     expect(IsbfAlumni::Registration).to have_received(:redeem).with(
       invite: invite,
       email: "alumni@example.com",
-      redeeming_user: nil
+      redeeming_user: nil,
     )
   end
 

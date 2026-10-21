@@ -14,7 +14,11 @@ RSpec.describe DiscourseAcademyRoles::ModeratorPermissions do
   end
 
   it "scopes the native queue to alumni reviews and revokes access immediately" do
-    stub_const("ReviewableIsbfAlumni", Class.new(Reviewable))
+    RSpec::Mocks::ExampleMethods.instance_method(:stub_const).bind_call(
+      self,
+      "ReviewableIsbfAlumni",
+      Class.new(Reviewable),
+    )
     alumni = Fabricate(:reviewable_queued_post, topic: nil, category_id: nil)
     alumni.update_columns(type: "ReviewableIsbfAlumni", reviewable_by_moderator: true)
     ordinary = Fabricate(:reviewable_queued_post, category_id: nil)
@@ -43,20 +47,18 @@ RSpec.describe DiscourseAcademyRoles::ModeratorPermissions do
           type: "ReviewableIsbfAlumni",
           category_id: nil,
           target_created_by: nil,
-          target_type: "IsbfAlumni::Application"
+          target_type: "IsbfAlumni::Application",
         )
       expect(described_class.review_permission(reviewable)).to eq(:review_alumni)
       expect(described_class.review_edit_permission(reviewable)).to eq(:review_alumni)
-      expect(
-        described_class.review_action_allowed?(administrator, reviewable, :approve)
-      ).to eq(false)
+      expect(described_class.review_action_allowed?(administrator, reviewable, :approve)).to eq(
+        false,
+      )
       SiteSetting.academy_moderators_review_alumni = true
-      expect(
-        described_class.review_action_allowed?(administrator, reviewable, :approve)
-      ).to eq(true)
-      expect(
-        described_class.review_action_allowed?(administrator, reviewable, :reject)
-      ).to eq(true)
+      expect(described_class.review_action_allowed?(administrator, reviewable, :approve)).to eq(
+        true,
+      )
+      expect(described_class.review_action_allowed?(administrator, reviewable, :reject)).to eq(true)
       expect(described_class.allowed?(administrator, :edit_users)).to eq(false)
       expect(described_class.allowed?(administrator, :view_emails)).to eq(false)
       SiteSetting.academy_moderators_review_alumni = false
@@ -65,7 +67,7 @@ RSpec.describe DiscourseAcademyRoles::ModeratorPermissions do
 
     it "defines a dedicated alumni-review capability disabled by default" do
       expect(described_class::SETTINGS.fetch(:review_alumni)).to eq(
-        :academy_moderators_review_alumni
+        :academy_moderators_review_alumni,
       )
       expect(SiteSetting.academy_moderators_review_alumni).to eq(false)
       expect(described_class.allowed?(developer, :review_alumni)).to eq(true)
