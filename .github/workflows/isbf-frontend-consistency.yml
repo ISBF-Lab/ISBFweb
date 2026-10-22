@@ -165,6 +165,11 @@ jobs:
         run: |
           bin/qunit --standalone --filter '/Academy authentication page|Academy alumni registration on login-required sites/i' plugins/discourse-academy-roles/test/javascripts/acceptance/auth-page-test.js | tee tmp/isbf-frontend-results/academy-auth-qunit.log
 
+      - name: Deleted reply rendering regression
+        env:
+          LOAD_PLUGINS: "0"
+        run: bin/qunit --standalone frontend/discourse/tests/integration/components/nested/deleted-posts-test.gjs
+
       - name: Native frontend behavior regression
         env:
           LOAD_PLUGINS: "0"

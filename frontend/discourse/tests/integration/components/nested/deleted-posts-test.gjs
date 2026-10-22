@@ -1,4 +1,3 @@
-import { getOwner } from "@ember/owner";
 import { click, render, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import NestedDeletedPosts from "discourse/components/nested/deleted-posts";
@@ -19,7 +18,6 @@ module("Integration | Component | Nested | DeletedPosts", function (hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function () {
-    this.owner = getOwner(this);
     this.posts = [2, 3, 4].map((number) => ({
       id: number,
       post_number: number,
