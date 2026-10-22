@@ -4,7 +4,18 @@ import { module, test } from "qunit";
 import NestedDeletedPosts from "discourse/components/nested/deleted-posts";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 
-module("Integration | Component | Nested | Deleted posts", function (hooks) {
+function renderComponent(context) {
+  return render(
+    <template>
+      <NestedDeletedPosts
+        @posts={{context.posts}}
+        @targetPostNumber={{context.target}}
+      />
+    </template>
+  );
+}
+
+module("Integration | Component | Nested | DeletedPosts", function (hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function () {
@@ -18,48 +29,55 @@ module("Integration | Component | Nested | Deleted posts", function (hooks) {
   });
 
   test("starts with one collapsed summary and expands compact placeholders", async function (assert) {
-    await render(
-      <template><NestedDeletedPosts @posts={{this.posts}} /></template>
-    );
+    await renderComponent(this);
     assert
       .dom(".nested-deleted-posts__summary")
-      .hasAttribute("aria-expanded", "false");
-    assert.dom(".nested-deleted-posts__entry").doesNotExist();
+      .hasAttribute("aria-expanded", "false", "the summary starts collapsed");
+    assert
+      .dom(".nested-deleted-posts__entry")
+      .doesNotExist("collapsed groups hide individual entries");
     await click(".nested-deleted-posts__summary");
-    assert.dom(".nested-deleted-posts__entry").exists({ count: 3 });
+    assert
+      .dom(".nested-deleted-posts__entry")
+      .exists({ count: 3 }, "expanding reveals every loaded deleted reply");
     assert
       .dom(".nested-deleted-posts__summary")
-      .hasAttribute("aria-expanded", "true");
+      .hasAttribute("aria-expanded", "true", "the summary announces expansion");
     await click(".nested-deleted-posts__summary");
-    assert.dom(".nested-deleted-posts__entry").doesNotExist();
+    assert
+      .dom(".nested-deleted-posts__entry")
+      .doesNotExist("the expanded group can collapse again");
   });
 
   test("a direct floor target expands its group and can subsequently collapse", async function (assert) {
     this.target = 3;
-    await render(
-      <template>
-        <NestedDeletedPosts
-          @posts={{this.posts}}
-          @targetPostNumber={{this.target}}
-        />
-      </template>
-    );
-    assert.dom('[data-post-number="3"]').exists();
+    await renderComponent(this);
+    assert
+      .dom('[data-post-number="3"]')
+      .exists("the initial target is revealed");
     await click(".nested-deleted-posts__summary");
-    assert.dom(".nested-deleted-posts__entry").doesNotExist();
+    assert
+      .dom(".nested-deleted-posts__entry")
+      .doesNotExist("a targeted group can still collapse");
     this.set("target", 4);
     await settled();
-    assert.dom('[data-post-number="4"]').exists();
+    assert
+      .dom('[data-post-number="4"]')
+      .exists("a new target reopens the group");
   });
 
   test("a single deleted reply has no empty expand or collapse button", async function (assert) {
     this.posts = [this.posts[0]];
-    await render(
-      <template><NestedDeletedPosts @posts={{this.posts}} /></template>
-    );
-    assert.dom(".nested-deleted-posts__summary").doesNotExist();
-    assert.dom(".nested-deleted-posts__entry").exists({ count: 1 });
-    assert.dom(".nested-post-children__collapse").doesNotExist();
+    await renderComponent(this);
+    assert
+      .dom(".nested-deleted-posts__summary")
+      .doesNotExist("a single deleted reply has no group control");
+    assert
+      .dom(".nested-deleted-posts__entry")
+      .exists({ count: 1 }, "the single compact entry stays visible");
+    assert
+      .dom(".nested-post-children__collapse")
+      .doesNotExist("there is no empty replies collapse control");
   });
 
   test("hidden body and unavailable recovery never create management actions", async function (assert) {
@@ -71,11 +89,18 @@ module("Integration | Component | Nested | Deleted posts", function (hooks) {
         can_recover: false,
       },
     ];
-    await render(
-      <template><NestedDeletedPosts @posts={{this.posts}} /></template>
-    );
-    assert.dom(".nested-deleted-posts__more").doesNotExist();
-    assert.dom(".nested-post__placeholder-reveal").doesNotExist();
-    assert.dom(".nested-deleted-posts").doesNotIncludeText("hidden content");
+    await renderComponent(this);
+    assert
+      .dom(".nested-deleted-posts__more")
+      .doesNotExist("unavailable actions do not create a menu");
+    assert
+      .dom(".nested-post__placeholder-reveal")
+      .doesNotExist("hidden original content stays unrevealed");
+    assert
+      .dom(".nested-deleted-posts")
+      .doesNotIncludeText(
+        "hidden content",
+        "hidden body text is never rendered"
+      );
   });
 });
