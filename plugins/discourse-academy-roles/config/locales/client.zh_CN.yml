@@ -11,8 +11,15 @@ zh_CN:
         enabled: 佩戴身份色
         description: 仅改变信息流卡片中的姓名，所有人看到相同的颜色。默认关闭。
         color: 自定义姓名颜色
-        color_description: 开发者可自由选色。色号留空时使用主题蓝；自选色在明暗模式下保持一致。
-        invalid_color: 请输入三位或六位十六进制色号。
+        color_description: 开发者可选纯色或渐变色。纯色色号留空时使用主题蓝；自选色在明暗模式下保持一致。
+        gradient: 使用渐变色
+        gradient_description: 选择起始和结束颜色，并设置渐变方向。
+        direction: 渐变方向
+        left_to_right: 从左到右
+        top_to_bottom: 从上到下
+        start_color: 起始颜色
+        end_color: 结束颜色
+        invalid_color: 请输入三位或六位十六进制色号；渐变色需要填写两种颜色。
         reset: 恢复主题色
         preview: 姓名预览
       invite_title: 通过邀请码注册

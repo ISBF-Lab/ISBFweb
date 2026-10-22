@@ -1325,6 +1325,21 @@ body:has(.isbf-v2-shell) tr.isbf-v2-topic > td.isbf-feed-card-cell {
     --d-link-color: var(--isbf-feed-author-color, var(--isbf-v2-text));
     color: var(--d-link-color);
   }
+
+  @supports (background-clip: text) {
+    &.has-gradient {
+      background-image: var(--isbf-feed-author-gradient);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  @media (forced-colors: active) {
+    &.has-gradient {
+      background-image: none;
+      -webkit-text-fill-color: currentcolor;
+    }
+  }
 }
 
 .isbf-feed-card__username,

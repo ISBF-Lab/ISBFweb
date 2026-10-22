@@ -11,8 +11,15 @@ en:
         enabled: Wear role color
         description: Only your name on feed cards changes. Everyone sees the same color. Off by default.
         color: Custom name color
-        color_description: Developers can choose any color. Leave the code empty for theme blue. Custom colors stay the same in light and dark modes.
-        invalid_color: Enter a three or six digit hexadecimal color code.
+        color_description: Developers can choose a solid color or a gradient. Leave the solid color empty for theme blue. Custom colors stay the same in light and dark modes.
+        gradient: Use a gradient
+        gradient_description: Choose a start color, end color and gradient direction.
+        direction: Gradient direction
+        left_to_right: Left to right
+        top_to_bottom: Top to bottom
+        start_color: Start color
+        end_color: End color
+        invalid_color: Enter a three or six digit hexadecimal color code. A gradient needs both colors.
         reset: Restore theme color
         preview: Name preview
       invite_title: "Register with an invitation code"

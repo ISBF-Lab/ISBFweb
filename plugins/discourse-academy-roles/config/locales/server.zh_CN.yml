@@ -10,7 +10,7 @@ zh_CN:
     name_color:
       unavailable: 只有管理员和开发者可以佩戴身份色。
       custom_unavailable: 只有开发者可以自定义姓名颜色。
-      invalid_color: 姓名颜色必须是三位或六位十六进制色号。
+      invalid_color: 姓名颜色须为十六进制色号，或由两个十六进制色号组成的横向或竖向渐变色。
     single_use_invite: 学院邀请码只能使用一次。
     unbound_invite: 邀请码不能绑定邮箱或邮箱域名。
     official_category_move: 官方话题必须保留在官方分类。

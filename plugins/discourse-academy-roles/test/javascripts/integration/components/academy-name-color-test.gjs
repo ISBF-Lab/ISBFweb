@@ -97,6 +97,90 @@ module("Integration | Component | AcademyNameColor", function (hooks) {
       .doesNotExist("ordinary accounts see no extra controls");
   });
 
+  test("edits a saved gradient, switches to solid color and restores the theme", async function (assert) {
+    this.model.set("academy_name_color_preferences", {
+      enabled: true,
+      color: "linear-gradient(180deg, #aabbcc, #123456)",
+    });
+    const outletArgs = this.outletArgs;
+    await render(
+      <template><AcademyNameColor @outletArgs={{outletArgs}} /></template>
+    );
+
+    assert.true(
+      formKit().field("gradient").value(),
+      "saved gradients reopen in gradient mode"
+    );
+    assert.strictEqual(
+      formKit().field("direction").value(),
+      "180",
+      "saved vertical gradients retain their direction"
+    );
+    await formKit().field("direction").select("90");
+    assert.strictEqual(
+      formKit().field("color").value(),
+      "aabbcc",
+      "the start color is restored"
+    );
+    assert.strictEqual(
+      formKit().field("endColor").value(),
+      "123456",
+      "the end color is restored"
+    );
+    await formKit().field("endColor").fillIn("Ff00ff");
+    assert.strictEqual(
+      this.model.custom_fields.academy_name_color,
+      "linear-gradient(90deg, #aabbcc, #Ff00ff)",
+      "both stops are included in the save draft"
+    );
+    assert
+      .dom(".academy-name-color__name")
+      .hasClass("has-gradient", "the preview displays a gradient");
+    await formKit().field("gradient").toggle();
+    assert.strictEqual(
+      this.model.custom_fields.academy_name_color,
+      "#aabbcc",
+      "solid mode retains the start color"
+    );
+    assert
+      .dom('[data-name="endColor"]')
+      .doesNotExist("the end color is only shown for gradients");
+    await click(".academy-name-color__reset");
+    assert.strictEqual(
+      this.model.custom_fields.academy_name_color,
+      "",
+      "reset clears both overrides"
+    );
+    assert.true(formKit().field("enabled").value(), "reset preserves wear");
+  });
+
+  test("keeps incomplete gradients out of the preview and shows the missing stop error", async function (assert) {
+    const outletArgs = this.outletArgs;
+    await render(
+      <template><AcademyNameColor @outletArgs={{outletArgs}} /></template>
+    );
+    await formKit().field("enabled").toggle();
+    await formKit().field("color").fillIn("123456");
+    await formKit().field("gradient").toggle();
+    await formKit().field("endColor").fillIn("");
+    assert
+      .dom('[data-name="endColor"]')
+      .hasClass("has-error", "the end color is required");
+    assert
+      .dom(".academy-name-color__name")
+      .doesNotHaveClass(
+        "has-gradient",
+        "invalid gradients never become styles"
+      );
+    await formKit().field("endColor").fillIn("abcdef");
+    assert
+      .dom('[data-name="endColor"]')
+      .doesNotHaveClass("has-error", "a valid end color clears the error");
+    assert
+      .dom(".academy-name-color__name")
+      .hasClass("has-gradient", "the completed gradient previews immediately");
+  });
+
   test("hides the controls on another account and when the role feature is disabled", async function (assert) {
     this.model.set("id", this.currentUser.id + 1);
     const outletArgs = this.outletArgs;

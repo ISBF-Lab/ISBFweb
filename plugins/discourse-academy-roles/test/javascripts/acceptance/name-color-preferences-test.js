@@ -23,6 +23,7 @@ acceptance("Academy name color preferences", function (needs) {
   needs.pretender((server, helper) => {
     server.get("/u/eviltrout.json", () => {
       const json = cloneJSON(userFixtures["/u/eviltrout.json"]);
+      json.user.can_edit = true;
       json.user.academy_name_color_preferences = {
         enabled: false,
         color: null,
@@ -46,10 +47,15 @@ acceptance("Academy name color preferences", function (needs) {
           },
         });
       }
+      const color = state.requestBody
+        .get("custom_fields[academy_name_color]")
+        ?.startsWith("linear-gradient(")
+        ? "linear-gradient(90deg, #aabbcc, #123456)"
+        : "#aabbcc";
       return helper.response({
         user: {
-          academy_display_name_color: "#aabbcc",
-          academy_name_color_preferences: { enabled: true, color: "#aabbcc" },
+          academy_display_name_color: color,
+          academy_name_color_preferences: { enabled: true, color },
         },
       });
     });
@@ -92,6 +98,33 @@ acceptance("Academy name color preferences", function (needs) {
     assert
       .dom(".saved")
       .exists("the normal preferences success state is retained");
+  });
+
+  test("saves both gradient stops through the existing interface action", async function (assert) {
+    await visit("/u/eviltrout/preferences/interface");
+    const form = formKit(".academy-name-color");
+    await form.field("enabled").toggle();
+    await form.field("color").fillIn("AbC");
+    await form.field("gradient").toggle();
+    await click(".save-changes");
+    assert.strictEqual(
+      state.requests,
+      0,
+      "an incomplete gradient is rejected before saving"
+    );
+    await form.field("endColor").fillIn("123456");
+    await click(".save-changes");
+    assert.strictEqual(
+      state.requestBody.get("custom_fields[academy_name_color]"),
+      "linear-gradient(90deg, #AbC, #123456)",
+      "the normal preference payload includes both stops"
+    );
+    assert.strictEqual(
+      this.owner.lookup("service:current-user").academy_display_name_color,
+      "linear-gradient(90deg, #aabbcc, #123456)",
+      "the saved gradient becomes the public appearance"
+    );
+    assert.dom(".saved").exists("the normal success feedback is retained");
   });
 
   test("a failed save keeps the previous appearance", async function (assert) {

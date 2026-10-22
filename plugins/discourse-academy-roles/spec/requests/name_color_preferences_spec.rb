@@ -59,6 +59,70 @@ RSpec.describe UsersController do
   end
 
   describe "#update" do
+    it "saves a gradient, retains it while disabled and clears it with the theme reset" do
+      sign_in(developer)
+      gradient = "linear-gradient(180deg, #aabbcc, #123456)"
+
+      put "/u/#{developer.username}.json",
+          params: {
+            custom_fields: {
+              academy_name_color_enabled: true,
+              academy_name_color: "linear-gradient(180deg, #AbC, #123456)",
+            },
+          }
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.dig("user", "academy_display_name_color")).to eq(gradient)
+      expect(developer.reload.custom_fields["academy_name_color"]).to eq(gradient)
+      get "/u/#{developer.username}.json"
+      expect(response.parsed_body.dig("user", "academy_name_color_preferences", "color")).to eq(
+        gradient,
+      )
+
+      put "/u/#{developer.username}.json",
+          params: {
+            custom_fields: {
+              academy_name_color_enabled: false,
+            },
+          }
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.dig("user", "academy_display_name_color")).to be_nil
+      expect(developer.reload.custom_fields["academy_name_color"]).to eq(gradient)
+
+      put "/u/#{developer.username}.json",
+          params: {
+            custom_fields: {
+              academy_name_color_enabled: true,
+              academy_name_color: "",
+            },
+          }
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.dig("user", "academy_display_name_color")).to eq("theme")
+    end
+
+    it "rejects unauthorized gradients and malformed gradient updates atomically" do
+      gradient = "linear-gradient(90deg, #123456, #abcdef)"
+      [moderator, member].each do |user|
+        sign_in(user)
+        put "/u/#{user.username}.json", params: { custom_fields: { academy_name_color: gradient } }
+        expect(response.status).to eq(403)
+        expect(user.reload.custom_fields["academy_name_color"]).to be_nil
+      end
+
+      sign_in(developer)
+      original_name = developer.name
+      put "/u/#{developer.username}.json",
+          params: {
+            name: "Unsaved name",
+            custom_fields: {
+              academy_name_color: "#{gradient};display:none",
+            },
+          }
+      expect(response.status).to eq(422)
+      expect(developer.reload.name).to eq(original_name)
+      expect(developer.custom_fields["academy_name_color"]).to be_nil
+    end
+
     it "persists a normalized developer color through the existing preferences endpoint" do
       sign_in(developer)
 

@@ -13,6 +13,7 @@ import Composer from "discourse/models/composer";
 import Draft from "discourse/models/draft";
 import { loadTopicView } from "discourse/models/topic";
 import DDecoratedHtml from "discourse/ui-kit/d-decorated-html";
+import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import { loadCookedPost, loadRepostCount } from "../lib/feed-post-loader";
@@ -25,7 +26,11 @@ import {
   postCardTitle,
 } from "../lib/post-card-helpers";
 import { isReportedHidden, openPostReport } from "../lib/report-post";
-import { displayName, feedAuthorColor } from "../lib/user-display";
+import {
+  displayName,
+  feedAuthorColor,
+  feedAuthorStyle,
+} from "../lib/user-display";
 import { ISBFMarketplacePrice } from "./isbf-marketplace-card";
 import ISBFOfficialActivitySummary from "./isbf-official-activity-summary";
 import ISBFOfficialCalendarItems from "./isbf-official-calendar-items";
@@ -132,8 +137,15 @@ export default class ISBFV2FeedCard extends Component {
   }
 
   get creatorColorStyle() {
-    const color = feedAuthorColor(this.args.topic.creator, this.currentUser);
-    return color ? trustHTML(`--isbf-feed-author-color: ${color};`) : null;
+    const style = feedAuthorStyle(this.args.topic.creator, this.currentUser);
+    return style ? trustHTML(style) : null;
+  }
+
+  get creatorHasGradient() {
+    return feedAuthorColor(
+      this.args.topic.creator,
+      this.currentUser
+    )?.startsWith("linear-gradient(");
   }
 
   get creatorName() {
@@ -578,7 +590,10 @@ export default class ISBFV2FeedCard extends Component {
       <div class="isbf-feed-card__main">
         <header class="isbf-feed-card__header">
           <a
-            class="isbf-feed-card__author"
+            class={{dConcatClass
+              "isbf-feed-card__author"
+              (if this.creatorHasGradient "has-gradient")
+            }}
             href={{this.profileUrl}}
             style={{this.creatorColorStyle}}
           >{{this.creatorName}}</a>

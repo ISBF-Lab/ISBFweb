@@ -46,6 +46,28 @@ RSpec.describe DiscourseAcademyRoles::NameColor do
     end
   end
 
+  describe ".normalize" do
+    it "normalizes two gradient stops and rejects other CSS" do
+      expect(described_class.normalize("linear-gradient(90deg, #AbC, #123456)")).to eq(
+        "linear-gradient(90deg, #aabbcc, #123456)",
+      )
+      expect(described_class.normalize("linear-gradient(180deg, #AbC, #123456)")).to eq(
+        "linear-gradient(180deg, #aabbcc, #123456)",
+      )
+      [
+        "linear-gradient(90deg, #123456, #abcdef);display:none",
+        "linear-gradient(90deg, #123456, url(https://example.com))",
+        "linear-gradient(90deg, var(--danger), #abcdef)",
+        "linear-gradient(90deg, #123456, )",
+        "linear-gradient(90deg, #123456, #abcdef, #ffffff)",
+        "linear-gradient(45deg, #123456, #abcdef)",
+        "linear-gradient(90deg, #1234, #abcdef)",
+        "linear-gradient(90deg, #123456, #abcdef)\n",
+        "x" * 1000,
+      ].each { |value| expect(described_class.normalize(value)).to be_nil }
+    end
+  end
+
   describe "UserLookup" do
     it "sideloads author appearances with a constant number of queries" do
       [developer, other_developer].each do |user|

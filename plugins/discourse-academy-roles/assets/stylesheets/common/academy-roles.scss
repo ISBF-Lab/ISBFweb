@@ -71,6 +71,21 @@
     font-size: var(--isbf-v2-font-sm, 15px);
     font-weight: var(--isbf-v2-weight-bold, 750);
     line-height: 1.35;
+
+    @supports (background-clip: text) {
+      &.has-gradient {
+        background-image: var(--academy-name-gradient);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    @media (forced-colors: active) {
+      &.has-gradient {
+        background-image: none;
+        -webkit-text-fill-color: currentcolor;
+      }
+    }
   }
 
   .form-kit__control-color-input-hex {
