@@ -50,7 +50,7 @@ module("Unit | Controller | nested", function (hooks) {
     ["staff-deleted", { deleted_at: "2026-10-20T00:00:00Z" }],
     ["author-deleted", { user_deleted: true }],
   ]) {
-    test(`recovering a ${deletionType} reply preserves its retry action after failure`, async function (assert) {
+    test(`recovering ${deletionType} replies preserves their retry action after failure`, async function (assert) {
       const post = buildPost(this.store, buildTopic(this.store, 724), 2001, 2);
       post.setProperties({
         ...deletedProperties,
@@ -64,7 +64,7 @@ module("Unit | Controller | nested", function (hooks) {
       await this.controller.recoverPost(post);
 
       assert.true(
-        Boolean(post.deleted),
+        Boolean(post.recoverable),
         "restores the deletion state on failure"
       );
       assert.true(
@@ -83,7 +83,10 @@ module("Unit | Controller | nested", function (hooks) {
 
       await this.controller.recoverPost(post);
 
-      assert.false(Boolean(post.deleted), "a successful retry clears deletion");
+      assert.false(
+        Boolean(post.recoverable),
+        "a successful retry clears deletion"
+      );
       assert.false(post.deleted_post_placeholder, "removes the placeholder");
       assert.false(post.can_recover, "removes the completed recovery action");
       assert.strictEqual(
