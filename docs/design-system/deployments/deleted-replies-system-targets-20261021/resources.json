@@ -1,0 +1,61 @@
+{
+  "build-budget.json": {
+    "host_available_bytes": 1587621888,
+    "effective_available_bytes": 1587621888,
+    "memory_limit_bytes": 1040187392,
+    "reserve_bytes": 536870912,
+    "rounding_bytes": 16777216,
+    "swap_total_bytes": 1040187392,
+    "exit_code": 0,
+    "peak_bytes": 954142720,
+    "lowest_host_available_bytes": 1442000896,
+    "elapsed_seconds": 541.3
+  },
+  "native-browser-budget.json": {
+    "host_available_bytes": 2096685056,
+    "effective_available_bytes": 2096685056,
+    "memory_limit_bytes": 1543503872,
+    "reserve_bytes": 536870912,
+    "rounding_bytes": 16777216,
+    "swap_total_bytes": 1543503872,
+    "exit_code": 0,
+    "peak_bytes": 1125425152,
+    "lowest_host_available_bytes": 1440890880,
+    "elapsed_seconds": 189.0
+  },
+  "publish-theme-budget.json": {
+    "host_available_bytes": 1877438464,
+    "effective_available_bytes": 1877438464,
+    "memory_limit_bytes": 1325400064,
+    "reserve_bytes": 536870912,
+    "rounding_bytes": 16777216,
+    "peak_rss_bytes": 416362496,
+    "lowest_host_available_bytes": 1605787648,
+    "exit_code": 0,
+    "stop_reason": null,
+    "elapsed_seconds": 35.6
+  },
+  "production-browser-budget.json": {
+    "host_available_bytes": 1776054272,
+    "effective_available_bytes": 1776054272,
+    "memory_limit_bytes": 1224736768,
+    "reserve_bytes": 536870912,
+    "rounding_bytes": 16777216,
+    "swap_total_bytes": 1224736768,
+    "peak_bytes": 836366336,
+    "lowest_host_available_bytes": 1349939200,
+    "stop_reason": null
+  },
+  "verified-image-budget.json": {
+    "host_available_bytes": 1776054272,
+    "effective_available_bytes": 1776054272,
+    "memory_limit_bytes": 1224736768,
+    "reserve_bytes": 536870912,
+    "rounding_bytes": 16777216,
+    "swap_total_bytes": 1224736768,
+    "exit_code": 0,
+    "peak_bytes": 836366336,
+    "lowest_host_available_bytes": 1930674176,
+    "elapsed_seconds": 275.5
+  }
+}

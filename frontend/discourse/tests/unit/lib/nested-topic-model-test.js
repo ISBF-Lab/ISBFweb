@@ -8,6 +8,30 @@ import {
 module("Unit | Lib | nested-topic-model", function (hooks) {
   setupTest(hooks);
 
+  test("a resolved system target opens the first post without a context chain", function (assert) {
+    const model = processNestedContextResponse({
+      data: {
+        topic: { id: 1, slug: "nested-topic" },
+        op_post: { id: 1, post_number: 1 },
+        roots: [{ id: 2, post_number: 2, children: [] }],
+        sort: "old",
+        resolved_target_post_number: 1,
+      },
+      params: { post_number: 9, context: "0" },
+      sort: "old",
+      site: this.owner.lookup("service:site"),
+      store: this.owner.lookup("service:store"),
+    });
+
+    assert.strictEqual(model.opPost.post_number, 1);
+    assert.strictEqual(model.targetPostNumber, 1);
+    assert.strictEqual(model.postNumber, 1);
+    assert.strictEqual(model.context, null);
+    assert.false(model.contextMode);
+    assert.strictEqual(model.sort, "old");
+    assert.strictEqual(model.rootNodes[0].post.post_number, 2);
+  });
+
   test("a flat deep link keeps its outer discussion and exact target", function (assert) {
     const navigation = {
       root_count: 21,

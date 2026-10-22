@@ -71,8 +71,7 @@ export default class TopicFromParams extends DiscourseRoute {
           // eslint-disable-next-line no-console
           console.log("Could not view nested topic", e);
         }
-        params._loading_error = true;
-        return params;
+        throw e;
       });
     }
 
@@ -138,6 +137,18 @@ export default class TopicFromParams extends DiscourseRoute {
 
     if (params._nested) {
       this.#setupNestedController(params._nested);
+      const model = params._nested;
+      if (model.canonicalTargetURL) {
+        schedule("afterRender", () => {
+          const current = this.controllerFor("nested");
+          if (
+            String(current.topic?.id) === String(model.topic.id) &&
+            current.targetPostNumber === 1
+          ) {
+            DiscourseURL.replaceState(model.canonicalTargetURL);
+          }
+        });
+      }
       return;
     }
 
@@ -317,8 +328,21 @@ export default class TopicFromParams extends DiscourseRoute {
     }
 
     if (reuseCurrent && String(current.topic?.id) === String(topic.id)) {
+      const resolvedTarget = params._nested.resolvedTargetPostNumber;
       this.#preservingNestedState = true;
-      params._nested = current.flatModelForTarget(postNumber, params._nested);
+      params._nested = current.flatModelForTarget(
+        resolvedTarget || postNumber,
+        params._nested
+      );
+      params._nested.resolvedTargetPostNumber = resolvedTarget;
+    }
+
+    if (params._nested.resolvedTargetPostNumber === 1) {
+      params._nested.context = null;
+      const canonicalQuery = { ...queryParams };
+      delete canonicalQuery.context;
+      const query = nestedQueryString(canonicalQuery);
+      params._nested.canonicalTargetURL = `${topic.url}/1${query ? `?${query}` : ""}`;
     }
 
     const scrollAnchor = explicitTarget

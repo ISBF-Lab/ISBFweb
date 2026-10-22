@@ -1,0 +1,3824 @@
+{
+  "passed": false,
+  "checks": [
+    "390px light op: five primary icons remain",
+    "390px light op: icon distances are equal",
+    "390px light op: existing heat gap remains 4px",
+    "390px light op: like and heat icon/count gaps match",
+    "390px light op: button heights remain accessible",
+    "390px light op: like target width remains accessible",
+    "390px light root: five primary icons remain",
+    "390px light root: icon distances are equal",
+    "390px light root: existing heat gap remains 4px",
+    "390px light root: like and heat icon/count gaps match",
+    "390px light root: button heights remain accessible",
+    "390px light child: five primary icons remain",
+    "390px light child: icon distances are equal",
+    "390px light child: existing heat gap remains 4px",
+    "390px light child: like and heat icon/count gaps match",
+    "390px light child: button heights remain accessible",
+    "390px light child: like target width remains accessible",
+    "390px light zero: five primary icons remain",
+    "390px light zero: icon distances are equal",
+    "390px light zero: existing heat gap remains 4px",
+    "390px light zero: button heights remain accessible",
+    "390px light zero: like target width remains accessible",
+    "390px light own-zero: five primary icons remain",
+    "390px light own-zero: icon distances are equal",
+    "390px light own-zero: existing heat gap remains 4px",
+    "390px light own-zero: button heights remain accessible",
+    "390px light flat: five primary icons remain",
+    "390px light flat: icon distances are equal",
+    "390px light flat: existing heat gap remains 4px",
+    "390px light flat: like and heat icon/count gaps match",
+    "390px light flat: button heights remain accessible",
+    "390px light flat: like target width remains accessible",
+    "390px light: no horizontal page overflow",
+    "390px light op: .toggle-like remains independently clickable",
+    "390px light op: .like-count remains independently clickable",
+    "390px light root: .like-count remains independently clickable",
+    "390px light child: .toggle-like remains independently clickable",
+    "390px light child: .like-count remains independently clickable",
+    "390px dark op: five primary icons remain",
+    "390px dark op: icon distances are equal",
+    "390px dark op: existing heat gap remains 4px",
+    "390px dark op: like and heat icon/count gaps match",
+    "390px dark op: button heights remain accessible",
+    "390px dark op: like target width remains accessible",
+    "390px dark root: five primary icons remain",
+    "390px dark root: icon distances are equal",
+    "390px dark root: existing heat gap remains 4px",
+    "390px dark root: like and heat icon/count gaps match",
+    "390px dark root: button heights remain accessible",
+    "390px dark child: five primary icons remain",
+    "390px dark child: icon distances are equal",
+    "390px dark child: existing heat gap remains 4px",
+    "390px dark child: like and heat icon/count gaps match",
+    "390px dark child: button heights remain accessible",
+    "390px dark child: like target width remains accessible",
+    "390px dark zero: five primary icons remain",
+    "390px dark zero: icon distances are equal",
+    "390px dark zero: existing heat gap remains 4px",
+    "390px dark zero: button heights remain accessible",
+    "390px dark zero: like target width remains accessible",
+    "390px dark own-zero: five primary icons remain",
+    "390px dark own-zero: icon distances are equal",
+    "390px dark own-zero: existing heat gap remains 4px",
+    "390px dark own-zero: button heights remain accessible",
+    "390px dark flat: five primary icons remain",
+    "390px dark flat: icon distances are equal",
+    "390px dark flat: existing heat gap remains 4px",
+    "390px dark flat: like and heat icon/count gaps match",
+    "390px dark flat: button heights remain accessible",
+    "390px dark flat: like target width remains accessible",
+    "390px dark: no horizontal page overflow",
+    "390px dark op: .toggle-like remains independently clickable",
+    "390px dark op: .like-count remains independently clickable",
+    "390px dark root: .like-count remains independently clickable",
+    "390px dark child: .toggle-like remains independently clickable",
+    "390px dark child: .like-count remains independently clickable",
+    "320px light op: five primary icons remain",
+    "320px light op: icon distances are equal",
+    "320px light op: existing heat gap remains 4px",
+    "320px light op: like and heat icon/count gaps match",
+    "320px light op: button heights remain accessible",
+    "320px light op: like target width remains accessible",
+    "320px light root: five primary icons remain"
+  ],
+  "layouts": [
+    {
+      "width": 390,
+      "palette": "light",
+      "version": "before",
+      "rows": {
+        "op": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": 26,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 113,
+              "bottom": 157,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 113,
+              "bottom": 157,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 223,
+              "right": 244,
+              "top": 113,
+              "bottom": 157,
+              "width": 21,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like has-like",
+              "left": 179,
+              "right": 223,
+              "top": 113,
+              "bottom": 157,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 113,
+              "bottom": 157,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 113,
+            "bottom": 157,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "root": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 227,
+              "bottom": 271,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 227,
+              "bottom": 271,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count my-likes post-action-menu__like-count",
+              "left": 179,
+              "right": 231.46875,
+              "top": 227,
+              "bottom": 271,
+              "width": 52.46875,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 227,
+              "bottom": 271,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 227,
+            "bottom": 271,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "child": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": 26,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 376,
+              "bottom": 420,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 376,
+              "bottom": 420,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 223,
+              "right": 244,
+              "top": 376,
+              "bottom": 420,
+              "width": 21,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like like",
+              "left": 179,
+              "right": 223,
+              "top": 376,
+              "bottom": 420,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 376,
+              "bottom": 420,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 376,
+            "bottom": 420,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "zero": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": null,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 500,
+              "bottom": 544,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 500,
+              "bottom": 544,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like like",
+              "left": 179,
+              "right": 223,
+              "top": 500,
+              "bottom": 544,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 500,
+              "bottom": 544,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 500,
+            "bottom": 544,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "own-zero": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": null,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 612,
+              "bottom": 656,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 612,
+              "bottom": 656,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text ",
+              "left": 179,
+              "right": 223,
+              "top": 612,
+              "bottom": 656,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 612,
+              "bottom": 656,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 612,
+            "bottom": 656,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "flat": {
+          "icons": [
+            {
+              "left": 16,
+              "right": 34,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 103.3125,
+              "right": 121.3125,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 179.390625,
+              "right": 197.390625,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 268.6875,
+              "right": 286.6875,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 356,
+              "right": 374,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            87.3125,
+            76.078125,
+            89.296875,
+            87.3125
+          ],
+          "likeGap": 16,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 8,
+              "right": 53.234375,
+              "top": 726,
+              "bottom": 770,
+              "width": 45.234375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 85.3125,
+              "right": 129.3125,
+              "top": 726,
+              "bottom": 770,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 205.390625,
+              "right": 228.625,
+              "top": 726,
+              "bottom": 770,
+              "width": 23.234375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like has-like",
+              "left": 161.390625,
+              "right": 205.390625,
+              "top": 726,
+              "bottom": 770,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 338,
+              "right": 382,
+              "top": 726,
+              "bottom": 770,
+              "width": 44,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 8,
+            "right": 382,
+            "top": 726,
+            "bottom": 770,
+            "width": 374,
+            "height": 44
+          }
+        }
+      }
+    },
+    {
+      "width": 390,
+      "palette": "light",
+      "version": "candidate",
+      "rows": {
+        "op": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 113,
+              "bottom": 157,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 113,
+              "bottom": 157,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 209,
+              "right": 216.234375,
+              "top": 113,
+              "bottom": 157,
+              "width": 7.234375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like has-like",
+              "left": 161,
+              "right": 205,
+              "top": 113,
+              "bottom": 157,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 113,
+              "bottom": 157,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 113,
+            "bottom": 157,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "root": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 227,
+              "bottom": 271,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 227,
+              "bottom": 271,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count my-likes post-action-menu__like-count",
+              "left": 179,
+              "right": 231.46875,
+              "top": 227,
+              "bottom": 271,
+              "width": 52.46875,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 227,
+              "bottom": 271,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 227,
+            "bottom": 271,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "child": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 376,
+              "bottom": 420,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 376,
+              "bottom": 420,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 209,
+              "right": 223.46875,
+              "top": 376,
+              "bottom": 420,
+              "width": 14.46875,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like like",
+              "left": 161,
+              "right": 205,
+              "top": 376,
+              "bottom": 420,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 376,
+              "bottom": 420,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 376,
+            "bottom": 420,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "zero": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": null,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 500,
+              "bottom": 544,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 500,
+              "bottom": 544,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like like",
+              "left": 161,
+              "right": 205,
+              "top": 500,
+              "bottom": 544,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 500,
+              "bottom": 544,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 500,
+            "bottom": 544,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "own-zero": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": null,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 612,
+              "bottom": 656,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 612,
+              "bottom": 656,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text ",
+              "left": 179,
+              "right": 223,
+              "top": 612,
+              "bottom": 656,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 612,
+              "bottom": 656,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 612,
+            "bottom": 656,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "flat": {
+          "icons": [
+            {
+              "left": 16,
+              "right": 34,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 91.59375,
+              "right": 109.59375,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 167.1875,
+              "right": 185.1875,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 242.796875,
+              "right": 260.796875,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 318.390625,
+              "right": 336.390625,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            75.59375,
+            75.59375,
+            75.609375,
+            75.59375
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 8,
+              "right": 79.59375,
+              "top": 726,
+              "bottom": 770,
+              "width": 71.59375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 83.59375,
+              "right": 155.1875,
+              "top": 726,
+              "bottom": 770,
+              "width": 71.59375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 189.1875,
+              "right": 196.421875,
+              "top": 726,
+              "bottom": 770,
+              "width": 7.234375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like has-like",
+              "left": 141.1875,
+              "right": 185.1875,
+              "top": 726,
+              "bottom": 770,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 310.390625,
+              "right": 354.390625,
+              "top": 726,
+              "bottom": 770,
+              "width": 44,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 8,
+            "right": 382,
+            "top": 726,
+            "bottom": 770,
+            "width": 374,
+            "height": 44
+          }
+        }
+      }
+    },
+    {
+      "width": 390,
+      "palette": "dark",
+      "version": "before",
+      "rows": {
+        "op": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": 26,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 113,
+              "bottom": 157,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 113,
+              "bottom": 157,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 223,
+              "right": 244,
+              "top": 113,
+              "bottom": 157,
+              "width": 21,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like has-like",
+              "left": 179,
+              "right": 223,
+              "top": 113,
+              "bottom": 157,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 113,
+              "bottom": 157,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 113,
+            "bottom": 157,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "root": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 227,
+              "bottom": 271,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 227,
+              "bottom": 271,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count my-likes post-action-menu__like-count",
+              "left": 179,
+              "right": 231.46875,
+              "top": 227,
+              "bottom": 271,
+              "width": 52.46875,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 227,
+              "bottom": 271,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 227,
+            "bottom": 271,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "child": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": 26,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 376,
+              "bottom": 420,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 376,
+              "bottom": 420,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 223,
+              "right": 244,
+              "top": 376,
+              "bottom": 420,
+              "width": 21,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like like",
+              "left": 179,
+              "right": 223,
+              "top": 376,
+              "bottom": 420,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 376,
+              "bottom": 420,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 376,
+            "bottom": 420,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "zero": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": null,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 500,
+              "bottom": 544,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 500,
+              "bottom": 544,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like like",
+              "left": 179,
+              "right": 223,
+              "top": 500,
+              "bottom": 544,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 500,
+              "bottom": 544,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 500,
+            "bottom": 544,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "own-zero": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": null,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 612,
+              "bottom": 656,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 612,
+              "bottom": 656,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text ",
+              "left": 179,
+              "right": 223,
+              "top": 612,
+              "bottom": 656,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 612,
+              "bottom": 656,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 612,
+            "bottom": 656,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "flat": {
+          "icons": [
+            {
+              "left": 16,
+              "right": 34,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 103.3125,
+              "right": 121.3125,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 179.390625,
+              "right": 197.390625,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 268.6875,
+              "right": 286.6875,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 356,
+              "right": 374,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            87.3125,
+            76.078125,
+            89.296875,
+            87.3125
+          ],
+          "likeGap": 16,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 8,
+              "right": 53.234375,
+              "top": 726,
+              "bottom": 770,
+              "width": 45.234375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 85.3125,
+              "right": 129.3125,
+              "top": 726,
+              "bottom": 770,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 205.390625,
+              "right": 228.625,
+              "top": 726,
+              "bottom": 770,
+              "width": 23.234375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like has-like",
+              "left": 161.390625,
+              "right": 205.390625,
+              "top": 726,
+              "bottom": 770,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 338,
+              "right": 382,
+              "top": 726,
+              "bottom": 770,
+              "width": 44,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 8,
+            "right": 382,
+            "top": 726,
+            "bottom": 770,
+            "width": 374,
+            "height": 44
+          }
+        }
+      }
+    },
+    {
+      "width": 390,
+      "palette": "dark",
+      "version": "candidate",
+      "rows": {
+        "op": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 113,
+              "bottom": 157,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 113,
+              "bottom": 157,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 209,
+              "right": 216.234375,
+              "top": 113,
+              "bottom": 157,
+              "width": 7.234375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like has-like",
+              "left": 161,
+              "right": 205,
+              "top": 113,
+              "bottom": 157,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 113,
+              "bottom": 157,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 113,
+            "bottom": 157,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "root": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 240,
+              "bottom": 258,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 227,
+              "bottom": 271,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 227,
+              "bottom": 271,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count my-likes post-action-menu__like-count",
+              "left": 179,
+              "right": 231.46875,
+              "top": 227,
+              "bottom": 271,
+              "width": 52.46875,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 227,
+              "bottom": 271,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 227,
+            "bottom": 271,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "child": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 389,
+              "bottom": 407,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 376,
+              "bottom": 420,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 376,
+              "bottom": 420,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 209,
+              "right": 223.46875,
+              "top": 376,
+              "bottom": 420,
+              "width": 14.46875,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like like",
+              "left": 161,
+              "right": 205,
+              "top": 376,
+              "bottom": 420,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 376,
+              "bottom": 420,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 376,
+            "bottom": 420,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "zero": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 513,
+              "bottom": 531,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": null,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 500,
+              "bottom": 544,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 500,
+              "bottom": 544,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like like",
+              "left": 161,
+              "right": 205,
+              "top": 500,
+              "bottom": 544,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 500,
+              "bottom": 544,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 500,
+            "bottom": 544,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "own-zero": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 118,
+              "right": 136,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 187,
+              "right": 205,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 256,
+              "right": 274,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 325,
+              "right": 343,
+              "top": 625,
+              "bottom": 643,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69,
+            69,
+            69,
+            69
+          ],
+          "likeGap": null,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 106,
+              "top": 612,
+              "bottom": 656,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 110,
+              "right": 175,
+              "top": 612,
+              "bottom": 656,
+              "width": 65,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text ",
+              "left": 179,
+              "right": 223,
+              "top": 612,
+              "bottom": 656,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 317,
+              "right": 382,
+              "top": 612,
+              "bottom": 656,
+              "width": 65,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 382,
+            "top": 612,
+            "bottom": 656,
+            "width": 341,
+            "height": 44
+          }
+        },
+        "flat": {
+          "icons": [
+            {
+              "left": 16,
+              "right": 34,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 91.59375,
+              "right": 109.59375,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 167.1875,
+              "right": 185.1875,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 242.796875,
+              "right": 260.796875,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 318.390625,
+              "right": 336.390625,
+              "top": 739,
+              "bottom": 757,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            75.59375,
+            75.59375,
+            75.609375,
+            75.59375
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 8,
+              "right": 79.59375,
+              "top": 726,
+              "bottom": 770,
+              "width": 71.59375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 83.59375,
+              "right": 155.1875,
+              "top": 726,
+              "bottom": 770,
+              "width": 71.59375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 189.1875,
+              "right": 196.421875,
+              "top": 726,
+              "bottom": 770,
+              "width": 7.234375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like has-like",
+              "left": 141.1875,
+              "right": 185.1875,
+              "top": 726,
+              "bottom": 770,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 310.390625,
+              "right": 354.390625,
+              "top": 726,
+              "bottom": 770,
+              "width": 44,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 8,
+            "right": 382,
+            "top": 726,
+            "bottom": 770,
+            "width": 374,
+            "height": 44
+          }
+        }
+      }
+    },
+    {
+      "width": 320,
+      "palette": "light",
+      "version": "before",
+      "rows": {
+        "op": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 104,
+              "right": 122,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 159,
+              "right": 177,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 214,
+              "right": 232,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 269,
+              "right": 287,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            55,
+            55,
+            55,
+            55
+          ],
+          "likeGap": 26,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 92,
+              "top": 113,
+              "bottom": 157,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 96,
+              "right": 147,
+              "top": 113,
+              "bottom": 157,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 195,
+              "right": 211,
+              "top": 113,
+              "bottom": 157,
+              "width": 16,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like has-like",
+              "left": 151,
+              "right": 195,
+              "top": 113,
+              "bottom": 157,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 261,
+              "right": 312,
+              "top": 113,
+              "bottom": 157,
+              "width": 51,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 312,
+            "top": 113,
+            "bottom": 157,
+            "width": 271,
+            "height": 44
+          }
+        },
+        "root": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 261,
+              "bottom": 279,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 104,
+              "right": 122,
+              "top": 261,
+              "bottom": 279,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 159,
+              "right": 177,
+              "top": 261,
+              "bottom": 279,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 214,
+              "right": 232,
+              "top": 261,
+              "bottom": 279,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 269,
+              "right": 287,
+              "top": 261,
+              "bottom": 279,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            55,
+            55,
+            55,
+            55
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 92,
+              "top": 248,
+              "bottom": 292,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 96,
+              "right": 147,
+              "top": 248,
+              "bottom": 292,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count my-likes post-action-menu__like-count",
+              "left": 151,
+              "right": 202,
+              "top": 248,
+              "bottom": 292,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 261,
+              "right": 312,
+              "top": 248,
+              "bottom": 292,
+              "width": 51,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 312,
+            "top": 248,
+            "bottom": 292,
+            "width": 271,
+            "height": 44
+          }
+        },
+        "child": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 410,
+              "bottom": 428,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 104,
+              "right": 122,
+              "top": 410,
+              "bottom": 428,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 159,
+              "right": 177,
+              "top": 410,
+              "bottom": 428,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 214,
+              "right": 232,
+              "top": 410,
+              "bottom": 428,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 269,
+              "right": 287,
+              "top": 410,
+              "bottom": 428,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            55,
+            55,
+            55,
+            55
+          ],
+          "likeGap": 26,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 92,
+              "top": 397,
+              "bottom": 441,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 96,
+              "right": 147,
+              "top": 397,
+              "bottom": 441,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 195,
+              "right": 211,
+              "top": 397,
+              "bottom": 441,
+              "width": 16,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like like",
+              "left": 151,
+              "right": 195,
+              "top": 397,
+              "bottom": 441,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 261,
+              "right": 312,
+              "top": 397,
+              "bottom": 441,
+              "width": 51,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 312,
+            "top": 397,
+            "bottom": 441,
+            "width": 271,
+            "height": 44
+          }
+        },
+        "zero": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 534,
+              "bottom": 552,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 104,
+              "right": 122,
+              "top": 534,
+              "bottom": 552,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 159,
+              "right": 177,
+              "top": 534,
+              "bottom": 552,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 214,
+              "right": 232,
+              "top": 534,
+              "bottom": 552,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 269,
+              "right": 287,
+              "top": 534,
+              "bottom": 552,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            55,
+            55,
+            55,
+            55
+          ],
+          "likeGap": null,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 92,
+              "top": 521,
+              "bottom": 565,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 96,
+              "right": 147,
+              "top": 521,
+              "bottom": 565,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like like",
+              "left": 151,
+              "right": 195,
+              "top": 521,
+              "bottom": 565,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 261,
+              "right": 312,
+              "top": 521,
+              "bottom": 565,
+              "width": 51,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 312,
+            "top": 521,
+            "bottom": 565,
+            "width": 271,
+            "height": 44
+          }
+        },
+        "own-zero": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 646,
+              "bottom": 664,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 104,
+              "right": 122,
+              "top": 646,
+              "bottom": 664,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 159,
+              "right": 177,
+              "top": 646,
+              "bottom": 664,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 214,
+              "right": 232,
+              "top": 646,
+              "bottom": 664,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 269,
+              "right": 287,
+              "top": 646,
+              "bottom": 664,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            55,
+            55,
+            55,
+            55
+          ],
+          "likeGap": null,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 92,
+              "top": 633,
+              "bottom": 677,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 96,
+              "right": 147,
+              "top": 633,
+              "bottom": 677,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text ",
+              "left": 151,
+              "right": 195,
+              "top": 633,
+              "bottom": 677,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 261,
+              "right": 312,
+              "top": 633,
+              "bottom": 677,
+              "width": 51,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 312,
+            "top": 633,
+            "bottom": 677,
+            "width": 271,
+            "height": 44
+          }
+        },
+        "flat": {
+          "icons": [
+            {
+              "left": 16,
+              "right": 34,
+              "top": 760,
+              "bottom": 778,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 85.8125,
+              "right": 103.8125,
+              "top": 760,
+              "bottom": 778,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 144.390625,
+              "right": 162.390625,
+              "top": 760,
+              "bottom": 778,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 216.1875,
+              "right": 234.1875,
+              "top": 760,
+              "bottom": 778,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 286,
+              "right": 304,
+              "top": 760,
+              "bottom": 778,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            69.8125,
+            58.578125,
+            71.796875,
+            69.8125
+          ],
+          "likeGap": 16,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 8,
+              "right": 53.234375,
+              "top": 747,
+              "bottom": 791,
+              "width": 45.234375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 67.8125,
+              "right": 111.8125,
+              "top": 747,
+              "bottom": 791,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 170.390625,
+              "right": 193.625,
+              "top": 747,
+              "bottom": 791,
+              "width": 23.234375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like has-like",
+              "left": 126.390625,
+              "right": 170.390625,
+              "top": 747,
+              "bottom": 791,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 268,
+              "right": 312,
+              "top": 747,
+              "bottom": 791,
+              "width": 44,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 8,
+            "right": 312,
+            "top": 747,
+            "bottom": 791,
+            "width": 304,
+            "height": 44
+          }
+        }
+      }
+    },
+    {
+      "width": 320,
+      "palette": "light",
+      "version": "candidate",
+      "rows": {
+        "op": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 104,
+              "right": 122,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 159,
+              "right": 177,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 214,
+              "right": 232,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 269,
+              "right": 287,
+              "top": 126,
+              "bottom": 144,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            55,
+            55,
+            55,
+            55
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 92,
+              "top": 113,
+              "bottom": 157,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 96,
+              "right": 147,
+              "top": 113,
+              "bottom": 157,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 181,
+              "right": 188.234375,
+              "top": 113,
+              "bottom": 157,
+              "width": 7.234375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like has-like",
+              "left": 133,
+              "right": 177,
+              "top": 113,
+              "bottom": 157,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 261,
+              "right": 312,
+              "top": 113,
+              "bottom": 157,
+              "width": 51,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 312,
+            "top": 113,
+            "bottom": 157,
+            "width": 271,
+            "height": 44
+          }
+        },
+        "root": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 261,
+              "bottom": 279,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 104,
+              "right": 122,
+              "top": 261,
+              "bottom": 279,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 158.265625,
+              "right": 176.265625,
+              "top": 261,
+              "bottom": 279,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 214,
+              "right": 232,
+              "top": 261,
+              "bottom": 279,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 269,
+              "right": 287,
+              "top": 261,
+              "bottom": 279,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            55,
+            54.265625,
+            55.734375,
+            55
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 92,
+              "top": 248,
+              "bottom": 292,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 96,
+              "right": 147,
+              "top": 248,
+              "bottom": 292,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count my-likes post-action-menu__like-count",
+              "left": 151,
+              "right": 202,
+              "top": 248,
+              "bottom": 292,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 261,
+              "right": 312,
+              "top": 248,
+              "bottom": 292,
+              "width": 51,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 312,
+            "top": 248,
+            "bottom": 292,
+            "width": 271,
+            "height": 44
+          }
+        },
+        "child": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 410,
+              "bottom": 428,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 104,
+              "right": 122,
+              "top": 410,
+              "bottom": 428,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 159,
+              "right": 177,
+              "top": 410,
+              "bottom": 428,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 214,
+              "right": 232,
+              "top": 410,
+              "bottom": 428,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 269,
+              "right": 287,
+              "top": 410,
+              "bottom": 428,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            55,
+            55,
+            55,
+            55
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 92,
+              "top": 397,
+              "bottom": 441,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 96,
+              "right": 147,
+              "top": 397,
+              "bottom": 441,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 181,
+              "right": 195.46875,
+              "top": 397,
+              "bottom": 441,
+              "width": 14.46875,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like like",
+              "left": 133,
+              "right": 177,
+              "top": 397,
+              "bottom": 441,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 261,
+              "right": 312,
+              "top": 397,
+              "bottom": 441,
+              "width": 51,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 312,
+            "top": 397,
+            "bottom": 441,
+            "width": 271,
+            "height": 44
+          }
+        },
+        "zero": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 534,
+              "bottom": 552,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 104,
+              "right": 122,
+              "top": 534,
+              "bottom": 552,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 159,
+              "right": 177,
+              "top": 534,
+              "bottom": 552,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 214,
+              "right": 232,
+              "top": 534,
+              "bottom": 552,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 269,
+              "right": 287,
+              "top": 534,
+              "bottom": 552,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            55,
+            55,
+            55,
+            55
+          ],
+          "likeGap": null,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 92,
+              "top": 521,
+              "bottom": 565,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 96,
+              "right": 147,
+              "top": 521,
+              "bottom": 565,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like like",
+              "left": 133,
+              "right": 177,
+              "top": 521,
+              "bottom": 565,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 261,
+              "right": 312,
+              "top": 521,
+              "bottom": 565,
+              "width": 51,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 312,
+            "top": 521,
+            "bottom": 565,
+            "width": 271,
+            "height": 44
+          }
+        },
+        "own-zero": {
+          "icons": [
+            {
+              "left": 49,
+              "right": 67,
+              "top": 646,
+              "bottom": 664,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 104,
+              "right": 122,
+              "top": 646,
+              "bottom": 664,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 159,
+              "right": 177,
+              "top": 646,
+              "bottom": 664,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 214,
+              "right": 232,
+              "top": 646,
+              "bottom": 664,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 269,
+              "right": 287,
+              "top": 646,
+              "bottom": 664,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            55,
+            55,
+            55,
+            55
+          ],
+          "likeGap": null,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 41,
+              "right": 92,
+              "top": 633,
+              "bottom": 677,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 96,
+              "right": 147,
+              "top": 633,
+              "bottom": 677,
+              "width": 51,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text ",
+              "left": 151,
+              "right": 195,
+              "top": 633,
+              "bottom": 677,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 261,
+              "right": 312,
+              "top": 633,
+              "bottom": 677,
+              "width": 51,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 41,
+            "right": 312,
+            "top": 633,
+            "bottom": 677,
+            "width": 271,
+            "height": 44
+          }
+        },
+        "flat": {
+          "icons": [
+            {
+              "left": 16,
+              "right": 34,
+              "top": 760,
+              "bottom": 778,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 77.59375,
+              "right": 95.59375,
+              "top": 760,
+              "bottom": 778,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 139.1875,
+              "right": 157.1875,
+              "top": 760,
+              "bottom": 778,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 200.796875,
+              "right": 218.796875,
+              "top": 760,
+              "bottom": 778,
+              "width": 18,
+              "height": 18
+            },
+            {
+              "left": 262.390625,
+              "right": 280.390625,
+              "top": 760,
+              "bottom": 778,
+              "width": 18,
+              "height": 18
+            }
+          ],
+          "intervals": [
+            61.59375,
+            61.59375,
+            61.609375,
+            61.59375
+          ],
+          "likeGap": 4,
+          "heatGap": 4,
+          "buttons": [
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__reply reply",
+              "left": 8,
+              "right": 65.59375,
+              "top": 747,
+              "bottom": 791,
+              "width": 57.59375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text isbf-topic-card__repost",
+              "left": 69.59375,
+              "right": 127.1875,
+              "top": 747,
+              "bottom": 791,
+              "width": 57.59375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text like-count regular-likes post-action-menu__like-count",
+              "left": 161.1875,
+              "right": 168.421875,
+              "top": 747,
+              "bottom": 791,
+              "width": 7.234375,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text toggle-like post-action-menu__like has-like",
+              "left": 113.1875,
+              "right": 157.1875,
+              "top": 747,
+              "bottom": 791,
+              "width": 44,
+              "height": 44
+            },
+            {
+              "className": "btn btn-flat no-text bookmark",
+              "left": 254.390625,
+              "right": 298.390625,
+              "top": 747,
+              "bottom": 791,
+              "width": 44,
+              "height": 44
+            }
+          ],
+          "row": {
+            "left": 8,
+            "right": 312,
+            "top": 747,
+            "bottom": 791,
+            "width": 304,
+            "height": 44
+          }
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "production_backend": false
+}

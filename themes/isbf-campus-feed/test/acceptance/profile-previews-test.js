@@ -28,16 +28,20 @@ acceptance("ISBF profile previews", function (needs) {
         ],
       })
     );
-    server.get("/posts/by_number/:topicId/:postNumber.json", (request) => {
-      const number = Number.parseInt(request.params["postNumber.json"], 10);
-      return helper.response({
+    // Resolved post IDs can outlive their cached cooked bodies.
+    for (const number of [1, 7]) {
+      const post = {
         id: 970010 + number,
         cooked:
           number === 1
             ? '<p>Campus photos.</p><img src="/images/d-logo-sketch-small.png">'
             : "<p>A popular reply.</p>",
-      });
-    });
+      };
+      server.get(`/posts/by_number/970001/${number}.json`, () =>
+        helper.response(post)
+      );
+      server.get(`/posts/${post.id}/cooked`, () => helper.response(post));
+    }
     server.get("/u/eviltrout/summary.json", () => {
       return helper.response({
         topics: [

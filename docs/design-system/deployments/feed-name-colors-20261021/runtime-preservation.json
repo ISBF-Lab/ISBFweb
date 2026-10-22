@@ -1,0 +1,507 @@
+{
+  "plugins": 66,
+  "revision": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "core_source_unchanged_except_theme_archives": true,
+  "plugin_delta": [
+    "plugins/discourse-academy-roles/plugin.rb",
+    "plugins/discourse-academy-roles/lib/discourse_academy_roles/guardian_extension.rb",
+    "plugins/discourse-academy-roles/lib/discourse_academy_roles/name_color.rb",
+    "plugins/discourse-academy-roles/assets/javascripts/discourse/lib/name-color.js",
+    "plugins/discourse-academy-roles/assets/javascripts/discourse/pre-initializers/academy-name-color.js",
+    "plugins/discourse-academy-roles/assets/javascripts/discourse/connectors/user-preferences-interface/academy-name-color.gjs",
+    "plugins/discourse-academy-roles/assets/stylesheets/common/academy-roles.scss",
+    "plugins/discourse-academy-roles/config/locales/client.en.yml",
+    "plugins/discourse-academy-roles/config/locales/client.zh_CN.yml",
+    "plugins/discourse-academy-roles/config/locales/server.en.yml",
+    "plugins/discourse-academy-roles/config/locales/server.zh_CN.yml"
+  ],
+  "before_inventory_sha256": "3ddc0e09dd3dee6b7b49513e6186af4d470153a4800451d7ea1fcc6cf0abe57a",
+  "after_inventory_sha256": "934e6bff762b1b9c0d6a94a482fce574cc85a2455feed9c3eef8250e70a50a2b",
+  "plugins_after": {
+    "automation": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "e674d257ea5a16b91520f71d008025a2eeb75c0e76c8fd00964c7455f1eb9bb1",
+      "files": 370
+    },
+    "boards": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "bc28909bd7c560bb24562eb64bdf6356e0fe28c0b756f1a198acef2710e12846",
+      "files": 331
+    },
+    "chat": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "c2f575a7cb64e831fba9867e7e6be4a51171ba5923f134440bf0b21bdc206d38",
+      "files": 1492
+    },
+    "checklist": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "ab052ec248aca44043c97cb8261e39cbedc699565586c0da39166fcafca6252c",
+      "files": 77
+    },
+    "discourse-academy-roles": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "34580a7cffad56541631dbb2a076cb142dcf1dc7fe2acf86277d3af7371eb08d",
+      "files": 114
+    },
+    "discourse-adplugin": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "4a2577df476d8f19146874e1e0db42b018f2a2b390810c62975b09e7775293de",
+      "files": 196
+    },
+    "discourse-affiliate": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "98266d44a00b747d3d73aa78af132e7da4ffd533d618d22f831d0198aac25521",
+      "files": 109
+    },
+    "discourse-ai": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "a93f47665d55bbbdd1117ddc6f061b05960d44c3423f09a93b8c33ad0abb30ad",
+      "files": 1845
+    },
+    "discourse-apple-auth": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "a18647a570e729bbcddd542160768fdc4404ba05fa275c990edb78ea069068df",
+      "files": 107
+    },
+    "discourse-assign": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "c6cb82f8202100b698d3e7cc402b2e7e4531415102717bf0c674256331886d2b",
+      "files": 300
+    },
+    "discourse-avatar-frames": {
+      "link": "/shared/discourse-avatar-frames-releases/2eb878d4227dee6009f839f681b0ad06f8e6223c/discourse-avatar-frames",
+      "internal_links": {},
+      "release_markers": {
+        "/shared/discourse-avatar-frames-releases/2eb878d4227dee6009f839f681b0ad06f8e6223c/discourse-avatar-frames/.release-commit": "2eb878d4227dee6009f839f681b0ad06f8e6223c"
+      },
+      "source_tree_sha256": "9e29a9b819237fa938bcc8d77569888710cf9c1dd1b151de0b8762bbc8843b79",
+      "files": 111
+    },
+    "discourse-cakeday": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "b1417852cfe78835e72dce37b47f3f48e1cfcd109c1fbd1c237c29e50400d05e",
+      "files": 177
+    },
+    "discourse-captcha": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "c791ce09a0060bf567cc420ed59a0ecc338a06a6779a76c28dc9dc63eddc5ccf",
+      "files": 136
+    },
+    "discourse-chat-integration": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "35030ddb7921a6038e066be1d81598897f94da1c7f4c4d9e1e9ef5e9bf50ee4e",
+      "files": 225
+    },
+    "discourse-data-explorer": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "958ab6e552d7a5b875cd76587a346d430654e4b18b1ac323d5b2f17205a3a4db",
+      "files": 294
+    },
+    "discourse-details": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "6deae5063a8fe73e28e79779ee0f74961f7bf408170769abe74c0ecda3ede7d3",
+      "files": 113
+    },
+    "discourse-events": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "4ed253000c08701f9130b163e6aa7a16a3453eda0a3c56f404b142bfc66af6cc",
+      "files": 971
+    },
+    "discourse-gamification": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "c56f712fafc33f1870deea072d0f3b26795ba4371561eb2e1ce32a23f0ded573",
+      "files": 235
+    },
+    "discourse-github": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "5ab35aa1c81dd17b9205d5e68be22839b7d9bb23e42eada56453af10b7d35b92",
+      "files": 137
+    },
+    "discourse-graphviz": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "543c8439f9db4916bbf098eaac71d0f21a4564e6bf4f0c415559feba37c08f24",
+      "files": 78
+    },
+    "discourse-latest-created-order": {
+      "link": "/shared/discourse-latest-created-order",
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "509d2abab72ef540974a8a0b1c4ec422df7683a674e28746f4e7af07c56817ec",
+      "files": 14
+    },
+    "discourse-lazy-videos": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "af00d6d39cb29c20e18f9322f4e833714083eb03247e6a240e0b8fabda4cdb7e",
+      "files": 75
+    },
+    "discourse-local-dates": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "880546a52eedb00db82a6fa8d771f9396975580c8ec000cf55c796255adae278",
+      "files": 135
+    },
+    "discourse-login-with-amazon": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "56e5818beec98aa4a168f31eb97383aeb5ba0f23f5abadd73bf5c4d28a849d4f",
+      "files": 107
+    },
+    "discourse-lti": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "acaca2010582c93d20935ad96af91874c584f5abc734394de9428d3d05c5d758",
+      "files": 110
+    },
+    "discourse-math": {
+      "link": null,
+      "internal_links": {
+        "public/1.0.1/katex": "/var/www/discourse/vendor/bundle/ruby/3.4.0/gems/discourse_math_bundle-1.0.1/vendor/assets/katex",
+        "public/1.0.1/mathjax": "/var/www/discourse/vendor/bundle/ruby/3.4.0/gems/discourse_math_bundle-1.0.1/vendor/assets/mathjax"
+      },
+      "release_markers": {},
+      "source_tree_sha256": "0428d6a56d80d5edac4a1ea6b4413745ce8bfc0065bb1227a6fe7bcf8966edf7",
+      "files": 376
+    },
+    "discourse-microsoft-auth": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "62f03ac4f2d8444b4b9c42aae6283cea0de54495573be67b068f0dd8f268813f",
+      "files": 117
+    },
+    "discourse-narrative-bot": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "0ccdb4b1b942d40ca24401196232d592c7b542ada8b43e7e3d2bb663a63026e8",
+      "files": 159
+    },
+    "discourse-oauth2-basic": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "6133c15b9c2af85665315c3d4e3332a4ebff0f9b4b8718958a6ec22402cb0046",
+      "files": 115
+    },
+    "discourse-openid-connect": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "1645175485d022881972457e0a1ee63e74f5405035c95185650cf5376991b549",
+      "files": 112
+    },
+    "discourse-patreon": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "c66c775d3fe00e66b60f749b22083ebb1d8da41a5be9e1419d99670a368fdd2d",
+      "files": 159
+    },
+    "discourse-policy": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "bc51e28d57b91c13efef510eb05821da152a8d3b1a5fbd9820b5281b350cd74a",
+      "files": 165
+    },
+    "discourse-post-voting": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "ff96baacfe5e305342be1353bede3afe470c04db5157244319f0d35a867040d6",
+      "files": 201
+    },
+    "discourse-presence": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "af750a3ed8def84c0e53092b4d5ab12701bc6acc86dc556ab510914ee2566790",
+      "files": 113
+    },
+    "discourse-reactions": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "40bed367f4a6c6f90b68549c1ee171f998ab95e723b0adbe4ac23f0c8daf3e74",
+      "files": 219
+    },
+    "discourse-rewind": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "68b9964810a76f3c1eb4d1182ab73f0cf41b49b16d6a3e598060af0507fe3e8b",
+      "files": 265
+    },
+    "discourse-rss-polling": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "d9c1cc3f4036305947b7b4dc14f58feacc1a6276073b2e6d04162e0b334033ba",
+      "files": 173
+    },
+    "discourse-solved": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "bb005951d7b2cd968033fa0229268ca9b0566264a6e101929636bd3fe02378ff",
+      "files": 271
+    },
+    "discourse-subscriptions": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "a5757e02916dc2aa810058e16ef5a1a527630b8cadd94489778ccc241a3b71af",
+      "files": 257
+    },
+    "discourse-templates": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "197587c7a2924b92172f9f2b135b26bb86c94fda2aea06d782f11e87a8f6d470",
+      "files": 152
+    },
+    "discourse-topic-voting": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "a9e20634be3469da24774039a4aff21e40f8ff41316a44d758f72507818fe935",
+      "files": 200
+    },
+    "discourse-user-notes": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "0735133c9b876df2601a203012d1da894aad5913471f5eda41c6570b8ab0356b",
+      "files": 133
+    },
+    "discourse-workflows": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "bece433f74676993165fef879f07386fbabb2ac9b013623f7d30d29351ed4b61",
+      "files": 923
+    },
+    "discourse-zendesk-plugin": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "c184493904ccee19462f46627252f430ded820779d1f2dced5d00513ff4a3ea7",
+      "files": 81
+    },
+    "footnote": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "d698d5efa1709894a43dad383156991ae305d310b27ac5d5b9167ac8a07e269d",
+      "files": 116
+    },
+    "isbf-account-switch": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "03a0a2d6a8e0f2f303e63aa5bc804f2fd6f86212720a7c43e2a0f3831ddb47cc",
+      "files": 26
+    },
+    "isbf-alumni": {
+      "link": "/shared/isbf-alumni-releases/bcfa8923d704e72bc7badd746bd0b0845f7a272e/isbf-alumni",
+      "internal_links": {},
+      "release_markers": {
+        "/shared/isbf-alumni-releases/bcfa8923d704e72bc7badd746bd0b0845f7a272e/isbf-alumni/.release-commit": "bcfa8923d704e72bc7badd746bd0b0845f7a272e"
+      },
+      "source_tree_sha256": "2c798c0b74dbca5a0fa7c996deff23f69b7d14d1e36faaaedf31531a7df6112e",
+      "files": 33
+    },
+    "isbf-anonymous": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "44acb22965185deda510de7f871e7d699b6cab81dee8f4b8fba44e0b7e1f4a7b",
+      "files": 31
+    },
+    "isbf-calendar": {
+      "link": "/shared/isbf-calendar-releases/c5f52384aa406e1265676b7ce26518ae68d0e07d/isbf-calendar",
+      "internal_links": {},
+      "release_markers": {
+        "/shared/isbf-calendar-releases/c5f52384aa406e1265676b7ce26518ae68d0e07d/isbf-calendar/.release-commit": "c5f52384aa406e1265676b7ce26518ae68d0e07d"
+      },
+      "source_tree_sha256": "d7114ddb14106e0aae6b2ed75d4eae2b07e35e0bf76cf34d97eaeea730914cce",
+      "files": 27
+    },
+    "isbf-careers": {
+      "link": "/shared/isbf-careers-releases/d865fece867593371fa33bb289ce4f398dfc314a/isbf-careers",
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "ba1ead0aa65f2d4bf0f5c12b8e470b371ef377441e09374b2739957956006518",
+      "files": 13
+    },
+    "isbf-explore": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "33560b95ab9e5453d98d68e1f94480aa955e691146cd22180725905748267e78",
+      "files": 13
+    },
+    "isbf-join": {
+      "link": "/shared/isbf-join-releases/27bec5c18ad7c823ea0909a589fe1a17c6c96b574f1cbb2533cf2db1e24162e3/isbf-join",
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "9bdffea5db3b2c8b4a3a3d71cca02d99d69fc8a15beec12802c1e86c6eac8783",
+      "files": 80
+    },
+    "isbf-learning": {
+      "link": "/shared/isbf-learning-releases/611c20a6bbb056579f2bf74291ffbe52ef935881/isbf-learning",
+      "internal_links": {},
+      "release_markers": {
+        "/shared/isbf-learning-releases/611c20a6bbb056579f2bf74291ffbe52ef935881/isbf-learning/.release-commit": "611c20a6bbb056579f2bf74291ffbe52ef935881"
+      },
+      "source_tree_sha256": "2bf8da0f909dfd6d66f04dde7840970a34fab2f39f7d73b624779551313ed747",
+      "files": 41
+    },
+    "isbf-marketplace": {
+      "link": "/shared/isbf-marketplace-releases/5df861909f630303cf2d6a98e44a75837e0e5d38/isbf-marketplace",
+      "internal_links": {},
+      "release_markers": {
+        "/shared/isbf-marketplace-releases/5df861909f630303cf2d6a98e44a75837e0e5d38/isbf-marketplace/.release-commit": "5df861909f630303cf2d6a98e44a75837e0e5d38"
+      },
+      "source_tree_sha256": "0b9740fb7e91b79e8aafd51063b6f87bf1ee05f0819723f763a12a57921815f7",
+      "files": 15
+    },
+    "isbf-moderation": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "919e2445c90b38af3d0b5394d14c1e93e8397f23e832c6d200f8f9aaeabe7780",
+      "files": 31
+    },
+    "isbf-notifications": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "b8da9d43fbf72419a85b0ec276a6c031a371c4b8f80679953dc65f4a1a6075a8",
+      "files": 11
+    },
+    "isbf-official": {
+      "link": "/shared/isbf-official-releases/d28e3a80d67e14a77a20a012665568a3d3e26be0/isbf-official",
+      "internal_links": {},
+      "release_markers": {
+        "/shared/isbf-official-releases/d28e3a80d67e14a77a20a012665568a3d3e26be0/isbf-official/.release-commit": "d28e3a80d67e14a77a20a012665568a3d3e26be0"
+      },
+      "source_tree_sha256": "7f01e679d0765f45b2b22ddd0a712914a95f3f286bfc120332b89b2a4781443b",
+      "files": 30
+    },
+    "isbf-pinning": {
+      "link": "/shared/isbf-pinning-releases/5935c071c82118cc298b4dfc761dfcf80e81f0d8/isbf-pinning",
+      "internal_links": {},
+      "release_markers": {
+        "/shared/isbf-pinning-releases/5935c071c82118cc298b4dfc761dfcf80e81f0d8/isbf-pinning/.release-commit": "5935c071c82118cc298b4dfc761dfcf80e81f0d8"
+      },
+      "source_tree_sha256": "65a0dc6fb942166d70234079111647897565fa32348d10cb5dc6f2feca6417e0",
+      "files": 42
+    },
+    "isbf-repost": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "434fb8c1ce3b7b90ba0fe246fab5079b3e13548249f6f895a0658cb8fddf3dd4",
+      "files": 11
+    },
+    "isbf-resume": {
+      "link": "/shared/isbf-resume-releases/bb2e9ce7e688aeb423560a5c953c8bb5f32659ee/isbf-resume",
+      "internal_links": {},
+      "release_markers": {
+        "/shared/isbf-resume-releases/bb2e9ce7e688aeb423560a5c953c8bb5f32659ee/isbf-resume/.release-commit": "bb2e9ce7e688aeb423560a5c953c8bb5f32659ee"
+      },
+      "source_tree_sha256": "4c5e3a90ffc9bd9a1d251fab9d5532308dde368e1ba6805c06954b3c4f2bd551",
+      "files": 159
+    },
+    "isbf-teamup": {
+      "link": "/shared/isbf-teamup-releases/7af826d26f02ae293a64e10e3b0fbec0c10fb46d/isbf-teamup",
+      "internal_links": {},
+      "release_markers": {
+        "/shared/isbf-teamup-releases/7af826d26f02ae293a64e10e3b0fbec0c10fb46d/isbf-teamup/.release-commit": "7af826d26f02ae293a64e10e3b0fbec0c10fb46d"
+      },
+      "source_tree_sha256": "a1521d3fe71aba5ecb2a2925cf0f64274f9223006719249f74cbb2e3b1fe735b",
+      "files": 14
+    },
+    "isbf-views": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "e4437274e583de51438abdcca1c45993f055e116b6eabe433b8e29983ca0de83",
+      "files": 8
+    },
+    "poll": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "6c1f4ef7be647075cd47ce59d59928cccf9cdbe075935b34e9e833f33a719e7e",
+      "files": 215
+    },
+    "spoiler-alert": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "a772aec13c467df5314523d15bbeb5c4e06b9010dcc1a8d1b649a7add86e90b5",
+      "files": 115
+    },
+    "styleguide": {
+      "link": null,
+      "internal_links": {},
+      "release_markers": {},
+      "source_tree_sha256": "e750a5b7b7a6d0aa4ee0dbb4d9fd9b061afe807c58081547ad8b16ddb877c72f",
+      "files": 358
+    },
+    "voice": {
+      "link": null,
+      "internal_links": {
+        "public/javascripts/0.1.0": "/var/www/discourse/vendor/bundle/ruby/3.4.0/gems/discourse_voice_assets-0.1.0/vendor"
+      },
+      "release_markers": {},
+      "source_tree_sha256": "b10ff855c004c88bdb4010e663f289598e3316223b4f254d9ce83497a2dd1a18",
+      "files": 371
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "pinned_source_installer_added": true,
+  "existing_hooks_and_configuration_preserved": true,
+  "before_sha256": "c3f626583fd2809074dd6f0dfe121370d2871912f213901c6cc42ab241fb26a6",
+  "after_sha256": "946a6d8a625c0604bc9b3d17b5ed1015e94240bf304cfbeec7701751c3650883",
+  "command": "python3 /shared/isbf-feed-name-color-releases/26d552c5e0adfb467cea945b9ac504930c4eeb2cb8be5aea434d895ef26fc677/rebuild-source.py 26d552c5e0adfb467cea945b9ac504930c4eeb2cb8be5aea434d895ef26fc677",
+  "peak_rss_bytes": 21143552
+}

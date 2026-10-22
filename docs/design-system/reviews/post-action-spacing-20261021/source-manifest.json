@@ -1,0 +1,49 @@
+{
+  "source_version": "1fdd1771500b6e8e255b33874f87796f08d0116fb1a4fabf48e46210d88760f0",
+  "workspace_base_commit": "5a56f19ded90fe7f041222e2ad4bcdca63b9eb5a",
+  "theme_id": 4,
+  "files": [
+    {
+      "relative": "common/common.scss",
+      "field_id": 197,
+      "before_sha256": "a159206d0e6a47234e0116bdd43fda0c5cb7205645b31ae035e5bd7f17452a35",
+      "sha256": "f2cc0d2e448869a689688c24bd94ec868168f05db69f4bcbafcd478f8c0cad7f",
+      "workspace_matches": false,
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "workspace_sha256": "cddb565702f9d201496f80fa4f3f70db4259628784a1f2aceaa236f161b2b85c",
+      "snapshot": "source/workspace/common/common.scss",
+      "live_before": "source/live-before/common/common.scss",
+      "live_candidate": "source/live-candidate/common/common.scss"
+    },
+    {
+      "relative": "stylesheets/reply-conversations.scss",
+      "field_id": 448,
+      "before_sha256": "8d08e39ac151188f96a2ba623449e6191ccb12eceeeae74c359b85ca752faef2",
+      "sha256": "b9eea58a26ae94d25153b79c6faf6fbe0b5206d273971427f0266574b135eba3",
+      "workspace_matches": true,
+      "path": "themes/isbf-campus-feed/stylesheets/reply-conversations.scss",
+      "workspace_sha256": "b9eea58a26ae94d25153b79c6faf6fbe0b5206d273971427f0266574b135eba3",
+      "snapshot": "source/workspace/stylesheets/reply-conversations.scss",
+      "live_before": "source/live-before/stylesheets/reply-conversations.scss",
+      "live_candidate": "source/live-candidate/stylesheets/reply-conversations.scss"
+    }
+  ],
+  "scope": "A04/C09/C16 post, root-comment and child-reply action spacing only",
+  "design_instruction": "User explicitly specified 4px matching heat and five equally spaced icons, preserving distinct actions; validate before publishing.",
+  "verification": {
+    "browser_report": "browser-report.json",
+    "checks": 235,
+    "viewports": [
+      320,
+      390,
+      1280
+    ],
+    "palettes": [
+      "light",
+      "dark"
+    ],
+    "native_css_cache": "docs/design-system/reviews/continue-reading-20261016/asset-cache/1accd92b97da6108798af693b282273010d051a0ad52fc638f377dc447297b5d.json",
+    "full_application_tests_run": false
+  },
+  "final_user_visual_acceptance": "pending"
+}

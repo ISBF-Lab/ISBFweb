@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "source": "Complete current database theme and native post CSS",
+  "extra_stylesheets": 20,
+  "results": [
+    {
+      "version": "before",
+      "palette": "light",
+      "bytes": 355036,
+      "sha256": "dca6bebb1ab5ab52b174d46092cf5b0d38881bcc065b34e85f4a8a466b61fccc"
+    },
+    {
+      "version": "candidate",
+      "palette": "light",
+      "bytes": 356159,
+      "sha256": "e9eb52503da5a9f38fce9e3fb77a1bdfc881f436fd4c0e534fa43c313b6231a8"
+    },
+    {
+      "version": "before",
+      "palette": "dark",
+      "bytes": 355036,
+      "sha256": "dca6bebb1ab5ab52b174d46092cf5b0d38881bcc065b34e85f4a8a466b61fccc"
+    },
+    {
+      "version": "candidate",
+      "palette": "dark",
+      "bytes": 356159,
+      "sha256": "e9eb52503da5a9f38fce9e3fb77a1bdfc881f436fd4c0e534fa43c313b6231a8"
+    }
+  ]
+}

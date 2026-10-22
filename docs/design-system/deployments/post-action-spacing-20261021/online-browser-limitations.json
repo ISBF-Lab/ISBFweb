@@ -1,0 +1,27 @@
+{
+  "complete": false,
+  "functional_browser_checks_completed": 0,
+  "reason": "The full production client did not complete page loading under the then-current 432MiB capped browser budget; no extra run was started when available capacity decreased.",
+  "budget": {
+    "host_available_bytes": 996474880,
+    "effective_available_bytes": 996474880,
+    "memory_limit_bytes": 452984832,
+    "reserve_bytes": 536870912,
+    "rounding_bytes": 16777216,
+    "peak_bytes": 452984832,
+    "lowest_host_available_bytes": 625487872,
+    "stop_reason": null
+  },
+  "browser_container_removed": true,
+  "verification_keys_removed": true,
+  "offline_checks_passed": 235,
+  "viewports": [
+    320,
+    390,
+    1280
+  ],
+  "palettes": [
+    "light",
+    "dark"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "verification_keys_removed": true,
+  "method": "Task-scoped SQL cleanup after Rails startup budget was unavailable",
+  "memory_limit_bytes": 134217728,
+  "available_before_bytes": 771989504,
+  "reserve_bytes": 536870912,
+  "exit_code": 0,
+  "rows": [
+    "BEGIN",
+    "DELETE 1",
+    "DELETE 1",
+    "0",
+    "COMMIT"
+  ]
+}

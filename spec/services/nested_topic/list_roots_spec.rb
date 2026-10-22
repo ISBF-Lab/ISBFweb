@@ -177,6 +177,35 @@ RSpec.describe NestedTopic::ListRoots do
       end
     end
 
+    [true, false].each do |flat_replies|
+      it "returns the first page and original post for a system target with flat replies #{flat_replies}" do
+        SiteSetting.nested_replies_cap_nesting_depth = flat_replies
+        SiteSetting.nested_replies_max_depth = flat_replies ? 1 : 3
+        roots = 3.times.map { Fabricate(:post, topic: topic, user: user, reply_to_post_number: 1) }
+        action = Fabricate(:small_action, topic: topic, user: user, action_code: "pinned.enabled")
+
+        response =
+          stub_const(NestedReplies::TreeLoader, :ROOTS_PER_PAGE, 2) do
+            described_class.call(
+              params: {
+                sort: "old",
+                page: 2,
+                target_post_number: action.post_number,
+              },
+              **dependencies,
+            )[
+              :response
+            ]
+          end
+
+        expect(response).to include(page: 0, resolved_target_post_number: 1, has_more_roots: true)
+        expect(response[:roots].map { |root_json| root_json[:id] }).to eq(roots.first(2).map(&:id))
+        expect(response[:op_post][:id]).to eq(op.id)
+        expect(response[:sort]).to eq("old")
+        expect(response[:topic]).to be_present
+      end
+    end
+
     context "when there are pinned roots on page 0" do
       fab!(:root_post) { Fabricate(:post, topic: topic, user: user, reply_to_post_number: 1) }
       fab!(:pinned_post) { Fabricate(:post, topic: topic, user: user, reply_to_post_number: 1) }

@@ -189,6 +189,10 @@ class NestedTopicsController < ApplicationController
 
   def show_context_response
     loader = NestedReplies::TreeLoader.new(topic: @topic, guardian: guardian)
+    if loader.resolve_target_post_number(params[:post_number].to_i) == 1
+      return list_roots_response(page: 0).merge(resolved_target_post_number: 1)
+    end
+
     if loader.flat_replies?
       return list_roots_response(page: 0, target_post_number: params[:post_number].to_i)
     end

@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "git_base": "5a56f19ded90fe7f041222e2ad4bcdca63b9eb5a",
+  "source_version": "2baea2816f6a17d816987cc6e53b5b57325ad19c6e525bd0dd2fc3d8d44f019b",
+  "approval": "User approved the complete plan and explicitly requested implementation.",
+  "scope": [
+    "A02/C09 feed title 18px, total title/body gap 24px, local link-state colors",
+    "Owner-only interface preferences: opt-in theme blue for administrators; optional custom hex for developers"
+  ],
+  "not_deployed": true,
+  "complete_preferences_page_approved": false,
+  "preexisting_worktree_changes_preserved": true,
+  "sources": [
+    {
+      "path": "plugins/discourse-academy-roles/plugin.rb",
+      "sha256": "8e8daaa560bbb70827aee39cdd2dcef8639f51c69f3420480e79099d289ee3a1",
+      "bytes": 11591
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/guardian_extension.rb",
+      "sha256": "f3c52dcff5d89ada1af73cbcddfd675d6fd19dc86e1668e761aa164ad3796364",
+      "bytes": 2436
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/name_color.rb",
+      "sha256": "25933e3ee2349603db64aa46233ec97c3b55f4e6910e7f30d6ba4717f2d0648f",
+      "bytes": 4902
+    },
+    {
+      "path": "plugins/discourse-academy-roles/spec/requests/name_color_preferences_spec.rb",
+      "sha256": "e5c7ef27aec39499f57bee988c9db43458b2b28df4a5d8e956fe35f46ccbe2b4",
+      "bytes": 8649
+    },
+    {
+      "path": "plugins/discourse-academy-roles/spec/lib/name_color_spec.rb",
+      "sha256": "c41faec520ffcb532892aa68ccc4f683f083b641f514b9a6302cba348d809a69",
+      "bytes": 2642
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/lib/name-color.js",
+      "sha256": "86c4d7f2adc7b6cab8eaac5c4d54a7731c135ac545378c144f985a4ec9991ce7",
+      "bytes": 1004
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/pre-initializers/academy-name-color.js",
+      "sha256": "8fdc0fc609672e3522a4c82aee8913abd021d60db0f6163690802b56e457640e",
+      "bytes": 2279
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/connectors/user-preferences-interface/academy-name-color.gjs",
+      "sha256": "86cbc46bc6cba4fe2938ad67aabc529894e601ca1d6dbf913606ace162ca1cd3",
+      "bytes": 3822
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/stylesheets/common/academy-roles.scss",
+      "sha256": "632bb7c1ad7326d2ea47427c6c84a4c48bf34f4e707eb12c273ad9677a17950a",
+      "bytes": 1706
+    },
+    {
+      "path": "plugins/discourse-academy-roles/test/javascripts/integration/components/academy-name-color-test.gjs",
+      "sha256": "054609db1a13a644a1556ed3208f309ce057e12d45be931a416281a2eaca9cb5",
+      "bytes": 4939
+    },
+    {
+      "path": "plugins/discourse-academy-roles/test/javascripts/acceptance/name-color-preferences-test.js",
+      "sha256": "aa38d680e393dd23f8217aefcdb2da435ea4ce8102553074fa3802415e8fecfc",
+      "bytes": 5305
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/client.en.yml",
+      "sha256": "47a6658c17e1bee413697b78612152627623bf4c4ba781eebe28176c1bc62fda",
+      "bytes": 3799
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/client.zh_CN.yml",
+      "sha256": "14d485b700601c40b011043bf2354bf73d61c5333472c1207bc831590304f147",
+      "bytes": 3521
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/server.en.yml",
+      "sha256": "e87677d1a32277a5a84201eb345f9b8ba5f80218c71f1a5267f97013f644c52a",
+      "bytes": 3520
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/server.zh_CN.yml",
+      "sha256": "1c0475ae7514c749603408f8dc2ec34328d2d31b063fb0ae25b9746d53e4748d",
+      "bytes": 3009
+    },
+    {
+      "path": "plugins/discourse-academy-roles/README.md",
+      "sha256": "f78b4382000c84460922751785d64aeb08a18fd6b59007d3b3e42135f5cd2ad4",
+      "bytes": 3891
+    },
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "sha256": "a0ca2bb41291cd65eeb724cd2294be834796dcce6702ae6f345c242fb8970f26",
+      "bytes": 117300
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-feed-card.gjs",
+      "sha256": "00ff13b999986d956eab544f272ffb8e44c6c8009992a32374b8e20cb1524dbb",
+      "bytes": 19706
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/user-display.js",
+      "sha256": "5c6ba972f1e0e1047a255696e2608537c58db1ad7830008a87548a3657ef6c20",
+      "bytes": 2526
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/unit/user-display-test.js",
+      "sha256": "539e986c133cd547921fdc61c42407b7154019ee28e60441f1ea47bfe2fa23c6",
+      "bytes": 7815
+    }
+  ]
+}

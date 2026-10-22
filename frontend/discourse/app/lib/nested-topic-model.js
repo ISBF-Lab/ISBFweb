@@ -37,6 +37,7 @@ export function processNestedRootResponse({
     contextChain: null,
     initialFocusedPath: [],
     targetPostNumber: null,
+    resolvedTargetPostNumber: data.resolved_target_post_number || null,
     contextNoAncestors: false,
     ancestorsTruncated: false,
     topAncestorPostNumber: null,
@@ -52,7 +53,7 @@ export function processNestedContextResponse({
   site,
   store,
 }) {
-  if (data.navigation && data.roots) {
+  if (data.roots && (data.navigation || data.resolved_target_post_number)) {
     const model = processNestedRootResponse({
       data,
       params,
@@ -60,7 +61,13 @@ export function processNestedContextResponse({
       siteSettings: { nested_replies_default_sort: "old" },
       store,
     });
-    model.targetPostNumber = Number(params.post_number);
+    model.targetPostNumber = Number(
+      data.resolved_target_post_number || params.post_number
+    );
+    if (data.resolved_target_post_number) {
+      model.postNumber = model.targetPostNumber;
+      model.context = null;
+    }
     return model;
   }
 

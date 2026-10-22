@@ -1687,6 +1687,60 @@ RSpec.describe NestedTopicsController, type: :request do
   end
 
   describe "GET context" do
+    it "opens the full topic for pin and unpin events in both conversation layouts" do
+      root = Fabricate(:post, topic: topic, user: user, reply_to_post_number: 1)
+      actions =
+        %w[pinned_globally.enabled pinned_globally.disabled].map do |code|
+          Fabricate(:small_action, topic: topic, user: admin, action_code: code)
+        end
+      sign_in(user)
+
+      [true, false].each do |flat_replies|
+        SiteSetting.nested_replies_cap_nesting_depth = flat_replies
+        SiteSetting.nested_replies_max_depth = flat_replies ? 1 : 3
+        actions.each do |action|
+          get context_url(topic, action.post_number, sort: "old", context: 0)
+
+          expect(response.status).to eq(200)
+          json = response.parsed_body
+          expect(json).to include("page" => 0, "resolved_target_post_number" => 1, "sort" => "old")
+          expect(json["op_post"]["id"]).to eq(op.id)
+          expect(json["roots"].map { |root_json| root_json["id"] }).to eq([root.id])
+          expect(json).not_to have_key("target_post")
+        end
+      end
+    end
+
+    it "opens the original post for a visible system event in a topic without replies" do
+      action = Fabricate(:small_action, topic: topic, user: admin, action_code: "pinned.enabled")
+
+      get context_url(topic, action.post_number, sort: "old")
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body).to include("page" => 0, "resolved_target_post_number" => 1)
+      expect(response.parsed_body["op_post"]["id"]).to eq(op.id)
+      expect(response.parsed_body["roots"]).to be_empty
+    end
+
+    it "returns 404 for hidden, deleted, missing, and unauthorized system event targets" do
+      hidden_action = Fabricate(:small_action, topic: topic, user: admin, hidden: true)
+      deleted_action = Fabricate(:small_action, topic: topic, user: admin)
+      deleted_action.update_columns(deleted_at: Time.current)
+      private_topic =
+        Fabricate(:topic, category: Fabricate(:private_category, group: Fabricate(:group)))
+      Fabricate(:post, topic: private_topic, post_number: 1)
+      private_action = Fabricate(:small_action, topic: private_topic, user: admin)
+      sign_in(user)
+
+      [hidden_action.post_number, deleted_action.post_number, 99_999].each do |post_number|
+        get context_url(topic, post_number)
+        expect(response.status).to eq(404)
+      end
+
+      get context_url(private_topic, private_action.post_number)
+      expect(response.status).to eq(404)
+    end
+
     context "when replies use flat conversations" do
       before do
         SiteSetting.nested_replies_cap_nesting_depth = true

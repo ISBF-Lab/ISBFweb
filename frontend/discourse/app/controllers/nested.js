@@ -581,8 +581,18 @@ export default class NestedController extends Controller {
   }
 
   @action
-  recoverPost(post) {
-    this.#topicController.recoverPost(post);
+  async recoverPost(post) {
+    if (post.post_number === 1) {
+      return this.#topicController.recoverPost(post);
+    }
+
+    await post.recover();
+    if (!post.deleted_at && !post.user_deleted) {
+      post.setProperties({
+        deleted_post_placeholder: false,
+        can_recover: false,
+      });
+    }
   }
 
   @action
@@ -963,7 +973,11 @@ export default class NestedController extends Controller {
   #onPostUnregistered(post) {
     if (
       post?.post_number != null &&
-      this.postRegistry.get(post.post_number) === post
+      this.postRegistry.get(post.post_number) === post &&
+      !(
+        flatRepliesEnabled(this.siteSettings) &&
+        this.#flatRootForPostNumber(post.post_number)
+      )
     ) {
       this.postRegistry.delete(post.post_number);
     }

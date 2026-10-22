@@ -4020,6 +4020,9 @@ zh_CN:
         name: "禁用嵌套回复"
         description: "将所选话题切换回平铺视图。"
     nested_replies:
+      deleted_reply: "该回复已删除"
+      deleted_replies:
+        other: "%{count} 条回复已删除"
       view_remaining_replies:
         other: "查看其余 %{count} 条回复"
       load_previous_replies: "加载此前回复"

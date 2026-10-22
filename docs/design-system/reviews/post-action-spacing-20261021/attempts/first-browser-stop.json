@@ -1,0 +1,6 @@
+{
+  "reason": "Memory cgroup reached its 320MiB maximum repeatedly before the first page completed; no OOM kill was recorded. The temporary browser was stopped and removed before retry.",
+  "memory_peak_bytes": 335544320,
+  "max_events": 137608,
+  "oom_kills": 0
+}

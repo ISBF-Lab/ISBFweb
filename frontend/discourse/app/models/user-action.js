@@ -83,6 +83,7 @@ export default class UserAction extends RestModel {
   }
 
   @service currentUser;
+  @service site;
 
   @computed("name", "username")
   get presentName() {
@@ -211,6 +212,14 @@ export default class UserAction extends RestModel {
   @computed()
   get postUrl() {
     return postUrl(this.slug, this.topic_id, this.post_number);
+  }
+
+  @computed("post_type", "action_code", "slug", "topic_id", "post_number")
+  get activityPostUrl() {
+    return this.post_type === this.site.post_types.small_action &&
+      this.action_code
+      ? `${postUrl(this.slug, this.topic_id, 1)}/1`
+      : this.postUrl;
   }
 
   @computed()

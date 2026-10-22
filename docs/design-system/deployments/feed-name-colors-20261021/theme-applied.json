@@ -1,0 +1,56 @@
+{
+  "published_at_utc": "2026-10-21T07:46:17Z",
+  "theme_id": 4,
+  "fields_before": 232,
+  "fields_after": 232,
+  "preserved_fields": 229,
+  "sources": [
+    {
+      "relative": "common/common.scss",
+      "sha256": "7bdfc4e601336913a2ffef0104acf0b08b254164cb5907eb8c45eed764af9ed8",
+      "previous_id": 197,
+      "field_id": 197
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-v2-feed-card.gjs",
+      "sha256": "bf508d5ee850b3af91763f4f9db3e20f9130314ba7bd6eb03d4c01d46ac0a719",
+      "previous_id": 227,
+      "field_id": 227
+    },
+    {
+      "relative": "javascripts/discourse/lib/user-display.js",
+      "sha256": "5c6ba972f1e0e1047a255696e2608537c58db1ad7830008a87548a3657ef6c20",
+      "previous_id": 406,
+      "field_id": 406
+    }
+  ],
+  "settings_preserved": true,
+  "javascript_url": "/theme-javascripts/22b757072118cfe3ab8aa98c7ca88b5464a3de11.js?__ws=isbf-one.com",
+  "javascript_sha256": "9539ffb0c72752ea918e9d53e6824d38bae94a4cd6dc6a5e25d689aac13e4728",
+  "styles": [
+    {
+      "target": "common_theme",
+      "bytes": 319381,
+      "sha256": "e938f69b91ec5f94d9e0f6f915d16b6a20da8846426450e391e3b899ce64b0d4",
+      "url": "/stylesheets/common_theme_4_e8f8c7e9358302a2c3d4d5c0ac7846afff643267.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "desktop_theme",
+      "bytes": 108,
+      "sha256": "2a6db3cfa64638149df0863a2648d2d9e5cd5732cce2ee6be9c18f17d65310c3",
+      "url": "/stylesheets/desktop_theme_4_fb44820578e4a6be5e511dd958baf82c904110b1.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "mobile_theme",
+      "bytes": 107,
+      "sha256": "8ad14b7d78510796daa83df78cb76b47f85bd575d759ebb959d28f5170d97144",
+      "url": "/stylesheets/mobile_theme_4_fb44820578e4a6be5e511dd958baf82c904110b1.css?__ws=isbf-one.com"
+    }
+  ],
+  "verified_candidate_compilation_reused": true,
+  "exact_full_input_tree_verified": true,
+  "external_plugin_import_targets_unchanged": true,
+  "source_map_omitted": true,
+  "theme_save_and_stylesheet_callbacks_executed": true,
+  "persistent_core_patch": false
+}

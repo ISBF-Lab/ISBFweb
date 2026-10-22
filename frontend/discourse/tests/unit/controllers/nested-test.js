@@ -46,6 +46,77 @@ module("Unit | Controller | nested", function (hooks) {
     return post;
   }
 
+  for (const [deletionType, deletedProperties] of [
+    ["staff-deleted", { deleted_at: "2026-10-20T00:00:00Z" }],
+    ["author-deleted", { user_deleted: true }],
+  ]) {
+    test(`recovering ${deletionType} replies preserves their retry action after failure`, async function (assert) {
+      const post = buildPost(this.store, buildTopic(this.store, 724), 2001, 2);
+      post.setProperties({
+        ...deletedProperties,
+        deleted_post_placeholder: true,
+        can_recover: true,
+      });
+      pretender.put(`/posts/${post.id}/recover`, () =>
+        response(503, { errors: ["Recovery unavailable"] })
+      );
+
+      await this.controller.recoverPost(post);
+
+      assert.true(
+        Boolean(post.recoverable),
+        "restores the deletion state on failure"
+      );
+      assert.true(
+        post.deleted_post_placeholder,
+        "retains the placeholder on failure"
+      );
+      assert.true(post.can_recover, "allows retrying the failed recovery");
+      this.owner.lookup("service:dialog").cancel();
+      pretender.put(`/posts/${post.id}/recover`, () =>
+        response({
+          cooked: "<p>Restored reply.</p>",
+          raw: "Restored reply.",
+          version: 2,
+        })
+      );
+
+      await this.controller.recoverPost(post);
+
+      assert.false(
+        Boolean(post.recoverable),
+        "a successful retry clears deletion"
+      );
+      assert.false(post.deleted_post_placeholder, "removes the placeholder");
+      assert.false(post.can_recover, "removes the completed recovery action");
+      assert.strictEqual(
+        post.cooked,
+        "<p>Restored reply.</p>",
+        "restores the reply body"
+      );
+    });
+  }
+
+  test("regrouping keeps loaded flat posts registered until they leave the model", function (assert) {
+    Object.assign(this.owner.lookup("service:site-settings"), {
+      nested_replies_enabled: true,
+      nested_replies_cap_nesting_depth: true,
+      nested_replies_max_depth: 1,
+    });
+    const topic = buildTopic(this.store, 724);
+    const post = buildPost(this.store, topic, 2001, 2);
+    this.controller.topic = topic;
+    this.controller.rootNodes = [{ post, children: [] }];
+    this.controller.subscribe();
+    this.appEvents.trigger("nested-replies:post-registered", post);
+    this.appEvents.trigger("nested-replies:post-unregistered", post);
+    assert.strictEqual(this.controller.postRegistry.get(2), post);
+
+    this.controller.rootNodes = [];
+    this.appEvents.trigger("nested-replies:post-unregistered", post);
+    assert.false(this.controller.postRegistry.has(2));
+  });
+
   test("a successful composer save immediately inserts an own flat root without a message", async function (assert) {
     const settings = this.owner.lookup("service:site-settings");
     Object.assign(settings, {

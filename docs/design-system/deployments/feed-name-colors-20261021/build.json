@@ -1,0 +1,10 @@
+{
+  "compiled": true,
+  "public_manifest_sha256": "c03968bfc8706c986fa47569333511f62f8ff262477c5267fed446f6de6b5ebb",
+  "theme_modules": 186,
+  "plugin_assets": 6,
+  "all_old_public_assets_preserved": true,
+  "other_generated_manifests_preserved": true,
+  "network": "none",
+  "production_data_mounted": false
+}

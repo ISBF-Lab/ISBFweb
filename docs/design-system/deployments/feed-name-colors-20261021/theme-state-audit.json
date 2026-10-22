@@ -1,0 +1,12 @@
+{
+  "fields_before": 232,
+  "fields_current": 232,
+  "field_differences": [],
+  "invariant_differences": {
+    "site_settings_digest": {
+      "before": "0093c84c6994a76b1c9983930d172fa3a2f2d6a47b43b80cf8ddf1f1428548a9",
+      "current": "32186b7d8fa18fd87c93e1846d8d25c975e5d0a6a583abf00e7a9f562c85fb20"
+    }
+  },
+  "current_errors": []
+}

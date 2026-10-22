@@ -1,0 +1,95 @@
+{
+  "source_version": "26d552c5e0adfb467cea945b9ac504930c4eeb2cb8be5aea434d895ef26fc677",
+  "review_source_version": "2baea2816f6a17d816987cc6e53b5b57325ad19c6e525bd0dd2fc3d8d44f019b",
+  "published_at_utc": "2026-10-21T07:46:17Z",
+  "sources": [
+    {
+      "path": "plugins/discourse-academy-roles/plugin.rb",
+      "before_sha256": "69bfe662c212ac3017c3084095fb03f9ad900ce697651a6434890f85534afb09",
+      "sha256": "8e8daaa560bbb70827aee39cdd2dcef8639f51c69f3420480e79099d289ee3a1",
+      "snapshot": "source/plugins/discourse-academy-roles/plugin.rb.txt"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/guardian_extension.rb",
+      "before_sha256": "35a73dde7111ce7d66662c5884afc7e0e3a688680e87b63b7c2d3121016d8045",
+      "sha256": "f3c52dcff5d89ada1af73cbcddfd675d6fd19dc86e1668e761aa164ad3796364",
+      "snapshot": "source/plugins/discourse-academy-roles/lib/discourse_academy_roles/guardian_extension.rb.txt"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/name_color.rb",
+      "before_sha256": null,
+      "sha256": "25933e3ee2349603db64aa46233ec97c3b55f4e6910e7f30d6ba4717f2d0648f",
+      "snapshot": "source/plugins/discourse-academy-roles/lib/discourse_academy_roles/name_color.rb.txt"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/lib/name-color.js",
+      "before_sha256": null,
+      "sha256": "86c4d7f2adc7b6cab8eaac5c4d54a7731c135ac545378c144f985a4ec9991ce7",
+      "snapshot": "source/plugins/discourse-academy-roles/assets/javascripts/discourse/lib/name-color.js.txt"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/pre-initializers/academy-name-color.js",
+      "before_sha256": null,
+      "sha256": "8fdc0fc609672e3522a4c82aee8913abd021d60db0f6163690802b56e457640e",
+      "snapshot": "source/plugins/discourse-academy-roles/assets/javascripts/discourse/pre-initializers/academy-name-color.js.txt"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/connectors/user-preferences-interface/academy-name-color.gjs",
+      "before_sha256": null,
+      "sha256": "86cbc46bc6cba4fe2938ad67aabc529894e601ca1d6dbf913606ace162ca1cd3",
+      "snapshot": "source/plugins/discourse-academy-roles/assets/javascripts/discourse/connectors/user-preferences-interface/academy-name-color.gjs.txt"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/stylesheets/common/academy-roles.scss",
+      "before_sha256": "aaac4448111a764c927220aa17cdc7835a3ce7978e8c7ad004e3dd3524236e70",
+      "sha256": "632bb7c1ad7326d2ea47427c6c84a4c48bf34f4e707eb12c273ad9677a17950a",
+      "snapshot": "source/plugins/discourse-academy-roles/assets/stylesheets/common/academy-roles.scss.txt"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/client.en.yml",
+      "before_sha256": "4b6b285a6b66ca0baa38d6fa28cdcd5d82126b68e51697751d017509840a6263",
+      "sha256": "47a6658c17e1bee413697b78612152627623bf4c4ba781eebe28176c1bc62fda",
+      "snapshot": "source/plugins/discourse-academy-roles/config/locales/client.en.yml.txt"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/client.zh_CN.yml",
+      "before_sha256": "62a04f73473540d709a6cc0b6a11dfb541bdbe5b92a5e7d08f6769fa2aac7ba8",
+      "sha256": "14d485b700601c40b011043bf2354bf73d61c5333472c1207bc831590304f147",
+      "snapshot": "source/plugins/discourse-academy-roles/config/locales/client.zh_CN.yml.txt"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/server.en.yml",
+      "before_sha256": "5b422d226fdb7fdfab65355f0e4776f9036b3e460023098a0f253145000df137",
+      "sha256": "e87677d1a32277a5a84201eb345f9b8ba5f80218c71f1a5267f97013f644c52a",
+      "snapshot": "source/plugins/discourse-academy-roles/config/locales/server.en.yml.txt"
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/server.zh_CN.yml",
+      "before_sha256": "861dd5b2b66d47129bbbfe1872aed8243002fe4040b24051c8c853d2426b9213",
+      "sha256": "1c0475ae7514c749603408f8dc2ec34328d2d31b063fb0ae25b9746d53e4748d",
+      "snapshot": "source/plugins/discourse-academy-roles/config/locales/server.zh_CN.yml.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "field_id": 197,
+      "before_sha256": "f2cc0d2e448869a689688c24bd94ec868168f05db69f4bcbafcd478f8c0cad7f",
+      "sha256": "7bdfc4e601336913a2ffef0104acf0b08b254164cb5907eb8c45eed764af9ed8",
+      "snapshot": "source/themes/isbf-campus-feed/common/common.scss.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-feed-card.gjs",
+      "field_id": 227,
+      "before_sha256": "cab3c87b4ceff8c3dddbe59b60b9d3b31453605d945b95429a0f177113e8d964",
+      "sha256": "bf508d5ee850b3af91763f4f9db3e20f9130314ba7bd6eb03d4c01d46ac0a719",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-feed-card.gjs.txt"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/user-display.js",
+      "field_id": 406,
+      "before_sha256": "94c4373d314dc009600ac8d7b22e3cc8b32573d9e707bdba7d88182109e9f6cf",
+      "sha256": "5c6ba972f1e0e1047a255696e2608537c58db1ad7830008a87548a3657ef6c20",
+      "snapshot": "source/themes/isbf-campus-feed/javascripts/discourse/lib/user-display.js.txt"
+    }
+  ],
+  "snapshots_are_non_executable_evidence": true
+}

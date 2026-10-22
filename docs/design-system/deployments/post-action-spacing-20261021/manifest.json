@@ -1,0 +1,13 @@
+{
+  "source_version": "1fdd1771500b6e8e255b33874f87796f08d0116fb1a4fabf48e46210d88760f0",
+  "published_at_utc": "2026-10-20T17:42:41Z",
+  "status": "published_offline_and_served_assets_verified_full_live_browser_incomplete",
+  "theme_only": true,
+  "files": {
+    "source-manifest.json": "06319ed0a7e5c53ff448d5fd1fa458a3c2aa3a5c8d092867dda3a5409c1a1d23",
+    "theme-applied.json": "55342fbde3ebc2cdd7773507778d0d7a1ba03ec4f05e3526e9cc4ac47a333567",
+    "resources.json": "976785fb3b116018051a5fe426aa07604b5394cc964f69c640b56f568a115c12",
+    "preservation.json": "67e95f22c02838737e37afe0216584f26e9d0d42bebd1accf02245bac802bd5c",
+    "online-browser-limitations.json": "adff6f4fb1f3c62ac8a782976ca4ebb98ba342bc0860b74e4bb95fe982a2ca49"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "image_tag": "local_discourse/isbf_app:feed-name-colors-20261021-26d552c5e0ad",
+  "image_id": "sha256:3a3c759f4597d7c01221bacf438e1e9a73ff0063c111d94e12c03d2fbc252074",
+  "source_version": "26d552c5e0adfb467cea945b9ac504930c4eeb2cb8be5aea434d895ef26fc677",
+  "complete_runtime_inventory_matches": true,
+  "plugins_verified": 66,
+  "plugin_links_markers_and_hidden_files_verified": true,
+  "active_theme_database_backed": true,
+  "runtime_startup_matches_production": true,
+  "latest_tag_changed": false,
+  "production_container_recreated": false,
+  "web_reloaded_for_backend": true,
+  "database_or_redis_restarted": false,
+  "shared_plugin_releases_required": true,
+  "future_rebuild_source_installer_verified": true,
+  "accepted_by_user": true,
+  "full_production_browser_suite_passed": false,
+  "verification_scope": "source inventories and startup metadata; no further page checks after user acceptance"
+}
