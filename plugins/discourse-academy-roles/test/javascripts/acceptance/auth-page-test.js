@@ -193,6 +193,7 @@ acceptance("Academy authentication page", function (needs) {
     PreloadStore.store("invite_info", {
       email: null,
       is_invite_link: true,
+      isbf_alumni_invite: false,
       username: "",
     });
     await visit("/invites/distributed-student-code");
@@ -202,6 +203,9 @@ acceptance("Academy authentication page", function (needs) {
     assert
       .dom(".code-login-form__email-step")
       .exists("the valid URL goes directly to email verification");
+    assert
+      .dom(".isbf-alumni-invite-form")
+      .doesNotExist("ordinary invitations retain the native form");
   });
 
   test("the page switch restores the original login UI", async function (assert) {

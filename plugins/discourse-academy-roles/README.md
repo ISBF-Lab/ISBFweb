@@ -1,5 +1,7 @@
 # Academy roles
 
+The invitation registration page exposes the `academy-invitation-form` wrapper outlet with `invitation`, `onAuthenticated` and `usernameHint`. Its default content remains the native `CodeLoginForm`. ISBF-Alumni replaces it only for server-confirmed approved Alumni invitations; email verification and account creation remain native. Closing new Alumni applications does not invalidate previously approved invitations.
+
 This plugin configures a private academy Discourse site. Site admins are the developers with full site access; moderators are the academy administrators who manage content, suspensions, and silences. Verified official members use their own accounts to publish marked official content.
 
 Administrators and developers can opt into a public feed name color from their own **Preferences → Interface** page. Wear is off by default. Administrators use theme blue; developers can choose a three or six digit hex color or restore theme blue. Turning wear off retains the saved custom color. This cosmetic capability uses the persisted role independently of restricted moderator management permissions. Only the owner can change these preferences. The campus feed theme consumes the effective color on author names only; usernames, timestamps and other page regions keep their own styles. API fields, anonymous handling and verification are documented in the [implementation record](../../docs/design-system/reviews/feed-name-colors-20261021/README.md).
