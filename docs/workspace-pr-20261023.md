@@ -24,4 +24,6 @@
 
 原生QUnit、主题完整回归及Windows runner的结果须以本次PR CI为准。真实Windows Desktop的端到端队列消费和自动续跑尚未在本Linux主机验证，不能由离线测试替代。设计技术检查与最终人工视觉验收分别记录。
 
+首次Windows CI暴露了测试夹具的连接清理问题：SQLite连接的事务上下文不会关闭连接，Windows因此无法删除临时数据库。现已用`contextlib.closing`显式关闭创建夹具的连接；保留只读写入拒绝断言，不跳过检查。修正后的平台结果仍以新提交的CI为准。
+
 失败调试日志、编译缓存和原始工作区快照保留在持久`deploy-work/workspace-pr-20261023/`；PR保留最终结果、可复核源码及必要来源证据。后续遵循[后台CI交接](codex-ci-handoff.md)，核对实时head、全部适用检查和未解决审查后，才执行用户已授权的合并。

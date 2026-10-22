@@ -1,3 +1,4 @@
+from contextlib import closing
 import importlib.util
 import json
 from pathlib import Path
@@ -175,8 +176,9 @@ class MetadataTests(unittest.TestCase):
     def test_metadata_connections_cannot_write(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "state_5.sqlite"
-            with sqlite3.connect(path) as connection:
+            with closing(sqlite3.connect(path)) as connection:
                 connection.execute("CREATE TABLE metadata (id TEXT)")
+                connection.commit()
             with ci.readonly_database(directory, path.name) as connection:
                 with self.assertRaises(sqlite3.OperationalError):
                     connection.execute("INSERT INTO metadata VALUES ('changed')")
