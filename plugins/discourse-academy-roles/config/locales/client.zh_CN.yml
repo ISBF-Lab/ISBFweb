@@ -13,13 +13,18 @@ zh_CN:
         color: 自定义姓名颜色
         color_description: 开发者可选纯色或渐变色。纯色色号留空时使用主题蓝；自选色在明暗模式下保持一致。
         gradient: 使用渐变色
-        gradient_description: 选择起始和结束颜色，并设置渐变方向。
+        gradient_description: 添加 2 至 10 个色号，按排列顺序沿所选方向依次渐变。
+        color_stop: 色号 %{number}
+        add_color: 添加色号（%{count}/%{max}）
+        remove_color: 移除最后一个色号
+        color_added: 已添加色号，共 %{count} 个。
+        color_removed: 已移除最后一个色号，剩余 %{count} 个。
         direction: 渐变方向
         left_to_right: 从左到右
         top_to_bottom: 从上到下
         start_color: 起始颜色
         end_color: 结束颜色
-        invalid_color: 请输入三位或六位十六进制色号；渐变色需要填写两种颜色。
+        invalid_color: 请输入三位或六位十六进制色号；渐变色需要填写 2 至 10 个色号。
         reset: 恢复主题色
         preview: 姓名预览
       invite_title: 通过邀请码注册

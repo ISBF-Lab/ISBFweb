@@ -25,6 +25,29 @@ function notificationItem(
 }
 
 module("ISBF | Unit | Lib | user-display", function () {
+  test("feed gradients keep ten stops in order and reject extra stops", function (assert) {
+    const stops = Array.from(
+      { length: 10 },
+      (_, index) => `#${(index + 1).toString(16).repeat(6)}`
+    );
+    for (const direction of [90, 180]) {
+      const color = `linear-gradient(${direction}deg, ${stops.join(", ")})`;
+      assert.strictEqual(
+        feedAuthorColor({ academy_display_name_color: color }),
+        color
+      );
+      assert.strictEqual(
+        feedAuthorStyle({ academy_display_name_color: color }),
+        `--isbf-feed-author-color: ${stops[0]}; --isbf-feed-author-gradient: ${color};`
+      );
+      assert.strictEqual(
+        feedAuthorColor({
+          academy_display_name_color: `linear-gradient(${direction}deg, ${[...stops, "#ffffff"].join(", ")})`,
+        }),
+        null
+      );
+    }
+  });
   test("feed gradients preserve solid fallback and reject injected styles", function (assert) {
     const gradient = "linear-gradient(90deg, #123456, #abcdef)";
     const author = { id: 1, academy_display_name_color: gradient };

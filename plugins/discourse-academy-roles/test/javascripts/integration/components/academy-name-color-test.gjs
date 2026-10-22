@@ -181,6 +181,87 @@ module("Integration | Component | AcademyNameColor", function (hooks) {
       .hasClass("has-gradient", "the completed gradient previews immediately");
   });
 
+  test("adds up to ten ordered colors, removes the last color and reopens the saved palette", async function (assert) {
+    const stops = Array.from(
+      { length: 10 },
+      (_, index) =>
+        `#${String(index + 1)
+          .repeat(6)
+          .slice(0, 6)}`
+    );
+    this.model.set("academy_name_color_preferences", {
+      enabled: true,
+      color: `linear-gradient(180deg, ${stops.slice(0, 2).join(", ")})`,
+    });
+    const outletArgs = this.outletArgs;
+    await render(
+      <template><AcademyNameColor @outletArgs={{outletArgs}} /></template>
+    );
+
+    for (let index = 2; index < 10; index++) {
+      await click(".academy-name-color__add");
+      await formKit()
+        .field(`color${index + 1}`)
+        .fillIn(stops[index].slice(1));
+    }
+    const gradient = `linear-gradient(180deg, ${stops.join(", ")})`;
+    assert.strictEqual(
+      this.model.custom_fields.academy_name_color,
+      gradient,
+      "all ten colors retain their order"
+    );
+    assert
+      .dom(".academy-name-color__add")
+      .isDisabled("the ten-color limit disables adding");
+    assert
+      .dom('.form-kit__field[data-control-type="color"]')
+      .exists({ count: 10 });
+    assert
+      .dom(".academy-name-color__name")
+      .hasAttribute(
+        "style",
+        `color: ${stops[0]}; --academy-name-gradient: ${gradient};`
+      );
+
+    await clearRender();
+    await render(
+      <template><AcademyNameColor @outletArgs={{outletArgs}} /></template>
+    );
+    assert.strictEqual(
+      formKit().field("color10").value(),
+      stops[9].slice(1),
+      "saved palettes reopen without losing colors"
+    );
+    assert.strictEqual(formKit().field("direction").value(), "180");
+    await click(".academy-name-color__remove");
+    assert.strictEqual(
+      this.model.custom_fields.academy_name_color,
+      `linear-gradient(180deg, ${stops.slice(0, 9).join(", ")})`
+    );
+    assert.dom(".academy-name-color__add").isEnabled();
+    await click(".academy-name-color__add");
+    assert.strictEqual(
+      formKit().field("color10").value(),
+      "",
+      "removed colors do not return unexpectedly"
+    );
+    await formKit().field("color10").fillIn("abcdef");
+    await formKit().field("direction").select("90");
+    assert.strictEqual(
+      this.model.custom_fields.academy_name_color,
+      `linear-gradient(90deg, ${[...stops.slice(0, 9), "#abcdef"].join(", ")})`
+    );
+    await click(".academy-name-color__reset");
+    assert.false(formKit().field("gradient").value());
+    await formKit().field("gradient").toggle();
+    assert
+      .dom('[data-name="color3"]')
+      .doesNotExist("reset returns to two empty stops");
+    assert
+      .dom(".academy-name-color__remove")
+      .doesNotExist("a gradient retains at least two stops");
+  });
+
   test("hides the controls on another account and when the role feature is disabled", async function (assert) {
     this.model.set("id", this.currentUser.id + 1);
     const outletArgs = this.outletArgs;

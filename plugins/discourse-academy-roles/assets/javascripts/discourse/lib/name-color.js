@@ -3,13 +3,27 @@ import { isValidHex, normalizeHex } from "discourse/lib/color-transformations";
 
 export const NAME_COLOR_ENABLED = "academy_name_color_enabled";
 export const NAME_COLOR = "academy_name_color";
-const GRADIENT_COLOR =
-  /^linear-gradient\((90|180)deg,\s*(#[0-9a-f]{3}(?:[0-9a-f]{3})?),\s*(#[0-9a-f]{3}(?:[0-9a-f]{3})?)\)$/i;
+export const MAX_NAME_COLOR_STOPS = 10;
+const GRADIENT_COLOR = /^linear-gradient\((90|180)deg,\s*(.*)\)$/i;
 
 export function nameGradientStops(value) {
-  return typeof value === "string" && value.length <= 80
-    ? (GRADIENT_COLOR.exec(value)?.slice(2) ?? null)
+  if (typeof value !== "string" || value.length > 128) {
+    return null;
+  }
+  const gradient = GRADIENT_COLOR.exec(value);
+  if (!gradient || gradient[0] !== value) {
+    return null;
+  }
+  const stops = gradient[2].split(/\s*,\s*/);
+  return stops.length >= 2 &&
+    stops.length <= MAX_NAME_COLOR_STOPS &&
+    stops.every((stop) => /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(stop))
+    ? stops
     : null;
+}
+
+export function nameColorStopField(index) {
+  return index === 0 ? "color" : index === 1 ? "endColor" : `color${index + 1}`;
 }
 
 export function nameGradientDirection(value) {
@@ -49,6 +63,12 @@ export function nameColorFormData(model) {
     endColor: stops?.[1] ?? "",
     direction: nameGradientDirection(draft.color),
     gradient: Boolean(stops),
+    ...Object.fromEntries(
+      (stops?.slice(2) ?? []).map((stop, index) => [
+        nameColorStopField(index + 2),
+        stop,
+      ])
+    ),
   };
 }
 

@@ -8,24 +8,56 @@ import DButton from "discourse/ui-kit/d-button";
 import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
 import { i18n } from "discourse-i18n";
 import {
+  MAX_NAME_COLOR_STOPS,
   NAME_COLOR,
   NAME_COLOR_ENABLED,
   nameColorDraft,
   nameColorFormData,
+  nameColorStopField,
   nameGradientStops,
   normalizedNameColor,
   validNameColor,
 } from "../../lib/name-color";
 
 export default class AcademyNameColor extends Component {
+  @service a11y;
   @service currentUser;
   @service siteSettings;
 
   @tracked gradient = nameColorFormData(this.args.outletArgs.model).gradient;
+  @tracked
+  colorCount =
+    nameGradientStops(nameColorDraft(this.args.outletArgs.model).color)
+      ?.length || 2;
 
   formData = nameColorFormData(this.args.outletArgs.model);
 
   #formApi;
+
+  get colorFields() {
+    return Array.from({ length: this.colorCount }, (_, index) => ({
+      name: nameColorStopField(index),
+      number: index + 1,
+    }));
+  }
+
+  get addColorLabel() {
+    return i18n("academy_roles.name_color.add_color", {
+      count: this.colorCount,
+      max: MAX_NAME_COLOR_STOPS,
+    });
+  }
+
+  get cannotAddColor() {
+    return (
+      this.colorCount >= MAX_NAME_COLOR_STOPS ||
+      this.args.outletArgs.model.isSaving
+    );
+  }
+
+  get canRemoveColor() {
+    return this.colorCount > 2;
+  }
 
   get canCustomize() {
     return (
@@ -81,12 +113,44 @@ export default class AcademyNameColor extends Component {
 
   @action
   resetColor() {
+    this.colorCount = 2;
     return this.#formApi.setProperties({
       gradient: false,
       color: "",
       endColor: "",
       direction: "90",
+      ...Object.fromEntries(
+        Array.from({ length: MAX_NAME_COLOR_STOPS - 2 }, (_, index) => [
+          nameColorStopField(index + 2),
+          "",
+        ])
+      ),
     });
+  }
+
+  @action
+  async addColor() {
+    if (this.cannotAddColor) {
+      return;
+    }
+    const name = nameColorStopField(this.colorCount);
+    this.colorCount++;
+    await this.#formApi.set(name, "");
+    this.a11y.announce(
+      i18n("academy_roles.name_color.color_added", { count: this.colorCount })
+    );
+  }
+
+  @action
+  async removeColor() {
+    if (!this.canRemoveColor || this.args.outletArgs.model.isSaving) {
+      return;
+    }
+    this.colorCount--;
+    await this.#formApi.set(nameColorStopField(this.colorCount), "");
+    this.a11y.announce(
+      i18n("academy_roles.name_color.color_removed", { count: this.colorCount })
+    );
   }
 
   @action
@@ -96,7 +160,7 @@ export default class AcademyNameColor extends Component {
       this.gradient = value;
     }
     const color = data.gradient
-      ? `linear-gradient(${data.direction}deg, ${data.color}, ${data.endColor})`
+      ? `linear-gradient(${data.direction}deg, ${this.colorFields.map((field) => data[field.name] ?? "").join(", ")})`
       : data.color;
     model.set("custom_fields", {
       ...model.custom_fields,
@@ -156,24 +220,6 @@ export default class AcademyNameColor extends Component {
           >
             <field.Control />
           </form.Field>
-          <form.Field
-            @description={{i18n "academy_roles.name_color.color_description"}}
-            @disabled={{@outletArgs.model.isSaving}}
-            @name="color"
-            @title={{i18n
-              (if
-                this.gradient
-                "academy_roles.name_color.start_color"
-                "academy_roles.name_color.color"
-              )
-            }}
-            @type="color"
-            @validate={{this.validateColor}}
-            @validation={{if this.gradient "required"}}
-            as |field|
-          >
-            <field.Control @prefixHex={{true}} />
-          </form.Field>
           {{#if this.gradient}}
             <form.Field
               @disabled={{@outletArgs.model.isSaving}}
@@ -192,13 +238,44 @@ export default class AcademyNameColor extends Component {
                   }}</control.Option>
               </field.Control>
             </form.Field>
+            {{#each this.colorFields key="name" as |colorField|}}
+              <form.Field
+                @disabled={{@outletArgs.model.isSaving}}
+                @name={{colorField.name}}
+                @title={{i18n
+                  "academy_roles.name_color.color_stop"
+                  number=colorField.number
+                }}
+                @type="color"
+                @validate={{this.validateColor}}
+                @validation="required"
+                as |field|
+              >
+                <field.Control @prefixHex={{true}} />
+              </form.Field>
+            {{/each}}
+            <DButton
+              class="btn-flat academy-name-color__stop-action academy-name-color__add"
+              @action={{this.addColor}}
+              @disabled={{this.cannotAddColor}}
+              @translatedLabel={{this.addColorLabel}}
+            />
+            {{#if this.canRemoveColor}}
+              <DButton
+                class="btn-flat academy-name-color__stop-action academy-name-color__remove"
+                @action={{this.removeColor}}
+                @disabled={{@outletArgs.model.isSaving}}
+                @label="academy_roles.name_color.remove_color"
+              />
+            {{/if}}
+          {{else}}
             <form.Field
+              @description={{i18n "academy_roles.name_color.color_description"}}
               @disabled={{@outletArgs.model.isSaving}}
-              @name="endColor"
-              @title={{i18n "academy_roles.name_color.end_color"}}
+              @name="color"
+              @title={{i18n "academy_roles.name_color.color"}}
               @type="color"
               @validate={{this.validateColor}}
-              @validation="required"
               as |field|
             >
               <field.Control @prefixHex={{true}} />

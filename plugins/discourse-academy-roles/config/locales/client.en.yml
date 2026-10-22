@@ -13,13 +13,18 @@ en:
         color: Custom name color
         color_description: Developers can choose a solid color or a gradient. Leave the solid color empty for theme blue. Custom colors stay the same in light and dark modes.
         gradient: Use a gradient
-        gradient_description: Choose a start color, end color and gradient direction.
+        gradient_description: Add 2 to 10 colors. The gradient follows their order in the selected direction.
+        color_stop: "Color %{number}"
+        add_color: "Add color (%{count}/%{max})"
+        remove_color: Remove last color
+        color_added: "Color added. %{count} colors in total."
+        color_removed: "Last color removed. %{count} colors remain."
         direction: Gradient direction
         left_to_right: Left to right
         top_to_bottom: Top to bottom
         start_color: Start color
         end_color: End color
-        invalid_color: Enter a three or six digit hexadecimal color code. A gradient needs both colors.
+        invalid_color: Enter a three or six digit hexadecimal color code. A gradient needs 2 to 10 colors.
         reset: Restore theme color
         preview: Name preview
       invite_title: "Register with an invitation code"

@@ -59,12 +59,28 @@ RSpec.describe DiscourseAcademyRoles::NameColor do
         "linear-gradient(90deg, #123456, url(https://example.com))",
         "linear-gradient(90deg, var(--danger), #abcdef)",
         "linear-gradient(90deg, #123456, )",
-        "linear-gradient(90deg, #123456, #abcdef, #ffffff)",
+        "linear-gradient(90deg, #123456)",
         "linear-gradient(45deg, #123456, #abcdef)",
         "linear-gradient(90deg, #1234, #abcdef)",
         "linear-gradient(90deg, #123456, #abcdef)\n",
         "x" * 1000,
       ].each { |value| expect(described_class.normalize(value)).to be_nil }
+    end
+
+    it "normalizes up to ten ordered stops and rejects an eleventh" do
+      stops = Array.new(10) { |index| "##{(index + 1).to_s(16) * 3}" }
+      [90, 180].each do |direction|
+        expect(
+          described_class.normalize("linear-gradient(#{direction}deg, #{stops.join(", ")})"),
+        ).to eq(
+          "linear-gradient(#{direction}deg, #{stops.map { |stop| described_class.normalize(stop) }.join(", ")})",
+        )
+        expect(
+          described_class.normalize(
+            "linear-gradient(#{direction}deg, #{(stops + ["#fff"]).join(", ")})",
+          ),
+        ).to be_nil
+      end
     end
   end
 
