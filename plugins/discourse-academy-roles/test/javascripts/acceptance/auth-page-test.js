@@ -216,3 +216,71 @@ acceptance("Academy authentication page", function (needs) {
       .exists("the original invitation entry is restored");
   });
 });
+
+acceptance(
+  "Academy alumni registration on login-required sites",
+  function (needs) {
+    needs.settings({
+      academy_roles_enabled: true,
+      academy_auth_page_enabled: true,
+      enable_local_logins: true,
+      invite_only: true,
+      login_required: true,
+      isbf_alumni_enabled: true,
+      isbf_alumni_registration_enabled: true,
+    });
+    needs.site({ isbf_alumni: null });
+
+    test("shows both registration methods without full site metadata", async function (assert) {
+      await visit("/login?mode=register");
+
+      assert
+        .dom(".academy-auth__registration-options button")
+        .exists({ count: 2 });
+      assert.dom(".academy-auth [data-name='code'] input").exists();
+    });
+
+    test("switches to the alumni outlet and back without redeeming an invitation", async function (assert) {
+      await visit("/login?mode=register");
+      await click(".academy-auth__registration-options button:nth-of-type(2)");
+
+      assert
+        .dom(".academy-auth__registration-options button:nth-of-type(2)")
+        .hasAttribute("aria-pressed", "true");
+      assert.dom(".academy-auth [data-name='code'] input").doesNotExist();
+
+      await click(".academy-auth__registration-options button:first-of-type");
+      assert.dom(".academy-auth [data-name='code'] input").exists();
+    });
+
+    for (const setting of [
+      "isbf_alumni_enabled",
+      "isbf_alumni_registration_enabled",
+    ]) {
+      test(`hides the alumni entry when ${setting} is disabled`, async function (assert) {
+        this.siteSettings[setting] = false;
+        await visit("/login?mode=register");
+
+        assert.dom(".academy-auth__registration-options").doesNotExist();
+        assert.dom(".academy-auth [data-name='code'] input").exists();
+      });
+    }
+
+    test("honors an explicitly disabled server capability", async function (assert) {
+      this.owner.lookup("service:site").set("isbf_alumni", {
+        registration_enabled: false,
+      });
+      await visit("/login?mode=register");
+
+      assert.dom(".academy-auth__registration-options").doesNotExist();
+      assert.dom(".academy-auth [data-name='code'] input").exists();
+    });
+
+    test("does not infer a public-site capability from missing metadata", async function (assert) {
+      this.siteSettings.login_required = false;
+      await visit("/login?mode=register");
+
+      assert.dom(".academy-auth__registration-options").doesNotExist();
+    });
+  }
+);
