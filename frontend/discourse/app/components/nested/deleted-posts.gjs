@@ -103,10 +103,10 @@ export default class NestedDeletedPosts extends Component {
     >
       {{#if this.multiple}}
         <DButton
-          aria-expanded={{this.expanded}}
           class="btn-flat nested-deleted-posts__summary"
           data-post-number={{unless this.expanded this.firstPost.post_number}}
           @action={{this.toggle}}
+          @ariaExpanded={{this.expanded}}
           @icon={{if this.expanded "chevron-down" "chevron-right"}}
           @translatedLabel={{this.label}}
         />
