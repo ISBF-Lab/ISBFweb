@@ -162,7 +162,7 @@ jobs:
       - name: Native frontend behavior regression
         env:
           LOAD_PLUGINS: "0"
-          FILTER: "/User.*preferences|User.*directory|User.*invited|Invite|Bookmark|Draft|Private Message|Pending Post|Group|Search|Badge|User Card|User.*summary|Tag|Modal|Dialog/i"
+          FILTER: "/User.*preferences|User.*directory|User.*invited|Invite|Bookmark|Draft|Private Message|Pending Post|Group|Search|Badge|User Card|User.*summary|Tag|Modal|Dialog|Nested.*DeletedPosts/i"
         run: bin/qunit --standalone --filter "$FILTER"
 
       - name: Real page appearance and preservation checks
