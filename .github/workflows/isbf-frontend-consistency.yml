@@ -141,6 +141,11 @@ jobs:
         run: |
           bin/rails runner 'theme = RemoteTheme.import_theme_from_directory(Rails.root.join("themes/isbf-campus-feed")); theme.set_default!'
 
+      - name: Deleted reply rendering regression
+        env:
+          LOAD_PLUGINS: "0"
+        run: bin/qunit --standalone frontend/discourse/tests/integration/components/nested/deleted-posts-test.gjs
+
       - name: Project theme QUnit
         id: theme_qunit
         env:
@@ -164,11 +169,6 @@ jobs:
           LOAD_PLUGINS: "1"
         run: |
           bin/qunit --standalone --filter '/Academy authentication page|Academy alumni registration on login-required sites/i' plugins/discourse-academy-roles/test/javascripts/acceptance/auth-page-test.js | tee tmp/isbf-frontend-results/academy-auth-qunit.log
-
-      - name: Deleted reply rendering regression
-        env:
-          LOAD_PLUGINS: "0"
-        run: bin/qunit --standalone frontend/discourse/tests/integration/components/nested/deleted-posts-test.gjs
 
       - name: Native frontend behavior regression
         env:
