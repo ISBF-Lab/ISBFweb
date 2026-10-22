@@ -59,6 +59,37 @@ RSpec.describe UsersController do
   end
 
   describe "#update" do
+    it "round-trips ten ordered colors and rejects an eleventh without changing saved preferences" do
+      sign_in(developer)
+      stops = Array.new(10) { |index| "##{(index + 1).to_s(16) * 6}" }
+      gradient = "linear-gradient(180deg, #{stops.join(", ")})"
+      put "/u/#{developer.username}.json",
+          params: {
+            custom_fields: {
+              academy_name_color_enabled: true,
+              academy_name_color: gradient,
+            },
+          }
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.dig("user", "academy_display_name_color")).to eq(gradient)
+      get "/u/#{developer.username}.json"
+      expect(response.parsed_body.dig("user", "academy_name_color_preferences", "color")).to eq(
+        gradient,
+      )
+
+      original_name = developer.name
+      put "/u/#{developer.username}.json",
+          params: {
+            name: "Unsaved name",
+            custom_fields: {
+              academy_name_color: "linear-gradient(180deg, #{(stops + ["#ffffff"]).join(", ")})",
+            },
+          }
+      expect(response.status).to eq(422)
+      expect(developer.reload.name).to eq(original_name)
+      expect(developer.custom_fields["academy_name_color"]).to eq(gradient)
+    end
+
     it "saves a gradient, retains it while disabled and clears it with the theme reset" do
       sign_in(developer)
       gradient = "linear-gradient(180deg, #aabbcc, #123456)"

@@ -17,9 +17,10 @@ export function feedAuthorColor(user, currentUser) {
     return "var(--isbf-v2-accent)";
   }
   return typeof color === "string" &&
-    color.length <= 80 &&
+    color.length <= 128 &&
+    color.trim() === color &&
     (/^#[0-9a-f]{6}$/i.test(color) ||
-      /^linear-gradient\((?:90|180)deg, #[0-9a-f]{6}, #[0-9a-f]{6}\)$/i.test(
+      /^linear-gradient\((?:90|180)deg, #[0-9a-f]{6}(?:, #[0-9a-f]{6}){1,9}\)$/i.test(
         color
       ))
     ? color

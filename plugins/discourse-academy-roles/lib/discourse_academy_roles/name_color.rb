@@ -4,9 +4,9 @@ module DiscourseAcademyRoles::NameColor
   ENABLED_FIELD = "academy_name_color_enabled"
   COLOR_FIELD = "academy_name_color"
   FIELDS = [ENABLED_FIELD, COLOR_FIELD].freeze
+  MAX_GRADIENT_STOPS = 10
   HEX_COLOR = /\A#?(?:[0-9a-f]{3}|[0-9a-f]{6})\z/i
-  GRADIENT_COLOR =
-    /\Alinear-gradient\((90|180)deg,\s*(#[0-9a-f]{3}(?:[0-9a-f]{3})?),\s*(#[0-9a-f]{3}(?:[0-9a-f]{3})?)\)\z/i
+  GRADIENT_COLOR = /\Alinear-gradient\((90|180)deg,\s*(.*)\)\z/i
 
   class Cache < ActiveSupport::CurrentAttributes
     attribute :selections
@@ -18,11 +18,14 @@ module DiscourseAcademyRoles::NameColor
 
   def self.normalize(value)
     return if value.blank?
-    return unless value.is_a?(String) && value.length <= 80
+    return unless value.is_a?(String) && value.length <= 128
 
     if gradient = GRADIENT_COLOR.match(value)
+      stops = gradient[2].split(/\s*,\s*/, -1)
+      return unless (2..MAX_GRADIENT_STOPS).cover?(stops.length)
+      return unless stops.all? { |stop| stop.start_with?("#") && HEX_COLOR.match?(stop) }
       return(
-        "linear-gradient(#{gradient[1]}deg, #{normalize(gradient[2])}, #{normalize(gradient[3])})"
+        "linear-gradient(#{gradient[1]}deg, #{stops.map { |stop| normalize(stop) }.join(", ")})"
       )
     end
     return unless HEX_COLOR.match?(value)

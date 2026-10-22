@@ -53,7 +53,8 @@
     font-size: var(--isbf-v2-font-md, 16px);
   }
 
-  &__reset {
+  &__reset,
+  &__stop-action {
     justify-self: start;
     min-height: 44px;
     color: var(--isbf-v2-accent, var(--tertiary));

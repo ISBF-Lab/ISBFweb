@@ -10,7 +10,7 @@ en:
     name_color:
       unavailable: Only administrators and developers can wear role colors.
       custom_unavailable: Only developers can customize their name color.
-      invalid_color: Use a hexadecimal name color or a horizontal or vertical gradient with two hexadecimal colors.
+      invalid_color: Use a hexadecimal name color or a horizontal or vertical gradient with 2 to 10 hexadecimal colors.
     auth:
       invite_invalid: "This invitation code is invalid. Check the code and try again."
       invite_expired: "This invitation code has expired. Request a new code from an administrator."
