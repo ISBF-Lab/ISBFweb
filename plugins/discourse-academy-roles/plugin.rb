@@ -103,7 +103,7 @@ after_initialize do
   register_user_custom_field_type(
     DiscourseAcademyRoles::NameColor::COLOR_FIELD,
     :string,
-    max_length: 7,
+    max_length: 80,
   )
   DiscourseAcademyRoles::NameColor::FIELDS.each do |field|
     register_editable_user_custom_field(field)

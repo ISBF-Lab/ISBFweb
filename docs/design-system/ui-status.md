@@ -1,5 +1,7 @@
 # UI 状态与设计来源
 
+2026-10-22 用户指定[姓名渐变色](reviews/feed-name-gradients-20261022/README.md)：仅扩展本人姓名颜色区域的双端颜色和横向/竖向选择，不扩大整个偏好页的批准范围。
+
 2026-10-21：用户已确认[信息流姓名颜色与排版方案](reviews/feed-name-colors-20261021/README.md)并要求实施。新增偏好字段区域的设计已确认，实际界面及Safari状态验证以该记录为准；此增量不将完整偏好页提升为Approved，也不表示已经发布。
 
 主题参考审阅于 2026-10-10；本次文档整理及认证增量核对于 2026-10-11。先读本文件，再读 [tokens](tokens.md)、[组件规范](components.md) 和 [Reference Map](reference-map.md)。

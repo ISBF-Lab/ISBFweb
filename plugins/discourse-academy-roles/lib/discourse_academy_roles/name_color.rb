@@ -5,6 +5,8 @@ module DiscourseAcademyRoles::NameColor
   COLOR_FIELD = "academy_name_color"
   FIELDS = [ENABLED_FIELD, COLOR_FIELD].freeze
   HEX_COLOR = /\A#?(?:[0-9a-f]{3}|[0-9a-f]{6})\z/i
+  GRADIENT_COLOR =
+    /\Alinear-gradient\((90|180)deg,\s*(#[0-9a-f]{3}(?:[0-9a-f]{3})?),\s*(#[0-9a-f]{3}(?:[0-9a-f]{3})?)\)\z/i
 
   class Cache < ActiveSupport::CurrentAttributes
     attribute :selections
@@ -16,7 +18,14 @@ module DiscourseAcademyRoles::NameColor
 
   def self.normalize(value)
     return if value.blank?
-    return unless value.is_a?(String) && HEX_COLOR.match?(value)
+    return unless value.is_a?(String) && value.length <= 80
+
+    if gradient = GRADIENT_COLOR.match(value)
+      return(
+        "linear-gradient(#{gradient[1]}deg, #{normalize(gradient[2])}, #{normalize(gradient[3])})"
+      )
+    end
+    return unless HEX_COLOR.match?(value)
 
     hex = value.delete_prefix("#").downcase
     hex = hex.chars.map { |character| character * 2 }.join if hex.length == 3

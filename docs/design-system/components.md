@@ -1,5 +1,7 @@
 # 核心组件规范
 
+2026-10-22 姓名颜色区域增加双端渐变和 FormKit 原生方向选择，复用现有颜色控件、预览、恢复与保存行为。范围见[记录](reviews/feed-name-gradients-20261022/README.md)。
+
 2026-10-21信息流颜色与偏好增量：C09卡片标题18px、标题至正文总间距24px，四个元信息/标题链接的状态颜色固定；管理员可选主题蓝，开发者可选色，账号与时间保持muted。C08只增加本人界面偏好中的单列16px间距区域，复用FormKit及现有保存反馈，不批准整页设置表单。用户确认范围、权限和实际验证见[记录](reviews/feed-name-colors-20261021/README.md)。
 
 所有视觉规则只来自 [Approved 清单](ui-status.md)，具体变量见 [tokens](tokens.md)。以下路径指实际存在的源码或已验收 `.txt` 副本；副本的实际工作区映射与差异见 [manifest](references/manifest.json)。未指定属性表示没有从 Approved 代码建立共同规则，不能自行补值。

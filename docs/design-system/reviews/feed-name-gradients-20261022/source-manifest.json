@@ -1,0 +1,22 @@
+{
+  "base": "de585fb1654ac6e667f33d42902e7fd94350bc9e",
+  "files": {
+    "plugins/discourse-academy-roles/assets/javascripts/discourse/connectors/user-preferences-interface/academy-name-color.gjs": "a50730c6c123e916ba845506e5cb0fe797ce99229f487bdb9f226f3dfcbdf304",
+    "plugins/discourse-academy-roles/assets/javascripts/discourse/lib/name-color.js": "05e09496b2a22bd997dee1ad8ceac9c5f183b70653b6de8e74efef0285ab036c",
+    "plugins/discourse-academy-roles/assets/stylesheets/common/academy-roles.scss": "b1d97428d3c2fe6950694fa503bef1eb4a598f73e281fcc584963dc6cf9d42ef",
+    "plugins/discourse-academy-roles/config/locales/client.en.yml": "a9c29f80b03f92354d692e0301672e9a0e2adb34a69a78e00051842af29ecf36",
+    "plugins/discourse-academy-roles/config/locales/client.zh_CN.yml": "b0de62a5e95ecf0dab754c15b6af8668c5da4748cdc5616abc1f475428432153",
+    "plugins/discourse-academy-roles/config/locales/server.en.yml": "131f104f2c4a71f5e0a52445a82d96305947c0b59b80d1795b94a50cd4b10cb6",
+    "plugins/discourse-academy-roles/config/locales/server.zh_CN.yml": "2cc1588e189759718db43d147da1d7f8d9abd6a630c9df031f645b535cb01dd5",
+    "plugins/discourse-academy-roles/lib/discourse_academy_roles/name_color.rb": "3dbcdb512a425e6dfec48ff8006df73ca5fe8040ec16355e39c9a3c56678ebe1",
+    "plugins/discourse-academy-roles/plugin.rb": "08ccb58f412a465451ddedea988403bf375988215a8d05e798511c0c68953227",
+    "plugins/discourse-academy-roles/spec/lib/name_color_spec.rb": "056c57245d91bada618ee7fbdcc550beb3e65717f4a6376625ffa15999050a82",
+    "plugins/discourse-academy-roles/spec/requests/name_color_preferences_spec.rb": "b8a9127f3f0f9659e32bd598ef6c5fe0a239ee1ffdc18930282ae667ba964a1e",
+    "plugins/discourse-academy-roles/test/javascripts/acceptance/name-color-preferences-test.js": "f7d23425717302c4449a251eef0d33aa4abe6989c54114dfad61a6de06d51a60",
+    "plugins/discourse-academy-roles/test/javascripts/integration/components/academy-name-color-test.gjs": "32ebd062c084dc037a141d68459d4d5e78fe1231d720ff89cfcb323616ca2af7",
+    "themes/isbf-campus-feed/common/common.scss": "dda5610fec1277699e99a16bb92cba49e489693938c503bb992c94843de3fc65",
+    "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-feed-card.gjs": "af070173abe9a19c667fda1113afa534a3db5b63105b80acfff1c9fb6249c1f6",
+    "themes/isbf-campus-feed/javascripts/discourse/lib/user-display.js": "ec1604fa699379bfa201230064e6a6e5b0ccc54383a2b47a15affee61e8d3c48",
+    "themes/isbf-campus-feed/test/unit/user-display-test.js": "63021414374ffd83cded3d96cbd49970a85aeeea64f8b077fb73cfb0e72bf6fd"
+  }
+}

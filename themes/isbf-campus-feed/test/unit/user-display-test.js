@@ -4,6 +4,7 @@ import {
   displayIdentity,
   displayName,
   feedAuthorColor,
+  feedAuthorStyle,
   notificationDisplayLabel,
 } from "../../discourse/lib/user-display";
 
@@ -24,6 +25,43 @@ function notificationItem(
 }
 
 module("ISBF | Unit | Lib | user-display", function () {
+  test("feed gradients preserve solid fallback and reject injected styles", function (assert) {
+    const gradient = "linear-gradient(90deg, #123456, #abcdef)";
+    const author = { id: 1, academy_display_name_color: gradient };
+    assert.strictEqual(
+      feedAuthorColor({
+        academy_display_name_color: "linear-gradient(180deg, #123456, #abcdef)",
+      }),
+      "linear-gradient(180deg, #123456, #abcdef)",
+      "vertical gradients retain their direction"
+    );
+    assert.strictEqual(
+      feedAuthorColor(author),
+      gradient,
+      "saved gradients are accepted"
+    );
+    assert.strictEqual(
+      feedAuthorStyle(author),
+      `--isbf-feed-author-color: #123456; --isbf-feed-author-gradient: ${gradient};`,
+      "the first color is available as a browser fallback"
+    );
+    assert.strictEqual(
+      feedAuthorColor({ id: 1 }, author),
+      gradient,
+      "a successful save updates loaded cards"
+    );
+    for (const color of [
+      `${gradient};display:none`,
+      "linear-gradient(90deg, #123456, url(x))",
+      "linear-gradient(90deg, #123456, var(--danger))",
+    ]) {
+      assert.strictEqual(
+        feedAuthorStyle({ academy_display_name_color: color }),
+        null,
+        "only canonical saved gradients can become styles"
+      );
+    }
+  });
   test("feed colors accept saved theme or hex colors and ignore arbitrary CSS", function (assert) {
     assert.strictEqual(
       feedAuthorColor({ academy_display_name_color: "theme" }),

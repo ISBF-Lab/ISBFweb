@@ -1,3 +1,4 @@
+import { get } from "@ember/object";
 import { i18n } from "discourse-i18n";
 
 export function displayName(user) {
@@ -7,18 +8,33 @@ export function displayName(user) {
 export function feedAuthorColor(user, currentUser) {
   const source =
     user?.id === currentUser?.id &&
-    currentUser?.academy_display_name_color !== undefined
+    currentUser &&
+    get(currentUser, "academy_display_name_color") !== undefined
       ? currentUser
       : user;
-  const color = source?.academy_display_name_color;
+  const color = source && get(source, "academy_display_name_color");
   if (color === "theme") {
     return "var(--isbf-v2-accent)";
   }
   return typeof color === "string" &&
-    color.length === 7 &&
-    /^#[0-9a-f]{6}$/i.test(color)
+    color.length <= 80 &&
+    (/^#[0-9a-f]{6}$/i.test(color) ||
+      /^linear-gradient\((?:90|180)deg, #[0-9a-f]{6}, #[0-9a-f]{6}\)$/i.test(
+        color
+      ))
     ? color
     : null;
+}
+
+export function feedAuthorStyle(user, currentUser) {
+  const color = feedAuthorColor(user, currentUser);
+  if (!color) {
+    return null;
+  }
+  if (color.startsWith("linear-gradient(")) {
+    return `--isbf-feed-author-color: ${color.match(/#[0-9a-f]{6}/i)[0]}; --isbf-feed-author-gradient: ${color};`;
+  }
+  return `--isbf-feed-author-color: ${color};`;
 }
 
 export function displayIdentity(user) {
