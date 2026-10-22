@@ -1,0 +1,34 @@
+name: Codex CI handoff
+
+on:
+  pull_request:
+    paths:
+      - "AGENTS.md"
+      - "AI-AGENTS.md"
+      - "script/codex_ci.py"
+      - "script/tests/test_codex_ci.py"
+      - "docs/codex-ci-handoff.md"
+      - ".github/workflows/codex-ci-handoff.yml"
+  push:
+    branches: [main]
+    paths:
+      - "AGENTS.md"
+      - "AI-AGENTS.md"
+      - "script/codex_ci.py"
+      - "script/tests/test_codex_ci.py"
+      - ".github/workflows/codex-ci-handoff.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  handoff-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Test CI completion and thread delivery without external services
+        run: python3 -m unittest discover -s script/tests -p 'test_codex_ci.py' -v
