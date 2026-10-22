@@ -18,6 +18,7 @@ import PluginOutlet from "discourse/components/plugin-outlet";
 import bodyClass from "discourse/helpers/body-class";
 import hideApplicationHeaderButtons from "discourse/helpers/hide-application-header-buttons";
 import hideApplicationSidebar from "discourse/helpers/hide-application-sidebar";
+import lazyHash from "discourse/helpers/lazy-hash";
 import { ajax } from "discourse/lib/ajax";
 import { extractError } from "discourse/lib/ajax-error";
 import cookie from "discourse/lib/cookie";
@@ -578,14 +579,23 @@ export default class AcademyAuthPage extends Component {
           {{/if}}
         {{else if this.isRegister}}
           {{#if this.invitation}}
-            <CodeLoginForm
-              @context="invite"
-              @emailLocked={{not this.invitation.is_invite_link}}
-              @initialEmail={{this.invitation.email}}
-              @inviteKey={{this.invitation.token}}
-              @onAuthenticated={{this.authenticated}}
-              @usernameHint={{i18n "academy_roles.auth.username_hint"}}
-            />
+            <PluginOutlet
+              @name="academy-invitation-form"
+              @outletArgs={{lazyHash
+                invitation=this.invitation
+                onAuthenticated=this.authenticated
+                usernameHint=(i18n "academy_roles.auth.username_hint")
+              }}
+            >
+              <CodeLoginForm
+                @context="invite"
+                @emailLocked={{not this.invitation.is_invite_link}}
+                @initialEmail={{this.invitation.email}}
+                @inviteKey={{this.invitation.token}}
+                @onAuthenticated={{this.authenticated}}
+                @usernameHint={{i18n "academy_roles.auth.username_hint"}}
+              />
+            </PluginOutlet>
           {{else}}
             {{#if this.alumniRegistrationEnabled}}
               <div
