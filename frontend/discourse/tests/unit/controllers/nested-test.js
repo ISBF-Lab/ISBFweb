@@ -46,25 +46,53 @@ module("Unit | Controller | nested", function (hooks) {
     return post;
   }
 
-  test("recovering a deleted reply clears its placeholder only after success", async function (assert) {
-    const post = buildPost(this.store, buildTopic(this.store, 724), 2001, 2);
-    post.setProperties({
-      deleted_post_placeholder: true,
-      deleted_at: "2026-10-20T00:00:00Z",
-      can_recover: true,
-    });
-    const recover = sinon.stub(post, "recover").resolves();
+  for (const [deletionType, deletedProperties] of [
+    ["staff-deleted", { deleted_at: "2026-10-20T00:00:00Z" }],
+    ["author-deleted", { user_deleted: true }],
+  ]) {
+    test(`recovering a ${deletionType} reply preserves its retry action after failure`, async function (assert) {
+      const post = buildPost(this.store, buildTopic(this.store, 724), 2001, 2);
+      post.setProperties({
+        ...deletedProperties,
+        deleted_post_placeholder: true,
+        can_recover: true,
+      });
+      pretender.put(`/posts/${post.id}/recover`, () =>
+        response(503, { errors: ["Recovery unavailable"] })
+      );
 
-    await this.controller.recoverPost(post);
-    assert.true(
-      post.deleted_post_placeholder,
-      "retains the placeholder on failure"
-    );
-    recover.callsFake(async () => post.set("deleted_at", null));
-    await this.controller.recoverPost(post);
-    assert.false(post.deleted_post_placeholder);
-    assert.false(post.can_recover);
-  });
+      await this.controller.recoverPost(post);
+
+      assert.true(
+        Boolean(post.deleted),
+        "restores the deletion state on failure"
+      );
+      assert.true(
+        post.deleted_post_placeholder,
+        "retains the placeholder on failure"
+      );
+      assert.true(post.can_recover, "allows retrying the failed recovery");
+      this.owner.lookup("service:dialog").cancel();
+      pretender.put(`/posts/${post.id}/recover`, () =>
+        response({
+          cooked: "<p>Restored reply.</p>",
+          raw: "Restored reply.",
+          version: 2,
+        })
+      );
+
+      await this.controller.recoverPost(post);
+
+      assert.false(Boolean(post.deleted), "a successful retry clears deletion");
+      assert.false(post.deleted_post_placeholder, "removes the placeholder");
+      assert.false(post.can_recover, "removes the completed recovery action");
+      assert.strictEqual(
+        post.cooked,
+        "<p>Restored reply.</p>",
+        "restores the reply body"
+      );
+    });
+  }
 
   test("regrouping keeps loaded flat posts registered until they leave the model", function (assert) {
     Object.assign(this.owner.lookup("service:site-settings"), {

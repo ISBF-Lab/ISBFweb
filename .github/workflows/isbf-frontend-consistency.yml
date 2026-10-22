@@ -141,10 +141,13 @@ jobs:
         run: |
           bin/rails runner 'theme = RemoteTheme.import_theme_from_directory(Rails.root.join("themes/isbf-campus-feed")); theme.set_default!'
 
-      - name: Deleted reply rendering regression
+      - name: Deleted reply rendering and controller regression
         env:
           LOAD_PLUGINS: "0"
-        run: bin/qunit --standalone frontend/discourse/tests/integration/components/nested/deleted-posts-test.gjs
+        run: >-
+          bin/qunit --standalone
+          frontend/discourse/tests/integration/components/nested/deleted-posts-test.gjs
+          frontend/discourse/tests/unit/controllers/nested-test.js
 
       - name: Project theme QUnit
         id: theme_qunit

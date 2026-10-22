@@ -587,7 +587,7 @@ export default class NestedController extends Controller {
     }
 
     await post.recover();
-    if (!post.deleted_at) {
+    if (!post.deleted_at && !post.user_deleted) {
       post.setProperties({
         deleted_post_placeholder: false,
         can_recover: false,
