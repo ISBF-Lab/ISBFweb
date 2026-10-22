@@ -6,7 +6,9 @@ on:
       - "AGENTS.md"
       - "AI-AGENTS.md"
       - "script/codex_ci.py"
+      - "script/codex_ci_win.py"
       - "script/tests/test_codex_ci.py"
+      - "script/tests/test_codex_ci_win.py"
       - "docs/codex-ci-handoff.md"
       - ".github/workflows/codex-ci-handoff.yml"
   push:
@@ -15,7 +17,9 @@ on:
       - "AGENTS.md"
       - "AI-AGENTS.md"
       - "script/codex_ci.py"
+      - "script/codex_ci_win.py"
       - "script/tests/test_codex_ci.py"
+      - "script/tests/test_codex_ci_win.py"
       - ".github/workflows/codex-ci-handoff.yml"
   workflow_dispatch:
 
@@ -31,4 +35,14 @@ jobs:
         with:
           persist-credentials: false
       - name: Test CI completion and thread delivery without external services
-        run: python3 -m unittest discover -s script/tests -p 'test_codex_ci.py' -v
+        run: python3 -m unittest discover -s script/tests -p 'test_codex_ci*.py' -v
+
+  windows-handoff-regression:
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Test native Windows state and callback behavior without external services
+        run: python -m unittest discover -s script/tests -p 'test_codex_ci_win.py' -v

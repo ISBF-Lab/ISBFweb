@@ -1,0 +1,14 @@
+[
+  "plugins/discourse-academy-roles/assets/javascripts/discourse/components/academy-password-setup-prompt.gjs",
+  "plugins/discourse-academy-roles/assets/javascripts/discourse/initializers/academy-password-setup.js",
+  "plugins/discourse-academy-roles/assets/javascripts/discourse/components/modal/academy-password-setup.gjs",
+  "frontend/discourse/app/form-kit/components/fk/control/password.gjs",
+  "plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-test.gjs",
+  "plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-prompt-test.gjs",
+  "frontend/discourse/tests/integration/components/form-kit/controls/password-test.gjs",
+  "frontend/discourse/app/components/form.gjs",
+  "frontend/discourse/app/form-kit/components/fk/form.gjs",
+  "frontend/discourse/app/form-kit/components/fk/field.gjs",
+  "frontend/discourse/app/form-kit/components/fk/field-data.gjs",
+  "frontend/discourse/app/form-kit/lib/field-control.js"
+]

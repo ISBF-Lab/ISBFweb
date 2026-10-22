@@ -1,0 +1,76 @@
+{
+  "theme_only": true,
+  "theme_id": 4,
+  "source_version": "314b1a43759c1b40e324e4cc5717ecafea40da708936c26d11274c75363abbd9",
+  "sources": [
+    {
+      "relative": "common/common.scss",
+      "sha256": "950858348d6b429906f83e18e267c5256f3b31fd969fe5528919db51afabbb1b",
+      "previous_id": 197,
+      "field_id": 197
+    },
+    {
+      "relative": "stylesheets/topic-reading.scss",
+      "sha256": "fad2f4ccd45d613a83ddac835d5c9fad6b151e02782c7385204781d4984021c7",
+      "previous_id": 261,
+      "field_id": 261
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-topic-reading.gjs",
+      "sha256": "643df25622b60f782e5829b0ed87b421cec87ceb5f31c22c6c9134b22971c399",
+      "previous_id": 260,
+      "field_id": 260
+    },
+    {
+      "relative": "test/acceptance/topic-reading-test.js",
+      "sha256": "9d2028ba9a52fecaed401f54978805a6bd672449e23249adbe60fc96d97be7a6",
+      "previous_id": 411,
+      "field_id": 411
+    },
+    {
+      "relative": "test/integration/topic-reading-test.gjs",
+      "sha256": "de396d06886abd76ed4fac1cf823f300a3e4603f88b35a86c724ead9d34d8edd",
+      "previous_id": 412,
+      "field_id": 412
+    }
+  ],
+  "plugins": 67,
+  "published_at_utc": "2026-10-22T11:20:22Z",
+  "fields_before": 234,
+  "fields_after": 234,
+  "preserved_fields": 229,
+  "settings_preserved": true,
+  "javascript_url": "/theme-javascripts/99cb3d838ccbb1555d1ca8dfcb4ca625176b5c2e.js?__ws=isbf-one.com",
+  "javascript_sha256": "44d40cc9d5828a44ded4827a11e81161047693e6698d437d85cd31ef6ec14231",
+  "styles": [
+    {
+      "target": "common_theme",
+      "bytes": 321204,
+      "sha256": "32e8bae12019d1a58292961e14cd159877fd56fa7cfef1efc55f356f2eda3eb0",
+      "url": "/stylesheets/common_theme_4_a157d008da38bdf8436f2067ccacb8cbc4974405.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "desktop_theme",
+      "bytes": 108,
+      "sha256": "89668a830d8afb0919ac2f88c635c040d4b847a1a37aa49097996633ffa5beb3",
+      "url": "/stylesheets/desktop_theme_4_99f7dd12cf1dcae83febcab348bc52197131dbb4.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "mobile_theme",
+      "bytes": 107,
+      "sha256": "44979689dba4a28c1c6ca81c8c508eb4d0019b78ed9cc1dcb4731f404e22d221",
+      "url": "/stylesheets/mobile_theme_4_99f7dd12cf1dcae83febcab348bc52197131dbb4.css?__ws=isbf-one.com"
+    }
+  ],
+  "javascript_bytes": 509250,
+  "core_revision": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "plugin_directories": 66,
+  "inventory_entries": 67,
+  "hidden_backup_entries": 1,
+  "core_plugins_and_generated_assets_unchanged": true,
+  "services_restarted": false,
+  "image_changed": false,
+  "production_browser_run": false,
+  "application_qunit_tests_executed": false,
+  "human_visual_acceptance": "Pending user review"
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "file": "acceptance/topic-reading-test.js",
+    "compiled": true,
+    "executed_as_qunit": false
+  },
+  {
+    "file": "integration/topic-reading-test.gjs",
+    "compiled": true,
+    "executed_as_qunit": false
+  }
+]

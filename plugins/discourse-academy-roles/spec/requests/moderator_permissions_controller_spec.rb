@@ -14,12 +14,12 @@ RSpec.describe DiscourseAcademyRoles::Admin::ModeratorPermissionsController do
   end
 
   describe "#index" do
-    it "returns the twenty-one switches to developers" do
+    it "returns the twenty-two switches to developers" do
       sign_in(developer)
       get "/academy-roles/admin/moderator-permissions.json"
       expect(response.status).to eq(200)
-      expect(response.parsed_body.fetch("settings").length).to eq(21)
-      expect(response.parsed_body.fetch("values").values).to eq([false] * 21)
+      expect(response.parsed_body.fetch("settings").length).to eq(22)
+      expect(response.parsed_body.fetch("values").values).to eq([false] * 22)
     end
 
     it "keeps permission configuration developer-only with every switch enabled" do

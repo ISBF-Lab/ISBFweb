@@ -1,0 +1,171 @@
+import Component from "@glimmer/component";
+import { fn, hash } from "@ember/helper";
+import { action } from "@ember/object";
+import { getOwner } from "@ember/owner";
+import { service } from "@ember/service";
+import { modifier } from "ember-modifier";
+import TopicNavigation from "discourse/components/topic-navigation";
+import TopicTimeline from "discourse/components/topic-timeline";
+import { popupAjaxError } from "discourse/lib/ajax-error";
+import ReplyNavigation from "../lib/reply-navigation";
+import { isConversationTopic } from "../lib/topic-card-scope";
+import ISBFTopicReading from "./isbf-topic-reading";
+
+export default class ISBFReplyNavigation extends Component {
+  @service appEvents;
+  @service router;
+  @service siteSettings;
+
+  navigation = isConversationTopic(
+    this.args.outletArgs.topic,
+    this.args.outletArgs.topic.url,
+    this.siteSettings
+  )
+    ? new ReplyNavigation(this.args.outletArgs.topic, this.appEvents)
+    : null;
+
+  trackGroups = modifier((element) => {
+    let frame;
+    const view = element.closest(".nested-view");
+    const update = () => {
+      const roots = [
+        ...(view?.querySelectorAll(".nested-post.--depth-0[data-root-index]") ||
+          []),
+      ];
+      const current = roots.find(
+        (root) => root.getBoundingClientRect().bottom > 60
+      );
+      const index = Number(current?.dataset.rootIndex);
+      if (index) {
+        this.navigation.notify(index);
+      }
+    };
+    const schedule = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    };
+    const observer = new MutationObserver(schedule);
+    const roots = view?.querySelector(".nested-view__roots");
+    if (roots) {
+      observer.observe(roots, { childList: true, subtree: true });
+    }
+    window.addEventListener("scroll", schedule, { passive: true });
+    schedule();
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("scroll", schedule);
+    };
+  });
+
+  willDestroy() {
+    super.willDestroy(...arguments);
+    this.navigation?.destroy();
+  }
+
+  get enabled() {
+    return isConversationTopic(
+      this.args.outletArgs.topic,
+      this.router.currentURL,
+      this.siteSettings
+    );
+  }
+
+  get enteredIndex() {
+    return (this.navigation?.currentIndex || 1) - 1;
+  }
+
+  get nestedController() {
+    return getOwner(this).lookup("controller:nested");
+  }
+
+  @action
+  jumpToIndex(index) {
+    this.navigation.jumpToIndex(index).catch(popupAjaxError);
+  }
+
+  @action
+  jumpToPost(number) {
+    this.navigation.jumpToPostNumber(number);
+  }
+
+  @action
+  jumpTop(event) {
+    event?.preventDefault();
+    this.jumpToPost(1);
+  }
+
+  @action
+  jumpEnd(event) {
+    event?.preventDefault();
+    this.jumpToIndex(this.navigation.total);
+  }
+
+  @action
+  sendTopicAction(name, ...args) {
+    return getOwner(this)
+      .lookup("controller:topic")
+      .send(name, ...args);
+  }
+
+  @action
+  jumpToDate(date) {
+    return this.sendTopicAction("jumpToDate", date);
+  }
+
+  <template>
+    {{#if this.enabled}}
+      <TopicNavigation
+        class="topic-navigation"
+        @jumpToDate={{this.jumpToDate}}
+        @jumpToIndex={{this.jumpToPost}}
+        @postCount={{@outletArgs.topic.highest_post_number}}
+        @topic={{@outletArgs.topic}}
+        {{this.trackGroups @outletArgs.topic.reply_navigation}}
+        as |info|
+      >
+        <ISBFTopicReading
+          @outletArgs={{hash
+            topic=@outletArgs.topic
+            navigation=this.navigation
+            renderTimeline=true
+            topicProgressExpanded=info.topicProgressExpanded
+          }}
+        />
+        <TopicTimeline
+          @convertToPrivateMessage={{fn
+            this.sendTopicAction
+            "convertToPrivateMessage"
+          }}
+          @convertToPublicTopic={{fn
+            this.sendTopicAction
+            "convertToPublicTopic"
+          }}
+          @deleteTopic={{fn this.sendTopicAction "deleteTopic"}}
+          @enteredIndex={{this.enteredIndex}}
+          @fullscreen={{info.topicProgressExpanded}}
+          @jumpBottom={{this.jumpEnd}}
+          @jumpEnd={{this.jumpEnd}}
+          @jumpToIndex={{this.jumpToIndex}}
+          @jumpTop={{this.jumpTop}}
+          @model={{@outletArgs.topic}}
+          @navigation={{this.navigation}}
+          @recoverTopic={{fn this.sendTopicAction "recoverTopic"}}
+          @replyToPost={{this.nestedController.replyToPost}}
+          @resetBumpDate={{fn this.sendTopicAction "resetBumpDate"}}
+          @showChangeTimestamp={{fn this.sendTopicAction "showChangeTimestamp"}}
+          @showFeatureTopic={{fn this.sendTopicAction "showFeatureTopic"}}
+          @showTopicSlowModeUpdate={{fn
+            this.sendTopicAction
+            "showTopicSlowModeUpdate"
+          }}
+          @showTopicTimerModal={{fn this.sendTopicAction "showTopicTimerModal"}}
+          @toggleArchived={{fn this.sendTopicAction "toggleArchived"}}
+          @toggleClosed={{fn this.sendTopicAction "toggleClosed"}}
+          @toggleMultiSelect={{fn this.sendTopicAction "toggleMultiSelect"}}
+          @toggleVisibility={{fn this.sendTopicAction "toggleVisibility"}}
+        />
+      </TopicNavigation>
+    {{/if}}
+  </template>
+}

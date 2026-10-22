@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 module DiscourseAcademyRoles::GuardianExtension
+  def can_setup_academy_password?(target = user)
+    DiscourseAcademyRoles::PasswordSetup.enabled? && user && target && user.id == target.id &&
+      target.id.positive? && target.active? && !target.suspended? && !target.staged? &&
+      !DiscourseAcademyRoles::PasswordSetup.anonymous_account?(target) && !user.is_impersonating &&
+      can_edit?(target) && can_access_forum?
+  end
+
   def can_wear_academy_name_color?(target)
     user&.id == target.id && DiscourseAcademyRoles::NameColor.allowed?(target)
   end

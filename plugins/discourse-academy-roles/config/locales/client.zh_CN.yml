@@ -6,6 +6,16 @@ zh_CN:
           academy_roles: 学院身份
   js:
     academy_roles:
+      password_setup:
+        title: 设置登录密码
+        description: 设置密码后，你也可以使用密码登录。也可以暂时跳过，稍后在安全设置中设置。
+        new_password: 新密码
+        confirm_password: 确认密码
+        password_mismatch: 两次输入的密码不一致。
+        submit: 设置密码
+        skip: 暂时跳过
+        success: 密码已设置。
+        verification_required: 为保障账号安全，请通过邮件验证后设置密码。
       name_color:
         title: 信息流姓名颜色
         enabled: 佩戴身份色

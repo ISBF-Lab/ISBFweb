@@ -1,0 +1,8 @@
+{
+  "initial_host_available_bytes": 2100719616,
+  "reserve_bytes": 536870912,
+  "rss_limit_bytes": 268435456,
+  "peak_rss_bytes": 48525312,
+  "minimum_host_available_bytes": 2068717568,
+  "passed": true
+}

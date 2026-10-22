@@ -8,13 +8,15 @@ body:has(.isbf-v2-shell--topic-feed-style) {
 }
 
 body:has(.isbf-v2-shell--topic) #main-outlet {
-  .container.posts.has-isbf-topic-reading {
+  .container.posts:has(> .topic-navigation .isbf-topic-reading__heading) {
     grid-template-areas: "posts" "timeline";
     grid-template-columns: minmax(0, 1fr);
   }
 
   .container.posts
-    > .topic-navigation.isbf-topic-reading:not(.topic-progress-expanded) {
+    > .topic-navigation:has(.isbf-topic-reading__heading):not(
+      .topic-progress-expanded
+    ) {
     position: static;
     grid-area: timeline;
     grid-row: auto;
@@ -55,7 +57,7 @@ body:has(.isbf-v2-shell--topic) #main-outlet {
   font-size: var(--isbf-v2-font-sm);
 }
 
-#main-outlet .topic-navigation.isbf-topic-reading {
+#main-outlet .topic-navigation:has(.isbf-topic-reading__heading) {
   --isbf-topic-reading-track-width: 4px;
   --isbf-topic-reading-handle-size: 16px;
 
@@ -278,7 +280,10 @@ body:has(.isbf-v2-shell--topic) #main-outlet {
 }
 
 @media (width <= 600px) {
-  #main-outlet .topic-navigation.isbf-topic-reading.topic-progress-expanded {
+  #main-outlet
+    .topic-navigation:has(
+      .isbf-topic-reading__heading
+    ).topic-progress-expanded {
     --isbf-topic-reading-bottom: calc(130px + env(safe-area-inset-bottom));
 
     .isbf-topic-reading__close,

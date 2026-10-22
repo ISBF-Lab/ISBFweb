@@ -1,18 +1,105 @@
 /* eslint-disable ember/template-no-pointer-down-event-binding -- Fixtures exercise capture before native bubbling dismissal. */
+import { hash } from "@ember/helper";
 import { on } from "@ember/modifier";
 import {
   clearRender,
   click,
+  find,
   render,
   settled,
   triggerEvent,
+  waitFor,
 } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
 import Topic from "discourse/models/topic";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
+import ISBFReplyNavigation from "../../discourse/components/isbf-reply-navigation";
 import { ISBFTopicReadingJump } from "../../discourse/components/isbf-topic-reading";
 import isbfCloseOnClickOutside from "../../discourse/modifiers/isbf-close-on-click-outside";
+
+module(
+  "ISBF | Integration | Component | ISBFReplyNavigation",
+  function (hooks) {
+    setupRenderingTest(hooks);
+
+    hooks.beforeEach(function () {
+      this.siteSettings.nested_replies_enabled = true;
+      this.siteSettings.nested_replies_cap_nesting_depth = true;
+      this.siteSettings.nested_replies_max_depth = 1;
+      sinon
+        .stub(this.owner.lookup("service:router"), "currentURL")
+        .get(() => "/t/conversations/990011");
+      this.topic = Topic.create({
+        id: 990011,
+        slug: "conversations",
+        title: "Conversations",
+        archetype: "regular",
+        is_nested_view: true,
+        posts_count: 3,
+        highest_post_number: 3,
+        created_at: "2026-10-14T00:00:00Z",
+        last_posted_at: "2026-10-15T00:00:00Z",
+        last_read_post_number: 1,
+        reply_navigation: { root_count: 2, root_index: 1, reply_count: 2 },
+      });
+    });
+
+    hooks.afterEach(function () {
+      sinon.restore();
+    });
+
+    test("native expansion keeps the grouped timeline floating across repeated opens", async function (assert) {
+      await render(
+        <template>
+          <div class="isbf-v2-shell--topic isbf-v2-shell--topic-feed-style">
+            <header class="isbf-v2-page-header"></header>
+          </div>
+          <main id="main-outlet">
+            <div class="nested-view">
+              <ISBFReplyNavigation @outletArgs={{hash topic=this.topic}} />
+            </div>
+          </main>
+        </template>
+      );
+      const toggle = ".isbf-topic-reading__toggle";
+      const panel = ".topic-navigation:has(.isbf-topic-reading__heading)";
+      await waitFor(toggle);
+      assert
+        .dom(toggle)
+        .hasAttribute("aria-expanded", "false", "reading starts collapsed");
+      for (let cycle = 0; cycle < 3; cycle++) {
+        await click(toggle);
+        await waitFor(`${panel}.topic-progress-expanded`);
+        assert
+          .dom(`${panel} .isbf-topic-reading__heading`)
+          .isVisible("the heading survives native rerendering");
+        assert.strictEqual(
+          getComputedStyle(find(panel)).position,
+          "fixed",
+          "the panel floats after expansion"
+        );
+        assert.strictEqual(
+          getComputedStyle(find(`${panel} .timeline-container`)).position,
+          "static",
+          "the native timeline stays inside the panel"
+        );
+        await click(".isbf-topic-reading__close");
+        assert
+          .dom(toggle)
+          .hasAttribute(
+            "aria-expanded",
+            "false",
+            "explicit closing collapses reading"
+          );
+      }
+      await clearRender();
+      assert
+        .dom(toggle)
+        .doesNotExist("destroying the topic releases its header control");
+    });
+  }
+);
 
 module(
   "ISBF | Integration | Modifier | isbf-close-on-click-outside",

@@ -4705,7 +4705,9 @@ body:has(.isbf-v2-shell--topic-feed-style) {
       margin: 0;
     }
 
-    #main-outlet .container.posts > .topic-navigation:not(.isbf-topic-reading) {
+    #main-outlet
+      .container.posts
+      > .topic-navigation:not(:has(.isbf-topic-reading__heading)) {
       display: none;
     }
   }

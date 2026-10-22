@@ -1,0 +1,18 @@
+{
+  "exit_code": 0,
+  "initial": {
+    "host_available": 4834381824,
+    "effective_available": 4834381824
+  },
+  "reserve": 536870912,
+  "budget": 4294967296,
+  "peak": 498155520,
+  "minimum_host_available": 4384051200,
+  "elapsed_seconds": 112.09,
+  "stop_reason": null,
+  "container_removed": true,
+  "command": [
+    "python3",
+    "/audit/final-checks.py"
+  ]
+}

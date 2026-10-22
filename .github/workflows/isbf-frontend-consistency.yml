@@ -173,6 +173,20 @@ jobs:
         run: |
           bin/qunit --standalone --filter '/Academy authentication page|Academy alumni registration on login-required sites/i' plugins/discourse-academy-roles/test/javascripts/acceptance/auth-page-test.js | tee tmp/isbf-frontend-results/academy-auth-qunit.log
 
+      - name: Native academy password setup regression
+        env:
+          LOAD_PLUGINS: "1"
+        run: |
+          bin/rspec \
+            plugins/discourse-academy-roles/spec/services/set_initial_password_spec.rb \
+            plugins/discourse-academy-roles/spec/services/dismiss_password_setup_spec.rb \
+            plugins/discourse-academy-roles/spec/requests/password_setup_controller_spec.rb \
+            plugins/discourse-academy-roles/spec/models/password_setup_user_spec.rb \
+            plugins/discourse-academy-roles/spec/serializers/password_setup_serializer_spec.rb \
+            | tee tmp/isbf-frontend-results/academy-password-setup-rspec.log
+          bin/qunit --standalone --filter '/AcademyPasswordSetup/i' plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-test.gjs plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-prompt-test.gjs | tee tmp/isbf-frontend-results/academy-password-setup-qunit.log
+          bin/qunit --standalone frontend/discourse/tests/integration/components/form-kit/controls/password-test.gjs | tee tmp/isbf-frontend-results/form-kit-password-qunit.log
+
       - name: Native frontend behavior regression
         env:
           LOAD_PLUGINS: "0"
