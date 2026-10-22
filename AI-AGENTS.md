@@ -75,6 +75,15 @@ off completed changes, committing, or pushing. During iterative edits, only run
 lint when it helps diagnose an issue. Prefer passing the specific changed files;
 use `bin/lint --fix --recent` only when appropriate.
 
+## Pull requests and CI handoff
+
+- Use the background handoff in [docs/codex-ci-handoff.md](docs/codex-ci-handoff.md) for this repository's PR work, including new conversations. Do not keep a model turn alive to poll CI, sleep repeatedly, or send unchanged progress updates.
+- After pushing a PR or a fix, run `python3 script/codex_ci.py watch --pr NUMBER --next-step "the remaining user-authorized work"`. It binds the exact PR head and `CODEX_THREAD_ID`. Never select the most recent session with `--last`.
+- Confirm registration succeeds, report that CI is pending, and end the turn. The background worker waits without model calls and resumes the same thread after the applicable checks finish. Do not describe a pending PR as merged or complete.
+- If registration fails, repair or report the actual handoff problem; do not claim automatic continuation is configured. Use `doctor` and `status` to inspect it. Foreground model polling is reserved for an explicit user request.
+- On a handoff message, read its saved result, verify the live PR head, current checks and review findings, and continue within the user's existing authorization. Merge only when merging was authorized. After another push or CI rerun, register a new wait and end the turn again.
+- Before reusing a worktree, check `python3 script/codex_ci.py status`. Keep a handed-off worktree intact; use an isolated worktree for other work. Preserve new edits and other worktrees when a callback arrives.
+
 ## Site Settings
 - Configured in `config/site_settings.yml` or `config/settings.yml` for plugins
 - Functionality in `lib/site_setting_extension.rb`
