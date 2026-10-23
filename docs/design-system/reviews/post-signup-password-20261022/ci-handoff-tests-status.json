@@ -1,0 +1,25 @@
+{
+  "exit_code": 0,
+  "initial": {
+    "host_available": 4772610048,
+    "effective_available": 4772610048
+  },
+  "reserve": 536870912,
+  "budget": 4227858432,
+  "peak": 27181056,
+  "minimum_host_available": 4762951680,
+  "elapsed_seconds": 0.41,
+  "stop_reason": null,
+  "command": [
+    "python3",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "deploy-work/workspace-pr-20261023/worktree/script/tests",
+    "-p",
+    "test_codex_ci*.py",
+    "-v"
+  ]
+}

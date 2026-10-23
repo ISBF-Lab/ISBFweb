@@ -78,7 +78,13 @@ export default class FKControlPassword extends FKBaseControl {
         class="btn-transparent form-kit__control-password-toggle"
         role="switch"
         @action={{this.toggleVisibility}}
+        @disabled={{@field.disabled}}
         @icon={{this.iconForType}}
+        @title={{if
+          (eq this.type TYPES.password)
+          "login.show_password_title"
+          "login.hide_password_title"
+        }}
       />
     </div>
   </template>

@@ -50,13 +50,21 @@ after_initialize do
     app/services/discourse_academy_roles/bulk_create_student_invites
     app/services/discourse_academy_roles/reissue_student_invite
     app/services/discourse_academy_roles/revoke_student_invite
+    app/services/discourse_academy_roles/set_initial_password
+    app/services/discourse_academy_roles/dismiss_password_setup
     app/serializers/discourse_academy_roles/student_registration_serializer
     app/serializers/discourse_academy_roles/student_invite_batch_serializer
     app/controllers/discourse_academy_roles/admin/student_invites_controller
     app/controllers/discourse_academy_roles/admin/moderator_permissions_controller
+    app/controllers/discourse_academy_roles/password_setup_controller
   ].each { |path| require_relative path }
 
   DiscourseAcademyRoles::Engine.routes.draw do
+    resource :password_setup,
+             path: "password-setup",
+             controller: "password_setup",
+             only: %i[update destroy]
+
     namespace :admin do
       get "moderator-permissions" => "moderator_permissions#index"
       resources :student_invites, path: "student-invites", only: %i[index create destroy] do
@@ -80,6 +88,7 @@ after_initialize do
 
   require_relative "lib/discourse_academy_roles"
   require_relative "lib/discourse_academy_roles/guardian_extension"
+  require_relative "lib/discourse_academy_roles/password_setup"
   require_relative "lib/discourse_academy_roles/name_color"
   require_relative "lib/discourse_academy_roles/topic_category_extension"
   require_relative "lib/discourse_academy_roles/daily_limits_extension"
@@ -99,6 +108,11 @@ after_initialize do
   register_post_custom_field_type(DiscourseAcademyRoles::OFFICIAL_POST_FIELD, :boolean)
   TopicView.default_post_custom_fields << DiscourseAcademyRoles::OFFICIAL_POST_FIELD
   register_user_custom_field_type(DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD, :integer)
+  register_user_custom_field_type(DiscourseAcademyRoles::PasswordSetup::PENDING_FIELD, :boolean)
+
+  add_model_callback(:user_password, :after_commit, on: :create) do
+    DiscourseAcademyRoles::PasswordSetup.complete_for(user)
+  end
   register_user_custom_field_type(DiscourseAcademyRoles::NameColor::ENABLED_FIELD, :boolean)
   register_user_custom_field_type(
     DiscourseAcademyRoles::NameColor::COLOR_FIELD,
@@ -204,6 +218,7 @@ after_initialize do
 
   on(:user_created) do |user|
     DiscourseAcademyRoles.lock_member_trust_level(user) if SiteSetting.academy_roles_enabled?
+    DiscourseAcademyRoles::PasswordSetup.mark_for(user)
   end
 
   add_to_serializer(:post, :academy_official_post) do
@@ -232,6 +247,11 @@ after_initialize do
 
   add_to_serializer(:current_user, :academy_official_member) do
     DiscourseAcademyRoles.official_member?(object)
+  end
+
+  add_to_serializer(:current_user, :academy_password_setup_pending) do
+    DiscourseAcademyRoles::PasswordSetup.pending?(object) &&
+      !!scope.can_setup_academy_password?(object)
   end
 
   add_to_serializer(:current_user, :academy_moderator_role) { object[:moderator] }

@@ -2249,6 +2249,18 @@
       "scope": "Single-level reply deletion states and public system-activity links; existing normal posts, private activity URLs and five-action appearance retained.",
       "source_version": "2a00be87555d7d82c7e5eacf702f61451fc5eabb3e6875726494b0236134dfa7",
       "manifest": "docs/design-system/reviews/deleted-replies-system-targets-20261021/source-manifest.json"
+    },
+    {
+      "id": "post-signup-password-20261022",
+      "date": "2026-10-22",
+      "status": "user_confirmed_design_implemented_not_deployed",
+      "scope": "C07 homepage initial password task; shared chrome and tokens retained.",
+      "source_version": "8aa2c4af7477caea9f290670ff2b7eb2f98fc62031da8887018ea2bb8b16cad6",
+      "source_manifest": "../reviews/post-signup-password-20261022/source-manifest.json",
+      "source_manifest_sha256": "833675ad7793ba7f3819ad9c9953f2dbec95b35ab2b9ffccfe49b6a2d11bb8ed",
+      "evidence": "../reviews/post-signup-password-20261022/README.md",
+      "final_visual_acceptance": "pending_user_review",
+      "new_global_visual_tokens": false
     }
   ]
 }

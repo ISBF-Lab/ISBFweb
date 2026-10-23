@@ -1,0 +1,47 @@
+{
+  "verification": "Local Docker lifecycle evidence for the completed original academy spec container; host wrapper session exited 143 before RSpec completed.",
+  "queried_until": "2026-10-22T18:41:25.473357+00:00",
+  "events": [
+    {
+      "time": 1792693921,
+      "action": "create",
+      "container_id": "21e037b1df7cbcef4fe30e8c1da25c0d17856cddcf30acdb9954b3ba9c074cee",
+      "name": "isbf_workspace_pr_20261023_review",
+      "image": "local_discourse/isbf_app:feed-name-colors-20261021-26d552c5e0ad",
+      "exit_code": null
+    },
+    {
+      "time": 1792693921,
+      "action": "start",
+      "container_id": "21e037b1df7cbcef4fe30e8c1da25c0d17856cddcf30acdb9954b3ba9c074cee",
+      "name": "isbf_workspace_pr_20261023_review",
+      "image": "local_discourse/isbf_app:feed-name-colors-20261021-26d552c5e0ad",
+      "exit_code": null
+    },
+    {
+      "time": 1792694375,
+      "action": "die",
+      "container_id": "21e037b1df7cbcef4fe30e8c1da25c0d17856cddcf30acdb9954b3ba9c074cee",
+      "name": "isbf_workspace_pr_20261023_review",
+      "image": "local_discourse/isbf_app:feed-name-colors-20261021-26d552c5e0ad",
+      "exit_code": "0"
+    },
+    {
+      "time": 1792694376,
+      "action": "destroy",
+      "container_id": "21e037b1df7cbcef4fe30e8c1da25c0d17856cddcf30acdb9954b3ba9c074cee",
+      "name": "isbf_workspace_pr_20261023_review",
+      "image": "local_discourse/isbf_app:feed-name-colors-20261021-26d552c5e0ad",
+      "exit_code": null
+    }
+  ],
+  "native_result": "rspec-academy-merged.json",
+  "host_stdout": "rspec-academy-merged.log",
+  "wrapper_exit_code": 143,
+  "container_exit_code": 0,
+  "container_removed": true,
+  "memory_limit_bytes": 4093640704,
+  "reserve_bytes": 536870912,
+  "peak_memory_bytes": null,
+  "resource_monitoring_note": "The host wrapper was terminated during the original run. The container retained its existing hard memory/swap/time limits. No final wrapper resource summary was produced; peak memory is not claimed."
+}

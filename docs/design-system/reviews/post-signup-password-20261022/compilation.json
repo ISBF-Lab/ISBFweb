@@ -1,0 +1,62 @@
+[
+  {
+    "file": "plugins/discourse-academy-roles/assets/javascripts/discourse/components/academy-password-setup-prompt.gjs",
+    "compiled": true,
+    "sha256": "0dc8d90c71b4ccc3b75c4c6d8c2039ccd4ad60e35b3d6d258076a3b5ace7cf8c"
+  },
+  {
+    "file": "plugins/discourse-academy-roles/assets/javascripts/discourse/initializers/academy-password-setup.js",
+    "compiled": true,
+    "sha256": "a55b6a8e9d6b94cb1c6130989141bc7859c91ba6fa9b61983aa59711ebb3db49"
+  },
+  {
+    "file": "plugins/discourse-academy-roles/assets/javascripts/discourse/components/modal/academy-password-setup.gjs",
+    "compiled": true,
+    "sha256": "e7dc1151aafac3ad62727c66f1ed934f46e47ada0f2218857850918f53cd1674"
+  },
+  {
+    "file": "frontend/discourse/app/form-kit/components/fk/control/password.gjs",
+    "compiled": true,
+    "sha256": "fbf651954fbea36efee22b54113e6c66ec01e07d5aad1c11150fedf0543c9980"
+  },
+  {
+    "file": "plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-test.gjs",
+    "compiled": true,
+    "sha256": "21d9a5f9452ca34ca273d339880eeb369b05001269321abe181a84e5f022d56a"
+  },
+  {
+    "file": "plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-prompt-test.gjs",
+    "compiled": true,
+    "sha256": "7c20b2262d05982a64c068ae04346ab01824a182dca3fda4f70b796a5ea1bcbd"
+  },
+  {
+    "file": "frontend/discourse/tests/integration/components/form-kit/controls/password-test.gjs",
+    "compiled": true,
+    "sha256": "a687291e1a1fa095fb8945e709199e88e0ace847430d5553a2242febed2fa4a6"
+  },
+  {
+    "file": "frontend/discourse/app/components/form.gjs",
+    "compiled": true,
+    "sha256": "16c1dfa93eb362a19ddb5a3e5a70c05dcd8b773bd07dad7952ec1c83e49c6e61"
+  },
+  {
+    "file": "frontend/discourse/app/form-kit/components/fk/form.gjs",
+    "compiled": true,
+    "sha256": "d7ffb1919939d6b290ab3e1852957d02de96049d2ba7f2d81e594960c3932ce4"
+  },
+  {
+    "file": "frontend/discourse/app/form-kit/components/fk/field.gjs",
+    "compiled": true,
+    "sha256": "0e57c22c8a3a4e74fee13e0feaaa4bb21375c1d1121ee3d6ed7ef4c50cebfc65"
+  },
+  {
+    "file": "frontend/discourse/app/form-kit/components/fk/field-data.gjs",
+    "compiled": true,
+    "sha256": "f0ad6ffa4dd863a650ed436097479e79484ea5544f6fbc3a7dbb7bba0fbee24e"
+  },
+  {
+    "file": "frontend/discourse/app/form-kit/lib/field-control.js",
+    "compiled": true,
+    "sha256": "d43698d69a0aaedd39aa7602d91e398487a9e719a39831552af214514bde673a"
+  }
+]

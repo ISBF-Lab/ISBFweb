@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "tls_verified": true,
+  "resources": [
+    {
+      "kind": "theme_javascript",
+      "url": "/theme-javascripts/99cb3d838ccbb1555d1ca8dfcb4ca625176b5c2e.js?__ws=isbf-one.com",
+      "sha256": "44d40cc9d5828a44ded4827a11e81161047693e6698d437d85cd31ef6ec14231",
+      "modules_preserved": 187
+    },
+    {
+      "kind": "common_theme",
+      "url": "/stylesheets/common_theme_4_a157d008da38bdf8436f2067ccacb8cbc4974405.css?__ws=isbf-one.com",
+      "sha256": "32e8bae12019d1a58292961e14cd159877fd56fa7cfef1efc55f356f2eda3eb0",
+      "bytes": 321204
+    },
+    {
+      "kind": "desktop_theme",
+      "url": "/stylesheets/desktop_theme_4_99f7dd12cf1dcae83febcab348bc52197131dbb4.css?__ws=isbf-one.com",
+      "sha256": "89668a830d8afb0919ac2f88c635c040d4b847a1a37aa49097996633ffa5beb3",
+      "bytes": 108
+    },
+    {
+      "kind": "mobile_theme",
+      "url": "/stylesheets/mobile_theme_4_99f7dd12cf1dcae83febcab348bc52197131dbb4.css?__ws=isbf-one.com",
+      "sha256": "44979689dba4a28c1c6ca81c8c508eb4d0019b78ed9cc1dcb4731f404e22d221",
+      "bytes": 107
+    }
+  ],
+  "plugins_preserved": 67,
+  "source_version": "314b1a43759c1b40e324e4cc5717ecafea40da708936c26d11274c75363abbd9",
+  "production_browser_run": false,
+  "new_credentials_created": false
+}

@@ -1,0 +1,284 @@
+{
+  "harness_sha256": "b78015644b0a3a879486377eab809f4c8e448783dd542180b480a3a33b5b896c",
+  "passed": true,
+  "full_ember_client": true,
+  "production_backend_used": false,
+  "checks": [
+    "1280 light: approved shared dialog frame",
+    "1280 light: safe viewport gutters",
+    "1280 light: shared pill actions",
+    "1280 light: two password-manager fields",
+    "1280 dark: approved shared dialog frame",
+    "1280 dark: safe viewport gutters",
+    "1280 dark: shared pill actions",
+    "1280 dark: two password-manager fields",
+    "390 light: approved shared dialog frame",
+    "390 light: safe viewport gutters",
+    "390 light: shared pill actions",
+    "390 light: two password-manager fields",
+    "390 dark: approved shared dialog frame",
+    "390 dark: safe viewport gutters",
+    "390 dark: shared pill actions",
+    "390 dark: two password-manager fields",
+    "mismatched passwords cannot reach the server",
+    "password visibility can be toggled",
+    "password visibility has an accessible action name",
+    "a failed save preserves the draft and reminder",
+    "retry reaches the synthetic endpoint",
+    "submitting locks both form and action",
+    "submitting also locks password visibility",
+    "Escape cannot interrupt saving",
+    "successful retry completes initial password setup",
+    "the current user reflects a saved password",
+    "escape: exactly one persisted skip, no password created",
+    "button: exactly one persisted skip, no password created",
+    "backdrop: exactly one persisted skip, no password created",
+    "failed dismissal does not pretend the reminder was saved",
+    "expired trust uses the existing email flow without setting a password",
+    "actions remain reachable with the software-keyboard viewport",
+    "the real homepage route triggers the registered prompt",
+    "a completed reminder does not repeat on feed navigation",
+    "no client exceptions"
+  ],
+  "layouts": [
+    {
+      "width": 600,
+      "mode": "light",
+      "left": 332.5,
+      "top": 254.90625,
+      "right": 932.5,
+      "bottom": 645.09375,
+      "radii": [
+        "16px",
+        "16px",
+        "16px",
+        "16px"
+      ],
+      "border": "1px",
+      "shadow": "none"
+    },
+    {
+      "width": 600,
+      "mode": "dark",
+      "left": 332.5,
+      "top": 254.90625,
+      "right": 932.5,
+      "bottom": 645.09375,
+      "radii": [
+        "16px",
+        "16px",
+        "16px",
+        "16px"
+      ],
+      "border": "1px",
+      "shadow": "none"
+    },
+    {
+      "width": 343,
+      "mode": "light",
+      "left": 16,
+      "top": 480.25,
+      "right": 359,
+      "bottom": 884,
+      "radii": [
+        "16px",
+        "16px",
+        "16px",
+        "16px"
+      ],
+      "border": "1px",
+      "shadow": "none"
+    },
+    {
+      "width": 343,
+      "mode": "dark",
+      "left": 16,
+      "top": 480.25,
+      "right": 359,
+      "bottom": 884,
+      "radii": [
+        "16px",
+        "16px",
+        "16px",
+        "16px"
+      ],
+      "border": "1px",
+      "shadow": "none"
+    }
+  ],
+  "errors": [],
+  "console_errors": [],
+  "missing_assets": [],
+  "api_requests": [
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/filter.json"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "POST",
+      "path": "/isbf/views/impressions"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "POST",
+      "path": "/topics/timings"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "POST",
+      "path": "/isbf/views/impressions"
+    },
+    {
+      "method": "GET",
+      "path": "/session/csrf"
+    },
+    {
+      "method": "POST",
+      "path": "/srv/pv"
+    }
+  ],
+  "current_password_sources": true,
+  "screenshots": [
+    "password-setup-1280-light.png",
+    "password-setup-1280-dark.png",
+    "password-setup-390-light.png",
+    "password-setup-390-dark.png"
+  ],
+  "synthetic_password_requests": [
+    {
+      "method": "DELETE",
+      "keys": []
+    },
+    {
+      "method": "DELETE",
+      "keys": []
+    },
+    {
+      "method": "DELETE",
+      "keys": []
+    },
+    {
+      "method": "DELETE",
+      "keys": []
+    },
+    {
+      "method": "PUT",
+      "keys": [
+        "password",
+        "password_confirmation"
+      ]
+    },
+    {
+      "method": "PUT",
+      "keys": [
+        "password",
+        "password_confirmation"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "keys": []
+    },
+    {
+      "method": "DELETE",
+      "keys": []
+    },
+    {
+      "method": "DELETE",
+      "keys": []
+    },
+    {
+      "method": "DELETE",
+      "keys": []
+    },
+    {
+      "method": "DELETE",
+      "keys": []
+    },
+    {
+      "method": "PUT",
+      "keys": [
+        "password",
+        "password_confirmation"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "keys": []
+    },
+    {
+      "method": "DELETE",
+      "keys": []
+    }
+  ]
+}

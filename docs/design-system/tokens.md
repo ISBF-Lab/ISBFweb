@@ -366,3 +366,7 @@ C20不增加全局token。背景、数字/球、主文字、次级文字、边�
 
 
 2026-10-21[删除回复提示补充](reviews/deleted-replies-system-targets-20261021/README.md)沿用 isbf-v2-muted、isbf-v2-font-sm、space-2/3 和既有44px目标，不引入新的全局颜色、间距或组件变体。
+
+## 2026-10-22 首次设密弹窗
+
+首页首次设密任务沿用C07的radius-md、space-4、语义边框与配色、pill/44px文字动作及手机留边和安全区；使用共享默认宽度。用户确认双密码字段与单列布局，没有新增全局token或认证页居中输入规则。来源与实际验证见[记录](reviews/post-signup-password-20261022/README.md)。

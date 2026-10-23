@@ -31,22 +31,15 @@ export default class ISBFTopicReading extends Component {
 
   syncLayout = modifier((element) => {
     const navigation = element.closest(".topic-navigation");
-    const posts = navigation?.closest(".container.posts, .nested-view");
     const header = document.querySelector(
       ".isbf-v2-shell--topic-feed-style .isbf-v2-page-header"
     );
-    if (!navigation || !posts || !header) {
+    if (!navigation || !header) {
       return;
     }
     let frame;
 
-    navigation.classList.add("isbf-topic-reading");
-    posts.classList.add("has-isbf-topic-reading");
-
     const update = () => {
-      // The navigation's class binding can overwrite the outlet's classes.
-      navigation.classList.add("isbf-topic-reading");
-      posts.classList.add("has-isbf-topic-reading");
       if (this.header !== header) {
         this.header = header;
       }
@@ -87,8 +80,6 @@ export default class ISBFTopicReading extends Component {
         this.#cancelSheetSwipe,
         true
       );
-      navigation.classList.remove("isbf-topic-reading");
-      posts.classList.remove("has-isbf-topic-reading");
     };
   });
 
@@ -188,7 +179,7 @@ export default class ISBFTopicReading extends Component {
         {{isbfCloseOnClickOutside
           this.closeOnClickOutside
           (hash
-            targetSelector=".topic-navigation.isbf-topic-reading"
+            targetSelector=".topic-navigation:has(.isbf-topic-reading__heading)"
             secondaryTargetSelector=".isbf-topic-reading__toggle"
           )
         }}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "ISBF UI 规范"
+  short_description: "遵循 ISBF 已批准的界面规范、响应式操作收纳与弹窗契约"
+  default_prompt: "使用 $isbf-ui-guidelines，按项目最新设计规范设计、修改或审查界面，先核对批准范围与来源。"

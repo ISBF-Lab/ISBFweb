@@ -212,8 +212,9 @@ focus. Native jump dialogs and nested menus retain their interactions.
 The panel cancels the old sheet swipe while retaining native pointer dragging.
 The blue track extends through the top half of Core's 50px scroller to meet the
 handle's center. Shared track and handle sizes keep their horizontal alignment
-without changing drag geometry or duplicating reading state. Private messages
-and nested views keep their existing navigation. The layout lives in
+without changing drag geometry or duplicating reading state. Grouped reply topics
+share this floating layout while keeping their own navigation indexes. Private
+messages and other nested views keep their existing navigation. The layout lives in
 `stylesheets/topic-reading.scss`, imported by `common/common.scss`; sync that
 extra SCSS field with the two reading JavaScript modules and locale additions.
 The extra SCSS field is named `topic-reading` without its file extension.
@@ -225,9 +226,13 @@ installs its listener during capture, so this release needs no Core changes.
 The proposal, source hashes, and validation boundaries are recorded in
 `docs/design-system/proposals/topic-timeline-floating-20261013.md` and its review
 directory. Final visual acceptance is pending the user's review.
-When syncing an older live export, limit the desktop navigation hiding rule with
-`:not(.isbf-topic-reading)`, and wrap the rail's existing panels with
-`isbf-v2-rail__content`.
+The template-rendered `.isbf-topic-reading__heading` identifies the reading
+region through `.topic-navigation:has(.isbf-topic-reading__heading)`. Use that
+same selector for layout, desktop visibility, and outside-click exclusions.
+Do not add layout classes imperatively to the native navigation: its class
+binding replaces them during expansion, and a fixed child can leave its parent
+at zero height without notifying a resize observer. The rail's existing panels
+remain wrapped by `isbf-v2-rail__content`.
 
 The topic footer uses the same 16px inset as posts. Share, bookmark, and reply
 stay visible with labels; the theme's More menu receives the core footer button

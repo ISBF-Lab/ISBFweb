@@ -1,0 +1,53 @@
+{
+  "verification": "Native RSpec in a serial, offline container with synthetic PostgreSQL and Redis",
+  "verified_on": "2026-10-23",
+  "academy_full": {
+    "summary": {
+      "duration": 331.194473867,
+      "example_count": 303,
+      "failure_count": 0,
+      "pending_count": 0,
+      "errors_outside_of_examples_count": 0
+    },
+    "seed": 48989,
+    "native_json": "rspec-academy-merged.json",
+    "plugins": [
+      "automation",
+      "chat",
+      "discourse-events",
+      "discourse-academy-roles",
+      "isbf-anonymous",
+      "isbf-learning",
+      "isbf-resume"
+    ]
+  },
+  "password_feature": {
+    "examples": 68,
+    "failures": 0,
+    "included_in_academy_full": true
+  },
+  "container": {
+    "exit_code": 0,
+    "removed": true,
+    "evidence": "rspec-academy-merged-lifecycle.json",
+    "host_wrapper_exit_code": 143,
+    "limitations": "Wrapper stdout and final peak-resource summary are incomplete; full native results and Docker exit evidence are retained."
+  },
+  "prior_runs": "Previous partial/failing attempts remain in the persistent private task directory; the independent spec review documents their causes.",
+  "source_sha256": {
+    "plugins/discourse-academy-roles/plugin.rb": "6a93bde1b28fe05ba6687c4e8509beeeb71573a61fa556970f942d4ab2fc4bb9",
+    "plugins/discourse-academy-roles/lib/discourse_academy_roles/guardian_extension.rb": "d8ed543d2fadc2328fd49ebaafedfeeeeaf319eaada5a23d23e5cfbf1a061fe9",
+    "plugins/discourse-academy-roles/lib/discourse_academy_roles/password_setup.rb": "e87eaf2cca785dd03efd28f03efbfae183568a7250bf997a84896b9136a29eb3",
+    "plugins/discourse-academy-roles/app/controllers/discourse_academy_roles/password_setup_controller.rb": "641875543f0f1a6d80e75104997334f705a6cdca469bc8ceb3320cf39d245296",
+    "plugins/discourse-academy-roles/app/services/discourse_academy_roles/set_initial_password.rb": "90c57776d7f3387284b8adf02b741693c790a7c3fdda60669f8364665d9c719a",
+    "plugins/discourse-academy-roles/app/services/discourse_academy_roles/dismiss_password_setup.rb": "f5e53f2c06437569924db72fa067af791f66d7bd5a887812adee99e150feb817",
+    "plugins/discourse-academy-roles/spec/fabricators/academy_password_setup_user_fabricator.rb": "deabd80112d4943e7e91fe8db07681a9445381b20c1b09b92d505511172c08ab",
+    "plugins/discourse-academy-roles/spec/serializers/password_setup_serializer_spec.rb": "7a8a7f1735b85ea7a15d94a206b754ac48c44aa222bdfa948e60b7160af54742",
+    "plugins/discourse-academy-roles/spec/models/password_setup_user_spec.rb": "7fe8512b70dfb156a22a3fe332c0f8fae07864f012eee40e0564f49998efecd9",
+    "plugins/discourse-academy-roles/spec/requests/password_setup_controller_spec.rb": "0ba8da33d41e6b28181a199eb3081a716a6d9d4625bb7e5512ba445be749d2a1",
+    "plugins/discourse-academy-roles/spec/services/dismiss_password_setup_spec.rb": "2a0824a3c362ba44925f5d5d3ffe0fa949deaabd4a9d551a877204a035acb3c9",
+    "plugins/discourse-academy-roles/spec/services/set_initial_password_spec.rb": "236af10029dd5ad8ca28ec5462af0770affd90c056abdcc02a271ad8ce925a6e",
+    "plugins/discourse-academy-roles/spec/lib/moderator_permissions_spec.rb": "2c8984bcbc5405bf0ad20e316404460e7133d60a4afcd4e86fc88f327fa6e3f2",
+    "plugins/discourse-academy-roles/spec/requests/moderator_permissions_controller_spec.rb": "9e55dfc5a4813a63226ae102808dd973300bc95f4fa1b3b51c1ee09ed6f1b5e8"
+  }
+}

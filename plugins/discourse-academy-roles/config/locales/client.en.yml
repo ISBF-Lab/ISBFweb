@@ -6,6 +6,16 @@ en:
           academy_roles: "Academy roles"
   js:
     academy_roles:
+      password_setup:
+        title: Set a login password
+        description: A password gives you another way to log in. You can also skip this step and set one later in your security preferences.
+        new_password: New password
+        confirm_password: Confirm password
+        password_mismatch: The passwords do not match.
+        submit: Set password
+        skip: Skip for now
+        success: Your password has been set.
+        verification_required: To keep your account secure, verify your email before setting a password.
       name_color:
         title: Feed name color
         enabled: Wear role color

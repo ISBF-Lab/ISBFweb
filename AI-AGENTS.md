@@ -26,6 +26,7 @@ Discourse is large with long history. Understand context before changes.
 
 ### Frontend Design Consistency
 
+- Use the project skill at [`.skills/isbf-ui-guidelines`](.skills/isbf-ui-guidelines/SKILL.md) when designing, implementing, or reviewing ISBF UI; it routes to the current design references, responsive action rules, and dialog contract.
 - Before any UI change, read [UI status](docs/design-system/ui-status.md), [tokens](docs/design-system/tokens.md), [components](docs/design-system/components.md), and [reference map](docs/design-system/reference-map.md).
 - Find an Approved reference for the specific region, state, route, and responsive behaviour being changed. Approval of a page shell does not approve every component inside it. Legacy UI, platform default themes, unverified prototypes, and uncommitted changes are not sources of the target visual language.
 - Reuse the existing approved components and tokens within their documented scope. Read the complete styles and their later overrides; do not promote local values to global rules or invent new colours, spacing, typography, shapes, or component variants.

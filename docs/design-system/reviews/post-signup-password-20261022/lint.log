@@ -1,0 +1,167 @@
+Running: python3 /audit/lint-source.py
+[bin/lint] Skipping script/__pycache__/codex_ci.cpython-314.pyc: not a lintable file type
+[bin/lint] Skipping script/__pycache__/codex_ci_win.cpython-314.pyc: not a lintable file type
+[bin/lint] Skipping script/codex_ci_win.py: not a lintable file type
+[bin/lint] Skipping script/tests/__pycache__/test_codex_ci.cpython-314.pyc: not a lintable file type
+[bin/lint] Skipping script/tests/__pycache__/test_codex_ci_win.cpython-314.pyc: not a lintable file type
+[bin/lint] Skipping script/tests/test_codex_ci_win.py: not a lintable file type
+[bin/lint] No core linter for: .skills/isbf-ui-guidelines/SKILL.md, AI-AGENTS.md, docs/codex-ci-handoff.md, docs/design-system/components.md, docs/design-system/reference-map.md, docs/design-system/references/README.md, docs/design-system/tokens.md, docs/design-system/ui-status.md, docs/workbench-plugins-missing-20261010.md, docs/workspace-pr-password-spec-review-20261023.md, plugins/discourse-academy-roles/README.md, themes/isbf-campus-feed/README.md
+[bin/lint] Running core linters via lefthook...
+sync hooks: ❌
+│  Skipping hook sync: could not create a checksum file: open /home/codex/discourse/.git/info/lefthook.checksum: permission denied
+│  developer-docs-prettier (skip) no files for inspection
+┃  eslint ❯ 
+
+┃  prettier ❯ 
+frontend/discourse/app/form-kit/components/fk/control/password.gjs 608ms (unchanged)
+frontend/discourse/tests/integration/components/form-kit/controls/password-test.gjs 126ms (unchanged)
+plugins/discourse-academy-roles/assets/javascripts/discourse/components/academy-password-setup-prompt.gjs 230ms (unchanged)
+plugins/discourse-academy-roles/assets/javascripts/discourse/components/modal/academy-password-setup.gjs 515ms (unchanged)
+plugins/discourse-academy-roles/assets/javascripts/discourse/initializers/academy-password-setup.js 188ms (unchanged)
+plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-prompt-test.gjs 465ms (unchanged)
+plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-test.gjs 496ms (unchanged)
+themes/isbf-campus-feed/common/common.scss 5280ms (unchanged)
+themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-reading.gjs 696ms (unchanged)
+themes/isbf-campus-feed/stylesheets/topic-reading.scss 132ms (unchanged)
+themes/isbf-campus-feed/test/acceptance/topic-reading-test.js 601ms (unchanged)
+themes/isbf-campus-feed/test/integration/topic-reading-test.gjs 796ms (unchanged)
+
+┃  rubocop ❯ 
+Resolving dependencies...
+Inspecting 14 files
+..............
+
+14 files inspected, no offenses detected
+
+┃  stylelint ❯ 
+
+┃  syntax_tree ❯ 
+[38;5;102mplugins/discourse-academy-roles/app/controllers/discourse_academy_roles/password_setup_controller.rb[0m 187ms
+[38;5;102mGemfile[0m 188ms
+[38;5;102mplugins/discourse-academy-roles/app/services/discourse_academy_roles/dismiss_password_setup.rb[0m 15ms
+[38;5;102mplugins/discourse-academy-roles/app/services/discourse_academy_roles/set_initial_password.rb[0m 15ms
+[38;5;102mplugins/discourse-academy-roles/lib/discourse_academy_roles/guardian_extension.rb[0m 29ms
+[38;5;102mplugins/discourse-academy-roles/lib/discourse_academy_roles/password_setup.rb[0m 29ms
+[38;5;102mplugins/discourse-academy-roles/spec/fabricators/academy_password_setup_user_fabricator.rb[0m 1ms
+[38;5;102mplugins/discourse-academy-roles/spec/lib/moderator_permissions_spec.rb[0m 448ms
+[38;5;102mplugins/discourse-academy-roles/plugin.rb[0m 495ms
+[38;5;102mplugins/discourse-academy-roles/spec/models/password_setup_user_spec.rb[0m 125ms
+[38;5;102mplugins/discourse-academy-roles/spec/requests/moderator_permissions_controller_spec.rb[0m 266ms
+[38;5;102mplugins/discourse-academy-roles/spec/requests/password_setup_controller_spec.rb[0m 187ms
+[38;5;102mplugins/discourse-academy-roles/spec/serializers/password_setup_serializer_spec.rb[0m 37ms
+[38;5;102mplugins/discourse-academy-roles/spec/services/dismiss_password_setup_spec.rb[0m 37ms
+plugins/discourse-academy-roles/spec/services/set_initial_password_spec.rb 196ms
+
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 82.23 seconds)
+✔️ eslint (32.39 seconds)
+✔️ prettier (18.39 seconds)
+✔️ rubocop (11.22 seconds)
+✔️ stylelint (18.16 seconds)
+✔️ syntax_tree (2.07 seconds)
+[bin/lint] All lints passed
+Running: pnpm lint:dialogs
+
+> @ lint:dialogs /workspace
+> node script/check-isbf-dialogs.mjs
+
+Dialog policy: 176 source candidates, 0 violations
+Running: pnpm exec node --test script/check-isbf-dialogs.test.mjs frontend/discourse/lib/elastic-not-found.test.mjs
+TAP version 13
+# (node:214) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///workspace/frontend/discourse/scripts/js/elastic-not-found.js is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /workspace/frontend/discourse/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the clock counts continuous play and a finished round cannot resume
+ok 1 - the clock counts continuous play and a finished round cannot resume
+  ---
+  duration_ms: 12.06825
+  type: 'test'
+  ...
+# Subtest: a delayed frame resolves the actual miss before recording survival time
+ok 2 - a delayed frame resolves the actual miss before recording survival time
+  ---
+  duration_ms: 4.945128
+  type: 'test'
+  ...
+# Subtest: a paddle hit reflects the ball at the current accelerated speed
+ok 3 - a paddle hit reflects the ball at the current accelerated speed
+  ---
+  duration_ms: 3.55532
+  type: 'test'
+  ...
+# Subtest: the ball gradually accelerates, stays bounded, and resets for a new round
+ok 4 - the ball gradually accelerates, stays bounded, and resets for a new round
+  ---
+  duration_ms: 70.387628
+  type: 'test'
+  ...
+# Subtest: ordinary delayed frames keep playing without a pause state
+ok 5 - ordinary delayed frames keep playing without a pause state
+  ---
+  duration_ms: 0.51327
+  type: 'test'
+  ...
+# Subtest: missing the paddle ends the round and freezes its time
+ok 6 - missing the paddle ends the round and freezes its time
+  ---
+  duration_ms: 0.669156
+  type: 'test'
+  ...
+# Subtest: walls reflect the ball and controls keep the paddle inside the arena
+ok 7 - walls reflect the ball and controls keep the paddle inside the arena
+  ---
+  duration_ms: 1.472972
+  type: 'test'
+  ...
+# Subtest: records survive a fresh instance and never replace a better stored result
+ok 8 - records survive a fresh instance and never replace a better stored result
+  ---
+  duration_ms: 0.58862
+  type: 'test'
+  ...
+# Subtest: unavailable or corrupt storage keeps a session record
+ok 9 - unavailable or corrupt storage keeps a session record
+  ---
+  duration_ms: 1.225508
+  type: 'test'
+  ...
+# Subtest: times display minutes, seconds, and tenths
+ok 10 - times display minutes, seconds, and tenths
+  ---
+  duration_ms: 2.10628
+  type: 'test'
+  ...
+# Subtest: detects custom modal markup without treating selector strings or ordinary controls as dialogs
+ok 11 - detects custom modal markup without treating selector strings or ordinary controls as dialogs
+  ---
+  duration_ms: 4.303156
+  type: 'test'
+  ...
+# Subtest: finds nested shell and button overrides while preserving unrelated content styling
+ok 12 - finds nested shell and button overrides while preserving unrelated content styling
+  ---
+  duration_ms: 6.693061
+  type: 'test'
+  ...
+# Subtest: an exception cannot authorize a different selector, value or source file
+ok 13 - an exception cannot authorize a different selector, value or source file
+  ---
+  duration_ms: 2.332003
+  type: 'test'
+  ...
+# Subtest: tracks button overrides even when the owning modal has an arbitrary class name
+ok 14 - tracks button overrides even when the owning modal has an arbitrary class name
+  ---
+  duration_ms: 0.811838
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1338.011464

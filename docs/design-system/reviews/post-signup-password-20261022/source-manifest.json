@@ -1,0 +1,182 @@
+{
+  "date": "2026-10-22",
+  "base_commit": "20998c11f6807964317146283b01a7d97540c55d",
+  "source_version": "8aa2c4af7477caea9f290670ff2b7eb2f98fc62031da8887018ea2bb8b16cad6",
+  "acceptance": "User confirmed the new-account-only dual-password task and requested implementation.",
+  "scope": "C07 homepage initial password task; shared chrome and tokens retained.",
+  "production_deployed": false,
+  "final_visual_acceptance": "pending_user_review",
+  "attachments_are_executable": false,
+  "files": [
+    {
+      "source": ".github/workflows/isbf-frontend-consistency.yml",
+      "snapshot": "source/.github/workflows/isbf-frontend-consistency.yml.txt",
+      "sha256": "dc11cad6673cdb5c98ca786db4cd3eb935c86f9d7d32c2eaf08001051b392651"
+    },
+    {
+      "source": "docs/design-system/components.md",
+      "snapshot": "source/docs/design-system/components.md.txt",
+      "sha256": "d2defdd2a9d93bd575e60c5b5cdde27e27dee92f47e0a2332c7226060439b494"
+    },
+    {
+      "source": "docs/design-system/dialogs.md",
+      "snapshot": "source/docs/design-system/dialogs.md.txt",
+      "sha256": "2b5b5f84cf44b951f6e56b5f4a61c09f5a82fdc7d970cea8a681530da82cfa13"
+    },
+    {
+      "source": "docs/design-system/reference-map.md",
+      "snapshot": "source/docs/design-system/reference-map.md.txt",
+      "sha256": "f909ee736dd7da3b0e2d089548bea9ae79290d88384d0be531f3beb5e3b65d21"
+    },
+    {
+      "source": "docs/design-system/references/README.md",
+      "snapshot": "source/docs/design-system/references/README.md.txt",
+      "sha256": "e51bfa49e4796933797df326e0ce7f0879bd4e83d4df1c0e2b5c32f2439dfc3e"
+    },
+    {
+      "source": "docs/design-system/tokens.md",
+      "snapshot": "source/docs/design-system/tokens.md.txt",
+      "sha256": "cf9d42a533e29b3766cd9a980871c3b2e76e9fc8b21af88cfd87e70c4f6c7795"
+    },
+    {
+      "source": "docs/design-system/ui-status.md",
+      "snapshot": "source/docs/design-system/ui-status.md.txt",
+      "sha256": "f21a4207b79010a9abc434473242eda4520e26cb5602231cc61b51723b33fe02"
+    },
+    {
+      "source": "frontend/discourse/app/form-kit/components/fk/control/password.gjs",
+      "snapshot": "source/frontend/discourse/app/form-kit/components/fk/control/password.gjs.txt",
+      "sha256": "fbf651954fbea36efee22b54113e6c66ec01e07d5aad1c11150fedf0543c9980"
+    },
+    {
+      "source": "frontend/discourse/tests/integration/components/form-kit/controls/password-test.gjs",
+      "snapshot": "source/frontend/discourse/tests/integration/components/form-kit/controls/password-test.gjs.txt",
+      "sha256": "a687291e1a1fa095fb8945e709199e88e0ace847430d5553a2242febed2fa4a6"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/README.md",
+      "snapshot": "source/plugins/discourse-academy-roles/README.md.txt",
+      "sha256": "0eaec503e29ec033c6e9bb851a8e5aeca1ae1cb6dc2eecc411e9529e419e437b"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/app/controllers/discourse_academy_roles/password_setup_controller.rb",
+      "snapshot": "source/plugins/discourse-academy-roles/app/controllers/discourse_academy_roles/password_setup_controller.rb.txt",
+      "sha256": "641875543f0f1a6d80e75104997334f705a6cdca469bc8ceb3320cf39d245296"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/app/services/discourse_academy_roles/dismiss_password_setup.rb",
+      "snapshot": "source/plugins/discourse-academy-roles/app/services/discourse_academy_roles/dismiss_password_setup.rb.txt",
+      "sha256": "f5e53f2c06437569924db72fa067af791f66d7bd5a887812adee99e150feb817"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/app/services/discourse_academy_roles/set_initial_password.rb",
+      "snapshot": "source/plugins/discourse-academy-roles/app/services/discourse_academy_roles/set_initial_password.rb.txt",
+      "sha256": "90c57776d7f3387284b8adf02b741693c790a7c3fdda60669f8364665d9c719a"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/assets/javascripts/discourse/components/academy-password-setup-prompt.gjs",
+      "snapshot": "source/plugins/discourse-academy-roles/assets/javascripts/discourse/components/academy-password-setup-prompt.gjs.txt",
+      "sha256": "0dc8d90c71b4ccc3b75c4c6d8c2039ccd4ad60e35b3d6d258076a3b5ace7cf8c"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/assets/javascripts/discourse/components/modal/academy-password-setup.gjs",
+      "snapshot": "source/plugins/discourse-academy-roles/assets/javascripts/discourse/components/modal/academy-password-setup.gjs.txt",
+      "sha256": "e7dc1151aafac3ad62727c66f1ed934f46e47ada0f2218857850918f53cd1674"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/assets/javascripts/discourse/initializers/academy-password-setup.js",
+      "snapshot": "source/plugins/discourse-academy-roles/assets/javascripts/discourse/initializers/academy-password-setup.js.txt",
+      "sha256": "a55b6a8e9d6b94cb1c6130989141bc7859c91ba6fa9b61983aa59711ebb3db49"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/config/locales/client.en.yml",
+      "snapshot": "source/plugins/discourse-academy-roles/config/locales/client.en.yml.txt",
+      "sha256": "ba7e231a1efd7eedb1c8534d19f5d14b36907278114f4e8bb16df83a19a67687"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/config/locales/client.zh_CN.yml",
+      "snapshot": "source/plugins/discourse-academy-roles/config/locales/client.zh_CN.yml.txt",
+      "sha256": "f345da6cd152f72437568c37bf086a6339d741478dbc70a3b13533463965b5ca"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/config/locales/server.en.yml",
+      "snapshot": "source/plugins/discourse-academy-roles/config/locales/server.en.yml.txt",
+      "sha256": "d8b62e45c83adbda1b0f16dc397471a3c27ecee1f20310bc3954d0cff3513d64"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/config/locales/server.zh_CN.yml",
+      "snapshot": "source/plugins/discourse-academy-roles/config/locales/server.zh_CN.yml.txt",
+      "sha256": "9d4d1e6a89e8b2148dfa3f2fb5b6fee9d0d0a6a8f99505ff77740842b87e1b59"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/lib/discourse_academy_roles/guardian_extension.rb",
+      "snapshot": "source/plugins/discourse-academy-roles/lib/discourse_academy_roles/guardian_extension.rb.txt",
+      "sha256": "d8ed543d2fadc2328fd49ebaafedfeeeeaf319eaada5a23d23e5cfbf1a061fe9"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/lib/discourse_academy_roles/password_setup.rb",
+      "snapshot": "source/plugins/discourse-academy-roles/lib/discourse_academy_roles/password_setup.rb.txt",
+      "sha256": "e87eaf2cca785dd03efd28f03efbfae183568a7250bf997a84896b9136a29eb3"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/plugin.rb",
+      "snapshot": "source/plugins/discourse-academy-roles/plugin.rb.txt",
+      "sha256": "6a93bde1b28fe05ba6687c4e8509beeeb71573a61fa556970f942d4ab2fc4bb9"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/spec/fabricators/academy_password_setup_user_fabricator.rb",
+      "snapshot": "source/plugins/discourse-academy-roles/spec/fabricators/academy_password_setup_user_fabricator.rb.txt",
+      "sha256": "deabd80112d4943e7e91fe8db07681a9445381b20c1b09b92d505511172c08ab"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/spec/lib/moderator_permissions_spec.rb",
+      "snapshot": "source/plugins/discourse-academy-roles/spec/lib/moderator_permissions_spec.rb.txt",
+      "sha256": "2c8984bcbc5405bf0ad20e316404460e7133d60a4afcd4e86fc88f327fa6e3f2"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/spec/models/password_setup_user_spec.rb",
+      "snapshot": "source/plugins/discourse-academy-roles/spec/models/password_setup_user_spec.rb.txt",
+      "sha256": "7fe8512b70dfb156a22a3fe332c0f8fae07864f012eee40e0564f49998efecd9"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/spec/requests/moderator_permissions_controller_spec.rb",
+      "snapshot": "source/plugins/discourse-academy-roles/spec/requests/moderator_permissions_controller_spec.rb.txt",
+      "sha256": "9e55dfc5a4813a63226ae102808dd973300bc95f4fa1b3b51c1ee09ed6f1b5e8"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/spec/requests/password_setup_controller_spec.rb",
+      "snapshot": "source/plugins/discourse-academy-roles/spec/requests/password_setup_controller_spec.rb.txt",
+      "sha256": "0ba8da33d41e6b28181a199eb3081a716a6d9d4625bb7e5512ba445be749d2a1"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/spec/serializers/password_setup_serializer_spec.rb",
+      "snapshot": "source/plugins/discourse-academy-roles/spec/serializers/password_setup_serializer_spec.rb.txt",
+      "sha256": "7a8a7f1735b85ea7a15d94a206b754ac48c44aa222bdfa948e60b7160af54742"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/spec/services/dismiss_password_setup_spec.rb",
+      "snapshot": "source/plugins/discourse-academy-roles/spec/services/dismiss_password_setup_spec.rb.txt",
+      "sha256": "2a0824a3c362ba44925f5d5d3ffe0fa949deaabd4a9d551a877204a035acb3c9"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/spec/services/set_initial_password_spec.rb",
+      "snapshot": "source/plugins/discourse-academy-roles/spec/services/set_initial_password_spec.rb.txt",
+      "sha256": "236af10029dd5ad8ca28ec5462af0770affd90c056abdcc02a271ad8ce925a6e"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-prompt-test.gjs",
+      "snapshot": "source/plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-prompt-test.gjs.txt",
+      "sha256": "7c20b2262d05982a64c068ae04346ab01824a182dca3fda4f70b796a5ea1bcbd"
+    },
+    {
+      "source": "plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-test.gjs",
+      "snapshot": "source/plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-test.gjs.txt",
+      "sha256": "21d9a5f9452ca34ca273d339880eeb369b05001269321abe181a84e5f022d56a"
+    },
+    {
+      "source": "themes/isbf-campus-feed/stylesheets/dialog-consistency.scss",
+      "snapshot": "source/themes/isbf-campus-feed/stylesheets/dialog-consistency.scss.txt",
+      "sha256": "5ec291af4685ebd1420438fe0689e7b0afc64374ef253b74c11c58eef69e971e"
+    }
+  ]
+}

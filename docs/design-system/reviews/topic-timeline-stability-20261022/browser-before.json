@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "version": "before",
+  "full_ember_application": true,
+  "production_backend_used": false,
+  "views": [
+    {
+      "mobile": false,
+      "checks": [],
+      "observed": {
+        "className": "topic-progress-expanded with-timeline topic-navigation",
+        "position": "static",
+        "width": 598,
+        "top": 60,
+        "right": 467,
+        "height": 0,
+        "sheetPosition": "fixed",
+        "sheetWidth": 1440,
+        "headingVisible": false,
+        "close": true,
+        "blur": "none",
+        "expanded": "true"
+      },
+      "frames": [
+        {
+          "classes": "topic-progress-expanded with-timeline topic-navigation",
+          "position": "static",
+          "width": 598,
+          "heading": "none"
+        }
+      ],
+      "reproduced_bottom_sheet": true
+    },
+    {
+      "mobile": true,
+      "checks": [],
+      "observed": {
+        "className": "topic-progress-expanded with-timeline topic-navigation",
+        "position": "static",
+        "width": 390,
+        "top": 60,
+        "right": 0,
+        "height": 0,
+        "sheetPosition": "fixed",
+        "sheetWidth": 390,
+        "headingVisible": false,
+        "close": true,
+        "blur": "none",
+        "expanded": "true"
+      },
+      "frames": [
+        {
+          "classes": "topic-progress-expanded with-timeline topic-navigation",
+          "position": "static",
+          "width": 390,
+          "heading": "none"
+        }
+      ],
+      "reproduced_bottom_sheet": true
+    }
+  ],
+  "errors": [],
+  "missing_assets": []
+}

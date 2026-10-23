@@ -11,6 +11,7 @@ import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 
 const TOPIC = "/t/internationalization-localization/280";
 const TOGGLE = ".isbf-topic-reading__toggle";
+const NAVIGATION = ".topic-navigation:has(.isbf-topic-reading__heading)";
 
 function topicReadingPretender(server, helper) {
   server.get("/t/280/excerpts.json", () => helper.response([]));
@@ -38,15 +39,20 @@ acceptance("ISBF floating topic reading", function (needs) {
       );
     await triggerEvent(TOGGLE, "pointerdown");
     await click(TOGGLE);
-    await waitFor(
-      ".topic-navigation.isbf-topic-reading.topic-progress-expanded"
-    );
+    await waitFor(`${NAVIGATION}.topic-progress-expanded`);
     assert
-      .dom(".topic-navigation")
-      .hasClass(
-        "isbf-topic-reading",
-        "native class updates retain the floating layout"
-      );
+      .dom(`${NAVIGATION} .isbf-topic-reading__heading`)
+      .isVisible("native class updates retain the floating heading");
+    assert.strictEqual(
+      getComputedStyle(find(NAVIGATION)).position,
+      "fixed",
+      "the navigation remains a floating panel after expansion"
+    );
+    assert.strictEqual(
+      getComputedStyle(find(`${NAVIGATION} .timeline-container`)).position,
+      "static",
+      "the native timeline does not become a bottom sheet"
+    );
     assert
       .dom(TOGGLE)
       .hasAttribute("aria-expanded", "true", "the header expands reading");
@@ -109,9 +115,7 @@ acceptance("ISBF floating topic reading", function (needs) {
     assert.dom(TOGGLE).isFocused("Escape returns focus to the opener");
     await visit("/latest");
     assert.dom(TOGGLE).doesNotExist("the topic opener is removed when leaving");
-    assert
-      .dom(".has-isbf-topic-reading")
-      .doesNotExist("the reading layout is released");
+    assert.dom(NAVIGATION).doesNotExist("the reading layout is released");
   });
 
   test("another topic starts collapsed after navigating with reading open", async function (assert) {
@@ -158,7 +162,7 @@ acceptance("ISBF floating topic reading on touch", function (needs) {
   test("reading does not start the bottom-sheet swipe behavior", async function (assert) {
     await visit(TOPIC);
     await click(TOGGLE);
-    const navigation = find(".topic-navigation.isbf-topic-reading");
+    const navigation = find(NAVIGATION);
     const swipe = new CustomEvent("swipestart", { cancelable: true });
     assert.false(
       navigation.dispatchEvent(swipe),

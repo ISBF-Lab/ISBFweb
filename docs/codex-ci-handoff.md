@@ -37,6 +37,7 @@ python3 script/codex_ci.py cancel --job 实际等待记录的UUID
 ## 完成判定与续跑
 
 - 等待最新 check runs、经典 commit statuses 和该 SHA 的工作流全部完成，结果稳定至少 30 秒。
+- 三类结果均读取全部分页。经典状态使用[combined status端点的分页参数](https://docs.github.com/en/rest/commits/statuses#get-the-combined-status-for-a-specific-reference)，防止后续页的pending或failure被遗漏；超过读取上限时报错，不判为成功。
 - 投递前核对 PR 仍打开且 head SHA 相符，避免使用旧提交的结果。
 - 失败、缺少检查和等待超时分别通知，不能视为 CI 成功。
 - 原线程工作时先等待，不中断该回合；保留已排队的人类消息顺序。
@@ -69,7 +70,7 @@ worker 按启动时主机可用内存和有效 cgroup 剩余额度计算预算�
 测试不需要 Codex、GitHub 认证或网络：
 
 ```bash
-python3 -m unittest discover -s script/tests -p 'test_codex_ci.py' -v
+python3 -m unittest discover -s script/tests -p 'test_codex_ci*.py' -v
 ```
 
 覆盖未完成工作流、经典状态、旧 SHA、空检查、失败、超时、忙碌线程、队列顺序、重复投递防护、
@@ -79,3 +80,11 @@ python3 -m unittest discover -s script/tests -p 'test_codex_ci.py' -v
 协议依据：[官方 CLI 队列命令](https://learn.chatgpt.com/docs/cli/reference)、
 [App Server 协议](https://learn.chatgpt.com/docs/app-server)和本机生成的对应版本 JSON schema。
 运行约束见[资源规范](design-system/resource-policy.md)。
+
+## Windows Desktop 适配
+
+`script/codex_ci_win.py` 为 Windows 单独提供同一等待流程，依赖 Python 3.10+、Git 和支持精确线程队列的现有 Codex CLI。Linux 工作区继续使用上面的 Unix socket 版本。Windows 版的 `watch`、`doctor`、`status` 和 `cancel` 使用相同子命令名称；线程、PR head 和已授权剩余工作的约束保持一致。
+
+Windows 版只读查询本地线程、回合及队列元数据，通过官方 CLI 入队；不写入 Codex 数据库。它等待现有 Desktop 消费队列，核对消息收据，无法确认投递时停止重发。Desktop 元数据表和 CLI 回执发生变化时会报错，不能将缺少回执当作完成。
+
+离线回归覆盖检查完成判定、精确线程、忙碌回合、人类消息顺序、过期回调、未知收据、只读元数据及 worker 锁；CI 同时在 Linux 和 Windows 运行该适配器测试。本次 Linux 主机没有执行真实 Windows Desktop 的端到端自动续跑；这部分仍需在目标 Desktop 环境验证。
