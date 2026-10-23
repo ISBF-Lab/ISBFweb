@@ -1,7 +1,7 @@
 {
   "date": "2026-10-22",
-  "base_commit": "604ea93d6f5f79f8bc855e31ea48b8aad34526ab",
-  "source_version": "a56d4b968ee128227180c569aaf71548d4ef370e40e814321df2f4e43c643afa",
+  "base_commit": "20998c11f6807964317146283b01a7d97540c55d",
+  "source_version": "8aa2c4af7477caea9f290670ff2b7eb2f98fc62031da8887018ea2bb8b16cad6",
   "acceptance": "User confirmed the new-account-only dual-password task and requested implementation.",
   "scope": "C07 homepage initial password task; shared chrome and tokens retained.",
   "production_deployed": false,
@@ -171,7 +171,7 @@
     {
       "source": "plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-test.gjs",
       "snapshot": "source/plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-test.gjs.txt",
-      "sha256": "f4ab55fe02305318c67069d7acdaa545f04faef029b537f598f69c5ec723afe4"
+      "sha256": "21d9a5f9452ca34ca273d339880eeb369b05001269321abe181a84e5f022d56a"
     },
     {
       "source": "themes/isbf-campus-feed/stylesheets/dialog-consistency.scss",

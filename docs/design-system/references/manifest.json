@@ -2255,9 +2255,9 @@
       "date": "2026-10-22",
       "status": "user_confirmed_design_implemented_not_deployed",
       "scope": "C07 homepage initial password task; shared chrome and tokens retained.",
-      "source_version": "a56d4b968ee128227180c569aaf71548d4ef370e40e814321df2f4e43c643afa",
+      "source_version": "8aa2c4af7477caea9f290670ff2b7eb2f98fc62031da8887018ea2bb8b16cad6",
       "source_manifest": "../reviews/post-signup-password-20261022/source-manifest.json",
-      "source_manifest_sha256": "8186cbc9e6e4b3677f2bef7db90add60fc8dc3c55f0887fb5cbce91e2ef538f7",
+      "source_manifest_sha256": "833675ad7793ba7f3819ad9c9953f2dbec95b35ab2b9ffccfe49b6a2d11bb8ed",
       "evidence": "../reviews/post-signup-password-20261022/README.md",
       "final_visual_acceptance": "pending_user_review",
       "new_global_visual_tokens": false

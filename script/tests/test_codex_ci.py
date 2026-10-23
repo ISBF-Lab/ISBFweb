@@ -7,6 +7,7 @@ import struct
 import tempfile
 import unittest
 from unittest.mock import patch
+from urllib.parse import parse_qs, urlsplit
 
 SPEC = importlib.util.spec_from_file_location("codex_ci", Path(__file__).resolve().parents[1] / "codex_ci.py")
 ci = importlib.util.module_from_spec(SPEC)
@@ -37,11 +38,29 @@ class FakeGitHub:
 
     def pages(self, path, key):
         self.calls.append(path)
-        return copy.deepcopy(self.checks if key == "check_runs" else self.runs)
+        return copy.deepcopy({"check_runs": self.checks, "statuses": self.statuses, "workflow_runs": self.runs}[key])
 
     def get(self, path):
         self.calls.append(path)
         return copy.deepcopy(self.pr if "/pulls/" in path else {"statuses": self.statuses})
+
+
+class PaginatedGitHub(FakeGitHub):
+    pages = ci.GitHub.pages
+
+    def get(self, path):
+        self.calls.append(path)
+        parsed = urlsplit(path)
+        if parsed.path.endswith("/status"):
+            query = parse_qs(parsed.query)
+            size = int(query.get("per_page", [30])[0])
+            offset = (int(query.get("page", [1])[0]) - 1) * size
+            return {"statuses": self.statuses[offset:offset + size], "total_count": len(self.statuses)}
+        if parsed.path.endswith("/check-runs"):
+            return {"check_runs": self.checks}
+        if parsed.path.endswith("/actions/runs"):
+            return {"workflow_runs": self.runs}
+        return copy.deepcopy(self.pr)
 
 
 class FakeRpc:
@@ -139,6 +158,19 @@ class CheckTests(unittest.TestCase):
     def test_classic_failure_prevents_success(self):
         self.api.statuses = [{"context": "external-test", "state": "failure"}]
         self.assertEqual(self.settle()["result"], "failure")
+
+    def test_classic_statuses_beyond_the_first_page_control_completion(self):
+        for state, expected in [("pending", None), ("failure", "failure"), ("success", "success")]:
+            with self.subTest(state=state):
+                self.api = PaginatedGitHub()
+                self.job = make_job()
+                self.api.statuses = [
+                    {"context": f"external-{index}", "state": "success"}
+                    for index in range(100)
+                ] + [{"context": "last-context", "state": state}]
+                result = self.settle()
+                self.assertEqual(result["result"] if result else None, expected)
+                self.assertTrue(any("/status?per_page=100&page=2" in path for path in self.api.calls))
 
     def test_neutral_and_skipped_checks_can_finish(self):
         for conclusion in ("neutral", "skipped"):

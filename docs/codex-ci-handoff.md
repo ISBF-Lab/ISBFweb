@@ -37,6 +37,7 @@ python3 script/codex_ci.py cancel --job 实际等待记录的UUID
 ## 完成判定与续跑
 
 - 等待最新 check runs、经典 commit statuses 和该 SHA 的工作流全部完成，结果稳定至少 30 秒。
+- 三类结果均读取全部分页。经典状态使用[combined status端点的分页参数](https://docs.github.com/en/rest/commits/statuses#get-the-combined-status-for-a-specific-reference)，防止后续页的pending或failure被遗漏；超过读取上限时报错，不判为成功。
 - 投递前核对 PR 仍打开且 head SHA 相符，避免使用旧提交的结果。
 - 失败、缺少检查和等待超时分别通知，不能视为 CI 成功。
 - 原线程工作时先等待，不中断该回合；保留已排队的人类消息顺序。

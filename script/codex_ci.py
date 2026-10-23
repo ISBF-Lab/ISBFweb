@@ -333,7 +333,7 @@ def inspect_checks(api, job, now):
         return None
     if now - job["stable_since"] < 30:
         return None
-    statuses = api.get(f"{prefix}/commits/{job['sha']}/status")["statuses"]
+    statuses = api.pages(f"{prefix}/commits/{job['sha']}/status", "statuses")
     runs = latest_runs(api.pages(f"{prefix}/actions/runs?head_sha={job['sha']}", "workflow_runs"))
     if any(s["state"] == "pending" for s in statuses) or any(r["status"] != "completed" for r in runs):
         return None

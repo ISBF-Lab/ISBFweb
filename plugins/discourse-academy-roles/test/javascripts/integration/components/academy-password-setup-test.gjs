@@ -141,7 +141,11 @@ module("Integration | Component | AcademyPasswordSetup", function (hooks) {
       } else if (closeWith === "button") {
         await click(".academy-password-setup .modal-close");
       } else if (closeWith === "escape") {
-        await triggerKeyEvent(document, "keydown", "Escape");
+        await triggerKeyEvent(
+          ".academy-password-setup input",
+          "keydown",
+          "Escape"
+        );
       } else {
         await click(".d-modal__backdrop");
       }

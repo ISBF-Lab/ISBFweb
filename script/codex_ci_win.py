@@ -469,7 +469,7 @@ def inspect_checks(api, job, now):
     checks = api.pages(
         f"{prefix}/commits/{job['sha']}/check-runs?filter=latest", "check_runs"
     )
-    statuses = api.get(f"{prefix}/commits/{job['sha']}/status")["statuses"]
+    statuses = api.pages(f"{prefix}/commits/{job['sha']}/status", "statuses")
     latest = {}
     for run in api.pages(
         f"{prefix}/actions/runs?head_sha={job['sha']}", "workflow_runs"

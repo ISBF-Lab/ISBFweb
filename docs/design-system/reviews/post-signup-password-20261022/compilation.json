@@ -22,7 +22,7 @@
   {
     "file": "plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-test.gjs",
     "compiled": true,
-    "sha256": "f4ab55fe02305318c67069d7acdaa545f04faef029b537f598f69c5ec723afe4"
+    "sha256": "21d9a5f9452ca34ca273d339880eeb369b05001269321abe181a84e5f022d56a"
   },
   {
     "file": "plugins/discourse-academy-roles/test/javascripts/integration/components/academy-password-setup-prompt-test.gjs",

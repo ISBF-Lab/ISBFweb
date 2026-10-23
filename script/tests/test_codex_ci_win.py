@@ -5,6 +5,7 @@ from pathlib import Path
 import sqlite3
 import tempfile
 import unittest
+from urllib.parse import parse_qs, urlsplit
 
 SPEC = importlib.util.spec_from_file_location(
     "codex_ci_win", Path(__file__).resolve().parents[1] / "codex_ci_win.py"
@@ -43,7 +44,29 @@ class FakeGitHub:
         return {"statuses": self.statuses}
 
     def pages(self, _path, key):
-        return self.checks if key == "check_runs" else self.runs
+        return {"check_runs": self.checks, "statuses": self.statuses, "workflow_runs": self.runs}[key]
+
+
+class PaginatedGitHub(FakeGitHub):
+    pages = ci.GitHub.pages
+
+    def __init__(self):
+        super().__init__()
+        self.calls = []
+
+    def get(self, path):
+        self.calls.append(path)
+        parsed = urlsplit(path)
+        if parsed.path.endswith("/status"):
+            query = parse_qs(parsed.query)
+            size = int(query.get("per_page", [30])[0])
+            offset = (int(query.get("page", [1])[0]) - 1) * size
+            return {"statuses": self.statuses[offset:offset + size], "total_count": len(self.statuses)}
+        if parsed.path.endswith("/check-runs"):
+            return {"check_runs": self.checks}
+        if parsed.path.endswith("/actions/runs"):
+            return {"workflow_runs": self.runs}
+        return super().get(path)
 
 
 class FakeDesktop:
@@ -99,6 +122,20 @@ class CheckTests(unittest.TestCase):
         self.api.statuses = [{"context": "external", "state": "failure"}]
         self.assertIsNone(ci.inspect_checks(self.api, self.job, 500))
         self.assertEqual(ci.inspect_checks(self.api, self.job, 531)["result"], "failure")
+
+    def test_classic_statuses_beyond_the_first_page_control_completion(self):
+        for state, expected in [("pending", None), ("failure", "failure"), ("success", "success")]:
+            with self.subTest(state=state):
+                api = PaginatedGitHub()
+                job = make_job(state="waiting")
+                api.statuses = [
+                    {"context": f"external-{index}", "state": "success"}
+                    for index in range(100)
+                ] + [{"context": "last-context", "state": state}]
+                self.assertIsNone(ci.inspect_checks(api, job, 500))
+                result = ci.inspect_checks(api, job, 531)
+                self.assertEqual(result["result"] if result else None, expected)
+                self.assertTrue(any("/status?per_page=100&page=2" in path for path in api.calls))
 
     def test_changed_head_cancels_the_wait(self):
         self.api.sha = "b" * 40

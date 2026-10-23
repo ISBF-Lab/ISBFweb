@@ -1,0 +1,26 @@
+{
+  "exit_code": 0,
+  "initial": {
+    "host_available": 4802433024,
+    "effective_available": 4802433024
+  },
+  "reserve": 536870912,
+  "budget": 4227858432,
+  "peak": 562438144,
+  "minimum_host_available": 4325453824,
+  "elapsed_seconds": 40.19,
+  "stop_reason": null,
+  "container_removed": true,
+  "command": [
+    "python3",
+    "/audit/review-fix-validation.py"
+  ],
+  "ci_before_fix": {
+    "commit": "20998c11f6807964317146283b01a7d97540c55d",
+    "windows_handoff": "success",
+    "frontend": "failure_in_modal_escape_test",
+    "job_url": "https://github.com/ISBF-Lab/ISBFweb/actions/runs/39836683925/job/120026742034"
+  },
+  "review_thread": "PRRT_kwDOUrf5Ns6vVac7",
+  "native_qunit_after_fix": "pending_PR_CI"
+}
