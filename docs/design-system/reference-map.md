@@ -65,7 +65,7 @@ boolean、enum 和 group_list 设置行，共四项控制；不新增样式或�
 [运行基线](baselines/README.md)、[19组执行记录](frontend-rollout-20261012.md)
 及[D01–D07代表提案](proposals/frontend-consistency-20261012.md)已建立。
 D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用户卡及资料上部保留，后台排除。
-遵照用户要求[控制内存](resource-policy.md)，停止生产排查。
+遵守现行[运行约束](resource-policy.md)，停止生产排查。
 
 ## 本轮已确认复用映射
 
@@ -225,3 +225,7 @@ A01品牌与共享语义变量、C01强调色/按钮机制 → C20独立404、�
 ## 2026-10-22 首页首次设密
 
 用户确认的“设置登录密码”双输入任务 → C07共享弹窗契约和C08的FormKit工程能力；表单单列、密码显隐、设置/跳过及关闭语义由本次明确确认。认证页外观不移植。服务端一次性标记及新账号信任窗口只作用于当前用户，新区域的源码与验证保存于[实施记录](reviews/post-signup-password-20261022/README.md)。
+
+## 2026-10-23 工作台十入口与动效
+
+`/isbf/workbench` 的顺序、方形卡片和图标反馈在 A08/C02 上采用[本次用户确认的增量](reviews/workbench-square-20261023/README.md)，页面壳仍取 A01。以记录中的实际活动主题前后源码和 source manifest 为准；旧九入口预览不是当前网站来源，也不能替换完整主题。发布证据见[上线记录](deployments/workbench-square-20261023/README.md)。

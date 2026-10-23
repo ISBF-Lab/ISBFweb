@@ -1,0 +1,33 @@
+{
+  "inspector_failures": 0,
+  "inspector_warnings": [
+    "unused-canvas"
+  ],
+  "skill_lint": {
+    "failures": 0,
+    "warnings": [
+      "shadow: inherited floating menu only"
+    ]
+  },
+  "bin_lint": {
+    "exit_code": 0,
+    "coverage": "No core linter for review artifacts; nothing linted"
+  },
+  "prettier": "Source files formatted with existing pnpm/Prettier",
+  "viewports": [
+    1440,
+    768,
+    390
+  ],
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "screenshots_opened": true,
+  "browser_container_removed": true,
+  "lint_container_removed": true,
+  "browser_peak_bytes": 223965184,
+  "lint_memory_limit_bytes": 1342177280,
+  "host_available_before_lint": 5002182656,
+  "production_changed": false
+}

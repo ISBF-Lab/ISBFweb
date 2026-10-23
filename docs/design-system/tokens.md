@@ -234,7 +234,7 @@ A15/C14 来源为 [2026-10-11 校准样式](references/plugins/discourse-avatar-
 [运行基线](baselines/README.md)、[19组执行记录](frontend-rollout-20261012.md)
 及[D01–D07代表提案](proposals/frontend-consistency-20261012.md)已建立。
 D01–D06及D07弹窗组合已人工确认，实际页面仍为In Progress；用户卡及资料上部保留，后台排除。
-遵照用户要求[控制内存](resource-policy.md)，停止生产排查。
+遵守现行[运行约束](resource-policy.md)，停止生产排查。
 
 ## 本轮已确认的用途组合
 
@@ -370,3 +370,7 @@ C20不增加全局token。背景、数字/球、主文字、次级文字、边�
 ## 2026-10-22 首次设密弹窗
 
 首页首次设密任务沿用C07的radius-md、space-4、语义边框与配色、pill/44px文字动作及手机留边和安全区；使用共享默认宽度。用户确认双密码字段与单列布局，没有新增全局token或认证页居中输入规则。来源与实际验证见[记录](reviews/post-signup-password-20261022/README.md)。
+
+## 2026-10-23 工作台方形卡片
+
+A08/C02 新增经用户确认的局部排布：卡片 1:1，面板内容宽度 696px 起五列、394px 起四列，更窄两列；手机 ≤600px 固定两列。间距仍为 14/8px，图标与文字复用现有大小组合，末行同尺寸居中。取消按屏高拉长；无新增全站 token。具体来源和范围见[工作台记录](reviews/workbench-square-20261023/README.md)。

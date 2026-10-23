@@ -1,0 +1,116 @@
+{
+  "scope": "Offline review fixture only",
+  "results": [
+    {
+      "width": 1440,
+      "height": 900,
+      "status": "passed",
+      "total": 9,
+      "available": 4,
+      "planned": 5,
+      "names": [
+        "学习资源",
+        "简历工具",
+        "校友网络",
+        "商城",
+        "课程专区",
+        "求职实习",
+        "校园服务",
+        "学生认证",
+        "资料库"
+      ],
+      "links": [
+        "https://isbf-one.com/isbf/learning",
+        "https://isbf-one.com/isbf/workbench/resume",
+        "https://isbf-one.com/isbf/alumni",
+        "https://isbf-one.com/isbf/marketplace"
+      ],
+      "columns": 3,
+      "overflow": false,
+      "minTarget": 148,
+      "lastRowFits": true,
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "menuEscape": true,
+      "keyboardFocus": true,
+      "reducedMotion": true,
+      "consoleErrors": []
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "status": "passed",
+      "total": 9,
+      "available": 4,
+      "planned": 5,
+      "names": [
+        "学习资源",
+        "简历工具",
+        "校友网络",
+        "商城",
+        "课程专区",
+        "求职实习",
+        "校园服务",
+        "学生认证",
+        "资料库"
+      ],
+      "links": [
+        "https://isbf-one.com/isbf/learning",
+        "https://isbf-one.com/isbf/workbench/resume",
+        "https://isbf-one.com/isbf/alumni",
+        "https://isbf-one.com/isbf/marketplace"
+      ],
+      "columns": 2,
+      "overflow": false,
+      "minTarget": 148,
+      "lastRowFits": true,
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "menuEscape": true,
+      "keyboardFocus": true,
+      "reducedMotion": true,
+      "consoleErrors": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "status": "passed",
+      "total": 9,
+      "available": 4,
+      "planned": 5,
+      "names": [
+        "学习资源",
+        "简历工具",
+        "校友网络",
+        "商城",
+        "课程专区",
+        "求职实习",
+        "校园服务",
+        "学生认证",
+        "资料库"
+      ],
+      "links": [
+        "https://isbf-one.com/isbf/learning",
+        "https://isbf-one.com/isbf/workbench/resume",
+        "https://isbf-one.com/isbf/alumni",
+        "https://isbf-one.com/isbf/marketplace"
+      ],
+      "columns": 1,
+      "overflow": false,
+      "minTarget": 128,
+      "lastRowFits": true,
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "menuEscape": true,
+      "keyboardFocus": true,
+      "reducedMotion": true,
+      "consoleErrors": []
+    }
+  ]
+}

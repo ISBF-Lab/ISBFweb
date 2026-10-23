@@ -1,0 +1,77 @@
+{
+  "scenario": "All currently linked services configured; review fixture, not live site state",
+  "services": [
+    {
+      "key": "learning",
+      "name": "学习资源",
+      "description": "查找课程学习资料",
+      "icon": "book-open",
+      "tone": "blue",
+      "href": "/isbf/learning"
+    },
+    {
+      "key": "courses",
+      "name": "课程专区",
+      "description": "汇集课程相关信息",
+      "icon": "graduation-cap",
+      "tone": "violet",
+      "href": null
+    },
+    {
+      "key": "careers",
+      "name": "求职实习",
+      "description": "寻找实习与就业机会",
+      "icon": "briefcase",
+      "tone": "amber",
+      "href": null
+    },
+    {
+      "key": "resume",
+      "name": "简历工具",
+      "description": "编辑与预览个人简历",
+      "icon": "file-lines",
+      "tone": "mint",
+      "href": "/isbf/workbench/resume"
+    },
+    {
+      "key": "campus",
+      "name": "校园服务",
+      "description": "办理校园生活事项",
+      "icon": "building-columns",
+      "tone": "blue",
+      "href": null
+    },
+    {
+      "key": "identity",
+      "name": "学生认证",
+      "description": "认证校园学生身份",
+      "icon": "id-card",
+      "tone": "amber",
+      "href": null
+    },
+    {
+      "key": "library",
+      "name": "资料库",
+      "description": "查找共享资料",
+      "icon": "database",
+      "tone": "violet",
+      "href": null
+    },
+    {
+      "key": "alumni",
+      "name": "校友网络",
+      "description": "查看校友目录与分布",
+      "icon": "user-group",
+      "tone": "mint",
+      "href": "/isbf/alumni"
+    },
+    {
+      "key": "marketplace",
+      "name": "商城",
+      "description": "浏览校园商品信息",
+      "icon": "bag-shopping",
+      "tone": "amber",
+      "href": "/isbf/marketplace"
+    }
+  ]
+}

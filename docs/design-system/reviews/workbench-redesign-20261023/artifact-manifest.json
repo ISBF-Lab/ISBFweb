@@ -1,0 +1,54 @@
+{
+  "artifacts": [
+    {
+      "path": "example.html",
+      "bytes": 33355,
+      "sha256": "a2620aab217f2200af88580d9d76df673b87fc68ca2fc48f3df21f5b07e49bd4"
+    },
+    {
+      "path": "site/index.html",
+      "bytes": 19847,
+      "sha256": "60e640a87ac8baf20ea654052a31fb78ff2c7e30aa6436e9947cc63e6e1d25af"
+    },
+    {
+      "path": "site/style.css",
+      "bytes": 12250,
+      "sha256": "ec33a83ffc77b8202cf5748e716ba9cd51b02e63f8832360d27317a4c4238c49"
+    },
+    {
+      "path": "site/preview.js",
+      "bytes": 1301,
+      "sha256": "6117789e8085a4362ee37abb5c1b215dd0bff0487fdafe7d1679c0021b207219"
+    },
+    {
+      "path": "screenshots/desktop-dark.png",
+      "bytes": 81179,
+      "sha256": "fff6a754754dc5aadb1be07affdda9f2e0fdb4a43f9393508e0e92a7cdbbc1f7"
+    },
+    {
+      "path": "screenshots/desktop-light.png",
+      "bytes": 80539,
+      "sha256": "f34655f3634a3080dd0f49680c22a4ac57068cf6d2c4a3be1a8554a59fe2ad65"
+    },
+    {
+      "path": "screenshots/mobile-dark.png",
+      "bytes": 68910,
+      "sha256": "bf6b6ccba81c2ce017826a06a27c491f5ed66cd6d6e5d7770ff9ea1503a1b7fa"
+    },
+    {
+      "path": "screenshots/mobile-light.png",
+      "bytes": 67781,
+      "sha256": "963e59da6b02c14a74ebbdaccb81a9220bd5734ea6f2966d3e40cd7d4ff344d6"
+    },
+    {
+      "path": "screenshots/tablet-dark.png",
+      "bytes": 66897,
+      "sha256": "618b459f37e2b7e47ce38614c12832cd6cff4decc807ed93b282a55e1311521e"
+    },
+    {
+      "path": "screenshots/tablet-light.png",
+      "bytes": 66096,
+      "sha256": "db8d08a5963472f3e7ba4fcacef454c19ae0108832af194f83e13a33050dc642"
+    }
+  ]
+}

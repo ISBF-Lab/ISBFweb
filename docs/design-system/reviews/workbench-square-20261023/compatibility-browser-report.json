@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "version": "candidate",
+  "full_ember_application": true,
+  "production_backend_used": false,
+  "views": [
+    {
+      "mobile": false,
+      "checks": [
+        "delayed shared sprite is corrected after the workbench mounts",
+        "shared original symbol remains unchanged",
+        "leaving before the shared sprite arrives cancels pending repair",
+        "returning with a loaded sprite creates one corrected symbol"
+      ]
+    },
+    {
+      "mobile": true,
+      "checks": [
+        "delayed shared sprite is corrected after the workbench mounts",
+        "shared original symbol remains unchanged",
+        "leaving before the shared sprite arrives cancels pending repair",
+        "returning with a loaded sprite creates one corrected symbol"
+      ]
+    }
+  ],
+  "errors": [],
+  "missing_assets": []
+}

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="ISBF 工作台：学习、成长与校园生活的常用服务。">
+    <title>工作台 · 国金综合平台 · 源码基线</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="before.css">
+    <script src="preview.js" defer></script>
+  </head>
+  <body class="is-before">
+    <svg class="isbf-icons" aria-hidden="true"><symbol id="icon-book-open" viewBox="0 0 512 512"><path d="M256 141.3l0 309.3 .5-.2C311.1 427.7 369.7 416 428.8 416l19.2 0 0-320-19.2 0c-42.2 0-84.1 8.4-123.1 24.6-16.8 7-33.4 13.9-49.7 20.7zM230.9 61.5L256 72 281.1 61.5C327.9 42 378.1 32 428.8 32L464 32c26.5 0 48 21.5 48 48l0 352c0 26.5-21.5 48-48 48l-35.2 0c-50.7 0-100.9 10-147.7 29.5l-12.8 5.3c-7.9 3.3-16.7 3.3-24.6 0l-12.8-5.3C184.1 490 133.9 480 83.2 480L48 480c-26.5 0-48-21.5-48-48L0 80C0 53.5 21.5 32 48 32l35.2 0c50.7 0 100.9 10 147.7 29.5z"></path></symbol>
+<symbol id="icon-graduation-cap" viewBox="0 0 576 512"><path d="M48 195.8l209.2 86.1c9.8 4 20.2 6.1 30.8 6.1s21-2.1 30.8-6.1l242.4-99.8c9-3.7 14.8-12.4 14.8-22.1s-5.8-18.4-14.8-22.1L318.8 38.1C309 34.1 298.6 32 288 32s-21 2.1-30.8 6.1L14.8 137.9C5.8 141.6 0 150.3 0 160L0 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-260.2zm48 71.7L96 384c0 53 86 96 192 96s192-43 192-96l0-116.6-142.9 58.9c-15.6 6.4-32.2 9.7-49.1 9.7s-33.5-3.3-49.1-9.7L96 267.4z"></path></symbol>
+<symbol id="icon-briefcase" viewBox="0 0 512 512"><path d="M200 48l112 0c4.4 0 8 3.6 8 8l0 40-128 0 0-40c0-4.4 3.6-8 8-8zm-56 8l0 40-80 0C28.7 96 0 124.7 0 160l0 96 512 0 0-96c0-35.3-28.7-64-64-64l-80 0 0-40c0-30.9-25.1-56-56-56L200 0c-30.9 0-56 25.1-56 56zM512 304l-192 0 0 16c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-16-192 0 0 112c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-112z"></path></symbol>
+<symbol id="icon-file-lines" viewBox="0 0 384 512"><path d="M0 64C0 28.7 28.7 0 64 0L213.5 0c17 0 33.3 6.7 45.3 18.7L365.3 125.3c12 12 18.7 28.3 18.7 45.3L384 448c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm208-5.5l0 93.5c0 13.3 10.7 24 24 24L325.5 176 208 58.5zM120 256c-13.3 0-24 10.7-24 24s10.7 24 24 24l144 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-144 0zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24l144 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-144 0z"></path></symbol>
+<symbol id="icon-building-columns" viewBox="0 0 512 512"><path d="M271.9 20.2c-9.8-5.6-21.9-5.6-31.8 0l-224 128c-12.6 7.2-18.8 22-15.1 36S17.5 208 32 208l32 0 0 208 0 0-51.2 38.4C4.7 460.4 0 469.9 0 480 0 497.7 14.3 512 32 512l448 0c17.7 0 32-14.3 32-32 0-10.1-4.7-19.6-12.8-25.6l-51.2-38.4 0-208 32 0c14.5 0 27.2-9.8 30.9-23.8s-2.5-28.8-15.1-36l-224-128zM400 208l0 208-64 0 0-208 64 0zm-112 0l0 208-64 0 0-208 64 0zm-112 0l0 208-64 0 0-208 64 0zM256 96a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path></symbol>
+<symbol id="icon-id-card" viewBox="0 0 576 512"><path d="M0 96C0 60.7 28.7 32 64 32l448 0c35.3 0 64 28.7 64 64L0 96zm0 48l576 0 0 272c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 144zM247.3 416c20.2 0 35.3-19.4 22.4-35-14.7-17.7-36.9-29-61.7-29l-64 0c-24.8 0-47 11.3-61.7 29-12.9 15.6 2.2 35 22.4 35l142.5 0zM176 312a56 56 0 1 0 0-112 56 56 0 1 0 0 112zM360 208c-13.3 0-24 10.7-24 24s10.7 24 24 24l112 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-112 0zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24l112 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-112 0z"></path></symbol>
+<symbol id="icon-database" viewBox="0 0 448 512"><path d="M448 205.8c-14.8 9.8-31.8 17.7-49.5 24-47 16.8-108.7 26.2-174.5 26.2S96.4 246.5 49.5 229.8c-17.6-6.3-34.7-14.2-49.5-24L0 288c0 44.2 100.3 80 224 80s224-35.8 224-80l0-82.2zm0-77.8l0-48C448 35.8 347.7 0 224 0S0 35.8 0 80l0 48c0 44.2 100.3 80 224 80s224-35.8 224-80zM398.5 389.8C351.6 406.5 289.9 416 224 416S96.4 406.5 49.5 389.8c-17.6-6.3-34.7-14.2-49.5-24L0 432c0 44.2 100.3 80 224 80s224-35.8 224-80l0-66.2c-14.8 9.8-31.8 17.7-49.5 24z"></path></symbol>
+<symbol id="icon-user-group" viewBox="0 0 576 512"><path d="M64 128a112 112 0 1 1 224 0 112 112 0 1 1 -224 0zM0 464c0-97.2 78.8-176 176-176s176 78.8 176 176l0 6c0 23.2-18.8 42-42 42L42 512c-23.2 0-42-18.8-42-42l0-6zM432 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240c79.5 0 144 64.5 144 144l0 22.4c0 23-18.6 41.6-41.6 41.6l-144.8 0c6.6-12.5 10.4-26.8 10.4-42l0-6c0-51.5-17.4-98.9-46.5-136.7 22.6-14.7 49.6-23.3 78.5-23.3z"></path></symbol>
+<symbol id="icon-bag-shopping" viewBox="0 0 448 512"><path d="M160 80c0-35.3 28.7-64 64-64s64 28.7 64 64l0 48-128 0 0-48zm-48 48l-64 0c-26.5 0-48 21.5-48 48L0 384c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-208c0-26.5-21.5-48-48-48l-64 0 0-48c0-61.9-50.1-112-112-112S112 18.1 112 80l0 48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"></path></symbol>
+<symbol id="icon-house" viewBox="0 0 512 512"><path d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"></path></symbol>
+<symbol id="icon-magnifying-glass" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376C296.3 401.1 253.9 416 208 416 93.1 416 0 322.9 0 208S93.1 0 208 0 416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></symbol>
+<symbol id="icon-bell" viewBox="0 0 448 512"><path d="M224 0c-17.7 0-32 14.3-32 32l0 3.2C119 50 64 114.6 64 192l0 21.7c0 48.1-16.4 94.8-46.4 132.4L7.8 358.3C2.7 364.6 0 372.4 0 380.5 0 400.1 15.9 416 35.5 416l376.9 0c19.6 0 35.5-15.9 35.5-35.5 0-8.1-2.7-15.9-7.8-22.2l-9.8-12.2C400.4 308.5 384 261.8 384 213.7l0-21.7c0-77.4-55-142-128-156.8l0-3.2c0-17.7-14.3-32-32-32zM162 464c7.1 27.6 32.2 48 62 48s54.9-20.4 62-48l-124 0z"></path></symbol>
+<symbol id="icon-calendar-days" viewBox="0 0 448 512"><path d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 32 0c35.3 0 64 28.7 64 64l0 288c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 128C0 92.7 28.7 64 64 64l32 0 0-32c0-17.7 14.3-32 32-32zM64 240l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 368l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"></path></symbol>
+<symbol id="icon-table-cells-large" viewBox="0 0 448 512"><path d="M384 96l-128 0 0 128 128 0 0-128zm64 128l0 192c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96C0 60.7 28.7 32 64 32l320 0c35.3 0 64 28.7 64 64l0 128zM64 288l0 128 128 0 0-128-128 0zm128-64l0-128-128 0 0 128 128 0zm64 64l0 128 128 0 0-128-128 0z"></path></symbol>
+<symbol id="icon-bookmark" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64L0 480c0 11.5 6.2 22.2 16.2 27.8s22.3 5.5 32.2-.4L192 421.3 335.5 507.4c9.9 5.9 22.2 6.1 32.2 .4S384 491.5 384 480l0-416c0-35.3-28.7-64-64-64L64 0z"></path></symbol>
+<symbol id="icon-user" viewBox="0 0 448 512"><path d="M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z"></path></symbol>
+<symbol id="icon-arrow-right" viewBox="0 0 512 512"><path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></symbol>
+<symbol id="icon-ellipsis" viewBox="0 0 448 512"><path d="M0 256a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm168 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm224-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path></symbol>
+<symbol id="icon-moon" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256S114.6 512 256 512c68.8 0 131.3-27.2 177.3-71.4 7.3-7 9.4-17.9 5.3-27.1s-13.7-14.9-23.8-14.1c-4.9 .4-9.8 .6-14.8 .6-101.6 0-184-82.4-184-184 0-72.1 41.5-134.6 102.1-164.8 9.1-4.5 14.3-14.3 13.1-24.4S322.6 8.5 312.7 6.3C294.4 2.2 275.4 0 256 0z"></path></symbol>
+<symbol id="icon-sun" viewBox="0 0 576 512"><path d="M288-32c8.4 0 16.3 4.4 20.6 11.7L364.1 72.3 468.9 46c8.2-2 16.9 .4 22.8 6.3S500 67 498 75.1l-26.3 104.7 92.7 55.5c7.2 4.3 11.7 12.2 11.7 20.6s-4.4 16.3-11.7 20.6L471.7 332.1 498 436.8c2 8.2-.4 16.9-6.3 22.8S477 468 468.9 466l-104.7-26.3-55.5 92.7c-4.3 7.2-12.2 11.7-20.6 11.7s-16.3-4.4-20.6-11.7L211.9 439.7 107.2 466c-8.2 2-16.8-.4-22.8-6.3S76 445 78 436.8l26.2-104.7-92.6-55.5C4.4 272.2 0 264.4 0 256s4.4-16.3 11.7-20.6L104.3 179.9 78 75.1c-2-8.2 .3-16.8 6.3-22.8S99 44 107.2 46l104.7 26.2 55.5-92.6 1.8-2.6c4.5-5.7 11.4-9.1 18.8-9.1zm0 144a144 144 0 1 0 0 288 144 144 0 1 0 0-288zm0 240a96 96 0 1 1 0-192 96 96 0 1 1 0 192z"></path></symbol>
+<symbol id="icon-circle-info" viewBox="0 0 512 512"><path d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zM224 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm-8 64l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24z"></path></symbol>
+<symbol id="icon-arrow-right-to-bracket" viewBox="0 0 512 512"><path d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0c53 0 96-43 96-96l0-256c0-53-43-96-96-96l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-9.4 182.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L242.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"></path></symbol></svg>
+    <a class="isbf-skip" href="#workbench">跳至工作台</a>
+    <div class="isbf-v2-shell">
+      <aside class="isbf-v2-side" aria-label="主导航">
+        <a class="isbf-v2-brand" href="https://isbf-one.com/latest" aria-label="国金综合平台"><span class="isbf-v2-brand__name">国金综合平台</span><span class="isbf-v2-brand__compact" aria-hidden="true">ISBF</span></a>
+        <nav class="isbf-v2-side__links" aria-label="站点导航"><a href="https://isbf-one.com/latest" title="首页"><svg class="d-icon " aria-hidden="true"><use href="#icon-house"></use></svg><span>首页</span></a>
+<a href="https://isbf-one.com/categories" title="探索"><svg class="d-icon " aria-hidden="true"><use href="#icon-magnifying-glass"></use></svg><span>探索</span></a>
+<a href="https://isbf-one.com/login" title="通知"><svg class="d-icon " aria-hidden="true"><use href="#icon-bell"></use></svg><span>通知</span></a>
+<a href="https://isbf-one.com/isbf/calendar" title="日历"><svg class="d-icon " aria-hidden="true"><use href="#icon-calendar-days"></use></svg><span>日历</span></a>
+<a href="https://isbf-one.com/isbf/workbench" aria-current="page" class="is-active" title="工作台"><svg class="d-icon " aria-hidden="true"><use href="#icon-table-cells-large"></use></svg><span>工作台</span></a>
+<a href="https://isbf-one.com/login" title="书签"><svg class="d-icon " aria-hidden="true"><use href="#icon-bookmark"></use></svg><span>书签</span></a>
+<a href="https://isbf-one.com/login" title="个人资料"><svg class="d-icon " aria-hidden="true"><use href="#icon-user"></use></svg><span>个人资料</span></a><details class="isbf-v2-more">
+    <summary aria-label="更多"><svg class="d-icon " aria-hidden="true"><use href="#icon-ellipsis"></use></svg><span>更多</span></summary>
+    <div class="isbf-v2-more__content">
+      <button class="isbf-v2-more__theme" type="button" aria-pressed="false"><svg class="d-icon " aria-hidden="true"><use href="#icon-moon"></use></svg><span>切换深色外观</span></button>
+      <a href="https://isbf-one.com/about"><svg class="d-icon " aria-hidden="true"><use href="#icon-circle-info"></use></svg>关于我们</a>
+      <a href="https://isbf-one.com/join/"><svg class="d-icon " aria-hidden="true"><use href="#icon-arrow-right-to-bracket"></use></svg>加入我们</a>
+    </div>
+  </details></nav>
+        <a class="isbf-v2-side__compose" href="https://isbf-one.com/new-topic"><span>发布</span><span class="isbf-v2-side__plus" aria-hidden="true">+</span></a>
+        <a class="isbf-v2-side__login" href="https://isbf-one.com/login"><svg class="d-icon " aria-hidden="true"><use href="#icon-user"></use></svg><span>登录</span></a>
+      </aside>
+    </div>
+    <main class="isbf-workbench" id="workbench" tabindex="-1">
+      <header class="isbf-workbench__header">
+        <h1>工作台</h1>
+        
+      </header>
+      <div class="isbf-workbench__catalogue isbf-before">
+        <ul class="isbf-before__grid" aria-label="校园服务"><li><a class="isbf-before__card" href="https://isbf-one.com/isbf/learning"><span class="isbf-before__icon --blue"><svg class="d-icon " aria-hidden="true"><use href="#icon-book-open"></use></svg></span><span class="isbf-before__name">学习资源</span></a></li>
+<li><div class="isbf-before__card"><span class="isbf-before__icon --violet"><svg class="d-icon " aria-hidden="true"><use href="#icon-graduation-cap"></use></svg></span><span class="isbf-before__name">课程专区</span></div></li>
+<li><div class="isbf-before__card"><span class="isbf-before__icon --amber"><svg class="d-icon " aria-hidden="true"><use href="#icon-briefcase"></use></svg></span><span class="isbf-before__name">求职实习</span></div></li>
+<li><a class="isbf-before__card" href="https://isbf-one.com/isbf/workbench/resume"><span class="isbf-before__icon --mint"><svg class="d-icon " aria-hidden="true"><use href="#icon-file-lines"></use></svg></span><span class="isbf-before__name">简历工具</span></a></li>
+<li><div class="isbf-before__card"><span class="isbf-before__icon --blue"><svg class="d-icon " aria-hidden="true"><use href="#icon-building-columns"></use></svg></span><span class="isbf-before__name">校园服务</span></div></li>
+<li><div class="isbf-before__card"><span class="isbf-before__icon --amber"><svg class="d-icon " aria-hidden="true"><use href="#icon-id-card"></use></svg></span><span class="isbf-before__name">学生认证</span></div></li>
+<li><div class="isbf-before__card"><span class="isbf-before__icon --violet"><svg class="d-icon " aria-hidden="true"><use href="#icon-database"></use></svg></span><span class="isbf-before__name">资料库</span></div></li>
+<li><a class="isbf-before__card" href="https://isbf-one.com/isbf/alumni"><span class="isbf-before__icon --mint"><svg class="d-icon " aria-hidden="true"><use href="#icon-user-group"></use></svg></span><span class="isbf-before__name">校友网络</span></a></li>
+<li><a class="isbf-before__card" href="https://isbf-one.com/isbf/marketplace"><span class="isbf-before__icon --amber"><svg class="d-icon " aria-hidden="true"><use href="#icon-bag-shopping"></use></svg></span><span class="isbf-before__name">商城</span></a></li></ul>
+      </div>
+      <div class="isbf-workbench__more"><details class="isbf-v2-more --mobile">
+    <summary aria-label="更多"><svg class="d-icon " aria-hidden="true"><use href="#icon-ellipsis"></use></svg><span>更多</span></summary>
+    <div class="isbf-v2-more__content">
+      <button class="isbf-v2-more__theme" type="button" aria-pressed="false"><svg class="d-icon " aria-hidden="true"><use href="#icon-moon"></use></svg><span>切换深色外观</span></button>
+      <a href="https://isbf-one.com/about"><svg class="d-icon " aria-hidden="true"><use href="#icon-circle-info"></use></svg>关于我们</a>
+      <a href="https://isbf-one.com/join/"><svg class="d-icon " aria-hidden="true"><use href="#icon-arrow-right-to-bracket"></use></svg>加入我们</a>
+    </div>
+  </details></div>
+    </main>
+    <nav class="isbf-v2-mobile-nav" aria-label="移动导航"><a href="https://isbf-one.com/latest" title="首页"><svg class="d-icon " aria-hidden="true"><use href="#icon-house"></use></svg><span>首页</span></a>
+<a href="https://isbf-one.com/categories" title="探索"><svg class="d-icon " aria-hidden="true"><use href="#icon-magnifying-glass"></use></svg><span>探索</span></a>
+<a href="https://isbf-one.com/isbf/calendar" title="日历"><svg class="d-icon " aria-hidden="true"><use href="#icon-calendar-days"></use></svg><span>日历</span></a>
+<a href="https://isbf-one.com/isbf/workbench" aria-current="page" class="is-active" title="工作台"><svg class="d-icon " aria-hidden="true"><use href="#icon-table-cells-large"></use></svg><span>工作台</span></a></nav>
+  </body>
+</html>

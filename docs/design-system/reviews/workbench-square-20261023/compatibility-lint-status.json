@@ -1,0 +1,15 @@
+{
+  "commands": [
+    {
+      "command": [
+        "ruby",
+        "bin/lint",
+        "--fix",
+        "themes/isbf-campus-feed/javascripts/discourse/components/isbf-profile-summary-section.gjs"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "exit_code": 0,
+  "serial": true
+}

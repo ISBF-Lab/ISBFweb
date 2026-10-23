@@ -1,0 +1,738 @@
+{
+  "passed": true,
+  "version": "candidate",
+  "full_ember_application": true,
+  "production_backend_used": false,
+  "views": [
+    {
+      "mobile": false,
+      "checks": [
+        "ten entries retain original order, square geometry, usable links and scoped bag correction",
+        "all seven available entries play once on actual hover or touch click",
+        "reduced motion keeps icons static",
+        "a newly available entry animates without rebinding",
+        "route changes clean animations and local sprites, returning mounts one instance"
+      ],
+      "geometry": [
+        {
+          "width": 1440,
+          "keys": [
+            "learning_resources",
+            "library",
+            "courses",
+            "careers",
+            "resume",
+            "campus_services",
+            "student_identity",
+            "alumni",
+            "marketplace",
+            "teamup"
+          ],
+          "sizes": [
+            [
+              426,
+              123.5,
+              152,
+              152
+            ],
+            [
+              592,
+              123.5,
+              152,
+              152
+            ],
+            [
+              758,
+              123.5,
+              152,
+              152
+            ],
+            [
+              924,
+              123.5,
+              152,
+              152
+            ],
+            [
+              1090,
+              123.5,
+              152,
+              152
+            ],
+            [
+              426,
+              289.5,
+              152,
+              152
+            ],
+            [
+              592,
+              289.5,
+              152,
+              152
+            ],
+            [
+              758,
+              289.5,
+              152,
+              152
+            ],
+            [
+              924,
+              289.5,
+              152,
+              152
+            ],
+            [
+              1090,
+              289.5,
+              152,
+              152
+            ]
+          ],
+          "overflow": false,
+          "columns": "5",
+          "links": [
+            "/isbf/learning",
+            "/isbf/library",
+            "/isbf/careers",
+            "/isbf/workbench/resume",
+            "/isbf/alumni",
+            "/isbf/marketplace",
+            "/isbf/teamup"
+          ]
+        },
+        {
+          "width": 1280,
+          "keys": [
+            "learning_resources",
+            "library",
+            "courses",
+            "careers",
+            "resume",
+            "campus_services",
+            "student_identity",
+            "alumni",
+            "marketplace",
+            "teamup"
+          ],
+          "sizes": [
+            [
+              352,
+              123.5,
+              152,
+              152
+            ],
+            [
+              518,
+              123.5,
+              152,
+              152
+            ],
+            [
+              684,
+              123.5,
+              152,
+              152
+            ],
+            [
+              850,
+              123.5,
+              152,
+              152
+            ],
+            [
+              1016,
+              123.5,
+              152,
+              152
+            ],
+            [
+              352,
+              289.5,
+              152,
+              152
+            ],
+            [
+              518,
+              289.5,
+              152,
+              152
+            ],
+            [
+              684,
+              289.5,
+              152,
+              152
+            ],
+            [
+              850,
+              289.5,
+              152,
+              152
+            ],
+            [
+              1016,
+              289.5,
+              152,
+              152
+            ]
+          ],
+          "overflow": false,
+          "columns": "5",
+          "links": [
+            "/isbf/learning",
+            "/isbf/library",
+            "/isbf/careers",
+            "/isbf/workbench/resume",
+            "/isbf/alumni",
+            "/isbf/marketplace",
+            "/isbf/teamup"
+          ]
+        },
+        {
+          "width": 1100,
+          "keys": [
+            "learning_resources",
+            "library",
+            "courses",
+            "careers",
+            "resume",
+            "campus_services",
+            "student_identity",
+            "alumni",
+            "marketplace",
+            "teamup"
+          ],
+          "sizes": [
+            [
+              424,
+              122.25,
+              139.5,
+              139.5
+            ],
+            [
+              577.5,
+              122.25,
+              139.5,
+              139.5
+            ],
+            [
+              731,
+              122.25,
+              139.5,
+              139.5
+            ],
+            [
+              884.5,
+              122.25,
+              139.5,
+              139.5
+            ],
+            [
+              424,
+              275.75,
+              139.5,
+              139.5
+            ],
+            [
+              577.5,
+              275.75,
+              139.5,
+              139.5
+            ],
+            [
+              731,
+              275.75,
+              139.5,
+              139.5
+            ],
+            [
+              884.5,
+              275.75,
+              139.5,
+              139.5
+            ],
+            [
+              577.5,
+              429.25,
+              139.5,
+              139.5
+            ],
+            [
+              731,
+              429.25,
+              139.5,
+              139.5
+            ]
+          ],
+          "overflow": false,
+          "columns": "4",
+          "links": [
+            "/isbf/learning",
+            "/isbf/library",
+            "/isbf/careers",
+            "/isbf/workbench/resume",
+            "/isbf/alumni",
+            "/isbf/marketplace",
+            "/isbf/teamup"
+          ]
+        },
+        {
+          "width": 1024,
+          "keys": [
+            "learning_resources",
+            "library",
+            "courses",
+            "careers",
+            "resume",
+            "campus_services",
+            "student_identity",
+            "alumni",
+            "marketplace",
+            "teamup"
+          ],
+          "sizes": [
+            [
+              386,
+              119.390625,
+              130,
+              130
+            ],
+            [
+              530,
+              119.390625,
+              130,
+              130
+            ],
+            [
+              674,
+              119.390625,
+              130,
+              130
+            ],
+            [
+              818,
+              119.390625,
+              130,
+              130
+            ],
+            [
+              386,
+              263.390625,
+              130,
+              130
+            ],
+            [
+              530,
+              263.390625,
+              130,
+              130
+            ],
+            [
+              674,
+              263.390625,
+              130,
+              130
+            ],
+            [
+              818,
+              263.390625,
+              130,
+              130
+            ],
+            [
+              530,
+              407.390625,
+              130,
+              130
+            ],
+            [
+              674,
+              407.390625,
+              130,
+              130
+            ]
+          ],
+          "overflow": false,
+          "columns": "4",
+          "links": [
+            "/isbf/learning",
+            "/isbf/library",
+            "/isbf/careers",
+            "/isbf/workbench/resume",
+            "/isbf/alumni",
+            "/isbf/marketplace",
+            "/isbf/teamup"
+          ]
+        },
+        {
+          "width": 768,
+          "keys": [
+            "learning_resources",
+            "library",
+            "courses",
+            "careers",
+            "resume",
+            "campus_services",
+            "student_identity",
+            "alumni",
+            "marketplace",
+            "teamup"
+          ],
+          "sizes": [
+            [
+              176,
+              116,
+              118.5,
+              118.5
+            ],
+            [
+              308.5,
+              116,
+              118.5,
+              118.5
+            ],
+            [
+              441,
+              116,
+              118.5,
+              118.5
+            ],
+            [
+              573.5,
+              116,
+              118.5,
+              118.5
+            ],
+            [
+              176,
+              248.5,
+              118.5,
+              118.5
+            ],
+            [
+              308.5,
+              248.5,
+              118.5,
+              118.5
+            ],
+            [
+              441,
+              248.5,
+              118.5,
+              118.5
+            ],
+            [
+              573.5,
+              248.5,
+              118.5,
+              118.5
+            ],
+            [
+              308.5,
+              381,
+              118.5,
+              118.5
+            ],
+            [
+              441,
+              381,
+              118.5,
+              118.5
+            ]
+          ],
+          "overflow": false,
+          "columns": "4",
+          "links": [
+            "/isbf/learning",
+            "/isbf/library",
+            "/isbf/careers",
+            "/isbf/workbench/resume",
+            "/isbf/alumni",
+            "/isbf/marketplace",
+            "/isbf/teamup"
+          ]
+        }
+      ]
+    },
+    {
+      "mobile": true,
+      "checks": [
+        "ten entries retain original order, square geometry, usable links and scoped bag correction",
+        "all seven available entries play once on actual hover or touch click",
+        "reduced motion keeps icons static",
+        "a newly available entry animates without rebinding",
+        "route changes clean animations and local sprites, returning mounts one instance"
+      ],
+      "geometry": [
+        {
+          "width": 320,
+          "keys": [
+            "learning_resources",
+            "library",
+            "courses",
+            "careers",
+            "resume",
+            "campus_services",
+            "student_identity",
+            "alumni",
+            "marketplace",
+            "teamup"
+          ],
+          "sizes": [
+            [
+              25,
+              92,
+              131,
+              131
+            ],
+            [
+              164,
+              92,
+              131,
+              131
+            ],
+            [
+              25,
+              231,
+              131,
+              131
+            ],
+            [
+              164,
+              231,
+              131,
+              131
+            ],
+            [
+              25,
+              370,
+              131,
+              131
+            ],
+            [
+              164,
+              370,
+              131,
+              131
+            ],
+            [
+              25,
+              509,
+              131,
+              131
+            ],
+            [
+              164,
+              509,
+              131,
+              131
+            ],
+            [
+              25,
+              648,
+              131,
+              131
+            ],
+            [
+              164,
+              648,
+              131,
+              131
+            ]
+          ],
+          "overflow": false,
+          "columns": "2",
+          "links": [
+            "/isbf/learning",
+            "/isbf/library",
+            "/isbf/careers",
+            "/isbf/workbench/resume",
+            "/isbf/alumni",
+            "/isbf/marketplace",
+            "/isbf/teamup"
+          ]
+        },
+        {
+          "width": 390,
+          "keys": [
+            "learning_resources",
+            "library",
+            "courses",
+            "careers",
+            "resume",
+            "campus_services",
+            "student_identity",
+            "alumni",
+            "marketplace",
+            "teamup"
+          ],
+          "sizes": [
+            [
+              25,
+              92,
+              166,
+              166
+            ],
+            [
+              199,
+              92,
+              166,
+              166
+            ],
+            [
+              25,
+              266,
+              166,
+              166
+            ],
+            [
+              199,
+              266,
+              166,
+              166
+            ],
+            [
+              25,
+              440,
+              166,
+              166
+            ],
+            [
+              199,
+              440,
+              166,
+              166
+            ],
+            [
+              25,
+              614,
+              166,
+              166
+            ],
+            [
+              199,
+              614,
+              166,
+              166
+            ],
+            [
+              25,
+              788,
+              166,
+              166
+            ],
+            [
+              199,
+              788,
+              166,
+              166
+            ]
+          ],
+          "overflow": false,
+          "columns": "2",
+          "links": [
+            "/isbf/learning",
+            "/isbf/library",
+            "/isbf/careers",
+            "/isbf/workbench/resume",
+            "/isbf/alumni",
+            "/isbf/marketplace",
+            "/isbf/teamup"
+          ]
+        },
+        {
+          "width": 600,
+          "keys": [
+            "learning_resources",
+            "library",
+            "courses",
+            "careers",
+            "resume",
+            "campus_services",
+            "student_identity",
+            "alumni",
+            "marketplace",
+            "teamup"
+          ],
+          "sizes": [
+            [
+              25,
+              92,
+              271,
+              271
+            ],
+            [
+              304,
+              92,
+              271,
+              271
+            ],
+            [
+              25,
+              371,
+              271,
+              271
+            ],
+            [
+              304,
+              371,
+              271,
+              271
+            ],
+            [
+              25,
+              650,
+              271,
+              271
+            ],
+            [
+              304,
+              650,
+              271,
+              271
+            ],
+            [
+              25,
+              929,
+              271,
+              271
+            ],
+            [
+              304,
+              929,
+              271,
+              271
+            ],
+            [
+              25,
+              1208,
+              271,
+              271
+            ],
+            [
+              304,
+              1208,
+              271,
+              271
+            ]
+          ],
+          "overflow": false,
+          "columns": "2",
+          "links": [
+            "/isbf/learning",
+            "/isbf/library",
+            "/isbf/careers",
+            "/isbf/workbench/resume",
+            "/isbf/alumni",
+            "/isbf/marketplace",
+            "/isbf/teamup"
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "missing_assets": []
+}

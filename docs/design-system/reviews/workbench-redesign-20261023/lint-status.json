@@ -1,0 +1,16 @@
+{
+  "bin_lint": {
+    "exit_code": 0,
+    "result": "No core linter for the review directory; nothing was linted"
+  },
+  "prettier": "Preview CSS, JS and build script formatted using repository pnpm tool",
+  "skill_lint": {
+    "failures": 0,
+    "warnings": [
+      {
+        "id": "shadow",
+        "reason": "Only the floating More menu has a shadow"
+      }
+    ]
+  }
+}

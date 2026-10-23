@@ -1,0 +1,46 @@
+{
+  "scope": "Review fixture, not live configuration",
+  "directions": [
+    {
+      "key": "learn",
+      "verb": "学",
+      "name": "学习资源",
+      "description": "按年级与课程查找学习资料",
+      "href": "/isbf/learning",
+      "planned": [
+        "课程专区",
+        "资料库"
+      ]
+    },
+    {
+      "key": "write",
+      "verb": "写",
+      "name": "简历工具",
+      "description": "编辑与预览个人简历",
+      "href": "/isbf/workbench/resume",
+      "planned": [
+        "求职实习"
+      ]
+    },
+    {
+      "key": "connect",
+      "verb": "联",
+      "name": "校友网络",
+      "description": "查看校友目录与分布",
+      "href": "/isbf/alumni",
+      "planned": [
+        "学生认证"
+      ]
+    },
+    {
+      "key": "browse",
+      "verb": "逛",
+      "name": "商城",
+      "description": "浏览校园商品信息",
+      "href": "/isbf/marketplace",
+      "planned": [
+        "校园服务"
+      ]
+    }
+  ]
+}

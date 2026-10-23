@@ -1,0 +1,75 @@
+{
+  "source_version": "1a0aaaf759f4c638661b7081afe3469b14cd2078237682c9ee029ef792790f5f",
+  "theme_id": 4,
+  "scope": "User-confirmed A08/C02 workbench increment plus a required compatibility repair to a concurrent profile module; deployed CSS preserves the profile import",
+  "sources": [
+    {
+      "relative": "common/common.scss",
+      "field_id": 197,
+      "sha256": "c523b1f5fbca0eb0ccae2736c4fd5d69be4077d8677eddeba04eaa29c99f5148"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-v2-workbench.gjs",
+      "field_id": 207,
+      "sha256": "1eafcd04c8e2c046c39b24d8ba29e2441705668bf36f282caf15c7c292d24e04"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-profile-summary-section.gjs",
+      "field_id": 492,
+      "sha256": "ce3296c6136daba3c91eed3c101031f492ee7485565e6f777bd2279c5296e018"
+    }
+  ],
+  "references": {
+    "shell": "A01",
+    "workbench": "A08/C02"
+  },
+  "verification": {
+    "passed": true,
+    "source_version": "9adc7a09052cea850d11152bcecbafb94dd7135d65bcbebbff2362f5126dfe07",
+    "native_client_views": 2,
+    "viewport_checks": 8,
+    "modules": 188,
+    "style_variants": 4,
+    "lint_exit_code": 0,
+    "production_backend_used_for_tests": false,
+    "delayed_sprite_verified": true,
+    "current_theme_modules": 191,
+    "compatibility_native_views": 2,
+    "production_browser_passed": true,
+    "final_runtime_source_version": "1a0aaaf759f4c638661b7081afe3469b14cd2078237682c9ee029ef792790f5f"
+  },
+  "reference_integrity": [
+    {
+      "path": "theme-4/common/common.scss.txt",
+      "sha256": "9878f3a38bac37dd717a1139252f9e700dfdcbc112af4d2fb51fd6d5f30e265f"
+    },
+    {
+      "path": "theme-4/javascripts/discourse/components/isbf-v2-workbench.gjs.txt",
+      "sha256": "cafa3ca03b88038b8ce95ba31a83356c6bb5ca7df481f59816d2ba1d526ba74b"
+    }
+  ],
+  "workbench_source_version": "9adc7a09052cea850d11152bcecbafb94dd7135d65bcbebbff2362f5126dfe07",
+  "workbench_sources": [
+    {
+      "relative": "common/common.scss",
+      "field_id": 197,
+      "before_sha256": "6ee0ec0f6a923d9d96d292f72f6e00c068ee234391060561d5960971ba1f6a55",
+      "sha256": "8d04450f025e00a8f93951cc34175803b96f9d0f38951513150e83d57b398604"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-v2-workbench.gjs",
+      "field_id": 207,
+      "before_sha256": "bd5140caccb9eb4c41cd96079515b57e07ba31ca4832c5bfd3aea0a799369e63",
+      "sha256": "1eafcd04c8e2c046c39b24d8ba29e2441705668bf36f282caf15c7c292d24e04"
+    }
+  ],
+  "compatibility_source_version": "14fb55f000c2d82c9bc109d58e1382b3b61e8d9e262798059cd7b2b36bc2c521",
+  "compatibility_sources": [
+    {
+      "relative": "javascripts/discourse/components/isbf-profile-summary-section.gjs",
+      "field_id": 492,
+      "before_sha256": "80ee1b844637302a5413cfacc3a0a9a719d9060571ff03b33a23b56836a6254f",
+      "sha256": "ce3296c6136daba3c91eed3c101031f492ee7485565e6f777bd2279c5296e018"
+    }
+  ]
+}

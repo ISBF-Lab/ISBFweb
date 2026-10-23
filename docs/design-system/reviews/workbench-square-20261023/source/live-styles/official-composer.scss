@@ -1,0 +1,471 @@
+html.composer-open
+  body:has(.isbf-v2-shell)
+  #reply-control.open:has(.isbf-v2-composer):has(.isbf-official-composer) {
+  --isbf-official-compose-gap: 8px;
+
+  .d-editor-textarea-column {
+    display: grid;
+    grid-template-columns: fit-content(40%) fit-content(24%) minmax(0, 1fr);
+    grid-template-rows: auto auto auto minmax(0, 1fr);
+    align-items: start;
+    gap: var(--isbf-official-compose-gap);
+    box-sizing: border-box;
+    height: 100%;
+    min-height: 0;
+    padding: 12px 16px 8px;
+    overflow-y: auto;
+    scroll-padding-block: 12px;
+  }
+
+  .composer-fields,
+  .composer-fields > span,
+  .title-and-category,
+  .isbf-official-composer,
+  .isbf-official-composer__menus {
+    display: contents;
+  }
+
+  .composer-fields,
+  .title-and-category {
+    position: static;
+    inset: auto;
+    z-index: auto;
+    width: auto;
+    height: auto;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow: visible;
+  }
+
+  .isbf-v2-composer,
+  .isbf-v2-composer-options,
+  .category-input,
+  .title-and-category > .title-input,
+  .composer-fields > .title-input {
+    display: none;
+  }
+
+  .isbf-official-composer__campus,
+  .isbf-official-composer__type,
+  .tags-input {
+    grid-row: 1;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .isbf-official-composer__campus,
+  .isbf-official-composer__type {
+    justify-self: start;
+    width: max-content;
+  }
+
+  .isbf-official-composer__campus {
+    grid-column: 1;
+  }
+
+  .isbf-official-composer__type {
+    grid-column: 2;
+  }
+
+  .tags-input {
+    grid-column: 3;
+  }
+
+  .isbf-official-picker__trigger,
+  .select-kit,
+  .select-kit-header {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 44px;
+  }
+
+  .isbf-official-picker__trigger {
+    justify-content: flex-start;
+    gap: 8px;
+    width: auto;
+    padding-inline: 12px;
+  }
+
+  .isbf-official-picker__trigger .d-button-label,
+  .select-kit-header .selected-name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .isbf-official-calendar-composer {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--isbf-official-compose-gap);
+    min-width: 0;
+    margin: 0;
+  }
+
+  .isbf-official-calendar-composer .btn {
+    justify-content: flex-start;
+    gap: 8px;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid var(--isbf-v2-border);
+    border-radius: var(--isbf-v2-radius-sm);
+    background: var(--isbf-v2-surface);
+    color: var(--isbf-v2-text);
+    font-size: var(--isbf-v2-font-sm);
+  }
+
+  .isbf-official-calendar-composer .d-button-label {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .isbf-official-calendar-composer .d-icon {
+    flex: none;
+  }
+
+  .isbf-v2-composer-title {
+    display: block;
+    position: static;
+    inset: auto;
+    z-index: auto;
+    grid-column: 1 / -1;
+    grid-row: 3;
+    order: 0;
+    min-width: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    background: transparent;
+  }
+
+  .isbf-v2-composer-title .title-input {
+    display: block;
+    min-width: 0;
+    min-height: 44px;
+    margin: 0;
+  }
+
+  .isbf-v2-composer-title .title-input input {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 44px;
+  }
+
+  &:not(:has(.isbf-v2-composer-title)) {
+    .title-and-category > .title-input,
+    .composer-fields > .title-input {
+      display: block;
+      position: static;
+      grid-column: 1 / -1;
+      grid-row: 3;
+      width: 100%;
+      min-width: 0;
+      max-width: none;
+      min-height: 44px;
+      margin: 0;
+    }
+
+    .title-input input {
+      box-sizing: border-box;
+      width: 100%;
+      min-height: 44px;
+    }
+  }
+
+  .d-editor-textarea-wrapper {
+    position: static;
+    grid-column: 1 / -1;
+    grid-row: 4;
+    align-self: stretch;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+  }
+
+  .d-editor-input {
+    flex: 1 1 0;
+    box-sizing: border-box;
+    min-height: 0;
+    padding: 12px;
+    overflow-y: auto;
+  }
+}
+
+.isbf-official-calendar-editor {
+  .isbf-official-calendar-editor__tabs {
+    display: flex;
+    gap: 8px;
+    margin-block-end: 12px;
+  }
+
+  .isbf-official-calendar-editor__tabs .btn {
+    flex: 1;
+    min-width: 0;
+    min-height: 44px;
+    white-space: normal;
+  }
+
+  .isbf-official-calendar-editor__tabs .btn[aria-selected="true"] {
+    background: var(--isbf-v2-hover);
+    color: var(--isbf-v2-text);
+    box-shadow: inset 0 -2px var(--isbf-v2-accent);
+  }
+
+  .form-kit,
+  [role="tabpanel"],
+  .form-kit__collection,
+  .isbf-official-calendar-editor__item,
+  .form-kit__field,
+  .form-kit__container-content,
+  .form-kit__control-input-wrapper,
+  .isbf-official-calendar-editor__datetime {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .form-kit {
+    gap: 12px;
+  }
+
+  [role="tabpanel"][hidden] {
+    display: none;
+  }
+
+  [role="tabpanel"]:not([hidden]) > .form-kit__collection {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .isbf-official-calendar-editor__item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+  }
+
+  .form-kit__field {
+    gap: 4px;
+  }
+
+  .form-kit__control-checkbox-label {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .isbf-official-calendar-editor__add,
+  .form-kit__button,
+  .modal-close {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .isbf-official-calendar-editor__datetime {
+    position: relative;
+    min-width: 0;
+  }
+
+  .isbf-official-calendar-editor__date-placeholder {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 44px;
+    left: 12px;
+    color: var(--isbf-v2-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  // Native date segments must remain visible during keyboard entry.
+  .isbf-official-calendar-editor__datetime[data-empty="true"]:not(
+      :focus-within
+    ) {
+    input {
+      color: transparent;
+    }
+
+    input::-webkit-datetime-edit {
+      opacity: 0;
+    }
+
+    input::-webkit-calendar-picker-indicator {
+      color: var(--isbf-v2-text);
+      opacity: 1;
+    }
+
+    .isbf-official-calendar-editor__date-placeholder {
+      display: block;
+    }
+  }
+
+  .isbf-official-calendar-editor__remove {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid var(--danger);
+    border-radius: var(--isbf-v2-radius-sm);
+    background: transparent;
+    color: var(--danger);
+
+    .d-icon {
+      color: inherit;
+    }
+
+    &:hover {
+      background: var(--danger-low);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--isbf-v2-focus-ring);
+      outline-offset: 2px;
+    }
+  }
+
+  input:not([type="checkbox"]),
+  select {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 44px;
+  }
+}
+
+@media (width <= 600px) {
+  html.composer-open
+    body:has(.isbf-v2-shell)
+    #reply-control.open:has(.isbf-v2-composer):has(.isbf-official-composer) {
+    height: calc(var(--composer-vh, 1dvh) * 100);
+    max-height: calc(var(--composer-vh, 1dvh) * 100);
+
+    .reply-area {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      height: 100%;
+      min-height: 0;
+      padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+    }
+
+    .reply-to {
+      position: static;
+      flex: none;
+      align-items: center;
+      height: 48px;
+      min-height: 48px;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--isbf-v2-border);
+    }
+
+    .reply-to .composer-action-title,
+    .reply-to .composer-controls {
+      display: flex;
+    }
+
+    .isbf-v2-composer-cancel {
+      display: none;
+    }
+
+    .wmd-controls {
+      display: flex;
+      position: relative;
+      flex: 1 1 0;
+      flex-direction: column;
+      box-sizing: border-box;
+      min-height: 0;
+      padding-bottom: 0;
+      overflow: hidden;
+    }
+
+    .d-editor,
+    .d-editor-container {
+      position: static;
+      flex: 1 1 0;
+      min-height: 0;
+    }
+
+    .d-editor-textarea-column {
+      grid-template-rows: auto auto auto minmax(84px, 1fr);
+    }
+
+    .d-editor-button-bar__wrap {
+      position: static;
+      inset: auto;
+      flex: none;
+      width: auto;
+      height: auto;
+      min-height: 44px;
+      padding: 4px 8px;
+    }
+
+    .submit-panel {
+      position: static;
+      inset: auto;
+      flex: none;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      box-sizing: border-box;
+      width: 100%;
+      height: auto;
+      min-height: 52px;
+      padding: 4px 16px;
+    }
+
+    .submit-panel > span {
+      min-width: 0;
+    }
+
+    .save-or-cancel {
+      position: static;
+      inset: auto;
+      flex: none;
+      gap: 8px;
+      width: auto;
+      height: auto;
+      min-height: 44px;
+      margin-left: auto;
+      padding: 0;
+    }
+
+    .save-or-cancel .btn-primary,
+    .save-or-cancel .discard-button {
+      display: inline-flex;
+      position: static;
+      min-width: 44px;
+      min-height: 44px;
+      margin: 0;
+    }
+  }
+
+  html.composer-open.keyboard-visible
+    body:has(.isbf-v2-shell)
+    #reply-control.open:has(.isbf-v2-composer):has(.isbf-official-composer)
+    .reply-area {
+    padding-bottom: 0;
+  }
+}

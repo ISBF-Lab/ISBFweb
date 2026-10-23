@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="ISBF 工作台：学习、成长与校园生活的常用服务。">
+    <title>工作台 · 学写联逛 · 国金综合平台</title>
+    <style>
+:root {
+  color-scheme: light;
+  --primary: #17202a;
+  --secondary: #fff;
+  --tertiary: #1769aa;
+  --primary-medium: #5d6872;
+  --primary-low: #e4e8eb;
+  --primary-very-low: #f4f6f8;
+  --font-family:
+    system-ui, -apple-system, "PingFang SC", "Noto Sans CJK SC", sans-serif;
+  --isbf-v2-text: var(--primary);
+  --isbf-v2-background: var(--secondary);
+  --isbf-v2-surface: var(--secondary);
+  --isbf-v2-muted: var(--primary-medium);
+  --isbf-v2-border: var(--primary-low);
+  --isbf-v2-hover: var(--primary-very-low);
+  --isbf-v2-active-surface: var(--primary-very-low);
+  --isbf-v2-accent: var(--tertiary);
+  --isbf-v2-accent-contrast: var(--secondary);
+  --isbf-v2-focus-ring: color-mix(
+    in srgb,
+    var(--isbf-v2-accent) 65%,
+    var(--isbf-v2-text)
+  );
+  --isbf-v2-font-family: var(--font-family);
+  --isbf-v2-font-xs: 13px;
+  --isbf-v2-font-sm: 15px;
+  --isbf-v2-font-md: 16px;
+  --isbf-v2-font-lg: 18px;
+  --isbf-v2-font-xl: 20px;
+  --isbf-v2-weight-medium: 600;
+  --isbf-v2-weight-bold: 750;
+  --isbf-v2-space-1: 4px;
+  --isbf-v2-space-2: 8px;
+  --isbf-v2-space-3: 12px;
+  --isbf-v2-space-4: 16px;
+  --isbf-v2-space-5: 20px;
+  --isbf-v2-space-6: 24px;
+  --isbf-v2-space-8: 32px;
+  --isbf-v2-radius-sm: 8px;
+  --isbf-v2-radius-md: 16px;
+  --isbf-v2-radius-pill: 999px;
+  --isbf-v2-transition-fast: 120ms ease;
+  --isbf-v2-left-width: 260px;
+  --isbf-v2-gap: 24px;
+  --isbf-v2-layout-max: 1260px;
+  --isbf-v2-page-left: max(16px, calc((100vw - var(--isbf-v2-layout-max)) / 2));
+  --isbf-v2-feed-left: calc(
+    var(--isbf-v2-page-left) + var(--isbf-v2-left-width) + var(--isbf-v2-gap)
+  );
+  --isbf-v2-feature-width: min(
+    920px,
+    calc(100vw - var(--isbf-v2-feed-left) - 24px)
+  );
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --primary: #e7e9ea;
+  --secondary: #101413;
+  --tertiary: #72c5fa;
+  --primary-medium: #adb5b8;
+  --primary-low: #303735;
+  --primary-very-low: #1a201e;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--isbf-v2-background);
+  color: var(--isbf-v2-text);
+  font-family: var(--isbf-v2-font-family);
+  font-size: var(--isbf-v2-font-md);
+  line-height: 1.5;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+summary {
+  font: inherit;
+}
+button,
+a,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--isbf-v2-focus-ring);
+  outline-offset: 3px;
+}
+button {
+  cursor: pointer;
+}
+.d-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex: none;
+  fill: currentcolor;
+  vertical-align: -0.125em;
+}
+.isbf-icons {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+.isbf-skip {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  padding: 12px 16px;
+  background: var(--isbf-v2-surface);
+}
+.isbf-skip:focus {
+  top: 12px;
+}
+
+.isbf-v2-side {
+  position: fixed;
+  top: 0;
+  left: var(--isbf-v2-page-left);
+  display: flex;
+  flex-direction: column;
+  width: var(--isbf-v2-left-width);
+  height: 100dvh;
+  padding: 8px 12px 16px 0;
+}
+.isbf-v2-brand {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 56px;
+  margin-bottom: 12px;
+  padding: 0 12px;
+  border-radius: var(--isbf-v2-radius-pill);
+  font-size: var(--isbf-v2-font-lg);
+  font-weight: 800;
+}
+.isbf-v2-brand__compact {
+  display: none;
+}
+.isbf-v2-side__links {
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+}
+.isbf-v2-side__links > a,
+.isbf-v2-more > summary {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: fit-content;
+  min-height: 52px;
+  padding: 0 16px;
+  border-radius: var(--isbf-v2-radius-pill);
+  font-size: var(--isbf-v2-font-xl);
+}
+.isbf-v2-side__links .d-icon,
+.isbf-v2-more > summary .d-icon {
+  width: 26px;
+  height: 26px;
+}
+.isbf-v2-side__links .is-active {
+  background: var(--isbf-v2-active-surface);
+  font-weight: var(--isbf-v2-weight-bold);
+}
+.isbf-v2-side__compose {
+  display: grid;
+  place-items: center;
+  width: calc(100% - 20px);
+  min-height: 52px;
+  margin-top: 18px;
+  border-radius: var(--isbf-v2-radius-pill);
+  background: var(--isbf-v2-accent);
+  color: var(--isbf-v2-accent-contrast);
+  font-size: 17px;
+  font-weight: var(--isbf-v2-weight-bold);
+}
+.isbf-v2-side__plus {
+  display: none;
+}
+.isbf-v2-side__login {
+  display: flex;
+  align-items: center;
+  gap: var(--isbf-v2-space-3);
+  width: fit-content;
+  min-height: 52px;
+  margin-top: auto;
+  padding: 0 16px;
+  border-radius: var(--isbf-v2-radius-pill);
+  color: var(--isbf-v2-muted);
+  font-size: var(--isbf-v2-font-sm);
+}
+.isbf-v2-side__login .d-icon {
+  width: 20px;
+  height: 20px;
+}
+.isbf-v2-more {
+  position: relative;
+}
+.isbf-v2-more > summary {
+  list-style: none;
+  cursor: pointer;
+}
+.isbf-v2-more > summary::-webkit-details-marker {
+  display: none;
+}
+.isbf-v2-more__content {
+  position: absolute;
+  z-index: 60;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 220px;
+  padding: 8px;
+  border: 1px solid var(--isbf-v2-border);
+  border-radius: var(--isbf-v2-radius-md);
+  background: var(--isbf-v2-surface);
+  box-shadow: 0 8px 28px rgb(0 0 0 / 22%);
+}
+.isbf-v2-more__content > a,
+.isbf-v2-more__content > button {
+  display: flex;
+  align-items: center;
+  gap: var(--isbf-v2-space-3);
+  width: 100%;
+  min-height: 48px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--isbf-v2-radius-sm);
+  background: transparent;
+  color: var(--isbf-v2-text);
+  font-size: var(--isbf-v2-font-sm);
+  text-align: left;
+}
+.isbf-v2-more__content .d-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.isbf-workbench {
+  width: var(--isbf-v2-feature-width);
+  min-height: 100dvh;
+  margin-inline-start: var(--isbf-v2-feed-left);
+  padding: 32px 26px 80px;
+  border-inline: 1px solid var(--isbf-v2-border);
+  outline: none;
+}
+.isbf-workbench__header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: var(--isbf-v2-weight-bold);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.isbf-workbench__intro {
+  margin: var(--isbf-v2-space-3) 0 0;
+  color: var(--isbf-v2-muted);
+  font-size: var(--isbf-v2-font-sm);
+}
+.isbf-workbench__catalogue {
+  container-type: inline-size;
+  margin-top: var(--isbf-v2-space-8);
+}
+.isbf-workbench__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--isbf-v2-space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.isbf-workbench__item {
+  grid-column: span 12;
+  min-width: 0;
+}
+.isbf-workbench__service {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) 16px;
+  align-items: start;
+  gap: var(--isbf-v2-space-3);
+  min-height: 148px;
+  height: 100%;
+  padding: var(--isbf-v2-space-4);
+  border: 1px solid var(--isbf-v2-border);
+  border-radius: var(--isbf-v2-radius-sm);
+  background: var(--isbf-v2-hover);
+}
+.isbf-workbench__icon {
+  width: 18px;
+  height: 18px;
+  margin-top: 5px;
+  color: var(--isbf-v2-text);
+}
+.isbf-workbench__content {
+  min-width: 0;
+}
+.isbf-workbench__name {
+  margin: 0;
+  color: var(--isbf-v2-text);
+  font-size: var(--isbf-v2-font-lg);
+  font-weight: var(--isbf-v2-weight-medium);
+  line-height: 1.5;
+}
+.isbf-workbench__description {
+  margin: var(--isbf-v2-space-2) 0 0;
+  color: var(--isbf-v2-muted);
+  font-size: var(--isbf-v2-font-sm);
+  line-height: 1.5;
+}
+.isbf-workbench__status {
+  display: inline-block;
+  margin-top: var(--isbf-v2-space-4);
+  color: var(--isbf-v2-muted);
+  font-size: var(--isbf-v2-font-xs);
+  line-height: 1.5;
+}
+.is-available .isbf-workbench__status {
+  color: var(--isbf-v2-accent);
+}
+.isbf-workbench__service.is-available {
+  background: var(--isbf-v2-surface);
+}
+.isbf-workbench__service.is-planned .isbf-workbench__name,
+.isbf-workbench__service.is-planned .isbf-workbench__icon {
+  color: var(--isbf-v2-muted);
+}
+.isbf-workbench__service.is-available .isbf-workbench__arrow {
+  color: var(--isbf-v2-accent);
+}
+.isbf-workbench__arrow {
+  width: 16px;
+  height: 16px;
+  margin-top: 6px;
+  color: var(--isbf-v2-muted);
+  transition: transform var(--isbf-v2-transition-fast);
+}
+.isbf-workbench__service.is-available:active {
+  transform: translateY(1px);
+}
+.isbf-workbench__more,
+.isbf-v2-mobile-nav {
+  display: none;
+}
+
+@container (width >= 496px) {
+  .isbf-workbench__item {
+    grid-column: span 6;
+  }
+  .isbf-workbench__item:last-child:nth-child(2n + 1) {
+    grid-column: span 12;
+  }
+}
+
+@container (width >= 752px) {
+  .isbf-workbench__item,
+  .isbf-workbench__item:last-child:nth-child(2n + 1) {
+    grid-column: span 4;
+  }
+  .isbf-workbench__item:last-child:nth-child(3n + 1) {
+    grid-column: span 12;
+  }
+  .isbf-workbench__item:nth-last-child(2):nth-child(3n + 1),
+  .isbf-workbench__item:last-child:nth-child(3n + 2) {
+    grid-column: span 6;
+  }
+}
+
+@media (hover: hover) {
+  .isbf-v2-brand:hover,
+  .isbf-v2-side__links > a:hover,
+  .isbf-v2-more > summary:hover,
+  .isbf-v2-more__content > a:hover,
+  .isbf-v2-more__content > button:hover,
+  .isbf-v2-side__login:hover {
+    background: var(--isbf-v2-hover);
+  }
+  .isbf-v2-side__compose:hover {
+    filter: brightness(0.92);
+  }
+  .isbf-workbench__service.is-available:hover {
+    border-color: var(--isbf-v2-accent);
+  }
+  .isbf-workbench__service.is-available:hover .isbf-workbench__name,
+  .isbf-workbench__service.is-available:hover .isbf-workbench__arrow {
+    color: var(--isbf-v2-accent);
+  }
+  .isbf-workbench__service.is-available:hover .isbf-workbench__arrow {
+    transform: translateX(3px);
+  }
+}
+
+@media (width <= 1279px) {
+  :root {
+    --isbf-v2-left-width: 220px;
+    --isbf-v2-page-left: max(16px, calc((100vw - 844px) / 2));
+  }
+}
+
+@media (width <= 1023px) {
+  :root {
+    --isbf-v2-left-width: 72px;
+    --isbf-v2-gap: 8px;
+    --isbf-v2-page-left: max(
+      8px,
+      calc((100vw - 72px - 8px - min(600px, 100vw - 100px)) / 2)
+    );
+  }
+  .isbf-v2-side {
+    padding-inline-end: 0;
+  }
+  .isbf-v2-brand,
+  .isbf-v2-side__links > a,
+  .isbf-v2-more > summary {
+    justify-content: center;
+    width: 56px;
+    padding-inline: 0;
+  }
+  .isbf-v2-brand__name,
+  .isbf-v2-side__links > a > span,
+  .isbf-v2-side__links .isbf-v2-more > summary > span,
+  .isbf-v2-side__compose > span:first-child,
+  .isbf-v2-side__login > span {
+    display: none;
+  }
+  .isbf-v2-brand__compact {
+    display: block;
+    font-size: var(--isbf-v2-font-xs);
+  }
+  .isbf-v2-side__compose {
+    width: 52px;
+    height: 52px;
+  }
+  .isbf-v2-side__plus {
+    display: inline;
+    font-size: 26px;
+  }
+}
+
+@media (width <= 600px) {
+  :root {
+    --isbf-v2-feature-width: 100%;
+    --isbf-v2-feed-left: 0px;
+  }
+  .isbf-v2-side {
+    display: none;
+  }
+  .isbf-workbench {
+    padding: 24px 16px calc(80px + env(safe-area-inset-bottom));
+    border-inline: 0;
+  }
+  .isbf-workbench__header h1 {
+    font-size: 24px;
+  }
+  .isbf-workbench__catalogue {
+    margin-top: var(--isbf-v2-space-6);
+  }
+  .isbf-workbench__service {
+    min-height: 128px;
+  }
+  .isbf-workbench__more {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: var(--isbf-v2-space-6);
+  }
+  .isbf-workbench__more summary {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 4px;
+    min-width: 72px;
+    min-height: 52px;
+    padding: 0 12px;
+    font-size: 10px;
+  }
+  .isbf-workbench__more .d-icon {
+    width: 23px;
+    height: 23px;
+  }
+  .isbf-workbench__more .isbf-v2-more__content {
+    inset: auto 0 calc(100% + 8px) auto;
+  }
+  .isbf-workbench__more .isbf-v2-more__content .d-icon {
+    width: 16px;
+    height: 16px;
+  }
+  .isbf-v2-mobile-nav {
+    position: fixed;
+    z-index: 50;
+    inset: auto 0 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    height: calc(64px + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+    border-top: 1px solid var(--isbf-v2-border);
+    background: var(--isbf-v2-background);
+  }
+  .isbf-v2-mobile-nav a {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 4px;
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 10px;
+  }
+  .isbf-v2-mobile-nav .d-icon {
+    width: 23px;
+    height: 23px;
+  }
+  .isbf-v2-mobile-nav .is-active {
+    color: var(--isbf-v2-accent);
+    font-weight: var(--isbf-v2-weight-bold);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+
+.wb-atlas {
+  width: var(--isbf-v2-feature-width);
+  min-height: 100dvh;
+  margin-inline-start: var(--isbf-v2-feed-left);
+  padding: var(--isbf-v2-space-8) 26px 80px;
+  border-inline: 1px solid var(--isbf-v2-border);
+  outline: none;
+}
+
+.wb-atlas__header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: var(--isbf-v2-weight-bold);
+  line-height: 1.3;
+}
+
+.wb-atlas__header p {
+  margin: var(--isbf-v2-space-2) 0 0;
+  color: var(--isbf-v2-muted);
+  font-size: var(--isbf-v2-font-sm);
+}
+
+.wb-atlas__canvas {
+  container: workbench-atlas / inline-size;
+  margin-block-start: var(--isbf-v2-space-6);
+}
+
+.wb-atlas__index {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--isbf-v2-space-4);
+  align-items: stretch;
+}
+
+.wb-atlas__zone {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--isbf-v2-space-4);
+  min-width: 0;
+  margin: 0;
+  padding: var(--isbf-v2-space-4);
+}
+
+.wb-atlas__zone.--learn {
+  grid-column: 1 / -1;
+  background: var(--isbf-v2-hover);
+}
+
+.wb-atlas__zone.--write,
+.wb-atlas__zone.--connect {
+  grid-column: span 6;
+}
+
+.wb-atlas__zone.--browse {
+  grid-column: 1 / -1;
+  background: var(--isbf-v2-text);
+  color: var(--isbf-v2-surface);
+}
+
+.wb-atlas__launch {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--isbf-v2-space-3);
+  min-width: 0;
+  min-height: 44px;
+  color: inherit;
+}
+
+.wb-atlas__glyph {
+  display: block;
+  flex: none;
+  font-size: 80px;
+  font-weight: var(--isbf-v2-weight-bold);
+  line-height: 1.05;
+  letter-spacing: -0.065em;
+  transition: transform var(--isbf-v2-transition-fast);
+}
+
+.wb-atlas__copy {
+  min-width: 0;
+}
+
+.wb-atlas__copy h2 {
+  margin: 0;
+  font-size: var(--isbf-v2-font-xl);
+  font-weight: var(--isbf-v2-weight-medium);
+  line-height: 1.4;
+}
+
+.wb-atlas__copy p {
+  margin: var(--isbf-v2-space-2) 0 0;
+  color: var(--isbf-v2-muted);
+  font-size: var(--isbf-v2-font-sm);
+  line-height: 1.5;
+}
+
+.wb-atlas__state {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--isbf-v2-space-3);
+  margin-block-start: var(--isbf-v2-space-3);
+  color: var(--isbf-v2-accent);
+  font-size: var(--isbf-v2-font-xs);
+}
+
+.wb-atlas__arrow {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--isbf-v2-transition-fast);
+}
+
+.wb-atlas__planned {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--isbf-v2-space-2) var(--isbf-v2-space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wb-atlas__planned li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--isbf-v2-space-2);
+  min-height: 24px;
+  color: var(--isbf-v2-text);
+  font-size: var(--isbf-v2-font-xs);
+}
+
+.wb-atlas__pending {
+  color: var(--isbf-v2-muted);
+}
+
+.wb-atlas__zone.--learn .wb-atlas__launch,
+.wb-atlas__zone.--browse .wb-atlas__launch {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  min-height: 174px;
+}
+
+.wb-atlas__zone.--learn .wb-atlas__glyph {
+  font-size: 112px;
+}
+
+.wb-atlas__zone.--learn .wb-atlas__copy h2,
+.wb-atlas__zone.--browse .wb-atlas__copy h2 {
+  font-size: 24px;
+}
+
+.wb-atlas__zone.--connect .wb-atlas__glyph {
+  align-self: flex-end;
+}
+
+.wb-atlas__zone.--browse .wb-atlas__copy p,
+.wb-atlas__zone.--browse .wb-atlas__state,
+.wb-atlas__zone.--browse .wb-atlas__planned li,
+.wb-atlas__zone.--browse .wb-atlas__pending {
+  color: inherit;
+}
+
+.wb-atlas__zone.--browse .wb-atlas__launch:focus-visible {
+  outline-color: var(--isbf-v2-surface);
+}
+
+.wb-atlas[data-focus="learn"] .--learn .wb-atlas__glyph,
+.wb-atlas[data-focus="write"] .--write .wb-atlas__glyph,
+.wb-atlas[data-focus="connect"] .--connect .wb-atlas__glyph {
+  color: var(--isbf-v2-accent);
+}
+
+.wb-atlas__launch:focus-visible .wb-atlas__arrow {
+  transform: translateX(4px);
+}
+
+@media (hover: hover) {
+  .wb-atlas__launch:hover .wb-atlas__glyph {
+    transform: translateY(-4px);
+  }
+
+  .wb-atlas__launch:hover .wb-atlas__arrow {
+    transform: translateX(4px);
+  }
+}
+
+@container workbench-atlas (width >= 496px) {
+  .wb-atlas__zone {
+    padding: var(--isbf-v2-space-6);
+  }
+
+  .wb-atlas__zone.--learn .wb-atlas__launch {
+    grid-template-columns: 216px minmax(0, 1fr);
+    min-height: 244px;
+    gap: var(--isbf-v2-space-6);
+  }
+
+  .wb-atlas__zone.--learn .wb-atlas__glyph {
+    font-size: 216px;
+  }
+
+  .wb-atlas__zone.--write .wb-atlas__glyph,
+  .wb-atlas__zone.--connect .wb-atlas__glyph {
+    font-size: 104px;
+  }
+
+  .wb-atlas__zone.--browse .wb-atlas__launch {
+    grid-template-columns: 96px minmax(0, 1fr);
+    min-height: 112px;
+    gap: var(--isbf-v2-space-6);
+  }
+
+  .wb-atlas__zone.--browse .wb-atlas__glyph {
+    font-size: 96px;
+  }
+}
+
+@container workbench-atlas (width >= 752px) {
+  .wb-atlas__zone.--learn {
+    grid-column: 1 / 8;
+    grid-row: 1 / 3;
+    gap: var(--isbf-v2-space-6);
+  }
+
+  .wb-atlas__zone.--learn .wb-atlas__launch {
+    display: flex;
+    min-height: 328px;
+  }
+
+  .wb-atlas__zone.--write {
+    grid-column: 8 / -1;
+    grid-row: 1;
+  }
+
+  .wb-atlas__zone.--connect {
+    grid-column: 8 / -1;
+    grid-row: 2;
+  }
+
+  .wb-atlas__zone.--write .wb-atlas__launch,
+  .wb-atlas__zone.--connect .wb-atlas__launch {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 128px;
+    gap: var(--isbf-v2-space-5);
+  }
+
+  .wb-atlas__zone.--connect .wb-atlas__launch {
+    flex-direction: row-reverse;
+  }
+
+  .wb-atlas__zone.--connect .wb-atlas__glyph {
+    align-self: center;
+  }
+
+  .wb-atlas__zone.--browse {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    grid-column: 1 / -1;
+    gap: var(--isbf-v2-space-6);
+  }
+
+  .wb-atlas__zone.--browse .wb-atlas__planned {
+    justify-content: flex-end;
+    padding-block-end: var(--isbf-v2-space-1);
+  }
+}
+
+@media (width <= 600px) {
+  .wb-atlas {
+    padding: var(--isbf-v2-space-6) var(--isbf-v2-space-4)
+      calc(80px + env(safe-area-inset-bottom));
+    border-inline: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wb-atlas__glyph,
+  .wb-atlas__arrow {
+    transition: none;
+  }
+}
+
+</style>
+    
+    
+  </head>
+  <body>
+    <svg class="isbf-icons" aria-hidden="true"><symbol id="icon-book-open" viewBox="0 0 512 512"><path d="M256 141.3l0 309.3 .5-.2C311.1 427.7 369.7 416 428.8 416l19.2 0 0-320-19.2 0c-42.2 0-84.1 8.4-123.1 24.6-16.8 7-33.4 13.9-49.7 20.7zM230.9 61.5L256 72 281.1 61.5C327.9 42 378.1 32 428.8 32L464 32c26.5 0 48 21.5 48 48l0 352c0 26.5-21.5 48-48 48l-35.2 0c-50.7 0-100.9 10-147.7 29.5l-12.8 5.3c-7.9 3.3-16.7 3.3-24.6 0l-12.8-5.3C184.1 490 133.9 480 83.2 480L48 480c-26.5 0-48-21.5-48-48L0 80C0 53.5 21.5 32 48 32l35.2 0c50.7 0 100.9 10 147.7 29.5z"></path></symbol>
+<symbol id="icon-graduation-cap" viewBox="0 0 576 512"><path d="M48 195.8l209.2 86.1c9.8 4 20.2 6.1 30.8 6.1s21-2.1 30.8-6.1l242.4-99.8c9-3.7 14.8-12.4 14.8-22.1s-5.8-18.4-14.8-22.1L318.8 38.1C309 34.1 298.6 32 288 32s-21 2.1-30.8 6.1L14.8 137.9C5.8 141.6 0 150.3 0 160L0 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-260.2zm48 71.7L96 384c0 53 86 96 192 96s192-43 192-96l0-116.6-142.9 58.9c-15.6 6.4-32.2 9.7-49.1 9.7s-33.5-3.3-49.1-9.7L96 267.4z"></path></symbol>
+<symbol id="icon-briefcase" viewBox="0 0 512 512"><path d="M200 48l112 0c4.4 0 8 3.6 8 8l0 40-128 0 0-40c0-4.4 3.6-8 8-8zm-56 8l0 40-80 0C28.7 96 0 124.7 0 160l0 96 512 0 0-96c0-35.3-28.7-64-64-64l-80 0 0-40c0-30.9-25.1-56-56-56L200 0c-30.9 0-56 25.1-56 56zM512 304l-192 0 0 16c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-16-192 0 0 112c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-112z"></path></symbol>
+<symbol id="icon-file-lines" viewBox="0 0 384 512"><path d="M0 64C0 28.7 28.7 0 64 0L213.5 0c17 0 33.3 6.7 45.3 18.7L365.3 125.3c12 12 18.7 28.3 18.7 45.3L384 448c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm208-5.5l0 93.5c0 13.3 10.7 24 24 24L325.5 176 208 58.5zM120 256c-13.3 0-24 10.7-24 24s10.7 24 24 24l144 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-144 0zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24l144 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-144 0z"></path></symbol>
+<symbol id="icon-building-columns" viewBox="0 0 512 512"><path d="M271.9 20.2c-9.8-5.6-21.9-5.6-31.8 0l-224 128c-12.6 7.2-18.8 22-15.1 36S17.5 208 32 208l32 0 0 208 0 0-51.2 38.4C4.7 460.4 0 469.9 0 480 0 497.7 14.3 512 32 512l448 0c17.7 0 32-14.3 32-32 0-10.1-4.7-19.6-12.8-25.6l-51.2-38.4 0-208 32 0c14.5 0 27.2-9.8 30.9-23.8s-2.5-28.8-15.1-36l-224-128zM400 208l0 208-64 0 0-208 64 0zm-112 0l0 208-64 0 0-208 64 0zm-112 0l0 208-64 0 0-208 64 0zM256 96a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path></symbol>
+<symbol id="icon-id-card" viewBox="0 0 576 512"><path d="M0 96C0 60.7 28.7 32 64 32l448 0c35.3 0 64 28.7 64 64L0 96zm0 48l576 0 0 272c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 144zM247.3 416c20.2 0 35.3-19.4 22.4-35-14.7-17.7-36.9-29-61.7-29l-64 0c-24.8 0-47 11.3-61.7 29-12.9 15.6 2.2 35 22.4 35l142.5 0zM176 312a56 56 0 1 0 0-112 56 56 0 1 0 0 112zM360 208c-13.3 0-24 10.7-24 24s10.7 24 24 24l112 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-112 0zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24l112 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-112 0z"></path></symbol>
+<symbol id="icon-database" viewBox="0 0 448 512"><path d="M448 205.8c-14.8 9.8-31.8 17.7-49.5 24-47 16.8-108.7 26.2-174.5 26.2S96.4 246.5 49.5 229.8c-17.6-6.3-34.7-14.2-49.5-24L0 288c0 44.2 100.3 80 224 80s224-35.8 224-80l0-82.2zm0-77.8l0-48C448 35.8 347.7 0 224 0S0 35.8 0 80l0 48c0 44.2 100.3 80 224 80s224-35.8 224-80zM398.5 389.8C351.6 406.5 289.9 416 224 416S96.4 406.5 49.5 389.8c-17.6-6.3-34.7-14.2-49.5-24L0 432c0 44.2 100.3 80 224 80s224-35.8 224-80l0-66.2c-14.8 9.8-31.8 17.7-49.5 24z"></path></symbol>
+<symbol id="icon-user-group" viewBox="0 0 576 512"><path d="M64 128a112 112 0 1 1 224 0 112 112 0 1 1 -224 0zM0 464c0-97.2 78.8-176 176-176s176 78.8 176 176l0 6c0 23.2-18.8 42-42 42L42 512c-23.2 0-42-18.8-42-42l0-6zM432 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240c79.5 0 144 64.5 144 144l0 22.4c0 23-18.6 41.6-41.6 41.6l-144.8 0c6.6-12.5 10.4-26.8 10.4-42l0-6c0-51.5-17.4-98.9-46.5-136.7 22.6-14.7 49.6-23.3 78.5-23.3z"></path></symbol>
+<symbol id="icon-bag-shopping" viewBox="0 0 448 512"><path d="M160 80c0-35.3 28.7-64 64-64s64 28.7 64 64l0 48-128 0 0-48zm-48 48l-64 0c-26.5 0-48 21.5-48 48L0 384c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-208c0-26.5-21.5-48-48-48l-64 0 0-48c0-61.9-50.1-112-112-112S112 18.1 112 80l0 48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"></path></symbol>
+<symbol id="icon-house" viewBox="0 0 512 512"><path d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"></path></symbol>
+<symbol id="icon-magnifying-glass" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376C296.3 401.1 253.9 416 208 416 93.1 416 0 322.9 0 208S93.1 0 208 0 416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></symbol>
+<symbol id="icon-bell" viewBox="0 0 448 512"><path d="M224 0c-17.7 0-32 14.3-32 32l0 3.2C119 50 64 114.6 64 192l0 21.7c0 48.1-16.4 94.8-46.4 132.4L7.8 358.3C2.7 364.6 0 372.4 0 380.5 0 400.1 15.9 416 35.5 416l376.9 0c19.6 0 35.5-15.9 35.5-35.5 0-8.1-2.7-15.9-7.8-22.2l-9.8-12.2C400.4 308.5 384 261.8 384 213.7l0-21.7c0-77.4-55-142-128-156.8l0-3.2c0-17.7-14.3-32-32-32zM162 464c7.1 27.6 32.2 48 62 48s54.9-20.4 62-48l-124 0z"></path></symbol>
+<symbol id="icon-calendar-days" viewBox="0 0 448 512"><path d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 32 0c35.3 0 64 28.7 64 64l0 288c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 128C0 92.7 28.7 64 64 64l32 0 0-32c0-17.7 14.3-32 32-32zM64 240l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 368l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"></path></symbol>
+<symbol id="icon-table-cells-large" viewBox="0 0 448 512"><path d="M384 96l-128 0 0 128 128 0 0-128zm64 128l0 192c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96C0 60.7 28.7 32 64 32l320 0c35.3 0 64 28.7 64 64l0 128zM64 288l0 128 128 0 0-128-128 0zm128-64l0-128-128 0 0 128 128 0zm64 64l0 128 128 0 0-128-128 0z"></path></symbol>
+<symbol id="icon-bookmark" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64L0 480c0 11.5 6.2 22.2 16.2 27.8s22.3 5.5 32.2-.4L192 421.3 335.5 507.4c9.9 5.9 22.2 6.1 32.2 .4S384 491.5 384 480l0-416c0-35.3-28.7-64-64-64L64 0z"></path></symbol>
+<symbol id="icon-user" viewBox="0 0 448 512"><path d="M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z"></path></symbol>
+<symbol id="icon-arrow-right" viewBox="0 0 512 512"><path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></symbol>
+<symbol id="icon-ellipsis" viewBox="0 0 448 512"><path d="M0 256a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm168 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm224-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path></symbol>
+<symbol id="icon-moon" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256S114.6 512 256 512c68.8 0 131.3-27.2 177.3-71.4 7.3-7 9.4-17.9 5.3-27.1s-13.7-14.9-23.8-14.1c-4.9 .4-9.8 .6-14.8 .6-101.6 0-184-82.4-184-184 0-72.1 41.5-134.6 102.1-164.8 9.1-4.5 14.3-14.3 13.1-24.4S322.6 8.5 312.7 6.3C294.4 2.2 275.4 0 256 0z"></path></symbol>
+<symbol id="icon-sun" viewBox="0 0 576 512"><path d="M288-32c8.4 0 16.3 4.4 20.6 11.7L364.1 72.3 468.9 46c8.2-2 16.9 .4 22.8 6.3S500 67 498 75.1l-26.3 104.7 92.7 55.5c7.2 4.3 11.7 12.2 11.7 20.6s-4.4 16.3-11.7 20.6L471.7 332.1 498 436.8c2 8.2-.4 16.9-6.3 22.8S477 468 468.9 466l-104.7-26.3-55.5 92.7c-4.3 7.2-12.2 11.7-20.6 11.7s-16.3-4.4-20.6-11.7L211.9 439.7 107.2 466c-8.2 2-16.8-.4-22.8-6.3S76 445 78 436.8l26.2-104.7-92.6-55.5C4.4 272.2 0 264.4 0 256s4.4-16.3 11.7-20.6L104.3 179.9 78 75.1c-2-8.2 .3-16.8 6.3-22.8S99 44 107.2 46l104.7 26.2 55.5-92.6 1.8-2.6c4.5-5.7 11.4-9.1 18.8-9.1zm0 144a144 144 0 1 0 0 288 144 144 0 1 0 0-288zm0 240a96 96 0 1 1 0-192 96 96 0 1 1 0 192z"></path></symbol>
+<symbol id="icon-circle-info" viewBox="0 0 512 512"><path d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zM224 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm-8 64l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24z"></path></symbol>
+<symbol id="icon-arrow-right-to-bracket" viewBox="0 0 512 512"><path d="M352 96l64 0c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0c53 0 96-43 96-96l0-256c0-53-43-96-96-96l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-9.4 182.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L242.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"></path></symbol></svg>
+    <a class="isbf-skip" href="#workbench">跳至工作台</a>
+    <div class="isbf-v2-shell">
+      <aside class="isbf-v2-side" aria-label="主导航">
+        <a class="isbf-v2-brand" href="https://isbf-one.com/latest" aria-label="国金综合平台"><span class="isbf-v2-brand__name">国金综合平台</span><span class="isbf-v2-brand__compact" aria-hidden="true">ISBF</span></a>
+        <nav class="isbf-v2-side__links" aria-label="站点导航"><a href="https://isbf-one.com/latest" title="首页"><svg class="d-icon " aria-hidden="true"><use href="#icon-house"></use></svg><span>首页</span></a>
+<a href="https://isbf-one.com/categories" title="探索"><svg class="d-icon " aria-hidden="true"><use href="#icon-magnifying-glass"></use></svg><span>探索</span></a>
+<a href="https://isbf-one.com/login" title="通知"><svg class="d-icon " aria-hidden="true"><use href="#icon-bell"></use></svg><span>通知</span></a>
+<a href="https://isbf-one.com/isbf/calendar" title="日历"><svg class="d-icon " aria-hidden="true"><use href="#icon-calendar-days"></use></svg><span>日历</span></a>
+<a href="https://isbf-one.com/isbf/workbench" aria-current="page" class="is-active" title="工作台"><svg class="d-icon " aria-hidden="true"><use href="#icon-table-cells-large"></use></svg><span>工作台</span></a>
+<a href="https://isbf-one.com/login" title="书签"><svg class="d-icon " aria-hidden="true"><use href="#icon-bookmark"></use></svg><span>书签</span></a>
+<a href="https://isbf-one.com/login" title="个人资料"><svg class="d-icon " aria-hidden="true"><use href="#icon-user"></use></svg><span>个人资料</span></a><details class="isbf-v2-more">
+    <summary aria-label="更多"><svg class="d-icon " aria-hidden="true"><use href="#icon-ellipsis"></use></svg><span>更多</span></summary>
+    <div class="isbf-v2-more__content">
+      <button class="isbf-v2-more__theme" type="button" aria-pressed="false"><svg class="d-icon " aria-hidden="true"><use href="#icon-moon"></use></svg><span>切换深色外观</span></button>
+      <a href="https://isbf-one.com/about"><svg class="d-icon " aria-hidden="true"><use href="#icon-circle-info"></use></svg>关于我们</a>
+      <a href="https://isbf-one.com/join/"><svg class="d-icon " aria-hidden="true"><use href="#icon-arrow-right-to-bracket"></use></svg>加入我们</a>
+    </div>
+  </details></nav>
+        <a class="isbf-v2-side__compose" href="https://isbf-one.com/new-topic"><span>发布</span><span class="isbf-v2-side__plus" aria-hidden="true">+</span></a>
+        <a class="isbf-v2-side__login" href="https://isbf-one.com/login"><svg class="d-icon " aria-hidden="true"><use href="#icon-user"></use></svg><span>登录</span></a>
+      </aside>
+    </div>
+    <main class="wb-atlas" id="workbench" data-focus="learn" tabindex="-1">
+  <header class="wb-atlas__header">
+    <h1>工作台</h1>
+    <p>学习、成长、连接与校园生活。</p>
+  </header>
+  <div class="wb-atlas__canvas">
+    <div class="wb-atlas__index"><section class="wb-atlas__zone --learn" aria-labelledby="learn-title">
+    <a class="wb-atlas__launch" data-direction="learn" href="https://isbf-one.com/isbf/learning" aria-labelledby="learn-title">
+      <span class="wb-atlas__glyph">学</span>
+      <div class="wb-atlas__copy">
+        <h2 id="learn-title">学习资源</h2>
+        <p>按年级与课程查找学习资料</p>
+        <span class="wb-atlas__state">已开放 <svg class="d-icon wb-atlas__arrow" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></span>
+      </div>
+    </a>
+    <ul class="wb-atlas__planned" aria-label="学习资源相关筹备服务"><li><span>课程专区</span><span class="wb-atlas__pending">筹备中</span></li><li><span>资料库</span><span class="wb-atlas__pending">筹备中</span></li></ul>
+  </section>
+<section class="wb-atlas__zone --write" aria-labelledby="write-title">
+    <a class="wb-atlas__launch" data-direction="write" href="https://isbf-one.com/isbf/workbench/resume" aria-labelledby="write-title">
+      <span class="wb-atlas__glyph">写</span>
+      <div class="wb-atlas__copy">
+        <h2 id="write-title">简历工具</h2>
+        <p>编辑与预览个人简历</p>
+        <span class="wb-atlas__state">已开放 <svg class="d-icon wb-atlas__arrow" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></span>
+      </div>
+    </a>
+    <ul class="wb-atlas__planned" aria-label="简历工具相关筹备服务"><li><span>求职实习</span><span class="wb-atlas__pending">筹备中</span></li></ul>
+  </section>
+<section class="wb-atlas__zone --connect" aria-labelledby="connect-title">
+    <a class="wb-atlas__launch" data-direction="connect" href="https://isbf-one.com/isbf/alumni" aria-labelledby="connect-title">
+      <span class="wb-atlas__glyph">联</span>
+      <div class="wb-atlas__copy">
+        <h2 id="connect-title">校友网络</h2>
+        <p>查看校友目录与分布</p>
+        <span class="wb-atlas__state">已开放 <svg class="d-icon wb-atlas__arrow" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></span>
+      </div>
+    </a>
+    <ul class="wb-atlas__planned" aria-label="校友网络相关筹备服务"><li><span>学生认证</span><span class="wb-atlas__pending">筹备中</span></li></ul>
+  </section>
+<section class="wb-atlas__zone --browse" aria-labelledby="browse-title">
+    <a class="wb-atlas__launch" data-direction="browse" href="https://isbf-one.com/isbf/marketplace" aria-labelledby="browse-title">
+      <span class="wb-atlas__glyph">逛</span>
+      <div class="wb-atlas__copy">
+        <h2 id="browse-title">商城</h2>
+        <p>浏览校园商品信息</p>
+        <span class="wb-atlas__state">已开放 <svg class="d-icon wb-atlas__arrow" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></span>
+      </div>
+    </a>
+    <ul class="wb-atlas__planned" aria-label="商城相关筹备服务"><li><span>校园服务</span><span class="wb-atlas__pending">筹备中</span></li></ul>
+  </section></div>
+  </div>
+  <div class="isbf-workbench__more"><details class="isbf-v2-more --mobile">
+    <summary aria-label="更多"><svg class="d-icon " aria-hidden="true"><use href="#icon-ellipsis"></use></svg><span>更多</span></summary>
+    <div class="isbf-v2-more__content">
+      <button class="isbf-v2-more__theme" type="button" aria-pressed="false"><svg class="d-icon " aria-hidden="true"><use href="#icon-moon"></use></svg><span>切换深色外观</span></button>
+      <a href="https://isbf-one.com/about"><svg class="d-icon " aria-hidden="true"><use href="#icon-circle-info"></use></svg>关于我们</a>
+      <a href="https://isbf-one.com/join/"><svg class="d-icon " aria-hidden="true"><use href="#icon-arrow-right-to-bracket"></use></svg>加入我们</a>
+    </div>
+  </details></div>
+    
+</main>
+    <nav class="isbf-v2-mobile-nav" aria-label="移动导航"><a href="https://isbf-one.com/latest" title="首页"><svg class="d-icon " aria-hidden="true"><use href="#icon-house"></use></svg><span>首页</span></a>
+<a href="https://isbf-one.com/categories" title="探索"><svg class="d-icon " aria-hidden="true"><use href="#icon-magnifying-glass"></use></svg><span>探索</span></a>
+<a href="https://isbf-one.com/isbf/calendar" title="日历"><svg class="d-icon " aria-hidden="true"><use href="#icon-calendar-days"></use></svg><span>日历</span></a>
+<a href="https://isbf-one.com/isbf/workbench" aria-current="page" class="is-active" title="工作台"><svg class="d-icon " aria-hidden="true"><use href="#icon-table-cells-large"></use></svg><span>工作台</span></a></nav>
+  <script>
+(() => {
+  const root = document.documentElement;
+  const dark =
+    new URLSearchParams(window.location.search).get("theme") === "dark";
+  const buttons = document.querySelectorAll(".isbf-v2-more__theme");
+
+  function setTheme(isDark) {
+    root.dataset.theme = isDark ? "dark" : "light";
+    for (const button of buttons) {
+      button.setAttribute("aria-pressed", String(isDark));
+      button.querySelector("span").textContent = isDark
+        ? "切换浅色外观"
+        : "切换深色外观";
+      button
+        .querySelector("use")
+        .setAttribute("href", isDark ? "#icon-sun" : "#icon-moon");
+    }
+  }
+
+  setTheme(dark);
+  for (const button of buttons) {
+    button.addEventListener("click", () => {
+      setTheme(root.dataset.theme !== "dark");
+      button.closest("details").open = false;
+    });
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") {
+      return;
+    }
+    for (const menu of document.querySelectorAll("details[open]")) {
+      menu.open = false;
+      menu.querySelector("summary").focus();
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    for (const menu of document.querySelectorAll("details[open]")) {
+      if (!menu.contains(event.target)) {
+        menu.open = false;
+      }
+    }
+  });
+})();
+
+(() => {
+  const index = document.querySelector(".wb-atlas");
+  const links = index.querySelectorAll(".wb-atlas__launch");
+
+  for (const link of links) {
+    for (const event of ["pointerenter", "focus"]) {
+      link.addEventListener(event, () => {
+        index.dataset.focus = link.dataset.direction;
+      });
+    }
+  }
+
+  index.addEventListener("pointerleave", () => {
+    const focused = document.activeElement.closest(".wb-atlas__launch");
+    index.dataset.focus = focused?.dataset.direction || "learn";
+  });
+})();
+
+</script>
+</body>
+</html>

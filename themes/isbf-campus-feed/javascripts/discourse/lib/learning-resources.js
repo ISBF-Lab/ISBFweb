@@ -3,11 +3,14 @@ export function learningConfig(site) {
   return Number.isSafeInteger(config?.category_id) &&
     config.category_id > 0 &&
     Array.isArray(config.grades) &&
-    [1, 2, 3, 4].every((id) =>
-      config.grades.some(
-        (grade) => grade.id === id && typeof grade.label === "string"
-      )
-    )
+    config.grades.every(
+      (grade) =>
+        Number.isSafeInteger(grade?.id) &&
+        grade.id >= 1 &&
+        typeof grade.label === "string"
+    ) &&
+    new Set(config.grades.map((grade) => grade.id)).size ===
+      config.grades.length
     ? config
     : null;
 }

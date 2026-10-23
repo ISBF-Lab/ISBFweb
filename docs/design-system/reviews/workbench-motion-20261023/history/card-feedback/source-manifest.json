@@ -1,0 +1,76 @@
+{
+  "scope": "User-authorized preview only; visual acceptance pending; not deployed",
+  "referenceIntegrity": [
+    {
+      "path": "theme-4/common/common.scss.txt",
+      "sha256": "9878f3a38bac37dd717a1139252f9e700dfdcbc112af4d2fb51fd6d5f30e265f",
+      "verified": true
+    },
+    {
+      "path": "theme-4/javascripts/discourse/components/isbf-v2-workbench.gjs.txt",
+      "sha256": "cafa3ca03b88038b8ce95ba31a83356c6bb5ca7df481f59816d2ba1d526ba74b",
+      "verified": true
+    }
+  ],
+  "references": {
+    "shell": "A01",
+    "workbench": "A08 / C02",
+    "source": "Current workspace workbench component; approved visual reference supplemented by the user-selected three-column sizing and motion plan"
+  },
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "67cf3f4958056c4e7d5a3b6414c05543603c87a6078d9b1bc6275deb57767a5c"
+    },
+    {
+      "path": "docs/design-system/resource-policy.md",
+      "sha256": "e3ba4271fd89babcca6783efcd16b4dcaca912bd8a306c61dee66e0eef2bcc6f"
+    },
+    {
+      "path": "docs/design-system/references/manifest.json",
+      "sha256": "a534905e2763ac2d40a42cc3f6d0f9176dbef3de26015390016feee669bbda43"
+    },
+    {
+      "path": "docs/design-system/references/theme-4/common/common.scss.txt",
+      "sha256": "9878f3a38bac37dd717a1139252f9e700dfdcbc112af4d2fb51fd6d5f30e265f"
+    },
+    {
+      "path": "docs/design-system/references/theme-4/javascripts/discourse/components/isbf-v2-workbench.gjs.txt",
+      "sha256": "cafa3ca03b88038b8ce95ba31a83356c6bb5ca7df481f59816d2ba1d526ba74b"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-workbench.gjs",
+      "sha256": "c701bececa6c844320dab46d71587d012ac497ed94e4e54364035b62cb9a32a8"
+    },
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "sha256": "38c6cbbf9e2bcb139e1d4a69ee46b09936967963612f49cced787f2ec39b951c"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/learning-resources.scss",
+      "sha256": "8af2a5d07d19bdcbcdc6ca91c55a3897090206e5e14ace4443d135dbdcb92d96"
+    },
+    {
+      "path": "docs/design-system/reviews/workbench-redesign-20261023/site/style.css",
+      "sha256": "ec33a83ffc77b8202cf5748e716ba9cd51b02e63f8832360d27317a4c4238c49"
+    },
+    {
+      "path": "docs/design-system/reviews/workbench-redesign-20261023/site/before.html",
+      "sha256": "e91d5f8ea1574c1f4d11038de0acdfffe8749621d36c3930a0bc121c2336b7f4"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "example.html",
+      "sha256": "35c361063e7a51ed1dccb473ae057f400c7e03bc50d81541237ab89cd516cdba"
+    },
+    {
+      "path": "before.html",
+      "sha256": "a4c799e00641a06ba08c1b40a1ad305d61193a17775829b1bdc9b1c3824af480"
+    },
+    {
+      "path": "dark.html",
+      "sha256": "23b215956a1a86c28ae53b6921d507f7cda991bf5cb29fba603c1c2bc8dc6cea"
+    }
+  ]
+}

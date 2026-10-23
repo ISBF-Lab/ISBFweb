@@ -1,0 +1,99 @@
+.isbf-before {
+  padding: 24px;
+  border: 1px solid var(--isbf-v2-border);
+  border-radius: 22px;
+  background: var(--isbf-v2-hover);
+}
+.isbf-before__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.isbf-before__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 16px 8px;
+  border: 1px solid var(--isbf-v2-border);
+  border-radius: 18px;
+  background: var(--isbf-v2-surface);
+  text-align: center;
+}
+.isbf-before__icon {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 18px;
+  background: color-mix(
+    in srgb,
+    var(--isbf-v2-accent) 15%,
+    var(--isbf-v2-surface)
+  );
+  color: var(--isbf-v2-accent);
+}
+.isbf-before__icon .d-icon {
+  width: 27px;
+  height: 27px;
+}
+.isbf-before__icon.--mint {
+  background: color-mix(in srgb, #35b595 19%, var(--isbf-v2-surface));
+  color: #239c81;
+}
+.isbf-before__icon.--amber {
+  background: color-mix(in srgb, #e5a659 21%, var(--isbf-v2-surface));
+  color: #b67b37;
+}
+.isbf-before__icon.--violet {
+  background: color-mix(in srgb, #9480d8 19%, var(--isbf-v2-surface));
+  color: #7965ba;
+}
+.isbf-before__name {
+  margin-top: 13px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.is-before .isbf-workbench__header h1 {
+  font-size: clamp(28px, 3vw, 34px);
+}
+.is-before .isbf-workbench__catalogue {
+  margin-top: 24px;
+}
+
+@media (width <= 1099px) {
+  .isbf-before__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (width <= 600px) {
+  .isbf-before {
+    padding: 8px;
+  }
+  .isbf-before__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .isbf-before__card {
+    padding: 8px 4px;
+    border-radius: 8px;
+  }
+  .isbf-before__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+  .isbf-before__icon .d-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .isbf-before__name {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+}

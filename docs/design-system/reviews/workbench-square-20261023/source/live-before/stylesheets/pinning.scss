@@ -1,0 +1,83 @@
+.isbf-feed-card__pin {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: var(--isbf-v2-muted);
+  font-size: 14px;
+
+  .d-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.isbf-home-pin-dialog {
+  .d-modal__container,
+  .d-modal__header,
+  .d-modal__body,
+  .d-modal__footer {
+    background: var(--isbf-v2-surface);
+    color: var(--isbf-v2-text);
+    border-color: var(--isbf-v2-border);
+  }
+
+  .btn,
+  input,
+  .select-kit-header {
+    min-height: 44px;
+  }
+
+  @media (width >= 601px) {
+    align-items: center;
+    left: var(--isbf-v2-feed-left);
+    width: var(--isbf-v2-feed-width);
+
+    .d-modal__container {
+      position: relative;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      margin: 0;
+    }
+  }
+
+  @media (width <= 600px) {
+    .d-modal__body {
+      padding-bottom: max(16px, env(safe-area-inset-bottom));
+    }
+  }
+}
+
+.isbf-home-pin-dialog__field {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  gap: 8px;
+  min-width: 0;
+}
+
+.isbf-home-pin-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.isbf-home-pin-dialog__error {
+  color: var(--danger);
+}
+
+.isbf-feed-card__menu button {
+  min-height: 44px;
+}
+
+.isbf-feed-card__menu button.isbf-feed-card__pin-action {
+  color: var(--isbf-v2-text);
+
+  .d-icon {
+    color: var(--isbf-v2-text);
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "theme_only": true,
+  "theme_id": 4,
+  "published_at_utc": "2026-10-23T12:59:57Z",
+  "source_version": "1a0aaaf759f4c638661b7081afe3469b14cd2078237682c9ee029ef792790f5f",
+  "workbench_source_version": "9adc7a09052cea850d11152bcecbafb94dd7135d65bcbebbff2362f5126dfe07",
+  "compatibility_source_version": "14fb55f000c2d82c9bc109d58e1382b3b61e8d9e262798059cd7b2b36bc2c521",
+  "sources": [
+    {
+      "relative": "common/common.scss",
+      "field_id": 197,
+      "sha256": "c523b1f5fbca0eb0ccae2736c4fd5d69be4077d8677eddeba04eaa29c99f5148"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-v2-workbench.gjs",
+      "field_id": 207,
+      "sha256": "1eafcd04c8e2c046c39b24d8ba29e2441705668bf36f282caf15c7c292d24e04"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-profile-summary-section.gjs",
+      "field_id": 492,
+      "sha256": "ce3296c6136daba3c91eed3c101031f492ee7485565e6f777bd2279c5296e018"
+    }
+  ],
+  "fields_after": 239,
+  "workbench_fields_preserved_at_publication": 233,
+  "compatibility_fields_preserved": 238,
+  "settings_preserved": true,
+  "plugin_directory_entries_preserved": 67,
+  "inventory_sha256": "beccfc1916401095f06b1bf532882f7bf94f12c90179bfc65d0448389d21c7f1",
+  "running_image_id": "sha256:d7392bb5d64fd8cb127fdf0f594bf8e890faf6346a449f3fbde6fc190fef8ae8",
+  "new_image_created": false,
+  "service_restarts": false,
+  "javascript_url": "/theme-javascripts/47361171d5354c902e8ab26ac6b7617d86cdf5e8.js?__ws=isbf-one.com",
+  "javascript_sha256": "0f60d735996c659d3f77a13d9d293e06c5f18d95991e86ebcb7a54b754c36069",
+  "styles": [
+    {
+      "target": "common_theme",
+      "bytes": 330683,
+      "sha256": "23f3246ce7f5687425852609b3c7a1ec240f16e9f32f668b6b17671935fd1a88",
+      "url": "/stylesheets/common_theme_4_e850c9020fe3ec8fc41b67b904b826232e04874b.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "desktop_theme",
+      "bytes": 108,
+      "sha256": "86e8128d352fabcbd2cb001eae417cafa20d1e75ca8c1477fc14efd286f17b6c",
+      "url": "/stylesheets/desktop_theme_4_6e7b6fd866a6c6f055b2bf469d8078927c0e391d.css?__ws=isbf-one.com"
+    },
+    {
+      "target": "mobile_theme",
+      "bytes": 107,
+      "sha256": "c5448d5970bf1d4bfc114d792612de1d1cd7a71e08c3326828763fa1de988b04",
+      "url": "/stylesheets/mobile_theme_4_6e7b6fd866a6c6f055b2bf469d8078927c0e391d.css?__ws=isbf-one.com"
+    }
+  ],
+  "read_only_production_verification_passed": true,
+  "production_content_submitted": false,
+  "verification_keys_removed": true,
+  "final_visual_acceptance": "Awaiting user review; implementation and automated deployment checks complete"
+}

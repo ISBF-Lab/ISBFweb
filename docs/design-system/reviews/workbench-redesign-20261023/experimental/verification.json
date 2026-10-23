@@ -1,0 +1,203 @@
+{
+  "scope": "Offline experimental candidate",
+  "results": [
+    {
+      "width": 1440,
+      "height": 900,
+      "status": "passed",
+      "links": [
+        "https://isbf-one.com/isbf/learning",
+        "https://isbf-one.com/isbf/workbench/resume",
+        "https://isbf-one.com/isbf/alumni",
+        "https://isbf-one.com/isbf/marketplace"
+      ],
+      "labels": [
+        "学习资源",
+        "简历工具",
+        "校友网络",
+        "商城"
+      ],
+      "planned": [
+        "课程专区筹备中",
+        "资料库筹备中",
+        "求职实习筹备中",
+        "学生认证筹备中",
+        "校园服务筹备中"
+      ],
+      "plannedLinks": 0,
+      "minimumTarget": 112,
+      "overflow": false,
+      "learn": {
+        "x": 401,
+        "y": 117.6875,
+        "width": 498.5,
+        "height": 448,
+        "bottom": 565.6875,
+        "right": 899.5
+      },
+      "write": {
+        "x": 915.5,
+        "y": 117.6875,
+        "width": 351.5,
+        "height": 216,
+        "bottom": 333.6875,
+        "right": 1267
+      },
+      "connect": {
+        "x": 915.5,
+        "y": 349.6875,
+        "width": 351.5,
+        "height": 216,
+        "bottom": 565.6875,
+        "right": 1267
+      },
+      "browse": {
+        "x": 401,
+        "y": 581.6875,
+        "width": 866,
+        "height": 160,
+        "bottom": 741.6875,
+        "right": 1267
+      },
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "focusFeedback": true,
+      "menuEscape": true,
+      "reducedMotion": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "status": "passed",
+      "links": [
+        "https://isbf-one.com/isbf/learning",
+        "https://isbf-one.com/isbf/workbench/resume",
+        "https://isbf-one.com/isbf/alumni",
+        "https://isbf-one.com/isbf/marketplace"
+      ],
+      "labels": [
+        "学习资源",
+        "简历工具",
+        "校友网络",
+        "商城"
+      ],
+      "planned": [
+        "课程专区筹备中",
+        "资料库筹备中",
+        "求职实习筹备中",
+        "学生认证筹备中",
+        "校园服务筹备中"
+      ],
+      "plannedLinks": 0,
+      "minimumTarget": 112,
+      "overflow": false,
+      "learn": {
+        "x": 151,
+        "y": 117.6875,
+        "width": 566,
+        "height": 332,
+        "bottom": 449.6875,
+        "right": 717
+      },
+      "write": {
+        "x": 151,
+        "y": 465.6875,
+        "width": 275,
+        "height": 299.6875,
+        "bottom": 765.375,
+        "right": 426
+      },
+      "connect": {
+        "x": 442,
+        "y": 465.6875,
+        "width": 275,
+        "height": 299.6875,
+        "bottom": 765.375,
+        "right": 717
+      },
+      "browse": {
+        "x": 151,
+        "y": 781.375,
+        "width": 566,
+        "height": 200,
+        "bottom": 981.375,
+        "right": 717
+      },
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "focusFeedback": true,
+      "menuEscape": true,
+      "reducedMotion": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "status": "passed",
+      "links": [
+        "https://isbf-one.com/isbf/learning",
+        "https://isbf-one.com/isbf/workbench/resume",
+        "https://isbf-one.com/isbf/alumni",
+        "https://isbf-one.com/isbf/marketplace"
+      ],
+      "labels": [
+        "学习资源",
+        "简历工具",
+        "校友网络",
+        "商城"
+      ],
+      "planned": [
+        "课程专区筹备中",
+        "资料库筹备中",
+        "求职实习筹备中",
+        "学生认证筹备中",
+        "校园服务筹备中"
+      ],
+      "plannedLinks": 0,
+      "minimumTarget": 139,
+      "overflow": false,
+      "learn": {
+        "x": 16,
+        "y": 109.6875,
+        "width": 358,
+        "height": 246,
+        "bottom": 355.6875,
+        "right": 374
+      },
+      "write": {
+        "x": 16,
+        "y": 371.6875,
+        "width": 171,
+        "height": 258.5,
+        "bottom": 630.1875,
+        "right": 187
+      },
+      "connect": {
+        "x": 203,
+        "y": 371.6875,
+        "width": 171,
+        "height": 258.5,
+        "bottom": 630.1875,
+        "right": 374
+      },
+      "browse": {
+        "x": 16,
+        "y": 646.1875,
+        "width": 358,
+        "height": 246,
+        "bottom": 892.1875,
+        "right": 374
+      },
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "focusFeedback": true,
+      "menuEscape": true,
+      "reducedMotion": true
+    }
+  ]
+}
