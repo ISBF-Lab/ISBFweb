@@ -46,7 +46,7 @@ description: "Design, implement, or review UI in the ISBF/Discourse project usin
 
 ## 验证与保存结果
 
-启动检查或预览前读 [资源规范](../../docs/design-system/resource-policy.md)，按当前内存和有效 cgroup 余量设置预算，串行使用工具；共享主机保持完整预览论坛停止，不以生产作为测试后端。
+启动检查或预览前读 [资源规范](../../docs/design-system/resource-policy.md)，串行使用工具；共享主机保持完整预览论坛停止，不以生产作为测试后端。
 
 按实际修改验证宽窄布局、明暗模式、长内容、权限、动态状态及键盘行为。栏目操作栏检查收纳和恢复，弹窗检查焦点、关闭和失败重试。遵循仓库的定向测试及 `bin/lint --fix` 要求；修改弹窗模板或样式时另运行 `pnpm lint:dialogs` 和契约要求的检查，不为纯文档修改启动应用或浏览器。
 

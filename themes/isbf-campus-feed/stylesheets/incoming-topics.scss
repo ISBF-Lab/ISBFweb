@@ -1,0 +1,29 @@
+body:has(.isbf-v2-shell) .show-more.has-topics {
+  position: fixed;
+  z-index: 25;
+  inset-block-start: calc(env(safe-area-inset-top) + clamp(8rem, 18dvh, 10rem));
+
+  // Match the existing feed header's physical column coordinates.
+  left: var(--isbf-v2-feed-left);
+  right: auto;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--isbf-v2-feed-width);
+  max-width: 100%;
+  margin: 0;
+  padding-inline: var(--isbf-v2-space-4);
+  font-size: var(--font-down-1-rem);
+  pointer-events: none;
+
+  .alert {
+    box-sizing: border-box;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--d-border-radius-large);
+    overflow-wrap: anywhere;
+    pointer-events: auto;
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "revision": "all-icon-feedback",
+  "status": "Offline preview complete; visual acceptance pending; not deployed",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "68a005baf0f8e9151bb1601a3a27bb453afd7e5243086113a6ef1dba3540fa12"
+    },
+    {
+      "path": "all-icons.html",
+      "sha256": "05dcbd5bf720004d1ce7553e9dbddb4a562defbc8bbbc983010ae640d08c2a13"
+    },
+    {
+      "path": "before.html",
+      "sha256": "6b3747b32d3e1f0b82c35b81c6728e64e70ca0af9e99645e18e374a945e1a596"
+    },
+    {
+      "path": "bin-lint.log",
+      "sha256": "797871cab07e1ad747ad6f158e0aebd8a469e97f303f498ac40ffe30490ad402"
+    },
+    {
+      "path": "build.mjs",
+      "sha256": "4f536c4721ad2070626f7147853058ee17cee564f15de2b7c779719981aad835"
+    },
+    {
+      "path": "critique.md",
+      "sha256": "2474b65d60a0b523a35fc5dddca8e0f160cdbd35177aae20e0c3fc2c352d706c"
+    },
+    {
+      "path": "dark.html",
+      "sha256": "011b4753a41d1cea20ecbc8507dbe51aa66a707a63966d8a44893188783a55ef"
+    },
+    {
+      "path": "example.html",
+      "sha256": "34775bd4c8cc311e0b61ad386b6d4a2b8a5a5e42706bc0c0a7c6744653589ca0"
+    },
+    {
+      "path": "fixture.json",
+      "sha256": "9d8012bf6d783f053479d77a116cf273dd50225f046ac52b6a7321483f18b6dc"
+    },
+    {
+      "path": "inspect/desktop-fold.jpg",
+      "sha256": "fde4a096fafe4b646730ce3ae6fe06248baede108cdc4fc3b68a885e736a2d5b"
+    },
+    {
+      "path": "inspect/desktop-page-01.jpg",
+      "sha256": "e37c6098cd07b4b320f90fa1ad154def02e9c2a1483de16306973be3fb6e3361"
+    },
+    {
+      "path": "inspect/mobile-fold.jpg",
+      "sha256": "90851dc6682045467816ef275383ff40e0efb10304a05a3832b1580fb1d91641"
+    },
+    {
+      "path": "inspect/mobile-page-01.jpg",
+      "sha256": "d65d297489021cb2456e9801dbf120816015693dece9990488bb7956cda79518"
+    },
+    {
+      "path": "inspect/report.json",
+      "sha256": "a14c6b453a9e048d92c97453e34d5f76d28542fde8ee8d787212d24e8444b8cc"
+    },
+    {
+      "path": "inspect/tablet-fold.jpg",
+      "sha256": "f9a3ba0a59d656c104b482ecbaf40f3c82e2947d9899efa38736f22bf0d723cb"
+    },
+    {
+      "path": "inspect/tablet-page-01.jpg",
+      "sha256": "c10f4b4df17266aede79d09e8f203e34d37691585799049dff2f2646b0d39113"
+    },
+    {
+      "path": "inspect-run.log",
+      "sha256": "1ca1dc3ccfcb8eb78ead38287c2096d93d07e9597614df0eba485b4d8a85c87f"
+    },
+    {
+      "path": "preview.js",
+      "sha256": "b8bac365a91eb5e366e2df29df1e112f56b3ee04d2fd596f9ba0d643cb10a854"
+    },
+    {
+      "path": "screenshots/desktop-after-dark.png",
+      "sha256": "b6dd4ada8c550d30c9369d2945ca789621213ddd78fabbf99e6adaece32ae318"
+    },
+    {
+      "path": "screenshots/desktop-after-light.png",
+      "sha256": "b3304c2b303112ab0f5bf22bdd1706c90e12db92bfc7870434aa988cc6f8f2cb"
+    },
+    {
+      "path": "screenshots/desktop-bag-detail.png",
+      "sha256": "f7f62e43c992e1b237f549bc4dc042e8cba1822adeaf7c0cc0b9475f9455901f"
+    },
+    {
+      "path": "screenshots/desktop-before-dark.png",
+      "sha256": "10de6506b7b9816d8996cf905ba8a22cc2b04744b684ffb561a627994c777cc5"
+    },
+    {
+      "path": "screenshots/desktop-before-light.png",
+      "sha256": "3208ae05a8f201b0d83000dd9e697a8e64cb359e1d63d04d84dc399b070a8132"
+    },
+    {
+      "path": "screenshots/desktop-icon-alumni.png",
+      "sha256": "4c95a2b6aaaf8e4366eeffd59b8cb752803be3dcf35259a70cdd654d4ae6f30c"
+    },
+    {
+      "path": "screenshots/desktop-icon-learning_resources.png",
+      "sha256": "b80df709280338af9537763119969710fca9892b7c995186a42c0bb9254e5872"
+    },
+    {
+      "path": "screenshots/desktop-icon-marketplace.png",
+      "sha256": "de33141c0fb5442bfa750f26a7c3ea0c96b6217ecd0a9c71e2a3f9a2e402c4c8"
+    },
+    {
+      "path": "screenshots/desktop-icon-resume.png",
+      "sha256": "8aa2dd0b37d4ceaaefbf7515b4d7546c9cc597bd8a99b5d6469c35f7062acd2b"
+    },
+    {
+      "path": "screenshots/mobile-after-dark.png",
+      "sha256": "48c6a9de5ed7e3470e3d500298d645ee26bcba31710ad496176141efe3ada6f2"
+    },
+    {
+      "path": "screenshots/mobile-after-light.png",
+      "sha256": "a712641d4549c09a2f005fb9a05c9dfca90fb22b340e2d64dc3008a7cf108344"
+    },
+    {
+      "path": "screenshots/mobile-bag-detail.png",
+      "sha256": "d0fe265c80a3aae0b587f74f99e502f0d81fad7f8a56927a8776344caae2e1cc"
+    },
+    {
+      "path": "screenshots/mobile-before-dark.png",
+      "sha256": "74806b2911d75f70ccd614571d610d74a8b5649dbbd55de18b10b7fd9227c70b"
+    },
+    {
+      "path": "screenshots/mobile-before-light.png",
+      "sha256": "6171a8ab4f246317ed8d8631f42f3f61126a6c1faffb0417cb50bc2de34d1d3e"
+    },
+    {
+      "path": "screenshots/mobile-icon-tap.png",
+      "sha256": "a5b17db396681dd93376ae31f6d2a66db6ca2d0c980cd1e4b0bbb6b16420a156"
+    },
+    {
+      "path": "screenshots/mobile-reserved-identity.png",
+      "sha256": "38d1396ff92dfffe6db484c10843e237bf6105e83576a66395837903481a5142"
+    },
+    {
+      "path": "screenshots/reserved-icon-campus_services.png",
+      "sha256": "9c57ccccaa396b3a7036b04ff10b8de99f7f71bf7ff76911defa235f80dd1e97"
+    },
+    {
+      "path": "screenshots/reserved-icon-careers.png",
+      "sha256": "6a4f08621234cb64b5b9f4899d4d4bb2f4d9893f6965a62f2eee4f7f8a874956"
+    },
+    {
+      "path": "screenshots/reserved-icon-courses.png",
+      "sha256": "2c6934583a4383ee325e2463f24fc8c016722d502e1b817dc19bce03b8580e40"
+    },
+    {
+      "path": "screenshots/reserved-icon-library.png",
+      "sha256": "1e7fd190908f85af965d8df5eea1393f9e60bd8f3501d8c56a683207873edd4b"
+    },
+    {
+      "path": "screenshots/reserved-icon-student_identity.png",
+      "sha256": "e1e57ebb2effb7143fcb3f7ae7c5feaf6141eb8e4b400ed54bc06066cd0f92eb"
+    },
+    {
+      "path": "screenshots/small-mobile-after-dark-lower.png",
+      "sha256": "8fd9fe20f1e42652b29f8e63cf590808cf207e0ac0ecd7267edbce91c0d021b5"
+    },
+    {
+      "path": "screenshots/small-mobile-after-dark.png",
+      "sha256": "1df348f012298e8781ef8a3d68f32410605cfbfda471c71a5b7d2ebb03a8e11c"
+    },
+    {
+      "path": "screenshots/small-mobile-after-light.png",
+      "sha256": "51182168b34e43c9561a8ecc93806b62fb7d1db0a38c429186ca5ff8202103bc"
+    },
+    {
+      "path": "screenshots/small-mobile-before-dark.png",
+      "sha256": "aebb307612fd590a537e50cc6615d8783f20ee78659a3b2a4fe92f7bff1877ea"
+    },
+    {
+      "path": "screenshots/small-mobile-before-light.png",
+      "sha256": "5681c5c0e45f60a27b732e7299782c08a7b71506760a3533d924422564f42117"
+    },
+    {
+      "path": "screenshots/tablet-after-dark.png",
+      "sha256": "9bd1f8be48084bfcabcf0c4d9f4509f305238fa57f7ac645ac23aaaa33234cd2"
+    },
+    {
+      "path": "screenshots/tablet-after-light.png",
+      "sha256": "43db22009ed41c669dbb97a86710360e173d409575c50423d6325032087821ea"
+    },
+    {
+      "path": "screenshots/tablet-before-dark.png",
+      "sha256": "ac6f7aacb2a2df9b531c2067571b6eeda9a3d8b0ac1f45607b571d607db63320"
+    },
+    {
+      "path": "screenshots/tablet-before-light.png",
+      "sha256": "963dbd9ebe2188c6c6656367134c94cd793e3163fc27ad016bf2225f96401766"
+    },
+    {
+      "path": "source-lint.json",
+      "sha256": "e98fa2cfcd53b68f0943e768036ddeffaec4d675f8fd328d02ec1a8ee7715315"
+    },
+    {
+      "path": "source-manifest.json",
+      "sha256": "4dc8bb02174aad0857441dce52e239c394802bf72a4dd479de3f585a0a4d8f2b"
+    },
+    {
+      "path": "tools/check-icons.mjs",
+      "sha256": "361ffd4f2f2d045aeed309d44699484e6524c44bb6f27525ce589dae35749591"
+    },
+    {
+      "path": "tools/check.mjs",
+      "sha256": "a602746446c2372d494c9344c44a799822a1933c260d68528cc48b7cc2a54535"
+    },
+    {
+      "path": "tools/inspect-serial.mjs",
+      "sha256": "70e838f9a34439ac3ca69a589a40ca4ff3558500aa9d6c722037199fb5d18e8d"
+    },
+    {
+      "path": "verification.json",
+      "sha256": "7d943b3190f3816286f1d527f7f835d1f266743cbc6e10f8ec6275f25ea99a18"
+    },
+    {
+      "path": "workbench.css",
+      "sha256": "5dd434aad0a13a080c96ca0bbcb3234fc32b0dc65c4ba9242814828e73c88163"
+    }
+  ]
+}

@@ -1,0 +1,1052 @@
+{
+  "status": "passed",
+  "revision": "icon-feedback",
+  "scope": "Offline HTML preview only; not an application or production regression",
+  "results": [
+    {
+      "width": 1440,
+      "height": 900,
+      "label": "desktop",
+      "baseline": true,
+      "count": 9,
+      "columns": 4,
+      "overflow": false,
+      "pageHeight": 900,
+      "panel": {
+        "x": 401,
+        "y": 98.5,
+        "width": 866,
+        "height": 472.5,
+        "bottom": 571,
+        "right": 1267
+      },
+      "more": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "bottom": 0,
+        "right": 0
+      },
+      "navTop": 900,
+      "lowerGap": 329,
+      "cardHeight": 131.5,
+      "cards": [
+        {
+          "x": 426,
+          "y": 123.5,
+          "width": 193.5,
+          "height": 131.5,
+          "bottom": 255,
+          "right": 619.5
+        },
+        {
+          "x": 633.5,
+          "y": 123.5,
+          "width": 193.5,
+          "height": 131.5,
+          "bottom": 255,
+          "right": 827
+        },
+        {
+          "x": 841,
+          "y": 123.5,
+          "width": 193.5,
+          "height": 131.5,
+          "bottom": 255,
+          "right": 1034.5
+        },
+        {
+          "x": 1048.5,
+          "y": 123.5,
+          "width": 193.5,
+          "height": 131.5,
+          "bottom": 255,
+          "right": 1242
+        },
+        {
+          "x": 426,
+          "y": 269,
+          "width": 193.5,
+          "height": 131.5,
+          "bottom": 400.5,
+          "right": 619.5
+        },
+        {
+          "x": 633.5,
+          "y": 269,
+          "width": 193.5,
+          "height": 131.5,
+          "bottom": 400.5,
+          "right": 827
+        },
+        {
+          "x": 841,
+          "y": 269,
+          "width": 193.5,
+          "height": 131.5,
+          "bottom": 400.5,
+          "right": 1034.5
+        },
+        {
+          "x": 1048.5,
+          "y": 269,
+          "width": 193.5,
+          "height": 131.5,
+          "bottom": 400.5,
+          "right": 1242
+        },
+        {
+          "x": 426,
+          "y": 414.5,
+          "width": 193.5,
+          "height": 131.5,
+          "bottom": 546,
+          "right": 619.5
+        }
+      ],
+      "destinations": [
+        "/isbf/learning",
+        "/isbf/workbench/resume",
+        "/isbf/alumni",
+        "/isbf/marketplace"
+      ],
+      "placeholderTargets": 0,
+      "themes": [
+        "light",
+        "dark"
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "label": "desktop",
+      "baseline": false,
+      "count": 9,
+      "columns": 3,
+      "overflow": false,
+      "pageHeight": 900,
+      "panel": {
+        "x": 401,
+        "y": 98.5,
+        "width": 866,
+        "height": 702,
+        "bottom": 800.5,
+        "right": 1267
+      },
+      "more": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "bottom": 0,
+        "right": 0
+      },
+      "navTop": 900,
+      "lowerGap": 99.5,
+      "cardHeight": 208,
+      "cards": [
+        {
+          "x": 426,
+          "y": 123.5,
+          "width": 262.65625,
+          "height": 208,
+          "bottom": 331.5,
+          "right": 688.65625
+        },
+        {
+          "x": 702.65625,
+          "y": 123.5,
+          "width": 262.671875,
+          "height": 208,
+          "bottom": 331.5,
+          "right": 965.328125
+        },
+        {
+          "x": 979.328125,
+          "y": 123.5,
+          "width": 262.65625,
+          "height": 208,
+          "bottom": 331.5,
+          "right": 1241.984375
+        },
+        {
+          "x": 426,
+          "y": 345.5,
+          "width": 262.65625,
+          "height": 208,
+          "bottom": 553.5,
+          "right": 688.65625
+        },
+        {
+          "x": 702.65625,
+          "y": 345.5,
+          "width": 262.671875,
+          "height": 208,
+          "bottom": 553.5,
+          "right": 965.328125
+        },
+        {
+          "x": 979.328125,
+          "y": 345.5,
+          "width": 262.65625,
+          "height": 208,
+          "bottom": 553.5,
+          "right": 1241.984375
+        },
+        {
+          "x": 426,
+          "y": 567.5,
+          "width": 262.65625,
+          "height": 208,
+          "bottom": 775.5,
+          "right": 688.65625
+        },
+        {
+          "x": 702.65625,
+          "y": 567.5,
+          "width": 262.671875,
+          "height": 208,
+          "bottom": 775.5,
+          "right": 965.328125
+        },
+        {
+          "x": 979.328125,
+          "y": 567.5,
+          "width": 262.65625,
+          "height": 208,
+          "bottom": 775.5,
+          "right": 1241.984375
+        }
+      ],
+      "destinations": [
+        "/isbf/learning",
+        "/isbf/workbench/resume",
+        "/isbf/alumni",
+        "/isbf/marketplace"
+      ],
+      "placeholderTargets": 0,
+      "themes": [
+        "light",
+        "dark"
+      ]
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "label": "tablet",
+      "baseline": true,
+      "count": 9,
+      "columns": 3,
+      "overflow": false,
+      "pageHeight": 1024,
+      "panel": {
+        "x": 151,
+        "y": 91,
+        "width": 566,
+        "height": 472.5,
+        "bottom": 563.5,
+        "right": 717
+      },
+      "more": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "bottom": 0,
+        "right": 0
+      },
+      "navTop": 1024,
+      "lowerGap": 460.5,
+      "cardHeight": 131.5,
+      "cards": [
+        {
+          "x": 176,
+          "y": 116,
+          "width": 162.65625,
+          "height": 131.5,
+          "bottom": 247.5,
+          "right": 338.65625
+        },
+        {
+          "x": 352.65625,
+          "y": 116,
+          "width": 162.671875,
+          "height": 131.5,
+          "bottom": 247.5,
+          "right": 515.328125
+        },
+        {
+          "x": 529.328125,
+          "y": 116,
+          "width": 162.671875,
+          "height": 131.5,
+          "bottom": 247.5,
+          "right": 692
+        },
+        {
+          "x": 176,
+          "y": 261.5,
+          "width": 162.65625,
+          "height": 131.5,
+          "bottom": 393,
+          "right": 338.65625
+        },
+        {
+          "x": 352.65625,
+          "y": 261.5,
+          "width": 162.671875,
+          "height": 131.5,
+          "bottom": 393,
+          "right": 515.328125
+        },
+        {
+          "x": 529.328125,
+          "y": 261.5,
+          "width": 162.671875,
+          "height": 131.5,
+          "bottom": 393,
+          "right": 692
+        },
+        {
+          "x": 176,
+          "y": 407,
+          "width": 162.65625,
+          "height": 131.5,
+          "bottom": 538.5,
+          "right": 338.65625
+        },
+        {
+          "x": 352.65625,
+          "y": 407,
+          "width": 162.671875,
+          "height": 131.5,
+          "bottom": 538.5,
+          "right": 515.328125
+        },
+        {
+          "x": 529.328125,
+          "y": 407,
+          "width": 162.671875,
+          "height": 131.5,
+          "bottom": 538.5,
+          "right": 692
+        }
+      ],
+      "destinations": [
+        "/isbf/learning",
+        "/isbf/workbench/resume",
+        "/isbf/alumni",
+        "/isbf/marketplace"
+      ],
+      "placeholderTargets": 0,
+      "themes": [
+        "light",
+        "dark"
+      ]
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "label": "tablet",
+      "baseline": false,
+      "count": 9,
+      "columns": 3,
+      "overflow": false,
+      "pageHeight": 1024,
+      "panel": {
+        "x": 151,
+        "y": 91,
+        "width": 566,
+        "height": 702,
+        "bottom": 793,
+        "right": 717
+      },
+      "more": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "bottom": 0,
+        "right": 0
+      },
+      "navTop": 1024,
+      "lowerGap": 231,
+      "cardHeight": 208,
+      "cards": [
+        {
+          "x": 176,
+          "y": 116,
+          "width": 162.65625,
+          "height": 208,
+          "bottom": 324,
+          "right": 338.65625
+        },
+        {
+          "x": 352.65625,
+          "y": 116,
+          "width": 162.671875,
+          "height": 208,
+          "bottom": 324,
+          "right": 515.328125
+        },
+        {
+          "x": 529.328125,
+          "y": 116,
+          "width": 162.671875,
+          "height": 208,
+          "bottom": 324,
+          "right": 692
+        },
+        {
+          "x": 176,
+          "y": 338,
+          "width": 162.65625,
+          "height": 208,
+          "bottom": 546,
+          "right": 338.65625
+        },
+        {
+          "x": 352.65625,
+          "y": 338,
+          "width": 162.671875,
+          "height": 208,
+          "bottom": 546,
+          "right": 515.328125
+        },
+        {
+          "x": 529.328125,
+          "y": 338,
+          "width": 162.671875,
+          "height": 208,
+          "bottom": 546,
+          "right": 692
+        },
+        {
+          "x": 176,
+          "y": 560,
+          "width": 162.65625,
+          "height": 208,
+          "bottom": 768,
+          "right": 338.65625
+        },
+        {
+          "x": 352.65625,
+          "y": 560,
+          "width": 162.671875,
+          "height": 208,
+          "bottom": 768,
+          "right": 515.328125
+        },
+        {
+          "x": 529.328125,
+          "y": 560,
+          "width": 162.671875,
+          "height": 208,
+          "bottom": 768,
+          "right": 692
+        }
+      ],
+      "destinations": [
+        "/isbf/learning",
+        "/isbf/workbench/resume",
+        "/isbf/alumni",
+        "/isbf/marketplace"
+      ],
+      "placeholderTargets": 0,
+      "themes": [
+        "light",
+        "dark"
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "label": "mobile",
+      "baseline": true,
+      "count": 9,
+      "columns": 4,
+      "overflow": false,
+      "pageHeight": 844,
+      "panel": {
+        "x": 16,
+        "y": 83,
+        "width": 358,
+        "height": 292.5625,
+        "bottom": 375.5625,
+        "right": 374
+      },
+      "more": {
+        "x": 0,
+        "y": 696,
+        "width": 390,
+        "height": 68,
+        "bottom": 764,
+        "right": 390
+      },
+      "navTop": 780,
+      "lowerGap": 16,
+      "cardHeight": 86.1875,
+      "cards": [
+        {
+          "x": 25,
+          "y": 92,
+          "width": 79,
+          "height": 86.1875,
+          "bottom": 178.1875,
+          "right": 104
+        },
+        {
+          "x": 112,
+          "y": 92,
+          "width": 79,
+          "height": 86.1875,
+          "bottom": 178.1875,
+          "right": 191
+        },
+        {
+          "x": 199,
+          "y": 92,
+          "width": 79,
+          "height": 86.1875,
+          "bottom": 178.1875,
+          "right": 278
+        },
+        {
+          "x": 286,
+          "y": 92,
+          "width": 79,
+          "height": 86.1875,
+          "bottom": 178.1875,
+          "right": 365
+        },
+        {
+          "x": 25,
+          "y": 186.1875,
+          "width": 79,
+          "height": 86.1875,
+          "bottom": 272.375,
+          "right": 104
+        },
+        {
+          "x": 112,
+          "y": 186.1875,
+          "width": 79,
+          "height": 86.1875,
+          "bottom": 272.375,
+          "right": 191
+        },
+        {
+          "x": 199,
+          "y": 186.1875,
+          "width": 79,
+          "height": 86.1875,
+          "bottom": 272.375,
+          "right": 278
+        },
+        {
+          "x": 286,
+          "y": 186.1875,
+          "width": 79,
+          "height": 86.1875,
+          "bottom": 272.375,
+          "right": 365
+        },
+        {
+          "x": 25,
+          "y": 280.375,
+          "width": 79,
+          "height": 86.1875,
+          "bottom": 366.5625,
+          "right": 104
+        }
+      ],
+      "destinations": [
+        "/isbf/learning",
+        "/isbf/workbench/resume",
+        "/isbf/alumni",
+        "/isbf/marketplace"
+      ],
+      "placeholderTargets": 0,
+      "themes": [
+        "light",
+        "dark"
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "label": "mobile",
+      "baseline": false,
+      "count": 9,
+      "columns": 3,
+      "overflow": false,
+      "pageHeight": 844,
+      "panel": {
+        "x": 16,
+        "y": 83,
+        "width": 358,
+        "height": 514,
+        "bottom": 597,
+        "right": 374
+      },
+      "more": {
+        "x": 0,
+        "y": 621,
+        "width": 390,
+        "height": 44,
+        "bottom": 665,
+        "right": 390
+      },
+      "navTop": 780,
+      "lowerGap": 115,
+      "cardHeight": 160,
+      "cards": [
+        {
+          "x": 25,
+          "y": 92,
+          "width": 108,
+          "height": 160,
+          "bottom": 252,
+          "right": 133
+        },
+        {
+          "x": 141,
+          "y": 92,
+          "width": 108,
+          "height": 160,
+          "bottom": 252,
+          "right": 249
+        },
+        {
+          "x": 257,
+          "y": 92,
+          "width": 108,
+          "height": 160,
+          "bottom": 252,
+          "right": 365
+        },
+        {
+          "x": 25,
+          "y": 260,
+          "width": 108,
+          "height": 160,
+          "bottom": 420,
+          "right": 133
+        },
+        {
+          "x": 141,
+          "y": 260,
+          "width": 108,
+          "height": 160,
+          "bottom": 420,
+          "right": 249
+        },
+        {
+          "x": 257,
+          "y": 260,
+          "width": 108,
+          "height": 160,
+          "bottom": 420,
+          "right": 365
+        },
+        {
+          "x": 25,
+          "y": 428,
+          "width": 108,
+          "height": 160,
+          "bottom": 588,
+          "right": 133
+        },
+        {
+          "x": 141,
+          "y": 428,
+          "width": 108,
+          "height": 160,
+          "bottom": 588,
+          "right": 249
+        },
+        {
+          "x": 257,
+          "y": 428,
+          "width": 108,
+          "height": 160,
+          "bottom": 588,
+          "right": 365
+        }
+      ],
+      "destinations": [
+        "/isbf/learning",
+        "/isbf/workbench/resume",
+        "/isbf/alumni",
+        "/isbf/marketplace"
+      ],
+      "placeholderTargets": 0,
+      "themes": [
+        "light",
+        "dark"
+      ]
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "label": "small-mobile",
+      "baseline": true,
+      "count": 9,
+      "columns": 4,
+      "overflow": false,
+      "pageHeight": 568,
+      "panel": {
+        "x": 16,
+        "y": 83,
+        "width": 288,
+        "height": 292.5625,
+        "bottom": 375.5625,
+        "right": 304
+      },
+      "more": {
+        "x": 0,
+        "y": 420,
+        "width": 320,
+        "height": 68,
+        "bottom": 488,
+        "right": 320
+      },
+      "navTop": 504,
+      "lowerGap": 16,
+      "cardHeight": 86.1875,
+      "cards": [
+        {
+          "x": 25,
+          "y": 92,
+          "width": 61.5,
+          "height": 86.1875,
+          "bottom": 178.1875,
+          "right": 86.5
+        },
+        {
+          "x": 94.5,
+          "y": 92,
+          "width": 61.5,
+          "height": 86.1875,
+          "bottom": 178.1875,
+          "right": 156
+        },
+        {
+          "x": 164,
+          "y": 92,
+          "width": 61.5,
+          "height": 86.1875,
+          "bottom": 178.1875,
+          "right": 225.5
+        },
+        {
+          "x": 233.5,
+          "y": 92,
+          "width": 61.5,
+          "height": 86.1875,
+          "bottom": 178.1875,
+          "right": 295
+        },
+        {
+          "x": 25,
+          "y": 186.1875,
+          "width": 61.5,
+          "height": 86.1875,
+          "bottom": 272.375,
+          "right": 86.5
+        },
+        {
+          "x": 94.5,
+          "y": 186.1875,
+          "width": 61.5,
+          "height": 86.1875,
+          "bottom": 272.375,
+          "right": 156
+        },
+        {
+          "x": 164,
+          "y": 186.1875,
+          "width": 61.5,
+          "height": 86.1875,
+          "bottom": 272.375,
+          "right": 225.5
+        },
+        {
+          "x": 233.5,
+          "y": 186.1875,
+          "width": 61.5,
+          "height": 86.1875,
+          "bottom": 272.375,
+          "right": 295
+        },
+        {
+          "x": 25,
+          "y": 280.375,
+          "width": 61.5,
+          "height": 86.1875,
+          "bottom": 366.5625,
+          "right": 86.5
+        }
+      ],
+      "destinations": [
+        "/isbf/learning",
+        "/isbf/workbench/resume",
+        "/isbf/alumni",
+        "/isbf/marketplace"
+      ],
+      "placeholderTargets": 0,
+      "themes": [
+        "light",
+        "dark"
+      ]
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "label": "small-mobile",
+      "baseline": false,
+      "count": 9,
+      "columns": 3,
+      "overflow": false,
+      "pageHeight": 601,
+      "panel": {
+        "x": 16,
+        "y": 83,
+        "width": 288,
+        "height": 370,
+        "bottom": 453,
+        "right": 304
+      },
+      "more": {
+        "x": 0,
+        "y": 477,
+        "width": 320,
+        "height": 44,
+        "bottom": 521,
+        "right": 320
+      },
+      "navTop": 504,
+      "lowerGap": -17,
+      "cardHeight": 112,
+      "cards": [
+        {
+          "x": 25,
+          "y": 92,
+          "width": 84.65625,
+          "height": 112,
+          "bottom": 204,
+          "right": 109.65625
+        },
+        {
+          "x": 117.65625,
+          "y": 92,
+          "width": 84.671875,
+          "height": 112,
+          "bottom": 204,
+          "right": 202.328125
+        },
+        {
+          "x": 210.328125,
+          "y": 92,
+          "width": 84.65625,
+          "height": 112,
+          "bottom": 204,
+          "right": 294.984375
+        },
+        {
+          "x": 25,
+          "y": 212,
+          "width": 84.65625,
+          "height": 112,
+          "bottom": 324,
+          "right": 109.65625
+        },
+        {
+          "x": 117.65625,
+          "y": 212,
+          "width": 84.671875,
+          "height": 112,
+          "bottom": 324,
+          "right": 202.328125
+        },
+        {
+          "x": 210.328125,
+          "y": 212,
+          "width": 84.65625,
+          "height": 112,
+          "bottom": 324,
+          "right": 294.984375
+        },
+        {
+          "x": 25,
+          "y": 332,
+          "width": 84.65625,
+          "height": 112,
+          "bottom": 444,
+          "right": 109.65625
+        },
+        {
+          "x": 117.65625,
+          "y": 332,
+          "width": 84.671875,
+          "height": 112,
+          "bottom": 444,
+          "right": 202.328125
+        },
+        {
+          "x": 210.328125,
+          "y": 332,
+          "width": 84.65625,
+          "height": 112,
+          "bottom": 444,
+          "right": 294.984375
+        }
+      ],
+      "destinations": [
+        "/isbf/learning",
+        "/isbf/workbench/resume",
+        "/isbf/alumni",
+        "/isbf/marketplace"
+      ],
+      "placeholderTargets": 0,
+      "themes": [
+        "light",
+        "dark"
+      ]
+    }
+  ],
+  "interactions": {
+    "profiles": [
+      {
+        "service": "learning_resources",
+        "timing": {
+          "duration": 360,
+          "iterations": 1
+        },
+        "peak": [
+          1.1091,
+          -0.155874,
+          0.155874,
+          1.1091,
+          0,
+          0
+        ],
+        "stableCardTileAndLabel": true,
+        "noLoop": true
+      },
+      {
+        "service": "resume",
+        "timing": {
+          "duration": 320,
+          "iterations": 1
+        },
+        "peak": [
+          0.997564,
+          -0.0697565,
+          0.0697565,
+          0.997564,
+          0,
+          -4
+        ],
+        "stableCardTileAndLabel": true,
+        "noLoop": true
+      },
+      {
+        "service": "alumni",
+        "timing": {
+          "duration": 320,
+          "iterations": 1
+        },
+        "peak": [
+          1.14,
+          0,
+          0,
+          1.14,
+          0,
+          0
+        ],
+        "stableCardTileAndLabel": true,
+        "noLoop": true
+      },
+      {
+        "service": "marketplace",
+        "timing": {
+          "duration": 400,
+          "iterations": 1
+        },
+        "peak": [
+          0.984808,
+          -0.173648,
+          0.173648,
+          0.984808,
+          0,
+          0
+        ],
+        "stableCardTileAndLabel": true,
+        "noLoop": true
+      }
+    ],
+    "leaveAndReenter": {
+      "restoredIn": 120,
+      "replayed": true
+    },
+    "placeholderStatic": true,
+    "keyboard": {
+      "service": "resume",
+      "focusVisible": true,
+      "outline": "2px"
+    },
+    "rapidClicks": {
+      "activeAnimations": 1
+    },
+    "reducedMotion": true,
+    "touchClick": {
+      "noAnimationBeforeClick": true,
+      "playsOnceAfterClick": true,
+      "restores": true
+    },
+    "touchScroll": {
+      "cancels": 1,
+      "calls": 0,
+      "active": 0,
+      "hash": "",
+      "scrollY": 33
+    },
+    "mixedInput": true,
+    "longLabelsAndDoubleText": {
+      "overflow": false,
+      "textFits": true,
+      "cardHeight": 231.953125
+    }
+  },
+  "externalRequests": [],
+  "consoleErrors": [],
+  "previewHashes": [
+    {
+      "path": "example.html",
+      "sha256": "f4856d491560dcbd2d9ddb46463f25db8c36f5b8dcaf4d38ef46b2be1c3e452c"
+    },
+    {
+      "path": "before.html",
+      "sha256": "354d29d08aa6c3a33321825b80a849fbcb8d767f3516a4013420733f09a8f8bc"
+    },
+    {
+      "path": "dark.html",
+      "sha256": "3eba4fea1b3f0792ca8667d89ae7fbd10e957785cbdfbafbf4fd33b66444e501"
+    }
+  ],
+  "staticChecks": {
+    "nodeSyntax": "passed",
+    "prettier": "formatted",
+    "coreLint": "No applicable core rules for docs prototypes; see bin-lint.log",
+    "designSource": {
+      "fail": 0,
+      "warn": 1
+    },
+    "designRender": {
+      "fail": 0,
+      "warn": 2
+    }
+  }
+}

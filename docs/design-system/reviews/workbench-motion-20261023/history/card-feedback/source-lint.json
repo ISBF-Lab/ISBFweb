@@ -1,0 +1,29 @@
+{
+ "files": 3,
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "scale-zero",
+   "file": "docs/design-system/reviews/workbench-motion-20261023/preview.js",
+   "line": 57,
+   "match": "scale(0)",
+   "message": "Entering from scale(0). Start at 0.95–0.98 with opacity 0."
+  },
+  {
+   "level": "WARN",
+   "id": "shadow",
+   "file": "docs/design-system/reviews/workbench-motion-20261023/example.html",
+   "line": 232,
+   "match": "box-shadow:",
+   "message": "Shadow. Elements at rest carry none; only real overlays (menu, dialog, sticky bar) may."
+  },
+  {
+   "level": "WARN",
+   "id": "scale-zero",
+   "file": "docs/design-system/reviews/workbench-motion-20261023/example.html",
+   "line": 791,
+   "match": "scale(0)",
+   "message": "Entering from scale(0). Start at 0.95–0.98 with opacity 0."
+  }
+ ]
+}

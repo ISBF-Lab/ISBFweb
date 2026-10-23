@@ -1,0 +1,5 @@
+[bin/lint] Skipping docs/design-system/reviews/workbench-motion-20261023/example.html: not a lintable file type
+[bin/lint] Skipping docs/design-system/reviews/workbench-motion-20261023/before.html: not a lintable file type
+[bin/lint] Skipping docs/design-system/reviews/workbench-motion-20261023/dark.html: not a lintable file type
+[bin/lint] No core linter for: docs/design-system/reviews/workbench-motion-20261023/build.mjs, docs/design-system/reviews/workbench-motion-20261023/workbench.css, docs/design-system/reviews/workbench-motion-20261023/preview.js, docs/design-system/reviews/workbench-motion-20261023/fixture.json, docs/design-system/reviews/workbench-motion-20261023/tools/check.mjs, docs/design-system/reviews/workbench-motion-20261023/README.md, docs/design-system/reviews/workbench-motion-20261023/critique.md
+[bin/lint] Nothing was linted

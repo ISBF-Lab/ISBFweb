@@ -1,0 +1,21 @@
+{
+ "files": 4,
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "shadow",
+   "file": "docs/design-system/reviews/workbench-motion-20261023/example.html",
+   "line": 232,
+   "match": "box-shadow:",
+   "message": "Shadow. Elements at rest carry none; only real overlays (menu, dialog, sticky bar) may."
+  },
+  {
+   "level": "WARN",
+   "id": "shadow",
+   "file": "docs/design-system/reviews/workbench-motion-20261023/all-icons.html",
+   "line": 232,
+   "match": "box-shadow:",
+   "message": "Shadow. Elements at rest carry none; only real overlays (menu, dialog, sticky bar) may."
+  }
+ ]
+}

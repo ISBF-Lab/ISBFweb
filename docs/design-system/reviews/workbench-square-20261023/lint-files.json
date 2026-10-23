@@ -1,0 +1,8 @@
+[
+  "themes/isbf-campus-feed/common/common.scss",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-workbench.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/lib/careers.js",
+  "themes/isbf-campus-feed/javascripts/discourse/lib/teamup.js",
+  "themes/isbf-campus-feed/javascripts/discourse/lib/learning-resources.js",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-profile-summary-section.gjs"
+]

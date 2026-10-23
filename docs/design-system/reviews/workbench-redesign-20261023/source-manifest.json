@@ -1,0 +1,41 @@
+{
+  "status": "Review example; not deployed or visually accepted",
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "67cf3f4958056c4e7d5a3b6414c05543603c87a6078d9b1bc6275deb57767a5c"
+    },
+    {
+      "path": "docs/design-system/resource-policy.md",
+      "sha256": "e3ba4271fd89babcca6783efcd16b4dcaca912bd8a306c61dee66e0eef2bcc6f"
+    },
+    {
+      "path": "docs/design-system/references/manifest.json",
+      "sha256": "a534905e2763ac2d40a42cc3f6d0f9176dbef3de26015390016feee669bbda43"
+    },
+    {
+      "path": "docs/design-system/references/theme-4/common/common.scss.txt",
+      "sha256": "9878f3a38bac37dd717a1139252f9e700dfdcbc112af4d2fb51fd6d5f30e265f"
+    },
+    {
+      "path": "docs/design-system/references/theme-4/javascripts/discourse/components/isbf-v2-workbench.gjs.txt",
+      "sha256": "cafa3ca03b88038b8ce95ba31a83356c6bb5ca7df481f59816d2ba1d526ba74b"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-workbench.gjs",
+      "sha256": "c701bececa6c844320dab46d71587d012ac497ed94e4e54364035b62cb9a32a8"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-side-nav.gjs",
+      "sha256": "fef3e0cc6fb7527161e2d548cfa6d60e7986027a61c03c06db1414a6624074f6"
+    },
+    {
+      "path": "themes/isbf-campus-feed/settings.yml",
+      "sha256": "c9b83da12b3892b316e50589716de453dd34770c5cd9a7ab8c6f878d8aeeb258"
+    },
+    {
+      "path": "themes/isbf-campus-feed/about.json",
+      "sha256": "da4eaed9b844a0630771ab5975ccc4f74a5570a075cf8fe2e878149398398486"
+    }
+  ]
+}

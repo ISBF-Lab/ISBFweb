@@ -1,0 +1,12 @@
+{
+  "status": "partial",
+  "source": "Source-derived offline reconstruction; not production capture",
+  "error": "Inspector CDP timeout: Page.enable while creating auxiliary page",
+  "saved_images": [
+    "desktop-fold.jpg",
+    "desktop-page-01.jpg",
+    "mobile-fold.jpg",
+    "tablet-fold.jpg",
+    "tablet-page-01.jpg"
+  ]
+}

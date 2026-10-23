@@ -2261,6 +2261,16 @@
       "evidence": "../reviews/post-signup-password-20261022/README.md",
       "final_visual_acceptance": "pending_user_review",
       "new_global_visual_tokens": false
+    },
+    {
+      "id": "workbench-square-20261023",
+      "date": "2026-10-23",
+      "acceptance": "User confirmed original ten-entry order, five desktop columns, two mobile columns, square cards and icon-only hover/touch feedback, then explicitly requested direct deployment.",
+      "scope": "A08/C02 workbench layout and feedback only; future feature capabilities and other pages retain their existing approval boundaries. Final visual acceptance remains pending.",
+      "source_version": "1a0aaaf759f4c638661b7081afe3469b14cd2078237682c9ee029ef792790f5f",
+      "workbench_source_version": "9adc7a09052cea850d11152bcecbafb94dd7135d65bcbebbff2362f5126dfe07",
+      "manifest": "docs/design-system/reviews/workbench-square-20261023/source-manifest.json",
+      "manifest_sha256": "d29b0cee0816e51eb5d49ccdb6b7e6c3533ba1fa89432274153cb5dfc752ebef"
     }
   ]
 }

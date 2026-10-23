@@ -1,0 +1,70 @@
+{
+  "scope": "Experimental static review candidate; not deployed",
+  "artifacts": [
+    {
+      "path": "example.html",
+      "sha256": "650efb546d2ac21b4b80a8f40f4973962c8618b1b3a9a7d28d976d842149630a",
+      "bytes": 37794
+    },
+    {
+      "path": "atlas.css",
+      "sha256": "0c9b7dd18f1739dd1d42668a6fac591ff5ce9f370be23aee1d93f1f94e24ad9d",
+      "bytes": 6063
+    },
+    {
+      "path": "atlas.js",
+      "sha256": "a8fd06be84fadff36c83cfd75dea9bf5cb195e574e5bd853aadfb42f23a19121",
+      "bytes": 524
+    },
+    {
+      "path": "build.mjs",
+      "sha256": "d06780755256e7440ca36763ee7d078519f097cd6582840b856108bf6e2a2baa",
+      "bytes": 3524
+    },
+    {
+      "path": "fixture.json",
+      "sha256": "9f8effa0a1bd3f54c99f6d917b8b02fdd512daa5ce19a07420472cc660ecf1eb",
+      "bytes": 991
+    },
+    {
+      "path": "screenshots/desktop-dark.png",
+      "sha256": "32752873db087388d5f405e0e459ac10e8095a930c1ae3f1aa9f57f99c51bbc7",
+      "bytes": 80309
+    },
+    {
+      "path": "screenshots/desktop-light.png",
+      "sha256": "837ceacea95637a7355acb8c60d410d003fbd78b4e63d7c56c9ae9af30c424cd",
+      "bytes": 79738
+    },
+    {
+      "path": "screenshots/mobile-dark-lower.png",
+      "sha256": "677a627bb1091c9e28593446d5846d9d623fd4fc99b934b2c405a74c2ccf83c7",
+      "bytes": 42859
+    },
+    {
+      "path": "screenshots/mobile-dark.png",
+      "sha256": "90637f02160309c79fb3ac184907434679a6db172dfe87e8efc9194a8bae4601",
+      "bytes": 48381
+    },
+    {
+      "path": "screenshots/mobile-light-lower.png",
+      "sha256": "a6bc741e485a24aa4cfb7f9b30ef85628105d5d01bab7c044f36c1051e06263d",
+      "bytes": 42433
+    },
+    {
+      "path": "screenshots/mobile-light.png",
+      "sha256": "93e449b6cc54c64347d68c81e366fc6663dbb7bd75b5b4a7d3dbfa8971aee106",
+      "bytes": 47661
+    },
+    {
+      "path": "screenshots/tablet-dark.png",
+      "sha256": "110c2b4e173043a4fcda8a0d603dd478d9aea4e84123ba2aa9e49defacdf4536",
+      "bytes": 61965
+    },
+    {
+      "path": "screenshots/tablet-light.png",
+      "sha256": "fd470dbdf6f84ca8756bf0a85f2022efacde03aea8bdb2aaf466da6c2689eef1",
+      "bytes": 61106
+    }
+  ]
+}

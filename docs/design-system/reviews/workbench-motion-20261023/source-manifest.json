@@ -1,0 +1,97 @@
+{
+  "scope": "User-authorized preview only; visual acceptance pending; not deployed",
+  "revision": "Nine reserved icon motions, dynamic link activation, corrected bag bounds",
+  "referenceIntegrity": [
+    {
+      "path": "theme-4/common/common.scss.txt",
+      "sha256": "9878f3a38bac37dd717a1139252f9e700dfdcbc112af4d2fb51fd6d5f30e265f",
+      "verified": true
+    },
+    {
+      "path": "theme-4/javascripts/discourse/components/isbf-v2-workbench.gjs.txt",
+      "sha256": "cafa3ca03b88038b8ce95ba31a83356c6bb5ca7df481f59816d2ba1d526ba74b",
+      "verified": true
+    }
+  ],
+  "references": {
+    "shell": "A01",
+    "workbench": "A08 / C02",
+    "source": "Current workspace workbench component; A01/A08 appearance with user-selected three-column sizing and per-icon mouse hover / touch click feedback"
+  },
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "67cf3f4958056c4e7d5a3b6414c05543603c87a6078d9b1bc6275deb57767a5c"
+    },
+    {
+      "path": "docs/design-system/resource-policy.md",
+      "sha256": "e3ba4271fd89babcca6783efcd16b4dcaca912bd8a306c61dee66e0eef2bcc6f"
+    },
+    {
+      "path": "docs/design-system/references/manifest.json",
+      "sha256": "a534905e2763ac2d40a42cc3f6d0f9176dbef3de26015390016feee669bbda43"
+    },
+    {
+      "path": "docs/design-system/references/theme-4/common/common.scss.txt",
+      "sha256": "9878f3a38bac37dd717a1139252f9e700dfdcbc112af4d2fb51fd6d5f30e265f"
+    },
+    {
+      "path": "docs/design-system/references/theme-4/javascripts/discourse/components/isbf-v2-workbench.gjs.txt",
+      "sha256": "cafa3ca03b88038b8ce95ba31a83356c6bb5ca7df481f59816d2ba1d526ba74b"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-workbench.gjs",
+      "sha256": "c701bececa6c844320dab46d71587d012ac497ed94e4e54364035b62cb9a32a8"
+    },
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "sha256": "38c6cbbf9e2bcb139e1d4a69ee46b09936967963612f49cced787f2ec39b951c"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/learning-resources.scss",
+      "sha256": "8af2a5d07d19bdcbcdc6ca91c55a3897090206e5e14ace4443d135dbdcb92d96"
+    },
+    {
+      "path": "docs/design-system/reviews/workbench-redesign-20261023/site/style.css",
+      "sha256": "ec33a83ffc77b8202cf5748e716ba9cd51b02e63f8832360d27317a4c4238c49"
+    },
+    {
+      "path": "docs/design-system/reviews/workbench-redesign-20261023/site/before.html",
+      "sha256": "e91d5f8ea1574c1f4d11038de0acdfffe8749621d36c3930a0bc121c2336b7f4"
+    },
+    {
+      "path": "docs/design-system/reviews/workbench-motion-20261023/build.mjs",
+      "sha256": "4f536c4721ad2070626f7147853058ee17cee564f15de2b7c779719981aad835"
+    },
+    {
+      "path": "docs/design-system/reviews/workbench-motion-20261023/workbench.css",
+      "sha256": "5dd434aad0a13a080c96ca0bbcb3234fc32b0dc65c4ba9242814828e73c88163"
+    },
+    {
+      "path": "docs/design-system/reviews/workbench-motion-20261023/preview.js",
+      "sha256": "b8bac365a91eb5e366e2df29df1e112f56b3ee04d2fd596f9ba0d643cb10a854"
+    },
+    {
+      "path": "docs/design-system/reviews/workbench-motion-20261023/fixture.json",
+      "sha256": "9d8012bf6d783f053479d77a116cf273dd50225f046ac52b6a7321483f18b6dc"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "example.html",
+      "sha256": "34775bd4c8cc311e0b61ad386b6d4a2b8a5a5e42706bc0c0a7c6744653589ca0"
+    },
+    {
+      "path": "before.html",
+      "sha256": "6b3747b32d3e1f0b82c35b81c6728e64e70ca0af9e99645e18e374a945e1a596"
+    },
+    {
+      "path": "dark.html",
+      "sha256": "011b4753a41d1cea20ecbc8507dbe51aa66a707a63966d8a44893188783a55ef"
+    },
+    {
+      "path": "all-icons.html",
+      "sha256": "05dcbd5bf720004d1ce7553e9dbddb4a562defbc8bbbc983010ae640d08c2a13"
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+body:has(.isbf-v2-shell):has(.isbf-v2-shell--official-filtered) {
+  --isbf-official-header-height: 53px;
+  --isbf-official-filter-height: 56px;
+  --isbf-official-compose-height: 92px;
+
+  #main-outlet {
+    min-height: 0;
+    padding: 0;
+    border: 0;
+
+    .discovery-navigation,
+    .list-container,
+    .topic-list-bottom {
+      display: none;
+    }
+  }
+
+  .isbf-v2-compose {
+    top: calc(
+      var(--isbf-official-header-height) + var(--isbf-official-filter-height)
+    );
+    height: var(--isbf-official-compose-height);
+    min-height: var(--isbf-official-compose-height);
+    background: var(--isbf-v2-surface);
+  }
+
+  &:has(.isbf-v2-shell--no-compose) {
+    --isbf-official-compose-height: 0px;
+  }
+}
+
+.isbf-v2-shell--official-filtered {
+  height: auto;
+}
+
+.isbf-official-feed {
+  box-sizing: border-box;
+  width: var(--isbf-v2-feed-width);
+  min-height: 100vh;
+  margin-left: var(--isbf-v2-feed-left);
+  padding-top: calc(
+    var(--isbf-official-header-height) + var(--isbf-official-filter-height) +
+      var(--isbf-official-compose-height)
+  );
+  border-inline: 1px solid var(--isbf-v2-border);
+  background: var(--isbf-v2-surface);
+
+  .isbf-feed-card {
+    border-bottom: 1px solid var(--isbf-v2-border);
+  }
+}
+
+.isbf-official-feed__filters {
+  display: flex;
+  position: fixed;
+  top: var(--isbf-official-header-height);
+  left: var(--isbf-v2-feed-left);
+  z-index: 25;
+  align-items: center;
+  box-sizing: border-box;
+  width: var(--isbf-v2-feed-width);
+  height: var(--isbf-official-filter-height);
+  border-inline: 1px solid var(--isbf-v2-border);
+  background: var(--isbf-v2-surface);
+  gap: var(--isbf-v2-space-3);
+  padding: var(--isbf-v2-space-3) var(--isbf-v2-space-4);
+  border-bottom: 1px solid var(--isbf-v2-border);
+}
+
+.isbf-official-feed__status {
+  padding: var(--isbf-v2-space-4);
+  text-align: center;
+  color: var(--isbf-v2-muted);
+}
+
+.isbf-official-composer {
+  padding: var(--isbf-v2-space-3);
+
+  p {
+    margin-top: 0;
+    color: var(--isbf-v2-muted);
+  }
+
+  &__menus {
+    display: flex;
+    gap: var(--isbf-v2-space-3);
+  }
+}
+
+.isbf-official-picker__trigger {
+  min-width: 0;
+  max-width: 100%;
+  padding: var(--isbf-v2-space-2) var(--isbf-v2-space-3);
+  border: 1px solid var(--isbf-v2-border);
+  border-radius: var(--isbf-v2-radius-pill);
+  color: var(--isbf-v2-text);
+  background: var(--isbf-v2-surface);
+
+  .d-button-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.isbf-official-picker__menu {
+  box-sizing: border-box;
+  width: min(260px, calc(100vw - var(--isbf-v2-space-8)));
+  max-height: 55dvh;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--isbf-v2-text);
+
+  .fk-d-menu__inner-content {
+    box-sizing: border-box;
+    width: 100%;
+    max-height: inherit;
+    overflow-y: auto;
+    padding: var(--isbf-v2-space-2);
+    border: 1px solid var(--isbf-v2-border);
+    border-radius: var(--isbf-v2-radius-md);
+    background: var(--isbf-v2-surface);
+    box-shadow: var(--isbf-v2-shadow-menu);
+    overscroll-behavior: contain;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    min-width: 0;
+    gap: var(--isbf-v2-space-1);
+    padding: 0;
+  }
+}
+
+.isbf-official-picker__item {
+  display: flex;
+  align-items: center;
+  gap: var(--isbf-v2-space-2);
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  margin: 0;
+  padding: var(--isbf-v2-space-2) var(--isbf-v2-space-4);
+  text-align: left;
+  color: var(--isbf-v2-text);
+  background: transparent;
+  cursor: pointer;
+
+  &:hover,
+  &[aria-pressed="true"] {
+    background: var(--isbf-v2-hover);
+  }
+}
+
+@media (width <= 600px) {
+  body:has(.isbf-v2-shell):has(.isbf-v2-shell--official-filtered) {
+    --isbf-official-header-height: 108px;
+    --isbf-official-compose-height: 0px;
+  }
+
+  .isbf-official-feed {
+    width: 100%;
+    margin-left: 0;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+    border: 0;
+  }
+
+  .isbf-official-feed__filters {
+    left: 0;
+    width: 100%;
+    border-inline: 0;
+  }
+}
+
+@import "official-composer";

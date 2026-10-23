@@ -1,0 +1,113 @@
+.isbf-careers-salary {
+  display: block;
+  color: var(--isbf-v2-accent);
+  font-weight: var(--isbf-v2-weight-bold);
+  overflow-wrap: anywhere;
+}
+
+.isbf-careers-composer {
+  color: var(--isbf-v2-text);
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: var(--isbf-v2-space-2);
+    min-height: 44px;
+    margin: 0;
+  }
+
+  input[type="text"] {
+    width: min(100%, 320px);
+    min-width: 0;
+    margin: 0;
+  }
+}
+
+html.composer-open
+  body:has(.isbf-v2-shell)
+  #reply-control.open:has(.isbf-careers-composer) {
+  .title-and-category {
+    display: grid;
+    grid-template-columns: max-content minmax(120px, 1fr) max-content;
+    align-items: start;
+    gap: 8px;
+    max-height: none;
+    margin-bottom: 0;
+  }
+
+  .title-and-category > :has(.isbf-careers-composer),
+  .title-and-category > :has(.isbf-careers-composer-options) {
+    display: contents;
+  }
+
+  .title-and-category > .title-input,
+  .composer-fields > .title-input {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .isbf-careers-composer {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .category-input,
+  .tags-input,
+  .isbf-careers-composer-options {
+    grid-row: 3;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .category-input {
+    grid-column: 1;
+  }
+
+  .tags-input {
+    grid-column: 2;
+  }
+
+  .isbf-careers-composer-options {
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  .isbf-careers-composer__home {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    width: auto;
+    min-height: 44px;
+    margin: 0;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      flex: 0 0 16px;
+      width: 16px;
+      min-width: 16px;
+      height: 16px;
+      margin: 0;
+    }
+
+    span {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    &:focus-within {
+      outline: 2px solid var(--isbf-v2-focus-ring);
+      outline-offset: 2px;
+      border-radius: var(--isbf-v2-radius-sm);
+    }
+  }
+
+  .title-input > input {
+    flex-basis: 100%;
+    width: 100%;
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "scope": "Local review fixture, not the live site's configuration",
+  "services": [
+    { "key": "learning_resources", "label": "学习资源", "icon": "book-open", "tone": "blue", "href": "/isbf/learning" },
+    { "key": "courses", "label": "课程专区", "icon": "graduation-cap", "tone": "violet", "href": null },
+    { "key": "careers", "label": "求职实习", "icon": "briefcase", "tone": "amber", "href": null },
+    { "key": "resume", "label": "简历工具", "icon": "file-lines", "tone": "mint", "href": "/isbf/workbench/resume" },
+    { "key": "campus_services", "label": "校园服务", "icon": "building-columns", "tone": "sky", "href": null },
+    { "key": "student_identity", "label": "学生认证", "icon": "id-card", "tone": "rose", "href": null },
+    { "key": "library", "label": "资料库", "icon": "database", "tone": "indigo", "href": null },
+    { "key": "alumni", "label": "校友网络", "icon": "user-group", "tone": "teal", "href": "/isbf/alumni" },
+    { "key": "marketplace", "label": "商城", "icon": "bag-shopping", "tone": "amber", "href": "/isbf/marketplace" }
+  ]
+}

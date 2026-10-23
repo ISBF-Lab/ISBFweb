@@ -1,0 +1,15 @@
+{
+  "scope": "Final offline standalone-example verification",
+  "network": "none",
+  "cpu_limit": 0.5,
+  "pids_limit": 192,
+  "memory_limit_bytes": 1342177280,
+  "memory_swap_total_bytes": 1342177280,
+  "peak_bytes": 203620352,
+  "browser": "Single-process Chromium, one active page",
+  "repository_mounted": false,
+  "production_data_mounted": false,
+  "screenshot_count": 6,
+  "checks_passed": true,
+  "container_removed": true
+}

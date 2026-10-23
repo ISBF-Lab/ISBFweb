@@ -1,0 +1,1564 @@
+{
+ "url": "example.html",
+ "at": "2026-10-23T02:33:07.033Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 1,
+   "filled": [
+    0.32
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 900,
+     "screens": 1,
+     "words": 40,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 25,
+     "sections": 4,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "工作台",
+     "words": 1,
+     "chars": 3,
+     "lines": 1,
+     "size": 24,
+     "vw": 1.7,
+     "font": "system-ui",
+     "weight": 750,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 32,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "工作台",
+     "words": 1,
+     "lines": 1,
+     "size": 24,
+     "font": "system-ui"
+    },
+    "headings": [
+     {
+      "text": "学",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 216,
+      "vw": 15,
+      "font": "system-ui",
+      "weight": 750,
+      "tracking": -0.065,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.14,
+      "top": 142,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "写",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 104,
+      "vw": 7.2,
+      "font": "system-ui",
+      "weight": 750,
+      "tracking": -0.065,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.07,
+      "top": 151,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "联",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 104,
+      "vw": 7.2,
+      "font": "system-ui",
+      "weight": 750,
+      "tracking": -0.065,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.07,
+      "top": 383,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "逛",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 96,
+      "vw": 6.7,
+      "font": "system-ui",
+      "weight": 750,
+      "tracking": -0.065,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.07,
+      "top": 611,
+      "tag": "span",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 4,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 1,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "system-ui",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      13,
+      15,
+      16,
+      17,
+      18,
+      20,
+      24,
+      96,
+      104,
+      216
+     ],
+     "sizeCount": 10,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 216,
+      "vw": 15,
+      "font": "system-ui",
+      "text": "学"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [
+     {
+      "text": "课程专区",
+      "above": "逛",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 13,
+      "top": 518
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#17202a",
+       "share": 0.46
+      },
+      {
+       "color": "#5d6872",
+       "share": 0.35
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.14
+      },
+      {
+       "color": "#1769aa",
+       "share": 0.06
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#17202a"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 3,
+     "inHero": 3,
+     "radius": "pill",
+     "height": 52,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "跳至工作台",
+      "工作台",
+      "发布"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 1,
+     "hairlineSamples": [
+      "main#workbench.wb-atlas 920px"
+     ],
+     "outlinedBoxes": 1,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 1,
+     "boxRadius": 16,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 2,
+     "fixed": true,
+     "height": 900,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 900,
+    "margins": {
+     "left": 401,
+     "right": 197
+    },
+    "sections": [],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "工作台",
+      "size": 24,
+      "top": 32,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 401,
+      "n": 1
+     },
+     {
+      "x": 545,
+      "n": 1
+     },
+     {
+      "x": 560,
+      "n": 1
+     },
+     {
+      "x": 940,
+      "n": 1
+     },
+     {
+      "x": 1108,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 5,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.18,
+    "voidBox": {
+     "x": 180,
+     "y": 720,
+     "w": 1260,
+     "h": 180
+    }
+   },
+   "app": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "dark": false,
+    "ground": "#ffffff",
+    "sidebar": null,
+    "topbar": null,
+    "canvas": {
+     "left": 99,
+     "right": 197
+    },
+    "hero": {
+     "text": "工作台",
+     "words": 1,
+     "chars": 3,
+     "lines": 1,
+     "size": 24,
+     "vw": 1.7,
+     "font": "system-ui",
+     "weight": 750,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 32,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 2,
+     "firstScreen": 2,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 2,
+     "radii": [
+      [
+       0,
+       2
+      ]
+     ],
+     "heavyBorders": 0,
+     "borderSamples": [],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 0,
+     "hues": 0,
+     "samples": []
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      13,
+      15,
+      16,
+      17,
+      18,
+      20,
+      24
+     ]
+    },
+    "title": {
+     "text": "工作台",
+     "size": 24,
+     "top": 32
+    },
+    "colourShare": 0.025
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    0.5,
+    0.48
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 1061,
+     "screens": 1,
+     "words": 31,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 25,
+     "sections": 4,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "工作台",
+     "words": 1,
+     "chars": 3,
+     "lines": 1,
+     "size": 24,
+     "vw": 3.1,
+     "font": "system-ui",
+     "weight": 750,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 32,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "工作台",
+     "words": 1,
+     "lines": 1,
+     "size": 24,
+     "font": "system-ui"
+    },
+    "headings": [
+     {
+      "text": "学",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 216,
+      "vw": 28.1,
+      "font": "system-ui",
+      "weight": 750,
+      "tracking": -0.065,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.28,
+      "top": 150,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "写",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 104,
+      "vw": 13.5,
+      "font": "system-ui",
+      "weight": 750,
+      "tracking": -0.065,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.13,
+      "top": 490,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "联",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 104,
+      "vw": 13.5,
+      "font": "system-ui",
+      "weight": 750,
+      "tracking": -0.065,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.13,
+      "top": 490,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "+",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 26,
+      "vw": 3.4,
+      "font": "system-ui",
+      "weight": 750,
+      "tracking": 0,
+      "leading": 1.5,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.07,
+      "top": 538,
+      "tag": "a",
+      "kind": "heading"
+     },
+     {
+      "text": "逛",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 96,
+      "vw": 12.5,
+      "font": "system-ui",
+      "weight": 750,
+      "tracking": -0.065,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.13,
+      "top": 811,
+      "tag": "span",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 5,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 1,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "system-ui",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      13,
+      15,
+      16,
+      20,
+      24,
+      26,
+      96,
+      104,
+      216
+     ],
+     "sizeCount": 9,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 216,
+      "vw": 28.1,
+      "font": "system-ui",
+      "text": "学"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.03,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [
+     {
+      "text": "求职实习",
+      "above": "逛",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 13,
+      "top": 717
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#5d6872",
+       "share": 0.39
+      },
+      {
+       "color": "#17202a",
+       "share": 0.38
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.15
+      },
+      {
+       "color": "#1769aa",
+       "share": 0.07
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#17202a"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 1,
+     "inHero": 1,
+     "radius": 0,
+     "height": 48,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "跳至工作台"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 1,
+     "hairlineSamples": [
+      "main#workbench.wb-atlas 620px"
+     ],
+     "outlinedBoxes": 1,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 1,
+     "boxRadius": 16,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 2,
+     "fixed": true,
+     "height": 1024,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 1061,
+    "margins": {
+     "left": 151,
+     "right": 167
+    },
+    "sections": [
+     {
+      "sel": "section.wb-atlas__zone.--learn",
+      "tag": "section",
+      "top": 118,
+      "height": 332,
+      "words": 7,
+      "media": 0,
+      "middle": 31,
+      "heading": {
+       "text": "学习资源",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 175,
+      "right": 173,
+      "textLeft": 175,
+      "textRight": 173,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.wb-atlas__zone.--browse",
+      "tag": "section",
+      "top": 781,
+      "height": 200,
+      "words": 5,
+      "media": 0,
+      "middle": 21,
+      "heading": {
+       "text": "商城",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 175,
+      "right": 353,
+      "textLeft": 175,
+      "textRight": 353,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "工作台",
+      "size": 24,
+      "top": 32,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 151,
+      "n": 1
+     },
+     {
+      "x": 175,
+      "n": 1
+     },
+     {
+      "x": 295,
+      "n": 1
+     },
+     {
+      "x": 415,
+      "n": 1
+     },
+     {
+      "x": 466,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 5,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "dark": false,
+    "ground": "#ffffff",
+    "sidebar": null,
+    "topbar": null,
+    "canvas": {
+     "left": 32,
+     "right": 167
+    },
+    "hero": {
+     "text": "工作台",
+     "words": 1,
+     "chars": 3,
+     "lines": 1,
+     "size": 24,
+     "vw": 3.1,
+     "font": "system-ui",
+     "weight": 750,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 32,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 2,
+     "firstScreen": 2,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 2,
+     "radii": [
+      [
+       0,
+       2
+      ]
+     ],
+     "heavyBorders": 0,
+     "borderSamples": [],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 1,
+     "hues": 1,
+     "samples": [
+      {
+       "hue": 210,
+       "size": 56,
+       "radius": "999px"
+      }
+     ]
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      13,
+      15,
+      16,
+      20,
+      24
+     ]
+    },
+    "title": {
+     "text": "工作台",
+     "size": 24,
+     "top": 32
+    },
+    "colourShare": 0.027
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    0.59,
+    0.51
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 1048,
+     "screens": 1.2,
+     "words": 34,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 25,
+     "sections": 4,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "工作台",
+     "words": 1,
+     "chars": 3,
+     "lines": 1,
+     "size": 24,
+     "vw": 6.2,
+     "font": "system-ui",
+     "weight": 750,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 24,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "工作台",
+     "words": 1,
+     "lines": 1,
+     "size": 24,
+     "font": "system-ui"
+    },
+    "headings": [
+     {
+      "text": "工作台",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "system-ui",
+      "weight": 750,
+      "tracking": 0,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 24,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "学",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 112,
+      "vw": 28.7,
+      "font": "system-ui",
+      "weight": 750,
+      "tracking": -0.065,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.34,
+      "top": 154,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "学习资源",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "system-ui",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.46,
+      "top": 165,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "写",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 80,
+      "vw": 20.5,
+      "font": "system-ui",
+      "weight": 750,
+      "tracking": -0.065,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.19,
+      "top": 388,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "联",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 80,
+      "vw": 20.5,
+      "font": "system-ui",
+      "weight": 750,
+      "tracking": -0.065,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.19,
+      "top": 388,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "商城",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "system-ui",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.46,
+      "top": 701,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "逛",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 80,
+      "vw": 20.5,
+      "font": "system-ui",
+      "weight": 750,
+      "tracking": -0.065,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.34,
+      "top": 707,
+      "tag": "span",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 7,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 1,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "system-ui",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      10,
+      13,
+      15,
+      16,
+      20,
+      24,
+      80,
+      112
+     ],
+     "sizeCount": 8,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 112,
+      "vw": 28.7,
+      "font": "system-ui",
+      "text": "学"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#17202a",
+       "share": 0.4
+      },
+      {
+       "color": "#5d6872",
+       "share": 0.38
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.14
+      },
+      {
+       "color": "#1769aa",
+       "share": 0.09
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#17202a"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 1,
+     "inHero": 1,
+     "radius": 0,
+     "height": 48,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "跳至工作台"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 1,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "div.isbf-v2-more__content → rgba(0, 0, 0, 0.22) 0px 8px 28px 0px"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 1,
+     "hairlineSamples": [
+      "nav.isbf-v2-mobile-nav 390px"
+     ],
+     "outlinedBoxes": 1,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 1,
+     "boxRadius": 16,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 0,
+     "fixed": true,
+     "height": 0,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 1048,
+    "margins": {
+     "left": 16,
+     "right": 33
+    },
+    "sections": [
+     {
+      "sel": "section.wb-atlas__zone.--learn",
+      "tag": "section",
+      "top": 110,
+      "height": 246,
+      "words": 7,
+      "media": 0,
+      "middle": 24,
+      "heading": {
+       "text": "学习资源",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 32,
+      "right": 33,
+      "textLeft": 32,
+      "textRight": 33,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.wb-atlas__zone.--browse",
+      "tag": "section",
+      "top": 646,
+      "height": 246,
+      "words": 5,
+      "media": 0,
+      "middle": 46,
+      "heading": {
+       "text": "商城",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 32,
+      "right": 93,
+      "textLeft": 32,
+      "textRight": 93,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "工作台",
+      "size": 24,
+      "top": 24,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 177,
+      "n": 2
+     },
+     {
+      "x": 16,
+      "n": 1
+     },
+     {
+      "x": 32,
+      "n": 1
+     },
+     {
+      "x": 219,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 5,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "dark": false,
+    "ground": "#ffffff",
+    "sidebar": null,
+    "topbar": null,
+    "canvas": {
+     "left": 16,
+     "right": 25
+    },
+    "hero": {
+     "text": "工作台",
+     "words": 1,
+     "chars": 3,
+     "lines": 1,
+     "size": 24,
+     "vw": 6.2,
+     "font": "system-ui",
+     "weight": 750,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 24,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 2,
+     "firstScreen": 2,
+     "ragged": [],
+     "voids": [
+      {
+       "gap": 59,
+       "at": 796,
+       "panel": "商城"
+      },
+      {
+       "gap": 51,
+       "at": 268,
+       "panel": "学习资源"
+      }
+     ]
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 2,
+     "radii": [
+      [
+       0,
+       2
+      ]
+     ],
+     "heavyBorders": 0,
+     "borderSamples": [],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 0,
+     "hues": 0,
+     "samples": []
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.07,
+     "tiny": 1,
+     "tinySamples": [
+      "工作台 10px"
+     ],
+     "sizes": [
+      10,
+      13,
+      15,
+      16,
+      20,
+      24
+     ]
+    },
+    "title": {
+     "text": "工作台",
+     "size": 24,
+     "top": 24
+    },
+    "colourShare": 0.016
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "unused-canvas",
+   "width": 1440,
+   "message": "The content stops 197px short of the right edge while it starts 99px from the sidebar.",
+   "fix": "Let the grid fill the canvas (columns in fr units), or centre a capped canvas with equal margins. A dead strip on one side reads as unfinished."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "/review/inspect/desktop-fold.jpg",
+   "pages": [
+    "/review/inspect/desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "/review/inspect/tablet-fold.jpg",
+   "pages": [
+    "/review/inspect/tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "/review/inspect/mobile-fold.jpg",
+   "pages": [
+    "/review/inspect/mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

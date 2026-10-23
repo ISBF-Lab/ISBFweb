@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "views": [
+    {
+      "mobile": false,
+      "checks": [
+        "workbench document loads",
+        "ten entries retain original order",
+        "all cards are square",
+        "expected two or five columns",
+        "all seven existing feature links remain available",
+        "marketplace handle has a scoped corrected viewport",
+        "mouse hover animates the group icon",
+        "hover feedback finishes without looping",
+        "marketplace data request completes",
+        "existing marketplace products finish rendering",
+        "existing alumni map finishes initialization"
+      ],
+      "passed": true
+    },
+    {
+      "mobile": true,
+      "checks": [
+        "workbench document loads",
+        "ten entries retain original order",
+        "all cards are square",
+        "expected two or five columns",
+        "all seven existing feature links remain available",
+        "marketplace handle has a scoped corrected viewport",
+        "existing group data request completes",
+        "touch click plays the group icon and follows the real link",
+        "marketplace data request completes",
+        "existing marketplace products finish rendering",
+        "existing alumni map finishes initialization"
+      ],
+      "passed": true
+    }
+  ],
+  "javascript_errors": [],
+  "failed_assets": [],
+  "blocked_writes": 11,
+  "production_content_submitted": false,
+  "blocked_write_paths": [
+    "/srv/pv",
+    "/srv/pv",
+    "/srv/pv",
+    "/srv/pv",
+    "/srv/pv",
+    "/srv/pv",
+    "/isbf/views/impressions",
+    "/srv/pv",
+    "/srv/pv",
+    "/srv/pv",
+    "/srv/pv"
+  ],
+  "transport": {
+    "get_requests": 56,
+    "cache_hits": 263,
+    "tls_verified": true,
+    "production_content_submitted": false
+  }
+}
