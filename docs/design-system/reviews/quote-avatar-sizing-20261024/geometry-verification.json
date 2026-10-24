@@ -1,0 +1,3525 @@
+{
+  "results": [
+    {
+      "variant": "feed",
+      "mode": "light",
+      "width": 375,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "12px",
+            "marginTop": "12px",
+            "maxHeight": "590.8px"
+          },
+          {
+            "width": 240.40625,
+            "height": 240.40625,
+            "radius": "12px",
+            "marginTop": "12px",
+            "maxHeight": "590.8px"
+          }
+        ],
+        "photo": {
+          "width": 299,
+          "height": 168.1875,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "video": {
+          "width": 299,
+          "height": 360,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 299,
+          "height": 168.1875,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "video": {
+          "width": 299,
+          "height": 360,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "topic",
+      "mode": "light",
+      "width": 375,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 230.40625,
+            "height": 230.40625,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 289,
+          "height": 162.5625,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 289,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 289,
+          "height": 162.5625,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 289,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "native-topic",
+      "mode": "light",
+      "width": 375,
+      "before": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 311,
+          "height": 174.9375,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 311,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 311,
+          "height": 174.9375,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 311,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "activity",
+      "mode": "light",
+      "width": 375,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 375,
+          "height": 210.9375,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 375,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 375,
+          "height": 210.9375,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 375,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "feed",
+      "mode": "light",
+      "width": 390,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "12px",
+            "marginTop": "12px",
+            "maxHeight": "590.8px"
+          },
+          {
+            "width": 255.40625,
+            "height": 255.40625,
+            "radius": "12px",
+            "marginTop": "12px",
+            "maxHeight": "590.8px"
+          }
+        ],
+        "photo": {
+          "width": 314,
+          "height": 176.625,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "video": {
+          "width": 314,
+          "height": 360,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 314,
+          "height": 176.625,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "video": {
+          "width": 314,
+          "height": 360,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "topic",
+      "mode": "light",
+      "width": 390,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 245.40625,
+            "height": 245.40625,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 304,
+          "height": 171,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 304,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 304,
+          "height": 171,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 304,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "native-topic",
+      "mode": "light",
+      "width": 390,
+      "before": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 326,
+          "height": 183.375,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 326,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 326,
+          "height": 183.375,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 326,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "activity",
+      "mode": "light",
+      "width": 390,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 390,
+          "height": 219.375,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 390,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 390,
+          "height": 219.375,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 390,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "feed",
+      "mode": "light",
+      "width": 600,
+      "before": {
+        "avatars": [
+          {
+            "width": 358.203125,
+            "height": 358.203125,
+            "radius": "12px",
+            "marginTop": "12px",
+            "maxHeight": "590.8px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "12px",
+            "marginTop": "12px",
+            "maxHeight": "590.8px"
+          }
+        ],
+        "photo": {
+          "width": 524,
+          "height": 294.75,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "video": {
+          "width": 524,
+          "height": 360,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 524,
+          "height": 294.75,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "video": {
+          "width": 524,
+          "height": 360,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "topic",
+      "mode": "light",
+      "width": 600,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 514,
+          "height": 289.125,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 514,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 514,
+          "height": 289.125,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 514,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "native-topic",
+      "mode": "light",
+      "width": 600,
+      "before": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 536,
+          "height": 301.5,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 536,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 536,
+          "height": 301.5,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 536,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "activity",
+      "mode": "light",
+      "width": 600,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 600,
+          "height": 337.5,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 600,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 600,
+          "height": 337.5,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 600,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "feed",
+      "mode": "light",
+      "width": 601,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 413,
+          "height": 232.3125,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 413,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 413,
+          "height": 232.3125,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 413,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "topic",
+      "mode": "light",
+      "width": 601,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 413,
+          "height": 232.3125,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 413,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 413,
+          "height": 232.3125,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 413,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "native-topic",
+      "mode": "light",
+      "width": 601,
+      "before": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 435,
+          "height": 244.6875,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 435,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 435,
+          "height": 244.6875,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 435,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "activity",
+      "mode": "light",
+      "width": 601,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 499,
+          "height": 280.6875,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 499,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 499,
+          "height": 280.6875,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 499,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "feed",
+      "mode": "light",
+      "width": 1280,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 512,
+          "height": 288,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 512,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 512,
+          "height": 288,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 512,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "topic",
+      "mode": "light",
+      "width": 1280,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 512,
+          "height": 288,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 512,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 512,
+          "height": 288,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 512,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "native-topic",
+      "mode": "light",
+      "width": 1280,
+      "before": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 534,
+          "height": 300.375,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 534,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "500px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 534,
+          "height": 300.375,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 534,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "500px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "activity",
+      "mode": "light",
+      "width": 1280,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 598,
+          "height": 336.375,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 598,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 598,
+          "height": 336.375,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 598,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "feed",
+      "mode": "dark",
+      "width": 375,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "12px",
+            "marginTop": "12px",
+            "maxHeight": "590.8px"
+          },
+          {
+            "width": 240.40625,
+            "height": 240.40625,
+            "radius": "12px",
+            "marginTop": "12px",
+            "maxHeight": "590.8px"
+          }
+        ],
+        "photo": {
+          "width": 299,
+          "height": 168.1875,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "video": {
+          "width": 299,
+          "height": 360,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 299,
+          "height": 168.1875,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "video": {
+          "width": 299,
+          "height": 360,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "topic",
+      "mode": "dark",
+      "width": 375,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 230.40625,
+            "height": 230.40625,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 289,
+          "height": 162.5625,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 289,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 289,
+          "height": 162.5625,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 289,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "native-topic",
+      "mode": "dark",
+      "width": 375,
+      "before": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 311,
+          "height": 174.9375,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 311,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 311,
+          "height": 174.9375,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 311,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "activity",
+      "mode": "dark",
+      "width": 375,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 375,
+          "height": 210.9375,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 375,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 375,
+          "height": 210.9375,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 375,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "feed",
+      "mode": "dark",
+      "width": 390,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "12px",
+            "marginTop": "12px",
+            "maxHeight": "590.8px"
+          },
+          {
+            "width": 255.40625,
+            "height": 255.40625,
+            "radius": "12px",
+            "marginTop": "12px",
+            "maxHeight": "590.8px"
+          }
+        ],
+        "photo": {
+          "width": 314,
+          "height": 176.625,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "video": {
+          "width": 314,
+          "height": 360,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 314,
+          "height": 176.625,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "video": {
+          "width": 314,
+          "height": 360,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "topic",
+      "mode": "dark",
+      "width": 390,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 245.40625,
+            "height": 245.40625,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 304,
+          "height": 171,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 304,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 304,
+          "height": 171,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 304,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "native-topic",
+      "mode": "dark",
+      "width": 390,
+      "before": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 326,
+          "height": 183.375,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 326,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 326,
+          "height": 183.375,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 326,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "activity",
+      "mode": "dark",
+      "width": 390,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 390,
+          "height": 219.375,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 390,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 390,
+          "height": 219.375,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 390,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "feed",
+      "mode": "dark",
+      "width": 600,
+      "before": {
+        "avatars": [
+          {
+            "width": 358.203125,
+            "height": 358.203125,
+            "radius": "12px",
+            "marginTop": "12px",
+            "maxHeight": "590.8px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "12px",
+            "marginTop": "12px",
+            "maxHeight": "590.8px"
+          }
+        ],
+        "photo": {
+          "width": 524,
+          "height": 294.75,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "video": {
+          "width": 524,
+          "height": 360,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 524,
+          "height": 294.75,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "video": {
+          "width": 524,
+          "height": 360,
+          "radius": "12px",
+          "marginTop": "12px",
+          "maxHeight": "590.8px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "topic",
+      "mode": "dark",
+      "width": 600,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 514,
+          "height": 289.125,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 514,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 514,
+          "height": 289.125,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 514,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "native-topic",
+      "mode": "dark",
+      "width": 600,
+      "before": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 536,
+          "height": 301.5,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 536,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 536,
+          "height": 301.5,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 536,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "activity",
+      "mode": "dark",
+      "width": 600,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 600,
+          "height": 337.5,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 600,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 600,
+          "height": 337.5,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 600,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "feed",
+      "mode": "dark",
+      "width": 601,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 413,
+          "height": 232.3125,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 413,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 413,
+          "height": 232.3125,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 413,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "topic",
+      "mode": "dark",
+      "width": 601,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 413,
+          "height": 232.3125,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 413,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 413,
+          "height": 232.3125,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 413,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "native-topic",
+      "mode": "dark",
+      "width": 601,
+      "before": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 435,
+          "height": 244.6875,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 435,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 435,
+          "height": 244.6875,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 435,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "activity",
+      "mode": "dark",
+      "width": 601,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 499,
+          "height": 280.6875,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 499,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 499,
+          "height": 280.6875,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 499,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "feed",
+      "mode": "dark",
+      "width": 1280,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 512,
+          "height": 288,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 512,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 512,
+          "height": 288,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 512,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "topic",
+      "mode": "dark",
+      "width": 1280,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 512,
+          "height": 288,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 512,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 512,
+          "height": 288,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 512,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": {
+          "width": 42,
+          "height": 42,
+          "radius": "50%",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "native-topic",
+      "mode": "dark",
+      "width": 1280,
+      "before": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "14px",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 534,
+          "height": 300.375,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 534,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "500px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 534,
+          "height": 300.375,
+          "radius": "14px",
+          "marginTop": "0px",
+          "maxHeight": "none"
+        },
+        "video": {
+          "width": 534,
+          "height": 360,
+          "radius": "0px",
+          "marginTop": "0px",
+          "maxHeight": "500px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    },
+    {
+      "variant": "activity",
+      "mode": "dark",
+      "width": 1280,
+      "before": {
+        "avatars": [
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          },
+          {
+            "width": 256,
+            "height": 256,
+            "radius": "16px",
+            "marginTop": "12px",
+            "maxHeight": "620px"
+          }
+        ],
+        "photo": {
+          "width": 598,
+          "height": 336.375,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 598,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "after": {
+        "avatars": [
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          },
+          {
+            "width": 24,
+            "height": 24,
+            "radius": "50%",
+            "marginTop": "0px",
+            "maxHeight": "none"
+          }
+        ],
+        "photo": {
+          "width": 598,
+          "height": 336.375,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "video": {
+          "width": 598,
+          "height": 360,
+          "radius": "16px",
+          "marginTop": "12px",
+          "maxHeight": "620px"
+        },
+        "author": null,
+        "links": [
+          "/t/fixture/1/1",
+          "/t/fixture/1/1"
+        ],
+        "text": "引用正文 @exampleVery_long_quoted_author_name_for_mobile_layout:嵌套引用文字"
+      },
+      "status": "passed"
+    }
+  ],
+  "failures": []
+}

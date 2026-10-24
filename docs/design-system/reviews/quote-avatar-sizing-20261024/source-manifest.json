@@ -1,0 +1,13 @@
+{
+  "repository_file": "themes/isbf-campus-feed/common/common.scss",
+  "base_commit": "bb07007bb950b86f259a2709b1d36f77ef230e0e",
+  "before_sha256": "fac717e1996bacca3de418c53b2f9b1c8887f3f701734130fb0fc8236c3694c6",
+  "after_sha256": "52bba24d4d89a335d51e1c343281562a3933ff35b964913a668fa4c33c38f834",
+  "changed_selectors": 5,
+  "development_validation": {
+    "path": "external/active-theme/common/common.scss",
+    "sha256": "951d5cc267a518763506ca6c8279abbc95c3e937d5c1319b6a420e2806791b43"
+  },
+  "cases": 40,
+  "failures": 0
+}
