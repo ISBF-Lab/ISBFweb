@@ -1,0 +1,824 @@
+{
+  "tests": [
+    {
+      "name": "ISBF | Integration | Component | ISBFV2Workbench > the new presentation preserves real links and non-interactive placeholders",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Integration | Component | ISBFV2Workbench > disabled services keep their existing visibility and placeholder rules",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Integration | Component | ISBFV2Workbench > entry names belong to the glass face and decorative copy is removed",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench colors > only complete hex colors are accepted",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench colors > module overrides inherit the shared default in the selected palette",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench colors > invalid and unset values leave the theme fallback intact",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench colors > light and dark backgrounds choose contrasting existing foreground tokens",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > mobile does not initialize graphics, motion, or size observers",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > crossing the navigation breakpoint releases and restores desktop resources",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > custom colors survive a breakpoint change before computed styles refresh",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > the administrator can select traditional layout on both device sizes",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > mobile glass and desktop traditional use independent administrator settings",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > desktop-only custom colors stay independent when both devices use glass",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > intro settles and the renderer sleeps until another interaction",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > removal cancels pending frames, observers, listeners, and GPU resources",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > context loss immediately restores visible fallback and supports restoration",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > static mode remains visible without animation: {\"reduced\":true}",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > static mode remains visible without animation: {\"gpu\":false}",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > enabling reduced motion during intro completes it immediately",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > a pending frame respects reduced motion before its change event arrives",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > placeholder entries do not acquire interactive motion handlers",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass lifecycle > an empty grid does not allocate graphics or observers",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass renderer > missing or blocked WebGL leaves the DOM fallback available",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass renderer > initialization failure releases resources: {\"compile\":false}",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass renderer > initialization failure releases resources: {\"link\":false}",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass renderer > palette changes redraw without allocating another renderer",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass renderer > each entry receives its own clear-glass color from a shared palette texture",
+      "status": "passed",
+      "errors": []
+    },
+    {
+      "name": "ISBF | Unit | workbench glass renderer > destroy is idempotent and prevents drawing with released resources",
+      "status": "passed",
+      "errors": []
+    }
+  ],
+  "assertions": [
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element .isbf-workbench-grid__item exists 10 times"
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element [data-workbench-key=\"learning_resources\"] has attribute \"href\" with value \"/isbf/learning\""
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element [data-workbench-key=\"library\"] has attribute \"href\" with value \"/isbf/library\""
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element [data-workbench-key=\"careers\"] has attribute \"href\" with value \"/isbf/careers\""
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element [data-workbench-key=\"resume\"] has attribute \"href\" with value \"/isbf/workbench/resume\""
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element [data-workbench-key=\"alumni\"] has attribute \"href\" with value \"/isbf/alumni\""
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element [data-workbench-key=\"marketplace\"] has attribute \"href\" with value \"/isbf/marketplace\""
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element [data-workbench-key=\"teamup\"] has attribute \"href\" with value \"/isbf/teamup\""
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element [data-workbench-key=\"courses\"] has tagName div"
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element [data-workbench-key=\"courses\"] does not have attribute \"tabindex\""
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element [data-workbench-key=\"campus_services\"] has tagName div"
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element [data-workbench-key=\"campus_services\"] does not have attribute \"tabindex\""
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element [data-workbench-key=\"student_identity\"] has tagName div"
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element [data-workbench-key=\"student_identity\"] does not have attribute \"tabindex\""
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element .isbf-workbench-grid.has-webgl does not exist"
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "the new presentation preserves real links and non-interactive placeholders",
+      "result": true,
+      "message": "Element [data-workbench-key=\"learning_resources\"] .isbf-workbench-grid__label has style \"{\"opacity\":\"1\"}\""
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "disabled services keep their existing visibility and placeholder rules",
+      "result": true,
+      "message": "Element .isbf-workbench-grid__item exists 9 times"
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "disabled services keep their existing visibility and placeholder rules",
+      "result": true,
+      "message": "Element [data-workbench-key=\"alumni\"] does not exist"
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "disabled services keep their existing visibility and placeholder rules",
+      "result": true,
+      "message": "Element a.isbf-workbench-grid__item does not exist"
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "entry names belong to the glass face and decorative copy is removed",
+      "result": true,
+      "message": "Element .isbf-workbench-grid__face > .isbf-workbench-grid__label exists 10 times"
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "entry names belong to the glass face and decorative copy is removed",
+      "result": true,
+      "message": "Element .isbf-workbench-grid__face[aria-hidden] does not exist"
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "entry names belong to the glass face and decorative copy is removed",
+      "result": true,
+      "message": "Element .isbf-workbench-grid__mobile-icon[aria-hidden=true] exists 10 times"
+    },
+    {
+      "module": "ISBF | Integration | Component | ISBFV2Workbench",
+      "name": "entry names belong to the glass face and decorative copy is removed",
+      "result": true,
+      "message": "Element .isbf-v2-workbench__heading-dot, .isbf-v2-workbench__signature, .isbf-v2-workbench__caption, .isbf-v2-workbench__heading p, .isbf-v2-workbench__mobile-brand does not exist"
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "only complete hex colors are accepted",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "only complete hex colors are accepted",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "only complete hex colors are accepted",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "only complete hex colors are accepted",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "only complete hex colors are accepted",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "only complete hex colors are accepted",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "only complete hex colors are accepted",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "only complete hex colors are accepted",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "module overrides inherit the shared default in the selected palette",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "module overrides inherit the shared default in the selected palette",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "module overrides inherit the shared default in the selected palette",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "module overrides inherit the shared default in the selected palette",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "invalid and unset values leave the theme fallback intact",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "invalid and unset values leave the theme fallback intact",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "light and dark backgrounds choose contrasting existing foreground tokens",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench colors",
+      "name": "light and dark backgrounds choose contrasting existing foreground tokens",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "mobile does not initialize graphics, motion, or size observers",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "mobile does not initialize graphics, motion, or size observers",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "mobile does not initialize graphics, motion, or size observers",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "mobile does not initialize graphics, motion, or size observers",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "mobile does not initialize graphics, motion, or size observers",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "crossing the navigation breakpoint releases and restores desktop resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "crossing the navigation breakpoint releases and restores desktop resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "crossing the navigation breakpoint releases and restores desktop resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "crossing the navigation breakpoint releases and restores desktop resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "crossing the navigation breakpoint releases and restores desktop resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "crossing the navigation breakpoint releases and restores desktop resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "crossing the navigation breakpoint releases and restores desktop resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "crossing the navigation breakpoint releases and restores desktop resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "crossing the navigation breakpoint releases and restores desktop resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "custom colors survive a breakpoint change before computed styles refresh",
+      "result": true,
+      "message": "explicit colors reach WebGL even while computed styles return the previous theme color"
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "custom colors survive a breakpoint change before computed styles refresh",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "custom colors survive a breakpoint change before computed styles refresh",
+      "result": true,
+      "message": "the restored desktop renderer uses the same explicit palette"
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "the administrator can select traditional layout on both device sizes",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "the administrator can select traditional layout on both device sizes",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "the administrator can select traditional layout on both device sizes",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "the administrator can select traditional layout on both device sizes",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "the administrator can select traditional layout on both device sizes",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "mobile glass and desktop traditional use independent administrator settings",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "mobile glass and desktop traditional use independent administrator settings",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "mobile glass and desktop traditional use independent administrator settings",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "mobile glass and desktop traditional use independent administrator settings",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "mobile glass and desktop traditional use independent administrator settings",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "mobile glass and desktop traditional use independent administrator settings",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "mobile glass and desktop traditional use independent administrator settings",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "desktop-only custom colors stay independent when both devices use glass",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "desktop-only custom colors stay independent when both devices use glass",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "desktop-only custom colors stay independent when both devices use glass",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "desktop-only custom colors stay independent when both devices use glass",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "intro settles and the renderer sleeps until another interaction",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "intro settles and the renderer sleeps until another interaction",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "intro settles and the renderer sleeps until another interaction",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "intro settles and the renderer sleeps until another interaction",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "intro settles and the renderer sleeps until another interaction",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "intro settles and the renderer sleeps until another interaction",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "removal cancels pending frames, observers, listeners, and GPU resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "removal cancels pending frames, observers, listeners, and GPU resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "removal cancels pending frames, observers, listeners, and GPU resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "removal cancels pending frames, observers, listeners, and GPU resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "removal cancels pending frames, observers, listeners, and GPU resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "removal cancels pending frames, observers, listeners, and GPU resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "removal cancels pending frames, observers, listeners, and GPU resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "context loss immediately restores visible fallback and supports restoration",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "context loss immediately restores visible fallback and supports restoration",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "context loss immediately restores visible fallback and supports restoration",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "context loss immediately restores visible fallback and supports restoration",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "context loss immediately restores visible fallback and supports restoration",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "context loss immediately restores visible fallback and supports restoration",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "static mode remains visible without animation: {\"reduced\":true}",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "static mode remains visible without animation: {\"reduced\":true}",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "static mode remains visible without animation: {\"gpu\":false}",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "static mode remains visible without animation: {\"gpu\":false}",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "enabling reduced motion during intro completes it immediately",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "enabling reduced motion during intro completes it immediately",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "a pending frame respects reduced motion before its change event arrives",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "a pending frame respects reduced motion before its change event arrives",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "a pending frame respects reduced motion before its change event arrives",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "placeholder entries do not acquire interactive motion handlers",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "placeholder entries do not acquire interactive motion handlers",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "an empty grid does not allocate graphics or observers",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "an empty grid does not allocate graphics or observers",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass lifecycle",
+      "name": "an empty grid does not allocate graphics or observers",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "missing or blocked WebGL leaves the DOM fallback available",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "missing or blocked WebGL leaves the DOM fallback available",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "initialization failure releases resources: {\"compile\":false}",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "initialization failure releases resources: {\"compile\":false}",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "initialization failure releases resources: {\"compile\":false}",
+      "result": true,
+      "message": "both allocated shaders are released"
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "initialization failure releases resources: {\"link\":false}",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "initialization failure releases resources: {\"link\":false}",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "initialization failure releases resources: {\"link\":false}",
+      "result": true,
+      "message": "both allocated shaders are released"
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "palette changes redraw without allocating another renderer",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "palette changes redraw without allocating another renderer",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "palette changes redraw without allocating another renderer",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "palette changes redraw without allocating another renderer",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "each entry receives its own clear-glass color from a shared palette texture",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "each entry receives its own clear-glass color from a shared palette texture",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "each entry receives its own clear-glass color from a shared palette texture",
+      "result": true,
+      "message": "both entry colors are uploaded together, so draws do not mutate the sampled texture"
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "each entry receives its own clear-glass color from a shared palette texture",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "each entry receives its own clear-glass color from a shared palette texture",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "each entry receives its own clear-glass color from a shared palette texture",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "destroy is idempotent and prevents drawing with released resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "destroy is idempotent and prevents drawing with released resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "destroy is idempotent and prevents drawing with released resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "destroy is idempotent and prevents drawing with released resources",
+      "result": true
+    },
+    {
+      "module": "ISBF | Unit | workbench glass renderer",
+      "name": "destroy is idempotent and prevents drawing with released resources",
+      "result": true
+    }
+  ],
+  "done": {
+    "passed": 28,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "total": 28
+  },
+  "errors": [],
+  "text": "Discourse QUnit Test Runner\nHide passed testsNo try-catchLoop until failureTarget: \ntheme id 4\nFilter:  GoModule: \nQUnit 2.26.0; Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36\n\n28 tests completed in 6099 milliseconds, with 0 failed, 0 skipped, and 0 todo.\n128 assertions of 128 passed, 0 failed.",
+  "pageErrors": []
+}
