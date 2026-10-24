@@ -1,5 +1,6 @@
 import {
   fillIn,
+  find,
   render,
   settled,
   triggerEvent,
@@ -52,6 +53,37 @@ module("Integration | ui-kit | DOtp animated", function (hooks) {
       clipboardData: { getData: () => "654321" },
     });
     assert.dom(".d-otp-input").hasValue("654321");
+  });
+
+  test("preserves native keyboard range deletion and cursor position", async function (assert) {
+    const changes = [];
+    this.changed = (code) => changes.push(code);
+    await render(
+      <template>
+        <DOtp @onChange={{this.changed}} @variant="animated" />
+      </template>
+    );
+
+    const input = find(".d-otp-input");
+    for (const inputType of ["deleteContentBackward", "deleteContentForward"]) {
+      await fillIn(input, "12345");
+      input.value = "15";
+      input.setSelectionRange(1, 1);
+      await triggerEvent(input, "input", { inputType });
+      assert.dom(input).hasValue("15");
+      assert.strictEqual(changes.at(-1), "15");
+      assert
+        .dom(".d-otp-animated__slot[data-index='1']")
+        .hasAttribute("data-active");
+    }
+
+    await fillIn(input, "12345");
+    input.value = "";
+    input.setSelectionRange(0, 0);
+    await triggerEvent(input, "input", { inputType: "deleteContentBackward" });
+    assert.dom(input).hasValue("");
+    assert.strictEqual(changes.at(-1), "");
+    assert.dom(".d-otp-animated__slot[data-filled]").doesNotExist();
   });
 
   test("rejects a code, clears once and accepts a retry", async function (assert) {

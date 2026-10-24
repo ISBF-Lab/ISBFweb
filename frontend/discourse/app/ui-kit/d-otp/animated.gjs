@@ -238,10 +238,12 @@ export default class AnimatedOtp extends Component {
       event.target.value = this.code;
       return;
     }
-    if (event.inputType === "deleteContentBackward") {
-      this.#remove(true);
-    } else if (event.inputType === "deleteContentForward") {
-      this.#remove(false);
+    if (event.inputType?.startsWith("delete")) {
+      const position = event.target.selectionStart;
+      this.#commit(slotsOf(event.target.value, this.count));
+      if (position !== null) {
+        this.active = Math.max(0, Math.min(this.count - 1, position));
+      }
     } else if (
       event.inputType === "insertText" &&
       digitsOf(event.data).length === 1

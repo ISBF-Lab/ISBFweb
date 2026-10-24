@@ -1,8 +1,8 @@
 {
   "environment": "isolated development only; synthetic data; local mail sink",
   "core_qunit": {
-    "tests": 56,
-    "assertions": 273,
+    "tests": 57,
+    "assertions": 282,
     "failed": 0
   },
   "alumni_qunit": {
@@ -21,7 +21,8 @@
     "login, invitation signup and alumni application continuation",
     "1440px desktop, 390px and 320px mobile emulation; light and dark",
     "reduced motion",
-    "real development email code login"
+    "real development email code login",
+    "native backward/forward selection deletion and cursor position"
   ],
   "limits": [
     "Chromium emulation; no physical Safari/iPhone acceptance",

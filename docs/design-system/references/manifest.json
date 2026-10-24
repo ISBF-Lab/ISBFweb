@@ -2279,7 +2279,7 @@
       "scope": "Authentication email verification in login, invitation signup and alumni application only; theme palette, animated numeric slots and native backend flow preserved",
       "review": "../reviews/auth-code-slots-20261023/README.md",
       "source_manifest": "../reviews/auth-code-slots-20261023/source-manifest.json",
-      "source_manifest_sha256": "ac13ab00940ca0b82ed9d6605ddd70096ab1f6bee8440bd0a029c38b74ed8972",
+      "source_manifest_sha256": "541e3142b1c3c6c171231a495fd1733977482aaab295be1572e341328514d9fc",
       "acceptance": "User approved the supplied numeric-slot reference, website theme colors and implementation. On 2026-10-24 the user requested PR creation and production deployment. Development checks passed; production deployment and final visual acceptance are tracked separately."
     }
   ]

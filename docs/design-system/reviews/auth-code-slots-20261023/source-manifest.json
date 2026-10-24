@@ -21,7 +21,7 @@
     },
     {
       "path": "frontend/discourse/app/ui-kit/d-otp/animated.gjs",
-      "sha256": "9ed1a736b4a6eab4c949ae9f5836045cba31fe01e6f6ff9d3d47a93adb24077c",
+      "sha256": "5823dddedea6971647d0c544283fdd0bf72019a86eaf7f4d738f368beccdec7a",
       "repository": "ISBF-Lab/ISBFweb"
     },
     {
@@ -71,7 +71,7 @@
     },
     {
       "path": "frontend/discourse/tests/integration/ui-kit/d-otp-animated-test.gjs",
-      "sha256": "bc982345fdcb4095784c831e67263183783758bc3ed89c018c6a2d93da493c0d",
+      "sha256": "c30f3df5af648ac974481a67e26897851cf2a8c672b0055012ac43c3f0aaf864",
       "repository": "ISBF-Lab/ISBFweb"
     },
     {
@@ -97,12 +97,12 @@
   ],
   "validation": {
     "status": "passed_in_isolated_development",
-    "qunit_tests": 74,
-    "qunit_assertions": 347,
+    "qunit_tests": 75,
+    "qunit_assertions": 356,
     "failed": 0,
     "core": {
-      "tests": 56,
-      "assertions": 273
+      "tests": 57,
+      "assertions": 282
     },
     "alumni": {
       "tests": 18,
@@ -124,5 +124,13 @@
   "base_commits": {
     "ISBF-Lab/ISBFweb": "359ddc1dde768345865eda16ca2fcf4ff6d2cd22",
     "ISBF-Lab/ISBF-Alumni": "2ab923e1680b2f598555ea481c3daac7ba07f342"
+  },
+  "review_followup": {
+    "date": "2026-10-24",
+    "review": "https://github.com/ISBF-Lab/ISBFweb/pull/84#discussion_r4365709223",
+    "change": "Consume the browser-edited value for native deletion and retain its cursor position. Added backward/forward range deletion and clear-all regression coverage.",
+    "core_tests": 57,
+    "core_assertions": 282,
+    "failed": 0
   }
 }
