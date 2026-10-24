@@ -4,6 +4,40 @@ zh_CN:
     settings:
       brand_show_logo: "显示徽标：使用后台「徽标」页配置的对应场景图片及深色版本。"
       brand_show_name: "显示名称：显示平台名称，可与徽标同时显示；两个开关均关闭时隐藏品牌区域。"
+      workbench_layout_mobile:
+        description: "手机工作台布局，统一对全站用户生效，与电脑布局独立。传统布局使用原来的平面入口；玻璃布局使用紧凑液态玻璃入口。"
+        choices:
+          traditional: 传统布局
+          glass: 玻璃布局
+      workbench_layout_desktop:
+        description: "电脑工作台布局，统一对全站用户生效，与手机布局独立。玻璃布局使用下方明暗配色；传统布局沿用原来配色。"
+        choices:
+          traditional: 传统布局
+          glass: 玻璃布局
+      workbench_panel_color_light: "电脑工作台：工具箱底板（浅色模式），填写 #RRGGBB。留空跟随主题；单模块设置可覆盖默认颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_panel_color_dark: "电脑工作台：工具箱底板（深色模式），填写 #RRGGBB。留空跟随主题；单模块设置可覆盖默认颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_color_light: "电脑工作台：模块背板统一默认（浅色模式），填写 #RRGGBB。留空跟随主题；单模块设置可覆盖默认颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_color_dark: "电脑工作台：模块背板统一默认（深色模式），填写 #RRGGBB。留空跟随主题；单模块设置可覆盖默认颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_learning_resources_color_light: "电脑工作台：课程资源（浅色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_learning_resources_color_dark: "电脑工作台：课程资源（深色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_library_color_light: "电脑工作台：资料库（浅色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_library_color_dark: "电脑工作台：资料库（深色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_courses_color_light: "电脑工作台：课程专区（浅色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_courses_color_dark: "电脑工作台：课程专区（深色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_careers_color_light: "电脑工作台：求职实习（浅色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_careers_color_dark: "电脑工作台：求职实习（深色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_resume_color_light: "电脑工作台：简历工具（浅色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_resume_color_dark: "电脑工作台：简历工具（深色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_campus_services_color_light: "电脑工作台：校园服务（浅色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_campus_services_color_dark: "电脑工作台：校园服务（深色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_student_identity_color_light: "电脑工作台：学生认证（浅色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_student_identity_color_dark: "电脑工作台：学生认证（深色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_alumni_color_light: "电脑工作台：校友网络（浅色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_alumni_color_dark: "电脑工作台：校友网络（深色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_marketplace_color_light: "电脑工作台：商城（浅色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_marketplace_color_dark: "电脑工作台：商城（深色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_teamup_color_light: "电脑工作台：组队（浅色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
+      workbench_plate_teamup_color_dark: "电脑工作台：组队（深色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
   isbf_v2:
     continue_reading:
       title: "接着看看"

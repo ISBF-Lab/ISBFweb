@@ -347,19 +347,6 @@ body:has(.isbf-v2-shell--learning) #main-outlet {
   }
 }
 
-.isbf-v2-workbench a.isbf-v2-workbench__card {
-  color: var(--isbf-v2-text);
-
-  &:hover {
-    background: var(--isbf-v2-hover);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--isbf-v2-focus-ring);
-    outline-offset: 2px;
-  }
-}
-
 @media (width <= 600px) {
   .isbf-learning {
     --isbf-learning-courses-width: 104px;

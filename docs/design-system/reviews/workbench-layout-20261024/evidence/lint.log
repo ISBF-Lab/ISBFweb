@@ -1,0 +1,19 @@
+[bin/lint] No core linter for: themes/isbf-workbench-pr-validation/about.json, themes/isbf-workbench-release-validation/about.json
+[bin/lint] Running core linters via lefthook...
+│  developer-docs-prettier (skip) no files for inspection
+┃  eslint ❯ 
+
+┃  prettier ❯ 
+- Starting...
+✔ Reformatted 0 / 21 files...
+
+│  rubocop (skip) no files for inspection
+┃  stylelint ❯ 
+
+│  syntax_tree (skip) no files for inspection
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 62.12 seconds)
+✔️ eslint (23.23 seconds)
+✔️ prettier (17.16 seconds)
+✔️ stylelint (21.63 seconds)
+[bin/lint] All lints passed

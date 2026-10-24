@@ -4,6 +4,40 @@ en:
     settings:
       brand_show_logo: "Show the logo from the native logo settings for the current layout and color mode."
       brand_show_name: "Show the platform name, with or without its logo. Turning both switches off hides the brand area."
+      workbench_layout_mobile:
+        description: "Mobile workbench layout for everyone, independent of desktop. Choose the original flat entries or compact liquid glass."
+        choices:
+          traditional: Traditional layout
+          glass: Glass layout
+      workbench_layout_desktop:
+        description: "Desktop workbench layout for everyone, independent of mobile. Glass uses the color settings below; traditional retains the original palette."
+        choices:
+          traditional: Traditional layout
+          glass: Glass layout
+      workbench_panel_color_light: "Desktop workbench: Toolbox background (light mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_panel_color_dark: "Desktop workbench: Toolbox background (dark mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_color_light: "Desktop workbench: Default module background (light mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_color_dark: "Desktop workbench: Default module background (dark mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_learning_resources_color_light: "Desktop workbench: Learning resources (light mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_learning_resources_color_dark: "Desktop workbench: Learning resources (dark mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_library_color_light: "Desktop workbench: Library (light mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_library_color_dark: "Desktop workbench: Library (dark mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_courses_color_light: "Desktop workbench: Courses (light mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_courses_color_dark: "Desktop workbench: Courses (dark mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_careers_color_light: "Desktop workbench: Careers (light mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_careers_color_dark: "Desktop workbench: Careers (dark mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_resume_color_light: "Desktop workbench: Resume tools (light mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_resume_color_dark: "Desktop workbench: Resume tools (dark mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_campus_services_color_light: "Desktop workbench: Campus services (light mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_campus_services_color_dark: "Desktop workbench: Campus services (dark mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_student_identity_color_light: "Desktop workbench: Student identity (light mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_student_identity_color_dark: "Desktop workbench: Student identity (dark mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_alumni_color_light: "Desktop workbench: Alumni (light mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_alumni_color_dark: "Desktop workbench: Alumni (dark mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_marketplace_color_light: "Desktop workbench: Marketplace (light mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_marketplace_color_dark: "Desktop workbench: Marketplace (dark mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_teamup_color_light: "Desktop workbench: Team up (light mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
+      workbench_plate_teamup_color_dark: "Desktop workbench: Team up (dark mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
   isbf_v2:
     continue_reading:
       title: "Keep reading"

@@ -1,154 +1,114 @@
-import {
-  clearRender,
-  find,
-  findAll,
-  render,
-  triggerEvent,
-} from "@ember/test-helpers";
+import { render } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import ISBFV2Workbench from "../../discourse/components/isbf-v2-workbench";
 
 module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
-  setupRenderingTest(hooks);
+  setupRenderingTest(hooks, { stubRouter: true });
+
+  let geometryStyle;
+  hooks.before(function () {
+    // Theme QUnit omits theme CSS; retain the canvas's normal out-of-flow layout.
+    geometryStyle = document.createElement("style");
+    geometryStyle.textContent =
+      ".isbf-workbench-grid__items { position: relative; } .isbf-workbench-grid__canvas { position: absolute; }";
+    document.head.append(geometryStyle);
+  });
+  hooks.after(function () {
+    geometryStyle.remove();
+  });
 
   hooks.beforeEach(function () {
-    this.site.setProperties({
-      isbf_learning: null,
-      isbf_library: null,
-      isbf_careers: null,
-      isbf_teamup: null,
-      isbf_marketplace: null,
-      isbf_alumni: null,
-    });
-    this.siteSettings.isbf_resume_enabled = false;
-  });
-
-  hooks.afterEach(function () {
-    sinon.restore();
-  });
-
-  test("unavailable services stay noninteractive and alumni follows its configuration", async function (assert) {
-    await render(<template><ISBFV2Workbench /></template>);
-
-    assert
-      .dom(".isbf-v2-workbench__card")
-      .exists({ count: 9 }, "only the configured alumni entry is omitted");
-    assert
-      .dom("a.isbf-v2-workbench__card")
-      .doesNotExist(
-        "unavailable services have no navigation or extra focus target"
-      );
-    assert
-      .dom('[data-service="teamup"] .isbf-v2-workbench__name')
-      .doesNotIncludeText(
-        "translation missing",
-        "the new entry has a translated name"
-      );
-  });
-
-  test("available services keep their order and real destinations", async function (assert) {
-    this.site.setProperties({
-      isbf_learning: { category_id: 7, grades: [{ id: 1, label: "Grade 1" }] },
+    const getContext = HTMLCanvasElement.prototype.getContext;
+    this.contextStub = sinon
+      .stub(HTMLCanvasElement.prototype, "getContext")
+      .callsFake(function (type, ...args) {
+        return type === "webgl2" ? null : getContext.call(this, type, ...args);
+      });
+    const configuration = {
+      isbf_learning: { category_id: 1, grades: [] },
       isbf_library: {
-        category_id: 10,
+        category_id: 2,
         link_sharing: true,
         catalog_requests: true,
       },
-      isbf_careers: { category_id: 11, enabled: true, version: 1 },
-      isbf_teamup: { category_id: 9, enabled: true, version: 1 },
-      isbf_marketplace: { category_id: 8, private_images: true, version: 1 },
+      isbf_careers: { category_id: 3, enabled: true, version: 1 },
+      isbf_marketplace: { category_id: 4, private_images: true, version: 1 },
+      isbf_teamup: { category_id: 5, enabled: true, version: 1 },
       isbf_alumni: { enabled: true, countries: [] },
-    });
+    };
+    this.previousConfiguration = Object.fromEntries(
+      Object.keys(configuration).map((name) => [name, this.site[name]])
+    );
+    this.previousResumeEnabled = this.siteSettings.isbf_resume_enabled;
+    this.site.setProperties(configuration);
     this.siteSettings.isbf_resume_enabled = true;
-
-    await render(<template><ISBFV2Workbench /></template>);
-
-    assert.deepEqual(
-      findAll(".isbf-v2-workbench__card").map((card) => card.dataset.service),
-      [
-        "learning_resources",
-        "library",
-        "courses",
-        "careers",
-        "resume",
-        "campus_services",
-        "student_identity",
-        "alumni",
-        "marketplace",
-        "teamup",
-      ],
-      "the original ten-entry order is retained"
-    );
-    assert.deepEqual(
-      findAll("a.isbf-v2-workbench__card").map((card) =>
-        card.getAttribute("href")
-      ),
-      [
-        "/isbf/learning",
-        "/isbf/library",
-        "/isbf/careers",
-        "/isbf/workbench/resume",
-        "/isbf/alumni",
-        "/isbf/marketplace",
-        "/isbf/teamup",
-      ],
-      "the seven available services retain native links"
-    );
-    assert
-      .dom('[data-service="courses"]')
-      .doesNotHaveAttribute("href", "future services remain placeholders");
   });
 
-  test("hover feedback stops for reduced motion and after unmounting", async function (assert) {
-    this.site.isbf_learning = { category_id: 7, grades: [] };
-    const matchMedia = window.matchMedia.bind(window);
-    const media = matchMedia("(prefers-reduced-motion: reduce)");
-    let reduced = false;
-    sinon.stub(media, "matches").get(() => reduced);
-    sinon
-      .stub(window, "matchMedia")
-      .callsFake((query) =>
-        query === "(prefers-reduced-motion: reduce)" ? media : matchMedia(query)
-      );
-    const cancel = sinon.spy();
-    const animate = sinon
-      .stub(Element.prototype, "animate")
-      .returns({ cancel });
+  hooks.afterEach(function () {
+    this.contextStub.restore();
+    this.site.setProperties(this.previousConfiguration);
+    this.siteSettings.isbf_resume_enabled = this.previousResumeEnabled;
+  });
 
+  test("the new presentation preserves real links and non-interactive placeholders", async function (assert) {
     await render(<template><ISBFV2Workbench /></template>);
-    const card = find('[data-service="learning_resources"]');
-    await triggerEvent(card, "pointerover", { pointerType: "mouse" });
-    assert.true(
-      animate.calledOnce,
-      "a mouse entering an available card starts feedback"
-    );
+    assert.dom(".isbf-workbench-grid__item").exists({ count: 10 });
+    for (const [key, href] of Object.entries({
+      learning_resources: "/isbf/learning",
+      library: "/isbf/library",
+      careers: "/isbf/careers",
+      resume: "/isbf/workbench/resume",
+      alumni: "/isbf/alumni",
+      marketplace: "/isbf/marketplace",
+      teamup: "/isbf/teamup",
+    })) {
+      assert.dom(`[data-workbench-key="${key}"]`).hasAttribute("href", href);
+    }
+    for (const key of ["courses", "campus_services", "student_identity"]) {
+      assert.dom(`[data-workbench-key="${key}"]`).hasTagName("div");
+      assert
+        .dom(`[data-workbench-key="${key}"]`)
+        .doesNotHaveAttribute("tabindex");
+    }
+    assert.dom(".isbf-workbench-grid.has-webgl").doesNotExist();
+    assert
+      .dom(
+        '[data-workbench-key="learning_resources"] .isbf-workbench-grid__label'
+      )
+      .hasStyle({ opacity: "1" });
+  });
 
-    reduced = true;
-    media.dispatchEvent(new Event("change"));
-    assert.true(
-      cancel.calledOnce,
-      "enabling reduced motion cancels active feedback"
-    );
-    await triggerEvent(card, "pointerover", { pointerType: "mouse" });
-    assert.true(
-      animate.calledOnce,
-      "reduced motion prevents another animation"
-    );
+  test("disabled services keep their existing visibility and placeholder rules", async function (assert) {
+    this.site.setProperties({
+      isbf_alumni: null,
+      isbf_learning: null,
+      isbf_library: null,
+      isbf_careers: null,
+      isbf_marketplace: null,
+      isbf_teamup: null,
+    });
+    this.siteSettings.isbf_resume_enabled = false;
+    await render(<template><ISBFV2Workbench /></template>);
+    assert.dom(".isbf-workbench-grid__item").exists({ count: 9 });
+    assert.dom('[data-workbench-key="alumni"]').doesNotExist();
+    assert.dom("a.isbf-workbench-grid__item").doesNotExist();
+  });
 
-    reduced = false;
-    await triggerEvent(card, "pointerover", { pointerType: "mouse" });
-    await clearRender();
-    assert.strictEqual(
-      cancel.callCount,
-      2,
-      "unmounting cancels remaining feedback"
-    );
-    await triggerEvent(card, "pointerover", { pointerType: "mouse" });
-    assert.true(
-      animate.calledTwice,
-      "the detached card no longer has a listener"
-    );
+  test("entry names belong to the glass face and decorative copy is removed", async function (assert) {
+    await render(<template><ISBFV2Workbench /></template>);
+    assert
+      .dom(".isbf-workbench-grid__face > .isbf-workbench-grid__label")
+      .exists({ count: 10 });
+    assert.dom(".isbf-workbench-grid__face[aria-hidden]").doesNotExist();
+    assert
+      .dom(".isbf-workbench-grid__mobile-icon[aria-hidden=true]")
+      .exists({ count: 10 });
+    assert
+      .dom(
+        ".isbf-v2-workbench__heading-dot, .isbf-v2-workbench__signature, .isbf-v2-workbench__caption, .isbf-v2-workbench__heading p, .isbf-v2-workbench__mobile-brand"
+      )
+      .doesNotExist();
   });
 });

@@ -1,0 +1,102 @@
+{
+  "results": [
+    {
+      "mode": "light",
+      "image": "custom-light-1440.png",
+      "sha256": "58886e30b36ad7ca86323dfadce560234d6b48a6fe7d1a56d3ef12a8b80ccf64",
+      "size": [
+        1440,
+        1026
+      ],
+      "samples": [
+        {
+          "name": "panel",
+          "point": [
+            450,
+            150
+          ],
+          "rgb": [
+            255,
+            246,
+            238
+          ]
+        },
+        {
+          "name": "module_override",
+          "point": [
+            584,
+            178
+          ],
+          "rgb": [
+            244,
+            198,
+            212
+          ]
+        },
+        {
+          "name": "module_default",
+          "point": [
+            716,
+            178
+          ],
+          "rgb": [
+            35,
+            110,
+            164
+          ]
+        }
+      ],
+      "black_foreground_pixels": 288,
+      "status": "passed"
+    },
+    {
+      "mode": "dark",
+      "image": "custom-dark-1440.png",
+      "sha256": "f3af89655104ce481a0c84da0fa2eb07b974f6d36195feb865bcc435b504b79e",
+      "size": [
+        1440,
+        1026
+      ],
+      "samples": [
+        {
+          "name": "panel",
+          "point": [
+            450,
+            150
+          ],
+          "rgb": [
+            25,
+            43,
+            60
+          ]
+        },
+        {
+          "name": "module_default",
+          "point": [
+            584,
+            178
+          ],
+          "rgb": [
+            121,
+            184,
+            219
+          ]
+        },
+        {
+          "name": "module_override",
+          "point": [
+            1112,
+            336
+          ],
+          "rgb": [
+            195,
+            150,
+            59
+          ]
+        }
+      ],
+      "black_foreground_pixels": 288,
+      "status": "passed"
+    }
+  ]
+}

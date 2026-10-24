@@ -1,0 +1,198 @@
+{
+  "results": [
+    {
+      "name": "glass rows align at their first column",
+      "width": 375,
+      "layout": "glass",
+      "toolboxHeadings": 0,
+      "rowCounts": [
+        3,
+        3,
+        3,
+        1
+      ],
+      "rowStarts": [
+        40.5,
+        40.5,
+        40.5,
+        40.5
+      ],
+      "groupLeft": 40.5,
+      "groupCenter": 187.5,
+      "stageCenter": 187.5,
+      "gpuCenter": [
+        104,
+        416
+      ],
+      "expectedGpuCenter": [
+        104,
+        416
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "glass rows align at their first column",
+      "width": 601,
+      "layout": "glass",
+      "toolboxHeadings": 0,
+      "rowCounts": [
+        3,
+        3,
+        3,
+        1
+      ],
+      "rowStarts": [
+        186.5,
+        186.5,
+        186.5,
+        186.5
+      ],
+      "groupLeft": 186.5,
+      "groupCenter": 333.5,
+      "stageCenter": 333.5,
+      "gpuCenter": [
+        104,
+        494
+      ],
+      "expectedGpuCenter": [
+        104,
+        494
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "glass rows align at their first column",
+      "width": 768,
+      "layout": "glass",
+      "toolboxHeadings": 0,
+      "rowCounts": [
+        4,
+        4,
+        2
+      ],
+      "rowStarts": [
+        209,
+        209,
+        209
+      ],
+      "groupLeft": 209,
+      "groupCenter": 434,
+      "stageCenter": 434,
+      "gpuCenter": [
+        234,
+        404
+      ],
+      "expectedGpuCenter": [
+        234,
+        404
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "glass rows align at their first column",
+      "width": 1440,
+      "layout": "glass",
+      "toolboxHeadings": 0,
+      "rowCounts": [
+        5,
+        5
+      ],
+      "rowStarts": [
+        516,
+        516
+      ],
+      "groupLeft": 516,
+      "groupCenter": 834,
+      "stageCenter": 834,
+      "gpuCenter": [
+        658,
+        288
+      ],
+      "expectedGpuCenter": [
+        658,
+        288
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "static glass rows use the same left alignment",
+      "width": 375,
+      "layout": "glass",
+      "toolboxHeadings": 0,
+      "rowCounts": [
+        3,
+        3,
+        3,
+        1
+      ],
+      "rowStarts": [
+        40.5,
+        40.5,
+        40.5,
+        40.5
+      ],
+      "groupLeft": 40.5,
+      "groupCenter": 187.5,
+      "stageCenter": 187.5,
+      "gpuCenter": null,
+      "expectedGpuCenter": [
+        83.5,
+        453.796875
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "traditional row arrangement retained",
+      "width": 375,
+      "layout": "traditional",
+      "toolboxHeadings": 0,
+      "rowCounts": [
+        4,
+        4,
+        2
+      ],
+      "rowStarts": [
+        25,
+        25,
+        25
+      ],
+      "groupLeft": 25,
+      "groupCenter": 187.5,
+      "stageCenter": 187.5,
+      "gpuCenter": null,
+      "expectedGpuCenter": [
+        145.875,
+        330.265625
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "traditional row arrangement retained",
+      "width": 1440,
+      "layout": "traditional",
+      "toolboxHeadings": 0,
+      "rowCounts": [
+        4,
+        4,
+        2
+      ],
+      "rowStarts": [
+        434,
+        434,
+        434
+      ],
+      "groupLeft": 434,
+      "groupCenter": 834,
+      "stageCenter": 834,
+      "gpuCenter": null,
+      "expectedGpuCenter": [
+        732.25,
+        489.96875
+      ],
+      "status": "passed"
+    }
+  ],
+  "failures": [],
+  "pageErrors": [],
+  "settingsRestored": true
+}

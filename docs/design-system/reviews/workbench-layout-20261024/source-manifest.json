@@ -1,0 +1,193 @@
+{
+  "prepared_at_utc": "2026-10-24",
+  "scope": "Workbench main content only; native site-wide mobile/desktop layout and desktop colors",
+  "base_commit": "00d7860482cc2c15d77c7ef626db31d849aa2ebf",
+  "files": [
+    {
+      "path": "themes/isbf-campus-feed/about.json",
+      "sha256": "27cfcea745533c2d18df446b27cef2a39325ca1091f99c8fc2a24e62b0c9a1b8",
+      "development_sha256": "907e304ac6851d71638eb462c43289dbbdeea3e291ee60918fbfd57a99c0c90c",
+      "production_candidate_sha256": "27cfcea745533c2d18df446b27cef2a39325ca1091f99c8fc2a24e62b0c9a1b8",
+      "production_before_sha256": "be6f4cc306615e8bc03ccc665723c6826cb56e18478e433689f2f8f8c88688ca",
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "sha256": "fac717e1996bacca3de418c53b2f9b1c8887f3f701734130fb0fc8236c3694c6",
+      "development_sha256": "cf0cd01506b2321f23d7b52a11567109183877f84b1000bf6ab91c461fba49fc",
+      "production_candidate_sha256": "22db0ad3526a0a409b7f627ac2aeaccaca6c4ff39edfa3d0cdcd963a4f68c421",
+      "production_before_sha256": "1b71ff6fc108bc23b4ecb5bc475064298721d2814a1087fba35643c275369d50",
+      "runtime_variant_preserves_unrelated_production_changes": true
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-workbench-icons.js",
+      "sha256": "a7b51c0424c5b6d8ceebaa7b76662b92188b452fe94265b7970a5b8259f8283e",
+      "development_sha256": "a7b51c0424c5b6d8ceebaa7b76662b92188b452fe94265b7970a5b8259f8283e",
+      "production_candidate_sha256": "a7b51c0424c5b6d8ceebaa7b76662b92188b452fe94265b7970a5b8259f8283e",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-workbench.gjs",
+      "sha256": "5a5f92cdcddeb77def9fe117f2205596cb2e10d6171a041b0c803cc8df9b712e",
+      "development_sha256": "5a5f92cdcddeb77def9fe117f2205596cb2e10d6171a041b0c803cc8df9b712e",
+      "production_candidate_sha256": "5a5f92cdcddeb77def9fe117f2205596cb2e10d6171a041b0c803cc8df9b712e",
+      "production_before_sha256": "1eafcd04c8e2c046c39b24d8ba29e2441705668bf36f282caf15c7c292d24e04",
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-workbench-grid.gjs",
+      "sha256": "86f621b3be1cac1720e735db866cc8ba5051eb0b9c5df48da9dbfd6438328e39",
+      "development_sha256": "86f621b3be1cac1720e735db866cc8ba5051eb0b9c5df48da9dbfd6438328e39",
+      "production_candidate_sha256": "86f621b3be1cac1720e735db866cc8ba5051eb0b9c5df48da9dbfd6438328e39",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-workbench-icon.gjs",
+      "sha256": "d24266d3900c44fc182badde06962996e671ffd57ebb131cc5cffaa5387dbc70",
+      "development_sha256": "d24266d3900c44fc182badde06962996e671ffd57ebb131cc5cffaa5387dbc70",
+      "production_candidate_sha256": "d24266d3900c44fc182badde06962996e671ffd57ebb131cc5cffaa5387dbc70",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-colors.js",
+      "sha256": "0cf1cea0d56c4fea23c02aa5e04a3211b58354f999f76f158467955bac8ab932",
+      "development_sha256": "0cf1cea0d56c4fea23c02aa5e04a3211b58354f999f76f158467955bac8ab932",
+      "production_candidate_sha256": "0cf1cea0d56c4fea23c02aa5e04a3211b58354f999f76f158467955bac8ab932",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-glass-renderer.js",
+      "sha256": "ab5d3eb755e984206c2907d9da12c3bf9fb7aba60f7f324b8e999bb248ac7c7d",
+      "development_sha256": "ab5d3eb755e984206c2907d9da12c3bf9fb7aba60f7f324b8e999bb248ac7c7d",
+      "production_candidate_sha256": "ab5d3eb755e984206c2907d9da12c3bf9fb7aba60f7f324b8e999bb248ac7c7d",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-glass-shaders.js",
+      "sha256": "47e994c84ba6352b88610e172dcae64a6d85bef7ae27bcdd71649606a6d43250",
+      "development_sha256": "47e994c84ba6352b88610e172dcae64a6d85bef7ae27bcdd71649606a6d43250",
+      "production_candidate_sha256": "47e994c84ba6352b88610e172dcae64a6d85bef7ae27bcdd71649606a6d43250",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-glass.js",
+      "sha256": "dbd3bf01d3b4d66b87360785222939c4096fd2483101130e5c3efc4ccbdfcef5",
+      "development_sha256": "dbd3bf01d3b4d66b87360785222939c4096fd2483101130e5c3efc4ccbdfcef5",
+      "production_candidate_sha256": "dbd3bf01d3b4d66b87360785222939c4096fd2483101130e5c3efc4ccbdfcef5",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-icons.js",
+      "sha256": "21fd8eb3de996d28d05626f46956f44439b8259a6eda230caefad4890797fcf4",
+      "development_sha256": "21fd8eb3de996d28d05626f46956f44439b8259a6eda230caefad4890797fcf4",
+      "production_candidate_sha256": "21fd8eb3de996d28d05626f46956f44439b8259a6eda230caefad4890797fcf4",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/modifiers/workbench-glass.js",
+      "sha256": "05dc493da2da77880bf20c2e0d83f4cd646c699a5c775fd848b825c3e5ab10a9",
+      "development_sha256": "05dc493da2da77880bf20c2e0d83f4cd646c699a5c775fd848b825c3e5ab10a9",
+      "production_candidate_sha256": "05dc493da2da77880bf20c2e0d83f4cd646c699a5c775fd848b825c3e5ab10a9",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/locales/en.yml",
+      "sha256": "f6c142e750a43576e876ebbaf6e49313080df0a6728a707cd8d7b3bfa87600ff",
+      "development_sha256": "bb27a3bdb09716a007e1eb99cad1746b496867bacd520d0de367245f80c13118",
+      "production_candidate_sha256": "c3e65454c7cda7662eb55136da5f4cad18e88da47d11de96bf5bd55f27437c37",
+      "production_before_sha256": "981fc8b7fc95e3c2601a843aaa098d27cf8a19a6a37b647d2772bfc19075ae48",
+      "runtime_variant_preserves_unrelated_production_changes": true
+    },
+    {
+      "path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+      "sha256": "585ddb8bb3782ee1ecd90bbd303350ca1c559beb732544e70751b613c417c805",
+      "development_sha256": "62c5c48d0170d4c1367056c087aa2424bcef9d4cc139eb2b6aec00ca9812b831",
+      "production_candidate_sha256": "5a26206d8cc39b7dc1033f123c7445a4df62f2a7e4ae10327a82af5059a18686",
+      "production_before_sha256": "62fd3e907e32114df9ef9329962501d423db585e9dab3444f636ab5c094d40e7",
+      "runtime_variant_preserves_unrelated_production_changes": true
+    },
+    {
+      "path": "themes/isbf-campus-feed/settings.yml",
+      "sha256": "f01a47504cd254c13c5986a42461d44941ec0b08c86487ca7ea858edbd298903",
+      "development_sha256": "f01a47504cd254c13c5986a42461d44941ec0b08c86487ca7ea858edbd298903",
+      "production_candidate_sha256": "f01a47504cd254c13c5986a42461d44941ec0b08c86487ca7ea858edbd298903",
+      "production_before_sha256": "c9b83da12b3892b316e50589716de453dd34770c5cd9a7ab8c6f878d8aeeb258",
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/learning-resources.scss",
+      "sha256": "c7e9b690778042e1b8a6793f79d6af3cc73fd9a9b970b182cc269584f59a60cd",
+      "development_sha256": "c8fc041118b4487a116b299a61ce999bded09ec1d8689791747c564a8b2179ca",
+      "production_candidate_sha256": "c8fc041118b4487a116b299a61ce999bded09ec1d8689791747c564a8b2179ca",
+      "production_before_sha256": "4ea496ea8f7021fd37beb8a060d4927c4d85cecb8ef6476d1d5f741f22e69f7e",
+      "runtime_variant_preserves_unrelated_production_changes": true
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/workbench.scss",
+      "sha256": "7d3ba195310277fe9297020afae8b0d79db8a7e15866f7f029a5f124ff3bf859",
+      "development_sha256": "7d3ba195310277fe9297020afae8b0d79db8a7e15866f7f029a5f124ff3bf859",
+      "production_candidate_sha256": "7d3ba195310277fe9297020afae8b0d79db8a7e15866f7f029a5f124ff3bf859",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/helpers/workbench-graphics.js",
+      "sha256": "a7ca8bbcc186f6606af12ff565c6642af33c70e29f20d59aa0397159db6e0547",
+      "development_sha256": "a7ca8bbcc186f6606af12ff565c6642af33c70e29f20d59aa0397159db6e0547",
+      "production_candidate_sha256": "a7ca8bbcc186f6606af12ff565c6642af33c70e29f20d59aa0397159db6e0547",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/helpers/workbench-stage.js",
+      "sha256": "411837585a2d94d25a921da55196ec6915b6c20f53e1b5c4e2ad98a2481ec7c5",
+      "development_sha256": "411837585a2d94d25a921da55196ec6915b6c20f53e1b5c4e2ad98a2481ec7c5",
+      "production_candidate_sha256": "411837585a2d94d25a921da55196ec6915b6c20f53e1b5c4e2ad98a2481ec7c5",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/workbench-test.gjs",
+      "sha256": "561fc8e9757fbc69867dd5b7822b7e84c93efd03e6f60f5466c1472512cc91c8",
+      "development_sha256": "561fc8e9757fbc69867dd5b7822b7e84c93efd03e6f60f5466c1472512cc91c8",
+      "production_candidate_sha256": "561fc8e9757fbc69867dd5b7822b7e84c93efd03e6f60f5466c1472512cc91c8",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/unit/workbench-colors-test.js",
+      "sha256": "d283272c24affae9689b90b366bd7698e6b81de0163c26d4b618870f3b1a4160",
+      "development_sha256": "d283272c24affae9689b90b366bd7698e6b81de0163c26d4b618870f3b1a4160",
+      "production_candidate_sha256": "d283272c24affae9689b90b366bd7698e6b81de0163c26d4b618870f3b1a4160",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/unit/workbench-glass-lifecycle-test.js",
+      "sha256": "5bb7831ba363a45f8d67e00f2c89db8d2d9b205293d5519bbabc3cbfd2f68e95",
+      "development_sha256": "5bb7831ba363a45f8d67e00f2c89db8d2d9b205293d5519bbabc3cbfd2f68e95",
+      "production_candidate_sha256": "5bb7831ba363a45f8d67e00f2c89db8d2d9b205293d5519bbabc3cbfd2f68e95",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/unit/workbench-glass-renderer-test.js",
+      "sha256": "c237d181e4162216e1ae71c7c92fe7683b7992d19a03577d49c0e749a59406af",
+      "development_sha256": "c237d181e4162216e1ae71c7c92fe7683b7992d19a03577d49c0e749a59406af",
+      "production_candidate_sha256": "c237d181e4162216e1ae71c7c92fe7683b7992d19a03577d49c0e749a59406af",
+      "production_before_sha256": null,
+      "runtime_variant_preserves_unrelated_production_changes": false
+    }
+  ],
+  "production_changed": false,
+  "migration_manifests_unchanged": true
+}
