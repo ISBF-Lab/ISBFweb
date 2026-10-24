@@ -1,0 +1,128 @@
+{
+  "date": "2026-10-23",
+  "acceptance": "User approved the animation reference, theme colors and implementation scope; final visual review pending.",
+  "environment": "isolated development only",
+  "dependency": {
+    "package": "motion",
+    "version": "12.23.24",
+    "resolution": "pnpm-lock.yaml"
+  },
+  "scope": [
+    "email code login",
+    "invitation email verification",
+    "alumni invitation email verification",
+    "alumni application email verification"
+  ],
+  "files": [
+    {
+      "path": "frontend/discourse/app/ui-kit/d-otp/index.gjs",
+      "sha256": "77eb6c4b440a6c9371cac95f452f297ef2139141a8db1806ff63dceee51307cd",
+      "repository": "ISBF-Lab/ISBFweb"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-otp/animated.gjs",
+      "sha256": "9ed1a736b4a6eab4c949ae9f5836045cba31fe01e6f6ff9d3d47a93adb24077c",
+      "repository": "ISBF-Lab/ISBFweb"
+    },
+    {
+      "path": "frontend/discourse/app/lib/load-motion.js",
+      "sha256": "cb23713428455f90bd9e0207a637ba4be92552601ed8d3dd4309d9606f0e7346",
+      "repository": "ISBF-Lab/ISBFweb"
+    },
+    {
+      "path": "frontend/discourse/app/lib/otp-feedback.js",
+      "sha256": "826c5bb09ea0ce78a298ecdd8dee4d95dee8b14adfa30aacb5b3b5e3eea0e711",
+      "repository": "ISBF-Lab/ISBFweb"
+    },
+    {
+      "path": "frontend/discourse/app/components/code-login-form.gjs",
+      "sha256": "c0cfeff18c23c6cd080ae8c201ebc3f8d5789222e1e39e775067390c429018ef",
+      "repository": "ISBF-Lab/ISBFweb"
+    },
+    {
+      "path": "app/assets/stylesheets/common/components/d-otp.scss",
+      "sha256": "1f34710de7d5a122cf492c014ab2d6f05f3fe4e8b74c5e1dfcfb0d2d2c167ad1",
+      "repository": "ISBF-Lab/ISBFweb"
+    },
+    {
+      "path": "app/assets/stylesheets/common/components/_d-otp-animated.scss",
+      "sha256": "579bbebdbde9909f44a47d5c6e4169951f948d73541a3eaae78b972dc8efc620",
+      "repository": "ISBF-Lab/ISBFweb"
+    },
+    {
+      "path": "config/locales/client.en.yml",
+      "sha256": "cebbdbaff00eb47d56e666e469d23865dd850dfc2bfee77873870815c2afecf6",
+      "repository": "ISBF-Lab/ISBFweb"
+    },
+    {
+      "path": "config/locales/client.zh_CN.yml",
+      "sha256": "1275bcb60a389cdbdba27e1e0a9ee0dbb01b433e6445b614800b009465985cfb",
+      "repository": "ISBF-Lab/ISBFweb"
+    },
+    {
+      "path": "frontend/discourse/package.json",
+      "sha256": "18ee47b9a690c4b0814c77797b277af2f52107947096e1c5ef1baba4ffc19c48",
+      "repository": "ISBF-Lab/ISBFweb"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "13f6b3eb267dbb2026a100c9e07fec0a17b0606fc1c944a7e860adcf431a7754",
+      "repository": "ISBF-Lab/ISBFweb"
+    },
+    {
+      "path": "frontend/discourse/tests/integration/ui-kit/d-otp-animated-test.gjs",
+      "sha256": "bc982345fdcb4095784c831e67263183783758bc3ed89c018c6a2d93da493c0d",
+      "repository": "ISBF-Lab/ISBFweb"
+    },
+    {
+      "path": "frontend/discourse/tests/integration/components/code-login-form-test.gjs",
+      "sha256": "7c6ca50fe04a9e509b3027d4b1ce4cf4eae41ba15a994d104e052b1a6670e47d",
+      "repository": "ISBF-Lab/ISBFweb"
+    },
+    {
+      "path": "assets/javascripts/discourse/components/isbf-alumni-registration.gjs",
+      "sha256": "75ab896c0ac994fbce2955e779febb584129df62c3f0322da9ea5988597b2e76",
+      "repository": "ISBF-Lab/ISBF-Alumni"
+    },
+    {
+      "path": "test/javascripts/integration/components/alumni-registration-otp-test.gjs",
+      "sha256": "fa893979004279360d82960fe7f722595f406f59c8976c857bef950b8b0f8386",
+      "repository": "ISBF-Lab/ISBF-Alumni"
+    },
+    {
+      "path": "scripts/check-registration-ui.mjs",
+      "sha256": "251488749e90ebead016fd44d0ae655f390a6c1028fd494bdda35e19855ade5e",
+      "repository": "ISBF-Lab/ISBF-Alumni"
+    }
+  ],
+  "validation": {
+    "status": "passed_in_isolated_development",
+    "qunit_tests": 74,
+    "qunit_assertions": 347,
+    "failed": 0,
+    "core": {
+      "tests": 56,
+      "assertions": 273
+    },
+    "alumni": {
+      "tests": 18,
+      "assertions": 74
+    },
+    "browser_checks": 22,
+    "javascript_page_errors": 0,
+    "lint": "Core files checked by bin/lint --fix; external plugin files checked with the same workspace ESLint/Prettier toolchain. All passed.",
+    "alumni_script": "scripts/check-registration-ui.mjs passed",
+    "live_login": "Seeded development student authenticated using a real code delivered to local Mailpit.",
+    "production_deployment": false,
+    "known_limits": [
+      "Chromium with touch and viewport emulation; physical Safari/iPhone visual review pending.",
+      "Before-change source snapshots and after-change screenshots are available; no historical before-change browser screenshot."
+    ],
+    "evidence": "verification-summary.json; detailed reports retained in the isolated migration workspace docs/auth-code-slots-20261023/results/"
+  },
+  "release_authorization": "User requested PR creation and production deployment on 2026-10-24; deployment pending.",
+  "base_commits": {
+    "ISBF-Lab/ISBFweb": "359ddc1dde768345865eda16ca2fcf4ff6d2cd22",
+    "ISBF-Lab/ISBF-Alumni": "2ab923e1680b2f598555ea481c3daac7ba07f342"
+  }
+}

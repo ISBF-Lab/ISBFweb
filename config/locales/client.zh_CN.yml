@@ -2606,6 +2606,8 @@ zh_CN:
       search: "搜索…"
       label: "选择选项"
     d_otp:
+      accepted: "验证码已通过"
+      progress: "已输入 %{entered} 位，共 %{length} 位"
       screen_reader:
         other: 输入 %{count} 个数字
     form_kit:

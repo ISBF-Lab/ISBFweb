@@ -8,7 +8,9 @@ import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import { service } from "@ember/service";
 import { isBlank } from "@ember/utils";
 import preventScrollOnFocus from "discourse/modifiers/prevent-scroll-on-focus";
+import { eq } from "discourse/truth-helpers";
 import { i18n } from "discourse-i18n";
+import Animated from "./animated";
 import Slot from "./slot";
 
 const DEFAULT_SLOTS = 6;
@@ -27,6 +29,13 @@ const DEFAULT_SLOTS = 6;
  * @property {function(string): void} [Args.onChange] - Callback fired when the input value changes
  * @property {function(string): void} [Args.onFill] - Callback fired when all slots become filled
  * @property {number} [Args.groupSize] - Adds a visual separator after every groupSize slots
+ * @property {"animated"} [Args.variant] - Animated numeric slots for authentication flows
+ * @property {string} [Args.value] - Controlled value for the animated variant
+ * @property {"idle" | "error" | "success"} [Args.status] - Feedback state for the animated variant
+ * @property {boolean} [Args.disabled] - Disables the animated input
+ * @property {boolean} [Args.invalid] - Marks the animated input as invalid
+ * @property {boolean} [Args.mask] - Masks digits in the animated variant
+ * @property {string} [Args.describedBy] - Additional description IDs for the animated input
  *
  */
 
@@ -220,42 +229,60 @@ export default class DOTP extends Component {
   }
 
   <template>
-    <div class="d-otp">
-      <div class="d-otp-group">
-        {{#each this.otp as |char index|}}
-          <Slot
-            @char={{char}}
-            @index={{index}}
-            @isFocused={{this.isFocusedSlot index}}
-          />
-          {{#if (this.showSeparator index)}}
-            <span aria-hidden="true" class="d-otp-separator">-</span>
-          {{/if}}
-        {{/each}}
-      </div>
+    {{#if (eq @variant "animated")}}
+      <Animated
+        ...attributes
+        @autocomplete={{this.autocomplete}}
+        @autoFocus={{@autoFocus}}
+        @describedBy={{@describedBy}}
+        @disabled={{@disabled}}
+        @invalid={{@invalid}}
+        @mask={{@mask}}
+        @onChange={{@onChange}}
+        @onFill={{@onFill}}
+        @slots={{this.slots}}
+        @status={{@status}}
+        @value={{@value}}
+      />
+    {{else}}
+      <div class="d-otp">
+        <div class="d-otp-group">
+          {{#each this.otp as |char index|}}
+            <Slot
+              @char={{char}}
+              @index={{index}}
+              @isFocused={{this.isFocusedSlot index}}
+            />
+            {{#if (this.showSeparator index)}}
+              <span aria-hidden="true" class="d-otp-separator">-</span>
+            {{/if}}
+          {{/each}}
+        </div>
 
-      <div class="d-otp-input-wrapper">
-        <input
-          aria-label={{i18n "d_otp.screen_reader" count=this.slots}}
-          autocapitalize="off"
-          autocomplete={{this.autocomplete}}
-          autocorrect="off"
-          class="d-otp-input"
-          data-slot="input-otp"
-          inputmode={{this.inputMode}}
-          maxlength={{this.maxLength}}
-          spellcheck="false"
-          ...attributes
-          {{preventScrollOnFocus}}
-          {{on "input" this.onInput}}
-          {{on "select" this.onSelect}}
-          {{on "keydown" this.onKeyDown}}
-          {{on "focus" this.onFocus}}
-          {{on "blur" this.onBlur}}
-          {{on "paste" this.onPaste}}
-          {{didInsert this.focusInput}}
-        />
+        <div class="d-otp-input-wrapper">
+          <input
+            aria-label={{i18n "d_otp.screen_reader" count=this.slots}}
+            autocapitalize="off"
+            autocomplete={{this.autocomplete}}
+            autocorrect="off"
+            class="d-otp-input"
+            data-slot="input-otp"
+            disabled={{@disabled}}
+            inputmode={{this.inputMode}}
+            maxlength={{this.maxLength}}
+            spellcheck="false"
+            ...attributes
+            {{preventScrollOnFocus}}
+            {{on "input" this.onInput}}
+            {{on "select" this.onSelect}}
+            {{on "keydown" this.onKeyDown}}
+            {{on "focus" this.onFocus}}
+            {{on "blur" this.onBlur}}
+            {{on "paste" this.onPaste}}
+            {{didInsert this.focusInput}}
+          />
+        </div>
       </div>
-    </div>
+    {{/if}}
   </template>
 }

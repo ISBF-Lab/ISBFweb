@@ -1,0 +1,210 @@
+.d-otp.d-otp-animated {
+  --d-otp-accent: var(--tertiary);
+  --d-otp-ink: var(--tertiary);
+  --d-otp-surface: var(--primary-very-low);
+  --d-otp-digit: var(--secondary);
+  --d-otp-size: 44px;
+  --d-otp-gap: 8px;
+  --d-otp-radius: 12px;
+  display: block;
+  position: relative;
+  width: min(
+    100%,
+    calc(
+      var(--d-otp-slots, 6) * var(--d-otp-size) + (var(--d-otp-slots, 6) - 1) *
+        var(--d-otp-gap)
+    )
+  );
+  min-width: 0;
+  max-width: 100%;
+  align-self: center;
+  isolation: isolate;
+  cursor: text;
+
+  &[data-disabled]:not([data-status="success"]) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &[data-status="error"] {
+    --d-otp-accent: var(--danger);
+    --d-otp-ink: var(--danger);
+    --d-otp-surface: color-mix(
+      in srgb,
+      var(--danger) 20%,
+      var(--primary-very-low)
+    );
+  }
+
+  &[data-status="success"] {
+    .d-otp-animated__wash {
+      clip-path: inset(0 0 round var(--d-otp-radius));
+    }
+
+    .d-otp-animated__check {
+      opacity: 1;
+      transform: none;
+    }
+
+    .d-otp-animated__digit {
+      opacity: 0;
+    }
+  }
+
+  .d-otp-input {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+    background: transparent;
+    color: transparent;
+    caret-color: transparent;
+    font-size: 16px;
+    letter-spacing: normal;
+    opacity: 0;
+    clip-path: none;
+    cursor: inherit;
+    touch-action: manipulation;
+  }
+
+  &:focus-within .d-otp-animated__slot[data-active] {
+    background: color-mix(in srgb, var(--d-otp-ink) 8%, var(--d-otp-surface));
+    outline: 2px solid var(--d-otp-ink);
+    outline-offset: 2px;
+  }
+
+  &:focus-within .d-otp-animated__slot[data-active]:not([data-filled]) {
+    .d-otp-animated__caret {
+      display: block;
+    }
+  }
+}
+
+.d-otp-animated {
+  &__row {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--d-otp-slots, 6), minmax(0, 1fr));
+    gap: var(--d-otp-gap);
+    direction: ltr;
+  }
+
+  &__slot {
+    position: relative;
+    box-sizing: border-box;
+    min-width: 0;
+    height: 52px;
+    border-radius: var(--d-otp-radius);
+    background: var(--d-otp-surface);
+    overflow: hidden;
+    user-select: none;
+
+    &[data-filled] {
+      .d-otp-animated__fill {
+        transform: scale(1);
+      }
+
+      .d-otp-animated__digit {
+        opacity: 1;
+      }
+
+      .d-otp-animated__caret {
+        display: none;
+      }
+    }
+  }
+
+  &__fill {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--d-otp-accent);
+    transform: scale(0);
+    transform-origin: center;
+  }
+
+  &__digit {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    color: var(--d-otp-digit);
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    opacity: 0;
+  }
+
+  &__caret {
+    display: none;
+    position: absolute;
+    inset-block-start: 25%;
+    inset-inline-start: calc(50% - 0.75px);
+    width: 1.5px;
+    height: 50%;
+    background: var(--d-otp-ink);
+    pointer-events: none;
+  }
+
+  &__wash {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    border-radius: var(--d-otp-radius);
+    background: var(--d-otp-accent);
+    color: var(--d-otp-digit);
+    clip-path: inset(0 50% round var(--d-otp-radius));
+    pointer-events: none;
+  }
+
+  &__check {
+    display: grid;
+    place-items: center;
+    font-size: 26px;
+    opacity: 0;
+    transform: translateY(8px) scale(0.85);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: opacity 200ms ease;
+
+    &__slot {
+      transition: background-color 200ms ease;
+    }
+
+    &__caret {
+      animation: otp-cursor-blink 1s linear infinite;
+    }
+  }
+
+  @media (forced-colors: active) {
+    &__slot {
+      border: 1px solid CanvasText;
+    }
+
+    &__fill,
+    &__wash {
+      forced-color-adjust: none;
+      background: Highlight;
+    }
+
+    &__digit,
+    &__check {
+      forced-color-adjust: none;
+      color: HighlightText;
+    }
+  }
+}
