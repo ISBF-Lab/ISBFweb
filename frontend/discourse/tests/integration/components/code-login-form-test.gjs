@@ -516,6 +516,73 @@ module("Integration | Component | CodeLoginForm", function (hooks) {
     assert.dom(".d-otp-input").hasValue("", "the code input is cleared");
   });
 
+  test("locks input and email changes until verification completes", async function (assert) {
+    stubCodeRequest();
+    let release;
+    let requests = 0;
+    pretender.post("/session/login-code/verify", async () => {
+      requests++;
+      await new Promise((resolve) => (release = resolve));
+      return response({ error: "Invalid verification code" });
+    });
+    await goToCodeStep();
+    const verification = fillIn(".d-otp-input", "123456");
+    await waitUntil(() => requests === 1);
+    await waitFor(".d-otp-input[disabled]");
+    assert.dom(".code-login-form__change-email").isDisabled();
+    const input = find(".d-otp-input");
+    input.value = "654321";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    assert.strictEqual(requests, 1, "pending verification is not duplicated");
+    assert.dom(input).hasValue("123456");
+    release();
+    await verification;
+    assert.dom(".d-otp-input").hasValue("").isFocused();
+    assert.dom("#code-login-error").hasText("Invalid verification code");
+  });
+
+  test("keeps the code after a server failure and allows manual retry", async function (assert) {
+    stubCodeRequest();
+    const redirect = sinon.stub(DiscourseURL, "redirectTo");
+    sinon.stub(this.owner.lookup("service:dialog"), "alert");
+    let requests = 0;
+    pretender.post("/session/login-code/verify", () => {
+      requests++;
+      return requests === 1
+        ? response(503, { errors: ["Temporarily unavailable"] })
+        : response({ success: "OK", redirect_url: "/latest" });
+    });
+    await goToCodeStep();
+    await fillIn(".d-otp-input", "123456");
+    assert.dom(".d-otp-input").hasValue("123456").isNotDisabled();
+    await click(".code-login-form__verify");
+    assert.strictEqual(requests, 2);
+    assert.true(redirect.calledWith("/latest"));
+  });
+
+  test("ignores a code delivery response after the form is closed", async function (assert) {
+    stubCodeRequest();
+    let release;
+    let started = false;
+    pretender.post("/session/login-code", async () => {
+      started = true;
+      await new Promise((resolve) => (release = resolve));
+      return response({ success: "OK" });
+    });
+    await render(<template><CodeLoginForm /></template>);
+    await fillIn(
+      ".code-login-form__email-step .form-kit__control-input",
+      "user@example.com"
+    );
+    const submitting = formKit().submit();
+    await waitUntil(() => started);
+    const teardown = clearRender();
+    release();
+    await Promise.all([submitting, teardown]);
+    await settled();
+    assert.dom(".code-login-form").doesNotExist();
+  });
+
   test("collects valid account details before submitting for approval", async function (assert) {
     stubCodeRequest();
     this.siteSettings.enable_random_usernames = true;

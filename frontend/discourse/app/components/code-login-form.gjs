@@ -21,6 +21,7 @@ import cookie, { removeCookie } from "discourse/lib/cookie";
 import discourseDebounce from "discourse/lib/debounce";
 import escape from "discourse/lib/escape";
 import discourseLater from "discourse/lib/later";
+import waitForOtpFeedback from "discourse/lib/otp-feedback";
 import PasswordValidationHelper from "discourse/lib/password-validation-helper";
 import {
   applyBehaviorTransformer,
@@ -55,7 +56,9 @@ export default class CodeLoginForm extends Component {
 
   @tracked email = this.args.initialEmail ?? "";
   @tracked verifying = false;
+  @tracked code = "";
   @tracked codeError;
+  @tracked otpStatus = "idle";
   @tracked notice;
   @tracked resendCooldown = 0;
   @tracked otpGeneration = 0;
@@ -85,7 +88,6 @@ export default class CodeLoginForm extends Component {
   @tracked securityKeyRequired = false;
   @tracked securityKeyChallenge;
   @tracked securityKeyAllowedCredentialIds;
-  code = "";
   passwordValidationHelper = new PasswordValidationHelper(this);
   userFieldsValidationHelper = new UserFieldsValidationHelper({
     getUserFields: () =>
@@ -129,6 +131,9 @@ export default class CodeLoginForm extends Component {
 
   set step(value) {
     this._step = value;
+    if (value !== "code") {
+      this.otpStatus = "idle";
+    }
     this.args.onStepChange?.(value);
   }
 
@@ -274,7 +279,6 @@ export default class CodeLoginForm extends Component {
     return this.accountPassword.length > 0 && this.passwordValidation.reason;
   }
 
-  // Re-rendering DOtp with a fresh identity is the only way to clear it
   get otpGenerationArray() {
     return [this.otpGeneration];
   }
@@ -299,7 +303,9 @@ export default class CodeLoginForm extends Component {
   }
 
   get resendDisabled() {
-    return this.resendCooldown > 0 || this.verifying;
+    return (
+      this.resendCooldown > 0 || this.verifying || this.otpStatus !== "idle"
+    );
   }
 
   @action
@@ -338,7 +344,9 @@ export default class CodeLoginForm extends Component {
 
     this.verifying = true;
     await this.sendCode();
-    this.verifying = false;
+    if (!this.isDestroying) {
+      this.verifying = false;
+    }
   }
 
   @action
@@ -347,20 +355,36 @@ export default class CodeLoginForm extends Component {
       return;
     }
 
-    if (await this.sendCode()) {
-      this.notice = i18n("code_login.code_resent");
-      this.code = "";
-      this.otpGeneration++;
+    this.verifying = true;
+    try {
+      const sent = await this.sendCode();
+      if (this.isDestroying) {
+        return;
+      }
+      if (sent) {
+        this.notice = i18n("code_login.code_resent");
+        this.code = "";
+        this.otpStatus = "idle";
+        this.otpGeneration++;
+      }
+    } finally {
+      if (!this.isDestroying) {
+        this.verifying = false;
+      }
     }
   }
 
   @action
   changeEmail() {
+    if (this.verifying) {
+      return;
+    }
     cancel(this.#cooldownTimer);
     this.accountPassword = "";
     this.showOptionalPassword = false;
     this.resendCooldown = 0;
     this.code = "";
+    this.otpStatus = "idle";
     this.codeError = null;
     this.notice = null;
     this.username = "";
@@ -379,8 +403,12 @@ export default class CodeLoginForm extends Component {
 
   @action
   codeChanged(value) {
+    const rejecting = this.otpStatus === "error";
     this.code = value;
-    this.codeError = null;
+    this.otpStatus = "idle";
+    if (!rejecting) {
+      this.codeError = null;
+    }
   }
 
   @action
@@ -389,7 +417,7 @@ export default class CodeLoginForm extends Component {
       this.code = code;
     }
 
-    if (this.code.length < 6 || this.verifying) {
+    if (this.code.length !== 6 || this.verifying || this.otpStatus !== "idle") {
       return;
     }
 
@@ -456,6 +484,19 @@ export default class CodeLoginForm extends Component {
         return;
       }
 
+      if (
+        this.isCodeStep &&
+        !this.isPasswordReset &&
+        !result?.error &&
+        !result?.username_errors
+      ) {
+        this.otpStatus = "success";
+        await waitForOtpFeedback(this);
+        if (this.isDestroying) {
+          return;
+        }
+      }
+
       if (result?.username_required) {
         this.setupSignupDetails(result);
         this.step = "signup-details";
@@ -498,8 +539,12 @@ export default class CodeLoginForm extends Component {
           this.codeError = result.error;
         } else {
           this.codeError = result.error;
-          this.code = "";
-          this.otpGeneration++;
+          if (this.isPasswordReset) {
+            this.code = "";
+            this.otpGeneration++;
+          } else {
+            this.otpStatus = "error";
+          }
         }
         return;
       }
@@ -861,11 +906,17 @@ export default class CodeLoginForm extends Component {
           type: "POST",
           data: { login: this.email.trim() },
         });
+        if (this.isDestroying) {
+          return false;
+        }
         this.startResendCooldown();
         return true;
       }
 
       const honeypot = await ajax("/session/hp.json");
+      if (this.isDestroying) {
+        return false;
+      }
       const result = await ajax("/session/login-code", {
         type: "POST",
         data: {
@@ -881,6 +932,10 @@ export default class CodeLoginForm extends Component {
         },
       });
 
+      if (this.isDestroying) {
+        return false;
+      }
+
       if (result?.error) {
         this.codeError = result.error;
         return false;
@@ -890,7 +945,9 @@ export default class CodeLoginForm extends Component {
       this.startResendCooldown();
       return true;
     } catch (e) {
-      popupAjaxError(e);
+      if (!this.isDestroying) {
+        popupAjaxError(e);
+      }
       return false;
     }
   }
@@ -1220,12 +1277,23 @@ export default class CodeLoginForm extends Component {
           {{#each this.otpGenerationArray as |generation|}}
             <DOtp
               id="code-login-otp-{{generation}}"
+              @describedBy="code-login-error"
+              @disabled={{this.verifying}}
+              @invalid={{this.codeError}}
               @onChange={{this.codeChanged}}
               @onFill={{this.verifyCode}}
+              @status={{this.otpStatus}}
+              @value={{this.code}}
+              @variant={{unless this.isPasswordReset "animated"}}
             />
           {{/each}}
 
-          <div aria-live="polite" class="code-login-form__error" role="alert">
+          <div
+            aria-live="polite"
+            class="code-login-form__error"
+            id="code-login-error"
+            role="alert"
+          >
             {{this.codeError}}
           </div>
 
@@ -1254,6 +1322,7 @@ export default class CodeLoginForm extends Component {
               <DButton
                 class="btn-flat code-login-form__change-email"
                 @action={{this.changeEmail}}
+                @disabled={{this.verifying}}
                 @label="code_login.use_different_email"
               />
             {{/unless}}

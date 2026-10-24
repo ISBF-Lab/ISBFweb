@@ -2271,6 +2271,16 @@
       "workbench_source_version": "9adc7a09052cea850d11152bcecbafb94dd7135d65bcbebbff2362f5126dfe07",
       "manifest": "docs/design-system/reviews/workbench-square-20261023/source-manifest.json",
       "manifest_sha256": "d29b0cee0816e51eb5d49ccdb6b7e6c3533ba1fa89432274153cb5dfc752ebef"
+    },
+    {
+      "id": "auth-code-slots-20261023",
+      "date": "2026-10-23",
+      "status": "design_confirmed_visual_acceptance_pending",
+      "scope": "Authentication email verification in login, invitation signup and alumni application only; theme palette, animated numeric slots and native backend flow preserved",
+      "review": "../reviews/auth-code-slots-20261023/README.md",
+      "source_manifest": "../reviews/auth-code-slots-20261023/source-manifest.json",
+      "source_manifest_sha256": "541e3142b1c3c6c171231a495fd1733977482aaab295be1572e341328514d9fc",
+      "acceptance": "User approved the supplied numeric-slot reference, website theme colors and implementation. On 2026-10-24 the user requested PR creation and production deployment. Development checks passed; production deployment and final visual acceptance are tracked separately."
     }
   ]
 }

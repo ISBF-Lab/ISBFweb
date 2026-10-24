@@ -1,0 +1,32 @@
+{
+  "environment": "isolated development only; synthetic data; local mail sink",
+  "core_qunit": {
+    "tests": 57,
+    "assertions": 282,
+    "failed": 0
+  },
+  "alumni_qunit": {
+    "tests": 18,
+    "assertions": 74,
+    "failed": 0
+  },
+  "browser_checks": 22,
+  "javascript_errors": 0,
+  "coverage": [
+    "numeric keyboard, paste, autofill and leading zeroes",
+    "controlled values and external resets",
+    "single completion request and locked input while verifying",
+    "reverse error drain, retained explanation and retry",
+    "retained code after transport failure",
+    "login, invitation signup and alumni application continuation",
+    "1440px desktop, 390px and 320px mobile emulation; light and dark",
+    "reduced motion",
+    "real development email code login",
+    "native backward/forward selection deletion and cursor position"
+  ],
+  "limits": [
+    "Chromium emulation; no physical Safari/iPhone acceptance",
+    "Production deployment pending"
+  ],
+  "screenshots_location": "isolated migration workspace docs/auth-code-slots-20261023/results/"
+}

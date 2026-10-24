@@ -2906,6 +2906,8 @@ en:
       search: "Search…"
       label: "Select options"
     d_otp:
+      accepted: "Code accepted"
+      progress: "%{entered} of %{length} digits entered"
       screen_reader:
         one: Enter a number
         other: Enter %{count} numbers
