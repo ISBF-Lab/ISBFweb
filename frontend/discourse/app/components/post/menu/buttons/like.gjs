@@ -52,6 +52,10 @@ export default class PostMenuLikeButton extends Component {
 
   @action
   async toggleLike() {
+    if (this.args.animate === false) {
+      return this.args.buttonActions.toggleLike();
+    }
+
     this.isAnimated = true;
 
     return new Promise((resolve) => {
@@ -73,7 +77,15 @@ export default class PostMenuLikeButton extends Component {
         }}
       >
         {{#if @post.likeCount}}
-          <LikedUsersList ...attributes @post={{@post}} />
+          <LikedUsersList ...attributes @post={{@post}}>
+            <:count as |count|>
+              {{#if (has-block "count")}}
+                {{yield count to="count"}}
+              {{else}}
+                {{count}}
+              {{/if}}
+            </:count>
+          </LikedUsersList>
         {{/if}}
         <DButton
           class={{dConcatClass
@@ -95,7 +107,15 @@ export default class PostMenuLikeButton extends Component {
       </div>
     {{else}}
       <div class="double-button">
-        <LikedUsersList ...attributes @post={{@post}} />
+        <LikedUsersList ...attributes @post={{@post}}>
+          <:count as |count|>
+            {{#if (has-block "count")}}
+              {{yield count to="count"}}
+            {{else}}
+              {{count}}
+            {{/if}}
+          </:count>
+        </LikedUsersList>
       </div>
     {{/if}}
   </template>

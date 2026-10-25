@@ -1,0 +1,49 @@
+{
+  "component": "PulseHeart",
+  "variant": "JavaScript + CSS",
+  "source": "User-supplied component source in this task; upstream revision unspecified",
+  "confirmed_scope": [
+    "shared feed cards",
+    "regular topic main posts",
+    "root comments",
+    "child replies"
+  ],
+  "confirmed_appearance": "Keep existing icons, dimensions, colors, layout and count formats; add motion only",
+  "confirmed_state_timing": "Immediate motion feedback; values and selected colors follow existing business state",
+  "parameters": {
+    "duration_ms": 560,
+    "flip_fraction": 0.4,
+    "dot_fraction": 0.3,
+    "overshoot": 1.7,
+    "press_scale": 0.97,
+    "beat_percent": 3,
+    "roll_duration_ms": 350
+  },
+  "reuse": [
+    "A02",
+    "A04",
+    "C09",
+    "C16",
+    "2026-10-21 post action spacing"
+  ],
+  "acceptance": {
+    "design": "confirmed by user",
+    "implementation": "verified in isolated development",
+    "final_visual": "pending user review",
+    "pr_and_production": "Explicitly authorized by the user: 继续，并完成pr和生产发布"
+  },
+  "hover_correction": {
+    "source": "User-supplied screenshot and explicit follow-up choice",
+    "image": "Private migration workspace: source/docs/design-system/reviews/post-action-pulse-20261025/reported-hover.png",
+    "sha256": "5a5c73c88b0c0248d070234effec99068ae75664c2df27256f3beb79e1e17309",
+    "choice": "Remove hover backgrounds; keep icon color feedback, click pulse, hit areas and keyboard focus",
+    "scope": [
+      "reply",
+      "repost",
+      "like",
+      "bookmark",
+      "native like-count sibling"
+    ],
+    "heart_hover": "Enabled unliked hearts use the existing --love pink on hover and return to their existing idle color on leave"
+  }
+}

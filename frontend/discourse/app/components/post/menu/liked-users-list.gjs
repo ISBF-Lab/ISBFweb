@@ -61,7 +61,11 @@ export default class LikedUsersList extends Component {
       {{#if this.buttonIcon}}
         {{dIcon this.buttonIcon}}
       {{/if}}
-      {{@post.likeCount}}
+      {{#if (has-block "count")}}
+        {{yield @post.likeCount to="count"}}
+      {{else}}
+        {{@post.likeCount}}
+      {{/if}}
     </button>
   </template>
 }

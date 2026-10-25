@@ -1,0 +1,17 @@
+{
+  "before": {
+    "enabled": false,
+    "cap": true,
+    "depth": 3
+  },
+  "during": {
+    "enabled": true,
+    "cap": true,
+    "depth": 1
+  },
+  "after": {
+    "enabled": false,
+    "cap": true,
+    "depth": 3
+  }
+}

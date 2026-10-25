@@ -12,6 +12,7 @@ import { ajax } from "discourse/lib/ajax";
 import Composer from "discourse/models/composer";
 import Draft from "discourse/models/draft";
 import { loadTopicView } from "discourse/models/topic";
+import DButton from "discourse/ui-kit/d-button";
 import DDecoratedHtml from "discourse/ui-kit/d-decorated-html";
 import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
@@ -19,6 +20,7 @@ import { i18n } from "discourse-i18n";
 import { loadCookedPost, loadRepostCount } from "../lib/feed-post-loader";
 import { recordVisibleView } from "../lib/feed-view-tracker";
 import { isOfficialCalendarPath } from "../lib/official-calendar";
+import PostActionPulse from "../lib/post-action-pulse";
 import {
   compactNumber,
   openQuotedRepost,
@@ -31,9 +33,11 @@ import {
   feedAuthorColor,
   feedAuthorStyle,
 } from "../lib/user-display";
+import postActionPulse from "../modifiers/post-action-pulse";
 import { ISBFMarketplacePrice } from "./isbf-marketplace-card";
 import ISBFOfficialActivitySummary from "./isbf-official-activity-summary";
 import ISBFOfficialCalendarItems from "./isbf-official-calendar-items";
+import ISBFPostActionCount from "./isbf-post-action-count";
 
 export default class ISBFV2FeedCard extends Component {
   @service appEvents;
@@ -51,6 +55,7 @@ export default class ISBFV2FeedCard extends Component {
   @tracked bookmarked;
   @tracked expanded = false;
   @tracked hidden = false;
+  @tracked isBookmarking = false;
   @tracked isFlagging = false;
   @tracked isLiking = false;
   @tracked isReplying = false;
@@ -59,6 +64,8 @@ export default class ISBFV2FeedCard extends Component {
   @tracked menuOpen = false;
   @tracked repostCount = null;
   @tracked viewCount = null;
+
+  pulse = new PostActionPulse();
 
   #bodyRequest = 0;
   #observer;
@@ -157,18 +164,6 @@ export default class ISBFV2FeedCard extends Component {
       return null;
     }
     return postCardTitle(this.args.topic.title, this.body);
-  }
-
-  get formattedLikeCount() {
-    return compactNumber(this.likeCount);
-  }
-
-  get formattedReplyCount() {
-    return compactNumber(this.args.topic.replyCount);
-  }
-
-  get formattedRepostCount() {
-    return compactNumber(this.repostCount);
   }
 
   get formattedViewCount() {
@@ -347,6 +342,7 @@ export default class ISBFV2FeedCard extends Component {
     } catch (error) {
       await this.#showError(error);
     } finally {
+      this.pulse.settle("reply");
       this.isReplying = false;
     }
   }
@@ -379,6 +375,7 @@ export default class ISBFV2FeedCard extends Component {
     } catch (error) {
       await this.#showError(error);
     } finally {
+      this.pulse.settle("like");
       this.isLiking = false;
     }
   }
@@ -389,6 +386,10 @@ export default class ISBFV2FeedCard extends Component {
       this.router.transitionTo("login");
       return;
     }
+    if (this.isBookmarking) {
+      return;
+    }
+    this.isBookmarking = true;
     try {
       if (this.bookmarked) {
         await ajax(`/t/${this.args.topic.id}/remove_bookmarks`, {
@@ -400,21 +401,28 @@ export default class ISBFV2FeedCard extends Component {
       this.bookmarked = !this.bookmarked;
     } catch (error) {
       await this.#showError(error);
+    } finally {
+      this.pulse.settle("bookmark");
+      this.isBookmarking = false;
     }
   }
 
   @action
   async repost() {
-    await openQuotedRepost({
-      composer: this.composer,
-      router: this.router,
-      currentUser: this.currentUser,
-      topicId: this.args.topic.id,
-      postNumber: 1,
-      username: this.args.topic.creator?.username,
-      cookedHtml: this.body || this.args.topic.excerpt,
-      title: this.args.topic.title,
-    });
+    try {
+      await openQuotedRepost({
+        composer: this.composer,
+        router: this.router,
+        currentUser: this.currentUser,
+        topicId: this.args.topic.id,
+        postNumber: 1,
+        username: this.args.topic.creator?.username,
+        cookedHtml: this.body || this.args.topic.excerpt,
+        title: this.args.topic.title,
+      });
+    } finally {
+      this.pulse.settle("repost");
+    }
   }
 
   @action
@@ -674,39 +682,60 @@ export default class ISBFV2FeedCard extends Component {
         {{#unless this.hidden}}<ISBFMarketplacePrice
             @metadata={{@topic.isbf_marketplace}}
           />{{/unless}}
-        <footer class="isbf-feed-card__actions">
-          <button
-            aria-label={{i18n (themePrefix "isbf_v2.reply")}}
-            disabled={{this.isReplying}}
-            type="button"
-            {{on "click" this.reply}}
-          >{{dIcon "comment"}}{{#if this.formattedReplyCount}}<span
-              >{{this.formattedReplyCount}}</span>{{/if}}</button>
-          <button
-            aria-label={{i18n (themePrefix "isbf_v2.repost")}}
-            type="button"
-            {{on "click" this.repost}}
-          >{{dIcon "retweet"}}{{#if this.formattedRepostCount}}<span
-              >{{this.formattedRepostCount}}</span>{{/if}}</button>
-          <button
-            aria-label={{i18n (themePrefix "isbf_v2.like")}}
+        <footer class="isbf-feed-card__actions" {{postActionPulse this.pulse}}>
+          <DButton
+            data-isbf-action-count={{@topic.replyCount}}
+            data-isbf-post-action="reply"
+            @action={{this.reply}}
+            @disabled={{this.isReplying}}
+            @icon="comment"
+            @translatedAriaLabel={{i18n (themePrefix "isbf_v2.reply")}}
+          ><ISBFPostActionCount
+              @kind="reply"
+              @pulse={{this.pulse}}
+              @value={{@topic.replyCount}}
+            /></DButton>
+          <DButton
+            data-isbf-action-count={{this.repostCount}}
+            data-isbf-post-action="repost"
+            @action={{this.repost}}
+            @icon="retweet"
+            @translatedAriaLabel={{i18n (themePrefix "isbf_v2.repost")}}
+          ><ISBFPostActionCount
+              @kind="repost"
+              @pulse={{this.pulse}}
+              @value={{this.repostCount}}
+            /></DButton>
+          <DButton
             class={{if this.liked "is-liked"}}
-            disabled={{this.isLiking}}
-            type="button"
-            {{on "click" this.toggleLike}}
-          >{{dIcon "heart"}}{{#if this.formattedLikeCount}}<span
-              >{{this.formattedLikeCount}}</span>{{/if}}</button>
+            data-isbf-action-count={{this.likeCount}}
+            data-isbf-post-action="like"
+            @action={{this.toggleLike}}
+            @ariaPressed={{this.liked}}
+            @disabled={{this.isLiking}}
+            @icon="heart"
+            @translatedAriaLabel={{i18n (themePrefix "isbf_v2.like")}}
+          ><ISBFPostActionCount
+              @kind="like"
+              @pulse={{this.pulse}}
+              @value={{this.likeCount}}
+            /></DButton>
           <span
             aria-label={{this.viewLabel}}
             class="isbf-feed-card__views"
           >{{dIcon "chart-bar"}}{{#if this.formattedViewCount}}<span
               >{{this.formattedViewCount}}</span>{{/if}}</span>
-          <button
-            aria-label={{i18n (themePrefix "isbf_v2.bookmark_action")}}
+          <DButton
             class={{if this.bookmarked "is-bookmarked"}}
-            type="button"
-            {{on "click" this.toggleBookmark}}
-          >{{dIcon "bookmark"}}</button>
+            data-isbf-post-action="bookmark"
+            @action={{this.toggleBookmark}}
+            @ariaPressed={{this.bookmarked}}
+            @disabled={{this.isBookmarking}}
+            @icon="bookmark"
+            @translatedAriaLabel={{i18n
+              (themePrefix "isbf_v2.bookmark_action")
+            }}
+          />
         </footer>
       </div>
     </article>

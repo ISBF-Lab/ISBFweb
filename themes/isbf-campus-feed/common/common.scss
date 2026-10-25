@@ -1477,6 +1477,9 @@ body:has(.isbf-v2-shell) tr.isbf-v2-topic > td.isbf-feed-card-cell {
 
 .isbf-feed-card__actions {
   @include isbf-card-actions;
+
+  --d-button-default-icon-color: currentcolor;
+  --d-button-default-icon-color--hover: currentcolor;
   margin-block: 12px -6px;
 
   button,
@@ -1513,7 +1516,14 @@ body:has(.isbf-v2-shell) tr.isbf-v2-topic > td.isbf-feed-card-cell {
   button {
     border-radius: var(--isbf-v2-radius-pill);
 
-    &:hover,
+    &:hover {
+      background: var(
+        --isbf-post-action-hover-background,
+        color-mix(in srgb, var(--isbf-v2-accent) 12%, transparent)
+      );
+      color: var(--isbf-v2-accent);
+    }
+
     &:focus-visible {
       background: color-mix(in srgb, var(--isbf-v2-accent) 12%, transparent);
       color: var(--isbf-v2-accent);
@@ -4447,7 +4457,7 @@ body:has(.isbf-v2-shell--topic-feed-style) {
       flex: none;
       width: 18px;
       height: 18px;
-      color: inherit;
+      color: var(--isbf-post-action-icon-color, inherit);
     }
 
     .d-button-label {
@@ -4458,7 +4468,10 @@ body:has(.isbf-v2-shell--topic-feed-style) {
     }
 
     &:is(button, a):hover {
-      background: var(--isbf-v2-hover);
+      background: var(
+        --isbf-post-action-hover-background,
+        var(--isbf-v2-hover)
+      );
       color: var(--isbf-v2-accent);
     }
   }
@@ -4477,6 +4490,13 @@ body:has(.isbf-v2-shell--topic-feed-style) {
     max-width: 100%;
     margin: 0;
     border: 0;
+
+    &:hover > button {
+      background: var(
+        --isbf-post-action-hover-background,
+        var(--d-post-control-background--hover)
+      );
+    }
 
     // Offset the native hit area while keeping its glyph on the shared column.
     &:has(.toggle-like) {
@@ -4516,6 +4536,10 @@ body:has(.isbf-v2-shell--topic-feed-style) {
 
       .d-icon {
         padding: 0;
+      }
+
+      &:enabled:hover .d-icon {
+        color: var(--love);
       }
     }
 
@@ -5277,6 +5301,7 @@ body:has(.isbf-v2-shell):has(.isbf-v2-shell--feedback) {
 
 @import "topic-reading";
 @import "reply-conversations";
+@import "post-action-pulse";
 @import "reporting";
 @import "official-filters";
 @import "learning-resources";

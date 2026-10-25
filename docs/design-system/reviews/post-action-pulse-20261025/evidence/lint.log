@@ -1,0 +1,29 @@
+[bin/lint] Running core linters via lefthook...
+│  developer-docs-prettier (skip) no files for inspection
+┃  eslint ❯ 
+
+┃  prettier ❯ 
+- Starting...
+✔ Reformatted 0 / 11 files...
+
+┃  rubocop ❯ 
+Inspecting 2 files
+..
+
+2 files inspected, no offenses detected
+
+┃  stylelint ❯ 
+
+┃  syntax_tree ❯ 
+[38;5;102mGemfile[0m 80ms
+[38;5;102mdocs/design-system/reviews/post-action-pulse-20261025/tools/seed_fixture.rb[0m 80ms
+[38;5;102mdocs/design-system/reviews/post-action-pulse-20261025/tools/nesting_fixture.rb[0m 79ms
+
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 18.26 seconds)
+✔️ eslint (6.27 seconds)
+✔️ prettier (3.81 seconds)
+✔️ rubocop (2.68 seconds)
+✔️ stylelint (4.67 seconds)
+✔️ syntax_tree (0.83 seconds)
+[bin/lint] All lints passed
