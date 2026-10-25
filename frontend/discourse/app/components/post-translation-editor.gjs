@@ -5,6 +5,7 @@ import willDestroy from "@ember/render-modifiers/modifiers/will-destroy";
 import { service } from "@ember/service";
 import lazyHash from "discourse/helpers/lazy-hash";
 import { popupAjaxError } from "discourse/lib/ajax-error";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import PostLocalization from "discourse/models/post-localization";
 import DEditor from "discourse/ui-kit/d-editor";
 import DTextField from "discourse/ui-kit/d-text-field";
@@ -88,7 +89,10 @@ export default class PostTranslationEditor extends Component {
             @disabled={{this.composer.loading}}
             @id="translated-topic-title"
             @maxLength={{this.siteSettings.max_topic_title_length}}
-            @placeholder={{this.composer.model.topic.title}}
+            @placeholder={{topicDisplayTitle
+              this.composer.model.topic.title
+              this.composer.model.topic
+            }}
             @value={{this.composer.model.title}}
           />
         </div>

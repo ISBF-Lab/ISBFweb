@@ -5,6 +5,7 @@ import SvgEnvelopeZero from "discourse/components/svg/envelope-zero";
 import DMenu from "discourse/float-kit/components/d-menu";
 import bodyClass from "discourse/helpers/body-class";
 import rawDate from "discourse/helpers/raw-date";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import { groupPath } from "discourse/lib/url";
 import DButton from "discourse/ui-kit/d-button";
 import DConditionalLoadingSpinner from "discourse/ui-kit/d-conditional-loading-spinner";
@@ -275,7 +276,10 @@ export default <template>
                               href={{invite.topic.url}}
                             >
                               {{dIcon "file-lines"}}
-                              {{invite.topic.title}}
+                              {{topicDisplayTitle
+                                invite.topic.title
+                                invite.topic
+                              }}
                             </a>
                           </span>
                         {{/if}}

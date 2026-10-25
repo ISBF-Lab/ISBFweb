@@ -17,6 +17,7 @@ import TrackSelected from "discourse/components/track-selected";
 import lazyHash from "discourse/helpers/lazy-hash";
 import { wantsNewWindow } from "discourse/lib/intercept-click";
 import { logSearchLinkClick } from "discourse/lib/search";
+import { fancyTitle } from "discourse/lib/topic-fancy-title";
 import dAvatar from "discourse/ui-kit/helpers/d-avatar";
 import dCategoryLink from "discourse/ui-kit/helpers/d-category-link";
 import dDiscourseTags from "discourse/ui-kit/helpers/d-discourse-tags";
@@ -33,6 +34,14 @@ export default class SearchResultEntry extends Component {
   get shouldShowPrivateMessageIcon() {
     // Only show PM icon if this is a PM AND we're not in a PM-only search
     return this.post.topic.isPrivateMessage && !this.isPMOnly;
+  }
+
+  get displayTopicTitle() {
+    return fancyTitle(
+      this.post.topic.fancy_title,
+      this.siteSettings.support_mixed_text_direction,
+      this.post
+    );
   }
 
   @action
@@ -93,7 +102,7 @@ export default class SearchResultEntry extends Component {
               {{trustHTML this.post.topicTitleHeadline}}
             {{else}}
               <HighlightSearch @highlight={{this.highlightQuery}}>
-                {{trustHTML this.post.topic.fancyTitle}}
+                {{trustHTML this.displayTopicTitle}}
               </HighlightSearch>
             {{/if}}
           </span>

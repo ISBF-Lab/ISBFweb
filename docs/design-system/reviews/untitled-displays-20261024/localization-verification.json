@@ -1,0 +1,214 @@
+{
+  "passed": true,
+  "parent_revision": "a0d2376f7b7be4add36d01a05edda1cc84e1c5cb",
+  "scope": "Preserve available localized fancy titles ahead of generated-title body previews; retain source titles, native formatting and original targets",
+  "review_thread": "PRRT_kwDOUrf5Ns6v9rFa",
+  "environment": "isolated local development; synthetic native QUnit fixtures only",
+  "theme_qunit": {
+    "tests": 20,
+    "assertions": 87,
+    "failed": 0,
+    "cases": [
+      {
+        "name": "the real topics route replaces internal titles without replacing its list",
+        "module": "Acceptance: ISBF untitled topic lists",
+        "failed": 0,
+        "total": 7
+      },
+      {
+        "name": "the real read route replaces internal titles without replacing its list",
+        "module": "Acceptance: ISBF untitled topic lists",
+        "failed": 0,
+        "total": 7
+      },
+      {
+        "name": "sorting and loading another page retain clean topic titles",
+        "module": "Acceptance: ISBF untitled topic lists",
+        "failed": 0,
+        "total": 3
+      },
+      {
+        "name": "native topic links retain the unread target and escape preview text",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 5
+      },
+      {
+        "name": "localized topic links and browser titles retain the selected language without fetching the body",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 10
+      },
+      {
+        "name": "bookmarked localized titles retain their flag and exact post target",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 3
+      },
+      {
+        "name": "cached sharing and activity labels update when a translation arrives",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 4
+      },
+      {
+        "name": "localized search titles precede original-language highlighted headlines and blurbs",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 2
+      },
+      {
+        "name": "a visible public title can load its missing first post",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 4
+      },
+      {
+        "name": "private, hidden, and deleted titles never enter the public loader",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 5
+      },
+      {
+        "name": "a failed preview request keeps a clean title and original link",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 2
+      },
+      {
+        "name": "search headlines cannot reintroduce highlighted internal titles",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 2
+      },
+      {
+        "name": "both search interfaces use the matched body without headline mode",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 2
+      },
+      {
+        "name": "bookmarked replies retain their exact post and local excerpt",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 3
+      },
+      {
+        "name": "draft rows display their own body while keeping resumable raw data",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 3
+      },
+      {
+        "name": "editing an untitled topic shows an empty field and preserves its marker",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 4
+      },
+      {
+        "name": "only generated titles are replaced with clean body text",
+        "module": "ISBF | Unit | topic display title",
+        "failed": 0,
+        "total": 6
+      },
+      {
+        "name": "localized title text wins while a missing translation retains the body fallback",
+        "module": "ISBF | Unit | topic display title",
+        "failed": 0,
+        "total": 5
+      },
+      {
+        "name": "pictures and inaccessible content use translated fallbacks",
+        "module": "ISBF | Unit | topic display title",
+        "failed": 0,
+        "total": 6
+      },
+      {
+        "name": "authorized draft, pending, and search excerpts remain local",
+        "module": "ISBF | Unit | topic display title",
+        "failed": 0,
+        "total": 4
+      }
+    ]
+  },
+  "core_qunit": {
+    "tests": 8,
+    "assertions": 13,
+    "failed": 0,
+    "cases": [
+      {
+        "name": "It renders the empty state panel",
+        "module": "Acceptance: User Activity / Read - empty state",
+        "failed": 0,
+        "total": 1
+      },
+      {
+        "name": "bulk topic closing works",
+        "module": "Acceptance: User Activity / Topics - bulk actions",
+        "failed": 0,
+        "total": 1
+      },
+      {
+        "name": "bulk topic closing works",
+        "module": "Acceptance: User Activity / Read - bulk actions",
+        "failed": 0,
+        "total": 1
+      },
+      {
+        "name": "When looking at another user's activity page",
+        "module": "Acceptance: User Activity / Topics - empty state",
+        "failed": 0,
+        "total": 1
+      },
+      {
+        "name": "When looking at the own activity page",
+        "module": "Acceptance: User Activity / Topics - empty state",
+        "failed": 0,
+        "total": 1
+      },
+      {
+        "name": "an available localized title precedes presentation overrides",
+        "module": "Unit | Utility | topic display title",
+        "failed": 0,
+        "total": 3
+      },
+      {
+        "name": "presentation text is escaped without changing source content",
+        "module": "Unit | Utility | topic display title",
+        "failed": 0,
+        "total": 3
+      },
+      {
+        "name": "without a presentation override the original titles and markup remain",
+        "module": "Unit | Utility | topic display title",
+        "failed": 0,
+        "total": 2
+      }
+    ]
+  },
+  "lint": {
+    "passed": true,
+    "changed_source_files": 13,
+    "reformatted_files": 0
+  },
+  "native_theme_import": {
+    "passed": true,
+    "theme_id": 4,
+    "fields": 258
+  },
+  "earlier_browser_checks": {
+    "revision": "a0d2376f7b7be4add36d01a05edda1cc84e1c5cb",
+    "checks": 21,
+    "record": "verification.json",
+    "rerun_for_this_follow_up": false
+  },
+  "intermediate_failure": "One added language-switch test caught nonreactive property reads. Reactive get() reads fixed it; all 20 theme tests then passed.",
+  "production": {
+    "published": false,
+    "status": "Awaiting new exact-head CI, review verification, merge and guarded incremental release"
+  },
+  "limits": [
+    "Chromium native QUnit; no physical Safari/iPhone verification",
+    "Production validation has not been run"
+  ]
+}

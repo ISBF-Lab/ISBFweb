@@ -21,7 +21,10 @@ export default class TopicLink extends Component {
         href={{this.url}}
         ...attributes
       >
-        {{~trustHTML @topic.fancyTitle~}}
+        <PluginOutlet
+          @name="topic-link-title"
+          @outletArgs={{lazyHash topic=@topic}}
+        >{{trustHTML @topic.fancyTitle}}</PluginOutlet>
         {{~#if @topic.visited~}}
           <span class="sr-only">&nbsp;{{i18n "topic.sr_read"}}</span>
         {{~/if~}}

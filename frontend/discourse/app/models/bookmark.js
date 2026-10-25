@@ -165,6 +165,12 @@ export default class Bookmark extends RestCompatModel {
     return (this.#topicForList ??= Topic.create({
       id: this.topic_id,
       fancy_title: this.fancy_title,
+      fancy_title_localized: this.fancy_title_localized,
+      title: this.title,
+      excerpt: this.excerpt,
+      hidden: this.hidden || this.deleted,
+      archetype: this.archetype,
+      category_id: this.category_id,
       linked_post_number:
         this.bookmarkable_type === "Topic" ? null : this.linked_post_number,
       last_read_post_number: this.last_read_post_number,

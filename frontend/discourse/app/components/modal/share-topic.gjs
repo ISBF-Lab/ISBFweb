@@ -11,6 +11,7 @@ import { longDateNoYear } from "discourse/lib/formatter";
 import { getAbsoluteURL } from "discourse/lib/get-url";
 import { showCreateInviteModal } from "discourse/lib/invite-modal";
 import Sharing from "discourse/lib/sharing";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import Category from "discourse/models/category";
 import DButton from "discourse/ui-kit/d-button";
 import DCopyButton from "discourse/ui-kit/d-copy-button";
@@ -77,7 +78,7 @@ export default class ShareTopicModal extends Component {
   @action
   share(source) {
     Sharing.shareSource(source, {
-      title: this.topic.title,
+      title: topicDisplayTitle(this.topic.title, this.topic),
       url: this.url,
     });
   }
@@ -89,7 +90,7 @@ export default class ShareTopicModal extends Component {
         inviteToTopic: true,
         topics: [this.topic],
         topicId: this.topic.id,
-        topicTitle: this.topic.title,
+        topicTitle: topicDisplayTitle(this.topic.title, this.topic),
       },
     });
   }

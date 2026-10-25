@@ -7,6 +7,7 @@ import PluginOutlet from "discourse/components/plugin-outlet";
 import lazyHash from "discourse/helpers/lazy-hash";
 import { getAbsoluteURL } from "discourse/lib/get-url";
 import Sharing from "discourse/lib/sharing";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import { clipboardCopyAsync, postUrl } from "discourse/lib/utilities";
 import DButton from "discourse/ui-kit/d-button";
 import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
@@ -85,7 +86,7 @@ export default class PostTextSelectionToolbar extends Component {
   share(source) {
     Sharing.shareSource(source, {
       url: this.shareUrl,
-      title: this.topic.title,
+      title: topicDisplayTitle(this.topic.title, this.topic),
       quote: window.getSelection().toString(),
     });
   }

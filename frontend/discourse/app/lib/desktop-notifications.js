@@ -1,6 +1,7 @@
 import { Promise } from "rsvp";
 import KeyValueStore from "discourse/lib/key-value-store";
 import discourseLater from "discourse/lib/later";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import DiscourseURL from "discourse/lib/url";
 import { formatUsername } from "discourse/lib/utilities";
 import Site from "discourse/models/site";
@@ -151,7 +152,7 @@ async function onNotification(data, siteSettings, user, appEvents) {
       data.translated_title ||
       i18n(i18nKey(data.notification_type), {
         site_title: siteSettings.title,
-        topic: data.topic_title,
+        topic: topicDisplayTitle(data.topic_title, data),
         username: formatUsername(data.username),
         group_name: data.group_name,
       });

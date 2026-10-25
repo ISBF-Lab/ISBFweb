@@ -1,5 +1,6 @@
 import { trustHTML } from "@ember/template";
-import { emojiUnescape } from "discourse/lib/text";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
+import { fancyTitle } from "discourse/lib/topic-fancy-title";
 import { userPath } from "discourse/lib/url";
 import { formatUsername, postUrl } from "discourse/lib/utilities";
 import { i18n } from "discourse-i18n";
@@ -84,11 +85,18 @@ export default class NotificationTypeBase {
    * @returns {string} The description is the second part of the text content displayed in the notification. For example, in a like notification, the topic title is the description. If a falsey value is returned, the description is omitted.
    */
   get description() {
-    const description = emojiUnescape(this.notification.fancy_title);
+    const description = fancyTitle(
+      this.notification.fancy_title,
+      false,
+      this.notification
+    );
     if (description) {
       return trustHTML(description);
     } else {
-      return this.notification.data.topic_title;
+      return topicDisplayTitle(
+        this.notification.data.topic_title,
+        this.notification
+      );
     }
   }
 

@@ -15,6 +15,7 @@ import { INVITE_DESCRIPTION_MAX_LENGTH } from "discourse/lib/constants";
 import { shortDate } from "discourse/lib/formatter";
 import { canNativeShare, nativeShare } from "discourse/lib/pwa-utils";
 import { sanitize } from "discourse/lib/text";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import {
   clipboardCopyAsync,
   emailValid,
@@ -313,7 +314,7 @@ export default class CreateInviteWithRoles extends Component {
     if (this.invite.topic) {
       rows.push({
         label: i18n("user.invited.invite_roles.summary.topic"),
-        value: this.invite.topic.title,
+        value: topicDisplayTitle(this.invite.topic.title, this.invite.topic),
       });
     }
 

@@ -22,6 +22,7 @@ import { deepEqual, deepMerge } from "discourse/lib/object";
 import PreloadStore from "discourse/lib/preload-store";
 import { serializeTags } from "discourse/lib/serialize-tags";
 import { emojiUnescape } from "discourse/lib/text";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import { fancyTitle } from "discourse/lib/topic-fancy-title";
 import { autoTrackedArray } from "discourse/lib/tracked-tools";
 import {
@@ -527,11 +528,27 @@ export default class Topic extends RestModel {
     return users;
   }
 
-  @computed("fancy_title")
+  @computed(
+    "title",
+    "excerpt",
+    "fancy_title",
+    "fancy_title_localized",
+    "hidden",
+    "deleted",
+    "postStream.posts.@each.cooked",
+    "postStream.posts.@each.hidden",
+    "postStream.posts.@each.deleted_at"
+  )
+  get displayTitle() {
+    return topicDisplayTitle(this.title, this);
+  }
+
+  @computed("fancy_title", "displayTitle")
   get fancyTitle() {
     return fancyTitle(
       this.fancy_title,
-      this.siteSettings.support_mixed_text_direction
+      this.siteSettings.support_mixed_text_direction,
+      this
     );
   }
 

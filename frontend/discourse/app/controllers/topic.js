@@ -46,6 +46,7 @@ import { consumeOptimisticPostUpdate } from "discourse/lib/optimistic-post-updat
 import { buildQuote } from "discourse/lib/quote";
 import QuoteState from "discourse/lib/quote-state";
 import { extractLinkMeta } from "discourse/lib/render-topic-featured-link";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import { fancyTitle } from "discourse/lib/topic-fancy-title";
 import { autoTrackedArray } from "discourse/lib/tracked-tools";
 import {
@@ -1470,7 +1471,9 @@ export default class TopicController extends Controller {
     }
 
     composerController.open(options).then(() => {
-      const title = escapeExpression(this.model.title);
+      const title = escapeExpression(
+        topicDisplayTitle(this.model.title, this.model)
+      );
       const postUrl = `${location.protocol}//${location.host}${post.url}`;
       const postLink = `[${title}](${postUrl})`;
       const text = `${i18n("post.continue_discussion", {

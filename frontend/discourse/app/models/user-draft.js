@@ -1,5 +1,6 @@
 import { computed } from "@ember/object";
 import { service } from "@ember/service";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import { userPath } from "discourse/lib/url";
 import { postUrl } from "discourse/lib/utilities";
 import {
@@ -15,7 +16,7 @@ export default class UserDraft extends RestModel {
   @service currentUser;
 
   get titleHtml() {
-    return dReplaceEmoji(this.get("title"));
+    return dReplaceEmoji(topicDisplayTitle(this.title, this));
   }
 
   @computed("draft_username")
