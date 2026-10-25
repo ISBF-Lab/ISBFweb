@@ -1,6 +1,7 @@
 import { computed } from "@ember/object";
 import { service } from "@ember/service";
 import { emojiUnescape } from "discourse/lib/text";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import { userPath } from "discourse/lib/url";
 import { escapeExpression, postUrl } from "discourse/lib/utilities";
 import RestModel from "discourse/models/rest";
@@ -227,9 +228,10 @@ export default class UserAction extends RestModel {
     return postUrl(this.slug, this.topic_id, this.reply_to_post_number);
   }
 
-  @computed("title")
+  @computed("title", "excerpt", "hidden", "deleted")
   get titleHtml() {
-    return this.title && emojiUnescape(escapeExpression(this.title));
+    const title = topicDisplayTitle(this.title, this);
+    return title && emojiUnescape(escapeExpression(title));
   }
 
   @computed(

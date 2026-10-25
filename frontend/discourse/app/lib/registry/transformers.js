@@ -154,6 +154,7 @@ export const VALUE_TRANSFORMERS = Object.freeze([
   "site-setting-allows-none",
   "small-user-attrs",
   "tag-separator",
+  "topic-display-title",
   "topic-escaped-excerpt",
   "topic-list-class",
   "topic-list-columns",

@@ -1,0 +1,326 @@
+{
+  "passed": true,
+  "environment": "isolated development; synthetic QUnit fixtures and local fictional accounts only",
+  "theme_qunit": {
+    "tests": 15,
+    "assertions": 63,
+    "failed": 0,
+    "cases": [
+      {
+        "name": "the real topics route replaces internal titles without replacing its list",
+        "module": "Acceptance: ISBF untitled topic lists",
+        "failed": 0,
+        "total": 7
+      },
+      {
+        "name": "the real read route replaces internal titles without replacing its list",
+        "module": "Acceptance: ISBF untitled topic lists",
+        "failed": 0,
+        "total": 7
+      },
+      {
+        "name": "sorting and loading another page retain clean topic titles",
+        "module": "Acceptance: ISBF untitled topic lists",
+        "failed": 0,
+        "total": 3
+      },
+      {
+        "name": "native topic links retain the unread target and escape preview text",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 5
+      },
+      {
+        "name": "a visible public title can load its missing first post",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 4
+      },
+      {
+        "name": "private, hidden, and deleted titles never enter the public loader",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 5
+      },
+      {
+        "name": "a failed preview request keeps a clean title and original link",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 2
+      },
+      {
+        "name": "search headlines cannot reintroduce highlighted internal titles",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 2
+      },
+      {
+        "name": "both search interfaces use the matched body without headline mode",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 2
+      },
+      {
+        "name": "bookmarked replies retain their exact post and local excerpt",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 3
+      },
+      {
+        "name": "draft rows display their own body while keeping resumable raw data",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 3
+      },
+      {
+        "name": "editing an untitled topic shows an empty field and preserves its marker",
+        "module": "ISBF | Integration | topic display title",
+        "failed": 0,
+        "total": 4
+      },
+      {
+        "name": "only generated titles are replaced with clean body text",
+        "module": "ISBF | Unit | topic display title",
+        "failed": 0,
+        "total": 6
+      },
+      {
+        "name": "pictures and inaccessible content use translated fallbacks",
+        "module": "ISBF | Unit | topic display title",
+        "failed": 0,
+        "total": 6
+      },
+      {
+        "name": "authorized draft, pending, and search excerpts remain local",
+        "module": "ISBF | Unit | topic display title",
+        "failed": 0,
+        "total": 4
+      }
+    ]
+  },
+  "core_qunit": {
+    "tests": 7,
+    "assertions": 10,
+    "failed": 0,
+    "cases": [
+      {
+        "name": "When looking at another user's activity page",
+        "module": "Acceptance: User Activity / Topics - empty state",
+        "failed": 0,
+        "total": 1
+      },
+      {
+        "name": "bulk topic closing works",
+        "module": "Acceptance: User Activity / Read - bulk actions",
+        "failed": 0,
+        "total": 1
+      },
+      {
+        "name": "It renders the empty state panel",
+        "module": "Acceptance: User Activity / Read - empty state",
+        "failed": 0,
+        "total": 1
+      },
+      {
+        "name": "presentation text is escaped without changing source content",
+        "module": "Unit | Utility | topic display title",
+        "failed": 0,
+        "total": 3
+      },
+      {
+        "name": "without a presentation override the original titles and markup remain",
+        "module": "Unit | Utility | topic display title",
+        "failed": 0,
+        "total": 2
+      },
+      {
+        "name": "bulk topic closing works",
+        "module": "Acceptance: User Activity / Topics - bulk actions",
+        "failed": 0,
+        "total": 1
+      },
+      {
+        "name": "When looking at the own activity page",
+        "module": "Acceptance: User Activity / Topics - empty state",
+        "failed": 0,
+        "total": 1
+      }
+    ]
+  },
+  "browser": {
+    "checks": 21,
+    "client_errors": [],
+    "checks_passed": [
+      {
+        "check": "Created topics hide internal title markers",
+        "passed": true,
+        "width": 390,
+        "mode": "light"
+      },
+      {
+        "check": "Untitled topics retain a readable label",
+        "passed": true,
+        "width": 390,
+        "mode": "light"
+      },
+      {
+        "check": "The original topic link remains available",
+        "passed": true,
+        "width": 390,
+        "mode": "light"
+      },
+      {
+        "check": "Created topics hide internal title markers",
+        "passed": true,
+        "width": 390,
+        "mode": "dark"
+      },
+      {
+        "check": "Untitled topics retain a readable label",
+        "passed": true,
+        "width": 390,
+        "mode": "dark"
+      },
+      {
+        "check": "The original topic link remains available",
+        "passed": true,
+        "width": 390,
+        "mode": "dark"
+      },
+      {
+        "check": "Profile tools contain no visible internal titles",
+        "passed": true,
+        "width": 390,
+        "route": "read"
+      },
+      {
+        "check": "Profile tools contain no visible internal titles",
+        "passed": true,
+        "width": 390,
+        "route": "drafts"
+      },
+      {
+        "check": "Profile tools contain no visible internal titles",
+        "passed": true,
+        "width": 390,
+        "route": "bookmarks"
+      },
+      {
+        "check": "Actual search results use clean display titles",
+        "passed": true,
+        "width": 390
+      },
+      {
+        "check": "Created topics hide internal title markers",
+        "passed": true,
+        "width": 1440,
+        "mode": "light"
+      },
+      {
+        "check": "Untitled topics retain a readable label",
+        "passed": true,
+        "width": 1440,
+        "mode": "light"
+      },
+      {
+        "check": "The original topic link remains available",
+        "passed": true,
+        "width": 1440,
+        "mode": "light"
+      },
+      {
+        "check": "Created topics hide internal title markers",
+        "passed": true,
+        "width": 1440,
+        "mode": "dark"
+      },
+      {
+        "check": "Untitled topics retain a readable label",
+        "passed": true,
+        "width": 1440,
+        "mode": "dark"
+      },
+      {
+        "check": "The original topic link remains available",
+        "passed": true,
+        "width": 1440,
+        "mode": "dark"
+      },
+      {
+        "check": "Profile tools contain no visible internal titles",
+        "passed": true,
+        "width": 1440,
+        "route": "read"
+      },
+      {
+        "check": "Profile tools contain no visible internal titles",
+        "passed": true,
+        "width": 1440,
+        "route": "drafts"
+      },
+      {
+        "check": "Profile tools contain no visible internal titles",
+        "passed": true,
+        "width": 1440,
+        "route": "bookmarks"
+      },
+      {
+        "check": "Actual search results use clean display titles",
+        "passed": true,
+        "width": 1440
+      },
+      {
+        "check": "No client exceptions during the development flows",
+        "passed": true
+      }
+    ],
+    "viewports": [
+      390,
+      1440
+    ],
+    "color_schemes": [
+      "light",
+      "dark"
+    ],
+    "screenshots": [
+      {
+        "name": "topics-1440-dark.png",
+        "sha256": "4a250c610023d1da35a508fd86753c9a953cd07faa4b24ca480d4d1da68899fd",
+        "location": "private workspace verification artifacts; not attached to the public PR"
+      },
+      {
+        "name": "topics-1440-light.png",
+        "sha256": "db7672fae34c0bf6657eba0afaf9055a9518944000d110a4cee965839f8d86d4",
+        "location": "private workspace verification artifacts; not attached to the public PR"
+      },
+      {
+        "name": "topics-390-dark.png",
+        "sha256": "82d2e68f88aed9181a542db75037bb788f142351bc2446573542e7eb25bf307f",
+        "location": "private workspace verification artifacts; not attached to the public PR"
+      },
+      {
+        "name": "topics-390-light.png",
+        "sha256": "11d207dfc2f5c30a88b3b425ff731ab39574b8e9b6ff5ea2db17b12901a21460",
+        "location": "private workspace verification artifacts; not attached to the public PR"
+      }
+    ]
+  },
+  "lint": {
+    "passed": true,
+    "coverage": "full changed source plus scoped follow-up checks"
+  },
+  "dialogs": {
+    "passed": true,
+    "source_candidates": 176,
+    "violations": 0
+  },
+  "production": {
+    "published": false,
+    "status": "Awaiting PR CI, merge and guarded incremental release"
+  },
+  "limitations": [
+    "Chromium emulation; no physical Safari or iPhone verification",
+    "Full repository CI has not completed yet",
+    "Production validation has not been run"
+  ]
+}

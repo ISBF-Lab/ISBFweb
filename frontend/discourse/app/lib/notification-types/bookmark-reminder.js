@@ -1,5 +1,6 @@
 import getUrl from "discourse/lib/get-url";
 import NotificationTypeBase from "discourse/lib/notification-types/base";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import { i18n } from "discourse-i18n";
 
 export default class extends NotificationTypeBase {
@@ -13,7 +14,10 @@ export default class extends NotificationTypeBase {
   }
 
   get description() {
-    return super.description || this.notification.data.title;
+    return (
+      super.description ||
+      topicDisplayTitle(this.notification.data.title, this.notification)
+    );
   }
 
   get label() {

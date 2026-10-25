@@ -9,6 +9,7 @@ import formatUsername from "discourse/helpers/format-username";
 import lazyHash from "discourse/helpers/lazy-hash";
 import routeAction from "discourse/helpers/route-action";
 import userStatus from "discourse/helpers/user-status";
+import { fancyTitle } from "discourse/lib/topic-fancy-title";
 import UserNotificationsDropdown from "discourse/select-kit/components/user-notifications-dropdown";
 import { and, not } from "discourse/truth-helpers";
 import DButton from "discourse/ui-kit/d-button";
@@ -247,7 +248,13 @@ export default <template>
                     }}
                     @route="topic"
                   >{{dReplaceEmoji
-                      (trustHTML @controller.model.featured_topic.fancy_title)
+                      (trustHTML
+                        (fancyTitle
+                          @controller.model.featured_topic.fancy_title
+                          false
+                          @controller.model.featured_topic
+                        )
+                      )
                     }}</LinkTo>
                 </div>
               {{/if}}

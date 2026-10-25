@@ -6,6 +6,7 @@ import TopicStatus from "discourse/components/topic-status";
 import lazyHash from "discourse/helpers/lazy-hash";
 import getURL from "discourse/lib/get-url";
 import { prioritizeNameInUx } from "discourse/lib/settings";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import { or } from "discourse/truth-helpers";
 import DButton from "discourse/ui-kit/d-button";
 import dAvatar from "discourse/ui-kit/helpers/d-avatar";
@@ -30,6 +31,11 @@ export default class PostListItemDetails extends Component {
   }
 
   get topicTitle() {
+    const title = topicDisplayTitle(this.args.post.title, this.args.post);
+    if (title !== this.args.post.title) {
+      return title;
+    }
+
     return this.args.titlePath
       ? this.args.titlePath === "titleHtml" ||
         this.args.titlePath === "topic_html_title"
@@ -39,7 +45,10 @@ export default class PostListItemDetails extends Component {
   }
 
   get draftTitle() {
-    return this.args.post.title ?? this.args.post.data.title;
+    return topicDisplayTitle(
+      this.args.post.title ?? this.args.post.data?.title,
+      this.args.post
+    );
   }
 
   get titleAriaLabel() {

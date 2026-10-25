@@ -149,6 +149,11 @@ jobs:
           frontend/discourse/tests/integration/components/nested/deleted-posts-test.gjs
           frontend/discourse/tests/unit/controllers/nested-test.js
 
+      - name: Native title display regression
+        env:
+          LOAD_PLUGINS: "0"
+        run: bin/qunit --standalone frontend/discourse/tests/unit/lib/topic-display-title-test.js
+
       - name: Project theme QUnit
         id: theme_qunit
         env:

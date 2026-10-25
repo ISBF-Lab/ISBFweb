@@ -4,6 +4,7 @@ import { fn } from "@ember/helper";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import getURL from "discourse/lib/get-url";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import { applyValueTransformer } from "discourse/lib/transformer";
 import DiscourseURL from "discourse/lib/url";
 import {
@@ -137,7 +138,7 @@ export default class TopicDraftsDropdown extends Component {
                 @action={{fn this.resumeDraft draft}}
                 @icon={{this.draftIcon draft}}
                 @translatedLabel={{or
-                  draft.title
+                  (topicDisplayTitle draft.title draft)
                   (i18n "drafts.dropdown.untitled")
                 }}
               />

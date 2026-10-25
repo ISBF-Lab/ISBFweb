@@ -6,6 +6,7 @@ import { themePrefix } from "virtual:theme";
 import TopicFooterButtons from "discourse/components/topic-footer-buttons";
 import TopicMap from "discourse/components/topic-map";
 import routeAction from "discourse/helpers/route-action";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import DButton from "discourse/ui-kit/d-button";
 import DModal from "discourse/ui-kit/d-modal";
 import { i18n } from "discourse-i18n";
@@ -31,7 +32,7 @@ export default class ISBFTopicInfo extends Component {
       @title={{themePrefix "isbf_v2.topic_info"}}
     >
       <:body>
-        <h2>{{@model.title}}</h2>
+        <h2>{{topicDisplayTitle @model.title @model}}</h2>
         <p>{{@model.category.name}}</p>
         {{#if @model.details.can_edit}}
           <DButton

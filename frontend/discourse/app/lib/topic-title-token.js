@@ -1,3 +1,5 @@
+import topicDisplayTitle from "discourse/lib/topic-display-title";
+
 export default function topicTitleToken(model, siteSettings) {
   if (!model) {
     return;
@@ -17,6 +19,11 @@ export default function topicTitleToken(model, siteSettings) {
     result = tempDiv.textContent || tempDiv.innerText || fancyTitle;
   } else {
     result = model.get("unicode_title") || model.get("title");
+  }
+
+  const displayed = topicDisplayTitle(model.title, model);
+  if (displayed !== model.title) {
+    result = displayed;
   }
 
   const cat = model.get("category");

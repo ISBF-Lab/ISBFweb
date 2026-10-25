@@ -1,5 +1,5 @@
 import { trustHTML } from "@ember/template";
-import { emojiUnescape } from "discourse/lib/text";
+import { fancyTitle } from "discourse/lib/topic-fancy-title";
 import UserMenuBaseItem from "discourse/lib/user-menu/base-item";
 import { postUrl } from "discourse/lib/utilities";
 import { i18n } from "discourse-i18n";
@@ -43,7 +43,7 @@ export default class UserMenuMessageItem extends UserMenuBaseItem {
   }
 
   get description() {
-    return trustHTML(emojiUnescape(this.message.fancy_title));
+    return trustHTML(fancyTitle(this.message.fancy_title, false, this.message));
   }
 
   get topicId() {
