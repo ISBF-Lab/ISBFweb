@@ -2167,8 +2167,8 @@ zh_CN:
       name:
         title: "姓名"
         title_optional: "名称（可选）"
-        instructions: "您的全名（可选）"
-        instructions_required: "您的全名"
+        instructions: "用于对外展示的姓名（可选）"
+        instructions_required: "用于对外展示的姓名"
         required: "请输入姓名"
         too_short: "您的用户名过短"
         ok: "您的姓名没有问题"
