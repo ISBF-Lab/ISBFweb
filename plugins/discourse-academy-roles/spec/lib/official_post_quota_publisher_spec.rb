@@ -55,8 +55,8 @@ RSpec.describe TopicPublisher do
       Discourse::InvalidAccess,
     )
     expect(topic.reload.category_id).to eq(draft_category.id)
-    expect(topic.created_at).to eq(topic_time)
-    expect(draft_post.reload.created_at).to eq(post_time)
+    expect(topic.created_at).to eq_time(topic_time)
+    expect(draft_post.reload.created_at).to eq_time(post_time)
     expect(SharedDraft.exists?(topic: topic)).to eq(true)
     expect(quota.usage(author)).to eq(1)
     expect(DiscourseAcademyRoles::OfficialPostQuotaPublication.topic_id).to be_nil

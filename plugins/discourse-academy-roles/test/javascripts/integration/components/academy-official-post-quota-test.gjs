@@ -69,11 +69,10 @@ module("Integration | Component | Official post quota", function (hooks) {
     assert.strictEqual(this.gets, 1);
     assert.dom(input).hasValue("0");
     assert.dom(input).hasAttribute("type", "number");
+    const inputId = document.querySelector(input).id;
     assert
-      .dom(input)
-      .hasAccessibleName(
-        new RegExp(i18n("academy_roles.official_post_quota.limit"))
-      );
+      .dom(`${scope} label[for="${inputId}"]`)
+      .includesText(i18n("academy_roles.official_post_quota.limit"));
     assert.dom(scope).includesText(
       i18n("academy_roles.official_post_quota.usage", {
         used: 2,

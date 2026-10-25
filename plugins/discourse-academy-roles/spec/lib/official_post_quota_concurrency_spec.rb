@@ -42,6 +42,8 @@ RSpec.describe "Official post quota concurrency", type: :model do
     start = Queue.new
     author_id = @author.id
     category_id = @official_category.id
+    # The native test pool has two slots; return the coordinating thread's connection.
+    ActiveRecord::Base.connection_handler.clear_active_connections!
     @threads =
       2.times.map do |index|
         Thread.new do
