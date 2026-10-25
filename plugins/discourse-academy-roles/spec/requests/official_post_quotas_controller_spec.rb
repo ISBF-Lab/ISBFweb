@@ -128,7 +128,10 @@ RSpec.describe DiscourseAcademyRoles::Admin::OfficialPostQuotasController do
           params: {
             custom_fields: {
               limit_field => 100,
-              usage_field => { week_starts_at: Time.current.iso8601, used: 0 },
+              usage_field => {
+                week_starts_at: Time.current.iso8601,
+                used: 0,
+              },
             },
           },
           as: :json

@@ -46,10 +46,7 @@ module DiscourseAcademyRoles::OfficialPostQuota
   def self.record_success!(user, used:, now: Time.current)
     starts_at, = week_bounds(now)
     state = load_state(user)
-    state["usage"] = {
-      "week_starts_at" => starts_at.utc.iso8601,
-      "used" => used + 1,
-    }
+    state["usage"] = { "week_starts_at" => starts_at.utc.iso8601, "used" => used + 1 }
     save_state!(user, state)
   end
 
@@ -66,8 +63,7 @@ module DiscourseAcademyRoles::OfficialPostQuota
   def self.update_limit!(actor, target, limit:)
     raise Discourse::InvalidAccess unless actor&.admin?
     unless limit.is_a?(Integer) && limit.between?(0, MAX_LIMIT)
-      raise Discourse::InvalidParameters,
-            I18n.t("academy_roles.official_post_quota.invalid_limit")
+      raise Discourse::InvalidParameters, I18n.t("academy_roles.official_post_quota.invalid_limit")
     end
 
     target.with_lock do
@@ -75,10 +71,14 @@ module DiscourseAcademyRoles::OfficialPostQuota
       state = load_state(target)
       previous_limit = state["limit"].to_i
       starts_at, = week_bounds(now)
-      updated_state = state.merge(
-        "limit" => limit,
-        "usage" => { "week_starts_at" => starts_at.utc.iso8601, "used" => usage(target, now: now) },
-      )
+      updated_state =
+        state.merge(
+          "limit" => limit,
+          "usage" => {
+            "week_starts_at" => starts_at.utc.iso8601,
+            "used" => usage(target, now: now),
+          },
+        )
       save_state!(target, updated_state) if updated_state != state
       if previous_limit != limit
         StaffActionLogger
@@ -131,9 +131,10 @@ module DiscourseAcademyRoles::OfficialPostQuota
       .where.not(topic_id: SharedDraft.select(:topic_id))
       .where(
         id:
-          PostCustomField
-            .where(name: DiscourseAcademyRoles::OFFICIAL_POST_FIELD, value: "t")
-            .select(:post_id),
+          PostCustomField.where(
+            name: DiscourseAcademyRoles::OFFICIAL_POST_FIELD,
+            value: "t",
+          ).select(:post_id),
       )
       .count
   end

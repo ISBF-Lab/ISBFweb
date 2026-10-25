@@ -25,7 +25,9 @@ RSpec.describe DiscourseAcademyRoles::OfficialPostQuota do
           exempt: false,
           official: false,
         )
-      }.not_to change { PluginStoreRow.where(plugin_name: DiscourseAcademyRoles::PLUGIN_NAME).count }
+      }.not_to change {
+        PluginStoreRow.where(plugin_name: DiscourseAcademyRoles::PLUGIN_NAME).count
+      }
     end
 
     it "uses Monday in Shanghai across the calendar year" do
@@ -33,9 +35,7 @@ RSpec.describe DiscourseAcademyRoles::OfficialPostQuota do
         week_starts_at: "2025-12-28T16:00:00Z",
         resets_at: "2026-01-04T16:00:00Z",
       )
-      expect(
-        described_class.snapshot(member, now: Time.utc(2026, 1, 4, 16)),
-      ).to include(
+      expect(described_class.snapshot(member, now: Time.utc(2026, 1, 4, 16))).to include(
         week_starts_at: "2026-01-04T16:00:00Z",
         resets_at: "2026-01-11T16:00:00Z",
         used: 0,
@@ -54,11 +54,7 @@ RSpec.describe DiscourseAcademyRoles::OfficialPostQuota do
         remaining: 1,
         official: true,
       )
-      expect(described_class.snapshot(other_member)).to include(
-        limit: 5,
-        used: 0,
-        remaining: 5,
-      )
+      expect(described_class.snapshot(other_member)).to include(limit: 5, used: 0, remaining: 5)
     end
   end
 
@@ -192,9 +188,9 @@ RSpec.describe DiscourseAcademyRoles::OfficialPostQuota do
     end
 
     it "initializes usage when saving the default limit without recording a limit change" do
-      expect {
-        described_class.update_limit!(developer, member, limit: 0)
-      }.not_to change { UserHistory.where(custom_type: described_class::AUDIT_ACTION).count }
+      expect { described_class.update_limit!(developer, member, limit: 0) }.not_to change {
+        UserHistory.where(custom_type: described_class::AUDIT_ACTION).count
+      }
 
       expect(
         PluginStore.get(
@@ -203,7 +199,10 @@ RSpec.describe DiscourseAcademyRoles::OfficialPostQuota do
         ),
       ).to include(
         "limit" => 0,
-        "usage" => { "week_starts_at" => "2025-12-28T16:00:00Z", "used" => 0 },
+        "usage" => {
+          "week_starts_at" => "2025-12-28T16:00:00Z",
+          "used" => 0,
+        },
       )
     end
 
@@ -229,9 +228,7 @@ RSpec.describe DiscourseAcademyRoles::OfficialPostQuota do
       expect {
         described_class.update_limit!(developer, member, limit: 3)
         described_class.update_limit!(developer, member, limit: 3)
-      }.to change {
-        UserHistory.where(custom_type: described_class::AUDIT_ACTION).count
-      }.by(1)
+      }.to change { UserHistory.where(custom_type: described_class::AUDIT_ACTION).count }.by(1)
 
       history = UserHistory.find_by!(custom_type: described_class::AUDIT_ACTION)
       expect(history).to have_attributes(
@@ -255,9 +252,9 @@ RSpec.describe DiscourseAcademyRoles::OfficialPostQuota do
     end
 
     it "rejects a nondeveloper actor" do
-      expect {
-        described_class.update_limit!(other_member, member, limit: 1)
-      }.to raise_error(Discourse::InvalidAccess)
+      expect { described_class.update_limit!(other_member, member, limit: 1) }.to raise_error(
+        Discourse::InvalidAccess,
+      )
     end
   end
 end

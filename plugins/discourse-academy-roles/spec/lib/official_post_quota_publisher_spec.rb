@@ -18,7 +18,12 @@ RSpec.describe TopicPublisher do
 
   let(:quota) { DiscourseAcademyRoles::OfficialPostQuota }
   let(:draft_post) do
-    post = Fabricate(:post, user: author, topic: Fabricate(:topic, user: author, category: draft_category))
+    post =
+      Fabricate(
+        :post,
+        user: author,
+        topic: Fabricate(:topic, user: author, category: draft_category),
+      )
     post.custom_fields[DiscourseAcademyRoles::OFFICIAL_POST_FIELD] = true
     post.save_custom_fields
     SharedDraft.create!(topic: post.topic, category: official_category)
@@ -46,7 +51,9 @@ RSpec.describe TopicPublisher do
     post_time = draft_post.created_at
     freeze_time 1.minute.from_now
 
-    expect { described_class.new(topic, developer, official_category.id).publish! }.to raise_error(Discourse::InvalidAccess)
+    expect { described_class.new(topic, developer, official_category.id).publish! }.to raise_error(
+      Discourse::InvalidAccess,
+    )
     expect(topic.reload.category_id).to eq(draft_category.id)
     expect(topic.created_at).to eq(topic_time)
     expect(draft_post.reload.created_at).to eq(post_time)

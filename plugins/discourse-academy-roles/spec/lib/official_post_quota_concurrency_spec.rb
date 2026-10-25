@@ -26,7 +26,10 @@ RSpec.describe "Official post quota concurrency", type: :model do
     SiteSetting.academy_roles_enabled = false
     if @author
       Topic.with_deleted.where(user_id: @author.id).destroy_all
-      PluginStoreRow.where(plugin_name: DiscourseAcademyRoles::PLUGIN_NAME, key: "official_post_quota:#{@author.id}").destroy_all
+      PluginStoreRow.where(
+        plugin_name: DiscourseAcademyRoles::PLUGIN_NAME,
+        key: "official_post_quota:#{@author.id}",
+      ).destroy_all
       @author.destroy!
     end
     @developer&.destroy!
@@ -39,35 +42,40 @@ RSpec.describe "Official post quota concurrency", type: :model do
     start = Queue.new
     author_id = @author.id
     category_id = @official_category.id
-    @threads = 2.times.map do |index|
-      Thread.new do
-        ActiveRecord::Base.connection_pool.with_connection do
-          author = User.find(author_id)
-          ready << true
-          start.pop
-          creator = PostCreator.new(
-            author,
-            title: "Concurrent official announcement #{index}",
-            raw: "Independent concurrent publication #{index} for the official academy community.",
-            category: category_id,
-            academy_official: true,
-            isbf_official_campuses: '["zhuhai"]',
-            isbf_official_types: '["academic"]',
-            skip_rate_limits: true,
-            skip_jobs: true,
-          )
-          post = creator.create
-          { persisted: post&.persisted? == true, errors: creator.errors.full_messages }
+    @threads =
+      2.times.map do |index|
+        Thread.new do
+          ActiveRecord::Base.connection_pool.with_connection do
+            author = User.find(author_id)
+            ready << true
+            start.pop
+            creator =
+              PostCreator.new(
+                author,
+                title: "Concurrent official announcement #{index}",
+                raw:
+                  "Independent concurrent publication #{index} for the official academy community.",
+                category: category_id,
+                academy_official: true,
+                isbf_official_campuses: '["zhuhai"]',
+                isbf_official_types: '["academic"]',
+                skip_rate_limits: true,
+                skip_jobs: true,
+              )
+            post = creator.create
+            { persisted: post&.persisted? == true, errors: creator.errors.full_messages }
+          end
         end
       end
-    end
     2.times { ready.pop }
     2.times { start << true }
     @threads.each { |thread| raise "Concurrent publication timed out" unless thread.join(25) }
     results = @threads.map(&:value)
 
     expect(results.count { |result| result[:persisted] }).to eq(1)
-    expect(results.reject { |result| result[:persisted] }.first[:errors]).to include(DiscourseAcademyRoles::OfficialPostQuota.error_message(@author))
+    expect(results.reject { |result| result[:persisted] }.first[:errors]).to include(
+      DiscourseAcademyRoles::OfficialPostQuota.error_message(@author),
+    )
     expect(Post.with_deleted.where(user_id: author_id, post_number: 1).count).to eq(1)
     expect(DiscourseAcademyRoles::OfficialPostQuota.usage(@author)).to eq(1)
   end
