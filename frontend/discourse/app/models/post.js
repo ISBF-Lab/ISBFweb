@@ -344,11 +344,18 @@ export default class Post extends RestModel {
     );
   }
 
-  @computed("topic_title_headline")
+  @computed(
+    "topic_title_headline",
+    "topic.title",
+    "topic.fancy_title",
+    "topic.fancy_title_localized",
+    "blurb"
+  )
   get topicTitleHeadline() {
     return fancyTitle(
       this.topic_title_headline,
-      this.siteSettings.support_mixed_text_direction
+      this.siteSettings.support_mixed_text_direction,
+      this
     );
   }
 

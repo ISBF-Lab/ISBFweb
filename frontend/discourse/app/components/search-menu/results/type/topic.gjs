@@ -6,6 +6,7 @@ import HighlightedSearch from "discourse/components/search-menu/highlighted-sear
 import Blurb from "discourse/components/search-menu/results/blurb";
 import TopicStatus from "discourse/components/topic-status";
 import lazyHash from "discourse/helpers/lazy-hash";
+import { fancyTitle } from "discourse/lib/topic-fancy-title";
 import dCategoryLink from "discourse/ui-kit/helpers/d-category-link";
 import dDiscourseTags from "discourse/ui-kit/helpers/d-discourse-tags";
 import dReplaceEmoji from "discourse/ui-kit/helpers/d-replace-emoji";
@@ -24,6 +25,22 @@ export default class Results extends Component {
   get shouldShowPrivateMessageIcon() {
     // Only show PM icon if this is a PM AND we're not in a PM-only search
     return this.args.result.topic.isPrivateMessage && !this.args.isPMOnly;
+  }
+
+  get title() {
+    return fancyTitle(
+      this.args.result.topic.fancy_title,
+      this.siteSettings.support_mixed_text_direction,
+      this.args.result
+    );
+  }
+
+  get headline() {
+    return fancyTitle(
+      this.args.result.topic_title_headline,
+      this.siteSettings.support_mixed_text_direction,
+      this.args.result
+    );
   }
 
   get useHeadline() {
@@ -45,9 +62,9 @@ export default class Results extends Component {
         <span class="topic-title" data-topic-id={{@result.topic.id}}>
           <MaybeAnchor @href={{if @withTopicUrl @result.url}}>
             {{#if this.useHeadline}}
-              {{dReplaceEmoji (trustHTML @result.topic_title_headline)}}
+              {{dReplaceEmoji (trustHTML this.headline)}}
             {{else}}
-              <HighlightedSearch @string={{@result.topic.fancyTitle}} />
+              <HighlightedSearch @string={{this.title}} />
             {{/if}}
           </MaybeAnchor>
           <PluginOutlet

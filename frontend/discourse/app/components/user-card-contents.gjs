@@ -24,6 +24,7 @@ import { getURLWithCDN } from "discourse/lib/get-url";
 import { wantsNewWindow } from "discourse/lib/intercept-click";
 import { prioritizeNameInUx } from "discourse/lib/settings";
 import { emojiUnescape } from "discourse/lib/text";
+import { fancyTitle } from "discourse/lib/topic-fancy-title";
 import { escapeExpression } from "discourse/lib/utilities";
 import User from "discourse/models/user";
 import DButton from "discourse/ui-kit/d-button";
@@ -714,7 +715,13 @@ export default class UserCardContents extends CardContentsBase {
                   }}
                   @route="topic"
                 >{{dReplaceEmoji
-                    (trustHTML this.user.featured_topic.fancy_title)
+                    (trustHTML
+                      (fancyTitle
+                        this.user.featured_topic.fancy_title
+                        false
+                        this.user.featured_topic
+                      )
+                    )
                   }}</LinkTo>
               </div>
             </div>

@@ -6,6 +6,7 @@ import { isEmpty } from "@ember/utils";
 import ShareSource from "discourse/components/share-source";
 import discourseLater from "discourse/lib/later";
 import Sharing from "discourse/lib/sharing";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import { escapeExpression } from "discourse/lib/utilities";
 import DTextarea from "discourse/ui-kit/d-textarea";
 import { i18n } from "discourse-i18n";
@@ -50,9 +51,11 @@ export default class SharePanel extends Component {
     return Sharing.activeSources(this.siteSettings.share_links, privateContext);
   }
 
-  @computed("type", "topic.title")
+  @computed("type", "topic.{title,fancy_title,fancy_title_localized,excerpt}")
   get shareTitle() {
-    const topicTitle = escapeExpression(this.topic?.title);
+    const topicTitle = escapeExpression(
+      topicDisplayTitle(this.topic?.title, this.topic)
+    );
     return i18n("share.topic_html", { topicTitle });
   }
 
@@ -89,7 +92,7 @@ export default class SharePanel extends Component {
   share(source) {
     Sharing.shareSource(source, {
       url: this.shareUrl,
-      title: this.topic.get("title"),
+      title: topicDisplayTitle(this.topic.title, this.topic),
     });
   }
 

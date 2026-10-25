@@ -3,6 +3,8 @@ import { service } from "@ember/service";
 import { trustHTML } from "@ember/template";
 import { isEmpty } from "@ember/utils";
 import { getAbsoluteURL } from "discourse/lib/get-url";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
+import { escapeExpression } from "discourse/lib/utilities";
 import DModal from "discourse/ui-kit/d-modal";
 import { i18n } from "discourse-i18n";
 
@@ -12,7 +14,14 @@ export default class AnonymousFlagModal extends Component {
   get description() {
     return i18n("anonymous_flagging.description", {
       email: this.#email,
-      topic_title: this.args.model.flagModel.topic.title,
+      topic_title: escapeExpression(
+        encodeURIComponent(
+          topicDisplayTitle(
+            this.args.model.flagModel.topic.title,
+            this.args.model.flagModel
+          )
+        )
+      ),
       url: getAbsoluteURL(this.args.model.flagModel.url),
     });
   }

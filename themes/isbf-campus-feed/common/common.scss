@@ -1069,6 +1069,15 @@ body:has(.isbf-v2-shell) tr.isbf-v2-topic {
   }
 }
 
+.isbf-topic-title-preview {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
 .isbf-activity-preview {
   &__header {
     display: flex;

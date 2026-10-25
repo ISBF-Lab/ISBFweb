@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { hash } from "@ember/helper";
 import { action } from "@ember/object";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import { eq } from "discourse/truth-helpers";
 import DButton from "discourse/ui-kit/d-button";
 import { categoryLinkHTML } from "discourse/ui-kit/helpers/d-category-link";
@@ -38,7 +39,7 @@ const TopicLabelButton = <template>
 
         </span>
         <span class="fancy-title">
-          {{@topic.title}}
+          {{topicDisplayTitle @topic.title @topic}}
         </span>
       </div>
       <div class="topic-title__bottom-line">

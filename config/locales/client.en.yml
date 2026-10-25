@@ -2410,8 +2410,8 @@ en:
       name:
         title: "Name"
         title_optional: "Name (optional)"
-        instructions: "Your full name (optional)"
-        instructions_required: "Your full name"
+        instructions: "Your publicly displayed name (optional)"
+        instructions_required: "Your publicly displayed name"
         required: "Please enter a name"
         too_short: "Your name is too short"
         ok: "Your name looks good"

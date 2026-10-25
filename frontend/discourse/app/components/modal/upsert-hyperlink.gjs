@@ -8,6 +8,7 @@ import Form from "discourse/components/form";
 import TopicStatus from "discourse/components/topic-status";
 import discourseDebounce from "discourse/lib/debounce";
 import { searchForTerm } from "discourse/lib/search";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import { prefixProtocol } from "discourse/lib/url";
 import DButton from "discourse/ui-kit/d-button";
 import DModal from "discourse/ui-kit/d-modal";
@@ -258,7 +259,7 @@ export default class UpsertHyperlink extends Component {
                 {{#each this.searchResults as |result|}}
                   <a
                     class="search-link"
-                    data-title={{result.fancy_title}}
+                    data-title={{topicDisplayTitle result.fancy_title result}}
                     href={{result.url}}
                     {{on "click" this.linkClick}}
                   >

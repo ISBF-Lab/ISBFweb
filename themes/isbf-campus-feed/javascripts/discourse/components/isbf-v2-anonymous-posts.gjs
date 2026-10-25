@@ -4,8 +4,11 @@ import { action } from "@ember/object";
 import { scheduleOnce } from "@ember/runloop";
 import { themePrefix } from "virtual:theme";
 import { ajax } from "discourse/lib/ajax";
+import { cook } from "discourse/lib/text";
+import topicDisplayTitle from "discourse/lib/topic-display-title";
 import DButton from "discourse/ui-kit/d-button";
 import { i18n } from "discourse-i18n";
+import { optionalTopicTitle } from "../lib/optional-topic-title";
 
 export default class ISBFV2AnonymousPosts extends Component {
   @tracked posts = [];
@@ -42,7 +45,21 @@ export default class ISBFV2AnonymousPosts extends Component {
       if (this.isDestroying) {
         return;
       }
-      this.posts = [...this.posts, ...response.posts];
+      const posts = await Promise.all(
+        response.posts.map(async (post) => {
+          const cooked = await cook(post.excerpt ?? "");
+          return {
+            ...post,
+            displayTitle: topicDisplayTitle(post.title, {
+              cooked: cooked.toString(),
+            }),
+          };
+        })
+      );
+      if (this.isDestroying) {
+        return;
+      }
+      this.posts = [...this.posts, ...posts];
       this.nextBeforeId = response.next_before_id;
       this.loaded = true;
     } catch {
@@ -63,8 +80,8 @@ export default class ISBFV2AnonymousPosts extends Component {
         }}</h1>
       {{#each this.posts as |post|}}
         <article class="isbf-v2-anonymous-posts__item">
-          <a href={{post.url}}>{{post.title}}</a>
-          <p>{{post.excerpt}}</p>
+          <a href={{post.url}}>{{post.displayTitle}}</a>
+          {{#if (optionalTopicTitle post.title)}}<p>{{post.excerpt}}</p>{{/if}}
         </article>
       {{/each}}
       {{#if this.error}}

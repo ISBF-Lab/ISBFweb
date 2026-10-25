@@ -1,0 +1,376 @@
+{
+  "scope": "Generated title presentation only; HTTP fields and persisted titles unchanged",
+  "files": [
+    {
+      "path": "frontend/discourse/app/lib/registry/transformers.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/lib/registry/transformers.js",
+      "before_sha256": "41fd4b02508a0b8940f2086d5c61709806cdeff63b97de1791444fefe83568d0",
+      "runtime_sha256": "26c96cc45a92ea5eac5b17587139b26a6b2df705446817ab295676c1dbc7596b",
+      "pr_sha256": "26c96cc45a92ea5eac5b17587139b26a6b2df705446817ab295676c1dbc7596b"
+    },
+    {
+      "path": "frontend/discourse/app/lib/topic-fancy-title.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/lib/topic-fancy-title.js",
+      "before_sha256": "63c1367c18df6febe0a52343af8b516dac4e5c1d6bbc80ee9424a82c76aba061",
+      "runtime_sha256": "8fec0f09835bc4393e0700abb051dc7faa6d8494c7f178dc9f6ab4e03b269c20",
+      "pr_sha256": "8fec0f09835bc4393e0700abb051dc7faa6d8494c7f178dc9f6ab4e03b269c20"
+    },
+    {
+      "path": "frontend/discourse/app/lib/topic-title-token.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/lib/topic-title-token.js",
+      "before_sha256": "7dc45bdd558c5b0d3ca2727a975da4797119f690de4f5a1d08ec88f32d8c6d5b",
+      "runtime_sha256": "2149d7e1d78ae43c5ca3e7458fb33a9ad2c08618eb81ae545bdb56f097c0d9f2",
+      "pr_sha256": "2149d7e1d78ae43c5ca3e7458fb33a9ad2c08618eb81ae545bdb56f097c0d9f2"
+    },
+    {
+      "path": "frontend/discourse/app/models/topic.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/models/topic.js",
+      "before_sha256": "3913d5056b7f42ede46e1383b0a786294c2bbb3d56e87cbc8061307f28e39e1e",
+      "runtime_sha256": "963159bbeb2589a3738f6c95003a4d7128ca536c19b879b7625a00b12249f241",
+      "pr_sha256": "963159bbeb2589a3738f6c95003a4d7128ca536c19b879b7625a00b12249f241"
+    },
+    {
+      "path": "frontend/discourse/app/models/post.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/models/post.js",
+      "before_sha256": "da428b54e118a9caf20e770a1cd31b6e41121dfd1a19cca9e4b3a499d138e4cf",
+      "runtime_sha256": "0bf79c1c15b3473510b5bdefe9e4ec3562636f998c9d3cbd74159eeebbc40aab",
+      "pr_sha256": "0bf79c1c15b3473510b5bdefe9e4ec3562636f998c9d3cbd74159eeebbc40aab"
+    },
+    {
+      "path": "frontend/discourse/app/models/user-action.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/models/user-action.js",
+      "before_sha256": "b1f1e31212480227a903852a1abd845dc5785560237eb0c3e05ff62bece40884",
+      "runtime_sha256": "eb106e806be8d212b96a2b84fab5a324bd1f56aacd0fad18f4ed8223aaedc2a5",
+      "pr_sha256": "eb106e806be8d212b96a2b84fab5a324bd1f56aacd0fad18f4ed8223aaedc2a5"
+    },
+    {
+      "path": "frontend/discourse/app/models/user-draft.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/models/user-draft.js",
+      "before_sha256": "ef30bbaf6c3c9042a1b902e06f3586679a5af306d8752e33c01fb1435f1bf032",
+      "runtime_sha256": "7105f3d37fc090d94a9f6e7993d457d7f040ba8866f6589802a92b9406a0d61a",
+      "pr_sha256": "7105f3d37fc090d94a9f6e7993d457d7f040ba8866f6589802a92b9406a0d61a"
+    },
+    {
+      "path": "frontend/discourse/app/models/bookmark.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/models/bookmark.js",
+      "before_sha256": "c4c391eed6a47c576451ea03158b7da36161052a04f945c3a7ea29f94a372ab6",
+      "runtime_sha256": "1f9ee1abe152cb29b4df83a7d082bbe551e1a6e17900f3c9f6dd0a3452f7028e",
+      "pr_sha256": "1f9ee1abe152cb29b4df83a7d082bbe551e1a6e17900f3c9f6dd0a3452f7028e"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-list/topic-link.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/components/topic-list/topic-link.gjs",
+      "before_sha256": "648b1000d7b78626c370bc09b267e45d5f7f4d18f69afbe4848350c288571da6",
+      "runtime_sha256": "6cdaa6a8b62eb47926e8e5ee0d0f80b3d749b4c75e7a659f939b0b4c6768a9cb",
+      "pr_sha256": "6cdaa6a8b62eb47926e8e5ee0d0f80b3d749b4c75e7a659f939b0b4c6768a9cb"
+    },
+    {
+      "path": "frontend/discourse/app/components/post-list/item/details.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/components/post-list/item/details.gjs",
+      "before_sha256": "543dfd1bb81e07a5be518d32df2ec58423cf9be071f336b83ce0b06681afb629",
+      "runtime_sha256": "392cffca0ce063bf9c77d60385eaf94e8a901a5fe3b75877868c063778642381",
+      "pr_sha256": "392cffca0ce063bf9c77d60385eaf94e8a901a5fe3b75877868c063778642381"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-drafts-dropdown.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/components/topic-drafts-dropdown.gjs",
+      "before_sha256": "9aa658f469d2946ef8dc53fe3b74f190bb9a76993f4d4e955e0e5e680ae6ee40",
+      "runtime_sha256": "dca8ddb1464d99241f41589ab77da09b46046af9638418bafa80974721dfc05c",
+      "pr_sha256": "dca8ddb1464d99241f41589ab77da09b46046af9638418bafa80974721dfc05c"
+    },
+    {
+      "path": "frontend/discourse/app/components/search-menu/results/type/topic.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/components/search-menu/results/type/topic.gjs",
+      "before_sha256": "38383a4b3f38c48915d505525cea798a91e8ce7d4bfaf97924413aa5dc509f76",
+      "runtime_sha256": "bd6a514efeae867bf2ce37ad5da32abeff61dc9466d6deb7f5368611261f707f",
+      "pr_sha256": "bd6a514efeae867bf2ce37ad5da32abeff61dc9466d6deb7f5368611261f707f"
+    },
+    {
+      "path": "frontend/discourse/app/components/share-panel.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/components/share-panel.gjs",
+      "before_sha256": "d8a2f6999d583f77970c40f82d40ffe18855569eb9bf960293905eba369d9901",
+      "runtime_sha256": "a765fa0f4921a07e7cd72b2fcb209beaec15fac069e8f49129d80523cb3a941d",
+      "pr_sha256": "a765fa0f4921a07e7cd72b2fcb209beaec15fac069e8f49129d80523cb3a941d"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/share-topic.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/components/modal/share-topic.gjs",
+      "before_sha256": "3eb02e41a3cdbcc51692e39eaa765d8d1f002656a2861c8310670d1225301c91",
+      "runtime_sha256": "0e21b69917abfa975c6cb0a295f6b443e24b305db1b62e08b75220a3c6ee87bd",
+      "pr_sha256": "0e21b69917abfa975c6cb0a295f6b443e24b305db1b62e08b75220a3c6ee87bd"
+    },
+    {
+      "path": "frontend/discourse/app/controllers/topic.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/controllers/topic.js",
+      "before_sha256": "6962aafeb05a889857feb7da97ed2a9d426e26bffe7c4e15fd506377680f0813",
+      "runtime_sha256": "3513e5f508c775eb5bb7cfeb776f6442229e3ecb0f6b82da6c792a769c219025",
+      "pr_sha256": "3513e5f508c775eb5bb7cfeb776f6442229e3ecb0f6b82da6c792a769c219025"
+    },
+    {
+      "path": "frontend/discourse/app/lib/user-menu/bookmark-item.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/lib/user-menu/bookmark-item.js",
+      "before_sha256": "af13f1410332bf7d72e1ca58dea44d7ea3b6991f0506edcc858640d56f52bc3d",
+      "runtime_sha256": "694b2af41d0c6c6e6f1072054edf5658b1c86f1c7d6a6d563d39d3a66fd8fbb8",
+      "pr_sha256": "694b2af41d0c6c6e6f1072054edf5658b1c86f1c7d6a6d563d39d3a66fd8fbb8"
+    },
+    {
+      "path": "frontend/discourse/app/lib/user-menu/message-item.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/lib/user-menu/message-item.js",
+      "before_sha256": "aee5c77c4ea887efb3f63c7d4c7e4eb5740ffc3a989c88b6534ac321b4ff05fb",
+      "runtime_sha256": "9eff7517592c6c5510573e3b9d253e648b2d97b9036baa839926f17b58fdde26",
+      "pr_sha256": "9eff7517592c6c5510573e3b9d253e648b2d97b9036baa839926f17b58fdde26"
+    },
+    {
+      "path": "frontend/discourse/app/lib/notification-types/base.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/lib/notification-types/base.js",
+      "before_sha256": "34a096bfcf90fd3e3630ce39d646dcd736d36b5e174052b8d507b6caa1232fbd",
+      "runtime_sha256": "9bf22e1fb121f3447c55dd305cbf4dbeeab30d74765c291133937302d3f5b9f9",
+      "pr_sha256": "9bf22e1fb121f3447c55dd305cbf4dbeeab30d74765c291133937302d3f5b9f9"
+    },
+    {
+      "path": "frontend/discourse/app/lib/notification-types/bookmark-reminder.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/lib/notification-types/bookmark-reminder.js",
+      "before_sha256": "0d9d0ae227d48099347349697b7aeae490de3e245fb4c400aa8b576d24008cbe",
+      "runtime_sha256": "4ae7981defedba8b7dd81eaf34efcf36e1dc2c39edd6915db98d108ce48efbd1",
+      "pr_sha256": "4ae7981defedba8b7dd81eaf34efcf36e1dc2c39edd6915db98d108ce48efbd1"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-info.gjs",
+      "runtime_workspace_path": "external/active-theme/javascripts/discourse/components/isbf-topic-info.gjs",
+      "before_sha256": "0b73163593ec6b91b7c18abfb7a217ac81387b7a2b1f39e0c44205e38faec539",
+      "runtime_sha256": "5ba12ee9902a8b48ad2164b7e1b5a933f7833ef7610c21fb2ad74e8e093ba5c0",
+      "pr_sha256": "5ba12ee9902a8b48ad2164b7e1b5a933f7833ef7610c21fb2ad74e8e093ba5c0"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-anonymous-posts.gjs",
+      "runtime_workspace_path": "external/active-theme/javascripts/discourse/components/isbf-v2-anonymous-posts.gjs",
+      "before_sha256": "d0ca9a5ff8473629274245af281d0009d04147bc55e75106316d92c36b0a258e",
+      "runtime_sha256": "90350f174340922e8bf3f699956e23bd0127ab2338052052298c90b17950d3d0",
+      "pr_sha256": "90350f174340922e8bf3f699956e23bd0127ab2338052052298c90b17950d3d0"
+    },
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "runtime_workspace_path": "external/active-theme/common/common.scss",
+      "before_sha256": "951d5cc267a518763506ca6c8279abbc95c3e937d5c1319b6a420e2806791b43",
+      "runtime_sha256": "00f4be9a57739e87b55efe74b316a9962025512b9d8b234eec3a750a6835089d",
+      "pr_sha256": "6f23fb4767991864836f70ec7ca788b0383a5e94f219728b55cfcc8438f3f0c5"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-reply-choice-dialog.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/components/topic-reply-choice-dialog.gjs",
+      "before_sha256": "d255fb08b6c3d7991fea5b49fd9b2e1c63ea46e5e63816d13a30b4a24e2ef2df",
+      "runtime_sha256": "f94c491652dba0d07945bf5cfbdc427b25c0db18ac115422e6206b8815ec51bc",
+      "pr_sha256": "f94c491652dba0d07945bf5cfbdc427b25c0db18ac115422e6206b8815ec51bc"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/anonymous-flag.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/components/modal/anonymous-flag.gjs",
+      "before_sha256": "7e982b777ed87eab95d16dfb7c1bd8d87da55ac7a916df8764f4c4acd57a509a",
+      "runtime_sha256": "948a468ebe8fadadc49954066984893ccb3b9cef7bec16fac84f76c555204962",
+      "pr_sha256": "948a468ebe8fadadc49954066984893ccb3b9cef7bec16fac84f76c555204962"
+    },
+    {
+      "path": "frontend/discourse/app/components/post-text-selection-toolbar.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/components/post-text-selection-toolbar.gjs",
+      "before_sha256": "643760e75b73f46a66ee2eddd16bacba6d69107e837b9dde5c875ffc89f3e247",
+      "runtime_sha256": "d01eda9d1e476844c05cc8e0ecc50d35a78b4e2dc084609cd104c9158f454ed8",
+      "pr_sha256": "d01eda9d1e476844c05cc8e0ecc50d35a78b4e2dc084609cd104c9158f454ed8"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/create-invite-with-roles.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/components/modal/create-invite-with-roles.gjs",
+      "before_sha256": "07b468a75dad88a2cdb4d4d68590f31df9e2435ab2987cd9cc76f30686f51b10",
+      "runtime_sha256": "2c00d3b7ddc31d115e1bc1fc6dfe73ee443bd753ec8433b44d65a8fc8d860338",
+      "pr_sha256": "2c00d3b7ddc31d115e1bc1fc6dfe73ee443bd753ec8433b44d65a8fc8d860338"
+    },
+    {
+      "path": "frontend/discourse/app/templates/user-invited/show.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/templates/user-invited/show.gjs",
+      "before_sha256": "f1ec08e941855d1c5fd86f4e62dd92a7e728e876822988707ce5f7ebff8571fd",
+      "runtime_sha256": "d53adcbf19897561b379e6ae75c9c7e7c6e4514a4a93f83e5025e33f51fc4232",
+      "pr_sha256": "d53adcbf19897561b379e6ae75c9c7e7c6e4514a4a93f83e5025e33f51fc4232"
+    },
+    {
+      "path": "frontend/discourse/app/templates/user.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/templates/user.gjs",
+      "before_sha256": "7bf94483dfb36e7edcb51eaada54b39a66bd0742ea794850f6e48859976b0ecc",
+      "runtime_sha256": "21fc7d6a39019b50576f39a0c1d423d4bc12543a280c55536a17c035c0d6f0e5",
+      "pr_sha256": "21fc7d6a39019b50576f39a0c1d423d4bc12543a280c55536a17c035c0d6f0e5"
+    },
+    {
+      "path": "frontend/discourse/app/templates/preferences/profile.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/templates/preferences/profile.gjs",
+      "before_sha256": "7466eb52950ae2fed4a396921bf707a54e050fea961e0f8063eb8c9a5cfa8254",
+      "runtime_sha256": "56335e698ecc791e45c92624f2f8f4beb87642f52134f157d4301eabc8b33323",
+      "pr_sha256": "56335e698ecc791e45c92624f2f8f4beb87642f52134f157d4301eabc8b33323"
+    },
+    {
+      "path": "frontend/discourse/app/components/user-card-contents.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/components/user-card-contents.gjs",
+      "before_sha256": "2ebecc1be2f79f88f1c9e781b5b4cbfabb704c2da1b3f1203f97935f776b46c7",
+      "runtime_sha256": "80081b9171243e3afad73d116cdb53a10efb172377e181c344102a29676dd11c",
+      "pr_sha256": "80081b9171243e3afad73d116cdb53a10efb172377e181c344102a29676dd11c"
+    },
+    {
+      "path": "frontend/discourse/app/lib/desktop-notifications.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/lib/desktop-notifications.js",
+      "before_sha256": "6852a17619a160af5df23be90b6be70490893564d4fd92ef80e9f5489beccd1d",
+      "runtime_sha256": "89abfb0cdbf1139b3790454d814d9f7a51ecd35100f47dfc9e1ee3915cdf0884",
+      "pr_sha256": "89abfb0cdbf1139b3790454d814d9f7a51ecd35100f47dfc9e1ee3915cdf0884"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/upsert-hyperlink.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/components/modal/upsert-hyperlink.gjs",
+      "before_sha256": "969dd7a1d8bc883128694ce84917af0db789d5868bfe3b7a8eb6325b6e5c76ac",
+      "runtime_sha256": "47d9583278432c2f10d7468f9524a5b532efeeb08a0b79b213f71c0d6965d0d0",
+      "pr_sha256": "47d9583278432c2f10d7468f9524a5b532efeeb08a0b79b213f71c0d6965d0d0"
+    },
+    {
+      "path": "frontend/discourse/app/components/search-result-entry.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/components/search-result-entry.gjs",
+      "before_sha256": "e5352a499d80fe2972b7da31d91f336e83fe2c4be0f8535a767c276522781d6f",
+      "runtime_sha256": "8c0b3b6d7bf452d4597636dcad11e4c1ce012e42ba271cac901240cea8414525",
+      "pr_sha256": "8c0b3b6d7bf452d4597636dcad11e4c1ce012e42ba271cac901240cea8414525"
+    },
+    {
+      "path": "frontend/discourse/app/components/post-translation-editor.gjs",
+      "runtime_workspace_path": "source/frontend/discourse/app/components/post-translation-editor.gjs",
+      "before_sha256": "1ced7f4589f3632ca56de474939342e0a9633b3de97dc7d4cd6525a9b47c8467",
+      "runtime_sha256": "ec3fb798c40c89c65fdb5ff80f95d1ea5ea4d458eab7ed3894ae74877b2c09d6",
+      "pr_sha256": "ec3fb798c40c89c65fdb5ff80f95d1ea5ea4d458eab7ed3894ae74877b2c09d6"
+    },
+    {
+      "path": "frontend/discourse/app/lib/topic-display-title.js",
+      "runtime_workspace_path": "source/frontend/discourse/app/lib/topic-display-title.js",
+      "before_sha256": null,
+      "runtime_sha256": "12302245b8ed6e2292dbf5d815e823a88707812ef56cd1c9e56f723a6fc098b1",
+      "pr_sha256": "12302245b8ed6e2292dbf5d815e823a88707812ef56cd1c9e56f723a6fc098b1"
+    },
+    {
+      "path": "frontend/discourse/tests/unit/lib/topic-display-title-test.js",
+      "runtime_workspace_path": "source/frontend/discourse/tests/unit/lib/topic-display-title-test.js",
+      "before_sha256": null,
+      "runtime_sha256": "1428c07c280d61dc4056604f8013a6d17870dfb32541e32f84fb35563a1d428e",
+      "pr_sha256": "1428c07c280d61dc4056604f8013a6d17870dfb32541e32f84fb35563a1d428e"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/topic-display-title.js",
+      "runtime_workspace_path": "external/active-theme/javascripts/discourse/lib/topic-display-title.js",
+      "before_sha256": null,
+      "runtime_sha256": "b727a5e2eca198438edf7f87efd735908d08b661115080f7a09b48c3ada7314f",
+      "pr_sha256": "b727a5e2eca198438edf7f87efd735908d08b661115080f7a09b48c3ada7314f"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-link-title.gjs",
+      "runtime_workspace_path": "external/active-theme/javascripts/discourse/components/isbf-topic-link-title.gjs",
+      "before_sha256": null,
+      "runtime_sha256": "5a90f2065f311e8cb39a8872b938cdb9d96e0cd950992384191790e5c8889a95",
+      "pr_sha256": "5a90f2065f311e8cb39a8872b938cdb9d96e0cd950992384191790e5c8889a95"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-optional-topic-title-editor.gjs",
+      "runtime_workspace_path": "external/active-theme/javascripts/discourse/components/isbf-optional-topic-title-editor.gjs",
+      "before_sha256": null,
+      "runtime_sha256": "9e6df993a269e52e97d463aacdacaaafa3f7fe74aef25535e7f448b05a6bdb3f",
+      "pr_sha256": "9e6df993a269e52e97d463aacdacaaafa3f7fe74aef25535e7f448b05a6bdb3f"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-topic-display-title.gjs",
+      "runtime_workspace_path": "external/active-theme/javascripts/discourse/api-initializers/isbf-topic-display-title.gjs",
+      "before_sha256": null,
+      "runtime_sha256": "7da551aec14ed42262c40c276a6e0842d6fed87172149a8ef85ac1cf67cb777a",
+      "pr_sha256": "7da551aec14ed42262c40c276a6e0842d6fed87172149a8ef85ac1cf67cb777a"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/unit/topic-display-title-test.js",
+      "runtime_workspace_path": "external/active-theme/test/unit/topic-display-title-test.js",
+      "before_sha256": null,
+      "runtime_sha256": "76616e1e2fbe9fdccf8abc8aec787b25ff4b5271ee05a81ab0a3341b3485089f",
+      "pr_sha256": "76616e1e2fbe9fdccf8abc8aec787b25ff4b5271ee05a81ab0a3341b3485089f"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/topic-display-title-test.gjs",
+      "runtime_workspace_path": "external/active-theme/test/integration/topic-display-title-test.gjs",
+      "before_sha256": null,
+      "runtime_sha256": "dbdca75874f48ea4162530852032288cd9a501cb2ab0be932d425c45c50d1d6b",
+      "pr_sha256": "dbdca75874f48ea4162530852032288cd9a501cb2ab0be932d425c45c50d1d6b"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/acceptance/untitled-topics-test.js",
+      "runtime_workspace_path": "external/active-theme/test/acceptance/untitled-topics-test.js",
+      "before_sha256": null,
+      "runtime_sha256": "17fca3b445f7005dd6ae728fbc7cf48f80595832d26e9d2743c22916b7a163a5",
+      "pr_sha256": "17fca3b445f7005dd6ae728fbc7cf48f80595832d26e9d2743c22916b7a163a5"
+    }
+  ],
+  "production_theme_candidate": [
+    {
+      "relative": "common/common.scss",
+      "field_id": 197,
+      "before_sha256": "c41e65f855cbc604371942e1e6349dca916ba5acf5c1b2f234d6d39752f286e9",
+      "sha256": "3f677daca2e11736eef153d96c458c694f0fe668792df4e78670d6e6ea11b46d"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-topic-info.gjs",
+      "field_id": 241,
+      "before_sha256": "0b73163593ec6b91b7c18abfb7a217ac81387b7a2b1f39e0c44205e38faec539",
+      "sha256": "5ba12ee9902a8b48ad2164b7e1b5a933f7833ef7610c21fb2ad74e8e093ba5c0"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-v2-anonymous-posts.gjs",
+      "field_id": 231,
+      "before_sha256": "d0ca9a5ff8473629274245af281d0009d04147bc55e75106316d92c36b0a258e",
+      "sha256": "90350f174340922e8bf3f699956e23bd0127ab2338052052298c90b17950d3d0"
+    },
+    {
+      "relative": "javascripts/discourse/lib/topic-display-title.js",
+      "field_id": null,
+      "before_sha256": null,
+      "sha256": "b727a5e2eca198438edf7f87efd735908d08b661115080f7a09b48c3ada7314f"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-topic-link-title.gjs",
+      "field_id": null,
+      "before_sha256": null,
+      "sha256": "5a90f2065f311e8cb39a8872b938cdb9d96e0cd950992384191790e5c8889a95"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-optional-topic-title-editor.gjs",
+      "field_id": null,
+      "before_sha256": null,
+      "sha256": "9e6df993a269e52e97d463aacdacaaafa3f7fe74aef25535e7f448b05a6bdb3f"
+    },
+    {
+      "relative": "javascripts/discourse/api-initializers/isbf-topic-display-title.gjs",
+      "field_id": null,
+      "before_sha256": null,
+      "sha256": "7da551aec14ed42262c40c276a6e0842d6fed87172149a8ef85ac1cf67cb777a"
+    }
+  ],
+  "production_baseline": {
+    "core_checked": 31,
+    "core_matching": 31,
+    "core_requires_merge": [],
+    "existing_theme_fields": [
+      {
+        "path": "javascripts/discourse/components/isbf-topic-info.gjs",
+        "field_id": 241,
+        "matches_workspace_baseline": true
+      },
+      {
+        "path": "javascripts/discourse/components/isbf-v2-anonymous-posts.gjs",
+        "field_id": 231,
+        "matches_workspace_baseline": true
+      },
+      {
+        "path": "common/common.scss",
+        "field_id": 197,
+        "matches_workspace_baseline": false
+      }
+    ],
+    "production_theme_fields": 262,
+    "production_theme_settings": 6,
+    "runtime_files": 26961,
+    "plugin_directories_including_hidden_backup": 67
+  }
+}

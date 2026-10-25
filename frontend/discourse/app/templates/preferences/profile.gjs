@@ -7,6 +7,7 @@ import PreferenceCheckbox from "discourse/components/preference-checkbox";
 import UppyImageUploader from "discourse/components/uppy-image-uploader";
 import UserField from "discourse/components/user-field";
 import lazyHash from "discourse/helpers/lazy-hash";
+import { fancyTitle } from "discourse/lib/topic-fancy-title";
 import ComboBox from "discourse/select-kit/components/combo-box";
 import TimezoneInput from "discourse/select-kit/components/timezone-input";
 import DButton from "discourse/ui-kit/d-button";
@@ -171,7 +172,13 @@ export default <template>
               @route="topic"
             >
               {{dReplaceEmoji
-                (trustHTML @controller.model.featured_topic.fancy_title)
+                (trustHTML
+                  (fancyTitle
+                    @controller.model.featured_topic.fancy_title
+                    false
+                    @controller.model.featured_topic
+                  )
+                )
               }}
             </LinkTo>
           </label>

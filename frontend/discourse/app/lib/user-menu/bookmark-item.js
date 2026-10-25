@@ -1,4 +1,5 @@
 import { trustHTML } from "@ember/template";
+import { fancyTitle } from "discourse/lib/topic-fancy-title";
 import UserMenuBaseItem from "discourse/lib/user-menu/base-item";
 import { NO_REMINDER_ICON } from "discourse/models/bookmark";
 
@@ -33,7 +34,9 @@ export default class UserMenuBookmarkItem extends UserMenuBaseItem {
   }
 
   get description() {
-    return trustHTML(this.bookmark.fancy_title);
+    return trustHTML(
+      fancyTitle(this.bookmark.fancy_title, false, this.bookmark)
+    );
   }
 
   get topicId() {
