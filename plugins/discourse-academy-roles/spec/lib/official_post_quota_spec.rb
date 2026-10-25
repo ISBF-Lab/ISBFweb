@@ -230,7 +230,12 @@ RSpec.describe DiscourseAcademyRoles::OfficialPostQuota do
         described_class.update_limit!(developer, member, limit: 3)
       }.to change { UserHistory.where(custom_type: described_class::AUDIT_ACTION).count }.by(1)
 
-      history = UserHistory.find_by!(custom_type: described_class::AUDIT_ACTION)
+      history =
+        UserHistory.find_by!(
+          custom_type: described_class::AUDIT_ACTION,
+          acting_user_id: developer.id,
+          target_user_id: member.id,
+        )
       expect(history).to have_attributes(
         acting_user_id: developer.id,
         target_user_id: member.id,

@@ -30,6 +30,11 @@ RSpec.describe "Official post quota concurrency", type: :model do
         plugin_name: DiscourseAcademyRoles::PLUGIN_NAME,
         key: "official_post_quota:#{@author.id}",
       ).destroy_all
+      UserHistory.where(
+        custom_type: "academy_official_weekly_topic_limit_changed",
+        acting_user_id: @developer.id,
+        target_user_id: @author.id,
+      ).destroy_all
       @author.destroy!
     end
     @developer&.destroy!
