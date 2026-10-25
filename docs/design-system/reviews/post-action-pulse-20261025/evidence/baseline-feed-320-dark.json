@@ -1,0 +1,54 @@
+{
+  "width": 260,
+  "height": 44,
+  "scroll": 320,
+  "controls": [
+    {
+      "icon": {
+        "x": 8,
+        "width": 22,
+        "height": 22
+      },
+      "color": "rgb(144, 153, 158)",
+      "fontSize": "13px",
+      "minHeight": "44px"
+    },
+    {
+      "icon": {
+        "x": 60.515625,
+        "width": 22,
+        "height": 22
+      },
+      "color": "rgb(144, 153, 158)",
+      "fontSize": "13px",
+      "minHeight": "44px"
+    },
+    {
+      "icon": {
+        "x": 113.03125,
+        "width": 22,
+        "height": 22
+      },
+      "color": "rgb(144, 153, 158)",
+      "fontSize": "13px",
+      "minHeight": "44px"
+    },
+    {
+      "icon": {
+        "x": 165.546875,
+        "width": 22,
+        "height": 22
+      }
+    },
+    {
+      "icon": {
+        "x": 224,
+        "width": 22,
+        "height": 22
+      },
+      "color": "rgb(144, 153, 158)",
+      "fontSize": "13px",
+      "minHeight": "44px"
+    }
+  ]
+}

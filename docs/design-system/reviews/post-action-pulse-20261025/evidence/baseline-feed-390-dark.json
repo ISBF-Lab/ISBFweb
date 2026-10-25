@@ -1,0 +1,54 @@
+{
+  "width": 330,
+  "height": 44,
+  "scroll": 390,
+  "controls": [
+    {
+      "icon": {
+        "x": 8,
+        "width": 22,
+        "height": 22
+      },
+      "color": "rgb(144, 153, 158)",
+      "fontSize": "13px",
+      "minHeight": "44px"
+    },
+    {
+      "icon": {
+        "x": 78.015625,
+        "width": 22,
+        "height": 22
+      },
+      "color": "rgb(144, 153, 158)",
+      "fontSize": "13px",
+      "minHeight": "44px"
+    },
+    {
+      "icon": {
+        "x": 148.03125,
+        "width": 22,
+        "height": 22
+      },
+      "color": "rgb(144, 153, 158)",
+      "fontSize": "13px",
+      "minHeight": "44px"
+    },
+    {
+      "icon": {
+        "x": 218.046875,
+        "width": 22,
+        "height": 22
+      }
+    },
+    {
+      "icon": {
+        "x": 294,
+        "width": 22,
+        "height": 22
+      },
+      "color": "rgb(144, 153, 158)",
+      "fontSize": "13px",
+      "minHeight": "44px"
+    }
+  ]
+}

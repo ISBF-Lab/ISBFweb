@@ -1,0 +1,103 @@
+{
+  "results": [
+    {
+      "passed": 63,
+      "failed": 0,
+      "total": 63,
+      "runtime": 7952,
+      "failures": [],
+      "tests": [
+        {
+          "name": "the optional native hooks keep the default animation and numeric count",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "the count block preserves the owner's icon and native users menu",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "a pointer press pulses immediately while a slow like keeps the real count",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "name": "decrements and multi-digit changes roll in the proper direction",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "keyboard and external count updates are immediate",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "a failed request leaves no stale local transition for later updates",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "zero counts keep the native entry rules and count clicks do not pulse",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "disabled controls never start a run",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "canceled touches release the pressed style without a run",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "reduced motion and a live preference change release all transforms",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "reply opens its native action without incrementing or selecting",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "the first-post bookmark tracks its model and uses the existing PUT routes",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "name": "compact counts retain their format and unchanged glyphs do not roll",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "a repeated press replaces the animation and destruction cancels it",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 6
+        }
+      ]
+    },
+    {
+      "name": "No client exceptions",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "errors": []
+}

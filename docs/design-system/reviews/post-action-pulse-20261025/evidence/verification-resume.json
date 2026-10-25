@@ -1,0 +1,10 @@
+{
+  "application_source_unchanged": true,
+  "retained_passed_checks": 536,
+  "rerun_phase": "menus",
+  "harness_fixes": [
+    "Compare hover hit area dimensions, since document scrolling changes viewport coordinates.",
+    "Close native menu instances to run their onClose callback before reopening."
+  ],
+  "application_sources_sha256": "b2093447a7d3d15c3c9e9a0de04c8a830e21db30b942d02815293bdd22099cb9"
+}

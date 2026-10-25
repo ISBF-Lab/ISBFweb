@@ -1,0 +1,75 @@
+[data-isbf-post-action] {
+  --isbf-post-action-hover-background: transparent;
+  --d-button-default-bg-color--hover: transparent;
+
+  .d-icon {
+    transform-origin: center;
+  }
+}
+
+button[data-isbf-post-action]:enabled:hover,
+[data-isbf-post-action] button:not(.like-count):enabled:hover {
+  --isbf-post-action-icon-color: var(--isbf-v2-accent);
+  --d-button-default-icon-color: var(--isbf-v2-accent);
+  --d-button-default-icon-color--hover: var(--isbf-v2-accent);
+}
+
+button[data-isbf-post-action="like"]:enabled:hover,
+[data-isbf-post-action="like"] button:not(.like-count):enabled:hover {
+  --isbf-post-action-icon-color: var(--love);
+  --d-button-default-icon-color: var(--love);
+  --d-button-default-icon-color--hover: var(--love);
+}
+
+.isbf-feed-card__actions button[data-isbf-post-action]:enabled:hover .d-icon {
+  color: var(--isbf-post-action-icon-color);
+}
+
+.isbf-post-action-count {
+  display: inline-block;
+  position: relative;
+  line-height: 1;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__value {
+    display: inline-block;
+  }
+
+  &[data-isbf-count-rolling] &__value {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  &[data-isbf-count-rolling] &__motion {
+    position: static;
+  }
+
+  &__motion {
+    display: inline-flex;
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  &__slot {
+    display: block;
+    overflow: hidden;
+    height: 1em;
+  }
+
+  &__roll {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__roll > span {
+    display: block;
+    height: 1em;
+    line-height: 1;
+  }
+}

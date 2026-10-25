@@ -1,0 +1,1485 @@
+--- a/source/frontend/discourse/app/components/post/menu/buttons/like.gjs
++++ b/source/frontend/discourse/app/components/post/menu/buttons/like.gjs
+@@ -52,6 +52,10 @@
+ 
+   @action
+   async toggleLike() {
++    if (this.args.animate === false) {
++      return this.args.buttonActions.toggleLike();
++    }
++
+     this.isAnimated = true;
+ 
+     return new Promise((resolve) => {
+@@ -73,7 +77,15 @@
+         }}
+       >
+         {{#if @post.likeCount}}
+-          <LikedUsersList ...attributes @post={{@post}} />
++          <LikedUsersList ...attributes @post={{@post}}>
++            <:count as |count|>
++              {{#if (has-block "count")}}
++                {{yield count to="count"}}
++              {{else}}
++                {{count}}
++              {{/if}}
++            </:count>
++          </LikedUsersList>
+         {{/if}}
+         <DButton
+           class={{dConcatClass
+@@ -95,7 +107,15 @@
+       </div>
+     {{else}}
+       <div class="double-button">
+-        <LikedUsersList ...attributes @post={{@post}} />
++        <LikedUsersList ...attributes @post={{@post}}>
++          <:count as |count|>
++            {{#if (has-block "count")}}
++              {{yield count to="count"}}
++            {{else}}
++              {{count}}
++            {{/if}}
++          </:count>
++        </LikedUsersList>
+       </div>
+     {{/if}}
+   </template>
+--- a/source/frontend/discourse/app/components/post/menu/liked-users-list.gjs
++++ b/source/frontend/discourse/app/components/post/menu/liked-users-list.gjs
+@@ -61,7 +61,11 @@
+       {{#if this.buttonIcon}}
+         {{dIcon this.buttonIcon}}
+       {{/if}}
+-      {{@post.likeCount}}
++      {{#if (has-block "count")}}
++        {{yield @post.likeCount to="count"}}
++      {{else}}
++        {{@post.likeCount}}
++      {{/if}}
+     </button>
+   </template>
+ }
+--- a/external/active-theme/javascripts/discourse/components/isbf-topic-actions.gjs
++++ b/external/active-theme/javascripts/discourse/components/isbf-topic-actions.gjs
+@@ -1,6 +1,6 @@
+ import Component from "@glimmer/component";
+ import { tracked } from "@glimmer/tracking";
+-import { action } from "@ember/object";
++import { action, get } from "@ember/object";
+ import { service } from "@ember/service";
+ import { themePrefix } from "virtual:theme";
+ import PostMenuBookmarkButton from "discourse/components/post/menu/buttons/bookmark";
+@@ -10,19 +10,35 @@
+ import DButton from "discourse/ui-kit/d-button";
+ import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
+ import { i18n } from "discourse-i18n";
+-import { compactNumber, openQuotedRepost } from "../lib/post-card-helpers";
++import PostActionPulse from "../lib/post-action-pulse";
++import { openQuotedRepost } from "../lib/post-card-helpers";
+ import { cardReplyCount } from "../lib/topic-card-scope";
++import postActionPulse from "../modifiers/post-action-pulse";
++import ISBFPostActionCount from "./isbf-post-action-count";
+ 
+ export class ISBFTopicReply extends Component {
++  pulse = new PostActionPulse();
++
+   get count() {
+-    return compactNumber(cardReplyCount(this.args.post));
++    return cardReplyCount(this.args.post);
++  }
++
++  @action
++  async reply() {
++    try {
++      return await this.args.buttonActions.replyToPost();
++    } finally {
++      this.pulse.settle("reply");
++    }
+   }
+ 
+   <template>
+     <DButton
+       class="isbf-topic-card__reply reply"
+-      ...attributes
+-      @action={{@buttonActions.replyToPost}}
++      data-isbf-action-count={{this.count}}
++      data-isbf-post-action="reply"
++      ...attributes
++      @action={{this.reply}}
+       @disabled={{if @state.currentUser (if @state.canCreatePost false true)}}
+       @icon="comment"
+       @translatedAriaLabel={{i18n
+@@ -30,7 +46,12 @@
+         post_number=@post.post_number
+         username=@post.username
+       }}
+-    >{{this.count}}</DButton>
++      {{postActionPulse this.pulse}}
++    ><ISBFPostActionCount
++        @kind="reply"
++        @pulse={{this.pulse}}
++        @value={{this.count}}
++      /></DButton>
+   </template>
+ }
+ 
+@@ -40,6 +61,8 @@
+   @service router;
+ 
+   @tracked busy = false;
++
++  pulse = new PostActionPulse();
+ 
+   @action
+   async repost() {
+@@ -62,6 +85,7 @@
+     } catch (error) {
+       popupAjaxError(error);
+     } finally {
++      this.pulse.settle("repost");
+       if (!this.isDestroying) {
+         this.busy = false;
+       }
+@@ -71,41 +95,73 @@
+   <template>
+     <DButton
+       class="isbf-topic-card__repost"
++      data-isbf-post-action="repost"
+       ...attributes
+       @action={{this.repost}}
+       @disabled={{this.busy}}
+       @icon="retweet"
+       @translatedAriaLabel={{i18n (themePrefix "isbf_v2.repost")}}
++      {{postActionPulse this.pulse}}
+     />
+   </template>
+ }
+ 
+-export const ISBFTopicLike = <template>
+-  <div class="isbf-topic-card__like" ...attributes>
+-    {{#if @post.showLike}}
+-      <PostMenuLikeButton
+-        @buttonActions={{@buttonActions}}
+-        @post={{@post}}
+-        @showLabel={{false}}
+-        @state={{@state}}
+-      />
+-    {{else if @post.likeCount}}
+-      <PostMenuLikeButton
+-        @buttonActions={{@buttonActions}}
+-        @post={{@post}}
+-        @showLabel={{false}}
+-        @state={{@state}}
+-      />
+-    {{else}}
+-      <DButton
+-        class="btn-flat"
+-        @disabled={{true}}
+-        @icon="heart"
+-        @title="post.controls.like"
+-      />
+-    {{/if}}
+-  </div>
+-</template>;
++export class ISBFTopicLike extends Component {
++  pulse = new PostActionPulse();
++
++  get buttonActions() {
++    return { ...this.args.buttonActions, toggleLike: this.toggleLike };
++  }
++
++  get showNativeButton() {
++    return this.args.post.showLike || this.args.post.likeCount;
++  }
++
++  @action
++  async toggleLike() {
++    try {
++      return await this.args.buttonActions.toggleLike();
++    } finally {
++      this.pulse.settle("like");
++    }
++  }
++
++  <template>
++    <div
++      class="isbf-topic-card__like"
++      data-isbf-action-count={{@post.likeCount}}
++      data-isbf-post-action="like"
++      ...attributes
++      {{postActionPulse this.pulse}}
++    >
++      {{#if this.showNativeButton}}
++        <PostMenuLikeButton
++          @animate={{false}}
++          @buttonActions={{this.buttonActions}}
++          @post={{@post}}
++          @showLabel={{false}}
++          @state={{@state}}
++        >
++          <:count as |count|>
++            <ISBFPostActionCount
++              @format="integer"
++              @kind="like"
++              @pulse={{this.pulse}}
++              @value={{count}}
++            />
++          </:count>
++        </PostMenuLikeButton>
++      {{else}}
++        <DButton
++          class="btn-flat"
++          @disabled={{true}}
++          @icon="heart"
++          @title="post.controls.like"
++        />
++      {{/if}}
++    </div>
++  </template>
++}
+ 
+ export class ISBFTopicBookmark extends Component {
+   @service currentUser;
+@@ -113,13 +169,15 @@
+ 
+   @tracked busy = false;
+ 
++  pulse = new PostActionPulse();
++
+   get isFirstPost() {
+     return this.args.post.post_number === 1;
+   }
+ 
+   get bookmarked() {
+     return this.isFirstPost
+-      ? this.args.post.topic.bookmarked
++      ? get(this.args.post.topic, "bookmarked")
+       : this.args.post.bookmarked;
+   }
+ 
+@@ -135,7 +193,7 @@
+     const topic = this.args.post.topic;
+     try {
+       if (topic.bookmarked) {
+-        await ajax(`/t/${topic.id}/remove_bookmarks`, { type: "DELETE" });
++        await ajax(`/t/${topic.id}/remove_bookmarks`, { type: "PUT" });
+         topic.set("bookmarked", false);
+       } else {
+         await ajax(`/t/${topic.id}/bookmark`, { type: "PUT" });
+@@ -144,6 +202,7 @@
+     } catch (error) {
+       popupAjaxError(error);
+     } finally {
++      this.pulse.settle("bookmark");
+       if (!this.isDestroying) {
+         this.busy = false;
+       }
+@@ -156,12 +215,15 @@
+         "isbf-topic-card__bookmark"
+         (if this.bookmarked "bookmarked")
+       }}
+-      ...attributes
++      data-isbf-post-action="bookmark"
++      ...attributes
++      {{postActionPulse this.pulse}}
+     >
+       {{#if this.isFirstPost}}
+         <DButton
+           class="btn-flat"
+           @action={{this.bookmark}}
++          @ariaPressed={{this.bookmarked}}
+           @disabled={{this.busy}}
+           @icon={{if this.bookmarked "bookmark" "far-bookmark"}}
+           @translatedAriaLabel={{i18n (themePrefix "isbf_v2.bookmark_action")}}
+--- a/external/active-theme/javascripts/discourse/components/isbf-v2-feed-card.gjs
++++ b/external/active-theme/javascripts/discourse/components/isbf-v2-feed-card.gjs
+@@ -13,6 +13,7 @@
+ import Composer from "discourse/models/composer";
+ import Draft from "discourse/models/draft";
+ import { loadTopicView } from "discourse/models/topic";
++import DButton from "discourse/ui-kit/d-button";
+ import DDecoratedHtml from "discourse/ui-kit/d-decorated-html";
+ import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
+ import dIcon from "discourse/ui-kit/helpers/d-icon";
+@@ -22,6 +23,7 @@
+ import { isOfficialCalendarPath } from "../lib/official-calendar";
+ import { isPinningContext, pinningMeta, saveHomePin } from "../lib/pinning";
+ import { extractFeedPolls } from "../lib/poll-preview";
++import PostActionPulse from "../lib/post-action-pulse";
+ import {
+   compactNumber,
+   openQuotedRepost,
+@@ -34,6 +36,7 @@
+   feedAuthorColor,
+   feedAuthorStyle,
+ } from "../lib/user-display";
++import postActionPulse from "../modifiers/post-action-pulse";
+ import { ISBFCareersSalary } from "./isbf-careers-card";
+ import ISBFFeedCardMenu from "./isbf-feed-card-menu";
+ import ISBFHomePinDialog from "./isbf-home-pin-dialog";
+@@ -41,6 +44,7 @@
+ import ISBFOfficialActivitySummary from "./isbf-official-activity-summary";
+ import ISBFOfficialCalendarItems from "./isbf-official-calendar-items";
+ import ISBFPollPreviews from "./isbf-poll-previews";
++import ISBFPostActionCount from "./isbf-post-action-count";
+ 
+ export default class ISBFV2FeedCard extends Component {
+   @service appEvents;
+@@ -58,6 +62,7 @@
+   @tracked bookmarked;
+   @tracked expanded = false;
+   @tracked hidden = false;
++  @tracked isBookmarking = false;
+   @tracked isFlagging = false;
+   @tracked isLiking = false;
+   @tracked isPinning = false;
+@@ -67,6 +72,8 @@
+   @tracked pinNow = Date.now();
+   @tracked repostCount = null;
+   @tracked viewCount = null;
++
++  pulse = new PostActionPulse();
+ 
+   #bodyRequest = 0;
+   #observer;
+@@ -196,18 +203,6 @@
+       return null;
+     }
+     return postCardTitle(this.args.topic.title, this.body);
+-  }
+-
+-  get formattedLikeCount() {
+-    return compactNumber(this.likeCount);
+-  }
+-
+-  get formattedReplyCount() {
+-    return compactNumber(this.args.topic.replyCount);
+-  }
+-
+-  get formattedRepostCount() {
+-    return compactNumber(this.repostCount);
+   }
+ 
+   get formattedViewCount() {
+@@ -386,6 +381,7 @@
+     } catch (error) {
+       await this.#showError(error);
+     } finally {
++      this.pulse.settle("reply");
+       this.isReplying = false;
+     }
+   }
+@@ -418,6 +414,7 @@
+     } catch (error) {
+       await this.#showError(error);
+     } finally {
++      this.pulse.settle("like");
+       this.isLiking = false;
+     }
+   }
+@@ -428,6 +425,10 @@
+       this.router.transitionTo("login");
+       return;
+     }
++    if (this.isBookmarking) {
++      return;
++    }
++    this.isBookmarking = true;
+     try {
+       if (this.bookmarked) {
+         await ajax(`/t/${this.args.topic.id}/remove_bookmarks`, {
+@@ -439,21 +440,28 @@
+       this.bookmarked = !this.bookmarked;
+     } catch (error) {
+       await this.#showError(error);
++    } finally {
++      this.pulse.settle("bookmark");
++      this.isBookmarking = false;
+     }
+   }
+ 
+   @action
+   async repost() {
+-    await openQuotedRepost({
+-      composer: this.composer,
+-      router: this.router,
+-      currentUser: this.currentUser,
+-      topicId: this.args.topic.id,
+-      postNumber: 1,
+-      username: this.args.topic.creator?.username,
+-      cookedHtml: this.body || this.args.topic.excerpt,
+-      title: this.args.topic.title,
+-    });
++    try {
++      await openQuotedRepost({
++        composer: this.composer,
++        router: this.router,
++        currentUser: this.currentUser,
++        topicId: this.args.topic.id,
++        postNumber: 1,
++        username: this.args.topic.creator?.username,
++        cookedHtml: this.body || this.args.topic.excerpt,
++        title: this.args.topic.title,
++      });
++    } finally {
++      this.pulse.settle("repost");
++    }
+   }
+ 
+   @action
+@@ -755,39 +763,60 @@
+         {{#unless this.hidden}}<ISBFMarketplacePrice
+             @metadata={{@topic.isbf_marketplace}}
+           /><ISBFCareersSalary @metadata={{@topic.isbf_careers}} />{{/unless}}
+-        <footer class="isbf-feed-card__actions">
+-          <button
+-            aria-label={{i18n (themePrefix "isbf_v2.reply")}}
+-            disabled={{this.isReplying}}
+-            type="button"
+-            {{on "click" this.reply}}
+-          >{{dIcon "comment"}}{{#if this.formattedReplyCount}}<span
+-              >{{this.formattedReplyCount}}</span>{{/if}}</button>
+-          <button
+-            aria-label={{i18n (themePrefix "isbf_v2.repost")}}
+-            type="button"
+-            {{on "click" this.repost}}
+-          >{{dIcon "retweet"}}{{#if this.formattedRepostCount}}<span
+-              >{{this.formattedRepostCount}}</span>{{/if}}</button>
+-          <button
+-            aria-label={{i18n (themePrefix "isbf_v2.like")}}
++        <footer class="isbf-feed-card__actions" {{postActionPulse this.pulse}}>
++          <DButton
++            data-isbf-action-count={{@topic.replyCount}}
++            data-isbf-post-action="reply"
++            @action={{this.reply}}
++            @disabled={{this.isReplying}}
++            @icon="comment"
++            @translatedAriaLabel={{i18n (themePrefix "isbf_v2.reply")}}
++          ><ISBFPostActionCount
++              @kind="reply"
++              @pulse={{this.pulse}}
++              @value={{@topic.replyCount}}
++            /></DButton>
++          <DButton
++            data-isbf-action-count={{this.repostCount}}
++            data-isbf-post-action="repost"
++            @action={{this.repost}}
++            @icon="retweet"
++            @translatedAriaLabel={{i18n (themePrefix "isbf_v2.repost")}}
++          ><ISBFPostActionCount
++              @kind="repost"
++              @pulse={{this.pulse}}
++              @value={{this.repostCount}}
++            /></DButton>
++          <DButton
+             class={{if this.liked "is-liked"}}
+-            disabled={{this.isLiking}}
+-            type="button"
+-            {{on "click" this.toggleLike}}
+-          >{{dIcon "heart"}}{{#if this.formattedLikeCount}}<span
+-              >{{this.formattedLikeCount}}</span>{{/if}}</button>
++            data-isbf-action-count={{this.likeCount}}
++            data-isbf-post-action="like"
++            @action={{this.toggleLike}}
++            @ariaPressed={{this.liked}}
++            @disabled={{this.isLiking}}
++            @icon="heart"
++            @translatedAriaLabel={{i18n (themePrefix "isbf_v2.like")}}
++          ><ISBFPostActionCount
++              @kind="like"
++              @pulse={{this.pulse}}
++              @value={{this.likeCount}}
++            /></DButton>
+           <span
+             aria-label={{this.viewLabel}}
+             class="isbf-feed-card__views"
+           >{{dIcon "chart-bar"}}{{#if this.formattedViewCount}}<span
+               >{{this.formattedViewCount}}</span>{{/if}}</span>
+-          <button
+-            aria-label={{i18n (themePrefix "isbf_v2.bookmark_action")}}
++          <DButton
+             class={{if this.bookmarked "is-bookmarked"}}
+-            type="button"
+-            {{on "click" this.toggleBookmark}}
+-          >{{dIcon "bookmark"}}</button>
++            data-isbf-post-action="bookmark"
++            @action={{this.toggleBookmark}}
++            @ariaPressed={{this.bookmarked}}
++            @disabled={{this.isBookmarking}}
++            @icon="bookmark"
++            @translatedAriaLabel={{i18n
++              (themePrefix "isbf_v2.bookmark_action")
++            }}
++          />
+         </footer>
+       </div>
+     </article>
+--- a/external/active-theme/common/common.scss
++++ b/external/active-theme/common/common.scss
+@@ -1486,6 +1486,9 @@
+ 
+ .isbf-feed-card__actions {
+   @include isbf-card-actions;
++
++  --d-button-default-icon-color: currentcolor;
++  --d-button-default-icon-color--hover: currentcolor;
+   margin-block: 12px -6px;
+ 
+   button,
+@@ -1522,7 +1525,14 @@
+   button {
+     border-radius: var(--isbf-v2-radius-pill);
+ 
+-    &:hover,
++    &:hover {
++      background: var(
++        --isbf-post-action-hover-background,
++        color-mix(in srgb, var(--isbf-v2-accent) 12%, transparent)
++      );
++      color: var(--isbf-v2-accent);
++    }
++
+     &:focus-visible {
+       background: color-mix(in srgb, var(--isbf-v2-accent) 12%, transparent);
+       color: var(--isbf-v2-accent);
+@@ -4466,7 +4476,7 @@
+       flex: none;
+       width: 18px;
+       height: 18px;
+-      color: inherit;
++      color: var(--isbf-post-action-icon-color, inherit);
+     }
+ 
+     .d-button-label {
+@@ -4477,7 +4487,10 @@
+     }
+ 
+     &:is(button, a):hover {
+-      background: var(--isbf-v2-hover);
++      background: var(
++        --isbf-post-action-hover-background,
++        var(--isbf-v2-hover)
++      );
+       color: var(--isbf-v2-accent);
+     }
+   }
+@@ -4496,6 +4509,13 @@
+     max-width: 100%;
+     margin: 0;
+     border: 0;
++
++    &:hover > button {
++      background: var(
++        --isbf-post-action-hover-background,
++        var(--d-post-control-background--hover)
++      );
++    }
+ 
+     // Offset the native hit area while keeping its glyph on the shared column.
+     &:has(.toggle-like) {
+@@ -4535,6 +4555,10 @@
+ 
+       .d-icon {
+         padding: 0;
++      }
++
++      &:enabled:hover .d-icon {
++        color: var(--love);
+       }
+     }
+ 
+@@ -5300,6 +5324,7 @@
+ 
+ @import "topic-reading";
+ @import "reply-conversations";
++@import "post-action-pulse";
+ @import "reporting";
+ @import "official-filters";
+ @import "learning-resources";
+--- a/source/docs/design-system/ui-status.md
++++ b/source/docs/design-system/ui-status.md
+@@ -355,3 +355,11 @@
+ [实施记录](reviews/controls-batch-20261025/README.md)。
+ 本批组合复用A02/A10与C01/C06/C08/C07，不将整个校友表单或其他菜单状态提升为Approved。
+ 开发站已完成同步，15项定向测试／66条断言及102项响应式流程检查通过；最终用户视觉验收待确认。
++
++## 2026-10-25 帖子互动按钮回弹
++
++用户确认信息流卡片、详情主帖、根评论和子回复的点赞／引用／评论／收藏统一采用PulseHeart动效，保留现有图标、外形、尺寸、颜色与排列。点击立即反馈，数字与状态沿用现有业务结果；设计已确认，实际验证及最终视觉验收见[独立记录](reviews/post-action-pulse-20261025/README.md)。本次仅扩展A02/A04/C09/C16局部交互，不扩大其他区域的Approved范围。
++
++### 2026-10-25 鼠标悬停修订
++
++用户根据最新截图确认去掉这排按钮的鼠标悬停底色，仅保留图标变色及点击回弹。点赞和独立赞数入口同时清理；通过局部hover变量覆盖，原按钮／触控范围、排列及键盘焦点保留。来源、截图及验证见[本次记录](reviews/post-action-pulse-20261025/README.md)。
+--- a/source/docs/design-system/tokens.md
++++ b/source/docs/design-system/tokens.md
+@@ -420,3 +420,13 @@
+ 仅作用于isbf-alumni-location-picker。帖子卡菜单保留原有局部外观，菜单项最小44px，
+ 触发器沿用桌面36px／手机44px；弹窗框架与操作沿用C07。没有新增全局token。
+ 来源和实际验证见[实施记录](reviews/controls-batch-20261025/README.md)，最终视觉待用户验收。
++
++## 2026-10-25 帖子互动按钮回弹
++
++本次仅为A02/A04/C09/C16增加局部动效参数：按压0.97、主过程560ms、40%转折、图标最小0.3、回弹系数1.7、按钮视觉轻缩3%、计数滚动350ms。颜色继续使用既有muted／love／accent，保留尺寸、字号、4px图文间距和五列排列；不新增全站视觉token。来源和范围见[记录](reviews/post-action-pulse-20261025/README.md)。
++
++### 2026-10-25 鼠标悬停修订
++
++用户根据最新截图确认去掉这排按钮的鼠标悬停底色，仅保留图标变色及点击回弹。点赞和独立赞数入口同时清理；通过局部hover变量覆盖，原按钮／触控范围、排列及键盘焦点保留。来源、截图及验证见[本次记录](reviews/post-action-pulse-20261025/README.md)。
++
++点赞及本人赞数心形的悬停使用既有love色，其余动作使用accent；移开恢复真实状态色。仅作用于本次互动区域，键盘焦点和禁用状态保留。
+--- a/source/docs/design-system/components.md
++++ b/source/docs/design-system/components.md
+@@ -565,3 +565,13 @@
+ 窄屏地区面板与字段同宽，保留垂直翻转；列表高度限制在弹窗正文可见范围内，
+ 不修改共享弹窗的留边和外框。
+ 来源、局部复用和验证边界见[实施记录](reviews/controls-batch-20261025/README.md)；最终视觉待用户验收。
++
++## 2026-10-25 帖子互动按钮回弹
++
++四类动作共用主题动效控制器与受控数字渲染，详情点赞继续使用原生按钮和独立赞数入口。`PostMenuLikeButton @animate=false`仅关闭原生延迟动画；可选`:count`块向`LikedUsersList`透传，其余调用保留原有默认行为。引用／评论立即打开原有编辑器；点赞／收藏状态由业务模型驱动。零值隐藏、数字原格式、提醒菜单、权限与请求语义保留；外部同步、键盘及减少动态效果直接显示真实值，销毁清理动画。来源及验证见[记录](reviews/post-action-pulse-20261025/README.md)。
++
++### 2026-10-25 鼠标悬停修订
++
++用户根据最新截图确认去掉这排按钮的鼠标悬停底色，仅保留图标变色及点击回弹。点赞和独立赞数入口同时清理；通过局部hover变量覆盖，原按钮／触控范围、排列及键盘焦点保留。来源、截图及验证见[本次记录](reviews/post-action-pulse-20261025/README.md)。
++
++点赞及本人赞数心形的悬停使用既有love色，其余动作使用accent；移开恢复真实状态色。仅作用于本次互动区域，键盘焦点和禁用状态保留。
+--- a/source/docs/design-system/reference-map.md
++++ b/source/docs/design-system/reference-map.md
+@@ -276,3 +276,11 @@
+ 共享帖子卡菜单保留A02已有动作外观，由float-kit负责定位／关闭，
+ d-roving-focus负责键盘导航。ComboBox、FormKit和float-kit的默认外观不作为新的设计来源。
+ 注册、账号面板、探索筛选及话题详情菜单不纳入本批；新渲染的最终视觉验收单独记录。
++
++## 2026-10-25 帖子互动按钮回弹
++
++A02信息流、A04普通话题与C16评论／子回复 → [用户确认及实际来源](reviews/post-action-pulse-20261025/reference.json)、[实施验证](reviews/post-action-pulse-20261025/README.md)。复用C09/C16现有静态外观及2026-10-21操作栏间距，仅添加四类按钮动效；热度、赞数菜单、三点菜单、私信、后台和其他按钮不接入。开发站验证与生产发布分别记录，最终视觉待用户验收。
++
++### 2026-10-25 鼠标悬停修订
++
++用户根据最新截图确认去掉这排按钮的鼠标悬停底色，仅保留图标变色及点击回弹。点赞和独立赞数入口同时清理；通过局部hover变量覆盖，原按钮／触控范围、排列及键盘焦点保留。来源、截图及验证见[本次记录](reviews/post-action-pulse-20261025/README.md)。
+--- a/docs/development.md
++++ b/docs/development.md
+@@ -141,3 +141,7 @@
+ 本批只修改6项主题字段并新增5项，其他252字段和7项设置保留，生产未发布。源码摘要、截图、
+ 验证边界及回退见[实施记录](../source/docs/design-system/reviews/controls-batch-20261025/README.md)，
+ 复现工具见[工作区说明](controls-batch-20261025/README.md)。迁移清单和运行时捕获证据保持原样。
++
++## 帖子互动动效
++
++2026-10-25，信息流、详情主帖、根评论及子回复的点赞／引用／评论／收藏已增加统一回弹与计数滚动，并同步独立开发站。静态外观及业务状态处理保留；主帖收藏补齐响应式状态读取，并将取消操作匹配到既有PUT路由。新增核心扩展点保持默认调用行为，生产未发布。来源、检查、截图及回退见[实施记录](../source/docs/design-system/reviews/post-action-pulse-20261025/README.md)，复现工具见[工作区说明](post-action-pulse-20261025/README.md)。迁移清单保持原始捕获版本。
+--- /dev/null
++++ b/external/active-theme/javascripts/discourse/components/isbf-post-action-count.gjs
+@@ -0,0 +1,17 @@
++import { not } from "discourse/truth-helpers";
++import { formatActionCount } from "../lib/post-action-pulse";
++import postActionCount from "../modifiers/post-action-count";
++
++export default <template>
++  <span
++    class="isbf-post-action-count"
++    hidden={{not (formatActionCount @value @format)}}
++    {{postActionCount @pulse @kind @value @format}}
++  ><span class="isbf-post-action-count__value">{{formatActionCount
++        @value
++        @format
++      }}</span><span
++      aria-hidden="true"
++      class="isbf-post-action-count__motion"
++    ></span></span>
++</template>
+--- /dev/null
++++ b/external/active-theme/javascripts/discourse/lib/post-action-pulse.js
+@@ -0,0 +1,199 @@
++const DURATION = 560;
++const OUT = 0.4;
++const DOT = 0.3;
++const OVERSHOOT = 1.7;
++const BEAT = 0.03;
++
++export function formatActionCount(value, format = "compact") {
++  const count = Math.max(0, Number(value) || 0);
++  if (!count) {
++    return "";
++  }
++  return format === "integer"
++    ? String(count)
++    : new Intl.NumberFormat(undefined, { notation: "compact" }).format(count);
++}
++
++export function actionSwell(t) {
++  if (t <= 0) {
++    return 0;
++  }
++  if (t < OUT) {
++    return 1 - (1 - t / OUT) ** 3;
++  }
++  const u = (t - OUT) / (1 - OUT) - 1;
++  return -((OVERSHOOT + 1) * u ** 3 + OVERSHOOT * u ** 2);
++}
++
++export default class PostActionPulse {
++  #active = new Map();
++  #frames = new Set();
++  #pending = new Map();
++  #pointer;
++  #root;
++
++  mount(root) {
++    this.#root = root;
++    const listeners = new AbortController();
++    const options = { capture: true, signal: listeners.signal };
++    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
++    const stop = () => this.#stop();
++    const down = (event) => {
++      const target = this.#target(event);
++      if (!target || event.button !== 0 || event.isPrimary === false) {
++        return;
++      }
++      this.#pointer = target.button;
++      if (!motion.matches) {
++        this.#cancel(target.button);
++        target.button.dataset.isbfPulsePressed = "";
++        target.button.style.transform = "scale(0.97)";
++      }
++    };
++    const up = () => this.#release();
++    const cancel = () => {
++      this.#release();
++      this.#pointer = null;
++    };
++    const click = (event) => {
++      const target = this.#target(event);
++      if (!target) {
++        return;
++      }
++      const pointer =
++        this.#pointer === target.button &&
++        event.detail !== 0 &&
++        !motion.matches;
++      cancel();
++      this.#pending.set(target.kind, {
++        from: Number(target.action.dataset.isbfActionCount) || 0,
++        pointer,
++        consumed: false,
++      });
++      this.#cancel(target.button);
++      if (pointer) {
++        this.#run(target.button);
++      }
++    };
++
++    root.addEventListener("pointerdown", down, options);
++    root.addEventListener("pointerup", up, options);
++    root.addEventListener("pointercancel", cancel, options);
++    root.addEventListener("pointerleave", up, options);
++    root.addEventListener("keydown", cancel, options);
++    root.addEventListener("click", click, options);
++    window.addEventListener("pointerup", up, { signal: listeners.signal });
++    window.addEventListener("blur", cancel, { signal: listeners.signal });
++    motion.addEventListener("change", stop);
++
++    return () => {
++      listeners.abort();
++      motion.removeEventListener("change", stop);
++      this.#stop();
++      this.#root = null;
++    };
++  }
++
++  settle(kind) {
++    const pending = this.#pending.get(kind);
++    if (!pending) {
++      return;
++    }
++    // Let the model's render finish before ending the local count transition.
++    const frame = requestAnimationFrame(() => {
++      this.#frames.delete(frame);
++      if (this.#pending.get(kind) === pending) {
++        this.#pending.delete(kind);
++      }
++    });
++    this.#frames.add(frame);
++  }
++
++  takeCountTransition(kind, previous, next) {
++    const pending = this.#pending.get(kind);
++    const from = previous ?? pending?.from;
++    if (!pending?.pointer || pending.consumed || from === next) {
++      return null;
++    }
++    pending.consumed = true;
++    return { from, to: next };
++  }
++
++  #cancel(button) {
++    const running = this.#active.get(button);
++    if (running) {
++      cancelAnimationFrame(running.frame);
++      running.icon.style.transform = "";
++      this.#active.delete(button);
++    }
++    button.style.transform = "";
++    delete button.dataset.isbfPulseRunning;
++    delete button.dataset.isbfPulsePressed;
++  }
++
++  #release() {
++    if (this.#pointer) {
++      delete this.#pointer.dataset.isbfPulsePressed;
++      if (!this.#active.has(this.#pointer)) {
++        this.#pointer.style.transform = "";
++      }
++    }
++  }
++
++  #run(button) {
++    const icon = button.querySelector(".d-icon");
++    if (!icon) {
++      return;
++    }
++    const running = { icon, frame: 0 };
++    const started = performance.now();
++    button.dataset.isbfPulseRunning = "";
++    this.#active.set(button, running);
++    const tick = (now) => {
++      const currentIcon = button.querySelector(".d-icon");
++      if (currentIcon && currentIcon !== running.icon) {
++        running.icon.style.transform = "";
++        running.icon = currentIcon;
++      }
++      const t = Math.min(1, (now - started) / DURATION);
++      const swell = actionSwell(t);
++      running.icon.style.transform = `scale(${1 - (1 - DOT) * swell})`;
++      button.style.transform = `scale(${1 - BEAT * swell})`;
++      if (t < 1) {
++        running.frame = requestAnimationFrame(tick);
++      } else {
++        this.#cancel(button);
++      }
++    };
++    running.frame = requestAnimationFrame(tick);
++  }
++
++  #stop() {
++    this.#release();
++    this.#pointer = null;
++    for (const button of this.#active.keys()) {
++      this.#cancel(button);
++    }
++    for (const frame of this.#frames) {
++      cancelAnimationFrame(frame);
++    }
++    this.#frames.clear();
++    this.#pending.clear();
++  }
++
++  #target(event) {
++    const button = event.target.closest?.("button");
++    const action = button?.closest("[data-isbf-post-action]");
++    if (
++      !button ||
++      !action ||
++      !this.#root.contains(button) ||
++      button.disabled ||
++      button.getAttribute("aria-disabled") === "true" ||
++      button.classList.contains("like-count")
++    ) {
++      return null;
++    }
++    return { button, action, kind: action.dataset.isbfPostAction };
++  }
++}
+--- /dev/null
++++ b/external/active-theme/javascripts/discourse/modifiers/post-action-pulse.js
+@@ -0,0 +1,3 @@
++import { modifier } from "ember-modifier";
++
++export default modifier((element, [pulse]) => pulse.mount(element));
+--- /dev/null
++++ b/external/active-theme/javascripts/discourse/modifiers/post-action-count.js
+@@ -0,0 +1,107 @@
++import { registerDestructor } from "@ember/destroyable";
++import Modifier from "ember-modifier";
++import { formatActionCount } from "../lib/post-action-pulse";
++
++const DURATION = 350;
++
++export default class PostActionCount extends Modifier {
++  cancel = () => {
++    this.#animation?.cancel();
++    this.#animation = null;
++    if (this.#element) {
++      delete this.#element.dataset.isbfCountRolling;
++      this.#element
++        .querySelector(".isbf-post-action-count__motion")
++        ?.replaceChildren();
++    }
++  };
++  #animation;
++  #element;
++  #motion;
++
++  #previous;
++
++  constructor(owner, args) {
++    super(owner, args);
++    this.#motion = window.matchMedia("(prefers-reduced-motion: reduce)");
++    this.#motion.addEventListener("change", this.cancel);
++    registerDestructor(this, () => {
++      this.#motion.removeEventListener("change", this.cancel);
++      this.cancel();
++    });
++  }
++
++  modify(element, [pulse, kind, value, format]) {
++    this.#element = element;
++    const next = Math.max(0, Number(value) || 0);
++    const previous = this.#previous;
++    this.#previous = next;
++    this.cancel();
++    if (this.#motion.matches || previous === next) {
++      return;
++    }
++    const transition = pulse?.takeCountTransition(kind, previous, next);
++    if (!transition) {
++      return;
++    }
++    const from = formatActionCount(transition.from, format);
++    const to = formatActionCount(next, format);
++    if (!from || !to || from === to) {
++      return;
++    }
++
++    const overlay = element.querySelector(".isbf-post-action-count__motion");
++    const changed =
++      from.length === to.length
++        ? [...to].flatMap((char, index) =>
++            char !== from[index] ? [index] : []
++          )
++        : [];
++    const up = next > transition.from;
++    const top = up ? from : to;
++    const bottom = up ? to : from;
++    const slot = document.createElement("span");
++    slot.className = "isbf-post-action-count__slot";
++    const roll = document.createElement("span");
++    roll.className = "isbf-post-action-count__roll";
++    slot.append(roll);
++    if (changed.length === 1) {
++      [...to].forEach((char, index) => {
++        if (index === changed[0]) {
++          overlay.append(slot);
++          this.#appendRow(roll, top[index]);
++          this.#appendRow(roll, bottom[index]);
++        } else {
++          this.#appendRow(overlay, char);
++        }
++      });
++    } else {
++      overlay.append(slot);
++      this.#appendRow(roll, top);
++      this.#appendRow(roll, bottom);
++    }
++    element.dataset.isbfCountRolling = "";
++    this.#animation = roll.animate(
++      [
++        { transform: `translateY(${up ? "0" : "-1em"})` },
++        { transform: `translateY(${up ? "-1em" : "0"})` },
++      ],
++      { duration: DURATION, easing: "cubic-bezier(0.23, 1, 0.32, 1)" }
++    );
++    const animation = this.#animation;
++    animation.finished.then(
++      () => {
++        if (this.#animation === animation) {
++          this.cancel();
++        }
++      },
++      () => {}
++    );
++  }
++
++  #appendRow(parent, text) {
++    const row = document.createElement("span");
++    row.textContent = text;
++    parent.append(row);
++  }
++}
+--- /dev/null
++++ b/external/active-theme/stylesheets/post-action-pulse.scss
+@@ -0,0 +1,75 @@
++[data-isbf-post-action] {
++  --isbf-post-action-hover-background: transparent;
++  --d-button-default-bg-color--hover: transparent;
++
++  .d-icon {
++    transform-origin: center;
++  }
++}
++
++button[data-isbf-post-action]:enabled:hover,
++[data-isbf-post-action] button:not(.like-count):enabled:hover {
++  --isbf-post-action-icon-color: var(--isbf-v2-accent);
++  --d-button-default-icon-color: var(--isbf-v2-accent);
++  --d-button-default-icon-color--hover: var(--isbf-v2-accent);
++}
++
++button[data-isbf-post-action="like"]:enabled:hover,
++[data-isbf-post-action="like"] button:not(.like-count):enabled:hover {
++  --isbf-post-action-icon-color: var(--love);
++  --d-button-default-icon-color: var(--love);
++  --d-button-default-icon-color--hover: var(--love);
++}
++
++.isbf-feed-card__actions button[data-isbf-post-action]:enabled:hover .d-icon {
++  color: var(--isbf-post-action-icon-color);
++}
++
++.isbf-post-action-count {
++  display: inline-block;
++  position: relative;
++  line-height: 1;
++
++  &[hidden] {
++    display: none;
++  }
++
++  &__value {
++    display: inline-block;
++  }
++
++  &[data-isbf-count-rolling] &__value {
++    position: absolute;
++    visibility: hidden;
++  }
++
++  &[data-isbf-count-rolling] &__motion {
++    position: static;
++  }
++
++  &__motion {
++    display: inline-flex;
++    position: absolute;
++    inset-block-start: 0;
++    inset-inline-start: 0;
++    pointer-events: none;
++    white-space: nowrap;
++  }
++
++  &__slot {
++    display: block;
++    overflow: hidden;
++    height: 1em;
++  }
++
++  &__roll {
++    display: flex;
++    flex-direction: column;
++  }
++
++  &__roll > span {
++    display: block;
++    height: 1em;
++    line-height: 1;
++  }
++}
+--- /dev/null
++++ b/external/active-theme/test/integration/post-action-pulse-test.gjs
+@@ -0,0 +1,397 @@
++import { hash } from "@ember/helper";
++import EmberObject from "@ember/object";
++import {
++  clearRender,
++  click,
++  find,
++  render,
++  settled,
++  triggerEvent,
++  waitFor,
++  waitUntil,
++} from "@ember/test-helpers";
++import { module, test } from "qunit";
++import sinon from "sinon";
++import PostMenuLikeButton from "discourse/components/post/menu/buttons/like";
++import { setupRenderingTest } from "discourse/tests/helpers/component-test";
++import pretender, { response } from "discourse/tests/helpers/create-pretender";
++import DButton from "discourse/ui-kit/d-button";
++import ISBFPostActionCount from "../../discourse/components/isbf-post-action-count";
++import {
++  ISBFTopicBookmark,
++  ISBFTopicLike,
++  ISBFTopicReply,
++} from "../../discourse/components/isbf-topic-actions";
++import PostActionPulse from "../../discourse/lib/post-action-pulse";
++import postActionPulse from "../../discourse/modifiers/post-action-pulse";
++
++const toggle = ".toggle-like";
++const rolling = "[data-isbf-count-rolling]";
++const running = "[data-isbf-pulse-running]";
++
++async function pointerClick(selector) {
++  await triggerEvent(selector, "pointerdown", { button: 0, isPrimary: true });
++  await triggerEvent(selector, "pointerup", { button: 0 });
++  await triggerEvent(selector, "click", { button: 0, detail: 1 });
++}
++
++function deferred() {
++  let resolve;
++  const promise = new Promise((done) => (resolve = done));
++  return { promise, resolve };
++}
++
++module("ISBF | Integration | Post action pulse", function (hooks) {
++  setupRenderingTest(hooks);
++
++  hooks.beforeEach(function () {
++    this.post = EmberObject.create({
++      id: 990080,
++      post_number: 2,
++      username: "pulse_user",
++      showLike: true,
++      canToggleLike: true,
++      liked: false,
++      likeCount: 8,
++      topic: { id: 990081, archived: false },
++    });
++    this.motion = window.matchMedia("(prefers-reduced-motion: reduce)");
++    this.reduced = sinon.stub(this.motion, "matches").get(() => false);
++    const nativeMatchMedia = window.matchMedia.bind(window);
++    sinon
++      .stub(window, "matchMedia")
++      .callsFake((query) =>
++        query === "(prefers-reduced-motion: reduce)"
++          ? this.motion
++          : nativeMatchMedia(query)
++      );
++  });
++
++  hooks.afterEach(function () {
++    sinon.restore();
++  });
++
++  test("the optional native hooks keep the default animation and numeric count", async function (assert) {
++    this.toggleLike = sinon.spy();
++    await render(
++      <template>
++        <PostMenuLikeButton
++          @buttonActions={{hash toggleLike=this.toggleLike}}
++          @post={{this.post}}
++          @showLabel={{false}}
++        />
++      </template>
++    );
++    assert.dom(".like-count").hasText("8");
++    find(toggle).click();
++    await waitFor(".heart-animation");
++    assert.false(
++      this.toggleLike.called,
++      "the default still has its native delay"
++    );
++    await waitUntil(() => this.toggleLike.calledOnce);
++    assert.dom(".heart-animation").doesNotExist();
++  });
++
++  test("the count block preserves the owner's icon and native users menu", async function (assert) {
++    this.post.setProperties({ yours: true, showLike: false });
++    const menu = this.owner.lookup("service:menu");
++    const show = sinon.spy();
++    sinon.stub(menu, "show").value(show);
++    await render(
++      <template>
++        <PostMenuLikeButton @post={{this.post}} @showLabel={{false}}>
++          <:count as |count|><strong
++              class="custom-count"
++            >{{count}}</strong></:count>
++        </PostMenuLikeButton>
++      </template>
++    );
++    assert.dom(".my-likes .d-icon").exists();
++    assert.dom(".custom-count").hasText("8");
++    await click(".like-count");
++    assert.true(show.calledOnce, "the original count action opens its menu");
++    assert.strictEqual(show.firstCall.args[1].data.post, this.post);
++  });
++
++  test("a pointer press pulses immediately while a slow like keeps the real count", async function (assert) {
++    const request = deferred();
++    this.toggleLike = sinon.spy(async () => {
++      await request.promise;
++      this.post.setProperties({ likeCount: 9, liked: true });
++    });
++    await render(
++      <template>
++        <ISBFTopicLike
++          @buttonActions={{hash toggleLike=this.toggleLike}}
++          @post={{this.post}}
++        />
++      </template>
++    );
++    await pointerClick(toggle);
++    assert.true(
++      this.toggleLike.calledOnce,
++      "the request starts without the old delay"
++    );
++    assert.dom(running).exists();
++    assert.dom(".heart-animation").doesNotExist();
++    assert.dom(".isbf-post-action-count__value").hasText("8");
++    await waitUntil(() => !find(running));
++    request.resolve();
++    await waitFor(rolling);
++    assert.dom(".isbf-post-action-count__value").hasText("9");
++    assert.dom(".isbf-post-action-count__slot").exists({ count: 1 });
++    assert.dom(".isbf-post-action-count__roll").hasText("89");
++    await waitUntil(() => !find(rolling));
++    assert.dom(".isbf-post-action-count__motion").hasText("");
++  });
++
++  test("decrements and multi-digit changes roll in the proper direction", async function (assert) {
++    this.post.setProperties({ likeCount: 10, liked: true });
++    this.toggleLike = () =>
++      this.post.setProperties({ likeCount: 9, liked: false });
++    await render(
++      <template>
++        <ISBFTopicLike
++          @buttonActions={{hash toggleLike=this.toggleLike}}
++          @post={{this.post}}
++        />
++      </template>
++    );
++    await pointerClick(toggle);
++    await waitFor(rolling);
++    assert.dom(".isbf-post-action-count__roll > span:first-child").hasText("9");
++    assert.dom(".isbf-post-action-count__roll > span:last-child").hasText("10");
++    assert.true(
++      find(".isbf-post-action-count").clientWidth >=
++        find(".isbf-post-action-count__slot").scrollWidth,
++      "the previous multi-digit count stays visible throughout the roll"
++    );
++    await waitUntil(() => !find(rolling));
++    assert.dom(".isbf-post-action-count__value").hasText("9");
++  });
++
++  test("keyboard and external count updates are immediate", async function (assert) {
++    this.toggleLike = () =>
++      this.post.setProperties({ likeCount: 9, liked: true });
++    await render(
++      <template>
++        <ISBFTopicLike
++          @buttonActions={{hash toggleLike=this.toggleLike}}
++          @post={{this.post}}
++        />
++      </template>
++    );
++    await click(toggle);
++    assert.dom(running).doesNotExist();
++    assert.dom(rolling).doesNotExist();
++    assert.dom(".isbf-post-action-count__value").hasText("9");
++    this.post.set("likeCount", 15);
++    await settled();
++    assert.dom(rolling).doesNotExist();
++    assert.dom(".isbf-post-action-count__value").hasText("15");
++  });
++
++  test("a failed request leaves no stale local transition for later updates", async function (assert) {
++    this.toggleLike = sinon.spy(async () => {});
++    await render(
++      <template>
++        <ISBFTopicLike
++          @buttonActions={{hash toggleLike=this.toggleLike}}
++          @post={{this.post}}
++        />
++      </template>
++    );
++    await pointerClick(toggle);
++    await waitUntil(() => !find(running));
++    this.post.set("likeCount", 12);
++    await settled();
++    assert.dom(rolling).doesNotExist();
++    assert.dom(".isbf-post-action-count__value").hasText("12");
++  });
++
++  test("zero counts keep the native entry rules and count clicks do not pulse", async function (assert) {
++    this.post.set("likeCount", 0);
++    this.toggleLike = () =>
++      this.post.setProperties({ likeCount: 1, liked: true });
++    const menu = this.owner.lookup("service:menu");
++    sinon.stub(menu, "show");
++    await render(
++      <template>
++        <ISBFTopicLike
++          @buttonActions={{hash toggleLike=this.toggleLike}}
++          @post={{this.post}}
++        />
++      </template>
++    );
++    assert.dom(".like-count").doesNotExist();
++    await pointerClick(toggle);
++    assert.dom(".isbf-post-action-count__value").hasText("1");
++    await waitUntil(() => !find(running));
++    await pointerClick(".like-count");
++    assert.dom(running).doesNotExist();
++    assert.dom(rolling).doesNotExist();
++    this.post.setProperties({ likeCount: 0, liked: false });
++    await settled();
++    assert.dom(".like-count").doesNotExist();
++  });
++
++  test("disabled controls never start a run", async function (assert) {
++    this.post.set("canToggleLike", false);
++    this.toggleLike = sinon.spy();
++    await render(
++      <template>
++        <ISBFTopicLike
++          @buttonActions={{hash toggleLike=this.toggleLike}}
++          @post={{this.post}}
++        />
++      </template>
++    );
++    find(toggle).dispatchEvent(
++      new PointerEvent("pointerdown", { bubbles: true, button: 0 })
++    );
++    await settled();
++    assert.dom("[data-isbf-pulse-pressed]").doesNotExist();
++    assert.dom(running).doesNotExist();
++    assert.false(this.toggleLike.called);
++  });
++
++  test("canceled touches release the pressed style without a run", async function (assert) {
++    this.toggleLike = sinon.spy();
++    await render(
++      <template>
++        <ISBFTopicLike
++          @buttonActions={{hash toggleLike=this.toggleLike}}
++          @post={{this.post}}
++        />
++      </template>
++    );
++    await triggerEvent(toggle, "pointerdown", { button: 0 });
++    assert.dom("[data-isbf-pulse-pressed]").exists();
++    await triggerEvent(toggle, "pointercancel", { button: 0 });
++    assert.dom("[data-isbf-pulse-pressed]").doesNotExist();
++    assert.strictEqual(find(toggle).style.transform, "");
++    assert.false(this.toggleLike.called);
++  });
++
++  test("reduced motion and a live preference change release all transforms", async function (assert) {
++    this.toggleLike = () =>
++      this.post.setProperties({ likeCount: 9, liked: true });
++    await render(
++      <template>
++        <ISBFTopicLike
++          @buttonActions={{hash toggleLike=this.toggleLike}}
++          @post={{this.post}}
++        />
++      </template>
++    );
++    await pointerClick(toggle);
++    await waitFor(rolling);
++    this.reduced.get(() => true);
++    this.motion.dispatchEvent(new Event("change"));
++    assert.dom(running).doesNotExist();
++    assert.dom(rolling).doesNotExist();
++    assert.strictEqual(find(toggle).style.transform, "");
++    await pointerClick(toggle);
++    assert.dom(running).doesNotExist();
++    assert.dom(rolling).doesNotExist();
++  });
++
++  test("reply opens its native action without incrementing or selecting", async function (assert) {
++    this.post.set("reply_count", 3);
++    this.reply = sinon.spy();
++    await render(
++      <template>
++        <ISBFTopicReply
++          @buttonActions={{hash replyToPost=this.reply}}
++          @post={{this.post}}
++          @state={{hash currentUser=true canCreatePost=true}}
++        />
++      </template>
++    );
++    await pointerClick(".reply");
++    assert.true(this.reply.calledOnce);
++    assert.dom(running).exists();
++    assert.dom(".isbf-post-action-count__value").hasText("3");
++    assert.dom(".reply").doesNotHaveAttribute("aria-pressed");
++  });
++
++  test("the first-post bookmark tracks its model and uses the existing PUT routes", async function (assert) {
++    const topic = EmberObject.create({ id: 990081, bookmarked: false });
++    this.post.setProperties({ post_number: 1, topic, canBookmark: true });
++    const requests = [];
++    pretender.put("/t/990081/bookmark", () => {
++      requests.push("create");
++      return response({});
++    });
++    pretender.put("/t/990081/remove_bookmarks", () => {
++      requests.push("remove");
++      return response({});
++    });
++    await render(
++      <template><ISBFTopicBookmark @post={{this.post}} /></template>
++    );
++    const button = ".isbf-topic-card__bookmark button";
++    assert.dom(button).hasAttribute("aria-pressed", "false");
++    await click(button);
++    assert.true(topic.bookmarked);
++    assert.dom(".isbf-topic-card__bookmark").hasClass("bookmarked");
++    assert.dom(button).hasAttribute("aria-pressed", "true");
++    await click(button);
++    assert.false(topic.bookmarked);
++    assert.dom(".isbf-topic-card__bookmark").doesNotHaveClass("bookmarked");
++    assert.dom(button).hasAttribute("aria-pressed", "false");
++    assert.deepEqual(requests, ["create", "remove"]);
++  });
++
++  test("compact counts retain their format and unchanged glyphs do not roll", async function (assert) {
++    this.pulse = new PostActionPulse();
++    this.set("value", 1201);
++    this.change = () => {
++      this.set("value", 1202);
++      this.pulse.settle("like");
++    };
++    await render(
++      <template>
++        <DButton
++          data-isbf-action-count={{this.value}}
++          data-isbf-post-action="like"
++          @action={{this.change}}
++          @icon="heart"
++          {{postActionPulse this.pulse}}
++        ><ISBFPostActionCount
++            @kind="like"
++            @pulse={{this.pulse}}
++            @value={{this.value}}
++          /></DButton>
++      </template>
++    );
++    const text = find(".isbf-post-action-count__value").textContent;
++    await pointerClick("button");
++    assert.dom(".isbf-post-action-count__value").hasText(text);
++    assert.dom(rolling).doesNotExist();
++  });
++
++  test("a repeated press replaces the animation and destruction cancels it", async function (assert) {
++    this.toggleLike = () => this.post.set("likeCount", this.post.likeCount + 1);
++    await render(
++      <template>
++        <ISBFTopicLike
++          @buttonActions={{hash toggleLike=this.toggleLike}}
++          @post={{this.post}}
++        />
++      </template>
++    );
++    await pointerClick(toggle);
++    await pointerClick(toggle);
++    assert.dom(running).exists({ count: 1 });
++    assert.dom(".isbf-post-action-count__value").hasText("10");
++    const button = find(toggle);
++    const count = find(".isbf-post-action-count");
++    await clearRender();
++    assert.strictEqual(button.style.transform, "");
++    assert.false(button.hasAttribute("data-isbf-pulse-running"));
++    assert.false(count.hasAttribute("data-isbf-count-rolling"));
++    assert.strictEqual(count.getAnimations({ subtree: true }).length, 0);
++  });
++});

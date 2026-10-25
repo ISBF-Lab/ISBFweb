@@ -1,0 +1,20 @@
+[bin/lint] Running core linters via lefthook...
+sync hooks: ❌
+│  Skipping hook sync: could not replace the hook: remove /home/ginm/ISBF-One/source/.git/hooks/pre-commit: read-only file system
+│  developer-docs-prettier (skip) no files for inspection
+┃  eslint ❯ 
+
+┃  prettier ❯ 
+- Starting...
+✔ Reformatted 0 / 11 files...
+
+│  rubocop (skip) no files for inspection
+┃  stylelint ❯ 
+
+│  syntax_tree (skip) no files for inspection
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 43.87 seconds)
+✔️ eslint (17.86 seconds)
+✔️ prettier (13.71 seconds)
+✔️ stylelint (12.30 seconds)
+[bin/lint] All lints passed
