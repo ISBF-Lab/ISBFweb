@@ -1,4 +1,6 @@
-import topicDisplayTitle from "discourse/lib/topic-display-title";
+import topicDisplayTitle, {
+  localizedTopicTitle,
+} from "discourse/lib/topic-display-title";
 
 export default function topicTitleToken(model, siteSettings) {
   if (!model) {
@@ -11,7 +13,7 @@ export default function topicTitleToken(model, siteSettings) {
 
   let result;
 
-  const titleLocalized = model.get("fancy_title_localized");
+  const titleLocalized = localizedTopicTitle(model);
   if (titleLocalized) {
     const fancyTitle = model.get("fancy_title");
     const tempDiv = document.createElement("div");
@@ -21,9 +23,11 @@ export default function topicTitleToken(model, siteSettings) {
     result = model.get("unicode_title") || model.get("title");
   }
 
-  const displayed = topicDisplayTitle(model.title, model);
-  if (displayed !== model.title) {
-    result = displayed;
+  if (!titleLocalized) {
+    const displayed = topicDisplayTitle(model.title, model);
+    if (displayed !== model.title) {
+      result = displayed;
+    }
   }
 
   const cat = model.get("category");

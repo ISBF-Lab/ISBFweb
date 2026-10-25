@@ -228,7 +228,14 @@ export default class UserAction extends RestModel {
     return postUrl(this.slug, this.topic_id, this.reply_to_post_number);
   }
 
-  @computed("title", "excerpt", "hidden", "deleted")
+  @computed(
+    "title",
+    "excerpt",
+    "fancy_title",
+    "fancy_title_localized",
+    "hidden",
+    "deleted"
+  )
   get titleHtml() {
     const title = topicDisplayTitle(this.title, this);
     return title && emojiUnescape(escapeExpression(title));

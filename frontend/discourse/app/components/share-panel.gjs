@@ -51,7 +51,7 @@ export default class SharePanel extends Component {
     return Sharing.activeSources(this.siteSettings.share_links, privateContext);
   }
 
-  @computed("type", "topic.title")
+  @computed("type", "topic.{title,fancy_title,fancy_title_localized,excerpt}")
   get shareTitle() {
     const topicTitle = escapeExpression(
       topicDisplayTitle(this.topic?.title, this.topic)

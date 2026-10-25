@@ -3,6 +3,7 @@ import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import didUpdate from "@ember/render-modifiers/modifiers/did-update";
+import { localizedTopicTitle } from "discourse/lib/topic-display-title";
 import dReplaceEmoji from "discourse/ui-kit/helpers/d-replace-emoji";
 import { loadCookedPost } from "../lib/feed-post-loader";
 import { isUntitledTopicTitle } from "../lib/optional-topic-title";
@@ -28,7 +29,10 @@ export default class ISBFTopicLinkTitle extends Component {
   }
 
   get untitled() {
-    return isUntitledTopicTitle(this.topic.title ?? this.topic.fancy_title);
+    return (
+      !localizedTopicTitle(this.topic) &&
+      isUntitledTopicTitle(this.topic.title ?? this.topic.fancy_title)
+    );
   }
 
   get text() {

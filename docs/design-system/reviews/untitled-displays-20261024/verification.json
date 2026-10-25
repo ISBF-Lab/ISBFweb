@@ -320,7 +320,15 @@
   },
   "limitations": [
     "Chromium emulation; no physical Safari or iPhone verification",
-    "Full repository CI has not completed yet",
-    "Production validation has not been run"
-  ]
+    "Production validation has not been run",
+    "The first revision passed CI; the localization follow-up requires a new exact-head CI result before merging."
+  ],
+  "revision": "a0d2376f7b7be4add36d01a05edda1cc84e1c5cb",
+  "ci": {
+    "head": "a0d2376f7b7be4add36d01a05edda1cc84e1c5cb",
+    "workflow": "ISBF frontend consistency",
+    "run_id": 40154210380,
+    "result": "success"
+  },
+  "follow_up": "Localization review fix and its current validation are recorded in localization-verification.json; the browser screenshots below belong to this first revision."
 }

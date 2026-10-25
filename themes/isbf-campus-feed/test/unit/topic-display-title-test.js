@@ -28,6 +28,26 @@ module("ISBF | Unit | topic display title", function (hooks) {
     );
   });
 
+  test("localized title text wins while a missing translation retains the body fallback", function (assert) {
+    const topic = {
+      title: TITLE,
+      fancy_title_localized: true,
+      fancy_title: "<b>Translated &amp; title</b>",
+      excerpt: "<p>Original-language body.</p>",
+    };
+    assert.strictEqual(topicDisplayTitle(TITLE, topic), "Translated & title");
+    assert.strictEqual(
+      topicDisplayTitle(TITLE, { topic, blurb: "Original search body" }),
+      "Translated & title"
+    );
+    for (const fancy_title of [undefined, "", "   "]) {
+      assert.strictEqual(
+        topicDisplayTitle(TITLE, { ...topic, fancy_title }),
+        "Original-language body."
+      );
+    }
+  });
+
   test("pictures and inaccessible content use translated fallbacks", function (assert) {
     assert.strictEqual(
       topicDisplayTitle(TITLE, { cooked: '<img src="/photo.png">' }),

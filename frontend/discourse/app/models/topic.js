@@ -531,6 +531,8 @@ export default class Topic extends RestModel {
   @computed(
     "title",
     "excerpt",
+    "fancy_title",
+    "fancy_title_localized",
     "hidden",
     "deleted",
     "postStream.posts.@each.cooked",

@@ -1,4 +1,5 @@
 import { themePrefix } from "virtual:theme";
+import { localizedTopicTitle } from "discourse/lib/topic-display-title";
 import { i18n } from "discourse-i18n";
 import { isUntitledTopicTitle } from "./optional-topic-title";
 import { postPreview } from "./post-preview";
@@ -17,6 +18,11 @@ export function unavailableTitleContent(resource) {
 export default function topicDisplayTitle(title, resource = {}) {
   if (!isUntitledTopicTitle(title)) {
     return title;
+  }
+
+  const localized = localizedTopicTitle(resource);
+  if (localized) {
+    return postPreview(localized).text;
   }
 
   const loadedPost = resource.postStream?.posts?.find(

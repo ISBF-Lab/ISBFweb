@@ -29,4 +29,31 @@ module("Unit | Utility | topic display title", function (hooks) {
     );
     assert.deepEqual(resource, { title: "Original title", excerpt: "Body" });
   });
+
+  test("an available localized title precedes presentation overrides", function (assert) {
+    let transformed = false;
+    withPluginApi((api) => {
+      api.registerValueTransformer("topic-display-title", () => {
+        transformed = true;
+        return "Original-language body";
+      });
+    });
+    const topic = {
+      title: "Generated title",
+      fancy_title: "<b>Translated &amp; title</b>",
+      fancy_title_localized: true,
+    };
+    assert.strictEqual(
+      fancyTitle(topic.fancy_title, false, topic),
+      topic.fancy_title
+    );
+    assert.strictEqual(
+      fancyTitle("Highlighted original", false, { topic }),
+      topic.fancy_title
+    );
+    assert.false(
+      transformed,
+      "selected translations bypass the body preview override"
+    );
+  });
 });

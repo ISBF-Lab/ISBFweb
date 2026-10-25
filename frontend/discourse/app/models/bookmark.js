@@ -165,6 +165,7 @@ export default class Bookmark extends RestCompatModel {
     return (this.#topicForList ??= Topic.create({
       id: this.topic_id,
       fancy_title: this.fancy_title,
+      fancy_title_localized: this.fancy_title_localized,
       title: this.title,
       excerpt: this.excerpt,
       hidden: this.hidden || this.deleted,

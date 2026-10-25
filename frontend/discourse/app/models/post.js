@@ -344,7 +344,13 @@ export default class Post extends RestModel {
     );
   }
 
-  @computed("topic_title_headline", "topic.title", "blurb")
+  @computed(
+    "topic_title_headline",
+    "topic.title",
+    "topic.fancy_title",
+    "topic.fancy_title_localized",
+    "blurb"
+  )
   get topicTitleHeadline() {
     return fancyTitle(
       this.topic_title_headline,

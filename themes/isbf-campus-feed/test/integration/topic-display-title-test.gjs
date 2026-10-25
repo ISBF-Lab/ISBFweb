@@ -1,3 +1,4 @@
+import { get } from "@ember/object";
 import { fillIn, render, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import PostListItemDetails from "discourse/components/post-list/item/details";
@@ -10,6 +11,7 @@ import topicTitleToken from "discourse/lib/topic-title-token";
 import Bookmark from "discourse/models/bookmark";
 import Post from "discourse/models/post";
 import Topic from "discourse/models/topic";
+import UserAction from "discourse/models/user-action";
 import UserDraft from "discourse/models/user-draft";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import pretender, { response } from "discourse/tests/helpers/create-pretender";
@@ -58,6 +60,135 @@ module("ISBF | Integration | topic display title", function (hooks) {
       }),
       "<svg onload=alert(1)> & body"
     );
+  });
+
+  test("localized topic links and browser titles retain the selected language without fetching the body", async function (assert) {
+    const observations = stubIntersectionObserver();
+    this.topic.setProperties({
+      fancy_title: "<b>Translated &amp; title</b>",
+      fancy_title_localized: true,
+      excerpt: undefined,
+    });
+    await render(<template><TopicLink @topic={{this.topic}} /></template>);
+    assert.dom("a.title").hasText("Translated & title");
+    assert.dom("a.title b").exists("localized title formatting is preserved");
+    assert.dom(".isbf-topic-title-preview").doesNotExist();
+    assert.strictEqual(
+      observations.length,
+      0,
+      "translations need no body request"
+    );
+    assert.strictEqual(
+      topicTitleToken(this.topic, {
+        topic_page_title_includes_category: false,
+      }),
+      "Translated & title"
+    );
+    assert.strictEqual(
+      this.topic.displayTitle,
+      "Translated & title",
+      "plain-text consumers use the selected language too"
+    );
+    this.topic.setProperties({
+      fancy_title: TITLE,
+      fancy_title_localized: false,
+      excerpt: "<p>Original-language body.</p>",
+    });
+    await settled();
+    assert.dom(".isbf-topic-title-preview").hasText("Original-language body.");
+    this.topic.setProperties({
+      fancy_title: "Translated again",
+      fancy_title_localized: true,
+    });
+    await settled();
+    assert.dom("a.title").hasText("Translated again");
+    assert.strictEqual(this.topic.displayTitle, "Translated again");
+    assert.strictEqual(
+      this.topic.title,
+      TITLE,
+      "the persisted title remains unchanged"
+    );
+  });
+
+  test("bookmarked localized titles retain their flag and exact post target", async function (assert) {
+    this.bookmark = Bookmark.create({
+      id: 980602,
+      topic_id: 980001,
+      title: TITLE,
+      fancy_title: "Translated bookmark",
+      fancy_title_localized: true,
+      excerpt: "<p>Original-language bookmark body.</p>",
+      bookmarkable_type: "Post",
+      linked_post_number: 7,
+    });
+    await render(
+      <template>{{dTopicLink this.bookmark.topicForList}}</template>
+    );
+    assert
+      .dom("a.title")
+      .hasText("Translated bookmark")
+      .hasAttribute("href", "/t/topic/980001/7");
+    assert.true(this.bookmark.topicForList.fancy_title_localized);
+  });
+
+  test("cached sharing and activity labels update when a translation arrives", function (assert) {
+    const sharing = this.owner
+      .factoryFor("component:share-panel")
+      .create({ panel: { model: { topic: this.topic } } });
+    const activity = UserAction.create({
+      title: TITLE,
+      excerpt: "<p>Original activity body.</p>",
+    });
+    try {
+      assert.true(get(sharing, "shareTitle").includes("Campus body."));
+      assert.strictEqual(activity.titleHtml, "Original activity body.");
+      this.topic.setProperties({
+        fancy_title: "Translated sharing title",
+        fancy_title_localized: true,
+      });
+      activity.setProperties({
+        fancy_title: "Translated activity title",
+        fancy_title_localized: true,
+      });
+      assert.true(
+        get(sharing, "shareTitle").includes("Translated sharing title")
+      );
+      assert.strictEqual(activity.titleHtml, "Translated activity title");
+    } finally {
+      sharing.destroy();
+      activity.destroy();
+    }
+  });
+
+  test("localized search titles precede original-language highlighted headlines and blurbs", async function (assert) {
+    this.siteSettings.use_pg_headlines_for_excerpt = true;
+    this.siteSettings.support_mixed_text_direction = false;
+    this.topic.setProperties({
+      fancy_title: "Translated search title",
+      fancy_title_localized: true,
+    });
+    this.searchPost = Post.create({
+      id: 980603,
+      topic_id: this.topic.id,
+      topic: this.topic,
+      post_number: 1,
+      username: "eviltrout",
+      created_at: "2026-10-24T00:00:00Z",
+      topic_title_headline: TITLE.replace("校园动态", "<b>校园动态</b>"),
+      blurb: "Original-language search body",
+    });
+    await render(
+      <template>
+        <SearchResultEntry @post={{this.searchPost}} />
+        <div class="search-menu-test"><SearchMenuTopic
+            @result={{this.searchPost}}
+          /></div>
+      </template>
+    );
+    assert.dom(".fps-result .topic-title").hasText("Translated search title");
+    assert
+      .dom(".search-menu-test .topic-title")
+      .hasText("Translated search title");
   });
 
   test("a visible public title can load its missing first post", async function (assert) {
