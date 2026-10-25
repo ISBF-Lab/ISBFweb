@@ -14,6 +14,7 @@ add_admin_route "academy_roles.student_invites.title",
 
 register_asset "stylesheets/common/academy-roles.scss"
 register_asset "stylesheets/common/academy-auth.scss"
+register_asset "stylesheets/common/academy-official-post-quota.scss"
 register_svg_icon "pause"
 register_svg_icon "play"
 
@@ -56,6 +57,7 @@ after_initialize do
     app/serializers/discourse_academy_roles/student_invite_batch_serializer
     app/controllers/discourse_academy_roles/admin/student_invites_controller
     app/controllers/discourse_academy_roles/admin/moderator_permissions_controller
+    app/controllers/discourse_academy_roles/admin/official_post_quotas_controller
     app/controllers/discourse_academy_roles/password_setup_controller
   ].each { |path| require_relative path }
 
@@ -67,6 +69,8 @@ after_initialize do
 
     namespace :admin do
       get "moderator-permissions" => "moderator_permissions#index"
+      get "users/:user_id/official-post-quota" => "official_post_quotas#show"
+      put "users/:user_id/official-post-quota" => "official_post_quotas#update"
       resources :student_invites, path: "student-invites", only: %i[index create destroy] do
         post :reissue, on: :member
         post :bulk, on: :collection
@@ -92,6 +96,9 @@ after_initialize do
   require_relative "lib/discourse_academy_roles/name_color"
   require_relative "lib/discourse_academy_roles/topic_category_extension"
   require_relative "lib/discourse_academy_roles/daily_limits_extension"
+  require_relative "lib/discourse_academy_roles/official_post_quota"
+  require_relative "lib/discourse_academy_roles/official_post_quota_creator"
+  require_relative "lib/discourse_academy_roles/official_post_quota_publisher"
   require_relative "lib/discourse_academy_roles/activity_level"
   require_relative "lib/discourse_academy_roles/student_invite_extension"
   require_relative "lib/discourse_academy_roles/moderator_permissions"
@@ -185,6 +192,9 @@ after_initialize do
     AdminConstraint.prepend(DiscourseAcademyRoles::ModeratorAdminConstraint)
     Topic.prepend(DiscourseAcademyRoles::TopicCategoryExtension)
     Topic.prepend(DiscourseAcademyRoles::TopicDailyLimitsExtension)
+    PostCreator.prepend(DiscourseAcademyRoles::OfficialPostQuotaCreator)
+    TopicPublisher.prepend(DiscourseAcademyRoles::OfficialPostQuotaPublisher)
+    TopicTimestampChanger.prepend(DiscourseAcademyRoles::OfficialPostQuotaTimestampChanger)
     Post.prepend(DiscourseAcademyRoles::PostDailyLimitsExtension)
     PostAction.prepend(DiscourseAcademyRoles::PostActionDailyLimitsExtension)
     User.prepend(DiscourseAcademyRoles::NewMemberPostingExtension)

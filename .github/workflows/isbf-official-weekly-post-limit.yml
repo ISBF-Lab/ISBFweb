@@ -1,0 +1,123 @@
+name: Official account weekly quota integration
+
+on:
+  pull_request:
+    paths:
+      - "plugins/discourse-academy-roles/**"
+      - ".github/workflows/isbf-official-weekly-post-limit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: official-weekly-quota-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+      - name: Format quota Ruby source with the native formatter
+        run: |
+          gem install syntax_tree --version 6.3.0 --no-document
+          stree write plugins/discourse-academy-roles/plugin.rb plugins/discourse-academy-roles/lib/discourse_academy_roles/official_post_quota*.rb plugins/discourse-academy-roles/app/controllers/discourse_academy_roles/admin/official_post_quotas_controller.rb plugins/discourse-academy-roles/spec/lib/official_post_quota*_spec.rb plugins/discourse-academy-roles/spec/requests/official_post_quotas_controller_spec.rb
+          git diff --exit-code -- plugins/discourse-academy-roles
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: official-quota-formatted-${{ github.run_id }}
+          path: |
+            plugins/discourse-academy-roles/plugin.rb
+            plugins/discourse-academy-roles/lib/discourse_academy_roles/official_post_quota*.rb
+            plugins/discourse-academy-roles/app/controllers/discourse_academy_roles/admin/official_post_quotas_controller.rb
+            plugins/discourse-academy-roles/spec/lib/official_post_quota*_spec.rb
+            plugins/discourse-academy-roles/spec/requests/official_post_quotas_controller_spec.rb
+          if-no-files-found: error
+          retention-days: 7
+  quota:
+    needs: formatting
+    runs-on: ubuntu-latest
+    container: discourse/discourse_test:release
+    timeout-minutes: 35
+    defaults:
+      run:
+        shell: bash
+        working-directory: discourse
+    env:
+      RAILS_ENV: test
+      PGUSER: discourse
+      PGPASSWORD: discourse
+      LOAD_PLUGINS: "1"
+      PARALLEL_TEST_PROCESSORS: "1"
+      QUNIT_PARALLEL: "1"
+      QUNIT_REUSE_BUILD: "1"
+      NODE_OPTIONS: --max-old-space-size=2048
+      CHEAP_SOURCE_MAPS: "1"
+      EMBER_ENV: development
+      PLAYWRIGHT_BROWSERS_PATH: /home/discourse/.cache/ms-playwright
+      DBUS_SESSION_BUS_ADDRESS: unix:path=/dev/null
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: candidate
+          sparse-checkout: plugins/discourse-academy-roles
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: 132cc95d043db01251eedf9c93b3927cd5ffee91
+          path: discourse
+          persist-credentials: false
+      - name: Overlay only the candidate identity plugin on the fixed native runtime
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/discourse"
+          test -d plugins/discourse-academy-roles
+          test ! -L plugins/discourse-academy-roles
+          rm -r plugins/discourse-academy-roles
+          cp -a ../candidate/plugins/discourse-academy-roles plugins/discourse-academy-roles
+          redis-server /etc/redis/redis.conf --daemonize yes --logfile ""
+          chown -R postgres /var/run/postgresql
+          sudo -E -u postgres script/start_test_db.rb
+          sudo -u postgres psql -c "CREATE ROLE discourse LOGIN SUPERUSER PASSWORD 'discourse';"
+          ln -s /var/www/discourse/vendor/bundle vendor/bundle
+          bundle config --local path vendor/bundle
+          bundle config --local deployment true
+          bundle config --local without ""
+          bundle install --jobs 1
+          pnpm install --frozen-lockfile
+      - name: Prepare isolated test database
+        id: database
+        run: bin/rake db:create db:migrate
+      - name: Native quota, approval, shared draft, permission and concurrency tests
+        run: |
+          mkdir -p tmp
+          bin/rspec plugins/discourse-academy-roles/spec/lib/official_post_quota*_spec.rb plugins/discourse-academy-roles/spec/requests/official_post_quotas_controller_spec.rb plugins/discourse-academy-roles/spec/requests/posts_controller_spec.rb | tee tmp/official-quota-rspec.log
+      - name: Build native Admin FormKit integration
+        id: native_assets
+        if: always() && steps.database.outcome == 'success'
+        run: |
+          pnpm playwright-install
+          script/assemble_ember_build.rb
+          mkdir -p "$HOME/.pki/nssdb" "$HOME/.local/share/pki/nssdb"
+          dbus-daemon --system --fork 2>/dev/null || true
+          isbf_bus_address=$(dbus-daemon --session --fork --print-address 2>/dev/null)
+          echo "DBUS_SESSION_BUS_ADDRESS=$isbf_bus_address" >> "$GITHUB_ENV"
+      - name: Native Admin quota form
+        if: always() && steps.native_assets.outcome == 'success'
+        run: bin/qunit --standalone --target discourse-academy-roles --filter '/Official post quota/i' | tee tmp/official-quota-qunit.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: official-quota-integration-${{ github.run_id }}
+          path: |
+            discourse/tmp/official-quota-rspec.log
+            discourse/tmp/official-quota-qunit.log
+            discourse/log/test.log
+          if-no-files-found: warn
+          retention-days: 14

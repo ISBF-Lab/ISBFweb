@@ -7,6 +7,10 @@ en:
     errors:
       academy_roles_not_configured: "Choose an existing official group and category before enabling academy roles."
   academy_roles:
+    official_post_quota:
+      invalid_limit: "The weekly official topic limit must be an integer from 0 to 2147483647; 0 means unlimited."
+      exceeded: "Your weekly limit of %{limit} official topics has been reached. You can publish again at %{resets_at} (%{timezone})."
+      already_published: "This shared draft has already been published. Refresh the page."
     password_setup:
       unavailable: This account already has a password or has dismissed the reminder. Manage your password in your security preferences.
       verification_required: To keep your account secure, verify your email before setting a password.

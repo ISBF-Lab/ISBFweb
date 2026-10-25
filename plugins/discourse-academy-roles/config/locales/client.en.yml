@@ -6,6 +6,20 @@ en:
           academy_roles: "Academy roles"
   js:
     academy_roles:
+      official_post_quota:
+        title: Official weekly posting limit
+        limit: Weekly topic limit
+        description: "Set 0 for unlimited (the default). Saving takes effect immediately for this account."
+        usage: "Topics published this week: %{used}. Remaining: %{remaining}."
+        resets_at: "Resets at %{date} (%{timezone}); the week starts on Monday at 00:00."
+        unlimited: Unlimited
+        exempt: This developer account is exempt from the weekly limit.
+        not_official: This account is not an official publisher. You can configure its limit in advance; saving does not grant publishing permission.
+        invalid_limit: Enter a whole number from 0 to 2147483647.
+        loading: Loading weekly limit…
+        retry: Retry
+        save: Save weekly limit
+        saved: Weekly limit saved.
       password_setup:
         title: Set a login password
         description: A password gives you another way to log in. You can also skip this step and set one later in your security preferences.
