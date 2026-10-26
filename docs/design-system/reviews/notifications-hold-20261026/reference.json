@@ -1,0 +1,24 @@
+{
+  "source": "User-provided HoldButton JavaScript and CSS in this conversation",
+  "library_index": "https://reactbits.dev/llms.txt",
+  "approved_scope": "Current-user grouped notification page; desktop and mobile mark-all-read action",
+  "accepted_choices": {
+    "desktop_placement": "Immediately left of the three-dot menu",
+    "mobile_placement": "Same row text button, label 全部已读",
+    "idle_appearance": "Existing website palette",
+    "high_priority_confirmation": "Preserve existing confirmation dialog"
+  },
+  "parameters": {
+    "hold_time_ms": 300,
+    "release_time_ms": 200,
+    "reset_after_ms": 1200,
+    "fill_direction": "right",
+    "wave_amplitude_px": 6,
+    "press_scale": 0.97,
+    "glow": true,
+    "fill_color": "var(--isbf-v2-accent)",
+    "fill_text_color": "var(--isbf-v2-accent-contrast)"
+  },
+  "visual_acceptance": "Pending user review",
+  "production_release": false
+}

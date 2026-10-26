@@ -1,0 +1,50 @@
+{
+  "results": [
+    {
+      "passed": 30,
+      "failed": 0,
+      "total": 30,
+      "runtime": 5065,
+      "failures": [],
+      "tests": [
+        {
+          "name": "the action is outside the menu and a click does not mark read",
+          "module": "ISBF | Integration | Notifications hold",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "a successful hold marks read once, updates counts and refreshes",
+          "module": "ISBF | Integration | Notifications hold",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "high priority notifications retain confirmation and cancellation makes no request",
+          "module": "ISBF | Integration | Notifications hold",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "confirmation submits once and completion follows the request result",
+          "module": "ISBF | Integration | Notifications hold",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "request failure resets the button, preserves counts and offers a retry",
+          "module": "ISBF | Integration | Notifications hold",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "a newer notification during the request keeps its unread count",
+          "module": "ISBF | Integration | Notifications hold",
+          "failed": 0,
+          "total": 3
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

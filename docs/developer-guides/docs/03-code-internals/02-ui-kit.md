@@ -63,14 +63,15 @@ The groups below are a map, not an exhaustive list. Run `ls frontend/discourse/a
 
 ## Actions
 
-| Primitive                                              | Use it for                                                                          | Styleguide                                                                   |
-| ------------------------------------------------------ | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `DButton`                                              | Every clickable action. Handles labels, icons, `@isLoading`, `@disabled`, and ARIA. | [Buttons](https://meta.discourse.org/styleguide/atoms/buttons)               |
-| `DComboButton`                                         | A primary action paired with a dropdown of secondary actions.                       | [Combo button](https://meta.discourse.org/styleguide/molecules/combo-button) |
-| `DCopyButton`                                          | Copy a value to the clipboard with feedback.                                        |                                                                              |
-| `DPageActionButton`                                    | Actions in a page header.                                                           |                                                                              |
-| `DBadgeButton`, `DToggleSwitch`, `DTogglePasswordMask` | Toggles and badge-shaped actions.                                                   |                                                                              |
-| `DShortcut`                                            | Render a keyboard shortcut in the platform's notation.                              | [Shortcut](https://meta.discourse.org/styleguide/atoms/shortcut)             |
+| Primitive                                              | Use it for                                                                             | Styleguide                                                                   |
+| ------------------------------------------------------ | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `DButton`                                              | Every clickable action. Handles labels, icons, `@isLoading`, `@disabled`, and ARIA.    | [Buttons](https://meta.discourse.org/styleguide/atoms/buttons)               |
+| `DHoldButton`                                          | An action requiring a continuous press, with asynchronous completion and cancellation. |                                                                              |
+| `DComboButton`                                         | A primary action paired with a dropdown of secondary actions.                          | [Combo button](https://meta.discourse.org/styleguide/molecules/combo-button) |
+| `DCopyButton`                                          | Copy a value to the clipboard with feedback.                                           |                                                                              |
+| `DPageActionButton`                                    | Actions in a page header.                                                              |                                                                              |
+| `DBadgeButton`, `DToggleSwitch`, `DTogglePasswordMask` | Toggles and badge-shaped actions.                                                      |                                                                              |
+| `DShortcut`                                            | Render a keyboard shortcut in the platform's notation.                                 | [Shortcut](https://meta.discourse.org/styleguide/atoms/shortcut)             |
 
 ## Inputs
 

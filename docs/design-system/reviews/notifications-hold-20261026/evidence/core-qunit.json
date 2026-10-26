@@ -1,0 +1,56 @@
+{
+  "results": [
+    {
+      "passed": 47,
+      "failed": 0,
+      "total": 47,
+      "runtime": 4263,
+      "failures": [],
+      "tests": [
+        {
+          "name": "pointer cancellation, drift, capture loss and blur cancel unfinished holds",
+          "module": "Integration | ui-kit | DHoldButton",
+          "failed": 0,
+          "total": 12
+        },
+        {
+          "name": "pending actions block repeats and false results reset without success",
+          "module": "Integration | ui-kit | DHoldButton",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "rejections reset and invoke the error handler",
+          "module": "Integration | ui-kit | DHoldButton",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "destruction cancels the pending hold and its scheduled callbacks",
+          "module": "Integration | ui-kit | DHoldButton",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "disabled changes cancel a hold and labels expose one accessible name",
+          "module": "Integration | ui-kit | DHoldButton",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "Space and Enter require a hold, ignore repeats and support Escape",
+          "module": "Integration | ui-kit | DHoldButton",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "short clicks and 299ms holds do not confirm; 300ms confirms once",
+          "module": "Integration | ui-kit | DHoldButton",
+          "failed": 0,
+          "total": 13
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

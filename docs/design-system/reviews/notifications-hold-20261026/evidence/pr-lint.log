@@ -1,0 +1,26 @@
+[bin/lint] No core linter for: docs/design-system/components.md, docs/design-system/reference-map.md, docs/design-system/tokens.md, docs/design-system/ui-status.md, docs/design-system/reviews/notifications-hold-20261026/README.md, docs/design-system/reviews/notifications-hold-20261026/evidence/core-qunit.json, docs/design-system/reviews/notifications-hold-20261026/evidence/flows.json, docs/design-system/reviews/notifications-hold-20261026/evidence/qunit.json, docs/design-system/reviews/notifications-hold-20261026/evidence/types.json, docs/design-system/reviews/notifications-hold-20261026/reference.json, docs/design-system/reviews/notifications-hold-20261026/source-manifest.json
+[bin/lint] Running core linters via lefthook...
+sync hooks: ❌
+│  Skipping hook sync: could not replace the hook: remove /home/ginm/ISBF-One/source/.git/hooks/pre-commit: read-only file system
+┃  developer-docs-prettier ❯ 
+docs/03-code-internals/02-ui-kit.md 1604ms
+
+┃  eslint ❯ 
+
+┃  prettier ❯ 
+- Starting...
+isbf-notifications.gjs
+- Reformatted 1 / 8 files...
+✔ Reformatted 1 / 8 files...
+
+│  rubocop (skip) no files for inspection
+┃  stylelint ❯ 
+
+│  syntax_tree (skip) no files for inspection
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 54.73 seconds)
+✔️ developer-docs-prettier (7.62 seconds)
+✔️ eslint (18.50 seconds)
+✔️ prettier (14.32 seconds)
+✔️ stylelint (14.30 seconds)
+[bin/lint] All lints passed
