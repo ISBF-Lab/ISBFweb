@@ -1,12 +1,12 @@
-import { on } from "@ember/modifier";
 import { trustHTML } from "@ember/template";
 import { eq } from "discourse/truth-helpers";
+import DSelect from "discourse/ui-kit/d-select";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 
 const Dropdown = <template>
   <div class="control-group form-template-field" data-field-type="dropdown">
     {{#if @attributes.label}}
-      <label class="form-template-field__label">
+      <label class="form-template-field__label" for={{@id}}>
         {{@attributes.label}}
         {{#if @validations.required}}
           {{dIcon "asterisk" class="form-template-field__required-indicator"}}
@@ -20,11 +20,14 @@ const Dropdown = <template>
       </span>
     {{/if}}
 
-    <select
+    <DSelect
+      aria-label={{@attributes.label}}
       class="form-template-field__dropdown"
+      id={{@id}}
       name={{@id}}
       required={{if @validations.required "required" ""}}
-      {{on "input" @onChange}}
+      @includeNone={{false}}
+      @onInput={{@onChange}}
     >
       {{#if @attributes.none_label}}
         <option
@@ -41,7 +44,7 @@ const Dropdown = <template>
           value={{choice}}
         >{{choice}}</option>
       {{/each}}
-    </select>
+    </DSelect>
   </div>
 </template>;
 

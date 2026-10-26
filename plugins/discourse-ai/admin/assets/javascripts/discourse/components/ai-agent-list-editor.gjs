@@ -365,7 +365,7 @@ export default class AiAgentListEditor extends Component {
                 <DMenu
                   @autofocus={{true}}
                   @identifier="agent-list-layout"
-                  @modalForMobile={{true}}
+                  @modalForMobile={{false}}
                   @onRegisterApi={{this.onRegisterApi}}
                   @triggerClass="btn-default btn-icon"
                 >

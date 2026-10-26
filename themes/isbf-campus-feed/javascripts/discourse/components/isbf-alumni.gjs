@@ -8,6 +8,7 @@ import { themePrefix } from "virtual:theme";
 import { ajax } from "discourse/lib/ajax";
 import { eq } from "discourse/truth-helpers";
 import DButton from "discourse/ui-kit/d-button";
+import DSelect from "discourse/ui-kit/d-select";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import { alumniConfig, alumniLocation, alumniRegions } from "../lib/alumni";
@@ -217,9 +218,10 @@ export default class ISBFAlumni extends Component {
             />{{/if}}
           <div class="isbf-alumni__filters">
             <label>{{i18n (themePrefix "isbf_v2.alumni_country")}}
-              <select
-                value={{this.country}}
-                {{on "change" this.countryChanged}}
+              <DSelect
+                @includeNone={{false}}
+                @onInput={{this.countryChanged}}
+                @value={{this.country}}
               >
                 <option value="">{{i18n
                     (themePrefix "isbf_v2.alumni_all")
@@ -228,14 +230,15 @@ export default class ISBFAlumni extends Component {
                     selected={{eq this.country country.code}}
                     value={{country.code}}
                   >{{country.name}}</option>{{/each}}
-              </select>
+              </DSelect>
             </label>
             {{#if this.regions.length}}<label>{{i18n
                   (themePrefix "isbf_v2.alumni_region")
                 }}
-                <select
-                  value={{this.region}}
-                  {{on "change" this.regionChanged}}
+                <DSelect
+                  @includeNone={{false}}
+                  @onInput={{this.regionChanged}}
+                  @value={{this.region}}
                 ><option value="">{{i18n
                       (themePrefix "isbf_v2.alumni_all")
                     }}</option>
@@ -243,7 +246,7 @@ export default class ISBFAlumni extends Component {
                       selected={{eq this.region region.code}}
                       value={{region.code}}
                     >{{region.name}}</option>{{/each}}
-                </select>
+                </DSelect>
               </label>{{/if}}
           </div>
           {{#if this.mapConfig}}<ISBFAlumniMap

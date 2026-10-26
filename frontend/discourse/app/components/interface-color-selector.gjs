@@ -42,7 +42,6 @@ export default class InterfaceColorSelector extends Component {
     <DMenu
       class="interface-color-selector icon"
       data-current-mode={{this.interfaceColor.colorMode}}
-      @animated={{false}}
       @ariaLabel={{i18n
         "sidebar.footer.interface_color_selector.aria_label"
         mode=this.interfaceColor.colorMode

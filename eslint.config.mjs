@@ -1,7 +1,24 @@
 import DiscourseRecommended from "@discourse/lint-configs/eslint";
+import menuImports from "./script/eslint-menu-imports.mjs";
+
+const upstreamPlugin = DiscourseRecommended.find(
+  (config) => config.plugins?.discourse
+)?.plugins.discourse;
+const menuPlugin = {
+  ...upstreamPlugin,
+  rules: {
+    ...upstreamPlugin.rules,
+    "ui-kit-imports": menuImports(upstreamPlugin.rules["ui-kit-imports"]),
+  },
+};
+const recommended = DiscourseRecommended.map((config) =>
+  config.plugins?.discourse
+    ? { ...config, plugins: { ...config.plugins, discourse: menuPlugin } }
+    : config
+);
 
 export default [
-  ...DiscourseRecommended,
+  ...recommended,
   {
     rules: {
       "ember/template-no-capital-arguments": "off",

@@ -131,3 +131,11 @@ use `bin/lint --fix --recent` only when appropriate.
 - Follow project conventions, prevent knowledge silos
 - Recommend storage locations by info type
 - Inform when this file changes and reloads
+
+## Shared dropdown contract
+
+- Follow [the dropdown contract](docs/design-system/dropdowns.md) for frontend, authentication, admin, themes and plugins.
+- Use FormKit/DSelect, the existing SelectKit/DMultiSelect adapters, and DMenu/DDropdownMenu. The shared menu appearance is automatic; keep task-specific trigger shapes.
+- Menu surfaces are defined only by the active theme shared dropdown stylesheet. Do not add private menu radii, shadows, opening animations, or visible native selects.
+- Menus float beside the trigger on mobile. Non-menu popovers use the explicit surface type and a documented policy entry.
+- Run `pnpm test:menus` and `pnpm lint:menus`; the rule also runs in the normal lint and CI workflow.

@@ -116,7 +116,7 @@ export default class PinnedOptions extends Component {
       @autofocus={{false}}
       @contentClass={{@contentClass}}
       @identifier="pinned-options"
-      @modalForMobile={{true}}
+      @modalForMobile={{false}}
       @onRegisterApi={{this.registerDmenuApi}}
       @triggerClass={{dConcatClass
         "btn-default"

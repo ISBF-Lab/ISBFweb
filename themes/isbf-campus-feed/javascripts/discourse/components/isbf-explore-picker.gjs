@@ -1,25 +1,17 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+import { fn } from "@ember/helper";
+import { on } from "@ember/modifier";
 import { action } from "@ember/object";
-import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import { scheduleOnce } from "@ember/runloop";
 import { themePrefix } from "virtual:theme";
-import dIcon from "discourse/ui-kit/helpers/d-icon";
+import DMenu from "discourse/float-kit/components/d-menu";
+import dMenuHighlight from "discourse/ui-kit/modifiers/d-menu-highlight";
 import { i18n } from "discourse-i18n";
 
-let nextPickerId = 0;
-
 export default class ISBFExplorePicker extends Component {
-  @tracked isOpen = false;
   @tracked search = "";
-
-  menuId = `isbf-explore-picker-${++nextPickerId}`;
-  #root;
-
-  willDestroy() {
-    super.willDestroy(...arguments);
-    this.#removeListeners();
-  }
+  #menu;
 
   get label() {
     const label = i18n(themePrefix(this.args.labelKey));
@@ -50,52 +42,29 @@ export default class ISBFExplorePicker extends Component {
 
   @action
   createCategory() {
-    this.#close();
+    this.#menu?.close();
     this.args.onCreateCategory?.();
   }
 
   @action
   focusSearch() {
-    this.#root?.querySelector("input[type='search']")?.focus();
+    this.#menu?.content?.querySelector("input[type='search']")?.focus();
   }
 
   @action
-  observe(element) {
-    this.#root = element;
+  opened() {
+    this.args.onSearch?.(this.search);
+    scheduleOnce("afterRender", this, this.focusSearch);
   }
 
   @action
-  onDocumentKeydown(event) {
-    if (event.key === "Escape") {
-      event.preventDefault();
-      event.stopPropagation();
-      this.#close();
-    }
-  }
-
-  @action
-  onOutsidePointer(event) {
-    if (!this.#root?.contains(event.target)) {
-      this.#close();
-    }
+  registerMenu(menu) {
+    this.#menu = menu;
   }
 
   @action
   retrySearch() {
     this.args.onSearch?.(this.search);
-  }
-
-  @action
-  toggle() {
-    if (this.isOpen) {
-      this.#close();
-      return;
-    }
-    this.isOpen = true;
-    this.args.onSearch?.(this.search);
-    document.addEventListener("pointerdown", this.onOutsidePointer, true);
-    document.addEventListener("keydown", this.onDocumentKeydown, true);
-    scheduleOnce("afterRender", this, this.focusSearch);
   }
 
   @action
@@ -109,34 +78,21 @@ export default class ISBFExplorePicker extends Component {
     this.args.onSearch?.(this.search);
   }
 
-  #close() {
-    this.isOpen = false;
-    this.#removeListeners();
-    this.#root?.querySelector(".isbf-explore-picker__trigger")?.focus();
-  }
-
-  #removeListeners() {
-    document.removeEventListener("pointerdown", this.onOutsidePointer, true);
-    document.removeEventListener("keydown", this.onDocumentKeydown, true);
-  }
-
   <template>
-    <div class="isbf-explore-picker" {{didInsert this.observe}}>
-      <button
-        aria-controls={{this.menuId}}
-        aria-expanded={{if this.isOpen "true" "false"}}
-        class="isbf-explore-picker__trigger"
-        disabled={{@disabled}}
-        type="button"
-        {{on "click" this.toggle}}
-      >{{this.label}}{{dIcon "chevron-down"}}</button>
-      {{#if this.isOpen}}
-        <div
-          aria-label={{i18n (themePrefix @labelKey)}}
-          class="isbf-explore-picker__menu"
-          id={{this.menuId}}
-          role="group"
-        >
+    <DMenu
+      @ariaLabel={{this.label}}
+      @contentClass="isbf-explore-picker__menu"
+      @disabled={{@disabled}}
+      @icon="chevron-down"
+      @inlineTabOrder={{true}}
+      @label={{this.label}}
+      @onRegisterApi={{this.registerMenu}}
+      @onShow={{this.opened}}
+      @placement="bottom-start"
+      @triggerClass="isbf-explore-picker__trigger"
+    >
+      <:content>
+        <div class="isbf-explore-picker__content">
           <input
             aria-label={{i18n (themePrefix @searchKey)}}
             class="isbf-explore-picker__search"
@@ -156,7 +112,10 @@ export default class ISBFExplorePicker extends Component {
                 }}</button>
             </div>
           {{/if}}
-          <div class="isbf-explore-picker__options">
+          <div
+            class="isbf-explore-picker__options"
+            {{dMenuHighlight itemSelector="label"}}
+          >
             {{#each this.options key="id" as |item|}}
               <label class="isbf-explore-picker__option">
                 <span class="isbf-explore-picker__label">{{item.label}}</span>
@@ -190,7 +149,7 @@ export default class ISBFExplorePicker extends Component {
             {{/if}}
           </div>
         </div>
-      {{/if}}
-    </div>
+      </:content>
+    </DMenu>
   </template>
 }

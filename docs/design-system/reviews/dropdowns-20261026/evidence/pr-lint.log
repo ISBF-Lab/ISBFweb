@@ -1,0 +1,27 @@
+[bin/lint] No core linter for: AI-AGENTS.md, docs/design-system/components.md, docs/design-system/reference-map.md, docs/design-system/references/README.md, docs/design-system/tokens.md, docs/design-system/ui-status.md, docs/design-system/dropdowns.md
+[bin/lint] Running core linters via lefthook...
+┃  developer-docs-prettier ❯ 
+docs/03-code-internals/02-ui-kit.md 1500ms (unchanged)
+
+┃  eslint ❯ 
+
+┃  prettier ❯ 
+- Starting...
+isbf-feed-card-menu.gjs
+isbf-alumni-profile.gjs
+isbf-alumni.gjs
+isbf-notifications.gjs
+- Reformatted 4 / 37 files...
+✔ Reformatted 4 / 87 files...
+
+│  rubocop (skip) no files for inspection
+┃  stylelint ❯ 
+
+│  syntax_tree (skip) no files for inspection
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 116.33 seconds)
+✔️ developer-docs-prettier (7.22 seconds)
+✔️ eslint (43.60 seconds)
+✔️ prettier (47.11 seconds)
+✔️ stylelint (18.33 seconds)
+[bin/lint] All lints passed

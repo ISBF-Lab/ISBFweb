@@ -68,6 +68,9 @@ jobs:
             exit 1
           fi
 
+      - name: Menu policy
+        run: pnpm test:menus && pnpm lint:menus
+
       - parallel:
           - name: Rubocop
             if: ${{ !cancelled() }}

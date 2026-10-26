@@ -26,6 +26,9 @@ interface DInlineFloatSignature {
     /** A class added to the inner content element. */
     innerClass?: string;
 
+    /** Whether semantic menu rows receive the shared visual cursor. */
+    menuHighlight?: boolean;
+
     /** The ARIA role for the content. */
     role?: string;
 
@@ -74,6 +77,7 @@ const DInlineFloat: TemplateOnlyComponent<DInlineFloatSignature> = <template>
         @innerClass={{@innerClass}}
         @instance={{@instance}}
         @mainClass={{@mainClass}}
+        @menuHighlight={{@menuHighlight}}
         @portalOutletElement={{@instance.portalOutletElement}}
         @role={{@role}}
         @trapTab={{@trapTab}}

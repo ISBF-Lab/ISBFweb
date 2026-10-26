@@ -44,7 +44,9 @@
     "playwright-install": "playwright install --no-shell chromium",
     "build": "pnpm --silent --dir=frontend/discourse build",
     "start": "pnpm --silent --dir=frontend/discourse start",
-    "lint:dialogs": "node script/check-isbf-dialogs.mjs"
+    "lint:dialogs": "node script/check-isbf-dialogs.mjs",
+    "lint:menus": "node script/check-menus.mjs",
+    "test:menus": "node --test script/check-menus-test.mjs"
   },
   "engines": {
     "node": ">= 20",

@@ -1,6 +1,8 @@
 import type { TemplateOnlyComponent } from "@ember/component/template-only";
 import DInlineFloat from "discourse/float-kit/components/d-inline-float";
 import type DMenuInstance from "discourse/float-kit/lib/d-menu-instance";
+import { eq } from "discourse/truth-helpers";
+import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
 
 interface DHeadlessMenuSignature {
   Args: {
@@ -23,9 +25,16 @@ const DHeadlessMenu: TemplateOnlyComponent<DHeadlessMenuSignature> = <template>
   <DInlineFloat
     @inline={{@inline}}
     @inlineTabOrder={{@menu.options.inlineTabOrder}}
-    @innerClass="fk-d-menu__inner-content"
+    @innerClass={{dConcatClass
+      "fk-d-menu__inner-content"
+      (if (eq @menu.options.surface "menu") "d-menu-surface")
+    }}
     @instance={{@menu}}
-    @mainClass="fk-d-menu"
+    @mainClass={{dConcatClass
+      "fk-d-menu"
+      (if (eq @menu.options.surface "menu") "--menu-surface")
+    }}
+    @menuHighlight={{eq @menu.options.surface "menu"}}
     @role={{@menu.options.contentRole}}
     @trapTab={{@menu.options.trapTab}}
   />

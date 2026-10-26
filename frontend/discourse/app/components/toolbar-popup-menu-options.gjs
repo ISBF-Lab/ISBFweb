@@ -150,7 +150,7 @@ export default class ToolbarPopupMenuOptions extends Component {
       @fallbackPlacements={{array "top"}}
       @groupIdentifier="toolbar-menu"
       @identifier={{concat "toolbar-menu__" @class}}
-      @modalForMobile={{true}}
+      @modalForMobile={{false}}
       @offset={{5}}
       @onKeydown={{@onKeydown}}
       @onRegisterApi={{this.onRegisterApi}}

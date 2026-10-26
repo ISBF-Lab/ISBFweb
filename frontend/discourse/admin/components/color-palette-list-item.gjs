@@ -180,7 +180,7 @@ export default class ColorPaletteListItem extends Component {
             <DMenu
               @icon="ellipsis"
               @isLoading={{this.isLoading}}
-              @modalForMobile={{true}}
+              @modalForMobile={{false}}
               @onRegisterApi={{this.onRegisterApi}}
               @triggerClass="btn-flat"
             >

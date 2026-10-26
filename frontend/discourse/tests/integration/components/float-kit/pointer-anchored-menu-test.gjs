@@ -236,6 +236,7 @@ module(
         component: CloseMenu,
         identifier: "pointer-oracle-mobile-menu",
         modalForMobile: true,
+        surface: "popover",
         ariaLabel: expectedLabel,
       });
       await settled();

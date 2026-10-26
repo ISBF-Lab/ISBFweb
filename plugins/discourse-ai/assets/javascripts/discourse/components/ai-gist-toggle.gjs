@@ -57,7 +57,7 @@ export default class AiGistToggle extends Component {
       <DMenu
         @autofocus={{true}}
         @identifier="topic-list-layout"
-        @modalForMobile={{true}}
+        @modalForMobile={{false}}
         @onRegisterApi={{this.onRegisterApi}}
         @triggerClass="btn-default btn-icon"
       >

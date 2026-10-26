@@ -10,8 +10,13 @@ import { horizontalViewportInset } from "discourse/float-kit/lib/update-position
 import FloatKitApplyFloatingUi from "discourse/float-kit/modifiers/apply-floating-ui";
 import FloatKitCloseOnEscape from "discourse/float-kit/modifiers/close-on-escape";
 import FloatKitTabOrderInline from "discourse/float-kit/modifiers/tab-order-inline";
+import {
+  containsFloatingTarget,
+  registerFloatingOrigin,
+} from "discourse/ui-kit/-internals/floating-family";
 import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
 import dCloseOnClickOutside from "discourse/ui-kit/modifiers/d-close-on-click-outside";
+import dMenuHighlight from "discourse/ui-kit/modifiers/d-menu-highlight";
 import dTrapTab from "discourse/ui-kit/modifiers/d-trap-tab";
 
 interface DFloatBodySignature {
@@ -28,6 +33,9 @@ interface DFloatBodySignature {
 
     /** A class added to the inner content element. */
     innerClass?: string;
+
+    /** Whether semantic menu rows receive the shared visual cursor. */
+    menuHighlight?: boolean;
 
     /** The ARIA role for the content. */
     role?: string;
@@ -67,6 +75,67 @@ interface DFloatBodySignature {
  * instance plus a few presentational overrides.
  */
 export default class DFloatBody extends Component<DFloatBodySignature> {
+  trackOrigin = modifierFn(
+    (element: HTMLElement, [trigger]: [HTMLElement | null]) => {
+      const release = registerFloatingOrigin(element, trigger);
+      if (!element.classList.contains("--menu-surface") || !trigger) {
+        return release;
+      }
+      let frame: number | null = null;
+      const update = () => {
+        if (frame !== null) {
+          return;
+        }
+        frame = requestAnimationFrame(() => {
+          frame = null;
+          const viewport = window.visualViewport;
+          const top = viewport?.offsetTop ?? 0;
+          const height = viewport?.height ?? window.innerHeight;
+          const container = trigger
+            .closest(".d-modal__body")
+            ?.getBoundingClientRect();
+          const bounds = trigger.getBoundingClientRect();
+          const above = bounds.top - Math.max(top, container?.top ?? top) - 16;
+          const below =
+            Math.min(top + height, container?.bottom ?? top + height) -
+            bounds.bottom -
+            16;
+          let available = element.dataset.placement?.startsWith("top")
+            ? above
+            : below;
+          if (available < 44) {
+            available = Math.max(above, below);
+          }
+          const limit = `${Math.max(0, Math.min(height * 0.55, available))}px`;
+          if (
+            element.style.getPropertyValue("--d-menu-available-height") !==
+            limit
+          ) {
+            element.style.setProperty("--d-menu-available-height", limit);
+          }
+        });
+      };
+      const observer = new MutationObserver(update);
+      observer.observe(element, {
+        attributes: true,
+        attributeFilter: ["data-placement"],
+      });
+      window.visualViewport?.addEventListener("resize", update);
+      window.visualViewport?.addEventListener("scroll", update);
+      window.addEventListener("resize", update);
+      update();
+      return () => {
+        release();
+        observer.disconnect();
+        window.visualViewport?.removeEventListener("resize", update);
+        window.visualViewport?.removeEventListener("scroll", update);
+        window.removeEventListener("resize", update);
+        if (frame !== null) {
+          cancelAnimationFrame(frame);
+        }
+      };
+    }
+  );
   closeOnScroll = modifierFn(() => {
     const firstScrollParent = getScrollParent(this.trigger)!;
 
@@ -107,7 +176,10 @@ export default class DFloatBody extends Component<DFloatBodySignature> {
     const onFocusIn = () => instance.lockHoverCloseForFocus();
     const onFocusOut = (event: FocusEvent) => {
       const nextFocused = event.relatedTarget;
-      if (nextFocused instanceof Node && element.contains(nextFocused)) {
+      if (
+        nextFocused instanceof Node &&
+        containsFloatingTarget(element, nextFocused)
+      ) {
         return;
       }
       instance.unlockHoverCloseForFocus();
@@ -242,6 +314,7 @@ export default class DFloatBody extends Component<DFloatBodySignature> {
         style={{this.style}}
         ...attributes
         {{FloatKitApplyFloatingUi this.trigger this.options @instance}}
+        {{this.trackOrigin @instance.triggerElement}}
         {{this.trapInteractionPropagation}}
         {{(if @trapTab (modifier dTrapTab autofocus=this.options.autofocus))}}
         {{(if
@@ -267,7 +340,7 @@ export default class DFloatBody extends Component<DFloatBodySignature> {
         {{(if this.supportsCloseOnScroll (modifier this.closeOnScroll))}}
         {{(if this.supportsHoverGrace (modifier this.hoverGrace))}}
       >
-        <div class={{@innerClass}}>
+        <div class={{@innerClass}} {{(if @menuHighlight dMenuHighlight)}}>
           {{yield}}
         </div>
       </div>

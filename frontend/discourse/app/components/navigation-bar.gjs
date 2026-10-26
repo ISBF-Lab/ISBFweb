@@ -54,7 +54,7 @@ export default class NavigationBarComponent extends Component {
           <DMenu
             @autofocus={{true}}
             @identifier="list-control-toggle-link"
-            @modalForMobile={{true}}
+            @modalForMobile={{false}}
             @onRegisterApi={{this.onRegisterApi}}
           >
             <:trigger>

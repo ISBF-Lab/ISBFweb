@@ -220,7 +220,7 @@ export default class TopicFooterButtons extends Component {
               <DMenu
                 class="topic-footer-button btn-default"
                 @identifier="topic-footer-mobile-dropdown"
-                @modalForMobile={{true}}
+                @modalForMobile={{false}}
               >
                 <:trigger>
                   {{dIcon "ellipsis-vertical"}}

@@ -257,7 +257,7 @@ export default class TopicMapSummary extends Component {
         @identifier="topic-map__views"
         @inline={{true}}
         @interactive={{true}}
-        @modalForMobile={{true}}
+        @modalForMobile={{false}}
         @onShow={{this.fetchViews}}
         @placement="right"
       >
@@ -300,7 +300,7 @@ export default class TopicMapSummary extends Component {
             @identifier="topic-map__likes"
             @inline={{true}}
             @interactive={{true}}
-            @modalForMobile={{true}}
+            @modalForMobile={{false}}
             @placement="right"
           >
             <:trigger>
@@ -365,7 +365,7 @@ export default class TopicMapSummary extends Component {
           @identifier="topic-map__links"
           @inline={{true}}
           @interactive={{true}}
-          @modalForMobile={{true}}
+          @modalForMobile={{false}}
           @placement="right"
         >
           <:trigger>
@@ -416,7 +416,7 @@ export default class TopicMapSummary extends Component {
           @identifier="topic-map__users"
           @inline={{true}}
           @interactive={{true}}
-          @modalForMobile={{true}}
+          @modalForMobile={{false}}
           @placement="right"
         >
           <:trigger>

@@ -123,7 +123,7 @@ export default class NestedDeletedPosts extends Component {
                 <DMenu
                   @ariaLabel={{i18n "more"}}
                   @icon="ellipsis"
-                  @modalForMobile={{true}}
+                  @modalForMobile={{false}}
                   @title={{i18n "more"}}
                   @triggerClass="btn-flat nested-deleted-posts__more"
                 >

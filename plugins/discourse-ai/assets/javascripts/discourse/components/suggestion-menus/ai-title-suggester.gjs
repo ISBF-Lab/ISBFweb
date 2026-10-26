@@ -102,7 +102,7 @@ export default class AiTitleSuggester extends Component {
         @contentClass="ai-suggestions-menu"
         @icon={{this.triggerIcon}}
         @identifier="ai-title-suggester"
-        @modalForMobile={{true}}
+        @modalForMobile={{false}}
         @onClose={{this.onClose}}
         @onRegisterApi={{this.onRegisterApi}}
         @title={{i18n "discourse_ai.ai_helper.suggest"}}

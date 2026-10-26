@@ -56,7 +56,7 @@ export default class RedesignedAdminDashboard extends Component {
             @icon="gear"
             @identifier="db-configure"
             @label={{i18n "admin.dashboard.configure.button"}}
-            @modalForMobile={{true}}
+            @modalForMobile={{false}}
             @title={{i18n "admin.dashboard.configure.tooltip"}}
             @triggerClass="btn-default"
           >

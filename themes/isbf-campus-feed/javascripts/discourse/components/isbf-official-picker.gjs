@@ -1,15 +1,30 @@
 import Component from "@glimmer/component";
 import { fn } from "@ember/helper";
-import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { themePrefix } from "virtual:theme";
 import DMenu from "discourse/float-kit/components/d-menu";
 import DButton from "discourse/ui-kit/d-button";
 import DDropdownMenu from "discourse/ui-kit/d-dropdown-menu";
+import dRovingFocus from "discourse/ui-kit/modifiers/d-roving-focus";
 import { i18n } from "discourse-i18n";
 
 export default class ISBFOfficialPicker extends Component {
-  fallbackPlacements = ["bottom-start", "bottom-end"];
+  fallbackPlacements = ["top-start", "bottom-end", "top-end"];
+  #menu;
+  #entered = false;
+
+  get menuItems() {
+    return this.args.multiple
+      ? this.options
+      : [
+          {
+            id: "",
+            label: i18n(themePrefix(this.args.allKey)),
+            selected: this.allSelected,
+          },
+          ...this.options,
+        ];
+  }
 
   get label() {
     const selected = this.options.filter((item) => item.selected);
@@ -37,54 +52,95 @@ export default class ISBFOfficialPicker extends Component {
   }
 
   @action
+  enter() {
+    if (this.#entered) {
+      return;
+    }
+    this.#entered = true;
+    const row =
+      this.#menu?.content?.querySelector('[aria-checked="true"]') ||
+      this.#menu?.content?.querySelector(
+        "button[role], input[type='checkbox']"
+      );
+    row?.focus({ preventScroll: true });
+    row?.scrollIntoView({ block: "nearest" });
+  }
+
+  @action
+  closed() {
+    this.#entered = false;
+  }
+
+  @action
+  openFromKey(event) {
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      this.#menu?.show();
+    }
+  }
+
+  @action
+  registerMenu(menu) {
+    this.#menu = menu;
+  }
+
+  @action
   async select(menu, id) {
     this.args.onSelect(id);
     await menu.close();
   }
 
   @action
-  toggle(id, event) {
-    this.args.onSelect(id, event.target.checked);
+  toggle(id, selected) {
+    this.args.onSelect(id, !selected);
   }
 
   <template>
     <DMenu
-      @ariaLabel={{i18n (themePrefix @labelKey)}}
+      aria-haspopup="menu"
+      @ariaLabel={{this.label}}
       @contentClass="isbf-official-picker__menu"
+      @contentRole="presentation"
       @fallbackPlacements={{this.fallbackPlacements}}
       @icon="chevron-down"
+      @inlineTabOrder={{true}}
       @label={{this.label}}
+      @onClose={{this.closed}}
+      @onKeydown={{this.openFromKey}}
+      @onPositioned={{this.enter}}
+      @onRegisterApi={{this.registerMenu}}
       @placement="bottom-start"
       @triggerClass="btn-flat isbf-official-picker__trigger"
     >
       <:content as |menu|>
-        <DDropdownMenu as |dropdown|>
-          {{#unless @multiple}}
-            <dropdown.item>
-              <DButton
-                class="btn-flat isbf-official-picker__item"
-                @action={{fn this.select menu ""}}
-                @ariaPressed={{this.allSelected}}
-                @translatedLabel={{i18n (themePrefix @allKey)}}
-              />
-            </dropdown.item>
-          {{/unless}}
-          {{#each this.options as |item|}}
-            <dropdown.item>
+        <DDropdownMenu
+          aria-label={{i18n (themePrefix @labelKey)}}
+          role="menu"
+          @manageFocus={{false}}
+          {{dRovingFocus
+            itemSelector="button[role]"
+            itemsKey=this.menuItems
+            orientation="vertical"
+            typeAhead=true
+          }}
+          as |dropdown|
+        >
+          {{#each this.menuItems key="id" as |item|}}
+            <dropdown.item role="presentation">
               {{#if @multiple}}
-                <label class="isbf-official-picker__item">
-                  <input
-                    checked={{item.selected}}
-                    type="checkbox"
-                    {{on "change" (fn this.toggle item.id)}}
-                  />
-                  <span>{{item.label}}</span>
-                </label>
+                <DButton
+                  aria-checked={{if item.selected "true" "false"}}
+                  class="isbf-official-picker__item"
+                  role="menuitemcheckbox"
+                  @action={{fn this.toggle item.id item.selected}}
+                  @translatedLabel={{item.label}}
+                />
               {{else}}
                 <DButton
-                  class="btn-flat isbf-official-picker__item"
+                  aria-checked={{if item.selected "true" "false"}}
+                  class="isbf-official-picker__item"
+                  role="menuitemradio"
                   @action={{fn this.select menu item.id}}
-                  @ariaPressed={{item.selected}}
                   @translatedLabel={{item.label}}
                 />
               {{/if}}

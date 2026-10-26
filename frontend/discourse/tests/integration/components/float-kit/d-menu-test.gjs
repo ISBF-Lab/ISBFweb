@@ -32,7 +32,12 @@ import dElement from "discourse/ui-kit/helpers/d-element";
 const ModalWithMenu = <template>
   <DModal @closeModal={{@closeModal}} @inline={{true}}>
     <span class="outer-modal-content">Outer modal</span>
-    <DMenu @inline={{true}} @label="Permission" @modalForMobile={{true}}>
+    <DMenu
+      @inline={{true}}
+      @label="Permission"
+      @modalForMobile={{true}}
+      @surface="popover"
+    >
       <:content as |menu|>
         <DButton class="close-menu" @action={{menu.close}}>Viewer</DButton>
       </:content>
@@ -98,6 +103,22 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
     assert.dom(".fk-d-menu").hasText("content");
   });
 
+  test("menu surfaces stay floating on mobile even with a legacy modal option", async function (assert) {
+    forceMobile();
+    await render(
+      <template>
+        <DMenu @content="Options" @inline={{true}} @modalForMobile={{true}} />
+      </template>
+    );
+    await open();
+    assert
+      .dom(".fk-d-menu .d-menu-surface")
+      .hasText("Options", "the shared floating menu is rendered");
+    assert
+      .dom(".fk-d-menu-modal")
+      .doesNotExist("the legacy option cannot create a menu sheet");
+  });
+
   test("@modalForMobile", async function (assert) {
     forceMobile();
 
@@ -108,6 +129,7 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
           @identifier="foo"
           @inline={{true}}
           @modalForMobile={{true}}
+          @surface="popover"
         />
       </template>
     );
@@ -123,7 +145,12 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
 
     await render(
       <template>
-        <DMenu @inline={{true}} @label="Permission" @modalForMobile={{true}}>
+        <DMenu
+          @inline={{true}}
+          @label="Permission"
+          @modalForMobile={{true}}
+          @surface="popover"
+        >
           <:content as |menu|>
             <DButton class="close-menu" @action={{menu.close}}>Viewer</DButton>
           </:content>
@@ -186,6 +213,7 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
         content: "menu content",
         identifier: "mobile-menu",
         modalForMobile: true,
+        surface: "popover",
       });
     const tooltip = await getOwner(this)
       .lookup("service:tooltip")
@@ -214,8 +242,12 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
     await render(<template><DMenus /></template>);
     const menu = getOwner(this).lookup("service:menu");
 
-    assert.true(
+    assert.false(
       menu.shouldRenderInModal(true),
+      "menu surfaces remain floating"
+    );
+    assert.true(
+      menu.shouldRenderInModal(true, "popover"),
       "mobile plus modalForMobile renders in a modal"
     );
     assert.false(
@@ -269,6 +301,7 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
           @label="label"
           @modalForMobile={{true}}
           @onPositioned={{this.onPositioned}}
+          @surface="popover"
         />
       </template>
     );
@@ -295,6 +328,7 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
           @identifier="foo"
           @inline={{true}}
           @modalForMobile={{true}}
+          @surface="popover"
         />
       </template>
     );
@@ -312,7 +346,12 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
 
     await render(
       <template>
-        <DMenu @identifier="foo" @inline={{true}} @modalForMobile={{true}}>
+        <DMenu
+          @identifier="foo"
+          @inline={{true}}
+          @modalForMobile={{true}}
+          @surface="popover"
+        >
           <div class="test-scroll-area" style="height: 50px; overflow-y: auto">
             <div style="height: 500px">tall content</div>
           </div>

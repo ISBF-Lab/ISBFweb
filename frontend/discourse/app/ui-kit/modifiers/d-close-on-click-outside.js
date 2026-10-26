@@ -1,6 +1,7 @@
 import { registerDestructor } from "@ember/destroyable";
 import Modifier from "ember-modifier";
 import { bind } from "discourse/lib/decorators";
+import { containsFloatingTarget } from "discourse/ui-kit/-internals/floating-family";
 
 export default class DCloseOnClickOutside extends Modifier {
   constructor(owner, args) {
@@ -25,14 +26,14 @@ export default class DCloseOnClickOutside extends Modifier {
 
   @bind
   check(event) {
-    if (this.element.contains(event.target)) {
+    if (containsFloatingTarget(this.element, event.target)) {
       return;
     }
 
     const target = this.target ?? document.querySelector(this.targetSelector);
 
     if (
-      target?.contains(event.target) ||
+      (target && containsFloatingTarget(target, event.target)) ||
       (this.secondaryTargetSelector &&
         document
           .querySelector(this.secondaryTargetSelector)

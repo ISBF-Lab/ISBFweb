@@ -34,6 +34,7 @@ import {
   feedAuthorStyle,
 } from "../lib/user-display";
 import postActionPulse from "../modifiers/post-action-pulse";
+import ISBFFeedCardMenu from "./isbf-feed-card-menu";
 import { ISBFMarketplacePrice } from "./isbf-marketplace-card";
 import ISBFOfficialActivitySummary from "./isbf-official-activity-summary";
 import ISBFOfficialCalendarItems from "./isbf-official-calendar-items";
@@ -61,11 +62,11 @@ export default class ISBFV2FeedCard extends Component {
   @tracked isReplying = false;
   @tracked liked;
   @tracked likeCount;
-  @tracked menuOpen = false;
   @tracked repostCount = null;
   @tracked viewCount = null;
-
   pulse = new PostActionPulse();
+
+  #menu;
 
   #bodyRequest = 0;
   #observer;
@@ -93,8 +94,6 @@ export default class ISBFV2FeedCard extends Component {
       "visibilitychange",
       this.onDocumentVisibilityChange
     );
-    document.removeEventListener("pointerdown", this.onOutsidePointer, true);
-    document.removeEventListener("keydown", this.onDocumentKeydown, true);
   }
 
   get avatarUrl() {
@@ -426,36 +425,8 @@ export default class ISBFV2FeedCard extends Component {
   }
 
   @action
-  toggleMenu(event) {
-    event.stopPropagation();
-    this.menuOpen = !this.menuOpen;
-    if (this.menuOpen) {
-      document.addEventListener("pointerdown", this.onOutsidePointer, true);
-      document.addEventListener("keydown", this.onDocumentKeydown, true);
-    } else {
-      this.#closeMenu();
-    }
-  }
-
-  @action
-  onOutsidePointer(event) {
-    if (
-      !this.#rootElement
-        ?.querySelector(".isbf-feed-card__menu-wrap")
-        ?.contains(event.target)
-    ) {
-      this.#closeMenu();
-    }
-  }
-
-  @action
-  onDocumentKeydown(event) {
-    if (event.key === "Escape") {
-      this.#closeMenu();
-      this.#rootElement
-        ?.querySelector(".isbf-feed-card__menu-trigger")
-        ?.focus();
-    }
+  registerMenu(menu) {
+    this.#menu = menu;
   }
 
   @action
@@ -474,7 +445,7 @@ export default class ISBFV2FeedCard extends Component {
         return;
       }
       post.set("topic", this.args.topic);
-      this.#closeMenu();
+      await this.#closeMenu();
       this.#rootElement
         ?.querySelector(".isbf-feed-card__menu-trigger")
         ?.focus();
@@ -561,9 +532,7 @@ export default class ISBFV2FeedCard extends Component {
   }
 
   #closeMenu() {
-    this.menuOpen = false;
-    document.removeEventListener("pointerdown", this.onOutsidePointer, true);
-    document.removeEventListener("keydown", this.onDocumentKeydown, true);
+    return this.#menu?.close();
   }
 
   async #showError(error) {
@@ -615,27 +584,12 @@ export default class ISBFV2FeedCard extends Component {
             href={{this.topicUrl}}
             title={{@topic.createdAt}}
           >{{this.relativeTime}}</a>
-          <div class="isbf-feed-card__menu-wrap">
-            <button
-              aria-expanded={{if this.menuOpen "true" "false"}}
-              aria-label={{i18n (themePrefix "isbf_v2.more_actions")}}
-              class="isbf-feed-card__menu-trigger"
-              type="button"
-              {{on "click" this.toggleMenu}}
-            >{{dIcon "ellipsis"}}</button>
-            {{#if this.menuOpen}}
-              <div class="isbf-feed-card__menu" role="menu">
-                {{#if this.canFlag}}<button
-                    disabled={{this.isFlagging}}
-                    role="menuitem"
-                    type="button"
-                    {{on "click" this.flag}}
-                  >{{dIcon "flag"}}{{i18n
-                      (themePrefix "isbf_v2.report")
-                    }}</button>{{/if}}
-              </div>
-            {{/if}}
-          </div>
+          <ISBFFeedCardMenu
+            @canFlag={{this.canFlag}}
+            @isFlagging={{this.isFlagging}}
+            @onFlag={{this.flag}}
+            @onRegisterApi={{this.registerMenu}}
+          />
         </header>
         {{#if this.displayTitle}}<a
             class="isbf-feed-card__title"

@@ -1,0 +1,623 @@
+{
+  "scanned_active_source_files": 5927,
+  "policy_findings": [],
+  "shared_adapters": {
+    "FormKit and native-select compatibility": "frontend/discourse/app/ui-kit/d-select.gts",
+    "Searchable legacy selectors": "frontend/discourse/select-kit/components/select-kit/select-kit-body.gjs",
+    "Declarative and service menus": "frontend/discourse/float-kit/components/d-float-body.gts",
+    "Action lists and finite multiple selection": "frontend/discourse/app/ui-kit/d-dropdown-menu.gjs"
+  },
+  "runtime_checks": [
+    {
+      "name": "Campus picker uses the shared rounded frame",
+      "width": 1440
+    },
+    {
+      "name": "Campus picker keeps long menus within the shared height limit",
+      "width": 1440
+    },
+    {
+      "name": "Campus picker fits the viewport",
+      "width": 1440
+    },
+    {
+      "name": "Campus picker uses rounded touch-sized rows",
+      "width": 1440
+    },
+    {
+      "name": "Campus picker uses the shared label typography",
+      "width": 1440
+    },
+    {
+      "name": "Official type picker uses the shared rounded frame",
+      "width": 1440
+    },
+    {
+      "name": "Official type picker keeps long menus within the shared height limit",
+      "width": 1440
+    },
+    {
+      "name": "Official type picker fits the viewport",
+      "width": 1440
+    },
+    {
+      "name": "Official type picker uses rounded touch-sized rows",
+      "width": 1440
+    },
+    {
+      "name": "Official type picker uses the shared label typography",
+      "width": 1440
+    },
+    {
+      "name": "Campus picker uses the shared rounded frame",
+      "width": 1440
+    },
+    {
+      "name": "Campus picker keeps long menus within the shared height limit",
+      "width": 1440
+    },
+    {
+      "name": "Campus picker fits the viewport",
+      "width": 1440
+    },
+    {
+      "name": "Campus picker uses rounded touch-sized rows",
+      "width": 1440
+    },
+    {
+      "name": "Campus picker uses the shared label typography",
+      "width": 1440
+    },
+    {
+      "name": "Official type picker uses the shared rounded frame",
+      "width": 1440
+    },
+    {
+      "name": "Official type picker keeps long menus within the shared height limit",
+      "width": 1440
+    },
+    {
+      "name": "Official type picker fits the viewport",
+      "width": 1440
+    },
+    {
+      "name": "Official type picker uses rounded touch-sized rows",
+      "width": 1440
+    },
+    {
+      "name": "Official type picker uses the shared label typography",
+      "width": 1440
+    },
+    {
+      "name": "Campus picker uses the shared rounded frame",
+      "width": 390
+    },
+    {
+      "name": "Campus picker keeps long menus within the shared height limit",
+      "width": 390
+    },
+    {
+      "name": "Campus picker fits the viewport",
+      "width": 390
+    },
+    {
+      "name": "Campus picker uses rounded touch-sized rows",
+      "width": 390
+    },
+    {
+      "name": "Campus picker uses the shared label typography",
+      "width": 390
+    },
+    {
+      "name": "Official type picker uses the shared rounded frame",
+      "width": 390
+    },
+    {
+      "name": "Official type picker keeps long menus within the shared height limit",
+      "width": 390
+    },
+    {
+      "name": "Official type picker fits the viewport",
+      "width": 390
+    },
+    {
+      "name": "Official type picker uses rounded touch-sized rows",
+      "width": 390
+    },
+    {
+      "name": "Official type picker uses the shared label typography",
+      "width": 390
+    },
+    {
+      "name": "Campus picker uses the shared rounded frame",
+      "width": 390
+    },
+    {
+      "name": "Campus picker keeps long menus within the shared height limit",
+      "width": 390
+    },
+    {
+      "name": "Campus picker fits the viewport",
+      "width": 390
+    },
+    {
+      "name": "Campus picker uses rounded touch-sized rows",
+      "width": 390
+    },
+    {
+      "name": "Campus picker uses the shared label typography",
+      "width": 390
+    },
+    {
+      "name": "Official type picker uses the shared rounded frame",
+      "width": 390
+    },
+    {
+      "name": "Official type picker keeps long menus within the shared height limit",
+      "width": 390
+    },
+    {
+      "name": "Official type picker fits the viewport",
+      "width": 390
+    },
+    {
+      "name": "Official type picker uses rounded touch-sized rows",
+      "width": 390
+    },
+    {
+      "name": "Official type picker uses the shared label typography",
+      "width": 390
+    },
+    {
+      "name": "Campus picker uses the shared rounded frame",
+      "width": 320
+    },
+    {
+      "name": "Campus picker keeps long menus within the shared height limit",
+      "width": 320
+    },
+    {
+      "name": "Campus picker fits the viewport",
+      "width": 320
+    },
+    {
+      "name": "Campus picker uses rounded touch-sized rows",
+      "width": 320
+    },
+    {
+      "name": "Campus picker uses the shared label typography",
+      "width": 320
+    },
+    {
+      "name": "Official type picker uses the shared rounded frame",
+      "width": 320
+    },
+    {
+      "name": "Official type picker keeps long menus within the shared height limit",
+      "width": 320
+    },
+    {
+      "name": "Official type picker fits the viewport",
+      "width": 320
+    },
+    {
+      "name": "Official type picker uses rounded touch-sized rows",
+      "width": 320
+    },
+    {
+      "name": "Official type picker uses the shared label typography",
+      "width": 320
+    },
+    {
+      "name": "Campus picker uses the shared rounded frame",
+      "width": 320
+    },
+    {
+      "name": "Campus picker keeps long menus within the shared height limit",
+      "width": 320
+    },
+    {
+      "name": "Campus picker fits the viewport",
+      "width": 320
+    },
+    {
+      "name": "Campus picker uses rounded touch-sized rows",
+      "width": 320
+    },
+    {
+      "name": "Campus picker uses the shared label typography",
+      "width": 320
+    },
+    {
+      "name": "Official type picker uses the shared rounded frame",
+      "width": 320
+    },
+    {
+      "name": "Official type picker keeps long menus within the shared height limit",
+      "width": 320
+    },
+    {
+      "name": "Official type picker fits the viewport",
+      "width": 320
+    },
+    {
+      "name": "Official type picker uses rounded touch-sized rows",
+      "width": 320
+    },
+    {
+      "name": "Official type picker uses the shared label typography",
+      "width": 320
+    },
+    {
+      "name": "The shared pointer cursor glides",
+      "width": null
+    },
+    {
+      "name": "Keyboard navigation reaches the final option",
+      "width": null
+    },
+    {
+      "name": "Reduced motion removes menu and highlight movement",
+      "width": null
+    },
+    {
+      "name": "Account menu uses the shared rounded frame",
+      "width": 1440
+    },
+    {
+      "name": "Account menu keeps long menus within the shared height limit",
+      "width": 1440
+    },
+    {
+      "name": "Account menu fits the viewport",
+      "width": 1440
+    },
+    {
+      "name": "Account menu uses rounded touch-sized rows",
+      "width": 1440
+    },
+    {
+      "name": "Account menu uses the shared label typography",
+      "width": 1440
+    },
+    {
+      "name": "Account menu uses the shared rounded frame",
+      "width": 390
+    },
+    {
+      "name": "Account menu keeps long menus within the shared height limit",
+      "width": 390
+    },
+    {
+      "name": "Account menu fits the viewport",
+      "width": 390
+    },
+    {
+      "name": "Account menu uses rounded touch-sized rows",
+      "width": 390
+    },
+    {
+      "name": "Account menu uses the shared label typography",
+      "width": 390
+    },
+    {
+      "name": "Sidebar more menu uses the shared rounded frame",
+      "width": 1440
+    },
+    {
+      "name": "Sidebar more menu keeps long menus within the shared height limit",
+      "width": 1440
+    },
+    {
+      "name": "Sidebar more menu fits the viewport",
+      "width": 1440
+    },
+    {
+      "name": "Sidebar more menu uses rounded touch-sized rows",
+      "width": 1440
+    },
+    {
+      "name": "Sidebar more menu uses the shared label typography",
+      "width": 1440
+    },
+    {
+      "name": "Explore controls retain spacing and touch targets",
+      "width": 1440
+    },
+    {
+      "name": "Popular and new-topic labels fit their buttons",
+      "width": 1440
+    },
+    {
+      "name": "Explore controls retain spacing and touch targets",
+      "width": 1440
+    },
+    {
+      "name": "Popular and new-topic labels fit their buttons",
+      "width": 1440
+    },
+    {
+      "name": "Explore controls retain spacing and touch targets",
+      "width": 900
+    },
+    {
+      "name": "Popular and new-topic labels fit their buttons",
+      "width": 900
+    },
+    {
+      "name": "Explore controls retain spacing and touch targets",
+      "width": 900
+    },
+    {
+      "name": "Popular and new-topic labels fit their buttons",
+      "width": 900
+    },
+    {
+      "name": "Explore controls retain spacing and touch targets",
+      "width": 768
+    },
+    {
+      "name": "Popular and new-topic labels fit their buttons",
+      "width": 768
+    },
+    {
+      "name": "Explore controls retain spacing and touch targets",
+      "width": 768
+    },
+    {
+      "name": "Popular and new-topic labels fit their buttons",
+      "width": 768
+    },
+    {
+      "name": "Explore controls retain spacing and touch targets",
+      "width": 390
+    },
+    {
+      "name": "Popular and new-topic labels fit their buttons",
+      "width": 390
+    },
+    {
+      "name": "Explore controls retain spacing and touch targets",
+      "width": 390
+    },
+    {
+      "name": "Popular and new-topic labels fit their buttons",
+      "width": 390
+    },
+    {
+      "name": "Explore controls retain spacing and touch targets",
+      "width": 320
+    },
+    {
+      "name": "Popular and new-topic labels fit their buttons",
+      "width": 320
+    },
+    {
+      "name": "Explore controls retain spacing and touch targets",
+      "width": 320
+    },
+    {
+      "name": "Popular and new-topic labels fit their buttons",
+      "width": 320
+    },
+    {
+      "name": "Searchable category picker uses the shared rounded frame",
+      "width": 1440
+    },
+    {
+      "name": "Searchable category picker keeps long menus within the shared height limit",
+      "width": 1440
+    },
+    {
+      "name": "Searchable category picker fits the viewport",
+      "width": 1440
+    },
+    {
+      "name": "Searchable category picker uses rounded touch-sized rows",
+      "width": 1440
+    },
+    {
+      "name": "Searchable category picker uses the shared label typography",
+      "width": 1440
+    },
+    {
+      "name": "Search keeps focus in its input",
+      "width": 1440
+    },
+    {
+      "name": "Searching does not close or submit the picker",
+      "width": 1440
+    },
+    {
+      "name": "Searchable category picker uses the shared rounded frame",
+      "width": 390
+    },
+    {
+      "name": "Searchable category picker keeps long menus within the shared height limit",
+      "width": 390
+    },
+    {
+      "name": "Searchable category picker fits the viewport",
+      "width": 390
+    },
+    {
+      "name": "Searchable category picker uses rounded touch-sized rows",
+      "width": 390
+    },
+    {
+      "name": "Searchable category picker uses the shared label typography",
+      "width": 390
+    },
+    {
+      "name": "Search keeps focus in its input",
+      "width": 390
+    },
+    {
+      "name": "Searching does not close or submit the picker",
+      "width": 390
+    },
+    {
+      "name": "Notification menu uses the shared rounded frame",
+      "width": 1440
+    },
+    {
+      "name": "Notification menu keeps long menus within the shared height limit",
+      "width": 1440
+    },
+    {
+      "name": "Notification menu fits the viewport",
+      "width": 1440
+    },
+    {
+      "name": "Notification menu uses rounded touch-sized rows",
+      "width": 1440
+    },
+    {
+      "name": "Notification menu uses the shared label typography",
+      "width": 1440
+    },
+    {
+      "name": "Hovering number and dot keeps the notification menu stationary",
+      "width": null
+    },
+    {
+      "name": "Notification menu uses the shared rounded frame",
+      "width": 390
+    },
+    {
+      "name": "Notification menu keeps long menus within the shared height limit",
+      "width": 390
+    },
+    {
+      "name": "Notification menu fits the viewport",
+      "width": 390
+    },
+    {
+      "name": "Notification menu uses rounded touch-sized rows",
+      "width": 390
+    },
+    {
+      "name": "Notification menu uses the shared label typography",
+      "width": 390
+    },
+    {
+      "name": "The wrapped report action matches the shared highlight surface",
+      "width": null
+    },
+    {
+      "name": "Searchable country selector uses the shared rounded frame",
+      "width": 1440
+    },
+    {
+      "name": "Searchable country selector keeps long menus within the shared height limit",
+      "width": 1440
+    },
+    {
+      "name": "Searchable country selector fits the viewport",
+      "width": 1440
+    },
+    {
+      "name": "Searchable country selector uses rounded touch-sized rows",
+      "width": 1440
+    },
+    {
+      "name": "Searchable country selector uses the shared label typography",
+      "width": 1440
+    },
+    {
+      "name": "Searchable country selector uses the shared rounded frame",
+      "width": 390
+    },
+    {
+      "name": "Searchable country selector keeps long menus within the shared height limit",
+      "width": 390
+    },
+    {
+      "name": "Searchable country selector fits the viewport",
+      "width": 390
+    },
+    {
+      "name": "Searchable country selector uses rounded touch-sized rows",
+      "width": 390
+    },
+    {
+      "name": "Searchable country selector uses the shared label typography",
+      "width": 390
+    },
+    {
+      "name": "Searchable country selector uses the shared rounded frame",
+      "width": 320
+    },
+    {
+      "name": "Searchable country selector keeps long menus within the shared height limit",
+      "width": 320
+    },
+    {
+      "name": "Searchable country selector fits the viewport",
+      "width": 320
+    },
+    {
+      "name": "Searchable country selector uses rounded touch-sized rows",
+      "width": 320
+    },
+    {
+      "name": "Searchable country selector uses the shared label typography",
+      "width": 320
+    },
+    {
+      "name": "Long country lists scroll inside the floating panel",
+      "width": null
+    },
+    {
+      "name": "Admin setting selector uses the shared rounded frame",
+      "width": 1440
+    },
+    {
+      "name": "Admin setting selector keeps long menus within the shared height limit",
+      "width": 1440
+    },
+    {
+      "name": "Admin setting selector fits the viewport",
+      "width": 1440
+    },
+    {
+      "name": "Admin setting selector uses rounded touch-sized rows",
+      "width": 1440
+    },
+    {
+      "name": "Admin setting selector uses the shared label typography",
+      "width": 1440
+    },
+    {
+      "name": "Authentication theme selector uses the shared rounded frame",
+      "width": 1440
+    },
+    {
+      "name": "Authentication theme selector keeps long menus within the shared height limit",
+      "width": 1440
+    },
+    {
+      "name": "Authentication theme selector fits the viewport",
+      "width": 1440
+    },
+    {
+      "name": "Authentication theme selector uses rounded touch-sized rows",
+      "width": 1440
+    },
+    {
+      "name": "Authentication theme selector uses the shared label typography",
+      "width": 1440
+    },
+    {
+      "name": "No client exceptions across the frontend, authentication and admin routes",
+      "width": null
+    }
+  ],
+  "registered_non_menu_popovers": {
+    "frontend/discourse/app/form-kit/components/fk/control/color.gjs": "Two-dimensional color palette",
+    "frontend/discourse/admin/components/dashboard/date-range.gjs": "Calendar date-range panel",
+    "frontend/discourse/admin/components/ip-lookup.gjs": "IP lookup information panel",
+    "frontend/discourse/admin/components/admin-report-table-summary.gjs": "Report information panel"
+  },
+  "boundaries": "Representative development routes and shared-engine regression tests; optional plugin services were not all exercised live. Production publication is authorized and pending PR checks and merge; this record contains development results only."
+}

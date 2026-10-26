@@ -411,3 +411,7 @@ zh_CN:
     untitled_topic: "校园动态"
     preview_picture: "图片"
     preview_post: "查看帖子"
+    official_inactive: "%{label}（已停用）"
+    pin: 置顶
+    pin_update: 调整置顶时间
+    pin_cancel: 取消置顶

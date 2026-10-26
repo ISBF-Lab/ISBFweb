@@ -15,6 +15,8 @@ pre-commit:
     - merge
     - rebase
   commands:
+    menu-policy:
+      run: pnpm lint:menus
     rubocop:
       exclude: &ruby_exclude
         - "bin/dev"
@@ -101,6 +103,8 @@ fix-staged:
 lint-files:
   parallel: true
   commands:
+    menu-policy:
+      run: pnpm lint:menus
     rubocop:
       files: &working_tree_files git ls-files --cached --others --exclude-standard
       exclude: *ruby_exclude

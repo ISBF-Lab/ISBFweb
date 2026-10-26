@@ -37,7 +37,7 @@ export default class ISBFTopicMore extends Component {
         @icon="ellipsis"
         @identifier="isbf-v2-topic-more"
         @label={{i18n "more"}}
-        @modalForMobile={{true}}
+        @modalForMobile={{false}}
         @triggerClass="btn-default topic-footer-button"
       >
         <:content as |menu|>

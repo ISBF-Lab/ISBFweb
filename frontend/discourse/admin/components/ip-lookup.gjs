@@ -160,6 +160,7 @@ export default class IpLookup extends Component {
       @modalForMobile={{true}}
       @onRegisterApi={{this.onRegisterApi}}
       @onShow={{this.lookup}}
+      @surface="popover"
       @triggerClass="btn-default"
     >
       <:content>

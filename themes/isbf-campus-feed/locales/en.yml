@@ -415,3 +415,7 @@ en:
     untitled_topic: "Campus update"
     preview_picture: "Picture"
     preview_post: "View post"
+    official_inactive: 'Inactive: %{label}'
+    pin: Pin
+    pin_update: Adjust pin duration
+    pin_cancel: Unpin

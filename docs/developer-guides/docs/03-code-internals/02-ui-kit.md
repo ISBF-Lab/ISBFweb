@@ -237,3 +237,7 @@ A section should be designed, with multiple examples that each isolate one capab
 - [Designing for devices](28-designing-for-devices.md) and [responsive widths](29-designing-for-responsive-widths.md).
 - [Drag, resize, and gesture primitives](30-drag-and-gesture-primitives.md) for the modifiers that handle input.
 - [Types](27-types.md) for the Glint and TypeScript conventions the kit follows.
+
+## Shared dropdowns
+
+Use FormKit or `DSelect` for form selections, existing SelectKit/DMultiSelect adapters for searchable selections, and DMenu/DDropdownMenu for actions. The shared visual cursor never owns focus or selection. See [the project dropdown contract](../../../design-system/dropdowns.md) for the automatic menu surface, mobile behavior, compatible Option blocks, and required `pnpm lint:menus` check.

@@ -116,7 +116,7 @@ class FieldHelper {
         ).value;
       }
       case "select": {
-        return this.element.querySelector(".form-kit__control-select").value;
+        return this.element.querySelector("select.d-native-select").value;
       }
       case "color": {
         return this.element.querySelector(".form-kit__control-color-input-hex")

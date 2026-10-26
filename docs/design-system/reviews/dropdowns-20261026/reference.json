@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-26",
+  "scope": "All dropdowns in frontend, authentication, admin and active plugins",
+  "approved_by_user": [
+    "可以 就按照这个样子 统一所有的下拉菜单 而且下次新增的时候别人agent也会复用这个样式",
+    "全站都统一",
+    "按用途保留入口",
+    "统一就地浮动",
+    "也要是这种圆角（点开之后的菜单）",
+    "Implement the plan."
+  ],
+  "reference_image_sha256": "cffa821d5bb0a8127cd2762452bd0309f1fa26b8efbb4f5a0aece59e389c2c81",
+  "pilot_manifest_sha256": "872f23fe6374528a75b2474e63a11d4845f1dc29f385727c5a06fc909a60da73",
+  "approved_geometry": {
+    "panel_radius": 24,
+    "row_radius": 16,
+    "panel_padding": 8
+  },
+  "delivery": "isolated development preview; sitewide visual acceptance pending"
+}

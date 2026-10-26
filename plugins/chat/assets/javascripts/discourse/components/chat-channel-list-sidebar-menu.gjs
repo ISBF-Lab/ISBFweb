@@ -202,7 +202,7 @@ export default class ChatChannelListSidebarMenu extends Component {
             @groupIdentifier="chat-channel-list-options-submenu"
             @identifier="chat-channel-list-filter-menu"
             @label={{this.currentFilterLabel}}
-            @modalForMobile={{true}}
+            @modalForMobile={{false}}
             @offset={{hash mainAxis=10 crossAxis=-5}}
             @placement="right-start"
           >
@@ -235,7 +235,7 @@ export default class ChatChannelListSidebarMenu extends Component {
             @groupIdentifier="chat-channel-list-options-submenu"
             @identifier="chat-channel-list-sort-menu"
             @label={{this.currentSortLabel}}
-            @modalForMobile={{true}}
+            @modalForMobile={{false}}
             @offset={{hash mainAxis=10 crossAxis=-5}}
             @placement="right-start"
           >

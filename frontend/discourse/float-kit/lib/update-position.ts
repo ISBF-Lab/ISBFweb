@@ -345,7 +345,12 @@ function buildConstrainHeightMiddleware(
 
       if (inner) {
         inner.style.display = hideElement ? "none" : "";
-        Object.assign(inner.style, { maxHeight: `${max}px` });
+        if (inner.classList.contains("d-menu-surface")) {
+          inner.style.removeProperty("max-height");
+          inner.style.setProperty("--d-menu-available-height", `${max}px`);
+        } else {
+          inner.style.maxHeight = `${max}px`;
+        }
       } else {
         elements.floating.style.display = hideElement ? "none" : "";
         Object.assign(elements.floating.style, {

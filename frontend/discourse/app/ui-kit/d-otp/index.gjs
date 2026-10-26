@@ -10,8 +10,15 @@ import { isBlank } from "@ember/utils";
 import preventScrollOnFocus from "discourse/modifiers/prevent-scroll-on-focus";
 import { eq } from "discourse/truth-helpers";
 import { i18n } from "discourse-i18n";
-import Animated from "./animated";
+import AnimatedUntyped from "./animated";
 import Slot from "./slot";
+
+// TODO(typescript-pending): remove the alias once the animated component declares its element Signature.
+/** @type {import("@glint/template").ComponentLike<DOTPSignature>} */
+const Animated =
+  /** @type {import("@glint/template").ComponentLike<DOTPSignature>} */ (
+    /** @type {unknown} */ (AnimatedUntyped)
+  );
 
 const DEFAULT_SLOTS = 6;
 

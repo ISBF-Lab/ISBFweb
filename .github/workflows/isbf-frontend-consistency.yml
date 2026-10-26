@@ -29,7 +29,7 @@ concurrency:
 jobs:
   theme:
     runs-on: ubuntu-latest
-    container: discourse/discourse_test:release
+    container: discourse/discourse_test@sha256:94eca5318fed6171264b95204914de76a113c305cebb72d9fa9527e2c4496494
     timeout-minutes: 30
     defaults:
       run:
@@ -71,6 +71,9 @@ jobs:
           bundle config --local without ""
           bundle install --jobs 1
           pnpm install --frozen-lockfile
+
+      - name: Frontend types
+        run: pnpm lint:types
 
       - name: Changed source lint
         if: github.event_name == 'pull_request'
@@ -153,6 +156,14 @@ jobs:
         env:
           LOAD_PLUGINS: "0"
         run: bin/qunit --standalone frontend/discourse/tests/unit/lib/topic-display-title-test.js
+
+      - name: Shared dropdown regression
+        env:
+          LOAD_PLUGINS: "0"
+        run: |
+          pnpm test:menus
+          pnpm lint:menus
+          bin/qunit --standalone --filter '/(ui-kit.*D(NativeSelect|Select|DropdownMenu)|FloatKit.*DMenu|FormKit.*Select)/i'
 
       - name: Project theme QUnit
         id: theme_qunit

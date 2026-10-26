@@ -1,16 +1,19 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+import { array } from "@ember/helper";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { themePrefix } from "virtual:theme";
 import Form from "discourse/components/form";
 import PluginOutlet from "discourse/components/plugin-outlet";
+import DMenu from "discourse/float-kit/components/d-menu";
 import lazyHash from "discourse/helpers/lazy-hash";
 import { ajax } from "discourse/lib/ajax";
 import logout from "discourse/lib/logout";
 import { getCurrentPushSubscription } from "discourse/lib/push-notifications";
 import DButton from "discourse/ui-kit/d-button";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
+import dMenuHighlight from "discourse/ui-kit/modifiers/d-menu-highlight";
 import { i18n } from "discourse-i18n";
 
 export default class ISBFV2AccountMenu extends Component {
@@ -34,6 +37,7 @@ export default class ISBFV2AccountMenu extends Component {
   @tracked verificationLinkId;
 
   #rootElement;
+  #menu;
 
   willDestroy() {
     super.willDestroy(...arguments);
@@ -83,10 +87,26 @@ export default class ISBFV2AccountMenu extends Component {
   }
 
   @action
-  closeMenu() {
+  registerMenu(menu) {
+    this.#menu = menu;
+    this.#rootElement = menu.triggerElement.closest(".isbf-v2-account-menu");
+  }
+
+  @action
+  menuShown() {
+    this.isOpen = true;
+    this.#loadAccounts();
+  }
+
+  @action
+  menuClosed() {
     this.isOpen = false;
     this.#resetForms();
-    this.#removeDocumentListeners();
+  }
+
+  @action
+  closeMenu() {
+    this.#menu?.close();
   }
 
   @action
@@ -136,7 +156,8 @@ export default class ISBFV2AccountMenu extends Component {
     // Removing or disabling a focused control can leave no focus destination.
     if (
       event.relatedTarget &&
-      !event.currentTarget.contains(event.relatedTarget)
+      !event.currentTarget.contains(event.relatedTarget) &&
+      !this.#menu?.content?.contains(event.relatedTarget)
     ) {
       this.closeMenu();
     }
@@ -159,7 +180,7 @@ export default class ISBFV2AccountMenu extends Component {
       return;
     }
     if (!this.#rootElement?.contains(document.activeElement)) {
-      this.closeMenu();
+      this.#menu?.scheduleHoverClose();
     }
   }
 
@@ -322,10 +343,7 @@ export default class ISBFV2AccountMenu extends Component {
 
   #showMenu(target) {
     this.#rootElement = target.closest(".isbf-v2-account-menu");
-    this.isOpen = true;
-    this.#loadAccounts();
-    document.addEventListener("pointerdown", this.onOutsidePointer, true);
-    document.addEventListener("keydown", this.onKeyDown, true);
+    this.#menu?.show();
   }
 
   async #signOut() {
@@ -378,282 +396,299 @@ export default class ISBFV2AccountMenu extends Component {
           </a>
         {{/unless}}
 
-        <button
-          aria-expanded={{if this.isOpen "true" "false"}}
-          aria-label={{i18n (themePrefix "isbf_v2.account_actions")}}
-          class="isbf-v2-account-menu__trigger"
-          type="button"
-          {{on "click" this.toggleMenu}}
+        <DMenu
+          @ariaLabel={{i18n (themePrefix "isbf_v2.account_actions")}}
+          @contentClass="isbf-v2-account-menu__float"
+          @hoverGracePeriod={{250}}
+          @inlineTabOrder={{true}}
+          @onClose={{this.menuClosed}}
+          @onRegisterApi={{this.registerMenu}}
+          @onShow={{this.menuShown}}
+          @placement={{if @mobile "bottom-start" "top-start"}}
+          @triggerClass="isbf-v2-account-menu__trigger"
+          @untriggers={{if @mobile (array "click") (array)}}
         >
-          {{#unless @mobile}}
-            <span class="isbf-avatar isbf-v2-account-menu__compact-avatar"><img
-                alt=""
-                height="40"
-                src={{this.avatarUrl}}
-                width="40"
-              /><PluginOutlet
-                @name="user-avatar-frame"
-                @outletArgs={{lazyHash user=this.currentUser motion="static"}}
-              /></span>
-          {{/unless}}
-          {{dIcon "ellipsis"}}
-        </button>
+          <:trigger>
 
-        {{#if this.isOpen}}
-          <div
-            aria-label={{i18n (themePrefix "isbf_v2.account_actions")}}
-            class="isbf-v2-account-menu__panel"
-            role="group"
-          >
             {{#unless @mobile}}
-              <a
-                class="isbf-v2-account-menu__compact-profile"
-                href={{this.profileHref}}
-                {{on "click" this.closeMenu}}
-              >
-                {{i18n (themePrefix "isbf_v2.profile")}}
-              </a>
+              <span
+                class="isbf-avatar isbf-v2-account-menu__compact-avatar"
+              ><img
+                  alt=""
+                  height="40"
+                  src={{this.avatarUrl}}
+                  width="40"
+                /><PluginOutlet
+                  @name="user-avatar-frame"
+                  @outletArgs={{lazyHash user=this.currentUser motion="static"}}
+                /></span>
             {{/unless}}
-            <a href="/isbf-anonymous/posts" {{on "click" this.closeMenu}}>
-              {{i18n (themePrefix "isbf_v2.my_anonymous_posts")}}
-            </a>
+            {{dIcon "ellipsis"}}
+          </:trigger>
+          <:content>
 
-            {{#if this.canSwitchAccounts}}
-              {{#if this.showLinkedAccounts}}
-                {{#each this.activeLinks as |link|}}
-                  <div class="isbf-v2-account-menu__linked-account">
-                    <span class="isbf-avatar"><img
-                        alt=""
-                        height="32"
-                        src={{link.account.avatar_template}}
-                        width="32"
-                      /><PluginOutlet
-                        @name="user-avatar-frame"
-                        @outletArgs={{lazyHash
-                          user=link.account
-                          motion="static"
-                        }}
-                      /></span>
-                    <span class="isbf-v2-account-menu__account-info">
-                      <b class="isbf-v2-account-menu__account-name">
-                        {{or link.account.name link.account.username}}
-                      </b>
-                      <small class="isbf-v2-account-menu__account-username">
-                        @{{link.account.username}}
-                      </small>
-                    </span>
-                    {{#if (eq link.status "approved")}}
-                      <button
-                        disabled={{this.isBusy}}
-                        type="button"
-                        {{on "click" (fn this.switchAccount link)}}
-                      >
-                        {{if
-                          link.device_authorized
-                          (i18n (themePrefix "isbf_v2.switch_now"))
-                          (i18n (themePrefix "isbf_v2.verify_device"))
-                        }}
-                      </button>
-                    {{else}}
-                      <small class="isbf-v2-account-menu__status">
-                        {{i18n (themePrefix "isbf_v2.account_link_pending")}}
-                      </small>
-                    {{/if}}
-
-                    {{#if (eq this.verificationLinkId link.id)}}
-                      <Form
-                        class="isbf-v2-account-menu__verify"
-                        @data={{this.verificationData}}
-                        @onSubmit={{fn this.verifyAndSwitch link}}
-                        as |form draft|
-                      >
-                        {{#if link.account.email_code_enabled}}
-                          <form.Field
-                            @disabled={{this.isBusy}}
-                            @name="verificationMethod"
-                            @title={{i18n
-                              (themePrefix "isbf_v2.device_verification_method")
-                            }}
-                            @type="select"
-                            @validation="required"
-                            as |field|
-                          >
-                            <field.Control @includeNone={{false}} as |select|>
-                              <select.Option @value="password">
-                                {{i18n
-                                  (themePrefix "isbf_v2.password_verification")
-                                }}
-                              </select.Option>
-                              <select.Option @value="email_code">
-                                {{i18n
-                                  (themePrefix
-                                    "isbf_v2.email_code_verification"
-                                  )
-                                }}
-                              </select.Option>
-                            </field.Control>
-                          </form.Field>
-                        {{/if}}
-
-                        {{#if (eq draft.verificationMethod "email_code")}}
-                          <DButton
-                            class="isbf-v2-account-menu__send-code"
-                            @action={{fn this.sendEmailCode link}}
-                            @disabled={{this.isBusy}}
-                            @translatedLabel={{if
-                              this.emailCodeSent
-                              (i18n (themePrefix "isbf_v2.resend_email_code"))
-                              (i18n (themePrefix "isbf_v2.send_email_code"))
-                            }}
-                          />
-                          {{#if this.emailCodeSent}}
-                            <p class="isbf-v2-account-menu__code-status">
-                              {{this.emailCodeSentMessage}}
-                            </p>
-                          {{/if}}
-                          <form.Field
-                            @disabled={{this.isBusy}}
-                            @name="emailCode"
-                            @title={{i18n
-                              (themePrefix "isbf_v2.target_email_code")
-                            }}
-                            @type="input"
-                            @validation="required|length:6,6"
-                            as |field|
-                          >
-                            <field.Control
-                              autocomplete="one-time-code"
-                              inputmode="numeric"
-                              maxlength="6"
-                              pattern="[0-9]{6}"
-                            />
-                          </form.Field>
-                        {{else}}
-                          <form.Field
-                            @disabled={{this.isBusy}}
-                            @name="password"
-                            @title={{i18n
-                              (themePrefix "isbf_v2.target_password")
-                            }}
-                            @type="input-password"
-                            @validation="required"
-                            as |field|
-                          >
-                            <field.Control autocomplete="current-password" />
-                          </form.Field>
-                        {{/if}}
-
-                        {{#if
-                          (or
-                            link.account.totp_enabled
-                            link.account.backup_codes_enabled
-                          )
-                        }}
-                          <form.Field
-                            @description={{i18n
-                              (themePrefix
-                                (if
-                                  (eq draft.secondFactorMethod "2")
-                                  "isbf_v2.backup_code_help"
-                                  "isbf_v2.authenticator_code_help"
-                                )
-                              )
-                            }}
-                            @disabled={{this.isBusy}}
-                            @name="secondFactorToken"
-                            @title={{i18n
-                              (themePrefix "isbf_v2.second_factor_code")
-                            }}
-                            @type="input"
-                            @validation="required"
-                            as |field|
-                          >
-                            <field.Control autocomplete="one-time-code" />
-                          </form.Field>
-                        {{/if}}
-                        {{#if link.account.backup_codes_enabled}}
-                          <form.Field
-                            @disabled={{this.isBusy}}
-                            @name="secondFactorMethod"
-                            @title={{i18n
-                              (themePrefix "isbf_v2.second_factor_method")
-                            }}
-                            @type="select"
-                            @validation="required"
-                            as |field|
-                          >
-                            <field.Control @includeNone={{false}} as |select|>
-                              <select.Option @value="1">
-                                {{i18n
-                                  (themePrefix "isbf_v2.authenticator_code")
-                                }}
-                              </select.Option>
-                              <select.Option @value="2">
-                                {{i18n (themePrefix "isbf_v2.backup_code")}}
-                              </select.Option>
-                            </field.Control>
-                          </form.Field>
-                        {{/if}}
-                        <form.Submit
-                          @disabled={{this.isBusy}}
-                          @label={{themePrefix "isbf_v2.verify_and_switch"}}
-                        />
-                      </Form>
-                    {{/if}}
-                  </div>
-                {{/each}}
-              {{/if}}
-
-              <button
-                aria-expanded={{if
-                  this.canLinkAccounts
-                  (if this.isLinkFormOpen "true" "false")
-                  (if this.isLinkedAccountsOpen "true" "false")
-                }}
-                class="isbf-v2-account-menu__link"
-                type="button"
-                {{on "click" this.toggleLinkForm}}
-              >
-                {{i18n (themePrefix "isbf_v2.link_account")}}
-              </button>
-
-              {{#if (and this.canLinkAccounts this.isLinkFormOpen)}}
-                <form
-                  class="isbf-v2-account-menu__link-form"
-                  {{on "submit" this.createLink}}
+            <div
+              aria-label={{i18n (themePrefix "isbf_v2.account_actions")}}
+              class="isbf-v2-account-menu__panel"
+              role="group"
+              {{dMenuHighlight
+                itemSelector=":scope > a, :scope > button, .isbf-v2-account-menu__linked-account > button"
+              }}
+            >
+              {{#unless @mobile}}
+                <a
+                  class="isbf-v2-account-menu__compact-profile"
+                  href={{this.profileHref}}
+                  {{on "click" this.closeMenu}}
                 >
-                  <label>
-                    {{i18n (themePrefix "isbf_v2.account_username")}}
-                    <input
-                      autocomplete="username"
-                      placeholder={{i18n
-                        (themePrefix "isbf_v2.account_username_placeholder")
-                      }}
-                      required
-                      type="text"
-                      value={{this.requestedUsername}}
-                      {{on "input" this.updateRequestedUsername}}
-                    />
-                  </label>
-                  <button disabled={{this.isBusy}} type="submit">
-                    {{i18n (themePrefix "isbf_v2.send_link_request")}}
-                  </button>
-                </form>
+                  {{i18n (themePrefix "isbf_v2.profile")}}
+                </a>
+              {{/unless}}
+              <a href="/isbf-anonymous/posts" {{on "click" this.closeMenu}}>
+                {{i18n (themePrefix "isbf_v2.my_anonymous_posts")}}
+              </a>
+
+              {{#if this.canSwitchAccounts}}
+                {{#if this.showLinkedAccounts}}
+                  {{#each this.activeLinks as |link|}}
+                    <div class="isbf-v2-account-menu__linked-account">
+                      <span class="isbf-avatar"><img
+                          alt=""
+                          height="32"
+                          src={{link.account.avatar_template}}
+                          width="32"
+                        /><PluginOutlet
+                          @name="user-avatar-frame"
+                          @outletArgs={{lazyHash
+                            user=link.account
+                            motion="static"
+                          }}
+                        /></span>
+                      <span class="isbf-v2-account-menu__account-info">
+                        <b class="isbf-v2-account-menu__account-name">
+                          {{or link.account.name link.account.username}}
+                        </b>
+                        <small class="isbf-v2-account-menu__account-username">
+                          @{{link.account.username}}
+                        </small>
+                      </span>
+                      {{#if (eq link.status "approved")}}
+                        <button
+                          disabled={{this.isBusy}}
+                          type="button"
+                          {{on "click" (fn this.switchAccount link)}}
+                        >
+                          {{if
+                            link.device_authorized
+                            (i18n (themePrefix "isbf_v2.switch_now"))
+                            (i18n (themePrefix "isbf_v2.verify_device"))
+                          }}
+                        </button>
+                      {{else}}
+                        <small class="isbf-v2-account-menu__status">
+                          {{i18n (themePrefix "isbf_v2.account_link_pending")}}
+                        </small>
+                      {{/if}}
+
+                      {{#if (eq this.verificationLinkId link.id)}}
+                        <Form
+                          class="isbf-v2-account-menu__verify"
+                          @data={{this.verificationData}}
+                          @onSubmit={{fn this.verifyAndSwitch link}}
+                          as |form draft|
+                        >
+                          {{#if link.account.email_code_enabled}}
+                            <form.Field
+                              @disabled={{this.isBusy}}
+                              @name="verificationMethod"
+                              @title={{i18n
+                                (themePrefix
+                                  "isbf_v2.device_verification_method"
+                                )
+                              }}
+                              @type="select"
+                              @validation="required"
+                              as |field|
+                            >
+                              <field.Control @includeNone={{false}} as |select|>
+                                <select.Option @value="password">
+                                  {{i18n
+                                    (themePrefix
+                                      "isbf_v2.password_verification"
+                                    )
+                                  }}
+                                </select.Option>
+                                <select.Option @value="email_code">
+                                  {{i18n
+                                    (themePrefix
+                                      "isbf_v2.email_code_verification"
+                                    )
+                                  }}
+                                </select.Option>
+                              </field.Control>
+                            </form.Field>
+                          {{/if}}
+
+                          {{#if (eq draft.verificationMethod "email_code")}}
+                            <DButton
+                              class="isbf-v2-account-menu__send-code"
+                              @action={{fn this.sendEmailCode link}}
+                              @disabled={{this.isBusy}}
+                              @translatedLabel={{if
+                                this.emailCodeSent
+                                (i18n (themePrefix "isbf_v2.resend_email_code"))
+                                (i18n (themePrefix "isbf_v2.send_email_code"))
+                              }}
+                            />
+                            {{#if this.emailCodeSent}}
+                              <p class="isbf-v2-account-menu__code-status">
+                                {{this.emailCodeSentMessage}}
+                              </p>
+                            {{/if}}
+                            <form.Field
+                              @disabled={{this.isBusy}}
+                              @name="emailCode"
+                              @title={{i18n
+                                (themePrefix "isbf_v2.target_email_code")
+                              }}
+                              @type="input"
+                              @validation="required|length:6,6"
+                              as |field|
+                            >
+                              <field.Control
+                                autocomplete="one-time-code"
+                                inputmode="numeric"
+                                maxlength="6"
+                                pattern="[0-9]{6}"
+                              />
+                            </form.Field>
+                          {{else}}
+                            <form.Field
+                              @disabled={{this.isBusy}}
+                              @name="password"
+                              @title={{i18n
+                                (themePrefix "isbf_v2.target_password")
+                              }}
+                              @type="input-password"
+                              @validation="required"
+                              as |field|
+                            >
+                              <field.Control autocomplete="current-password" />
+                            </form.Field>
+                          {{/if}}
+
+                          {{#if
+                            (or
+                              link.account.totp_enabled
+                              link.account.backup_codes_enabled
+                            )
+                          }}
+                            <form.Field
+                              @description={{i18n
+                                (themePrefix
+                                  (if
+                                    (eq draft.secondFactorMethod "2")
+                                    "isbf_v2.backup_code_help"
+                                    "isbf_v2.authenticator_code_help"
+                                  )
+                                )
+                              }}
+                              @disabled={{this.isBusy}}
+                              @name="secondFactorToken"
+                              @title={{i18n
+                                (themePrefix "isbf_v2.second_factor_code")
+                              }}
+                              @type="input"
+                              @validation="required"
+                              as |field|
+                            >
+                              <field.Control autocomplete="one-time-code" />
+                            </form.Field>
+                          {{/if}}
+                          {{#if link.account.backup_codes_enabled}}
+                            <form.Field
+                              @disabled={{this.isBusy}}
+                              @name="secondFactorMethod"
+                              @title={{i18n
+                                (themePrefix "isbf_v2.second_factor_method")
+                              }}
+                              @type="select"
+                              @validation="required"
+                              as |field|
+                            >
+                              <field.Control @includeNone={{false}} as |select|>
+                                <select.Option @value="1">
+                                  {{i18n
+                                    (themePrefix "isbf_v2.authenticator_code")
+                                  }}
+                                </select.Option>
+                                <select.Option @value="2">
+                                  {{i18n (themePrefix "isbf_v2.backup_code")}}
+                                </select.Option>
+                              </field.Control>
+                            </form.Field>
+                          {{/if}}
+                          <form.Submit
+                            @disabled={{this.isBusy}}
+                            @label={{themePrefix "isbf_v2.verify_and_switch"}}
+                          />
+                        </Form>
+                      {{/if}}
+                    </div>
+                  {{/each}}
+                {{/if}}
+
+                <button
+                  aria-expanded={{if
+                    this.canLinkAccounts
+                    (if this.isLinkFormOpen "true" "false")
+                    (if this.isLinkedAccountsOpen "true" "false")
+                  }}
+                  class="isbf-v2-account-menu__link"
+                  type="button"
+                  {{on "click" this.toggleLinkForm}}
+                >
+                  {{i18n (themePrefix "isbf_v2.link_account")}}
+                </button>
+
+                {{#if (and this.canLinkAccounts this.isLinkFormOpen)}}
+                  <form
+                    class="isbf-v2-account-menu__link-form"
+                    {{on "submit" this.createLink}}
+                  >
+                    <label>
+                      {{i18n (themePrefix "isbf_v2.account_username")}}
+                      <input
+                        autocomplete="username"
+                        placeholder={{i18n
+                          (themePrefix "isbf_v2.account_username_placeholder")
+                        }}
+                        required
+                        type="text"
+                        value={{this.requestedUsername}}
+                        {{on "input" this.updateRequestedUsername}}
+                      />
+                    </label>
+                    <button disabled={{this.isBusy}} type="submit">
+                      {{i18n (themePrefix "isbf_v2.send_link_request")}}
+                    </button>
+                  </form>
+                {{/if}}
+
+                {{#if this.errorMessage}}
+                  <p class="isbf-v2-account-menu__error" role="alert">
+                    {{this.errorMessage}}
+                  </p>
+                {{/if}}
               {{/if}}
 
-              {{#if this.errorMessage}}
-                <p class="isbf-v2-account-menu__error" role="alert">
-                  {{this.errorMessage}}
-                </p>
-              {{/if}}
-            {{/if}}
-
-            <button type="button" {{on "click" this.confirmLogout}}>
-              {{i18n (themePrefix "isbf_v2.logout")}}
-              @{{this.currentUser.username}}
-            </button>
-          </div>
-        {{/if}}
+              <button type="button" {{on "click" this.confirmLogout}}>
+                {{i18n (themePrefix "isbf_v2.logout")}}
+                @{{this.currentUser.username}}
+              </button>
+            </div>
+          </:content>
+        </DMenu>
       </div>
     {{/if}}
   </template>

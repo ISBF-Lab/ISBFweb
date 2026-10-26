@@ -542,3 +542,7 @@ C12正文提取规则补齐到通用话题链接及前台独立标题出口。�
 用户根据最新截图确认去掉这排按钮的鼠标悬停底色，仅保留图标变色及点击回弹。点赞和独立赞数入口同时清理；通过局部hover变量覆盖，原按钮／触控范围、排列及键盘焦点保留。来源、截图及验证见[本次记录](reviews/post-action-pulse-20261025/README.md)。
 
 点赞及本人赞数心形的悬停使用既有love色，其余动作使用accent；移开恢复真实状态色。仅作用于本次互动区域，键盘焦点和禁用状态保留。
+
+## 2026-10-26 C06全站共享契约
+
+所有列表型下拉统一遵循[dropdowns.md](dropdowns.md)：DMenu／DDropdownMenu、DSelect／FormKit、SelectKit与DMultiSelect默认接入共享表面和高亮；24px面板、16px选项、8px内距。入口按用途保留，手机统一浮动，非菜单浮层明确标记popover。新增菜单使用共享入口并通过lint:menus，具体接口与验证见[本轮记录](reviews/dropdowns-20261026/README.md)。

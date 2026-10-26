@@ -25,7 +25,7 @@ export default class FKControlMenu extends FKBaseControl {
       id={{@field.id}}
       @contentClass="form-kit__control-menu-content"
       @disabled={{@field.disabled}}
-      @modalForMobile={{true}}
+      @modalForMobile={{false}}
       @offset={{5}}
       @onRegisterApi={{this.registerMenuApi}}
       @placement="bottom-start"
