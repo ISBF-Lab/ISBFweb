@@ -29,6 +29,24 @@ const firstEmpty = (slots) => {
   return index < 0 ? slots.length - 1 : index;
 };
 
+/**
+ * @typedef AnimatedOtpSignature
+ * @property {HTMLInputElement} Element
+ * @property {object} Args
+ * @property {boolean} [Args.autoFocus]
+ * @property {string} [Args.autocomplete]
+ * @property {string} [Args.describedBy]
+ * @property {boolean} [Args.disabled]
+ * @property {boolean} [Args.invalid]
+ * @property {boolean} [Args.mask]
+ * @property {(code: string) => void} [Args.onChange]
+ * @property {(code: string) => void} [Args.onFill]
+ * @property {number} [Args.slots]
+ * @property {"idle" | "error" | "success"} [Args.status]
+ * @property {string} [Args.value]
+ */
+
+/** @extends {Component<AnimatedOtpSignature>} */
 export default class AnimatedOtp extends Component {
   @service a11y;
   @service capabilities;

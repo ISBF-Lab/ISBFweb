@@ -1,0 +1,462 @@
+{
+  "results": [
+    {
+      "name": "Heading keeps the text action immediately left of the menu",
+      "passed": true,
+      "width": 1440,
+      "mode": "light",
+      "geometry": {
+        "x": 764.984375,
+        "right": 895,
+        "height": 44,
+        "menuX": 903,
+        "menuRight": 947,
+        "menuHeight": 44,
+        "centerDelta": 0,
+        "titleRight": 469,
+        "radius": "999px",
+        "holdTime": "300ms",
+        "fill": "rgb(23, 105, 170)",
+        "clipVisibility": "hidden",
+        "accent": "rgb(23, 105, 170)",
+        "idle": "rgb(246, 248, 250)",
+        "compact": "none",
+        "full": "block",
+        "described": true
+      }
+    },
+    {
+      "name": "The action and menu preserve touch targets and 300ms timing",
+      "passed": true,
+      "width": 1440,
+      "mode": "light"
+    },
+    {
+      "name": "Fill follows the active theme blue on a neutral capsule",
+      "passed": true,
+      "width": 1440,
+      "mode": "light"
+    },
+    {
+      "name": "Idle has no residual blue fill or wave edge",
+      "passed": true,
+      "width": 1440,
+      "mode": "light"
+    },
+    {
+      "name": "Accessible instructions and responsive text are present",
+      "passed": true,
+      "width": 1440,
+      "mode": "light"
+    },
+    {
+      "name": "The menu contains settings and preferences without a duplicate action",
+      "passed": true,
+      "width": 1440,
+      "mode": "light"
+    },
+    {
+      "name": "Escape restores focus to the menu trigger",
+      "passed": true,
+      "width": 1440,
+      "mode": "light"
+    },
+    {
+      "name": "Heading keeps the text action immediately left of the menu",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark",
+      "geometry": {
+        "x": 764.984375,
+        "right": 895,
+        "height": 44,
+        "menuX": 903,
+        "menuRight": 947,
+        "menuHeight": 44,
+        "centerDelta": 0,
+        "titleRight": 469,
+        "radius": "999px",
+        "holdTime": "300ms",
+        "fill": "rgb(114, 197, 250)",
+        "clipVisibility": "hidden",
+        "accent": "rgb(114, 197, 250)",
+        "idle": "rgb(39, 43, 45)",
+        "compact": "none",
+        "full": "block",
+        "described": true
+      }
+    },
+    {
+      "name": "The action and menu preserve touch targets and 300ms timing",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark"
+    },
+    {
+      "name": "Fill follows the active theme blue on a neutral capsule",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark"
+    },
+    {
+      "name": "Idle has no residual blue fill or wave edge",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark"
+    },
+    {
+      "name": "Accessible instructions and responsive text are present",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark"
+    },
+    {
+      "name": "The menu contains settings and preferences without a duplicate action",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark"
+    },
+    {
+      "name": "Escape restores focus to the menu trigger",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark"
+    },
+    {
+      "name": "Heading keeps the text action immediately left of the menu",
+      "passed": true,
+      "width": 390,
+      "mode": "light",
+      "geometry": {
+        "x": 191.984375,
+        "right": 322,
+        "height": 44,
+        "menuX": 330,
+        "menuRight": 374,
+        "menuHeight": 44,
+        "centerDelta": 0,
+        "titleRight": 72.015625,
+        "radius": "999px",
+        "holdTime": "300ms",
+        "fill": "rgb(23, 105, 170)",
+        "clipVisibility": "hidden",
+        "accent": "rgb(23, 105, 170)",
+        "idle": "rgb(246, 248, 250)",
+        "compact": "block",
+        "full": "none",
+        "described": true
+      }
+    },
+    {
+      "name": "The action and menu preserve touch targets and 300ms timing",
+      "passed": true,
+      "width": 390,
+      "mode": "light"
+    },
+    {
+      "name": "Fill follows the active theme blue on a neutral capsule",
+      "passed": true,
+      "width": 390,
+      "mode": "light"
+    },
+    {
+      "name": "Idle has no residual blue fill or wave edge",
+      "passed": true,
+      "width": 390,
+      "mode": "light"
+    },
+    {
+      "name": "Accessible instructions and responsive text are present",
+      "passed": true,
+      "width": 390,
+      "mode": "light"
+    },
+    {
+      "name": "The menu contains settings and preferences without a duplicate action",
+      "passed": true,
+      "width": 390,
+      "mode": "light"
+    },
+    {
+      "name": "Escape restores focus to the menu trigger",
+      "passed": true,
+      "width": 390,
+      "mode": "light"
+    },
+    {
+      "name": "Heading keeps the text action immediately left of the menu",
+      "passed": true,
+      "width": 390,
+      "mode": "dark",
+      "geometry": {
+        "x": 191.984375,
+        "right": 322,
+        "height": 44,
+        "menuX": 330,
+        "menuRight": 374,
+        "menuHeight": 44,
+        "centerDelta": 0,
+        "titleRight": 72.015625,
+        "radius": "999px",
+        "holdTime": "300ms",
+        "fill": "rgb(114, 197, 250)",
+        "clipVisibility": "hidden",
+        "accent": "rgb(114, 197, 250)",
+        "idle": "rgb(39, 43, 45)",
+        "compact": "block",
+        "full": "none",
+        "described": true
+      }
+    },
+    {
+      "name": "The action and menu preserve touch targets and 300ms timing",
+      "passed": true,
+      "width": 390,
+      "mode": "dark"
+    },
+    {
+      "name": "Fill follows the active theme blue on a neutral capsule",
+      "passed": true,
+      "width": 390,
+      "mode": "dark"
+    },
+    {
+      "name": "Idle has no residual blue fill or wave edge",
+      "passed": true,
+      "width": 390,
+      "mode": "dark"
+    },
+    {
+      "name": "Accessible instructions and responsive text are present",
+      "passed": true,
+      "width": 390,
+      "mode": "dark"
+    },
+    {
+      "name": "The menu contains settings and preferences without a duplicate action",
+      "passed": true,
+      "width": 390,
+      "mode": "dark"
+    },
+    {
+      "name": "Escape restores focus to the menu trigger",
+      "passed": true,
+      "width": 390,
+      "mode": "dark"
+    },
+    {
+      "name": "Heading keeps the text action immediately left of the menu",
+      "passed": true,
+      "width": 320,
+      "mode": "light",
+      "geometry": {
+        "x": 121.984375,
+        "right": 252,
+        "height": 44,
+        "menuX": 260,
+        "menuRight": 304,
+        "menuHeight": 44,
+        "centerDelta": 0,
+        "titleRight": 72.015625,
+        "radius": "999px",
+        "holdTime": "300ms",
+        "fill": "rgb(23, 105, 170)",
+        "clipVisibility": "hidden",
+        "accent": "rgb(23, 105, 170)",
+        "idle": "rgb(246, 248, 250)",
+        "compact": "block",
+        "full": "none",
+        "described": true
+      }
+    },
+    {
+      "name": "The action and menu preserve touch targets and 300ms timing",
+      "passed": true,
+      "width": 320,
+      "mode": "light"
+    },
+    {
+      "name": "Fill follows the active theme blue on a neutral capsule",
+      "passed": true,
+      "width": 320,
+      "mode": "light"
+    },
+    {
+      "name": "Idle has no residual blue fill or wave edge",
+      "passed": true,
+      "width": 320,
+      "mode": "light"
+    },
+    {
+      "name": "Accessible instructions and responsive text are present",
+      "passed": true,
+      "width": 320,
+      "mode": "light"
+    },
+    {
+      "name": "The menu contains settings and preferences without a duplicate action",
+      "passed": true,
+      "width": 320,
+      "mode": "light"
+    },
+    {
+      "name": "Escape restores focus to the menu trigger",
+      "passed": true,
+      "width": 320,
+      "mode": "light"
+    },
+    {
+      "name": "Heading keeps the text action immediately left of the menu",
+      "passed": true,
+      "width": 320,
+      "mode": "dark",
+      "geometry": {
+        "x": 121.984375,
+        "right": 252,
+        "height": 44,
+        "menuX": 260,
+        "menuRight": 304,
+        "menuHeight": 44,
+        "centerDelta": 0,
+        "titleRight": 72.015625,
+        "radius": "999px",
+        "holdTime": "300ms",
+        "fill": "rgb(114, 197, 250)",
+        "clipVisibility": "hidden",
+        "accent": "rgb(114, 197, 250)",
+        "idle": "rgb(39, 43, 45)",
+        "compact": "block",
+        "full": "none",
+        "described": true
+      }
+    },
+    {
+      "name": "The action and menu preserve touch targets and 300ms timing",
+      "passed": true,
+      "width": 320,
+      "mode": "dark"
+    },
+    {
+      "name": "Fill follows the active theme blue on a neutral capsule",
+      "passed": true,
+      "width": 320,
+      "mode": "dark"
+    },
+    {
+      "name": "Idle has no residual blue fill or wave edge",
+      "passed": true,
+      "width": 320,
+      "mode": "dark"
+    },
+    {
+      "name": "Accessible instructions and responsive text are present",
+      "passed": true,
+      "width": 320,
+      "mode": "dark"
+    },
+    {
+      "name": "The menu contains settings and preferences without a duplicate action",
+      "passed": true,
+      "width": 320,
+      "mode": "dark"
+    },
+    {
+      "name": "Escape restores focus to the menu trigger",
+      "passed": true,
+      "width": 320,
+      "mode": "dark"
+    },
+    {
+      "name": "English and Chinese labels fit the narrow heading",
+      "passed": true,
+      "locale": "en"
+    },
+    {
+      "name": "English and Chinese labels fit the narrow heading",
+      "passed": true,
+      "locale": "zh_CN"
+    },
+    {
+      "name": "A short click does not submit mark read",
+      "passed": true
+    },
+    {
+      "name": "An unfinished hold shows partial fill and releases without a request",
+      "passed": true,
+      "progress": 0.3663
+    },
+    {
+      "name": "An early release fully hides the fill edge after its return animation",
+      "passed": true
+    },
+    {
+      "name": "A completed hold submits once and remains pending until the response",
+      "passed": true
+    },
+    {
+      "name": "The real development endpoint succeeds and updates unread counts",
+      "passed": true
+    },
+    {
+      "name": "High priority notifications wait for the existing confirmation dialog",
+      "passed": true
+    },
+    {
+      "name": "Cancelling confirmation preserves unread counts and makes no request",
+      "passed": true
+    },
+    {
+      "name": "Cancelling confirmation returns focus to the hold button",
+      "passed": true
+    },
+    {
+      "name": "Confirming the dialog submits one request and then shows success",
+      "passed": true
+    },
+    {
+      "name": "Successful confirmation returns focus after the request unlocks the button",
+      "passed": true
+    },
+    {
+      "name": "A failed request resets the button and preserves counts",
+      "passed": true
+    },
+    {
+      "name": "The existing retry action succeeds once against the development endpoint",
+      "passed": true
+    },
+    {
+      "name": "Short keyboard presses do not bypass the hold",
+      "passed": true
+    },
+    {
+      "name": "A held Enter confirms exactly once",
+      "passed": true
+    },
+    {
+      "name": "A real emulated touch hold confirms once",
+      "passed": true
+    },
+    {
+      "name": "Scrolling away from a touch hold cancels it",
+      "passed": true
+    },
+    {
+      "name": "Reduced motion removes the wave animation",
+      "passed": true
+    },
+    {
+      "name": "Reduced motion keeps confirmation without press scaling",
+      "passed": true
+    },
+    {
+      "name": "Leaving the notification page cancels an unfinished hold",
+      "passed": true
+    },
+    {
+      "name": "The changed flows produce no client exceptions",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

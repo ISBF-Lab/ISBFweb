@@ -1,0 +1,21 @@
+[bin/lint] Running core linters via lefthook...
+┃  developer-docs-prettier ❯ 
+docs/03-code-internals/02-ui-kit.md 563ms (unchanged)
+
+┃  eslint ❯ 
+
+┃  prettier ❯ 
+- Starting...
+✔ Reformatted 0 / 8 files...
+
+│  rubocop (skip) no files for inspection
+┃  stylelint ❯ 
+
+│  syntax_tree (skip) no files for inspection
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 22.15 seconds)
+✔️ developer-docs-prettier (3.19 seconds)
+✔️ eslint (7.18 seconds)
+✔️ prettier (4.71 seconds)
+✔️ stylelint (7.08 seconds)
+[bin/lint] All lints passed

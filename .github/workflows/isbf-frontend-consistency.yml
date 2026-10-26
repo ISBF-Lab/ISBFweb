@@ -5,6 +5,7 @@ on:
     paths:
       - "themes/isbf-campus-feed/**"
       - "frontend/discourse/app/**"
+      - "frontend/discourse/tests/integration/ui-kit/d-hold-button-test.gjs"
       - "frontend/discourse/dialog-holder/**"
       - "frontend/discourse/float-kit/**"
       - "frontend/discourse/scripts/js/elastic-not-found.js"
@@ -29,8 +30,8 @@ concurrency:
 jobs:
   theme:
     runs-on: ubuntu-latest
-    container: discourse/discourse_test:release
-    timeout-minutes: 30
+    container: discourse/discourse_test@sha256:94eca5318fed6171264b95204914de76a113c305cebb72d9fa9527e2c4496494
+    timeout-minutes: 45
     defaults:
       run:
         shell: bash
@@ -71,6 +72,9 @@ jobs:
           bundle config --local without ""
           bundle install --jobs 1
           pnpm install --frozen-lockfile
+
+      - name: Frontend types
+        run: pnpm lint:types
 
       - name: Changed source lint
         if: github.event_name == 'pull_request'
@@ -153,6 +157,11 @@ jobs:
         env:
           LOAD_PLUGINS: "0"
         run: bin/qunit --standalone frontend/discourse/tests/unit/lib/topic-display-title-test.js
+
+      - name: Hold button regression
+        env:
+          LOAD_PLUGINS: "0"
+        run: bin/qunit --standalone frontend/discourse/tests/integration/ui-kit/d-hold-button-test.gjs
 
       - name: Project theme QUnit
         id: theme_qunit

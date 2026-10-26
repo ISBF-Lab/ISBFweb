@@ -1,4 +1,11 @@
-import { clearRender, click, find, render, settled } from "@ember/test-helpers";
+import {
+  clearRender,
+  click,
+  find,
+  render,
+  settled,
+  triggerEvent,
+} from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
 import { themePrefix } from "virtual:theme";
@@ -502,8 +509,16 @@ module("ISBF | Integration | Component | ISBFNotifications", function (hooks) {
     await render(
       <template><ISBFNotifications /><ISBFNotificationBell /></template>
     );
-    await click(".isbf-notifications__menu summary");
-    await click(".isbf-notifications__menu-items > button");
+    await triggerEvent(".isbf-notifications__mark-read", "pointerdown", {
+      button: 0,
+      isPrimary: true,
+      pointerId: 1,
+      pointerType: "touch",
+    });
+    await new Promise((resolve) => setTimeout(resolve, 330));
+    await triggerEvent(".isbf-notifications__mark-read", "pointerup", {
+      pointerId: 1,
+    });
     assert
       .dom(".isbf-notification-bell__badge")
       .hasText("1", "failure keeps the count");
