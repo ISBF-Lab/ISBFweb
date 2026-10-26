@@ -16,5 +16,10 @@
     "cause": "Read-only installed dependency declaration build-info output; this attempt is not a passing full type gate"
   },
   "exact_head_ci": "Required before merge",
-  "scoped_native_lint": "passed on both changed source files"
+  "scoped_native_lint": "passed on both changed source files",
+  "exact_head_ci_type_gate": {
+    "commit": "7b299d2f5e8efbffccd842452f9a143dff6c9b5a",
+    "result": "passed",
+    "job_url": "https://github.com/ISBF-Lab/ISBFweb/actions/runs/40371244883/job/121742313743"
+  }
 }

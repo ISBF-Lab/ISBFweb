@@ -267,6 +267,10 @@
       {
         "repository_path": "themes/isbf-campus-feed/test/integration/notifications-hold-test.gjs",
         "sha256": "7b849ec9d4abaad6424131594ab6467f816a4eedc2eb4b98545759bf7c95ab3e"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/test/integration/notifications-test.gjs",
+        "sha256": "f8ae5b0069926cf6d444b345486d5e035afa381a5839b460d4b30e11daa95ee2"
       }
     ],
     "scope": "Notification hold action and the minimal type-only baseline declarations required by its full CI gate; independent menu and selector drafts remain in the shared development workspace.",
@@ -343,6 +347,12 @@
       ],
       "runtime_text_unchanged": true,
       "new_suppressions_or_casts": false
+    },
+    "legacy_test_update": {
+      "file": "themes/isbf-campus-feed/test/integration/notifications-test.gjs",
+      "gesture": "300ms hold on the external button",
+      "failure_retry_assertions_unchanged": true,
+      "runtime_release_scope_unchanged": true
     }
   }
 }
