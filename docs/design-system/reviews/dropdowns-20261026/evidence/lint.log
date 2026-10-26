@@ -5,15 +5,19 @@
 
 ┃  prettier ❯ 
 - Starting...
-✔ Reformatted 0 / 89 files...
+close-on-escape.ts
+- Reformatted 1 / 50 files...
+d-menu-test.gjs
+- Reformatted 2 / 91 files...
+✔ Reformatted 2 / 91 files...
 
 │  rubocop (skip) no files for inspection
 ┃  stylelint ❯ 
 
 │  syntax_tree (skip) no files for inspection
 [38;2;56;56;56m  ────────────────────────────────────[m
-summary: (done in 29.97 seconds)
-✔️ eslint (13.90 seconds)
-✔️ prettier (8.47 seconds)
-✔️ stylelint (7.60 seconds)
+summary: (done in 29.50 seconds)
+✔️ eslint (12.01 seconds)
+✔️ prettier (9.18 seconds)
+✔️ stylelint (8.31 seconds)
 [bin/lint] All lints passed

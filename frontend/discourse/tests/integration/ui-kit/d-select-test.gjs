@@ -329,4 +329,41 @@ module("Integration | ui-kit | DSelect", function (hooks) {
       .dom(".outer-menu, .d-select__menu")
       .doesNotExist("destruction releases the whole float family");
   });
+
+  test("nested Escape leaves the parent menu and its draft open", async function (assert) {
+    this.closed = sinon.spy();
+    this.changed = sinon.spy();
+    await render(
+      <template>
+        <DMenus />
+        <DMenu
+          @contentClass="outer-menu"
+          @label="Outer"
+          @onClose={{this.closed}}
+          @triggerClass="outer-trigger"
+        >
+          <:content>
+            <input class="draft" value="Keep this draft" />
+            <DSelect @onChange={{this.changed}} @value="a" as |s|>
+              <s.Option @value="a">Alpha</s.Option>
+              <s.Option @value="b">Beta</s.Option>
+            </DSelect>
+          </:content>
+        </DMenu>
+      </template>
+    );
+    await click(".outer-trigger");
+    await click(trigger);
+    await triggerEvent(findAll(options)[0], "keydown", { key: "Escape" });
+    assert.dom(".d-select__menu").doesNotExist("the child closes first");
+    assert.dom(".outer-menu .draft").hasValue("Keep this draft");
+    assert.false(this.closed.called, "the parent close callback does not run");
+    assert.false(this.changed.called, "Escape does not submit a value");
+    assert.dom(trigger).isFocused("focus returns to the child trigger");
+
+    await triggerEvent(trigger, "keydown", { key: "Escape" });
+    assert.dom(".outer-menu").doesNotExist("the next Escape closes the parent");
+    assert.true(this.closed.calledOnce);
+    assert.dom(".outer-trigger").isFocused();
+  });
 });

@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-10-26T17:53:14.804292+00:00",
+  "verified_at": "2026-10-26T18:28:12.328302+00:00",
   "environment": "isolated development theme 4",
   "visual_acceptance": "pending user review",
   "reference_sha256": "6e7712a01ec01aa2f7e3ed9042a8bba516606750a7e7e8f40faa6e957b224390",
@@ -192,7 +192,7 @@
     },
     {
       "path": "source/docs/design-system/dropdowns.md",
-      "sha256": "772af891215751461b5d0858565427d357a31725b022a09c893b86aca9c38399",
+      "sha256": "d6fdc761b94532fea11fab89f7b5f4ee654f9781e4c75a5f7c82b976c8830455",
       "before_sha256": null,
       "deleted": false
     },
@@ -514,10 +514,27 @@
       "deleted": false
     },
     {
+      "path": "source/frontend/discourse/float-kit/lib/float-kit-instance.ts",
+      "sha256": "abb92196ab38ae6ba425db0609b8c96dbc9c9c365af01ee94ac4dabf993b315a",
+      "before_sha256": "04fd230dce45f5fbd7b84f8e066ff0e42d0c960e91961ae315f4fd47cf7c3942",
+      "deleted": false
+    },
+    {
       "path": "source/frontend/discourse/float-kit/lib/update-position.ts",
       "sha256": "a536011bfe923faaf83d5430bf5d662e7103aa1d4445f1f7d9994daacedfca9e",
       "before_sha256": "6989f35902ceca26d6a013043c87090baa4e277e76778ecf766457b368c4ba0a",
       "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/float-kit/modifiers/close-on-escape.ts",
+      "sha256": "32ec12d81e9163e2cc0c2d4277effefa0893f72d1b3b686b988407033af496df",
+      "before_sha256": "170530ef9245c823abd3f8319026ab780d62f939c8c2ead7e6a574a7037049c4",
+      "deleted": false,
+      "baseline_provenance": {
+        "sha256": "170530ef9245c823abd3f8319026ab780d62f939c8c2ead7e6a574a7037049c4",
+        "content_source_commit": "639077b4c1ddce597a7ecd26a6e7effdebbeed46",
+        "verification": "Runtime was compared byte-for-byte before this review fix; recovered content also matches the captured production inventory SHA256."
+      }
     },
     {
       "path": "source/frontend/discourse/float-kit/services/menu.ts",
@@ -545,7 +562,7 @@
     },
     {
       "path": "source/frontend/discourse/tests/integration/components/float-kit/d-menu-test.gjs",
-      "sha256": "da3fa4061e3cc61e874f26e1002c4faa0ce60e2060e04f9909f45f2d06ed28c3",
+      "sha256": "d25bbcc34e2a21b44257c0252fa13bc010be1974400f7b983f98f8822c0b626f",
       "before_sha256": "999411742842b7b08b16eef16f515aad39ae7adc2008b4c02a584a4c66878f9d",
       "deleted": false
     },
@@ -569,7 +586,7 @@
     },
     {
       "path": "source/frontend/discourse/tests/integration/ui-kit/d-select-test.gjs",
-      "sha256": "9b7d0468408bd1beeace311524f2675e105c780b526eca52509327342813f740",
+      "sha256": "f491fe52331105ed7c86fde54b6a1708e95a32828c6bd2555f5e03d8f43d6a40",
       "before_sha256": null,
       "deleted": false
     },
@@ -714,8 +731,8 @@
     ]
   },
   "verification": {
-    "core_tests": 104,
-    "core_assertions": 242,
+    "core_tests": 106,
+    "core_assertions": 256,
     "theme_tests": 20,
     "theme_assertions": 94,
     "browser_checks": 151,
@@ -760,7 +777,7 @@
       },
       {
         "path": "docs/design-system/dropdowns.md",
-        "sha256": "772af891215751461b5d0858565427d357a31725b022a09c893b86aca9c38399",
+        "sha256": "d6fdc761b94532fea11fab89f7b5f4ee654f9781e4c75a5f7c82b976c8830455",
         "before_sha256": null
       },
       {
@@ -1024,9 +1041,19 @@
         "before_sha256": "50078b61f82b377f04abddc00e46ad31d1723c3edca9aa1ca3e4fc98c52be41b"
       },
       {
+        "path": "frontend/discourse/float-kit/lib/float-kit-instance.ts",
+        "sha256": "abb92196ab38ae6ba425db0609b8c96dbc9c9c365af01ee94ac4dabf993b315a",
+        "before_sha256": "04fd230dce45f5fbd7b84f8e066ff0e42d0c960e91961ae315f4fd47cf7c3942"
+      },
+      {
         "path": "frontend/discourse/float-kit/lib/update-position.ts",
         "sha256": "a536011bfe923faaf83d5430bf5d662e7103aa1d4445f1f7d9994daacedfca9e",
         "before_sha256": "6989f35902ceca26d6a013043c87090baa4e277e76778ecf766457b368c4ba0a"
+      },
+      {
+        "path": "frontend/discourse/float-kit/modifiers/close-on-escape.ts",
+        "sha256": "32ec12d81e9163e2cc0c2d4277effefa0893f72d1b3b686b988407033af496df",
+        "before_sha256": "170530ef9245c823abd3f8319026ab780d62f939c8c2ead7e6a574a7037049c4"
       },
       {
         "path": "frontend/discourse/float-kit/services/menu.ts",
@@ -1050,7 +1077,7 @@
       },
       {
         "path": "frontend/discourse/tests/integration/components/float-kit/d-menu-test.gjs",
-        "sha256": "da3fa4061e3cc61e874f26e1002c4faa0ce60e2060e04f9909f45f2d06ed28c3",
+        "sha256": "d25bbcc34e2a21b44257c0252fa13bc010be1974400f7b983f98f8822c0b626f",
         "before_sha256": "999411742842b7b08b16eef16f515aad39ae7adc2008b4c02a584a4c66878f9d"
       },
       {
@@ -1070,7 +1097,7 @@
       },
       {
         "path": "frontend/discourse/tests/integration/ui-kit/d-select-test.gjs",
-        "sha256": "9b7d0468408bd1beeace311524f2675e105c780b526eca52509327342813f740",
+        "sha256": "f491fe52331105ed7c86fde54b6a1708e95a32828c6bd2555f5e03d8f43d6a40",
         "before_sha256": null
       },
       {
@@ -1264,7 +1291,18 @@
       "alumni_native_lint": "passed",
       "registration_contract": "passed",
       "geography_checks": "passed",
-      "ci": "pending final pushed head"
+      "ci": "pending review-fix commit"
     }
+  },
+  "review_followup": {
+    "core_tests": 106,
+    "core_assertions": 256,
+    "theme_tests": 20,
+    "theme_assertions": 94,
+    "native_lint": "passed",
+    "menu_policy_and_types": "passed",
+    "runtime_and_PR_fix_files_equal": true,
+    "visual_checks": "The original 151 page checks remain evidence for unchanged visual code; this follow-up changes shared Escape and hover dismissal only.",
+    "review_evidence": "review-regressions.json"
   }
 }

@@ -1409,6 +1409,38 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
     assert.dom(".fk-d-menu").doesNotExist();
   });
 
+  test("hover dismissal preserves outside focus while Escape restores the trigger", async function (assert) {
+    await render(
+      <template>
+        <input class="editing-field" />
+        <DMenu
+          @content="content"
+          @hoverGracePeriod={{150}}
+          @inline={{true}}
+          @label="label"
+          @triggers={{array "hover"}}
+          @untriggers={{array "hover"}}
+        />
+      </template>
+    );
+    await focus(".editing-field");
+    await triggerEvent(".fk-d-menu__trigger", "pointermove");
+    assert.dom(".fk-d-menu").exists();
+    assert.dom(".editing-field").isFocused("hover does not take focus");
+    await triggerEvent(".fk-d-menu__trigger", "pointerleave");
+    assert.dom(".fk-d-menu").doesNotExist();
+    assert
+      .dom(".editing-field")
+      .isFocused("hover dismissal leaves focus alone");
+
+    await triggerEvent(".fk-d-menu__trigger", "pointermove");
+    await triggerKeyEvent(document.activeElement, "keydown", "Escape");
+    assert.dom(".fk-d-menu").doesNotExist();
+    assert
+      .dom(".fk-d-menu__trigger")
+      .isFocused("Escape restores trigger focus");
+  });
+
   test("default hoverGracePeriod (0) does not install hover-close on interactive menus", async function (assert) {
     await render(
       <template>

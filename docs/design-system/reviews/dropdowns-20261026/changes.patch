@@ -2512,7 +2512,7 @@
 +}
 --- /dev/null
 +++ b/source/docs/design-system/dropdowns.md
-@@ -0,0 +1,79 @@
+@@ -0,0 +1,80 @@
 +# 全站下拉菜单契约
 +
 +2026-10-26：用户验收校区样板，明确要求覆盖前台、登录注册、后台与活动插件，
@@ -2578,7 +2578,8 @@
 +- 单选选择后关闭，多选连续选择。搜索不提交字段值；搜索栏、标题、分隔线和底部区域不参与高亮。
 +- 保留Escape、Tab、方向键、Home／End及文字查找的适用语义；搜索输入保持焦点。
 +- 浮层按视口、软键盘和所在弹窗正文限制宽高，可上下翻转，长列表保留正常触控滚动。
-+- 嵌套浮层属于父菜单的交互范围，选择子菜单不会误关父菜单。销毁清理监听、观察器和待执行帧。
++- 嵌套浮层属于父菜单的交互范围，选择子菜单不会误关父菜单。Escape每次只关闭最内层浮层，保留父菜单及表单草稿；再次按下才关闭父菜单。
++- 鼠标悬停关闭不移动现有焦点；Escape仍恢复入口焦点。销毁清理监听、观察器和待执行帧。
 +- 减少动态效果时取消菜单和高亮运动。颜色之外仍有勾号或ARIA状态。
 +
 +## 检查与交付
@@ -4468,6 +4469,17 @@
      this.id =
        (element instanceof HTMLElement && element.id) || guidFor(element);
      this.setupListeners();
+--- a/source/frontend/discourse/float-kit/lib/float-kit-instance.ts
++++ b/source/frontend/discourse/float-kit/lib/float-kit-instance.ts
+@@ -195,7 +195,7 @@
+     this.#hoverCloseTimer = discourseLater(() => {
+       this.#hoverCloseTimer = null;
+       if (!this.#hoverFocusLocked) {
+-        this.close();
++        this.close({ focusTrigger: false });
+       }
+     }, this.hoverGracePeriod);
+   }
 --- a/source/frontend/discourse/float-kit/lib/update-position.ts
 +++ b/source/frontend/discourse/float-kit/lib/update-position.ts
 @@ -345,7 +345,12 @@
@@ -4484,6 +4496,61 @@
        } else {
          elements.floating.style.display = hideElement ? "none" : "";
          Object.assign(elements.floating.style, {
+--- a/source/frontend/discourse/float-kit/modifiers/close-on-escape.ts
++++ b/source/frontend/discourse/float-kit/modifiers/close-on-escape.ts
+@@ -2,6 +2,9 @@
+ import type Owner from "@ember/owner";
+ import Modifier, { type ArgsFor } from "ember-modifier";
+ import { bind } from "discourse/lib/decorators";
++import { containsFloatingTarget } from "discourse/ui-kit/-internals/floating-family";
++
++const activeHandlers = new Set<FloatKitCloseOnEscape>();
+ 
+ interface FloatKitCloseOnEscapeSignature {
+   Element: HTMLElement;
+@@ -29,19 +32,38 @@
+     this.closeFn = closeFn;
+     this.element = element;
+ 
++    activeHandlers.add(this);
+     document.addEventListener("keydown", this.check, { capture: true });
+   }
+ 
+   @bind
+   check(event: KeyboardEvent) {
+-    if (event.key === "Escape") {
+-      event.stopPropagation();
+-      event.preventDefault();
+-      this.closeFn();
++    if (event.key !== "Escape" || event.defaultPrevented) {
++      return;
+     }
++    const handlers = [...activeHandlers].filter(
++      (handler) => handler.element.isConnected
++    );
++    const innermost = handlers
++      .reverse()
++      .find(
++        (handler) =>
++          !handlers.some(
++            (other) =>
++              other !== handler &&
++              containsFloatingTarget(handler.element, other.element)
++          )
++      );
++    if (innermost !== this) {
++      return;
++    }
++    event.stopPropagation();
++    event.preventDefault();
++    this.closeFn();
+   }
+ 
+   cleanup() {
++    activeHandlers.delete(this);
+     document.removeEventListener("keydown", this.check, { capture: true });
+   }
+ }
 --- a/source/frontend/discourse/float-kit/services/menu.ts
 +++ b/source/frontend/discourse/float-kit/services/menu.ts
 @@ -29,10 +29,17 @@
@@ -4815,6 +4882,45 @@
            <div class="test-scroll-area" style="height: 50px; overflow-y: auto">
              <div style="height: 500px">tall content</div>
            </div>
+@@ -1368,6 +1407,38 @@
+     await triggerEvent(".fk-d-menu__trigger", "pointerleave");
+ 
+     assert.dom(".fk-d-menu").doesNotExist();
++  });
++
++  test("hover dismissal preserves outside focus while Escape restores the trigger", async function (assert) {
++    await render(
++      <template>
++        <input class="editing-field" />
++        <DMenu
++          @content="content"
++          @hoverGracePeriod={{150}}
++          @inline={{true}}
++          @label="label"
++          @triggers={{array "hover"}}
++          @untriggers={{array "hover"}}
++        />
++      </template>
++    );
++    await focus(".editing-field");
++    await triggerEvent(".fk-d-menu__trigger", "pointermove");
++    assert.dom(".fk-d-menu").exists();
++    assert.dom(".editing-field").isFocused("hover does not take focus");
++    await triggerEvent(".fk-d-menu__trigger", "pointerleave");
++    assert.dom(".fk-d-menu").doesNotExist();
++    assert
++      .dom(".editing-field")
++      .isFocused("hover dismissal leaves focus alone");
++
++    await triggerEvent(".fk-d-menu__trigger", "pointermove");
++    await triggerKeyEvent(document.activeElement, "keydown", "Escape");
++    assert.dom(".fk-d-menu").doesNotExist();
++    assert
++      .dom(".fk-d-menu__trigger")
++      .isFocused("Escape restores trigger focus");
+   });
+ 
+   test("default hoverGracePeriod (0) does not install hover-close on interactive menus", async function (assert) {
 --- a/source/frontend/discourse/tests/integration/components/float-kit/pointer-anchored-menu-test.gjs
 +++ b/source/frontend/discourse/tests/integration/components/float-kit/pointer-anchored-menu-test.gjs
 @@ -236,6 +236,7 @@
@@ -4906,7 +5012,7 @@
    test("option attributes", async function (assert) {
 --- /dev/null
 +++ b/source/frontend/discourse/tests/integration/ui-kit/d-select-test.gjs
-@@ -0,0 +1,332 @@
+@@ -0,0 +1,369 @@
 +import {
 +  clearRender,
 +  click,
@@ -5237,6 +5343,43 @@
 +    assert
 +      .dom(".outer-menu, .d-select__menu")
 +      .doesNotExist("destruction releases the whole float family");
++  });
++
++  test("nested Escape leaves the parent menu and its draft open", async function (assert) {
++    this.closed = sinon.spy();
++    this.changed = sinon.spy();
++    await render(
++      <template>
++        <DMenus />
++        <DMenu
++          @contentClass="outer-menu"
++          @label="Outer"
++          @onClose={{this.closed}}
++          @triggerClass="outer-trigger"
++        >
++          <:content>
++            <input class="draft" value="Keep this draft" />
++            <DSelect @onChange={{this.changed}} @value="a" as |s|>
++              <s.Option @value="a">Alpha</s.Option>
++              <s.Option @value="b">Beta</s.Option>
++            </DSelect>
++          </:content>
++        </DMenu>
++      </template>
++    );
++    await click(".outer-trigger");
++    await click(trigger);
++    await triggerEvent(findAll(options)[0], "keydown", { key: "Escape" });
++    assert.dom(".d-select__menu").doesNotExist("the child closes first");
++    assert.dom(".outer-menu .draft").hasValue("Keep this draft");
++    assert.false(this.closed.called, "the parent close callback does not run");
++    assert.false(this.changed.called, "Escape does not submit a value");
++    assert.dom(trigger).isFocused("focus returns to the child trigger");
++
++    await triggerEvent(trigger, "keydown", { key: "Escape" });
++    assert.dom(".outer-menu").doesNotExist("the next Escape closes the parent");
++    assert.true(this.closed.calledOnce);
++    assert.dom(".outer-trigger").isFocused();
 +  });
 +});
 --- /dev/null

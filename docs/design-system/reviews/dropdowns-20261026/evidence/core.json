@@ -1,131 +1,17 @@
 {
   "results": [
     {
-      "passed": 242,
+      "passed": 256,
       "failed": 0,
-      "total": 242,
-      "runtime": 29401,
+      "total": 256,
+      "runtime": 30970,
       "failures": [],
       "tests": [
         {
-          "name": "@onShow",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "delayed-hover opens menu after delay",
+          "name": "a changing triggerComponent does not kill the menu",
           "module": "Integration | Component | FloatKit | DMenu",
           "failed": 0,
           "total": 2
-        },
-        {
-          "name": "close data preserves the default trigger focus",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "disabling during beforeTrigger vetoes the pending open",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "content aria-labelledby attribute",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "no value",
-          "module": "Integration | ui-kit | DNativeSelect",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "@onPositioned fires with the content once the float is positioned",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 3
-        },
-        {
-          "name": "@contentRole none removes container semantics",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 3
-        },
-        {
-          "name": "@closeOnClickOutside",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "selected value",
-          "module": "Integration | ui-kit | DNativeSelect",
-          "failed": 0,
-          "total": 4
-        },
-        {
-          "name": "trigger expanded argument reflects the open state",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "trigger id attribute",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "applies position",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "@onPositioned fires when the menu renders as a mobile modal",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 3
-        },
-        {
-          "name": "selecting none",
-          "module": "Integration | Component | FormKit | Controls | Select",
-          "failed": 0,
-          "total": 4
-        },
-        {
-          "name": "@hoverGracePeriod closes the menu after the grace period when the pointer leaves entirely",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "@onChange",
-          "module": "Integration | ui-kit | DNativeSelect",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "@identifier",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "pointer-oracle: an idless service trigger gives the menu a usable label",
-          "module": "Integration | Component | FloatKit | PointerAnchoredMenu",
-          "failed": 0,
-          "total": 4
-        },
-        {
-          "name": "service-created menus use @contentRole",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
         },
         {
           "name": "required field",
@@ -134,409 +20,7 @@
           "total": 1
         },
         {
-          "name": "disabled delayed-hover does not swallow the first click after re-enabling",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "keyboard navigation skips disabled options and Escape returns focus",
-          "module": "Integration | ui-kit | DSelect",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "traps pointerdown events only when expanded ",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "@label",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "keeps the selection when options are rebuilt",
-          "module": "Integration | ui-kit | DNativeSelect",
-          "failed": 0,
-          "total": 4
-        },
-        {
-          "name": "@modalForMobile - swipe down defers to scrolled content",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "-expanded class",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "keeps the selection when the value is not a string",
-          "module": "Integration | ui-kit | DNativeSelect",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "DMenu uses a modal while DTooltip stays inline on mobile",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 4
-        },
-        {
-          "name": "a menu can be closed by identifier",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "@modalForMobile",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "closing a mobile menu preserves its containing modal",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "pointer-oracle: a service menu rendered as a mobile modal exposes its supplied label",
-          "module": "Integration | Component | FloatKit | PointerAnchoredMenu",
-          "failed": 0,
-          "total": 5
-        },
-        {
-          "name": "dropdown menu item",
-          "module": "Integration | ui-kit | DDropdownMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "@type=\"select\" wires aria-describedby to @description",
-          "module": "Integration | Component | FormKit | Field | aria-describedby wiring",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "wrapped actions share the same row surface and keep their callback",
-          "module": "Integration | ui-kit | DDropdownMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "controlled multiple values update all selections without a callback",
-          "module": "Integration | ui-kit | DSelect",
-          "failed": 0,
-          "total": 4
-        },
-        {
-          "name": "delayed-hover cancels when pointer leaves before delay",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "@content",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "dropdown menu",
-          "module": "Integration | ui-kit | DDropdownMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "@onClose",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "destroys its instance when the menu itself is torn down",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 4
-        },
-        {
-          "name": "option attributes",
-          "module": "Integration | ui-kit | DNativeSelect",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "default hoverGracePeriod (0) does not install hover-close on interactive menus",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "closing hands focus back to the trigger when the menu holds it",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 3
-        },
-        {
-          "name": "a disabled trigger still consumes its click (does not fall through to a clickable ancestor)",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "content role attribute",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "@disabled blocks the default button trigger",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "pointer-oracle: Shift+Tab wraps past a CSS-hidden input to the last visible control",
-          "module": "Integration | Component | FloatKit | PointerAnchoredMenu",
-          "failed": 0,
-          "total": 4
-        },
-        {
-          "name": "@modalForMobile - swipe down to close",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "include none",
-          "module": "Integration | Component | FormKit | Controls | Select",
-          "failed": 0,
-          "total": 10
-        },
-        {
-          "name": "empty @identifier/@groupIdentifier",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 4
-        },
-        {
-          "name": "@selection",
-          "module": "Integration | Component | FormKit | Controls | Menu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "required fields report validation on the visible control",
-          "module": "Integration | ui-kit | DSelect",
-          "failed": 0,
-          "total": 6
-        },
-        {
-          "name": "@groupIdentifier",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 4
-        },
-        {
-          "name": "<:content>",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "@disabled blocks a custom trigger and updates reactively",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 4
-        },
-        {
-          "name": "closing leaves focus alone when something else has taken it",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "@class",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "dropdown menu divider",
-          "module": "Integration | ui-kit | DDropdownMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "@autofocus",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "@closeOnScroll ignores an overflow container whose content fits",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "a service-created menu component can close with data",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "focusTrigger on close",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "a changing triggerComponent does not kill the menu",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "trigger disabled argument reflects the disabled state",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "pointer-oracle: closing a virtual-trigger menu resolves focusTarget at close time",
-          "module": "Integration | Component | FloatKit | PointerAnchoredMenu",
-          "failed": 0,
-          "total": 6
-        },
-        {
-          "name": "@contentClass",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "@triggerClass",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "shared navigation moves once and skips disabled actions",
-          "module": "Integration | ui-kit | DDropdownMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "get a menu by identifier",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "@matchTriggerWidth",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "disabling an open menu returns focus to a trigger that stays focusable",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 3
-        },
-        {
-          "name": "a pick keeps the form value, label and one change callback in sync",
-          "module": "Integration | ui-kit | DSelect",
-          "failed": 0,
-          "total": 8
-        },
-        {
-          "name": "@component",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "aria-expanded attribute",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "multiple selection keeps its panel open and sends a native input event",
-          "module": "Integration | ui-kit | DSelect",
-          "failed": 0,
-          "total": 5
-        },
-        {
-          "name": "@triggerComponent",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "pointer-oracle: Tab wraps past a hidden input to the first visible control",
-          "module": "Integration | Component | FloatKit | PointerAnchoredMenu",
-          "failed": 0,
-          "total": 4
-        },
-        {
-          "name": "@closeOnEscape",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "content close argument",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "menu surfaces stay floating on mobile even with a legacy modal option",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "select attributes",
-          "module": "Integration | ui-kit | DNativeSelect",
-          "failed": 0,
-          "total": 2
-        },
-        {
-          "name": "@matchTriggerMinWidth",
-          "module": "Integration | Component | FloatKit | DMenu",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "@onChange with the none option",
-          "module": "Integration | ui-kit | DNativeSelect",
-          "failed": 0,
-          "total": 1
-        },
-        {
-          "name": "reverts the selection when a controlled change is rejected",
-          "module": "Integration | Component | FormKit | Controls | ConditionalContent",
-          "failed": 0,
-          "total": 4
-        },
-        {
-          "name": "default",
-          "module": "Integration | Component | FormKit | Controls | Select",
-          "failed": 0,
-          "total": 6
-        },
-        {
-          "name": "delayed-hover click during pending delay opens menu",
+          "name": "@onShow",
           "module": "Integration | Component | FloatKit | DMenu",
           "failed": 0,
           "total": 1
@@ -548,7 +32,127 @@
           "total": 1
         },
         {
-          "name": "<:trigger>",
+          "name": "trigger disabled argument reflects the disabled state",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "closing a mobile menu preserves its containing modal",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "@maxWidth",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "menu surfaces stay floating on mobile even with a legacy modal option",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "@disabled blocks a custom trigger and updates reactively",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "@matchTriggerMinWidth",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "reverts the selection when a controlled change is rejected",
+          "module": "Integration | Component | FormKit | Controls | ConditionalContent",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "multiple selection keeps its panel open and sends a native input event",
+          "module": "Integration | ui-kit | DSelect",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "default hoverGracePeriod (0) does not install hover-close on interactive menus",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "@label",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "@onChange",
+          "module": "Integration | ui-kit | DNativeSelect",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "@closeOnScroll ignores an overflow container whose content fits",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "@onRegisterApi",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "delayed-hover opens menu after delay",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "pointer-oracle: Shift+Tab wraps past a CSS-hidden input to the last visible control",
+          "module": "Integration | Component | FloatKit | PointerAnchoredMenu",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "pointer-oracle: a service menu rendered as a mobile modal exposes its supplied label",
+          "module": "Integration | Component | FloatKit | PointerAnchoredMenu",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "<:content>",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "@onChange with the none option",
+          "module": "Integration | ui-kit | DNativeSelect",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "closing leaves focus alone when something else has taken it",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "destroys its instance when the menu itself is torn down",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "a menu can be closed by identifier",
           "module": "Integration | Component | FloatKit | DMenu",
           "failed": 0,
           "total": 1
@@ -560,22 +164,22 @@
           "total": 4
         },
         {
-          "name": "@disabled",
-          "module": "Integration | Component | FormKit | Controls | Select",
+          "name": "dropdown menu divider",
+          "module": "Integration | ui-kit | DDropdownMenu",
           "failed": 0,
           "total": 1
         },
         {
-          "name": "selected falsy value",
-          "module": "Integration | ui-kit | DNativeSelect",
+          "name": "pointer-oracle: Tab wraps past a hidden input to the first visible control",
+          "module": "Integration | Component | FloatKit | PointerAnchoredMenu",
           "failed": 0,
           "total": 4
         },
         {
-          "name": "focusTrigger=false still rescues focus the menu was holding",
+          "name": "aria-expanded attribute",
           "module": "Integration | Component | FloatKit | DMenu",
           "failed": 0,
-          "total": 1
+          "total": 2
         },
         {
           "name": "closing a standalone mobile menu cleans up its modal",
@@ -584,31 +188,55 @@
           "total": 3
         },
         {
-          "name": "@hoverGracePeriod keeps the menu open while the pointer crosses to the content",
+          "name": "@contentRole none removes container semantics",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "@closeOnEscape",
           "module": "Integration | Component | FloatKit | DMenu",
           "failed": 0,
           "total": 2
         },
         {
-          "name": "disabled controls cannot open a menu",
-          "module": "Integration | ui-kit | DSelect",
+          "name": "menu.shouldRenderInModal decides without an instance",
+          "module": "Integration | Component | FloatKit | DMenu",
           "failed": 0,
-          "total": 3
+          "total": 4
         },
         {
-          "name": "@maxWidth",
+          "name": "select attributes",
+          "module": "Integration | ui-kit | DNativeSelect",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "@triggerComponent",
           "module": "Integration | Component | FloatKit | DMenu",
           "failed": 0,
           "total": 1
         },
         {
-          "name": "dynamic options and controlled values update without emitting a change",
-          "module": "Integration | ui-kit | DSelect",
+          "name": "@content",
+          "module": "Integration | Component | FloatKit | DMenu",
           "failed": 0,
-          "total": 3
+          "total": 1
         },
         {
-          "name": "@onRegisterApi",
+          "name": "<:trigger>",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "@disabled blocks the default button trigger",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "close data preserves the default trigger focus",
           "module": "Integration | Component | FloatKit | DMenu",
           "failed": 0,
           "total": 1
@@ -620,16 +248,400 @@
           "total": 2
         },
         {
-          "name": "menu.shouldRenderInModal decides without an instance",
+          "name": "pointer-oracle: closing a virtual-trigger menu resolves focusTarget at close time",
+          "module": "Integration | Component | FloatKit | PointerAnchoredMenu",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "closing hands focus back to the trigger when the menu holds it",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "a service-created menu component can close with data",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "default",
+          "module": "Integration | Component | FormKit | Controls | Select",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "@modalForMobile - swipe down to close",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "content aria-labelledby attribute",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "shared navigation moves once and skips disabled actions",
+          "module": "Integration | ui-kit | DDropdownMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "@groupIdentifier",
           "module": "Integration | Component | FloatKit | DMenu",
           "failed": 0,
           "total": 4
+        },
+        {
+          "name": "@modalForMobile",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "controlled multiple values update all selections without a callback",
+          "module": "Integration | ui-kit | DSelect",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "service-created menus use @contentRole",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "@onClose",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "delayed-hover click during pending delay opens menu",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "content close argument",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "trigger id attribute",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "@identifier",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "required fields report validation on the visible control",
+          "module": "Integration | ui-kit | DSelect",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "selecting none",
+          "module": "Integration | Component | FormKit | Controls | Select",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "selected value",
+          "module": "Integration | ui-kit | DNativeSelect",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "keyboard navigation skips disabled options and Escape returns focus",
+          "module": "Integration | ui-kit | DSelect",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "hover dismissal preserves outside focus while Escape restores the trigger",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "@class",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "-expanded class",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "nested Escape leaves the parent menu and its draft open",
+          "module": "Integration | ui-kit | DSelect",
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "name": "@hoverGracePeriod closes the menu after the grace period when the pointer leaves entirely",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "focusTrigger=false still rescues focus the menu was holding",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "selected falsy value",
+          "module": "Integration | ui-kit | DNativeSelect",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "@type=\"select\" wires aria-describedby to @description",
+          "module": "Integration | Component | FormKit | Field | aria-describedby wiring",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "keeps the selection when options are rebuilt",
+          "module": "Integration | ui-kit | DNativeSelect",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "a pick keeps the form value, label and one change callback in sync",
+          "module": "Integration | ui-kit | DSelect",
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "name": "@triggerClass",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "@component",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "@modalForMobile - swipe down defers to scrolled content",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "trigger expanded argument reflects the open state",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "dynamic options and controlled values update without emitting a change",
+          "module": "Integration | ui-kit | DSelect",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "dropdown menu",
+          "module": "Integration | ui-kit | DDropdownMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "no value",
+          "module": "Integration | ui-kit | DNativeSelect",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "pointer-oracle: an idless service trigger gives the menu a usable label",
+          "module": "Integration | Component | FloatKit | PointerAnchoredMenu",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "disabling during beforeTrigger vetoes the pending open",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "@hoverGracePeriod keeps the menu open while the pointer crosses to the content",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "@matchTriggerWidth",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "empty @identifier/@groupIdentifier",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "@closeOnClickOutside",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "applies position",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "get a menu by identifier",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "disabled controls cannot open a menu",
+          "module": "Integration | ui-kit | DSelect",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "@autofocus",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "focusTrigger on close",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "delayed-hover cancels when pointer leaves before delay",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "disabled delayed-hover does not swallow the first click after re-enabling",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
         },
         {
           "name": "the native compatibility export preserves values including false and null",
           "module": "Integration | ui-kit | DSelect",
           "failed": 0,
           "total": 3
+        },
+        {
+          "name": "option attributes",
+          "module": "Integration | ui-kit | DNativeSelect",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "@contentClass",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "DMenu uses a modal while DTooltip stays inline on mobile",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "@disabled",
+          "module": "Integration | Component | FormKit | Controls | Select",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "@selection",
+          "module": "Integration | Component | FormKit | Controls | Menu",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "@onPositioned fires when the menu renders as a mobile modal",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "disabling an open menu returns focus to a trigger that stays focusable",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "traps pointerdown events only when expanded ",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "@onPositioned fires with the content once the float is positioned",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "include none",
+          "module": "Integration | Component | FormKit | Controls | Select",
+          "failed": 0,
+          "total": 10
+        },
+        {
+          "name": "keeps the selection when the value is not a string",
+          "module": "Integration | ui-kit | DNativeSelect",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "a disabled trigger still consumes its click (does not fall through to a clickable ancestor)",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "wrapped actions share the same row surface and keep their callback",
+          "module": "Integration | ui-kit | DDropdownMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "content role attribute",
+          "module": "Integration | Component | FloatKit | DMenu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "dropdown menu item",
+          "module": "Integration | ui-kit | DDropdownMenu",
+          "failed": 0,
+          "total": 2
         }
       ]
     }
