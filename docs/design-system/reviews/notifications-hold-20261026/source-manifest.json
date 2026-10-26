@@ -229,8 +229,16 @@
         "sha256": "d9f4eb27eea0afbd74f7f127f7e529c52b023984c53f135a0700f75f94ad60f2"
       },
       {
+        "repository_path": "frontend/discourse/app/lib/load-motion.js",
+        "sha256": "51903c1b619234eb129c0885af094d823ed8a7e4df0372a5df24e890a0899d46"
+      },
+      {
         "repository_path": "frontend/discourse/app/ui-kit/d-hold-button.gts",
         "sha256": "8f3f77ac7723b883a041929ebd0d0eec9ede4f7b8a4634899dfa5a40c7dd2b71"
+      },
+      {
+        "repository_path": "frontend/discourse/app/ui-kit/d-otp/animated.gjs",
+        "sha256": "675ac3bf59f6a3654c39d26e2dbdd48bce6ec8fd246a14abf5155b51386073f7"
       },
       {
         "repository_path": "frontend/discourse/tests/integration/ui-kit/d-hold-button-test.gjs",
@@ -261,7 +269,7 @@
         "sha256": "7b849ec9d4abaad6424131594ab6467f816a4eedc2eb4b98545759bf7c95ab3e"
       }
     ],
-    "scope": "Notification hold action only; independent menu and selector drafts remain in the shared development workspace.",
+    "scope": "Notification hold action and the minimal type-only baseline declarations required by its full CI gate; independent menu and selector drafts remain in the shared development workspace.",
     "scoped_lint": "Passed in the isolated PR worktree",
     "isolated_type_gate": "Required CI check before merge",
     "local_only_evidence": [
@@ -325,6 +333,16 @@
         "path": "flows-desktop-pending.png",
         "sha256": "6f05b8ad63c29637d398a9ac22b4695b41733c4775581a5d1ababbd67637db74"
       }
-    ]
+    ],
+    "type_gate_repairs": {
+      "failure_head": "642846faddf5c63062a672e28351a2c97d71291c",
+      "job_url": "https://github.com/ISBF-Lab/ISBFweb/actions/runs/40327999185/job/121589617654",
+      "files": [
+        "frontend/discourse/app/lib/load-motion.js",
+        "frontend/discourse/app/ui-kit/d-otp/animated.gjs"
+      ],
+      "runtime_text_unchanged": true,
+      "new_suppressions_or_casts": false
+    }
   }
 }
