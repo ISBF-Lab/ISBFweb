@@ -1,0 +1,80 @@
+--- a/source/frontend/discourse/app/ui-kit/d-select.gts
++++ b/source/frontend/discourse/app/ui-kit/d-select.gts
+@@ -373,11 +373,13 @@
+         </ul>
+       </:content>
+     </SelectMenu>
++    {{! Keep consumer field styles from exposing the form value carrier. }}
+     <NativeSelect
+       aria-hidden="true"
+-      class="d-select__native"
++      class="d-select__native hidden"
+       disabled={{@disabled}}
+       form={{@form}}
++      hidden
+       multiple={{@multiple}}
+       name={{@name}}
+       required={{@required}}
+--- a/source/frontend/discourse/tests/integration/ui-kit/d-select-test.gjs
++++ b/source/frontend/discourse/tests/integration/ui-kit/d-select-test.gjs
+@@ -23,6 +23,49 @@
+ module("Integration | ui-kit | DSelect", function (hooks) {
+   setupRenderingTest(hooks);
+ 
++  let consumerSheet;
++
++  hooks.afterEach(() => consumerSheet?.remove());
++
++  test("keeps the native value carrier out of themed layouts", async function (assert) {
++    consumerSheet = document.createElement("style");
++    consumerSheet.textContent =
++      ".legacy-select-layout select { display: block; }";
++    document.head.appendChild(consumerSheet);
++
++    await render(
++      <template>
++        <DMenus />
++        <form class="legacy-select-layout">
++          <DSelect name="choice" @value="a" as |s|>
++            <s.Option @value="a">Alpha</s.Option>
++            <s.Option @value="b">Beta</s.Option>
++          </DSelect>
++        </form>
++      </template>
++    );
++
++    assert
++      .dom(".d-select__native")
++      .isNotVisible(
++        "theme field rules cannot expose a duplicate native control"
++      );
++    assert.dom(trigger).isVisible("the shared trigger remains available");
++    assert.strictEqual(
++      new FormData(find("form")).get("choice"),
++      "a",
++      "the hidden carrier still submits its value"
++    );
++    await click(trigger);
++    await click(findAll(options)[2]);
++    assert.dom(trigger).hasText("Beta", "the visible selection updates");
++    assert.strictEqual(
++      new FormData(find("form")).get("choice"),
++      "b",
++      "the selected value still reaches form submission"
++    );
++  });
++
+   test("required fields report validation on the visible control", async function (assert) {
+     await render(
+       <template>
+--- a/source/docs/design-system/dropdowns.md
++++ b/source/docs/design-system/dropdowns.md
+@@ -35,6 +35,8 @@
+ DSelect保留原生值载体，支持name、form、required、disabled、空值、动态选项与FormData。
+ 单选延续字符串／null回调；多选回调为字符串数组。旧原生事件适配可使用`@onInput`，
+ 事件目标仍是原生select；可见入口是有标签关联的按钮。底层载体不是另一套可见菜单。
++载体同时保留`hidden`属性与核心`hidden`工具类，避免业务表单的display规则将其重新显示；
++隐藏不影响原有值、校验与FormData提交。
+ 
+ ## 唯一外观来源
+ 

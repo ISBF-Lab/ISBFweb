@@ -373,11 +373,13 @@ export default class DSelect<
         </ul>
       </:content>
     </SelectMenu>
+    {{! Keep consumer field styles from exposing the form value carrier. }}
     <NativeSelect
       aria-hidden="true"
-      class="d-select__native"
+      class="d-select__native hidden"
       disabled={{@disabled}}
       form={{@form}}
+      hidden
       multiple={{@multiple}}
       name={{@name}}
       required={{@required}}

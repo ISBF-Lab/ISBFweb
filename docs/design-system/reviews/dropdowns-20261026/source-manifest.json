@@ -192,7 +192,7 @@
     },
     {
       "path": "source/docs/design-system/dropdowns.md",
-      "sha256": "e19eb55134d21312cb0a3a39c9682ba1e855c97d9c0164802bef227ff6015b95",
+      "sha256": "300b2da261d87b3fae3fc705befdd9f9dbf5e4ca673fffbe85ef0408c94f4b6f",
       "before_sha256": null,
       "deleted": false
     },
@@ -449,7 +449,7 @@
     },
     {
       "path": "source/frontend/discourse/app/ui-kit/d-select.gts",
-      "sha256": "91afa3782159557937aa62dce1e5f72534c4cfad7d8963ef53a7e16824c8d3be",
+      "sha256": "e935e8a831e9c50466445e87a94d08ef229748c4aff466fa348b9593840b81db",
       "before_sha256": null,
       "deleted": false
     },
@@ -586,7 +586,7 @@
     },
     {
       "path": "source/frontend/discourse/tests/integration/ui-kit/d-select-test.gjs",
-      "sha256": "f491fe52331105ed7c86fde54b6a1708e95a32828c6bd2555f5e03d8f43d6a40",
+      "sha256": "751701a2243c2fdd8b64614742648ced004fa4106da119d7680d361560ce5663",
       "before_sha256": null,
       "deleted": false
     },
@@ -845,7 +845,7 @@
       },
       {
         "path": "docs/design-system/dropdowns.md",
-        "sha256": "e19eb55134d21312cb0a3a39c9682ba1e855c97d9c0164802bef227ff6015b95",
+        "sha256": "300b2da261d87b3fae3fc705befdd9f9dbf5e4ca673fffbe85ef0408c94f4b6f",
         "before_sha256": null
       },
       {
@@ -1050,7 +1050,7 @@
       },
       {
         "path": "frontend/discourse/app/ui-kit/d-select.gts",
-        "sha256": "91afa3782159557937aa62dce1e5f72534c4cfad7d8963ef53a7e16824c8d3be",
+        "sha256": "e935e8a831e9c50466445e87a94d08ef229748c4aff466fa348b9593840b81db",
         "before_sha256": null
       },
       {
@@ -1205,7 +1205,7 @@
       },
       {
         "path": "frontend/discourse/tests/integration/ui-kit/d-select-test.gjs",
-        "sha256": "f491fe52331105ed7c86fde54b6a1708e95a32828c6bd2555f5e03d8f43d6a40",
+        "sha256": "751701a2243c2fdd8b64614742648ced004fa4106da119d7680d361560ce5663",
         "before_sha256": null
       },
       {
@@ -1401,12 +1401,12 @@
     ],
     "validation": {
       "native_lint": "passed",
-      "types": "Passed in CI on a09f543b; current followup changes tests and CI timeout only",
+      "types": "Passed in CI on 56ab53c8; final declarative hiding and regression-test followup CI required",
       "menu_policy": "passed",
       "dialog_policy": "passed",
       "full_theme_tests": 263,
       "full_theme_assertions": 1142,
-      "ci": "pending final test-adapter and timeout followup",
+      "ci": "pending native value carrier visibility correction",
       "native_followup": {
         "native-followup": {
           "tests": 124,
@@ -1426,6 +1426,16 @@
         "assertions": 18,
         "failed": 0,
         "client_errors": 0
+      },
+      "native_visibility_followup": {
+        "core_tests": 107,
+        "core_assertions": 261,
+        "failed": 0,
+        "client_errors": 0,
+        "page_combinations": 12,
+        "page_checks": 96,
+        "native_lint": "passed",
+        "menu_policy": "passed"
       }
     }
   },
@@ -1442,5 +1452,6 @@
   },
   "ci_followup": "ci-followup.json",
   "native_followup": "native-followup.json",
-  "upcoming_select_followup": "upcoming-select-followup.json"
+  "upcoming_select_followup": "upcoming-select-followup.json",
+  "native_visibility_followup": "native-visibility-followup.json"
 }

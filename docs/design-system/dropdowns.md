@@ -35,6 +35,8 @@ import DSelect from "discourse/ui-kit/d-select";
 DSelect保留原生值载体，支持name、form、required、disabled、空值、动态选项与FormData。
 单选延续字符串／null回调；多选回调为字符串数组。旧原生事件适配可使用`@onInput`，
 事件目标仍是原生select；可见入口是有标签关联的按钮。底层载体不是另一套可见菜单。
+载体同时保留`hidden`属性与核心`hidden`工具类，避免业务表单的display规则将其重新显示；
+隐藏不影响原有值、校验与FormData提交。
 
 ## 唯一外观来源
 

@@ -23,6 +23,49 @@ const options = ".d-select__menu [role='option']";
 module("Integration | ui-kit | DSelect", function (hooks) {
   setupRenderingTest(hooks);
 
+  let consumerSheet;
+
+  hooks.afterEach(() => consumerSheet?.remove());
+
+  test("keeps the native value carrier out of themed layouts", async function (assert) {
+    consumerSheet = document.createElement("style");
+    consumerSheet.textContent =
+      ".legacy-select-layout select { display: block; }";
+    document.head.appendChild(consumerSheet);
+
+    await render(
+      <template>
+        <DMenus />
+        <form class="legacy-select-layout">
+          <DSelect name="choice" @value="a" as |s|>
+            <s.Option @value="a">Alpha</s.Option>
+            <s.Option @value="b">Beta</s.Option>
+          </DSelect>
+        </form>
+      </template>
+    );
+
+    assert
+      .dom(".d-select__native")
+      .isNotVisible(
+        "theme field rules cannot expose a duplicate native control"
+      );
+    assert.dom(trigger).isVisible("the shared trigger remains available");
+    assert.strictEqual(
+      new FormData(find("form")).get("choice"),
+      "a",
+      "the hidden carrier still submits its value"
+    );
+    await click(trigger);
+    await click(findAll(options)[2]);
+    assert.dom(trigger).hasText("Beta", "the visible selection updates");
+    assert.strictEqual(
+      new FormData(find("form")).get("choice"),
+      "b",
+      "the selected value still reaches form submission"
+    );
+  });
+
   test("required fields report validation on the visible control", async function (assert) {
     await render(
       <template>

@@ -1,0 +1,27 @@
+{
+  "results": [
+    {
+      "passed": 4,
+      "failed": 1,
+      "total": 5,
+      "runtime": 1608,
+      "failures": [
+        {
+          "message": "theme field rules cannot expose a duplicate native control",
+          "source": "    at DOMAssertions.pushResult (https://dev.isbf-one.com/assets/js/test-entrypoint-otds4lk1.digested.js:205268:20)",
+          "actual": "Element .d-select__native is visible once",
+          "expected": "Element .d-select__native is not visible"
+        }
+      ],
+      "tests": [
+        {
+          "name": "keeps the native value carrier out of themed layouts",
+          "module": "Integration | ui-kit | DSelect",
+          "failed": 1,
+          "total": 5
+        }
+      ]
+    }
+  ],
+  "errors": []
+}
