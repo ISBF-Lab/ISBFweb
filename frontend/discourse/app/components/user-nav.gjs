@@ -1,6 +1,5 @@
 import PluginOutlet from "discourse/components/plugin-outlet";
 import lazyHash from "discourse/helpers/lazy-hash";
-import { and } from "discourse/truth-helpers";
 import DHorizontalOverflowNav from "discourse/ui-kit/d-horizontal-overflow-nav";
 import DNavigationItem from "discourse/ui-kit/d-navigation-item";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
@@ -86,11 +85,11 @@ const UserNav = <template>
           <span>{{i18n "user.preferences.title"}}</span>
         </DNavigationItem>
       {{/if}}
-      {{#if (and @isMobileView @isStaff)}}
+      {{#if @isAdmin}}
         <li class="user-nav__admin">
           <a href={{@user.adminPath}}>
             {{dIcon "wrench"}}
-            <span>{{i18n "admin.user.manage_user"}}</span>
+            <span>{{i18n "admin.user.show_admin_profile"}}</span>
           </a>
         </li>
       {{/if}}
