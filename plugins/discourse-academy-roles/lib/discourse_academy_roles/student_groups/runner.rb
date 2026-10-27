@@ -63,14 +63,14 @@ class DiscourseAcademyRoles::StudentGroups::Runner
     @item.update!(status: "running", reason_code: "")
     started_at = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     all_completed =
-      @item.steps.each_with_index.all? do |step, index|
-        if step["state"] == "done"
+      @item.steps.each_index.all? do |index|
+        if @item.steps[index]["state"] == "done"
           true
         elsif Process.clock_gettime(Process::CLOCK_MONOTONIC) - started_at >= USER_SLICE_BUDGET
           @item.update!(status: "queued")
           false
         else
-          apply_step(step, index)
+          apply_step(index)
         end
       end
     return unless all_completed
@@ -110,13 +110,15 @@ class DiscourseAcademyRoles::StudentGroups::Runner
     Snapshot.capture(@item.user, @batch.group_ids)
   end
 
-  def apply_step(step, index)
+  def apply_step(index)
     unless valid_context?
       conflict!(:changed_since_preview)
       return false
     end
+    steps = @item.steps.deep_dup
+    step = steps.fetch(index)
     step["state"] = "started"
-    @item.update!(steps: @item.steps)
+    @item.update!(steps:)
     attempted = false
     applied = false
     Group.transaction do
@@ -152,13 +154,13 @@ class DiscourseAcademyRoles::StudentGroups::Runner
       end
       step["state"] = "done"
       step["after"] = after
-      @item.update!(steps: @item.steps, after_snapshot: after)
+      @item.update!(steps:, after_snapshot: after)
     end
     applied
   rescue StandardError => error
     @item.reload
-    steps = @item.steps
-    steps[index]["state"] = attempted ? "uncertain" : "pending"
+    steps = @item.steps.deep_dup
+    steps.fetch(index)["state"] = attempted ? "uncertain" : "pending"
     @item.update!(steps:)
     if attempted
       conflict!(:uncertain_result)

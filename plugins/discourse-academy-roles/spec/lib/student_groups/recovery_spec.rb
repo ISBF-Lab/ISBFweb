@@ -83,7 +83,7 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::Runner do
     Group.stubs(:transaction).raises(ActiveRecord::ConnectionNotEstablished)
     Jobs::AcademyStudentGroupBatch.new.execute(batch_id: batch.id)
     expect(batch.items.sole.status).to eq("failed")
-    expect(batch.can_retry?).to eq(true)
+    expect(batch.reload.can_retry?).to eq(true)
     Group.unstub(:transaction)
 
     DiscourseAcademyRoles::StudentGroups::Confirmation.retry(actor: developer, batch: batch.reload)

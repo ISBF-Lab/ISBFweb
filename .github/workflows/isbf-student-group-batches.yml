@@ -48,6 +48,13 @@ jobs:
           ref: 132cc95d043db01251eedf9c93b3927cd5ffee91
           path: discourse
           persist-credentials: false
+      - name: Check out the fixed learning plugin dependency
+        uses: actions/checkout@v4
+        with:
+          ref: 867a0bbc25a446593c223d5b63261e3d1ac9fcb6
+          path: runtime-plugins
+          sparse-checkout: plugins/isbf-learning
+          persist-credentials: false
       - name: Prepare dependencies for the fixed native runtime
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE/discourse"
@@ -63,15 +70,18 @@ jobs:
           pnpm install --frozen-lockfile
       - name: Prepare the unchanged native schema for generator boot
         run: bin/rake db:create db:migrate
-      - name: Overlay only the candidate identity plugin
+      - name: Overlay the candidate identity plugin and fixed learning dependency
         id: overlay
         run: |
           test -d plugins/discourse-academy-roles
           test ! -L plugins/discourse-academy-roles
           rm -r plugins/discourse-academy-roles
           cp -a ../candidate/plugins/discourse-academy-roles plugins/discourse-academy-roles
+          test ! -e plugins/isbf-learning
+          cp -a ../runtime-plugins/plugins/isbf-learning plugins/isbf-learning
           mkdir -p tmp
           git -C ../candidate rev-parse HEAD > tmp/student-group-source-sha.txt
+          git -C ../runtime-plugins rev-parse HEAD > tmp/student-group-learning-source-sha.txt
       - name: Finalize schema migration with the native Rails generator
         run: python3 plugins/discourse-academy-roles/scripts/generate-student-group-migration.py
       - name: Native syntax and formatting for batch feature files
@@ -93,7 +103,7 @@ jobs:
         if: always() && steps.database.outcome == 'success'
         run: |
           set -o pipefail
-          bin/rspec plugins/discourse-academy-roles/spec --exclude-pattern "**/spec/system/**/*_spec.rb" | tee tmp/student-group-rspec.log
+          bin/rake "plugin:spec[discourse-academy-roles]" | tee tmp/student-group-rspec.log
       - name: Build native Admin FormKit components
         id: assets
         if: always() && steps.database.outcome == 'success'
@@ -123,6 +133,7 @@ jobs:
             discourse/tmp/student-group-*.log
             discourse/tmp/student-group-files.txt
             discourse/tmp/student-group-source-sha.txt
+            discourse/tmp/student-group-learning-source-sha.txt
             discourse/log/test.log
             discourse/tmp/student-group-browser
             discourse/tmp/capybara

@@ -2,9 +2,14 @@
 
 class DiscourseAcademyRoles::Admin::StudentGroupBatchesController < ::Admin::AdminController
   requires_plugin "discourse-academy-roles"
+  skip_before_action :check_xhr, only: :download
   before_action :ensure_developer
   before_action :limit_preview, only: %i[preview undo_preview]
   before_action :limit_execution, only: %i[execute retry]
+
+  rescue_from Discourse::InvalidAccess do
+    render_json_error(I18n.t("invalid_access"), type: :invalid_access, status: :forbidden)
+  end
 
   rescue_from DiscourseAcademyRoles::StudentGroups::Error do |error|
     render_json_error(error.message, status: :conflict)

@@ -4,6 +4,7 @@ RSpec.describe DiscourseAcademyRoles::Admin::StudentGroupBatchesController do
   fab!(:developer, :admin)
   fab!(:moderator)
   fab!(:member, :user)
+  fab!(:group_owner, :user)
   fab!(:target, :group)
   fab!(:registration, :registered_academy_student)
   fab!(:official_group, :group)
@@ -29,15 +30,20 @@ RSpec.describe DiscourseAcademyRoles::Admin::StudentGroupBatchesController do
   end
 
   describe "developer authorization" do
-    it "denies guests, members, group owners and restricted administrators on every endpoint" do
-      target.add(member)
-      GroupUser.find_by!(group: target, user: member).update!(owner: true)
+    before do
+      target.add(group_owner)
+      GroupUser.find_by!(group: target, user: group_owner).update!(owner: true)
       DiscourseAcademyRoles::ModeratorPermissions::SETTINGS.values.each do |setting|
         SiteSetting.public_send("#{setting}=", true)
       end
-      batch
-      [nil, member, moderator].each do |actor|
-        sign_in(actor) if actor
+    end
+
+    %i[guest member group_owner moderator].each do |role|
+      it "denies a #{role} on every endpoint with all moderator permissions enabled" do
+        batch
+        sign_in(public_send(role)) unless role == :guest
+        batch_count = DiscourseAcademyRoles::StudentGroupBatch.count
+
         [
           "#{base}.json",
           "#{base}/options.json",
@@ -45,7 +51,7 @@ RSpec.describe DiscourseAcademyRoles::Admin::StudentGroupBatchesController do
           "#{base}/#{batch.id}/download.csv",
         ].each do |path|
           get path
-          expect(response.status).to eq(403)
+          expect(response.status).to eq(403), "#{role}: GET #{path}"
         end
         [
           "#{base}/preview.json",
@@ -54,10 +60,108 @@ RSpec.describe DiscourseAcademyRoles::Admin::StudentGroupBatchesController do
           "#{base}/#{batch.id}/undo-preview.json",
         ].each do |path|
           post path, params: preview_params, as: :json
-          expect(response.status).to eq(403)
+          expect(response.status).to eq(403), "#{role}: POST #{path}"
         end
+
+        expect(DiscourseAcademyRoles::StudentGroupBatch.count).to eq(batch_count)
+        expect(batch.reload.state).to eq("preview")
+        expect(GroupUser.exists?(group: target, user_id: registration.user_id)).to eq(false)
       end
+    end
+  end
+
+  describe "CSRF protection" do
+    around do |example|
+      previous = ActionController::Base.allow_forgery_protection
+      ActionController::Base.allow_forgery_protection = true
+      example.run
+    ensure
+      ActionController::Base.allow_forgery_protection = previous
+    end
+
+    it "requires a CSRF token for every mutation even from a signed-in developer" do
+      batch_count = DiscourseAcademyRoles::StudentGroupBatch.count
+      batch
+      [
+        "#{base}/preview.json",
+        "#{base}/#{batch.id}/execute.json",
+        "#{base}/#{batch.id}/retry.json",
+        "#{base}/#{batch.id}/undo-preview.json",
+      ].each do |path|
+        sign_in(developer)
+        post path, params: preview_params, as: :json
+        expect(response.status).to eq(403), "POST #{path} without a CSRF token"
+        expect(response.body).to include("BAD CSRF")
+      end
+
+      expect(DiscourseAcademyRoles::StudentGroupBatch.count).to eq(batch_count + 1)
       expect(batch.reload.state).to eq("preview")
+      expect(GroupUser.exists?(group: target, user_id: registration.user_id)).to eq(false)
+    end
+  end
+
+  describe "#show" do
+    it "lets another developer inspect an existing batch" do
+      sign_in(Fabricate(:admin))
+      get "#{base}/#{batch.id}.json"
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.fetch("items").sole.fetch("student_number")).to eq(
+        registration.student_number,
+      )
+      expect(response.headers["Cache-Control"]).to include("no-store")
+    end
+  end
+
+  describe "#execute" do
+    it "rejects another developer even when the request spoofs the initiator" do
+      sign_in(Fabricate(:admin))
+      post "#{base}/#{batch.id}/execute.json",
+           params: {
+             selected_item_ids: [batch.items.sole.id],
+             actor_id: developer.id,
+           },
+           as: :json
+
+      expect(response.status).to eq(403)
+      expect(batch.reload.state).to eq("preview")
+      expect(GroupUser.exists?(group: target, user_id: registration.user_id)).to eq(false)
+    end
+
+    it "rejects selected accounts from a different batch" do
+      other_registration = Fabricate(:registered_academy_student)
+      other_batch =
+        DiscourseAcademyRoles::StudentGroups::Preview.create(
+          actor: developer,
+          **preview_params.merge(student_numbers: other_registration.student_number),
+        )
+      sign_in(developer)
+      post "#{base}/#{batch.id}/execute.json",
+           params: {
+             selected_item_ids: [other_batch.items.sole.id],
+           },
+           as: :json
+
+      expect(response.status).to eq(409)
+      expect([batch.reload.state, other_batch.reload.state]).to eq(%w[preview preview])
+      expect(
+        GroupUser.exists?(
+          group: target,
+          user_id: [registration.user_id, other_registration.user_id],
+        ),
+      ).to eq(false)
+    end
+  end
+
+  describe "#retry" do
+    it "rejects another developer even for a retryable batch" do
+      batch.update!(state: "blocked")
+      batch.items.update_all(selected: true, status: "queued")
+      sign_in(Fabricate(:admin))
+      post "#{base}/#{batch.id}/retry.json", params: { actor_id: developer.id }, as: :json
+
+      expect(response.status).to eq(403)
+      expect(batch.reload.state).to eq("blocked")
       expect(GroupUser.exists?(group: target, user_id: registration.user_id)).to eq(false)
     end
   end
@@ -103,13 +207,30 @@ RSpec.describe DiscourseAcademyRoles::Admin::StudentGroupBatchesController do
   end
 
   describe "#download" do
-    it "exports escaped student numbers and completed deltas without invitation secrets" do
+    it "exports UTF-8 CSV with a BOM, escaped values and actual completed deltas without invitation secrets" do
       registration.update_column(:student_number, "=1+1")
+      title = "@SUM(1,2) \"\u5b66\u53f7\"\r\nnext line"
+      registration.user.update!(title:)
       sign_in(developer)
       get "#{base}/#{batch.id}/download.csv"
+
       expect(response.status).to eq(200)
-      rows = CSV.parse(response.body, headers: true)
-      expect(rows.sole["student_number"]).to eq("'=1+1")
+      expect(response.media_type).to eq("text/csv")
+      expect(response.headers["Content-Disposition"]).to include(
+        "attachment",
+        "student-group-batch-#{batch.id}.csv",
+      )
+      expect(response.headers["Cache-Control"]).to include("no-store")
+      output = response.body.dup.force_encoding(Encoding::UTF_8)
+      expect(output.valid_encoding?).to eq(true)
+      expect(output).to start_with(Encodings::BOM)
+      rows = CSV.parse(output.delete_prefix(Encodings::BOM), headers: true)
+      expect(rows.sole.to_h).to include(
+        "student_number" => "'=1+1",
+        "requested_additions" => target.name,
+        "completed_additions" => "",
+        "title_before" => "'#{title}",
+      )
       expect(rows.headers).to include(
         "completed_additions",
         "completed_removals",
@@ -117,7 +238,29 @@ RSpec.describe DiscourseAcademyRoles::Admin::StudentGroupBatchesController do
         "title_after",
         "flair_group_after",
       )
-      expect(response.body).not_to include(registration.invite.invite_key)
+      expect(output.include?(registration.invite.invite_key)).to eq(false)
+      expect(output.include?(registration.invite.link)).to eq(false)
+
+      DiscourseAcademyRoles::StudentGroups::Confirmation.execute(
+        actor: developer,
+        batch:,
+        selected_item_ids: [batch.items.sole.id],
+      )
+      Jobs::AcademyStudentGroupBatch.new.execute(batch_id: batch.id)
+      get "#{base}/#{batch.id}/download.csv"
+
+      expect(response.status).to eq(200)
+      output = response.body.dup.force_encoding(Encoding::UTF_8)
+      rows = CSV.parse(output.delete_prefix(Encodings::BOM), headers: true)
+      expect(rows.sole.to_h).to include(
+        "status" => "success",
+        "requested_additions" => target.name,
+        "completed_additions" => target.name,
+        "completed_removals" => "",
+        "title_after" => "'#{title}",
+      )
+      expect(output.include?(registration.invite.invite_key)).to eq(false)
+      expect(output.include?(registration.invite.link)).to eq(false)
     end
   end
 end

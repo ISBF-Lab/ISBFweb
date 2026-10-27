@@ -29,7 +29,11 @@ RSpec.describe "Adjust student groups" do
     context "with #{width}px #{mode} layout", mobile: do
       before do
         if mode == "dark"
-          scheme = ColorScheme.create_from_base(name: "Batch review dark", base_scheme_id: "Dark")
+          scheme =
+            ColorScheme.create_from_base(
+              name: "Batch review dark",
+              base_scheme_id: ColorScheme::NAMES_TO_ID_MAP.fetch("Dark"),
+            )
           developer.user_option.update!(color_scheme_id: scheme.id, dark_scheme_id: scheme.id)
         end
         page.current_window.resize_to(width, 900)

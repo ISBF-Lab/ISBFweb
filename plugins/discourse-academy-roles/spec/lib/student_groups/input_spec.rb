@@ -53,16 +53,20 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::Input do
         "student_number\n" + "000123\n" * 1501,
         "0" * (1.megabyte + 1),
       ].each do |content|
-        upload =
-          ActionDispatch::Http::UploadedFile.new(
-            tempfile: file_from_contents(content, "students.csv"),
-            filename: "students.csv",
-            type: "text/csv",
-          )
+        Tempfile.create(%w[students .csv], binmode: true) do |file|
+          file.write(content)
+          file.rewind
+          upload =
+            ActionDispatch::Http::UploadedFile.new(
+              tempfile: file,
+              filename: "students.csv",
+              type: "text/csv",
+            )
 
-        expect { described_class.new(kind: "csv", file: upload) }.to raise_error(
-          DiscourseAcademyRoles::StudentGroups::Error,
-        )
+          expect { described_class.new(kind: "csv", file: upload) }.to raise_error(
+            DiscourseAcademyRoles::StudentGroups::Error,
+          )
+        end
       end
     end
 
