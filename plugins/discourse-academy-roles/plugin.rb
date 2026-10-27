@@ -36,6 +36,9 @@ after_initialize do
     module Admin
     end
 
+    module StudentGroups
+    end
+
     module StudentInvites
       module Action
       end
@@ -44,6 +47,20 @@ after_initialize do
 
   %w[
     app/models/discourse_academy_roles/student_registration
+    lib/discourse_academy_roles/student_groups
+    app/models/discourse_academy_roles/student_group_batch
+    app/models/discourse_academy_roles/student_group_batch_item
+    lib/discourse_academy_roles/student_groups/input
+    lib/discourse_academy_roles/student_groups/groups
+    lib/discourse_academy_roles/student_groups/snapshot
+    lib/discourse_academy_roles/student_groups/preview
+    lib/discourse_academy_roles/student_groups/confirmation
+    lib/discourse_academy_roles/student_groups/runner
+    app/services/discourse_academy_roles/student_groups/create_preview
+    app/services/discourse_academy_roles/student_groups/confirm_batch
+    app/serializers/discourse_academy_roles/student_group_batch_serializer
+    app/serializers/discourse_academy_roles/student_group_batch_item_serializer
+    app/controllers/discourse_academy_roles/admin/student_group_batches_controller
     lib/discourse_academy_roles/student_invite_csv
     app/services/discourse_academy_roles/student_invite_contract
     app/services/discourse_academy_roles/create_student_invite
@@ -68,6 +85,14 @@ after_initialize do
              only: %i[update destroy]
 
     namespace :admin do
+      resources :student_group_batches, path: "student-group-batches", only: %i[index show] do
+        get :options, on: :collection
+        post :preview, on: :collection
+        post :execute, on: :member
+        post :retry, on: :member
+        post "undo-preview", action: :undo_preview, on: :member
+        get :download, on: :member
+      end
       get "moderator-permissions" => "moderator_permissions#index"
       get "users/:user_id/official-post-quota" => "official_post_quotas#show"
       put "users/:user_id/official-post-quota" => "official_post_quotas#update"
@@ -86,6 +111,10 @@ after_initialize do
     get "/admin/plugins/discourse-academy-roles/student-invites/new" => "admin/plugins#index",
         :constraints => AdminConstraint.new
     get "/admin/plugins/discourse-academy-roles/student-invites/bulk" => "admin/plugins#index",
+        :constraints => AdminConstraint.new
+    get "/admin/plugins/discourse-academy-roles/student-group-batches" => "admin/plugins#index",
+        :constraints => AdminConstraint.new
+    get "/admin/plugins/discourse-academy-roles/student-group-batches/:batch_id" => "admin/plugins#index",
         :constraints => AdminConstraint.new
     mount ::DiscourseAcademyRoles::Engine, at: "/academy-roles"
   end
@@ -111,6 +140,8 @@ after_initialize do
   require_relative "lib/discourse_academy_roles/moderator_controllers"
   require_relative "lib/discourse_academy_roles/moderator_client_permissions"
   require_relative "lib/discourse_academy_roles/moderator_post_destroyer"
+
+  Rails.application.config.filter_parameters += %i[student_numbers prefix]
 
   register_post_custom_field_type(DiscourseAcademyRoles::OFFICIAL_POST_FIELD, :boolean)
   TopicView.default_post_custom_fields << DiscourseAcademyRoles::OFFICIAL_POST_FIELD

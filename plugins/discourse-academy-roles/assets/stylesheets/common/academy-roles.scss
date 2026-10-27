@@ -94,3 +94,13 @@
     min-height: 44px;
   }
 }
+
+.academy-student-group-batches {
+  &__result {
+    margin-block: 1.5em;
+  }
+
+  .d-table__cell {
+    overflow-wrap: anywhere;
+  }
+}
