@@ -5,6 +5,7 @@ from pathlib import Path
 import sqlite3
 import tempfile
 import unittest
+from unittest.mock import Mock, patch
 from urllib.parse import parse_qs, urlsplit
 
 SPEC = importlib.util.spec_from_file_location(
@@ -97,6 +98,36 @@ class FakeDesktop:
     def delete(self, _thread, submission):
         self.deleted.append(submission)
 
+
+
+class WorkspacePathTests(unittest.TestCase):
+    def test_normalizes_drive_and_unc_extended_prefixes(self):
+        self.assertEqual(ci.strip_windows_extended_prefix(r"\\?\C:\workspace\repo"), r"C:\workspace\repo")
+        self.assertEqual(ci.strip_windows_extended_prefix(r"\\?\UNC\server\share\repo"), r"\\server\share\repo")
+        self.assertEqual(ci.strip_windows_extended_prefix("/workspace/repo"), "/workspace/repo")
+
+    def test_accepts_an_owned_checkout_with_equivalent_metadata_paths(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            owner = Path(temporary).resolve()
+            candidate = owner / "repos" / "forum"
+            candidate.mkdir(parents=True)
+            desktop = ci.Desktop(owner, Path("codex"))
+            desktop.thread = Mock(return_value={"id": "thread", "cwd": "\\\\?\\" + str(owner)})
+            desktop.queued = Mock(return_value=[])
+            with patch.object(ci, "common_directory", side_effect=lambda path: path / ".git"), patch.object(ci, "command", return_value=Mock(returncode=0, stdout="--thread --message")):
+                self.assertEqual(desktop.check("thread", candidate)["id"], "thread")
+
+    def test_rejects_an_unrelated_checkout_after_normalizing_metadata(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            owner = Path(temporary).resolve() / "owner"
+            owner.mkdir()
+            candidate = owner.parent / "unrelated"
+            candidate.mkdir()
+            desktop = ci.Desktop(owner, Path("codex"))
+            desktop.thread = Mock(return_value={"id": "thread", "cwd": "\\\\?\\" + str(owner)})
+            with patch.object(ci, "common_directory", side_effect=lambda path: path / ".git"):
+                with self.assertRaisesRegex(ci.HandoffError, "outside the owning"):
+                    desktop.check("thread", candidate)
 
 class CheckTests(unittest.TestCase):
     def setUp(self):
