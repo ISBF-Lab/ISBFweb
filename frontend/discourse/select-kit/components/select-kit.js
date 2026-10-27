@@ -1161,11 +1161,29 @@ export default class SelectKit extends Component {
     this.selectKit.onOpen(event);
 
     this.cleanupFloatingUi?.();
-    this.cleanupFloatingUi = autoUpdate(
+    let updateTimer = null;
+    const schedulePosition = () => {
+      if (updateTimer !== null) {
+        return;
+      }
+      // Resize callbacks must not resize another observer's target during delivery.
+      updateTimer = next(() => {
+        updateTimer = null;
+        if (!this.isDestroying && this.selectKit.isExpanded) {
+          this.updateFloatingUiPosition();
+        }
+      });
+    };
+    const cleanup = autoUpdate(
       this.getHeader(),
       this._bodyElement(),
-      () => this.updateFloatingUiPosition()
+      schedulePosition
     );
+    this.cleanupFloatingUi = () => {
+      cleanup();
+      cancel(updateTimer);
+      updateTimer = null;
+    };
 
     this.selectKit.setProperties({
       isExpanded: true,

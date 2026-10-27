@@ -192,7 +192,7 @@
     },
     {
       "path": "source/docs/design-system/dropdowns.md",
-      "sha256": "d6fdc761b94532fea11fab89f7b5f4ee654f9781e4c75a5f7c82b976c8830455",
+      "sha256": "e19eb55134d21312cb0a3a39c9682ba1e855c97d9c0164802bef227ff6015b95",
       "before_sha256": null,
       "deleted": false
     },
@@ -544,7 +544,7 @@
     },
     {
       "path": "source/frontend/discourse/select-kit/components/select-kit.js",
-      "sha256": "45df9adc847e56de3a5209129f9e19282865a3c9355922e054c4fb0148c365b4",
+      "sha256": "e67ac69efc49dda690b5fa1186418a08fb000cde01f80b938780150134977983",
       "before_sha256": "1039dc7e2ce31ccf7b64433b7ad1315d6d8192cca1b5ff629504905ee562ab2c",
       "deleted": false
     },
@@ -691,6 +691,62 @@
       "sha256": "ffe5882180982dd7596989b8245360eb9dff66f8e54d5f5e4991c9fa5c82d11c",
       "before_sha256": null,
       "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/tests/helpers/d-select.js",
+      "sha256": "58cff6b8fee57801d8aaf46812d35368e2a090e87b638fed0265a36009c6383c",
+      "before_sha256": null,
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/helpers/d-native-select-assertions.js",
+      "sha256": "f7755597f66729fc7fe6709c94ca42c53a85e6277aed6cf7a05e464188f7eaf5",
+      "before_sha256": "5dd3a67f97b2f0f658e719301f0764cc843073c3de227cb4e872f3fc0d4e5c1c",
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/acceptance/admin-customize-components-config-area-test.gjs",
+      "sha256": "a9af8aeaed0631755d6f6dd77a1182c7f8572b25877a7e69e2ddefdd8c78c2d6",
+      "before_sha256": "a22183daab126513e0f256fd2192f5f701bdc7c02ebe440cae7e71d777d48f7b",
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/acceptance/admin-emoji-test.gjs",
+      "sha256": "2d80b75eb1ffce7e61841e288befbe6c334934fa9433846131c958dd3510f2bf",
+      "before_sha256": "616968a503a61578ed4bb5d9d1adab0d52a9fd02aa0a65c68916c9fca5d48e5b",
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/acceptance/admin-mcp-test.js",
+      "sha256": "ba501be2b24f06841af6732e2e5ae7b9ba6ae35774886246ff9cb6a465834639",
+      "before_sha256": "5d8baf543ab60e3ae8e492d799f430e2b4d0486b5b433906d7d4d7bcb0ce770e",
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/acceptance/reports-test.js",
+      "sha256": "5d56676a13e2b4824bfe84ac0bbda8396644ac54479ba4eb39a82e62c96241da",
+      "before_sha256": "00419d20742cdd4424a2aca7ff82185bc1a12744631274b8f7847cff4c570459",
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/acceptance/topic-edit-timer-test.js",
+      "sha256": "d0ce88063c25e408aa33c2c0afb5c7614384296857cdf7f5f9803c1caee98025",
+      "before_sha256": "9bbe7502c20aea4199c0a285bde9f89e7d945e10c88b23b140b01cb763159a81",
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/integration/ui-kit/d-filter-controls-test.gjs",
+      "sha256": "fed225d775c9834cd7f5c243a239bd984864f6efb49f23f1164aae0289400a67",
+      "before_sha256": "d5fdaecf25c05285545d415d43a1808f391b6f94b3c6bab0994aecd7b03d3dd9",
+      "deleted": false,
+      "test_only": true
     }
   ],
   "preservation": {
@@ -740,7 +796,7 @@
     "lint": "passed",
     "types": "passed"
   },
-  "patch_scope": "Non-overlapping dropdown increments only; concurrent files are recorded by hash and require comparison before restoration",
+  "patch_scope": "Non-overlapping dropdown increments only; concurrent files are recorded by hash and require comparison before restoration; apply native-followup.patch after changes.patch for the native regression correction",
   "pull_request": {
     "base_commit": "099c6eaa0ab136461d8e822e185e9503a1da4391",
     "source_mapping": "Scoped dropdown delta applied to main, preserving the merged notification hold action. Runtime source hashes and theme preservation remain separate.",
@@ -777,7 +833,7 @@
       },
       {
         "path": "docs/design-system/dropdowns.md",
-        "sha256": "d6fdc761b94532fea11fab89f7b5f4ee654f9781e4c75a5f7c82b976c8830455",
+        "sha256": "e19eb55134d21312cb0a3a39c9682ba1e855c97d9c0164802bef227ff6015b95",
         "before_sha256": null
       },
       {
@@ -1057,13 +1113,48 @@
       },
       {
         "path": "frontend/discourse/select-kit/components/select-kit.js",
-        "sha256": "45df9adc847e56de3a5209129f9e19282865a3c9355922e054c4fb0148c365b4",
+        "sha256": "e67ac69efc49dda690b5fa1186418a08fb000cde01f80b938780150134977983",
         "before_sha256": "1039dc7e2ce31ccf7b64433b7ad1315d6d8192cca1b5ff629504905ee562ab2c"
       },
       {
         "path": "frontend/discourse/select-kit/components/select-kit/select-kit-body.gjs",
         "sha256": "6fd1c769097b5329db1d5a0265e8ede72c086fb3d3fc499621454801d23f4c0c",
         "before_sha256": "6ac2db5be3a6897647e6803f9e4e00583a4404f343b7a9b586e6b85718d53509"
+      },
+      {
+        "path": "frontend/discourse/tests/acceptance/admin-customize-components-config-area-test.gjs",
+        "sha256": "a9af8aeaed0631755d6f6dd77a1182c7f8572b25877a7e69e2ddefdd8c78c2d6",
+        "before_sha256": "a22183daab126513e0f256fd2192f5f701bdc7c02ebe440cae7e71d777d48f7b"
+      },
+      {
+        "path": "frontend/discourse/tests/acceptance/admin-emoji-test.gjs",
+        "sha256": "2d80b75eb1ffce7e61841e288befbe6c334934fa9433846131c958dd3510f2bf",
+        "before_sha256": "616968a503a61578ed4bb5d9d1adab0d52a9fd02aa0a65c68916c9fca5d48e5b"
+      },
+      {
+        "path": "frontend/discourse/tests/acceptance/admin-mcp-test.js",
+        "sha256": "ba501be2b24f06841af6732e2e5ae7b9ba6ae35774886246ff9cb6a465834639",
+        "before_sha256": "5d8baf543ab60e3ae8e492d799f430e2b4d0486b5b433906d7d4d7bcb0ce770e"
+      },
+      {
+        "path": "frontend/discourse/tests/acceptance/reports-test.js",
+        "sha256": "5d56676a13e2b4824bfe84ac0bbda8396644ac54479ba4eb39a82e62c96241da",
+        "before_sha256": "00419d20742cdd4424a2aca7ff82185bc1a12744631274b8f7847cff4c570459"
+      },
+      {
+        "path": "frontend/discourse/tests/acceptance/topic-edit-timer-test.js",
+        "sha256": "d0ce88063c25e408aa33c2c0afb5c7614384296857cdf7f5f9803c1caee98025",
+        "before_sha256": "9bbe7502c20aea4199c0a285bde9f89e7d945e10c88b23b140b01cb763159a81"
+      },
+      {
+        "path": "frontend/discourse/tests/helpers/d-native-select-assertions.js",
+        "sha256": "f7755597f66729fc7fe6709c94ca42c53a85e6277aed6cf7a05e464188f7eaf5",
+        "before_sha256": "5dd3a67f97b2f0f658e719301f0764cc843073c3de227cb4e872f3fc0d4e5c1c"
+      },
+      {
+        "path": "frontend/discourse/tests/helpers/d-select.js",
+        "sha256": "58cff6b8fee57801d8aaf46812d35368e2a090e87b638fed0265a36009c6383c",
+        "before_sha256": null
       },
       {
         "path": "frontend/discourse/tests/helpers/form-kit-assertions.js",
@@ -1084,6 +1175,11 @@
         "path": "frontend/discourse/tests/integration/ui-kit/d-dropdown-menu-test.gjs",
         "sha256": "168ccb0a1fd205ba6a8a2217e66925c0b61a52307bb4108abeb9b9217db77a55",
         "before_sha256": "51c83208eea8f4f22695a3ff4d2b56bb600652a5ee7b6d4aa2a9687874ea3c7e"
+      },
+      {
+        "path": "frontend/discourse/tests/integration/ui-kit/d-filter-controls-test.gjs",
+        "sha256": "fed225d775c9834cd7f5c243a239bd984864f6efb49f23f1164aae0289400a67",
+        "before_sha256": "d5fdaecf25c05285545d415d43a1808f391b6f94b3c6bab0994aecd7b03d3dd9"
       },
       {
         "path": "frontend/discourse/tests/integration/ui-kit/d-native-select-test.gjs",
@@ -1288,12 +1384,26 @@
     ],
     "validation": {
       "native_lint": "passed",
-      "types": "passed",
+      "types": "Passed in CI on 19abc796; final followup CI required",
       "menu_policy": "passed",
       "dialog_policy": "passed",
       "full_theme_tests": 263,
       "full_theme_assertions": 1142,
-      "ci": "pending corrected integration commit"
+      "ci": "pending native regression correction",
+      "native_followup": {
+        "native-followup": {
+          "tests": 124,
+          "assertions": 414,
+          "failed": 0,
+          "client_errors": 0
+        },
+        "native-theme": {
+          "tests": 20,
+          "assertions": 94,
+          "failed": 0,
+          "client_errors": 0
+        }
+      }
     }
   },
   "review_followup": {
@@ -1307,5 +1417,6 @@
     "visual_checks": "The original 151 page checks remain evidence for unchanged visual code; this follow-up changes shared Escape and hover dismissal only.",
     "review_evidence": "review-regressions.json"
   },
-  "ci_followup": "ci-followup.json"
+  "ci_followup": "ci-followup.json",
+  "native_followup": "native-followup.json"
 }

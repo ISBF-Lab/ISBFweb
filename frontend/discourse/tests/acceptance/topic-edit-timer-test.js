@@ -1,7 +1,8 @@
-import { click, fillIn, findAll, select, visit } from "@ember/test-helpers";
+import { click, fillIn, findAll, visit } from "@ember/test-helpers";
 import { test } from "qunit";
 import { cloneJSON } from "discourse/lib/object";
 import topicFixtures from "discourse/tests/fixtures/topic";
+import select from "discourse/tests/helpers/d-select";
 import {
   acceptance,
   fakeTime,

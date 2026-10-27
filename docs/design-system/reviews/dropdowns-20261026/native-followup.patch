@@ -1,0 +1,260 @@
+--- a/source/docs/design-system/dropdowns.md
++++ b/source/docs/design-system/dropdowns.md
+@@ -70,6 +70,9 @@
+ ## 检查与交付
+ 
+ 修改菜单后执行定向`bin/lint --fix`、`pnpm test:menus`及`pnpm lint:menus`。
++涉及字段值的回归从`discourse/tests/helpers/d-select`导入`select`，可同时定位共享入口与原生字段；
++`findSelect`及`assert.dnativeselect`读取实际提交值载体，保留筛选、分组、禁用与权限断言。
++鼠标和键盘交互继续通过共享选择器的组件及真实页面测试验证。
+ 规则已接入提交检查与CI；检查当前核心、插件和活动主题。在独立PR仓库中检查
+ `themes/isbf-campus-feed`交付源；迁移工作区优先检查`external/active-theme`，不把历史稿件当作运行源码。
+ 受控原生载体和非菜单浮层是已登记的工程用途，不能用于规避菜单标准。
+--- a/source/frontend/discourse/select-kit/components/select-kit.js
++++ b/source/frontend/discourse/select-kit/components/select-kit.js
+@@ -1161,11 +1161,29 @@
+     this.selectKit.onOpen(event);
+ 
+     this.cleanupFloatingUi?.();
+-    this.cleanupFloatingUi = autoUpdate(
++    let updateTimer = null;
++    const schedulePosition = () => {
++      if (updateTimer !== null) {
++        return;
++      }
++      // Resize callbacks must not resize another observer's target during delivery.
++      updateTimer = next(() => {
++        updateTimer = null;
++        if (!this.isDestroying && this.selectKit.isExpanded) {
++          this.updateFloatingUiPosition();
++        }
++      });
++    };
++    const cleanup = autoUpdate(
+       this.getHeader(),
+       this._bodyElement(),
+-      () => this.updateFloatingUiPosition()
++      schedulePosition
+     );
++    this.cleanupFloatingUi = () => {
++      cleanup();
++      cancel(updateTimer);
++      updateTimer = null;
++    };
+ 
+     this.selectKit.setProperties({
+       isExpanded: true,
+--- /dev/null
++++ b/source/frontend/discourse/tests/helpers/d-select.js
+@@ -0,0 +1,17 @@
++import { find, select as selectValue } from "@ember/test-helpers";
++
++/** Finds the submitted value carrier for a shared or native select. */
++export function findSelect(selectorOrElement) {
++  const element =
++    typeof selectorOrElement === "string"
++      ? find(selectorOrElement)
++      : selectorOrElement;
++  return element?.matches(".d-select__trigger")
++    ? element.nextElementSibling
++    : element;
++}
++
++/** Changes a field value through the existing native input/change event contract. */
++export default function select(selectorOrElement, value, options = undefined) {
++  return selectValue(findSelect(selectorOrElement), value, options);
++}
+--- a/source/frontend/discourse/tests/helpers/d-native-select-assertions.js
++++ b/source/frontend/discourse/tests/helpers/d-native-select-assertions.js
+@@ -1,14 +1,10 @@
+-import { find } from "@ember/test-helpers";
+ import QUnit from "qunit";
++import { findSelect } from "discourse/tests/helpers/d-select";
+ 
+ class DNativeSelect {
+   constructor(selector, context) {
+     this.context = context;
+-    if (selector instanceof HTMLElement) {
+-      this.element = selector;
+-    } else {
+-      this.element = find(selector);
+-    }
++    this.element = findSelect(selector);
+   }
+ 
+   hasOption({ value, label }, assertionMessage) {
+--- a/source/frontend/discourse/tests/acceptance/admin-customize-components-config-area-test.gjs
++++ b/source/frontend/discourse/tests/acceptance/admin-customize-components-config-area-test.gjs
+@@ -1,6 +1,7 @@
+-import { click, currentURL, fillIn, select, visit } from "@ember/test-helpers";
++import { click, currentURL, fillIn, visit } from "@ember/test-helpers";
+ import { test } from "qunit";
+ import { withPluginApi } from "discourse/lib/plugin-api";
++import select, { findSelect } from "discourse/tests/helpers/d-select";
+ import { acceptance } from "discourse/tests/helpers/qunit-helpers";
+ 
+ acceptance("Admin - Config areas - Components", function (needs) {
+@@ -130,7 +131,7 @@
+       .dom(".d-filter-controls__input")
+       .hasValue("air", "prefills the search input from the URL");
+     assert
+-      .dom(".d-filter-controls__dropdown")
++      .dom(findSelect(".d-filter-controls__dropdown"))
+       .hasValue("unused", "preselects the status dropdown from the URL");
+     assert.dom(".admin-config-components__component-row").exists({ count: 1 });
+   });
+@@ -144,7 +145,7 @@
+       "does not send the invalid status to the server"
+     );
+     assert
+-      .dom(".d-filter-controls__dropdown")
++      .dom(findSelect(".d-filter-controls__dropdown"))
+       .hasValue("all", "the status dropdown falls back to the default value");
+     assert.dom(".admin-config-components__component-row").exists({ count: 2 });
+   });
+@@ -217,7 +218,7 @@
+       "removes both params in a single URL update"
+     );
+     assert.dom(".d-filter-controls__input").hasValue("");
+-    assert.dom(".d-filter-controls__dropdown").hasValue("all");
++    assert.dom(findSelect(".d-filter-controls__dropdown")).hasValue("all");
+     assert.strictEqual(
+       requests.at(-1).name,
+       "",
+--- a/source/frontend/discourse/tests/acceptance/admin-emoji-test.gjs
++++ b/source/frontend/discourse/tests/acceptance/admin-emoji-test.gjs
+@@ -2,12 +2,12 @@
+   click,
+   currentURL,
+   fillIn,
+-  select,
+   triggerEvent,
+   visit,
+ } from "@ember/test-helpers";
+ import { test } from "qunit";
+ import pretender, { response } from "discourse/tests/helpers/create-pretender";
++import select from "discourse/tests/helpers/d-select";
+ import { acceptance, createFile } from "discourse/tests/helpers/qunit-helpers";
+ 
+ const emojiList = [
+--- a/source/frontend/discourse/tests/acceptance/admin-mcp-test.js
++++ b/source/frontend/discourse/tests/acceptance/admin-mcp-test.js
+@@ -3,11 +3,11 @@
+   currentURL,
+   fillIn,
+   findAll,
+-  select,
+   visit,
+   waitUntil,
+ } from "@ember/test-helpers";
+ import { test } from "qunit";
++import select, { findSelect } from "discourse/tests/helpers/d-select";
+ import { acceptance } from "discourse/tests/helpers/qunit-helpers";
+ import stubIntersectionObserver from "discourse/tests/helpers/stub-intersection-observer";
+ import {
+@@ -1119,7 +1119,7 @@
+       .dom(".admin-mcp__primitive")
+       .exists({ count: 4 }, "all primitives initially render");
+     assert
+-      .dom('[name="primitiveGroupBy"]')
++      .dom(findSelect('[name="primitiveGroupBy"]'))
+       .hasValue("scope", "primitives are grouped by scope by default");
+     assert
+       .dom(
+--- a/source/frontend/discourse/tests/acceptance/reports-test.js
++++ b/source/frontend/discourse/tests/acceptance/reports-test.js
+@@ -1,6 +1,7 @@
+-import { click, currentURL, fillIn, select, visit } from "@ember/test-helpers";
++import { click, currentURL, fillIn, visit } from "@ember/test-helpers";
+ import { test } from "qunit";
+ import reportsBulkFixtures from "discourse/tests/fixtures/reports-bulk";
++import select, { findSelect } from "discourse/tests/helpers/d-select";
+ import { acceptance } from "discourse/tests/helpers/qunit-helpers";
+ 
+ acceptance("Reports", function (needs) {
+@@ -193,7 +194,7 @@
+     await visit("/admin/reports?group=content");
+ 
+     assert.strictEqual(currentURL(), "/admin/reports?group=content");
+-    assert.dom(".d-filter-controls__dropdown").hasValue("content");
++    assert.dom(findSelect(".d-filter-controls__dropdown")).hasValue("content");
+     assert.dom(".admin-reports-group").exists({ count: 1 });
+     assert
+       .dom(".admin-section-landing-item__title")
+@@ -206,12 +207,12 @@
+     // same-route transition to the bare URL fires no route event at all
+     await visit("/admin/reports?group=content");
+ 
+-    assert.dom(".d-filter-controls__dropdown").hasValue("content");
++    assert.dom(findSelect(".d-filter-controls__dropdown")).hasValue("content");
+ 
+     await visit("/admin/reports?group=moderation_and_security");
+ 
+     assert
+-      .dom(".d-filter-controls__dropdown")
++      .dom(findSelect(".d-filter-controls__dropdown"))
+       .hasValue(
+         "moderation_and_security",
+         "re-selects the dropdown from the new URL"
+@@ -224,7 +225,7 @@
+   test("falls back to all groups when the URL group is unknown", async function (assert) {
+     await visit("/admin/reports?group=nonsense");
+ 
+-    assert.dom(".d-filter-controls__dropdown").hasValue("all");
++    assert.dom(findSelect(".d-filter-controls__dropdown")).hasValue("all");
+     assert.dom(".admin-reports-group").exists({ count: 3 });
+     assert.dom(".admin-section-landing-item__content").exists({ count: 3 });
+   });
+@@ -249,7 +250,7 @@
+       "clears both params in one write"
+     );
+     assert.dom(".d-filter-controls__input").hasValue("");
+-    assert.dom(".d-filter-controls__dropdown").hasValue("all");
++    assert.dom(findSelect(".d-filter-controls__dropdown")).hasValue("all");
+     assert.dom(".admin-section-landing-item__content").exists({ count: 3 });
+   });
+ });
+--- a/source/frontend/discourse/tests/acceptance/topic-edit-timer-test.js
++++ b/source/frontend/discourse/tests/acceptance/topic-edit-timer-test.js
+@@ -1,7 +1,8 @@
+-import { click, fillIn, findAll, select, visit } from "@ember/test-helpers";
++import { click, fillIn, findAll, visit } from "@ember/test-helpers";
+ import { test } from "qunit";
+ import { cloneJSON } from "discourse/lib/object";
+ import topicFixtures from "discourse/tests/fixtures/topic";
++import select from "discourse/tests/helpers/d-select";
+ import {
+   acceptance,
+   fakeTime,
+--- a/source/frontend/discourse/tests/integration/ui-kit/d-filter-controls-test.gjs
++++ b/source/frontend/discourse/tests/integration/ui-kit/d-filter-controls-test.gjs
+@@ -1,9 +1,10 @@
+ import { tracked } from "@glimmer/tracking";
+ import Evented from "@ember/object/evented";
+ import Service from "@ember/service";
+-import { click, fillIn, render, select, settled } from "@ember/test-helpers";
++import { click, fillIn, render, settled } from "@ember/test-helpers";
+ import { module, test } from "qunit";
+ import { setupRenderingTest } from "discourse/tests/helpers/component-test";
++import select, { findSelect } from "discourse/tests/helpers/d-select";
+ import DFilterControls from "discourse/ui-kit/d-filter-controls";
+ import { i18n } from "discourse-i18n";
+ 
+@@ -150,7 +151,7 @@
+ 
+     assert.strictEqual(this.resetCount, 1, "calls the reset callback once");
+     assert
+-      .dom(".d-filter-controls__dropdown--category")
++      .dom(findSelect(".d-filter-controls__dropdown--category"))
+       .hasValue("all", "resets dropdown filters");
+     assert
+       .dom(".d-filter-controls__input")
+@@ -1188,7 +1189,7 @@
+     await settled();
+ 
+     assert
+-      .dom(".d-filter-controls__dropdown--category")
++      .dom(findSelect(".d-filter-controls__dropdown--category"))
+       .hasValue("feature", "reveals the URL-owned active dropdown");
+     assert
+       .dom(".item")

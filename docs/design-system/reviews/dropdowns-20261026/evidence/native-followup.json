@@ -1,0 +1,758 @@
+{
+  "results": [
+    {
+      "passed": 414,
+      "failed": 0,
+      "total": 414,
+      "runtime": 276901,
+      "failures": [],
+      "tests": [
+        {
+          "name": "excluding usernames",
+          "module": "Integration | Component | SelectKit | EmailGroupUserChooser",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "seeds the filters from the URL before the first request",
+          "module": "Acceptance: Admin - Config areas - Components - filters",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "shows access as one row per group",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 11
+        },
+        {
+          "name": "shows custom no results message",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "typing in the filter box reflects the search in the URL",
+          "module": "Acceptance: Reports | Filter query params",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "pasting",
+          "module": "Integration | Component | SelectKit | EmailGroupUserChooser",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "respects minItemsForFilter parameter",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "combines text and dropdown filters (client-side)",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "falls back to all groups when the URL group is unknown",
+          "module": "Acceptance: Reports | Filter query params",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "limiting the displayed groups",
+          "module": "Integration | Component | SelectKit | GroupChooser",
+          "failed": 0,
+          "total": 9
+        },
+        {
+          "name": "preview renders a section for each category with rows",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "Visit reports page",
+          "module": "Acceptance: Reports",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "Does not show timer notice unless timer set",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "shows an empty latency value when there are no samples",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "Does not show a warning in the composer if the message is sent to other users",
+          "module": "Acceptance: Composer - Messages - Private Messages",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "skips client-side filtering when server callbacks provided",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "prioritize_username_in_ux keeps username first",
+          "module": "Integration | Component | SelectKit | EmailGroupUserChooser",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "new emoji section shows incoming image",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "query param sync args are inert without a live router",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "conflict section shows resolution radio buttons",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "Category Moderator can auto-delete replies",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "Shows warning in the composer if the user is sending a message only to himself",
+          "module": "Acceptance: Composer - Messages - Private Messages",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "supports custom default values for multiple dropdowns",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "auto delete after last post",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "clears a primitive change when its saved value is restored",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "invalid section shows error message",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "loads older clients and authorizations",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "plugin report groups are sorted alphabetically by display name",
+          "module": "Acceptance: Reports | Plugin groups sorted by display name",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "filters data by text (client-side)",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "Category Moderator can auto-delete",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "admin-config-area-components-new-button plugin outlet",
+          "module": "Acceptance: Admin - Config areas - Components",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "edits the eligible scopes for one group",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 11
+        },
+        {
+          "name": "can hide the text filter without affecting other controls",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "name": "timer removed after manual toggle close and open",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "schedule publish to category - visible for a PM",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "can navigate away from the settings tab",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "schedule publish to category - last custom date and time",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "supports additional filters and includes them in reset state",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "export button is present in page header",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "excludeGroupNameWhenMatchingFullName hides a redundant group name",
+          "module": "Integration | Component | SelectKit | EmailGroupUserChooser",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "TL4 can't auto-delete",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "invalid rows count appears in summary",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "select-all checks all rows and deselect-all unchecks them",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "filters data by single dropdown (client-side)",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "shows a custom empty state in a yield when showEmptyState is true and the array is empty",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "marks the dropdown active when its value differs from the default",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "reflects the status dropdown in the URL",
+          "module": "Acceptance: Admin - Config areas - Components - filters",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "import page shows file picker initially",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "blocks and unblocks a primitive immediately",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "does not show dropdown filter when only one option",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "auto delete",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "shows user status if enabled",
+          "module": "Integration | Component | SelectKit | EmailGroupUserChooser",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "cancel from confirmation view returns to file picker",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "does not render an empty inputs container when text filtering is hidden",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "autoclose - specific time",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "reveals a URL-owned dropdown activated by a route change",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "cancel exits selecting mode and hides checkboxes",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "filters on the server and automatically loads the next filtered page",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "filters data by multiple dropdowns (client-side)",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "calls onResetFilters callback for server-side filtering",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "reset button clears both params from the URL",
+          "module": "Acceptance: Reports | Filter query params",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "renders group results with group name and full name",
+          "module": "Integration | Component | SelectKit | EmailGroupUserChooser",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "TL4 can't auto-delete replies",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "reflects the search in the URL as the user types",
+          "module": "Acceptance: Admin - Config areas - Components - filters",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "ignores an invalid status param in the URL",
+          "module": "Acceptance: Admin - Config areas - Components - filters",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "shows client actions in the expected order and refreshes metadata",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 10
+        },
+        {
+          "name": "moderators request only report aggregates",
+          "module": "Acceptance: Reports | Moderator related items",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "lists custom emojis with a delete button per row and a select-to-export button",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "resetting the filters clears the params from the URL",
+          "module": "Acceptance: Admin - Config areas - Components - filters",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "select-all only selects emojis visible through the filters",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "schedule publish to category - does not show for a public topic",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "clicking select-to-export enters selecting mode and shows checkboxes",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "doesn't show user status by default",
+          "module": "Integration | Component | SelectKit | EmailGroupUserChooser",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "uploading a ZIP shows the confirmation view with categorised rows",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "confirming the import navigates back to the emoji list",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "initialTextFilter still seeds when a query param arg is set",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "close temporarily",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "calls onDropdownFilterChange callback for server-side filtering",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "prefills known OAuth client applications",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 17
+        },
+        {
+          "name": "selecting a group reflects it in the URL",
+          "module": "Acceptance: Reports | Filter query params",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "renders multiple dropdowns",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "Shows correct time frame options",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "pre-selects the group from the URL",
+          "module": "Acceptance: Reports | Filter query params",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "Inline delete timer",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "shows the setup checklist while setup is incomplete",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "labels audited calls as tool calls",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "labels user grants as authorizations",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "summary bar shows correct counts",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "Visit report page",
+          "module": "Acceptance: Reports",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "filters custom emojis by group",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "resets multiple dropdowns correctly",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "can hide the built-in no-results state",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "schedule publish to category - visible for a private category",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "prioritizeUserNameOrdering can render the name before username",
+          "module": "Integration | Component | SelectKit | EmailGroupUserChooser",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "keeps reset visible and enables it only for active filters",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 14
+        },
+        {
+          "name": "adds group access on a dedicated page",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "groups primitives by scope, provider, and type",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 22
+        },
+        {
+          "name": "can hide the reset button",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "can collapse a single dropdown behind the filter toggle",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "yields to actions block",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "filters activity with a custom date range",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "Open timer removed after manual open",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "floats the save action while primitive changes are unsaved",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "hides metrics when there is no activity",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "calls onTextFilterChange callback for server-side filtering",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "supports inline controls and a checkbox-only filter drawer",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "navigating away from the emoji list clears selecting mode",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "autoclose",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "deep linking to filters with no results still renders the filter controls",
+          "module": "Acceptance: Admin - Config areas - Components - filters",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "reports the drawer state when the filter toggle is used",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "renders single dropdown filter",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "schedule publish to category - visible for an unlisted public topic",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "Close timer removed after manual close",
+          "module": "Acceptance: Topic - Edit timer",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "import button navigates to the import route",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "re-derives the group when the URL changes without leaving the route",
+          "module": "Acceptance: Reports | Filter query params",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "filters clients and authorizations on the server",
+          "module": "Acceptance: Admin - MCP",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "admin-config-area-components-empty-list-bottom plugin outlet",
+          "module": "Acceptance: Admin - Config areas - Components",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "selecting a row makes header select-all indeterminate",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "filters custom emojis by name",
+          "module": "Acceptance: Admin - Emoji",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "yields to aboveContent block",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "calls onDropdownFilterChange with key and value for multiple dropdowns",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "renders text filter input",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "can show expanded dropdowns without a filter toggle",
+          "module": "Integration | ui-kit | DFilterControls",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "prioritizeGroupFullNameOrdering renders the full name before the group name",
+          "module": "Integration | Component | SelectKit | EmailGroupUserChooser",
+          "failed": 0,
+          "total": 2
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

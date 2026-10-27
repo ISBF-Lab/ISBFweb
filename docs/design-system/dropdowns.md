@@ -70,6 +70,9 @@ DSelect保留原生值载体，支持name、form、required、disabled、空值�
 ## 检查与交付
 
 修改菜单后执行定向`bin/lint --fix`、`pnpm test:menus`及`pnpm lint:menus`。
+涉及字段值的回归从`discourse/tests/helpers/d-select`导入`select`，可同时定位共享入口与原生字段；
+`findSelect`及`assert.dnativeselect`读取实际提交值载体，保留筛选、分组、禁用与权限断言。
+鼠标和键盘交互继续通过共享选择器的组件及真实页面测试验证。
 规则已接入提交检查与CI；检查当前核心、插件和活动主题。在独立PR仓库中检查
 `themes/isbf-campus-feed`交付源；迁移工作区优先检查`external/active-theme`，不把历史稿件当作运行源码。
 受控原生载体和非菜单浮层是已登记的工程用途，不能用于规避菜单标准。

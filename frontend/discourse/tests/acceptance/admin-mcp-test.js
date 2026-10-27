@@ -3,11 +3,11 @@ import {
   currentURL,
   fillIn,
   findAll,
-  select,
   visit,
   waitUntil,
 } from "@ember/test-helpers";
 import { test } from "qunit";
+import select, { findSelect } from "discourse/tests/helpers/d-select";
 import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 import stubIntersectionObserver from "discourse/tests/helpers/stub-intersection-observer";
 import {
@@ -1119,7 +1119,7 @@ acceptance("Admin - MCP", function (needs) {
       .dom(".admin-mcp__primitive")
       .exists({ count: 4 }, "all primitives initially render");
     assert
-      .dom('[name="primitiveGroupBy"]')
+      .dom(findSelect('[name="primitiveGroupBy"]'))
       .hasValue("scope", "primitives are grouped by scope by default");
     assert
       .dom(
