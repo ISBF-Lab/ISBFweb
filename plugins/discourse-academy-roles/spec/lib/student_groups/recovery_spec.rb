@@ -5,8 +5,14 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::Runner do
   fab!(:registration, :registered_academy_student)
   fab!(:source, :group)
   fab!(:target, :group)
+  fab!(:official_group, :group)
+  fab!(:official_category, :category)
 
-  before { SiteSetting.academy_roles_enabled = true }
+  before do
+    SiteSetting.academy_official_group = official_group.id
+    SiteSetting.academy_official_category = official_category.id
+    SiteSetting.academy_roles_enabled = true
+  end
 
   def confirmed_batch
     batch =

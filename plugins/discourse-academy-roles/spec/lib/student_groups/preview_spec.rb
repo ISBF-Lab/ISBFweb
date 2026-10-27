@@ -4,8 +4,14 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::Preview do
   fab!(:admin)
   fab!(:target, :group)
   fab!(:source, :group)
+  fab!(:official_group, :group)
+  fab!(:official_category, :category)
 
-  before { SiteSetting.academy_roles_enabled = true }
+  before do
+    SiteSetting.academy_official_group = official_group.id
+    SiteSetting.academy_official_category = official_category.id
+    SiteSetting.academy_roles_enabled = true
+  end
 
   describe ".create" do
     it "matches registered accounts by exact student number without altering invites or bindings" do

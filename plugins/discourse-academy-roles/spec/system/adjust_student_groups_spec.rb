@@ -3,6 +3,8 @@
 require_relative "page_objects/academy_student_group_batches"
 
 RSpec.describe "Adjust student groups" do
+  fab!(:official_group, :group)
+  fab!(:official_category, :category)
   fab!(:developer, :admin)
   fab!(:target, :group)
   fab!(:registration, :registered_academy_student)
@@ -10,6 +12,8 @@ RSpec.describe "Adjust student groups" do
   let(:batches_page) { PageObjects::Pages::AcademyStudentGroupBatches.new }
 
   before do
+    SiteSetting.academy_official_group = official_group.id
+    SiteSetting.academy_official_category = official_category.id
     SiteSetting.academy_roles_enabled = true
     SiteSetting.default_locale = "en"
     sign_in(developer)

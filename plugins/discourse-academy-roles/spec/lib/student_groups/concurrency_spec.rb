@@ -4,6 +4,10 @@ RSpec.describe "Student group batch concurrency", type: :model do
   self.use_transactional_tests = false
 
   before do
+    @official_group = Fabricate(:group)
+    @official_category = Fabricate(:category)
+    SiteSetting.academy_official_group = @official_group.id
+    SiteSetting.academy_official_category = @official_category.id
     SiteSetting.academy_roles_enabled = true
     @developer = Fabricate(:admin)
     @target = Fabricate(:group)
@@ -30,6 +34,8 @@ RSpec.describe "Student group batch concurrency", type: :model do
     end
     @developer&.destroy!
     SiteSetting.academy_roles_enabled = false
+    @official_category&.destroy!
+    @official_group&.destroy!
   end
 
   it "keeps one native membership and one audit entry under simultaneous job delivery" do

@@ -9,6 +9,8 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::CreatePreview do
   describe ".call" do
     subject(:result) { described_class.call(params:, **dependencies) }
 
+    fab!(:official_group, :group)
+    fab!(:official_category, :category)
     fab!(:developer, :admin)
     fab!(:group)
     fab!(:registration, :registered_academy_student)
@@ -22,7 +24,11 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::CreatePreview do
     end
     let(:dependencies) { { guardian: developer.guardian } }
 
-    before { SiteSetting.academy_roles_enabled = true }
+    before do
+      SiteSetting.academy_official_group = official_group.id
+      SiteSetting.academy_official_category = official_category.id
+      SiteSetting.academy_roles_enabled = true
+    end
 
     context "with valid registered student bindings" do
       it "stores an executable preview without changing memberships" do

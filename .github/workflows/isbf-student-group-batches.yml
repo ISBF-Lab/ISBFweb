@@ -108,7 +108,7 @@ jobs:
         if: always() && steps.assets.outcome == 'success'
         run: |
           set -o pipefail
-          bin/qunit --standalone --target discourse-academy-roles --filter '/AcademyStudentGroup/' | tee tmp/student-group-qunit.log
+          bin/qunit --standalone --target discourse-academy-roles --filter AcademyStudentGroup | tee tmp/student-group-qunit.log
       - name: Real developer preview, execution, undo and responsive Admin pages
         if: always() && steps.assets.outcome == 'success'
         run: |

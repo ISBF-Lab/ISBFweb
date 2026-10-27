@@ -56,6 +56,8 @@ after_initialize do
     lib/discourse_academy_roles/student_groups/preview
     lib/discourse_academy_roles/student_groups/confirmation
     lib/discourse_academy_roles/student_groups/runner
+    app/jobs/regular/academy_student_group_batch
+    app/jobs/scheduled/recover_academy_student_group_batches
     app/services/discourse_academy_roles/student_groups/create_preview
     app/services/discourse_academy_roles/student_groups/confirm_batch
     app/serializers/discourse_academy_roles/student_group_batch_serializer
