@@ -114,7 +114,8 @@ after_initialize do
         :constraints => AdminConstraint.new
     get "/admin/plugins/discourse-academy-roles/student-group-batches" => "admin/plugins#index",
         :constraints => AdminConstraint.new
-    get "/admin/plugins/discourse-academy-roles/student-group-batches/:batch_id" => "admin/plugins#index",
+    get "/admin/plugins/discourse-academy-roles/student-group-batches/:batch_id" =>
+          "admin/plugins#index",
         :constraints => AdminConstraint.new
     mount ::DiscourseAcademyRoles::Engine, at: "/academy-roles"
   end

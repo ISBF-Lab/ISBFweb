@@ -18,7 +18,9 @@ class CreateAcademyStudentGroupBatches < ActiveRecord::Migration[8.0]
     end
     add_index :academy_student_group_batches, :actor_id
     add_index :academy_student_group_batches, :source_batch_id
-    add_index :academy_student_group_batches, %i[state updated_at], name: "idx_academy_group_batches_pending"
+    add_index :academy_student_group_batches,
+              %i[state updated_at],
+              name: "idx_academy_group_batches_pending"
 
     create_table :academy_student_group_batch_items do |t|
       t.bigint :batch_id, null: false
@@ -37,8 +39,13 @@ class CreateAcademyStudentGroupBatches < ActiveRecord::Migration[8.0]
       t.jsonb :steps, null: false, default: []
       t.timestamps
     end
-    add_index :academy_student_group_batch_items, %i[batch_id position], unique: true, name: "idx_academy_group_items_position"
-    add_index :academy_student_group_batch_items, %i[batch_id selected status], name: "idx_academy_group_items_pending"
+    add_index :academy_student_group_batch_items,
+              %i[batch_id position],
+              unique: true,
+              name: "idx_academy_group_items_position"
+    add_index :academy_student_group_batch_items,
+              %i[batch_id selected status],
+              name: "idx_academy_group_items_pending"
     add_index :academy_student_group_batch_items, :user_id
     add_index :academy_student_group_batch_items, :source_item_id
   end

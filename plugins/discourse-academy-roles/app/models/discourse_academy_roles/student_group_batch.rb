@@ -5,7 +5,9 @@ class DiscourseAcademyRoles::StudentGroupBatch < ActiveRecord::Base
 
   belongs_to :actor, class_name: "::User", optional: true
   belongs_to :source_batch, class_name: "DiscourseAcademyRoles::StudentGroupBatch", optional: true
-  has_many :items, class_name: "DiscourseAcademyRoles::StudentGroupBatchItem", foreign_key: :batch_id
+  has_many :items,
+           class_name: "DiscourseAcademyRoles::StudentGroupBatchItem",
+           foreign_key: :batch_id
 
   validates :mode, inclusion: { in: %w[graduation groups undo] }
   validates :state, inclusion: { in: %w[preview queued running completed partial blocked] }
@@ -42,8 +44,18 @@ class DiscourseAcademyRoles::StudentGroupBatch < ActiveRecord::Base
   end
 
   def can_retry?
-    return true if state == "blocked" && items.where(selected: true, status: %w[queued running]).exists?
-    terminal? && items.where(status: %w[failed partial]).where("steps @> ?::jsonb OR (? AND NOT display_restored)", [{ state: "pending" }].to_json, undo?).exists?
+    if state == "blocked" && items.where(selected: true, status: %w[queued running]).exists?
+      return true
+    end
+    terminal? &&
+      items
+        .where(status: %w[failed partial])
+        .where(
+          "steps @> ?::jsonb OR (? AND NOT display_restored)",
+          [{ state: "pending" }].to_json,
+          undo?,
+        )
+        .exists?
   end
 
   def can_undo?

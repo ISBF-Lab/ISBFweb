@@ -12,16 +12,28 @@ class DiscourseAcademyRoles::StudentGroups::Confirmation
     DiscourseAcademyRoles::StudentGroupBatch.mutex(batch.id) do
       batch.with_lock do
         if batch.state != "preview"
-          raise Error, :already_confirmed unless batch.items.where(selected: true).order(:id).pluck(:id) == selected
+          unless batch.items.where(selected: true).order(:id).pluck(:id) == selected
+            raise Error, :already_confirmed
+          end
         else
           raise Error, :preview_expired if batch.expires_at <= Time.current
-          unless Groups.valid_plan?(batch.plan, mode: batch.undo? ? batch.source_batch.mode : batch.mode)
+          unless Groups.valid_plan?(
+                   batch.plan,
+                   mode: batch.undo? ? batch.source_batch.mode : batch.mode,
+                 )
             raise Error, :groups_changed
           end
           allowed = batch.items.where(status: "ready").pluck(:id)
           raise Error, :invalid_selection unless (selected - allowed).empty?
-          batch.items.where(status: "ready").where.not(id: selected).update_all(selected: false, status: "excluded", updated_at: Time.current)
-          batch.items.where(id: selected).update_all(selected: true, status: "queued", updated_at: Time.current)
+          batch
+            .items
+            .where(status: "ready")
+            .where.not(id: selected)
+            .update_all(selected: false, status: "excluded", updated_at: Time.current)
+          batch
+            .items
+            .where(id: selected)
+            .update_all(selected: true, status: "queued", updated_at: Time.current)
           batch.update!(state: "queued", confirmed_at: Time.current)
           enqueue = true
         end
@@ -38,12 +50,17 @@ class DiscourseAcademyRoles::StudentGroups::Confirmation
     DiscourseAcademyRoles::StudentGroupBatch.mutex(batch.id) do
       batch.with_lock do
         raise Error, :cannot_retry unless batch.terminal?
-        enqueue = batch.state == "blocked" && batch.items.where(selected: true, status: %w[queued running]).exists?
-        batch.items.where(selected: true, status: %w[failed partial]).each do |item|
-          next unless item.retryable?
-          item.update!(status: "queued", reason_code: "")
-          enqueue = true
-        end
+        enqueue =
+          batch.state == "blocked" &&
+            batch.items.where(selected: true, status: %w[queued running]).exists?
+        batch
+          .items
+          .where(selected: true, status: %w[failed partial])
+          .each do |item|
+            next unless item.retryable?
+            item.update!(status: "queued", reason_code: "")
+            enqueue = true
+          end
         raise Error, :cannot_retry unless enqueue
         batch.update!(state: "queued", finished_at: nil)
       end

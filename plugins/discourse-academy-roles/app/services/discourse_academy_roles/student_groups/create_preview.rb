@@ -27,7 +27,8 @@ class DiscourseAcademyRoles::StudentGroups::CreatePreview
 
   def create_preview(params:, guardian:)
     DiscourseAcademyRoles::StudentGroups::Preview.create(
-      actor: guardian.user, **params.attributes.symbolize_keys,
+      actor: guardian.user,
+      **params.attributes.symbolize_keys,
     )
   end
 end

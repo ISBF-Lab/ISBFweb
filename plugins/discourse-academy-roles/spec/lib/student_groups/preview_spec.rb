@@ -14,13 +14,18 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::Preview do
       original_invites = Invite.order(:id).map(&:attributes)
       original_bindings = DiscourseAcademyRoles::StudentRegistration.order(:id).map(&:attributes)
 
-      batch = described_class.create(
-        actor: admin, mode: "groups", input_kind: "list",
-        student_numbers: "000123\n123\n000124\n#{"0" * 65}\n000123",
-        add_group_ids: [target.id],
-      )
+      batch =
+        described_class.create(
+          actor: admin,
+          mode: "groups",
+          input_kind: "list",
+          student_numbers: "000123\n123\n000124\n#{"0" * 65}\n000123",
+          add_group_ids: [target.id],
+        )
 
-      expect(batch.items.order(:position).pluck(:student_number, :status, :user_id, :selected)).to eq(
+      expect(
+        batch.items.order(:position).pluck(:student_number, :status, :user_id, :selected),
+      ).to eq(
         [
           [registered.student_number, "ready", registered.user_id, true],
           ["123", "unmatched", nil, false],
@@ -30,12 +35,21 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::Preview do
       )
       expect(batch.duplicate_count).to eq(1)
       expect(Invite.order(:id).map(&:attributes)).to eq(original_invites)
-      expect(DiscourseAcademyRoles::StudentRegistration.order(:id).map(&:attributes)).to eq(original_bindings)
+      expect(DiscourseAcademyRoles::StudentRegistration.order(:id).map(&:attributes)).to eq(
+        original_bindings,
+      )
       expect(GroupUser.exists?(group: target, user_id: registered.user_id)).to eq(false)
     end
 
     it "reports invalid control characters without sending null bytes to PostgreSQL" do
-      batch = described_class.create(actor: admin, mode: "groups", input_kind: "list", student_numbers: "000\u0000123", add_group_ids: [target.id])
+      batch =
+        described_class.create(
+          actor: admin,
+          mode: "groups",
+          input_kind: "list",
+          student_numbers: "000\u0000123",
+          add_group_ids: [target.id],
+        )
 
       expect(batch.items.sole.status).to eq("invalid")
       expect(batch.items.sole.student_number).to eq("000�123")
@@ -50,11 +64,15 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::Preview do
       source.add(owner.user)
       GroupUser.find_by!(group: source, user: owner.user).update!(owner: true)
 
-      batch = described_class.create(
-        actor: admin, mode: "groups", input_kind: "list",
-        student_numbers: [unchanged.student_number, owner.student_number].join("\n"),
-        add_group_ids: [target.id], remove_group_ids: [source.id],
-      )
+      batch =
+        described_class.create(
+          actor: admin,
+          mode: "groups",
+          input_kind: "list",
+          student_numbers: [unchanged.student_number, owner.student_number].join("\n"),
+          add_group_ids: [target.id],
+          remove_group_ids: [source.id],
+        )
 
       expect(batch.items.order(:position).pluck(:status, :selected)).to eq(
         [["no_change", false], ["conflict", false]],
@@ -67,7 +85,13 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::Preview do
 
       [Fabricate(:moderator), Fabricate(:user), nil].each do |actor|
         expect do
-          described_class.create(actor:, mode: "groups", input_kind: "list", student_numbers: "000123", add_group_ids: [target.id])
+          described_class.create(
+            actor:,
+            mode: "groups",
+            input_kind: "list",
+            student_numbers: "000123",
+            add_group_ids: [target.id],
+          )
         end.to raise_error(Discourse::InvalidAccess)
       end
       expect(DiscourseAcademyRoles::StudentGroupBatch.count).to eq(0)

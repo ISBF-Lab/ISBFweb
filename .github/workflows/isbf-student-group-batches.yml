@@ -17,7 +17,7 @@ concurrency:
 jobs:
   native-integration:
     runs-on: ubuntu-latest
-    container: discourse/discourse_test:release
+    container: discourse/discourse_test@sha256:94eca5318fed6171264b95204914de76a113c305cebb72d9fa9527e2c4496494
     timeout-minutes: 45
     defaults:
       run:
@@ -40,6 +40,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           path: candidate
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           sparse-checkout: plugins/discourse-academy-roles
           persist-credentials: false
       - uses: actions/checkout@v4
@@ -63,11 +64,14 @@ jobs:
       - name: Prepare the unchanged native schema for generator boot
         run: bin/rake db:create db:migrate
       - name: Overlay only the candidate identity plugin
+        id: overlay
         run: |
           test -d plugins/discourse-academy-roles
           test ! -L plugins/discourse-academy-roles
           rm -r plugins/discourse-academy-roles
           cp -a ../candidate/plugins/discourse-academy-roles plugins/discourse-academy-roles
+          mkdir -p tmp
+          git -C ../candidate rev-parse HEAD > tmp/student-group-source-sha.txt
       - name: Finalize schema migration with the native Rails generator
         run: python3 plugins/discourse-academy-roles/scripts/generate-student-group-migration.py
       - name: Native syntax and formatting for batch feature files
@@ -118,6 +122,7 @@ jobs:
             discourse/plugins/discourse-academy-roles
             discourse/tmp/student-group-*.log
             discourse/tmp/student-group-files.txt
+            discourse/tmp/student-group-source-sha.txt
             discourse/log/test.log
             discourse/tmp/student-group-browser
             discourse/tmp/capybara

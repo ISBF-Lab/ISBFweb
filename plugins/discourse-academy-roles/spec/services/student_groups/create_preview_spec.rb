@@ -12,7 +12,14 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::CreatePreview do
     fab!(:developer, :admin)
     fab!(:group)
     fab!(:registration, :registered_academy_student)
-    let(:params) { { mode: "groups", input_kind: "list", student_numbers: registration.student_number, add_group_ids: [group.id] } }
+    let(:params) do
+      {
+        mode: "groups",
+        input_kind: "list",
+        student_numbers: registration.student_number,
+        add_group_ids: [group.id],
+      }
+    end
     let(:dependencies) { { guardian: developer.guardian } }
 
     before { SiteSetting.academy_roles_enabled = true }
@@ -27,6 +34,7 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::CreatePreview do
 
     context "with an invalid input mode" do
       let(:params) { super().merge(input_kind: "unsupported") }
+
       it { is_expected.to fail_a_contract }
     end
 

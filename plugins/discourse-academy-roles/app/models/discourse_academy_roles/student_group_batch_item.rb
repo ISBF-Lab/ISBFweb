@@ -6,14 +6,17 @@ class DiscourseAcademyRoles::StudentGroupBatchItem < ActiveRecord::Base
   belongs_to :batch, class_name: "DiscourseAcademyRoles::StudentGroupBatch"
   belongs_to :registration, class_name: "DiscourseAcademyRoles::StudentRegistration", optional: true
   belongs_to :user, class_name: "::User", optional: true
-  belongs_to :source_item, class_name: "DiscourseAcademyRoles::StudentGroupBatchItem", optional: true
+  belongs_to :source_item,
+             class_name: "DiscourseAcademyRoles::StudentGroupBatchItem",
+             optional: true
 
   def completed_steps
     steps.select { |step| step["state"] == "done" }
   end
 
   def retryable?
-    %w[failed partial].include?(status) && (steps.any? { |step| step["state"] == "pending" } || (batch.undo? && !display_restored))
+    %w[failed partial].include?(status) &&
+      (steps.any? { |step| step["state"] == "pending" } || (batch.undo? && !display_restored))
   end
 
   def selectable?

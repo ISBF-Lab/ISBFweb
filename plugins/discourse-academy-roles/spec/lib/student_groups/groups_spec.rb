@@ -6,7 +6,12 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::Groups do
     fab!(:source, :group)
 
     it "accepts manual groups and normalizes duplicate identifiers" do
-      plan = described_class.plan(mode: "groups", add_group_ids: [target.id.to_s, target.id], remove_group_ids: [source.id])
+      plan =
+        described_class.plan(
+          mode: "groups",
+          add_group_ids: [target.id.to_s, target.id],
+          remove_group_ids: [source.id],
+        )
 
       expect(plan.fetch("add_group_ids")).to eq([target.id])
       expect(plan.fetch("remove_group_ids")).to eq([source.id])
@@ -35,19 +40,21 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::Groups do
 
       expect(described_class.valid_plan?(plan, mode: "groups")).to eq(false)
     end
+
     it "uses only the configured alumni group for graduation and keeps removals explicit" do
       configured = target
-      integration = Module.new do
-        define_singleton_method(:enabled?) { true }
-        define_singleton_method(:group) { configured }
-      end
+      integration =
+        Module.new do
+          define_singleton_method(:enabled?) { true }
+          define_singleton_method(:group) { configured }
+        end
       stub_const(Object, :IsbfAlumni, integration) do
-        plan = described_class.plan(mode: "graduation", add_group_ids: [], remove_group_ids: [source.id])
+        plan =
+          described_class.plan(mode: "graduation", add_group_ids: [], remove_group_ids: [source.id])
         expect(plan.fetch("add_group_ids")).to eq([target.id])
         expect(plan.fetch("remove_group_ids")).to eq([source.id])
         expect(described_class.valid_plan?(plan, mode: "graduation")).to eq(true)
       end
     end
-
   end
 end

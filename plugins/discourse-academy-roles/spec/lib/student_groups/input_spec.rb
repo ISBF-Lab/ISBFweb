@@ -10,7 +10,9 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::Input do
     end
 
     it "accepts 1500 rows and rejects larger lists before deduplication" do
-      expect(described_class.new(kind: "list", student_numbers: "000123\n" * 1500).numbers).to eq(["000123"])
+      expect(described_class.new(kind: "list", student_numbers: "000123\n" * 1500).numbers).to eq(
+        ["000123"],
+      )
       expect do
         described_class.new(kind: "list", student_numbers: "000123\n" * 1501)
       end.to raise_error(DiscourseAcademyRoles::StudentGroups::Error)
@@ -22,16 +24,20 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::Input do
         { kind: "unknown", student_numbers: "000123" },
         { kind: "list", student_numbers: "0" * (1.megabyte + 1) },
       ].each do |parameters|
-        expect { described_class.new(**parameters) }.to raise_error(DiscourseAcademyRoles::StudentGroups::Error)
+        expect { described_class.new(**parameters) }.to raise_error(
+          DiscourseAcademyRoles::StudentGroups::Error,
+        )
       end
     end
 
     it "reads BOM and Chinese CSV headers while retaining leading zeroes" do
-      upload = ActionDispatch::Http::UploadedFile.new(
-        tempfile: file_from_contents("\uFEFF学号\r\n000123\r\n000123\r\n002345\r\n", "students.csv"),
-        filename: "STUDENTS.CSV",
-        type: "text/csv",
-      )
+      upload =
+        ActionDispatch::Http::UploadedFile.new(
+          tempfile:
+            file_from_contents("\uFEFF学号\r\n000123\r\n000123\r\n002345\r\n", "students.csv"),
+          filename: "STUDENTS.CSV",
+          type: "text/csv",
+        )
 
       input = described_class.new(kind: "csv", file: upload)
 
@@ -40,21 +46,34 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::Input do
     end
 
     it "rejects invalid CSV encoding, malformed quoting, extra columns and excessive rows" do
-      ["\xFF".b, "\"unfinished\n", "000123,extra\n", "student_number\n" + "000123\n" * 1501, "0" * (1.megabyte + 1)].each do |content|
-        upload = ActionDispatch::Http::UploadedFile.new(
-          tempfile: file_from_contents(content, "students.csv"),
-          filename: "students.csv",
-          type: "text/csv",
-        )
+      [
+        "\xFF".b,
+        "\"unfinished\n",
+        "000123,extra\n",
+        "student_number\n" + "000123\n" * 1501,
+        "0" * (1.megabyte + 1),
+      ].each do |content|
+        upload =
+          ActionDispatch::Http::UploadedFile.new(
+            tempfile: file_from_contents(content, "students.csv"),
+            filename: "students.csv",
+            type: "text/csv",
+          )
 
-        expect { described_class.new(kind: "csv", file: upload) }.to raise_error(DiscourseAcademyRoles::StudentGroups::Error)
+        expect { described_class.new(kind: "csv", file: upload) }.to raise_error(
+          DiscourseAcademyRoles::StudentGroups::Error,
+        )
       end
     end
 
     it "rejects the whole prefix result when more than the allowed batch would match" do
-      3.times { |index| Fabricate(:academy_student_registration, student_number: "overflow-#{index}") }
+      3.times do |index|
+        Fabricate(:academy_student_registration, student_number: "overflow-#{index}")
+      end
       stub_const(DiscourseAcademyRoles::StudentGroups, :MAX_ROWS, 2) do
-        expect { described_class.new(kind: "prefix", prefix: "overflow-") }.to raise_error(DiscourseAcademyRoles::StudentGroups::Error) { |error| expect(error.code).to eq("too_many") }
+        expect { described_class.new(kind: "prefix", prefix: "overflow-") }.to raise_error(
+          DiscourseAcademyRoles::StudentGroups::Error,
+        ) { |error| expect(error.code).to eq("too_many") }
       end
     end
 
@@ -63,7 +82,9 @@ RSpec.describe DiscourseAcademyRoles::StudentGroups::Input do
       Fabricate(:academy_student_registration, student_number: "2026AB001")
       Fabricate(:academy_student_registration, student_number: "2026_Z001")
 
-      expect(described_class.new(kind: "prefix", prefix: "2026_%").numbers).to eq([literal.student_number])
+      expect(described_class.new(kind: "prefix", prefix: "2026_%").numbers).to eq(
+        [literal.student_number],
+      )
     end
   end
 

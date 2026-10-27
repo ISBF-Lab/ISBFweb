@@ -30,7 +30,9 @@ class DiscourseAcademyRoles::StudentGroups::ConfirmBatch
 
   def queue_confirmed_accounts(batch:, params:, guardian:)
     DiscourseAcademyRoles::StudentGroups::Confirmation.execute(
-      actor: guardian.user, batch:, selected_item_ids: params.selected_item_ids,
+      actor: guardian.user,
+      batch:,
+      selected_item_ids: params.selected_item_ids,
     )
   end
 end

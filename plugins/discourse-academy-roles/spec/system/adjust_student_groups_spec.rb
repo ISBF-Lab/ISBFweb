@@ -2,7 +2,7 @@
 
 require_relative "page_objects/academy_student_group_batches"
 
-RSpec.describe "Adjust student groups", type: :system do
+RSpec.describe "Adjust student groups" do
   fab!(:developer, :admin)
   fab!(:target, :group)
   fab!(:registration, :registered_academy_student)
@@ -15,7 +15,13 @@ RSpec.describe "Adjust student groups", type: :system do
     sign_in(developer)
   end
 
-  [[1440, "light", false], [1024, "dark", false], [768, "light", false], [430, "dark", true], [390, "light", true]].each do |width, mode, mobile|
+  [
+    [1440, "light", false],
+    [1024, "dark", false],
+    [768, "light", false],
+    [430, "dark", true],
+    [390, "light", true],
+  ].each do |width, mode, mobile|
     context "with #{width}px #{mode} layout", mobile: do
       before do
         if mode == "dark"

@@ -20,6 +20,8 @@ module DiscourseAcademyRoles::StudentGroups
   end
 
   def self.ensure_developer!(actor)
-    raise Discourse::InvalidAccess unless SiteSetting.academy_roles_enabled? && actor&.reload&.admin?
+    unless SiteSetting.academy_roles_enabled? && actor&.reload&.admin?
+      raise Discourse::InvalidAccess
+    end
   end
 end

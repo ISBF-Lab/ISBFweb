@@ -22,7 +22,10 @@ module PageObjects
       end
 
       def has_state?(state)
-        has_css?(".academy-student-group-batches__result > p[role='status']", text: I18n.t("js.academy_roles.student_groups.states.#{state}"))
+        has_css?(
+          ".academy-student-group-batches__result > p[role='status']",
+          text: I18n.t("js.academy_roles.student_groups.states.#{state}"),
+        )
       end
 
       def confirm_by_keyboard
@@ -40,9 +43,11 @@ module PageObjects
       end
 
       def save_review(name)
-        directory = Rails.root.join("tmp", "student-group-browser")
+        directory = Rails.root.join("tmp/student-group-browser")
         FileUtils.mkdir_p(directory)
-        page.save_screenshot(directory.join("#{name}.png"))
+        page.driver.with_playwright_page do |pw_page|
+          pw_page.screenshot(path: directory.join("#{name}.png").to_s, fullPage: true)
+        end
       end
     end
   end

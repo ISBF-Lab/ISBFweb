@@ -33,23 +33,33 @@ RSpec.describe "Student group batch concurrency", type: :model do
   end
 
   it "keeps one native membership and one audit entry under simultaneous job delivery" do
-    @batch = DiscourseAcademyRoles::StudentGroups::Preview.create(
-      actor: @developer, mode: "groups", input_kind: "list", student_numbers: @registration.student_number, add_group_ids: [@target.id],
+    @batch =
+      DiscourseAcademyRoles::StudentGroups::Preview.create(
+        actor: @developer,
+        mode: "groups",
+        input_kind: "list",
+        student_numbers: @registration.student_number,
+        add_group_ids: [@target.id],
+      )
+    DiscourseAcademyRoles::StudentGroups::Confirmation.execute(
+      actor: @developer,
+      batch: @batch,
+      selected_item_ids: @batch.items.pluck(:id),
     )
-    DiscourseAcademyRoles::StudentGroups::Confirmation.execute(actor: @developer, batch: @batch, selected_item_ids: @batch.items.pluck(:id))
     batch_id = @batch.id
     ready = Queue.new
     start = Queue.new
     ActiveRecord::Base.connection_handler.clear_active_connections!
-    @threads = 2.times.map do
-      Thread.new do
-        ActiveRecord::Base.connection_pool.with_connection do
-          ready << true
-          start.pop
-          Jobs::AcademyStudentGroupBatch.new.execute(batch_id:)
+    @threads =
+      2.times.map do
+        Thread.new do
+          ActiveRecord::Base.connection_pool.with_connection do
+            ready << true
+            start.pop
+            Jobs::AcademyStudentGroupBatch.new.execute(batch_id:)
+          end
         end
       end
-    end
     2.times { ready.pop }
     2.times { start << true }
     @threads.each { |thread| raise "Concurrent membership task timed out" unless thread.join(25) }
@@ -58,6 +68,12 @@ RSpec.describe "Student group batch concurrency", type: :model do
     expect(@batch.reload.state).to eq("completed")
     expect(@target.reload.user_count).to eq(1)
     expect(GroupUser.where(group_id: @target.id, user_id: @registration.user_id).count).to eq(1)
-    expect(GroupHistory.where(group_id: @target.id, action: GroupHistory.actions[:add_user_to_group], target_user_id: @registration.user_id).count).to eq(1)
+    expect(
+      GroupHistory.where(
+        group_id: @target.id,
+        action: GroupHistory.actions[:add_user_to_group],
+        target_user_id: @registration.user_id,
+      ).count,
+    ).to eq(1)
   end
 end

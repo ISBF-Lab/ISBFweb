@@ -15,17 +15,22 @@ class DiscourseAcademyRoles::StudentGroups::Runner
       end
       batch.update!(state: "running")
       started_at = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-      batch.items.where(selected: true, status: %w[queued running]).order(:position).limit(CHUNK_SIZE).each do |item|
-        break if Process.clock_gettime(Process::CLOCK_MONOTONIC) - started_at >= CHUNK_BUDGET
-        break if batch.reload.state == "blocked"
-        unless batch.actor&.reload&.admin? && SiteSetting.academy_roles_enabled?
-          batch.update!(state: "blocked", finished_at: Time.current)
-          break
+      batch
+        .items
+        .where(selected: true, status: %w[queued running])
+        .order(:position)
+        .limit(CHUNK_SIZE)
+        .each do |item|
+          break if Process.clock_gettime(Process::CLOCK_MONOTONIC) - started_at >= CHUNK_BUDGET
+          break if batch.reload.state == "blocked"
+          unless batch.actor&.reload&.admin? && SiteSetting.academy_roles_enabled?
+            batch.update!(state: "blocked", finished_at: Time.current)
+            break
+          end
+          DistributedMutex.synchronize("academy-group-user-#{item.user_id}", validity: 600) do
+            new(batch, item).run
+          end
         end
-        DistributedMutex.synchronize("academy-group-user-#{item.user_id}", validity: 600) do
-          new(batch, item).run
-        end
-      end
       unless batch.state == "blocked"
         remaining = batch.items.where(selected: true, status: %w[queued running]).exists?
         if remaining
@@ -57,14 +62,18 @@ class DiscourseAcademyRoles::StudentGroups::Runner
     end
     @item.update!(status: "running", reason_code: "")
     started_at = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    @item.steps.each_with_index do |step, index|
-      next if step["state"] == "done"
-      if Process.clock_gettime(Process::CLOCK_MONOTONIC) - started_at >= USER_SLICE_BUDGET
-        @item.update!(status: "queued")
-        return
+    all_completed =
+      @item.steps.each_with_index.all? do |step, index|
+        if step["state"] == "done"
+          true
+        elsif Process.clock_gettime(Process::CLOCK_MONOTONIC) - started_at >= USER_SLICE_BUDGET
+          @item.update!(status: "queued")
+          false
+        else
+          apply_step(step, index)
+        end
       end
-      return unless apply_step(step, index)
-    end
+    return unless all_completed
     return if @batch.undo? && !@item.display_restored && !restore_display
     @item.update!(status: "success", reason_code: "", after_snapshot: current_snapshot)
     Discourse.request_refresh!(user_ids: [@item.user_id])
@@ -75,7 +84,10 @@ class DiscourseAcademyRoles::StudentGroups::Runner
     if @item.reload.steps.any? { |step| step["state"] == "started" }
       conflict!(:uncertain_result)
     else
-      @item.update!(status: @item.completed_steps.empty? ? "failed" : "partial", reason_code: "execution_failed")
+      @item.update!(
+        status: @item.completed_steps.empty? ? "failed" : "partial",
+        reason_code: "execution_failed",
+      )
     end
     Rails.logger.warn("[academy student group batch #{@batch.id}] #{error.class.name}")
   end
@@ -84,10 +96,14 @@ class DiscourseAcademyRoles::StudentGroups::Runner
 
   def valid_context?
     @batch.actor&.reload&.admin? && SiteSetting.academy_roles_enabled? &&
-      (!@batch.undo? || (@batch.source_batch.reload.terminal? && Snapshot.restorable_display?(@item.source_item))) &&
-      @item.binding_matches? &&
-      Groups.valid_plan?(@batch.plan, mode: @batch.undo? ? @batch.source_batch.mode : @batch.mode) &&
-      Snapshot.matches?(@item.user, @item.expected_snapshot, @batch.group_ids)
+      (
+        !@batch.undo? ||
+          (@batch.source_batch.reload.terminal? && Snapshot.restorable_display?(@item.source_item))
+      ) && @item.binding_matches? &&
+      Groups.valid_plan?(
+        @batch.plan,
+        mode: @batch.undo? ? @batch.source_batch.mode : @batch.mode,
+      ) && Snapshot.matches?(@item.user, @item.expected_snapshot, @batch.group_ids)
   end
 
   def current_snapshot
@@ -107,16 +123,22 @@ class DiscourseAcademyRoles::StudentGroups::Runner
       group = Group.lock.find_by(id: step.fetch("group_id"))
       @item.user.lock!
       GroupUser.where(user_id: @item.user_id, group_id: @batch.group_ids).lock.load
-      unless group && valid_context?
-        raise Error, :changed_since_preview
-      end
-      if step["operation"] == "remove" && GroupUser.exists?(group_id: group.id, user_id: @item.user_id, owner: true)
+      raise Error, :changed_since_preview unless group && valid_context?
+      if step["operation"] == "remove" &&
+           GroupUser.exists?(group_id: group.id, user_id: @item.user_id, owner: true)
         raise Error, :account_or_owner
       end
       before = current_snapshot
       step["before"] = before
       attempted = true
-      changed_ids = step["operation"] == "add" ? group.bulk_add([@item.user_id]) : group.bulk_remove([@item.user_id])
+      changed_ids =
+        (
+          if step["operation"] == "add"
+            group.bulk_add([@item.user_id])
+          else
+            group.bulk_remove([@item.user_id])
+          end
+        )
       after = current_snapshot
       member = after.dig("memberships", group.id.to_s)
       applied = step["operation"] == "add" ? member.present? && !member["owner"] : member.nil?
@@ -143,20 +165,25 @@ class DiscourseAcademyRoles::StudentGroups::Runner
     elsif error.is_a?(Error)
       conflict!(error.code)
     else
-      @item.update!(status: @item.completed_steps.empty? ? "failed" : "partial", reason_code: "execution_failed")
+      @item.update!(
+        status: @item.completed_steps.empty? ? "failed" : "partial",
+        reason_code: "execution_failed",
+      )
     end
     false
   end
 
   def restore_display
     source = @item.source_item
-    unless source && @item.binding_matches? && Groups.valid_plan?(@batch.plan, mode: @batch.source_batch.mode)
+    unless source && @item.binding_matches? &&
+             Groups.valid_plan?(@batch.plan, mode: @batch.source_batch.mode)
       conflict!(:changed_since_execution)
       return false
     end
     restored = false
     @item.user.with_lock do
-      if Snapshot.matches?(@item.user, @item.expected_snapshot, @batch.group_ids) && Snapshot.restorable_display?(source, after_steps: true)
+      if Snapshot.matches?(@item.user, @item.expected_snapshot, @batch.group_ids) &&
+           Snapshot.restorable_display?(source, after_steps: true)
         target = source.before_snapshot.fetch("display")
         @item.user.update!(target)
         @item.update!(after_snapshot: current_snapshot, display_restored: true)

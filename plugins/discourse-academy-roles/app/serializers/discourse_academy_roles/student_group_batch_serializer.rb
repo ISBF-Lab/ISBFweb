@@ -1,10 +1,24 @@
 # frozen_string_literal: true
 
 class DiscourseAcademyRoles::StudentGroupBatchSerializer < ApplicationSerializer
-  attributes :id, :mode, :state, :created_at, :expires_at, :confirmed_at, :finished_at,
-             :source_batch_id, :duplicate_count, :counts, :version, :message_bus_channel,
-             :add_groups, :remove_groups, :selectable_item_ids, :selected_item_ids,
-             :can_retry, :can_undo
+  attributes :id,
+             :mode,
+             :state,
+             :created_at,
+             :expires_at,
+             :confirmed_at,
+             :finished_at,
+             :source_batch_id,
+             :duplicate_count,
+             :counts,
+             :version,
+             :message_bus_channel,
+             :add_groups,
+             :remove_groups,
+             :selectable_item_ids,
+             :selected_item_ids,
+             :can_retry,
+             :can_undo
 
   %i[counts selectable_item_ids selected_item_ids can_retry can_undo].each do |attribute|
     define_method("include_#{attribute}?") { !@options[:compact] }
@@ -15,11 +29,17 @@ class DiscourseAcademyRoles::StudentGroupBatchSerializer < ApplicationSerializer
   end
 
   def add_groups
-    object.plan.fetch("add_group_ids").map { |id| { id:, name: object.plan.dig("groups", id.to_s, "name") } }
+    object
+      .plan
+      .fetch("add_group_ids")
+      .map { |id| { id:, name: object.plan.dig("groups", id.to_s, "name") } }
   end
 
   def remove_groups
-    object.plan.fetch("remove_group_ids").map { |id| { id:, name: object.plan.dig("groups", id.to_s, "name") } }
+    object
+      .plan
+      .fetch("remove_group_ids")
+      .map { |id| { id:, name: object.plan.dig("groups", id.to_s, "name") } }
   end
 
   def selectable_item_ids
