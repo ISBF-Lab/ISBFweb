@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "source_version": "0f1ab21f2b2ccfbf66f556523ad9752f8d94686b2b9026e046f11844bdb9761a",
+  "core_files": 68,
+  "runtime_source_files": 27008,
+  "plugin_directories": 67,
+  "generated_manifests": 71,
+  "public_assets": 1812,
+  "unrelated_source_preserved": true,
+  "plugins_preserved": true,
+  "generated_manifests_preserved": true,
+  "existing_public_assets_preserved": true,
+  "compiled_resources_verified": 207,
+  "full_inventory_exported": false,
+  "checked_at_utc": "2026-10-27T11:15:51.390106+00:00",
+  "theme_fields": 297,
+  "theme_settings": 17,
+  "theme_fields_preserved": 276,
+  "theme_configuration_preserved": true,
+  "theme_source_version": "48d3e5014f3133ae772b6e6e6c099cd6ca3163397029f218cacaa0de748e8321"
+}

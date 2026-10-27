@@ -1,0 +1,45 @@
+{
+  "runtime_recovery": {
+    "verified": true,
+    "tag": "local_discourse/isbf_app:shared-dropdowns-20261027-0f1ab21f2b2c",
+    "image": "sha256:3beb562c08e1fd0e13890797b9ca774e5b5763850a78f7befcc1b6f4e244303f",
+    "source_version": "0f1ab21f2b2ccfbf66f556523ad9752f8d94686b2b9026e046f11844bdb9761a",
+    "complete_live_and_image_inventory_equal": true,
+    "plugin_directories": 67,
+    "generated_manifests": 71,
+    "public_assets": 1812,
+    "core_digest": "190b4c4be4f8191ea913da25b40e16eb7b31f8118911cc7d51fd519b7dc8616c",
+    "generated_digest": "12ba5d4fd29246a6a5db6c9e29ebb93f34e354199fdeb8107ae38d061d85381e",
+    "asset_digest": "493946ec9637efe28098597a6bc34579a11da6a8dc2e8d3647c4c2f569ae5454",
+    "production_paused": false,
+    "latest_tag_changed": false,
+    "boot_command": [
+      "/sbin/boot"
+    ],
+    "shared_source_mounts_required": [
+      "/shared/discourse-avatar-frames-releases/2eb878d4227dee6009f839f681b0ad06f8e6223c",
+      "/shared/discourse-latest-created-order",
+      "/shared/isbf-academy-roles-releases/1c298484093f325b0582c915f9c4c1cc8a577f42",
+      "/shared/isbf-alumni-releases/f63153279b30d612021eccec4f23f540d64c60c7",
+      "/shared/isbf-calendar-releases/68ed219ba8688d78dfbd1c032eeb2bc904ad229a",
+      "/shared/isbf-careers-releases/d865fece867593371fa33bb289ce4f398dfc314a",
+      "/shared/isbf-join-releases/27bec5c18ad7c823ea0909a589fe1a17c6c96b574f1cbb2533cf2db1e24162e3",
+      "/shared/isbf-learning-releases/0ec46cfb4fe30d67979c4cf11d4f5d0fc86ac315",
+      "/shared/isbf-marketplace-releases/5df861909f630303cf2d6a98e44a75837e0e5d38",
+      "/shared/isbf-official-releases/d28e3a80d67e14a77a20a012665568a3d3e26be0",
+      "/shared/isbf-pinning-releases/a2357660be9deed306a6999bc8e47f0ceb9ca111",
+      "/shared/isbf-resume-releases/af3dc61886611b45b5af0b1f59961b2e00c2326b",
+      "/shared/isbf-teamup-releases/7af826d26f02ae293a64e10e3b0fbec0c10fb46d"
+    ],
+    "database_theme_required": 4,
+    "theme_fields_preserved": 297,
+    "browser_checks": 86,
+    "source_overlay_release": "/shared/isbf-shared-dropdowns-releases/0f1ab21f2b2ccfbf66f556523ad9752f8d94686b2b9026e046f11844bdb9761a"
+  },
+  "core_source_version": "0f1ab21f2b2ccfbf66f556523ad9752f8d94686b2b9026e046f11844bdb9761a",
+  "database_theme_id": 4,
+  "authoritative_theme_backup": "/home/codex/discourse/deploy-work/notification-menu-width-20261027/theme-after.json",
+  "compact_stylesheet_sha256": "81f631c2bb0c05aa415b5516232b6716e96c860f9c2ef7860c674eac85b24f90",
+  "compact_source_version": "8863df9d8a38b963ca4a5d65d93d347051f92b54db975d825951ca4df153d498",
+  "requires_shared_releases_and_database": true
+}

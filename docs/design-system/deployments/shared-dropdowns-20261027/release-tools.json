@@ -1,0 +1,224 @@
+{
+  "files": [
+    {
+      "path": "docs/dropdowns-20261026/apply-theme.rb",
+      "sha256": "0e1ffd7eb06a4ff7a78e0385fc5ab9cf801cc0d219f9c1bfc6c79c503375f135"
+    },
+    {
+      "path": "docs/dropdowns-20261026/browser.mjs",
+      "sha256": "b3b6d521d1a13de47df5d30e54212a5aa0bafc776a1e81a5a83f6d5b2d77332f"
+    },
+    {
+      "path": "docs/dropdowns-20261026/build_release.py",
+      "sha256": "abf47f1dac3b31877f890b51bb401ce5254b6fd00c45594a74ec5ad65805bb6b"
+    },
+    {
+      "path": "docs/dropdowns-20261026/capture_mutable_hashes.py",
+      "sha256": "7d6b624be8ef741680d742f678cd8905881564b431f8ed7bbd6573f9231fc0a4"
+    },
+    {
+      "path": "docs/dropdowns-20261026/capture_recovery.py",
+      "sha256": "d3880740d158db2cb07bdc0f55b31e69c82f421e204bb8adef75aef638cd550f"
+    },
+    {
+      "path": "docs/dropdowns-20261026/capture_release_sources.py",
+      "sha256": "5148f0d3efedea7aa17cfa5509add7f1d05bb643285c5972b0784ba18e2c2141"
+    },
+    {
+      "path": "docs/dropdowns-20261026/check_cleanup.py",
+      "sha256": "b5c5344df5dfc2021503e98629955d89bcafac365c30a337a0c15d65dd185c49"
+    },
+    {
+      "path": "docs/dropdowns-20261026/check_native_retention.py",
+      "sha256": "48a1b4f8311b7a00dca7520cec0957c5573387c4cfe08700d69cb34701138906"
+    },
+    {
+      "path": "docs/dropdowns-20261026/check_pr.py",
+      "sha256": "1ed4b6a282dd9e7cb24935fd63dfba7b8ff134c8fddc86eceb96ce259fc8cc67"
+    },
+    {
+      "path": "docs/dropdowns-20261026/checks.py",
+      "sha256": "e965fc4ef63d8e72ce9f1b235e2bd1b960108cf012fe0019085db9f6e8dbae1d"
+    },
+    {
+      "path": "docs/dropdowns-20261026/cleanup_backups.py",
+      "sha256": "5972e0e757cb060c907369789b919f148e6917fb885e10b7012c39aeee9e2886"
+    },
+    {
+      "path": "docs/dropdowns-20261026/compile_release_plugins.py",
+      "sha256": "1673dc15751978efb708e604cd74efd4ef1876183adde5d2940368a612495540"
+    },
+    {
+      "path": "docs/dropdowns-20261026/finalize_docs.py",
+      "sha256": "92a8533ab86a24c07b3bdf00e6f078a5ed164a4bc009fcba41c17a936abab5a1"
+    },
+    {
+      "path": "docs/dropdowns-20261026/install_release.py",
+      "sha256": "43791604ecd642306446ea8a2af558f2aad01e3cb5b485dfc7e95d0d1c6da7e6"
+    },
+    {
+      "path": "docs/dropdowns-20261026/launch_production.py",
+      "sha256": "8abcd4ee437965fc8367ecaa787d8fd9a5de6d594eaf36a1d19365b5fb4068a2"
+    },
+    {
+      "path": "docs/dropdowns-20261026/lint.py",
+      "sha256": "3b352005663f9b64c81c209edc772aaa57e3fe9f7ae5ea94aa42440a7a60c5ea"
+    },
+    {
+      "path": "docs/dropdowns-20261026/lint_release_sources.py",
+      "sha256": "402c4b7020880d55c8075fdcb54c3a6776ee51d55d93e10eda44f69d5772b279"
+    },
+    {
+      "path": "docs/dropdowns-20261026/lint_theme_candidate.py",
+      "sha256": "647e3938a350d4fdf70b9f140417c7b0b4cac7f0dc0cc92d14df99792773845e"
+    },
+    {
+      "path": "docs/dropdowns-20261026/map_release_sources.py",
+      "sha256": "406af3b67beb66460910e07c331ab44fad94c9c76e95c4db38d7b3c4efffe71b"
+    },
+    {
+      "path": "docs/dropdowns-20261026/observe_theme.py",
+      "sha256": "32fd57350826774a1ad6a9bbe0088a6bc1262380d22bc823c91ec97fbc6963a7"
+    },
+    {
+      "path": "docs/dropdowns-20261026/package_release.py",
+      "sha256": "59a87582768a2c44186046c08d092916a03a1e971b1bab860921d1ae588e55a7"
+    },
+    {
+      "path": "docs/dropdowns-20261026/plan_release_sources.py",
+      "sha256": "86d1c873398768eec1146238fedbf8e6f1dc6718b8d9dc6109187a2545bfcc5b"
+    },
+    {
+      "path": "docs/dropdowns-20261026/preflight_assets.py",
+      "sha256": "f88a0b1a320409ffd1c2b4963c9c129d6e0f0a0508baa3c1f442c7cad3ceff55"
+    },
+    {
+      "path": "docs/dropdowns-20261026/prepare_api_push.py",
+      "sha256": "423c3c4a0045208aca85df87c3b1c75d9be6879ebc53f7d58edf6dd82bbe24a0"
+    },
+    {
+      "path": "docs/dropdowns-20261026/prepare_pr.py",
+      "sha256": "2c8592180aa1b4952a3f695388f9b81e9e48aac8350b977b22671d6efc63c750"
+    },
+    {
+      "path": "docs/dropdowns-20261026/prepare_pr_theme.py",
+      "sha256": "bbdb4d9b15a3abc44e415dadcaa54676187b5e6ff14cda3412d8a4b30baf680a"
+    },
+    {
+      "path": "docs/dropdowns-20261026/prepare_theme_release.py",
+      "sha256": "67ab6b599c95b1998b2e89f41f9ac469baa3d317ba4f0720621ed8ecba1fb7ae"
+    },
+    {
+      "path": "docs/dropdowns-20261026/production-browser.mjs",
+      "sha256": "8ccdde11af29f785278cc90830fbaef76d0aa6c6ca1991f655b0ff60c7ffc0a9"
+    },
+    {
+      "path": "docs/dropdowns-20261026/production_deploy.py",
+      "sha256": "b45e787c0851eb0f0ecb2b27a7f24165c98f2fe9c55bf43ba704f6b8ee07a554"
+    },
+    {
+      "path": "docs/dropdowns-20261026/production_inventory.py",
+      "sha256": "664c31a39435879ade096348cc1207fe2b32d9c34f0bb19d02f19f54ff784192"
+    },
+    {
+      "path": "docs/dropdowns-20261026/publish_compact_css.py",
+      "sha256": "ff942a5e2c94edd26aff744260d5fb7d2d7114f379155ea49a36f5e5b9f0657b"
+    },
+    {
+      "path": "docs/dropdowns-20261026/reconstruct_release.py",
+      "sha256": "b775f2880707fd9eec794aaf4b71f85acc53b17b569821c3a5b2dbaeff540e19"
+    },
+    {
+      "path": "docs/dropdowns-20261026/record_compact_release.py",
+      "sha256": "35d1e54d21cc3c222a8cf64bc2e258b93e115e4002e9b553bcbb3550eef1e6a4"
+    },
+    {
+      "path": "docs/dropdowns-20261026/record_native_followup.py",
+      "sha256": "c054c7a6a17f1288031afe9c35838614065369b384f2197bc1d780d973ce39c9"
+    },
+    {
+      "path": "docs/dropdowns-20261026/record_pr_verification.py",
+      "sha256": "840e82b9278f7d0fcf8dcf2b8e0d4b5dc80b4926f1821f7a17033bd44f7bc42f"
+    },
+    {
+      "path": "docs/dropdowns-20261026/record_release.py",
+      "sha256": "fdc9c16aed8526e4b4434169f0879bca28f607b1560ad3bd8ba8c27439c1985f"
+    },
+    {
+      "path": "docs/dropdowns-20261026/record_upcoming_followup.py",
+      "sha256": "6da56e680dd28c81b669ec232820840df7732326c9c3bb53ddaef0cb7f9258c3"
+    },
+    {
+      "path": "docs/dropdowns-20261026/record_verification.py",
+      "sha256": "48b329a8c3fff67145f87c7e4f4efe8281339bbb1b2eb324cac7c72dcb3bd5f7"
+    },
+    {
+      "path": "docs/dropdowns-20261026/record_visibility_followup.py",
+      "sha256": "d5b5e85898e8c25c9516d0eae6a9ce7e84edb589f50799bface503d27397fcc7"
+    },
+    {
+      "path": "docs/dropdowns-20261026/refresh_after_concurrent_release.py",
+      "sha256": "c8e3942ad597e7b9175f142de052697dc6bf8b141cf50b28713d145a13cfb932"
+    },
+    {
+      "path": "docs/dropdowns-20261026/release.py",
+      "sha256": "f8cd73b9ca623053ad0c31f0edf434b406a76df3a0da6c1140cec23ad23fd067"
+    },
+    {
+      "path": "docs/dropdowns-20261026/resolve_theme_release.py",
+      "sha256": "269f91875fc8b9bebab10a16e4261af8913d4d15f11329dfbc22504a00e58836"
+    },
+    {
+      "path": "docs/dropdowns-20261026/rollback_release.py",
+      "sha256": "1d021dfcad2b5d4054a04165b60a462e6fe2a3fa200bbdf10cd8c00b2f3b9e12"
+    },
+    {
+      "path": "docs/dropdowns-20261026/run_browser.py",
+      "sha256": "fab582510f0415e00aa0c88ec397d5d30207507a153d6b48d95956c58e28ddab"
+    },
+    {
+      "path": "docs/dropdowns-20261026/run_compact_production.py",
+      "sha256": "e5a1028e2f287275bd4e7c61e7002080ca7182759f85d32e757a32d0fe094ef2"
+    },
+    {
+      "path": "docs/dropdowns-20261026/run_native_theme.py",
+      "sha256": "984029138688c2ade06896ec8c3b398011eb6013830d6e9e42559fbcfffd63e3"
+    },
+    {
+      "path": "docs/dropdowns-20261026/run_pr_theme.py",
+      "sha256": "c9bed2b071e34943fb528b2d37cace32f74037a3aa44fa9f071f48e229ecc855"
+    },
+    {
+      "path": "docs/dropdowns-20261026/run_production_browser.py",
+      "sha256": "2e4ab8ebe0af2a0e25c4f3a49cfb9d9914b2e29faf8b17ebc22cdf142d0d7c28"
+    },
+    {
+      "path": "docs/dropdowns-20261026/sync_compact_development.py",
+      "sha256": "dee7a3b817d2173d1a3865a41b2708e787574a77562723552d07b5bfa08a5fa2"
+    },
+    {
+      "path": "docs/dropdowns-20261026/upload_release.py",
+      "sha256": "67784ca2cd256d9d6d3c528875e3073108cfccbc996f4552ee8c691990dafd50"
+    },
+    {
+      "path": "docs/dropdowns-20261026/validate_candidates.py",
+      "sha256": "fbd0d1b082d4c2df1be9206fd7e1ea310dae766306579cb8aa3ff6c07f0a60b9"
+    },
+    {
+      "path": "docs/dropdowns-20261026/verify_installer.py",
+      "sha256": "73a8914f33e6f54d6e1e633ff40fe185a6de8c79c31f07f6c073d892e320c9d9"
+    },
+    {
+      "path": "docs/dropdowns-20261026/verify_resources.py",
+      "sha256": "4cddc447ca624a86d0a537231c4e4365d383199974e13b74e6c00f416ad47d4d"
+    },
+    {
+      "path": "docs/dropdowns-20261026/verify_runtime.py",
+      "sha256": "fe188c16b033d27b888bb815fc4b53affb80614f99d7e706dd86298e83c6cedf"
+    },
+    {
+      "path": "docs/dropdowns-20261026/wait_publication.py",
+      "sha256": "a29a277e8efdf232b467c09398e1bb79f07cd8048eef36998bbe68e0de6c51be"
+    }
+  ]
+}

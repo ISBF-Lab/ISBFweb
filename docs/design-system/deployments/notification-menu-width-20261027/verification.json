@@ -1,0 +1,34 @@
+{
+  "status": "deployed_verified_review_pending",
+  "published_at_utc": "2026-10-27T12:14:03Z",
+  "source_version": "8863df9d8a38b963ca4a5d65d93d347051f92b54db975d825951ca4df153d498",
+  "source_sha256": "81f631c2bb0c05aa415b5516232b6716e96c860f9c2ef7860c674eac85b24f90",
+  "width_before": 260,
+  "width_after": 192,
+  "changed_theme_fields": 1,
+  "unrelated_fields_preserved": 296,
+  "settings_preserved": 17,
+  "runtime_sources_changed": false,
+  "core_source_version": "0f1ab21f2b2ccfbf66f556523ad9752f8d94686b2b9026e046f11844bdb9761a",
+  "shared_dropdown_prs": [
+    93,
+    9
+  ],
+  "followup_review": "Pending PR CI; original shared rollout merged after exact-head checks passed",
+  "production_browser_checks": 58,
+  "local_rendered_checks": 84,
+  "hover_max_drift_px": 0,
+  "client_errors": 0,
+  "methods_forwarded": [
+    "GET",
+    "HEAD"
+  ],
+  "temporary_key_revoked": true,
+  "styles_verified_over_tls": 3,
+  "screenshots_exported": false,
+  "recovery_image": "sha256:3beb562c08e1fd0e13890797b9ca774e5b5763850a78f7befcc1b6f4e244303f",
+  "recovery_tag": "local_discourse/isbf_app:shared-dropdowns-20261027-0f1ab21f2b2c",
+  "recovery_boundary": "Runtime filesystem unchanged; use the existing verified image plus this correction's database theme backup",
+  "theme_backup_before": "/home/codex/discourse/deploy-work/notification-menu-width-20261027/theme-before.json",
+  "theme_backup_after": "/home/codex/discourse/deploy-work/notification-menu-width-20261027/theme-after.json"
+}

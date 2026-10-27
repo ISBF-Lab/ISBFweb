@@ -1,0 +1,817 @@
+{
+  "status": "merged_deployed_verified",
+  "recorded_at_utc": "2026-10-27T12:22:00.552406+00:00",
+  "pull_requests": [
+    {
+      "repository": "ISBF-Lab/ISBFweb",
+      "pr": 93,
+      "url": "https://github.com/ISBF-Lab/ISBFweb/pull/93",
+      "head_sha": "fa217abc0fff472f98d935cba2a43993526695b6",
+      "merge_commit": "867a0bbc25a446593c223d5b63261e3d1ac9fcb6",
+      "exact_head_checks_passed": true,
+      "unresolved_reviews": 0,
+      "workflows": [
+        {
+          "id": 40464198309,
+          "name": "Developer Docs Lint",
+          "conclusion": "success"
+        },
+        {
+          "id": 40464198333,
+          "name": "Codex CI handoff",
+          "conclusion": "success"
+        },
+        {
+          "id": 40464198305,
+          "name": "ISBF resume documents",
+          "conclusion": "success"
+        },
+        {
+          "id": 40464198343,
+          "name": "ISBF frontend consistency",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "repository": "ISBF-Lab/ISBF-Alumni",
+      "pr": 9,
+      "url": "https://github.com/ISBF-Lab/ISBF-Alumni/pull/9",
+      "head_sha": "3170ce4050aab00cf61206128c6d4712ade71842",
+      "merge_commit": "c2c8fa29d994a0f51369ac088d73de205e68a9a7",
+      "exact_head_checks_passed": true,
+      "unresolved_reviews": 0,
+      "workflows": [
+        {
+          "id": 40464566244,
+          "name": "ISBF Alumni plugin tests",
+          "conclusion": "success"
+        },
+        {
+          "id": 40464566077,
+          "name": "Alumni registration integration",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "published_at_utc": "2026-10-27T11:12:35Z",
+  "core_source_version": "0f1ab21f2b2ccfbf66f556523ad9752f8d94686b2b9026e046f11844bdb9761a",
+  "theme_source_version": "48d3e5014f3133ae772b6e6e6c099cd6ca3163397029f218cacaa0de748e8321",
+  "scope": "Shared dropdowns and the three reported defects; existing notification hold and alumni identity behavior preserved",
+  "source_files": [
+    {
+      "path": "plugins/isbf-alumni/AGENTS.md",
+      "before_sha256": null,
+      "sha256": "0d43b959d56d2b3411c9b2ea98218c4c2495bf2e45d3cc5cbab9ba10f2f42810",
+      "approved_source": "external/isbf-alumni/AGENTS.md",
+      "approved_sha256": "0d43b959d56d2b3411c9b2ea98218c4c2495bf2e45d3cc5cbab9ba10f2f42810",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "plugins/isbf-alumni/assets/javascripts/discourse/components/isbf-alumni-registration.gjs",
+      "before_sha256": "75ab896c0ac994fbce2955e779febb584129df62c3f0322da9ea5988597b2e76",
+      "sha256": "d24f0a36cdfd9a59fa016255e27ac316705053772abcddd9b50077aa408654e6",
+      "approved_source": "external/isbf-alumni/assets/javascripts/discourse/components/isbf-alumni-registration.gjs",
+      "approved_sha256": "d24f0a36cdfd9a59fa016255e27ac316705053772abcddd9b50077aa408654e6",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "plugins/isbf-resume/assets/stylesheets/isbf-resume-sharing.scss",
+      "before_sha256": "ff947f6bc709b83ac736e086e99e5c3373cfa8647b844e7c7fac63241f505019",
+      "sha256": "2498736749d20a37fd86ed711f6b219d76b2963040f8128eb4d4a4c0e0125158",
+      "approved_source": "external/isbf-resume/assets/stylesheets/isbf-resume-sharing.scss",
+      "approved_sha256": "2498736749d20a37fd86ed711f6b219d76b2963040f8128eb4d4a4c0e0125158",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "app/assets/stylesheets/common/components/_index.scss",
+      "before_sha256": "21476f8f587ff8c9d91bf1a0cbceffc1305ce659c89c8f1b4b0801ab5131f367",
+      "sha256": "59a1aca21105ce1d1c3b66ca0cfa27fbcebedc3ecf86c5bb33b1ec028ee3b032",
+      "approved_source": "source/app/assets/stylesheets/common/components/_index.scss",
+      "approved_sha256": "59a1aca21105ce1d1c3b66ca0cfa27fbcebedc3ecf86c5bb33b1ec028ee3b032",
+      "method": "three-way merge preserving concurrent code"
+    },
+    {
+      "path": "app/assets/stylesheets/common/components/d-menu-surface.scss",
+      "before_sha256": null,
+      "sha256": "c9119464509269e876e6b74d2c6529850e8efc56149d4928b830399088b80c16",
+      "approved_source": "source/app/assets/stylesheets/common/components/d-menu-surface.scss",
+      "approved_sha256": "c9119464509269e876e6b74d2c6529850e8efc56149d4928b830399088b80c16",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/admin/components/admin-report-table-summary.gjs",
+      "before_sha256": "710a9b748e8503734464e5f9a6ef381417cb69033e428c5143aaf8f6c9636d39",
+      "sha256": "63ff0bbf67d2f81475da52704251dda0409fc052f57d3f34672fbb035a62d6f4",
+      "approved_source": "source/frontend/discourse/admin/components/admin-report-table-summary.gjs",
+      "approved_sha256": "63ff0bbf67d2f81475da52704251dda0409fc052f57d3f34672fbb035a62d6f4",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/admin/components/color-palette-list-item.gjs",
+      "before_sha256": "a481c161e7547f646875252d95a94143559e9b1db27107bb3b38b9330ca5cad8",
+      "sha256": "03f52de4ac021c0550a15dc8a4f255dfee8e4b1830417ea35f25879904662f14",
+      "approved_source": "source/frontend/discourse/admin/components/color-palette-list-item.gjs",
+      "approved_sha256": "03f52de4ac021c0550a15dc8a4f255dfee8e4b1830417ea35f25879904662f14",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/admin/components/dashboard/date-range.gjs",
+      "before_sha256": "ffa6bfbec52a27d206947248275d006f2056e41d938c45a6e6486eb95e20472e",
+      "sha256": "9053c7d085e7cd845df82d0493aa22f44ee25190d9838c56fec36889a21bd865",
+      "approved_source": "source/frontend/discourse/admin/components/dashboard/date-range.gjs",
+      "approved_sha256": "9053c7d085e7cd845df82d0493aa22f44ee25190d9838c56fec36889a21bd865",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/admin/components/ip-lookup.gjs",
+      "before_sha256": "8e890bd693f7453080fc4a4d53d8baf8463b26256d43a1fd5c15e23547074082",
+      "sha256": "1b5959ba826a849e2433e2f9f76561f920f162a6625a4765b41342ab5609114e",
+      "approved_source": "source/frontend/discourse/admin/components/ip-lookup.gjs",
+      "approved_sha256": "1b5959ba826a849e2433e2f9f76561f920f162a6625a4765b41342ab5609114e",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/admin/components/redesigned-admin-dashboard.gjs",
+      "before_sha256": "a3f09162876f42b01ded3f8cf135ce01def77ace804cb35fe05a1c615555f1f1",
+      "sha256": "8d0b41c40f2ca786a8aa0721623463dace7b7c757bbc8d1a54f4db40d0d503ab",
+      "approved_source": "source/frontend/discourse/admin/components/redesigned-admin-dashboard.gjs",
+      "approved_sha256": "8d0b41c40f2ca786a8aa0721623463dace7b7c757bbc8d1a54f4db40d0d503ab",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/admin/components/themes-grid-card.gjs",
+      "before_sha256": "506a249b38e2c1af8434e5feab2c926574c703d2fbdca8dac932d1ff030b6086",
+      "sha256": "403a29789fd17d3f39831fcec68f41ed150fb5280aad20f6e7be5f96c155f27c",
+      "approved_source": "source/frontend/discourse/admin/components/themes-grid-card.gjs",
+      "approved_sha256": "403a29789fd17d3f39831fcec68f41ed150fb5280aad20f6e7be5f96c155f27c",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/bulk-select-topics-dropdown.gjs",
+      "before_sha256": "9f3a94ee7f6ccd01f62f1d2fea34bcb8380368174767333161f2855902ea34d0",
+      "sha256": "6bd6cb88af4bc85c13ef34b4a223919f4932af387319e6c9c377564c5345758e",
+      "approved_source": "source/frontend/discourse/app/components/bulk-select-topics-dropdown.gjs",
+      "approved_sha256": "6bd6cb88af4bc85c13ef34b4a223919f4932af387319e6c9c377564c5345758e",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/composer-actions.gjs",
+      "before_sha256": "06ec2ceb4f9aa381cb3cd7ab0ff0e6cdcb23aae0266e324ab657f1e1f67a6fbe",
+      "sha256": "d1fe8333c4ac4cf3669150e27019aff57b3b7de65f9055c6266dab1b3271b12b",
+      "approved_source": "source/frontend/discourse/app/components/composer-actions.gjs",
+      "approved_sha256": "d1fe8333c4ac4cf3669150e27019aff57b3b7de65f9055c6266dab1b3271b12b",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/design-wizard/fonts-section.gjs",
+      "before_sha256": "7033ecf24ae5d79f92f2274daf3d1f1c779cb789fa0688a9355bc1fff4f16faf",
+      "sha256": "5b3fd286298f178563de1e517ebed845affd7a42b32f0e66d72ed697c9b55761",
+      "approved_source": "source/frontend/discourse/app/components/design-wizard/fonts-section.gjs",
+      "approved_sha256": "5b3fd286298f178563de1e517ebed845affd7a42b32f0e66d72ed697c9b55761",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/form-template-field/dropdown.gjs",
+      "before_sha256": "ffe89375652b5f7c0018d358734e765a69e061d88e9ea028ff3f0080268f6a28",
+      "sha256": "f44a7f70c1bf620f95d425ead92660b5ddaaaf5784da205388cc73c317fee12b",
+      "approved_source": "source/frontend/discourse/app/components/form-template-field/dropdown.gjs",
+      "approved_sha256": "f44a7f70c1bf620f95d425ead92660b5ddaaaf5784da205388cc73c317fee12b",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/form-template-field/multi-select.gjs",
+      "before_sha256": "6561b5344006b18b42ce3654075b49c7b0fd3b982cd253fe54eb3333080c6614",
+      "sha256": "22b296414064bfba3b2379221c720d97b8253d83939db87e077119b8cca39713",
+      "approved_source": "source/frontend/discourse/app/components/form-template-field/multi-select.gjs",
+      "approved_sha256": "22b296414064bfba3b2379221c720d97b8253d83939db87e077119b8cca39713",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/form-template-field/tag-chooser.gjs",
+      "before_sha256": "c50554d4907ab28697a3ab40ba0c4a2531d307bf4ba8cb4158dd9ebfd601a4ae",
+      "sha256": "6592d075ed0e5dd98920a2425db51344cce7354dac013c52755ebe45b485f7ad",
+      "approved_source": "source/frontend/discourse/app/components/form-template-field/tag-chooser.gjs",
+      "approved_sha256": "6592d075ed0e5dd98920a2425db51344cce7354dac013c52755ebe45b485f7ad",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/interface-color-selector.gjs",
+      "before_sha256": "1ee6b4c0b2e2848cac582381424be63b04657943d78a21b17250a994ccf33e30",
+      "sha256": "94130242b46e0699f04f74649ff3e15043fb85ebf9eecf8601f149b301f7fe06",
+      "approved_source": "source/frontend/discourse/app/components/interface-color-selector.gjs",
+      "approved_sha256": "94130242b46e0699f04f74649ff3e15043fb85ebf9eecf8601f149b301f7fe06",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/navigation-bar.gjs",
+      "before_sha256": "028e7f2f4de4228a10912d1cea6eb4a19b3e06fc748a1cb1f788ed562465ce45",
+      "sha256": "f569f4b12567ec00e194853aa794355c477c6d03f32d602979ca444bcf1bcfe6",
+      "approved_source": "source/frontend/discourse/app/components/navigation-bar.gjs",
+      "approved_sha256": "f569f4b12567ec00e194853aa794355c477c6d03f32d602979ca444bcf1bcfe6",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/nested/deleted-posts.gjs",
+      "before_sha256": "bd68c8858f0b0757e40a07ae0d88c44bf3f767ca237d2e39a45503616100bd1a",
+      "sha256": "b6ceb0ec4fbf499deac89358ee2e69c455ec36009e5160b483c841c8d33ce196",
+      "approved_source": "source/frontend/discourse/app/components/nested/deleted-posts.gjs",
+      "approved_sha256": "b6ceb0ec4fbf499deac89358ee2e69c455ec36009e5160b483c841c8d33ce196",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/notifications-tracking.gjs",
+      "before_sha256": "a3468561be3a0a86d9435dc31d9419ef088c922ece3428564617afeb318353a7",
+      "sha256": "a3398383dce863442a72042c03a70bfb4b7fcc57e64bf21079d61244acfe4fc2",
+      "approved_source": "source/frontend/discourse/app/components/notifications-tracking.gjs",
+      "approved_sha256": "a3398383dce863442a72042c03a70bfb4b7fcc57e64bf21079d61244acfe4fc2",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/pinned-options.gjs",
+      "before_sha256": "6d1e08769fed23006676e685146ab0100780569656dd29731c1297ffbbf34ab4",
+      "sha256": "b77c3c7705a071a5311be7dc9ac83aaac11c1d96b6acfe839e4ac7917308eb9d",
+      "approved_source": "source/frontend/discourse/app/components/pinned-options.gjs",
+      "approved_sha256": "b77c3c7705a071a5311be7dc9ac83aaac11c1d96b6acfe839e4ac7917308eb9d",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/post-list/bulk-controls.gjs",
+      "before_sha256": "8ac55d0da1224985559c2d848f834a8796589a607ac25b6b1c3735b65f449544",
+      "sha256": "45927cb590fe2e36c0e4ebdc2fa1864119bd078ed9ce712bf290bef77bd9a67e",
+      "approved_source": "source/frontend/discourse/app/components/post-list/bulk-controls.gjs",
+      "approved_sha256": "45927cb590fe2e36c0e4ebdc2fa1864119bd078ed9ce712bf290bef77bd9a67e",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/sidebar/more-section-links.gjs",
+      "before_sha256": "5972a22d50562c77cf2b2ece4939d9a81727627c2840ad6524b3357e908e8095",
+      "sha256": "5254dd5ffe5c8623fc95e2bff4d2b51a19e24bac77daeb314dc9760591076a3d",
+      "approved_source": "source/frontend/discourse/app/components/sidebar/more-section-links.gjs",
+      "approved_sha256": "5254dd5ffe5c8623fc95e2bff4d2b51a19e24bac77daeb314dc9760591076a3d",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/toolbar-popup-menu-options.gjs",
+      "before_sha256": "6169459268394cf3be1937055880781bf514ce7ae6b278e79ee02b62a407d7e5",
+      "sha256": "e6908d5d9624db708c1e4375b46edd8de4a75e21320bfeed421109c229cce403",
+      "approved_source": "source/frontend/discourse/app/components/toolbar-popup-menu-options.gjs",
+      "approved_sha256": "e6908d5d9624db708c1e4375b46edd8de4a75e21320bfeed421109c229cce403",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-admin-menu.gjs",
+      "before_sha256": "2a4222edc1eb16cd2e9b35db2491c1778729c7ce3003a177c3a15ff7877f8c21",
+      "sha256": "dc98134797e4bff3adb7d3fff13572dfd56a002f63ab52f193cdd88b37612bf5",
+      "approved_source": "source/frontend/discourse/app/components/topic-admin-menu.gjs",
+      "approved_sha256": "dc98134797e4bff3adb7d3fff13572dfd56a002f63ab52f193cdd88b37612bf5",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-bookmarks-menu.gjs",
+      "before_sha256": "8dde8feb0b3e7adeea6919e2c3f1f250f80768066fa5bddc38c4a007d6d4c3e9",
+      "sha256": "39546815d156fbf3e81e6360f5b69fd3408b62c9bd89d6fc7b24037af787f07c",
+      "approved_source": "source/frontend/discourse/app/components/topic-bookmarks-menu.gjs",
+      "approved_sha256": "39546815d156fbf3e81e6360f5b69fd3408b62c9bd89d6fc7b24037af787f07c",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-footer-buttons.gjs",
+      "before_sha256": "d3ccacfdb85f047797c47fbf61890bf9ee8b11f0ff983086f3859d2c4e307b41",
+      "sha256": "1cda98e6f4b37cff87c6226f9eb5e72aaa61db90f2769f3c0637a0da984f9cc6",
+      "approved_source": "source/frontend/discourse/app/components/topic-footer-buttons.gjs",
+      "approved_sha256": "1cda98e6f4b37cff87c6226f9eb5e72aaa61db90f2769f3c0637a0da984f9cc6",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-map/topic-map-summary.gjs",
+      "before_sha256": "18c9c6785af50e57bfaf7a024b94210fcc686ed0ca789b456175d5c0d950cddb",
+      "sha256": "11b38f0a9e41e10685cf2ddd93533b8cb812a76f4a2ac1a7b8adf6c47c2d15be",
+      "approved_source": "source/frontend/discourse/app/components/topic-map/topic-map-summary.gjs",
+      "approved_sha256": "11b38f0a9e41e10685cf2ddd93533b8cb812a76f4a2ac1a7b8adf6c47c2d15be",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/form-kit/components/fk/control/color.gjs",
+      "before_sha256": "31d26a97261696845c59068aae35b10100db1050da986fabba9fb09fec3be3aa",
+      "sha256": "45e81168c493753c3c7be6555c84e1cbebe87f1d11d8edcdd42c591b72941fd3",
+      "approved_source": "source/frontend/discourse/app/form-kit/components/fk/control/color.gjs",
+      "approved_sha256": "45e81168c493753c3c7be6555c84e1cbebe87f1d11d8edcdd42c591b72941fd3",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/form-kit/components/fk/control/menu.gjs",
+      "before_sha256": "c2a1b57808dc43066c76c734f8d6000fe2e6771ebc3579f1b823ebdac2aab7a8",
+      "sha256": "e83250866ab10ae7250c30811f26a5e8564452e27b25e1cc1f8d446c15c0a217",
+      "approved_source": "source/frontend/discourse/app/form-kit/components/fk/control/menu.gjs",
+      "approved_sha256": "e83250866ab10ae7250c30811f26a5e8564452e27b25e1cc1f8d446c15c0a217",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/form-kit/components/fk/control/select.gjs",
+      "before_sha256": "cecc9ebe7cd4bc6f0fa0924bc19904747801a7b1de7b57bd771722f57bbf472b",
+      "sha256": "e5d1dd0f67370b8a9a0f239d7afc0cf277f28d5bc5ae0be0b66f607b6351ab35",
+      "approved_source": "source/frontend/discourse/app/form-kit/components/fk/control/select.gjs",
+      "approved_sha256": "e5d1dd0f67370b8a9a0f239d7afc0cf277f28d5bc5ae0be0b66f607b6351ab35",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/lib/load-motion.js",
+      "before_sha256": "cb23713428455f90bd9e0207a637ba4be92552601ed8d3dd4309d9606f0e7346",
+      "sha256": "51903c1b619234eb129c0885af094d823ed8a7e4df0372a5df24e890a0899d46",
+      "approved_source": "source/frontend/discourse/app/lib/load-motion.js",
+      "approved_sha256": "51903c1b619234eb129c0885af094d823ed8a7e4df0372a5df24e890a0899d46",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/-internals/floating-family.ts",
+      "before_sha256": null,
+      "sha256": "ca05a9f20a0fdb570ac3ef67a1178ddfa60ea85897ec21d71d2098fabe751e32",
+      "approved_source": "source/frontend/discourse/app/ui-kit/-internals/floating-family.ts",
+      "approved_sha256": "ca05a9f20a0fdb570ac3ef67a1178ddfa60ea85897ec21d71d2098fabe751e32",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/-internals/menu-highlight.ts",
+      "before_sha256": null,
+      "sha256": "53ae9152deb3a678380224cc40e088dbd50eae7cff96cd52ae6c65f156da5f39",
+      "approved_source": "source/frontend/discourse/app/ui-kit/-internals/menu-highlight.ts",
+      "approved_sha256": "53ae9152deb3a678380224cc40e088dbd50eae7cff96cd52ae6c65f156da5f39",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-access-control-permission-menu.gjs",
+      "before_sha256": "a541395401c6f31107c5f3cb1a4b43b2ef8e7e4303540c86c474c2e4998365c1",
+      "sha256": "d327efa682a45c7abafcc5a6085dd93ca04c3cdad49efdcb0080decdd66349a2",
+      "approved_source": "source/frontend/discourse/app/ui-kit/d-access-control-permission-menu.gjs",
+      "approved_sha256": "d327efa682a45c7abafcc5a6085dd93ca04c3cdad49efdcb0080decdd66349a2",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-dropdown-menu.gjs",
+      "before_sha256": "0001bedf6a553f8dc0f66ad8eaec845603a99ed5d5245b4cf537046532b3f719",
+      "sha256": "13b2cff6a23fe872cc3b3583043a6963c5a30081943627149ec236d6b5119281",
+      "approved_source": "source/frontend/discourse/app/ui-kit/d-dropdown-menu.gjs",
+      "approved_sha256": "13b2cff6a23fe872cc3b3583043a6963c5a30081943627149ec236d6b5119281",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-multi-select.gjs",
+      "before_sha256": "9f86736ee355cc83859a8b55d1027eaa792d35df81322b4236bb935e8457604c",
+      "sha256": "cdcbed5c7bf370211fabaac8d5b739cd791d894cf2e4e3a95487ffbf9fa19033",
+      "approved_source": "source/frontend/discourse/app/ui-kit/d-multi-select.gjs",
+      "approved_sha256": "cdcbed5c7bf370211fabaac8d5b739cd791d894cf2e4e3a95487ffbf9fa19033",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-native-select.gjs",
+      "before_sha256": "d8c904998205d934c3899536fae7d7e55d88cd33ac1e8a223c5d7caad2ab1398",
+      "sha256": "c94d788258310cac98e90b8ad716f3142b99b4c3358a3b9aec72b9068178ac4d",
+      "approved_source": "source/frontend/discourse/app/ui-kit/d-native-select.gjs",
+      "approved_sha256": "c94d788258310cac98e90b8ad716f3142b99b4c3358a3b9aec72b9068178ac4d",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-otp/index.gjs",
+      "before_sha256": "77eb6c4b440a6c9371cac95f452f297ef2139141a8db1806ff63dceee51307cd",
+      "sha256": "3bb129ab22e4d98aa77edd8abcf06141155d90a7e117d2f16de7a5802f6f0b89",
+      "approved_source": "source/frontend/discourse/app/ui-kit/d-otp/index.gjs",
+      "approved_sha256": "3bb129ab22e4d98aa77edd8abcf06141155d90a7e117d2f16de7a5802f6f0b89",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-select.gts",
+      "before_sha256": null,
+      "sha256": "e935e8a831e9c50466445e87a94d08ef229748c4aff466fa348b9593840b81db",
+      "approved_source": "source/frontend/discourse/app/ui-kit/d-select.gts",
+      "approved_sha256": "e935e8a831e9c50466445e87a94d08ef229748c4aff466fa348b9593840b81db",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-select/native.gjs",
+      "before_sha256": null,
+      "sha256": "ab0137493944965c8e37717439f75925b5cd543cad5ea3ba15e6c4b134cb65de",
+      "approved_source": "source/frontend/discourse/app/ui-kit/d-select/native.gjs",
+      "approved_sha256": "ab0137493944965c8e37717439f75925b5cd543cad5ea3ba15e6c4b134cb65de",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/modifiers/d-close-on-click-outside.js",
+      "before_sha256": "cf463f2c1baceccfbaa412df78de3d869bededef7b8f1eacaeae2ebaf77865d9",
+      "sha256": "a9f669147ec044302c58ca6a42b83c3680bfd608574b4bdfd1170e5b81917531",
+      "approved_source": "source/frontend/discourse/app/ui-kit/modifiers/d-close-on-click-outside.js",
+      "approved_sha256": "a9f669147ec044302c58ca6a42b83c3680bfd608574b4bdfd1170e5b81917531",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/modifiers/d-menu-highlight.ts",
+      "before_sha256": null,
+      "sha256": "02df4697de8b100abf7d052d0b6eb2f5bce2a2fd90f15d7706a683252bd65636",
+      "approved_source": "source/frontend/discourse/app/ui-kit/modifiers/d-menu-highlight.ts",
+      "approved_sha256": "02df4697de8b100abf7d052d0b6eb2f5bce2a2fd90f15d7706a683252bd65636",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/modifiers/d-roving-focus/keyboard.ts",
+      "before_sha256": "50d975df1e10cff3f2d570f1542604dbe6eeb685af0a6508e7758c41d1502926",
+      "sha256": "b05bebd72e425a02cf0a43ff730a5d8a93671575ba0e26fd0b8278c4e702e10f",
+      "approved_source": "source/frontend/discourse/app/ui-kit/modifiers/d-roving-focus/keyboard.ts",
+      "approved_sha256": "b05bebd72e425a02cf0a43ff730a5d8a93671575ba0e26fd0b8278c4e702e10f",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/float-kit/components/d-float-body.gts",
+      "before_sha256": "3e6933f04a0714f063e0e045643dbcd887474c9f45743902f491559ddd31ecd4",
+      "sha256": "a26af4fd277c6cff0d5d46480922cc1527dca24522ffa354402a537357708238",
+      "approved_source": "source/frontend/discourse/float-kit/components/d-float-body.gts",
+      "approved_sha256": "a26af4fd277c6cff0d5d46480922cc1527dca24522ffa354402a537357708238",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/float-kit/components/d-headless-menu.gts",
+      "before_sha256": "1f3b1fbacef4f06f32c24b80bb02f9e6b2fa9c84f0e7b35b8a5ab0488dbe795e",
+      "sha256": "8323567de651af920ceda1c03b64ab883bbd26a61383837207ca1c5785682c9c",
+      "approved_source": "source/frontend/discourse/float-kit/components/d-headless-menu.gts",
+      "approved_sha256": "8323567de651af920ceda1c03b64ab883bbd26a61383837207ca1c5785682c9c",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/float-kit/components/d-inline-float.gts",
+      "before_sha256": "d98c23c689d121769a8f7236a7c06d0c27f896f62563b7d894d2b45395e73682",
+      "sha256": "177edeb1cdbfecd1cf2b4db357b0e5ea208292908a0f448ed65652493179de68",
+      "approved_source": "source/frontend/discourse/float-kit/components/d-inline-float.gts",
+      "approved_sha256": "177edeb1cdbfecd1cf2b4db357b0e5ea208292908a0f448ed65652493179de68",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/float-kit/components/d-menu.gts",
+      "before_sha256": "14a7f65dcfc41adb39ecd511d987cc00e50ef2470d6350b7760283ca2ece1386",
+      "sha256": "4ef77c08329dd5377e2bf87ac732fb4503cfabf3d4f4c19a1ad93448e3fec63d",
+      "approved_source": "source/frontend/discourse/float-kit/components/d-menu.gts",
+      "approved_sha256": "4ef77c08329dd5377e2bf87ac732fb4503cfabf3d4f4c19a1ad93448e3fec63d",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/float-kit/lib/constants.ts",
+      "before_sha256": "96dfccb93e399bfff1cd4d38b551cd635374c4611260f70341a89fa6b2702c18",
+      "sha256": "a31b2d75b09e36ca4db71595bb920a128449caab450a525d49ac61d59164472a",
+      "approved_source": "source/frontend/discourse/float-kit/lib/constants.ts",
+      "approved_sha256": "a31b2d75b09e36ca4db71595bb920a128449caab450a525d49ac61d59164472a",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/float-kit/lib/d-menu-instance.ts",
+      "before_sha256": "50078b61f82b377f04abddc00e46ad31d1723c3edca9aa1ca3e4fc98c52be41b",
+      "sha256": "a550ee333789228c68a28a7559bd7954603f445be7bc0678cff0583e6c927208",
+      "approved_source": "source/frontend/discourse/float-kit/lib/d-menu-instance.ts",
+      "approved_sha256": "a550ee333789228c68a28a7559bd7954603f445be7bc0678cff0583e6c927208",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/float-kit/lib/float-kit-instance.ts",
+      "before_sha256": "04fd230dce45f5fbd7b84f8e066ff0e42d0c960e91961ae315f4fd47cf7c3942",
+      "sha256": "abb92196ab38ae6ba425db0609b8c96dbc9c9c365af01ee94ac4dabf993b315a",
+      "approved_source": "source/frontend/discourse/float-kit/lib/float-kit-instance.ts",
+      "approved_sha256": "abb92196ab38ae6ba425db0609b8c96dbc9c9c365af01ee94ac4dabf993b315a",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/float-kit/lib/update-position.ts",
+      "before_sha256": "6989f35902ceca26d6a013043c87090baa4e277e76778ecf766457b368c4ba0a",
+      "sha256": "a536011bfe923faaf83d5430bf5d662e7103aa1d4445f1f7d9994daacedfca9e",
+      "approved_source": "source/frontend/discourse/float-kit/lib/update-position.ts",
+      "approved_sha256": "a536011bfe923faaf83d5430bf5d662e7103aa1d4445f1f7d9994daacedfca9e",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/float-kit/modifiers/close-on-escape.ts",
+      "before_sha256": "170530ef9245c823abd3f8319026ab780d62f939c8c2ead7e6a574a7037049c4",
+      "sha256": "32ec12d81e9163e2cc0c2d4277effefa0893f72d1b3b686b988407033af496df",
+      "approved_source": "source/frontend/discourse/float-kit/modifiers/close-on-escape.ts",
+      "approved_sha256": "32ec12d81e9163e2cc0c2d4277effefa0893f72d1b3b686b988407033af496df",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/float-kit/services/menu.ts",
+      "before_sha256": "953f563f951c909478717445792f741b0d5756f36fa4bc7bd176f755430fc8a6",
+      "sha256": "4f8fb81cfdbf7821eadcc7af406985bfca1550d4628f35aea0aaa07675375bc1",
+      "approved_source": "source/frontend/discourse/float-kit/services/menu.ts",
+      "approved_sha256": "4f8fb81cfdbf7821eadcc7af406985bfca1550d4628f35aea0aaa07675375bc1",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/select-kit/components/select-kit.js",
+      "before_sha256": "1039dc7e2ce31ccf7b64433b7ad1315d6d8192cca1b5ff629504905ee562ab2c",
+      "sha256": "e67ac69efc49dda690b5fa1186418a08fb000cde01f80b938780150134977983",
+      "approved_source": "source/frontend/discourse/select-kit/components/select-kit.js",
+      "approved_sha256": "e67ac69efc49dda690b5fa1186418a08fb000cde01f80b938780150134977983",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "frontend/discourse/select-kit/components/select-kit/select-kit-body.gjs",
+      "before_sha256": "6ac2db5be3a6897647e6803f9e4e00583a4404f343b7a9b586e6b85718d53509",
+      "sha256": "6fd1c769097b5329db1d5a0265e8ede72c086fb3d3fc499621454801d23f4c0c",
+      "approved_source": "source/frontend/discourse/select-kit/components/select-kit/select-kit-body.gjs",
+      "approved_sha256": "6fd1c769097b5329db1d5a0265e8ede72c086fb3d3fc499621454801d23f4c0c",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "plugins/chat/assets/javascripts/discourse/components/chat-channel-list-sidebar-menu.gjs",
+      "before_sha256": "e9f1106dad322d2d33d6190152a2784decf1c4cbf1d8cd531e52f001628ceb05",
+      "sha256": "0eb3b30a40659a526ebc21b7b642456d75a6e4c2440d30b6e4ce2b4d71d4c881",
+      "approved_source": "source/plugins/chat/assets/javascripts/discourse/components/chat-channel-list-sidebar-menu.gjs",
+      "approved_sha256": "0eb3b30a40659a526ebc21b7b642456d75a6e4c2440d30b6e4ce2b4d71d4c881",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "plugins/chat/assets/javascripts/discourse/components/chat-composer-dropdown.gjs",
+      "before_sha256": "a9083a629adff878d1f354bdcc27a2d20e55c2d6ddc4fa4c51d9fe15dafa0626",
+      "sha256": "266fc46cc32c941bacaa785234a991df4c5dd4d8a5708ae694fae40107999ec3",
+      "approved_source": "source/plugins/chat/assets/javascripts/discourse/components/chat-composer-dropdown.gjs",
+      "approved_sha256": "266fc46cc32c941bacaa785234a991df4c5dd4d8a5708ae694fae40107999ec3",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "plugins/discourse-ai/admin/assets/javascripts/discourse/components/ai-agent-list-editor.gjs",
+      "before_sha256": "655ffd580267b9b0c599c9f099a6aa6837d84d218b4aa27102bf51c609bbeee6",
+      "sha256": "93c0b8d4b7c6e8a6159bd972bd76d1754047056495b00e5b455893237865543d",
+      "approved_source": "source/plugins/discourse-ai/admin/assets/javascripts/discourse/components/ai-agent-list-editor.gjs",
+      "approved_sha256": "93c0b8d4b7c6e8a6159bd972bd76d1754047056495b00e5b455893237865543d",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/ai-gist-toggle.gjs",
+      "before_sha256": "2ea965ef8a6131cc2f1a478de397dae9ed270eb1382c09ba9096032ac899ab03",
+      "sha256": "27c6ba83e17bbb01a7f83f0ebde4004e1a769bc7cc3f6caf94d1eb305e29700a",
+      "approved_source": "source/plugins/discourse-ai/assets/javascripts/discourse/components/ai-gist-toggle.gjs",
+      "approved_sha256": "27c6ba83e17bbb01a7f83f0ebde4004e1a769bc7cc3f6caf94d1eb305e29700a",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/suggestion-menus/ai-title-suggester.gjs",
+      "before_sha256": "bfcae19c915597286b78b43f7d9eccba5acf3ff1393ddc8ed93332ca55cec870",
+      "sha256": "d953dd40ce8a935b40971e339a95f257d5c93477185ebc17fa5899d2d0f54272",
+      "approved_source": "source/plugins/discourse-ai/assets/javascripts/discourse/components/suggestion-menus/ai-title-suggester.gjs",
+      "approved_sha256": "d953dd40ce8a935b40971e339a95f257d5c93477185ebc17fa5899d2d0f54272",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "plugins/discourse-events/assets/javascripts/discourse/components/discourse-post-event/creator.gjs",
+      "before_sha256": "8e1cff2bffd90d4c4aa609df41ccf2580a88e2c4c91f1a3e1a43fe7d867a2e9a",
+      "sha256": "58d2067a9f500a52e6c4b479ea41abae12734da52da28834be8b11a91d0794a2",
+      "approved_source": "source/plugins/discourse-events/assets/javascripts/discourse/components/discourse-post-event/creator.gjs",
+      "approved_sha256": "58d2067a9f500a52e6c4b479ea41abae12734da52da28834be8b11a91d0794a2",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "plugins/discourse-events/assets/javascripts/discourse/components/discourse-post-event/status.gjs",
+      "before_sha256": "edc7f6fce1ec7e0fe1d6c3488ffb06c87664443fa54224d6516e9dafc6f6fee6",
+      "sha256": "2dc02788628e2c1a6243dd1841611a6d99d717de37c9422376662d908e4bdffa",
+      "approved_source": "source/plugins/discourse-events/assets/javascripts/discourse/components/discourse-post-event/status.gjs",
+      "approved_sha256": "2dc02788628e2c1a6243dd1841611a6d99d717de37c9422376662d908e4bdffa",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "plugins/discourse-topic-voting/assets/javascripts/discourse/components/vote-count.gjs",
+      "before_sha256": "e3960a1e2185e9661f839508940c37da213b2b74809f8472219df22e6fce05c0",
+      "sha256": "76fdc4e6883d39821bb0e22143144a5d1173165d8cf554716d86daa6733455bd",
+      "approved_source": "source/plugins/discourse-topic-voting/assets/javascripts/discourse/components/vote-count.gjs",
+      "approved_sha256": "76fdc4e6883d39821bb0e22143144a5d1173165d8cf554716d86daa6733455bd",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "plugins/styleguide/assets/javascripts/discourse/components/toggle-color-mode.gjs",
+      "before_sha256": "dd4f6d7da348b38ab25e5d60771bb9355fe3c04d9e77705fb76814f3bdecab85",
+      "sha256": "dec92e53a9e36193f640dfd48e839573997126ff5f22984c12c55d0d718cf657",
+      "approved_source": "source/plugins/styleguide/assets/javascripts/discourse/components/toggle-color-mode.gjs",
+      "approved_sha256": "dec92e53a9e36193f640dfd48e839573997126ff5f22984c12c55d0d718cf657",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "plugins/voice/assets/javascripts/discourse/components/voice/call-widget.gjs",
+      "before_sha256": "7d264e47260271158a33f374814e02ef612d3826941142e7a103fa68676cd493",
+      "sha256": "f9f0c73c20b87bee138d1c6e012f76b8fa788661ada8ccfa5ba17d20cc21d526",
+      "approved_source": "source/plugins/voice/assets/javascripts/discourse/components/voice/call-widget.gjs",
+      "approved_sha256": "f9f0c73c20b87bee138d1c6e012f76b8fa788661ada8ccfa5ba17d20cc21d526",
+      "method": "approved delta on unchanged live source"
+    },
+    {
+      "path": "plugins/voice/assets/javascripts/discourse/components/voice/room-page.gjs",
+      "before_sha256": "cba6dbb6ce5e45e626f0a89e1d0e6028bc45f216e576882c941cbfee15fcd8c5",
+      "sha256": "7365a3fa25d5d87134f399f0dfac38a42aa6d93f066d662fe28327df34ae1715",
+      "approved_source": "source/plugins/voice/assets/javascripts/discourse/components/voice/room-page.gjs",
+      "approved_sha256": "7365a3fa25d5d87134f399f0dfac38a42aa6d93f066d662fe28327df34ae1715",
+      "method": "approved delta on unchanged live source"
+    }
+  ],
+  "theme_sources": [
+    {
+      "relative": "common/common.scss",
+      "before_sha256": "68c9e81ef9c81c1fbab84a721f18dcd4ef11d744e4c600a1a508fd52f312507e",
+      "sha256": "c1c147f2f46ad08cdfb1590b47b79b527cf77a42ce26f92292918e8b2adc6bf5"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-alumni-location-picker.gjs",
+      "before_sha256": null,
+      "sha256": "dc0269e16d2b6951806ab07a44274a6e009b7b409b994004a9c85b543e9fcbca"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-alumni-profile.gjs",
+      "before_sha256": "09f3790127c10b772ff36c8460577c167b28b7c67fda4242dc4edc46818440f8",
+      "sha256": "ffcc98916dd74a7fd9785debcb5282d4272444f1823937cb1917266433c5bd61"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-alumni.gjs",
+      "before_sha256": "e4c00b6b538df8ee8cc023bab5bd1ec432bd5020e216ae5200a1998906d756e0",
+      "sha256": "9047721dacf3e1f61ac8b7920e77523b3ec9a2df65367bafda0e6b55ba0adb2c"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-explore-picker.gjs",
+      "before_sha256": "841c20d087a69fc6d859ebe33703abc8b5f6381a28b225761df551129f0bde7c",
+      "sha256": "f5e41602eb7234362077cb7bf42ccaaf363a5e43eec2954ee50fd8ac973d75b5"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-feed-card-menu.gjs",
+      "before_sha256": null,
+      "sha256": "1f5facde39e512adb3cd0bd8315fed9c859a251e7491cd24b786872aade8271c"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-learning-composer.gjs",
+      "before_sha256": "d0ee1e13de96164284965b11ef4e2db78dfe757dc42d50bd5f6b3792c06ad2b1",
+      "sha256": "a616ed77facba599341f2cdd96e9b053f645fe8ce7a39bac6ba42cb49b6b56f3"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-notifications.gjs",
+      "before_sha256": "3c1abda29707e1d0c6f51db8dabad7393cdc5f2d0c0e5e2b11679737c8a8b654",
+      "sha256": "f7e3434354e61802be113e7e592605f413ddc7b07ae669858d04312685e127ab"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-official-picker.gjs",
+      "before_sha256": "d944472b67a791e0b6249865cb86799e075582aab2af51e5ce49cc8e18c7fc02",
+      "sha256": "8d7f06071709398ab15a4455a897752ba8423992f9bfd225d741699529c3173d"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-topic-more.gjs",
+      "before_sha256": "16d2040040cb438a2263430b9c17e96bef1df51675bd7c32a301130e0f34e95c",
+      "sha256": "dfd12ce8bf90463bfaf21d0901cfc67a856db43159ece0d34afa22e5cc26e510"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-v2-account-menu.gjs",
+      "before_sha256": "49c9a457f6986b87e37d6df7c245ad93cb7b902ff4f38e9916a5d49c9350f072",
+      "sha256": "9df580db2346d1aa4dc6c1a98eac83e6bfe4df3c51280054bb4a7aa1b70a7daa"
+    },
+    {
+      "relative": "javascripts/discourse/components/isbf-v2-feed-card.gjs",
+      "before_sha256": "da107889df18224da0bf3bbe9d29c6bff4605d5ed417e9413adc7e39e06aa0a9",
+      "sha256": "aba17399bf8857e940190e074de7a16c726079504e1368b61b170abbf2ad3b12"
+    },
+    {
+      "relative": "javascripts/discourse/connectors/topic-footer-main-buttons-before-create/isbf-topic-more.gjs",
+      "before_sha256": "73abe7df6567e8a4a1c160f4fa9433fca714499e9d8dc4688f4ef4e7ac4ff1ff",
+      "sha256": "83f3a38240a78634d7822b23f81d1e639157c9763fa87a9978b354b07fa59365"
+    },
+    {
+      "relative": "locales/en.yml",
+      "before_sha256": "4afd298f8b1f79e2f8c15d41af2f2d848289e8c825d34ddf172210bd486dd033",
+      "sha256": "5616f696f90cd17a3b424594de7a58d664ad3eddfd0bdfa3a4072c7a698a941d"
+    },
+    {
+      "relative": "locales/zh_CN.yml",
+      "before_sha256": "c75770074463e698a66a4c31fc4af66bca8eec5a94c18fec39e1e288b209b0d1",
+      "sha256": "0a89453ba3e82968a6f9c4c613403760c0bdf5f9e2ac9bcc81ade5ef62f84c44"
+    },
+    {
+      "relative": "stylesheets/alumni-controls.scss",
+      "before_sha256": null,
+      "sha256": "d8942257ca23c8478df63c7f15a730f0f2b177022febbf21aedd4078898192e9"
+    },
+    {
+      "relative": "stylesheets/dropdowns.scss",
+      "before_sha256": null,
+      "sha256": "73b77fed0ee0e7f1a0e8b62ca02f0cb76991aaf164a2c41b91872e0e318ef69b"
+    },
+    {
+      "relative": "stylesheets/learning-resources.scss",
+      "before_sha256": "2b2629e09e69022ceb496451006f6aab9959e7314085e6a928529b20bc4c8e3c",
+      "sha256": "5a0033db77f8b9a7f828218816f5dee93ae2b0c8aa5b59c123681f0bb87a8858"
+    },
+    {
+      "relative": "stylesheets/official-calendar.scss",
+      "before_sha256": "664bf9e0354e846b74a5a8f97b42cdecff286a69d99964e5d2151c9a4a96aaad",
+      "sha256": "f3972a77f084dae046b61defca5ff147840d4a8b4c72481e034de37c3d07bc1b"
+    },
+    {
+      "relative": "stylesheets/official-filters.scss",
+      "before_sha256": "319b9b6ce6784651452daf664b91b5b648159e84a88a5ccab7cd55901248e16e",
+      "sha256": "63cd3739b4780b26c0ec01b3abea090c4a0b9f242d77a3222889d725f7c3543e"
+    },
+    {
+      "relative": "stylesheets/profile-content.scss",
+      "before_sha256": "fda440845d0b03c77d3bf4b63f5a81b8b385172682d30e62137199cae170e57f",
+      "sha256": "f789b99fd96ca9c77d8006b07e743fcfc404dc5dafb2e5265a749b4a12df1cd8"
+    }
+  ],
+  "theme": {
+    "id": 4,
+    "fields_before": 293,
+    "fields_after": 297,
+    "modified": 17,
+    "added": 4,
+    "unrelated_preserved": 276,
+    "settings_preserved": 17,
+    "modules": 229
+  },
+  "runtime": {
+    "core_head": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+    "source_entries": 27008,
+    "plugin_directories": 67,
+    "generated_manifests": 71,
+    "public_assets": 1812,
+    "scoped_generated_manifest_updates": 7,
+    "container_recreated": false,
+    "web_gracefully_reloaded": true,
+    "container_id": "8b3389a4c02a33a11750db0a92baf4324e4c1beb22cfa2edc3e6f931dd0fa421",
+    "image": "sha256:d7392bb5d64fd8cb127fdf0f594bf8e890faf6346a449f3fbde6fc190fef8ae8",
+    "created_at": "2026-10-09T23:59:15.588230454Z",
+    "started_at": "2026-10-26T11:49:50.656227107Z",
+    "running": true
+  },
+  "verification": {
+    "asset_mappings": 99,
+    "installer_checks": 11,
+    "served_resources": 104,
+    "compiled_resources": 207,
+    "production_browser_checks": 86,
+    "browser_exceptions": 0,
+    "methods_forwarded": [
+      "GET",
+      "HEAD"
+    ],
+    "production_mark_read_submissions": 0,
+    "migration_evidence_files_preserved": 35,
+    "screenshots_uploaded": false,
+    "physical_safari_tested": false,
+    "final_user_visual_acceptance": "Compact notification width requested and recorded as a separate single-field correction",
+    "profile_selector_scope": [
+      {
+        "scope": "Profile DSelect",
+        "width": 1440,
+        "status": "not_rendered_in_current_production_page",
+        "nativeControls": 7
+      },
+      {
+        "scope": "Profile DSelect",
+        "width": 390,
+        "status": "not_rendered_in_current_production_page",
+        "nativeControls": 7
+      }
+    ],
+    "browser_segments": [
+      {
+        "path": "browser-attempts/profile-selector-unavailable/browser-results/production-browser.json",
+        "passed_checks": 56,
+        "original_exit_success": false,
+        "incomplete_probe": "No DSelect rendered on this read-only production interface; later availability probe records this explicitly"
+      },
+      {
+        "path": "browser-results/preservation-browser.json",
+        "passed_checks": 30,
+        "original_exit_success": true
+      }
+    ],
+    "superseded_harness_errors": [
+      {
+        "attempt": "clock-scaled-animation",
+        "reason": "Synthetic hold clock affected subsequent CSS opening-animation measurements; repeated normal-time geometry passed"
+      },
+      {
+        "attempt": "profile-selector-unavailable",
+        "reason": "A selector was assumed to exist; later actual-page probe showed seven native controls and no DSelect on both viewports"
+      }
+    ],
+    "whole_original_attempt_claimed_successful": false
+  },
+  "backup": {
+    "recovery_tag": "local_discourse/isbf_app:shared-dropdowns-20261027-0f1ab21f2b2c",
+    "recovery_image": "sha256:3beb562c08e1fd0e13890797b9ca774e5b5763850a78f7befcc1b6f4e244303f",
+    "requires_shared_sources_and_database_theme": true,
+    "native_archives": 1,
+    "latest_only_retention_verified": true
+  },
+  "cleanup": {
+    "passed": true,
+    "local_task_containers": [],
+    "local_task_networks": [],
+    "ssh_forwarding_closed": true,
+    "remaining_read_only_keys": 0,
+    "remaining_task_tools": [],
+    "full_preview_stopped": true
+  },
+  "conditional_rollback": "python3 docs/dropdowns-20261026/rollback_release.py 0f1ab21f2b2ccfbf66f556523ad9752f8d94686b2b9026e046f11844bdb9761a",
+  "publication_attempts": {
+    "staging_transfer_timeout": "Resumed from a verified 19,955,712-byte prefix; no application writes occurred in the interrupted transfer",
+    "legacy_lint_setup": "Superseded offline lint setup retained privately; reviewed source hashes restored and final native lint passed",
+    "concurrent_runtime_guard": "The first full guard stopped before any writes after three disjoint profile files and 38 public assets changed. The refreshed live sources were preserved in the final rebuild"
+  }
+}

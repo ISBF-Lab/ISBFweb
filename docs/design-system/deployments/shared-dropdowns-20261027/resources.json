@@ -1,0 +1,637 @@
+{
+  "passed": true,
+  "tls_verified": true,
+  "resources": [
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/plugins/chat_admin.CAVmuj-7ak692oq.digested.js",
+      "sha256": "8f79556534b77aeaa6c177b7f866a94e7ec72928eeafd75f414b1abbe24a6474",
+      "bytes": 16669
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/plugins/chat_chunk.Ddeb_q-7ak692oq.digested.js",
+      "sha256": "1fa002c662676b23d9d020bcffee1c63d79600078ceb45e1c1db042ff0aacc71",
+      "bytes": 41872
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/plugins/chat_main.BsiyUf-7ak692oq.digested.js",
+      "sha256": "e5a2b93694b3e3b3eb3bcfdfc11f89c9c06f53bb849dd455ee13f81573411f46",
+      "bytes": 718836
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/map/plugins/chat_admin.CAVmuj-7ak692oq.digested.js.map",
+      "sha256": "b4f0b8924d753f0e6b3991d069a414354c9829e05c7fea01761842f105272f47",
+      "bytes": 26673
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/map/plugins/chat_chunk.Ddeb_q-7ak692oq.digested.js.map",
+      "sha256": "e193347d7ed60ff9d0a9149e476b00a9647bc541e57b7192cde6c910e61143ae",
+      "bytes": 89727
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/map/plugins/chat_main.BsiyUf-7ak692oq.digested.js.map",
+      "sha256": "7f26693ccb8ac80d9de74be3ef64d1dc2bdd60e6e99be9d946d736073cafec9f",
+      "bytes": 1557610
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/plugins/discourse-ai_admin.DidLRl-dlj5xogv.digested.js",
+      "sha256": "78882413e27634ba16f83f3d9c4c512e27633a2584281fb592ab5adcdd9caf4c",
+      "bytes": 329157
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/plugins/discourse-ai_chunk.TXhe0V-dlj5xogv.digested.js",
+      "sha256": "29cead2e7618dadb188a88e14b33d7a2bd1e0e56f699149dfd8926c024ce1cae",
+      "bytes": 142061
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/plugins/discourse-ai_main.BLrNfN-dlj5xogv.digested.js",
+      "sha256": "4f2cb239867e71d5a1ef036c3c3c0aedac74c793bf3781c2f959f7338da9a2cd",
+      "bytes": 311703
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/map/plugins/discourse-ai_admin.DidLRl-dlj5xogv.digested.js.map",
+      "sha256": "f58cb05abdce55390e20bd76cae40980f0afcc4a92b923ea2dc7bf23e810fed1",
+      "bytes": 558950
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/map/plugins/discourse-ai_chunk.TXhe0V-dlj5xogv.digested.js.map",
+      "sha256": "95a9e1315d14da4abd4b9fab9fa44370e047549e1ccde736808329de56d3a535",
+      "bytes": 224277
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/map/plugins/discourse-ai_main.BLrNfN-dlj5xogv.digested.js.map",
+      "sha256": "64840f2c9ad18c29aa3beb8dca42c41a228a8071d8adbff628b4c928130779ae",
+      "bytes": 700321
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/plugins/discourse-events_main.eOhJqI-bnay8tfi.digested.js",
+      "sha256": "62fadfeb86be80bffdbdfaeb1d3f2f6eeffcf944dc447560f31efa28395f890a",
+      "bytes": 278208
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/map/plugins/discourse-events_main.eOhJqI-bnay8tfi.digested.js.map",
+      "sha256": "9208ef65a4cc195d125c92429e119ea60e1a4aa88cdc87ba6186ca56d1c3a77d",
+      "bytes": 601165
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/plugins/discourse-topic-voting_main.BV3Jvx-q6039r8k.digested.js",
+      "sha256": "ae7fa78c388536f43f27af6a95138068ca630d6ecdcb26af84fc5842b0b8d4ad",
+      "bytes": 19015
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/map/plugins/discourse-topic-voting_main.BV3Jvx-q6039r8k.digested.js.map",
+      "sha256": "9b888774e60d6dc22d04aef2bed76ec4283d37d46c34036a4e2a8573ed29df64",
+      "bytes": 34855
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/plugins/isbf-alumni_main.V_tbMh-i0dx2k3j.digested.js",
+      "sha256": "a94909c2c03eaa5c7b8c002022c1841ddd1d09ce997c200b91cd4be72cf664f3",
+      "bytes": 30320
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/map/plugins/isbf-alumni_main.V_tbMh-i0dx2k3j.digested.js.map",
+      "sha256": "c6b18e3c0bce52ad64cdba0ae4af53d85d027a79a20c71a142a15cf20cd0e55d",
+      "bytes": 48583
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/plugins/styleguide_main.B3-aOH-s7633zma.digested.js",
+      "sha256": "5347eec2443a1d919beec8635c756bf6fd6e43d712bf8e788b3173c21667cf14",
+      "bytes": 438323
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/map/plugins/styleguide_main.B3-aOH-s7633zma.digested.js.map",
+      "sha256": "944a270a36569f3644e617ab62549be489e0d27badde2eed720a4247293f9849",
+      "bytes": 498489
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/plugins/voice_admin.B4TLW7-tvwa2zav.digested.js",
+      "sha256": "b1759a10666b4b655882e66effb2742e851bb29b1f97d692b260988cb76fea1d",
+      "bytes": 35735
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/plugins/voice_chunk.CCtZSK-tvwa2zav.digested.js",
+      "sha256": "964cd617f509937b423b2547c67cc23014963d79daee86765c00566004c51011",
+      "bytes": 10835
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/plugins/voice_main.BgWiH7-tvwa2zav.digested.js",
+      "sha256": "49d473838842d056c7adbccdbaefe9b22a79ea00fec1ef2932e08393bf1e580b",
+      "bytes": 310802
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/map/plugins/voice_admin.B4TLW7-tvwa2zav.digested.js.map",
+      "sha256": "d81a23e97e90e0648f55949319f74d350816b0ffdb794cc188e6c2e93fa96711",
+      "bytes": 55603
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/map/plugins/voice_chunk.CCtZSK-tvwa2zav.digested.js.map",
+      "sha256": "3566d04c2f08da5d9e054811b9bc90460a4994625517f19f0d3c3f382e8a98d5",
+      "bytes": 13824
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/map/plugins/voice_main.BgWiH7-tvwa2zav.digested.js.map",
+      "sha256": "b4cfc889853ddc7728bcbb583947b60d72a5a9b721b0a9d44009cbb8cb46fc0b",
+      "bytes": 893987
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/ace-editor-bundle-bqrvqmwo-menus-e93aee2bc7d0.digested.js",
+      "sha256": "b3b2fb6b924507fc37a1434a9001bc6e59ad40f5fefda78352de364bef79fae5",
+      "bytes": 612090
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/admin-jhttizec-menus-e93aee2bc7d0.digested.js",
+      "sha256": "93c91319978bb87cea421b914a825849966787767d4f89a241e68971437eb341",
+      "bytes": 1524731
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chart-js-bundle-iujt34ll-menus-e93aee2bc7d0.digested.js",
+      "sha256": "a981243a403dc8019b87c994d67f4f3c280ff32829d8b69e746f01c0f2d9a41a",
+      "bytes": 215708
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-19te4et8-menus-e93aee2bc7d0.digested.js",
+      "sha256": "8893443e48ff0de876d70941707cf83df5d096c19a8bc0b49cbac7dd6e940a80",
+      "bytes": 4198
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-c4xlweex-menus-e93aee2bc7d0.digested.js",
+      "sha256": "e40782d40a7fe4315c08190c4dc6377bbcc061efb38c94277f3c241f09206b9f",
+      "bytes": 1980
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-cdcc58td-menus-e93aee2bc7d0.digested.js",
+      "sha256": "1bc9ffcbd717c9e08c48fc90b1515fd33aee81f3e180928bbfbb2ac706fda913",
+      "bytes": 1210
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-cp8qoad7-menus-e93aee2bc7d0.digested.js",
+      "sha256": "ec10a23254c748386d66567cc24bb5f37e1fc1b5f0f0d5952336aeec0065a2c3",
+      "bytes": 1487
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-diipd19v-menus-e93aee2bc7d0.digested.js",
+      "sha256": "c3eb6549561c9a95b817651f1e94f962a499f4597befbbcf8b6d7768839785b7",
+      "bytes": 215720
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-dtaxdxzg-menus-e93aee2bc7d0.digested.js",
+      "sha256": "e64538df61ba046910b7dc6b4e2c26703c3563e473ce5960388b9ed51bb361af",
+      "bytes": 4682
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-fdbwpn6k-menus-e93aee2bc7d0.digested.js",
+      "sha256": "b4b1750e3ee20ddc82853e4aaa607e8ab02fb8789ce5e0c20954ac0cd8623fbb",
+      "bytes": 60377
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-fgfsxvix-menus-e93aee2bc7d0.digested.js",
+      "sha256": "33d0faa3edc0d46ca75acdb11cb48f639387bc89fab6ca45d55eb5e4e48e13c9",
+      "bytes": 866
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-g1swrpy1-menus-e93aee2bc7d0.digested.js",
+      "sha256": "0bd3b04dde8179e28db95173248b642bf45a2c1c6a5b7f2d9296492663f16e19",
+      "bytes": 141799
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-g5t4m2n7-menus-e93aee2bc7d0.digested.js",
+      "sha256": "1ff289d915ba4bcbf48031b4e911531d73911f4bebfeb81891ae02b461103b24",
+      "bytes": 6299
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-gis4xx6n-menus-e93aee2bc7d0.digested.js",
+      "sha256": "3ee0ec8a2feeaada80adcbe033faf4a23813da6de85fecfe753ba0d569a3ef51",
+      "bytes": 167141
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-hregtenn-menus-e93aee2bc7d0.digested.js",
+      "sha256": "070f723fdd0fe5eae6c8e85132ebac6071af195ae62c6344c17cfff2c498a019",
+      "bytes": 151554
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-huvpbysz-menus-e93aee2bc7d0.digested.js",
+      "sha256": "8caaaef489640ca3c62adb1dba8262254c8aeb817edc16ee43a3470ccbc13592",
+      "bytes": 112101
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-idpk31wn-menus-e93aee2bc7d0.digested.js",
+      "sha256": "b58c9c316fc6783f18af2200ac56dc97a5e2020456710580f4dfb5b0eea87afa",
+      "bytes": 154381
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-ipwtn2rg-menus-e93aee2bc7d0.digested.js",
+      "sha256": "c902dffe4df6398cb5837c76fe1f97c12e2875b048913afe68599fede58979c1",
+      "bytes": 723
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-jl99jwgt-menus-e93aee2bc7d0.digested.js",
+      "sha256": "ad1ba88097786bdd8d91368734b8e6b9532543d9de63414118ebe46798cd9ee6",
+      "bytes": 53798
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-k2gzcye1-menus-e93aee2bc7d0.digested.js",
+      "sha256": "cb9026e3313e4c6300a89d832da0f54a2bddf900800b5b0ad6841eae9e1f19d0",
+      "bytes": 626
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-l0rqg42e-menus-e93aee2bc7d0.digested.js",
+      "sha256": "f6ebe12edf8cd45de5a47b8791f6dd888e5598fbc774acb85e4d92eb04d2a9b0",
+      "bytes": 1328
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-mneowlrs-menus-e93aee2bc7d0.digested.js",
+      "sha256": "9918857de063d4271cde69e99a1a9ded5bd3aee6d3acda01673a7e95a59fddb7",
+      "bytes": 300
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-npha69py-menus-e93aee2bc7d0.digested.js",
+      "sha256": "e0a79ad36c6ca1ffbc796c80aa5661803a9d1bc684e29d1587f48b4ba9a82714",
+      "bytes": 1291
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-nz33l0dv-menus-e93aee2bc7d0.digested.js",
+      "sha256": "4a6f08605450b778c971f551a60e8294eebf35829a8ad32eb75b605d6598a93c",
+      "bytes": 487
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-o87h2cps-menus-e93aee2bc7d0.digested.js",
+      "sha256": "cb116a1e14bb0f26e43e1332393b5f48f5caecdb41e3d62c11ebdfe007d63d14",
+      "bytes": 89897
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-oc9dp0kr-menus-e93aee2bc7d0.digested.js",
+      "sha256": "a6aee80784fd406dc3cf7740f0ed495e43cdcd760769f4f68c1266ca17304006",
+      "bytes": 2104
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-ogtqojjq-menus-e93aee2bc7d0.digested.js",
+      "sha256": "a67e80b1d85976efd030659709d9aada91ef9cbc152cb298e70f56442ae9e1b6",
+      "bytes": 446079
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-ooawntkh-menus-e93aee2bc7d0.digested.js",
+      "sha256": "a690323c7477f810034dd795d36f98a2860e5267205ed83e320da393d05873b9",
+      "bytes": 13973
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/chunk-pc35expm-menus-e93aee2bc7d0.digested.js",
+      "sha256": "84fbbd91f5030fe62741705a80766d7787519a37065a0859274d7f207f8d2e21",
+      "bytes": 640426
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/codemirror-editor-f5hk52hm-menus-e93aee2bc7d0.digested.js",
+      "sha256": "b922a352d77aedd76e9f058e8ce9ad5bf6aeadbd6901f530102590392bfd0360",
+      "bytes": 500673
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/dev-tools-b44x1fs2-menus-e93aee2bc7d0.digested.js",
+      "sha256": "ccb2dc677495ce385a2a504dc7c94e4166a83c1b4f00422d7517742e6ff732bb",
+      "bytes": 57647
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/diff-hdlvlyzz-menus-e93aee2bc7d0.digested.js",
+      "sha256": "91f765fff166380b4bb387e24172e0611ad37f4359bfb383cfc2137e16f7bebb",
+      "bytes": 22278
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/discourse-gpairi5w-menus-e93aee2bc7d0.digested.js",
+      "sha256": "650e2d5f378dea9be33cd86b083ffee3ae430a1c71227da6c258d7849798631b",
+      "bytes": 3935732
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/dist-hnrdl876-menus-e93aee2bc7d0.digested.js",
+      "sha256": "a6263378161dec61691800a0063399ef9853eb590c02c7866160d8956e17f1f0",
+      "bytes": 14764
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/ember-inspector-support-kni7sk21-menus-e93aee2bc7d0.digested.js",
+      "sha256": "fe68daf196c4832844f6cf7c2fad033d1a7e9f9f8c13182f029138a83cda1e65",
+      "bytes": 4321
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/es-f2z77cae-menus-e93aee2bc7d0.digested.js",
+      "sha256": "8e55811c0a6b69c2292eb58eb08a408ccc63abaa79cded57592c958e3d608765",
+      "bytes": 137552
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/faker-ld93o248-menus-e93aee2bc7d0.digested.js",
+      "sha256": "c2b958c3036edd4bcc3f57ccd3bbcf3a61af604676c8b632affb531acfd539aa",
+      "bytes": 2373875
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/full-calendar-bundle-e16k70iz-menus-e93aee2bc7d0.digested.js",
+      "sha256": "ec1fc76b307a5ed903d16fd1182ac926570af11a849533125c0c4ded4b326fdd",
+      "bytes": 985384
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/heic_dec-copf1fgf.digested.wasm",
+      "sha256": "832bfb37148038257e56216d165cfae24a8afaa7cae8fc0ddb1ef4bf495612a9",
+      "bytes": 959554
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/highlightjs-gnfav6kb-menus-e93aee2bc7d0.digested.js",
+      "sha256": "1133c4ef5065270d0dd20d79bf43ec7ea371756c5cb3269481cd65dcda89aaf7",
+      "bytes": 20457
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/jsoneditor-dglj2y90-menus-e93aee2bc7d0.digested.js",
+      "sha256": "9a4375dd8d0429e0d2c2302932b7fefcea0602bc17262ebb4236964c2fe07fe4",
+      "bytes": 532167
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/jspreadsheet-bm60sb4y-menus-e93aee2bc7d0.digested.js",
+      "sha256": "0571032afefbc679841914c2c61f36c26a952bc75a4ebba51f21c7321f3b05e2",
+      "bytes": 475284
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/jspreadsheet-cwx1o7ih-menus-e93aee2bc7d0.digested.js",
+      "sha256": "777223dab3367cd4c7cb03853479e16cc78901eb265c04c0201c24d0315d98b5",
+      "bytes": 21265
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/jsquash_magic_kernel_bg-kegyad09.digested.wasm",
+      "sha256": "f3d1b2e550d4de73abc2a1ed9c89adde4b0eed80009e730b4c3a0ae415f8122d",
+      "bytes": 18760
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/jsuites-hrk75ayg-menus-e93aee2bc7d0.digested.js",
+      "sha256": "c49f7df1bd334ac8334f79bcfa809940caee5c6ad0ed3c0d53095d284acdb258",
+      "bytes": 75251
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/jxl_dec-ec63vg9w.digested.wasm",
+      "sha256": "165bde0f48f3bdc39c7806365db5bb3b777df67fefff48050841fb4430062433",
+      "bytes": 849240
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/jxl_enc-gne50clb.digested.wasm",
+      "sha256": "3c6c02df45c0dededab146888789d541b23b9a299cb16d497dce412a3a4bc7d3",
+      "bytes": 1363824
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/jxl_enc_mt-nfg44xx4.digested.wasm",
+      "sha256": "6bb316b4e3b76fa7df5a69bd6e2508779b1c07f135dc0a52aba592fa995c72bf",
+      "bytes": 1375371
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/jxl_enc_mt.worker-j0szyb2f-menus-e93aee2bc7d0.digested.js",
+      "sha256": "c2402602e5d287123449182a40e24bf4939157136822f479e3cabb5d2e05bdd0",
+      "bytes": 1855
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/jxl_enc_mt_simd-b0vx5xe3.digested.wasm",
+      "sha256": "8b5b3a537864181465e202df1913f7bbe333a168eacc48ddf945c3ce011fdb42",
+      "bytes": 2012670
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/jxl_enc_mt_simd.worker-ol683em7-menus-e93aee2bc7d0.digested.js",
+      "sha256": "617112488a9b9843e781be07b36c12458dad7ca86407b48087ad5ddd64da0898",
+      "bytes": 1860
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/minimasonry-ktop47q2-menus-e93aee2bc7d0.digested.js",
+      "sha256": "ad829dd369686c055ab45cdd2cfe1d5f7f7fc1a147ee336f0281238107974d40",
+      "bytes": 4087
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/morphlex-ez2k6xg8-menus-e93aee2bc7d0.digested.js",
+      "sha256": "cd515c01a8d16822bebd305d39931474b6111c2222cb8ca778938d9f2ec3a298",
+      "bytes": 7970
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/mozjpeg_dec-cktdh3wj.digested.wasm",
+      "sha256": "a7c4b12169817e779ff4af137981393ae924944e167ad1bd95747c9199162d3e",
+      "bytes": 166470
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/mozjpeg_enc-mje7fyf9.digested.wasm",
+      "sha256": "24d4177f1c4963e2058b107189249651c61fdef125570e79b1dfb63c8bb49326",
+      "bytes": 251524
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/photoswipe-co5q2mxt-menus-e93aee2bc7d0.digested.js",
+      "sha256": "768e8cae1d2a702d197d96ed7b14a0baaf93ae1d42fd6f6fcac6c63313e69467",
+      "bytes": 58772
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/photoswipe-lightbox-b5w1r1kv-menus-e93aee2bc7d0.digested.js",
+      "sha256": "582b08011a6d6a1ce57b449d83837881531a8afa4c8c952bb06f22d001a48a19",
+      "bytes": 14331
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/pikaday-hu4ncyzp-menus-e93aee2bc7d0.digested.js",
+      "sha256": "0a5f826586b419989a8ff311ac080832a8cfdeef211acf85c8a74bdfd08f7e5b",
+      "bytes": 16160
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/prosemirror-editor-emxqxx4k-menus-e93aee2bc7d0.digested.js",
+      "sha256": "8b96462f4dbcf10cb4706afc18ad127873addc2c2ec14af2c21115b52b7660c9",
+      "bytes": 48075
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/prosemirror-extensions-kptkczhn-menus-e93aee2bc7d0.digested.js",
+      "sha256": "da2038d3e4dc129d7606673baa51cedd10d2ad111dc0e73885badd2e961a104e",
+      "bytes": 458981
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/rete-bundle-imp2apb9-menus-e93aee2bc7d0.digested.js",
+      "sha256": "8f0b2f063c2da9565410468f84c44c7844c2203586f1a64b33ccf50caf7303b0",
+      "bytes": 112380
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/route-wizard-js-c20os3i1-menus-e93aee2bc7d0.digested.js",
+      "sha256": "32ccdce61afd5546dcdcca6588b93df2cf196e9bb86456bd6a691c9d59115098",
+      "bytes": 15070
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/squoosh_gif_bg-k76zrrpq.digested.wasm",
+      "sha256": "c524f59ae965458b1cfc67db3a3abea813a5e25327a8479e83d4ad1485c9c22d",
+      "bytes": 43418
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/squoosh_png_bg-lobmjcmy.digested.wasm",
+      "sha256": "263d6e658808a74b72a1a99c5cc1d619237e70c150db6e41d5d84d3d117ab9be",
+      "bytes": 181088
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/squoosh_resize_bg-bp9nawun.digested.wasm",
+      "sha256": "5b1f702d502c4d0a70b99f78691bd554d566ba95859e4c57af5435955a1d74a5",
+      "bytes": 34545
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/squooshhqx_bg-cd86wrn4.digested.wasm",
+      "sha256": "812617712f0444b09ee61d72f9b2dab6cdd7fed3e9c74cc57e4dd6c80f4a4c80",
+      "bytes": 135082
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/tags-admin-dropdown-n8lfr51s-menus-e93aee2bc7d0.digested.js",
+      "sha256": "6127e9cafd4b03baf4942bcbf21d643b0f04f7a342f7184b11dfa555ae1fd5f6",
+      "bytes": 4208
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/to-markdown-o1oo4gt1-menus-e93aee2bc7d0.digested.js",
+      "sha256": "ad33aa7dae80e7f35705ce28d1679b09c6f81a45519cc4fcb6c1e03972488d87",
+      "bytes": 866
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/webp_dec-geb9t9l8.digested.wasm",
+      "sha256": "a13cc36394b20e632d967cd06deb11f34eeb4d625690954ee950f611c7ae19ba",
+      "bytes": 144775
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/webp_enc-ndsdbmht.digested.wasm",
+      "sha256": "5a2578257280e00711dcec2495b30887f0875515595e9aee13d0efb98f497d87",
+      "bytes": 424537
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/webp_enc-o8arywqq-menus-e93aee2bc7d0.digested.js",
+      "sha256": "4e69c23e056454b32ff050d551cf0a9f65ae5912f42a2d8b7d53bc9fe8ea89ee",
+      "bytes": 18072
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/webp_enc_simd-ivbcnosj.digested.wasm",
+      "sha256": "d7bd924aa3e6d31ad116c7ec2d40ff5dbe25562c5300036e14b279397f7384a2",
+      "bytes": 642254
+    },
+    {
+      "kind": "release_asset",
+      "url": "/assets/js/webp_enc_simd-ke1zv484-menus-e93aee2bc7d0.digested.js",
+      "sha256": "82817f1077545ae9179cf26b1788df1fd0f66b05083c49b5ee94e4ad7b124694",
+      "bytes": 18150
+    },
+    {
+      "kind": "theme_javascript",
+      "url": "/theme-javascripts/2d2d099d7aa06d37494464f8bd36106a20dce5f4.js?__ws=isbf-one.com",
+      "sha256": "4ef34eff728f1e48c9bf9ef57495bd119dda7f95decbd481b074fb114901b691",
+      "modules": 229,
+      "bytes": 599143
+    },
+    {
+      "kind": "common_theme",
+      "url": "/stylesheets/common_theme_4_c4b979b99c0d40b4d89137ee2ebeed422f616247.css?__ws=isbf-one.com",
+      "sha256": "b3a7057319784acaad80dacac70e33423a6888ad34186679c8a42c0e9a4b2828",
+      "bytes": 372680
+    },
+    {
+      "kind": "desktop_theme",
+      "url": "/stylesheets/desktop_theme_4_5058bfa995c2dfe08610386b5f94b76200ad2069.css?__ws=isbf-one.com",
+      "sha256": "5386dd4b4953f99e3da95fe0469d5c242b8c568cdbc50aa9337999c70a289785",
+      "bytes": 108
+    },
+    {
+      "kind": "mobile_theme",
+      "url": "/stylesheets/mobile_theme_4_5058bfa995c2dfe08610386b5f94b76200ad2069.css?__ws=isbf-one.com",
+      "sha256": "299500bb359cd3b55f74cd2f5191ccb99ef8c77473a55499b1b2a9e28eea907b",
+      "bytes": 107
+    },
+    {
+      "kind": "common_core",
+      "url": "/stylesheets/common_5918acbd5611ac46113f581ec6211987e06f9589.css?__ws=isbf-one.com",
+      "sha256": "39d76a5419bb5991d167c383443e61cebb9ef35fbe7a9bed496b1c6fa09074b8",
+      "bytes": 1200985
+    }
+  ],
+  "core_source_version": "0f1ab21f2b2ccfbf66f556523ad9752f8d94686b2b9026e046f11844bdb9761a",
+  "theme_source_version": "48d3e5014f3133ae772b6e6e6c099cd6ca3163397029f218cacaa0de748e8321",
+  "theme_modules": 229,
+  "http_authentication_used": false,
+  "verification_location": "Production HTTPS origin with hostname-verified TLS; only checksums returned",
+  "content_decoding": "curl --compressed"
+}

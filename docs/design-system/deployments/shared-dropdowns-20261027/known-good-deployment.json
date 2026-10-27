@@ -1,0 +1,98 @@
+{
+  "recorded_at_utc": "2026-10-27T12:22:00.552406+00:00",
+  "pull_requests": [
+    {
+      "repository": "ISBF-Lab/ISBFweb",
+      "pr": 93,
+      "url": "https://github.com/ISBF-Lab/ISBFweb/pull/93",
+      "head_sha": "fa217abc0fff472f98d935cba2a43993526695b6",
+      "merge_commit": "867a0bbc25a446593c223d5b63261e3d1ac9fcb6",
+      "exact_head_checks_passed": true,
+      "unresolved_reviews": 0,
+      "workflows": [
+        {
+          "id": 40464198309,
+          "name": "Developer Docs Lint",
+          "conclusion": "success"
+        },
+        {
+          "id": 40464198333,
+          "name": "Codex CI handoff",
+          "conclusion": "success"
+        },
+        {
+          "id": 40464198305,
+          "name": "ISBF resume documents",
+          "conclusion": "success"
+        },
+        {
+          "id": 40464198343,
+          "name": "ISBF frontend consistency",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "repository": "ISBF-Lab/ISBF-Alumni",
+      "pr": 9,
+      "url": "https://github.com/ISBF-Lab/ISBF-Alumni/pull/9",
+      "head_sha": "3170ce4050aab00cf61206128c6d4712ade71842",
+      "merge_commit": "c2c8fa29d994a0f51369ac088d73de205e68a9a7",
+      "exact_head_checks_passed": true,
+      "unresolved_reviews": 0,
+      "workflows": [
+        {
+          "id": 40464566244,
+          "name": "ISBF Alumni plugin tests",
+          "conclusion": "success"
+        },
+        {
+          "id": 40464566077,
+          "name": "Alumni registration integration",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "core_source_version": "0f1ab21f2b2ccfbf66f556523ad9752f8d94686b2b9026e046f11844bdb9761a",
+  "theme_source_version": "48d3e5014f3133ae772b6e6e6c099cd6ca3163397029f218cacaa0de748e8321",
+  "recovery": {
+    "verified": true,
+    "tag": "local_discourse/isbf_app:shared-dropdowns-20261027-0f1ab21f2b2c",
+    "image": "sha256:3beb562c08e1fd0e13890797b9ca774e5b5763850a78f7befcc1b6f4e244303f",
+    "source_version": "0f1ab21f2b2ccfbf66f556523ad9752f8d94686b2b9026e046f11844bdb9761a",
+    "complete_live_and_image_inventory_equal": true,
+    "plugin_directories": 67,
+    "generated_manifests": 71,
+    "public_assets": 1812,
+    "core_digest": "190b4c4be4f8191ea913da25b40e16eb7b31f8118911cc7d51fd519b7dc8616c",
+    "generated_digest": "12ba5d4fd29246a6a5db6c9e29ebb93f34e354199fdeb8107ae38d061d85381e",
+    "asset_digest": "493946ec9637efe28098597a6bc34579a11da6a8dc2e8d3647c4c2f569ae5454",
+    "production_paused": false,
+    "latest_tag_changed": false,
+    "boot_command": [
+      "/sbin/boot"
+    ],
+    "shared_source_mounts_required": [
+      "/shared/discourse-avatar-frames-releases/2eb878d4227dee6009f839f681b0ad06f8e6223c",
+      "/shared/discourse-latest-created-order",
+      "/shared/isbf-academy-roles-releases/1c298484093f325b0582c915f9c4c1cc8a577f42",
+      "/shared/isbf-alumni-releases/f63153279b30d612021eccec4f23f540d64c60c7",
+      "/shared/isbf-calendar-releases/68ed219ba8688d78dfbd1c032eeb2bc904ad229a",
+      "/shared/isbf-careers-releases/d865fece867593371fa33bb289ce4f398dfc314a",
+      "/shared/isbf-join-releases/27bec5c18ad7c823ea0909a589fe1a17c6c96b574f1cbb2533cf2db1e24162e3",
+      "/shared/isbf-learning-releases/0ec46cfb4fe30d67979c4cf11d4f5d0fc86ac315",
+      "/shared/isbf-marketplace-releases/5df861909f630303cf2d6a98e44a75837e0e5d38",
+      "/shared/isbf-official-releases/d28e3a80d67e14a77a20a012665568a3d3e26be0",
+      "/shared/isbf-pinning-releases/a2357660be9deed306a6999bc8e47f0ceb9ca111",
+      "/shared/isbf-resume-releases/af3dc61886611b45b5af0b1f59961b2e00c2326b",
+      "/shared/isbf-teamup-releases/7af826d26f02ae293a64e10e3b0fbec0c10fb46d"
+    ],
+    "database_theme_required": 4,
+    "theme_fields_preserved": 297,
+    "browser_checks": 86,
+    "source_overlay_release": "/shared/isbf-shared-dropdowns-releases/0f1ab21f2b2ccfbf66f556523ad9752f8d94686b2b9026e046f11844bdb9761a"
+  },
+  "authoritative_theme_backup": "/home/codex/discourse/deploy-work/shared-dropdowns-20261027/theme-after.json",
+  "full_inventories_remain_on_production": true
+}

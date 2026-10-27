@@ -1,0 +1,3219 @@
+--- a/theme/common/common.scss
++++ b/theme/common/common.scss
+@@ -443,8 +443,7 @@
+ }
+ 
+ .isbf-v2-side__links a,
+-.isbf-v2-side__links .isbf-v2-side__more,
+-.isbf-v2-more-menu .isbf-v2-more-menu__item {
++.isbf-v2-side__links .isbf-v2-side__more {
+   display: flex;
+   align-items: center;
+   gap: 18px;
+@@ -478,26 +477,6 @@
+ .isbf-v2-more-menu {
+   box-sizing: border-box;
+   width: min(260px, calc(100vw - var(--isbf-v2-space-8)));
+-  max-height: calc(100dvh - var(--isbf-v2-space-8));
+-  overflow: visible;
+-  padding: 0;
+-  border: 0;
+-  background: transparent;
+-  box-shadow: none;
+-  color: var(--isbf-v2-text);
+-
+-  .fk-d-menu__inner-content {
+-    box-sizing: border-box;
+-    width: 100%;
+-    max-height: inherit;
+-    overflow-y: auto;
+-    padding: var(--isbf-v2-space-2);
+-    border: 1px solid var(--isbf-v2-border);
+-    border-radius: var(--isbf-v2-radius-md);
+-    background: var(--isbf-v2-surface);
+-    box-shadow: var(--isbf-v2-shadow-menu);
+-    overscroll-behavior: contain;
+-  }
+ 
+   .dropdown-menu {
+     width: 100%;
+@@ -508,6 +487,9 @@
+ }
+ 
+ .isbf-v2-more-menu .isbf-v2-more-menu__item {
++  display: flex;
++  align-items: center;
++  gap: 8px;
+   justify-content: flex-start;
+   box-sizing: border-box;
+   width: 100%;
+@@ -524,17 +506,6 @@
+   .d-icon {
+     flex: none;
+     color: inherit;
+-  }
+-
+-  &:hover,
+-  &:focus-visible {
+-    background: var(--isbf-v2-hover);
+-    color: var(--isbf-v2-text);
+-  }
+-
+-  &:focus-visible {
+-    outline: 3px solid var(--isbf-v2-focus-ring);
+-    outline-offset: -3px;
+   }
+ }
+ 
+@@ -731,8 +702,7 @@
+   cursor: pointer;
+ }
+ 
+-.isbf-v2-account-menu__trigger:hover,
+-.isbf-v2-account-menu__panel > :hover {
++.isbf-v2-account-menu__trigger:hover {
+   background: var(--isbf-v2-hover);
+ }
+ 
+@@ -744,20 +714,6 @@
+ .isbf-v2-account-menu__compact-avatar,
+ .isbf-v2-account-menu__compact-profile {
+   display: none;
+-}
+-
+-.isbf-v2-account-menu__panel {
+-  position: absolute;
+-  bottom: 100%;
+-  left: 0;
+-  z-index: 70;
+-  box-sizing: border-box;
+-  width: max(220px, 100%);
+-  padding: 8px;
+-  border: 1px solid var(--isbf-v2-border);
+-  border-radius: var(--isbf-v2-radius-md);
+-  background: var(--isbf-v2-surface);
+-  box-shadow: var(--isbf-v2-shadow-menu);
+ }
+ 
+ .isbf-v2-account-menu__panel > a,
+@@ -766,15 +722,9 @@
+   align-items: center;
+   box-sizing: border-box;
+   width: 100%;
+-  min-height: 44px;
+-  padding: 8px 12px;
+   border: 0;
+-  border-radius: var(--isbf-v2-radius-sm);
+-  background: transparent;
+   color: var(--isbf-v2-text);
+-  font-size: var(--isbf-v2-font-sm);
+-  font-weight: var(--isbf-v2-weight-medium);
+-  text-align: left;
++  text-align: start;
+   cursor: pointer;
+ }
+ 
+@@ -1393,25 +1343,28 @@
+     background: var(--isbf-v2-hover);
+     color: var(--isbf-v2-accent);
+   }
++
++  @media (width <= 600px) {
++    width: 44px;
++    height: 44px;
++  }
++}
++
++.isbf-feed-card-menu .fk-d-menu__inner-content {
++  min-width: 132px;
+ }
+ 
+ .isbf-feed-card__menu {
+-  position: absolute;
+-  z-index: 20;
+-  top: 34px;
+-  right: 0;
+-  min-width: 132px;
+-  padding: 6px;
+-  border: 1px solid var(--isbf-v2-border);
+-  border-radius: var(--isbf-v2-radius-sm);
+-  background: var(--isbf-v2-surface);
+-  box-shadow: 0 8px 28px rgb(0 0 0 / 18%);
++  margin: 0;
++  padding: 0;
++  list-style: none;
+ 
+   button {
+     display: flex;
+     align-items: center;
+     gap: 9px;
+     width: 100%;
++    min-height: 44px;
+     padding: 9px 10px;
+     border: 0;
+     border-radius: 6px;
+@@ -1634,10 +1587,6 @@
+     border-radius: 50%;
+   }
+ 
+-  .isbf-v2-account-menu__panel {
+-    width: min(240px, calc(100vw - 16px));
+-  }
+-
+   .isbf-v2-account-menu__compact-profile {
+     display: flex;
+   }
+@@ -1701,14 +1650,6 @@
+   .isbf-v2-account-menu--mobile .isbf-v2-account-menu__trigger {
+     width: 44px;
+     height: 44px;
+-  }
+-
+-  .isbf-v2-account-menu--mobile .isbf-v2-account-menu__panel {
+-    top: 100%;
+-    right: 0;
+-    bottom: auto;
+-    left: auto;
+-    width: min(280px, calc(100vw - 32px));
+   }
+ 
+   .isbf-v2-feed-header {
+@@ -3648,11 +3589,6 @@
+   display: none;
+ }
+ 
+-.isbf-v2-account-menu__panel {
+-  max-height: min(70vh, 620px);
+-  overflow-y: auto;
+-}
+-
+ .isbf-v2-account-menu__linked-account {
+   display: grid;
+   grid-template-columns: 32px minmax(0, 1fr);
+@@ -3831,52 +3767,19 @@
+     position: relative;
+   }
+ 
+-  &__menu summary {
+-    padding: var(--isbf-v2-space-2);
+-    border-radius: var(--isbf-v2-radius-pill);
+-    cursor: pointer;
+-    list-style: none;
+-
+-    &::before {
+-      display: none;
+-    }
+-
+-    &::marker {
+-      content: "";
+-    }
+-
+-    &::-webkit-details-marker {
+-      display: none;
+-    }
+-  }
+-
+   &__menu-items {
+-    position: absolute;
+-    z-index: 10;
+-    inset-inline-end: 0;
+     display: grid;
+-    box-sizing: border-box;
+-    inline-size: max-content;
+-    max-inline-size: calc(100vw - 2 * var(--isbf-v2-space-4));
+-    padding: var(--isbf-v2-space-2);
+-    border: 1px solid var(--isbf-v2-border);
+-    border-radius: var(--isbf-v2-radius-sm);
+-    background: var(--isbf-v2-surface);
+-    box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
++    min-width: 0;
+ 
+     a,
+     button {
++      display: flex;
++      align-items: center;
+       justify-content: flex-start;
+-      padding: var(--isbf-v2-space-3);
++      width: 100%;
+       border: 0;
+-      color: var(--isbf-v2-text);
+       text-align: start;
+-      background: transparent;
+-    }
+-
+-    a:hover,
+-    button:hover {
+-      background: var(--isbf-v2-hover);
++      cursor: pointer;
+     }
+   }
+ 
+@@ -4918,6 +4821,19 @@
+     min-width: 0;
+     padding: var(--isbf-v2-space-3) var(--isbf-v2-space-4);
+     border-bottom: 1px solid var(--isbf-v2-border);
++
++    > .isbf-explore-picker__trigger {
++      flex: 1 1 0;
++      min-width: 44px;
++      width: auto;
++
++      .d-button-label {
++        overflow: hidden;
++        min-width: 0;
++        text-overflow: ellipsis;
++        white-space: nowrap;
++      }
++    }
+   }
+ 
+   > .isbf-explore__toolbar + .isbf-explore-group {
+@@ -4932,7 +4848,6 @@
+     justify-content: center;
+     gap: var(--isbf-v2-space-1);
+     box-sizing: border-box;
+-    min-width: 0;
+     min-height: 44px;
+     padding: var(--isbf-v2-space-2) var(--isbf-v2-space-3);
+     border: 1px solid var(--isbf-v2-border-strong);
+@@ -4954,6 +4869,11 @@
+     }
+   }
+ 
++  &__order,
++  &__compose {
++    flex: none;
++  }
++
+   &__compose {
+     margin-left: auto;
+     border-color: var(--isbf-v2-accent);
+@@ -5001,22 +4921,7 @@
+   }
+ 
+   &__menu {
+-    position: absolute;
+-    z-index: 20;
+-    top: calc(100% + var(--isbf-v2-space-2));
+-    left: 0;
+-    display: flex;
+-    flex-direction: column;
+-    box-sizing: border-box;
+-    width: min(280px, calc(100vw - 32px));
+-    max-height: min(420px, 60dvh);
+-    padding: var(--isbf-v2-space-2);
+-    border: 1px solid var(--isbf-v2-border-strong);
+-    border-radius: var(--isbf-v2-radius-sm);
+-    background: var(--isbf-v2-surface);
+-    box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+-    overflow-y: auto;
+-    overscroll-behavior: contain;
++    width: min(280px, calc(100dvw - 32px));
+   }
+ 
+   &__search {
+@@ -5047,21 +4952,9 @@
+     justify-content: space-between;
+     gap: var(--isbf-v2-space-3);
+     box-sizing: border-box;
+-    min-height: 44px;
++    width: 100%;
+     margin: 0;
+-    padding: var(--isbf-v2-space-2);
+-    border-radius: var(--isbf-v2-radius-sm);
+-    color: var(--isbf-v2-text);
+-    font-size: var(--isbf-v2-font-sm);
+     cursor: pointer;
+-
+-    &:hover {
+-      background: var(--isbf-v2-hover);
+-    }
+-
+-    &:has(input:checked) {
+-      background: var(--isbf-v2-active-surface);
+-    }
+   }
+ 
+   &__label {
+@@ -5381,19 +5274,11 @@
+   gap: 12px;
+   padding: 16px;
+ 
+-  label {
++  .isbf-alumni__filter {
+     display: grid;
+     flex: 1 1 140px;
+     gap: 6px;
+     min-width: 0;
+-  }
+-
+-  select {
+-    width: 100%;
+-    min-width: 0;
+-    min-height: 44px;
+-    color: var(--isbf-v2-text);
+-    background: var(--isbf-v2-surface);
+   }
+ }
+ 
+@@ -5473,32 +5358,20 @@
+ }
+ 
+ .isbf-alumni-profile {
+-  form,
++  .form-kit,
+   label {
+     display: grid;
+     gap: 8px;
+   }
+ 
+-  form {
++  .isbf-alumni-profile__form {
+     gap: 16px;
+   }
+ 
+-  input,
+-  select {
++  input {
+     min-width: 0;
+     min-height: 44px;
+     margin: 0;
+-  }
+-
+-  .isbf-alumni-profile__visible {
+-    display: flex;
+-    align-items: center;
+-  }
+-
+-  .isbf-alumni-profile__actions {
+-    display: flex;
+-    justify-content: flex-end;
+-    gap: 12px;
+   }
+ }
+ 
+@@ -5681,6 +5554,7 @@
+ }
+ 
+ @import "elastic-not-found";
++@import "alumni-controls";
+ @import "dialog-consistency";
+ 
+ .isbf-v2-calendar__item--personal {
+@@ -6057,4 +5931,5 @@
+ @import "workbench";
+ @import "profile-navigation";
+ @import "profile-content";
++@import "dropdowns";
+ @import "notifications-hold";
+--- /dev/null
++++ b/theme/javascripts/discourse/components/isbf-alumni-location-picker.gjs
+@@ -0,0 +1,101 @@
++import Component from "@glimmer/component";
++import { hash } from "@ember/helper";
++import { action } from "@ember/object";
++import { themePrefix } from "virtual:theme";
++import ComboBox from "discourse/select-kit/components/combo-box";
++import { selectKitOptions } from "discourse/select-kit/components/select-kit";
++import dUniqueId from "discourse/ui-kit/helpers/d-unique-id";
++import { i18n } from "discourse-i18n";
++
++@selectKitOptions({ headerAriaLabel: null })
++class AlumniLocationComboBox extends ComboBox {
++  onOpen() {
++    this.onPickerOpen?.(this.selectKit);
++  }
++
++  updateFloatingUiPosition() {
++    return super.updateFloatingUiPosition().then(() => {
++      const body = this.selectKit.bodyElement();
++      const header = this.selectKit.headerElement();
++      if (!body?.isConnected || !header) {
++        return;
++      }
++
++      const reference = header.getBoundingClientRect();
++      if (window.innerWidth <= 450) {
++        // SelectKit's full-viewport mobile menu is clipped by the task dialog.
++        body.style.minWidth = "0";
++        body.style.width = `${reference.width}px`;
++        body.style.left = `${reference.left - body.getBoundingClientRect().left}px`;
++      }
++
++      const container = body.closest(".d-modal__body");
++      if (container) {
++        const bounds = container.getBoundingClientRect();
++        const offset = this.selectKit.options.verticalOffset;
++        const available = this.selectKit.isPlacedAbove
++          ? reference.top - Math.max(0, bounds.top) - offset
++          : Math.min(window.innerHeight, bounds.bottom) -
++            reference.bottom -
++            offset;
++        body.style.maxHeight = `${Math.max(0, available)}px`;
++        if (this.selectKit.isPlacedAbove) {
++          body.style.top = `${reference.top - offset - body.getBoundingClientRect().bottom}px`;
++        }
++      }
++    });
++  }
++}
++
++export default class ISBFAlumniLocationPicker extends Component {
++  #id = dUniqueId();
++
++  get ariaLabel() {
++    const selected = this.args.items.find(
++      (item) => item.code === this.args.value
++    );
++    const value = selected?.name || this.args.noneLabel;
++    return value
++      ? i18n(themePrefix("isbf_v2.alumni_location_value"), {
++          label: this.args.label,
++          value,
++        })
++      : this.args.label;
++  }
++
++  get pickerId() {
++    return this.args.id ?? this.#id;
++  }
++
++  @action
++  select(value) {
++    const code = value ?? "";
++    if (!this.args.disabled && code !== this.args.value) {
++      return this.args.onChange(code);
++    }
++  }
++
++  <template>
++    <AlumniLocationComboBox
++      class="isbf-alumni-location-picker"
++      inert={{@disabled}}
++      ...attributes
++      @content={{@items}}
++      @id={{this.pickerId}}
++      @nameProperty="name"
++      @onChange={{this.select}}
++      @onPickerOpen={{@onOpen}}
++      @options={{hash
++        autoInsertNoneItem=@allowNone
++        clearable=false
++        disabled=@disabled
++        filterable=true
++        headerAriaLabel=this.ariaLabel
++        translatedNone=@noneLabel
++        triggerOnChangeOnTab=false
++      }}
++      @value={{@value}}
++      @valueProperty="code"
++    />
++  </template>
++}
+--- a/theme/javascripts/discourse/components/isbf-alumni-profile.gjs
++++ b/theme/javascripts/discourse/components/isbf-alumni-profile.gjs
+@@ -1,16 +1,17 @@
+ import Component from "@glimmer/component";
+ import { tracked } from "@glimmer/tracking";
+-import { fn } from "@ember/helper";
+-import { on } from "@ember/modifier";
+ import { action } from "@ember/object";
+ import { service } from "@ember/service";
+ import { themePrefix } from "virtual:theme";
++import Form from "discourse/components/form";
+ import { ajax } from "discourse/lib/ajax";
+ import { eq } from "discourse/truth-helpers";
+ import DButton from "discourse/ui-kit/d-button";
+-import DModal from "discourse/ui-kit/d-modal";
++import DModal, { CLOSE_INITIATED_BY_ESC } from "discourse/ui-kit/d-modal";
++import dUniqueId from "discourse/ui-kit/helpers/d-unique-id";
+ import { i18n } from "discourse-i18n";
+ import { alumniCities, alumniRegions } from "../lib/alumni";
++import ISBFAlumniLocationPicker from "./isbf-alumni-location-picker";
+ 
+ export default class ISBFAlumniProfile extends Component {
+   @service currentUser;
+@@ -31,29 +32,55 @@
+   @tracked saving = false;
+   @tracked error = false;
+ 
++  formId = dUniqueId();
++
++  #locationPicker;
++
+   constructor() {
+     super(...arguments);
+     this.load();
+   }
+ 
+-  get regions() {
+-    return alumniRegions(this.args.config, this.profile.country_code);
+-  }
+-
+-  get cities() {
+-    return alumniCities(
+-      this.args.config,
+-      this.profile.country_code,
+-      this.profile.region_code
+-    );
+-  }
+-
+-  get chineseLocation() {
+-    return this.profile.country_code === "CN";
+-  }
+-
+   get disabled() {
+     return !this.loaded || this.loading || this.saving;
++  }
++
++  @action
++  beforeClose({ initiatedBy }) {
++    if (this.saving) {
++      return false;
++    }
++    const picker = this.#locationPicker;
++    if (
++      initiatedBy === CLOSE_INITIATED_BY_ESC &&
++      picker?.isExpanded &&
++      picker.mainElement()
++    ) {
++      // DModal captures Escape before select-kit receives it.
++      picker.close();
++      picker.headerElement()?.focus();
++      return false;
++    }
++    return true;
++  }
++
++  @action
++  changeLocation(value, { name, set }) {
++    set(name, value);
++    if (name === "country_code") {
++      set("region_code", "");
++    }
++    if (name === "country_code" || name === "region_code") {
++      set("city_code", "");
++      set("city_name", "");
++    }
++  }
++
++  @action
++  close() {
++    if (!this.saving) {
++      this.args.onClose();
++    }
+   }
+ 
+   @action
+@@ -92,30 +119,19 @@
+   }
+ 
+   @action
+-  change(field, event) {
+-    const value =
+-      field === "visible" ? event.target.checked : event.target.value;
+-    const next = { ...this.profile, [field]: value };
+-    if (field === "country_code") {
+-      next.region_code = "";
+-    }
+-    if (field === "country_code" || field === "region_code") {
+-      next.city_code = "";
+-      next.city_name = "";
+-    }
+-    this.profile = next;
+-  }
+-
+-  @action
+-  async save(event) {
+-    event.preventDefault();
++  pickerOpened(picker) {
++    this.#locationPicker = picker;
++  }
++
++  @action
++  async save(data) {
+     if (this.disabled) {
+       return;
+     }
+     this.saving = true;
+     this.error = false;
+     try {
+-      await ajax("/isbf/alumni/me", { type: "PUT", data: this.profile });
++      await ajax("/isbf/alumni/me", { type: "PUT", data });
+       if (!this.isDestroying) {
+         this.args.onSaved();
+       }
+@@ -133,7 +149,8 @@
+   <template>
+     <DModal
+       class="isbf-alumni-profile"
+-      @closeModal={{@onClose}}
++      @beforeClose={{this.beforeClose}}
++      @closeModal={{this.close}}
+       @submitOnEnter={{false}}
+       @title={{i18n (themePrefix "isbf_v2.alumni_my_profile")}}
+     >
+@@ -142,99 +159,149 @@
+               (themePrefix "isbf_v2.learning_loading")
+             }}</p>
+         {{else if this.loaded}}
+-          <form {{on "submit" this.save}}>
+-            <label>{{i18n (themePrefix "isbf_v2.alumni_name")}}<input
+-                disabled={{this.saving}}
+-                maxlength="60"
+-                required
+-                type="text"
+-                value={{this.profile.display_name}}
+-                {{on "input" (fn this.change "display_name")}}
+-              /></label>
+-            <label>{{i18n (themePrefix "isbf_v2.alumni_country")}}<select
+-                disabled={{this.saving}}
+-                required
+-                value={{this.profile.country_code}}
+-                {{on "change" (fn this.change "country_code")}}
+-              >
+-                {{#each @config.countries as |country|}}<option
+-                    selected={{eq this.profile.country_code country.code}}
+-                    value={{country.code}}
+-                  >{{country.name}}</option>{{/each}}
+-              </select></label>
+-            {{#if this.regions.length}}<label>{{i18n
+-                  (themePrefix "isbf_v2.alumni_region")
+-                }}<select
+-                  disabled={{this.saving}}
+-                  required
+-                  value={{this.profile.region_code}}
+-                  {{on "change" (fn this.change "region_code")}}
++          <Form
++            class="isbf-alumni-profile__form"
++            id={{this.formId}}
++            @commitOnSubmit={{false}}
++            @data={{this.profile}}
++            @onSubmit={{this.save}}
++            as |form draft|
++          >
++            <form.Field
++              @disabled={{this.disabled}}
++              @format="full"
++              @name="display_name"
++              @title={{i18n (themePrefix "isbf_v2.alumni_name")}}
++              @type="input"
++              @validation="required|length:0,60"
++              as |field|
++            ><field.Control maxlength="60" /></form.Field>
++            <form.Field
++              @disabled={{this.disabled}}
++              @format="full"
++              @name="country_code"
++              @onSet={{this.changeLocation}}
++              @title={{i18n (themePrefix "isbf_v2.alumni_country")}}
++              @type="custom"
++              @validation="required"
++              as |field|
++            >
++              <field.Control>
++                <ISBFAlumniLocationPicker
++                  aria-describedby={{field.describedBy}}
++                  aria-invalid={{if field.error "true"}}
++                  @allowNone={{false}}
++                  @disabled={{field.disabled}}
++                  @id={{field.id}}
++                  @items={{@config.countries}}
++                  @label={{i18n (themePrefix "isbf_v2.alumni_country")}}
++                  @noneLabel={{i18n (themePrefix "isbf_v2.alumni_select")}}
++                  @onChange={{field.set}}
++                  @onOpen={{this.pickerOpened}}
++                  @value={{field.value}}
++                />
++              </field.Control>
++            </form.Field>
++            {{#let
++              (alumniRegions @config draft.country_code)
++              (alumniCities @config draft.country_code draft.region_code)
++              as |regions cities|
++            }}
++              {{#if regions}}
++                <form.Field
++                  @disabled={{this.disabled}}
++                  @format="full"
++                  @name="region_code"
++                  @onSet={{this.changeLocation}}
++                  @title={{i18n (themePrefix "isbf_v2.alumni_region")}}
++                  @type="custom"
++                  @validation="required"
++                  as |field|
+                 >
+-                  <option value="">{{i18n
+-                      (themePrefix "isbf_v2.alumni_select")
+-                    }}</option>
+-                  {{#each this.regions as |region|}}<option
+-                      selected={{eq this.profile.region_code region.code}}
+-                      value={{region.code}}
+-                    >{{region.name}}</option>{{/each}}
+-                </select></label>{{/if}}
+-            <label>{{i18n (themePrefix "isbf_v2.alumni_city")}}
+-              {{#if this.chineseLocation}}
+-                <select
+-                  disabled={{this.saving}}
+-                  value={{this.profile.city_code}}
+-                  {{on "change" (fn this.change "city_code")}}
++                  <field.Control>
++                    <ISBFAlumniLocationPicker
++                      aria-describedby={{field.describedBy}}
++                      aria-invalid={{if field.error "true"}}
++                      @allowNone={{true}}
++                      @disabled={{field.disabled}}
++                      @id={{field.id}}
++                      @items={{regions}}
++                      @label={{i18n (themePrefix "isbf_v2.alumni_region")}}
++                      @noneLabel={{i18n (themePrefix "isbf_v2.alumni_select")}}
++                      @onChange={{field.set}}
++                      @onOpen={{this.pickerOpened}}
++                      @value={{field.value}}
++                    />
++                  </field.Control>
++                </form.Field>
++              {{/if}}
++              {{#if (eq draft.country_code "CN")}}
++                <form.Field
++                  @disabled={{this.disabled}}
++                  @format="full"
++                  @name="city_code"
++                  @showOptional={{false}}
++                  @title={{i18n (themePrefix "isbf_v2.alumni_city")}}
++                  @type="custom"
++                  as |field|
+                 >
+-                  <option value="">{{i18n
+-                      (themePrefix "isbf_v2.alumni_city_optional")
+-                    }}</option>
+-                  {{#each this.cities as |city|}}<option
+-                      selected={{eq this.profile.city_code city.code}}
+-                      value={{city.code}}
+-                    >{{city.name}}</option>{{/each}}
+-                </select>
++                  <field.Control>
++                    <ISBFAlumniLocationPicker
++                      @allowNone={{true}}
++                      @disabled={{field.disabled}}
++                      @id={{field.id}}
++                      @items={{cities}}
++                      @label={{i18n (themePrefix "isbf_v2.alumni_city")}}
++                      @noneLabel={{i18n
++                        (themePrefix "isbf_v2.alumni_city_optional")
++                      }}
++                      @onChange={{field.set}}
++                      @onOpen={{this.pickerOpened}}
++                      @value={{field.value}}
++                    />
++                  </field.Control>
++                </form.Field>
+               {{else}}
+-                <input
+-                  disabled={{this.saving}}
+-                  maxlength="80"
+-                  type="text"
+-                  value={{this.profile.city_name}}
+-                  {{on "input" (fn this.change "city_name")}}
+-                />
++                <form.Field
++                  @disabled={{this.disabled}}
++                  @format="full"
++                  @name="city_name"
++                  @showOptional={{false}}
++                  @title={{i18n (themePrefix "isbf_v2.alumni_city")}}
++                  @type="input"
++                  as |field|
++                ><field.Control /></form.Field>
+               {{/if}}
+-            </label>
+-            <label>{{i18n (themePrefix "isbf_v2.alumni_industry")}}<input
+-                disabled={{this.saving}}
+-                maxlength="60"
+-                required
+-                type="text"
+-                value={{this.profile.industry}}
+-                {{on "input" (fn this.change "industry")}}
+-              /></label>
+-            <label>{{i18n (themePrefix "isbf_v2.alumni_bio")}}
+-              <textarea
+-                disabled={{this.saving}}
+-                maxlength="500"
+-                rows="4"
+-                value={{this.profile.bio}}
+-                {{on "input" (fn this.change "bio")}}
+-              ></textarea>
+-            </label>
+-            <label class="isbf-alumni-profile__visible"><input
+-                checked={{this.profile.visible}}
+-                disabled={{this.saving}}
+-                type="checkbox"
+-                {{on "change" (fn this.change "visible")}}
+-              />{{i18n (themePrefix "isbf_v2.alumni_visible")}}</label>
+-            <div class="isbf-alumni-profile__actions"><DButton
+-                @action={{@onClose}}
+-                @translatedLabel={{i18n "cancel"}}
+-              /><button
+-                class="btn btn-primary"
+-                disabled={{this.disabled}}
+-                type="submit"
+-              >{{i18n "save"}}</button></div>
+-          </form>
++            {{/let}}
++            <form.Field
++              @disabled={{this.disabled}}
++              @format="full"
++              @name="industry"
++              @showOptional={{false}}
++              @title={{i18n (themePrefix "isbf_v2.alumni_industry")}}
++              @type="input"
++              as |field|
++            ><field.Control /></form.Field>
++            <form.Field
++              @disabled={{this.disabled}}
++              @format="full"
++              @name="bio"
++              @showOptional={{false}}
++              @title={{i18n (themePrefix "isbf_v2.alumni_bio")}}
++              @type="textarea"
++              @validation="length:0,500"
++              as |field|
++            ><field.Control maxlength="500" rows="4" /></form.Field>
++            <form.Field
++              class="isbf-alumni-profile__visible"
++              @disabled={{this.disabled}}
++              @format="full"
++              @name="visible"
++              @title={{i18n (themePrefix "isbf_v2.alumni_visible")}}
++              @type="checkbox"
++              as |field|
++            ><field.Control /></form.Field>
++          </Form>
+         {{/if}}
+         {{#if this.error}}<p role="alert">{{i18n
+               (themePrefix "isbf_v2.alumni_save_error")
+@@ -243,6 +310,23 @@
+               @translatedLabel={{i18n (themePrefix "isbf_v2.explore_retry")}}
+             />{{/unless}}{{/if}}
+       </:body>
++      <:footer>
++        {{#if this.loaded}}
++          <DButton
++            class="btn-primary"
++            @disabled={{this.disabled}}
++            @form={{this.formId}}
++            @isLoading={{this.saving}}
++            @label="save"
++            @type="submit"
++          />
++          <DButton
++            @action={{this.close}}
++            @disabled={{this.saving}}
++            @label="cancel"
++          />
++        {{/if}}
++      </:footer>
+     </DModal>
+   </template>
+ }
+--- a/theme/javascripts/discourse/components/isbf-alumni.gjs
++++ b/theme/javascripts/discourse/components/isbf-alumni.gjs
+@@ -13,6 +13,7 @@
+ import { i18n } from "discourse-i18n";
+ import { alumniConfig, alumniLocation, alumniRegions } from "../lib/alumni";
+ import ISBFAlumniLabel from "./isbf-alumni-label";
++import ISBFAlumniLocationPicker from "./isbf-alumni-location-picker";
+ import ISBFAlumniMap from "./isbf-alumni-map";
+ import ISBFAlumniProfile from "./isbf-alumni-profile";
+ 
+@@ -120,13 +121,13 @@
+   }
+ 
+   @action
+-  countryChanged(event) {
+-    this.selectLocation({ country: event.target.value });
+-  }
+-
+-  @action
+-  regionChanged(event) {
+-    this.selectLocation({ country: this.country, region: event.target.value });
++  countryChanged(country) {
++    this.selectLocation({ country });
++  }
++
++  @action
++  regionChanged(region) {
++    this.selectLocation({ country: this.country, region });
+   }
+ 
+   @action
+@@ -334,35 +335,28 @@
+               @onSaved={{this.profileSaved}}
+             />{{/if}}
+           <div class="isbf-alumni__filters">
+-            <label>{{i18n (themePrefix "isbf_v2.alumni_country")}}
+-              <select
+-                value={{this.country}}
+-                {{on "change" this.countryChanged}}
+-              >
+-                <option value="">{{i18n
+-                    (themePrefix "isbf_v2.alumni_all")
+-                  }}</option>
+-                {{#each this.countries as |country|}}<option
+-                    selected={{eq this.country country.code}}
+-                    value={{country.code}}
+-                  >{{country.name}}</option>{{/each}}
+-              </select>
+-            </label>
+-            {{#if this.regions.length}}<label>{{i18n
+-                  (themePrefix "isbf_v2.alumni_region")
+-                }}
+-                <select
+-                  value={{this.region}}
+-                  {{on "change" this.regionChanged}}
+-                ><option value="">{{i18n
+-                      (themePrefix "isbf_v2.alumni_all")
+-                    }}</option>
+-                  {{#each this.regions as |region|}}<option
+-                      selected={{eq this.region region.code}}
+-                      value={{region.code}}
+-                    >{{region.name}}</option>{{/each}}
+-                </select>
+-              </label>{{/if}}
++            <div class="isbf-alumni__filter">
++              <span>{{i18n (themePrefix "isbf_v2.alumni_country")}}</span>
++              <ISBFAlumniLocationPicker
++                @allowNone={{true}}
++                @items={{this.countries}}
++                @label={{i18n (themePrefix "isbf_v2.alumni_country")}}
++                @noneLabel={{i18n (themePrefix "isbf_v2.alumni_all")}}
++                @onChange={{this.countryChanged}}
++                @value={{this.country}}
++              />
++            </div>
++            {{#if this.regions.length}}<div class="isbf-alumni__filter"><span
++                >{{i18n (themePrefix "isbf_v2.alumni_region")}}</span>
++                <ISBFAlumniLocationPicker
++                  @allowNone={{true}}
++                  @items={{this.regions}}
++                  @label={{i18n (themePrefix "isbf_v2.alumni_region")}}
++                  @noneLabel={{i18n (themePrefix "isbf_v2.alumni_all")}}
++                  @onChange={{this.regionChanged}}
++                  @value={{this.region}}
++                />
++              </div>{{/if}}
+           </div>
+           {{#if this.mapConfig}}<ISBFAlumniMap
+               @config={{this.mapConfig}}
+--- a/theme/javascripts/discourse/components/isbf-explore-picker.gjs
++++ b/theme/javascripts/discourse/components/isbf-explore-picker.gjs
+@@ -1,196 +1,155 @@
+-import Component from "@glimmer/component";
+-import { tracked } from "@glimmer/tracking";
+-import { action } from "@ember/object";
+-import didInsert from "@ember/render-modifiers/modifiers/did-insert";
+-import { scheduleOnce } from "@ember/runloop";
+-import { themePrefix } from "virtual:theme";
+-import dIcon from "discourse/ui-kit/helpers/d-icon";
+-import { i18n } from "discourse-i18n";
+-
+-let nextPickerId = 0;
+-
+-export default class ISBFExplorePicker extends Component {
+-  @tracked isOpen = false;
+-  @tracked search = "";
+-
+-  menuId = `isbf-explore-picker-${++nextPickerId}`;
+-  #root;
+-
+-  willDestroy() {
+-    super.willDestroy(...arguments);
+-    this.#removeListeners();
+-  }
+-
+-  get label() {
+-    const label = i18n(themePrefix(this.args.labelKey));
+-    return this.args.selectedIds.length
+-      ? i18n(themePrefix("isbf_v2.explore_selected_count"), {
+-          count: this.args.selectedIds.length,
+-          label,
+-        })
+-      : label;
+-  }
+-
+-  get options() {
+-    const selected = new Set(this.args.selectedIds);
+-    const query = this.search.trim().toLocaleLowerCase();
+-    return this.args.items
+-      .filter((item) =>
+-        this.args.onSearch
+-          ? true
+-          : item.label.toLocaleLowerCase().includes(query)
+-      )
+-      .map((item) => ({ ...item, selected: selected.has(item.id) }));
+-  }
+-
+-  @action
+-  clear() {
+-    this.args.onClear();
+-  }
+-
+-  @action
+-  createCategory() {
+-    this.#close();
+-    this.args.onCreateCategory?.();
+-  }
+-
+-  @action
+-  focusSearch() {
+-    this.#root?.querySelector("input[type='search']")?.focus();
+-  }
+-
+-  @action
+-  observe(element) {
+-    this.#root = element;
+-  }
+-
+-  @action
+-  onDocumentKeydown(event) {
+-    if (event.key === "Escape") {
+-      event.preventDefault();
+-      event.stopPropagation();
+-      this.#close();
+-    }
+-  }
+-
+-  @action
+-  onOutsidePointer(event) {
+-    if (!this.#root?.contains(event.target)) {
+-      this.#close();
+-    }
+-  }
+-
+-  @action
+-  retrySearch() {
+-    this.args.onSearch?.(this.search);
+-  }
+-
+-  @action
+-  toggle() {
+-    if (this.isOpen) {
+-      this.#close();
+-      return;
+-    }
+-    this.isOpen = true;
+-    this.args.onSearch?.(this.search);
+-    document.addEventListener("pointerdown", this.onOutsidePointer, true);
+-    document.addEventListener("keydown", this.onDocumentKeydown, true);
+-    scheduleOnce("afterRender", this, this.focusSearch);
+-  }
+-
+-  @action
+-  toggleOption(item) {
+-    this.args.onToggle(item);
+-  }
+-
+-  @action
+-  updateSearch(event) {
+-    this.search = event.target.value;
+-    this.args.onSearch?.(this.search);
+-  }
+-
+-  #close() {
+-    this.isOpen = false;
+-    this.#removeListeners();
+-    this.#root?.querySelector(".isbf-explore-picker__trigger")?.focus();
+-  }
+-
+-  #removeListeners() {
+-    document.removeEventListener("pointerdown", this.onOutsidePointer, true);
+-    document.removeEventListener("keydown", this.onDocumentKeydown, true);
+-  }
+-
+-  <template>
+-    <div class="isbf-explore-picker" {{didInsert this.observe}}>
+-      <button
+-        aria-controls={{this.menuId}}
+-        aria-expanded={{if this.isOpen "true" "false"}}
+-        class="isbf-explore-picker__trigger"
+-        disabled={{@disabled}}
+-        type="button"
+-        {{on "click" this.toggle}}
+-      >{{this.label}}{{dIcon "chevron-down"}}</button>
+-      {{#if this.isOpen}}
+-        <div
+-          aria-label={{i18n (themePrefix @labelKey)}}
+-          class="isbf-explore-picker__menu"
+-          id={{this.menuId}}
+-          role="group"
+-        >
+-          <input
+-            aria-label={{i18n (themePrefix @searchKey)}}
+-            class="isbf-explore-picker__search"
+-            placeholder={{i18n (themePrefix @searchKey)}}
+-            type="search"
+-            value={{this.search}}
+-            {{on "input" this.updateSearch}}
+-          />
+-          {{#if @loading}}<p role="status">{{i18n
+-                (themePrefix "isbf_v2.explore_loading")
+-              }}</p>{{/if}}
+-          {{#if @error}}
+-            <div class="isbf-explore-picker__error" role="alert">
+-              <span>{{i18n (themePrefix "isbf_v2.explore_search_error")}}</span>
+-              <button type="button" {{on "click" this.retrySearch}}>{{i18n
+-                  (themePrefix "isbf_v2.explore_retry")
+-                }}</button>
+-            </div>
+-          {{/if}}
+-          <div class="isbf-explore-picker__options">
+-            {{#each this.options key="id" as |item|}}
+-              <label class="isbf-explore-picker__option">
+-                <span class="isbf-explore-picker__label">{{item.label}}</span>
+-                <input
+-                  checked={{item.selected}}
+-                  class="isbf-explore-picker__checkbox"
+-                  disabled={{item.pending}}
+-                  type="checkbox"
+-                  {{on "change" (fn this.toggleOption item)}}
+-                />
+-              </label>
+-            {{else}}
+-              {{#unless @loading}}<p>{{i18n
+-                    (themePrefix "isbf_v2.explore_no_options")
+-                  }}</p>{{/unless}}
+-            {{/each}}
+-          </div>
+-          <div class="isbf-explore-picker__footer">
+-            <button
+-              class="isbf-explore-picker__clear"
+-              disabled={{eq @selectedIds.length 0}}
+-              type="button"
+-              {{on "click" this.clear}}
+-            >{{i18n (themePrefix "isbf_v2.explore_clear")}}</button>
+-            {{#if @canCreateCategory}}
+-              <button
+-                class="isbf-explore-picker__create"
+-                type="button"
+-                {{on "click" this.createCategory}}
+-              >{{i18n (themePrefix "isbf_v2.explore_create_category")}}</button>
+-            {{/if}}
+-          </div>
+-        </div>
+-      {{/if}}
+-    </div>
+-  </template>
+-}
++import Component from "@glimmer/component";
++import { tracked } from "@glimmer/tracking";
++import { fn } from "@ember/helper";
++import { on } from "@ember/modifier";
++import { action } from "@ember/object";
++import { scheduleOnce } from "@ember/runloop";
++import { themePrefix } from "virtual:theme";
++import DMenu from "discourse/float-kit/components/d-menu";
++import dMenuHighlight from "discourse/ui-kit/modifiers/d-menu-highlight";
++import { i18n } from "discourse-i18n";
++
++export default class ISBFExplorePicker extends Component {
++  @tracked search = "";
++  #menu;
++
++  get label() {
++    const label = i18n(themePrefix(this.args.labelKey));
++    return this.args.selectedIds.length
++      ? i18n(themePrefix("isbf_v2.explore_selected_count"), {
++          count: this.args.selectedIds.length,
++          label,
++        })
++      : label;
++  }
++
++  get options() {
++    const selected = new Set(this.args.selectedIds);
++    const query = this.search.trim().toLocaleLowerCase();
++    return this.args.items
++      .filter((item) =>
++        this.args.onSearch
++          ? true
++          : item.label.toLocaleLowerCase().includes(query)
++      )
++      .map((item) => ({ ...item, selected: selected.has(item.id) }));
++  }
++
++  @action
++  clear() {
++    this.args.onClear();
++  }
++
++  @action
++  createCategory() {
++    this.#menu?.close();
++    this.args.onCreateCategory?.();
++  }
++
++  @action
++  focusSearch() {
++    this.#menu?.content?.querySelector("input[type='search']")?.focus();
++  }
++
++  @action
++  opened() {
++    this.args.onSearch?.(this.search);
++    scheduleOnce("afterRender", this, this.focusSearch);
++  }
++
++  @action
++  registerMenu(menu) {
++    this.#menu = menu;
++  }
++
++  @action
++  retrySearch() {
++    this.args.onSearch?.(this.search);
++  }
++
++  @action
++  toggleOption(item) {
++    this.args.onToggle(item);
++  }
++
++  @action
++  updateSearch(event) {
++    this.search = event.target.value;
++    this.args.onSearch?.(this.search);
++  }
++
++  <template>
++    <DMenu
++      @ariaLabel={{this.label}}
++      @contentClass="isbf-explore-picker__menu"
++      @disabled={{@disabled}}
++      @icon="chevron-down"
++      @inlineTabOrder={{true}}
++      @label={{this.label}}
++      @onRegisterApi={{this.registerMenu}}
++      @onShow={{this.opened}}
++      @placement="bottom-start"
++      @triggerClass="isbf-explore-picker__trigger"
++    >
++      <:content>
++        <div class="isbf-explore-picker__content">
++          <input
++            aria-label={{i18n (themePrefix @searchKey)}}
++            class="isbf-explore-picker__search"
++            placeholder={{i18n (themePrefix @searchKey)}}
++            type="search"
++            value={{this.search}}
++            {{on "input" this.updateSearch}}
++          />
++          {{#if @loading}}<p role="status">{{i18n
++                (themePrefix "isbf_v2.explore_loading")
++              }}</p>{{/if}}
++          {{#if @error}}
++            <div class="isbf-explore-picker__error" role="alert">
++              <span>{{i18n (themePrefix "isbf_v2.explore_search_error")}}</span>
++              <button type="button" {{on "click" this.retrySearch}}>{{i18n
++                  (themePrefix "isbf_v2.explore_retry")
++                }}</button>
++            </div>
++          {{/if}}
++          <div
++            class="isbf-explore-picker__options"
++            {{dMenuHighlight itemSelector="label"}}
++          >
++            {{#each this.options key="id" as |item|}}
++              <label class="isbf-explore-picker__option">
++                <span class="isbf-explore-picker__label">{{item.label}}</span>
++                <input
++                  checked={{item.selected}}
++                  class="isbf-explore-picker__checkbox"
++                  disabled={{item.pending}}
++                  type="checkbox"
++                  {{on "change" (fn this.toggleOption item)}}
++                />
++              </label>
++            {{else}}
++              {{#unless @loading}}<p>{{i18n
++                    (themePrefix "isbf_v2.explore_no_options")
++                  }}</p>{{/unless}}
++            {{/each}}
++          </div>
++          <div class="isbf-explore-picker__footer">
++            <button
++              class="isbf-explore-picker__clear"
++              disabled={{eq @selectedIds.length 0}}
++              type="button"
++              {{on "click" this.clear}}
++            >{{i18n (themePrefix "isbf_v2.explore_clear")}}</button>
++            {{#if @canCreateCategory}}
++              <button
++                class="isbf-explore-picker__create"
++                type="button"
++                {{on "click" this.createCategory}}
++              >{{i18n (themePrefix "isbf_v2.explore_create_category")}}</button>
++            {{/if}}
++          </div>
++        </div>
++      </:content>
++    </DMenu>
++  </template>
++}
+--- /dev/null
++++ b/theme/javascripts/discourse/components/isbf-feed-card-menu.gjs
+@@ -0,0 +1,88 @@
++import { array } from "@ember/helper";
++import { themePrefix } from "virtual:theme";
++import DMenu from "discourse/float-kit/components/d-menu";
++import { or } from "discourse/truth-helpers";
++import DButton from "discourse/ui-kit/d-button";
++import DDropdownMenu from "discourse/ui-kit/d-dropdown-menu";
++import dRovingFocus from "discourse/ui-kit/modifiers/d-roving-focus";
++import { i18n } from "discourse-i18n";
++
++const ISBFFeedCardMenu = <template>
++  {{#if (or @canManageHomePin @canFlag)}}
++    <div class="isbf-feed-card__menu-wrap">
++      <DMenu
++        aria-haspopup="menu"
++        @ariaLabel={{i18n (themePrefix "isbf_v2.more_actions")}}
++        @autofocus={{true}}
++        @contentClass="isbf-feed-card-menu"
++        @contentRole="presentation"
++        @fallbackPlacements={{array "top-end" "bottom-start" "top-start"}}
++        @groupIdentifier="isbf-feed-card-actions"
++        @icon="ellipsis"
++        @modalForMobile={{false}}
++        @onRegisterApi={{@onRegisterApi}}
++        @placement="bottom-end"
++        @triggerClass="btn-flat isbf-feed-card__menu-trigger"
++      >
++        <:content>
++          <DDropdownMenu
++            aria-label={{i18n (themePrefix "isbf_v2.more_actions")}}
++            class="isbf-feed-card__menu"
++            role="menu"
++            @manageFocus={{false}}
++            {{dRovingFocus
++              itemSelector="[role='menuitem']"
++              itemsKey=(array
++                @canManageHomePin @canFlag @pinned @isPinning @isFlagging
++              )
++              orientation="vertical"
++              wrap=true
++            }}
++            as |dropdown|
++          >
++            {{#if @canManageHomePin}}
++              <dropdown.item role="presentation">
++                <DButton
++                  class="btn-flat isbf-feed-card__pin-action"
++                  role="menuitem"
++                  @action={{@onPin}}
++                  @disabled={{@isPinning}}
++                  @icon="thumbtack"
++                  @label={{themePrefix
++                    (if @pinned "isbf_v2.pin_update" "isbf_v2.pin")
++                  }}
++                />
++              </dropdown.item>
++              {{#if @pinned}}
++                <dropdown.item role="presentation">
++                  <DButton
++                    class="btn-flat isbf-feed-card__pin-action"
++                    role="menuitem"
++                    @action={{@onUnpin}}
++                    @disabled={{@isPinning}}
++                    @icon="thumbtack"
++                    @label={{themePrefix "isbf_v2.pin_cancel"}}
++                  />
++                </dropdown.item>
++              {{/if}}
++            {{/if}}
++            {{#if @canFlag}}
++              <dropdown.item role="presentation">
++                <DButton
++                  class="btn-flat"
++                  role="menuitem"
++                  @action={{@onFlag}}
++                  @disabled={{@isFlagging}}
++                  @icon="flag"
++                  @label={{themePrefix "isbf_v2.report"}}
++                />
++              </dropdown.item>
++            {{/if}}
++          </DDropdownMenu>
++        </:content>
++      </DMenu>
++    </div>
++  {{/if}}
++</template>;
++
++export default ISBFFeedCardMenu;
+--- a/theme/javascripts/discourse/components/isbf-learning-composer.gjs
++++ b/theme/javascripts/discourse/components/isbf-learning-composer.gjs
+@@ -1,10 +1,10 @@
+ import Component from "@glimmer/component";
+ import { tracked } from "@glimmer/tracking";
+ import { action } from "@ember/object";
+-import { on } from "@ember/modifier";
+ import didInsert from "@ember/render-modifiers/modifiers/did-insert";
+ import { ajax } from "discourse/lib/ajax";
+ import DButton from "discourse/ui-kit/d-button";
++import DSelect from "discourse/ui-kit/d-select";
+ import { isLearningComposer } from "../lib/learning-composer";
+ 
+ export default class ISBFLearningComposer extends Component {
+@@ -43,15 +43,15 @@
+     this.error = false;
+     try {
+       const data = await ajax("/isbf/learning/courses");
+-      if (!this.isDestroying && !this.isDestroyed) {
++      if (!this.isDestroying) {
+         this.courses = data.courses || [];
+       }
+     } catch {
+-      if (!this.isDestroying && !this.isDestroyed) {
++      if (!this.isDestroying) {
+         this.error = true;
+       }
+     } finally {
+-      if (!this.isDestroying && !this.isDestroyed) {
++      if (!this.isDestroying) {
+         this.loading = false;
+       }
+     }
+@@ -66,15 +66,19 @@
+     {{#if this.visible}}
+       <div class="isbf-learning-composer" {{didInsert this.loadCourses}}>
+         <label>课程
+-          <select disabled={{this.loading}} {{on "change" this.selectCourse}}>
++          <DSelect
++            disabled={{this.loading}}
++            @includeNone={{false}}
++            @onInput={{this.selectCourse}}
++          >
+             <option value="">请选择课程</option>
+             {{#each this.options as |course|}}
+               <option
++                selected={{course.selected}}
+                 value={{course.id}}
+-                selected={{course.selected}}
+               >{{course.label}}</option>
+             {{/each}}
+-          </select>
++          </DSelect>
+         </label>
+         <p
+         >填写资料标题。说明可选；请上传资料文件或填写外部链接。普通用户投稿将在审核通过后展示。</p>
+--- a/theme/javascripts/discourse/components/isbf-notifications.gjs
++++ b/theme/javascripts/discourse/components/isbf-notifications.gjs
+@@ -7,13 +7,14 @@
+ import { service } from "@ember/service";
+ import { themePrefix } from "virtual:theme";
+ import DismissNotificationConfirmationModal from "discourse/components/modal/dismiss-notification-confirmation";
++import DMenu from "discourse/float-kit/components/d-menu";
+ import { ajax } from "discourse/lib/ajax";
+ import UserMenuNotificationItem from "discourse/lib/user-menu/notification-item";
+ import Notification from "discourse/models/notification";
+ import DButton from "discourse/ui-kit/d-button";
+ import DHoldButton from "discourse/ui-kit/d-hold-button";
+ import DToggleSwitch from "discourse/ui-kit/d-toggle-switch";
+-import dIcon from "discourse/ui-kit/helpers/d-icon";
++import dMenuHighlight from "discourse/ui-kit/modifiers/d-menu-highlight";
+ import { i18n } from "discourse-i18n";
+ import { consumeInitialNotificationTab } from "../lib/notification-groups";
+ import { isUntitledTopicTitle } from "../lib/optional-topic-title";
+@@ -39,6 +40,7 @@
+   @tracked revision = 0;
+   @tracked tab = "all";
+ 
++  #menu;
+   #generation = 0;
+   #models = new Map();
+ 
+@@ -134,12 +136,14 @@
+   }
+ 
+   @action
+-  retryFilter(_value, event) {
++  registerMenu(menu) {
++    this.#menu = menu;
++  }
++
++  @action
++  retryFilter() {
+     // Keep focus in the menu when the retry control disappears.
+-    event.target
+-      .closest(".isbf-notifications__menu")
+-      ?.querySelector("summary")
+-      ?.focus();
++    this.#menu?.triggerElement?.focus();
+     return this.isbfNotifications.retryFilter();
+   }
+ 
+@@ -253,15 +257,6 @@
+       if (!this.isDestroying) {
+         this.markingRead = false;
+       }
+-    }
+-  }
+-
+-  @action
+-  onMenuKeydown(event) {
+-    if (event.key === "Escape") {
+-      event.currentTarget.open = false;
+-      event.currentTarget.querySelector("summary")?.focus();
+-      event.preventDefault();
+     }
+   }
+ 
+@@ -410,78 +405,93 @@
+                 (themePrefix "isbf_v2.notifications_mark_read_compact")
+               }}</span>
+           </DHoldButton>
+-          <details
+-            class="isbf-notifications__menu"
+-            {{on "keydown" this.onMenuKeydown}}
++          <DMenu
++            @ariaLabel={{i18n (themePrefix "isbf_v2.notifications_menu")}}
++            @contentClass="isbf-notifications__menu-panel"
++            @icon="ellipsis"
++            @inlineTabOrder={{true}}
++            @onRegisterApi={{this.registerMenu}}
++            @placement="bottom-end"
++            @triggerClass="btn-flat isbf-notifications__menu"
+           >
+-            <summary
+-              aria-label={{i18n (themePrefix "isbf_v2.notifications_menu")}}
+-            >{{dIcon "ellipsis"}}</summary>
+-            <div class="isbf-notifications__menu-items">
+-              <a href="/my/preferences/notifications">{{i18n
+-                  (themePrefix "isbf_v2.notifications_settings")
+-                }}</a>
+-              <div class="isbf-notifications__filter">
+-                <DToggleSwitch
+-                  disabled={{this.isbfNotifications.savingFilter}}
+-                  @label={{themePrefix "isbf_v2.notifications_unread_only"}}
+-                  @state={{this.unreadOnly}}
+-                  {{on "click" this.toggleUnreadOnly}}
+-                />
+-              </div>
+-              {{#if this.isbfNotifications.filterError}}
++            <:content>
++              <div
++                class="isbf-notifications__menu-items"
++                {{dMenuHighlight
++                  itemSelector=":scope > button, :scope > a, .isbf-notifications__badge-options > button"
++                }}
++              >
++                <a href="/my/preferences/notifications">{{i18n
++                    (themePrefix "isbf_v2.notifications_settings")
++                  }}</a>
++                <div class="isbf-notifications__filter">
++                  <DToggleSwitch
++                    disabled={{this.isbfNotifications.savingFilter}}
++                    @label={{themePrefix "isbf_v2.notifications_unread_only"}}
++                    @state={{this.unreadOnly}}
++                    {{on "click" this.toggleUnreadOnly}}
++                  />
++                </div>
++                {{#if this.isbfNotifications.filterError}}
++                  <div
++                    class="isbf-notifications__filter-error isbf-notifications__preference-error"
++                    role="alert"
++                  >
++                    <p>{{i18n
++                        (themePrefix "isbf_v2.notifications_filter_error")
++                      }}</p>
++                    <DButton
++                      @action={{this.retryFilter}}
++                      @disabled={{this.isbfNotifications.savingFilter}}
++                      @forwardEvent={{true}}
++                      @label={{themePrefix "isbf_v2.notifications_retry"}}
++                    />
++                  </div>
++                {{/if}}
+                 <div
+-                  class="isbf-notifications__filter-error isbf-notifications__preference-error"
+-                  role="alert"
++                  aria-label={{i18n
++                    (themePrefix "isbf_v2.notifications_badge_style")
++                  }}
++                  class="isbf-notifications__badge-options"
++                  role="group"
+                 >
+                   <p>{{i18n
+-                      (themePrefix "isbf_v2.notifications_filter_error")
++                      (themePrefix "isbf_v2.notifications_badge_style")
+                     }}</p>
+                   <DButton
+-                    @action={{this.retryFilter}}
+-                    @disabled={{this.isbfNotifications.savingFilter}}
+-                    @forwardEvent={{true}}
+-                    @label={{themePrefix "isbf_v2.notifications_retry"}}
++                    @action={{fn
++                      this.isbfNotifications.saveBadgeStyle
++                      "number"
++                    }}
++                    @ariaPressed={{this.isbfNotifications.numberStyle}}
++                    @disabled={{this.isbfNotifications.savingStyle}}
++                    @label={{themePrefix "isbf_v2.notifications_badge_number"}}
++                  />
++                  <DButton
++                    @action={{fn this.isbfNotifications.saveBadgeStyle "dot"}}
++                    @ariaPressed={{this.isbfNotifications.dotStyle}}
++                    @disabled={{this.isbfNotifications.savingStyle}}
++                    @label={{themePrefix "isbf_v2.notifications_badge_dot"}}
+                   />
+                 </div>
+-              {{/if}}
+-              <div
+-                aria-label={{i18n
+-                  (themePrefix "isbf_v2.notifications_badge_style")
+-                }}
+-                class="isbf-notifications__badge-options"
+-                role="group"
+-              >
+-                <p>{{i18n
+-                    (themePrefix "isbf_v2.notifications_badge_style")
+-                  }}</p>
+-                <DButton
+-                  @action={{fn this.isbfNotifications.saveBadgeStyle "number"}}
+-                  @ariaPressed={{this.isbfNotifications.numberStyle}}
+-                  @disabled={{this.isbfNotifications.savingStyle}}
+-                  @label={{themePrefix "isbf_v2.notifications_badge_number"}}
+-                />
+-                <DButton
+-                  @action={{fn this.isbfNotifications.saveBadgeStyle "dot"}}
+-                  @ariaPressed={{this.isbfNotifications.dotStyle}}
+-                  @disabled={{this.isbfNotifications.savingStyle}}
+-                  @label={{themePrefix "isbf_v2.notifications_badge_dot"}}
+-                />
++                {{#if this.isbfNotifications.styleError}}
++                  <div
++                    class="isbf-notifications__preference-error"
++                    role="alert"
++                  >
++                    <p>{{i18n
++                        (themePrefix "isbf_v2.notifications_badge_error")
++                      }}</p>
++                    <DButton
++                      @action={{this.isbfNotifications.retryBadgeStyle}}
++                      @disabled={{this.isbfNotifications.savingStyle}}
++                      @label={{themePrefix "isbf_v2.notifications_retry"}}
++                    />
++                  </div>
++                {{/if}}
+               </div>
+-              {{#if this.isbfNotifications.styleError}}
+-                <div class="isbf-notifications__preference-error" role="alert">
+-                  <p>{{i18n
+-                      (themePrefix "isbf_v2.notifications_badge_error")
+-                    }}</p>
+-                  <DButton
+-                    @action={{this.isbfNotifications.retryBadgeStyle}}
+-                    @disabled={{this.isbfNotifications.savingStyle}}
+-                    @label={{themePrefix "isbf_v2.notifications_retry"}}
+-                  />
+-                </div>
+-              {{/if}}
+-            </div>
+-          </details>
++            </:content>
++          </DMenu>
+         </div>
+       </header>
+       <div
+--- a/theme/javascripts/discourse/components/isbf-official-picker.gjs
++++ b/theme/javascripts/discourse/components/isbf-official-picker.gjs
+@@ -1,15 +1,30 @@
+ import Component from "@glimmer/component";
+ import { fn } from "@ember/helper";
+-import { on } from "@ember/modifier";
+ import { action } from "@ember/object";
+ import { themePrefix } from "virtual:theme";
+ import DMenu from "discourse/float-kit/components/d-menu";
+ import DButton from "discourse/ui-kit/d-button";
+ import DDropdownMenu from "discourse/ui-kit/d-dropdown-menu";
++import dRovingFocus from "discourse/ui-kit/modifiers/d-roving-focus";
+ import { i18n } from "discourse-i18n";
+ 
+ export default class ISBFOfficialPicker extends Component {
+-  fallbackPlacements = ["bottom-start", "bottom-end"];
++  fallbackPlacements = ["top-start", "bottom-end", "top-end"];
++  #menu;
++  #entered = false;
++
++  get menuItems() {
++    return this.args.multiple
++      ? this.options
++      : [
++          {
++            id: "",
++            label: i18n(themePrefix(this.args.allKey)),
++            selected: this.allSelected,
++          },
++          ...this.options,
++        ];
++  }
+ 
+   get label() {
+     const selected = this.options.filter((item) => item.selected);
+@@ -43,54 +58,95 @@
+   }
+ 
+   @action
++  enter() {
++    if (this.#entered) {
++      return;
++    }
++    this.#entered = true;
++    const row =
++      this.#menu?.content?.querySelector('[aria-checked="true"]') ||
++      this.#menu?.content?.querySelector(
++        "button[role], input[type='checkbox']"
++      );
++    row?.focus({ preventScroll: true });
++    row?.scrollIntoView({ block: "nearest" });
++  }
++
++  @action
++  closed() {
++    this.#entered = false;
++  }
++
++  @action
++  openFromKey(event) {
++    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
++      event.preventDefault();
++      this.#menu?.show();
++    }
++  }
++
++  @action
++  registerMenu(menu) {
++    this.#menu = menu;
++  }
++
++  @action
+   async select(menu, id) {
+     this.args.onSelect(id);
+     await menu.close();
+   }
+ 
+   @action
+-  toggle(id, event) {
+-    this.args.onSelect(id, event.target.checked);
++  toggle(id, selected) {
++    this.args.onSelect(id, !selected);
+   }
+ 
+   <template>
+     <DMenu
+-      @ariaLabel={{i18n (themePrefix @labelKey)}}
++      aria-haspopup="menu"
++      @ariaLabel={{this.label}}
+       @contentClass="isbf-official-picker__menu"
++      @contentRole="presentation"
+       @fallbackPlacements={{this.fallbackPlacements}}
+       @icon="chevron-down"
++      @inlineTabOrder={{true}}
+       @label={{this.label}}
++      @onClose={{this.closed}}
++      @onKeydown={{this.openFromKey}}
++      @onPositioned={{this.enter}}
++      @onRegisterApi={{this.registerMenu}}
+       @placement="bottom-start"
+       @triggerClass="btn-flat isbf-official-picker__trigger"
+     >
+       <:content as |menu|>
+-        <DDropdownMenu as |dropdown|>
+-          {{#unless @multiple}}
+-            <dropdown.item>
+-              <DButton
+-                class="btn-flat isbf-official-picker__item"
+-                @action={{fn this.select menu ""}}
+-                @ariaPressed={{this.allSelected}}
+-                @translatedLabel={{i18n (themePrefix @allKey)}}
+-              />
+-            </dropdown.item>
+-          {{/unless}}
+-          {{#each this.options as |item|}}
+-            <dropdown.item>
++        <DDropdownMenu
++          aria-label={{i18n (themePrefix @labelKey)}}
++          role="menu"
++          @manageFocus={{false}}
++          {{dRovingFocus
++            itemSelector="button[role]"
++            itemsKey=this.menuItems
++            orientation="vertical"
++            typeAhead=true
++          }}
++          as |dropdown|
++        >
++          {{#each this.menuItems key="id" as |item|}}
++            <dropdown.item role="presentation">
+               {{#if @multiple}}
+-                <label class="isbf-official-picker__item">
+-                  <input
+-                    checked={{item.selected}}
+-                    type="checkbox"
+-                    {{on "change" (fn this.toggle item.id)}}
+-                  />
+-                  <span>{{item.label}}</span>
+-                </label>
++                <DButton
++                  aria-checked={{if item.selected "true" "false"}}
++                  class="isbf-official-picker__item"
++                  role="menuitemcheckbox"
++                  @action={{fn this.toggle item.id item.selected}}
++                  @translatedLabel={{item.label}}
++                />
+               {{else}}
+                 <DButton
+-                  class="btn-flat isbf-official-picker__item"
++                  aria-checked={{if item.selected "true" "false"}}
++                  class="isbf-official-picker__item"
++                  role="menuitemradio"
+                   @action={{fn this.select menu item.id}}
+-                  @ariaPressed={{item.selected}}
+                   @translatedLabel={{item.label}}
+                 />
+               {{/if}}
+--- a/theme/javascripts/discourse/components/isbf-topic-more.gjs
++++ b/theme/javascripts/discourse/components/isbf-topic-more.gjs
+@@ -189,7 +189,7 @@
+         @ariaLabel={{i18n "more"}}
+         @icon="ellipsis"
+         @identifier={{this.identifier}}
+-        @modalForMobile={{true}}
++        @modalForMobile={{false}}
+         @onRegisterApi={{this.registerMenu}}
+         @title={{i18n "more"}}
+         @triggerClass="btn-flat isbf-topic-card__more show-more-actions"
+--- a/theme/javascripts/discourse/components/isbf-v2-account-menu.gjs
++++ b/theme/javascripts/discourse/components/isbf-v2-account-menu.gjs
+@@ -1,16 +1,19 @@
+ import Component from "@glimmer/component";
+ import { tracked } from "@glimmer/tracking";
++import { array } from "@ember/helper";
+ import { action } from "@ember/object";
+ import { service } from "@ember/service";
+ import { themePrefix } from "virtual:theme";
+ import Form from "discourse/components/form";
+ import PluginOutlet from "discourse/components/plugin-outlet";
++import DMenu from "discourse/float-kit/components/d-menu";
+ import lazyHash from "discourse/helpers/lazy-hash";
+ import { ajax } from "discourse/lib/ajax";
+ import logout from "discourse/lib/logout";
+ import { getCurrentPushSubscription } from "discourse/lib/push-notifications";
+ import DButton from "discourse/ui-kit/d-button";
+ import dIcon from "discourse/ui-kit/helpers/d-icon";
++import dMenuHighlight from "discourse/ui-kit/modifiers/d-menu-highlight";
+ import { i18n } from "discourse-i18n";
+ import ISBFAlumniLabel from "./isbf-alumni-label";
+ 
+@@ -35,6 +38,7 @@
+   @tracked verificationLinkId;
+ 
+   #rootElement;
++  #menu;
+ 
+   willDestroy() {
+     super.willDestroy(...arguments);
+@@ -84,10 +88,26 @@
+   }
+ 
+   @action
+-  closeMenu() {
++  registerMenu(menu) {
++    this.#menu = menu;
++    this.#rootElement = menu.triggerElement.closest(".isbf-v2-account-menu");
++  }
++
++  @action
++  menuShown() {
++    this.isOpen = true;
++    this.#loadAccounts();
++  }
++
++  @action
++  menuClosed() {
+     this.isOpen = false;
+     this.#resetForms();
+-    this.#removeDocumentListeners();
++  }
++
++  @action
++  closeMenu() {
++    this.#menu?.close();
+   }
+ 
+   @action
+@@ -137,7 +157,8 @@
+     // Removing or disabling a focused control can leave no focus destination.
+     if (
+       event.relatedTarget &&
+-      !event.currentTarget.contains(event.relatedTarget)
++      !event.currentTarget.contains(event.relatedTarget) &&
++      !this.#menu?.content?.contains(event.relatedTarget)
+     ) {
+       this.closeMenu();
+     }
+@@ -160,7 +181,7 @@
+       return;
+     }
+     if (!this.#rootElement?.contains(document.activeElement)) {
+-      this.closeMenu();
++      this.#menu?.scheduleHoverClose();
+     }
+   }
+ 
+@@ -323,10 +344,7 @@
+ 
+   #showMenu(target) {
+     this.#rootElement = target.closest(".isbf-v2-account-menu");
+-    this.isOpen = true;
+-    this.#loadAccounts();
+-    document.addEventListener("pointerdown", this.onOutsidePointer, true);
+-    document.addEventListener("keydown", this.onKeyDown, true);
++    this.#menu?.show();
+   }
+ 
+   async #signOut() {
+@@ -381,284 +399,301 @@
+           </a>
+         {{/unless}}
+ 
+-        <button
+-          aria-expanded={{if this.isOpen "true" "false"}}
+-          aria-label={{i18n (themePrefix "isbf_v2.account_actions")}}
+-          class="isbf-v2-account-menu__trigger"
+-          type="button"
+-          {{on "click" this.toggleMenu}}
++        <DMenu
++          @ariaLabel={{i18n (themePrefix "isbf_v2.account_actions")}}
++          @contentClass="isbf-v2-account-menu__float"
++          @hoverGracePeriod={{250}}
++          @inlineTabOrder={{true}}
++          @onClose={{this.menuClosed}}
++          @onRegisterApi={{this.registerMenu}}
++          @onShow={{this.menuShown}}
++          @placement={{if @mobile "bottom-start" "top-start"}}
++          @triggerClass="isbf-v2-account-menu__trigger"
++          @untriggers={{if @mobile (array "click") (array)}}
+         >
+-          {{#unless @mobile}}
+-            <span class="isbf-avatar isbf-v2-account-menu__compact-avatar"><img
+-                alt=""
+-                height="40"
+-                src={{this.avatarUrl}}
+-                width="40"
+-              /><PluginOutlet
+-                @name="user-avatar-frame"
+-                @outletArgs={{lazyHash user=this.currentUser motion="static"}}
+-              /></span>
+-          {{/unless}}
+-          {{dIcon "ellipsis"}}
+-        </button>
+-
+-        {{#if this.isOpen}}
+-          <div
+-            aria-label={{i18n (themePrefix "isbf_v2.account_actions")}}
+-            class="isbf-v2-account-menu__panel"
+-            role="group"
+-          >
++          <:trigger>
++
+             {{#unless @mobile}}
+-              <a
+-                class="isbf-v2-account-menu__compact-profile"
+-                href={{this.profileHref}}
+-                {{on "click" this.closeMenu}}
+-              >
+-                {{i18n (themePrefix "isbf_v2.profile")}}
++              <span
++                class="isbf-avatar isbf-v2-account-menu__compact-avatar"
++              ><img
++                  alt=""
++                  height="40"
++                  src={{this.avatarUrl}}
++                  width="40"
++                /><PluginOutlet
++                  @name="user-avatar-frame"
++                  @outletArgs={{lazyHash user=this.currentUser motion="static"}}
++                /></span>
++            {{/unless}}
++            {{dIcon "ellipsis"}}
++          </:trigger>
++          <:content>
++
++            <div
++              aria-label={{i18n (themePrefix "isbf_v2.account_actions")}}
++              class="isbf-v2-account-menu__panel"
++              role="group"
++              {{dMenuHighlight
++                itemSelector=":scope > a, :scope > button, .isbf-v2-account-menu__linked-account > button"
++              }}
++            >
++              {{#unless @mobile}}
++                <a
++                  class="isbf-v2-account-menu__compact-profile"
++                  href={{this.profileHref}}
++                  {{on "click" this.closeMenu}}
++                >
++                  {{i18n (themePrefix "isbf_v2.profile")}}
++                </a>
++              {{/unless}}
++              <a href="/isbf-anonymous/posts" {{on "click" this.closeMenu}}>
++                {{i18n (themePrefix "isbf_v2.my_anonymous_posts")}}
+               </a>
+-            {{/unless}}
+-            <a href="/isbf-anonymous/posts" {{on "click" this.closeMenu}}>
+-              {{i18n (themePrefix "isbf_v2.my_anonymous_posts")}}
+-            </a>
+-
+-            {{#if this.canSwitchAccounts}}
+-              {{#if this.showLinkedAccounts}}
+-                {{#each this.activeLinks as |link|}}
+-                  <div class="isbf-v2-account-menu__linked-account">
+-                    <span class="isbf-avatar"><img
+-                        alt=""
+-                        height="32"
+-                        src={{link.account.avatar_template}}
+-                        width="32"
+-                      /><PluginOutlet
+-                        @name="user-avatar-frame"
+-                        @outletArgs={{lazyHash
+-                          user=link.account
+-                          motion="static"
++
++              {{#if this.canSwitchAccounts}}
++                {{#if this.showLinkedAccounts}}
++                  {{#each this.activeLinks as |link|}}
++                    <div class="isbf-v2-account-menu__linked-account">
++                      <span class="isbf-avatar"><img
++                          alt=""
++                          height="32"
++                          src={{link.account.avatar_template}}
++                          width="32"
++                        /><PluginOutlet
++                          @name="user-avatar-frame"
++                          @outletArgs={{lazyHash
++                            user=link.account
++                            motion="static"
++                          }}
++                        /></span>
++                      <span class="isbf-v2-account-menu__account-info">
++                        <b class="isbf-v2-account-menu__account-name">
++                          {{or link.account.name link.account.username}}
++                        </b>
++                        <small class="isbf-v2-account-menu__account-username">
++                          @{{link.account.username}}<ISBFAlumniLabel
++                            @user={{link.account}}
++                          />
++                        </small>
++                      </span>
++                      {{#if (eq link.status "approved")}}
++                        <button
++                          disabled={{this.isBusy}}
++                          type="button"
++                          {{on "click" (fn this.switchAccount link)}}
++                        >
++                          {{if
++                            link.device_authorized
++                            (i18n (themePrefix "isbf_v2.switch_now"))
++                            (i18n (themePrefix "isbf_v2.verify_device"))
++                          }}
++                        </button>
++                      {{else}}
++                        <small class="isbf-v2-account-menu__status">
++                          {{i18n (themePrefix "isbf_v2.account_link_pending")}}
++                        </small>
++                      {{/if}}
++
++                      {{#if (eq this.verificationLinkId link.id)}}
++                        <Form
++                          class="isbf-v2-account-menu__verify"
++                          @data={{this.verificationData}}
++                          @onSubmit={{fn this.verifyAndSwitch link}}
++                          as |form draft|
++                        >
++                          {{#if link.account.email_code_enabled}}
++                            <form.Field
++                              @disabled={{this.isBusy}}
++                              @name="verificationMethod"
++                              @title={{i18n
++                                (themePrefix
++                                  "isbf_v2.device_verification_method"
++                                )
++                              }}
++                              @type="select"
++                              @validation="required"
++                              as |field|
++                            >
++                              <field.Control @includeNone={{false}} as |select|>
++                                <select.Option @value="password">
++                                  {{i18n
++                                    (themePrefix
++                                      "isbf_v2.password_verification"
++                                    )
++                                  }}
++                                </select.Option>
++                                <select.Option @value="email_code">
++                                  {{i18n
++                                    (themePrefix
++                                      "isbf_v2.email_code_verification"
++                                    )
++                                  }}
++                                </select.Option>
++                              </field.Control>
++                            </form.Field>
++                          {{/if}}
++
++                          {{#if (eq draft.verificationMethod "email_code")}}
++                            <DButton
++                              class="isbf-v2-account-menu__send-code"
++                              @action={{fn this.sendEmailCode link}}
++                              @disabled={{this.isBusy}}
++                              @translatedLabel={{if
++                                this.emailCodeSent
++                                (i18n (themePrefix "isbf_v2.resend_email_code"))
++                                (i18n (themePrefix "isbf_v2.send_email_code"))
++                              }}
++                            />
++                            {{#if this.emailCodeSent}}
++                              <p class="isbf-v2-account-menu__code-status">
++                                {{this.emailCodeSentMessage}}
++                              </p>
++                            {{/if}}
++                            <form.Field
++                              @disabled={{this.isBusy}}
++                              @name="emailCode"
++                              @title={{i18n
++                                (themePrefix "isbf_v2.target_email_code")
++                              }}
++                              @type="input"
++                              @validation="required|length:6,6"
++                              as |field|
++                            >
++                              <field.Control
++                                autocomplete="one-time-code"
++                                inputmode="numeric"
++                                maxlength="6"
++                                pattern="[0-9]{6}"
++                              />
++                            </form.Field>
++                          {{else}}
++                            <form.Field
++                              @disabled={{this.isBusy}}
++                              @name="password"
++                              @title={{i18n
++                                (themePrefix "isbf_v2.target_password")
++                              }}
++                              @type="input-password"
++                              @validation="required"
++                              as |field|
++                            >
++                              <field.Control autocomplete="current-password" />
++                            </form.Field>
++                          {{/if}}
++
++                          {{#if
++                            (or
++                              link.account.totp_enabled
++                              link.account.backup_codes_enabled
++                            )
++                          }}
++                            <form.Field
++                              @description={{i18n
++                                (themePrefix
++                                  (if
++                                    (eq draft.secondFactorMethod "2")
++                                    "isbf_v2.backup_code_help"
++                                    "isbf_v2.authenticator_code_help"
++                                  )
++                                )
++                              }}
++                              @disabled={{this.isBusy}}
++                              @name="secondFactorToken"
++                              @title={{i18n
++                                (themePrefix "isbf_v2.second_factor_code")
++                              }}
++                              @type="input"
++                              @validation="required"
++                              as |field|
++                            >
++                              <field.Control autocomplete="one-time-code" />
++                            </form.Field>
++                          {{/if}}
++                          {{#if link.account.backup_codes_enabled}}
++                            <form.Field
++                              @disabled={{this.isBusy}}
++                              @name="secondFactorMethod"
++                              @title={{i18n
++                                (themePrefix "isbf_v2.second_factor_method")
++                              }}
++                              @type="select"
++                              @validation="required"
++                              as |field|
++                            >
++                              <field.Control @includeNone={{false}} as |select|>
++                                <select.Option @value="1">
++                                  {{i18n
++                                    (themePrefix "isbf_v2.authenticator_code")
++                                  }}
++                                </select.Option>
++                                <select.Option @value="2">
++                                  {{i18n (themePrefix "isbf_v2.backup_code")}}
++                                </select.Option>
++                              </field.Control>
++                            </form.Field>
++                          {{/if}}
++                          <form.Submit
++                            @disabled={{this.isBusy}}
++                            @label={{themePrefix "isbf_v2.verify_and_switch"}}
++                          />
++                        </Form>
++                      {{/if}}
++                    </div>
++                  {{/each}}
++                {{/if}}
++
++                <button
++                  aria-expanded={{if
++                    this.canLinkAccounts
++                    (if this.isLinkFormOpen "true" "false")
++                    (if this.isLinkedAccountsOpen "true" "false")
++                  }}
++                  class="isbf-v2-account-menu__link"
++                  type="button"
++                  {{on "click" this.toggleLinkForm}}
++                >
++                  {{i18n (themePrefix "isbf_v2.link_account")}}
++                </button>
++
++                {{#if (and this.canLinkAccounts this.isLinkFormOpen)}}
++                  <form
++                    class="isbf-v2-account-menu__link-form"
++                    {{on "submit" this.createLink}}
++                  >
++                    <label>
++                      {{i18n (themePrefix "isbf_v2.account_username")}}
++                      <input
++                        autocomplete="username"
++                        placeholder={{i18n
++                          (themePrefix "isbf_v2.account_username_placeholder")
+                         }}
+-                      /></span>
+-                    <span class="isbf-v2-account-menu__account-info">
+-                      <b class="isbf-v2-account-menu__account-name">
+-                        {{or link.account.name link.account.username}}
+-                      </b>
+-                      <small class="isbf-v2-account-menu__account-username">
+-                        @{{link.account.username}}<ISBFAlumniLabel
+-                          @user={{link.account}}
+-                        />
+-                      </small>
+-                    </span>
+-                    {{#if (eq link.status "approved")}}
+-                      <button
+-                        disabled={{this.isBusy}}
+-                        type="button"
+-                        {{on "click" (fn this.switchAccount link)}}
+-                      >
+-                        {{if
+-                          link.device_authorized
+-                          (i18n (themePrefix "isbf_v2.switch_now"))
+-                          (i18n (themePrefix "isbf_v2.verify_device"))
+-                        }}
+-                      </button>
+-                    {{else}}
+-                      <small class="isbf-v2-account-menu__status">
+-                        {{i18n (themePrefix "isbf_v2.account_link_pending")}}
+-                      </small>
+-                    {{/if}}
+-
+-                    {{#if (eq this.verificationLinkId link.id)}}
+-                      <Form
+-                        class="isbf-v2-account-menu__verify"
+-                        @data={{this.verificationData}}
+-                        @onSubmit={{fn this.verifyAndSwitch link}}
+-                        as |form draft|
+-                      >
+-                        {{#if link.account.email_code_enabled}}
+-                          <form.Field
+-                            @disabled={{this.isBusy}}
+-                            @name="verificationMethod"
+-                            @title={{i18n
+-                              (themePrefix "isbf_v2.device_verification_method")
+-                            }}
+-                            @type="select"
+-                            @validation="required"
+-                            as |field|
+-                          >
+-                            <field.Control @includeNone={{false}} as |select|>
+-                              <select.Option @value="password">
+-                                {{i18n
+-                                  (themePrefix "isbf_v2.password_verification")
+-                                }}
+-                              </select.Option>
+-                              <select.Option @value="email_code">
+-                                {{i18n
+-                                  (themePrefix
+-                                    "isbf_v2.email_code_verification"
+-                                  )
+-                                }}
+-                              </select.Option>
+-                            </field.Control>
+-                          </form.Field>
+-                        {{/if}}
+-
+-                        {{#if (eq draft.verificationMethod "email_code")}}
+-                          <DButton
+-                            class="isbf-v2-account-menu__send-code"
+-                            @action={{fn this.sendEmailCode link}}
+-                            @disabled={{this.isBusy}}
+-                            @translatedLabel={{if
+-                              this.emailCodeSent
+-                              (i18n (themePrefix "isbf_v2.resend_email_code"))
+-                              (i18n (themePrefix "isbf_v2.send_email_code"))
+-                            }}
+-                          />
+-                          {{#if this.emailCodeSent}}
+-                            <p class="isbf-v2-account-menu__code-status">
+-                              {{this.emailCodeSentMessage}}
+-                            </p>
+-                          {{/if}}
+-                          <form.Field
+-                            @disabled={{this.isBusy}}
+-                            @name="emailCode"
+-                            @title={{i18n
+-                              (themePrefix "isbf_v2.target_email_code")
+-                            }}
+-                            @type="input"
+-                            @validation="required|length:6,6"
+-                            as |field|
+-                          >
+-                            <field.Control
+-                              autocomplete="one-time-code"
+-                              inputmode="numeric"
+-                              maxlength="6"
+-                              pattern="[0-9]{6}"
+-                            />
+-                          </form.Field>
+-                        {{else}}
+-                          <form.Field
+-                            @disabled={{this.isBusy}}
+-                            @name="password"
+-                            @title={{i18n
+-                              (themePrefix "isbf_v2.target_password")
+-                            }}
+-                            @type="input-password"
+-                            @validation="required"
+-                            as |field|
+-                          >
+-                            <field.Control autocomplete="current-password" />
+-                          </form.Field>
+-                        {{/if}}
+-
+-                        {{#if
+-                          (or
+-                            link.account.totp_enabled
+-                            link.account.backup_codes_enabled
+-                          )
+-                        }}
+-                          <form.Field
+-                            @description={{i18n
+-                              (themePrefix
+-                                (if
+-                                  (eq draft.secondFactorMethod "2")
+-                                  "isbf_v2.backup_code_help"
+-                                  "isbf_v2.authenticator_code_help"
+-                                )
+-                              )
+-                            }}
+-                            @disabled={{this.isBusy}}
+-                            @name="secondFactorToken"
+-                            @title={{i18n
+-                              (themePrefix "isbf_v2.second_factor_code")
+-                            }}
+-                            @type="input"
+-                            @validation="required"
+-                            as |field|
+-                          >
+-                            <field.Control autocomplete="one-time-code" />
+-                          </form.Field>
+-                        {{/if}}
+-                        {{#if link.account.backup_codes_enabled}}
+-                          <form.Field
+-                            @disabled={{this.isBusy}}
+-                            @name="secondFactorMethod"
+-                            @title={{i18n
+-                              (themePrefix "isbf_v2.second_factor_method")
+-                            }}
+-                            @type="select"
+-                            @validation="required"
+-                            as |field|
+-                          >
+-                            <field.Control @includeNone={{false}} as |select|>
+-                              <select.Option @value="1">
+-                                {{i18n
+-                                  (themePrefix "isbf_v2.authenticator_code")
+-                                }}
+-                              </select.Option>
+-                              <select.Option @value="2">
+-                                {{i18n (themePrefix "isbf_v2.backup_code")}}
+-                              </select.Option>
+-                            </field.Control>
+-                          </form.Field>
+-                        {{/if}}
+-                        <form.Submit
+-                          @disabled={{this.isBusy}}
+-                          @label={{themePrefix "isbf_v2.verify_and_switch"}}
+-                        />
+-                      </Form>
+-                    {{/if}}
+-                  </div>
+-                {{/each}}
++                        required
++                        type="text"
++                        value={{this.requestedUsername}}
++                        {{on "input" this.updateRequestedUsername}}
++                      />
++                    </label>
++                    <button disabled={{this.isBusy}} type="submit">
++                      {{i18n (themePrefix "isbf_v2.send_link_request")}}
++                    </button>
++                  </form>
++                {{/if}}
++
++                {{#if this.errorMessage}}
++                  <p class="isbf-v2-account-menu__error" role="alert">
++                    {{this.errorMessage}}
++                  </p>
++                {{/if}}
+               {{/if}}
+ 
+-              <button
+-                aria-expanded={{if
+-                  this.canLinkAccounts
+-                  (if this.isLinkFormOpen "true" "false")
+-                  (if this.isLinkedAccountsOpen "true" "false")
+-                }}
+-                class="isbf-v2-account-menu__link"
+-                type="button"
+-                {{on "click" this.toggleLinkForm}}
+-              >
+-                {{i18n (themePrefix "isbf_v2.link_account")}}
++              <button type="button" {{on "click" this.confirmLogout}}>
++                {{i18n (themePrefix "isbf_v2.logout")}}
++                @{{this.currentUser.username}}
+               </button>
+-
+-              {{#if (and this.canLinkAccounts this.isLinkFormOpen)}}
+-                <form
+-                  class="isbf-v2-account-menu__link-form"
+-                  {{on "submit" this.createLink}}
+-                >
+-                  <label>
+-                    {{i18n (themePrefix "isbf_v2.account_username")}}
+-                    <input
+-                      autocomplete="username"
+-                      placeholder={{i18n
+-                        (themePrefix "isbf_v2.account_username_placeholder")
+-                      }}
+-                      required
+-                      type="text"
+-                      value={{this.requestedUsername}}
+-                      {{on "input" this.updateRequestedUsername}}
+-                    />
+-                  </label>
+-                  <button disabled={{this.isBusy}} type="submit">
+-                    {{i18n (themePrefix "isbf_v2.send_link_request")}}
+-                  </button>
+-                </form>
+-              {{/if}}
+-
+-              {{#if this.errorMessage}}
+-                <p class="isbf-v2-account-menu__error" role="alert">
+-                  {{this.errorMessage}}
+-                </p>
+-              {{/if}}
+-            {{/if}}
+-
+-            <button type="button" {{on "click" this.confirmLogout}}>
+-              {{i18n (themePrefix "isbf_v2.logout")}}
+-              @{{this.currentUser.username}}
+-            </button>
+-          </div>
+-        {{/if}}
++            </div>
++          </:content>
++        </DMenu>
+       </div>
+     {{/if}}
+   </template>
+--- a/theme/javascripts/discourse/components/isbf-v2-feed-card.gjs
++++ b/theme/javascripts/discourse/components/isbf-v2-feed-card.gjs
+@@ -39,6 +39,7 @@
+ import postActionPulse from "../modifiers/post-action-pulse";
+ import ISBFAlumniLabel from "./isbf-alumni-label";
+ import { ISBFCareersSalary } from "./isbf-careers-card";
++import ISBFFeedCardMenu from "./isbf-feed-card-menu";
+ import ISBFHomePinDialog from "./isbf-home-pin-dialog";
+ import { ISBFMarketplacePrice } from "./isbf-marketplace-card";
+ import ISBFOfficialActivitySummary from "./isbf-official-activity-summary";
+@@ -69,7 +70,6 @@
+   @tracked isReplying = false;
+   @tracked liked;
+   @tracked likeCount;
+-  @tracked menuOpen = false;
+   @tracked pinNow = Date.now();
+   @tracked repostCount = null;
+   @tracked viewCount = null;
+@@ -81,6 +81,7 @@
+   #pollBody;
+   #pollContent;
+   #rootElement;
++  #menu;
+   #viewInFlight = false;
+   #viewObserver;
+ 
+@@ -106,8 +107,6 @@
+       "visibilitychange",
+       this.onDocumentVisibilityChange
+     );
+-    document.removeEventListener("pointerdown", this.onOutsidePointer, true);
+-    document.removeEventListener("keydown", this.onDocumentKeydown, true);
+   }
+ 
+   get avatarUrl() {
+@@ -467,36 +466,8 @@
+   }
+ 
+   @action
+-  toggleMenu(event) {
+-    event.stopPropagation();
+-    this.menuOpen = !this.menuOpen;
+-    if (this.menuOpen) {
+-      document.addEventListener("pointerdown", this.onOutsidePointer, true);
+-      document.addEventListener("keydown", this.onDocumentKeydown, true);
+-    } else {
+-      this.#closeMenu();
+-    }
+-  }
+-
+-  @action
+-  onOutsidePointer(event) {
+-    if (
+-      !this.#rootElement
+-        ?.querySelector(".isbf-feed-card__menu-wrap")
+-        ?.contains(event.target)
+-    ) {
+-      this.#closeMenu();
+-    }
+-  }
+-
+-  @action
+-  onDocumentKeydown(event) {
+-    if (event.key === "Escape") {
+-      this.#closeMenu();
+-      this.#rootElement
+-        ?.querySelector(".isbf-feed-card__menu-trigger")
+-        ?.focus();
+-    }
++  registerMenu(menu) {
++    this.#menu = menu;
+   }
+ 
+   @action
+@@ -510,15 +481,15 @@
+     }
+     this.isFlagging = true;
+     try {
++      await this.#menu?.close();
++      if (this.isDestroying) {
++        return;
++      }
+       const post = await this.store.find("post", this.args.topic.first_post_id);
+       if (this.isDestroying) {
+         return;
+       }
+       post.set("topic", this.args.topic);
+-      this.#closeMenu();
+-      this.#rootElement
+-        ?.querySelector(".isbf-feed-card__menu-trigger")
+-        ?.focus();
+       openPostReport({
+         post,
+         modal: this.modal,
+@@ -598,7 +569,7 @@
+       this.#bodyRequest += 1;
+       this.body = null;
+       this.bodyFailed = false;
+-      this.#closeMenu();
++      this.#menu?.close();
+       if (!hidden) {
+         this.#loadContent();
+       }
+@@ -668,15 +639,8 @@
+   }
+ 
+   async #closePinMenu() {
+-    this.#closeMenu();
+-    this.#rootElement?.querySelector(".isbf-feed-card__menu-trigger")?.focus();
++    await this.#menu?.close();
+     await new Promise((resolve) => schedule("afterRender", resolve));
+-  }
+-
+-  #closeMenu() {
+-    this.menuOpen = false;
+-    document.removeEventListener("pointerdown", this.onOutsidePointer, true);
+-    document.removeEventListener("keydown", this.onDocumentKeydown, true);
+   }
+ 
+   async #showError(error) {
+@@ -735,51 +699,17 @@
+             href={{this.topicUrl}}
+             title={{@topic.createdAt}}
+           >{{this.relativeTime}}</a>
+-          <div class="isbf-feed-card__menu-wrap">
+-            <button
+-              aria-expanded={{if this.menuOpen "true" "false"}}
+-              aria-label={{i18n (themePrefix "isbf_v2.more_actions")}}
+-              class="isbf-feed-card__menu-trigger"
+-              type="button"
+-              {{on "click" this.toggleMenu}}
+-            >{{dIcon "ellipsis"}}</button>
+-            {{#if this.menuOpen}}
+-              <div class="isbf-feed-card__menu" role="menu">
+-                {{#if this.canManageHomePin}}
+-                  <button
+-                    class="isbf-feed-card__pin-action"
+-                    disabled={{this.isPinning}}
+-                    role="menuitem"
+-                    type="button"
+-                    {{on "click" this.openHomePin}}
+-                  >{{dIcon "thumbtack"}}{{i18n
+-                      (themePrefix
+-                        (if this.showHomePin "isbf_v2.pin_update" "isbf_v2.pin")
+-                      )
+-                    }}</button>
+-                  {{#if this.showHomePin}}
+-                    <button
+-                      class="isbf-feed-card__pin-action"
+-                      disabled={{this.isPinning}}
+-                      role="menuitem"
+-                      type="button"
+-                      {{on "click" this.cancelHomePin}}
+-                    >{{dIcon "thumbtack"}}{{i18n
+-                        (themePrefix "isbf_v2.pin_cancel")
+-                      }}</button>
+-                  {{/if}}
+-                {{/if}}
+-                {{#if this.canFlag}}<button
+-                    disabled={{this.isFlagging}}
+-                    role="menuitem"
+-                    type="button"
+-                    {{on "click" this.flag}}
+-                  >{{dIcon "flag"}}{{i18n
+-                      (themePrefix "isbf_v2.report")
+-                    }}</button>{{/if}}
+-              </div>
+-            {{/if}}
+-          </div>
++          <ISBFFeedCardMenu
++            @canFlag={{this.canFlag}}
++            @canManageHomePin={{this.canManageHomePin}}
++            @isFlagging={{this.isFlagging}}
++            @isPinning={{this.isPinning}}
++            @onFlag={{this.flag}}
++            @onPin={{this.openHomePin}}
++            @onRegisterApi={{this.registerMenu}}
++            @onUnpin={{this.cancelHomePin}}
++            @pinned={{this.showHomePin}}
++          />
+         </header>
+         {{#if this.displayTitle}}<a
+             class="isbf-feed-card__title"
+--- a/theme/javascripts/discourse/connectors/topic-footer-main-buttons-before-create/isbf-topic-more.gjs
++++ b/theme/javascripts/discourse/connectors/topic-footer-main-buttons-before-create/isbf-topic-more.gjs
+@@ -1,61 +1,61 @@
+-import Component from "@glimmer/component";
+-import { fn } from "@ember/helper";
+-import { action } from "@ember/object";
+-import { service } from "@ember/service";
+-import DMenu from "discourse/float-kit/components/d-menu";
+-import DButton from "discourse/ui-kit/d-button";
+-import DDropdownMenu from "discourse/ui-kit/d-dropdown-menu";
+-import { i18n } from "discourse-i18n";
+-
+-export default class ISBFTopicMore extends Component {
+-  @service site;
+-
+-  get secondaryActions() {
+-    return (this.args.outletArgs.buttons ?? []).filter(
+-      (button) => button.id === "flag" || button.id === "defer"
+-    );
+-  }
+-
+-  get showMenu() {
+-    return (
+-      this.site.desktopView &&
+-      !this.args.outletArgs.topic?.is_nested_view &&
+-      this.secondaryActions.length > 0
+-    );
+-  }
+-
+-  @action
+-  async selectAction(button, menu) {
+-    await menu.close();
+-    return button.action();
+-  }
+-
+-  <template>
+-    {{#if this.showMenu}}
+-      <DMenu
+-        class="isbf-v2-topic-more"
+-        @icon="ellipsis"
+-        @identifier="isbf-v2-topic-more"
+-        @label={{i18n "more"}}
+-        @modalForMobile={{true}}
+-        @triggerClass="btn-default topic-footer-button"
+-      >
+-        <:content as |menu|>
+-          <DDropdownMenu as |dropdown|>
+-            {{#each this.secondaryActions key="id" as |button|}}
+-              <dropdown.item>
+-                <DButton
+-                  @action={{fn this.selectAction button menu}}
+-                  @disabled={{button.disabled}}
+-                  @icon={{button.icon}}
+-                  @translatedLabel={{button.label}}
+-                  @translatedTitle={{button.title}}
+-                />
+-              </dropdown.item>
+-            {{/each}}
+-          </DDropdownMenu>
+-        </:content>
+-      </DMenu>
+-    {{/if}}
+-  </template>
+-}
++import Component from "@glimmer/component";
++import { fn } from "@ember/helper";
++import { action } from "@ember/object";
++import { service } from "@ember/service";
++import DMenu from "discourse/float-kit/components/d-menu";
++import DButton from "discourse/ui-kit/d-button";
++import DDropdownMenu from "discourse/ui-kit/d-dropdown-menu";
++import { i18n } from "discourse-i18n";
++
++export default class ISBFTopicMore extends Component {
++  @service site;
++
++  get secondaryActions() {
++    return (this.args.outletArgs.buttons ?? []).filter(
++      (button) => button.id === "flag" || button.id === "defer"
++    );
++  }
++
++  get showMenu() {
++    return (
++      this.site.desktopView &&
++      !this.args.outletArgs.topic?.is_nested_view &&
++      this.secondaryActions.length > 0
++    );
++  }
++
++  @action
++  async selectAction(button, menu) {
++    await menu.close();
++    return button.action();
++  }
++
++  <template>
++    {{#if this.showMenu}}
++      <DMenu
++        class="isbf-v2-topic-more"
++        @icon="ellipsis"
++        @identifier="isbf-v2-topic-more"
++        @label={{i18n "more"}}
++        @modalForMobile={{false}}
++        @triggerClass="btn-default topic-footer-button"
++      >
++        <:content as |menu|>
++          <DDropdownMenu as |dropdown|>
++            {{#each this.secondaryActions key="id" as |button|}}
++              <dropdown.item>
++                <DButton
++                  @action={{fn this.selectAction button menu}}
++                  @disabled={{button.disabled}}
++                  @icon={{button.icon}}
++                  @translatedLabel={{button.label}}
++                  @translatedTitle={{button.title}}
++                />
++              </dropdown.item>
++            {{/each}}
++          </DDropdownMenu>
++        </:content>
++      </DMenu>
++    {{/if}}
++  </template>
++}
+--- a/theme/locales/en.yml
++++ b/theme/locales/en.yml
+@@ -463,6 +463,7 @@
+       registration deadlines count separately.
+     alumni_return_china: Return to China
+     alumni_my_profile: My alumni profile
++    alumni_location_value: "%{label}: %{value}"
+     alumni_country: Country
+     alumni_region: Province / state
+     alumni_city: City
+--- a/theme/locales/zh_CN.yml
++++ b/theme/locales/zh_CN.yml
+@@ -433,6 +433,7 @@
+     schedule_too_many_items: 最多可填写 %{max} 个时间项，活动和报名截止分别计数。
+     alumni_return_china: 返回中国
+     alumni_my_profile: 我的校友资料
++    alumni_location_value: "%{label}：%{value}"
+     alumni_country: 国家
+     alumni_region: 省／州
+     alumni_city: 城市
+--- /dev/null
++++ b/theme/stylesheets/alumni-controls.scss
+@@ -0,0 +1,69 @@
++.isbf-alumni-location-picker.select-kit {
++  width: 100%;
++  min-width: 0;
++  max-width: 100%;
++
++  > .select-kit-header {
++    box-sizing: border-box;
++    min-height: 44px;
++    padding: var(--isbf-v2-space-2) var(--isbf-v2-space-3);
++    border: 1px solid var(--isbf-v2-border-strong);
++    border-radius: var(--isbf-v2-radius-sm);
++    color: var(--isbf-v2-text);
++    background: var(--isbf-v2-surface);
++    font: inherit;
++
++    &:focus-visible {
++      outline: 2px solid var(--isbf-v2-focus-ring);
++      outline-offset: 2px;
++    }
++  }
++
++  .select-kit-header-wrapper,
++  .selected-name,
++  .selected-name .name {
++    min-width: 0;
++  }
++
++  .selected-name .name {
++    overflow: hidden;
++    text-overflow: ellipsis;
++    white-space: nowrap;
++  }
++
++  .select-kit-body {
++    max-width: calc(100dvw - 32px);
++  }
++
++  .select-kit-collection {
++    min-height: 0;
++    max-height: min(420px, 60dvh);
++    overflow-y: auto;
++    overscroll-behavior: contain;
++  }
++
++  .select-kit-filter {
++    flex-shrink: 0;
++
++    input {
++      min-height: 44px;
++      border-color: var(--isbf-v2-border-strong);
++      border-radius: var(--isbf-v2-radius-sm);
++      color: var(--isbf-v2-text);
++      background: var(--isbf-v2-surface);
++    }
++  }
++}
++
++.isbf-alumni-profile__form {
++  .form-kit__container-title,
++  .form-kit__container-label,
++  .form-kit__container-content {
++    min-width: 0;
++  }
++}
++
++.isbf-alumni-profile__visible .form-kit__control-checkbox-label {
++  display: flex;
++  align-items: center;
++}
+--- /dev/null
++++ b/theme/stylesheets/dropdowns.scss
+@@ -0,0 +1,110 @@
++:root {
++  --d-menu-panel-radius: 24px;
++  --d-menu-row-radius: 16px;
++  --d-menu-padding: 8px;
++  --d-menu-font-size: 15px;
++  --d-menu-font-weight: 600;
++  --d-menu-row-height: 44px;
++  --d-menu-background: var(--secondary);
++  --d-menu-text: var(--primary);
++  --d-menu-muted: var(--primary-medium);
++  --d-menu-border: var(--primary-low);
++  --d-menu-highlight: var(--primary-very-low);
++  --d-menu-accent: var(--tertiary);
++  --d-menu-focus: var(--isbf-v2-focus-ring);
++  --d-menu-shadow: var(--isbf-v2-shadow-menu);
++}
++
++:root .d-menu-surface.d-menu-surface {
++  max-width: calc(100dvw - 32px);
++  max-height: min(55dvh, var(--d-menu-available-height, 55dvh));
++  overflow: hidden auto;
++  padding: var(--d-menu-padding);
++  border: 1px solid var(--d-menu-border);
++  border-radius: var(--d-menu-panel-radius);
++  background: var(--d-menu-background);
++  box-shadow: var(--d-menu-shadow);
++  color: var(--d-menu-text);
++  font-family: var(--isbf-v2-font-family);
++
++  [data-d-menu-row] {
++    min-height: var(--d-menu-row-height);
++    border-radius: var(--d-menu-row-radius);
++    background: transparent;
++    font-size: var(--d-menu-font-size);
++    font-weight: var(--d-menu-font-weight);
++    padding: 8px 12px;
++  }
++}
++
++.isbf-v2-account-menu__float {
++  width: min(280px, calc(100dvw - 32px));
++}
++
++.isbf-official-picker__trigger {
++  .d-icon-chevron-down {
++    order: 1;
++    width: 12px;
++    height: 12px;
++    color: var(--isbf-v2-muted);
++    transition: rotate 180ms cubic-bezier(0.23, 1, 0.32, 1);
++  }
++
++  &[aria-expanded="true"] {
++    background: var(--isbf-v2-hover);
++
++    .d-icon-chevron-down {
++      rotate: 180deg;
++    }
++  }
++}
++
++.isbf-v2-account-menu__panel {
++  box-sizing: border-box;
++  width: 100%;
++  min-width: 0;
++}
++
++.isbf-notifications__menu {
++  display: inline-flex;
++  align-items: center;
++  justify-content: center;
++  min-width: 44px;
++  min-height: 44px;
++  padding: 8px;
++  border: 0;
++  border-radius: var(--isbf-v2-radius-pill);
++  background: transparent;
++}
++
++.isbf-notifications__menu-panel {
++  width: min(260px, calc(100dvw - 32px));
++}
++
++.isbf-explore-picker__content {
++  width: 100%;
++  min-width: 0;
++}
++
++.select-kit .d-menu-surface {
++  max-height: var(--d-menu-available-height, 55dvh);
++  overflow: auto;
++
++  .select-kit-collection {
++    max-height: none;
++    overflow: visible;
++  }
++
++  .select-kit-row {
++    display: flex;
++    align-items: center;
++    gap: 8px;
++    padding: 8px 12px;
++  }
++}
++
++@media (prefers-reduced-motion: reduce) {
++  .isbf-official-picker__trigger .d-icon-chevron-down {
++    transition: none;
++  }
++}
+--- a/theme/stylesheets/learning-resources.scss
++++ b/theme/stylesheets/learning-resources.scss
+@@ -203,40 +203,10 @@
+ .isbf-learning-actions-menu {
+   max-inline-size: calc(100vw - 2 * var(--isbf-v2-space-4));
+ 
+-  .fk-d-menu__inner-content {
+-    padding: var(--isbf-v2-space-2);
+-    border: 1px solid var(--isbf-v2-border);
+-    border-radius: var(--isbf-v2-radius-sm);
+-    background: var(--isbf-v2-surface);
+-  }
+-
+   .isbf-learning-actions-menu__item {
+     display: flex;
+-    justify-content: center;
+     inline-size: 100%;
+-    min-block-size: 44px;
+-    margin: 0;
+-    padding: var(--isbf-v2-space-3);
+-    border: 0;
+-    border-radius: 0;
+-    background: transparent;
+-    color: var(--isbf-v2-text);
+-    font-size: var(--isbf-v2-font-sm);
+-    font-weight: var(--isbf-v2-weight-medium);
+-    text-align: center;
+-    white-space: nowrap;
+-
+-    &:hover,
+-    &:focus,
+-    &:active {
+-      background: transparent;
+-      color: var(--isbf-v2-text);
+-    }
+-
+-    &:focus-visible {
+-      outline: 2px solid var(--isbf-v2-focus-ring);
+-      outline-offset: -2px;
+-    }
++    text-align: start;
+   }
+ }
+ 
+--- a/theme/stylesheets/official-calendar.scss
++++ b/theme/stylesheets/official-calendar.scss
+@@ -292,21 +292,12 @@
+   max-width: calc(
+     100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right)
+   );
+-  padding: 4px;
+-  border: 1px solid var(--isbf-v2-border);
+-  border-radius: var(--isbf-v2-radius-sm);
+-  background: var(--isbf-v2-surface);
+   color: var(--isbf-v2-text);
+-  box-shadow: var(--isbf-v2-shadow-menu);
+ 
+   .fk-d-menu__inner-content {
+     box-sizing: border-box;
+     width: 100%;
+     min-width: 0;
+-    border: 0;
+-    border-radius: 0;
+-    background: transparent;
+-    box-shadow: none;
+   }
+ 
+   .dropdown-menu {
+@@ -314,7 +305,6 @@
+     width: 100%;
+     min-width: 0;
+     margin: 0;
+-    padding: 0;
+   }
+ 
+   .isbf-calendar-subscription-menu__item {
+@@ -327,21 +317,13 @@
+     min-width: 0;
+     height: 48px;
+     min-height: 48px;
+-    padding: 0 12px;
+-    border-radius: var(--isbf-v2-radius-sm);
+     color: var(--isbf-v2-text);
+-    font-size: 14px;
+     text-align: start;
+     white-space: nowrap;
+ 
+     > span {
+       flex: 1;
+       min-width: 0;
+-    }
+-
+-    &:hover,
+-    &:focus-visible {
+-      background: var(--isbf-v2-hover);
+     }
+   }
+ }
+--- a/theme/stylesheets/official-filters.scss
++++ b/theme/stylesheets/official-filters.scss
+@@ -104,34 +104,10 @@
+ }
+ 
+ .isbf-official-picker__menu {
+-  box-sizing: border-box;
+-  width: min(260px, calc(100vw - var(--isbf-v2-space-8)));
+-  max-height: 55dvh;
+-  overflow: visible;
+-  padding: 0;
+-  border: 0;
+-  background: transparent;
+-  box-shadow: none;
+-  color: var(--isbf-v2-text);
++  width: min(260px, calc(100dvw - 32px));
+ 
+   .fk-d-menu__inner-content {
+-    box-sizing: border-box;
+     width: 100%;
+-    max-height: inherit;
+-    overflow-y: auto;
+-    padding: var(--isbf-v2-space-2);
+-    border: 1px solid var(--isbf-v2-border);
+-    border-radius: var(--isbf-v2-radius-md);
+-    background: var(--isbf-v2-surface);
+-    box-shadow: var(--isbf-v2-shadow-menu);
+-    overscroll-behavior: contain;
+-  }
+-
+-  .dropdown-menu {
+-    width: 100%;
+-    min-width: 0;
+-    gap: var(--isbf-v2-space-1);
+-    padding: 0;
+   }
+ }
+ 
+--- a/theme/stylesheets/profile-content.scss
++++ b/theme/stylesheets/profile-content.scss
+@@ -145,9 +145,6 @@
+ 
+       > .select-kit-body {
+         max-inline-size: calc(100vw - 2 * var(--isbf-v2-space-4));
+-        border: 1px solid var(--isbf-v2-border);
+-        border-radius: var(--isbf-v2-radius-sm);
+-        background: var(--isbf-v2-surface);
+       }
+     }
+ 

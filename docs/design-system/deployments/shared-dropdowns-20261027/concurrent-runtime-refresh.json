@@ -1,0 +1,12 @@
+{
+  "preserved_concurrent_source_paths": [
+    "frontend/discourse/app/components/user-nav.gjs",
+    "frontend/discourse/app/controllers/user.js",
+    "frontend/discourse/app/templates/user.gjs"
+  ],
+  "owned_source_files_unchanged": 68,
+  "plugin_directories": 67,
+  "generated_manifests": 71,
+  "public_assets": 1728,
+  "production_application_writes": 0
+}

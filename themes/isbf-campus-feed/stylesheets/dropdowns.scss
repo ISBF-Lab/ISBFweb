@@ -78,7 +78,15 @@
 }
 
 .isbf-notifications__menu-panel {
-  width: min(260px, calc(100dvw - 32px));
+  width: min(192px, calc(100dvw - 32px));
+}
+
+.isbf-notifications__menu-items {
+  width: 100%;
+}
+
+.isbf-notifications__badge-options {
+  grid-template-columns: auto auto;
 }
 
 .isbf-explore-picker__content {

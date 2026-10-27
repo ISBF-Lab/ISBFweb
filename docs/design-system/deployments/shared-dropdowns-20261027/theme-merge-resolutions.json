@@ -1,0 +1,27 @@
+[
+  {
+    "relative": "javascripts/discourse/components/isbf-alumni.gjs",
+    "method": "Retain deployed identity label and add the approved searchable location picker import",
+    "sha256": "9047721dacf3e1f61ac8b7920e77523b3ec9a2df65367bafda0e6b55ba0adb2c"
+  },
+  {
+    "relative": "javascripts/discourse/components/isbf-v2-feed-card.gjs",
+    "method": "Retain deployed post-action pulse and identity imports; the shared card-menu import is outside the conflict",
+    "sha256": "aba17399bf8857e940190e074de7a16c726079504e1368b61b170abbf2ad3b12"
+  },
+  {
+    "relative": "common/common.scss",
+    "method": "Keep the deployed notification-hold stylesheet and add the shared dropdown stylesheet",
+    "sha256": "c1c147f2f46ad08cdfb1590b47b79b527cf77a42ce26f92292918e8b2adc6bf5"
+  },
+  {
+    "relative": "javascripts/discourse/components/isbf-notifications.gjs",
+    "method": "Use the CI-tested integrated menu after confirming the live 300ms hold markup is identical and the diff preserves notification business handling",
+    "sha256": "f7e3434354e61802be113e7e592605f413ddc7b07ae669858d04312685e127ab"
+  },
+  {
+    "relative": "javascripts/discourse/components/isbf-v2-account-menu.gjs",
+    "method": "Keep the reviewed DMenu focus/hover behavior and restore both deployed account identity labels and their import",
+    "sha256": "4c671e76123a0bd5a0ba249d915c8814262da59d682378203545afd7234cb996"
+  }
+]

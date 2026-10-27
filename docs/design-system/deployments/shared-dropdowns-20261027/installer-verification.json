@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "checks": [
+    "Read-only preflight writes nothing",
+    "A concurrent compiled-resource change blocks the first installation",
+    "Install updates exactly the controlled sources",
+    "Mutable rollback bytes are captured on the target",
+    "New public assets and resolver mappings are installed",
+    "Independent plugin bytes and deployed parent symlinks remain intact",
+    "Installed state is idempotently checkable",
+    "Rollback restores prior sources and removes only the added module",
+    "Rollback restores exact prior metadata and retains immutable assets",
+    "Rollback preserves later independent public mappings",
+    "A peer source edit blocks installation without overwriting it"
+  ],
+  "production_backend_used": false
+}
