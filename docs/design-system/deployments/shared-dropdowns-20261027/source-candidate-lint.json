@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "source_files": 68,
+  "lintable_files": 67,
+  "candidate_bytes_unchanged": true,
+  "reviewed_lint_configuration": true,
+  "external_dependencies_read_only": true
+}

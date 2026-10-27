@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "source_entries_verified": 27008,
+  "owned_source_paths": 68,
+  "concurrent_profile_paths_preserved": 3,
+  "unrelated_source_bytes_preserved": true,
+  "restored_build_only_gem_path_aliases": [
+    "plugins/discourse-math/public/1.0.1/katex",
+    "plugins/discourse-math/public/1.0.1/mathjax",
+    "plugins/voice/public/javascripts/0.1.0"
+  ],
+  "production_symlinks_changed": false
+}

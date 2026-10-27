@@ -1,0 +1,3295 @@
+{
+  "results": [
+    {
+      "check": "Page responds successfully",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Mark-read stays left of the menu in one row with a touch-sized target",
+      "passed": true,
+      "width": 1440,
+      "mode": "light",
+      "appearance": {
+        "x": 764.984375,
+        "y": 32,
+        "right": 895,
+        "height": 44,
+        "menuX": 903,
+        "menuY": 32,
+        "time": "300ms",
+        "fill": "rgb(23, 105, 170)",
+        "accent": "rgb(23, 105, 170)",
+        "fillVisible": false,
+        "fillVisibility": "hidden",
+        "crestVisibility": "hidden",
+        "full": "block",
+        "compact": "none",
+        "accessibleName": "全部标为已读"
+      }
+    },
+    {
+      "check": "Hold time is 300ms and fill follows the site blue",
+      "passed": true,
+      "width": 1440,
+      "mode": "light"
+    },
+    {
+      "check": "Idle state has no residual blue edge",
+      "passed": true,
+      "width": 1440,
+      "mode": "light"
+    },
+    {
+      "check": "Responsive labels retain the full accessible action name",
+      "passed": true,
+      "width": 1440,
+      "mode": "light"
+    },
+    {
+      "check": "Notification menu uses the shared rounded frame",
+      "passed": true,
+      "width": 1440,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 687,
+        "y": 86,
+        "right": 947,
+        "bottom": 303.1875,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "check": "Notification menu keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Notification menu fits the viewport",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Notification menu uses rounded touch-sized rows",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Notification menu uses the shared label typography",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Number/dot hover keeps the menu and notification heading stationary",
+      "passed": true,
+      "width": 1440,
+      "mode": "light",
+      "variants": [
+        {
+          "fractionalPadding": 0,
+          "samples": 39,
+          "range": {
+            "x": 0,
+            "width": 0,
+            "heading": 0
+          }
+        },
+        {
+          "fractionalPadding": 0.5,
+          "samples": 36,
+          "range": {
+            "x": 0,
+            "width": 0,
+            "heading": 0
+          }
+        }
+      ]
+    },
+    {
+      "check": "Escape returns focus to the notification menu trigger",
+      "passed": true,
+      "width": 1440,
+      "mode": "light"
+    },
+    {
+      "check": "Mark-read stays left of the menu in one row with a touch-sized target",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark",
+      "appearance": {
+        "x": 764.984375,
+        "y": 32,
+        "right": 895,
+        "height": 44,
+        "menuX": 903,
+        "menuY": 32,
+        "time": "300ms",
+        "fill": "rgb(114, 197, 250)",
+        "accent": "rgb(114, 197, 250)",
+        "fillVisible": false,
+        "fillVisibility": "hidden",
+        "crestVisibility": "hidden",
+        "full": "block",
+        "compact": "none",
+        "accessibleName": "全部标为已读"
+      }
+    },
+    {
+      "check": "Hold time is 300ms and fill follows the site blue",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark"
+    },
+    {
+      "check": "Idle state has no residual blue edge",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark"
+    },
+    {
+      "check": "Responsive labels retain the full accessible action name",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark"
+    },
+    {
+      "check": "Notification menu uses the shared rounded frame",
+      "passed": true,
+      "width": 1440,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 687,
+        "y": 86,
+        "right": 947,
+        "bottom": 303.1875,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "check": "Notification menu keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Notification menu fits the viewport",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Notification menu uses rounded touch-sized rows",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Notification menu uses the shared label typography",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Number/dot hover keeps the menu and notification heading stationary",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark",
+      "variants": [
+        {
+          "fractionalPadding": 0,
+          "samples": 52,
+          "range": {
+            "x": 0,
+            "width": 0,
+            "heading": 0
+          }
+        },
+        {
+          "fractionalPadding": 0.5,
+          "samples": 40,
+          "range": {
+            "x": 0,
+            "width": 0,
+            "heading": 0
+          }
+        }
+      ]
+    },
+    {
+      "check": "Escape returns focus to the notification menu trigger",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark"
+    },
+    {
+      "check": "Keyboard focus remains visible",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Notification page has no horizontal overflow",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Page responds successfully",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Explore controls retain spacing and touch targets",
+      "passed": true,
+      "width": 1440,
+      "scheme": "light",
+      "layout": {
+        "x": 375,
+        "right": 973,
+        "controls": [
+          {
+            "x": 391,
+            "right": 590.984375,
+            "y": 110.5,
+            "width": 199.984375,
+            "height": 44,
+            "action": false,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 598.984375,
+            "right": 798.96875,
+            "y": 110.5,
+            "width": 199.984375,
+            "height": 44,
+            "action": false,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 806.96875,
+            "right": 862.984375,
+            "y": 110.5,
+            "width": 56.015625,
+            "height": 44,
+            "action": true,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 870.984375,
+            "right": 957,
+            "y": 110.5,
+            "width": 86.015625,
+            "height": 44,
+            "action": true,
+            "text": 60.015625,
+            "padding": 24
+          }
+        ]
+      }
+    },
+    {
+      "check": "Popular and new-topic labels fit their buttons",
+      "passed": true,
+      "width": 1440,
+      "scheme": "light"
+    },
+    {
+      "check": "Explore controls retain spacing and touch targets",
+      "passed": true,
+      "width": 1440,
+      "scheme": "dark",
+      "layout": {
+        "x": 375,
+        "right": 973,
+        "controls": [
+          {
+            "x": 391,
+            "right": 590.984375,
+            "y": 110.5,
+            "width": 199.984375,
+            "height": 44,
+            "action": false,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 598.984375,
+            "right": 798.96875,
+            "y": 110.5,
+            "width": 199.984375,
+            "height": 44,
+            "action": false,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 806.96875,
+            "right": 862.984375,
+            "y": 110.5,
+            "width": 56.015625,
+            "height": 44,
+            "action": true,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 870.984375,
+            "right": 957,
+            "y": 110.5,
+            "width": 86.015625,
+            "height": 44,
+            "action": true,
+            "text": 60.015625,
+            "padding": 24
+          }
+        ]
+      }
+    },
+    {
+      "check": "Popular and new-topic labels fit their buttons",
+      "passed": true,
+      "width": 1440,
+      "scheme": "dark"
+    },
+    {
+      "check": "Explore controls retain spacing and touch targets",
+      "passed": true,
+      "width": 900,
+      "scheme": "light",
+      "layout": {
+        "x": 191,
+        "right": 789,
+        "controls": [
+          {
+            "x": 207,
+            "right": 406.984375,
+            "y": 103,
+            "width": 199.984375,
+            "height": 44,
+            "action": false,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 414.984375,
+            "right": 614.96875,
+            "y": 103,
+            "width": 199.984375,
+            "height": 44,
+            "action": false,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 622.96875,
+            "right": 678.984375,
+            "y": 103,
+            "width": 56.015625,
+            "height": 44,
+            "action": true,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 686.984375,
+            "right": 773,
+            "y": 103,
+            "width": 86.015625,
+            "height": 44,
+            "action": true,
+            "text": 60.015625,
+            "padding": 24
+          }
+        ]
+      }
+    },
+    {
+      "check": "Popular and new-topic labels fit their buttons",
+      "passed": true,
+      "width": 900,
+      "scheme": "light"
+    },
+    {
+      "check": "Explore controls retain spacing and touch targets",
+      "passed": true,
+      "width": 900,
+      "scheme": "dark",
+      "layout": {
+        "x": 191,
+        "right": 789,
+        "controls": [
+          {
+            "x": 207,
+            "right": 406.984375,
+            "y": 103,
+            "width": 199.984375,
+            "height": 44,
+            "action": false,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 414.984375,
+            "right": 614.96875,
+            "y": 103,
+            "width": 199.984375,
+            "height": 44,
+            "action": false,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 622.96875,
+            "right": 678.984375,
+            "y": 103,
+            "width": 56.015625,
+            "height": 44,
+            "action": true,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 686.984375,
+            "right": 773,
+            "y": 103,
+            "width": 86.015625,
+            "height": 44,
+            "action": true,
+            "text": 60.015625,
+            "padding": 24
+          }
+        ]
+      }
+    },
+    {
+      "check": "Popular and new-topic labels fit their buttons",
+      "passed": true,
+      "width": 900,
+      "scheme": "dark"
+    },
+    {
+      "check": "Explore controls retain spacing and touch targets",
+      "passed": true,
+      "width": 768,
+      "scheme": "light",
+      "layout": {
+        "x": 125,
+        "right": 723,
+        "controls": [
+          {
+            "x": 141,
+            "right": 340.984375,
+            "y": 103,
+            "width": 199.984375,
+            "height": 44,
+            "action": false,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 348.984375,
+            "right": 548.96875,
+            "y": 103,
+            "width": 199.984375,
+            "height": 44,
+            "action": false,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 556.96875,
+            "right": 612.984375,
+            "y": 103,
+            "width": 56.015625,
+            "height": 44,
+            "action": true,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 620.984375,
+            "right": 707,
+            "y": 103,
+            "width": 86.015625,
+            "height": 44,
+            "action": true,
+            "text": 60.015625,
+            "padding": 24
+          }
+        ]
+      }
+    },
+    {
+      "check": "Popular and new-topic labels fit their buttons",
+      "passed": true,
+      "width": 768,
+      "scheme": "light"
+    },
+    {
+      "check": "Explore controls retain spacing and touch targets",
+      "passed": true,
+      "width": 768,
+      "scheme": "dark",
+      "layout": {
+        "x": 125,
+        "right": 723,
+        "controls": [
+          {
+            "x": 141,
+            "right": 340.984375,
+            "y": 103,
+            "width": 199.984375,
+            "height": 44,
+            "action": false,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 348.984375,
+            "right": 548.96875,
+            "y": 103,
+            "width": 199.984375,
+            "height": 44,
+            "action": false,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 556.96875,
+            "right": 612.984375,
+            "y": 103,
+            "width": 56.015625,
+            "height": 44,
+            "action": true,
+            "text": 30.015625,
+            "padding": 24
+          },
+          {
+            "x": 620.984375,
+            "right": 707,
+            "y": 103,
+            "width": 86.015625,
+            "height": 44,
+            "action": true,
+            "text": 60.015625,
+            "padding": 24
+          }
+        ]
+      }
+    },
+    {
+      "check": "Popular and new-topic labels fit their buttons",
+      "passed": true,
+      "width": 768,
+      "scheme": "dark"
+    },
+    {
+      "check": "Explore controls retain spacing and touch targets",
+      "passed": true,
+      "width": 390,
+      "scheme": "light",
+      "layout": {
+        "x": 0,
+        "right": 390,
+        "controls": [
+          {
+            "x": 12,
+            "right": 131.984375,
+            "y": 95,
+            "width": 119.984375,
+            "height": 44,
+            "action": false,
+            "text": 26.015625,
+            "padding": 16
+          },
+          {
+            "x": 135.984375,
+            "right": 255.96875,
+            "y": 95,
+            "width": 119.984375,
+            "height": 44,
+            "action": false,
+            "text": 26.015625,
+            "padding": 16
+          },
+          {
+            "x": 259.96875,
+            "right": 303.984375,
+            "y": 95,
+            "width": 44.015625,
+            "height": 44,
+            "action": true,
+            "text": 26.015625,
+            "padding": 16
+          },
+          {
+            "x": 307.984375,
+            "right": 378,
+            "y": 95,
+            "width": 70.015625,
+            "height": 44,
+            "action": true,
+            "text": 52.015625,
+            "padding": 16
+          }
+        ]
+      }
+    },
+    {
+      "check": "Popular and new-topic labels fit their buttons",
+      "passed": true,
+      "width": 390,
+      "scheme": "light"
+    },
+    {
+      "check": "Explore controls retain spacing and touch targets",
+      "passed": true,
+      "width": 390,
+      "scheme": "dark",
+      "layout": {
+        "x": 0,
+        "right": 390,
+        "controls": [
+          {
+            "x": 12,
+            "right": 131.984375,
+            "y": 95,
+            "width": 119.984375,
+            "height": 44,
+            "action": false,
+            "text": 26.015625,
+            "padding": 16
+          },
+          {
+            "x": 135.984375,
+            "right": 255.96875,
+            "y": 95,
+            "width": 119.984375,
+            "height": 44,
+            "action": false,
+            "text": 26.015625,
+            "padding": 16
+          },
+          {
+            "x": 259.96875,
+            "right": 303.984375,
+            "y": 95,
+            "width": 44.015625,
+            "height": 44,
+            "action": true,
+            "text": 26.015625,
+            "padding": 16
+          },
+          {
+            "x": 307.984375,
+            "right": 378,
+            "y": 95,
+            "width": 70.015625,
+            "height": 44,
+            "action": true,
+            "text": 52.015625,
+            "padding": 16
+          }
+        ]
+      }
+    },
+    {
+      "check": "Popular and new-topic labels fit their buttons",
+      "passed": true,
+      "width": 390,
+      "scheme": "dark"
+    },
+    {
+      "check": "Explore controls retain spacing and touch targets",
+      "passed": true,
+      "width": 320,
+      "scheme": "light",
+      "layout": {
+        "x": 0,
+        "right": 320,
+        "controls": [
+          {
+            "x": 12,
+            "right": 96.984375,
+            "y": 95,
+            "width": 84.984375,
+            "height": 44,
+            "action": false,
+            "text": 26.015625,
+            "padding": 16
+          },
+          {
+            "x": 100.984375,
+            "right": 185.96875,
+            "y": 95,
+            "width": 84.984375,
+            "height": 44,
+            "action": false,
+            "text": 26.015625,
+            "padding": 16
+          },
+          {
+            "x": 189.96875,
+            "right": 233.984375,
+            "y": 95,
+            "width": 44.015625,
+            "height": 44,
+            "action": true,
+            "text": 26.015625,
+            "padding": 16
+          },
+          {
+            "x": 237.984375,
+            "right": 308,
+            "y": 95,
+            "width": 70.015625,
+            "height": 44,
+            "action": true,
+            "text": 52.015625,
+            "padding": 16
+          }
+        ]
+      }
+    },
+    {
+      "check": "Popular and new-topic labels fit their buttons",
+      "passed": true,
+      "width": 320,
+      "scheme": "light"
+    },
+    {
+      "check": "Explore controls retain spacing and touch targets",
+      "passed": true,
+      "width": 320,
+      "scheme": "dark",
+      "layout": {
+        "x": 0,
+        "right": 320,
+        "controls": [
+          {
+            "x": 12,
+            "right": 96.984375,
+            "y": 95,
+            "width": 84.984375,
+            "height": 44,
+            "action": false,
+            "text": 26.015625,
+            "padding": 16
+          },
+          {
+            "x": 100.984375,
+            "right": 185.96875,
+            "y": 95,
+            "width": 84.984375,
+            "height": 44,
+            "action": false,
+            "text": 26.015625,
+            "padding": 16
+          },
+          {
+            "x": 189.96875,
+            "right": 233.984375,
+            "y": 95,
+            "width": 44.015625,
+            "height": 44,
+            "action": true,
+            "text": 26.015625,
+            "padding": 16
+          },
+          {
+            "x": 237.984375,
+            "right": 308,
+            "y": 95,
+            "width": 70.015625,
+            "height": 44,
+            "action": true,
+            "text": 52.015625,
+            "padding": 16
+          }
+        ]
+      }
+    },
+    {
+      "check": "Popular and new-topic labels fit their buttons",
+      "passed": true,
+      "width": 320,
+      "scheme": "dark"
+    },
+    {
+      "check": "Explore category picker uses the shared rounded frame",
+      "passed": true,
+      "width": 1440,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 391,
+        "y": 164.5,
+        "right": 671,
+        "bottom": 692.5,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "check": "Explore category picker keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Explore category picker fits the viewport",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Explore category picker uses rounded touch-sized rows",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Explore category picker uses the shared label typography",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Searchable picker keeps focus in its search field",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Explore feed has a real topic available for the report menu",
+      "passed": true
+    },
+    {
+      "check": "Page responds successfully",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Report action matches the rounded gliding highlight",
+      "passed": true,
+      "flagStyle": {
+        "marked": true,
+        "radius": "16px",
+        "background": "rgba(0, 0, 0, 0)",
+        "pillRadius": "16px",
+        "width": 163.015625,
+        "pillWidth": 163.016
+      }
+    },
+    {
+      "check": "Page responds successfully",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Page responds successfully",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Actual profile preferences render within the viewport",
+      "passed": true,
+      "width": 1440,
+      "geometry": {
+        "route": "preferences.interface",
+        "width": 1440,
+        "scrollWidth": 1440,
+        "nativeControls": 7,
+        "carriers": [],
+        "allowUserLocale": true
+      }
+    },
+    {
+      "check": "Page responds successfully",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Existing workbench feature links remain available",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Workbench destination has one visible link",
+      "passed": true,
+      "width": 1440,
+      "path": "/isbf/marketplace"
+    },
+    {
+      "check": "Marketplace products finish loading",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Page responds successfully",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Workbench destination has one visible link",
+      "passed": true,
+      "width": 1440,
+      "path": "/isbf/alumni"
+    },
+    {
+      "check": "Alumni map and directory finish loading",
+      "passed": true,
+      "width": 1440,
+      "pendingRequests": 0
+    },
+    {
+      "check": "Alumni country selector uses the shared rounded frame",
+      "passed": true,
+      "width": 1440,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 391,
+        "y": 168,
+        "right": 828,
+        "bottom": 718,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "check": "Alumni country selector keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Alumni country selector fits the viewport",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Alumni country selector uses rounded touch-sized rows",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Alumni country selector uses the shared label typography",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "check": "Page responds successfully",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "check": "Actual profile preferences render within the viewport",
+      "passed": true,
+      "width": 390,
+      "geometry": {
+        "route": "preferences.interface",
+        "width": 390,
+        "scrollWidth": 390,
+        "nativeControls": 7,
+        "carriers": [],
+        "allowUserLocale": true
+      }
+    },
+    {
+      "check": "Page responds successfully",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "check": "Existing workbench feature links remain available",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "check": "Workbench destination has one visible link",
+      "passed": true,
+      "width": 390,
+      "path": "/isbf/marketplace"
+    },
+    {
+      "check": "Marketplace products finish loading",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "check": "Page responds successfully",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "check": "Workbench destination has one visible link",
+      "passed": true,
+      "width": 390,
+      "path": "/isbf/alumni"
+    },
+    {
+      "check": "Alumni map and directory finish loading",
+      "passed": true,
+      "width": 390,
+      "pendingRequests": 0
+    },
+    {
+      "check": "Alumni country selector uses the shared rounded frame",
+      "passed": true,
+      "width": 390,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 17,
+        "y": 152,
+        "right": 189,
+        "bottom": 616.1875,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 58
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 58
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 58
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          },
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "check": "Alumni country selector keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "check": "Alumni country selector fits the viewport",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "check": "Alumni country selector uses rounded touch-sized rows",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "check": "Alumni country selector uses the shared label typography",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "check": "Production mark-read requests are never submitted",
+      "passed": true
+    },
+    {
+      "check": "No client exceptions or failed same-origin data requests",
+      "passed": true,
+      "errors": [],
+      "failedResponses": []
+    }
+  ],
+  "errors": [],
+  "failedResponses": [],
+  "methodsForwarded": [
+    "GET",
+    "HEAD"
+  ],
+  "screenshotsCaptured": false,
+  "credentials_sent_to_browser": false,
+  "coverage": [
+    {
+      "scope": "Profile DSelect",
+      "width": 1440,
+      "status": "not_rendered_in_current_production_page",
+      "nativeControls": 7
+    },
+    {
+      "scope": "Profile DSelect",
+      "width": 390,
+      "status": "not_rendered_in_current_production_page",
+      "nativeControls": 7
+    }
+  ],
+  "segments": [
+    {
+      "path": "browser-attempts/profile-selector-unavailable/browser-results/production-browser.json",
+      "passed_checks": 56,
+      "original_exit_success": false,
+      "incomplete_probe": "No DSelect rendered on this read-only production interface; later availability probe records this explicitly"
+    },
+    {
+      "path": "browser-results/preservation-browser.json",
+      "passed_checks": 30,
+      "original_exit_success": true
+    }
+  ],
+  "superseded_harness_errors": [
+    {
+      "attempt": "clock-scaled-animation",
+      "reason": "Synthetic hold clock affected subsequent CSS opening-animation measurements; repeated normal-time geometry passed"
+    },
+    {
+      "attempt": "profile-selector-unavailable",
+      "reason": "A selector was assumed to exist; later actual-page probe showed seven native controls and no DSelect on both viewports"
+    }
+  ],
+  "whole_original_attempt_claimed_successful": false
+}

@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "local_task_containers": [],
+  "local_task_networks": [],
+  "ssh_forwarding_closed": true,
+  "remaining_read_only_keys": 0,
+  "remaining_task_tools": [],
+  "full_preview_stopped": true
+}

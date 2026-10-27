@@ -1,0 +1,42 @@
+{
+  "scope": "Compact notification preferences menu",
+  "acceptance": "User requested less empty space after inspecting the shared dropdown rollout",
+  "source": {
+    "path": "themes/isbf-campus-feed/stylesheets/dropdowns.scss",
+    "before_sha256": "73b77fed0ee0e7f1a0e8b62ca02f0cb76991aaf164a2c41b91872e0e318ef69b",
+    "sha256": "81f631c2bb0c05aa415b5516232b6716e96c860f9c2ef7860c674eac85b24f90"
+  },
+  "width_before": 260,
+  "width_after": 192,
+  "rendered_checks": 84,
+  "viewport_widths": [
+    320,
+    390,
+    1440
+  ],
+  "color_modes": [
+    "light",
+    "dark"
+  ],
+  "label_variants": [
+    "Chinese",
+    "English"
+  ],
+  "selected_badge_states": [
+    "number",
+    "dot"
+  ],
+  "label_probe": "Translated labels and ARIA selected-state variants on the native rendered component; no preference requests",
+  "hover_max_x_drift_px": 0,
+  "hover_max_width_drift_px": 0,
+  "clipped_labels": 0,
+  "native_lint": "passed",
+  "shared_tokens": "24px panel, 16px rows, 8px inset, 15px/600 text and 44px touch targets retained",
+  "screenshots": "Private; not exported",
+  "production_correction": "Published as a user-authorized single-field adjustment to the already merged shared dropdown release; follow-up review/CI tracked separately",
+  "menu_policy": "passed",
+  "production_checks": 58,
+  "production_width_px": 192,
+  "production_client_errors": 0,
+  "production_publication": "../../deployments/notification-menu-width-20261027/README.md"
+}

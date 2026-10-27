@@ -1,0 +1,58 @@
+{
+  "merged": true,
+  "pull_requests": [
+    {
+      "repository": "ISBF-Lab/ISBFweb",
+      "pr": 93,
+      "url": "https://github.com/ISBF-Lab/ISBFweb/pull/93",
+      "head_sha": "fa217abc0fff472f98d935cba2a43993526695b6",
+      "merge_commit": "867a0bbc25a446593c223d5b63261e3d1ac9fcb6",
+      "exact_head_checks_passed": true,
+      "unresolved_reviews": 0,
+      "workflows": [
+        {
+          "id": 40464198309,
+          "name": "Developer Docs Lint",
+          "conclusion": "success"
+        },
+        {
+          "id": 40464198333,
+          "name": "Codex CI handoff",
+          "conclusion": "success"
+        },
+        {
+          "id": 40464198305,
+          "name": "ISBF resume documents",
+          "conclusion": "success"
+        },
+        {
+          "id": 40464198343,
+          "name": "ISBF frontend consistency",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "repository": "ISBF-Lab/ISBF-Alumni",
+      "pr": 9,
+      "url": "https://github.com/ISBF-Lab/ISBF-Alumni/pull/9",
+      "head_sha": "3170ce4050aab00cf61206128c6d4712ade71842",
+      "merge_commit": "c2c8fa29d994a0f51369ac088d73de205e68a9a7",
+      "exact_head_checks_passed": true,
+      "unresolved_reviews": 0,
+      "workflows": [
+        {
+          "id": 40464566244,
+          "name": "ISBF Alumni plugin tests",
+          "conclusion": "success"
+        },
+        {
+          "id": 40464566077,
+          "name": "Alumni registration integration",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "audit_at_utc": "2026-10-27T07:35:09.352Z"
+}

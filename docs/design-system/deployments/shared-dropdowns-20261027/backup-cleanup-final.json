@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "retention": "latest verified recovery backup; protect runtime/build dependencies and the existing base alias",
+  "latest_backup": "local_discourse/isbf_app:shared-dropdowns-20261027-0f1ab21f2b2c",
+  "latest_image": "sha256:3beb562c08e1fd0e13890797b9ca774e5b5763850a78f7befcc1b6f4e244303f",
+  "deleted_tags": [],
+  "deleted_tag_count": 0,
+  "required_older_tags": [
+    "notifications-hold-20261026-fc96672d9ee8",
+    "avatar-calibration-ready-20261011",
+    "auth-page-20261010-final",
+    "auth-page-base-20261009"
+  ],
+  "reclaimed_mib_before_new_backup": 0,
+  "reclaimed_mib_after_new_backup": 0,
+  "free_mib": 16324,
+  "running_services_untouched": true
+}
