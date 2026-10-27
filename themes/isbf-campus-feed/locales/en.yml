@@ -297,6 +297,10 @@ en:
     week_sun: "Sun"
     notifications_menu: "Notification actions"
     notifications_mark_read: "Mark all as read"
+    notifications_mark_read_compact: Mark all read
+    notifications_mark_read_done: All read
+    notifications_mark_read_pending: Processing…
+    notifications_mark_read_hint: Press and hold for 0.3 seconds to mark all as read
     notifications_settings: "Notification settings"
     notifications_tabs: "Notification filters"
     notifications_all: "All"

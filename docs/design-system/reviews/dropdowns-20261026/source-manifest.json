@@ -742,13 +742,13 @@
   },
   "patch_scope": "Non-overlapping dropdown increments only; concurrent files are recorded by hash and require comparison before restoration",
   "pull_request": {
-    "base_commit": "da66138fb00230e92a0522f93d998eb618094e9e",
-    "source_mapping": "Scoped dropdown delta applied to main; older main alumni fields and card disclosure use equivalent adapters. Runtime preservation and hashes remain separate.",
+    "base_commit": "099c6eaa0ab136461d8e822e185e9503a1da4391",
+    "source_mapping": "Scoped dropdown delta applied to main, preserving the merged notification hold action. Runtime source hashes and theme preservation remain separate.",
     "files": [
       {
         "path": ".github/workflows/isbf-frontend-consistency.yml",
-        "sha256": "ad357ed06d9c37f14157bbe01d035e5dbc4e5263267a3a45fb9792c6b00c89f1",
-        "before_sha256": "9b7253b156d4ab0cab3472b3e5c585817d8bf61a80ca8a73f4f4a781c9c659e5"
+        "sha256": "cb94c9a1dfd34c7c2c3230d253d774c1d67e057b731000ab07135b72fd1b25a0",
+        "before_sha256": "313a77ee90d01af38d21bb292f5f82b3776fc09c4b5fba3c5e3951e58741f801"
       },
       {
         "path": ".github/workflows/linting.yml",
@@ -762,8 +762,8 @@
       },
       {
         "path": "app/assets/stylesheets/common/components/_index.scss",
-        "sha256": "f014ea7bf016c182488e8ffb66bb137050eb4ce4bec4b760d140657120a3efa0",
-        "before_sha256": "24bda14484f218ac3b9a448e4956937086e84659522897a5ac4ecd4956b34384"
+        "sha256": "59a1aca21105ce1d1c3b66ca0cfa27fbcebedc3ecf86c5bb33b1ec028ee3b032",
+        "before_sha256": "21476f8f587ff8c9d91bf1a0cbceffc1305ce659c89c8f1b4b0801ab5131f367"
       },
       {
         "path": "app/assets/stylesheets/common/components/d-menu-surface.scss",
@@ -772,8 +772,8 @@
       },
       {
         "path": "docs/design-system/components.md",
-        "sha256": "6b4b1034b08c98227dcaaecd613eedca3ea070a347b0ec690a61dd2f4ab37ee4",
-        "before_sha256": "d16a2929fbf22a1e1af2ecfb75f05a96f11065968f4abe891af772e4dcbca66e"
+        "sha256": "dd6a000099cc4b50e0b288684d0beea874e27a8109c87a0909ee2e311ca5abfe",
+        "before_sha256": "daaa6e5f641ed8f647e7f887151acaa0b2726a01eed750123a4b987a96a5ef88"
       },
       {
         "path": "docs/design-system/dropdowns.md",
@@ -782,8 +782,8 @@
       },
       {
         "path": "docs/design-system/reference-map.md",
-        "sha256": "6b9cf5442afced935371b5b2e17becfbd24b00401f42c040f9ff274cc6873704",
-        "before_sha256": "df72be0d43dfd32c5e4f0f083baae2634e96376e09050e5929633400320b35ec"
+        "sha256": "a7b38a34252a85f6dee798a12f003eb47f17ab806a3b691553779ef9d5f3a409",
+        "before_sha256": "5e965e82e41c9f4f118e925a2deedfbf253bdc9a3bb2ca80e58ca7287e122218"
       },
       {
         "path": "docs/design-system/references/README.md",
@@ -792,18 +792,18 @@
       },
       {
         "path": "docs/design-system/tokens.md",
-        "sha256": "6275e9fe80937c0d05d0c412c4adba132ebd8cddb087f9d7c1fa803921b2bbc5",
-        "before_sha256": "18b0003440c79ad0fc9ec09660e6d9ef95b590b25c7762dfb6d01daf2fa01ea2"
+        "sha256": "6153a2921b5a5b45c423ea9205e6cc2cb24ee9cdb7cce4f88c2b818f72f065b7",
+        "before_sha256": "f3ed927369ca397182645a24ec1f960c477a20b998cc7a3e49610682cdb90fba"
       },
       {
         "path": "docs/design-system/ui-status.md",
-        "sha256": "77ff371774d66cb2d6435935cee2badbe501c35db23647d0b4513abfb0238504",
-        "before_sha256": "305da7ccac75038156a69335d1297e83a7694da46afa61ab3495370988254d8c"
+        "sha256": "f3954a7237e6c651e9e7728d13dff3342069c8ac0cfabf69be30ab2d9dda7876",
+        "before_sha256": "aba4025780696ccc4ecb880edd13d59e51cca5e730c358890563e5da4b5fdd48"
       },
       {
         "path": "docs/developer-guides/docs/03-code-internals/02-ui-kit.md",
-        "sha256": "28dfc7c3ce2222187290a687a8c247ebee4381971e0bc0d70b9ffa3ef30fc420",
-        "before_sha256": "1df5f035728b828a1ef03d366fb70d69ed56092923bc554cb24bb1a0ddbf61c2"
+        "sha256": "5b55a4c965945630b252de5c091511b630f805f3bc5c49319d6faad285f4d297",
+        "before_sha256": "d9f4eb27eea0afbd74f7f127f7e529c52b023984c53f135a0700f75f94ad60f2"
       },
       {
         "path": "eslint.config.mjs",
@@ -944,11 +944,6 @@
         "path": "frontend/discourse/app/form-kit/components/fk/control/select.gjs",
         "sha256": "e5d1dd0f67370b8a9a0f239d7afc0cf277f28d5bc5ae0be0b66f607b6351ab35",
         "before_sha256": "cecc9ebe7cd4bc6f0fa0924bc19904747801a7b1de7b57bd771722f57bbf472b"
-      },
-      {
-        "path": "frontend/discourse/app/lib/load-motion.js",
-        "sha256": "51903c1b619234eb129c0885af094d823ed8a7e4df0372a5df24e890a0899d46",
-        "before_sha256": "cb23713428455f90bd9e0207a637ba4be92552601ed8d3dd4309d9606f0e7346"
       },
       {
         "path": "frontend/discourse/app/ui-kit/-internals/floating-family.ts",
@@ -1192,8 +1187,8 @@
       },
       {
         "path": "themes/isbf-campus-feed/common/common.scss",
-        "sha256": "5e4cb496643b03279f764cf567cbc839f7510f42dda1b43293875be6f11ee93a",
-        "before_sha256": "678f2e53286b1f35dc1d2a070245b714a1c38009924bff39a578fada1d9d0ba7"
+        "sha256": "63706d2019d661bd5de9dd4e759e6572efc8bc8063a30875a9d274c49f525b90",
+        "before_sha256": "19666cdf308c8a731bb7aa7517f2e02b359d44d073820c3668bedd5530c65001"
       },
       {
         "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-alumni-profile.gjs",
@@ -1222,8 +1217,8 @@
       },
       {
         "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
-        "sha256": "1f02f455057701ceaf6ba1268cc1fbdd262e80e7f3d8d4f7d190778afbfddfb5",
-        "before_sha256": "520da473ae54740533e7f364399f39eeee3138c20e4a1b825b51b092e7b0ab73"
+        "sha256": "f7e3434354e61802be113e7e592605f413ddc7b07ae669858d04312685e127ab",
+        "before_sha256": "3c1abda29707e1d0c6f51db8dabad7393cdc5f2d0c0e5e2b11679737c8a8b654"
       },
       {
         "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-picker.gjs",
@@ -1252,13 +1247,13 @@
       },
       {
         "path": "themes/isbf-campus-feed/locales/en.yml",
-        "sha256": "0f0bf21e6cd853ab8421541376ea8aa16b333d690e50e6fcbb2f5fb8b57a950c",
-        "before_sha256": "f6c142e750a43576e876ebbaf6e49313080df0a6728a707cd8d7b3bfa87600ff"
+        "sha256": "a0bb6c7a8f8a87f655352bef3050ae12b2d884905a2c703807dc39e85856f6ae",
+        "before_sha256": "00cdfba11ebbfa5de678efb80dac750cb1e5c1f377e8cb2d57d0c71a49b9dc60"
       },
       {
         "path": "themes/isbf-campus-feed/locales/zh_CN.yml",
-        "sha256": "4e8f6df5cef580f19428c186cc5f0fb1f61336e08da13614168963a50eaafa6e",
-        "before_sha256": "585ddb8bb3782ee1ecd90bbd303350ca1c559beb732544e70751b613c417c805"
+        "sha256": "d0ce89448b6d85ca1bab54bbdaf064cc859e1b479e253c24acfb0f84e9450c57",
+        "before_sha256": "d91b1a2f74453c585fd09308c3890fd97220ec3fede73fbca3c7c286b069baa8"
       },
       {
         "path": "themes/isbf-campus-feed/stylesheets/dropdowns.scss",
@@ -1276,6 +1271,16 @@
         "before_sha256": null
       },
       {
+        "path": "themes/isbf-campus-feed/test/integration/notifications-test.gjs",
+        "sha256": "4f076583d5335b9d89b74fb337771d571c3d07bb6100fdf1dbae6c25ada58f7e",
+        "before_sha256": "f8ae5b0069926cf6d444b345486d5e035afa381a5839b460d4b30e11daa95ee2"
+      },
+      {
+        "path": "themes/isbf-campus-feed/test/integration/official-calendar-editor-test.gjs",
+        "sha256": "aba705bf530a0a7b432966984750eae81a1b409082cd69230540b393cb1ccee3",
+        "before_sha256": "f5c7aacba2ccf41817ac2d81cb87527fe3412b40060c829d342042f5a3c0d454"
+      },
+      {
         "path": "themes/isbf-campus-feed/test/integration/official-picker-glide-test.gjs",
         "sha256": "ceb4f8b06121c2c22962171370bdf58d4dcdafa7e794946f6cfa6074601401b3",
         "before_sha256": null
@@ -1283,15 +1288,12 @@
     ],
     "validation": {
       "native_lint": "passed",
-      "menu_policy_files": 5825,
-      "menu_policy_findings": 0,
-      "policy_tests": 5,
-      "script_lint_and_format": "passed",
+      "types": "passed",
+      "menu_policy": "passed",
       "dialog_policy": "passed",
-      "alumni_native_lint": "passed",
-      "registration_contract": "passed",
-      "geography_checks": "passed",
-      "ci": "pending review-fix commit"
+      "full_theme_tests": 263,
+      "full_theme_assertions": 1142,
+      "ci": "pending corrected integration commit"
     }
   },
   "review_followup": {
@@ -1304,5 +1306,6 @@
     "runtime_and_PR_fix_files_equal": true,
     "visual_checks": "The original 151 page checks remain evidence for unchanged visual code; this follow-up changes shared Escape and hover dismissal only.",
     "review_evidence": "review-regressions.json"
-  }
+  },
+  "ci_followup": "ci-followup.json"
 }

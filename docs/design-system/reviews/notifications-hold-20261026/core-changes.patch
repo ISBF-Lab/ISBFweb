@@ -1,0 +1,949 @@
+--- /dev/null
++++ b/source/frontend/discourse/app/ui-kit/d-hold-button.gts
+@@ -0,0 +1,449 @@
++import Component from "@glimmer/component";
++import { tracked } from "@glimmer/tracking";
++import type { TOC } from "@ember/component/template-only";
++import { on } from "@ember/modifier";
++import { action } from "@ember/object";
++import { guidFor } from "@ember/object/internals";
++import didInsert from "@ember/render-modifiers/modifiers/did-insert";
++import didUpdate from "@ember/render-modifiers/modifiers/did-update";
++import type RouterService from "@ember/routing/router-service";
++import { schedule } from "@ember/runloop";
++import { service } from "@ember/service";
++import type A11yService from "discourse/services/a11y";
++import { eq } from "discourse/truth-helpers";
++import DButton from "discourse/ui-kit/d-button";
++import dIcon from "discourse/ui-kit/helpers/d-icon";
++import { i18n } from "discourse-i18n";
++
++type Phase = "idle" | "holding" | "pending" | "done";
++type InputKind = "pointer" | "key";
++type HoldResult = boolean | void;
++
++export interface DHoldButtonSignature {
++  Args: {
++    /** Runs once after a complete hold. Return false to reset without success. */
++    action: () => HoldResult | Promise<HoldResult>;
++    /** Translation key for the idle label and accessible name. */
++    label: string;
++    /** Translation key announced and displayed only after the action succeeds. */
++    doneLabel: string;
++    /** Translation key displayed while waiting for the action's result. */
++    pendingLabel: string;
++    /** Translation key describing the required hold duration. */
++    hint: string;
++    /** Required hold duration in milliseconds; defaults to 2000. */
++    holdTime?: number;
++    /** Fill return duration in milliseconds; defaults to 200. */
++    releaseTime?: number;
++    /** Success display duration in milliseconds; 0 keeps it done. Defaults to 1200. */
++    resetAfter?: number;
++    /** Prevents input and cancels an unfinished hold. */
++    disabled?: boolean;
++    /** Handles a rejected action after the button resets. */
++    onError?: (error: unknown) => void;
++  };
++  Element: HTMLElement;
++  Blocks: {
++    /** Optional idle content, including alternate responsive labels. */
++    default: [];
++  };
++}
++
++const Labels: TOC<{
++  Args: { label: string; doneLabel: string; pendingLabel: string };
++  Blocks: { default: [] };
++}> = <template>
++  <span class="d-hold-button__idle">
++    {{#if (has-block)}}{{yield}}{{else}}{{i18n @label}}{{/if}}
++  </span>
++  <span class="d-hold-button__pending">{{i18n @pendingLabel}}</span>
++  <span class="d-hold-button__done">{{dIcon "check"}}{{i18n @doneLabel}}</span>
++</template>;
++
++export default class DHoldButton extends Component<DHoldButtonSignature> {
++  @service declare a11y: A11yService;
++  @service declare router: RouterService;
++
++  @tracked phase: Phase = "idle";
++  @tracked input: InputKind | null = null;
++
++  hintId = `${guidFor(this)}-hold-hint`;
++
++  #element?: HTMLButtonElement;
++  #observer?: ResizeObserver;
++  #frame = 0;
++  #completeTimer?: number;
++  #resetTimer?: number;
++  #pointerId: number | null = null;
++  #pressedKey: string | null = null;
++  #start = 0;
++  #progress = 0;
++
++  willDestroy() {
++    super.willDestroy();
++    this.#clearTimers();
++    cancelAnimationFrame(this.#frame);
++    this.#releaseCapture();
++    this.#observer?.disconnect();
++    window.removeEventListener("blur", this.cancelHold);
++    document.removeEventListener("visibilitychange", this.onVisibilityChange);
++    this.router.off("routeWillChange", this.cancelHold);
++  }
++
++  get accessibleLabel() {
++    if (this.phase === "done") {
++      return this.args.doneLabel;
++    }
++    return this.phase === "pending" ? this.args.pendingLabel : this.args.label;
++  }
++
++  get busy() {
++    return this.phase === "pending" || this.phase === "done";
++  }
++
++  get holdTime() {
++    return Math.max(0, this.args.holdTime ?? 2000);
++  }
++
++  get releaseTime() {
++    return Math.max(0, this.args.releaseTime ?? 200);
++  }
++
++  get resetAfter() {
++    return Math.max(0, this.args.resetAfter ?? 1200);
++  }
++
++  @action
++  setup(element: HTMLElement) {
++    if (!(element instanceof HTMLButtonElement)) {
++      return;
++    }
++    this.#element = element;
++    const measure = () => {
++      element.style.setProperty("--d-hold-width", `${element.offsetWidth}px`);
++      element.style.setProperty("--d-hold-height", `${element.offsetHeight}px`);
++    };
++    measure();
++    this.#observer = new ResizeObserver(measure);
++    this.#observer.observe(element);
++    this.syncDisabled();
++    window.addEventListener("blur", this.cancelHold);
++    document.addEventListener("visibilitychange", this.onVisibilityChange);
++    this.router.on("routeWillChange", this.cancelHold);
++  }
++
++  @action
++  syncDisabled() {
++    this.#element?.style.setProperty("--d-hold-time", `${this.holdTime}ms`);
++    this.#element?.style.setProperty(
++      "--d-hold-release",
++      `${this.releaseTime}ms`
++    );
++    this.#element?.style.setProperty(
++      "--d-hold-cycles",
++      `${this.holdTime / 1100}`
++    );
++    if (this.args.disabled) {
++      this.cancelHold();
++    }
++  }
++
++  @action
++  cancelHold() {
++    if (this.phase === "holding") {
++      this.#reset();
++    }
++    this.#pressedKey = null;
++    this.#releaseCapture();
++  }
++
++  @action
++  onVisibilityChange() {
++    if (document.hidden) {
++      this.cancelHold();
++    }
++  }
++
++  @action
++  onClick(event: MouseEvent) {
++    event.preventDefault();
++    if (this.phase === "idle") {
++      this.a11y.announce(i18n(this.args.hint));
++    }
++  }
++
++  @action
++  onContextMenu(event: MouseEvent) {
++    event.preventDefault();
++  }
++
++  @action
++  onKeyDown(event: KeyboardEvent) {
++    if (event.key === "Escape") {
++      this.cancelHold();
++    } else if (event.key === " " || event.key === "Enter") {
++      event.preventDefault();
++      if (!event.repeat && this.#begin("key")) {
++        this.#pressedKey = event.key;
++      }
++    }
++  }
++
++  @action
++  onKeyUp(event: KeyboardEvent) {
++    if (event.key === " " || event.key === "Enter") {
++      event.preventDefault();
++      if (this.input === "key" && this.#pressedKey === event.key) {
++        this.#pressedKey = null;
++        this.#release(false);
++      }
++    }
++  }
++
++  @action
++  onPointerDown(event: PointerEvent) {
++    if (
++      event.button !== 0 ||
++      !event.isPrimary ||
++      this.#pointerId !== null ||
++      !this.#begin("pointer")
++    ) {
++      return;
++    }
++    this.#pointerId = event.pointerId;
++    try {
++      this.#element?.setPointerCapture(event.pointerId);
++    } catch {}
++  }
++
++  @action
++  onPointerMove(event: PointerEvent) {
++    if (event.pointerId !== this.#pointerId || !this.#element) {
++      return;
++    }
++    const rect = this.#element.getBoundingClientRect();
++    if (
++      event.clientX < rect.left - 10 ||
++      event.clientX > rect.right + 10 ||
++      event.clientY < rect.top - 10 ||
++      event.clientY > rect.bottom + 10
++    ) {
++      this.#endPointer(event, true);
++    }
++  }
++
++  @action
++  onPointerUp(event: PointerEvent) {
++    this.#endPointer(event, false);
++  }
++
++  @action
++  onPointerCancel(event: PointerEvent) {
++    this.#endPointer(event, true);
++  }
++
++  @action
++  onPointerLeave(event: PointerEvent) {
++    if (event.pointerType !== "touch") {
++      this.#endPointer(event, true);
++    }
++  }
++
++  #begin(input: InputKind) {
++    if (this.args.disabled || this.phase !== "idle" || !this.#element) {
++      return false;
++    }
++    this.#clearTimers();
++    this.#setProgress(0);
++    this.#start = performance.now();
++    this.phase = "holding";
++    this.input = input;
++    this.#drive(1, this.holdTime);
++    this.#completeTimer = window.setTimeout(
++      () => this.#complete(),
++      this.holdTime
++    );
++    return true;
++  }
++
++  #endPointer(event: PointerEvent, cancelled: boolean) {
++    if (event.pointerId !== this.#pointerId) {
++      return;
++    }
++    this.#releaseCapture();
++    this.#release(cancelled);
++  }
++
++  #release(cancelled: boolean) {
++    if (this.phase !== "holding") {
++      return;
++    }
++    if (!cancelled && performance.now() - this.#start >= this.holdTime) {
++      this.#complete();
++    } else {
++      this.#reset();
++    }
++  }
++
++  #releaseCapture() {
++    const id = this.#pointerId;
++    this.#pointerId = null;
++    if (id !== null && this.#element?.hasPointerCapture(id)) {
++      this.#element.releasePointerCapture(id);
++    }
++  }
++
++  #clearTimers() {
++    window.clearTimeout(this.#completeTimer);
++    window.clearTimeout(this.#resetTimer);
++  }
++
++  async #complete() {
++    if (
++      this.isDestroying ||
++      this.phase !== "holding" ||
++      this.args.disabled ||
++      performance.now() - this.#start < this.holdTime
++    ) {
++      return;
++    }
++    this.#clearTimers();
++    cancelAnimationFrame(this.#frame);
++    this.#setProgress(1);
++    this.phase = "pending";
++    const restoreFocus = document.activeElement === this.#element;
++    try {
++      const result = await this.args.action();
++      if (this.isDestroying) {
++        return;
++      }
++      if (result === false) {
++        this.#reset();
++        return;
++      }
++      this.phase = "done";
++      this.a11y.announce(i18n(this.args.doneLabel));
++      if (this.resetAfter > 0) {
++        this.#resetTimer = window.setTimeout(
++          () => this.#reset(),
++          this.resetAfter
++        );
++      }
++    } catch (error: unknown) {
++      if (!this.isDestroying) {
++        this.#reset();
++        this.args.onError?.(error);
++      }
++    } finally {
++      if (restoreFocus && !this.isDestroying) {
++        schedule("afterRender", () => {
++          if (
++            !this.isDestroying &&
++            document.activeElement === document.body &&
++            !this.#element?.disabled
++          ) {
++            this.#element?.focus();
++          }
++        });
++      }
++    }
++  }
++
++  #reset() {
++    this.#clearTimers();
++    this.phase = "idle";
++    this.input = null;
++    this.#drive(0, this.releaseTime);
++  }
++
++  #setProgress(progress: number) {
++    this.#progress = progress;
++    this.#element?.style.setProperty("--d-hold-progress", progress.toFixed(4));
++    this.#element?.toggleAttribute("data-fill-visible", progress > 0);
++  }
++
++  #drive(target: number, duration: number) {
++    cancelAnimationFrame(this.#frame);
++    const from = this.#progress;
++    const start = performance.now();
++    const step = (now: number) => {
++      if (this.isDestroying) {
++        return;
++      }
++      const t = duration > 0 ? Math.min(1, (now - start) / duration) : 1;
++      const eased = target === 1 ? t : 1 - Math.pow(1 - t, 3);
++      this.#setProgress(from + (target - from) * eased);
++      if (t < 1) {
++        this.#frame = requestAnimationFrame(step);
++      } else if (target === 1) {
++        this.#complete();
++      }
++    };
++    this.#frame = requestAnimationFrame(step);
++  }
++
++  <template>
++    {{! eslint-disable ember/template-no-pointer-down-event-binding -- Timed confirmation begins when the press starts. }}
++    <DButton
++      class="btn-default d-hold-button"
++      ...attributes
++      aria-busy={{if (eq this.phase "pending") "true"}}
++      aria-describedby={{this.hintId}}
++      aria-disabled={{if this.busy "true"}}
++      data-input={{this.input}}
++      data-phase={{this.phase}}
++      @ariaLabel={{this.accessibleLabel}}
++      @disabled={{@disabled}}
++      @onKeyDown={{this.onKeyDown}}
++      @title={{@hint}}
++      {{didInsert this.setup}}
++      {{didUpdate this.syncDisabled @disabled @holdTime @releaseTime}}
++      {{on "blur" this.cancelHold}}
++      {{on "click" this.onClick}}
++      {{on "contextmenu" this.onContextMenu}}
++      {{on "keyup" this.onKeyUp}}
++      {{on "pointerdown" this.onPointerDown}}
++      {{on "pointermove" this.onPointerMove}}
++      {{on "pointerup" this.onPointerUp}}
++      {{on "pointercancel" this.onPointerCancel}}
++      {{on "lostpointercapture" this.onPointerCancel}}
++      {{on "pointerleave" this.onPointerLeave}}
++    >
++      <span aria-hidden="true" class="d-hold-button__pulse" />
++      <span aria-hidden="true" class="d-hold-button__label">
++        <Labels
++          @doneLabel={{@doneLabel}}
++          @label={{@label}}
++          @pendingLabel={{@pendingLabel}}
++        >
++          {{#if (has-block)}}{{yield}}{{else}}{{i18n @label}}{{/if}}
++        </Labels>
++      </span>
++      <span aria-hidden="true" class="d-hold-button__clip">
++        <span class="d-hold-button__fill">
++          <span class="d-hold-button__label">
++            <Labels
++              @doneLabel={{@doneLabel}}
++              @label={{@label}}
++              @pendingLabel={{@pendingLabel}}
++            >
++              {{#if (has-block)}}{{yield}}{{else}}{{i18n @label}}{{/if}}
++            </Labels>
++          </span>
++        </span>
++        <span class="d-hold-button__crest">
++          <span class="d-hold-button__label">
++            <Labels
++              @doneLabel={{@doneLabel}}
++              @label={{@label}}
++              @pendingLabel={{@pendingLabel}}
++            >
++              {{#if (has-block)}}{{yield}}{{else}}{{i18n @label}}{{/if}}
++            </Labels>
++          </span>
++        </span>
++      </span>
++      <span class="sr-only" id={{this.hintId}}>{{i18n @hint}}</span>
++    </DButton>
++  </template>
++}
+--- /dev/null
++++ b/source/frontend/discourse/tests/integration/ui-kit/d-hold-button-test.gjs
+@@ -0,0 +1,249 @@
++import { run } from "@ember/runloop";
++import { clearRender, find, render, settled } from "@ember/test-helpers";
++import { module, test } from "qunit";
++import sinon from "sinon";
++import { setupRenderingTest } from "discourse/tests/helpers/component-test";
++import DHoldButton from "discourse/ui-kit/d-hold-button";
++import { i18n } from "discourse-i18n";
++
++const selector = ".d-hold-button";
++
++async function renderButton(context) {
++  await render(
++    <template>
++      <DHoldButton
++        @action={{context.confirm}}
++        @disabled={{context.disabled}}
++        @doneLabel="saved"
++        @hint="save"
++        @holdTime={{300}}
++        @label="save"
++        @onError={{context.onError}}
++        @pendingLabel="loading"
++        @resetAfter={{1200}}
++      />
++    </template>
++  );
++}
++
++function pointer(type, options = {}) {
++  run(() => {
++    find(selector).dispatchEvent(
++      new PointerEvent(type, {
++        bubbles: true,
++        button: 0,
++        isPrimary: true,
++        pointerId: 1,
++        pointerType: "mouse",
++        ...options,
++      })
++    );
++  });
++}
++
++function key(type, value, options = {}) {
++  run(() => {
++    find(selector).dispatchEvent(
++      new KeyboardEvent(type, {
++        bubbles: true,
++        cancelable: true,
++        key: value,
++        ...options,
++      })
++    );
++  });
++}
++
++async function withClock(callback) {
++  const clock = sinon.useFakeTimers({
++    toFake: [
++      "setTimeout",
++      "clearTimeout",
++      "performance",
++      "requestAnimationFrame",
++      "cancelAnimationFrame",
++    ],
++  });
++  try {
++    await callback(clock);
++  } finally {
++    clock.restore();
++  }
++}
++
++module("Integration | ui-kit | DHoldButton", function (hooks) {
++  setupRenderingTest(hooks);
++
++  hooks.beforeEach(function () {
++    this.disabled = false;
++    this.confirm = sinon.stub().returns(true);
++    this.onError = sinon.spy();
++    sinon.stub(this.owner.lookup("service:a11y"), "announce");
++  });
++
++  hooks.afterEach(function () {
++    sinon.restore();
++  });
++
++  test("short clicks and 299ms holds do not confirm; 300ms confirms once", async function (assert) {
++    await renderButton(this);
++    assert.dom(selector).doesNotHaveAttribute("data-fill-visible");
++    await withClock(async (clock) => {
++      run(() => find(selector).click());
++      assert.false(this.confirm.called);
++      pointer("pointerdown");
++      await clock.tickAsync(299);
++      assert.false(this.confirm.called);
++      assert.dom(selector).hasAttribute("data-fill-visible");
++      pointer("pointerup");
++      await clock.tickAsync(250);
++      assert.dom(selector).hasAttribute("data-phase", "idle");
++      assert.dom(selector).doesNotHaveAttribute("data-fill-visible");
++      assert.false(this.confirm.called);
++
++      pointer("pointerdown");
++      await clock.tickAsync(300);
++      assert.true(this.confirm.calledOnce);
++      assert.dom(selector).hasAttribute("data-phase", "done");
++      assert.dom(selector).hasAttribute("data-fill-visible");
++      pointer("pointerup");
++      run(() => find(selector).click());
++      await clock.tickAsync(400);
++      assert.true(this.confirm.calledOnce);
++      await clock.tickAsync(800);
++      assert.dom(selector).hasAttribute("data-phase", "idle");
++      await clock.tickAsync(220);
++      assert.dom(selector).doesNotHaveAttribute("data-fill-visible");
++    });
++  });
++
++  test("pointer cancellation, drift, capture loss and blur cancel unfinished holds", async function (assert) {
++    await renderButton(this);
++    await withClock(async (clock) => {
++      for (const cancellation of [
++        "pointercancel",
++        "lostpointercapture",
++        "pointerleave",
++        "blur",
++        "drift",
++        "navigation",
++      ]) {
++        pointer("pointerdown");
++        await clock.tickAsync(150);
++        if (cancellation === "blur") {
++          run(() => window.dispatchEvent(new Event("blur")));
++        } else if (cancellation === "navigation") {
++          run(() =>
++            this.owner.lookup("service:router").trigger("routeWillChange", {
++              from: { name: "userNotifications.index" },
++              to: { name: "discovery.latest" },
++            })
++          );
++        } else if (cancellation === "drift") {
++          pointer("pointermove", { clientX: -100, clientY: -100 });
++        } else {
++          pointer(cancellation);
++        }
++        await clock.tickAsync(400);
++        assert.dom(selector).hasAttribute("data-phase", "idle", cancellation);
++        assert.false(this.confirm.called, cancellation);
++      }
++    });
++  });
++
++  test("Space and Enter require a hold, ignore repeats and support Escape", async function (assert) {
++    await renderButton(this);
++    await withClock(async (clock) => {
++      for (const value of [" ", "Enter"]) {
++        key("keydown", value);
++        await clock.tickAsync(100);
++        key("keydown", value, { repeat: true });
++        key("keydown", "Escape");
++        await clock.tickAsync(400);
++        key("keyup", value);
++        assert.false(this.confirm.called);
++        assert.dom(selector).hasAttribute("data-phase", "idle");
++      }
++      key("keydown", "Enter");
++      await clock.tickAsync(300);
++      key("keydown", "Enter", { repeat: true });
++      key("keyup", "Enter");
++      assert.true(this.confirm.calledOnce);
++      assert.dom(selector).hasAttribute("data-phase", "done");
++    });
++  });
++
++  test("pending actions block repeats and false results reset without success", async function (assert) {
++    let resolve;
++    this.confirm = sinon
++      .stub()
++      .returns(new Promise((done) => (resolve = done)));
++    await renderButton(this);
++    await withClock(async (clock) => {
++      pointer("pointerdown");
++      await clock.tickAsync(300);
++      pointer("pointerup");
++      assert.dom(selector).hasAttribute("data-phase", "pending");
++      assert.dom(selector).hasAttribute("aria-busy", "true");
++      assert.dom(selector).hasAttribute("aria-disabled", "true");
++      pointer("pointerdown");
++      key("keydown", "Enter");
++      await clock.tickAsync(1000);
++      assert.true(this.confirm.calledOnce);
++      resolve(false);
++      await clock.tickAsync(0);
++      assert.dom(selector).hasAttribute("data-phase", "idle");
++      assert.dom(selector).doesNotHaveAttribute("aria-busy");
++    });
++  });
++
++  test("rejections reset and invoke the error handler", async function (assert) {
++    const error = new Error("Request failed");
++    this.confirm.rejects(error);
++    await renderButton(this);
++    await withClock(async (clock) => {
++      pointer("pointerdown");
++      await clock.tickAsync(300);
++      pointer("pointerup");
++      assert.true(this.onError.calledOnceWithExactly(error));
++      assert.dom(selector).hasAttribute("data-phase", "idle");
++    });
++  });
++
++  test("disabled changes cancel a hold and labels expose one accessible name", async function (assert) {
++    await renderButton(this);
++    const button = find(selector);
++    assert.dom(button).hasAttribute("aria-label", i18n("save"));
++    assert.dom(`#${button.getAttribute("aria-describedby")}`).exists();
++    assert
++      .dom(".d-hold-button__label[aria-hidden='true']")
++      .exists({ count: 1 });
++    assert.dom(".d-hold-button__clip[aria-hidden='true']").exists();
++    await withClock(async (clock) => {
++      pointer("pointerdown");
++      await clock.tickAsync(100);
++      run(() => this.set("disabled", true));
++      await clock.tickAsync(400);
++      assert.false(this.confirm.called);
++      assert.dom(selector).isDisabled();
++      assert.dom(selector).hasAttribute("data-phase", "idle");
++    });
++  });
++
++  test("destruction cancels the pending hold and its scheduled callbacks", async function (assert) {
++    await renderButton(this);
++    const clock = sinon.useFakeTimers({
++      toFake: ["performance", "requestAnimationFrame", "cancelAnimationFrame"],
++    });
++    try {
++      pointer("pointerdown");
++      clock.tick(100);
++      await clearRender();
++      clock.tick(1000);
++      await settled();
++      assert.false(this.confirm.called);
++    } finally {
++      clock.restore();
++    }
++  });
++});
+--- /dev/null
++++ b/source/app/assets/stylesheets/common/components/d-hold-button.scss
+@@ -0,0 +1,234 @@
++.d-hold-button {
++  --d-hold-radius: var(--d-button-border-radius);
++  --d-hold-background: var(--primary-very-low);
++  --d-hold-fill: var(--tertiary);
++  --d-hold-text: var(--primary);
++  --d-hold-fill-text: var(--secondary);
++  --d-hold-time: 2000ms;
++  --d-hold-release: 200ms;
++  --d-hold-wave: 6px;
++  --d-hold-width: 0px;
++  --d-hold-height: 0px;
++  --d-hold-progress: 0;
++  --d-hold-cycles: 2;
++  --d-hold-ease: cubic-bezier(0.23, 1, 0.32, 1);
++}
++
++.d-hold-button.btn {
++  position: relative;
++  display: inline-grid;
++  place-items: center;
++  isolation: isolate;
++  box-sizing: border-box;
++  min-block-size: 44px;
++  margin: 0;
++  padding: 0 22px;
++  border: 0;
++  border-radius: var(--d-hold-radius);
++  background: var(--d-hold-background);
++  color: var(--d-hold-text);
++  font: inherit;
++  font-weight: 500;
++  line-height: 1;
++  cursor: pointer;
++  user-select: none;
++  -webkit-touch-callout: none;
++  -webkit-tap-highlight-color: transparent;
++  touch-action: manipulation;
++
++  &:hover,
++  &:active,
++  &:focus {
++    background: var(--d-hold-background);
++    color: var(--d-hold-text);
++  }
++
++  &:focus-visible {
++    outline: 2px solid var(--d-hold-fill);
++    outline-offset: 3px;
++  }
++
++  &:disabled {
++    opacity: 0.5;
++    cursor: default;
++  }
++
++  &[data-phase="pending"] {
++    cursor: progress;
++  }
++}
++
++.d-hold-button__pulse {
++  position: absolute;
++  z-index: 0;
++  inset: 0;
++  border-radius: var(--d-hold-radius);
++  pointer-events: none;
++  opacity: 0;
++}
++
++.d-hold-button__label {
++  position: relative;
++  z-index: 2;
++  display: grid;
++  place-items: center;
++
++  > span {
++    grid-area: 1 / 1;
++    display: inline-flex;
++    align-items: center;
++    justify-content: center;
++    gap: 8px;
++    white-space: nowrap;
++  }
++
++  .d-icon {
++    color: inherit;
++  }
++}
++
++.d-hold-button__pending,
++.d-hold-button__done {
++  opacity: 0;
++}
++
++.d-hold-button[data-phase="pending"] .d-hold-button__idle,
++.d-hold-button[data-phase="done"] .d-hold-button__idle {
++  opacity: 0;
++}
++
++.d-hold-button[data-phase="pending"] .d-hold-button__pending,
++.d-hold-button[data-phase="done"] .d-hold-button__done {
++  opacity: 1;
++}
++
++.d-hold-button__clip {
++  position: absolute;
++  z-index: 3;
++  inset: 0;
++  clip-path: inset(0 round var(--d-hold-radius));
++  pointer-events: none;
++  visibility: hidden;
++}
++
++.d-hold-button[data-fill-visible] .d-hold-button__clip {
++  visibility: visible;
++}
++
++.d-hold-button__fill,
++.d-hold-button__crest {
++  position: absolute;
++  inset: 0;
++  display: grid;
++  place-items: center;
++  background: var(--d-hold-fill);
++  color: var(--d-hold-fill-text);
++}
++
++.d-hold-button__fill {
++  clip-path: inset(
++    0
++      calc(
++        (1 - var(--d-hold-progress)) *
++          (100% + 0.75 * var(--d-hold-wave)) - var(--d-hold-progress) * 0.25 *
++          var(--d-hold-wave)
++      )
++      0 0
++  );
++}
++
++.d-hold-button__crest {
++  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='200' viewBox='0 0 20 200' preserveAspectRatio='none'%3E%3Cpath d='M0 0H10C18 8 18 25.3 10 33.3S2 58.7 10 66.7S18 92 10 100S2 125.3 10 133.3S18 158.7 10 166.7S2 192 10 200H0Z'/%3E%3C/svg%3E");
++  mask-repeat: repeat-y;
++  mask-size: var(--d-hold-wave) calc(var(--d-hold-height) * 2);
++  mask-position-x: calc(
++    -1 * var(--d-hold-wave) + var(--d-hold-progress) *
++      (var(--d-hold-width) + var(--d-hold-wave))
++  );
++  mask-position-y: calc(
++    -1 * var(--d-hold-progress) * var(--d-hold-cycles) * var(--d-hold-height)
++  );
++}
++
++@media (prefers-reduced-motion: no-preference) {
++  .d-hold-button.btn {
++    transition:
++      transform 160ms var(--d-hold-ease),
++      box-shadow var(--d-hold-release) var(--d-hold-ease);
++
++    &[data-phase="holding"][data-input="pointer"] {
++      transform: scale(0.97);
++    }
++
++    &[data-phase="holding"],
++    &[data-phase="done"] {
++      box-shadow:
++        inset 0 1px 0 rgb(255 255 255 / 6%),
++        0 10px 32px -6px color-mix(in srgb, var(--d-hold-fill) 70%, transparent);
++    }
++
++    &[data-phase="holding"] {
++      transition:
++        transform 160ms var(--d-hold-ease),
++        box-shadow var(--d-hold-time) linear;
++    }
++  }
++
++  .d-hold-button__label > span {
++    transition:
++      opacity 200ms ease,
++      filter 200ms ease;
++  }
++
++  .d-hold-button__pending,
++  .d-hold-button__done {
++    filter: blur(2px);
++  }
++
++  .d-hold-button[data-phase="pending"] .d-hold-button__pending,
++  .d-hold-button[data-phase="done"] .d-hold-button__done {
++    filter: blur(0);
++  }
++
++  .d-hold-button[data-phase="done"] .d-hold-button__pulse {
++    animation: d-hold-pulse 600ms var(--d-hold-ease) forwards;
++  }
++}
++
++@keyframes d-hold-pulse {
++  from {
++    opacity: 1;
++    box-shadow: 0 0 0 0 color-mix(in srgb, var(--d-hold-fill) 55%, transparent);
++  }
++
++  to {
++    opacity: 0;
++    box-shadow: 0 0 0 14px
++      color-mix(in srgb, var(--d-hold-fill) 0%, transparent);
++  }
++}
++
++@media (prefers-reduced-motion: reduce) {
++  .d-hold-button__fill {
++    clip-path: inset(0);
++    opacity: 0;
++    transition: opacity var(--d-hold-release) ease;
++  }
++
++  .d-hold-button__crest {
++    display: none;
++  }
++
++  .d-hold-button[data-phase="holding"] .d-hold-button__fill,
++  .d-hold-button[data-phase="pending"] .d-hold-button__fill,
++  .d-hold-button[data-phase="done"] .d-hold-button__fill {
++    opacity: 1;
++    transition: opacity var(--d-hold-time) linear;
++  }
++}
++
++@media (prefers-contrast: more) {
++  .d-hold-button.btn {
++    outline: 1px solid var(--d-hold-text);
++  }
++}
+--- a/source/app/assets/stylesheets/common/components/_index.scss
++++ b/source/app/assets/stylesheets/common/components/_index.scss
+@@ -94,4 +94,5 @@
+ @import "welcome-banner";
+ @import "d-multi-select";
+ @import "d-otp";
++@import "d-hold-button";
+ @import "d-post-accordion";

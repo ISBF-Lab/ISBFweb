@@ -294,6 +294,10 @@ zh_CN:
     week_sun: "日"
     notifications_menu: "通知操作"
     notifications_mark_read: "全部标为已读"
+    notifications_mark_read_compact: 全部已读
+    notifications_mark_read_done: 已全部标读
+    notifications_mark_read_pending: 处理中…
+    notifications_mark_read_hint: 按住 0.3 秒，全部标为已读
     notifications_settings: "通知设置"
     notifications_tabs: "通知筛选"
     notifications_all: "全部"

@@ -1,0 +1,1592 @@
+{
+  "results": [
+    {
+      "passed": 1142,
+      "failed": 0,
+      "total": 1142,
+      "runtime": 193982,
+      "failures": [],
+      "tests": [
+        {
+          "name": "account fields and the native username editing flow stay available",
+          "module": "Acceptance: ISBF frontend consistency",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "directory retains data and clears its scope when leaving",
+          "module": "Acceptance: ISBF frontend consistency",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "functional-page styles leave the profile upper region unchanged",
+          "module": "Acceptance: ISBF frontend consistency",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "badge collections retain grouping anchors and grant recipients",
+          "module": "Acceptance: ISBF frontend consistency",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "bookmark reminder deletion can be cancelled without losing private rows",
+          "module": "Acceptance: ISBF private list appearance",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "/guidelines keeps its content in the V2 shell",
+          "module": "Acceptance: ISBF | Information pages",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "/faq keeps its content in the V2 shell",
+          "module": "Acceptance: ISBF | Information pages",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "/about keeps its content in the V2 shell",
+          "module": "Acceptance: ISBF | Information pages",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "/tos keeps its content in the V2 shell",
+          "module": "Acceptance: ISBF | Information pages",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "/privacy keeps its content in the V2 shell",
+          "module": "Acceptance: ISBF | Information pages",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "/rules keeps its content in the V2 shell",
+          "module": "Acceptance: ISBF | Information pages",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "/conduct keeps its content in the V2 shell",
+          "module": "Acceptance: ISBF | Information pages",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "guidelines links and the return button keep the shared navigation",
+          "module": "Acceptance: ISBF | Information pages",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "guidelines with a query, fragment, or trailing slash retain the shell",
+          "module": "Acceptance: ISBF | Information pages",
+          "failed": 0,
+          "total": 9
+        },
+        {
+          "name": "guidelines remain local when FAQ has an external URL",
+          "module": "Acceptance: ISBF | Information pages",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "login retains its existing interface",
+          "module": "Acceptance: ISBF | Information pages | Login required",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "historical activity previews its body and image through the real route",
+          "module": "Acceptance: ISBF profile previews",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "the real summary route preserves each original post target",
+          "module": "Acceptance: ISBF profile previews",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "the header controls the single native timeline at desktop widths",
+          "module": "Acceptance: ISBF floating topic reading",
+          "failed": 0,
+          "total": 10
+        },
+        {
+          "name": "an outside press closes reading without taking the clicked target's focus",
+          "module": "Acceptance: ISBF floating topic reading",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "Escape closes reading and leaving the topic removes its opener",
+          "module": "Acceptance: ISBF floating topic reading",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "another topic starts collapsed after navigating with reading open",
+          "module": "Acceptance: ISBF floating topic reading",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "jumping still opens the native modal and Escape closes the modal first",
+          "module": "Acceptance: ISBF floating topic reading",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "reading does not start the bottom-sheet swipe behavior",
+          "module": "Acceptance: ISBF floating topic reading on touch",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "the real topics route replaces internal titles without replacing its list",
+          "module": "Acceptance: ISBF untitled topic lists",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "the real read route replaces internal titles without replacing its list",
+          "module": "Acceptance: ISBF untitled topic lists",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "sorting and loading another page retain clean topic titles",
+          "module": "Acceptance: ISBF untitled topic lists",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "the marketplace arrow returns to its source through browser history",
+          "module": "ISBF | Integration | Service | isbf-back-navigation",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "directly opened functional pages retain their workbench fallback",
+          "module": "ISBF | Integration | Service | isbf-back-navigation",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "modified clicks retain ordinary link behavior",
+          "module": "ISBF | Integration | Service | isbf-back-navigation",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "deleting an entry requires confirmation",
+          "module": "ISBF | Integration | Component | ISBFV2Calendar",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "the entry editor focuses the title and closes with Escape",
+          "module": "ISBF | Integration | Component | ISBFV2Calendar",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "pending changes appear outside the displayed month",
+          "module": "ISBF | Integration | Component | ISBFV2Calendar",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "a notification opens the accepted entry on its Beijing date",
+          "module": "ISBF | Integration | Component | ISBFV2Calendar",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "imported entries expose only a private note editor",
+          "module": "ISBF | Integration | Component | ISBFV2Calendar",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "accept sends the reviewed version and preserves the private note",
+          "module": "ISBF | Integration | Component | ISBFCalendarUpdateDialog",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "keeping old information dismisses only the displayed revision",
+          "module": "ISBF | Integration | Component | ISBFCalendarUpdateDialog",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "a concurrent change refreshes the dialog without confirming it",
+          "module": "ISBF | Integration | Component | ISBFCalendarUpdateDialog",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "cancelled sources retain the record and offer removal",
+          "module": "ISBF | Integration | Component | ISBFCalendarUpdateDialog",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "publishing a short title shows the required length and correcting it clears the error",
+          "module": "ISBF | Integration | Component | ISBFV2ComposerTitle",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "leaving an optional title empty clears a previous length error",
+          "module": "ISBF | Integration | Component | ISBFV2ComposerTitle",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "renders actual reply counts and native topic, date and category targets",
+          "module": "ISBF | Integration | Component | ContinueReadingItem",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "uses the creator avatar and a local fallback without inventing an author",
+          "module": "ISBF | Integration | Component | ContinueReadingItem",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "keeps new, read and nested reply states distinct",
+          "module": "ISBF | Integration | Component | ContinueReadingItem",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "retains lock state, keyboard focus and native click history",
+          "module": "ISBF | Integration | Component | ContinueReadingItem",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "loads the first-post text lazily while retaining the unread target",
+          "module": "ISBF | Integration | Component | ISBFContinueReadingItem",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "a pure-image post has a readable label without a filename",
+          "module": "ISBF | Integration | Component | ISBFContinueReadingItem",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "a missing body retains the neutral label and linked-post target",
+          "module": "ISBF | Integration | Component | ISBFContinueReadingItem",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "hidden topics do not expose an excerpt or request their body",
+          "module": "ISBF | Integration | Component | ISBFContinueReadingItem",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "untitled links retain read announcements, focus and native history",
+          "module": "ISBF | Integration | Component | ISBFContinueReadingItem",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "a real title keeps native formatting without a body request",
+          "module": "ISBF | Integration | Component | ISBFContinueReadingItem",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "retains both real count links and follows tracking updates",
+          "module": "ISBF | Integration | Component | ContinueReadingFooter",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "retains separate new and unread routes when unified new is disabled",
+          "module": "ISBF | Integration | Component | ContinueReadingFooter",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "zero counts preserve category browsing and the extra latest link",
+          "module": "ISBF | Integration | Component | ContinueReadingFooter",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "both sources share the list while retaining their order and persisted selection",
+          "module": "ISBF | Integration | Component | ContinueReading",
+          "failed": 0,
+          "total": 9
+        },
+        {
+          "name": "empty and private contexts retain their existing rendering",
+          "module": "ISBF | Integration | Component | ContinueReading",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "inline dialogs receive the shared frame and buttons without a page or component whitelist",
+          "module": "ISBF | Integration | Dialog consistency",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "confirmation frames and actions work outside the previous admitted routes",
+          "module": "ISBF | Integration | Dialog consistency",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "calendar entry errors retain fields and all-day retries preserve the exclusive UTC end",
+          "module": "ISBF | Integration | Dialog consistency",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "directory requests preserve their pending result and selected parent",
+          "module": "ISBF | Integration | Dialog consistency",
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "name": "only available actions are rendered and empty menus are hidden",
+          "module": "ISBF | Integration | Feed card menu",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "arrows, Home and End move focus, and Escape returns it",
+          "module": "ISBF | Integration | Feed card menu",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "request states disable their actions and keyboard navigation skips them",
+          "module": "ISBF | Integration | Feed card menu",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "outside click and destruction release the floating menu",
+          "module": "ISBF | Integration | Feed card menu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "pin actions retain their original callbacks",
+          "module": "ISBF | Integration | Feed card menu",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "route transitions remove the previous region's classes",
+          "module": "ISBF | Integration | Component | ISBFFrontendScope",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "the existing fourth action closes the menu and opens the public join page",
+          "module": "ISBF | Integration | Component | ISBFV2UtilityActions | Join",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "the action is outside the menu and a click does not mark read",
+          "module": "ISBF | Integration | Notifications hold",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "a successful hold marks read once, updates counts and refreshes",
+          "module": "ISBF | Integration | Notifications hold",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "high priority notifications retain confirmation and cancellation makes no request",
+          "module": "ISBF | Integration | Notifications hold",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "confirmation submits once and completion follows the request result",
+          "module": "ISBF | Integration | Notifications hold",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "request failure resets the button, preserves counts and offers a retry",
+          "module": "ISBF | Integration | Notifications hold",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "a newer notification during the request keeps its unread count",
+          "module": "ISBF | Integration | Notifications hold",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "opens the grouped notification target and consumes its unread count once",
+          "module": "ISBF | Integration | Component | ISBFNotificationEntry",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "opens the native notification target and consumes its unread count once",
+          "module": "ISBF | Integration | Component | ISBFNotificationEntry",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "counts unread notices even after they were seen, caps the badge and hides zero",
+          "module": "ISBF | Integration | Component | ISBFNotificationBell",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "uses the account's dot preference and updates through the private notification channel",
+          "module": "ISBF | Integration | Component | ISBFNotificationBell",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "starts with all notifications, filters both tabs and expands without marking read",
+          "module": "ISBF | Integration | Component | ISBFNotifications",
+          "failed": 0,
+          "total": 13
+        },
+        {
+          "name": "restores the saved filter before loading and remembers turning it off",
+          "module": "ISBF | Integration | Component | ISBFNotifications",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "keeps the previous filter when saving fails and applies a successful retry",
+          "module": "ISBF | Integration | Component | ISBFNotifications",
+          "failed": 0,
+          "total": 9
+        },
+        {
+          "name": "saves a personal badge preference and lets a failed save be retried",
+          "module": "ISBF | Integration | Component | ISBFNotifications",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "refreshes the unread list when another tab marks its notifications read",
+          "module": "ISBF | Integration | Component | ISBFNotifications",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "keeps unread state after a failed bulk action and clears it on a successful retry",
+          "module": "ISBF | Integration | Component | ISBFNotifications",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "each activity shows four labelled fields and the cutoff appears once",
+          "module": "ISBF | Integration | Component | ISBFOfficialActivitySummary",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "legacy activities use placeholders and independent deadlines have a compact card",
+          "module": "ISBF | Integration | Component | ISBFOfficialActivitySummary",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "multiple activities have separate groups and user text remains escaped",
+          "module": "ISBF | Integration | Component | ISBFOfficialActivitySummary",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "ordinary announcements have no summary container",
+          "module": "ISBF | Integration | Component | ISBFOfficialActivitySummary",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "a publisher can add a date-only deadline",
+          "module": "ISBF | Integration | Component | ISBFOfficialCalendarEditor",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "changing precision retains the date and removing a row preserves other IDs",
+          "module": "ISBF | Integration | Component | ISBFOfficialCalendarEditor",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "an activity saves display information and an optional registration cutoff",
+          "module": "ISBF | Integration | Component | ISBFOfficialCalendarEditor",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "an activity can be saved without a registration deadline",
+          "module": "ISBF | Integration | Component | ISBFOfficialCalendarEditor",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "changing registration precision keeps the Beijing date and source identity",
+          "module": "ISBF | Integration | Component | ISBFOfficialCalendarEditor",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "the feed summary has no add control",
+          "module": "ISBF | Integration | Component | ISBFOfficialCalendarItems",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "one click adds the item and prevents another request",
+          "module": "ISBF | Integration | Component | ISBFOfficialCalendarItems",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "a failed request can be retried",
+          "module": "ISBF | Integration | Component | ISBFOfficialCalendarItems",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "a version conflict refreshes the official information",
+          "module": "ISBF | Integration | Component | ISBFOfficialCalendarItems",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "the selected campus is marked and a pick calls the existing callback once",
+          "module": "ISBF | Integration | Component | ISBFOfficialPicker",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "arrows, Home, End and type-ahead navigate without applying a filter",
+          "module": "ISBF | Integration | Component | ISBFOfficialPicker",
+          "failed": 0,
+          "total": 9
+        },
+        {
+          "name": "pointer exploration does not change selection and external values update immediately",
+          "module": "ISBF | Integration | Component | ISBFOfficialPicker",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "multi-select keeps the shared surface and toggles without closing",
+          "module": "ISBF | Integration | Component | ISBFOfficialPicker",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "outside clicks and destruction release the floating menu",
+          "module": "ISBF | Integration | Component | ISBFOfficialPicker",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "the optional native hooks keep the default animation and numeric count",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "the count block preserves the owner's icon and native users menu",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "a pointer press pulses immediately while a slow like keeps the real count",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "name": "decrements and multi-digit changes roll in the proper direction",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "keyboard and external count updates are immediate",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "a failed request leaves no stale local transition for later updates",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "zero counts keep the native entry rules and count clicks do not pulse",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "disabled controls never start a run",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "canceled touches release the pressed style without a run",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "reduced motion and a live preference change release all transforms",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "reply opens its native action without incrementing or selecting",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "the first-post bookmark tracks its model and uses the existing PUT routes",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "name": "compact counts retain their format and unchanged glyphs do not roll",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "a repeated press replaces the animation and destruction cancels it",
+          "module": "ISBF | Integration | Post action pulse",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "untitled activity loads image previews only after becoming visible",
+          "module": "ISBF | Integration | Component | ISBFPostPreview",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "the real activity stream previews a historical topic without a post ID",
+          "module": "ISBF | Integration | Component | ISBFPostPreview",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "the native summary topic link uses the body for an untitled topic",
+          "module": "ISBF | Integration | Component | ISBFPostPreview",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "an untitled popular reply previews its own post number",
+          "module": "ISBF | Integration | Component | ISBFPostPreview",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "an explicitly titled recent discussion needs no body request",
+          "module": "ISBF | Integration | Component | ISBFPostPreview",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "a recent untitled discussion retains the production text-only rail",
+          "module": "ISBF | Integration | Component | ISBFPostPreview",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "failed activity images are removed while the post link remains usable",
+          "module": "ISBF | Integration | Component | ISBFPostPreview",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "a failed request retains a clean excerpt and post link",
+          "module": "ISBF | Integration | Component | ISBFPostPreview",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "hidden activity does not display or request its body",
+          "module": "ISBF | Integration | Component | ISBFPostPreview",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "the native expand control still displays and folds the full body",
+          "module": "ISBF | Integration | Component | ISBFPostPreview",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "loads original content only on demand and links to its exact floor",
+          "module": "ISBF | Integration | Component | ISBFReplyContext",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "unavailable originals can be retried without exposing hidden content",
+          "module": "ISBF | Integration | Component | ISBFReplyContext",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "shows the reply count without displaying the accessibility instruction",
+          "module": "ISBF | Integration | Component | ISBFTopicReply",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "native topic links retain the unread target and escape preview text",
+          "module": "ISBF | Integration | topic display title",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "localized topic links and browser titles retain the selected language without fetching the body",
+          "module": "ISBF | Integration | topic display title",
+          "failed": 0,
+          "total": 10
+        },
+        {
+          "name": "bookmarked localized titles retain their flag and exact post target",
+          "module": "ISBF | Integration | topic display title",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "cached sharing and activity labels update when a translation arrives",
+          "module": "ISBF | Integration | topic display title",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "localized search titles precede original-language highlighted headlines and blurbs",
+          "module": "ISBF | Integration | topic display title",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "a visible public title can load its missing first post",
+          "module": "ISBF | Integration | topic display title",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "private, hidden, and deleted titles never enter the public loader",
+          "module": "ISBF | Integration | topic display title",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "a failed preview request keeps a clean title and original link",
+          "module": "ISBF | Integration | topic display title",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "search headlines cannot reintroduce highlighted internal titles",
+          "module": "ISBF | Integration | topic display title",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "both search interfaces use the matched body without headline mode",
+          "module": "ISBF | Integration | topic display title",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "bookmarked replies retain their exact post and local excerpt",
+          "module": "ISBF | Integration | topic display title",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "draft rows display their own body while keeping resumable raw data",
+          "module": "ISBF | Integration | topic display title",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "editing an untitled topic shows an empty field and preserves its marker",
+          "module": "ISBF | Integration | topic display title",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "native expansion keeps the grouped timeline floating across repeated opens",
+          "module": "ISBF | Integration | Component | ISBFReplyNavigation",
+          "failed": 0,
+          "total": 14
+        },
+        {
+          "name": "outside dismissal precedes a target that stops bubbling",
+          "module": "ISBF | Integration | Modifier | isbf-close-on-click-outside",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "the native panel and detached trigger are excluded",
+          "module": "ISBF | Integration | Modifier | isbf-close-on-click-outside",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "changing targets replaces the listener and teardown removes it",
+          "module": "ISBF | Integration | Modifier | isbf-close-on-click-outside",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "the footer returns to the native index within a filtered stream",
+          "module": "ISBF | Integration | Component | ISBFTopicReadingJump",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "nearby or unavailable previous positions do not add a return button",
+          "module": "ISBF | Integration | Component | ISBFTopicReadingJump",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "other navigation modes keep their existing controls",
+          "module": "ISBF | Integration | Component | ISBFTopicReadingJump",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "a regular post displays the name while retaining its profile and role",
+          "module": "ISBF | Integration | Component | UserDisplay",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "private messages retain the native name preference",
+          "module": "ISBF | Integration | Component | UserDisplay",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "a reply has the same author rule and user-supplied names stay escaped",
+          "module": "ISBF | Integration | Component | UserDisplay",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "a grouped notification displays the actor's name and username",
+          "module": "ISBF | Integration | Component | UserDisplay",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "the native notification menu displays both identities and keeps its target",
+          "module": "ISBF | Integration | Component | UserDisplay",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "other user-menu items keep their own labels",
+          "module": "ISBF | Integration | Component | UserDisplay",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "the new presentation preserves real links and non-interactive placeholders",
+          "module": "ISBF | Integration | Component | ISBFV2Workbench",
+          "failed": 0,
+          "total": 16
+        },
+        {
+          "name": "disabled services keep their existing visibility and placeholder rules",
+          "module": "ISBF | Integration | Component | ISBFV2Workbench",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "entry names belong to the glass face and decorative copy is removed",
+          "module": "ISBF | Integration | Component | ISBFV2Workbench",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "returning from a topic retains the exact source page",
+          "module": "ISBF | Unit | Lib | back-navigation-history",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "back and forward move the return target without creating a loop",
+          "module": "ISBF | Unit | Lib | back-navigation-history",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "address replacements do not add a return step",
+          "module": "ISBF | Unit | Lib | back-navigation-history",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "refresh restores the current browser entry after topic scrolling",
+          "module": "ISBF | Unit | Lib | back-navigation-history",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "a new tab or unrecorded entry starts a new return boundary",
+          "module": "ISBF | Unit | Lib | back-navigation-history",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "unavailable storage keeps navigation usable within the page lifetime",
+          "module": "ISBF | Unit | Lib | back-navigation-history",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "calendar changes link to the private entry",
+          "module": "ISBF | Unit | Lib | calendar-notification",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "other custom notifications retain core rendering",
+          "module": "ISBF | Unit | Lib | calendar-notification",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "items remain isolated and clearing preserves existing extensions",
+          "module": "ISBF | Unit | Model | composer-official-calendar",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "draft serialization and reopening retain structured items",
+          "module": "ISBF | Unit | Model | composer-official-calendar",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "editing the first post restores source IDs and versions",
+          "module": "ISBF | Unit | Model | composer-official-calendar",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "ordinary posts, replies and private messages omit time metadata",
+          "module": "ISBF | Unit | Model | composer-official-calendar",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "official fields default to null on each composer",
+          "module": "ISBF | Unit | Model | composer-official",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "clearing repeatedly resets official selections, optional title and core state",
+          "module": "ISBF | Unit | Model | composer-official",
+          "failed": 0,
+          "total": 12
+        },
+        {
+          "name": "opening a new official topic initializes empty selections",
+          "module": "ISBF | Unit | Model | composer-official",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "official selections survive draft serialization and restoration",
+          "module": "ISBF | Unit | Model | composer-official",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "editing the first post restores selections from the loaded post",
+          "module": "ISBF | Unit | Model | composer-official",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "open preserves another extension's arguments and result",
+          "module": "ISBF | Unit | Model | composer-official",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "open preserves promise rejections",
+          "module": "ISBF | Unit | Model | composer-official",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "payload getters track and filter official selections",
+          "module": "ISBF | Unit | Model | composer-official",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "save requires isbf_official_campuses before creating a post",
+          "module": "ISBF | Unit | Model | composer-official",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "save requires isbf_official_types before creating a post",
+          "module": "ISBF | Unit | Model | composer-official",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "saving a complete official topic preserves payloads and result",
+          "module": "ISBF | Unit | Model | composer-official",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "editing the first post preserves update serialization and options",
+          "module": "ISBF | Unit | Model | composer-official",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "ordinary topics save without official selections",
+          "module": "ISBF | Unit | Model | composer-official",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "replies and private messages omit official payloads",
+          "module": "ISBF | Unit | Model | composer-official",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "clearing a composer resets its optional title and core state",
+          "module": "ISBF | Unit | Model | composer-optional-title",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "an untitled draft keeps its hidden title when restored",
+          "module": "ISBF | Unit | Model | composer-optional-title",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "an explicit title survives draft restoration",
+          "module": "ISBF | Unit | Model | composer-optional-title",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "saving and closing stores the title before clearing the composer",
+          "module": "ISBF | Unit | Model | composer-optional-title",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "cancelling an unchanged composer clears the optional title",
+          "module": "ISBF | Unit | Model | composer-optional-title",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "concurrent requests for the same numeric ID share a request and cache",
+          "module": "ISBF | Unit | Lib | feed-post-loader",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "only four requests start before a queued request can proceed",
+          "module": "ISBF | Unit | Lib | feed-post-loader",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "a hidden post cannot be repopulated by a response already in flight",
+          "module": "ISBF | Unit | Lib | feed-post-loader",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "the least recently used content is evicted after fifty posts",
+          "module": "ISBF | Unit | Lib | feed-post-loader",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "a post number resolves once and shares the canonical post cache",
+          "module": "ISBF | Unit | Lib | feed-post-loader",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "a hidden number lookup cannot restore an in-flight body",
+          "module": "ISBF | Unit | Lib | feed-post-loader",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "an edit invalidates a pending number lookup before its ID is known",
+          "module": "ISBF | Unit | Lib | feed-post-loader",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "different replies in one topic keep separate bodies",
+          "module": "ISBF | Unit | Lib | feed-post-loader",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "poll state stays separate from cooked bodies and other users",
+          "module": "ISBF | Unit | Lib | feed-post-loader",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "only registered preference subroutes receive functional-page rules",
+          "module": "ISBF | Unit | Lib | frontend-consistency-scope",
+          "failed": 0,
+          "total": 16
+        },
+        {
+          "name": "directory and invitation filters use separate page scopes",
+          "module": "ISBF | Unit | Lib | frontend-consistency-scope",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "private lists and profile lower routes have explicit scopes",
+          "module": "ISBF | Unit | Lib | frontend-consistency-scope",
+          "failed": 0,
+          "total": 14
+        },
+        {
+          "name": "group management and directory scopes include only the accepted routes",
+          "module": "ISBF | Unit | Lib | frontend-consistency-scope",
+          "failed": 0,
+          "total": 29
+        },
+        {
+          "name": "loading, admin, authentication and approved surfaces stay outside the rollout",
+          "module": "ISBF | Unit | Lib | frontend-consistency-scope",
+          "failed": 0,
+          "total": 22
+        },
+        {
+          "name": "both official list paths use the layout while other feeds keep their summaries",
+          "module": "ISBF | Unit | Lib | official-activities",
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "name": "editing an activity keeps its registration identity and separate time precision",
+          "module": "ISBF | Unit | Lib | official-activities",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "multiple activities pair only with their own cutoffs and standalone deadlines remain visible",
+          "module": "ISBF | Unit | Lib | official-activities",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "a new optional registration cutoff creates a date-only deadline",
+          "module": "ISBF | Unit | Lib | official-activities",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "clearing registration omits its cutoff while keeping the activity ID",
+          "module": "ISBF | Unit | Lib | official-activities",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "legacy deadlines remain independent and cancelled cutoffs cannot be paired",
+          "module": "ISBF | Unit | Lib | official-activities",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "a date-only deadline is a Beijing day with an exclusive end",
+          "module": "ISBF | Unit | Lib | official-calendar",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "a precise deadline or activity without an end occupies one day",
+          "module": "ISBF | Unit | Lib | official-calendar",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "editor round trips preserve source identity and Beijing times",
+          "module": "ISBF | Unit | Lib | official-calendar",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "impossible dates and reversed ranges cannot be saved",
+          "module": "ISBF | Unit | Lib | official-calendar",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "image metadata is omitted while text and optimized images remain",
+          "module": "ISBF | Unit | Lib | post-preview",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "native excerpt lightbox filenames do not become preview text",
+          "module": "ISBF | Unit | Lib | post-preview",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "only safe post images enter the bounded gallery",
+          "module": "ISBF | Unit | Lib | post-preview",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "long summaries keep complete Unicode characters",
+          "module": "ISBF | Unit | Lib | post-preview",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "public activity is eligible while other user tools remain native",
+          "module": "ISBF | Unit | Lib | post-preview",
+          "failed": 0,
+          "total": 9
+        },
+        {
+          "name": "historical activity can locate its post by topic and post number",
+          "module": "ISBF | Unit | Lib | post-preview",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "group indexes resolve through the server before using canonical floor links",
+          "module": "ISBF | Unit | Lib | reply-navigation",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "a destroyed navigation cannot route after an outstanding resolution",
+          "module": "ISBF | Unit | Lib | reply-navigation",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "new reply totals update without changing group identity",
+          "module": "ISBF | Unit | Lib | reply-navigation",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "only generated titles are replaced with clean body text",
+          "module": "ISBF | Unit | topic display title",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "localized title text wins while a missing translation retains the body fallback",
+          "module": "ISBF | Unit | topic display title",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "pictures and inaccessible content use translated fallbacks",
+          "module": "ISBF | Unit | topic display title",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "authorized draft, pending, and search excerpts remain local",
+          "module": "ISBF | Unit | topic display title",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "feed gradients keep ten stops in order and reject extra stops",
+          "module": "ISBF | Unit | Lib | user-display",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "feed gradients preserve solid fallback and reject injected styles",
+          "module": "ISBF | Unit | Lib | user-display",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "feed colors accept saved theme or hex colors and ignore arbitrary CSS",
+          "module": "ISBF | Unit | Lib | user-display",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "saved current-user appearance overrides an older list object",
+          "module": "ISBF | Unit | Lib | user-display",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "a filled name is the primary name and retains the account identifier",
+          "module": "ISBF | Unit | Lib | user-display",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "missing and whitespace-only names fall back without duplicate identifiers",
+          "module": "ISBF | Unit | Lib | user-display",
+          "failed": 0,
+          "total": 9
+        },
+        {
+          "name": "received notifications use the current actor name independently of username preference",
+          "module": "ISBF | Unit | Lib | user-display",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "disabled names and deleted actors preserve their fallback",
+          "module": "ISBF | Unit | Lib | user-display",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "two-person and multi-person likes keep native counts and translation",
+          "module": "ISBF | Unit | Lib | user-display",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "reaction counts distinguish several actors from one actor reacting to several posts",
+          "module": "ISBF | Unit | Lib | user-display",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "group mentions and moved posts retain their extra information",
+          "module": "ISBF | Unit | Lib | user-display",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "system labels and consolidated reply summaries keep their native meaning",
+          "module": "ISBF | Unit | Lib | user-display",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "settling flushes batched impressions and cached counts avoid another request",
+          "module": "ISBF | Unit | Lib | view-tracker",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "only complete hex colors are accepted",
+          "module": "ISBF | Unit | workbench colors",
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "name": "module overrides inherit the shared default in the selected palette",
+          "module": "ISBF | Unit | workbench colors",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "invalid and unset values leave the theme fallback intact",
+          "module": "ISBF | Unit | workbench colors",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "light and dark backgrounds choose contrasting existing foreground tokens",
+          "module": "ISBF | Unit | workbench colors",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "mobile does not initialize graphics, motion, or size observers",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "crossing the navigation breakpoint releases and restores desktop resources",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 9
+        },
+        {
+          "name": "custom colors survive a breakpoint change before computed styles refresh",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "the administrator can select traditional layout on both device sizes",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "mobile glass and desktop traditional use independent administrator settings",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "desktop-only custom colors stay independent when both devices use glass",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "intro settles and the renderer sleeps until another interaction",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "removal cancels pending frames, observers, listeners, and GPU resources",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "context loss immediately restores visible fallback and supports restoration",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "static mode remains visible without animation: {\"reduced\":true}",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "static mode remains visible without animation: {\"gpu\":false}",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "enabling reduced motion during intro completes it immediately",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "a pending frame respects reduced motion before its change event arrives",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "placeholder entries do not acquire interactive motion handlers",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "an empty grid does not allocate graphics or observers",
+          "module": "ISBF | Unit | workbench glass lifecycle",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "missing or blocked WebGL leaves the DOM fallback available",
+          "module": "ISBF | Unit | workbench glass renderer",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "initialization failure releases resources: {\"compile\":false}",
+          "module": "ISBF | Unit | workbench glass renderer",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "initialization failure releases resources: {\"link\":false}",
+          "module": "ISBF | Unit | workbench glass renderer",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "palette changes redraw without allocating another renderer",
+          "module": "ISBF | Unit | workbench glass renderer",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "each entry receives its own clear-glass color from a shared palette texture",
+          "module": "ISBF | Unit | workbench glass renderer",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "destroy is idempotent and prevents drawing with released resources",
+          "module": "ISBF | Unit | workbench glass renderer",
+          "failed": 0,
+          "total": 5
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

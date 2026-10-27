@@ -1,0 +1,25 @@
+{
+  "failure_head": "642846faddf5c63062a672e28351a2c97d71291c",
+  "reported_typing_errors": [
+    "TS9006",
+    "TS4094",
+    "TS2345"
+  ],
+  "reported_typing_errors_after_fix": 0,
+  "runtime_text_unchanged": true,
+  "new_suppressions_or_casts": false,
+  "local_full_type_command": "pnpm lint:types",
+  "local_full_type_exit_code": 2,
+  "local_environment_errors": {
+    "code": "TS5033",
+    "count": 43,
+    "cause": "Read-only installed dependency declaration build-info output; this attempt is not a passing full type gate"
+  },
+  "exact_head_ci": "Required before merge",
+  "scoped_native_lint": "passed on both changed source files",
+  "exact_head_ci_type_gate": {
+    "commit": "7b299d2f5e8efbffccd842452f9a143dff6c9b5a",
+    "result": "passed",
+    "job_url": "https://github.com/ISBF-Lab/ISBFweb/actions/runs/40371244883/job/121742313743"
+  }
+}

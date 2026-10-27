@@ -1,0 +1,358 @@
+{
+  "verified_at": "2026-10-26T12:18:55.901874+00:00",
+  "environment": "Isolated development theme 4",
+  "visual_acceptance": "Pending user review",
+  "production_release": false,
+  "sources": [
+    {
+      "path": "source/frontend/discourse/app/ui-kit/d-hold-button.gts",
+      "sha256": "8f3f77ac7723b883a041929ebd0d0eec9ede4f7b8a4634899dfa5a40c7dd2b71"
+    },
+    {
+      "path": "source/frontend/discourse/tests/integration/ui-kit/d-hold-button-test.gjs",
+      "sha256": "ef1fecfc6baf5fa3d659da86e02f086bd64d7b235b28fb2b70f2b7f91703812f"
+    },
+    {
+      "path": "source/app/assets/stylesheets/common/components/d-hold-button.scss",
+      "sha256": "e1690d7eced8ec65c0809b7888bffd3162a3c0dea353fc9819a2211c42ef72d8"
+    },
+    {
+      "path": "source/app/assets/stylesheets/common/components/_index.scss",
+      "sha256": "59a1aca21105ce1d1c3b66ca0cfa27fbcebedc3ecf86c5bb33b1ec028ee3b032"
+    },
+    {
+      "path": "source/docs/developer-guides/docs/03-code-internals/02-ui-kit.md",
+      "sha256": "5b55a4c965945630b252de5c091511b630f805f3bc5c49319d6faad285f4d297"
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/components/isbf-notifications.gjs",
+      "sha256": "f7e3434354e61802be113e7e592605f413ddc7b07ae669858d04312685e127ab"
+    },
+    {
+      "path": "external/active-theme/stylesheets/notifications-hold.scss",
+      "sha256": "c0376b58a207f6b3ac1795b3168a8996aa1be48cb1872b9a542d5ad4cb37abb6"
+    },
+    {
+      "path": "external/active-theme/common/common.scss",
+      "sha256": "4a6444b50f8e683ef1ba523ecc11992a146250114cd264f4e822c3710c79ae1d"
+    },
+    {
+      "path": "external/active-theme/locales/en.yml",
+      "sha256": "4b01dd9bd93d363de5eccc91ae3471b30d635d1e134d815bf58c97c64ebe796f"
+    },
+    {
+      "path": "external/active-theme/locales/zh_CN.yml",
+      "sha256": "8fbce3b6803190093ebb8b79c072d193acecabeaabb2191c1284a4d4f704fdea"
+    },
+    {
+      "path": "external/active-theme/test/integration/notifications-hold-test.gjs",
+      "sha256": "7b849ec9d4abaad6424131594ab6467f816a4eedc2eb4b98545759bf7c95ab3e"
+    }
+  ],
+  "runtime_fields": [
+    {
+      "key": [
+        0,
+        1,
+        "scss"
+      ],
+      "sha256": "b177a18df6c9bf8b9122f898b40562b8b0bfac99efe67bc61108b2cfceab9f11"
+    },
+    {
+      "key": [
+        4,
+        5,
+        "en"
+      ],
+      "sha256": "4b01dd9bd93d363de5eccc91ae3471b30d635d1e134d815bf58c97c64ebe796f"
+    },
+    {
+      "key": [
+        4,
+        5,
+        "zh_CN"
+      ],
+      "sha256": "8fbce3b6803190093ebb8b79c072d193acecabeaabb2191c1284a4d4f704fdea"
+    },
+    {
+      "key": [
+        5,
+        1,
+        "notifications-hold"
+      ],
+      "sha256": "c0376b58a207f6b3ac1795b3168a8996aa1be48cb1872b9a542d5ad4cb37abb6"
+    },
+    {
+      "key": [
+        6,
+        6,
+        "discourse/components/isbf-notifications.gjs"
+      ],
+      "sha256": "f7e3434354e61802be113e7e592605f413ddc7b07ae669858d04312685e127ab"
+    },
+    {
+      "key": [
+        7,
+        6,
+        "integration/notifications-hold-test.gjs"
+      ],
+      "sha256": "7b849ec9d4abaad6424131594ab6467f816a4eedc2eb4b98545759bf7c95ab3e"
+    }
+  ],
+  "runtime_source_boundary": "Only the hold feature was applied to the live notification menu; the workspace also contains independent DMenu changes.",
+  "preservation": {
+    "transaction_fields_before": 290,
+    "transaction_fields_after": 292,
+    "transaction_preserved_fields": 286,
+    "transaction_preserved_settings": 7,
+    "latest_fields": 291,
+    "later_concurrent_fields": [
+      [
+        5,
+        1,
+        "profile-content"
+      ],
+      [
+        5,
+        1,
+        "alumni-controls"
+      ],
+      [
+        5,
+        1,
+        "official-calendar"
+      ],
+      [
+        6,
+        6,
+        "discourse/components/isbf-feed-card-menu.gjs"
+      ],
+      [
+        5,
+        1,
+        "learning-resources"
+      ],
+      [
+        6,
+        6,
+        "discourse/components/isbf-explore-picker.gjs"
+      ],
+      [
+        6,
+        6,
+        "discourse/connectors/topic-footer-main-buttons-before-create/isbf-topic-more.gjs"
+      ],
+      [
+        6,
+        6,
+        "discourse/components/isbf-topic-more.gjs"
+      ],
+      [
+        6,
+        6,
+        "discourse/components/isbf-official-picker.gjs"
+      ],
+      [
+        5,
+        1,
+        "official-filters"
+      ],
+      [
+        6,
+        6,
+        "discourse/components/isbf-learning-composer.gjs"
+      ],
+      [
+        7,
+        6,
+        "integration/official-picker-glide-test.gjs"
+      ],
+      [
+        6,
+        6,
+        "discourse/components/isbf-v2-account-menu.gjs"
+      ],
+      [
+        6,
+        6,
+        "discourse/components/isbf-official-feed.gjs"
+      ]
+    ],
+    "migration_manifests_unchanged": 35
+  },
+  "verification": {
+    "core_tests": 7,
+    "core_assertions": 47,
+    "theme_tests": 6,
+    "theme_assertions": 30,
+    "browser_checks": 64,
+    "lint": "Passed",
+    "types": {
+      "command": "pnpm lint:types",
+      "exit_code": 2,
+      "scope": "complete shared development workspace",
+      "unrelated_failure": "frontend/discourse/type-tests/ui-kit/d-select-test.gts:11",
+      "changed_component_errors": 0,
+      "isolated_pr_gate": "pending"
+    },
+    "browser": "Chromium, including emulated touch; no physical iOS/Safari or screen reader acceptance"
+  },
+  "pull_request": {
+    "base_commit": "da66138fb00230e92a0522f93d998eb618094e9e",
+    "source_files": [
+      {
+        "repository_path": "app/assets/stylesheets/common/components/_index.scss",
+        "sha256": "21476f8f587ff8c9d91bf1a0cbceffc1305ce659c89c8f1b4b0801ab5131f367"
+      },
+      {
+        "repository_path": "app/assets/stylesheets/common/components/d-hold-button.scss",
+        "sha256": "e1690d7eced8ec65c0809b7888bffd3162a3c0dea353fc9819a2211c42ef72d8"
+      },
+      {
+        "repository_path": "docs/design-system/components.md",
+        "sha256": "daaa6e5f641ed8f647e7f887151acaa0b2726a01eed750123a4b987a96a5ef88"
+      },
+      {
+        "repository_path": "docs/design-system/reference-map.md",
+        "sha256": "5e965e82e41c9f4f118e925a2deedfbf253bdc9a3bb2ca80e58ca7287e122218"
+      },
+      {
+        "repository_path": "docs/design-system/tokens.md",
+        "sha256": "f3ed927369ca397182645a24ec1f960c477a20b998cc7a3e49610682cdb90fba"
+      },
+      {
+        "repository_path": "docs/design-system/ui-status.md",
+        "sha256": "aba4025780696ccc4ecb880edd13d59e51cca5e730c358890563e5da4b5fdd48"
+      },
+      {
+        "repository_path": "docs/developer-guides/docs/03-code-internals/02-ui-kit.md",
+        "sha256": "d9f4eb27eea0afbd74f7f127f7e529c52b023984c53f135a0700f75f94ad60f2"
+      },
+      {
+        "repository_path": "frontend/discourse/app/lib/load-motion.js",
+        "sha256": "51903c1b619234eb129c0885af094d823ed8a7e4df0372a5df24e890a0899d46"
+      },
+      {
+        "repository_path": "frontend/discourse/app/ui-kit/d-hold-button.gts",
+        "sha256": "8f3f77ac7723b883a041929ebd0d0eec9ede4f7b8a4634899dfa5a40c7dd2b71"
+      },
+      {
+        "repository_path": "frontend/discourse/app/ui-kit/d-otp/animated.gjs",
+        "sha256": "675ac3bf59f6a3654c39d26e2dbdd48bce6ec8fd246a14abf5155b51386073f7"
+      },
+      {
+        "repository_path": "frontend/discourse/tests/integration/ui-kit/d-hold-button-test.gjs",
+        "sha256": "ef1fecfc6baf5fa3d659da86e02f086bd64d7b235b28fb2b70f2b7f91703812f"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/common/common.scss",
+        "sha256": "19666cdf308c8a731bb7aa7517f2e02b359d44d073820c3668bedd5530c65001"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+        "sha256": "3c1abda29707e1d0c6f51db8dabad7393cdc5f2d0c0e5e2b11679737c8a8b654"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/locales/en.yml",
+        "sha256": "00cdfba11ebbfa5de678efb80dac750cb1e5c1f377e8cb2d57d0c71a49b9dc60"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+        "sha256": "d91b1a2f74453c585fd09308c3890fd97220ec3fede73fbca3c7c286b069baa8"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/stylesheets/notifications-hold.scss",
+        "sha256": "c0376b58a207f6b3ac1795b3168a8996aa1be48cb1872b9a542d5ad4cb37abb6"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/test/integration/notifications-hold-test.gjs",
+        "sha256": "7b849ec9d4abaad6424131594ab6467f816a4eedc2eb4b98545759bf7c95ab3e"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/test/integration/notifications-test.gjs",
+        "sha256": "f8ae5b0069926cf6d444b345486d5e035afa381a5839b460d4b30e11daa95ee2"
+      }
+    ],
+    "scope": "Notification hold action and the minimal type-only baseline declarations required by its full CI gate; independent menu and selector drafts remain in the shared development workspace.",
+    "scoped_lint": "Passed in the isolated PR worktree",
+    "isolated_type_gate": "Required CI check before merge",
+    "local_only_evidence": [
+      {
+        "path": "baseline-390-light.png",
+        "sha256": "cd3fd659c51147cddc2439b31627aec0e5ba465995c55d10e88cab1550f347a9"
+      },
+      {
+        "path": "flows-confirmation.png",
+        "sha256": "1094972a041284049abccfb4adaa9857fbb40a078a1a39b86e566f58fb5305ab"
+      },
+      {
+        "path": "baseline-1440-light.png",
+        "sha256": "3207e689a13574c0eb51b12700a9ce2bd37c67ef11efb3f5f2372d92986c5df8"
+      },
+      {
+        "path": "flows-320-light.png",
+        "sha256": "db95a40471b4d11c7cf125a368a4ebbaea6db37af2dfa8bf784c2f349a98c796"
+      },
+      {
+        "path": "flows-320-en.png",
+        "sha256": "0ef96a58b9121af46462f8cf45c6a3211b06786bdc78663d67a1ce9b4b665c16"
+      },
+      {
+        "path": "flows-320-zh_CN.png",
+        "sha256": "c5c3f89fb495576d35b3c400c7a4eb1c2e866b6bcbdf37a317868a3b78a739a4"
+      },
+      {
+        "path": "flows-desktop-done.png",
+        "sha256": "cf569b314a109f1a1f772ff4a3e4783f5bacb69b0f938065896b9cabbebf1800"
+      },
+      {
+        "path": "flows-390-dark.png",
+        "sha256": "3de9d3f1d55186ff40033c6674be2af2229b25f80b96807b13f7df79253d5918"
+      },
+      {
+        "path": "flows-mobile-done.png",
+        "sha256": "d94ae55c4736af5e41d4ac14cdab679b8eb5cc17fe6dde518a8e87d7b162c482"
+      },
+      {
+        "path": "flows-1440-light.png",
+        "sha256": "931dda0e722c966145c268edfc94c5f26d065368cefc0896e49543ba0f6e3527"
+      },
+      {
+        "path": "flows-320-dark.png",
+        "sha256": "cb9403d82fbe007c06d827b1dcc1a034e7406bf9772a365dfd28051628a39ee1"
+      },
+      {
+        "path": "flows-request-error.png",
+        "sha256": "c6bc1b20a2fba3bc86d65f81fb7d6334b060cd5e9586df65099b34e40d0c9e43"
+      },
+      {
+        "path": "flows-1440-dark.png",
+        "sha256": "f4204bde4ee2ea22b924db4e6f8304d81b9db84e0e6456ada0d62f192c80be85"
+      },
+      {
+        "path": "flows-390-light.png",
+        "sha256": "ad7f87c0f15cbf8d75900f418780ed631ce5ebd42972ea709a40ff415cb6a559"
+      },
+      {
+        "path": "flows-desktop-pending.png",
+        "sha256": "6f05b8ad63c29637d398a9ac22b4695b41733c4775581a5d1ababbd67637db74"
+      }
+    ],
+    "type_gate_repairs": {
+      "failure_head": "642846faddf5c63062a672e28351a2c97d71291c",
+      "job_url": "https://github.com/ISBF-Lab/ISBFweb/actions/runs/40327999185/job/121589617654",
+      "files": [
+        "frontend/discourse/app/lib/load-motion.js",
+        "frontend/discourse/app/ui-kit/d-otp/animated.gjs"
+      ],
+      "runtime_text_unchanged": true,
+      "new_suppressions_or_casts": false
+    },
+    "legacy_test_update": {
+      "file": "themes/isbf-campus-feed/test/integration/notifications-test.gjs",
+      "gesture": "300ms hold on the external button",
+      "failure_retry_assertions_unchanged": true,
+      "runtime_release_scope_unchanged": true
+    }
+  }
+}

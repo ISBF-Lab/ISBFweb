@@ -1,0 +1,8 @@
+{
+  "command": "pnpm lint:types",
+  "exit_code": 2,
+  "scope": "complete shared development workspace",
+  "unrelated_failure": "frontend/discourse/type-tests/ui-kit/d-select-test.gts:11",
+  "changed_component_errors": 0,
+  "isolated_pr_gate": "pending"
+}

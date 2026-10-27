@@ -5,6 +5,7 @@ on:
     paths:
       - "themes/isbf-campus-feed/**"
       - "frontend/discourse/app/**"
+      - "frontend/discourse/tests/integration/ui-kit/d-hold-button-test.gjs"
       - "frontend/discourse/dialog-holder/**"
       - "frontend/discourse/float-kit/**"
       - "frontend/discourse/scripts/js/elastic-not-found.js"
@@ -30,7 +31,7 @@ jobs:
   theme:
     runs-on: ubuntu-latest
     container: discourse/discourse_test@sha256:94eca5318fed6171264b95204914de76a113c305cebb72d9fa9527e2c4496494
-    timeout-minutes: 30
+    timeout-minutes: 45
     defaults:
       run:
         shell: bash
@@ -164,6 +165,10 @@ jobs:
           pnpm test:menus
           pnpm lint:menus
           bin/qunit --standalone --filter '/(ui-kit.*D(NativeSelect|Select|DropdownMenu)|FloatKit.*DMenu|FormKit.*Select)/i'
+      - name: Hold button regression
+        env:
+          LOAD_PLUGINS: "0"
+        run: bin/qunit --standalone frontend/discourse/tests/integration/ui-kit/d-hold-button-test.gjs
 
       - name: Project theme QUnit
         id: theme_qunit

@@ -1,0 +1,6 @@
+Workspace dependency links validated.
+Isolated dependency cache write validated.
+
+> @ lint:types /workspace/discourse
+> NODE_OPTIONS=--max-old-space-size=8192 ember-tsc -b
+

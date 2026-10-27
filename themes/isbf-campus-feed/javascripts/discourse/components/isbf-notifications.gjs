@@ -12,6 +12,7 @@ import { ajax } from "discourse/lib/ajax";
 import UserMenuNotificationItem from "discourse/lib/user-menu/notification-item";
 import Notification from "discourse/models/notification";
 import DButton from "discourse/ui-kit/d-button";
+import DHoldButton from "discourse/ui-kit/d-hold-button";
 import DToggleSwitch from "discourse/ui-kit/d-toggle-switch";
 import dMenuHighlight from "discourse/ui-kit/modifiers/d-menu-highlight";
 import { i18n } from "discourse-i18n";
@@ -194,27 +195,33 @@ export default class ISBFNotifications extends Component {
   }
 
   @action
-  dismissNotifications() {
+  async dismissNotifications() {
+    if (this.markingRead) {
+      return false;
+    }
     const count = this.currentUser.unread_high_priority_notifications;
     if (count > 0) {
-      this.modal.show(DismissNotificationConfirmationModal, {
+      let request;
+      await this.modal.show(DismissNotificationConfirmationModal, {
         model: {
           confirmationMessage: i18n(
             "notifications.dismiss_confirmation.body.default",
             { count }
           ),
-          dismissNotifications: this.markRead,
+          dismissNotifications: () => {
+            request = this.markRead();
+          },
         },
       });
-    } else {
-      this.markRead();
+      return request ? await request : false;
     }
+    return this.markRead();
   }
 
   @action
   async markRead() {
     if (this.markingRead) {
-      return;
+      return false;
     }
     this.markingRead = true;
     this.markReadError = false;
@@ -222,7 +229,7 @@ export default class ISBFNotifications extends Component {
     try {
       await ajax("/notifications/mark-read", { type: "PUT" });
       if (this.isDestroying) {
-        return;
+        return false;
       }
       // A notification state received during this request may include a newer notice.
       if (this.isbfNotifications.version === version) {
@@ -236,6 +243,7 @@ export default class ISBFNotifications extends Component {
       }
       this.markReadError = false;
       this.refresh();
+      return true;
     } catch {
       if (!this.isDestroying) {
         this.markReadError = true;
@@ -244,6 +252,7 @@ export default class ISBFNotifications extends Component {
           "assertive"
         );
       }
+      return false;
     } finally {
       if (!this.isDestroying) {
         this.markingRead = false;
@@ -374,92 +383,116 @@ export default class ISBFNotifications extends Component {
     <main class="isbf-notifications">
       <header class="isbf-notifications__heading">
         <h1>{{i18n (themePrefix "isbf_v2.notifications")}}</h1>
-        <DMenu
-          @ariaLabel={{i18n (themePrefix "isbf_v2.notifications_menu")}}
-          @contentClass="isbf-notifications__menu-panel"
-          @icon="ellipsis"
-          @inlineTabOrder={{true}}
-          @onRegisterApi={{this.registerMenu}}
-          @placement="bottom-end"
-          @triggerClass="btn-flat isbf-notifications__menu"
-        >
-          <:content>
-            <div
-              class="isbf-notifications__menu-items"
-              {{dMenuHighlight
-                itemSelector=":scope > button, :scope > a, .isbf-notifications__badge-options > button"
-              }}
-            >
-              <DButton
-                @action={{this.dismissNotifications}}
-                @disabled={{this.markingRead}}
-                @label={{themePrefix "isbf_v2.notifications_mark_read"}}
-              />
-              <a href="/my/preferences/notifications">{{i18n
-                  (themePrefix "isbf_v2.notifications_settings")
-                }}</a>
-              <div class="isbf-notifications__filter">
-                <DToggleSwitch
-                  disabled={{this.isbfNotifications.savingFilter}}
-                  @label={{themePrefix "isbf_v2.notifications_unread_only"}}
-                  @state={{this.unreadOnly}}
-                  {{on "click" this.toggleUnreadOnly}}
-                />
-              </div>
-              {{#if this.isbfNotifications.filterError}}
+        <div class="isbf-notifications__actions">
+          <DHoldButton
+            class="isbf-notifications__mark-read"
+            @action={{this.dismissNotifications}}
+            @disabled={{this.markingRead}}
+            @doneLabel={{themePrefix "isbf_v2.notifications_mark_read_done"}}
+            @hint={{themePrefix "isbf_v2.notifications_mark_read_hint"}}
+            @holdTime={{300}}
+            @label={{themePrefix "isbf_v2.notifications_mark_read"}}
+            @pendingLabel={{themePrefix
+              "isbf_v2.notifications_mark_read_pending"
+            }}
+            @releaseTime={{200}}
+            @resetAfter={{1200}}
+          >
+            <span class="isbf-notifications__mark-read-full">{{i18n
+                (themePrefix "isbf_v2.notifications_mark_read")
+              }}</span>
+            <span class="isbf-notifications__mark-read-compact">{{i18n
+                (themePrefix "isbf_v2.notifications_mark_read_compact")
+              }}</span>
+          </DHoldButton>
+          <DMenu
+            @ariaLabel={{i18n (themePrefix "isbf_v2.notifications_menu")}}
+            @contentClass="isbf-notifications__menu-panel"
+            @icon="ellipsis"
+            @inlineTabOrder={{true}}
+            @onRegisterApi={{this.registerMenu}}
+            @placement="bottom-end"
+            @triggerClass="btn-flat isbf-notifications__menu"
+          >
+            <:content>
+              <div
+                class="isbf-notifications__menu-items"
+                {{dMenuHighlight
+                  itemSelector=":scope > button, :scope > a, .isbf-notifications__badge-options > button"
+                }}
+              >
+                <a href="/my/preferences/notifications">{{i18n
+                    (themePrefix "isbf_v2.notifications_settings")
+                  }}</a>
+                <div class="isbf-notifications__filter">
+                  <DToggleSwitch
+                    disabled={{this.isbfNotifications.savingFilter}}
+                    @label={{themePrefix "isbf_v2.notifications_unread_only"}}
+                    @state={{this.unreadOnly}}
+                    {{on "click" this.toggleUnreadOnly}}
+                  />
+                </div>
+                {{#if this.isbfNotifications.filterError}}
+                  <div
+                    class="isbf-notifications__filter-error isbf-notifications__preference-error"
+                    role="alert"
+                  >
+                    <p>{{i18n
+                        (themePrefix "isbf_v2.notifications_filter_error")
+                      }}</p>
+                    <DButton
+                      @action={{this.retryFilter}}
+                      @disabled={{this.isbfNotifications.savingFilter}}
+                      @forwardEvent={{true}}
+                      @label={{themePrefix "isbf_v2.notifications_retry"}}
+                    />
+                  </div>
+                {{/if}}
                 <div
-                  class="isbf-notifications__filter-error isbf-notifications__preference-error"
-                  role="alert"
+                  aria-label={{i18n
+                    (themePrefix "isbf_v2.notifications_badge_style")
+                  }}
+                  class="isbf-notifications__badge-options"
+                  role="group"
                 >
                   <p>{{i18n
-                      (themePrefix "isbf_v2.notifications_filter_error")
+                      (themePrefix "isbf_v2.notifications_badge_style")
                     }}</p>
                   <DButton
-                    @action={{this.retryFilter}}
-                    @disabled={{this.isbfNotifications.savingFilter}}
-                    @forwardEvent={{true}}
-                    @label={{themePrefix "isbf_v2.notifications_retry"}}
-                  />
-                </div>
-              {{/if}}
-              <div
-                aria-label={{i18n
-                  (themePrefix "isbf_v2.notifications_badge_style")
-                }}
-                class="isbf-notifications__badge-options"
-                role="group"
-              >
-                <p>{{i18n
-                    (themePrefix "isbf_v2.notifications_badge_style")
-                  }}</p>
-                <DButton
-                  @action={{fn this.isbfNotifications.saveBadgeStyle "number"}}
-                  @ariaPressed={{this.isbfNotifications.numberStyle}}
-                  @disabled={{this.isbfNotifications.savingStyle}}
-                  @label={{themePrefix "isbf_v2.notifications_badge_number"}}
-                />
-                <DButton
-                  @action={{fn this.isbfNotifications.saveBadgeStyle "dot"}}
-                  @ariaPressed={{this.isbfNotifications.dotStyle}}
-                  @disabled={{this.isbfNotifications.savingStyle}}
-                  @label={{themePrefix "isbf_v2.notifications_badge_dot"}}
-                />
-              </div>
-              {{#if this.isbfNotifications.styleError}}
-                <div class="isbf-notifications__preference-error" role="alert">
-                  <p>{{i18n
-                      (themePrefix "isbf_v2.notifications_badge_error")
-                    }}</p>
-                  <DButton
-                    @action={{this.isbfNotifications.retryBadgeStyle}}
+                    @action={{fn
+                      this.isbfNotifications.saveBadgeStyle
+                      "number"
+                    }}
+                    @ariaPressed={{this.isbfNotifications.numberStyle}}
                     @disabled={{this.isbfNotifications.savingStyle}}
-                    @label={{themePrefix "isbf_v2.notifications_retry"}}
+                    @label={{themePrefix "isbf_v2.notifications_badge_number"}}
+                  />
+                  <DButton
+                    @action={{fn this.isbfNotifications.saveBadgeStyle "dot"}}
+                    @ariaPressed={{this.isbfNotifications.dotStyle}}
+                    @disabled={{this.isbfNotifications.savingStyle}}
+                    @label={{themePrefix "isbf_v2.notifications_badge_dot"}}
                   />
                 </div>
-              {{/if}}
-            </div>
-          </:content>
-        </DMenu>
+                {{#if this.isbfNotifications.styleError}}
+                  <div
+                    class="isbf-notifications__preference-error"
+                    role="alert"
+                  >
+                    <p>{{i18n
+                        (themePrefix "isbf_v2.notifications_badge_error")
+                      }}</p>
+                    <DButton
+                      @action={{this.isbfNotifications.retryBadgeStyle}}
+                      @disabled={{this.isbfNotifications.savingStyle}}
+                      @label={{themePrefix "isbf_v2.notifications_retry"}}
+                    />
+                  </div>
+                {{/if}}
+              </div>
+            </:content>
+          </DMenu>
+        </div>
       </header>
       <div
         aria-label={{i18n (themePrefix "isbf_v2.notifications_tabs")}}
