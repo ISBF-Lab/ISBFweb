@@ -747,6 +747,13 @@
       "before_sha256": "d5fdaecf25c05285545d415d43a1808f391b6f94b3c6bab0994aecd7b03d3dd9",
       "deleted": false,
       "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/integration/components/admin-config-areas/upcoming-change-item-test.gjs",
+      "before_sha256": "695e6ad23aad9696e7f4c0ec44d5c97480289b58893fcb23477c8ef7d57c3ec0",
+      "sha256": "168fbc2e1ca29b91d36659cd2cb51b58135111edbdb87e80442f36bcdbf3627e",
+      "deleted": false,
+      "test_only": true
     }
   ],
   "preservation": {
@@ -805,6 +812,11 @@
         "path": ".github/workflows/isbf-frontend-consistency.yml",
         "sha256": "cb94c9a1dfd34c7c2c3230d253d774c1d67e057b731000ab07135b72fd1b25a0",
         "before_sha256": "313a77ee90d01af38d21bb292f5f82b3776fc09c4b5fba3c5e3951e58741f801"
+      },
+      {
+        "path": ".github/workflows/isbf-resume.yml",
+        "sha256": "cb41098a55916a730ae74f958f4cd1b7dc46934e88d76932e1c3c9b28c44825a",
+        "before_sha256": "5215392cde2c0d6956fc0ed6b10d635c68a431aba4f5a015be17fa162b9d8968"
       },
       {
         "path": ".github/workflows/linting.yml",
@@ -1162,6 +1174,11 @@
         "before_sha256": "90a3f932a8696c5fbc5c52ea8386598941bf520810f6443c606f6bdc6e57bd1a"
       },
       {
+        "path": "frontend/discourse/tests/integration/components/admin-config-areas/upcoming-change-item-test.gjs",
+        "sha256": "168fbc2e1ca29b91d36659cd2cb51b58135111edbdb87e80442f36bcdbf3627e",
+        "before_sha256": "695e6ad23aad9696e7f4c0ec44d5c97480289b58893fcb23477c8ef7d57c3ec0"
+      },
+      {
         "path": "frontend/discourse/tests/integration/components/float-kit/d-menu-test.gjs",
         "sha256": "d25bbcc34e2a21b44257c0252fa13bc010be1974400f7b983f98f8822c0b626f",
         "before_sha256": "999411742842b7b08b16eef16f515aad39ae7adc2008b4c02a584a4c66878f9d"
@@ -1384,12 +1401,12 @@
     ],
     "validation": {
       "native_lint": "passed",
-      "types": "Passed in CI on 19abc796; final followup CI required",
+      "types": "Passed in CI on a09f543b; current followup changes tests and CI timeout only",
       "menu_policy": "passed",
       "dialog_policy": "passed",
       "full_theme_tests": 263,
       "full_theme_assertions": 1142,
-      "ci": "pending native regression correction",
+      "ci": "pending final test-adapter and timeout followup",
       "native_followup": {
         "native-followup": {
           "tests": 124,
@@ -1403,6 +1420,12 @@
           "failed": 0,
           "client_errors": 0
         }
+      },
+      "upcoming_select_followup": {
+        "tests": 13,
+        "assertions": 18,
+        "failed": 0,
+        "client_errors": 0
       }
     }
   },
@@ -1418,5 +1441,6 @@
     "review_evidence": "review-regressions.json"
   },
   "ci_followup": "ci-followup.json",
-  "native_followup": "native-followup.json"
+  "native_followup": "native-followup.json",
+  "upcoming_select_followup": "upcoming-select-followup.json"
 }

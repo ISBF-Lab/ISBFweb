@@ -1,0 +1,92 @@
+{
+  "results": [
+    {
+      "passed": 18,
+      "failed": 0,
+      "total": 18,
+      "runtime": 5505,
+      "failures": [],
+      "tests": [
+        {
+          "name": "renders setting links in the description and rewrites their href via the modifier",
+          "module": "Integration | Component | UpcomingChangeItem",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "renders the permanent soon notice when status is stable",
+          "module": "Integration | Component | UpcomingChangeItem",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "does not render dependent settings link when enabled_for is no_one",
+          "module": "Integration | Component | UpcomingChangeItem",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "selecting staff on a change that excludes 'everyone' saves the staff group before enabling",
+          "module": "Integration | Component | UpcomingChangeItem",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "does not render default override setting link when overriding defaults is false",
+          "module": "Integration | Component | UpcomingChangeItem",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "does not render the permanent soon notice when permanent_warning is false",
+          "module": "Integration | Component | UpcomingChangeItem",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "renders default override setting link when overriding defaults and enabled",
+          "module": "Integration | Component | UpcomingChangeItem",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "does not render the permanent soon notice when status is alpha",
+          "module": "Integration | Component | UpcomingChangeItem",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "does not render the permanent soon notice when status is beta",
+          "module": "Integration | Component | UpcomingChangeItem",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "renders dependent settings link when dependents exist and enabled",
+          "module": "Integration | Component | UpcomingChangeItem",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "selecting everyone toggles the change then clears any groups",
+          "module": "Integration | Component | UpcomingChangeItem",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "does not render default override setting link when enabled_for is no_one",
+          "module": "Integration | Component | UpcomingChangeItem",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "does not render the permanent soon notice when status is experimental",
+          "module": "Integration | Component | UpcomingChangeItem",
+          "failed": 0,
+          "total": 1
+        }
+      ]
+    }
+  ],
+  "errors": []
+}
