@@ -78,7 +78,7 @@ class DiscourseAcademyRoles::StudentGroups::Snapshot
         valid_membership =
           (
             if changed_ids.include?(id.to_i)
-              (!after_steps || memberships[id].present?)
+              !after_steps || memberships[id].present?
             else
               memberships[id] == expected
             end

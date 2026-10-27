@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-class CreateAcademyStudentGroupBatches < ActiveRecord::Migration[8.0]
+# Generated with bin/rails g plugin_migration CreateAcademyStudentGroupBatches
+
+class CreateAcademyStudentGroupBatches < ActiveRecord::Migration[8.1]
   def change
     create_table :academy_student_group_batches do |t|
       t.bigint :actor_id, null: false

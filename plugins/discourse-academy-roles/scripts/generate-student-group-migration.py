@@ -22,7 +22,7 @@ if marker not in content:
         if len(generated) != 1:
             raise SystemExit("Native migration generation did not produce one file")
         skeleton = generated[0].read_text(encoding="utf-8")
-        declaration = "class CreateAcademyStudentGroupBatches < ActiveRecord::Migration[8.0]"
+        declaration = "class CreateAcademyStudentGroupBatches < ActiveRecord::Migration[8.1]"
         if declaration not in skeleton or declaration not in content:
             raise SystemExit("Native migration class/version differs from the proposed schema")
         generated[0].write_text(content.replace("# frozen_string_literal: true", "# frozen_string_literal: true\n\n" + marker, 1), encoding="utf-8")
