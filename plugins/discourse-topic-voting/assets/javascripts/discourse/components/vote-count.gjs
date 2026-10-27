@@ -86,7 +86,7 @@ export default class VoteCount extends Component {
           (if (eq @topic.vote_count 0) "no-votes")
         }}
         @identifier="vote-count-voters"
-        @modalForMobile={{true}}
+        @modalForMobile={{false}}
         @onShow={{this.loadVoters}}
         @placement="right"
         @triggerComponent={{VoteCountTrigger}}

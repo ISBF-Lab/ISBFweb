@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-26",
+  "requested_fixes": [
+    "Desktop notification number/dot hover must not move the menu",
+    "Nested report action must use the same highlight surface",
+    "Explore popular/new-topic actions must keep readable widths and spacing"
+  ],
+  "toolbar_reference_sha256": "1945c662c93aa528497d5c86717ad52b8f73666b59b9c2ae65b468ef7dd6a72b",
+  "scope": "Menu layout and existing toolbar sizing; preserve actions, colors, touch targets and permissions",
+  "release_authorization": "待会会发送继续 然后你完成复查后提pr并且上线生产",
+  "report_button_xpath": "/html/body/section/div[2]/div/div/ul/li[5]/div/button",
+  "diagnostic": "Font-metric stress reproduced 0.78125px movement with intrinsic menu width; final verification repeats both native and fractional metrics."
+}

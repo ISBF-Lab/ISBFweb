@@ -283,6 +283,7 @@ export default class DMultiSelect extends Component {
       <:content>
         <DDropdownMenu
           class={{dConcatClass "d-multi-select__content" @contentClass}}
+          @manageFocus={{false}}
           as |menu|
         >
           <menu.item class="d-multi-select__search-container">

@@ -1,7 +1,6 @@
 import {
   clearRender,
   click,
-  find,
   render,
   settled,
   triggerEvent,
@@ -290,18 +289,16 @@ module("ISBF | Integration | Component | ISBFNotifications", function (hooks) {
       .dom(".isbf-notifications__topic h2 .isbf-notification-unread")
       .doesNotExist("topic headings have no unread dot");
     assert
-      .dom(".isbf-notifications__menu")
-      .doesNotHaveAttribute("open", "the native menu starts closed");
-    assert.false(
-      find(".isbf-notifications__filter").checkVisibility(),
-      "the filter is inside the closed menu"
-    );
+      .dom("button.isbf-notifications__menu")
+      .hasAttribute("aria-expanded", "false", "the menu starts closed");
+    assert
+      .dom(".isbf-notifications__filter")
+      .doesNotExist("the filter is inside the closed menu");
 
-    await click(".isbf-notifications__menu summary");
-    assert.true(
-      find(".isbf-notifications__filter").checkVisibility(),
-      "opening the native menu reveals the filter"
-    );
+    await click("button.isbf-notifications__menu");
+    assert
+      .dom(".isbf-notifications__filter")
+      .isVisible("opening the menu reveals the filter");
     await click(".isbf-notifications__filter [role='switch']");
     assert.strictEqual(
       this.requests.at(-1).filter,
@@ -313,11 +310,10 @@ module("ISBF | Integration | Component | ISBFNotifications", function (hooks) {
       ["unread"],
       "the selection is saved to the account"
     );
-    await click(".isbf-notifications__menu summary");
-    assert.false(
-      find(".isbf-notifications__filter").checkVisibility(),
-      "closing the native menu hides the filter again"
-    );
+    await click("button.isbf-notifications__menu");
+    assert
+      .dom(".isbf-notifications__filter")
+      .doesNotExist("closing the menu hides the filter again");
     await click(".isbf-notifications__tabs button:last-child");
     assert.strictEqual(
       this.requests.at(-1).tab,
@@ -359,7 +355,7 @@ module("ISBF | Integration | Component | ISBFNotifications", function (hooks) {
       "unread",
       "returning restores the same preference"
     );
-    await click(".isbf-notifications__menu summary");
+    await click("button.isbf-notifications__menu");
     assert
       .dom(".isbf-notifications__filter [role='switch']")
       .hasAttribute(
@@ -395,7 +391,7 @@ module("ISBF | Integration | Component | ISBFNotifications", function (hooks) {
     });
     this.currentUser.set("isbf_notification_badge_style", "dot");
     await render(<template><ISBFNotifications /></template>);
-    await click(".isbf-notifications__menu summary");
+    await click("button.isbf-notifications__menu");
     await click(".isbf-notifications__filter [role='switch']");
     assert
       .dom(".isbf-notifications__filter-error")
@@ -425,7 +421,7 @@ module("ISBF | Integration | Component | ISBFNotifications", function (hooks) {
       .dom(".isbf-notifications__filter-error")
       .doesNotExist("a successful retry clears the error");
     assert
-      .dom(".isbf-notifications__menu summary")
+      .dom("button.isbf-notifications__menu")
       .isFocused("retry keeps focus in the menu when its button disappears");
     assert.strictEqual(
       this.requests.at(-1).filter,
@@ -452,7 +448,7 @@ module("ISBF | Integration | Component | ISBFNotifications", function (hooks) {
     await render(
       <template><ISBFNotifications /><ISBFNotificationBell /></template>
     );
-    await click(".isbf-notifications__menu summary");
+    await click("button.isbf-notifications__menu");
     await click(".isbf-notifications__badge-options button:last-child");
     assert
       .dom(".isbf-notifications__preference-error")
@@ -480,7 +476,7 @@ module("ISBF | Integration | Component | ISBFNotifications", function (hooks) {
     await render(
       <template><ISBFNotifications /><ISBFNotificationBell /></template>
     );
-    await click(".isbf-notifications__menu summary");
+    await click("button.isbf-notifications__menu");
     await click(".isbf-notifications__filter [role='switch']");
     this.unread = false;
     await publishToMessageBus("/notification/42", {

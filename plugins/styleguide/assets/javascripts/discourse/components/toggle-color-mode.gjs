@@ -117,7 +117,6 @@ export default class ToggleColorMode extends Component {
       <DMenu
         class="toggle-color-mode"
         data-current-mode={{this.mode}}
-        @animated={{false}}
         @ariaLabel={{i18n
           "sidebar.footer.interface_color_selector.aria_label"
           mode=this.mode

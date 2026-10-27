@@ -2,12 +2,12 @@ import {
   click,
   currentURL,
   fillIn,
-  select,
   triggerEvent,
   visit,
 } from "@ember/test-helpers";
 import { test } from "qunit";
 import pretender, { response } from "discourse/tests/helpers/create-pretender";
+import select from "discourse/tests/helpers/d-select";
 import { acceptance, createFile } from "discourse/tests/helpers/qunit-helpers";
 
 const emojiList = [

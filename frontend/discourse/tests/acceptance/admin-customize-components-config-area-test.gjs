@@ -1,6 +1,7 @@
-import { click, currentURL, fillIn, select, visit } from "@ember/test-helpers";
+import { click, currentURL, fillIn, visit } from "@ember/test-helpers";
 import { test } from "qunit";
 import { withPluginApi } from "discourse/lib/plugin-api";
+import select, { findSelect } from "discourse/tests/helpers/d-select";
 import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 
 acceptance("Admin - Config areas - Components", function (needs) {
@@ -130,7 +131,7 @@ acceptance("Admin - Config areas - Components - filters", function (needs) {
       .dom(".d-filter-controls__input")
       .hasValue("air", "prefills the search input from the URL");
     assert
-      .dom(".d-filter-controls__dropdown")
+      .dom(findSelect(".d-filter-controls__dropdown"))
       .hasValue("unused", "preselects the status dropdown from the URL");
     assert.dom(".admin-config-components__component-row").exists({ count: 1 });
   });
@@ -144,7 +145,7 @@ acceptance("Admin - Config areas - Components - filters", function (needs) {
       "does not send the invalid status to the server"
     );
     assert
-      .dom(".d-filter-controls__dropdown")
+      .dom(findSelect(".d-filter-controls__dropdown"))
       .hasValue("all", "the status dropdown falls back to the default value");
     assert.dom(".admin-config-components__component-row").exists({ count: 2 });
   });
@@ -217,7 +218,7 @@ acceptance("Admin - Config areas - Components - filters", function (needs) {
       "removes both params in a single URL update"
     );
     assert.dom(".d-filter-controls__input").hasValue("");
-    assert.dom(".d-filter-controls__dropdown").hasValue("all");
+    assert.dom(findSelect(".d-filter-controls__dropdown")).hasValue("all");
     assert.strictEqual(
       requests.at(-1).name,
       "",

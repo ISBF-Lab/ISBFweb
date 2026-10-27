@@ -1,10 +1,10 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import { ajax } from "discourse/lib/ajax";
 import DButton from "discourse/ui-kit/d-button";
+import DSelect from "discourse/ui-kit/d-select";
 import { isLearningComposer } from "../lib/learning-composer";
 
 export default class ISBFLearningComposer extends Component {
@@ -66,7 +66,11 @@ export default class ISBFLearningComposer extends Component {
     {{#if this.visible}}
       <div class="isbf-learning-composer" {{didInsert this.loadCourses}}>
         <label>课程
-          <select disabled={{this.loading}} {{on "change" this.selectCourse}}>
+          <DSelect
+            disabled={{this.loading}}
+            @includeNone={{false}}
+            @onInput={{this.selectCourse}}
+          >
             <option value="">请选择课程</option>
             {{#each this.options as |course|}}
               <option
@@ -74,7 +78,7 @@ export default class ISBFLearningComposer extends Component {
                 value={{course.id}}
               >{{course.label}}</option>
             {{/each}}
-          </select>
+          </DSelect>
         </label>
         <p
         >填写资料标题。说明可选；请上传资料文件或填写外部链接。普通用户投稿将在审核通过后展示。</p>

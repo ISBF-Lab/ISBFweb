@@ -29,10 +29,17 @@ export default class Menu extends Service {
    * caller uses before a menu exists; it delegates to the shared formula in
    * {@link FloatKitInstance.resolveRenderInModal}, so it can't drift from what `<DMenu>` renders.
    *
-   * @param modalForMobile - the menu's `@modalForMobile` option.
+   * @param modalForMobile - the popover's `@modalForMobile` option.
+   * @param surface - only non-menu popovers may use the modal path.
    */
-  shouldRenderInModal(modalForMobile?: boolean): boolean {
-    return FloatKitInstance.resolveRenderInModal(this.site, modalForMobile);
+  shouldRenderInModal(
+    modalForMobile?: boolean,
+    surface: MenuOptions["surface"] = "menu"
+  ): boolean {
+    return (
+      surface === "popover" &&
+      FloatKitInstance.resolveRenderInModal(this.site, modalForMobile)
+    );
   }
 
   /**

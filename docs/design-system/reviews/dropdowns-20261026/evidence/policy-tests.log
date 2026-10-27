@@ -1,0 +1,44 @@
+
+> @ test:menus /workspace/discourse
+> node --test script/check-menus-test.mjs
+
+TAP version 13
+# Subtest: native tags are rejected without confusing yielded Option components
+ok 1 - native tags are rejected without confusing yielded Option components
+  ---
+  duration_ms: 2.964745
+  type: 'test'
+  ...
+# Subtest: mobile menu sheets and undocumented popovers cannot bypass the standard
+ok 2 - mobile menu sheets and undocumented popovers cannot bypass the standard
+  ---
+  duration_ms: 0.453744
+  type: 'test'
+  ...
+# Subtest: private menu geometry is rejected while layout and shared tokens remain valid
+ok 3 - private menu geometry is rejected while layout and shared tokens remain valid
+  ---
+  duration_ms: 1.806656
+  type: 'test'
+  ...
+# Subtest: custom details menus are rejected
+ok 4 - custom details menus are rejected
+  ---
+  duration_ms: 0.320658
+  type: 'test'
+  ...
+# Subtest: the canonical shared select import is retained while legacy UI imports are still checked
+ok 5 - the canonical shared select import is retained while legacy UI imports are still checked
+  ---
+  duration_ms: 3417.776633
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3612.714901

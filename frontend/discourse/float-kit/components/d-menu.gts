@@ -16,6 +16,7 @@ import {
 import DMenuInstance from "discourse/float-kit/lib/d-menu-instance";
 import FloatKitNotifyPositioned from "discourse/float-kit/modifiers/notify-positioned";
 import { isTesting } from "discourse/lib/environment";
+import { eq } from "discourse/truth-helpers";
 import DButton from "discourse/ui-kit/d-button";
 import DModal from "discourse/ui-kit/d-modal";
 import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
@@ -255,6 +256,33 @@ export default class DMenu<Data = unknown> extends Component<
     // need to call the parent handler to allow arrow key navigation to siblings in toolbar contexts
     const parentHandlerResult = this.args.onKeydown?.(event);
 
+    if (event.defaultPrevented || parentHandlerResult === true) {
+      return parentHandlerResult;
+    }
+    if (
+      this.options.surface === "menu" &&
+      !this.menuInstance.disabled &&
+      !this.menuInstance.expanded &&
+      (event.key === "ArrowDown" || event.key === "ArrowUp")
+    ) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.menuInstance.show().then(() => {
+        const content = this.menuInstance.content;
+        const search = content?.querySelector<HTMLElement>(
+          'input[type="search"], input[role="combobox"]'
+        );
+        const selected = content?.querySelector<HTMLElement>(
+          '[aria-checked="true"]:not(:disabled), [aria-selected="true"]:not(:disabled)'
+        );
+        const first = content?.querySelector<HTMLElement>(
+          "button:not(:disabled), a[href], input:not(:disabled)"
+        );
+        (search ?? selected ?? first)?.focus();
+      });
+      return true;
+    }
+
     // Inline ordering owns Tab on the trigger, in the capture phase, and decides whether the
     // panel is entered. Pulling focus into the body here would override a decision to pass over
     // a panel that offers no stop.
@@ -338,14 +366,19 @@ export default class DMenu<Data = unknown> extends Component<
         <DFloatBody
           @inline={{this.options.inline}}
           @inlineTabOrder={{this.options.inlineTabOrder}}
-          @innerClass="fk-d-menu__inner-content"
+          @innerClass={{dConcatClass
+            "fk-d-menu__inner-content"
+            (if (eq this.options.surface "menu") "d-menu-surface")
+          }}
           @instance={{this.menuInstance}}
           @mainClass={{dConcatClass
             "fk-d-menu"
             (concat this.options.identifier "-content")
             @class
             @contentClass
+            (if (eq this.options.surface "menu") "--menu-surface")
           }}
+          @menuHighlight={{eq this.options.surface "menu"}}
           @role={{this.options.contentRole}}
           @trapTab={{this.options.trapTab}}
           {{this.registerFloatBody}}

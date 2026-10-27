@@ -67,7 +67,7 @@ export default class ISBFTopicMore extends Component {
         @ariaLabel={{i18n "more"}}
         @icon="ellipsis"
         @identifier={{this.identifier}}
-        @modalForMobile={{true}}
+        @modalForMobile={{false}}
         @title={{i18n "more"}}
         @triggerClass="btn-flat isbf-topic-card__more show-more-actions"
       >

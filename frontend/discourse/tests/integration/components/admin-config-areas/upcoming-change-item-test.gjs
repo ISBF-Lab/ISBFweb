@@ -1,8 +1,9 @@
-import { fillIn, render } from "@ember/test-helpers";
+import { render } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import UpcomingChangeItem from "discourse/admin/components/admin-config-areas/upcoming-change-item";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import pretender, { response } from "discourse/tests/helpers/create-pretender";
+import select, { findSelect } from "discourse/tests/helpers/d-select";
 import { i18n } from "discourse-i18n";
 
 function buildChange(overrides = {}) {
@@ -290,7 +291,7 @@ module("Integration | Component | UpcomingChangeItem", function (hooks) {
       </template>
     );
 
-    await fillIn(".upcoming-change__enabled-for", "staff");
+    await select(".upcoming-change__enabled-for", "staff");
 
     assert.deepEqual(
       requests,
@@ -298,7 +299,7 @@ module("Integration | Component | UpcomingChangeItem", function (hooks) {
       "persists the staff group first, so the toggle passes instead of 422ing"
     );
     assert
-      .dom(".upcoming-change__enabled-for")
+      .dom(findSelect(".upcoming-change__enabled-for"))
       .hasValue("staff", "keeps staff selected");
   });
 
@@ -333,7 +334,7 @@ module("Integration | Component | UpcomingChangeItem", function (hooks) {
       </template>
     );
 
-    await fillIn(".upcoming-change__enabled-for", "everyone");
+    await select(".upcoming-change__enabled-for", "everyone");
 
     assert.deepEqual(
       requests,
@@ -341,7 +342,7 @@ module("Integration | Component | UpcomingChangeItem", function (hooks) {
       "enables first then clears groups when 'everyone' is allowed"
     );
     assert
-      .dom(".upcoming-change__enabled-for")
+      .dom(findSelect(".upcoming-change__enabled-for"))
       .hasValue("everyone", "keeps everyone selected");
   });
 });

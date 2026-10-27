@@ -100,7 +100,7 @@ export default class SidebarMoreSectionLinks extends Component {
         @autofocus={{true}}
         @identifier={{if @identifier @identifier "sidebar-more-section"}}
         @inline={{true}}
-        @modalForMobile={{true}}
+        @modalForMobile={{false}}
         @placement="bottom"
         @triggerClass="sidebar-section-link sidebar-more-section-links-details-summary sidebar-row --link-button"
         @triggerComponent={{this.triggerComponent}}

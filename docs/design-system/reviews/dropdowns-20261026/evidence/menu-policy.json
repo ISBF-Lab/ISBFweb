@@ -1,0 +1,10 @@
+{
+  "scanned": 5927,
+  "findings": [],
+  "popovers": {
+    "frontend/discourse/app/form-kit/components/fk/control/color.gjs": "Two-dimensional color palette",
+    "frontend/discourse/admin/components/dashboard/date-range.gjs": "Calendar date-range panel",
+    "frontend/discourse/admin/components/ip-lookup.gjs": "IP lookup information panel",
+    "frontend/discourse/admin/components/admin-report-table-summary.gjs": "Report information panel"
+  }
+}

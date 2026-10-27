@@ -112,6 +112,7 @@ export default class AdminReportTableSummary extends Component {
       @modalForMobile={{true}}
       @onShow={{this.load}}
       @placement="bottom-start"
+      @surface="popover"
       @triggerClass="admin-report-table-summary"
       @triggerComponent={{dElement "button"}}
       @triggers={{array "delayed-hover" "click"}}

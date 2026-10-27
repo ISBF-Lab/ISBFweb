@@ -59,6 +59,12 @@ export default class DMenuInstance extends FloatKitInstance {
 
     const merged = { ...MENU.options, ...options };
 
+    if (merged.surface === "menu") {
+      merged.modalForMobile = false;
+      merged.constrainHeightToViewport = true;
+      merged.padding = options.padding ?? 16;
+    }
+
     // `trapTab` defaults to true and the two are alternatives, so inline ordering has to switch
     // it off itself or every caller would carry a second flag. An explicit `trapTab: true` is
     // left alone for `DFloatBody` to assert on rather than resolved silently here.
@@ -76,6 +82,16 @@ export default class DMenuInstance extends FloatKitInstance {
 
   set trigger(element: FloatKitTrigger) {
     this._trigger = element;
+    if (
+      this.options.surface === "menu" &&
+      !this.options.boundary &&
+      element instanceof HTMLElement
+    ) {
+      const container = element.closest<HTMLElement>(".d-modal__body");
+      if (container) {
+        this.options.boundary = container;
+      }
+    }
     this.id =
       (element instanceof HTMLElement && element.id) || guidFor(element);
     this.setupListeners();

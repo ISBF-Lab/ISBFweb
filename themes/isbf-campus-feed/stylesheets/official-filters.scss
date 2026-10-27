@@ -104,34 +104,10 @@ body:has(.isbf-v2-shell):has(.isbf-v2-shell--official-filtered) {
 }
 
 .isbf-official-picker__menu {
-  box-sizing: border-box;
-  width: min(260px, calc(100vw - var(--isbf-v2-space-8)));
-  max-height: 55dvh;
-  overflow: visible;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--isbf-v2-text);
+  width: min(260px, calc(100dvw - 32px));
 
   .fk-d-menu__inner-content {
-    box-sizing: border-box;
     width: 100%;
-    max-height: inherit;
-    overflow-y: auto;
-    padding: var(--isbf-v2-space-2);
-    border: 1px solid var(--isbf-v2-border);
-    border-radius: var(--isbf-v2-radius-md);
-    background: var(--isbf-v2-surface);
-    box-shadow: var(--isbf-v2-shadow-menu);
-    overscroll-behavior: contain;
-  }
-
-  .dropdown-menu {
-    width: 100%;
-    min-width: 0;
-    gap: var(--isbf-v2-space-1);
-    padding: 0;
   }
 }
 

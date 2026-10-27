@@ -1,0 +1,39 @@
+{
+  "recorded_at": "2026-10-26T18:23:48.841813+00:00",
+  "scope": "Two independently reproduced PR review findings; shared float behavior only",
+  "reviews": [
+    "PRRT_kwDOUrf5Ns6wZAIB",
+    "PRRT_kwDOUrf5Ns6wZAII"
+  ],
+  "before_fix": {
+    "reproduced": true,
+    "report_sha256": "fb16990769a2eaca3adeb1680b83b47172024792eca3cfa98dbfeda25d6052bb",
+    "assertion_failures": 5,
+    "classification": "Intentional reproduction before implementation, not final acceptance evidence"
+  },
+  "after_fix": {
+    "tests": [
+      {
+        "name": "hover dismissal preserves outside focus while Escape restores the trigger",
+        "module": "Integration | Component | FloatKit | DMenu",
+        "failed": 0,
+        "total": 6
+      },
+      {
+        "name": "nested Escape leaves the parent menu and its draft open",
+        "module": "Integration | ui-kit | DSelect",
+        "failed": 0,
+        "total": 8
+      }
+    ],
+    "suite_tests": 106,
+    "suite_assertions": 256,
+    "suite_failures": 0,
+    "client_errors": []
+  },
+  "guarantees": [
+    "Escape closes the child without closing the parent or discarding its draft",
+    "The next Escape closes the parent and restores its trigger",
+    "Hover dismissal preserves outside focus; Escape still restores its trigger"
+  ]
+}

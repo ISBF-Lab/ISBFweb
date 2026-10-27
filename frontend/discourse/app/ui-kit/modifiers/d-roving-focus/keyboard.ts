@@ -41,7 +41,7 @@ export default class KeyboardRouter {
   /** Routes a keydown while leaving unowned keys unconsumed. */
   handle(event: KeyboardEvent, context: KeyboardContext): void {
     const { config, scope } = context;
-    if (event.isComposing) {
+    if (event.isComposing || event.defaultPrevented) {
       return;
     }
     if (

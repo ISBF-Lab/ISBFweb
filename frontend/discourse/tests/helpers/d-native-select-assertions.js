@@ -1,14 +1,10 @@
-import { find } from "@ember/test-helpers";
 import QUnit from "qunit";
+import { findSelect } from "discourse/tests/helpers/d-select";
 
 class DNativeSelect {
   constructor(selector, context) {
     this.context = context;
-    if (selector instanceof HTMLElement) {
-      this.element = selector;
-    } else {
-      this.element = find(selector);
-    }
+    this.element = findSelect(selector);
   }
 
   hasOption({ value, label }, assertionMessage) {

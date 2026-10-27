@@ -79,7 +79,7 @@ module(
         .dom('[data-name="items.0.start"] input')
         .hasValue("2026-10-20", "date-only mode keeps the Beijing day");
       await click(".isbf-official-calendar-editor__add");
-      await click(".isbf-official-calendar-editor__item:last-child .btn");
+      await click(".isbf-official-calendar-editor__item:last-child > .btn");
       assert
         .dom(".isbf-official-calendar-editor__item")
         .exists({ count: 1 }, "only the new row is removed");

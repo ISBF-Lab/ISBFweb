@@ -1,6 +1,7 @@
-import { click, currentURL, fillIn, select, visit } from "@ember/test-helpers";
+import { click, currentURL, fillIn, visit } from "@ember/test-helpers";
 import { test } from "qunit";
 import reportsBulkFixtures from "discourse/tests/fixtures/reports-bulk";
+import select, { findSelect } from "discourse/tests/helpers/d-select";
 import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 
 acceptance("Reports", function (needs) {
@@ -193,7 +194,7 @@ acceptance("Reports | Filter query params", function (needs) {
     await visit("/admin/reports?group=content");
 
     assert.strictEqual(currentURL(), "/admin/reports?group=content");
-    assert.dom(".d-filter-controls__dropdown").hasValue("content");
+    assert.dom(findSelect(".d-filter-controls__dropdown")).hasValue("content");
     assert.dom(".admin-reports-group").exists({ count: 1 });
     assert
       .dom(".admin-section-landing-item__title")
@@ -206,12 +207,12 @@ acceptance("Reports | Filter query params", function (needs) {
     // same-route transition to the bare URL fires no route event at all
     await visit("/admin/reports?group=content");
 
-    assert.dom(".d-filter-controls__dropdown").hasValue("content");
+    assert.dom(findSelect(".d-filter-controls__dropdown")).hasValue("content");
 
     await visit("/admin/reports?group=moderation_and_security");
 
     assert
-      .dom(".d-filter-controls__dropdown")
+      .dom(findSelect(".d-filter-controls__dropdown"))
       .hasValue(
         "moderation_and_security",
         "re-selects the dropdown from the new URL"
@@ -224,7 +225,7 @@ acceptance("Reports | Filter query params", function (needs) {
   test("falls back to all groups when the URL group is unknown", async function (assert) {
     await visit("/admin/reports?group=nonsense");
 
-    assert.dom(".d-filter-controls__dropdown").hasValue("all");
+    assert.dom(findSelect(".d-filter-controls__dropdown")).hasValue("all");
     assert.dom(".admin-reports-group").exists({ count: 3 });
     assert.dom(".admin-section-landing-item__content").exists({ count: 3 });
   });
@@ -249,7 +250,7 @@ acceptance("Reports | Filter query params", function (needs) {
       "clears both params in one write"
     );
     assert.dom(".d-filter-controls__input").hasValue("");
-    assert.dom(".d-filter-controls__dropdown").hasValue("all");
+    assert.dom(findSelect(".d-filter-controls__dropdown")).hasValue("all");
     assert.dom(".admin-section-landing-item__content").exists({ count: 3 });
   });
 });

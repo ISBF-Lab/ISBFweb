@@ -22,12 +22,14 @@ import {
   size,
 } from "@floating-ui/dom";
 import { Promise } from "rsvp";
+import { animateClosing } from "discourse/lib/animation-utils";
 import { uniqueItemsFromArray } from "discourse/lib/array-tools";
 import discourseDebounce from "discourse/lib/debounce";
 import deprecated from "discourse/lib/deprecated";
-import { INPUT_DELAY } from "discourse/lib/environment";
+import { INPUT_DELAY, isTesting } from "discourse/lib/environment";
 import { makeArray } from "discourse/lib/helpers";
 import { autoTrackedArray } from "discourse/lib/tracked-tools";
+import { prefersReducedMotion } from "discourse/lib/utilities";
 import { normalize } from "discourse/select-kit/lib/input-utils";
 import {
   applyContentPluginApiCallbacks,
@@ -189,6 +191,8 @@ export default class SelectKit extends Component {
   @protoProp langProperty = null;
   @autoTrackedArray mainCollection = null;
   @autoTrackedArray errorsCollection = null;
+
+  #closing = false;
 
   _handleNativeToggle = () => {
     if (this.element.open !== this.selectKit.isExpanded) {
@@ -635,31 +639,34 @@ export default class SelectKit extends Component {
       },
       shift({ limiter: limitShift() }),
       offset(this.selectKit.options.verticalOffset),
-      {
-        name: "applySmallScreenOffset",
-        fn: (state) => {
-          if (window.innerWidth > 450) {
-            return state;
-          }
-
-          let { x } = state.elements.reference.getBoundingClientRect();
-          if (strategy === "fixed") {
-            return { x: 10, y: state.y };
-          } else {
-            return { x: -x + 10, y: state.y };
-          }
-        },
-      },
-      {
-        name: "applySmallScreenMaxWidth",
-        fn: (state) => {
+      size({
+        apply({ rects, availableHeight }) {
+          const viewport = window.visualViewport;
+          const viewportWidth = viewport?.width || window.innerWidth;
+          const viewportHeight = viewport?.height || window.innerHeight;
           if (window.innerWidth <= 450) {
-            width = `${window.innerWidth - 20}px`;
+            width = `${Math.min(Math.max(rects.reference.width, 220), viewportWidth - 32)}px`;
           }
-
-          return state;
+          const container = referenceElement
+            .closest(".d-modal__body")
+            ?.getBoundingClientRect();
+          const reference = referenceElement.getBoundingClientRect();
+          const top = viewport?.offsetTop || 0;
+          const above =
+            reference.top - Math.max(top, container?.top ?? top) - 16;
+          const below =
+            Math.min(
+              top + viewportHeight,
+              container?.bottom ?? top + viewportHeight
+            ) -
+            reference.bottom -
+            16;
+          floatingElement.style.setProperty(
+            "--d-menu-available-height",
+            `${Math.max(0, Math.min(viewportHeight * 0.55, availableHeight, Math.max(above, below)))}px`
+          );
         },
-      },
+      }),
       hide(),
     ];
 
@@ -1110,23 +1117,38 @@ export default class SelectKit extends Component {
   }
 
   _close(event) {
-    if (!this.selectKit.isExpanded) {
+    if (!this.selectKit.isExpanded || this.#closing) {
       return;
     }
 
-    this.cleanupFloatingUi?.();
+    const finish = () => {
+      if (this.isDestroying) {
+        return;
+      }
+      this.cleanupFloatingUi?.();
 
-    this.selectKit.mainElement().open = false;
+      this.selectKit.mainElement().open = false;
 
-    this.clearErrors();
+      this.clearErrors();
 
-    this.selectKit.onClose(event);
+      this.selectKit.onClose(event);
 
-    this.selectKit.setProperties({
-      isExpanded: false,
-      isPlacedAbove: false,
-      filter: null,
-    });
+      this.selectKit.setProperties({
+        isExpanded: false,
+        isPlacedAbove: false,
+        filter: null,
+      });
+    };
+
+    if (!isTesting() && !prefersReducedMotion()) {
+      this.#closing = true;
+      return animateClosing(this._bodyElement()).finally(() => {
+        this.#closing = false;
+        finish();
+      });
+    }
+
+    finish();
   }
 
   _open(event) {
@@ -1139,11 +1161,29 @@ export default class SelectKit extends Component {
     this.selectKit.onOpen(event);
 
     this.cleanupFloatingUi?.();
-    this.cleanupFloatingUi = autoUpdate(
+    let updateTimer = null;
+    const schedulePosition = () => {
+      if (updateTimer !== null) {
+        return;
+      }
+      // Resize callbacks must not resize another observer's target during delivery.
+      updateTimer = next(() => {
+        updateTimer = null;
+        if (!this.isDestroying && this.selectKit.isExpanded) {
+          this.updateFloatingUiPosition();
+        }
+      });
+    };
+    const cleanup = autoUpdate(
       this.getHeader(),
       this._bodyElement(),
-      () => this.updateFloatingUiPosition()
+      schedulePosition
     );
+    this.cleanupFloatingUi = () => {
+      cleanup();
+      cancel(updateTimer);
+      updateTimer = null;
+    };
 
     this.selectKit.setProperties({
       isExpanded: true,
@@ -1231,7 +1271,7 @@ export default class SelectKit extends Component {
 
     if (this.site.mobileView) {
       placementStrategy =
-        this.selectKit.options.mobilePlacementStrategy || "absolute";
+        this.selectKit.options.mobilePlacementStrategy || "fixed";
     } else {
       placementStrategy =
         this.selectKit.options.desktopPlacementStrategy || "fixed";

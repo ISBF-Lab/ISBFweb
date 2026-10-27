@@ -32,7 +32,12 @@ import dElement from "discourse/ui-kit/helpers/d-element";
 const ModalWithMenu = <template>
   <DModal @closeModal={{@closeModal}} @inline={{true}}>
     <span class="outer-modal-content">Outer modal</span>
-    <DMenu @inline={{true}} @label="Permission" @modalForMobile={{true}}>
+    <DMenu
+      @inline={{true}}
+      @label="Permission"
+      @modalForMobile={{true}}
+      @surface="popover"
+    >
       <:content as |menu|>
         <DButton class="close-menu" @action={{menu.close}}>Viewer</DButton>
       </:content>
@@ -98,6 +103,22 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
     assert.dom(".fk-d-menu").hasText("content");
   });
 
+  test("menu surfaces stay floating on mobile even with a legacy modal option", async function (assert) {
+    forceMobile();
+    await render(
+      <template>
+        <DMenu @content="Options" @inline={{true}} @modalForMobile={{true}} />
+      </template>
+    );
+    await open();
+    assert
+      .dom(".fk-d-menu .d-menu-surface")
+      .hasText("Options", "the shared floating menu is rendered");
+    assert
+      .dom(".fk-d-menu-modal")
+      .doesNotExist("the legacy option cannot create a menu sheet");
+  });
+
   test("@modalForMobile", async function (assert) {
     forceMobile();
 
@@ -108,6 +129,7 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
           @identifier="foo"
           @inline={{true}}
           @modalForMobile={{true}}
+          @surface="popover"
         />
       </template>
     );
@@ -123,7 +145,12 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
 
     await render(
       <template>
-        <DMenu @inline={{true}} @label="Permission" @modalForMobile={{true}}>
+        <DMenu
+          @inline={{true}}
+          @label="Permission"
+          @modalForMobile={{true}}
+          @surface="popover"
+        >
           <:content as |menu|>
             <DButton class="close-menu" @action={{menu.close}}>Viewer</DButton>
           </:content>
@@ -186,6 +213,7 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
         content: "menu content",
         identifier: "mobile-menu",
         modalForMobile: true,
+        surface: "popover",
       });
     const tooltip = await getOwner(this)
       .lookup("service:tooltip")
@@ -214,8 +242,12 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
     await render(<template><DMenus /></template>);
     const menu = getOwner(this).lookup("service:menu");
 
-    assert.true(
+    assert.false(
       menu.shouldRenderInModal(true),
+      "menu surfaces remain floating"
+    );
+    assert.true(
+      menu.shouldRenderInModal(true, "popover"),
       "mobile plus modalForMobile renders in a modal"
     );
     assert.false(
@@ -269,6 +301,7 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
           @label="label"
           @modalForMobile={{true}}
           @onPositioned={{this.onPositioned}}
+          @surface="popover"
         />
       </template>
     );
@@ -295,6 +328,7 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
           @identifier="foo"
           @inline={{true}}
           @modalForMobile={{true}}
+          @surface="popover"
         />
       </template>
     );
@@ -312,7 +346,12 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
 
     await render(
       <template>
-        <DMenu @identifier="foo" @inline={{true}} @modalForMobile={{true}}>
+        <DMenu
+          @identifier="foo"
+          @inline={{true}}
+          @modalForMobile={{true}}
+          @surface="popover"
+        >
           <div class="test-scroll-area" style="height: 50px; overflow-y: auto">
             <div style="height: 500px">tall content</div>
           </div>
@@ -1368,6 +1407,38 @@ module("Integration | Component | FloatKit | DMenu", function (hooks) {
     await triggerEvent(".fk-d-menu__trigger", "pointerleave");
 
     assert.dom(".fk-d-menu").doesNotExist();
+  });
+
+  test("hover dismissal preserves outside focus while Escape restores the trigger", async function (assert) {
+    await render(
+      <template>
+        <input class="editing-field" />
+        <DMenu
+          @content="content"
+          @hoverGracePeriod={{150}}
+          @inline={{true}}
+          @label="label"
+          @triggers={{array "hover"}}
+          @untriggers={{array "hover"}}
+        />
+      </template>
+    );
+    await focus(".editing-field");
+    await triggerEvent(".fk-d-menu__trigger", "pointermove");
+    assert.dom(".fk-d-menu").exists();
+    assert.dom(".editing-field").isFocused("hover does not take focus");
+    await triggerEvent(".fk-d-menu__trigger", "pointerleave");
+    assert.dom(".fk-d-menu").doesNotExist();
+    assert
+      .dom(".editing-field")
+      .isFocused("hover dismissal leaves focus alone");
+
+    await triggerEvent(".fk-d-menu__trigger", "pointermove");
+    await triggerKeyEvent(document.activeElement, "keydown", "Escape");
+    assert.dom(".fk-d-menu").doesNotExist();
+    assert
+      .dom(".fk-d-menu__trigger")
+      .isFocused("Escape restores trigger focus");
   });
 
   test("default hoverGracePeriod (0) does not install hover-close on interactive menus", async function (assert) {

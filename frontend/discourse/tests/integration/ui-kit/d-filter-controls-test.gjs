@@ -1,9 +1,10 @@
 import { tracked } from "@glimmer/tracking";
 import Evented from "@ember/object/evented";
 import Service from "@ember/service";
-import { click, fillIn, render, select, settled } from "@ember/test-helpers";
+import { click, fillIn, render, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
+import select, { findSelect } from "discourse/tests/helpers/d-select";
 import DFilterControls from "discourse/ui-kit/d-filter-controls";
 import { i18n } from "discourse-i18n";
 
@@ -150,7 +151,7 @@ module("Integration | ui-kit | DFilterControls", function (hooks) {
 
     assert.strictEqual(this.resetCount, 1, "calls the reset callback once");
     assert
-      .dom(".d-filter-controls__dropdown--category")
+      .dom(findSelect(".d-filter-controls__dropdown--category"))
       .hasValue("all", "resets dropdown filters");
     assert
       .dom(".d-filter-controls__input")
@@ -1188,7 +1189,7 @@ module("Integration | ui-kit | DFilterControls", function (hooks) {
     await settled();
 
     assert
-      .dom(".d-filter-controls__dropdown--category")
+      .dom(findSelect(".d-filter-controls__dropdown--category"))
       .hasValue("feature", "reveals the URL-owned active dropdown");
     assert
       .dom(".item")

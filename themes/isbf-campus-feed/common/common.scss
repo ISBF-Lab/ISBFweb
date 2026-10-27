@@ -440,8 +440,7 @@ body:has(.isbf-v2-shell--no-page-header) {
 }
 
 .isbf-v2-side__links a,
-.isbf-v2-side__links .isbf-v2-side__more,
-.isbf-v2-more-menu .isbf-v2-more-menu__item {
+.isbf-v2-side__links .isbf-v2-side__more {
   display: flex;
   align-items: center;
   gap: 18px;
@@ -475,26 +474,6 @@ body:has(.isbf-v2-shell--no-page-header) {
 .isbf-v2-more-menu {
   box-sizing: border-box;
   width: min(260px, calc(100vw - var(--isbf-v2-space-8)));
-  max-height: calc(100dvh - var(--isbf-v2-space-8));
-  overflow: visible;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--isbf-v2-text);
-
-  .fk-d-menu__inner-content {
-    box-sizing: border-box;
-    width: 100%;
-    max-height: inherit;
-    overflow-y: auto;
-    padding: var(--isbf-v2-space-2);
-    border: 1px solid var(--isbf-v2-border);
-    border-radius: var(--isbf-v2-radius-md);
-    background: var(--isbf-v2-surface);
-    box-shadow: var(--isbf-v2-shadow-menu);
-    overscroll-behavior: contain;
-  }
 
   .dropdown-menu {
     width: 100%;
@@ -505,6 +484,9 @@ body:has(.isbf-v2-shell--no-page-header) {
 }
 
 .isbf-v2-more-menu .isbf-v2-more-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   justify-content: flex-start;
   box-sizing: border-box;
   width: 100%;
@@ -521,17 +503,6 @@ body:has(.isbf-v2-shell--no-page-header) {
   .d-icon {
     flex: none;
     color: inherit;
-  }
-
-  &:hover,
-  &:focus-visible {
-    background: var(--isbf-v2-hover);
-    color: var(--isbf-v2-text);
-  }
-
-  &:focus-visible {
-    outline: 3px solid var(--isbf-v2-focus-ring);
-    outline-offset: -3px;
   }
 }
 
@@ -728,8 +699,7 @@ body:has(.isbf-v2-shell) tr.isbf-v2-topic {
   cursor: pointer;
 }
 
-.isbf-v2-account-menu__trigger:hover,
-.isbf-v2-account-menu__panel > :hover {
+.isbf-v2-account-menu__trigger:hover {
   background: var(--isbf-v2-hover);
 }
 
@@ -743,35 +713,15 @@ body:has(.isbf-v2-shell) tr.isbf-v2-topic {
   display: none;
 }
 
-.isbf-v2-account-menu__panel {
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  z-index: 70;
-  box-sizing: border-box;
-  width: max(220px, 100%);
-  padding: 8px;
-  border: 1px solid var(--isbf-v2-border);
-  border-radius: var(--isbf-v2-radius-md);
-  background: var(--isbf-v2-surface);
-  box-shadow: var(--isbf-v2-shadow-menu);
-}
-
 .isbf-v2-account-menu__panel > a,
 .isbf-v2-account-menu__panel > button {
   display: flex;
   align-items: center;
   box-sizing: border-box;
   width: 100%;
-  min-height: 44px;
-  padding: 8px 12px;
   border: 0;
-  border-radius: var(--isbf-v2-radius-sm);
-  background: transparent;
   color: var(--isbf-v2-text);
-  font-size: var(--isbf-v2-font-sm);
-  font-weight: var(--isbf-v2-weight-medium);
-  text-align: left;
+  text-align: start;
   cursor: pointer;
 }
 
@@ -1392,23 +1342,21 @@ body:has(.isbf-v2-shell) tr.isbf-v2-topic > td.isbf-feed-card-cell {
   }
 }
 
-.isbf-feed-card__menu {
-  position: absolute;
-  z-index: 20;
-  top: 34px;
-  right: 0;
+.isbf-feed-card-menu .fk-d-menu__inner-content {
   min-width: 132px;
-  padding: 6px;
-  border: 1px solid var(--isbf-v2-border);
-  border-radius: var(--isbf-v2-radius-sm);
-  background: var(--isbf-v2-surface);
-  box-shadow: 0 8px 28px rgb(0 0 0 / 18%);
+}
+
+.isbf-feed-card__menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 
   button {
     display: flex;
     align-items: center;
     gap: 9px;
     width: 100%;
+    min-height: 44px;
     padding: 9px 10px;
     border: 0;
     border-radius: 6px;
@@ -1620,10 +1568,6 @@ body:has(.isbf-v2-shell) tr.isbf-v2-topic > td.isbf-feed-card-cell {
     border-radius: 50%;
   }
 
-  .isbf-v2-account-menu__panel {
-    width: min(240px, calc(100vw - 16px));
-  }
-
   .isbf-v2-account-menu__compact-profile {
     display: flex;
   }
@@ -1678,14 +1622,6 @@ body:has(.isbf-v2-shell) tr.isbf-v2-topic > td.isbf-feed-card-cell {
   .isbf-v2-account-menu--mobile .isbf-v2-account-menu__trigger {
     width: 44px;
     height: 44px;
-  }
-
-  .isbf-v2-account-menu--mobile .isbf-v2-account-menu__panel {
-    top: 100%;
-    right: 0;
-    bottom: auto;
-    left: auto;
-    width: min(280px, calc(100vw - 32px));
   }
 
   .isbf-v2-feed-header {
@@ -3622,11 +3558,6 @@ body.user-activity-bookmarks-page #main-outlet .user-navigation-secondary {
   display: none;
 }
 
-.isbf-v2-account-menu__panel {
-  max-height: min(70vh, 620px);
-  overflow-y: auto;
-}
-
 .isbf-v2-account-menu__linked-account {
   display: grid;
   grid-template-columns: 32px minmax(0, 1fr);
@@ -3805,52 +3736,19 @@ body:has(.isbf-v2-shell--grouped-notifications) #main-outlet {
     position: relative;
   }
 
-  &__menu summary {
-    padding: var(--isbf-v2-space-2);
-    border-radius: var(--isbf-v2-radius-pill);
-    cursor: pointer;
-    list-style: none;
-
-    &::before {
-      display: none;
-    }
-
-    &::marker {
-      content: "";
-    }
-
-    &::-webkit-details-marker {
-      display: none;
-    }
-  }
-
   &__menu-items {
-    position: absolute;
-    z-index: 10;
-    inset-inline-end: 0;
     display: grid;
-    box-sizing: border-box;
-    inline-size: max-content;
-    max-inline-size: calc(100vw - 2 * var(--isbf-v2-space-4));
-    padding: var(--isbf-v2-space-2);
-    border: 1px solid var(--isbf-v2-border);
-    border-radius: var(--isbf-v2-radius-sm);
-    background: var(--isbf-v2-surface);
-    box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+    min-width: 0;
 
     a,
     button {
+      display: flex;
+      align-items: center;
       justify-content: flex-start;
-      padding: var(--isbf-v2-space-3);
+      width: 100%;
       border: 0;
-      color: var(--isbf-v2-text);
       text-align: start;
-      background: transparent;
-    }
-
-    a:hover,
-    button:hover {
-      background: var(--isbf-v2-hover);
+      cursor: pointer;
     }
   }
 
@@ -4888,6 +4786,19 @@ body:has(.isbf-v2-shell--custom-explore) #main-outlet {
     min-width: 0;
     padding: var(--isbf-v2-space-3) var(--isbf-v2-space-4);
     border-bottom: 1px solid var(--isbf-v2-border);
+
+    > .isbf-explore-picker__trigger {
+      flex: 1 1 0;
+      min-width: 44px;
+      width: auto;
+
+      .d-button-label {
+        overflow: hidden;
+        min-width: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
   }
 
   &__order,
@@ -4898,7 +4809,6 @@ body:has(.isbf-v2-shell--custom-explore) #main-outlet {
     justify-content: center;
     gap: var(--isbf-v2-space-1);
     box-sizing: border-box;
-    min-width: 0;
     min-height: 44px;
     padding: var(--isbf-v2-space-2) var(--isbf-v2-space-3);
     border: 1px solid var(--isbf-v2-border-strong);
@@ -4918,6 +4828,11 @@ body:has(.isbf-v2-shell--custom-explore) #main-outlet {
       flex-shrink: 0;
       color: inherit;
     }
+  }
+
+  &__order,
+  &__compose {
+    flex: none;
   }
 
   &__compose {
@@ -4967,22 +4882,7 @@ body:has(.isbf-v2-shell--custom-explore) #main-outlet {
   }
 
   &__menu {
-    position: absolute;
-    z-index: 20;
-    top: calc(100% + var(--isbf-v2-space-2));
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    width: min(280px, calc(100vw - 32px));
-    max-height: min(420px, 60dvh);
-    padding: var(--isbf-v2-space-2);
-    border: 1px solid var(--isbf-v2-border-strong);
-    border-radius: var(--isbf-v2-radius-sm);
-    background: var(--isbf-v2-surface);
-    box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
-    overflow-y: auto;
-    overscroll-behavior: contain;
+    width: min(280px, calc(100dvw - 32px));
   }
 
   &__search {
@@ -5013,21 +4913,9 @@ body:has(.isbf-v2-shell--custom-explore) #main-outlet {
     justify-content: space-between;
     gap: var(--isbf-v2-space-3);
     box-sizing: border-box;
-    min-height: 44px;
+    width: 100%;
     margin: 0;
-    padding: var(--isbf-v2-space-2);
-    border-radius: var(--isbf-v2-radius-sm);
-    color: var(--isbf-v2-text);
-    font-size: var(--isbf-v2-font-sm);
     cursor: pointer;
-
-    &:hover {
-      background: var(--isbf-v2-hover);
-    }
-
-    &:has(input:checked) {
-      background: var(--isbf-v2-active-surface);
-    }
   }
 
   &__label {
@@ -5592,4 +5480,5 @@ body:has(.isbf-v2-shell) .pswp {
 @import "dialog-consistency";
 @import "incoming-topics";
 @import "workbench";
+@import "dropdowns";
 @import "notifications-hold";

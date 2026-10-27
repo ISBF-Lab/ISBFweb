@@ -1,0 +1,1109 @@
+{
+  "results": [
+    {
+      "name": "Profile preferences fit the viewport",
+      "passed": true,
+      "theme": "1",
+      "mobile": true,
+      "width": 390,
+      "scheme": "light",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native value carriers stay outside visual and keyboard layout",
+      "passed": true,
+      "theme": "1",
+      "mobile": true,
+      "width": 390,
+      "scheme": "light",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 1 light uses the shared rounded frame",
+      "passed": true,
+      "width": 390,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 105,
+        "y": 600.40625,
+        "right": 266.25,
+        "bottom": 662.40625,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 1 light keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Profile menu theme 1 light fits the viewport",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Profile menu theme 1 light uses rounded touch-sized rows",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Profile menu theme 1 light uses the shared label typography",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Escape restores the profile selector focus",
+      "passed": true,
+      "theme": "1",
+      "mobile": true,
+      "width": 390,
+      "scheme": "light"
+    },
+    {
+      "name": "Profile preferences fit the viewport",
+      "passed": true,
+      "theme": "1",
+      "mobile": true,
+      "width": 390,
+      "scheme": "dark",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native value carriers stay outside visual and keyboard layout",
+      "passed": true,
+      "theme": "1",
+      "mobile": true,
+      "width": 390,
+      "scheme": "dark",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 1 dark uses the shared rounded frame",
+      "passed": true,
+      "width": 390,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 105,
+        "y": 600.40625,
+        "right": 266.25,
+        "bottom": 662.40625,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 1 dark keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Profile menu theme 1 dark fits the viewport",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Profile menu theme 1 dark uses rounded touch-sized rows",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Profile menu theme 1 dark uses the shared label typography",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Escape restores the profile selector focus",
+      "passed": true,
+      "theme": "1",
+      "mobile": true,
+      "width": 390,
+      "scheme": "dark"
+    },
+    {
+      "name": "Profile preferences fit the viewport",
+      "passed": true,
+      "theme": "1",
+      "mobile": true,
+      "width": 320,
+      "scheme": "light",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native value carriers stay outside visual and keyboard layout",
+      "passed": true,
+      "theme": "1",
+      "mobile": true,
+      "width": 320,
+      "scheme": "light",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 1 light uses the shared rounded frame",
+      "passed": true,
+      "width": 320,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 105,
+        "y": 638.09375,
+        "right": 266.25,
+        "bottom": 700.09375,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 1 light keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Profile menu theme 1 light fits the viewport",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Profile menu theme 1 light uses rounded touch-sized rows",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Profile menu theme 1 light uses the shared label typography",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Escape restores the profile selector focus",
+      "passed": true,
+      "theme": "1",
+      "mobile": true,
+      "width": 320,
+      "scheme": "light"
+    },
+    {
+      "name": "Profile preferences fit the viewport",
+      "passed": true,
+      "theme": "1",
+      "mobile": true,
+      "width": 320,
+      "scheme": "dark",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native value carriers stay outside visual and keyboard layout",
+      "passed": true,
+      "theme": "1",
+      "mobile": true,
+      "width": 320,
+      "scheme": "dark",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 1 dark uses the shared rounded frame",
+      "passed": true,
+      "width": 320,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 105,
+        "y": 638.09375,
+        "right": 266.25,
+        "bottom": 700.09375,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 1 dark keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Profile menu theme 1 dark fits the viewport",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Profile menu theme 1 dark uses rounded touch-sized rows",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Profile menu theme 1 dark uses the shared label typography",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Escape restores the profile selector focus",
+      "passed": true,
+      "theme": "1",
+      "mobile": true,
+      "width": 320,
+      "scheme": "dark"
+    },
+    {
+      "name": "Profile preferences fit the viewport",
+      "passed": true,
+      "theme": "4",
+      "mobile": true,
+      "width": 390,
+      "scheme": "light",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native value carriers stay outside visual and keyboard layout",
+      "passed": true,
+      "theme": "4",
+      "mobile": true,
+      "width": 390,
+      "scheme": "light",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 4 light uses the shared rounded frame",
+      "passed": true,
+      "width": 390,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 105,
+        "y": 599.40625,
+        "right": 266.25,
+        "bottom": 661.40625,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 4 light keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Profile menu theme 4 light fits the viewport",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Profile menu theme 4 light uses rounded touch-sized rows",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Profile menu theme 4 light uses the shared label typography",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Escape restores the profile selector focus",
+      "passed": true,
+      "theme": "4",
+      "mobile": true,
+      "width": 390,
+      "scheme": "light"
+    },
+    {
+      "name": "Profile preferences fit the viewport",
+      "passed": true,
+      "theme": "4",
+      "mobile": true,
+      "width": 390,
+      "scheme": "dark",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native value carriers stay outside visual and keyboard layout",
+      "passed": true,
+      "theme": "4",
+      "mobile": true,
+      "width": 390,
+      "scheme": "dark",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 4 dark uses the shared rounded frame",
+      "passed": true,
+      "width": 390,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 105,
+        "y": 599.40625,
+        "right": 266.25,
+        "bottom": 661.40625,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 4 dark keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Profile menu theme 4 dark fits the viewport",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Profile menu theme 4 dark uses rounded touch-sized rows",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Profile menu theme 4 dark uses the shared label typography",
+      "passed": true,
+      "width": 390
+    },
+    {
+      "name": "Escape restores the profile selector focus",
+      "passed": true,
+      "theme": "4",
+      "mobile": true,
+      "width": 390,
+      "scheme": "dark"
+    },
+    {
+      "name": "Profile preferences fit the viewport",
+      "passed": true,
+      "theme": "4",
+      "mobile": true,
+      "width": 320,
+      "scheme": "light",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native value carriers stay outside visual and keyboard layout",
+      "passed": true,
+      "theme": "4",
+      "mobile": true,
+      "width": 320,
+      "scheme": "light",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 4 light uses the shared rounded frame",
+      "passed": true,
+      "width": 320,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 105,
+        "y": 637.484375,
+        "right": 266.25,
+        "bottom": 699.484375,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 4 light keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Profile menu theme 4 light fits the viewport",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Profile menu theme 4 light uses rounded touch-sized rows",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Profile menu theme 4 light uses the shared label typography",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Escape restores the profile selector focus",
+      "passed": true,
+      "theme": "4",
+      "mobile": true,
+      "width": 320,
+      "scheme": "light"
+    },
+    {
+      "name": "Profile preferences fit the viewport",
+      "passed": true,
+      "theme": "4",
+      "mobile": true,
+      "width": 320,
+      "scheme": "dark",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native value carriers stay outside visual and keyboard layout",
+      "passed": true,
+      "theme": "4",
+      "mobile": true,
+      "width": 320,
+      "scheme": "dark",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 4 dark uses the shared rounded frame",
+      "passed": true,
+      "width": 320,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 105,
+        "y": 637.484375,
+        "right": 266.25,
+        "bottom": 699.484375,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 4 dark keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Profile menu theme 4 dark fits the viewport",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Profile menu theme 4 dark uses rounded touch-sized rows",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Profile menu theme 4 dark uses the shared label typography",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "name": "Escape restores the profile selector focus",
+      "passed": true,
+      "theme": "4",
+      "mobile": true,
+      "width": 320,
+      "scheme": "dark"
+    },
+    {
+      "name": "Profile preferences fit the viewport",
+      "passed": true,
+      "theme": "1",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "light",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native value carriers stay outside visual and keyboard layout",
+      "passed": true,
+      "theme": "1",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "light",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 1 light uses the shared rounded frame",
+      "passed": true,
+      "width": 1440,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 488,
+        "y": 671.328125,
+        "right": 649.25,
+        "bottom": 733.328125,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 1 light keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Profile menu theme 1 light fits the viewport",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Profile menu theme 1 light uses rounded touch-sized rows",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Profile menu theme 1 light uses the shared label typography",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Escape restores the profile selector focus",
+      "passed": true,
+      "theme": "1",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "light"
+    },
+    {
+      "name": "Profile preferences fit the viewport",
+      "passed": true,
+      "theme": "1",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "dark",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native value carriers stay outside visual and keyboard layout",
+      "passed": true,
+      "theme": "1",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "dark",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 1 dark uses the shared rounded frame",
+      "passed": true,
+      "width": 1440,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 488,
+        "y": 671.328125,
+        "right": 649.25,
+        "bottom": 733.328125,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 1 dark keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Profile menu theme 1 dark fits the viewport",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Profile menu theme 1 dark uses rounded touch-sized rows",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Profile menu theme 1 dark uses the shared label typography",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Escape restores the profile selector focus",
+      "passed": true,
+      "theme": "1",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "dark"
+    },
+    {
+      "name": "Profile preferences fit the viewport",
+      "passed": true,
+      "theme": "4",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "light",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native value carriers stay outside visual and keyboard layout",
+      "passed": true,
+      "theme": "4",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "light",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 4 light uses the shared rounded frame",
+      "passed": true,
+      "width": 1440,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 488,
+        "y": 671.703125,
+        "right": 649.25,
+        "bottom": 733.703125,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 4 light keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Profile menu theme 4 light fits the viewport",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Profile menu theme 4 light uses rounded touch-sized rows",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Profile menu theme 4 light uses the shared label typography",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Escape restores the profile selector focus",
+      "passed": true,
+      "theme": "4",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "light"
+    },
+    {
+      "name": "Profile preferences fit the viewport",
+      "passed": true,
+      "theme": "4",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "dark",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native value carriers stay outside visual and keyboard layout",
+      "passed": true,
+      "theme": "4",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "dark",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 4 dark uses the shared rounded frame",
+      "passed": true,
+      "width": 1440,
+      "appearance": {
+        "radius": "24px",
+        "padding": "8px",
+        "font": "15px",
+        "x": 488,
+        "y": 671.703125,
+        "right": 649.25,
+        "bottom": 733.703125,
+        "rows": [
+          {
+            "radius": "16px",
+            "font": "15px",
+            "weight": "600",
+            "height": 44
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profile menu theme 4 dark keeps long menus within the shared height limit",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Profile menu theme 4 dark fits the viewport",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Profile menu theme 4 dark uses rounded touch-sized rows",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Profile menu theme 4 dark uses the shared label typography",
+      "passed": true,
+      "width": 1440
+    },
+    {
+      "name": "Escape restores the profile selector focus",
+      "passed": true,
+      "theme": "4",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "dark"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,1457 @@
+{
+  "verified_at": "2026-10-26T18:28:12.328302+00:00",
+  "environment": "isolated development theme 4",
+  "visual_acceptance": "pending user review",
+  "reference_sha256": "6e7712a01ec01aa2f7e3ed9042a8bba516606750a7e7e8f40faa6e957b224390",
+  "followup_reference_sha256": "b4e05313eb9c63b69c5aa63548cf58d73be8a17b8e1a960888809f941f8b9ab0",
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "40429f52f4def8fbf114fe424a5ff59a59af6a5dfb7108244ed6a03dd09a9625",
+      "before_sha256": "3a0bd6edcf65e15183e2efbe6c12fc2c9ca81946d37465b338fc4f537e47ea1c",
+      "deleted": false
+    },
+    {
+      "path": "docs/development.md",
+      "sha256": "66c1df6670b18e27d0c7b5c26afb25a15f0827b98a30058d2eeaba7736c13f65",
+      "before_sha256": "24261552d0c910f90beaaa244a771883d73d7da50ac2acb9c1754c1481298806",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/common/common.scss",
+      "sha256": "c4fef037a9f67af4f2f005c5c2f5a1c79d9430c892528bf419fd13f0cb294583",
+      "before_sha256": "ca9a10982f524e2f893984b3c759058a7bece315650d668b16a6ff9e44c60267",
+      "deleted": false,
+      "concurrent_work": "Contains preserved notification hold-button work; compare both task records before restoring"
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/components/isbf-explore-picker.gjs",
+      "sha256": "f5e41602eb7234362077cb7bf42ccaaf363a5e43eec2954ee50fd8ac973d75b5",
+      "before_sha256": "841c20d087a69fc6d859ebe33703abc8b5f6381a28b225761df551129f0bde7c",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/components/isbf-feed-card-menu.gjs",
+      "sha256": "a0a6e85590a4d448a5315f27d889fa1ef894e26381e7f656e4f099c8ec950eac",
+      "before_sha256": "eb5a86635b2f6a0638cb55c5da6700c4124d2e75b268120be4ce796fdb26e852",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/components/isbf-learning-composer.gjs",
+      "sha256": "a616ed77facba599341f2cdd96e9b053f645fe8ce7a39bac6ba42cb49b6b56f3",
+      "before_sha256": "d0ee1e13de96164284965b11ef4e2db78dfe757dc42d50bd5f6b3792c06ad2b1",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/components/isbf-notifications.gjs",
+      "sha256": "f7e3434354e61802be113e7e592605f413ddc7b07ae669858d04312685e127ab",
+      "before_sha256": "520da473ae54740533e7f364399f39eeee3138c20e4a1b825b51b092e7b0ab73",
+      "deleted": false,
+      "concurrent_work": "Contains preserved notification hold-button work; compare both task records before restoring"
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/components/isbf-official-feed.gjs",
+      "sha256": "912a8f1b539068a8dcdee86406122568f0d812d7495de9908011f800d48a4abc",
+      "before_sha256": "0b59c9169fb295b6341a6f957c0d112e1047e12f99ffc4928a582d514cb85f31",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/components/isbf-official-picker.gjs",
+      "sha256": "8d7f06071709398ab15a4455a897752ba8423992f9bfd225d741699529c3173d",
+      "before_sha256": "26d43887e586fc1aa51de194fee67a59ea77daa3454cbb58098a32a589a9a592",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/components/isbf-topic-more.gjs",
+      "sha256": "dfd12ce8bf90463bfaf21d0901cfc67a856db43159ece0d34afa22e5cc26e510",
+      "before_sha256": "16d2040040cb438a2263430b9c17e96bef1df51675bd7c32a301130e0f34e95c",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/components/isbf-v2-account-menu.gjs",
+      "sha256": "fb158204a7f1b702e81f1d9f046af49949c86c3cb9b527ea1152932e865ea400",
+      "before_sha256": "58344c8af37e9faeb4e719dbee7a87132a86987212435ce7bdfa28c95e57aa92",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/connectors/topic-footer-main-buttons-before-create/isbf-topic-more.gjs",
+      "sha256": "83f3a38240a78634d7822b23f81d1e639157c9763fa87a9978b354b07fa59365",
+      "before_sha256": "73abe7df6567e8a4a1c160f4fa9433fca714499e9d8dc4688f4ef4e7ac4ff1ff",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/modifiers/official-picker-glide.js",
+      "sha256": null,
+      "before_sha256": "870ed92c8af2a39f5ccd1a9e5f9aa8d46b74a18e33b57f3119846a222819db19",
+      "deleted": true
+    },
+    {
+      "path": "external/active-theme/stylesheets/alumni-controls.scss",
+      "sha256": "d8942257ca23c8478df63c7f15a730f0f2b177022febbf21aedd4078898192e9",
+      "before_sha256": "5f4a39b679e17659158a02a811ced2de4d6380832a77e3e70d9753f0775b4321",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/stylesheets/dropdowns.scss",
+      "sha256": "73b77fed0ee0e7f1a0e8b62ca02f0cb76991aaf164a2c41b91872e0e318ef69b",
+      "before_sha256": null,
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/stylesheets/learning-resources.scss",
+      "sha256": "5a0033db77f8b9a7f828218816f5dee93ae2b0c8aa5b59c123681f0bb87a8858",
+      "before_sha256": "2b2629e09e69022ceb496451006f6aab9959e7314085e6a928529b20bc4c8e3c",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/stylesheets/official-calendar.scss",
+      "sha256": "f3972a77f084dae046b61defca5ff147840d4a8b4c72481e034de37c3d07bc1b",
+      "before_sha256": "664bf9e0354e846b74a5a8f97b42cdecff286a69d99964e5d2151c9a4a96aaad",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/stylesheets/official-filters.scss",
+      "sha256": "63cd3739b4780b26c0ec01b3abea090c4a0b9f242d77a3222889d725f7c3543e",
+      "before_sha256": "7e0635c846cdf861beaca7932e2cd4e5fe4cacb68062c81d20ffcdb6d626b759",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/stylesheets/official-picker-glide.scss",
+      "sha256": null,
+      "before_sha256": "3c590c80325ac6d935930732d0b235bfdad8c636121d3356646af4127aead270",
+      "deleted": true
+    },
+    {
+      "path": "external/active-theme/stylesheets/profile-content.scss",
+      "sha256": "f789b99fd96ca9c77d8006b07e743fcfc404dc5dafb2e5265a749b4a12df1cd8",
+      "before_sha256": "fda440845d0b03c77d3bf4b63f5a81b8b385172682d30e62137199cae170e57f",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/test/integration/alumni-controls-test.gjs",
+      "sha256": "b6e8dff71473e3d0b1d6a64b9ef256f94fd8b9555b769dcf940d5836981873c0",
+      "before_sha256": "8799fb3028e8ecb844c6bbb93b64e24aabf8f3ddf965910d5660b8865ac8e7a5",
+      "deleted": false
+    },
+    {
+      "path": "external/active-theme/test/integration/official-picker-glide-test.gjs",
+      "sha256": "ceb4f8b06121c2c22962171370bdf58d4dcdafa7e794946f6cfa6074601401b3",
+      "before_sha256": "0a6ead546c572912e37e18e89e4877e90bb8a0072a4031f259c8709e86a0c18d",
+      "deleted": false
+    },
+    {
+      "path": "external/isbf-alumni/AGENTS.md",
+      "sha256": "0d43b959d56d2b3411c9b2ea98218c4c2495bf2e45d3cc5cbab9ba10f2f42810",
+      "before_sha256": null,
+      "deleted": false
+    },
+    {
+      "path": "external/isbf-alumni/assets/javascripts/discourse/components/isbf-alumni-registration.gjs",
+      "sha256": "d24f0a36cdfd9a59fa016255e27ac316705053772abcddd9b50077aa408654e6",
+      "before_sha256": "75ab896c0ac994fbce2955e779febb584129df62c3f0322da9ea5988597b2e76",
+      "deleted": false
+    },
+    {
+      "path": "external/isbf-resume/assets/stylesheets/isbf-resume-sharing.scss",
+      "sha256": "2498736749d20a37fd86ed711f6b219d76b2963040f8128eb4d4a4c0e0125158",
+      "before_sha256": "ff947f6bc709b83ac736e086e99e5c3373cfa8647b844e7c7fac63241f505019",
+      "deleted": false
+    },
+    {
+      "path": "source/.github/workflows/linting.yml",
+      "sha256": "5809e35011d408c29db73e799e12a9cbfac89455b39064d35c1383f134491078",
+      "before_sha256": "254fd8c1bef6dee65ff36b29e1a94d18da9391ffc7e68b7838e0c4bc42d52fdc",
+      "deleted": false
+    },
+    {
+      "path": "source/AGENTS.md",
+      "sha256": "8f810cb0fba5afa5e9c90900dafafc4396b5ea4d429937ae5bcd4b2bed082f21",
+      "before_sha256": "a6c8d3660a49d85f7f4e202b14dded75d87eae73270139b4605cfb1f189222e3",
+      "deleted": false,
+      "canonical_path": "source/AI-AGENTS.md"
+    },
+    {
+      "path": "source/app/assets/stylesheets/common/components/_index.scss",
+      "sha256": "59a1aca21105ce1d1c3b66ca0cfa27fbcebedc3ecf86c5bb33b1ec028ee3b032",
+      "before_sha256": "24bda14484f218ac3b9a448e4956937086e84659522897a5ac4ecd4956b34384",
+      "deleted": false,
+      "concurrent_work": "Contains preserved notification hold-button work; compare both task records before restoring"
+    },
+    {
+      "path": "source/app/assets/stylesheets/common/components/d-menu-surface.scss",
+      "sha256": "c9119464509269e876e6b74d2c6529850e8efc56149d4928b830399088b80c16",
+      "before_sha256": null,
+      "deleted": false
+    },
+    {
+      "path": "source/docs/design-system/components.md",
+      "sha256": "575642530d33f49b504a5d0ab06d1618976a1cc6a0e7b0366e8c7ad2c0753509",
+      "before_sha256": "004d21ec68ddd420848e066a2305cb4ba1e16aba5120ddaae1c51bf2c3fa91f2",
+      "deleted": false,
+      "concurrent_work": "Contains preserved notification hold-button work; compare both task records before restoring"
+    },
+    {
+      "path": "source/docs/design-system/dropdowns.md",
+      "sha256": "300b2da261d87b3fae3fc705befdd9f9dbf5e4ca673fffbe85ef0408c94f4b6f",
+      "before_sha256": null,
+      "deleted": false
+    },
+    {
+      "path": "source/docs/design-system/reference-map.md",
+      "sha256": "58e808bd94a9b44a58f55d425c794cb37af717c75369e6627f90c36cfc8e159b",
+      "before_sha256": "6b3049b876273bd8291e1d1de27306224377b9ef4c08befe855c02531653d155",
+      "deleted": false,
+      "concurrent_work": "Contains preserved notification hold-button work; compare both task records before restoring"
+    },
+    {
+      "path": "source/docs/design-system/references/README.md",
+      "sha256": "56b73e1b5e4b4d6506f1c914d6d651e2e4ea0cfe67fa4d7df11678febffb433b",
+      "before_sha256": "f3293f1a10f131b0f62eefe3685ba273353f23306913ea82380962da6cfb3ada",
+      "deleted": false,
+      "concurrent_work": "Contains preserved notification hold-button work; compare both task records before restoring"
+    },
+    {
+      "path": "source/docs/design-system/tokens.md",
+      "sha256": "ef248e2f6e55ef57e342af7daa7f40728e9781acbc940cd421bfd1c04e6af0f9",
+      "before_sha256": "ae5c004faba26aa0f2f95189625aee689ca326043f71526b3def8b137164d3ab",
+      "deleted": false,
+      "concurrent_work": "Contains preserved notification hold-button work; compare both task records before restoring"
+    },
+    {
+      "path": "source/docs/design-system/ui-status.md",
+      "sha256": "ab13bb60108664979ec2f5a7abe5ef08dd2216382135363f1874b5096fb900f9",
+      "before_sha256": "a854d556225256c85cfce3741085a0cd7ccfe72af380e4cd9f651bd32fd264c5",
+      "deleted": false,
+      "concurrent_work": "Contains preserved notification hold-button work; compare both task records before restoring"
+    },
+    {
+      "path": "source/docs/developer-guides/docs/03-code-internals/02-ui-kit.md",
+      "sha256": "5b55a4c965945630b252de5c091511b630f805f3bc5c49319d6faad285f4d297",
+      "before_sha256": "1df5f035728b828a1ef03d366fb70d69ed56092923bc554cb24bb1a0ddbf61c2",
+      "deleted": false,
+      "concurrent_work": "Contains preserved notification hold-button work; compare both task records before restoring"
+    },
+    {
+      "path": "source/eslint.config.mjs",
+      "sha256": "7bbf476ff70931d5149c27a56a1c15170979588293226d258c0878e1ea162c99",
+      "before_sha256": "f9e912734bfa735fdde82ee6e9aad36e862523175086681c81bfc471452efc62",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/admin/components/admin-report-table-summary.gjs",
+      "sha256": "63ff0bbf67d2f81475da52704251dda0409fc052f57d3f34672fbb035a62d6f4",
+      "before_sha256": "710a9b748e8503734464e5f9a6ef381417cb69033e428c5143aaf8f6c9636d39",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/admin/components/color-palette-list-item.gjs",
+      "sha256": "03f52de4ac021c0550a15dc8a4f255dfee8e4b1830417ea35f25879904662f14",
+      "before_sha256": "a481c161e7547f646875252d95a94143559e9b1db27107bb3b38b9330ca5cad8",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/admin/components/dashboard/date-range.gjs",
+      "sha256": "9053c7d085e7cd845df82d0493aa22f44ee25190d9838c56fec36889a21bd865",
+      "before_sha256": "ffa6bfbec52a27d206947248275d006f2056e41d938c45a6e6486eb95e20472e",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/admin/components/ip-lookup.gjs",
+      "sha256": "1b5959ba826a849e2433e2f9f76561f920f162a6625a4765b41342ab5609114e",
+      "before_sha256": "8e890bd693f7453080fc4a4d53d8baf8463b26256d43a1fd5c15e23547074082",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/admin/components/redesigned-admin-dashboard.gjs",
+      "sha256": "8d0b41c40f2ca786a8aa0721623463dace7b7c757bbc8d1a54f4db40d0d503ab",
+      "before_sha256": "a3f09162876f42b01ded3f8cf135ce01def77ace804cb35fe05a1c615555f1f1",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/admin/components/themes-grid-card.gjs",
+      "sha256": "403a29789fd17d3f39831fcec68f41ed150fb5280aad20f6e7be5f96c155f27c",
+      "before_sha256": "506a249b38e2c1af8434e5feab2c926574c703d2fbdca8dac932d1ff030b6086",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/bulk-select-topics-dropdown.gjs",
+      "sha256": "6bd6cb88af4bc85c13ef34b4a223919f4932af387319e6c9c377564c5345758e",
+      "before_sha256": "9f3a94ee7f6ccd01f62f1d2fea34bcb8380368174767333161f2855902ea34d0",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/composer-actions.gjs",
+      "sha256": "d1fe8333c4ac4cf3669150e27019aff57b3b7de65f9055c6266dab1b3271b12b",
+      "before_sha256": "06ec2ceb4f9aa381cb3cd7ab0ff0e6cdcb23aae0266e324ab657f1e1f67a6fbe",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/design-wizard/fonts-section.gjs",
+      "sha256": "5b3fd286298f178563de1e517ebed845affd7a42b32f0e66d72ed697c9b55761",
+      "before_sha256": "7033ecf24ae5d79f92f2274daf3d1f1c779cb789fa0688a9355bc1fff4f16faf",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/form-template-field/dropdown.gjs",
+      "sha256": "f44a7f70c1bf620f95d425ead92660b5ddaaaf5784da205388cc73c317fee12b",
+      "before_sha256": "ffe89375652b5f7c0018d358734e765a69e061d88e9ea028ff3f0080268f6a28",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/form-template-field/multi-select.gjs",
+      "sha256": "22b296414064bfba3b2379221c720d97b8253d83939db87e077119b8cca39713",
+      "before_sha256": "6561b5344006b18b42ce3654075b49c7b0fd3b982cd253fe54eb3333080c6614",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/form-template-field/tag-chooser.gjs",
+      "sha256": "6592d075ed0e5dd98920a2425db51344cce7354dac013c52755ebe45b485f7ad",
+      "before_sha256": "c50554d4907ab28697a3ab40ba0c4a2531d307bf4ba8cb4158dd9ebfd601a4ae",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/interface-color-selector.gjs",
+      "sha256": "94130242b46e0699f04f74649ff3e15043fb85ebf9eecf8601f149b301f7fe06",
+      "before_sha256": "1ee6b4c0b2e2848cac582381424be63b04657943d78a21b17250a994ccf33e30",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/navigation-bar.gjs",
+      "sha256": "f569f4b12567ec00e194853aa794355c477c6d03f32d602979ca444bcf1bcfe6",
+      "before_sha256": "028e7f2f4de4228a10912d1cea6eb4a19b3e06fc748a1cb1f788ed562465ce45",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/nested/deleted-posts.gjs",
+      "sha256": "b6ceb0ec4fbf499deac89358ee2e69c455ec36009e5160b483c841c8d33ce196",
+      "before_sha256": "bd68c8858f0b0757e40a07ae0d88c44bf3f767ca237d2e39a45503616100bd1a",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/notifications-tracking.gjs",
+      "sha256": "a3398383dce863442a72042c03a70bfb4b7fcc57e64bf21079d61244acfe4fc2",
+      "before_sha256": "a3468561be3a0a86d9435dc31d9419ef088c922ece3428564617afeb318353a7",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/pinned-options.gjs",
+      "sha256": "b77c3c7705a071a5311be7dc9ac83aaac11c1d96b6acfe839e4ac7917308eb9d",
+      "before_sha256": "6d1e08769fed23006676e685146ab0100780569656dd29731c1297ffbbf34ab4",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/post-list/bulk-controls.gjs",
+      "sha256": "45927cb590fe2e36c0e4ebdc2fa1864119bd078ed9ce712bf290bef77bd9a67e",
+      "before_sha256": "8ac55d0da1224985559c2d848f834a8796589a607ac25b6b1c3735b65f449544",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/sidebar/more-section-links.gjs",
+      "sha256": "5254dd5ffe5c8623fc95e2bff4d2b51a19e24bac77daeb314dc9760591076a3d",
+      "before_sha256": "5972a22d50562c77cf2b2ece4939d9a81727627c2840ad6524b3357e908e8095",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/toolbar-popup-menu-options.gjs",
+      "sha256": "e6908d5d9624db708c1e4375b46edd8de4a75e21320bfeed421109c229cce403",
+      "before_sha256": "6169459268394cf3be1937055880781bf514ce7ae6b278e79ee02b62a407d7e5",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/topic-admin-menu.gjs",
+      "sha256": "dc98134797e4bff3adb7d3fff13572dfd56a002f63ab52f193cdd88b37612bf5",
+      "before_sha256": "2a4222edc1eb16cd2e9b35db2491c1778729c7ce3003a177c3a15ff7877f8c21",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/topic-bookmarks-menu.gjs",
+      "sha256": "39546815d156fbf3e81e6360f5b69fd3408b62c9bd89d6fc7b24037af787f07c",
+      "before_sha256": "8dde8feb0b3e7adeea6919e2c3f1f250f80768066fa5bddc38c4a007d6d4c3e9",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/topic-footer-buttons.gjs",
+      "sha256": "1cda98e6f4b37cff87c6226f9eb5e72aaa61db90f2769f3c0637a0da984f9cc6",
+      "before_sha256": "d3ccacfdb85f047797c47fbf61890bf9ee8b11f0ff983086f3859d2c4e307b41",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/components/topic-map/topic-map-summary.gjs",
+      "sha256": "11b38f0a9e41e10685cf2ddd93533b8cb812a76f4a2ac1a7b8adf6c47c2d15be",
+      "before_sha256": "18c9c6785af50e57bfaf7a024b94210fcc686ed0ca789b456175d5c0d950cddb",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/form-kit/components/fk/control/color.gjs",
+      "sha256": "45e81168c493753c3c7be6555c84e1cbebe87f1d11d8edcdd42c591b72941fd3",
+      "before_sha256": "31d26a97261696845c59068aae35b10100db1050da986fabba9fb09fec3be3aa",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/form-kit/components/fk/control/menu.gjs",
+      "sha256": "e83250866ab10ae7250c30811f26a5e8564452e27b25e1cc1f8d446c15c0a217",
+      "before_sha256": "c2a1b57808dc43066c76c734f8d6000fe2e6771ebc3579f1b823ebdac2aab7a8",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/form-kit/components/fk/control/select.gjs",
+      "sha256": "e5d1dd0f67370b8a9a0f239d7afc0cf277f28d5bc5ae0be0b66f607b6351ab35",
+      "before_sha256": "cecc9ebe7cd4bc6f0fa0924bc19904747801a7b1de7b57bd771722f57bbf472b",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/lib/load-motion.js",
+      "sha256": "51903c1b619234eb129c0885af094d823ed8a7e4df0372a5df24e890a0899d46",
+      "before_sha256": "cb23713428455f90bd9e0207a637ba4be92552601ed8d3dd4309d9606f0e7346",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/ui-kit/-internals/floating-family.ts",
+      "sha256": "ca05a9f20a0fdb570ac3ef67a1178ddfa60ea85897ec21d71d2098fabe751e32",
+      "before_sha256": null,
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/ui-kit/-internals/menu-highlight.ts",
+      "sha256": "53ae9152deb3a678380224cc40e088dbd50eae7cff96cd52ae6c65f156da5f39",
+      "before_sha256": null,
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/ui-kit/d-access-control-permission-menu.gjs",
+      "sha256": "d327efa682a45c7abafcc5a6085dd93ca04c3cdad49efdcb0080decdd66349a2",
+      "before_sha256": "a541395401c6f31107c5f3cb1a4b43b2ef8e7e4303540c86c474c2e4998365c1",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/ui-kit/d-dropdown-menu.gjs",
+      "sha256": "13b2cff6a23fe872cc3b3583043a6963c5a30081943627149ec236d6b5119281",
+      "before_sha256": "0001bedf6a553f8dc0f66ad8eaec845603a99ed5d5245b4cf537046532b3f719",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/ui-kit/d-multi-select.gjs",
+      "sha256": "cdcbed5c7bf370211fabaac8d5b739cd791d894cf2e4e3a95487ffbf9fa19033",
+      "before_sha256": "9f86736ee355cc83859a8b55d1027eaa792d35df81322b4236bb935e8457604c",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/ui-kit/d-native-select.gjs",
+      "sha256": "c94d788258310cac98e90b8ad716f3142b99b4c3358a3b9aec72b9068178ac4d",
+      "before_sha256": "d8c904998205d934c3899536fae7d7e55d88cd33ac1e8a223c5d7caad2ab1398",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/ui-kit/d-otp/index.gjs",
+      "sha256": "3bb129ab22e4d98aa77edd8abcf06141155d90a7e117d2f16de7a5802f6f0b89",
+      "before_sha256": "77eb6c4b440a6c9371cac95f452f297ef2139141a8db1806ff63dceee51307cd",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/ui-kit/d-select.gts",
+      "sha256": "e935e8a831e9c50466445e87a94d08ef229748c4aff466fa348b9593840b81db",
+      "before_sha256": null,
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/ui-kit/d-select/native.gjs",
+      "sha256": "ab0137493944965c8e37717439f75925b5cd543cad5ea3ba15e6c4b134cb65de",
+      "before_sha256": null,
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/ui-kit/modifiers/d-close-on-click-outside.js",
+      "sha256": "a9f669147ec044302c58ca6a42b83c3680bfd608574b4bdfd1170e5b81917531",
+      "before_sha256": "cf463f2c1baceccfbaa412df78de3d869bededef7b8f1eacaeae2ebaf77865d9",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/ui-kit/modifiers/d-menu-highlight.ts",
+      "sha256": "02df4697de8b100abf7d052d0b6eb2f5bce2a2fd90f15d7706a683252bd65636",
+      "before_sha256": null,
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/app/ui-kit/modifiers/d-roving-focus/keyboard.ts",
+      "sha256": "b05bebd72e425a02cf0a43ff730a5d8a93671575ba0e26fd0b8278c4e702e10f",
+      "before_sha256": "50d975df1e10cff3f2d570f1542604dbe6eeb685af0a6508e7758c41d1502926",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/float-kit/components/d-float-body.gts",
+      "sha256": "a26af4fd277c6cff0d5d46480922cc1527dca24522ffa354402a537357708238",
+      "before_sha256": "3e6933f04a0714f063e0e045643dbcd887474c9f45743902f491559ddd31ecd4",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/float-kit/components/d-headless-menu.gts",
+      "sha256": "8323567de651af920ceda1c03b64ab883bbd26a61383837207ca1c5785682c9c",
+      "before_sha256": "1f3b1fbacef4f06f32c24b80bb02f9e6b2fa9c84f0e7b35b8a5ab0488dbe795e",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/float-kit/components/d-inline-float.gts",
+      "sha256": "177edeb1cdbfecd1cf2b4db357b0e5ea208292908a0f448ed65652493179de68",
+      "before_sha256": "d98c23c689d121769a8f7236a7c06d0c27f896f62563b7d894d2b45395e73682",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/float-kit/components/d-menu.gts",
+      "sha256": "4ef77c08329dd5377e2bf87ac732fb4503cfabf3d4f4c19a1ad93448e3fec63d",
+      "before_sha256": "14a7f65dcfc41adb39ecd511d987cc00e50ef2470d6350b7760283ca2ece1386",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/float-kit/lib/constants.ts",
+      "sha256": "a31b2d75b09e36ca4db71595bb920a128449caab450a525d49ac61d59164472a",
+      "before_sha256": "96dfccb93e399bfff1cd4d38b551cd635374c4611260f70341a89fa6b2702c18",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/float-kit/lib/d-menu-instance.ts",
+      "sha256": "a550ee333789228c68a28a7559bd7954603f445be7bc0678cff0583e6c927208",
+      "before_sha256": "50078b61f82b377f04abddc00e46ad31d1723c3edca9aa1ca3e4fc98c52be41b",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/float-kit/lib/float-kit-instance.ts",
+      "sha256": "abb92196ab38ae6ba425db0609b8c96dbc9c9c365af01ee94ac4dabf993b315a",
+      "before_sha256": "04fd230dce45f5fbd7b84f8e066ff0e42d0c960e91961ae315f4fd47cf7c3942",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/float-kit/lib/update-position.ts",
+      "sha256": "a536011bfe923faaf83d5430bf5d662e7103aa1d4445f1f7d9994daacedfca9e",
+      "before_sha256": "6989f35902ceca26d6a013043c87090baa4e277e76778ecf766457b368c4ba0a",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/float-kit/modifiers/close-on-escape.ts",
+      "sha256": "32ec12d81e9163e2cc0c2d4277effefa0893f72d1b3b686b988407033af496df",
+      "before_sha256": "170530ef9245c823abd3f8319026ab780d62f939c8c2ead7e6a574a7037049c4",
+      "deleted": false,
+      "baseline_provenance": {
+        "sha256": "170530ef9245c823abd3f8319026ab780d62f939c8c2ead7e6a574a7037049c4",
+        "content_source_commit": "639077b4c1ddce597a7ecd26a6e7effdebbeed46",
+        "verification": "Runtime was compared byte-for-byte before this review fix; recovered content also matches the captured production inventory SHA256."
+      }
+    },
+    {
+      "path": "source/frontend/discourse/float-kit/services/menu.ts",
+      "sha256": "4f8fb81cfdbf7821eadcc7af406985bfca1550d4628f35aea0aaa07675375bc1",
+      "before_sha256": "953f563f951c909478717445792f741b0d5756f36fa4bc7bd176f755430fc8a6",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/select-kit/components/select-kit.js",
+      "sha256": "e67ac69efc49dda690b5fa1186418a08fb000cde01f80b938780150134977983",
+      "before_sha256": "1039dc7e2ce31ccf7b64433b7ad1315d6d8192cca1b5ff629504905ee562ab2c",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/select-kit/components/select-kit/select-kit-body.gjs",
+      "sha256": "6fd1c769097b5329db1d5a0265e8ede72c086fb3d3fc499621454801d23f4c0c",
+      "before_sha256": "6ac2db5be3a6897647e6803f9e4e00583a4404f343b7a9b586e6b85718d53509",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/tests/helpers/form-kit-assertions.js",
+      "sha256": "3a1bd42a38386f4388a289bce72b9af5b98a85f564d1df3c76d8bd581da19c2a",
+      "before_sha256": "90a3f932a8696c5fbc5c52ea8386598941bf520810f6443c606f6bdc6e57bd1a",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/tests/integration/components/float-kit/d-menu-test.gjs",
+      "sha256": "d25bbcc34e2a21b44257c0252fa13bc010be1974400f7b983f98f8822c0b626f",
+      "before_sha256": "999411742842b7b08b16eef16f515aad39ae7adc2008b4c02a584a4c66878f9d",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/tests/integration/components/float-kit/pointer-anchored-menu-test.gjs",
+      "sha256": "6b1a123203ec1537bf1f0d7b9e15649f5543fb703b1fc7fdd532ff057ab5dcf0",
+      "before_sha256": "361222132337697dbe876c2d41e0cf57ecff33dbcd38f017d83c6ec7e9f59e2a",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/tests/integration/ui-kit/d-dropdown-menu-test.gjs",
+      "sha256": "168ccb0a1fd205ba6a8a2217e66925c0b61a52307bb4108abeb9b9217db77a55",
+      "before_sha256": "51c83208eea8f4f22695a3ff4d2b56bb600652a5ee7b6d4aa2a9687874ea3c7e",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/tests/integration/ui-kit/d-native-select-test.gjs",
+      "sha256": "c852b0db03af9d7dfa33108a162e082066ce8048fcc1f8f290819187c07b5984",
+      "before_sha256": "d2d404b771b9cf91cd53327a20e56da7b8a307ed12b0c39069db0da56f50e441",
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/tests/integration/ui-kit/d-select-test.gjs",
+      "sha256": "751701a2243c2fdd8b64614742648ced004fa4106da119d7680d361560ce5663",
+      "before_sha256": null,
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/type-tests/ui-kit/d-select-test.gts",
+      "sha256": "bcbe54fe1d39300396db374f35b70c41e7982845b3d4c9163e0779fbd29c2e49",
+      "before_sha256": null,
+      "deleted": false
+    },
+    {
+      "path": "source/lefthook.yml",
+      "sha256": "d22b0af0afcface585d5151bd33b6b47d6f4dbb64f250b28af1ae59242122549",
+      "before_sha256": "3b203fb65443e5b97f064216eee059e80a310e4502b1bd673bf6c6a3a18db395",
+      "deleted": false
+    },
+    {
+      "path": "source/package.json",
+      "sha256": "22e98c33501959591b53c3af7d0e6b802651d99dfcae2a086eb2cf169065339b",
+      "before_sha256": "3790b5a61f8ed266cdf4f6d7e6a5b1fbc0751cbe90d213ff8f8a5ed095f01249",
+      "deleted": false
+    },
+    {
+      "path": "source/plugins/chat/assets/javascripts/discourse/components/chat-channel-list-sidebar-menu.gjs",
+      "sha256": "0eb3b30a40659a526ebc21b7b642456d75a6e4c2440d30b6e4ce2b4d71d4c881",
+      "before_sha256": "e9f1106dad322d2d33d6190152a2784decf1c4cbf1d8cd531e52f001628ceb05",
+      "deleted": false
+    },
+    {
+      "path": "source/plugins/chat/assets/javascripts/discourse/components/chat-composer-dropdown.gjs",
+      "sha256": "266fc46cc32c941bacaa785234a991df4c5dd4d8a5708ae694fae40107999ec3",
+      "before_sha256": "a9083a629adff878d1f354bdcc27a2d20e55c2d6ddc4fa4c51d9fe15dafa0626",
+      "deleted": false
+    },
+    {
+      "path": "source/plugins/discourse-ai/admin/assets/javascripts/discourse/components/ai-agent-list-editor.gjs",
+      "sha256": "93c0b8d4b7c6e8a6159bd972bd76d1754047056495b00e5b455893237865543d",
+      "before_sha256": "655ffd580267b9b0c599c9f099a6aa6837d84d218b4aa27102bf51c609bbeee6",
+      "deleted": false
+    },
+    {
+      "path": "source/plugins/discourse-ai/assets/javascripts/discourse/components/ai-gist-toggle.gjs",
+      "sha256": "27c6ba83e17bbb01a7f83f0ebde4004e1a769bc7cc3f6caf94d1eb305e29700a",
+      "before_sha256": "2ea965ef8a6131cc2f1a478de397dae9ed270eb1382c09ba9096032ac899ab03",
+      "deleted": false
+    },
+    {
+      "path": "source/plugins/discourse-ai/assets/javascripts/discourse/components/suggestion-menus/ai-title-suggester.gjs",
+      "sha256": "d953dd40ce8a935b40971e339a95f257d5c93477185ebc17fa5899d2d0f54272",
+      "before_sha256": "bfcae19c915597286b78b43f7d9eccba5acf3ff1393ddc8ed93332ca55cec870",
+      "deleted": false
+    },
+    {
+      "path": "source/plugins/discourse-events/assets/javascripts/discourse/components/discourse-post-event/creator.gjs",
+      "sha256": "58d2067a9f500a52e6c4b479ea41abae12734da52da28834be8b11a91d0794a2",
+      "before_sha256": "8e1cff2bffd90d4c4aa609df41ccf2580a88e2c4c91f1a3e1a43fe7d867a2e9a",
+      "deleted": false
+    },
+    {
+      "path": "source/plugins/discourse-events/assets/javascripts/discourse/components/discourse-post-event/status.gjs",
+      "sha256": "2dc02788628e2c1a6243dd1841611a6d99d717de37c9422376662d908e4bdffa",
+      "before_sha256": "edc7f6fce1ec7e0fe1d6c3488ffb06c87664443fa54224d6516e9dafc6f6fee6",
+      "deleted": false
+    },
+    {
+      "path": "source/plugins/discourse-topic-voting/assets/javascripts/discourse/components/vote-count.gjs",
+      "sha256": "76fdc4e6883d39821bb0e22143144a5d1173165d8cf554716d86daa6733455bd",
+      "before_sha256": "e3960a1e2185e9661f839508940c37da213b2b74809f8472219df22e6fce05c0",
+      "deleted": false
+    },
+    {
+      "path": "source/plugins/styleguide/assets/javascripts/discourse/components/toggle-color-mode.gjs",
+      "sha256": "dec92e53a9e36193f640dfd48e839573997126ff5f22984c12c55d0d718cf657",
+      "before_sha256": "dd4f6d7da348b38ab25e5d60771bb9355fe3c04d9e77705fb76814f3bdecab85",
+      "deleted": false
+    },
+    {
+      "path": "source/plugins/voice/assets/javascripts/discourse/components/voice/call-widget.gjs",
+      "sha256": "f9f0c73c20b87bee138d1c6e012f76b8fa788661ada8ccfa5ba17d20cc21d526",
+      "before_sha256": "7d264e47260271158a33f374814e02ef612d3826941142e7a103fa68676cd493",
+      "deleted": false
+    },
+    {
+      "path": "source/plugins/voice/assets/javascripts/discourse/components/voice/room-page.gjs",
+      "sha256": "7365a3fa25d5d87134f399f0dfac38a42aa6d93f066d662fe28327df34ae1715",
+      "before_sha256": "cba6dbb6ce5e45e626f0a89e1d0e6028bc45f216e576882c941cbfee15fcd8c5",
+      "deleted": false
+    },
+    {
+      "path": "source/script/check-menus-test.mjs",
+      "sha256": "74bae4b77e920a0640273ed1a54ab26582eb643e8b6eb4dd403a0be03e6b2773",
+      "before_sha256": null,
+      "deleted": false
+    },
+    {
+      "path": "source/script/check-menus.mjs",
+      "sha256": "21b8ad5cddc48d0113de88f7d80c01ed5cd390c693bbfaaa4708ed287be8a7ce",
+      "before_sha256": null,
+      "deleted": false
+    },
+    {
+      "path": "source/script/eslint-menu-imports.mjs",
+      "sha256": "ffe5882180982dd7596989b8245360eb9dff66f8e54d5f5e4991c9fa5c82d11c",
+      "before_sha256": null,
+      "deleted": false
+    },
+    {
+      "path": "source/frontend/discourse/tests/helpers/d-select.js",
+      "sha256": "58cff6b8fee57801d8aaf46812d35368e2a090e87b638fed0265a36009c6383c",
+      "before_sha256": null,
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/helpers/d-native-select-assertions.js",
+      "sha256": "f7755597f66729fc7fe6709c94ca42c53a85e6277aed6cf7a05e464188f7eaf5",
+      "before_sha256": "5dd3a67f97b2f0f658e719301f0764cc843073c3de227cb4e872f3fc0d4e5c1c",
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/acceptance/admin-customize-components-config-area-test.gjs",
+      "sha256": "a9af8aeaed0631755d6f6dd77a1182c7f8572b25877a7e69e2ddefdd8c78c2d6",
+      "before_sha256": "a22183daab126513e0f256fd2192f5f701bdc7c02ebe440cae7e71d777d48f7b",
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/acceptance/admin-emoji-test.gjs",
+      "sha256": "2d80b75eb1ffce7e61841e288befbe6c334934fa9433846131c958dd3510f2bf",
+      "before_sha256": "616968a503a61578ed4bb5d9d1adab0d52a9fd02aa0a65c68916c9fca5d48e5b",
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/acceptance/admin-mcp-test.js",
+      "sha256": "ba501be2b24f06841af6732e2e5ae7b9ba6ae35774886246ff9cb6a465834639",
+      "before_sha256": "5d8baf543ab60e3ae8e492d799f430e2b4d0486b5b433906d7d4d7bcb0ce770e",
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/acceptance/reports-test.js",
+      "sha256": "5d56676a13e2b4824bfe84ac0bbda8396644ac54479ba4eb39a82e62c96241da",
+      "before_sha256": "00419d20742cdd4424a2aca7ff82185bc1a12744631274b8f7847cff4c570459",
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/acceptance/topic-edit-timer-test.js",
+      "sha256": "d0ce88063c25e408aa33c2c0afb5c7614384296857cdf7f5f9803c1caee98025",
+      "before_sha256": "9bbe7502c20aea4199c0a285bde9f89e7d945e10c88b23b140b01cb763159a81",
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/integration/ui-kit/d-filter-controls-test.gjs",
+      "sha256": "fed225d775c9834cd7f5c243a239bd984864f6efb49f23f1164aae0289400a67",
+      "before_sha256": "d5fdaecf25c05285545d415d43a1808f391b6f94b3c6bab0994aecd7b03d3dd9",
+      "deleted": false,
+      "test_only": true
+    },
+    {
+      "path": "source/frontend/discourse/tests/integration/components/admin-config-areas/upcoming-change-item-test.gjs",
+      "before_sha256": "695e6ad23aad9696e7f4c0ec44d5c97480289b58893fcb23477c8ef7d57c3ec0",
+      "sha256": "168fbc2e1ca29b91d36659cd2cb51b58135111edbdb87e80442f36bcdbf3627e",
+      "deleted": false,
+      "test_only": true
+    }
+  ],
+  "preservation": {
+    "before_fields": 290,
+    "after_fields": 291,
+    "changed_fields": 19,
+    "added_fields": 3,
+    "removed_pilot_fields": 2,
+    "preserved_fields": 269,
+    "preserved_settings": 7,
+    "migration_manifests_unchanged": true,
+    "concurrent_work_preserved": "Notification hold button, associated stylesheet and locales",
+    "changed_paths": [
+      "common/common.scss",
+      "javascripts/discourse/components/isbf-explore-picker.gjs",
+      "javascripts/discourse/components/isbf-feed-card-menu.gjs",
+      "javascripts/discourse/components/isbf-learning-composer.gjs",
+      "javascripts/discourse/components/isbf-notifications.gjs",
+      "javascripts/discourse/components/isbf-official-feed.gjs",
+      "javascripts/discourse/components/isbf-official-picker.gjs",
+      "javascripts/discourse/components/isbf-topic-more.gjs",
+      "javascripts/discourse/components/isbf-v2-account-menu.gjs",
+      "javascripts/discourse/connectors/topic-footer-main-buttons-before-create/isbf-topic-more.gjs",
+      "locales/en.yml",
+      "locales/zh_CN.yml",
+      "stylesheets/alumni-controls.scss",
+      "stylesheets/learning-resources.scss",
+      "stylesheets/official-calendar.scss",
+      "stylesheets/official-filters.scss",
+      "stylesheets/profile-content.scss",
+      "test/integration/alumni-controls-test.gjs",
+      "test/integration/official-picker-glide-test.gjs"
+    ],
+    "added_paths": [
+      "stylesheets/dropdowns.scss",
+      "stylesheets/notifications-hold.scss",
+      "test/integration/notifications-hold-test.gjs"
+    ]
+  },
+  "verification": {
+    "core_tests": 106,
+    "core_assertions": 256,
+    "theme_tests": 20,
+    "theme_assertions": 94,
+    "browser_checks": 151,
+    "menu_policy_scanned_files": 5927,
+    "lint": "passed",
+    "types": "passed"
+  },
+  "patch_scope": "Non-overlapping dropdown increments only; concurrent files are recorded by hash and require comparison before restoration; apply native-followup.patch after changes.patch for the native regression correction",
+  "pull_request": {
+    "base_commit": "099c6eaa0ab136461d8e822e185e9503a1da4391",
+    "source_mapping": "Scoped dropdown delta applied to main, preserving the merged notification hold action. Runtime source hashes and theme preservation remain separate.",
+    "files": [
+      {
+        "path": ".github/workflows/isbf-frontend-consistency.yml",
+        "sha256": "cb94c9a1dfd34c7c2c3230d253d774c1d67e057b731000ab07135b72fd1b25a0",
+        "before_sha256": "313a77ee90d01af38d21bb292f5f82b3776fc09c4b5fba3c5e3951e58741f801"
+      },
+      {
+        "path": ".github/workflows/isbf-resume.yml",
+        "sha256": "cb41098a55916a730ae74f958f4cd1b7dc46934e88d76932e1c3c9b28c44825a",
+        "before_sha256": "5215392cde2c0d6956fc0ed6b10d635c68a431aba4f5a015be17fa162b9d8968"
+      },
+      {
+        "path": ".github/workflows/linting.yml",
+        "sha256": "5809e35011d408c29db73e799e12a9cbfac89455b39064d35c1383f134491078",
+        "before_sha256": "254fd8c1bef6dee65ff36b29e1a94d18da9391ffc7e68b7838e0c4bc42d52fdc"
+      },
+      {
+        "path": "AI-AGENTS.md",
+        "sha256": "46986808be72150827225863bc31c65ab5e3dc688e377c2710a68968a5d79248",
+        "before_sha256": "67cf3f4958056c4e7d5a3b6414c05543603c87a6078d9b1bc6275deb57767a5c"
+      },
+      {
+        "path": "app/assets/stylesheets/common/components/_index.scss",
+        "sha256": "59a1aca21105ce1d1c3b66ca0cfa27fbcebedc3ecf86c5bb33b1ec028ee3b032",
+        "before_sha256": "21476f8f587ff8c9d91bf1a0cbceffc1305ce659c89c8f1b4b0801ab5131f367"
+      },
+      {
+        "path": "app/assets/stylesheets/common/components/d-menu-surface.scss",
+        "sha256": "c9119464509269e876e6b74d2c6529850e8efc56149d4928b830399088b80c16",
+        "before_sha256": null
+      },
+      {
+        "path": "docs/design-system/components.md",
+        "sha256": "dd6a000099cc4b50e0b288684d0beea874e27a8109c87a0909ee2e311ca5abfe",
+        "before_sha256": "daaa6e5f641ed8f647e7f887151acaa0b2726a01eed750123a4b987a96a5ef88"
+      },
+      {
+        "path": "docs/design-system/dropdowns.md",
+        "sha256": "300b2da261d87b3fae3fc705befdd9f9dbf5e4ca673fffbe85ef0408c94f4b6f",
+        "before_sha256": null
+      },
+      {
+        "path": "docs/design-system/reference-map.md",
+        "sha256": "a7b38a34252a85f6dee798a12f003eb47f17ab806a3b691553779ef9d5f3a409",
+        "before_sha256": "5e965e82e41c9f4f118e925a2deedfbf253bdc9a3bb2ca80e58ca7287e122218"
+      },
+      {
+        "path": "docs/design-system/references/README.md",
+        "sha256": "e81c903bb55d9dcf46079167a644378f1a4bfe282f7ceec9c203a7dd6592a612",
+        "before_sha256": "378909bc92dfe431191a859118d0bd44820aa0bff096ac763e337113ba45aa0e"
+      },
+      {
+        "path": "docs/design-system/tokens.md",
+        "sha256": "6153a2921b5a5b45c423ea9205e6cc2cb24ee9cdb7cce4f88c2b818f72f065b7",
+        "before_sha256": "f3ed927369ca397182645a24ec1f960c477a20b998cc7a3e49610682cdb90fba"
+      },
+      {
+        "path": "docs/design-system/ui-status.md",
+        "sha256": "f3954a7237e6c651e9e7728d13dff3342069c8ac0cfabf69be30ab2d9dda7876",
+        "before_sha256": "aba4025780696ccc4ecb880edd13d59e51cca5e730c358890563e5da4b5fdd48"
+      },
+      {
+        "path": "docs/developer-guides/docs/03-code-internals/02-ui-kit.md",
+        "sha256": "5b55a4c965945630b252de5c091511b630f805f3bc5c49319d6faad285f4d297",
+        "before_sha256": "d9f4eb27eea0afbd74f7f127f7e529c52b023984c53f135a0700f75f94ad60f2"
+      },
+      {
+        "path": "eslint.config.mjs",
+        "sha256": "e3d9f0c48f73f96f90b7deb67a6e7340c56b6d87a4be3833491fe1c329554772",
+        "before_sha256": "26739dda1dc1da2570947d4e37706601fdd84fecc7d489dabd610a497a52a5f2"
+      },
+      {
+        "path": "frontend/discourse/admin/components/admin-report-table-summary.gjs",
+        "sha256": "63ff0bbf67d2f81475da52704251dda0409fc052f57d3f34672fbb035a62d6f4",
+        "before_sha256": "710a9b748e8503734464e5f9a6ef381417cb69033e428c5143aaf8f6c9636d39"
+      },
+      {
+        "path": "frontend/discourse/admin/components/color-palette-list-item.gjs",
+        "sha256": "03f52de4ac021c0550a15dc8a4f255dfee8e4b1830417ea35f25879904662f14",
+        "before_sha256": "a481c161e7547f646875252d95a94143559e9b1db27107bb3b38b9330ca5cad8"
+      },
+      {
+        "path": "frontend/discourse/admin/components/dashboard/date-range.gjs",
+        "sha256": "9053c7d085e7cd845df82d0493aa22f44ee25190d9838c56fec36889a21bd865",
+        "before_sha256": "ffa6bfbec52a27d206947248275d006f2056e41d938c45a6e6486eb95e20472e"
+      },
+      {
+        "path": "frontend/discourse/admin/components/ip-lookup.gjs",
+        "sha256": "1b5959ba826a849e2433e2f9f76561f920f162a6625a4765b41342ab5609114e",
+        "before_sha256": "8e890bd693f7453080fc4a4d53d8baf8463b26256d43a1fd5c15e23547074082"
+      },
+      {
+        "path": "frontend/discourse/admin/components/redesigned-admin-dashboard.gjs",
+        "sha256": "8d0b41c40f2ca786a8aa0721623463dace7b7c757bbc8d1a54f4db40d0d503ab",
+        "before_sha256": "a3f09162876f42b01ded3f8cf135ce01def77ace804cb35fe05a1c615555f1f1"
+      },
+      {
+        "path": "frontend/discourse/admin/components/themes-grid-card.gjs",
+        "sha256": "403a29789fd17d3f39831fcec68f41ed150fb5280aad20f6e7be5f96c155f27c",
+        "before_sha256": "506a249b38e2c1af8434e5feab2c926574c703d2fbdca8dac932d1ff030b6086"
+      },
+      {
+        "path": "frontend/discourse/app/components/bulk-select-topics-dropdown.gjs",
+        "sha256": "6bd6cb88af4bc85c13ef34b4a223919f4932af387319e6c9c377564c5345758e",
+        "before_sha256": "9f3a94ee7f6ccd01f62f1d2fea34bcb8380368174767333161f2855902ea34d0"
+      },
+      {
+        "path": "frontend/discourse/app/components/composer-actions.gjs",
+        "sha256": "d1fe8333c4ac4cf3669150e27019aff57b3b7de65f9055c6266dab1b3271b12b",
+        "before_sha256": "06ec2ceb4f9aa381cb3cd7ab0ff0e6cdcb23aae0266e324ab657f1e1f67a6fbe"
+      },
+      {
+        "path": "frontend/discourse/app/components/design-wizard/fonts-section.gjs",
+        "sha256": "5b3fd286298f178563de1e517ebed845affd7a42b32f0e66d72ed697c9b55761",
+        "before_sha256": "7033ecf24ae5d79f92f2274daf3d1f1c779cb789fa0688a9355bc1fff4f16faf"
+      },
+      {
+        "path": "frontend/discourse/app/components/form-template-field/dropdown.gjs",
+        "sha256": "f44a7f70c1bf620f95d425ead92660b5ddaaaf5784da205388cc73c317fee12b",
+        "before_sha256": "ffe89375652b5f7c0018d358734e765a69e061d88e9ea028ff3f0080268f6a28"
+      },
+      {
+        "path": "frontend/discourse/app/components/form-template-field/multi-select.gjs",
+        "sha256": "22b296414064bfba3b2379221c720d97b8253d83939db87e077119b8cca39713",
+        "before_sha256": "6561b5344006b18b42ce3654075b49c7b0fd3b982cd253fe54eb3333080c6614"
+      },
+      {
+        "path": "frontend/discourse/app/components/form-template-field/tag-chooser.gjs",
+        "sha256": "6592d075ed0e5dd98920a2425db51344cce7354dac013c52755ebe45b485f7ad",
+        "before_sha256": "c50554d4907ab28697a3ab40ba0c4a2531d307bf4ba8cb4158dd9ebfd601a4ae"
+      },
+      {
+        "path": "frontend/discourse/app/components/interface-color-selector.gjs",
+        "sha256": "94130242b46e0699f04f74649ff3e15043fb85ebf9eecf8601f149b301f7fe06",
+        "before_sha256": "1ee6b4c0b2e2848cac582381424be63b04657943d78a21b17250a994ccf33e30"
+      },
+      {
+        "path": "frontend/discourse/app/components/navigation-bar.gjs",
+        "sha256": "f569f4b12567ec00e194853aa794355c477c6d03f32d602979ca444bcf1bcfe6",
+        "before_sha256": "028e7f2f4de4228a10912d1cea6eb4a19b3e06fc748a1cb1f788ed562465ce45"
+      },
+      {
+        "path": "frontend/discourse/app/components/nested/deleted-posts.gjs",
+        "sha256": "4f479470b14d63e629e824893ea8e615ada49086904364be8c5d37bdadfd022f",
+        "before_sha256": "05ed41fd1d54c76ec8e3fd830e83f03bb68c32cb4d2f35a32b08b3b714fd74a7"
+      },
+      {
+        "path": "frontend/discourse/app/components/notifications-tracking.gjs",
+        "sha256": "a3398383dce863442a72042c03a70bfb4b7fcc57e64bf21079d61244acfe4fc2",
+        "before_sha256": "a3468561be3a0a86d9435dc31d9419ef088c922ece3428564617afeb318353a7"
+      },
+      {
+        "path": "frontend/discourse/app/components/pinned-options.gjs",
+        "sha256": "b77c3c7705a071a5311be7dc9ac83aaac11c1d96b6acfe839e4ac7917308eb9d",
+        "before_sha256": "6d1e08769fed23006676e685146ab0100780569656dd29731c1297ffbbf34ab4"
+      },
+      {
+        "path": "frontend/discourse/app/components/post-list/bulk-controls.gjs",
+        "sha256": "45927cb590fe2e36c0e4ebdc2fa1864119bd078ed9ce712bf290bef77bd9a67e",
+        "before_sha256": "8ac55d0da1224985559c2d848f834a8796589a607ac25b6b1c3735b65f449544"
+      },
+      {
+        "path": "frontend/discourse/app/components/sidebar/more-section-links.gjs",
+        "sha256": "5254dd5ffe5c8623fc95e2bff4d2b51a19e24bac77daeb314dc9760591076a3d",
+        "before_sha256": "5972a22d50562c77cf2b2ece4939d9a81727627c2840ad6524b3357e908e8095"
+      },
+      {
+        "path": "frontend/discourse/app/components/toolbar-popup-menu-options.gjs",
+        "sha256": "e6908d5d9624db708c1e4375b46edd8de4a75e21320bfeed421109c229cce403",
+        "before_sha256": "6169459268394cf3be1937055880781bf514ce7ae6b278e79ee02b62a407d7e5"
+      },
+      {
+        "path": "frontend/discourse/app/components/topic-admin-menu.gjs",
+        "sha256": "dc98134797e4bff3adb7d3fff13572dfd56a002f63ab52f193cdd88b37612bf5",
+        "before_sha256": "2a4222edc1eb16cd2e9b35db2491c1778729c7ce3003a177c3a15ff7877f8c21"
+      },
+      {
+        "path": "frontend/discourse/app/components/topic-bookmarks-menu.gjs",
+        "sha256": "39546815d156fbf3e81e6360f5b69fd3408b62c9bd89d6fc7b24037af787f07c",
+        "before_sha256": "8dde8feb0b3e7adeea6919e2c3f1f250f80768066fa5bddc38c4a007d6d4c3e9"
+      },
+      {
+        "path": "frontend/discourse/app/components/topic-footer-buttons.gjs",
+        "sha256": "1cda98e6f4b37cff87c6226f9eb5e72aaa61db90f2769f3c0637a0da984f9cc6",
+        "before_sha256": "d3ccacfdb85f047797c47fbf61890bf9ee8b11f0ff983086f3859d2c4e307b41"
+      },
+      {
+        "path": "frontend/discourse/app/components/topic-map/topic-map-summary.gjs",
+        "sha256": "11b38f0a9e41e10685cf2ddd93533b8cb812a76f4a2ac1a7b8adf6c47c2d15be",
+        "before_sha256": "18c9c6785af50e57bfaf7a024b94210fcc686ed0ca789b456175d5c0d950cddb"
+      },
+      {
+        "path": "frontend/discourse/app/form-kit/components/fk/control/color.gjs",
+        "sha256": "45e81168c493753c3c7be6555c84e1cbebe87f1d11d8edcdd42c591b72941fd3",
+        "before_sha256": "31d26a97261696845c59068aae35b10100db1050da986fabba9fb09fec3be3aa"
+      },
+      {
+        "path": "frontend/discourse/app/form-kit/components/fk/control/menu.gjs",
+        "sha256": "e83250866ab10ae7250c30811f26a5e8564452e27b25e1cc1f8d446c15c0a217",
+        "before_sha256": "c2a1b57808dc43066c76c734f8d6000fe2e6771ebc3579f1b823ebdac2aab7a8"
+      },
+      {
+        "path": "frontend/discourse/app/form-kit/components/fk/control/select.gjs",
+        "sha256": "e5d1dd0f67370b8a9a0f239d7afc0cf277f28d5bc5ae0be0b66f607b6351ab35",
+        "before_sha256": "cecc9ebe7cd4bc6f0fa0924bc19904747801a7b1de7b57bd771722f57bbf472b"
+      },
+      {
+        "path": "frontend/discourse/app/ui-kit/-internals/floating-family.ts",
+        "sha256": "ca05a9f20a0fdb570ac3ef67a1178ddfa60ea85897ec21d71d2098fabe751e32",
+        "before_sha256": null
+      },
+      {
+        "path": "frontend/discourse/app/ui-kit/-internals/menu-highlight.ts",
+        "sha256": "53ae9152deb3a678380224cc40e088dbd50eae7cff96cd52ae6c65f156da5f39",
+        "before_sha256": null
+      },
+      {
+        "path": "frontend/discourse/app/ui-kit/d-access-control-permission-menu.gjs",
+        "sha256": "d327efa682a45c7abafcc5a6085dd93ca04c3cdad49efdcb0080decdd66349a2",
+        "before_sha256": "a541395401c6f31107c5f3cb1a4b43b2ef8e7e4303540c86c474c2e4998365c1"
+      },
+      {
+        "path": "frontend/discourse/app/ui-kit/d-dropdown-menu.gjs",
+        "sha256": "13b2cff6a23fe872cc3b3583043a6963c5a30081943627149ec236d6b5119281",
+        "before_sha256": "0001bedf6a553f8dc0f66ad8eaec845603a99ed5d5245b4cf537046532b3f719"
+      },
+      {
+        "path": "frontend/discourse/app/ui-kit/d-multi-select.gjs",
+        "sha256": "cdcbed5c7bf370211fabaac8d5b739cd791d894cf2e4e3a95487ffbf9fa19033",
+        "before_sha256": "9f86736ee355cc83859a8b55d1027eaa792d35df81322b4236bb935e8457604c"
+      },
+      {
+        "path": "frontend/discourse/app/ui-kit/d-native-select.gjs",
+        "sha256": "c94d788258310cac98e90b8ad716f3142b99b4c3358a3b9aec72b9068178ac4d",
+        "before_sha256": "d8c904998205d934c3899536fae7d7e55d88cd33ac1e8a223c5d7caad2ab1398"
+      },
+      {
+        "path": "frontend/discourse/app/ui-kit/d-otp/index.gjs",
+        "sha256": "3bb129ab22e4d98aa77edd8abcf06141155d90a7e117d2f16de7a5802f6f0b89",
+        "before_sha256": "77eb6c4b440a6c9371cac95f452f297ef2139141a8db1806ff63dceee51307cd"
+      },
+      {
+        "path": "frontend/discourse/app/ui-kit/d-select.gts",
+        "sha256": "e935e8a831e9c50466445e87a94d08ef229748c4aff466fa348b9593840b81db",
+        "before_sha256": null
+      },
+      {
+        "path": "frontend/discourse/app/ui-kit/d-select/native.gjs",
+        "sha256": "ab0137493944965c8e37717439f75925b5cd543cad5ea3ba15e6c4b134cb65de",
+        "before_sha256": null
+      },
+      {
+        "path": "frontend/discourse/app/ui-kit/modifiers/d-close-on-click-outside.js",
+        "sha256": "a9f669147ec044302c58ca6a42b83c3680bfd608574b4bdfd1170e5b81917531",
+        "before_sha256": "cf463f2c1baceccfbaa412df78de3d869bededef7b8f1eacaeae2ebaf77865d9"
+      },
+      {
+        "path": "frontend/discourse/app/ui-kit/modifiers/d-menu-highlight.ts",
+        "sha256": "02df4697de8b100abf7d052d0b6eb2f5bce2a2fd90f15d7706a683252bd65636",
+        "before_sha256": null
+      },
+      {
+        "path": "frontend/discourse/app/ui-kit/modifiers/d-roving-focus/keyboard.ts",
+        "sha256": "b05bebd72e425a02cf0a43ff730a5d8a93671575ba0e26fd0b8278c4e702e10f",
+        "before_sha256": "50d975df1e10cff3f2d570f1542604dbe6eeb685af0a6508e7758c41d1502926"
+      },
+      {
+        "path": "frontend/discourse/float-kit/components/d-float-body.gts",
+        "sha256": "a26af4fd277c6cff0d5d46480922cc1527dca24522ffa354402a537357708238",
+        "before_sha256": "3e6933f04a0714f063e0e045643dbcd887474c9f45743902f491559ddd31ecd4"
+      },
+      {
+        "path": "frontend/discourse/float-kit/components/d-headless-menu.gts",
+        "sha256": "8323567de651af920ceda1c03b64ab883bbd26a61383837207ca1c5785682c9c",
+        "before_sha256": "1f3b1fbacef4f06f32c24b80bb02f9e6b2fa9c84f0e7b35b8a5ab0488dbe795e"
+      },
+      {
+        "path": "frontend/discourse/float-kit/components/d-inline-float.gts",
+        "sha256": "177edeb1cdbfecd1cf2b4db357b0e5ea208292908a0f448ed65652493179de68",
+        "before_sha256": "d98c23c689d121769a8f7236a7c06d0c27f896f62563b7d894d2b45395e73682"
+      },
+      {
+        "path": "frontend/discourse/float-kit/components/d-menu.gts",
+        "sha256": "4ef77c08329dd5377e2bf87ac732fb4503cfabf3d4f4c19a1ad93448e3fec63d",
+        "before_sha256": "14a7f65dcfc41adb39ecd511d987cc00e50ef2470d6350b7760283ca2ece1386"
+      },
+      {
+        "path": "frontend/discourse/float-kit/lib/constants.ts",
+        "sha256": "a31b2d75b09e36ca4db71595bb920a128449caab450a525d49ac61d59164472a",
+        "before_sha256": "96dfccb93e399bfff1cd4d38b551cd635374c4611260f70341a89fa6b2702c18"
+      },
+      {
+        "path": "frontend/discourse/float-kit/lib/d-menu-instance.ts",
+        "sha256": "a550ee333789228c68a28a7559bd7954603f445be7bc0678cff0583e6c927208",
+        "before_sha256": "50078b61f82b377f04abddc00e46ad31d1723c3edca9aa1ca3e4fc98c52be41b"
+      },
+      {
+        "path": "frontend/discourse/float-kit/lib/float-kit-instance.ts",
+        "sha256": "abb92196ab38ae6ba425db0609b8c96dbc9c9c365af01ee94ac4dabf993b315a",
+        "before_sha256": "04fd230dce45f5fbd7b84f8e066ff0e42d0c960e91961ae315f4fd47cf7c3942"
+      },
+      {
+        "path": "frontend/discourse/float-kit/lib/update-position.ts",
+        "sha256": "a536011bfe923faaf83d5430bf5d662e7103aa1d4445f1f7d9994daacedfca9e",
+        "before_sha256": "6989f35902ceca26d6a013043c87090baa4e277e76778ecf766457b368c4ba0a"
+      },
+      {
+        "path": "frontend/discourse/float-kit/modifiers/close-on-escape.ts",
+        "sha256": "32ec12d81e9163e2cc0c2d4277effefa0893f72d1b3b686b988407033af496df",
+        "before_sha256": "170530ef9245c823abd3f8319026ab780d62f939c8c2ead7e6a574a7037049c4"
+      },
+      {
+        "path": "frontend/discourse/float-kit/services/menu.ts",
+        "sha256": "4f8fb81cfdbf7821eadcc7af406985bfca1550d4628f35aea0aaa07675375bc1",
+        "before_sha256": "953f563f951c909478717445792f741b0d5756f36fa4bc7bd176f755430fc8a6"
+      },
+      {
+        "path": "frontend/discourse/select-kit/components/select-kit.js",
+        "sha256": "e67ac69efc49dda690b5fa1186418a08fb000cde01f80b938780150134977983",
+        "before_sha256": "1039dc7e2ce31ccf7b64433b7ad1315d6d8192cca1b5ff629504905ee562ab2c"
+      },
+      {
+        "path": "frontend/discourse/select-kit/components/select-kit/select-kit-body.gjs",
+        "sha256": "6fd1c769097b5329db1d5a0265e8ede72c086fb3d3fc499621454801d23f4c0c",
+        "before_sha256": "6ac2db5be3a6897647e6803f9e4e00583a4404f343b7a9b586e6b85718d53509"
+      },
+      {
+        "path": "frontend/discourse/tests/acceptance/admin-customize-components-config-area-test.gjs",
+        "sha256": "a9af8aeaed0631755d6f6dd77a1182c7f8572b25877a7e69e2ddefdd8c78c2d6",
+        "before_sha256": "a22183daab126513e0f256fd2192f5f701bdc7c02ebe440cae7e71d777d48f7b"
+      },
+      {
+        "path": "frontend/discourse/tests/acceptance/admin-emoji-test.gjs",
+        "sha256": "2d80b75eb1ffce7e61841e288befbe6c334934fa9433846131c958dd3510f2bf",
+        "before_sha256": "616968a503a61578ed4bb5d9d1adab0d52a9fd02aa0a65c68916c9fca5d48e5b"
+      },
+      {
+        "path": "frontend/discourse/tests/acceptance/admin-mcp-test.js",
+        "sha256": "ba501be2b24f06841af6732e2e5ae7b9ba6ae35774886246ff9cb6a465834639",
+        "before_sha256": "5d8baf543ab60e3ae8e492d799f430e2b4d0486b5b433906d7d4d7bcb0ce770e"
+      },
+      {
+        "path": "frontend/discourse/tests/acceptance/reports-test.js",
+        "sha256": "5d56676a13e2b4824bfe84ac0bbda8396644ac54479ba4eb39a82e62c96241da",
+        "before_sha256": "00419d20742cdd4424a2aca7ff82185bc1a12744631274b8f7847cff4c570459"
+      },
+      {
+        "path": "frontend/discourse/tests/acceptance/topic-edit-timer-test.js",
+        "sha256": "d0ce88063c25e408aa33c2c0afb5c7614384296857cdf7f5f9803c1caee98025",
+        "before_sha256": "9bbe7502c20aea4199c0a285bde9f89e7d945e10c88b23b140b01cb763159a81"
+      },
+      {
+        "path": "frontend/discourse/tests/helpers/d-native-select-assertions.js",
+        "sha256": "f7755597f66729fc7fe6709c94ca42c53a85e6277aed6cf7a05e464188f7eaf5",
+        "before_sha256": "5dd3a67f97b2f0f658e719301f0764cc843073c3de227cb4e872f3fc0d4e5c1c"
+      },
+      {
+        "path": "frontend/discourse/tests/helpers/d-select.js",
+        "sha256": "58cff6b8fee57801d8aaf46812d35368e2a090e87b638fed0265a36009c6383c",
+        "before_sha256": null
+      },
+      {
+        "path": "frontend/discourse/tests/helpers/form-kit-assertions.js",
+        "sha256": "3a1bd42a38386f4388a289bce72b9af5b98a85f564d1df3c76d8bd581da19c2a",
+        "before_sha256": "90a3f932a8696c5fbc5c52ea8386598941bf520810f6443c606f6bdc6e57bd1a"
+      },
+      {
+        "path": "frontend/discourse/tests/integration/components/admin-config-areas/upcoming-change-item-test.gjs",
+        "sha256": "168fbc2e1ca29b91d36659cd2cb51b58135111edbdb87e80442f36bcdbf3627e",
+        "before_sha256": "695e6ad23aad9696e7f4c0ec44d5c97480289b58893fcb23477c8ef7d57c3ec0"
+      },
+      {
+        "path": "frontend/discourse/tests/integration/components/float-kit/d-menu-test.gjs",
+        "sha256": "d25bbcc34e2a21b44257c0252fa13bc010be1974400f7b983f98f8822c0b626f",
+        "before_sha256": "999411742842b7b08b16eef16f515aad39ae7adc2008b4c02a584a4c66878f9d"
+      },
+      {
+        "path": "frontend/discourse/tests/integration/components/float-kit/pointer-anchored-menu-test.gjs",
+        "sha256": "6b1a123203ec1537bf1f0d7b9e15649f5543fb703b1fc7fdd532ff057ab5dcf0",
+        "before_sha256": "361222132337697dbe876c2d41e0cf57ecff33dbcd38f017d83c6ec7e9f59e2a"
+      },
+      {
+        "path": "frontend/discourse/tests/integration/ui-kit/d-dropdown-menu-test.gjs",
+        "sha256": "168ccb0a1fd205ba6a8a2217e66925c0b61a52307bb4108abeb9b9217db77a55",
+        "before_sha256": "51c83208eea8f4f22695a3ff4d2b56bb600652a5ee7b6d4aa2a9687874ea3c7e"
+      },
+      {
+        "path": "frontend/discourse/tests/integration/ui-kit/d-filter-controls-test.gjs",
+        "sha256": "fed225d775c9834cd7f5c243a239bd984864f6efb49f23f1164aae0289400a67",
+        "before_sha256": "d5fdaecf25c05285545d415d43a1808f391b6f94b3c6bab0994aecd7b03d3dd9"
+      },
+      {
+        "path": "frontend/discourse/tests/integration/ui-kit/d-native-select-test.gjs",
+        "sha256": "c852b0db03af9d7dfa33108a162e082066ce8048fcc1f8f290819187c07b5984",
+        "before_sha256": "d2d404b771b9cf91cd53327a20e56da7b8a307ed12b0c39069db0da56f50e441"
+      },
+      {
+        "path": "frontend/discourse/tests/integration/ui-kit/d-select-test.gjs",
+        "sha256": "751701a2243c2fdd8b64614742648ced004fa4106da119d7680d361560ce5663",
+        "before_sha256": null
+      },
+      {
+        "path": "frontend/discourse/type-tests/ui-kit/d-select-test.gts",
+        "sha256": "bcbe54fe1d39300396db374f35b70c41e7982845b3d4c9163e0779fbd29c2e49",
+        "before_sha256": null
+      },
+      {
+        "path": "lefthook.yml",
+        "sha256": "d22b0af0afcface585d5151bd33b6b47d6f4dbb64f250b28af1ae59242122549",
+        "before_sha256": "3b203fb65443e5b97f064216eee059e80a310e4502b1bd673bf6c6a3a18db395"
+      },
+      {
+        "path": "package.json",
+        "sha256": "04745c116d54ff8281b93495b1539e5e470964eef2bee8c134f655424a6b869c",
+        "before_sha256": "d83d8dc621b60af6ba1a15f029c296b37a75e04c6afe3e512b912750dc27931b"
+      },
+      {
+        "path": "plugins/chat/assets/javascripts/discourse/components/chat-channel-list-sidebar-menu.gjs",
+        "sha256": "0eb3b30a40659a526ebc21b7b642456d75a6e4c2440d30b6e4ce2b4d71d4c881",
+        "before_sha256": "e9f1106dad322d2d33d6190152a2784decf1c4cbf1d8cd531e52f001628ceb05"
+      },
+      {
+        "path": "plugins/chat/assets/javascripts/discourse/components/chat-composer-dropdown.gjs",
+        "sha256": "266fc46cc32c941bacaa785234a991df4c5dd4d8a5708ae694fae40107999ec3",
+        "before_sha256": "a9083a629adff878d1f354bdcc27a2d20e55c2d6ddc4fa4c51d9fe15dafa0626"
+      },
+      {
+        "path": "plugins/discourse-ai/admin/assets/javascripts/discourse/components/ai-agent-list-editor.gjs",
+        "sha256": "93c0b8d4b7c6e8a6159bd972bd76d1754047056495b00e5b455893237865543d",
+        "before_sha256": "655ffd580267b9b0c599c9f099a6aa6837d84d218b4aa27102bf51c609bbeee6"
+      },
+      {
+        "path": "plugins/discourse-ai/assets/javascripts/discourse/components/ai-gist-toggle.gjs",
+        "sha256": "27c6ba83e17bbb01a7f83f0ebde4004e1a769bc7cc3f6caf94d1eb305e29700a",
+        "before_sha256": "2ea965ef8a6131cc2f1a478de397dae9ed270eb1382c09ba9096032ac899ab03"
+      },
+      {
+        "path": "plugins/discourse-ai/assets/javascripts/discourse/components/suggestion-menus/ai-title-suggester.gjs",
+        "sha256": "d953dd40ce8a935b40971e339a95f257d5c93477185ebc17fa5899d2d0f54272",
+        "before_sha256": "bfcae19c915597286b78b43f7d9eccba5acf3ff1393ddc8ed93332ca55cec870"
+      },
+      {
+        "path": "plugins/discourse-events/assets/javascripts/discourse/components/discourse-post-event/creator.gjs",
+        "sha256": "58d2067a9f500a52e6c4b479ea41abae12734da52da28834be8b11a91d0794a2",
+        "before_sha256": "8e1cff2bffd90d4c4aa609df41ccf2580a88e2c4c91f1a3e1a43fe7d867a2e9a"
+      },
+      {
+        "path": "plugins/discourse-events/assets/javascripts/discourse/components/discourse-post-event/status.gjs",
+        "sha256": "2dc02788628e2c1a6243dd1841611a6d99d717de37c9422376662d908e4bdffa",
+        "before_sha256": "edc7f6fce1ec7e0fe1d6c3488ffb06c87664443fa54224d6516e9dafc6f6fee6"
+      },
+      {
+        "path": "plugins/discourse-topic-voting/assets/javascripts/discourse/components/vote-count.gjs",
+        "sha256": "76fdc4e6883d39821bb0e22143144a5d1173165d8cf554716d86daa6733455bd",
+        "before_sha256": "e3960a1e2185e9661f839508940c37da213b2b74809f8472219df22e6fce05c0"
+      },
+      {
+        "path": "plugins/isbf-resume/assets/stylesheets/isbf-resume-sharing.scss",
+        "sha256": "2498736749d20a37fd86ed711f6b219d76b2963040f8128eb4d4a4c0e0125158",
+        "before_sha256": "ff947f6bc709b83ac736e086e99e5c3373cfa8647b844e7c7fac63241f505019"
+      },
+      {
+        "path": "plugins/styleguide/assets/javascripts/discourse/components/toggle-color-mode.gjs",
+        "sha256": "dec92e53a9e36193f640dfd48e839573997126ff5f22984c12c55d0d718cf657",
+        "before_sha256": "dd4f6d7da348b38ab25e5d60771bb9355fe3c04d9e77705fb76814f3bdecab85"
+      },
+      {
+        "path": "plugins/voice/assets/javascripts/discourse/components/voice/call-widget.gjs",
+        "sha256": "f9f0c73c20b87bee138d1c6e012f76b8fa788661ada8ccfa5ba17d20cc21d526",
+        "before_sha256": "7d264e47260271158a33f374814e02ef612d3826941142e7a103fa68676cd493"
+      },
+      {
+        "path": "plugins/voice/assets/javascripts/discourse/components/voice/room-page.gjs",
+        "sha256": "7365a3fa25d5d87134f399f0dfac38a42aa6d93f066d662fe28327df34ae1715",
+        "before_sha256": "cba6dbb6ce5e45e626f0a89e1d0e6028bc45f216e576882c941cbfee15fcd8c5"
+      },
+      {
+        "path": "script/check-menus-test.mjs",
+        "sha256": "74bae4b77e920a0640273ed1a54ab26582eb643e8b6eb4dd403a0be03e6b2773",
+        "before_sha256": null
+      },
+      {
+        "path": "script/check-menus.mjs",
+        "sha256": "21b8ad5cddc48d0113de88f7d80c01ed5cd390c693bbfaaa4708ed287be8a7ce",
+        "before_sha256": null
+      },
+      {
+        "path": "script/eslint-menu-imports.mjs",
+        "sha256": "ffe5882180982dd7596989b8245360eb9dff66f8e54d5f5e4991c9fa5c82d11c",
+        "before_sha256": null
+      },
+      {
+        "path": "themes/isbf-campus-feed/common/common.scss",
+        "sha256": "63706d2019d661bd5de9dd4e759e6572efc8bc8063a30875a9d274c49f525b90",
+        "before_sha256": "19666cdf308c8a731bb7aa7517f2e02b359d44d073820c3668bedd5530c65001"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-alumni-profile.gjs",
+        "sha256": "61939f5b36a5bbb2a923b4b8efd3c3cbb41c4c2f3c3497479c956470f9812c88",
+        "before_sha256": "50f6bc796cbe89d91aefaf20901cfddc0c1c6385bc603b51c758eb76e9dfc755"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-alumni.gjs",
+        "sha256": "8d403d6de48f7e6a824f1c354b83fa649231ecc97a861faf45ef45e02839fc0c",
+        "before_sha256": "6e9eac15c3a2bd69da9b8eff8e2ce6cc008e71b35868f3a1e3de054d3c38b2fa"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-explore-picker.gjs",
+        "sha256": "f5e41602eb7234362077cb7bf42ccaaf363a5e43eec2954ee50fd8ac973d75b5",
+        "before_sha256": "78f2412ca7d87dc41afc2fe55dbccb93e58da6b5bae6e297eeddfe2ad0bee6f5"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-feed-card-menu.gjs",
+        "sha256": "1f5facde39e512adb3cd0bd8315fed9c859a251e7491cd24b786872aade8271c",
+        "before_sha256": null
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-learning-composer.gjs",
+        "sha256": "a616ed77facba599341f2cdd96e9b053f645fe8ce7a39bac6ba42cb49b6b56f3",
+        "before_sha256": "ad746b079b325911deab1c5f65d63185afbf591b26950f28aa247cb75add4d54"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-notifications.gjs",
+        "sha256": "f7e3434354e61802be113e7e592605f413ddc7b07ae669858d04312685e127ab",
+        "before_sha256": "3c1abda29707e1d0c6f51db8dabad7393cdc5f2d0c0e5e2b11679737c8a8b654"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-official-picker.gjs",
+        "sha256": "e1f7da27b1bd7fca95bb8cc0f5e668fe605d840862e88f811e68332581b86d30",
+        "before_sha256": "69d8e3276a9590e8553ab75cc1af7c8fce78e4c1100a9018b4ca34f00aae5f65"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-topic-more.gjs",
+        "sha256": "e94909c36980a8ef449b2b5642cdb8d37e26cf619cd38be27538bea2ae926099",
+        "before_sha256": "0d516b62365d51a1904a40e656e8ab432bb6b5571e8f188dcf2fc4f6900b9479"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-account-menu.gjs",
+        "sha256": "fb158204a7f1b702e81f1d9f046af49949c86c3cb9b527ea1152932e865ea400",
+        "before_sha256": "58344c8af37e9faeb4e719dbee7a87132a86987212435ce7bdfa28c95e57aa92"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-feed-card.gjs",
+        "sha256": "1b6a5f7063395c0f590e62fdfede806c259492c2cf723c8b784f39b21c7cd8dd",
+        "before_sha256": "8a51f4379f106c537a0ee5fb70e321980f89840ddd90fdc6f766afa21252b24c"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/connectors/topic-footer-main-buttons-before-create/isbf-topic-more.gjs",
+        "sha256": "83f3a38240a78634d7822b23f81d1e639157c9763fa87a9978b354b07fa59365",
+        "before_sha256": "d2011d94aa91c837fbc4599bbda47b04ec0f570613127a942d8dc5160b2dd8cb"
+      },
+      {
+        "path": "themes/isbf-campus-feed/locales/en.yml",
+        "sha256": "a0bb6c7a8f8a87f655352bef3050ae12b2d884905a2c703807dc39e85856f6ae",
+        "before_sha256": "00cdfba11ebbfa5de678efb80dac750cb1e5c1f377e8cb2d57d0c71a49b9dc60"
+      },
+      {
+        "path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+        "sha256": "d0ce89448b6d85ca1bab54bbdaf064cc859e1b479e253c24acfb0f84e9450c57",
+        "before_sha256": "d91b1a2f74453c585fd09308c3890fd97220ec3fede73fbca3c7c286b069baa8"
+      },
+      {
+        "path": "themes/isbf-campus-feed/stylesheets/dropdowns.scss",
+        "sha256": "73b77fed0ee0e7f1a0e8b62ca02f0cb76991aaf164a2c41b91872e0e318ef69b",
+        "before_sha256": null
+      },
+      {
+        "path": "themes/isbf-campus-feed/stylesheets/official-filters.scss",
+        "sha256": "f983a7307c360d1fe2859a80a01a7d9056a720aa32811142bc93324332c51ea7",
+        "before_sha256": "8ec34b6192560f27cef339be966bd36539438df488b6672bd80a8a0725653bd9"
+      },
+      {
+        "path": "themes/isbf-campus-feed/test/integration/feed-card-menu-test.gjs",
+        "sha256": "5a4c56bb53edd3ac1ae267e3eaddfc1302a70634615bcb53e94f07572a6f4c5b",
+        "before_sha256": null
+      },
+      {
+        "path": "themes/isbf-campus-feed/test/integration/notifications-test.gjs",
+        "sha256": "4f076583d5335b9d89b74fb337771d571c3d07bb6100fdf1dbae6c25ada58f7e",
+        "before_sha256": "f8ae5b0069926cf6d444b345486d5e035afa381a5839b460d4b30e11daa95ee2"
+      },
+      {
+        "path": "themes/isbf-campus-feed/test/integration/official-calendar-editor-test.gjs",
+        "sha256": "aba705bf530a0a7b432966984750eae81a1b409082cd69230540b393cb1ccee3",
+        "before_sha256": "f5c7aacba2ccf41817ac2d81cb87527fe3412b40060c829d342042f5a3c0d454"
+      },
+      {
+        "path": "themes/isbf-campus-feed/test/integration/official-picker-glide-test.gjs",
+        "sha256": "ceb4f8b06121c2c22962171370bdf58d4dcdafa7e794946f6cfa6074601401b3",
+        "before_sha256": null
+      }
+    ],
+    "validation": {
+      "native_lint": "passed",
+      "types": "Passed in CI on 56ab53c8; final declarative hiding and regression-test followup CI required",
+      "menu_policy": "passed",
+      "dialog_policy": "passed",
+      "full_theme_tests": 263,
+      "full_theme_assertions": 1142,
+      "ci": "pending native value carrier visibility correction",
+      "native_followup": {
+        "native-followup": {
+          "tests": 124,
+          "assertions": 414,
+          "failed": 0,
+          "client_errors": 0
+        },
+        "native-theme": {
+          "tests": 20,
+          "assertions": 94,
+          "failed": 0,
+          "client_errors": 0
+        }
+      },
+      "upcoming_select_followup": {
+        "tests": 13,
+        "assertions": 18,
+        "failed": 0,
+        "client_errors": 0
+      },
+      "native_visibility_followup": {
+        "core_tests": 107,
+        "core_assertions": 261,
+        "failed": 0,
+        "client_errors": 0,
+        "page_combinations": 12,
+        "page_checks": 96,
+        "native_lint": "passed",
+        "menu_policy": "passed"
+      }
+    }
+  },
+  "review_followup": {
+    "core_tests": 106,
+    "core_assertions": 256,
+    "theme_tests": 20,
+    "theme_assertions": 94,
+    "native_lint": "passed",
+    "menu_policy_and_types": "passed",
+    "runtime_and_PR_fix_files_equal": true,
+    "visual_checks": "The original 151 page checks remain evidence for unchanged visual code; this follow-up changes shared Escape and hover dismissal only.",
+    "review_evidence": "review-regressions.json"
+  },
+  "ci_followup": "ci-followup.json",
+  "native_followup": "native-followup.json",
+  "upcoming_select_followup": "upcoming-select-followup.json",
+  "native_visibility_followup": "native-visibility-followup.json"
+}

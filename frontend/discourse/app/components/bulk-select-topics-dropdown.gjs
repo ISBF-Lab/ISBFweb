@@ -445,7 +445,7 @@ export default class BulkSelectTopicsDropdown extends Component {
     <DMenu
       @autofocus={{true}}
       @identifier="bulk-select-topics-dropdown"
-      @modalForMobile={{true}}
+      @modalForMobile={{false}}
       @onRegisterApi={{this.onRegisterApi}}
       @triggerClass="btn-default"
     >

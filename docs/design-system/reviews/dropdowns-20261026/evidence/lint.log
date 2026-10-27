@@ -1,0 +1,23 @@
+[bin/lint] No core linter for: eslint.config.mjs, package.json, script/check-menus-test.mjs, script/check-menus.mjs, script/eslint-menu-imports.mjs
+[bin/lint] Running core linters via lefthook...
+│  developer-docs-prettier (skip) no files for inspection
+┃  eslint ❯ 
+
+┃  prettier ❯ 
+- Starting...
+close-on-escape.ts
+- Reformatted 1 / 50 files...
+d-menu-test.gjs
+- Reformatted 2 / 91 files...
+✔ Reformatted 2 / 91 files...
+
+│  rubocop (skip) no files for inspection
+┃  stylelint ❯ 
+
+│  syntax_tree (skip) no files for inspection
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 29.50 seconds)
+✔️ eslint (12.01 seconds)
+✔️ prettier (9.18 seconds)
+✔️ stylelint (8.31 seconds)
+[bin/lint] All lints passed

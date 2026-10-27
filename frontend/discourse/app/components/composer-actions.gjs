@@ -441,7 +441,7 @@ export default class ComposerActions extends Component {
           @contentClass="composer-actions-dropdown"
           @icon={{data.icon}}
           @label={{data.label}}
-          @modalForMobile={{true}}
+          @modalForMobile={{false}}
           @onRegisterApi={{this.registerDmenuApi}}
           @triggerClass="composer-actions-trigger btn-flat btn-icon-text"
         >

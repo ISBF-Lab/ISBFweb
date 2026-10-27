@@ -1,0 +1,134 @@
+{
+  "results": [
+    {
+      "passed": 94,
+      "failed": 0,
+      "total": 94,
+      "runtime": 17312,
+      "failures": [],
+      "tests": [
+        {
+          "name": "search leaves the value alone until an option is chosen",
+          "module": "ISBF | Integration | Alumni location picker",
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "name": "no matches and closing do not replace the current selection",
+          "module": "ISBF | Integration | Alumni location picker",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "a disabled picker is inert",
+          "module": "ISBF | Integration | Alumni location picker",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "changing country clears dependent codes and keeps foreign city text",
+          "module": "ISBF | Integration | Alumni profile controls",
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "name": "changing province clears the city and keeps an optional city empty",
+          "module": "ISBF | Integration | Alumni profile controls",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "required fields are checked before saving",
+          "module": "ISBF | Integration | Alumni profile controls",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "Enter chooses an option without submitting the profile",
+          "module": "ISBF | Integration | Alumni profile controls",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "a failed save keeps draft values for retry",
+          "module": "ISBF | Integration | Alumni profile controls",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "concurrent form submissions make one request",
+          "module": "ISBF | Integration | Alumni profile controls",
+          "failed": 0,
+          "total": 1
+        },
+        {
+          "name": "Escape dismisses the picker before the profile dialog",
+          "module": "ISBF | Integration | Alumni profile controls",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "only available actions are rendered and empty menus are hidden",
+          "module": "ISBF | Integration | Feed card menu",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "arrows, Home and End move focus, and Escape returns it",
+          "module": "ISBF | Integration | Feed card menu",
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "name": "request states disable their actions and keyboard navigation skips them",
+          "module": "ISBF | Integration | Feed card menu",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "outside click and destruction release the floating menu",
+          "module": "ISBF | Integration | Feed card menu",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "pin actions retain their original callbacks",
+          "module": "ISBF | Integration | Feed card menu",
+          "failed": 0,
+          "total": 3
+        },
+        {
+          "name": "the selected campus is marked and a pick calls the existing callback once",
+          "module": "ISBF | Integration | Component | ISBFOfficialPicker",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "arrows, Home, End and type-ahead navigate without applying a filter",
+          "module": "ISBF | Integration | Component | ISBFOfficialPicker",
+          "failed": 0,
+          "total": 9
+        },
+        {
+          "name": "pointer exploration does not change selection and external values update immediately",
+          "module": "ISBF | Integration | Component | ISBFOfficialPicker",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "multi-select keeps the shared surface and toggles without closing",
+          "module": "ISBF | Integration | Component | ISBFOfficialPicker",
+          "failed": 0,
+          "total": 4
+        },
+        {
+          "name": "outside clicks and destruction release the floating menu",
+          "module": "ISBF | Integration | Component | ISBFOfficialPicker",
+          "failed": 0,
+          "total": 2
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

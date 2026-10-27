@@ -337,7 +337,7 @@ export default class TopicBookmarksMenu extends Component {
         @icon={{this.buttonIcon}}
         @identifier="topic-bookmarks-menu"
         @label={{this.buttonLabel}}
-        @modalForMobile={{true}}
+        @modalForMobile={{false}}
         @onRegisterApi={{this.onRegisterApi}}
         @title={{this.buttonTitle}}
       >

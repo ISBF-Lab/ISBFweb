@@ -9,6 +9,7 @@ import { ajax } from "discourse/lib/ajax";
 import { eq } from "discourse/truth-helpers";
 import DButton from "discourse/ui-kit/d-button";
 import DModal from "discourse/ui-kit/d-modal";
+import DSelect from "discourse/ui-kit/d-select";
 import { i18n } from "discourse-i18n";
 import { alumniRegions } from "../lib/alumni";
 
@@ -129,24 +130,26 @@ export default class ISBFAlumniProfile extends Component {
                 value={{this.profile.display_name}}
                 {{on "input" (fn this.change "display_name")}}
               /></label>
-            <label>{{i18n (themePrefix "isbf_v2.alumni_country")}}<select
-                disabled={{this.saving}}
-                required
-                value={{this.profile.country_code}}
-                {{on "change" (fn this.change "country_code")}}
+            <label>{{i18n (themePrefix "isbf_v2.alumni_country")}}<DSelect
+                @disabled={{this.saving}}
+                @includeNone={{false}}
+                @onInput={{fn this.change "country_code"}}
+                @required={{true}}
+                @value={{this.profile.country_code}}
               >
                 {{#each @config.countries as |country|}}<option
                     selected={{eq this.profile.country_code country.code}}
                     value={{country.code}}
                   >{{country.name}}</option>{{/each}}
-              </select></label>
+              </DSelect></label>
             {{#if this.regions.length}}<label>{{i18n
                   (themePrefix "isbf_v2.alumni_region")
-                }}<select
-                  disabled={{this.saving}}
-                  required
-                  value={{this.profile.region_code}}
-                  {{on "change" (fn this.change "region_code")}}
+                }}<DSelect
+                  @disabled={{this.saving}}
+                  @includeNone={{false}}
+                  @onInput={{fn this.change "region_code"}}
+                  @required={{true}}
+                  @value={{this.profile.region_code}}
                 >
                   <option value="">{{i18n
                       (themePrefix "isbf_v2.alumni_select")
@@ -155,7 +158,7 @@ export default class ISBFAlumniProfile extends Component {
                       selected={{eq this.profile.region_code region.code}}
                       value={{region.code}}
                     >{{region.name}}</option>{{/each}}
-                </select></label>{{/if}}
+                </DSelect></label>{{/if}}
             <label>{{i18n (themePrefix "isbf_v2.alumni_industry")}}<input
                 disabled={{this.saving}}
                 maxlength="60"

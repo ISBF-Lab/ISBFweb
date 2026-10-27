@@ -181,7 +181,12 @@ module("Integration | ui-kit | DNativeSelect", function (hooks) {
   test("select attributes", async function (assert) {
     await render(<template><DNativeSelect class="test" /></template>);
 
-    assert.dom(".d-native-select.test").exists();
+    assert
+      .dom(".d-select__trigger.test")
+      .exists("attributes reach the visible control");
+    assert
+      .dom(".d-native-select")
+      .isNotVisible("the native carrier is not another visible control");
   });
 
   test("option attributes", async function (assert) {

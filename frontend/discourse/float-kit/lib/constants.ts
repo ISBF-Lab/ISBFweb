@@ -1,6 +1,7 @@
 import type { AutoUpdateOptions, ReferenceElement } from "@floating-ui/dom";
 import { type ComponentLike } from "@glint/template";
 import DDefaultToast from "discourse/float-kit/components/d-default-toast";
+import type { PositioningOptions } from "discourse/float-kit/lib/update-position";
 
 /**
  * The placements floating-ui may position a float at, ordered by preference. Kept
@@ -87,7 +88,7 @@ export type FloatTriggers = string[] | { mobile: string[]; desktop: string[] };
  * the corresponding component arguments; every field is always present on an
  * instance because the defaults populate it.
  */
-export interface TooltipOptions {
+export interface TooltipOptions extends PositioningOptions {
   /** Whether to animate the float as it opens and closes. */
   animated: boolean;
 
@@ -229,6 +230,9 @@ export interface TooltipOptions {
  * the menu template forwards to its trigger and content).
  */
 export interface MenuOptions extends TooltipOptions {
+  /** The shared menu surface, or an independently laid out non-menu popover. */
+  surface: "menu" | "popover";
+
   /**
    * The ARIA role for the content element. `dialog` suits a panel that holds its own widgets.
    * A popup that is only a list should pass `none`, so the container does not sit between the
@@ -422,6 +426,7 @@ export const TOOLTIP: { options: TooltipOptions; portalOutletId: string } = {
 
 export const MENU: { options: MenuOptions; portalOutletId: string } = {
   options: {
+    surface: "menu",
     animated: true,
     ariaLabel: null,
     arrow: false,
@@ -463,6 +468,15 @@ export const MENU: { options: MenuOptions; portalOutletId: string } = {
     class: null,
     matchTriggerMinWidth: false,
     matchTriggerWidth: false,
+    boundary: undefined,
+    strategy: undefined,
+    padding: undefined,
+    crossAxisShift: true,
+    constrainHeightToViewport: false,
+    minHeight: 0,
+    allowedPlacements: undefined,
+    limitShift: undefined,
+    computePosition: undefined,
     portalOutletElement: null,
   },
   portalOutletId: "d-menu-portal-outlet",

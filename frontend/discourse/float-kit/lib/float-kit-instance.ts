@@ -195,7 +195,7 @@ export default abstract class FloatKitInstance {
     this.#hoverCloseTimer = discourseLater(() => {
       this.#hoverCloseTimer = null;
       if (!this.#hoverFocusLocked) {
-        this.close();
+        this.close({ focusTrigger: false });
       }
     }, this.hoverGracePeriod);
   }

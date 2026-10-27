@@ -158,6 +158,13 @@ jobs:
           LOAD_PLUGINS: "0"
         run: bin/qunit --standalone frontend/discourse/tests/unit/lib/topic-display-title-test.js
 
+      - name: Shared dropdown regression
+        env:
+          LOAD_PLUGINS: "0"
+        run: |
+          pnpm test:menus
+          pnpm lint:menus
+          bin/qunit --standalone --filter '/(ui-kit.*D(NativeSelect|Select|DropdownMenu)|FloatKit.*DMenu|FormKit.*Select)/i'
       - name: Hold button regression
         env:
           LOAD_PLUGINS: "0"

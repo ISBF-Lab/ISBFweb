@@ -48,7 +48,7 @@ export default class DesignWizardFontsSection extends Component {
       <DMenu
         @contentClass="design-wizard__font-select-content"
         @identifier="design-wizard-base-font"
-        @modalForMobile={{true}}
+        @modalForMobile={{false}}
         @triggerClass="design-wizard__font-select"
         @triggerComponent={{component
           FontTrigger
@@ -86,7 +86,7 @@ export default class DesignWizardFontsSection extends Component {
       <DMenu
         @contentClass="design-wizard__font-select-content"
         @identifier="design-wizard-heading-font"
-        @modalForMobile={{true}}
+        @modalForMobile={{false}}
         @triggerClass="design-wizard__font-select"
         @triggerComponent={{component
           FontTrigger

@@ -402,6 +402,10 @@ A08/C02 新增经用户确认的局部排布：卡片 1:1，面板内容宽度 6
 
 点赞及本人赞数心形的悬停使用既有love色，其余动作使用accent；移开恢复真实状态色。仅作用于本次互动区域，键盘焦点和禁用状态保留。
 
+## 2026-10-26 全站菜单局部token
+
+本轮用户确认将菜单统一为24px面板、16px选项、8px内距、15px／600及最小44px选项。共享--d-menu-*变量只用于菜单，配色继续映射现有站点语义变量，阴影复用isbf-v2-shadow-menu；不改变卡片、弹窗或全站radius-sm／md。完整规则见[菜单契约](dropdowns.md)。
+
 ## 2026-10-26 通知标读长按按钮
 
 仅限[本次通知操作](reviews/notifications-hold-20261026/README.md)：待机使用hover/text，填充使用accent/contrast，外形使用radius-pill，文字font-sm/weight-medium，触控高44px、操作间距space-2。用户确认长按300ms、释放200ms、成功停留1200ms、向右填充、6px波浪及0.97按压缩放；这些动效参数不作为所有按钮的新默认值。

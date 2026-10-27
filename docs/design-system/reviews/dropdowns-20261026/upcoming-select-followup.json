@@ -1,0 +1,48 @@
+{
+  "verified_at": "2026-10-27T05:55:36.171221+00:00",
+  "CI": {
+    "head": "a09f543bfce071cae406e2adbb703caa226223c7",
+    "run": 40455051769,
+    "job": 122026321990,
+    "native_tests": 1197,
+    "passed": 1195,
+    "failed": 2,
+    "earlier_steps": "Types, lint, shared dropdown, hold button, full theme, academy authentication, code input and password setup all passed."
+  },
+  "cause": "Two existing UpcomingChangeItem tests filled the shared trigger button instead of changing the submitted native select. Their request-order assertions correctly failed.",
+  "fix": "Use the shared select/findSelect helpers for field changes and real value assertions. Preserve staff-group-before-toggle and everyone-toggle-before-group-clear request assertions.",
+  "verification": {
+    "upcoming-select-red": {
+      "tests": 13,
+      "assertions": 18,
+      "failed": 2,
+      "client_errors": 0
+    },
+    "upcoming-select-green": {
+      "tests": 13,
+      "assertions": 18,
+      "failed": 0,
+      "client_errors": 0
+    }
+  },
+  "native_lint": "passed",
+  "runtime_source": {
+    "path": "source/frontend/discourse/tests/integration/components/admin-config-areas/upcoming-change-item-test.gjs",
+    "before_sha256": "695e6ad23aad9696e7f4c0ec44d5c97480289b58893fcb23477c8ef7d57c3ec0",
+    "sha256": "168fbc2e1ca29b91d36659cd2cb51b58135111edbdb87e80442f36bcdbf3627e",
+    "deleted": false,
+    "test_only": true
+  },
+  "CI_timeout": {
+    "run": 40455051749,
+    "job": 122026322201,
+    "state": "cancelled; not a pass",
+    "observed": "The documents job reached its 15-minute limit while downloading LibreOffice dependencies; document assertions had not run.",
+    "change": "Increase only the documents job timeout to 30 minutes; retain every installation and test step.",
+    "canonical_path": ".github/workflows/isbf-resume.yml",
+    "before_sha256": "5215392cde2c0d6956fc0ed6b10d635c68a431aba4f5a015be17fa162b9d8968",
+    "sha256": "cb41098a55916a730ae74f958f4cd1b7dc46934e88d76932e1c3c9b28c44825a"
+  },
+  "boundary": "Test and CI configuration only; no product code, appearance, runtime settings or data changed. Earlier checks retain their own scope. New exact-head CI and production publication remain pending.",
+  "patch_order": "Compare upcoming-select-followup.patch after native-followup.patch; this supplemental runtime patch changes only a test file. The workflow change belongs only to the canonical PR repository."
+}

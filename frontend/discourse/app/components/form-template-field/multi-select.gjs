@@ -1,7 +1,7 @@
 import Component from "@glimmer/component";
-import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { trustHTML } from "@ember/template";
+import DSelect from "discourse/ui-kit/d-select";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 
 export default class FormTemplateFieldMultiSelect extends Component {
@@ -16,7 +16,7 @@ export default class FormTemplateFieldMultiSelect extends Component {
       data-field-type="multi-select"
     >
       {{#if @attributes.label}}
-        <label class="form-template-field__label">
+        <label class="form-template-field__label" for={{@id}}>
           {{@attributes.label}}
           {{#if @validations.required}}
             {{dIcon "asterisk" class="form-template-field__required-indicator"}}
@@ -30,12 +30,15 @@ export default class FormTemplateFieldMultiSelect extends Component {
         </span>
       {{/if}}
 
-      <select
+      <DSelect
+        aria-label={{@attributes.label}}
         class="form-template-field__multi-select"
-        multiple="multiple"
+        id={{@id}}
         name={{@id}}
         required={{if @validations.required "required" ""}}
-        {{on "input" @onChange}}
+        @includeNone={{false}}
+        @multiple={{true}}
+        @onInput={{@onChange}}
       >
         {{#if @attributes.none_label}}
           <option
@@ -51,7 +54,7 @@ export default class FormTemplateFieldMultiSelect extends Component {
             value={{choice}}
           >{{choice}}</option>
         {{/each}}
-      </select>
+      </DSelect>
     </div>
   </template>
 }

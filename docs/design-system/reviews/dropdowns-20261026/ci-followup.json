@@ -1,0 +1,54 @@
+{
+  "verified_at": "2026-10-27T00:42:02.315957+00:00",
+  "base_commit": "099c6eaa0ab136461d8e822e185e9503a1da4391",
+  "ci_failure": {
+    "head": "16dbbffa23dd28d02e3fd039a6c9d81cbfa19eb0",
+    "run": 40378218216,
+    "job": 121767029000,
+    "cause": "Six notification tests queried the former details/summary menu; one calendar test selected a descendant dropdown trigger instead of its direct remove button."
+  },
+  "resolution": "Use the shared DMenu trigger and rendered-state assertions, and scope the calendar remove action to a direct child. Preserve all business assertions and the notification hold gesture tests.",
+  "main_integration": "Preserves the merged notification hold action, confirmation, retries and concurrent-update guards; preference controls remain in the shared DMenu.",
+  "full_PR_theme": {
+    "tests": 263,
+    "assertions": 1142,
+    "failed": 0,
+    "client_errors": 0
+  },
+  "checks": {
+    "lint": {
+      "check": "lint",
+      "exit_code": 0,
+      "completed_at": "2026-10-26T23:47:24.286986+00:00",
+      "receipt": "Native lint process 30869 completed with exit code 0"
+    },
+    "types": {
+      "check": "types",
+      "exit_code": 0,
+      "completed_at": "2026-10-27T00:40:51.530624+00:00"
+    },
+    "policy": {
+      "check": "policy",
+      "exit_code": 0,
+      "completed_at": "2026-10-27T00:41:48.049583+00:00"
+    },
+    "dialogs": {
+      "check": "dialogs",
+      "exit_code": 0,
+      "completed_at": "2026-10-27T00:41:59.253051+00:00"
+    }
+  },
+  "execution": "Serial development checks; each tool container is limited to 0.5 CPU and 192 processes. The PR theme uses the pinned runtime's shared core APIs and the exact resolved PR theme sources.",
+  "dependencies": {
+    "lock_sha256": "13f6b3eb267dbb2026a100c9e07fec0a17b0606fc1c944a7e860adcf431a7754",
+    "setup": "Ignored relative workspace links restored from identically locked development dependencies. The dependency volume stays read-only; its existing compiler-cache file is overlaid by a task-private writable file. Resolution and cache-write preflights passed. Earlier missing-link and read-only-cache attempts are retained privately and are not counted as passes."
+  },
+  "test_harness": {
+    "runtime_view_sha256": "a2c1ff2a15c3ee3f964961efd629eb47840c716a35689711c32bf39e62314b1b",
+    "CI_view_sha256": "3bda674e5fa17014cd1c9c910cc582c94e09a5a05d63d343923b431cda3cbc03",
+    "runtime_view_restored": true,
+    "purpose": "Load the same theme CSS as the PR's existing CI harness without permanently changing the pinned runtime",
+    "validation_theme_id": 1
+  },
+  "boundary": "Development-only validation theme; active theme and settings preserved. Required remote CI and production publication remain pending."
+}

@@ -291,7 +291,7 @@ export default class DiscoursePostEventStatus extends Component {
                     @icon={{this.goingTriggerIcon}}
                     @identifier="discourse-post-event-going-menu"
                     @label={{this.goingTriggerLabel}}
-                    @modalForMobile={{true}}
+                    @modalForMobile={{false}}
                     @onRegisterApi={{this.registerGoingMenu}}
                   >
                     <:content>

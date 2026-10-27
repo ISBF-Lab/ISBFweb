@@ -670,7 +670,7 @@ export default class VoiceRoomPage extends Component {
                   <DMenu
                     @ariaLabel={{i18n "voice.stage.queue_title"}}
                     @identifier="voice-speak-queue-menu"
-                    @modalForMobile={{true}}
+                    @modalForMobile={{false}}
                     @placement="top-end"
                     @title={{i18n "voice.stage.queue_title"}}
                     @triggerClass="btn-default voice-speak-queue-trigger"
@@ -692,7 +692,7 @@ export default class VoiceRoomPage extends Component {
                   @ariaLabel={{i18n "voice.room.more"}}
                   @icon="ellipsis-vertical"
                   @identifier="voice-room-menu"
-                  @modalForMobile={{true}}
+                  @modalForMobile={{false}}
                   @placement="top-end"
                   @title={{i18n "voice.room.more"}}
                   @triggerClass="btn-default"

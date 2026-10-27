@@ -54,6 +54,7 @@ export default class DashboardDateRange extends Component {
       @maxWidth={{800}}
       @modalForMobile={{true}}
       @placement="bottom-end"
+      @surface="popover"
       @triggerClass="btn-default db-date-range__trigger"
     >
       <:content as |args|>

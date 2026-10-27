@@ -326,37 +326,21 @@ body:has(.isbf-resume-workspace) .powered-by-discourse {
     box-sizing: border-box;
     width: max-content;
     max-width: calc(100vw - 2 * var(--isbf-v2-space-4, 16px));
-    padding: var(--isbf-v2-space-2, 8px);
-    border: 1px solid var(--isbf-v2-border, var(--primary-low));
-    border-radius: var(--isbf-v2-radius-sm, 8px);
-    background: var(--isbf-v2-surface, var(--secondary));
-    box-shadow: var(--isbf-v2-shadow-menu);
-  }
-
-  .dropdown-menu {
-    padding: 0;
   }
 
   & &__item {
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    justify-content: center;
     width: 100%;
     min-height: 44px;
-    padding: var(--isbf-v2-space-2, 8px) var(--isbf-v2-space-3, 12px);
-    border: 0;
-    border-radius: var(--isbf-v2-radius-sm, 8px);
     color: var(--isbf-v2-text, var(--primary));
-    background: transparent;
     font-size: var(--isbf-v2-font-sm, 15px);
     font-weight: var(--isbf-v2-weight-medium, 600);
-    text-align: center;
 
     &:hover,
     &:focus-visible {
       color: var(--isbf-v2-text, var(--primary));
-      background: var(--isbf-v2-hover, var(--primary-very-low));
     }
   }
 }

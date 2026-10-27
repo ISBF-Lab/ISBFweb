@@ -217,6 +217,7 @@ export default class FKControlColor extends FKBaseControl {
             @icon="palette"
             @identifier="color-swatches-menu"
             @modalForMobile={{true}}
+            @surface="popover"
             @title={{@collapseSwatchesLabel}}
           >
             <:content as |args|>

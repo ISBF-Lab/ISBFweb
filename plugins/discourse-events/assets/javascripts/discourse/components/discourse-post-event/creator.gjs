@@ -129,7 +129,7 @@ export default class DiscoursePostEventCreator extends Component {
             <DMenu
               class="event-hosts__toggle"
               @identifier="discourse-post-event-hosts"
-              @modalForMobile={{true}}
+              @modalForMobile={{false}}
               @triggerComponent={{component
                 DButton
                 display="link"

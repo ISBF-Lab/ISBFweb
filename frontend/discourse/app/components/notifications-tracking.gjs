@@ -123,7 +123,7 @@ export default class NotificationsTracking extends Component {
       @autofocus={{false}}
       @contentClass={{@contentClass}}
       @identifier="notifications-tracking"
-      @modalForMobile={{true}}
+      @modalForMobile={{false}}
       @onRegisterApi={{this.registerDmenuApi}}
       @title={{@title}}
       @triggerClass={{dConcatClass

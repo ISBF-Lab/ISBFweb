@@ -39,7 +39,7 @@ export default class DAccessControlPermissionMenu extends Component {
       @autofocus={{false}}
       @disabled={{@disabled}}
       @identifier="d-access-control__permission-menu"
-      @modalForMobile={{true}}
+      @modalForMobile={{false}}
       @triggerComponent={{component
         PermissionTrigger
         disabled=@disabled

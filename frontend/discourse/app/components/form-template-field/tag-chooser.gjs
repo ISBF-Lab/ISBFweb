@@ -1,5 +1,4 @@
 import Component from "@glimmer/component";
-import { on } from "@ember/modifier";
 import { action, set } from "@ember/object";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import didUpdate from "@ember/render-modifiers/modifiers/did-update";
@@ -8,6 +7,7 @@ import { service } from "@ember/service";
 import { trustHTML } from "@ember/template";
 import { uniqueItemsFromArray } from "discourse/lib/array-tools";
 import { not } from "discourse/truth-helpers";
+import DSelect from "discourse/ui-kit/d-select";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 
@@ -146,7 +146,7 @@ export default class TagChooserField extends Component {
       {{didUpdate this.syncWithComposerTags this.composer.model.tags}}
     >
       {{#if @attributes.label}}
-        <label class="form-template-field__label">
+        <label class="form-template-field__label" for={{@id}}>
           {{@attributes.label}}
           {{#if @validations.required}}
             {{dIcon "asterisk" class="form-template-field__required-indicator"}}
@@ -160,12 +160,15 @@ export default class TagChooserField extends Component {
         </span>
       {{/if}}
 
-      <select
+      <DSelect
+        aria-label={{@attributes.label}}
         class="form-template-field__multi-select"
-        multiple={{@attributes.multiple}}
+        id={{@id}}
         name={{@id}}
         required={{if @validations.required "required" ""}}
-        {{on "input" this.handleInput}}
+        @includeNone={{false}}
+        @multiple={{@attributes.multiple}}
+        @onInput={{this.handleInput}}
       >
         {{#if @attributes.none_label}}
           <option
@@ -181,7 +184,7 @@ export default class TagChooserField extends Component {
             value={{choice.display}}
           >{{choice.display}}</option>
         {{/each}}
-      </select>
+      </DSelect>
     </div>
   </template>
 }

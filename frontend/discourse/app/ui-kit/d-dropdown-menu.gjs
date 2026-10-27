@@ -1,4 +1,7 @@
 import { hash } from "@ember/helper";
+import { notEq } from "discourse/truth-helpers";
+import dMenuHighlight from "discourse/ui-kit/modifiers/d-menu-highlight";
+import dRovingFocus from "discourse/ui-kit/modifiers/d-roving-focus";
 
 const DropdownItem = <template>
   <li class="dropdown-menu__item" ...attributes>{{yield}}</li>
@@ -13,7 +16,20 @@ const DropdownSubheader = <template>
 </template>;
 
 const DDropdownMenu = <template>
-  <ul class="dropdown-menu" ...attributes>
+  <ul
+    class="dropdown-menu"
+    ...attributes
+    {{(if
+      (notEq @manageFocus false)
+      (modifier
+        dRovingFocus
+        itemSelector=".dropdown-menu__item button, .dropdown-menu__item a[href], .dropdown-menu__item input[type='checkbox']"
+        orientation="vertical"
+        typeAhead=true
+      )
+    )}}
+    {{dMenuHighlight}}
+  >
     {{yield
       (hash
         item=DropdownItem divider=DropdownDivider subheader=DropdownSubheader

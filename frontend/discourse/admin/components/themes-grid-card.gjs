@@ -249,7 +249,7 @@ export default class ThemeCard extends Component {
                     <DMenu
                       @icon="ellipsis"
                       @identifier="theme-card__footer-menu"
-                      @modalForMobile={{true}}
+                      @modalForMobile={{false}}
                       @onRegisterApi={{this.onRegisterApi}}
                       @triggerClass="theme-card__footer-menu btn-flat"
                     >

@@ -1,0 +1,288 @@
+{
+  "verified_at": "2026-10-27T06:53:53.020780+00:00",
+  "CI": {
+    "head": "56ab53c8711d8607aec4045fb7d20b79fe257e02",
+    "run": 40458197074,
+    "job": 122036344698,
+    "native_frontend_tests": 1197,
+    "native_frontend_failed": 0,
+    "system_examples": 48,
+    "system_failed": 2,
+    "failed_scope": "Mobile profile preferences in light and dark modes; horizontal viewport containment",
+    "earlier_steps": "Types, lint, policies, shared dropdown, hold button, full theme, authentication and all native frontend behavior passed. Other document, asset and handoff workflows passed."
+  },
+  "cause": "Consumer field display rules could expose DSelect's internal native form carrier. In the development profile this produced a 584px document inside a 390px viewport.",
+  "fix": "Keep the carrier hidden using the semantic hidden attribute and the existing core hidden utility. Preserve its value, native event, validation and FormData contracts. Existing viewport assertions remain intact.",
+  "red": {
+    "component_assertions": 5,
+    "failed": 1,
+    "message": "theme field rules cannot expose a duplicate native control",
+    "page_width": 390,
+    "page_scroll_width": 584,
+    "fixture": "Initial regression used a template style element; final fixture injects the same consumer rule with afterEach cleanup to satisfy native lint. All five business assertions are retained."
+  },
+  "verification": {
+    "core_tests": 107,
+    "core_assertions": 261,
+    "failed": 0,
+    "client_errors": 0,
+    "page_combinations": 12,
+    "page_checks": 96,
+    "native_lint": "passed",
+    "menu_policy": "passed"
+  },
+  "page_layouts": [
+    {
+      "theme": "1",
+      "mobile": true,
+      "width": 390,
+      "scheme": "light",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "theme": "1",
+      "mobile": true,
+      "width": 390,
+      "scheme": "dark",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "theme": "1",
+      "mobile": true,
+      "width": 320,
+      "scheme": "light",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "theme": "1",
+      "mobile": true,
+      "width": 320,
+      "scheme": "dark",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "theme": "4",
+      "mobile": true,
+      "width": 390,
+      "scheme": "light",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "theme": "4",
+      "mobile": true,
+      "width": 390,
+      "scheme": "dark",
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "theme": "4",
+      "mobile": true,
+      "width": 320,
+      "scheme": "light",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "theme": "4",
+      "mobile": true,
+      "width": 320,
+      "scheme": "dark",
+      "geometry": {
+        "width": 320,
+        "scrollWidth": 320,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "theme": "1",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "light",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "theme": "1",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "dark",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "theme": "4",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "light",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    },
+    {
+      "theme": "4",
+      "mobile": false,
+      "width": 1440,
+      "scheme": "dark",
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "carriers": [
+          {
+            "display": "none",
+            "width": 0,
+            "hidden": true,
+            "ariaHidden": "true",
+            "tabIndex": -1
+          }
+        ]
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "source/frontend/discourse/app/ui-kit/d-select.gts",
+      "before_visibility_sha256": "91afa3782159557937aa62dce1e5f72534c4cfad7d8963ef53a7e16824c8d3be",
+      "sha256": "e935e8a831e9c50466445e87a94d08ef229748c4aff466fa348b9593840b81db",
+      "test_only": false
+    },
+    {
+      "path": "source/frontend/discourse/tests/integration/ui-kit/d-select-test.gjs",
+      "before_visibility_sha256": "f491fe52331105ed7c86fde54b6a1708e95a32828c6bd2555f5e03d8f43d6a40",
+      "sha256": "751701a2243c2fdd8b64614742648ced004fa4106da119d7680d361560ce5663",
+      "test_only": true
+    },
+    {
+      "path": "source/docs/design-system/dropdowns.md",
+      "before_visibility_sha256": "e19eb55134d21312cb0a3a39c9682ba1e855c97d9c0164802bef227ff6015b95",
+      "sha256": "300b2da261d87b3fae3fc705befdd9f9dbf5e4ca673fffbe85ef0408c94f4b6f",
+      "test_only": false
+    }
+  ],
+  "runtime_test_view_preserved": true,
+  "development_note": "The existing local login endpoint raised NoMethodError after hot reload. A documented ./dev restart restored it; only the local application was restarted, with no seed or configuration changes. Early login/fixture diagnostics are not successful checks.",
+  "patch_order": "Compare native-visibility-followup.patch after upcoming-select-followup.patch and native-followup.patch. Preserve unrelated runtime and theme differences.",
+  "boundary": "Scoped isolated development verification. No menu colors, radii or motion were changed. Earlier evidence retains its own scope; exact-head CI, merge and production publication remain pending."
+}

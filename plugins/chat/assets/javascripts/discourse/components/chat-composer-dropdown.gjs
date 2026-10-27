@@ -47,7 +47,7 @@ export default class ChatComposerDropdown extends Component {
         @disabled={{@isDisabled}}
         @icon="plus"
         @identifier="chat-composer-dropdown__menu"
-        @modalForMobile={{true}}
+        @modalForMobile={{false}}
         @placements={{array "top" "bottom"}}
         @title={{i18n "chat.composer.toggle_toolbar"}}
         {{on "dblclick" this.doubleClick}}

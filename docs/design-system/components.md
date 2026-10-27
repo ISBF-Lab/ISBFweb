@@ -543,6 +543,10 @@ C12正文提取规则补齐到通用话题链接及前台独立标题出口。�
 
 点赞及本人赞数心形的悬停使用既有love色，其余动作使用accent；移开恢复真实状态色。仅作用于本次互动区域，键盘焦点和禁用状态保留。
 
+## 2026-10-26 C06全站共享契约
+
+所有列表型下拉统一遵循[dropdowns.md](dropdowns.md)：DMenu／DDropdownMenu、DSelect／FormKit、SelectKit与DMultiSelect默认接入共享表面和高亮；24px面板、16px选项、8px内距。入口按用途保留，手机统一浮动，非菜单浮层明确标记popover。新增菜单使用共享入口并通过lint:menus，具体接口与验证见[本轮记录](reviews/dropdowns-20261026/README.md)。
+
 ## 2026-10-26 C01／C13通知长按标读
 
 [用户确认及实施记录](reviews/notifications-hold-20261026/README.md)只扩展当前用户通知页的“全部标为已读”操作：电脑与手机都在三点左侧使用44px文字胶囊按钮，手机文案“全部已读”。基于DButton的DHoldButton长按300ms，普通click不提交；长按完成后等待既有确认框或标读请求，成功才展示完成态，取消／失败复位。保留通知竞态保护、错误重试与菜单偏好。颜色和形状沿用现有token，其他按钮与菜单不因此获得新的外观批准。

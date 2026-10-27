@@ -780,7 +780,7 @@ export default class VoiceCallWidget extends Component {
               @ariaLabel={{i18n "voice.room.more"}}
               @icon="ellipsis-vertical"
               @identifier="voice-widget-room-menu"
-              @modalForMobile={{true}}
+              @modalForMobile={{false}}
               @placement="top-end"
               @title={{i18n "voice.room.more"}}
               @triggerClass="btn-default"

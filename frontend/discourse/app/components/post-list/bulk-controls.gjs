@@ -62,7 +62,7 @@ export default class PostListBulkControls extends Component {
               @icon="chevron-down"
               @identifier="post-list-bulk-actions-dropdown"
               @label={{i18n "post_list.bulk.actions"}}
-              @modalForMobile={{true}}
+              @modalForMobile={{false}}
               @onRegisterApi={{this.onRegisterApi}}
               @placement="bottom"
             >

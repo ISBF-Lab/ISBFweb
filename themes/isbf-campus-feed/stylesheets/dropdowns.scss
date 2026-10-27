@@ -1,0 +1,110 @@
+:root {
+  --d-menu-panel-radius: 24px;
+  --d-menu-row-radius: 16px;
+  --d-menu-padding: 8px;
+  --d-menu-font-size: 15px;
+  --d-menu-font-weight: 600;
+  --d-menu-row-height: 44px;
+  --d-menu-background: var(--secondary);
+  --d-menu-text: var(--primary);
+  --d-menu-muted: var(--primary-medium);
+  --d-menu-border: var(--primary-low);
+  --d-menu-highlight: var(--primary-very-low);
+  --d-menu-accent: var(--tertiary);
+  --d-menu-focus: var(--isbf-v2-focus-ring);
+  --d-menu-shadow: var(--isbf-v2-shadow-menu);
+}
+
+:root .d-menu-surface.d-menu-surface {
+  max-width: calc(100dvw - 32px);
+  max-height: min(55dvh, var(--d-menu-available-height, 55dvh));
+  overflow: hidden auto;
+  padding: var(--d-menu-padding);
+  border: 1px solid var(--d-menu-border);
+  border-radius: var(--d-menu-panel-radius);
+  background: var(--d-menu-background);
+  box-shadow: var(--d-menu-shadow);
+  color: var(--d-menu-text);
+  font-family: var(--isbf-v2-font-family);
+
+  [data-d-menu-row] {
+    min-height: var(--d-menu-row-height);
+    border-radius: var(--d-menu-row-radius);
+    background: transparent;
+    font-size: var(--d-menu-font-size);
+    font-weight: var(--d-menu-font-weight);
+    padding: 8px 12px;
+  }
+}
+
+.isbf-v2-account-menu__float {
+  width: min(280px, calc(100dvw - 32px));
+}
+
+.isbf-official-picker__trigger {
+  .d-icon-chevron-down {
+    order: 1;
+    width: 12px;
+    height: 12px;
+    color: var(--isbf-v2-muted);
+    transition: rotate 180ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  &[aria-expanded="true"] {
+    background: var(--isbf-v2-hover);
+
+    .d-icon-chevron-down {
+      rotate: 180deg;
+    }
+  }
+}
+
+.isbf-v2-account-menu__panel {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+}
+
+.isbf-notifications__menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+  border: 0;
+  border-radius: var(--isbf-v2-radius-pill);
+  background: transparent;
+}
+
+.isbf-notifications__menu-panel {
+  width: min(260px, calc(100dvw - 32px));
+}
+
+.isbf-explore-picker__content {
+  width: 100%;
+  min-width: 0;
+}
+
+.select-kit .d-menu-surface {
+  max-height: var(--d-menu-available-height, 55dvh);
+  overflow: auto;
+
+  .select-kit-collection {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .select-kit-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .isbf-official-picker__trigger .d-icon-chevron-down {
+    transition: none;
+  }
+}
