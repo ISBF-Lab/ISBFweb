@@ -289,18 +289,6 @@ export default class UserController extends Controller {
     ).canCheckEmails;
   }
 
-  get displayTopLevelAdminButton() {
-    if (!this.currentUser?.staff) {
-      return false;
-    }
-
-    if (this.siteSettings.sidebar_user_navigation) {
-      return false;
-    }
-
-    return this.site.desktopView;
-  }
-
   // Drives the body class the panel's stylesheet keys on. The panel is not
   // always in the DOM to be matched — collapsed, narrow and mobile all serve it
   // from the menu button instead — so the navs it replaces cannot key on it.

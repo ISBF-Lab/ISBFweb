@@ -447,15 +447,6 @@ export default <template>
                   </li>
                 {{/if}}
 
-                {{#if @controller.displayTopLevelAdminButton}}
-                  <li><a
-                      class="btn btn-default user-admin"
-                      href={{@controller.model.adminPath}}
-                    >{{dIcon "wrench"}}<span class="d-button-label">{{i18n
-                          "admin.user.show_admin_profile"
-                        }}</span></a></li>
-                {{/if}}
-
                 <PluginOutlet
                   @connectorTagName="li"
                   @name="user-profile-controls"
@@ -501,8 +492,7 @@ export default <template>
         <UserNav
           @canInviteToForum={{@controller.canInviteToForum}}
           @currentParentRoute={{@controller.currentParentRoute}}
-          @isMobileView={{@controller.site.mobileView}}
-          @isStaff={{@controller.currentUser.staff}}
+          @isAdmin={{@controller.currentUser.admin}}
           @showActivityTab={{@controller.showActivityTab}}
           @showBadges={{@controller.showBadges}}
           @showBookmarks={{@controller.showBookmarks}}
