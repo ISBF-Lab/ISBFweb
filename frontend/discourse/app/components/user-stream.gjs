@@ -11,7 +11,6 @@ import lazyHash from "discourse/helpers/lazy-hash";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import ClickTrack from "discourse/lib/click-track";
 import PostBulkSelectHelper from "discourse/lib/post-bulk-select-helper";
-import DiscourseURL from "discourse/lib/url";
 import Draft from "discourse/models/draft";
 import Post from "discourse/models/post";
 import dAvatar from "discourse/ui-kit/helpers/d-avatar";
@@ -102,27 +101,7 @@ export default class UserStreamComponent extends Component {
 
   @action
   async resumeDraft(item) {
-    if (this.composer.get("model.viewOpen")) {
-      this.composer.close();
-    }
-    if (item.get("postUrl")) {
-      DiscourseURL.routeTo(item.get("postUrl"));
-    } else {
-      try {
-        const draftData = await Draft.get(item.draft_key);
-        const draft = draftData.draft || item.data;
-        if (!draft) {
-          return;
-        }
-        this.composer.open({
-          draft,
-          draftKey: item.draft_key,
-          draftSequence: draftData.draft_sequence,
-        });
-      } catch (error) {
-        popupAjaxError(error);
-      }
-    }
+    await this.composer.resumeDraft(item);
   }
 
   @action

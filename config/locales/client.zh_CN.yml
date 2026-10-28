@@ -754,6 +754,7 @@ zh_CN:
       label: "草稿"
       label_with_count: "草稿 (%{count})"
       resume: "恢复"
+      not_found: "此草稿已不存在，草稿列表已刷新。"
       remove: "移除"
       remove_confirmation: "确定要删除此草稿吗？"
       bulk_delete: "删除所选"

@@ -76,18 +76,18 @@ export default class PostListItemDetails extends Component {
       <div class="stream-topic-title">
         <TopicStatus @disableActions={{true}} @topic={{@post}} />
         <span class="title">
-          {{#if this.url}}
-            <a
-              aria-label={{this.titleAriaLabel}}
-              href={{getURL this.url}}
-            >{{this.topicTitle}}</a>
-          {{else if @isDraft}}
+          {{#if @isDraft}}
             <DButton
               class="btn-transparent draft-title"
               @action={{fn @resumeDraft @post}}
             >
               {{or this.draftTitle (i18n "drafts.dropdown.untitled")}}
             </DButton>
+          {{else if this.url}}
+            <a
+              aria-label={{this.titleAriaLabel}}
+              href={{getURL this.url}}
+            >{{this.topicTitle}}</a>
           {{else}}
             {{this.topicTitle}}
           {{/if}}

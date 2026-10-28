@@ -1,10 +1,21 @@
 import { click, visit } from "@ember/test-helpers";
 import { IMAGE_VERSION } from "pretty-text/emoji/version";
 import { test } from "qunit";
+import draftsFixtures from "discourse/tests/fixtures/drafts";
 import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 
 acceptance("User Drafts", function (needs) {
   needs.user();
+
+  needs.pretender((server, helper) => {
+    server.get("/drafts/new_topic.json", () => {
+      const draft = draftsFixtures["/drafts.json"].drafts[0];
+      return helper.response({
+        draft: draft.data,
+        draft_sequence: draft.sequence,
+      });
+    });
+  });
 
   test("Stream", async function (assert) {
     await visit("/u/eviltrout/activity/drafts");
@@ -34,6 +45,16 @@ acceptance("User Drafts", function (needs) {
     assert.dom(".user-stream-item").exists("has drafts");
 
     await click(".user-stream-item .resume-draft");
+    assert
+      .dom(".d-editor-input")
+      .hasValue(/A fun new topic for testing drafts./);
+  });
+
+  test("Stream - resume by clicking the draft title", async function (assert) {
+    await visit("/u/eviltrout/activity/drafts");
+
+    await click(".user-stream-item .draft-title");
+
     assert
       .dom(".d-editor-input")
       .hasValue(/A fun new topic for testing drafts./);

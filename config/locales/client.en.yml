@@ -855,6 +855,7 @@ en:
       label: "Drafts"
       label_with_count: "Drafts (%{count})"
       resume: "Resume"
+      not_found: "This draft is no longer available. The drafts list has been refreshed."
       remove: "Remove"
       remove_confirmation: "Are you sure you want to delete this draft?"
       bulk_delete: "Delete selected"

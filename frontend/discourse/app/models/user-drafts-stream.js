@@ -74,7 +74,6 @@ export default class UserDraftsStream extends RestModel {
           draft.data = JSON.parse(draft.data);
           return cook(draft.data.reply).then((cooked) => {
             draft.excerpt = excerpt(cooked.toString(), 300);
-            draft.post_number = draft.data.postId || null;
             if (
               draft.draft_key.startsWith(NEW_PRIVATE_MESSAGE_KEY) ||
               draft.draft_key.startsWith(NEW_TOPIC_KEY)

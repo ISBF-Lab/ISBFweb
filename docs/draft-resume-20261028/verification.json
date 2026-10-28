@@ -1,0 +1,24 @@
+{
+  "qunit": {
+    "tests": 33,
+    "assertions": 125,
+    "failures": 0
+  },
+  "live_browser": {
+    "flows": 10,
+    "checks": 85,
+    "failures": 0,
+    "client_errors": 0
+  },
+  "menus": {
+    "tests": 5,
+    "scanned_files": 5933,
+    "findings": 0
+  },
+  "rspec": "Not run: discourse_test is absent; dry-run fails while loading the test environment.",
+  "post_list": {
+    "tests": 20,
+    "assertions": 39,
+    "failures": 0
+  }
+}
