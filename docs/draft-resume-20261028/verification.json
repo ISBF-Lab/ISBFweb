@@ -20,5 +20,18 @@
     "tests": 20,
     "assertions": 39,
     "failures": 0
+  },
+  "ci_regression": {
+    "tests": 48,
+    "assertions": 151,
+    "failures": 0,
+    "client_errors": 0,
+    "includes": "Draft service/models/acceptance, user routes and both flat/nested topic draft-opening routes"
+  },
+  "pr_checks": {
+    "native_lint": true,
+    "menu_tests": 5,
+    "menu_scanned_files": 5841,
+    "menu_findings": 0
   }
 }

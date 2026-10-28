@@ -137,6 +137,11 @@ module("Unit | Service | composer draft resume", function (hooks) {
   test("opens a topic-level reply even when the loaded page has no draft", async function (assert) {
     delete this.savedDraft.postId;
     this.topic.set("draft", null);
+    const transitionTo = this.router.transitionTo.bind(this.router);
+    sinon.stub(this.router, "transitionTo").callsFake((url) => {
+      assert.strictEqual(this.composer.resumingDraftTopicId, 280);
+      return transitionTo(url);
+    });
 
     await this.composer.resumeDraft(this.item);
 
@@ -145,6 +150,7 @@ module("Unit | Service | composer draft resume", function (hooks) {
     assert.strictEqual(this.composer.model.topic.id, 280);
     assert.strictEqual(this.composer.model.reply, this.savedDraft.reply);
     assert.strictEqual(this.composer.model.post, null);
+    assert.strictEqual(this.composer.resumingDraftTopicId, null);
   });
 
   test("restores a new topic without leaving the drafts page", async function (assert) {

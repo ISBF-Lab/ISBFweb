@@ -220,7 +220,7 @@ export default class TopicFromParams extends DiscourseRoute {
     if (
       !isEmpty(topic.draft) &&
       !EmbedMode.enabled &&
-      !this.composer.isResumingDraft
+      String(topic.id) !== String(this.composer.resumingDraftTopicId)
     ) {
       this.composer.open({
         draft: Draft.getLocal(topic.draft_key, topic.draft),
@@ -508,7 +508,7 @@ export default class TopicFromParams extends DiscourseRoute {
     if (
       !isEmpty(model.topic.draft) &&
       !EmbedMode.enabled &&
-      !this.composer.isResumingDraft
+      String(model.topic.id) !== String(this.composer.resumingDraftTopicId)
     ) {
       this.composer.open({
         draft: Draft.getLocal(model.topic.draft_key, model.topic.draft),

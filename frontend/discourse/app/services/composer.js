@@ -142,6 +142,7 @@ export default class ComposerService extends Service {
   @service toasts;
 
   @tracked isResumingDraft = false;
+  @tracked resumingDraftTopicId = null;
   @tracked selectedTranslationLocale = null;
   messageCount = null;
   showEditReason = false;
@@ -1752,6 +1753,7 @@ export default class ComposerService extends Service {
           topicId,
           post?.post_number
         );
+        this.resumingDraftTopicId = topicId;
         navigating = true;
         await this.router.transitionTo(withoutPrefix(url));
         navigating = false;
@@ -1793,6 +1795,7 @@ export default class ComposerService extends Service {
       }
     } finally {
       this.router.off("routeWillChange", onRouteWillChange);
+      this.resumingDraftTopicId = null;
       this.isResumingDraft = false;
     }
   }
