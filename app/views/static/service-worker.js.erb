@@ -51,11 +51,6 @@ function focusOrOpenWindow(event) {
     });
 
     var reusedClientWindow = topLevelClients.some(function (client) {
-      if (client.url === baseUrl + url && "focus" in client) {
-        client.focus();
-        return true;
-      }
-
       if ("postMessage" in client && "focus" in client) {
         client.focus();
         client.postMessage({ url: url });
