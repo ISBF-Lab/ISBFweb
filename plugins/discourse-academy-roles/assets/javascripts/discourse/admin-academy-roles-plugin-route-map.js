@@ -3,6 +3,13 @@ export default {
   path: "/plugins",
 
   map() {
+    this.route(
+      "academy-student-group-batches",
+      { path: "student-group-batches" },
+      function () {
+        this.route("batch", { path: "/:batch_id" });
+      }
+    );
     this.route("academy-moderator-permissions", {
       path: "moderator-permissions",
     });

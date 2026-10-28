@@ -44,7 +44,7 @@ jobs:
   quota:
     needs: formatting
     runs-on: ubuntu-latest
-    container: discourse/discourse_test:release
+    container: discourse/discourse_test@sha256:94eca5318fed6171264b95204914de76a113c305cebb72d9fa9527e2c4496494
     timeout-minutes: 35
     defaults:
       run:
@@ -67,6 +67,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           path: candidate
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           sparse-checkout: plugins/discourse-academy-roles
           persist-credentials: false
       - uses: actions/checkout@v4
