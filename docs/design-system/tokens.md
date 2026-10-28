@@ -413,3 +413,7 @@ A08/C02 新增经用户确认的局部排布：卡片 1:1，面板内容宽度 6
 ## 2026-10-27 热门榜单局部组合
 
 根`/top`复用surface/text/muted/border/accent/focus-ring、space-4内距及space-3列间距；标题font-lg/weight-medium最多两行、摘要font-sm一行、元信息和统计font-xs。排名基础宽度space-6，前三名使用accent；周期入口44px最小高、radius-sm，面板沿用共享菜单契约。局部组合来自本次用户确认，不新增全局token。[来源与验证](reviews/top-topics-20261027/README.md)。
+
+## 2026-10-28 桌面账号菜单布局
+
+账号菜单包裹布局继续使用现有菜单24px／16px圆角、8px内距、1px边框和既有椭圆卡片。宽高按实际卡片测量，仅新增布局变量，不产生颜色、圆角或阴影token。范围见[本轮记录](reviews/account-menu-enclosure-20261028/README.md)。

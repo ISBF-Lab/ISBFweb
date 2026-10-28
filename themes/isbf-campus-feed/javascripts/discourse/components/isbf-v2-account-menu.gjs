@@ -1,8 +1,9 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { array } from "@ember/helper";
+import { array, concat } from "@ember/helper";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
+import { modifier } from "ember-modifier";
 import { themePrefix } from "virtual:theme";
 import Form from "discourse/components/form";
 import PluginOutlet from "discourse/components/plugin-outlet";
@@ -29,6 +30,7 @@ export default class ISBFV2AccountMenu extends Component {
   @tracked isBusy = false;
   @tracked isLinkFormOpen = false;
   @tracked isLinkedAccountsOpen = false;
+  @tracked isEnclosed = false;
   @tracked isOpen = false;
   @tracked isSwitchAccessDenied = false;
   @tracked linkedAccounts = [];
@@ -36,8 +38,31 @@ export default class ISBFV2AccountMenu extends Component {
   @tracked verificationData = {};
   @tracked verificationLinkId;
 
+  layout = modifier((element) => {
+    this.#rootElement = element;
+    const update = () => this.#scheduleLayout();
+    const observer = new ResizeObserver(update);
+    observer.observe(element);
+    window.addEventListener("resize", update);
+    window.visualViewport?.addEventListener("resize", update);
+    update();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", update);
+      window.visualViewport?.removeEventListener("resize", update);
+      if (this.#layoutFrame !== null) {
+        cancelAnimationFrame(this.#layoutFrame);
+        this.#layoutFrame = null;
+      }
+    };
+  });
+
   #rootElement;
+  #baseMenuOptions;
   #menu;
+  #layoutFrame = null;
+  #layoutKey = "";
 
   willDestroy() {
     super.willDestroy(...arguments);
@@ -88,8 +113,18 @@ export default class ISBFV2AccountMenu extends Component {
 
   @action
   registerMenu(menu) {
-    this.#menu = menu;
+    if (this.#menu !== menu) {
+      this.#menu = menu;
+      this.#baseMenuOptions = menu.options;
+      this.#layoutKey = "";
+    }
     this.#rootElement = menu.triggerElement.closest(".isbf-v2-account-menu");
+    this.#scheduleLayout();
+  }
+
+  @action
+  anchorElement() {
+    return this.isEnclosed ? this.#rootElement : null;
   }
 
   @action
@@ -159,7 +194,7 @@ export default class ISBFV2AccountMenu extends Component {
       !event.currentTarget.contains(event.relatedTarget) &&
       !this.#menu?.content?.contains(event.relatedTarget)
     ) {
-      this.closeMenu();
+      this.#menu?.close({ focusTrigger: false });
     }
   }
 
@@ -343,7 +378,77 @@ export default class ISBFV2AccountMenu extends Component {
 
   #showMenu(target) {
     this.#rootElement = target.closest(".isbf-v2-account-menu");
+    this.#syncLayout();
     this.#menu?.show();
+  }
+
+  #scheduleLayout() {
+    if (this.#layoutFrame !== null || this.isDestroying) {
+      return;
+    }
+
+    this.#layoutFrame = requestAnimationFrame(() => {
+      this.#layoutFrame = null;
+      if (!this.isDestroying) {
+        this.#syncLayout();
+      }
+    });
+  }
+
+  #syncLayout() {
+    const root = this.#rootElement;
+    if (!root?.isConnected || !this.#menu || !this.#baseMenuOptions) {
+      return;
+    }
+
+    const profile = root.querySelector(".isbf-v2-side__account");
+    const enclosed = Boolean(
+      !this.args.mobile &&
+      profile &&
+      getComputedStyle(profile).display !== "none"
+    );
+    const rect = root.getBoundingClientRect();
+    const style = getComputedStyle(root);
+    const width = parseFloat(style.width) || rect.width;
+    const height = parseFloat(style.height) || rect.height;
+    const scaleY = rect.height > 0 && height > 0 ? rect.height / height : 1;
+    const padding = parseFloat(style.getPropertyValue("--d-menu-padding")) || 8;
+    const border =
+      parseFloat(style.getPropertyValue("--isbf-v2-border-width")) || 1;
+    const viewportPadding =
+      parseFloat(style.getPropertyValue("--isbf-v2-space-4")) || 16;
+    const outset = padding + border;
+    const frameHeight = Math.max(
+      0,
+      (rect.bottom -
+        (window.visualViewport?.offsetTop ?? 0) -
+        viewportPadding) /
+        scaleY +
+        outset
+    );
+    const key = [enclosed, width, height, padding, border, frameHeight].join(
+      ":"
+    );
+    if (this.#layoutKey === key) {
+      return;
+    }
+    this.#layoutKey = key;
+
+    root.style.setProperty("--isbf-account-card-width", `${width}px`);
+    root.style.setProperty("--isbf-account-card-height", `${height}px`);
+    root.style.setProperty("--isbf-account-card-outset", `${outset}px`);
+    root.style.setProperty("--isbf-account-frame-height", `${frameHeight}px`);
+    this.isEnclosed = enclosed;
+    this.#menu.options = enclosed
+      ? {
+          ...this.#baseMenuOptions,
+          inline: true,
+          placement: "top",
+          offset: -(height + outset),
+          padding: { top: viewportPadding, right: 0, bottom: 0, left: 0 },
+          visibilityOptimizer: "none",
+        }
+      : this.#baseMenuOptions;
   }
 
   async #signOut() {
@@ -364,11 +469,16 @@ export default class ISBFV2AccountMenu extends Component {
   <template>
     {{#if this.currentUser}}
       <div
-        class={{if
-          @mobile
-          "isbf-v2-account-menu isbf-v2-account-menu--mobile"
-          "isbf-v2-account-menu isbf-v2-account-menu--side"
+        class={{concat
+          (if
+            @mobile
+            "isbf-v2-account-menu isbf-v2-account-menu--mobile"
+            "isbf-v2-account-menu isbf-v2-account-menu--side"
+          )
+          (if this.isEnclosed " is-enclosed")
+          (if this.isOpen " is-open")
         }}
+        {{this.layout @mobile}}
         {{on "focusin" this.openMenu}}
         {{on "focusout" this.onFocusOut}}
         {{on "mouseenter" this.openMenu}}
@@ -397,6 +507,7 @@ export default class ISBFV2AccountMenu extends Component {
         {{/unless}}
 
         <DMenu
+          @anchorElement={{this.anchorElement}}
           @ariaLabel={{i18n (themePrefix "isbf_v2.account_actions")}}
           @contentClass="isbf-v2-account-menu__float"
           @hoverGracePeriod={{250}}
@@ -687,6 +798,10 @@ export default class ISBFV2AccountMenu extends Component {
                 @{{this.currentUser.username}}
               </button>
             </div>
+            <div
+              aria-hidden="true"
+              class="isbf-v2-account-menu__card-space"
+            ></div>
           </:content>
         </DMenu>
       </div>
