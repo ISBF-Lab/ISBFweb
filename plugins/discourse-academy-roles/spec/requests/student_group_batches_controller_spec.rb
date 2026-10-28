@@ -164,12 +164,20 @@ RSpec.describe DiscourseAcademyRoles::Admin::StudentGroupBatchesController do
 
   describe "preview, execute and undo" do
     it "keeps preview read-only, executes the confirmed list, restores a batch after refresh and undoes only confirmed changes" do
+      student_group = Fabricate(:group)
+      student_group.add(registration.user)
       sign_in(developer)
-      post "#{base}/preview.json", params: preview_params, as: :json
+      post "#{base}/preview.json",
+           params: preview_params.merge(remove_group_ids: [student_group.id]),
+           as: :json
       expect(response.status).to eq(200)
       result = response.parsed_body
       batch_id = result.fetch("batch").fetch("id")
       item_id = result.fetch("items").sole.fetch("id")
+      expect(result.fetch("batch")).to include(
+        "add_groups" => [{ "id" => target.id, "name" => target.name }],
+        "remove_groups" => [{ "id" => student_group.id, "name" => student_group.name }],
+      )
       expect(result.fetch("items").sole).to include(
         "student_number" => registration.student_number,
         "selectable" => true,
@@ -190,6 +198,10 @@ RSpec.describe DiscourseAcademyRoles::Admin::StudentGroupBatchesController do
       post "#{base}/#{batch_id}/undo-preview.json", as: :json
       expect(response.status).to eq(200)
       undo = response.parsed_body
+      expect(undo.fetch("batch")).to include(
+        "add_groups" => [{ "id" => student_group.id, "name" => student_group.name }],
+        "remove_groups" => [{ "id" => target.id, "name" => target.name }],
+      )
       expect(GroupUser.exists?(group: target, user_id: registration.user_id)).to eq(true)
       post "#{base}/#{undo.fetch("batch").fetch("id")}/execute.json",
            params: {
@@ -199,6 +211,7 @@ RSpec.describe DiscourseAcademyRoles::Admin::StudentGroupBatchesController do
       expect(response.status).to eq(200)
       Jobs::AcademyStudentGroupBatch.new.execute(batch_id: undo.fetch("batch").fetch("id"))
       expect(GroupUser.exists?(group: target, user_id: registration.user_id)).to eq(false)
+      expect(GroupUser.exists?(group: student_group, user_id: registration.user_id)).to eq(true)
     end
   end
 

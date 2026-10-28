@@ -31,14 +31,14 @@ class DiscourseAcademyRoles::StudentGroupBatchSerializer < ApplicationSerializer
   def add_groups
     object
       .plan
-      .fetch("add_group_ids")
+      .fetch(object.undo? ? "remove_group_ids" : "add_group_ids")
       .map { |id| { id:, name: object.plan.dig("groups", id.to_s, "name") } }
   end
 
   def remove_groups
     object
       .plan
-      .fetch("remove_group_ids")
+      .fetch(object.undo? ? "add_group_ids" : "remove_group_ids")
       .map { |id| { id:, name: object.plan.dig("groups", id.to_s, "name") } }
   end
 
