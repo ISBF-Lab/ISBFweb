@@ -170,6 +170,13 @@ jobs:
           LOAD_PLUGINS: "0"
         run: bin/qunit --standalone frontend/discourse/tests/integration/ui-kit/d-hold-button-test.gjs
 
+      - name: Device notification navigation regression
+        env:
+          LOAD_PLUGINS: "0"
+        run: |
+          bin/rspec spec/requests/service_worker_notification_navigation_spec.rb
+          bin/qunit --standalone frontend/discourse/tests/acceptance/push-notification-navigation-test.js
+
       - name: Project theme QUnit
         id: theme_qunit
         env:

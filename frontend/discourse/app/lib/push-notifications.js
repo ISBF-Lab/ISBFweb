@@ -1,6 +1,7 @@
 import { ajax } from "discourse/lib/ajax";
 import { helperContext } from "discourse/lib/helpers";
 import KeyValueStore from "discourse/lib/key-value-store";
+import DiscourseURL from "discourse/lib/url";
 
 export const keyValueStore = new KeyValueStore("discourse_push_notifications_");
 
@@ -73,7 +74,7 @@ export function register(user, router, appEvents) {
 
   navigator.serviceWorker.addEventListener("message", (event) => {
     if ("url" in event.data) {
-      router.transitionTo(event.data.url);
+      DiscourseURL.routeTo(event.data.url);
       appEvents.trigger("push-notification-opened", { url: event.data.url });
     }
   });
