@@ -1,0 +1,165 @@
+{
+  "recorded_at": "2026-10-27T17:10:28.194966+00:00",
+  "design_status": "User-approved plan; final visual acceptance pending",
+  "production_deployed": false,
+  "source_root": "external/active-theme",
+  "source_files": {
+    "javascripts/discourse/api-initializers/isbf-top-topics.gjs": {
+      "sha256": "a9f5e3683e6aafe8c7238ddad55f1af7daeee934e43d5f714595867011c1fd98",
+      "before_sha256": null
+    },
+    "javascripts/discourse/lib/top-topics-scope.js": {
+      "sha256": "48a92a20da10dbbbef29a7d0e8218abe09c0f5c5fb066a81b31ad7df4b6107aa",
+      "before_sha256": null
+    },
+    "javascripts/discourse/components/isbf-top-topics-area.gjs": {
+      "sha256": "368178751ad3ec599528dd4311bf6c3e19a94a7bc9173c8b2b6380d9d6b5a48f",
+      "before_sha256": null
+    },
+    "javascripts/discourse/components/isbf-top-topics.gjs": {
+      "sha256": "aae2f084fe63888bef363d52a1bc262740ac862a7d2f15f0ea02ac57cb31648b",
+      "before_sha256": null
+    },
+    "javascripts/discourse/components/isbf-top-topics-item.gjs": {
+      "sha256": "f3795fd8331a78597d34401564365931b688449d5abb0df2afc0d411c437d4fa",
+      "before_sha256": null
+    },
+    "javascripts/discourse/components/isbf-v2-shell.gjs": {
+      "sha256": "48bf962ca7b8d55b409e8594fcc15f90ed374f6c12a7f82828e6021f0a05909c",
+      "before_sha256": "b5ef891d61a81fab83be0bd90ef3313ad4e4a86ea9378138b370d0649eb234b1"
+    },
+    "common/common.scss": {
+      "sha256": "08bbc3269850d6fe6c543136b472dab4154a4ddfd50be125e80ba2e9c5fa67b6",
+      "before_sha256": "c4fef037a9f67af4f2f005c5c2f5a1c79d9430c892528bf419fd13f0cb294583"
+    },
+    "stylesheets/top-topics.scss": {
+      "sha256": "dd0d858647358c0313dcdbe6e42052abf22f8f66b69f10149e8fae456b585292",
+      "before_sha256": null
+    },
+    "locales/en.yml": {
+      "sha256": "78ee0059b8a870ca87230c47b6bb49fd8658d5587815d40c6938b3d9a6f7e130",
+      "before_sha256": "4b01dd9bd93d363de5eccc91ae3471b30d635d1e134d815bf58c97c64ebe796f"
+    },
+    "locales/zh_CN.yml": {
+      "sha256": "6e08e02264c618a52a09e354066ea57d79649bb47476d8502a3124aa5b8e1caa",
+      "before_sha256": "8fbce3b6803190093ebb8b79c072d193acecabeaabb2191c1284a4d4f704fdea"
+    },
+    "test/integration/top-topics-test.gjs": {
+      "sha256": "261c48b4fd1bc6a25646ec77191e86eb1a8bb494277ca52811153c97fc607d50",
+      "before_sha256": null
+    },
+    "test/acceptance/top-topics-test.js": {
+      "sha256": "18a55d3f5b86949dfff54dd684db5f73b059198bf4aa2fa0d9fa337fd9ee7d5c",
+      "before_sha256": null
+    }
+  },
+  "reference_image": {
+    "path": "reference.png",
+    "sha256": "7722636e562c499f2b48cf8d98176a3d39a7b3d81a6f2b9a8d2dc7206f970157"
+  },
+  "verification": {
+    "targeted_tests": 7,
+    "assertions": 48,
+    "failures": 0,
+    "menus_tests": 5,
+    "menu_policy_files": 5933,
+    "menu_policy_findings": 0,
+    "browser_checks": 56,
+    "browser_errors": [],
+    "viewports": [
+      1440,
+      1024,
+      601,
+      600,
+      390,
+      320
+    ],
+    "color_modes": [
+      "light",
+      "dark"
+    ],
+    "theme_compiler_errors": 0
+  },
+  "development_sync": {
+    "fields": 299,
+    "preserved_fields": 287,
+    "preserved_settings": 7,
+    "controlled_fields": 12
+  },
+  "evidence": {
+    "lint.log": "b0482f15b6e7bc690950be4c69a98b7e4e947e2a7aa370791a8d35e0bbafbc65",
+    "qunit.json": "ca7c82f941109f97d1d0dd9b63340efb4cefb3664fa952758943c9914cfd8625",
+    "flows.json": "ff2ceffde3db8342ece5efb09c0f06b72d11400a249276ce8bf5ace1c864e7ac"
+  },
+  "screenshots": {
+    "baseline-390-dark.png": "e3afc04d2c8dcd00390f0e37dc85389e1ad91332f3151252ad8e31ae2d07d24c",
+    "preview-390-dark.png": "e0ccaaf2808d271c3e064fdae44cab7ee90424556e351cb13b01bd9fade701bf",
+    "preview-320-dark.png": "8f44c7e8080fc4fee87dc013e901e3f02b376af22262a03775d6fd0216aaa577",
+    "baseline-390-light.png": "a5c5e30f9c14159a5122355d02b2c748795e8713f79567a45d24c47d5f47c331",
+    "preview-1440-light.png": "886b0b901d145c04ea8386593136bff84227d6a226073355cf90336713ca7e67",
+    "preview-390-light.png": "917c0f88766be41973adae8a37b3008042e6378f32342110977f711f6fc2240f",
+    "baseline-1440-dark.png": "c45bab1940667482ee67609ef967be0ff19fe6cd8ba8c2fc756419ba805512ac",
+    "preview-1440-dark.png": "e9f8c7249f681bfa133b55b7473c7fb6586669a7811ecc7c4298c31babfc4793",
+    "baseline-1440-light.png": "37cb2951bb38a526e8158b423f68f6aff8db747dab6357cbd7db1b53e449b1f1",
+    "preview-320-light.png": "70959e56871e0692d88aa56136d0941f927c492c866910acd4403975346b067f",
+    "flows-390-dark.png": "15df78431166d7a67b3fb4f5539b89e5411a5375d48edfcb13f477673b5308d2",
+    "flows-1440-light.png": "4e16e5b6829c3806091359845cd3c697a6a051eb3d44e405583f2acbfba48e83",
+    "flows-1440-dark.png": "2a386a925d99196c8fe9102bd3302a471f506fc6be8137aa85e8663a3640d9f9",
+    "flows-390-light.png": "eca1ff8d8f988e75e70885c6a43324e7bde3bfd2e2d92a3b8f4e2ac52a09f8a1"
+  },
+  "pull_request": {
+    "base_commit": "f27e719225cc4ba785602fd4941fa59c89657201",
+    "source_files": [
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-top-topics.gjs",
+        "sha256": "a9f5e3683e6aafe8c7238ddad55f1af7daeee934e43d5f714595867011c1fd98"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/lib/top-topics-scope.js",
+        "sha256": "48a92a20da10dbbbef29a7d0e8218abe09c0f5c5fb066a81b31ad7df4b6107aa"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-top-topics-area.gjs",
+        "sha256": "368178751ad3ec599528dd4311bf6c3e19a94a7bc9173c8b2b6380d9d6b5a48f"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-top-topics.gjs",
+        "sha256": "aae2f084fe63888bef363d52a1bc262740ac862a7d2f15f0ea02ac57cb31648b"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-top-topics-item.gjs",
+        "sha256": "f3795fd8331a78597d34401564365931b688449d5abb0df2afc0d411c437d4fa"
+      },
+      {
+        "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+        "sha256": "457141ac16087952d2fd3d281478cbfcbe19060f8ce65183332b90e3ae95927d"
+      },
+      {
+        "path": "themes/isbf-campus-feed/common/common.scss",
+        "sha256": "7ab43d0d13e5c5a1bc34de2c7e591da0dce7d2afa186c872948b513df15d6d79"
+      },
+      {
+        "path": "themes/isbf-campus-feed/stylesheets/top-topics.scss",
+        "sha256": "dd0d858647358c0313dcdbe6e42052abf22f8f66b69f10149e8fae456b585292"
+      },
+      {
+        "path": "themes/isbf-campus-feed/locales/en.yml",
+        "sha256": "24111d8c0f8b1e7ed3be91b68a576e96ad251b20856e22ac83c633453b2b6de6"
+      },
+      {
+        "path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+        "sha256": "5fa255987bb61b35dc30d535b1a760bc327914d708d257313b1ef4e0bd1b40e4"
+      },
+      {
+        "path": "themes/isbf-campus-feed/test/integration/top-topics-test.gjs",
+        "sha256": "261c48b4fd1bc6a25646ec77191e86eb1a8bb494277ca52811153c97fc607d50"
+      },
+      {
+        "path": "themes/isbf-campus-feed/test/acceptance/top-topics-test.js",
+        "sha256": "18a55d3f5b86949dfff54dd684db5f73b059198bf4aa2fa0d9fa337fd9ee7d5c"
+      }
+    ],
+    "runtime_workspace_preserved": true,
+    "screenshots_committed": false
+  }
+}

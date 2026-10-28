@@ -27,7 +27,7 @@ import urllib.parse
 import urllib.request
 import uuid
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 MAX_RESPONSE = 8 * 1024**2
 ACTIVE = {"waiting", "ready", "sending", "queued", "delivery_unknown"}
 SUCCESS = {"success", "neutral", "skipped"}
@@ -67,6 +67,20 @@ def git(cwd, *args):
     if result.returncode:
         raise HandoffError("Git failed: " + result.stderr.strip()[:300])
     return result.stdout.strip()
+
+
+
+def strip_windows_extended_prefix(value):
+    value = os.fspath(value)
+    if value.startswith("\\\\?\\UNC\\"):
+        return "\\\\" + value[8:]
+    if value.startswith("\\\\?\\"):
+        return value[4:]
+    return value
+
+
+def canonical_path(value):
+    return Path(strip_windows_extended_prefix(value)).resolve()
 
 
 def common_directory(cwd):
@@ -244,8 +258,8 @@ class Desktop:
 
     def check(self, thread_id, cwd):
         thread = self.thread(thread_id)
-        owner = Path(thread["cwd"]).resolve()
-        target = Path(cwd).resolve()
+        owner = canonical_path(thread["cwd"])
+        target = canonical_path(cwd)
         if common_directory(owner) != common_directory(
             target
         ) and not target.is_relative_to(owner / "repos"):
@@ -728,7 +742,7 @@ def ensure_worker(store):
 
 
 def register(store, args):
-    cwd = Path(git(args.cwd, "rev-parse", "--show-toplevel")).resolve()
+    cwd = canonical_path(git(args.cwd, "rev-parse", "--show-toplevel"))
     thread_id = args.thread or os.environ.get("CODEX_THREAD_ID")
     if not thread_id:
         raise HandoffError("Missing CODEX_THREAD_ID; provide the exact --thread UUID")

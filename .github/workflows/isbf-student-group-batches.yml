@@ -1,0 +1,144 @@
+name: Student number group batch integration
+
+on:
+  pull_request:
+    paths:
+      - "plugins/discourse-academy-roles/**"
+      - ".github/workflows/isbf-student-group-batches.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: student-group-batches-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native-integration:
+    runs-on: ubuntu-latest
+    container: discourse/discourse_test@sha256:94eca5318fed6171264b95204914de76a113c305cebb72d9fa9527e2c4496494
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+        working-directory: discourse
+    env:
+      RAILS_ENV: test
+      PGUSER: discourse
+      PGPASSWORD: discourse
+      LOAD_PLUGINS: "1"
+      PARALLEL_TEST_PROCESSORS: "1"
+      CAPYBARA_DEFAULT_MAX_WAIT_TIME: "20"
+      QUNIT_PARALLEL: "1"
+      QUNIT_REUSE_BUILD: "1"
+      NODE_OPTIONS: --max-old-space-size=2048
+      CHEAP_SOURCE_MAPS: "1"
+      EMBER_ENV: development
+      PLAYWRIGHT_BROWSERS_PATH: /home/discourse/.cache/ms-playwright
+      DBUS_SESSION_BUS_ADDRESS: unix:path=/dev/null
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: candidate
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          sparse-checkout: plugins/discourse-academy-roles
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: 132cc95d043db01251eedf9c93b3927cd5ffee91
+          path: discourse
+          persist-credentials: false
+      - name: Check out the fixed learning plugin dependency
+        uses: actions/checkout@v4
+        with:
+          ref: 867a0bbc25a446593c223d5b63261e3d1ac9fcb6
+          path: runtime-plugins
+          sparse-checkout: plugins/isbf-learning
+          persist-credentials: false
+      - name: Prepare dependencies for the fixed native runtime
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/discourse"
+          redis-server /etc/redis/redis.conf --daemonize yes --logfile ""
+          chown -R postgres /var/run/postgresql
+          sudo -E -u postgres script/start_test_db.rb
+          sudo -u postgres psql -c "CREATE ROLE discourse LOGIN SUPERUSER PASSWORD 'discourse';"
+          ln -s /var/www/discourse/vendor/bundle vendor/bundle
+          bundle config --local path vendor/bundle
+          bundle config --local deployment true
+          bundle config --local without ""
+          bundle install --jobs 1
+          pnpm install --frozen-lockfile
+      - name: Prepare the unchanged native schema for generator boot
+        run: bin/rake db:create db:migrate
+      - name: Overlay the candidate identity plugin and fixed learning dependency
+        id: overlay
+        run: |
+          test -d plugins/discourse-academy-roles
+          test ! -L plugins/discourse-academy-roles
+          rm -r plugins/discourse-academy-roles
+          cp -a ../candidate/plugins/discourse-academy-roles plugins/discourse-academy-roles
+          test ! -e plugins/isbf-learning
+          cp -a ../runtime-plugins/plugins/isbf-learning plugins/isbf-learning
+          mkdir -p tmp
+          git -C ../candidate rev-parse HEAD > tmp/student-group-source-sha.txt
+          git -C ../runtime-plugins rev-parse HEAD > tmp/student-group-learning-source-sha.txt
+      - name: Finalize schema migration with the native Rails generator
+        run: python3 plugins/discourse-academy-roles/scripts/generate-student-group-migration.py
+      - name: Native syntax and formatting for batch feature files
+        id: formatting
+        run: |
+          mkdir -p tmp
+          python3 plugins/discourse-academy-roles/scripts/student-group-check-files.py > tmp/student-group-files.txt
+          while IFS= read -r source; do sha256sum "$source"; done < tmp/student-group-files.txt > tmp/student-group-before.sha256
+          xargs -d '\n' bin/lint --fix < tmp/student-group-files.txt
+          sha256sum --check tmp/student-group-before.sha256
+      - name: Prepare isolated database and plugin migration
+        id: database
+        if: always() && steps.formatting.outcome != 'skipped'
+        run: bin/rake db:create db:migrate
+      - name: Regenerate native schema dump and model annotations
+        if: always() && steps.database.outcome == 'success'
+        run: bin/rake db:dump_structure annotate:clean
+      - name: Identity plugin and native group lifecycle regression
+        if: always() && steps.database.outcome == 'success'
+        env:
+          RSPEC_SEED: "16771"
+        run: |
+          set -o pipefail
+          bin/rake "plugin:spec[discourse-academy-roles]" | tee tmp/student-group-rspec.log
+      - name: Build native Admin FormKit components
+        id: assets
+        if: always() && steps.database.outcome == 'success'
+        run: |
+          pnpm playwright-install
+          script/assemble_ember_build.rb
+          mkdir -p "$HOME/.pki/nssdb" "$HOME/.local/share/pki/nssdb"
+          dbus-daemon --system --fork 2>/dev/null || true
+          isbf_bus_address=$(dbus-daemon --session --fork --print-address 2>/dev/null)
+          echo "DBUS_SESSION_BUS_ADDRESS=$isbf_bus_address" >> "$GITHUB_ENV"
+      - name: Native Admin batch form and selections
+        if: always() && steps.assets.outcome == 'success'
+        run: |
+          set -o pipefail
+          bin/qunit --standalone --target discourse-academy-roles --filter AcademyStudentGroup | tee tmp/student-group-qunit.log
+      - name: Real developer preview, execution, undo and responsive Admin pages
+        if: always() && steps.assets.outcome == 'success'
+        run: |
+          set -o pipefail
+          bin/rspec plugins/discourse-academy-roles/spec/system/adjust_student_groups_spec.rb | tee tmp/student-group-system.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: student-group-batches-${{ github.run_id }}
+          path: |
+            discourse/plugins/discourse-academy-roles
+            discourse/tmp/student-group-*.log
+            discourse/tmp/student-group-files.txt
+            discourse/tmp/student-group-source-sha.txt
+            discourse/tmp/student-group-learning-source-sha.txt
+            discourse/log/test.log
+            discourse/tmp/student-group-browser
+            discourse/tmp/capybara
+          if-no-files-found: warn
+          retention-days: 7

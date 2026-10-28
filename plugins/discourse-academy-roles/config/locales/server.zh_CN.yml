@@ -59,3 +59,33 @@ zh_CN:
       invite_invalid: 邀请码无效，请检查后重试。
       invite_expired: 邀请码已过期，请联系管理员获取新邀请码。
       invite_used: 邀请码已使用，请使用已注册的账号登录。
+
+    student_groups:
+      errors:
+        invalid_input: "请选择有效的输入方式和操作。"
+        empty_input: "输入中没有学号，或此前缀未匹配到记录。"
+        invalid_number: "学号无效，最多64个字符且不能包含控制字符。"
+        invalid_prefix: "请输入学号前缀，最多64个字符，按原文匹配。"
+        csv_required: "请上传单列 UTF-8 CSV 文件。"
+        invalid_utf8: "请将 CSV 保存为 UTF-8 编码。"
+        invalid_csv: "CSV 格式无效，请检查引号和换行。"
+        single_column: "CSV 每行只能有一列学号。"
+        too_large: "输入或文件不能超过1MB。"
+        too_many: "超过1500个学号，请缩小范围；本次未执行任何变更。"
+        invalid_groups: "请选择可手动维护的自建群组，加入和移除不能重复；不支持系统、自动及邮箱规则群组。"
+        alumni_unavailable: "现有校友组未配置、不可用或由自动规则维护，请先检查校友插件设置。"
+        unmatched: "没有匹配的学号绑定记录。"
+        unregistered: "该学号尚未注册，已跳过；邀请码保持原状。"
+        missing_user: "该学号绑定的账号已不存在。"
+        account_or_owner: "账号未激活、被暂停、为暂存账号，或是待移除群组的所有者。"
+        changed_since_preview: "绑定、账号、成员关系、身份展示或群组配置已有变化，请重新预览。"
+        changed_since_execution: "执行后相关状态已有变化，此账号不撤销，避免覆盖后续操作。"
+        uncertain_result: "步骤中断或无法确认结果归属；已停止自动重试，请核对后重新预览。"
+        execution_failed: "未完成步骤执行失败；已完成的变更已记录，重试不会重复执行。"
+        empty_selection: "请至少勾选一个可执行账号。"
+        invalid_selection: "确认名单包含不属于本预览的可执行记录，请重新核对。"
+        already_confirmed: "此批次已按另一份名单确认，不能覆盖原确认名单。"
+        preview_expired: "预览已过期，请重新预览后确认。"
+        groups_changed: "群组配置在预览后发生变化，请重新预览。"
+        cannot_undo: "此批次尚未结束，或没有可撤销的已完成变更。"
+        cannot_retry: "此批次尚未结束，或没有可安全重试的未完成步骤。"
