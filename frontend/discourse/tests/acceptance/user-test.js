@@ -9,6 +9,7 @@ import {
 import { test } from "qunit";
 import sinon from "sinon";
 import { cloneJSON } from "discourse/lib/object";
+import draftsFixtures from "discourse/tests/fixtures/drafts";
 import userFixtures from "discourse/tests/fixtures/user-fixtures";
 import {
   acceptance,
@@ -40,6 +41,13 @@ acceptance("User Routes", function (needs) {
     server.get("/u/eviltrout%2F..%2F..%2F.json", () =>
       helper.response(400, {})
     );
+    server.get("/drafts/new_topic.json", () => {
+      const draft = draftsFixtures["/drafts.json"].drafts[0];
+      return helper.response({
+        draft: draft.data,
+        draft_sequence: draft.sequence,
+      });
+    });
   });
 
   test("Invalid usernames", async function (assert) {

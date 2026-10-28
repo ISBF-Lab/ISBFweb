@@ -16,6 +16,16 @@ module PageObjects
         page.has_css?(".post-list__empty-text")
       end
 
+      def resume_draft
+        page.find(".resume-draft").click
+        self
+      end
+
+      def resume_draft_by_title
+        page.find(".draft-title").click
+        self
+      end
+
       def has_bulk_select_checkboxes?
         page.has_css?(".bulk-select-checkbox", minimum: 1)
       end

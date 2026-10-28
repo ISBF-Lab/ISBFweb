@@ -217,7 +217,11 @@ export default class TopicFromParams extends DiscourseRoute {
       }
     }
 
-    if (!isEmpty(topic.draft) && !EmbedMode.enabled) {
+    if (
+      !isEmpty(topic.draft) &&
+      !EmbedMode.enabled &&
+      String(topic.id) !== String(this.composer.resumingDraftTopicId)
+    ) {
       this.composer.open({
         draft: Draft.getLocal(topic.draft_key, topic.draft),
         draftKey: topic.draft_key,
@@ -501,7 +505,11 @@ export default class TopicFromParams extends DiscourseRoute {
     }
     this.screenTrack.start(model.topic.id, nestedController);
 
-    if (!isEmpty(model.topic.draft) && !EmbedMode.enabled) {
+    if (
+      !isEmpty(model.topic.draft) &&
+      !EmbedMode.enabled &&
+      String(model.topic.id) !== String(this.composer.resumingDraftTopicId)
+    ) {
       this.composer.open({
         draft: Draft.getLocal(model.topic.draft_key, model.topic.draft),
         draftKey: model.topic.draft_key,

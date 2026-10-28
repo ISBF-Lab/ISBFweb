@@ -6,7 +6,6 @@ import { service } from "@ember/service";
 import getURL from "discourse/lib/get-url";
 import topicDisplayTitle from "discourse/lib/topic-display-title";
 import { applyValueTransformer } from "discourse/lib/transformer";
-import DiscourseURL from "discourse/lib/url";
 import {
   NEW_PRIVATE_MESSAGE_KEY,
   NEW_TOPIC_KEY,
@@ -91,17 +90,7 @@ export default class TopicDraftsDropdown extends Component {
   @action
   async resumeDraft(draft) {
     await this.dMenu.close();
-
-    if (draft.postUrl) {
-      DiscourseURL.routeTo(draft.postUrl);
-    } else {
-      this.composer.open({
-        draft,
-        draftKey: draft.draft_key,
-        draftSequence: draft.sequence,
-        ...draft.data,
-      });
-    }
+    await this.composer.resumeDraft(draft);
   }
 
   <template>

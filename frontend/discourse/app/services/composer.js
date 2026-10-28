@@ -28,7 +28,7 @@ import prepareFormTemplateData, {
   getFormTemplateObject,
 } from "discourse/lib/form-template-validation";
 import { shortDate } from "discourse/lib/formatter";
-import getURL from "discourse/lib/get-url";
+import getURL, { withoutPrefix } from "discourse/lib/get-url";
 import { disableImplicitInjections } from "discourse/lib/implicit-injections";
 import { wantsNewWindow } from "discourse/lib/intercept-click";
 import { buildQuote } from "discourse/lib/quote";
@@ -39,7 +39,7 @@ import {
   uploadIcon,
 } from "discourse/lib/uploads";
 import DiscourseURL from "discourse/lib/url";
-import { escapeExpression } from "discourse/lib/utilities";
+import { escapeExpression, postUrl } from "discourse/lib/utilities";
 import { parseAttributesString } from "discourse/lib/wrap-utils";
 import Category from "discourse/models/category";
 import Composer, {
@@ -53,19 +53,15 @@ import Composer, {
 } from "discourse/models/composer";
 import Draft from "discourse/models/draft";
 import PostLocalization from "discourse/models/post-localization";
+import Topic from "discourse/models/topic";
 import TopicLocalization from "discourse/models/topic-localization";
 import { i18n } from "discourse-i18n";
 
 async function loadDraft(store, opts = {}) {
   let { draft, draftKey, draftSequence } = opts;
 
-  try {
-    if (draft && typeof draft === "string") {
-      draft = JSON.parse(draft);
-    }
-  } catch {
-    draft = null;
-    Draft.clear(draftKey, draftSequence);
+  if (typeof draft === "string") {
+    draft = JSON.parse(draft);
   }
 
   let attrs = {
@@ -77,19 +73,43 @@ async function loadDraft(store, opts = {}) {
   };
 
   Composer.serializedFieldsForDraft().forEach((f) => {
-    attrs[f] = draft[f] || opts[f];
+    attrs[f] = f in draft ? draft[f] : opts[f];
   });
 
-  // `||` above collapses explicit `null`; for these fields `null` means
-  // "no reply target" and must round-trip through the draft.
-  ["reply_to_post_number", "reply_to_user"].forEach((f) => {
-    if (draft && f in draft) {
-      attrs[f] = draft[f];
+  if (attrs.postId) {
+    attrs.post =
+      Number(opts.post?.id) === Number(attrs.postId)
+        ? opts.post
+        : await store.find("post", attrs.postId);
+    attrs.topic ||= attrs.post.topic;
+    if (!attrs.topic) {
+      attrs.topic = store.createRecord(
+        "topic",
+        await Topic.find(attrs.post.topic_id, {})
+      );
     }
-  });
+    attrs.post.set("topic", attrs.topic);
+  }
 
   const composer = store.createRecord("composer");
   await composer.open(attrs);
+
+  if (Composer.isEditDraft(draft)) {
+    // Loading the post refreshes its published values; the draft owns pending edits.
+    for (const [field, property] of Object.entries({
+      reply: "reply",
+      title: "title",
+      categoryId: "categoryId",
+      tags: "tags",
+      original_text: "originalText",
+      original_title: "originalTitle",
+      original_tags: "originalTags",
+    })) {
+      if (field in draft || property in draft) {
+        composer.set(property, field in draft ? draft[field] : draft[property]);
+      }
+    }
+  }
 
   return composer;
 }
@@ -121,6 +141,8 @@ export default class ComposerService extends Service {
   @service store;
   @service toasts;
 
+  @tracked isResumingDraft = false;
+  @tracked resumingDraftTopicId = null;
   @tracked selectedTranslationLocale = null;
   messageCount = null;
   showEditReason = false;
@@ -1658,6 +1680,123 @@ export default class ComposerService extends Service {
     } finally {
       this.skipAutoSave = false;
       this.appEvents.trigger("composer:open", { model: this.model });
+    }
+  }
+
+  @action
+  async resumeDraft(item) {
+    if (this.isResumingDraft) {
+      return;
+    }
+
+    this.isResumingDraft = true;
+    let abandoned = false;
+    let navigating = false;
+    const onRouteWillChange = () => {
+      if (!navigating) {
+        abandoned = true;
+      }
+    };
+    this.router.on("routeWillChange", onRouteWillChange);
+
+    try {
+      const currentModel = this.model;
+      const sameDraft = currentModel?.draftKey === item.draft_key;
+      let draft;
+      let draftSequence;
+      let post = sameDraft ? currentModel.post : null;
+
+      if (!sameDraft) {
+        const result = await Draft.get(item.draft_key);
+        if (abandoned) {
+          return;
+        }
+        if (!result.draft) {
+          this.appEvents.trigger("draft:destroyed", item.draft_key);
+          await this.dialog.alert(i18n("drafts.not_found"));
+          return;
+        }
+        draft =
+          typeof result.draft === "string"
+            ? JSON.parse(result.draft)
+            : result.draft;
+        draftSequence = result.draft_sequence;
+        if (draft.postId) {
+          post = await this.store.find("post", draft.postId);
+        }
+      }
+
+      if (abandoned || this.model !== currentModel) {
+        return;
+      }
+      if (!sameDraft && currentModel) {
+        if (currentModel.anyDirty) {
+          if (!(await this.cancelComposer())) {
+            return;
+          }
+        } else {
+          this.close();
+        }
+      }
+      if (abandoned) {
+        return;
+      }
+
+      const topicId =
+        post?.topic_id ||
+        (sameDraft && currentModel.topic?.id) ||
+        item.topic_id;
+      let topic;
+      if (topicId) {
+        const url = postUrl(
+          post?.topic_slug || item.slug,
+          topicId,
+          post?.post_number
+        );
+        this.resumingDraftTopicId = topicId;
+        navigating = true;
+        await this.router.transitionTo(withoutPrefix(url));
+        navigating = false;
+        topic = this.topicController.model;
+        if (
+          !this.router.currentRouteName?.startsWith("topic.") ||
+          String(topic?.id) !== String(topicId)
+        ) {
+          return;
+        }
+      }
+
+      if (sameDraft) {
+        if (this.model === currentModel) {
+          this.unshrink();
+        }
+      } else {
+        await this.open({
+          action:
+            draft.action ||
+            (topic
+              ? Composer.REPLY
+              : item.draft_key.startsWith(NEW_PRIVATE_MESSAGE_KEY)
+                ? Composer.PRIVATE_MESSAGE
+                : CREATE_TOPIC),
+          draft,
+          draftKey: item.draft_key,
+          draftSequence,
+          post,
+          topic,
+        });
+        if (abandoned && this.model?.draftKey === item.draft_key) {
+          this.close();
+        }
+      }
+    } catch (error) {
+      if (!abandoned && error?.name !== "TransitionAborted") {
+        popupAjaxError(error);
+      }
+    } finally {
+      this.router.off("routeWillChange", onRouteWillChange);
+      this.resumingDraftTopicId = null;
+      this.isResumingDraft = false;
     }
   }
 
