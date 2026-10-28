@@ -1,0 +1,56 @@
+{
+  "results": [
+    {
+      "passed": 48,
+      "failed": 0,
+      "total": 48,
+      "runtime": 13410,
+      "failures": [],
+      "tests": [
+        {
+          "name": "the top route has its own header and period changes retain other filters",
+          "module": "Acceptance: ISBF top topics route",
+          "failed": 0,
+          "total": 9
+        },
+        {
+          "name": "native pagination appends results and navigation releases the outlet",
+          "module": "Acceptance: ISBF top topics route",
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "name": "ranks use the returned order and retain real counts and native targets",
+          "module": "ISBF | Integration | Top topics",
+          "failed": 0,
+          "total": 11
+        },
+        {
+          "name": "untitled topics show escaped body text once and image-only posts retain a link",
+          "module": "ISBF | Integration | Top topics",
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "name": "hidden content is not reused as an excerpt",
+          "module": "ISBF | Integration | Top topics",
+          "failed": 0,
+          "total": 2
+        },
+        {
+          "name": "the shared selector exposes configured periods and an empty period remains selectable",
+          "module": "ISBF | Integration | Top topics",
+          "failed": 0,
+          "total": 5
+        },
+        {
+          "name": "failed pagination preserves topics and can retry without duplicate ranks",
+          "module": "ISBF | Integration | Top topics",
+          "failed": 0,
+          "total": 7
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

@@ -39,6 +39,22 @@ en:
       workbench_plate_teamup_color_light: "Desktop workbench: Team up (light mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
       workbench_plate_teamup_color_dark: "Desktop workbench: Team up (dark mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
   isbf_v2:
+    top_topics:
+      title: Popular topics
+      period: Time range
+      rank: "Rank %{rank}"
+      empty: No popular topics in this period
+      empty_hint: Try another time range to discover more discussions.
+      load_error: More topics could not be loaded. Please try again.
+      views:
+        one: "%{count} view"
+        other: "%{count} views"
+      replies:
+        one: "%{count} reply"
+        other: "%{count} replies"
+      likes:
+        one: "%{count} like"
+        other: "%{count} likes"
     continue_reading:
       title: "Keep reading"
       suggested: "New & unread"
