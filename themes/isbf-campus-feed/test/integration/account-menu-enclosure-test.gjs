@@ -12,6 +12,8 @@ import {
   waitUntil,
 } from "@ember/test-helpers";
 import { module, test } from "qunit";
+import sinon from "sinon";
+import DFloatPortal from "discourse/float-kit/components/d-float-portal";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import pretender, { response } from "discourse/tests/helpers/create-pretender";
 import ISBFV2AccountMenu from "../../discourse/components/isbf-v2-account-menu";
@@ -27,6 +29,7 @@ async function renderCard(context, mobile = false) {
     <template>
       <ISBFV2AccountMenu @mobile={{context.mobile}} />
       <button class="after-card" type="button">Next control</button>
+      <div id="d-menu-portals"></div>
     </template>
   );
   if (!mobile) {
@@ -89,6 +92,7 @@ module("ISBF | Integration | Account menu enclosure", function (hooks) {
             name: "Linked member " + id,
             username: "linked" + id,
             email_code_enabled: true,
+            backup_codes_enabled: this.backupCodesEnabled,
             avatar_template: "/letter_avatar_proxy/v4/letter/l/000000/32.png",
           },
         })),
@@ -141,7 +145,11 @@ module("ISBF | Integration | Account menu enclosure", function (hooks) {
       .hasAttribute("aria-hidden", "true");
   });
 
-  test("nested Escape keeps verification and its draft inside the account menu", async function (assert) {
+  test("portaled verification selectors keep the account menu and drafts open", async function (assert) {
+    this.backupCodesEnabled = true;
+    sinon.stub(DFloatPortal.prototype, "inline").get(function () {
+      return this.args.inline ?? false;
+    });
     await renderCard(this);
     await openCard();
     await click(".isbf-v2-account-menu__linked-account > button");
@@ -149,14 +157,35 @@ module("ISBF | Integration | Account menu enclosure", function (hooks) {
       ".isbf-v2-account-menu__verify input[type='password']",
       "Synthetic draft"
     );
-    const select = ".isbf-v2-account-menu__verify .d-select__trigger";
-    await click(select);
-    await triggerKeyEvent(select, "keydown", "Escape");
+    const token =
+      ".isbf-v2-account-menu__verify input[name='secondFactorToken']";
+    await fillIn(token, "123456");
+    const selects = findAll(".isbf-v2-account-menu__verify .d-select__trigger");
+    assert.strictEqual(selects.length, 2);
+    for (const select of selects) {
+      await click(select);
+      const options = find("#d-menu-portals .d-select__options");
+      assert.dom(options).exists();
+      assert.false(find(card).contains(options));
+      assert.true(options.contains(document.activeElement));
+      await triggerKeyEvent(document.activeElement, "keydown", "Escape");
+      assert.dom("#d-menu-portals .d-select__options").doesNotExist();
+      assert.dom(surface).exists();
+      assert
+        .dom(".isbf-v2-account-menu__verify input[type='password']")
+        .hasValue("Synthetic draft");
+      assert.dom(token).hasValue("123456");
+    }
+    await click(selects[1]);
+    await click(findAll("#d-menu-portals .d-select__option")[1]);
     assert.dom(surface).exists();
-    assert.dom(".isbf-v2-account-menu__verify").exists();
+    assert
+      .dom(".isbf-v2-account-menu__verify select[name='secondFactorMethod']")
+      .hasValue("2");
     assert
       .dom(".isbf-v2-account-menu__verify input[type='password']")
       .hasValue("Synthetic draft");
+    assert.dom(token).hasValue("123456");
   });
 
   test("Escape restores the original three-dot button", async function (assert) {

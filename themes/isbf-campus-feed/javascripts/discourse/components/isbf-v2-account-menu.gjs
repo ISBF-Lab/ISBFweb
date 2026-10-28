@@ -12,6 +12,7 @@ import lazyHash from "discourse/helpers/lazy-hash";
 import { ajax } from "discourse/lib/ajax";
 import logout from "discourse/lib/logout";
 import { getCurrentPushSubscription } from "discourse/lib/push-notifications";
+import { containsFloatingTarget } from "discourse/ui-kit/-internals/floating-family";
 import DButton from "discourse/ui-kit/d-button";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import dMenuHighlight from "discourse/ui-kit/modifiers/d-menu-highlight";
@@ -188,11 +189,12 @@ export default class ISBFV2AccountMenu extends Component {
 
   @action
   onFocusOut(event) {
+    const content = this.#menu?.content;
     // Removing or disabling a focused control can leave no focus destination.
     if (
       event.relatedTarget &&
-      !event.currentTarget.contains(event.relatedTarget) &&
-      !this.#menu?.content?.contains(event.relatedTarget)
+      !containsFloatingTarget(event.currentTarget, event.relatedTarget) &&
+      !(content && containsFloatingTarget(content, event.relatedTarget))
     ) {
       this.#menu?.close({ focusTrigger: false });
     }
