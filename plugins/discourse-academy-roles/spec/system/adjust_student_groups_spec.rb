@@ -10,13 +10,20 @@ RSpec.describe "Adjust student groups" do
   fab!(:registration, :registered_academy_student)
 
   let(:batches_page) { PageObjects::Pages::AcademyStudentGroupBatches.new }
+  let(:dark_scheme) do
+    ColorScheme
+      .create_from_base(
+        name: "Batch review dark",
+        base_scheme_id: ColorScheme::NAMES_TO_ID_MAP.fetch("Dark"),
+      )
+      .tap { |scheme| scheme.update!(user_selectable: true) }
+  end
 
   before do
     SiteSetting.academy_official_group = official_group.id
     SiteSetting.academy_official_category = official_category.id
     SiteSetting.academy_roles_enabled = true
     SiteSetting.default_locale = "en"
-    sign_in(developer)
   end
 
   [
@@ -29,13 +36,12 @@ RSpec.describe "Adjust student groups" do
     context "with #{width}px #{mode} layout", mobile: do
       before do
         if mode == "dark"
-          scheme =
-            ColorScheme.create_from_base(
-              name: "Batch review dark",
-              base_scheme_id: ColorScheme::NAMES_TO_ID_MAP.fetch("Dark"),
-            )
-          developer.user_option.update!(color_scheme_id: scheme.id, dark_scheme_id: scheme.id)
+          developer.user_option.update!(
+            color_scheme_id: dark_scheme.id,
+            dark_scheme_id: dark_scheme.id,
+          )
         end
+        sign_in(developer)
         page.current_window.resize_to(width, 900)
       end
 
@@ -44,6 +50,7 @@ RSpec.describe "Adjust student groups" do
 
         expect(batches_page).to have_number(registration.student_number)
         expect(batches_page).to have_state("preview")
+        expect(batches_page).to have_active_palette(dark_scheme) if mode == "dark"
         expect(batches_page).to be_contained
         batches_page.save_review("#{width}-#{mode}")
       end
@@ -51,6 +58,8 @@ RSpec.describe "Adjust student groups" do
   end
 
   it "lets a developer confirm, revisit and undo a selected batch" do
+    sign_in(developer)
+    page.current_window.resize_to(1440, 900)
     Jobs.run_immediately!
     batches_page.visit_index.preview_accounts(target, registration.student_number)
     expect(batches_page).to have_state("preview")

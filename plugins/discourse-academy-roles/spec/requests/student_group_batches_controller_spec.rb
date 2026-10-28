@@ -71,13 +71,8 @@ RSpec.describe DiscourseAcademyRoles::Admin::StudentGroupBatchesController do
   end
 
   describe "CSRF protection" do
-    around do |example|
-      previous = ActionController::Base.allow_forgery_protection
-      ActionController::Base.allow_forgery_protection = true
-      example.run
-    ensure
-      ActionController::Base.allow_forgery_protection = previous
-    end
+    before { ActionController::Base.allow_forgery_protection = true }
+    after { ActionController::Base.allow_forgery_protection = false }
 
     it "requires a CSRF token for every mutation even from a signed-in developer" do
       batch_count = DiscourseAcademyRoles::StudentGroupBatch.count
@@ -90,7 +85,8 @@ RSpec.describe DiscourseAcademyRoles::Admin::StudentGroupBatchesController do
       ].each do |path|
         sign_in(developer)
         post path, params: preview_params, as: :json
-        expect(response.status).to eq(403), "POST #{path} without a CSRF token"
+        expect(response.status).to eq(403),
+        "POST #{path} without a CSRF token returned #{response.status}"
         expect(response.body).to include("BAD CSRF")
       end
 

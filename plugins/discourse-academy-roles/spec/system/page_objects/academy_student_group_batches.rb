@@ -38,6 +38,13 @@ module PageObjects
         click_button(I18n.t("js.academy_roles.student_groups.undo_preview"))
       end
 
+      def has_active_palette?(color_scheme)
+        has_css?(
+          "link.light-scheme[data-scheme-id='#{color_scheme.id}'][media='all']",
+          visible: false,
+        )
+      end
+
       def contained?
         page.evaluate_script("document.documentElement.scrollWidth <= window.innerWidth + 1")
       end
