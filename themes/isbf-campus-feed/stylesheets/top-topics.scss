@@ -1,0 +1,272 @@
+body:has(.isbf-v2-shell--top) .list-controls {
+  display: none;
+}
+
+.isbf-top-topics {
+  --title-color: var(--isbf-v2-text);
+  --title-color--read: var(--isbf-v2-text);
+  --topic-title-font-weight: var(--isbf-v2-weight-medium);
+  --topic-title-font-weight--visited: var(--isbf-v2-weight-medium);
+  min-inline-size: 0;
+  color: var(--isbf-v2-text);
+  font-family: var(--isbf-v2-font-family);
+
+  &__heading {
+    overflow: hidden;
+    min-inline-size: 0;
+    margin: 0;
+    color: inherit;
+    font: inherit;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__filters {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--isbf-v2-space-3);
+    padding: var(--isbf-v2-space-4);
+    border-block-end: var(--isbf-v2-border-width) solid var(--isbf-v2-border);
+  }
+
+  &__period {
+    min-inline-size: 0;
+  }
+
+  &__label {
+    display: block;
+    margin-block-end: var(--isbf-v2-space-1);
+    font-size: var(--isbf-v2-font-sm);
+    font-weight: var(--isbf-v2-weight-medium);
+  }
+
+  &__range {
+    color: var(--isbf-v2-muted);
+    font-size: var(--isbf-v2-font-xs);
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+
+    .date-section {
+      display: none;
+    }
+
+    .top-date-string {
+      margin: 0;
+      color: inherit;
+      font: inherit;
+      opacity: 1;
+    }
+  }
+
+  &__select {
+    min-block-size: 44px;
+    min-inline-size: 5em;
+    padding: var(--isbf-v2-space-2) var(--isbf-v2-space-3);
+    border: var(--isbf-v2-border-width) solid var(--isbf-v2-border-strong);
+    border-radius: var(--isbf-v2-radius-sm);
+    background: var(--isbf-v2-surface);
+    color: var(--isbf-v2-text);
+    font-size: var(--isbf-v2-font-sm);
+    font-weight: var(--isbf-v2-weight-medium);
+  }
+
+  &__list.topic-list {
+    inline-size: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    table-layout: fixed;
+  }
+
+  &__item.topic-list-item {
+    border-block-end: var(--isbf-v2-border-width) solid var(--isbf-v2-border);
+  }
+
+  &__cell.topic-list-data {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: minmax(var(--isbf-v2-space-6), max-content) minmax(
+        0,
+        1fr
+      );
+    align-items: start;
+    gap: var(--isbf-v2-space-3);
+    inline-size: 100%;
+    max-inline-size: none;
+    padding: var(--isbf-v2-space-4);
+    border: 0;
+  }
+
+  &__rank {
+    padding-block-start: var(--isbf-v2-space-1);
+    color: var(--isbf-v2-muted);
+    font-size: var(--isbf-v2-font-lg);
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--isbf-v2-weight-medium);
+    line-height: 1.4;
+    text-align: center;
+
+    &.is-leading {
+      color: var(--isbf-v2-accent);
+      font-weight: var(--isbf-v2-weight-bold);
+    }
+  }
+
+  &__body {
+    min-inline-size: 0;
+  }
+
+  &__title-row.main-link {
+    display: flex;
+    align-items: baseline;
+    inline-size: 100%;
+    min-inline-size: 0;
+
+    .topic-statuses {
+      flex: none;
+      margin: 0;
+      color: var(--isbf-v2-muted);
+
+      &:has(*) {
+        margin-inline-end: var(--isbf-v2-space-2);
+      }
+    }
+  }
+
+  &__title.title {
+    display: -webkit-box;
+    overflow: hidden;
+    min-inline-size: 0;
+    padding-block: var(--isbf-v2-space-1);
+    color: var(--isbf-v2-text);
+    font-size: var(--isbf-v2-font-lg);
+    font-weight: var(--isbf-v2-weight-medium);
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    > * {
+      pointer-events: none;
+    }
+  }
+
+  &__unread {
+    flex: none;
+    align-self: center;
+    inline-size: var(--isbf-v2-space-2);
+    block-size: var(--isbf-v2-space-2);
+    margin-inline-start: var(--isbf-v2-space-2);
+    border-radius: var(--isbf-v2-radius-pill);
+    background: var(--isbf-v2-accent);
+  }
+
+  &__summary {
+    overflow: hidden;
+    margin: var(--isbf-v2-space-1) 0 var(--isbf-v2-space-2);
+    color: var(--isbf-v2-muted);
+    font-size: var(--isbf-v2-font-sm);
+    line-height: 1.45;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__metadata {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--isbf-v2-space-1) var(--isbf-v2-space-3);
+    margin-block-start: var(--isbf-v2-space-1);
+    font-size: var(--isbf-v2-font-xs);
+    line-height: 1.45;
+
+    a,
+    .badge-category__name {
+      color: var(--isbf-v2-muted);
+    }
+
+    .badge-category__wrapper {
+      min-inline-size: 0;
+      max-inline-size: 100%;
+    }
+  }
+
+  &__author {
+    overflow: hidden;
+    max-inline-size: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__stats {
+    display: flex;
+    gap: var(--isbf-v2-space-4);
+    margin-block-start: var(--isbf-v2-space-3);
+    color: var(--isbf-v2-muted);
+    font-size: var(--isbf-v2-font-xs);
+    line-height: 1.45;
+  }
+
+  &__stat {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--isbf-v2-space-1);
+    min-inline-size: 0;
+    color: inherit;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+
+    .d-icon {
+      flex: none;
+      color: inherit;
+    }
+  }
+
+  &__stat.badge-posts > *,
+  &__time > * {
+    pointer-events: none;
+  }
+
+  &__empty,
+  &__footer {
+    padding: var(--isbf-v2-space-4);
+    color: var(--isbf-v2-muted);
+    font-size: var(--isbf-v2-font-sm);
+    line-height: 1.45;
+    text-align: center;
+
+    p {
+      margin-block: var(--isbf-v2-space-2);
+    }
+  }
+
+  &__empty {
+    padding-block: var(--isbf-v2-space-8);
+
+    > .d-icon {
+      font-size: var(--isbf-v2-font-xl);
+    }
+
+    p {
+      color: var(--isbf-v2-text);
+      font-weight: var(--isbf-v2-weight-medium);
+    }
+
+    span {
+      font-size: var(--isbf-v2-font-xs);
+    }
+  }
+
+  &__retry.btn {
+    min-block-size: 44px;
+    color: var(--isbf-v2-accent);
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  .topic-list &__title.title:focus-visible {
+    outline: 2px solid var(--isbf-v2-focus-ring);
+    outline-offset: 2px;
+  }
+}

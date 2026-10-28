@@ -1,0 +1,67 @@
+[bin/lint] Running core linters via lefthook...
+│  developer-docs-prettier (skip) no files for inspection
+┃  eslint ❯ 
+
+┃  prettier ❯ 
+- Starting...
+✔ Reformatted 0 / 10 files...
+
+│  rubocop (skip) no files for inspection
+┃  stylelint ❯ 
+
+│  syntax_tree (skip) no files for inspection
+[38;2;56;56;56m  ────────────────────────────────────[m
+summary: (done in 14.59 seconds)
+✔️ eslint (5.83 seconds)
+✔️ prettier (3.92 seconds)
+✔️ stylelint (4.84 seconds)
+[bin/lint] All lints passed
+
+> @ test:menus /workspace/discourse
+> node --test script/check-menus-test.mjs
+
+TAP version 13
+# Subtest: native tags are rejected without confusing yielded Option components
+ok 1 - native tags are rejected without confusing yielded Option components
+  ---
+  duration_ms: 3.300632
+  type: 'test'
+  ...
+# Subtest: mobile menu sheets and undocumented popovers cannot bypass the standard
+ok 2 - mobile menu sheets and undocumented popovers cannot bypass the standard
+  ---
+  duration_ms: 0.50198
+  type: 'test'
+  ...
+# Subtest: private menu geometry is rejected while layout and shared tokens remain valid
+ok 3 - private menu geometry is rejected while layout and shared tokens remain valid
+  ---
+  duration_ms: 1.816705
+  type: 'test'
+  ...
+# Subtest: custom details menus are rejected
+ok 4 - custom details menus are rejected
+  ---
+  duration_ms: 0.307553
+  type: 'test'
+  ...
+# Subtest: the canonical shared select import is retained while legacy UI imports are still checked
+ok 5 - the canonical shared select import is retained while legacy UI imports are still checked
+  ---
+  duration_ms: 3286.167837
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3474.881759
+
+> @ lint:menus /workspace/discourse
+> node script/check-menus.mjs
+
+Menu policy: 5933 files, 0 findings

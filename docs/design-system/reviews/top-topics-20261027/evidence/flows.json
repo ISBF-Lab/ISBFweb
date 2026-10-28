@@ -1,0 +1,629 @@
+{
+  "results": [
+    {
+      "name": "The top page has its own heading and removes legacy navigation, composer and chooser",
+      "passed": true
+    },
+    {
+      "name": "Real development topics retain server order and consecutive ranks",
+      "passed": true,
+      "expected": [
+        "19"
+      ],
+      "actual": [
+        "19"
+      ],
+      "ranks": [
+        1
+      ]
+    },
+    {
+      "name": "Heading, rows and statistics fill the column with compact spacing and a 44px period trigger",
+      "passed": true,
+      "width": 1440,
+      "mode": "light",
+      "geometry": {
+        "pageWidth": 1440,
+        "width": 1440,
+        "triggerHeight": 44,
+        "triggerRight": 957,
+        "frameRight": 974,
+        "headingRight": 531,
+        "badRows": false,
+        "titleHeight": 33.1875,
+        "summaryGap": 4,
+        "titleRowHeight": 33.1875
+      }
+    },
+    {
+      "name": "The shared menu floats within the viewport",
+      "passed": true,
+      "width": 1440,
+      "mode": "light",
+      "menu": {
+        "x": 847.984375,
+        "y": 129.984375,
+        "width": 131.25,
+        "height": 302
+      }
+    },
+    {
+      "name": "Escape restores the period trigger focus",
+      "passed": true,
+      "width": 1440,
+      "mode": "light"
+    },
+    {
+      "name": "Heading, rows and statistics fill the column with compact spacing and a 44px period trigger",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark",
+      "geometry": {
+        "pageWidth": 1440,
+        "width": 1440,
+        "triggerHeight": 44,
+        "triggerRight": 957,
+        "frameRight": 974,
+        "headingRight": 531,
+        "badRows": false,
+        "titleHeight": 33.1875,
+        "summaryGap": 4,
+        "titleRowHeight": 33.1875
+      }
+    },
+    {
+      "name": "The shared menu floats within the viewport",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark",
+      "menu": {
+        "x": 847.984375,
+        "y": 129.984375,
+        "width": 131.11083984375,
+        "height": 301.6798400878906
+      }
+    },
+    {
+      "name": "Escape restores the period trigger focus",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark"
+    },
+    {
+      "name": "Heading, rows and statistics fill the column with compact spacing and a 44px period trigger",
+      "passed": true,
+      "width": 1024,
+      "mode": "light",
+      "geometry": {
+        "pageWidth": 1024,
+        "width": 1024,
+        "triggerHeight": 44,
+        "triggerRight": 917,
+        "frameRight": 934,
+        "headingRight": 491,
+        "badRows": false,
+        "titleHeight": 33.1875,
+        "summaryGap": 4,
+        "titleRowHeight": 33.1875
+      }
+    },
+    {
+      "name": "The shared menu floats within the viewport",
+      "passed": true,
+      "width": 1024,
+      "mode": "light",
+      "menu": {
+        "x": 807.984375,
+        "y": 129.984375,
+        "width": 131.1107177734375,
+        "height": 301.67950439453125
+      }
+    },
+    {
+      "name": "Escape restores the period trigger focus",
+      "passed": true,
+      "width": 1024,
+      "mode": "light"
+    },
+    {
+      "name": "Heading, rows and statistics fill the column with compact spacing and a 44px period trigger",
+      "passed": true,
+      "width": 1024,
+      "mode": "dark",
+      "geometry": {
+        "pageWidth": 1024,
+        "width": 1024,
+        "triggerHeight": 44,
+        "triggerRight": 917,
+        "frameRight": 934,
+        "headingRight": 491,
+        "badRows": false,
+        "titleHeight": 33.1875,
+        "summaryGap": 4,
+        "titleRowHeight": 33.1875
+      }
+    },
+    {
+      "name": "The shared menu floats within the viewport",
+      "passed": true,
+      "width": 1024,
+      "mode": "dark",
+      "menu": {
+        "x": 807.984375,
+        "y": 129.984375,
+        "width": 131.1107177734375,
+        "height": 301.6795959472656
+      }
+    },
+    {
+      "name": "Escape restores the period trigger focus",
+      "passed": true,
+      "width": 1024,
+      "mode": "dark"
+    },
+    {
+      "name": "Heading, rows and statistics fill the column with compact spacing and a 44px period trigger",
+      "passed": true,
+      "width": 601,
+      "mode": "light",
+      "geometry": {
+        "pageWidth": 601,
+        "width": 601,
+        "triggerHeight": 44,
+        "triggerRight": 574,
+        "frameRight": 591,
+        "headingRight": 247,
+        "badRows": false,
+        "titleHeight": 25.1875,
+        "summaryGap": 4,
+        "titleRowHeight": 25.1875
+      }
+    },
+    {
+      "name": "The shared menu floats within the viewport",
+      "passed": true,
+      "width": 601,
+      "mode": "light",
+      "menu": {
+        "x": 442.88909912109375,
+        "y": 129.984375,
+        "width": 131.11090087890625,
+        "height": 301.679931640625
+      }
+    },
+    {
+      "name": "Escape restores the period trigger focus",
+      "passed": true,
+      "width": 601,
+      "mode": "light"
+    },
+    {
+      "name": "Heading, rows and statistics fill the column with compact spacing and a 44px period trigger",
+      "passed": true,
+      "width": 601,
+      "mode": "dark",
+      "geometry": {
+        "pageWidth": 601,
+        "width": 601,
+        "triggerHeight": 44,
+        "triggerRight": 574,
+        "frameRight": 591,
+        "headingRight": 247,
+        "badRows": false,
+        "titleHeight": 25.1875,
+        "summaryGap": 4,
+        "titleRowHeight": 25.1875
+      }
+    },
+    {
+      "name": "The shared menu floats within the viewport",
+      "passed": true,
+      "width": 601,
+      "mode": "dark",
+      "menu": {
+        "x": 442.88934326171875,
+        "y": 129.984375,
+        "width": 131.11065673828125,
+        "height": 301.6794128417969
+      }
+    },
+    {
+      "name": "Escape restores the period trigger focus",
+      "passed": true,
+      "width": 601,
+      "mode": "dark"
+    },
+    {
+      "name": "Heading, rows and statistics fill the column with compact spacing and a 44px period trigger",
+      "passed": true,
+      "width": 600,
+      "mode": "light",
+      "geometry": {
+        "pageWidth": 600,
+        "width": 600,
+        "triggerHeight": 44,
+        "triggerRight": 584,
+        "frameRight": 600,
+        "headingRight": 156,
+        "badRows": false,
+        "titleHeight": 25.1875,
+        "summaryGap": 4,
+        "titleRowHeight": 25.1875
+      }
+    },
+    {
+      "name": "The shared menu floats within the viewport",
+      "passed": true,
+      "width": 600,
+      "mode": "light",
+      "menu": {
+        "x": 452.88909912109375,
+        "y": 130,
+        "width": 131.11090087890625,
+        "height": 301.6799011230469
+      }
+    },
+    {
+      "name": "Escape restores the period trigger focus",
+      "passed": true,
+      "width": 600,
+      "mode": "light"
+    },
+    {
+      "name": "Heading, rows and statistics fill the column with compact spacing and a 44px period trigger",
+      "passed": true,
+      "width": 600,
+      "mode": "dark",
+      "geometry": {
+        "pageWidth": 600,
+        "width": 600,
+        "triggerHeight": 44,
+        "triggerRight": 584,
+        "frameRight": 600,
+        "headingRight": 156,
+        "badRows": false,
+        "titleHeight": 25.1875,
+        "summaryGap": 4,
+        "titleRowHeight": 25.1875
+      }
+    },
+    {
+      "name": "The shared menu floats within the viewport",
+      "passed": true,
+      "width": 600,
+      "mode": "dark",
+      "menu": {
+        "x": 452.888916015625,
+        "y": 130,
+        "width": 131.111083984375,
+        "height": 301.68035888671875
+      }
+    },
+    {
+      "name": "Escape restores the period trigger focus",
+      "passed": true,
+      "width": 600,
+      "mode": "dark"
+    },
+    {
+      "name": "Heading, rows and statistics fill the column with compact spacing and a 44px period trigger",
+      "passed": true,
+      "width": 390,
+      "mode": "light",
+      "geometry": {
+        "pageWidth": 390,
+        "width": 390,
+        "triggerHeight": 44,
+        "triggerRight": 374,
+        "frameRight": 390,
+        "headingRight": 156,
+        "badRows": false,
+        "titleHeight": 50.375,
+        "summaryGap": 4,
+        "titleRowHeight": 50.375
+      }
+    },
+    {
+      "name": "The shared menu floats within the viewport",
+      "passed": true,
+      "width": 390,
+      "mode": "light",
+      "menu": {
+        "x": 242.88888549804688,
+        "y": 130,
+        "width": 131.11111450195312,
+        "height": 301.6804504394531
+      }
+    },
+    {
+      "name": "Escape restores the period trigger focus",
+      "passed": true,
+      "width": 390,
+      "mode": "light"
+    },
+    {
+      "name": "Heading, rows and statistics fill the column with compact spacing and a 44px period trigger",
+      "passed": true,
+      "width": 390,
+      "mode": "dark",
+      "geometry": {
+        "pageWidth": 390,
+        "width": 390,
+        "triggerHeight": 44,
+        "triggerRight": 374,
+        "frameRight": 390,
+        "headingRight": 156,
+        "badRows": false,
+        "titleHeight": 50.375,
+        "summaryGap": 4,
+        "titleRowHeight": 50.375
+      }
+    },
+    {
+      "name": "The shared menu floats within the viewport",
+      "passed": true,
+      "width": 390,
+      "mode": "dark",
+      "menu": {
+        "x": 246.86451721191406,
+        "y": 130,
+        "width": 127.13548278808594,
+        "height": 292.5326843261719
+      }
+    },
+    {
+      "name": "Escape restores the period trigger focus",
+      "passed": true,
+      "width": 390,
+      "mode": "dark"
+    },
+    {
+      "name": "Heading, rows and statistics fill the column with compact spacing and a 44px period trigger",
+      "passed": true,
+      "width": 320,
+      "mode": "light",
+      "geometry": {
+        "pageWidth": 320,
+        "width": 320,
+        "triggerHeight": 44,
+        "triggerRight": 304,
+        "frameRight": 320,
+        "headingRight": 156,
+        "badRows": false,
+        "titleHeight": 50.375,
+        "summaryGap": 4,
+        "titleRowHeight": 50.375
+      }
+    },
+    {
+      "name": "The shared menu floats within the viewport",
+      "passed": true,
+      "width": 320,
+      "mode": "light",
+      "menu": {
+        "x": 176.86477661132812,
+        "y": 130,
+        "width": 127.13522338867188,
+        "height": 292.5321044921875
+      }
+    },
+    {
+      "name": "Escape restores the period trigger focus",
+      "passed": true,
+      "width": 320,
+      "mode": "light"
+    },
+    {
+      "name": "Heading, rows and statistics fill the column with compact spacing and a 44px period trigger",
+      "passed": true,
+      "width": 320,
+      "mode": "dark",
+      "geometry": {
+        "pageWidth": 320,
+        "width": 320,
+        "triggerHeight": 44,
+        "triggerRight": 304,
+        "frameRight": 320,
+        "headingRight": 156,
+        "badRows": false,
+        "titleHeight": 50.375,
+        "summaryGap": 4,
+        "titleRowHeight": 50.375
+      }
+    },
+    {
+      "name": "The shared menu floats within the viewport",
+      "passed": true,
+      "width": 320,
+      "mode": "dark",
+      "menu": {
+        "x": 172.88941955566406,
+        "y": 130,
+        "width": 131.11058044433594,
+        "height": 301.67919921875
+      }
+    },
+    {
+      "name": "Escape restores the period trigger focus",
+      "passed": true,
+      "width": 320,
+      "mode": "dark"
+    },
+    {
+      "name": "Period selection uses the native URL query",
+      "passed": true,
+      "period": "all"
+    },
+    {
+      "name": "Period selection uses the native URL query",
+      "passed": true,
+      "period": "yearly"
+    },
+    {
+      "name": "Period selection uses the native URL query",
+      "passed": true,
+      "period": "quarterly"
+    },
+    {
+      "name": "Period selection uses the native URL query",
+      "passed": true,
+      "period": "monthly"
+    },
+    {
+      "name": "Period selection uses the native URL query",
+      "passed": true,
+      "period": "weekly"
+    },
+    {
+      "name": "Period selection uses the native URL query",
+      "passed": true,
+      "period": "daily"
+    },
+    {
+      "name": "Refreshing retains the selected period",
+      "passed": true
+    },
+    {
+      "name": "The native J shortcut selects a ranked topic",
+      "passed": true
+    },
+    {
+      "name": "The native topic link opens the discussion",
+      "passed": true
+    },
+    {
+      "name": "Browser back restores the popular-topic period",
+      "passed": true
+    },
+    {
+      "name": "Returning to latest releases the custom outlet and restores the feed",
+      "passed": true
+    },
+    {
+      "name": "Browser-only long-content, image-only and large-count fixtures retain compact layout",
+      "passed": true,
+      "width": 1440,
+      "mode": "light",
+      "fixturesOnlyInBrowser": true,
+      "stress": {
+        "overflow": false,
+        "ranks": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "untitledMarker": false,
+        "images": 0
+      }
+    },
+    {
+      "name": "Browser-only long-content, image-only and large-count fixtures retain compact layout",
+      "passed": true,
+      "width": 1440,
+      "mode": "dark",
+      "fixturesOnlyInBrowser": true,
+      "stress": {
+        "overflow": false,
+        "ranks": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "untitledMarker": false,
+        "images": 0
+      }
+    },
+    {
+      "name": "Browser-only long-content, image-only and large-count fixtures retain compact layout",
+      "passed": true,
+      "width": 390,
+      "mode": "light",
+      "fixturesOnlyInBrowser": true,
+      "stress": {
+        "overflow": false,
+        "ranks": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "untitledMarker": false,
+        "images": 0
+      }
+    },
+    {
+      "name": "Browser-only long-content, image-only and large-count fixtures retain compact layout",
+      "passed": true,
+      "width": 390,
+      "mode": "dark",
+      "fixturesOnlyInBrowser": true,
+      "stress": {
+        "overflow": false,
+        "ranks": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "untitledMarker": false,
+        "images": 0
+      }
+    },
+    {
+      "name": "Browser-only long-content, image-only and large-count fixtures retain compact layout",
+      "passed": true,
+      "width": 320,
+      "mode": "light",
+      "fixturesOnlyInBrowser": true,
+      "stress": {
+        "overflow": false,
+        "ranks": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "untitledMarker": false,
+        "images": 0
+      }
+    },
+    {
+      "name": "Browser-only long-content, image-only and large-count fixtures retain compact layout",
+      "passed": true,
+      "width": 320,
+      "mode": "dark",
+      "fixturesOnlyInBrowser": true,
+      "stress": {
+        "overflow": false,
+        "ranks": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "untitledMarker": false,
+        "images": 0
+      }
+    },
+    {
+      "name": "No browser JavaScript errors",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "errors": []
+}

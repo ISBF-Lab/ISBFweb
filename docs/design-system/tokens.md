@@ -409,3 +409,7 @@ A08/C02 新增经用户确认的局部排布：卡片 1:1，面板内容宽度 6
 ## 2026-10-26 通知标读长按按钮
 
 仅限[本次通知操作](reviews/notifications-hold-20261026/README.md)：待机使用hover/text，填充使用accent/contrast，外形使用radius-pill，文字font-sm/weight-medium，触控高44px、操作间距space-2。用户确认长按300ms、释放200ms、成功停留1200ms、向右填充、6px波浪及0.97按压缩放；这些动效参数不作为所有按钮的新默认值。
+
+## 2026-10-27 热门榜单局部组合
+
+根`/top`复用surface/text/muted/border/accent/focus-ring、space-4内距及space-3列间距；标题font-lg/weight-medium最多两行、摘要font-sm一行、元信息和统计font-xs。排名基础宽度space-6，前三名使用accent；周期入口44px最小高、radius-sm，面板沿用共享菜单契约。局部组合来自本次用户确认，不新增全局token。[来源与验证](reviews/top-topics-20261027/README.md)。

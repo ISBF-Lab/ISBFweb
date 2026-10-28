@@ -39,6 +39,19 @@ zh_CN:
       workbench_plate_teamup_color_light: "电脑工作台：组队（浅色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
       workbench_plate_teamup_color_dark: "电脑工作台：组队（深色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
   isbf_v2:
+    top_topics:
+      title: 热门话题
+      period: 统计周期
+      rank: "第 %{rank} 名"
+      empty: 这个周期暂无热门话题
+      empty_hint: 换个时间范围，发现更多社区讨论。
+      load_error: 更多话题加载失败，请重试。
+      views:
+        other: "%{count} 次浏览"
+      replies:
+        other: "%{count} 条回复"
+      likes:
+        other: "%{count} 个赞"
     continue_reading:
       title: "接着看看"
       suggested: "新帖与未读"

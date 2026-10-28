@@ -17,6 +17,7 @@ import {
 import { frontendConsistencyScope } from "../lib/frontend-consistency-scope";
 import { notificationsEnabled } from "../lib/notification-groups";
 import { officialConfig } from "../lib/official-filters";
+import { isTopTopicsPath } from "../lib/top-topics-scope";
 import { isConversationTopic, isFeedStyleTopic } from "../lib/topic-card-scope";
 import ISBFAlumni from "./isbf-alumni";
 import ISBFExplore from "./isbf-explore";
@@ -117,6 +118,9 @@ export default class ISBFV2Shell extends Component {
     if (this.#isOfficialPath(path) || this.isFeedback) {
       return "feed";
     }
+    if (isTopTopicsPath(path)) {
+      return "top";
+    }
     if (/^\/(search|categories|c|tag|tags)(\/|$)/.test(path)) {
       return "explore";
     }
@@ -129,6 +133,10 @@ export default class ISBFV2Shell extends Component {
 
   get isFeed() {
     return this.pageKind === "feed";
+  }
+
+  get isTopTopics() {
+    return this.pageKind === "top";
   }
 
   get feedbackCategory() {
@@ -281,6 +289,7 @@ export default class ISBFV2Shell extends Component {
       notifications: "notifications",
       profile: "profile",
       topic: "topic",
+      top: "top_topics.title",
       workbench: "workbench",
     };
 
@@ -527,7 +536,11 @@ export default class ISBFV2Shell extends Component {
               href={{this.backHref}}
               {{on "click" this.goBack}}
             >{{dIcon "arrow-left"}}</a>
-            <span>{{this.pageTitle}}</span>
+            {{#if this.isTopTopics}}
+              <h1 class="isbf-top-topics__heading">{{this.pageTitle}}</h1>
+            {{else}}
+              <span>{{this.pageTitle}}</span>
+            {{/if}}
             {{#if this.isOwnProfile}}<ISBFV2AccountMenu
                 @mobile={{true}}
               />{{/if}}
