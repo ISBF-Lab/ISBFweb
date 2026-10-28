@@ -60,16 +60,15 @@ RSpec.describe "Adjust student groups" do
   it "lets a developer confirm, revisit and undo a selected batch" do
     sign_in(developer)
     page.current_window.resize_to(1440, 900)
-    Jobs.run_immediately!
     batches_page.visit_index.preview_accounts(target, registration.student_number)
     expect(batches_page).to have_state("preview")
-    batches_page.confirm_by_keyboard
+    Jobs.with_immediate_jobs { batches_page.confirm_by_keyboard }
     expect(batches_page).to have_state("completed")
     page.refresh
     expect(batches_page).to have_state("completed")
     batches_page.preview_undo
     expect(batches_page).to have_state("preview")
-    batches_page.confirm_by_keyboard
+    Jobs.with_immediate_jobs { batches_page.confirm_by_keyboard }
     expect(batches_page).to have_state("completed")
     page.refresh
     expect(batches_page).to have_state("completed")
