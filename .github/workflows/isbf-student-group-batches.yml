@@ -102,6 +102,8 @@ jobs:
         run: bin/rake db:dump_structure annotate:clean
       - name: Identity plugin and native group lifecycle regression
         if: always() && steps.database.outcome == 'success'
+        env:
+          RSPEC_SEED: "16771"
         run: |
           set -o pipefail
           bin/rake "plugin:spec[discourse-academy-roles]" | tee tmp/student-group-rspec.log
