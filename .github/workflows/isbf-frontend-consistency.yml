@@ -138,6 +138,11 @@ jobs:
           isbf_bus_address=$(dbus-daemon --session --fork --print-address 2>/dev/null)
           echo "DBUS_SESSION_BUS_ADDRESS=$isbf_bus_address" >> "$GITHUB_ENV"
 
+      - name: Device notification service worker regression
+        env:
+          LOAD_PLUGINS: "0"
+        run: bin/rspec spec/requests/service_worker_notification_navigation_spec.rb
+
       - name: Install the project theme in the synthetic test database
         env:
           RAILS_ENV: development
@@ -169,6 +174,11 @@ jobs:
         env:
           LOAD_PLUGINS: "0"
         run: bin/qunit --standalone frontend/discourse/tests/integration/ui-kit/d-hold-button-test.gjs
+
+      - name: Device notification navigation regression
+        env:
+          LOAD_PLUGINS: "0"
+        run: bin/qunit --standalone frontend/discourse/tests/acceptance/push-notification-navigation-test.js
 
       - name: Project theme QUnit
         id: theme_qunit
