@@ -1,0 +1,31 @@
+{
+  "base_commit": "9ca49588e44c18957733311239a0f355314a2980",
+  "sources": [
+    {
+      "path": "frontend/discourse/select-kit/components/select-kit.js",
+      "sha256": "4ca4cbb16fad8c4bc7c2f973816b8ee9e15b754c3241ce16fe7b5b9eb1339549"
+    },
+    {
+      "path": "frontend/discourse/select-kit/components/select-kit/select-kit-body.gjs",
+      "sha256": "8698bc8d3259a8baf995a317e9960cd4e340950748c405e759f2568ad67189e4"
+    },
+    {
+      "path": "frontend/discourse/tests/integration/components/select-kit/combo-box-test.gjs",
+      "sha256": "50a5bdcbbc493db092851a4f7d73d0ffa5299fa21f6d5cfa81afd78c0de23385"
+    },
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "sha256": "3f570fb72ea6b85671b65a9783c28ce90f21d53974e55d69be235f96074c621d"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/dropdowns.scss",
+      "sha256": "7d0283f34a59212c9807b104d3f01cc7be0ee1be7d97a412e6aad1d280de43a8"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/select-kit-scrolling-test.gjs",
+      "sha256": "f1ffacb9ee9ff23612ac0d91b7eb8b345b9217bf83805e13df3d370433ca4579"
+    }
+  ],
+  "javascript_runtime_changed": true,
+  "ci": "Dedicated SelectKit anchored-search gate added; all existing checks retained"
+}

@@ -1,0 +1,80 @@
+{
+  "status": "locally_verified_ci_pending",
+  "verified_at": "2026-10-29T01:24:16.437867+00:00",
+  "native_core_anchor": {
+    "tests": 2,
+    "assertions": 8,
+    "failed": 0,
+    "client_errors": [],
+    "scope": "Top and bottom search anchoring while the next positioning update is paused; all existing ComboBox cases remain in the new CI gate"
+  },
+  "native_theme": {
+    "tests": 3,
+    "assertions": 23,
+    "failed": 0,
+    "client_errors": [],
+    "scope": "Actual shared CSS, scrolling and visual cursor, search and clearing, native category callback"
+  },
+  "native_lint": "Changed code/styles and final test files passed; markdown and workflow were not covered by the native linters",
+  "workflow": {
+    "yaml_syntax_valid": true,
+    "new_core_gate": true,
+    "existing_notification_and_theme_gates_preserved": true
+  },
+  "menu_policy": {
+    "files_checked": 5841,
+    "findings": 0,
+    "rule_tests_passed": 5,
+    "final_content_scan": "5841 files,0 findings"
+  },
+  "mobile_page": {
+    "browser": "Chromium with mobile/touch and iPhone UA; native OS keyboard not available",
+    "viewport_cases": [
+      "390x844",
+      "390x520",
+      "320x520"
+    ],
+    "native_touch_scroll_distance_px": 161,
+    "search_movement_during_touch_px": 0.0,
+    "panel_height_px": 286,
+    "visual_viewport_height_px": 520,
+    "input_font_px": 16.0,
+    "continuous_input": [
+      {
+        "label": "continuous-search-320",
+        "frames": 56,
+        "inputEdgeDrift": 0,
+        "focusPreserved": true
+      },
+      {
+        "label": "continuous-search-390",
+        "frames": 56,
+        "inputEdgeDrift": 0,
+        "focusPreserved": true
+      }
+    ],
+    "stable_search_geometry": {
+      "label": "search-stability",
+      "yRange": 0,
+      "heightRange": 0
+    },
+    "client_errors": [],
+    "screenshots_private": true
+  },
+  "before_fix": {
+    "input_edge_drift_during_typing_px": 28,
+    "scrolling_policy": "Outer panel scrolled and centered rows; internal collection overflow was visible",
+    "mobile_search_input_px": 15
+  },
+  "cleanup": {
+    "test_view_restored": true,
+    "compiler_initializer_added": false,
+    "development_reinitialized_after_tests": true,
+    "default_theme_id": 4,
+    "default_theme_preserved": true
+  },
+  "full_core_or_type_suites_repeated": false,
+  "prior_failed_attempts": "Private local records preserve the scale fixture, test listener teardown, development hot reload and stale-draft setup failures; no failures were suppressed",
+  "production_changed": false,
+  "screenshots_private": true
+}

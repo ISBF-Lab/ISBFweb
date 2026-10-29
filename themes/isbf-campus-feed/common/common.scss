@@ -4718,23 +4718,6 @@ body:has(.isbf-v2-shell) #reply-control:has(.isbf-v2-composer-options) {
   }
 }
 
-@media (width <= 600px) {
-  body:has(.isbf-v2-shell)
-    #reply-control.open:has(.isbf-v2-composer)
-    .select-kit-body.isbf-v2-composer-category-menu {
-    max-height: min(320px, var(--isbf-v2-category-menu-max-height));
-
-    .select-kit-filter {
-      flex-shrink: 0;
-    }
-
-    .select-kit-collection {
-      min-height: 0;
-      overscroll-behavior: contain;
-    }
-  }
-}
-
 body:has(.isbf-v2-shell--custom-explore) #main-outlet {
   min-height: 0;
   padding: 0;

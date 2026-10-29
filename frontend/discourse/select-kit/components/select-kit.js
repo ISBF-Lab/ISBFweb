@@ -583,6 +583,7 @@ export default class SelectKit extends Component {
 
     let width;
     let minWidth;
+    let height;
 
     const middleware = [
       {
@@ -641,6 +642,7 @@ export default class SelectKit extends Component {
       offset(this.selectKit.options.verticalOffset),
       size({
         apply({ rects, availableHeight }) {
+          height = rects.floating.height;
           const viewport = window.visualViewport;
           const viewportWidth = viewport?.width || window.innerWidth;
           const viewportHeight = viewport?.height || window.innerHeight;
@@ -675,12 +677,15 @@ export default class SelectKit extends Component {
       strategy,
       middleware,
     }).then(({ x, y, placement, middlewareData }) => {
+      const isPlacedAbove = placement.startsWith("top");
+      // Keep the trigger edge fixed while filtering changes the menu's height.
+      const anchorY = isPlacedAbove ? y + height : y;
       const style = {
         width,
         minWidth,
         top: "0",
         left: "0",
-        transform: `translate(${roundByDPR(x)}px,${roundByDPR(y)}px)`,
+        transform: `translate(${roundByDPR(x)}px,${roundByDPR(anchorY)}px)${isPlacedAbove ? " translateY(-100%)" : ""}`,
       };
 
       if (middlewareData.hide && !this.capabilities.isIOS) {
@@ -693,7 +698,7 @@ export default class SelectKit extends Component {
         }
       }
 
-      this.selectKit.set("isPlacedAbove", placement.startsWith("top"));
+      this.selectKit.set("isPlacedAbove", isPlacedAbove);
       Object.assign(floatingElement.style, style);
     });
   }
