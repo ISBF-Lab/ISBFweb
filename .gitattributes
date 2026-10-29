@@ -33,3 +33,6 @@ docs/design/** -text whitespace=-blank-at-eof,-blank-at-eol,cr-at-eol
 docs/design-system/reviews/** -text whitespace=-blank-at-eof,-blank-at-eol,cr-at-eol
 docs/design-system/deployments/** -text whitespace=-blank-at-eof,-blank-at-eol,cr-at-eol
 docs/ai-moderation-verification/*.log -text whitespace=-blank-at-eof,-blank-at-eol,cr-at-eol
+
+# Keep vendored questionnaire source hashes stable across platforms.
+plugins/isbf-mbti/data/upstream/* -text

@@ -35,3 +35,6 @@ plugins/isbf-join/web/shared/
 plugins/isbf-join/web/src/*
 !plugins/isbf-join/web/src/application-transport.js
 plugins/isbf-join/web/tests/ads.test.mjs
+
+# Preserve pinned upstream questionnaire and license bytes.
+plugins/isbf-mbti/data/upstream/

@@ -1,0 +1,8 @@
+en:
+  site_settings:
+    isbf_mbti_enabled: "Enable MBTI preference tests in the workbench. Results and history are private to their owner."
+  isbf_mbti:
+    invalid_answers: "Please answer every question using one of its two options."
+    stale_version: "The questionnaire has changed. Please start a new test using the current version."
+    submission_conflict: "This submission has already been saved with different answers. Please start a new test."
+    account_changed: "Your account changed while this test was being saved. Please sign in again and retry."

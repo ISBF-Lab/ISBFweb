@@ -1,0 +1,177 @@
+name: MBTI workbench integration
+
+on:
+  pull_request:
+    paths:
+      - "plugins/isbf-mbti/**"
+      - "themes/isbf-campus-feed/**"
+      - ".github/workflows/isbf-mbti.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: mbti-workbench-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native-integration:
+    name: MBTI (${{ matrix.baseline }})
+    runs-on: ubuntu-latest
+    container: discourse/discourse_test@sha256:94eca5318fed6171264b95204914de76a113c305cebb72d9fa9527e2c4496494
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        include:
+          - baseline: current
+            core_ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          - baseline: production-132
+            core_ref: 132cc95d043db01251eedf9c93b3927cd5ffee91
+    defaults:
+      run:
+        shell: bash
+        working-directory: discourse
+    env:
+      RAILS_ENV: test
+      PGUSER: discourse
+      PGPASSWORD: discourse
+      LOAD_PLUGINS: "1"
+      PARALLEL_TEST_PROCESSORS: "1"
+      CAPYBARA_DEFAULT_MAX_WAIT_TIME: "20"
+      QUNIT_PARALLEL: "1"
+      QUNIT_REUSE_BUILD: "1"
+      NODE_OPTIONS: --max-old-space-size=2048
+      CHEAP_SOURCE_MAPS: "1"
+      EMBER_ENV: development
+      PLAYWRIGHT_BROWSERS_PATH: /home/discourse/.cache/ms-playwright
+      DBUS_SESSION_BUS_ADDRESS: unix:path=/dev/null
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: candidate
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          sparse-checkout: |
+            plugins/isbf-mbti
+            themes/isbf-campus-feed
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.core_ref }}
+          path: discourse
+          persist-credentials: false
+      - name: Prepare dependencies and database services
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/discourse"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/candidate"
+          redis-server /etc/redis/redis.conf --daemonize yes --logfile ""
+          chown -R postgres /var/run/postgresql
+          sudo -E -u postgres script/start_test_db.rb
+          sudo -u postgres psql -c "CREATE ROLE discourse LOGIN SUPERUSER PASSWORD 'discourse';"
+          ln -s /var/www/discourse/vendor/bundle vendor/bundle
+          bundle config --local path vendor/bundle
+          bundle config --local deployment true
+          bundle config --local without ""
+          bundle install --jobs 1
+          pnpm install --frozen-lockfile
+      - name: Prepare the native schema before migration generation
+        run: bin/rake db:create db:migrate
+      - name: Overlay only the candidate MBTI plugin and project theme
+        id: overlay
+        run: |
+          if test -e plugins/isbf-mbti; then
+            test -d plugins/isbf-mbti
+            test ! -L plugins/isbf-mbti
+            rm -r plugins/isbf-mbti
+          fi
+          cp -a ../candidate/plugins/isbf-mbti plugins/isbf-mbti
+          if test -e themes/isbf-campus-feed; then
+            test -d themes/isbf-campus-feed
+            test ! -L themes/isbf-campus-feed
+            rm -r themes/isbf-campus-feed
+          fi
+          cp -a ../candidate/themes/isbf-campus-feed themes/isbf-campus-feed
+          mkdir -p tmp
+          git -C ../candidate rev-parse HEAD > tmp/mbti-source-sha.txt
+          git rev-parse HEAD > tmp/mbti-runtime-sha.txt
+      - name: Native migration helper regression
+        run: python3 -m unittest discover -s plugins/isbf-mbti/scripts -p 'test_generate_migration.py' -v
+      - name: Finalize migration using the native Rails generator
+        id: migration
+        run: |
+          python3 plugins/isbf-mbti/scripts/generate-migration.py | tee tmp/mbti-migration.txt
+      - name: Native formatting and source drift check
+        id: formatting
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.number }}
+        run: |
+          python3 plugins/isbf-mbti/scripts/check-files.py > tmp/mbti-files.txt
+          while IFS= read -r source; do sha256sum "$source"; done < tmp/mbti-files.txt > tmp/mbti-before.sha256
+          xargs -d '\n' bin/lint --fix < tmp/mbti-files.txt
+          sha256sum --check tmp/mbti-before.sha256
+          git diff --exit-code -- Gemfile.lock pnpm-lock.yaml
+      - name: Migrate isolated database
+        id: database
+        if: always() && steps.migration.outcome == 'success'
+        run: bin/rake db:create db:migrate
+      - name: Regenerate native schema and model annotations
+        if: always() && steps.database.outcome == 'success'
+        run: bin/rake db:dump_structure annotate:clean
+      - name: Plugin scoring, ownership and private history regression
+        if: always() && steps.database.outcome == 'success'
+        env:
+          RSPEC_SEED: "16771"
+        run: |
+          set -o pipefail
+          bin/rake "plugin:spec[isbf-mbti]" | tee tmp/mbti-rspec.log
+      - name: Build native components and browser assets
+        id: assets
+        if: always() && steps.database.outcome == 'success'
+        run: |
+          pnpm playwright-install
+          script/assemble_ember_build.rb
+          mkdir -p "$HOME/.pki/nssdb" "$HOME/.local/share/pki/nssdb"
+          dbus-daemon --system --fork 2>/dev/null || true
+          mbti_bus_address=$(dbus-daemon --session --fork --print-address 2>/dev/null)
+          echo "DBUS_SESSION_BUS_ADDRESS=$mbti_bus_address" >> "$GITHUB_ENV"
+      - name: Install candidate theme into the synthetic QUnit database
+        if: always() && steps.assets.outcome == 'success'
+        env:
+          RAILS_ENV: development
+          DISCOURSE_DEV_DB: discourse_test
+        run: >-
+          bin/rails runner 'theme = RemoteTheme.import_theme_from_directory(Rails.root.join("themes/isbf-campus-feed")); theme.set_default!'
+      - name: MBTI and existing workbench component regression
+        if: always() && steps.assets.outcome == 'success'
+        env:
+          DISCOURSE_DEV_DB: discourse_test
+          QUNIT_RAILS_ENV: development
+          FILTER: "/MBTI|Workbench/i"
+        run: |
+          set -o pipefail
+          bin/rake 'themes:qunit[name,ISBF Campus Feed]' | tee tmp/mbti-qunit.log
+      - name: Actual quiz, resume, private history and responsive pages
+        if: always() && steps.assets.outcome == 'success'
+        run: |
+          set -o pipefail
+          bin/rspec plugins/isbf-mbti/spec/system/take_mbti_test_spec.rb | tee tmp/mbti-system.log
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.overlay.outcome == 'success'
+        with:
+          name: mbti-${{ matrix.baseline }}-${{ github.run_id }}
+          path: |
+            discourse/plugins/isbf-mbti
+            discourse/themes/isbf-campus-feed
+            discourse/db/structure.sql
+            discourse/tmp/mbti-*.txt
+            discourse/tmp/mbti-*.sha256
+            discourse/tmp/mbti-*.log
+            discourse/tmp/mbti-browser
+            discourse/tmp/capybara
+            discourse/log/test.log
+          if-no-files-found: warn
+          retention-days: 7

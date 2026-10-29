@@ -1,4 +1,4 @@
-import { render } from "@ember/test-helpers";
+import { findAll, render, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
@@ -78,6 +78,34 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
         '[data-workbench-key="learning_resources"] .isbf-workbench-grid__label'
       )
       .hasStyle({ opacity: "1" });
+  });
+
+  test("MBTI is appended only when its plugin capability is enabled", async function (assert) {
+    const previous = this.site.isbf_mbti;
+    this.site.set("isbf_mbti", { enabled: true, path: "/isbf/mbti" });
+    try {
+      await render(<template><ISBFV2Workbench /></template>);
+      const cards = findAll("[data-workbench-key]");
+      assert.strictEqual(
+        cards.at(-1).dataset.workbenchKey,
+        "mbti",
+        "the existing entry order is retained"
+      );
+      assert
+        .dom('[data-workbench-key="mbti"]')
+        .hasAttribute(
+          "href",
+          "/isbf/mbti",
+          "the new card opens its real route"
+        );
+      this.site.set("isbf_mbti", null);
+      await settled();
+      assert
+        .dom('[data-workbench-key="mbti"]')
+        .doesNotExist("an unavailable plugin leaves no dead link");
+    } finally {
+      this.site.set("isbf_mbti", previous);
+    }
   });
 
   test("disabled services keep their existing visibility and placeholder rules", async function (assert) {
