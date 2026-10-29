@@ -16,6 +16,10 @@ The 119 observed files comprise:
 
 The six captured files under `isbf-mbti-runtime/` are immutable `.txt` data. Their original paths and digests are explicit in the manifest; they have no claimed Git source commit. They contain the existing menu viewport/highlight positioning adjustments, a deleted-post branch condition and an ARIA attribute correction. Review found no added external network calls or credential content. Preserve their exact bytes: `.gitattributes` disables newline conversion, and formatter changes would invalidate the audited digest.
 
+Syncing main `c199c2f7b47906ef0e499ab015cb89433af4dacb` subsequently made Git-equivalent versions of the four menu captures available through PR #102. The recorded origin still describes the approved capture; no captured bytes or source descriptors were replaced. The two nested-reply captures remain separately identified runtime data.
+
 The absent `frontend/discourse/tests/helpers/d-select.js` is a separate, fixed-source test-only supplement. It is not evidence that the helper was installed in production. The current theme baseline remains fixed at `9ca49588…` with the reviewed MBTI patch; this does not claim that all current database-backed theme fields were audited.
 
 Restoration runs only in the isolated GitHub Actions checkout. All sources, observed paths, retained files and target base digests are validated before any write. Current-candidate and production-baseline theme tests remain unfiltered; RSpec, all system examples, theme patch guards and frozen dependency-lock checks remain in place. A successful compatibility run does not establish visual acceptance or authorize merging, deployment or replacing production Core.
+
+The theme patch guard reads the target branch's live Git ref before and after fetching the PR diff and requires it to be an ancestor of the candidate. A PR's `base.sha` can be an older snapshot and is not used as the live target. Patch receipts record the verified live base SHA. Shared locale conflict resolution preserves all peer values and keeps the MBTI-only patch applicable to the fixed theme without importing unrelated error-page strings or styles.

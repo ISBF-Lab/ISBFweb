@@ -1,0 +1,42 @@
+{
+  "base_commit": "13d66d6f415a7a6b496741155cb55315e208f882",
+  "sources": [
+    {
+      "path": "frontend/discourse/select-kit/components/select-kit.js",
+      "sha256": "4ca4cbb16fad8c4bc7c2f973816b8ee9e15b754c3241ce16fe7b5b9eb1339549"
+    },
+    {
+      "path": "frontend/discourse/select-kit/components/select-kit/select-kit-body.gjs",
+      "sha256": "1494cb954f35d13173f2f3c33381de6630b4b223c8220669df7647a3cbc9366c"
+    },
+    {
+      "path": "frontend/discourse/tests/integration/components/select-kit/combo-box-test.gjs",
+      "sha256": "ed2837adfd054a659a70b3e5ca2580f13b1dbae9ce881dabba093f8cc5a1245b"
+    },
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "sha256": "3f570fb72ea6b85671b65a9783c28ce90f21d53974e55d69be235f96074c621d"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/dropdowns.scss",
+      "sha256": "71bdcb39e78b75805f9b045130fade9b75351a700d37fcef5370d5c67b9d39b3"
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/select-kit-scrolling-test.gjs",
+      "sha256": "066ca3e74bf65c441b3edaa56ece6ba4d286636ea77bc91c8b39857e50297d84"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/-internals/menu-highlight.ts",
+      "sha256": "5ee0f0b09de872228097f2352bbd65e807a184fa1fafa1c003525ad7b3f7e2f7"
+    },
+    {
+      "path": "app/assets/stylesheets/common/components/d-menu-surface.scss",
+      "sha256": "f44429422f74fec1208de100b8ddbfef7857f99296c27ebe3b4aac2fe4025849"
+    }
+  ],
+  "javascript_runtime_changed": true,
+  "ci": "Dedicated SelectKit anchored-search gate added; all existing checks retained",
+  "previous_reviewed_head": "745780f7759a93a3fde2ba547b3477a683f3c214",
+  "integrated_account_pr": 100,
+  "cursor_viewport": "SelectKit passes its existing collection selector; other shared menus retain the owner-based default. Native overflow clips the cursor including partially scrolled rows."
+}

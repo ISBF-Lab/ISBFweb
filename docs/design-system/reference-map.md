@@ -274,3 +274,7 @@ A01／C06→用户截图、选择“一体包住”并要求实施：完整桌�
 ## 2026-10-28 MBTI 专区映射
 
 `/isbf/mbti` 的区域依据为用户确认的《工作台 MBTI 专区》方案及[实施记录](reviews/mbti-workbench-20261028/README.md)。工作台入口继承 A08/C02 的现行传统/玻璃规则；内页继承共享导航及 token，FormKit 提供题目单选行为，dialog 提供确认操作。视觉验收与技术检查分别记录。
+
+## 2026-10-29 C21通用错误页
+
+通用exception模板 → C21；布局／文字场景／底部操作参考C20，品牌参考A01。活动源码位于external/active-theme的错误页组件、exception-wrapper连接器和error-pages样式；核心只扩展出口参数、恢复保护与共享文字动效入口。专用权限HTML／群组申请、现有404及静态维护页不在此次接管范围。源码摘要、用户确认和真实验证见[本轮记录](reviews/error-pages-20261029/README.md)。

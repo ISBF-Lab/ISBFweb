@@ -154,24 +154,37 @@ jobs:
           SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           python3 - <<'PY'
-          import hashlib, json, os, re, urllib.request
+          import hashlib, json, os, re, urllib.parse, urllib.request
           from pathlib import Path
           number = os.environ["PR_NUMBER"]
           assert number.isdecimal(), "Production patch verification requires a PR number"
-          url = f"{os.environ['GITHUB_API_URL']}/repos/{os.environ['GITHUB_REPOSITORY']}/pulls/{number}"
-          def read(accept):
-              request = urllib.request.Request(url, headers={
+          repository = os.environ["GITHUB_REPOSITORY"]
+          api = f"{os.environ['GITHUB_API_URL']}/repos/{repository}"
+          pull_path = f"/pulls/{number}"
+          def read(path, accept="application/vnd.github+json"):
+              request = urllib.request.Request(api + path, headers={
                   "Authorization": "Bearer " + os.environ["GITHUB_TOKEN"],
                   "Accept": accept,
               })
               with urllib.request.urlopen(request, timeout=45) as response:
                   return response.read()
-          before = json.loads(read("application/vnd.github+json"))
+          before = json.loads(read(pull_path))
           assert before["state"] == "open" and before["head"]["sha"] == os.environ["SOURCE_SHA"]
-          patch = read("application/vnd.github.diff")
-          after = json.loads(read("application/vnd.github+json"))
+          assert before["base"]["repo"]["full_name"] == repository, "Unexpected PR target repository"
+          base_ref = before["base"]["ref"]
+          base_path = "/git/ref/heads/" + urllib.parse.quote(base_ref, safe="")
+          live_base = json.loads(read(base_path))["object"]["sha"]
+          comparison = json.loads(read(f"/compare/{live_base}...{os.environ['SOURCE_SHA']}"))
+          assert comparison["merge_base_commit"]["sha"] == live_base, "PR must include the live target branch before theme projection"
+          patch = read(pull_path, "application/vnd.github.diff")
+          after = json.loads(read(pull_path))
+          assert after["state"] == "open"
           assert after["head"]["sha"] == before["head"]["sha"]
-          assert after["base"]["sha"] == before["base"]["sha"]
+          assert after["head"]["ref"] == before["head"]["ref"]
+          assert after["head"]["repo"]["full_name"] == before["head"]["repo"]["full_name"]
+          assert after["base"]["ref"] == base_ref
+          assert after["base"]["repo"]["full_name"] == repository
+          assert json.loads(read(base_path))["object"]["sha"] == live_base, "Live target branch changed during patch verification"
           assert patch.startswith(b"diff --git ") and b"isbf-mbti" in patch
           allowed = set(json.loads(Path("../candidate/.github/fixtures/isbf-mbti-theme-paths.json").read_text()))
           paths = []
@@ -185,7 +198,7 @@ jobs:
           assert "themes/isbf-campus-feed/javascripts/discourse/components/isbf-mbti.gjs" in paths
           Path("tmp/mbti-theme.patch").write_bytes(patch)
           Path("tmp/mbti-theme-patch.json").write_text(json.dumps({
-              "head": before["head"]["sha"], "base": before["base"]["sha"],
+              "head": before["head"]["sha"], "base": live_base,
               "sha256": hashlib.sha256(patch).hexdigest(),
               "paths": paths, "scope": "themes/isbf-campus-feed/**", "theme_baseline": "9ca49588e44c18957733311239a0f355314a2980",
           }))

@@ -433,12 +433,6 @@ en:
     image_retry: "Retry"
     untitled_topic: "Campus update"
     preview_picture: "Picture"
-    preview_post: "View post"
-    official_inactive: "Inactive: %{label}"
-    pin: Pin
-    pin_update: Adjust pin duration
-    pin_cancel: Unpin
-
     workbench_mbti: "MBTI test"
     mbti_history: "My history"
     mbti_intro_heading: "Explore your personality preferences"
@@ -491,4 +485,17 @@ en:
     mbti_dimension_SN: "Whether you prefer concrete experience or possibilities and broader connections when processing information."
     mbti_dimension_TF: "Whether decisions tend to emphasize consistent analytical principles or personal values and others’ feelings."
     mbti_dimension_JP: "Whether you prefer settled plans or flexibility; this does not measure self-discipline."
-    mbti_cleanup_failed: "Your result was saved, but this device could not clear its saved answers. Retrying the same attempt will not create another result."
+    mbti_cleanup_failed: "This device could not clear its saved answers. Check your browser’s storage settings."
+
+    preview_post: "View post"
+    official_inactive: 'Inactive: %{label}'
+    pin: Pin
+    pin_update: Adjust pin duration
+    pin_cancel: Unpin
+  error_page:
+    offline: "Offline"
+    unknown: "Error"
+    server_description: "This page is temporarily unavailable. Please try again later."
+    details: "Details"
+    status: "Status"
+    request: "Failed request"

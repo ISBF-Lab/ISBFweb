@@ -426,12 +426,6 @@ zh_CN:
     image_retry: "重试"
     untitled_topic: "校园动态"
     preview_picture: "图片"
-    preview_post: "查看帖子"
-    official_inactive: "%{label}（已停用）"
-    pin: 置顶
-    pin_update: 调整置顶时间
-    pin_cancel: 取消置顶
-
     workbench_mbti: "MBTI 测试"
     mbti_history: "我的历史"
     mbti_intro_heading: "了解你的类型倾向"
@@ -484,4 +478,17 @@ zh_CN:
     mbti_dimension_SN: "关注你处理信息时更偏好具体经验还是可能性与整体联系。"
     mbti_dimension_TF: "关注你做决定时更侧重一致的分析原则还是个人价值与他人感受。"
     mbti_dimension_JP: "关注你安排生活时更偏好提前确定还是保持弹性，不表示自律程度高低。"
-    mbti_cleanup_failed: "本次结果已保存，但设备上的续答进度未能清除。同一次答题再次提交不会重复保存结果。"
+    mbti_cleanup_failed: "设备上的续答进度未能清除，请检查浏览器的存储设置。"
+
+    preview_post: "查看帖子"
+    official_inactive: "%{label}（已停用）"
+    pin: 置顶
+    pin_update: 调整置顶时间
+    pin_cancel: 取消置顶
+  error_page:
+    offline: "离线"
+    unknown: "错误"
+    server_description: "页面暂时无法加载，请稍后重试。"
+    details: "详细信息"
+    status: "状态"
+    request: "失败的请求"
