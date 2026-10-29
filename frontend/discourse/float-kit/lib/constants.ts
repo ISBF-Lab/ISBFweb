@@ -426,6 +426,7 @@ export const TOOLTIP: { options: TooltipOptions; portalOutletId: string } = {
 
 export const MENU: { options: MenuOptions; portalOutletId: string } = {
   options: {
+    anchorElement: null,
     surface: "menu",
     animated: true,
     ariaLabel: null,

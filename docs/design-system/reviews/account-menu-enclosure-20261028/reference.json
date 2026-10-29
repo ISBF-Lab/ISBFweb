@@ -1,0 +1,13 @@
+{
+  "approved_design": "Desktop account menu wraps the original oval card in one shared frame, centered on the complete card; selected by user and implementation requested.",
+  "scope": "Expanded desktop sidebar account menu only; collapsed sidebar and mobile retain anchored floating menus.",
+  "existing_tokens": {
+    "panel_radius_px": 24,
+    "row_radius_px": 16,
+    "padding_px": 8
+  },
+  "screenshot_sha256": "b3ecb1d5a34fd2203529dc39045f673576fd75c60925dae9dc2cd07b5bcd88d0",
+  "screenshot_exported": false,
+  "visual_acceptance": "Layout confirmed; implemented result awaits inspection.",
+  "base_commit": "2ace8fc4087f0cfc5af7452a5595ff830ba3c2dd"
+}

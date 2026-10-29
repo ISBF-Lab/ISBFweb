@@ -1,0 +1,25 @@
+{
+  "product_sources": [
+    {
+      "path": "frontend/discourse/float-kit/lib/constants.ts",
+      "sha256": "bf6657e1bb58b60293bdf3ed829f38a5c2359656f43783322b25f49a3cc4b01d"
+    },
+    {
+      "path": "frontend/discourse/float-kit/lib/update-position.ts",
+      "sha256": "5c46283baaa1edfc74c1b60e309dc639add00fcb3a0d120ed1bb3a96d4dc839d"
+    },
+    {
+      "path": "frontend/discourse/float-kit/modifiers/apply-floating-ui.ts",
+      "sha256": "8845dfd41011ec38dbb7eae4c5ee34a3592b44ac190be13229c70208c47811a3"
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-account-menu.gjs",
+      "sha256": "ff0eb259a97680355fab936e8e5ecf81a2192c5a2ca40745ee401c934135ce27"
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/dropdowns.scss",
+      "sha256": "031f5e17e70a9c971945adc98a9465bae8a40eb9c3650ae0386b2ace0c2d6dbb"
+    }
+  ],
+  "main_parent": "edc29abfa39c57069e78f8f1592f8d0b90e8adcb"
+}
