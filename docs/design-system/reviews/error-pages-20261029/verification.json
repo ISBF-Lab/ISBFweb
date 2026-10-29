@@ -1,0 +1,63 @@
+{
+  "verified_at_utc": "2026-10-29T09:59:59.124459+00:00",
+  "source_version": "a4fbb5d8ff7475ef90178032b1c84f9ed4f703e44e228134841e46a37a664e82",
+  "environment": "isolated development only",
+  "theme": {
+    "id": 4,
+    "fields": 308,
+    "compilation_errors": 0
+  },
+  "checks": {
+    "qunit": {
+      "tests": 10,
+      "assertions": 36,
+      "failed": 0
+    },
+    "core": {
+      "tests": 2,
+      "assertions": 7,
+      "failed": 0
+    },
+    "flows": {
+      "checks": 25,
+      "failed": 0
+    },
+    "motion": {
+      "checks": 5,
+      "failed": 0
+    },
+    "preview": {
+      "checks": 20,
+      "failed": 0
+    },
+    "lint": {
+      "status": "passed",
+      "runner": "bin/lint --fix",
+      "log": "results/lint.log"
+    }
+  },
+  "browser": "Chromium; one page; serialized desktop, mobile viewport, mouse and CDP touch checks",
+  "viewports": [
+    [
+      1440,
+      1000
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      375,
+      667
+    ]
+  ],
+  "expected_errors": "Two deliberately rejected HTTP403 requests bubble through the native route handler in flows; no unexpected client errors.",
+  "production_published": false,
+  "visual_acceptance": "pending_user_review",
+  "limits": "No physical iOS Safari acceptance was performed.",
+  "cleanup": {
+    "temporary_browser_container_removed": true,
+    "internal_browser_network_removed": true,
+    "temporary_lint_alias_removed": true
+  }
+}

@@ -2281,6 +2281,17 @@
       "source_manifest": "../reviews/auth-code-slots-20261023/source-manifest.json",
       "source_manifest_sha256": "541e3142b1c3c6c171231a495fd1733977482aaab295be1572e341328514d9fc",
       "acceptance": "User approved the supplied numeric-slot reference, website theme colors and implementation. On 2026-10-24 the user requested PR creation and production deployment. Development checks passed; production deployment and final visual acceptance are tracked separately."
+    },
+    {
+      "id": "error-pages-20261029",
+      "source_version": "a4fbb5d8ff7475ef90178032b1c84f9ed4f703e44e228134841e46a37a664e82",
+      "approval_scope": "C21 generic exception pages: C20 full-screen brand layout, elastic status text and collapsed technical details; development-only preview entrypoints",
+      "source_manifest": "../reviews/error-pages-20261029/source-manifest.json",
+      "source_manifest_sha256": "20f1fc7468cf950f3a57df7a039787f712dcf12eb4a12d068e8ea036cca5b5d3",
+      "evidence": "../reviews/error-pages-20261029/README.md",
+      "verification": "../reviews/error-pages-20261029/verification.json",
+      "visual_acceptance": "pending_user_review",
+      "status": "implemented_verified_isolated_development"
     }
   ]
 }

@@ -439,3 +439,10 @@ en:
     pin: Pin
     pin_update: Adjust pin duration
     pin_cancel: Unpin
+  error_page:
+    offline: "Offline"
+    unknown: "Error"
+    server_description: "This page is temporarily unavailable. Please try again later."
+    details: "Details"
+    status: "Status"
+    request: "Failed request"

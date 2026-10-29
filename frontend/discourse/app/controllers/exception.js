@@ -3,6 +3,7 @@ import Controller from "@ember/controller";
 import { action } from "@ember/object";
 import { schedule } from "@ember/runloop";
 import { service } from "@ember/service";
+import getURL from "discourse/lib/get-url";
 import DiscourseURL from "discourse/lib/url";
 import { i18n } from "discourse-i18n";
 
@@ -164,8 +165,10 @@ export default class ExceptionController extends Controller {
       this.exception.clear();
       // Can't use routeTo because it handles navigation to the same page
       DiscourseURL.handleURL(currentURL);
-    } else {
+    } else if (window.history.length > 1) {
       window.history.back();
+    } else {
+      DiscourseURL.routeTo(getURL("/"));
     }
   }
 
@@ -175,9 +178,18 @@ export default class ExceptionController extends Controller {
 
     schedule("afterRender", () => {
       const transition = this.lastTransition;
+      if (!transition) {
+        window.location.reload();
+        this.loading = false;
+        return;
+      }
+
       this.exception.clear();
-      transition.retry();
-      this.loading = false;
+      try {
+        transition.retry();
+      } finally {
+        this.loading = false;
+      }
     });
   }
 }

@@ -1,0 +1,180 @@
+{
+  "source_version": "a4fbb5d8ff7475ef90178032b1c84f9ed4f703e44e228134841e46a37a664e82",
+  "scope": "C21 generic route exception pages and development-only previews",
+  "files": [
+    {
+      "path": "source/frontend/discourse/app/controllers/exception.js",
+      "sha256": "3410b3eda9c65cfa47c6cb669c10d921d99eac8c10dc8e8f5004b9459023bbc7",
+      "before_sha256": "b44ddb50ea451dec2cdd97689a5f5c5b02c11b5d72e4cdb60e6217ec72960a16"
+    },
+    {
+      "path": "source/frontend/discourse/app/templates/exception.gjs",
+      "sha256": "c3324cc7da794366f922d87f3c53171296edd3569b9584d50452714fa24a7664",
+      "before_sha256": "efb3a88043f0034b09c5eed0a896afdbe7f5dfe49278afae801692100f5daa89"
+    },
+    {
+      "path": "source/frontend/discourse/app/lib/elastic-status.js",
+      "sha256": "b35e7c1af44cb6ae1a96c2add65a398679be4df58c788f5dc60207a779e6e8fc",
+      "before_sha256": null
+    },
+    {
+      "path": "source/frontend/discourse/scripts/js/elastic-not-found.js",
+      "sha256": "96e73bc7acebb78641a157ee6b0a4d01669532ff8e0c20e09a1be086defc0fc5",
+      "before_sha256": "68af550fcd57890c058fb13d88059a4f6c32279188c7a96b5f9f3dff75af287f"
+    },
+    {
+      "path": "source/frontend/discourse/tests/unit/controllers/exception-test.js",
+      "sha256": "37ad0a493ab21545e4087fb644875dd6aadeb923e86b4054e02ac07a671a89eb",
+      "before_sha256": null
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/api-initializers/error-preview.js",
+      "sha256": "206c34ed49956d40f7a7a06adfe48e5eafe0b2a3aadced13c0d9c333cb5ffddb",
+      "before_sha256": null
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/lib/error-preview.js",
+      "sha256": "de9bb4d007695c7d54bebbeb7d395fde1f1da85e9749c3c6acfc0d589f204cd5",
+      "before_sha256": null
+    },
+    {
+      "path": "external/active-theme/test/unit/error-preview-test.js",
+      "sha256": "ef95234206fe3dbac0e515cd8b79f43307366ebeb6aebfd4cf6317274233b908",
+      "before_sha256": null
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/components/isbf-error-page.gjs",
+      "sha256": "1c8e80d515c2ff0af115c7acf5a6287ade1b45b5e0eaf74c48a4a23829935957",
+      "before_sha256": null
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/connectors/exception-wrapper/isbf-error-page.gjs",
+      "sha256": "6089778be9c17508325f96e90c4d51b026b2a998c3a8d997f4918484077c9182",
+      "before_sha256": null
+    },
+    {
+      "path": "external/active-theme/test/integration/error-page-test.gjs",
+      "sha256": "2e46857fcb7f75809e9ea42d416c8a84dc477c31956becb421b380490fc73f2e",
+      "before_sha256": null
+    },
+    {
+      "path": "external/active-theme/common/common.scss",
+      "sha256": "713b6ce71b069c497b2ca59f819efe1d6855659fd2acdb0012ed423699c101f4",
+      "before_sha256": "e0a98e75a31c75c3d58636683d9ce3c7fd928dd1383d8bf5c75b0185c3776920"
+    },
+    {
+      "path": "external/active-theme/stylesheets/error-pages.scss",
+      "sha256": "86b650dca1b2196d35ac28c129f9c4e2851f598e6010658a7df7f8079a32d963",
+      "before_sha256": null
+    },
+    {
+      "path": "external/active-theme/locales/en.yml",
+      "sha256": "56a6a4ce930a187224253cc867a1137bbe253a170aae6ec50eac875a2d983846",
+      "before_sha256": "78ee0059b8a870ca87230c47b6bb49fd8658d5587815d40c6938b3d9a6f7e130"
+    },
+    {
+      "path": "external/active-theme/locales/zh_CN.yml",
+      "sha256": "98d5fc61e44cef3244f773b18dd24ab6cdcbc8b6d0f8ed11f2f800750cd78d77",
+      "before_sha256": "6e08e02264c618a52a09e354066ea57d79649bb47476d8502a3124aa5b8e1caa"
+    }
+  ],
+  "production_published": false,
+  "visual_acceptance": "pending_user_review",
+  "pull_request": {
+    "base_commit": "f3f61a99ebe4236facba13d6d2ec432917828d8e",
+    "source_files": [
+      {
+        "repository_path": "frontend/discourse/app/controllers/exception.js",
+        "sha256": "3410b3eda9c65cfa47c6cb669c10d921d99eac8c10dc8e8f5004b9459023bbc7",
+        "approved_development_sha256": "3410b3eda9c65cfa47c6cb669c10d921d99eac8c10dc8e8f5004b9459023bbc7",
+        "base_sha256": "3410b3eda9c65cfa47c6cb669c10d921d99eac8c10dc8e8f5004b9459023bbc7"
+      },
+      {
+        "repository_path": "frontend/discourse/app/templates/exception.gjs",
+        "sha256": "c3324cc7da794366f922d87f3c53171296edd3569b9584d50452714fa24a7664",
+        "approved_development_sha256": "c3324cc7da794366f922d87f3c53171296edd3569b9584d50452714fa24a7664",
+        "base_sha256": "c3324cc7da794366f922d87f3c53171296edd3569b9584d50452714fa24a7664"
+      },
+      {
+        "repository_path": "frontend/discourse/app/lib/elastic-status.js",
+        "sha256": "b35e7c1af44cb6ae1a96c2add65a398679be4df58c788f5dc60207a779e6e8fc",
+        "approved_development_sha256": "b35e7c1af44cb6ae1a96c2add65a398679be4df58c788f5dc60207a779e6e8fc",
+        "base_sha256": "b35e7c1af44cb6ae1a96c2add65a398679be4df58c788f5dc60207a779e6e8fc"
+      },
+      {
+        "repository_path": "frontend/discourse/scripts/js/elastic-not-found.js",
+        "sha256": "96e73bc7acebb78641a157ee6b0a4d01669532ff8e0c20e09a1be086defc0fc5",
+        "approved_development_sha256": "96e73bc7acebb78641a157ee6b0a4d01669532ff8e0c20e09a1be086defc0fc5",
+        "base_sha256": "96e73bc7acebb78641a157ee6b0a4d01669532ff8e0c20e09a1be086defc0fc5"
+      },
+      {
+        "repository_path": "frontend/discourse/tests/unit/controllers/exception-test.js",
+        "sha256": "37ad0a493ab21545e4087fb644875dd6aadeb923e86b4054e02ac07a671a89eb",
+        "approved_development_sha256": "37ad0a493ab21545e4087fb644875dd6aadeb923e86b4054e02ac07a671a89eb",
+        "base_sha256": "37ad0a493ab21545e4087fb644875dd6aadeb923e86b4054e02ac07a671a89eb"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/error-preview.js",
+        "sha256": "206c34ed49956d40f7a7a06adfe48e5eafe0b2a3aadced13c0d9c333cb5ffddb",
+        "approved_development_sha256": "206c34ed49956d40f7a7a06adfe48e5eafe0b2a3aadced13c0d9c333cb5ffddb",
+        "base_sha256": "206c34ed49956d40f7a7a06adfe48e5eafe0b2a3aadced13c0d9c333cb5ffddb"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/javascripts/discourse/lib/error-preview.js",
+        "sha256": "de9bb4d007695c7d54bebbeb7d395fde1f1da85e9749c3c6acfc0d589f204cd5",
+        "approved_development_sha256": "de9bb4d007695c7d54bebbeb7d395fde1f1da85e9749c3c6acfc0d589f204cd5",
+        "base_sha256": "de9bb4d007695c7d54bebbeb7d395fde1f1da85e9749c3c6acfc0d589f204cd5"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/test/unit/error-preview-test.js",
+        "sha256": "ef95234206fe3dbac0e515cd8b79f43307366ebeb6aebfd4cf6317274233b908",
+        "approved_development_sha256": "ef95234206fe3dbac0e515cd8b79f43307366ebeb6aebfd4cf6317274233b908",
+        "base_sha256": "ef95234206fe3dbac0e515cd8b79f43307366ebeb6aebfd4cf6317274233b908"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-error-page.gjs",
+        "sha256": "1c8e80d515c2ff0af115c7acf5a6287ade1b45b5e0eaf74c48a4a23829935957",
+        "approved_development_sha256": "1c8e80d515c2ff0af115c7acf5a6287ade1b45b5e0eaf74c48a4a23829935957",
+        "base_sha256": "1c8e80d515c2ff0af115c7acf5a6287ade1b45b5e0eaf74c48a4a23829935957"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/javascripts/discourse/connectors/exception-wrapper/isbf-error-page.gjs",
+        "sha256": "6089778be9c17508325f96e90c4d51b026b2a998c3a8d997f4918484077c9182",
+        "approved_development_sha256": "6089778be9c17508325f96e90c4d51b026b2a998c3a8d997f4918484077c9182",
+        "base_sha256": "6089778be9c17508325f96e90c4d51b026b2a998c3a8d997f4918484077c9182"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/test/integration/error-page-test.gjs",
+        "sha256": "2e46857fcb7f75809e9ea42d416c8a84dc477c31956becb421b380490fc73f2e",
+        "approved_development_sha256": "2e46857fcb7f75809e9ea42d416c8a84dc477c31956becb421b380490fc73f2e",
+        "base_sha256": "2e46857fcb7f75809e9ea42d416c8a84dc477c31956becb421b380490fc73f2e"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/common/common.scss",
+        "sha256": "fd4494055dd5f6f6d5881fe9f76861c92aabb9181211ad395baca40e29ee299f",
+        "approved_development_sha256": "713b6ce71b069c497b2ca59f819efe1d6855659fd2acdb0012ed423699c101f4",
+        "base_sha256": "3f570fb72ea6b85671b65a9783c28ce90f21d53974e55d69be235f96074c621d"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/stylesheets/error-pages.scss",
+        "sha256": "86b650dca1b2196d35ac28c129f9c4e2851f598e6010658a7df7f8079a32d963",
+        "approved_development_sha256": "86b650dca1b2196d35ac28c129f9c4e2851f598e6010658a7df7f8079a32d963",
+        "base_sha256": null
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/locales/en.yml",
+        "sha256": "e1e77659532e4954bc8fc5228a1f49a3041d05716286760e2c234e64a050dd64",
+        "approved_development_sha256": "56a6a4ce930a187224253cc867a1137bbe253a170aae6ec50eac875a2d983846",
+        "base_sha256": "24111d8c0f8b1e7ed3be91b68a576e96ad251b20856e22ac83c633453b2b6de6"
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+        "sha256": "7dca9b24154885bb7f6ae52863b265b8acfb1eaf04cf00c25ce5602a461591a0",
+        "approved_development_sha256": "98d5fc61e44cef3244f773b18dd24ab6cdcbc8b6d0f8ed11f2f800750cd78d77",
+        "base_sha256": "5fa255987bb61b35dc30d535b1a760bc327914d708d257313b1ef4e0bd1b40e4"
+      }
+    ],
+    "scoped_increment_only": true,
+    "runtime_policy": "Merge only this delta with the actual production runtime; never install repository main wholesale."
+  }
+}
