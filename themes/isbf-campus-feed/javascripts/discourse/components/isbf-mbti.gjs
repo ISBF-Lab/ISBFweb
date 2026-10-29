@@ -26,11 +26,11 @@ import ISBFMbtiResult from "./isbf-mbti-result";
 const API = "/isbf/api/mbti";
 
 export default class ISBFMbti extends Component {
-  @service appEvents;
   @service currentUser;
   @service dialog;
   @service isbfBackNavigation;
   @service keyValueStore;
+  @service router;
   @service site;
 
   @tracked answers = {};
@@ -173,7 +173,7 @@ export default class ISBFMbti extends Component {
 
   @action
   login() {
-    this.appEvents.trigger("show-login");
+    this.router.transitionTo("login");
   }
 
   @action

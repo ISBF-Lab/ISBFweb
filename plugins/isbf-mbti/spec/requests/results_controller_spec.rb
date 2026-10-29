@@ -36,12 +36,20 @@ RSpec.describe IsbfMbti::ResultsController do
            as: :json
       expect(response.status).to eq(201)
       result = response.parsed_body.fetch("result")
-      expect(result["type"]).to eq("ESTJ")
+      expect(result).to include(
+        "type" => "ESTJ",
+        "variant" => "28",
+        "version" => "isbf-1",
+        "source_commit" => IsbfMbti::Questionnaire.fetch("28").source_commit,
+      )
+      expect(result.fetch("dimensions").map { |dimension| dimension.fetch("key") }).to eq(
+        IsbfMbti::Questionnaire::DIMENSIONS,
+      )
       expect(IsbfMbti::Result.find(result["id"]).user_id).to eq(user.id)
       expect(result.keys).not_to include("answers", "attempt_id", "submission_digest", "user_id")
       expect(response.headers["Cache-Control"]).to include("no-store")
       post "/isbf/api/mbti/results.json", params: submission, as: :json
-      expect(response.parsed_body.dig("result", "id")).to eq(result["id"])
+      expect(response.parsed_body.fetch("result")).to eq(result)
       expect(IsbfMbti::Result.where(user_id: user.id).count).to eq(1)
     end
 
@@ -103,6 +111,12 @@ RSpec.describe IsbfMbti::ResultsController do
       sign_in(user)
       get "/isbf/api/mbti/results/#{own.id}.json"
       expect(response.status).to eq(200)
+      expect(response.parsed_body.fetch("result")).to include(
+        "id" => own.id,
+        "type" => own.personality_type,
+        "version" => own.scoring_version,
+        "source_commit" => own.source_commit,
+      )
       get "/isbf/api/mbti/results/#{foreign.id}.json"
       expect(response.status).to eq(404)
     end

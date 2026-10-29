@@ -1,4 +1,11 @@
-import { clearRender, click, render, settled } from "@ember/test-helpers";
+import {
+  clearRender,
+  click,
+  find,
+  focus,
+  render,
+  settled,
+} from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
 import DialogHolder from "discourse/dialog-holder/components/dialog-holder";
@@ -88,7 +95,15 @@ module("ISBF | Integration | Component | ISBFMbti", function (hooks) {
     assert
       .dom("[data-test-mbti-next]")
       .isDisabled("an unanswered question cannot advance");
-    await click('[data-test-mbti-choice="2"]');
+    const choice = find('[data-test-mbti-choice="2"]');
+    await focus(choice);
+    await click(choice);
+    assert.strictEqual(
+      find('[data-test-mbti-choice="2"]'),
+      choice,
+      "choosing an answer keeps the current radio control mounted"
+    );
+    assert.dom(choice).isFocused("choosing an answer preserves keyboard focus");
     assert
       .dom("[data-test-mbti-question]")
       .hasAttribute(

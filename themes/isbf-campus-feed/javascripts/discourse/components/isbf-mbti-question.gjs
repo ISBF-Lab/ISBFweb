@@ -1,5 +1,4 @@
 import Component from "@glimmer/component";
-import { cached } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { themePrefix } from "virtual:theme";
 import Form from "discourse/components/form";
@@ -8,10 +7,9 @@ import DButton from "discourse/ui-kit/d-button";
 import { i18n } from "discourse-i18n";
 
 export default class ISBFMbtiQuestion extends Component {
-  @cached
-  get formData() {
-    return { choice: this.args.choice ? String(this.args.choice) : null };
-  }
+  formData = {
+    choice: this.args.choice ? String(this.args.choice) : null,
+  };
 
   @action
   selectChoice(value, { set, name }) {
@@ -43,6 +41,7 @@ export default class ISBFMbtiQuestion extends Component {
           @onSet={{this.selectChoice}}
           @title={{@question.question}}
           @type="radio-group"
+          @validation="required"
           as |field|
         >
           <field.Control as |options|>

@@ -32,14 +32,16 @@ module IsbfMbti
           .limit(PAGE_SIZE + 1)
           .to_a
       render json: {
-               results: serialize_data(records.first(PAGE_SIZE), ResultSerializer),
+               results: serialize_data(records.first(PAGE_SIZE), ResultSerializer, root: false),
                has_more: records.size > PAGE_SIZE,
                page: page.to_i,
              }
     end
 
     def show
-      render json: { result: serialize_data(own_results.find(params[:id]), ResultSerializer) }
+      render json: {
+               result: serialize_data(own_results.find(params[:id]), ResultSerializer, root: false),
+             }
     end
 
     def create
@@ -52,7 +54,10 @@ module IsbfMbti
           attempt_id: params[:attempt_id],
           answers: params[:answers],
         )
-      render json: { result: serialize_data(result, ResultSerializer) }, status: :created
+      render json: {
+               result: serialize_data(result, ResultSerializer, root: false),
+             },
+             status: :created
     end
 
     def destroy

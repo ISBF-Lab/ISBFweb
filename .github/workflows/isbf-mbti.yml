@@ -77,6 +77,7 @@ jobs:
             frontend/discourse/app/form-kit/components/fk/control
             frontend/discourse/float-kit
             frontend/discourse/select-kit
+            frontend/discourse/tests/helpers
             app/assets/stylesheets/common/components
           persist-credentials: false
       - name: CI runtime-fixture helper regression
@@ -125,6 +126,25 @@ jobs:
             --manifest ../candidate/.github/fixtures/isbf-mbti-production-ui.json \
             --source ../production-ui-baseline \
             --target . > tmp/mbti-production-ui.json
+      - name: Restore the native select test helper from the fixed UI source
+        if: matrix.baseline == 'production-132'
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          helper = Path("frontend/discourse/tests/helpers/d-select.js")
+          source = Path("../production-ui-baseline") / helper
+          data = source.read_bytes()
+          assert hashlib.sha256(data).hexdigest() == "58cff6b8fee57801d8aaf46812d35368e2a090e87b638fed0265a36009c6383c"
+          assert not helper.exists() and not helper.is_symlink()
+          helper.parent.mkdir(parents=True, exist_ok=True)
+          helper.write_bytes(data)
+          print("Restored the fixed-source native select helper only for CI tests")
+          PY
+      - name: Register the candidate plugin as repository-owned for native lint
+        run: |
+          git add --intent-to-add --force -- plugins/isbf-mbti/plugin.rb
+          script/list_bundled_plugins | grep -Fxq 'plugins/isbf-mbti'
       - name: Native migration helper regression
         run: python3 -m unittest discover -s plugins/isbf-mbti/scripts -p 'test_generate_migration.py' -v
       - name: Finalize migration using the native Rails generator
