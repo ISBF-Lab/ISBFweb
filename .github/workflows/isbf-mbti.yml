@@ -174,9 +174,10 @@ jobs:
           base_ref = before["base"]["ref"]
           base_path = "/git/ref/heads/" + urllib.parse.quote(base_ref, safe="")
           live_base = json.loads(read(base_path))["object"]["sha"]
-          comparison = json.loads(read(f"/compare/{live_base}...{os.environ['SOURCE_SHA']}"))
+          comparison_path = f"/compare/{live_base}...{os.environ['SOURCE_SHA']}"
+          comparison = json.loads(read(comparison_path))
           assert comparison["merge_base_commit"]["sha"] == live_base, "PR must include the live target branch before theme projection"
-          patch = read(pull_path, "application/vnd.github.diff")
+          patch = read(comparison_path, "application/vnd.github.diff")
           after = json.loads(read(pull_path))
           assert after["state"] == "open"
           assert after["head"]["sha"] == before["head"]["sha"]
