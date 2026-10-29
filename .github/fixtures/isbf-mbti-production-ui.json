@@ -1,0 +1,158 @@
+{
+  "core_head": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "source_commit": "9ca49588e44c18957733311239a0f355314a2980",
+  "observed_date": "2026-10-29",
+  "audit_sha256": "3f39e6a6161159e1ba0d1402edbfc32fd924929cc1f41416fd638bfd0bc39cca",
+  "files": [
+    {
+      "path": "app/assets/stylesheets/common/components/_index.scss",
+      "sha256": "59a1aca21105ce1d1c3b66ca0cfa27fbcebedc3ecf86c5bb33b1ec028ee3b032",
+      "base_sha256": "24bda14484f218ac3b9a448e4956937086e84659522897a5ac4ecd4956b34384"
+    },
+    {
+      "path": "app/assets/stylesheets/common/components/d-hold-button.scss",
+      "sha256": "e1690d7eced8ec65c0809b7888bffd3162a3c0dea353fc9819a2211c42ef72d8",
+      "base_sha256": null
+    },
+    {
+      "path": "app/assets/stylesheets/common/components/d-menu-surface.scss",
+      "sha256": "c9119464509269e876e6b74d2c6529850e8efc56149d4928b830399088b80c16",
+      "base_sha256": null
+    },
+    {
+      "path": "frontend/discourse/app/form-kit/components/fk/control/select.gjs",
+      "sha256": "e5d1dd0f67370b8a9a0f239d7afc0cf277f28d5bc5ae0be0b66f607b6351ab35",
+      "base_sha256": "cecc9ebe7cd4bc6f0fa0924bc19904747801a7b1de7b57bd771722f57bbf472b"
+    },
+    {
+      "path": "frontend/discourse/app/lib/registry/transformers.js",
+      "sha256": "26c96cc45a92ea5eac5b17587139b26a6b2df705446817ab295676c1dbc7596b",
+      "base_sha256": "41fd4b02508a0b8940f2086d5c61709806cdeff63b97de1791444fefe83568d0"
+    },
+    {
+      "path": "frontend/discourse/app/lib/topic-display-title.js",
+      "sha256": "12302245b8ed6e2292dbf5d815e823a88707812ef56cd1c9e56f723a6fc098b1",
+      "base_sha256": null
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/-internals/floating-family.ts",
+      "sha256": "ca05a9f20a0fdb570ac3ef67a1178ddfa60ea85897ec21d71d2098fabe751e32",
+      "base_sha256": null
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/-internals/menu-highlight.ts",
+      "sha256": "53ae9152deb3a678380224cc40e088dbd50eae7cff96cd52ae6c65f156da5f39",
+      "base_sha256": null
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-access-control-permission-menu.gjs",
+      "sha256": "d327efa682a45c7abafcc5a6085dd93ca04c3cdad49efdcb0080decdd66349a2",
+      "base_sha256": "a541395401c6f31107c5f3cb1a4b43b2ef8e7e4303540c86c474c2e4998365c1"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-dropdown-menu.gjs",
+      "sha256": "13b2cff6a23fe872cc3b3583043a6963c5a30081943627149ec236d6b5119281",
+      "base_sha256": "0001bedf6a553f8dc0f66ad8eaec845603a99ed5d5245b4cf537046532b3f719"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-hold-button.gts",
+      "sha256": "8f3f77ac7723b883a041929ebd0d0eec9ede4f7b8a4634899dfa5a40c7dd2b71",
+      "base_sha256": null
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-multi-select.gjs",
+      "sha256": "cdcbed5c7bf370211fabaac8d5b739cd791d894cf2e4e3a95487ffbf9fa19033",
+      "base_sha256": "9f86736ee355cc83859a8b55d1027eaa792d35df81322b4236bb935e8457604c"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-native-select.gjs",
+      "sha256": "c94d788258310cac98e90b8ad716f3142b99b4c3358a3b9aec72b9068178ac4d",
+      "base_sha256": "d8c904998205d934c3899536fae7d7e55d88cd33ac1e8a223c5d7caad2ab1398"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-select.gts",
+      "sha256": "e935e8a831e9c50466445e87a94d08ef229748c4aff466fa348b9593840b81db",
+      "base_sha256": null
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-select/native.gjs",
+      "sha256": "ab0137493944965c8e37717439f75925b5cd543cad5ea3ba15e6c4b134cb65de",
+      "base_sha256": null
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/modifiers/d-close-on-click-outside.js",
+      "sha256": "a9f669147ec044302c58ca6a42b83c3680bfd608574b4bdfd1170e5b81917531",
+      "base_sha256": "cf463f2c1baceccfbaa412df78de3d869bededef7b8f1eacaeae2ebaf77865d9"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/modifiers/d-menu-highlight.ts",
+      "sha256": "02df4697de8b100abf7d052d0b6eb2f5bce2a2fd90f15d7706a683252bd65636",
+      "base_sha256": null
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/modifiers/d-roving-focus/keyboard.ts",
+      "sha256": "b05bebd72e425a02cf0a43ff730a5d8a93671575ba0e26fd0b8278c4e702e10f",
+      "base_sha256": "50d975df1e10cff3f2d570f1542604dbe6eeb685af0a6508e7758c41d1502926"
+    },
+    {
+      "path": "frontend/discourse/float-kit/components/d-float-body.gts",
+      "sha256": "a26af4fd277c6cff0d5d46480922cc1527dca24522ffa354402a537357708238",
+      "base_sha256": "3e6933f04a0714f063e0e045643dbcd887474c9f45743902f491559ddd31ecd4"
+    },
+    {
+      "path": "frontend/discourse/float-kit/components/d-headless-menu.gts",
+      "sha256": "8323567de651af920ceda1c03b64ab883bbd26a61383837207ca1c5785682c9c",
+      "base_sha256": "1f3b1fbacef4f06f32c24b80bb02f9e6b2fa9c84f0e7b35b8a5ab0488dbe795e"
+    },
+    {
+      "path": "frontend/discourse/float-kit/components/d-inline-float.gts",
+      "sha256": "177edeb1cdbfecd1cf2b4db357b0e5ea208292908a0f448ed65652493179de68",
+      "base_sha256": "d98c23c689d121769a8f7236a7c06d0c27f896f62563b7d894d2b45395e73682"
+    },
+    {
+      "path": "frontend/discourse/float-kit/components/d-menu.gts",
+      "sha256": "4ef77c08329dd5377e2bf87ac732fb4503cfabf3d4f4c19a1ad93448e3fec63d",
+      "base_sha256": "14a7f65dcfc41adb39ecd511d987cc00e50ef2470d6350b7760283ca2ece1386"
+    },
+    {
+      "path": "frontend/discourse/float-kit/lib/constants.ts",
+      "sha256": "a31b2d75b09e36ca4db71595bb920a128449caab450a525d49ac61d59164472a",
+      "base_sha256": "96dfccb93e399bfff1cd4d38b551cd635374c4611260f70341a89fa6b2702c18"
+    },
+    {
+      "path": "frontend/discourse/float-kit/lib/d-menu-instance.ts",
+      "sha256": "a550ee333789228c68a28a7559bd7954603f445be7bc0678cff0583e6c927208",
+      "base_sha256": "50078b61f82b377f04abddc00e46ad31d1723c3edca9aa1ca3e4fc98c52be41b"
+    },
+    {
+      "path": "frontend/discourse/float-kit/lib/float-kit-instance.ts",
+      "sha256": "abb92196ab38ae6ba425db0609b8c96dbc9c9c365af01ee94ac4dabf993b315a",
+      "base_sha256": "04fd230dce45f5fbd7b84f8e066ff0e42d0c960e91961ae315f4fd47cf7c3942"
+    },
+    {
+      "path": "frontend/discourse/float-kit/lib/update-position.ts",
+      "sha256": "a536011bfe923faaf83d5430bf5d662e7103aa1d4445f1f7d9994daacedfca9e",
+      "base_sha256": "6989f35902ceca26d6a013043c87090baa4e277e76778ecf766457b368c4ba0a"
+    },
+    {
+      "path": "frontend/discourse/float-kit/modifiers/close-on-escape.ts",
+      "sha256": "32ec12d81e9163e2cc0c2d4277effefa0893f72d1b3b686b988407033af496df",
+      "base_sha256": "170530ef9245c823abd3f8319026ab780d62f939c8c2ead7e6a574a7037049c4"
+    },
+    {
+      "path": "frontend/discourse/float-kit/services/menu.ts",
+      "sha256": "4f8fb81cfdbf7821eadcc7af406985bfca1550d4628f35aea0aaa07675375bc1",
+      "base_sha256": "953f563f951c909478717445792f741b0d5756f36fa4bc7bd176f755430fc8a6"
+    },
+    {
+      "path": "frontend/discourse/select-kit/components/select-kit.js",
+      "sha256": "e67ac69efc49dda690b5fa1186418a08fb000cde01f80b938780150134977983",
+      "base_sha256": "1039dc7e2ce31ccf7b64433b7ad1315d6d8192cca1b5ff629504905ee562ab2c"
+    },
+    {
+      "path": "frontend/discourse/select-kit/components/select-kit/select-kit-body.gjs",
+      "sha256": "6fd1c769097b5329db1d5a0265e8ede72c086fb3d3fc499621454801d23f4c0c",
+      "base_sha256": "6ac2db5be3a6897647e6803f9e4e00583a4404f343b7a9b586e6b85718d53509"
+    }
+  ]
+}

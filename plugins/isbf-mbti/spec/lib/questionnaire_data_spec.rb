@@ -3,7 +3,7 @@
 require_relative "../plugin_helper"
 require "digest"
 
-RSpec.describe IsbfMbti::Questionnaire, "source provenance" do
+RSpec.describe IsbfMbti::Questionnaire do
   it "retains exact upstream bytes, complete bilingual questions and audited option directions" do
     root = File.expand_path("../../data", __dir__)
     hashes = {

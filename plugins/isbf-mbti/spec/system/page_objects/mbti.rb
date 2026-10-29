@@ -9,32 +9,32 @@ module PageObjects
       end
 
       def choose_version(variant)
-        find("[data-test-mbti-version='#{variant}']").click
+        find(".isbf-mbti__versions button", text: /\A#{variant} questions/).click
         self
       end
 
       def start
-        find("[data-test-mbti-start]").send_keys(:return)
+        find(".isbf-mbti-intro button", text: "Start test", exact_text: true).send_keys(:return)
         self
       end
 
       def resume
-        find("[data-test-mbti-resume]").click
+        find(".isbf-mbti-intro button", text: "Resume", exact_text: true).click
         self
       end
 
       def answer(choice)
-        find("[data-test-mbti-choice='#{choice}']").set(true)
+        find(".isbf-mbti-question input[name='choice'][value='#{choice}']").set(true)
         self
       end
 
       def next_question
-        find("[data-test-mbti-next]").click
+        find(".isbf-mbti-question button", text: "Next", exact_text: true).click
         self
       end
 
       def previous_question
-        find("[data-test-mbti-previous]").click
+        find(".isbf-mbti-question button", text: "Previous", exact_text: true).click
         self
       end
 
@@ -45,67 +45,77 @@ module PageObjects
           if number < total
             next_question
           else
-            find("[data-test-mbti-submit]").click
+            find(
+              ".isbf-mbti-question button",
+              text: "Submit and view result",
+              exact_text: true,
+            ).click
           end
         end
         self
       end
 
       def open_history
-        find("[data-test-mbti-history]").click
+        find(".isbf-mbti__header button", text: "My history", exact_text: true).click
         self
       end
 
       def open_latest_result
-        find("[data-test-mbti-history-item]", match: :first).click
+        find(".isbf-mbti-history .isbf-mbti__history button[data-result-id]", match: :first).click
         self
       end
 
       def delete_result
-        find("[data-test-mbti-result-delete]").click
+        find(".isbf-mbti-result button", text: "Delete result", exact_text: true).click
         PageObjects::Components::Dialog.new.click_yes
         self
       end
 
       def open_login
-        find("[data-test-mbti-login]").click
+        find(".isbf-mbti-intro button", text: "Log in to start", exact_text: true).click
         self
       end
 
       def has_intro?
-        has_css?("[data-test-mbti-intro]")
+        has_css?(".isbf-mbti-intro")
       end
 
       def has_versions?
-        %w[28 40 93].all? { |variant| has_css?("[data-test-mbti-version='#{variant}']") }
+        %w[28 40 93].all? do |variant|
+          has_css?(".isbf-mbti__versions button", text: /\A#{variant} questions/)
+        end
       end
 
       def has_question?(number)
-        has_css?("[data-test-mbti-question][data-question-id='#{number}']")
+        has_css?(".isbf-mbti-question[data-question-id='#{number}']")
       end
 
       def has_selected_choice?(choice)
-        has_css?("[data-test-mbti-choice='#{choice}']:checked")
+        has_css?(".isbf-mbti-question input[name='choice'][value='#{choice}']:checked")
       end
 
       def has_disabled_next?
-        has_css?("[data-test-mbti-next][disabled]")
+        has_css?(".isbf-mbti-question button[disabled]", text: "Next", exact_text: true)
       end
 
       def has_result?
-        has_css?("[data-test-mbti-result]")
+        has_css?(".isbf-mbti-result")
       end
 
       def has_history_item?
-        has_css?("[data-test-mbti-history-list] [data-test-mbti-history-item]")
+        has_css?(".isbf-mbti-history .isbf-mbti__history button[data-result-id]")
       end
 
       def has_empty_history?
-        has_css?("[data-test-mbti-history-empty]")
+        has_css?(
+          ".isbf-mbti-history .isbf-mbti__history li",
+          text: "You have no completed tests yet.",
+        )
       end
 
       def has_login_prompt?
-        has_css?("[data-test-mbti-login]") && has_no_css?("[data-test-mbti-start]")
+        has_css?(".isbf-mbti-intro button", text: "Log in to start", exact_text: true) &&
+          has_no_css?(".isbf-mbti-intro button", text: "Start test", exact_text: true)
       end
 
       def has_native_login?

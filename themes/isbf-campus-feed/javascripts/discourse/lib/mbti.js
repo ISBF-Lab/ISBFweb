@@ -4,7 +4,9 @@ const UUID_PATTERN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export function mbtiConfig(site) {
-  return site?.isbf_mbti?.enabled === true ? site.isbf_mbti : null;
+  const config =
+    typeof site?.get === "function" ? site.get("isbf_mbti") : site?.isbf_mbti;
+  return config?.enabled === true ? config : null;
 }
 
 export function clearForeignMbtiDrafts(store, userId) {

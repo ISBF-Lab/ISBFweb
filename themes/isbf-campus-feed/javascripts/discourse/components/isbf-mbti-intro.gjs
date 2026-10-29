@@ -4,7 +4,7 @@ import DButton from "discourse/ui-kit/d-button";
 import { i18n } from "discourse-i18n";
 
 export default <template>
-  <section data-test-mbti-intro>
+  <section class="isbf-mbti-intro" data-test-mbti-intro>
     <div class="isbf-mbti__panel">
       <h2>{{i18n (themePrefix "isbf_v2.mbti_intro_heading")}}</h2>
       <p>{{i18n (themePrefix "isbf_v2.mbti_intro")}}</p>

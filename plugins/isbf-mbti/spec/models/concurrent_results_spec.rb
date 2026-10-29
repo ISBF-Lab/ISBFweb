@@ -19,11 +19,13 @@ RSpec.describe IsbfMbti::Result, type: :model do
       start = Queue.new
       attempt_id = SecureRandom.uuid
       answers = (1..40).map { |question_id| { id: question_id, choice: 1 } }
+      owner_id = owner.id
+      ActiveRecord::Base.connection_pool.release_connection
       threads =
         Array.new(2) do
           Thread.new do
             ActiveRecord::Base.connection_pool.with_connection do
-              account = User.find(owner.id)
+              account = User.find(owner_id)
               ready.push(true)
               start.pop
               described_class.record!(

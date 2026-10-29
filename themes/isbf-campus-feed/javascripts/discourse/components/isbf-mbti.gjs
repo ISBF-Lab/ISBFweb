@@ -587,7 +587,7 @@ export default class ISBFMbti extends Component {
                   data-test-mbti-retry
                   @action={{this.retry}}
                   @disabled={{this.busy}}
-                  @label="retry"
+                  @label={{themePrefix "isbf_v2.mbti_retry"}}
                 />{{/unless}}
             </div>
           {{/if}}

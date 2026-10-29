@@ -57,12 +57,32 @@ jobs:
           sparse-checkout: |
             plugins/isbf-mbti
             themes/isbf-campus-feed
+            .github/fixtures
+            .github/scripts
+            .github/tests
           persist-credentials: false
       - uses: actions/checkout@v4
         with:
           ref: ${{ matrix.core_ref }}
           path: discourse
           persist-credentials: false
+      - uses: actions/checkout@v4
+        if: matrix.baseline == 'production-132'
+        with:
+          ref: 9ca49588e44c18957733311239a0f355314a2980
+          path: production-ui-baseline
+          sparse-checkout: |
+            frontend/discourse/app/ui-kit
+            frontend/discourse/app/lib
+            frontend/discourse/app/form-kit/components/fk/control
+            frontend/discourse/float-kit
+            frontend/discourse/select-kit
+            app/assets/stylesheets/common/components
+          persist-credentials: false
+      - name: CI runtime-fixture helper regression
+        run: >-
+          python3 -m unittest discover -s ../candidate/.github/tests
+          -p test_restore_mbti_production_ui.py -v
       - name: Prepare dependencies and database services
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE/discourse"
@@ -97,6 +117,14 @@ jobs:
           mkdir -p tmp
           git -C ../candidate rev-parse HEAD > tmp/mbti-source-sha.txt
           git rev-parse HEAD > tmp/mbti-runtime-sha.txt
+      - name: Restore audited production UI components only in the isolated CI runtime
+        if: matrix.baseline == 'production-132'
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/production-ui-baseline"
+          python3 ../candidate/.github/scripts/restore-mbti-production-ui.py \
+            --manifest ../candidate/.github/fixtures/isbf-mbti-production-ui.json \
+            --source ../production-ui-baseline \
+            --target . > tmp/mbti-production-ui.json
       - name: Native migration helper regression
         run: python3 -m unittest discover -s plugins/isbf-mbti/scripts -p 'test_generate_migration.py' -v
       - name: Finalize migration using the native Rails generator
@@ -170,6 +198,7 @@ jobs:
             discourse/tmp/mbti-*.txt
             discourse/tmp/mbti-*.sha256
             discourse/tmp/mbti-*.log
+            discourse/tmp/mbti-production-ui.json
             discourse/tmp/mbti-browser
             discourse/tmp/capybara
             discourse/log/test.log

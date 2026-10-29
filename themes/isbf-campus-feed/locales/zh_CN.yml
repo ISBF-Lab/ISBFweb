@@ -460,6 +460,7 @@ zh_CN:
     mbti_delete_result: "删除结果"
     mbti_delete_confirm: "删除这次测试结果？此操作不会删除其他测试结果。"
     mbti_delete_failed: "删除失败，结果仍然保留，请重试。"
+    mbti_retry: "重试"
     mbti_load_failed: "加载失败，请检查网络后重试。"
     mbti_save_failed: "提交失败，你的答案仍然保留，请再次提交。"
     mbti_unavailable: "MBTI 测试暂未开放。"

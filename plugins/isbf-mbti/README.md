@@ -12,9 +12,11 @@ A cascade foreign key is intentional: these private records must be removed on h
 
 ## Migration and verification
 
-`db/templates/` contains a schema template, not an installable timestamp migration. The native CI helper generates its timestamp and Rails migration version. Commit the generated, source-SHA-verified migration and model annotation artifacts before merging or deployment. Never deploy a candidate lacking the final native migration.
+The final migration is `db/migrate/20261029003825_create_isbf_mbti_results.rb`, produced by the native Rails generator in the current-baseline CI for source `b478424354419ead12cd274b14645f09271652b5`. The schema template remains in `db/templates/`; the helper verifies and reuses the final file. Only the MBTI schema blocks and its migration version are imported from that source-verified native dump. Model annotations were unchanged. Never deploy a candidate lacking the final native migration.
 
 The feature is isolated from Core and other business plugins. Run its RSpec suite plus the real theme tests and native browser flow in the dedicated MBTI CI. Source question files must retain their pinned bytes.
+
+The production CI matrix reproduces the deployed frontend, not a bare Git checkout: Core `132cc95d043db01251eedf9c93b3927cd5ffee91` already has 30 public UI dependency files from merged source `9ca49588e44c18957733311239a0f355314a2980`. A read-only audit on 2026-10-29 verified each file. `.github/fixtures/isbf-mbti-production-ui.json` pins their current/base hashes and audit digest; the CI-only restore helper checks both Git heads, verifies all sources and destinations before writing, and rejects drift. It neither installs Core into production nor changes dependency snapshots. Both matrices retain scoring, ownership, QUnit and all 16 native page examples.
 
 ## Release and rollback
 

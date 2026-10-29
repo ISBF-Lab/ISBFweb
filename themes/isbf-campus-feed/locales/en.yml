@@ -467,6 +467,7 @@ en:
     mbti_delete_result: "Delete result"
     mbti_delete_confirm: "Delete this result? Other results will remain."
     mbti_delete_failed: "Could not delete the result. It has been preserved; please retry."
+    mbti_retry: "Retry"
     mbti_load_failed: "Could not load. Check your connection and retry."
     mbti_save_failed: "Could not submit. Your answers are preserved; please retry."
     mbti_unavailable: "The MBTI test is not available yet."

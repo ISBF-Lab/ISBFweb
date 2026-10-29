@@ -4,7 +4,7 @@ import DButton from "discourse/ui-kit/d-button";
 import { i18n } from "discourse-i18n";
 
 export default <template>
-  <section data-test-mbti-history-list>
+  <section class="isbf-mbti-history" data-test-mbti-history-list>
     <h2>{{i18n (themePrefix "isbf_v2.mbti_history")}}</h2>
     <p class="isbf-mbti__muted">{{i18n
         (themePrefix "isbf_v2.mbti_privacy")

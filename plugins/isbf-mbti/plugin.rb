@@ -25,11 +25,6 @@ after_initialize do
   require_relative "app/controllers/isbf_mbti/questionnaires_controller"
   require_relative "app/controllers/isbf_mbti/results_controller"
 
-  IsbfMbti::Engine.routes.draw do
-    resources :questionnaires, only: %i[index show]
-    resources :results, only: %i[index show create destroy]
-  end
-
   Discourse::Application.routes.prepend do
     get "/isbf/mbti" => "isbf_mbti/pages#index", :as => :isbf_mbti_page
     mount ::IsbfMbti::Engine, at: "/isbf/api/mbti", as: :isbf_mbti_api
