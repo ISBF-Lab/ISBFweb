@@ -16,11 +16,14 @@ export interface MenuHighlightOptions {
   itemSelector?: string;
   /** Rows marked by an existing keyboard cursor. */
   activeSelector?: string;
+  /** Ancestor scroller which clips and scrolls the visual cursor with its rows. */
+  viewportSelector?: string;
 }
 
 /** A visual cursor which never changes focus, selection, or event activation. */
 export default class MenuHighlight {
   #element: HTMLElement;
+  #cursorElement: HTMLElement | null = null;
   #options: MenuHighlightOptions;
   #active: HTMLElement | null = null;
   #selected: HTMLElement[] = [];
@@ -148,6 +151,7 @@ export default class MenuHighlight {
     }
     this.#mutations.disconnect();
     this.#resize.disconnect();
+    this.#clearCursorElement();
     const element = this.#element;
     element.removeEventListener("pointerover", this.#onPointer);
     element.removeEventListener("focusin", this.#onFocus);
@@ -170,13 +174,32 @@ export default class MenuHighlight {
     );
   }
 
+  #clearCursorElement() {
+    const element = this.#cursorElement;
+    if (!element) {
+      return;
+    }
+    delete element.dataset.dMenuReady;
+    delete element.dataset.dMenuMotion;
+    if (element !== this.#element) {
+      this.#resize.unobserve(element);
+      element.classList.remove("d-menu-highlight__viewport");
+    }
+    this.#cursorElement = null;
+  }
+
   #move(row: HTMLElement | null) {
-    const element = this.#element;
     if (!row || !this.#canHighlight(row)) {
-      delete element.dataset.dMenuReady;
+      this.#clearCursorElement();
       this.#active = null;
       return;
     }
+    const viewport = this.#options.viewportSelector
+      ? row.closest<HTMLElement>(this.#options.viewportSelector)
+      : null;
+    const element =
+      viewport && this.#element.contains(viewport) ? viewport : this.#element;
+    this.#setCursorElement(element);
     if (!this.#instant && element.dataset.dMenuMotion === "instant") {
       element.dataset.dMenuMotion = "pointer";
       // Commit the keyboard position before enabling pointer interpolation.
@@ -221,6 +244,18 @@ export default class MenuHighlight {
         this.#frame = null;
         this.refresh();
       });
+    }
+  }
+
+  #setCursorElement(element: HTMLElement) {
+    if (element === this.#cursorElement) {
+      return;
+    }
+    this.#clearCursorElement();
+    this.#cursorElement = element;
+    if (element !== this.#element) {
+      element.classList.add("d-menu-highlight__viewport");
+      this.#resize.observe(element);
     }
   }
 }

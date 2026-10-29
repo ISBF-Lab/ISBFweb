@@ -1,21 +1,21 @@
 {
   "status": "locally_verified_ci_pending",
-  "verified_at": "2026-10-29T01:24:16.437867+00:00",
+  "verified_at": "2026-10-29T05:41:53.183308+00:00",
   "native_core_anchor": {
-    "tests": 2,
-    "assertions": 8,
+    "tests": 5,
+    "assertions": 18,
     "failed": 0,
     "client_errors": [],
-    "scope": "Top and bottom search anchoring while the next positioning update is paused; all existing ComboBox cases remain in the new CI gate"
+    "scope": "Full ComboBox module, including top/bottom search anchoring with strict1px tolerance after fonts, explicit initial placement and opening animation settle"
   },
   "native_theme": {
-    "tests": 3,
-    "assertions": 23,
+    "tests": 4,
+    "assertions": 34,
     "failed": 0,
     "client_errors": [],
-    "scope": "Actual shared CSS, scrolling and visual cursor, search and clearing, native category callback"
+    "scope": "Actual shared CSS; long-list scrolling, partial/fully clipped cursor, stationary search, search focus/value and original category callback"
   },
-  "native_lint": "Changed code/styles and final test files passed; markdown and workflow were not covered by the native linters",
+  "native_lint": "Scoped native ESLint, Prettier and Stylelint passed for the review fix; original implementation lint retained",
   "workflow": {
     "yaml_syntax_valid": true,
     "new_core_gate": true,
@@ -59,7 +59,8 @@
       "heightRange": 0
     },
     "client_errors": [],
-    "screenshots_private": true
+    "screenshots_private": true,
+    "reused_for_cursor_only_review_fix": true
   },
   "before_fix": {
     "input_edge_drift_during_typing_px": 28,
@@ -73,8 +74,21 @@
     "default_theme_id": 4,
     "default_theme_preserved": true
   },
-  "full_core_or_type_suites_repeated": false,
   "prior_failed_attempts": "Private local records preserve the scale fixture, test listener teardown, development hot reload and stale-draft setup failures; no failures were suppressed",
   "production_changed": false,
-  "screenshots_private": true
+  "screenshots_private": true,
+  "type_validation": {
+    "check": "types",
+    "exit_code": 0,
+    "completed_at": "2026-10-29T05:36:57.565854+00:00",
+    "reason": "Required for the new optional shared MenuHighlight viewportSelector API; prior unrelated clean suites were not repeated"
+  },
+  "review_fix": {
+    "thread": "PRRT_kwDOUrf5Ns6xYk-Y",
+    "cursor_clipped_by_owning_collection": true,
+    "reduced_motion_preserved": true,
+    "initial_test_geometry_stabilized_without_weakening_assertions": true,
+    "ci_viewport": "1440x900",
+    "account_pr_100_integrated": "13d66d6f415a7a6b496741155cb55315e208f882"
+  }
 }

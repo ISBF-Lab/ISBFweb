@@ -41,7 +41,7 @@ module("Integration | Component | SelectKit | ComboBox", function (hooks) {
 
   for (const placement of ["top-start", "bottom-start"]) {
     test(`${placement} search stays anchored between content resize and positioning`, async function (assert) {
-      setDefaultState(this);
+      setDefaultState(this, { content: DEFAULT_CONTENT.slice(0, 2) });
       this.placement = placement;
       this.onReady = (component) => {
         this.component = component;
@@ -76,9 +76,16 @@ module("Integration | Component | SelectKit | ComboBox", function (hooks) {
         const panel = find(".select-kit-body");
         await waitUntil(() => panel.style.transform);
         await settled();
+        await document.fonts.ready;
+        await this.component.updateFloatingUiPosition();
+        await settled();
+        await Promise.all(
+          panel.getAnimations().map((animation) => animation.finished)
+        );
         const input = find(".filter-input");
         const header = find(".select-kit-header");
         const above = placement.startsWith("top");
+        assert.strictEqual(this.component.selectKit.isPlacedAbove, above);
         const edge = () => {
           const field = input.getBoundingClientRect();
           const trigger = header.getBoundingClientRect();
@@ -96,7 +103,7 @@ module("Integration | Component | SelectKit | ComboBox", function (hooks) {
         assert.true(panel.getBoundingClientRect().height < beforeHeight);
         assert.true(
           Math.abs(edge() - before) < 1,
-          "search keeps the same trigger edge before the next position update"
+          `${placement} search edge ${before} to ${edge()} before the next position update`
         );
         assert.dom(input).isFocused();
         assert.strictEqual(this.value, DEFAULT_VALUE);

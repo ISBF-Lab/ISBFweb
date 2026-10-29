@@ -64,7 +64,8 @@
   width: 100%;
 }
 
-.d-menu-highlight {
+.d-menu-highlight,
+.d-menu-highlight__viewport {
   position: relative;
   isolation: isolate;
 
@@ -224,6 +225,7 @@
   }
 
   .d-menu-highlight::before,
+  .d-menu-highlight__viewport::before,
   .d-select__trigger .d-icon {
     transition: none;
   }

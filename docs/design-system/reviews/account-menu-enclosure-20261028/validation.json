@@ -1,0 +1,134 @@
+{
+  "status": "review_focus_fix_locally_verified_ci_pending",
+  "full_frontend_types": {
+    "exit_code": 0,
+    "scope": "Complete check before unrelated notification main integration; all modified product sources unchanged"
+  },
+  "native_lint": {
+    "product_and_tests": "passed",
+    "last_test_file": "passed"
+  },
+  "menu_policy": {
+    "files": 5933,
+    "findings": 0,
+    "tests_passed": 5
+  },
+  "native_core": {
+    "tests": 79,
+    "assertions": 166,
+    "failed": 0,
+    "client_errors": []
+  },
+  "native_account_component": {
+    "tests": 6,
+    "assertions": 27,
+    "failed": 0,
+    "client_errors": [],
+    "scope": "Complete product theme with the six selected tests; actual theme CSS loaded"
+  },
+  "page_checks": {
+    "completed": [
+      {
+        "name": "Desktop frame encloses the original card",
+        "passed": true,
+        "geometry": {
+          "left": 81,
+          "right": 327,
+          "bottom": 993,
+          "top": 715,
+          "height": 278,
+          "card": {
+            "x": 90,
+            "y": 908,
+            "width": 228,
+            "height": 76,
+            "right": 318,
+            "bottom": 984
+          },
+          "inset": 9,
+          "radius": "24px",
+          "cards": 1,
+          "viewportHeight": 1000
+        }
+      },
+      {
+        "name": "The desktop card stays stationary and unique",
+        "passed": true
+      },
+      {
+        "name": "The shared frame fits the desktop viewport",
+        "passed": true
+      },
+      {
+        "name": "Hovering from the card into the menu keeps it open",
+        "passed": true
+      },
+      {
+        "name": "The open frame realigns during desktop resizing",
+        "passed": true
+      },
+      {
+        "name": "Collapsed sidebar retains its original floating menu",
+        "passed": true
+      }
+    ],
+    "completed_assertions": 6,
+    "desktop_and_collapsed_sidebar": "passed",
+    "overall_probe_complete": false,
+    "mobile_probe": "The actual mobile account entry was not located before timeout; no pass claimed. Mobile component behavior passed in QUnit; required CI retains the real page suite.",
+    "probe_error": [
+      "locator.waitFor: Timeout 120000ms exceeded."
+    ]
+  },
+  "cleanup": {
+    "runtime_test_view_restored": true,
+    "temporary_compiler_hook_removed": true,
+    "isolated_app_restarted_after_cleanup": true,
+    "production_changed": false
+  },
+  "screenshots_exported": false,
+  "user_requested_no_repeated_local_validation": true,
+  "main_integration": {
+    "previous_base": "2ace8fc4087f0cfc5af7452a5595ff830ba3c2dd",
+    "integrated_main": "edc29abfa39c57069e78f8f1592f8d0b90e8adcb",
+    "incoming_paths": [
+      ".github/workflows/isbf-frontend-consistency.yml",
+      "app/views/static/service-worker.js.erb",
+      "frontend/discourse/app/lib/push-notifications.js",
+      "frontend/discourse/tests/acceptance/push-notification-navigation-test.js",
+      "spec/requests/service_worker_notification_navigation_spec.rb"
+    ],
+    "only_overlap": [
+      ".github/workflows/isbf-frontend-consistency.yml"
+    ],
+    "device_notification_checks_preserved": true,
+    "owned_product_sources_changed_by_integration": false
+  },
+  "test_formatting": "Final test-only formatting occurred after native success; no successful suite was repeated for formatting.",
+  "review_followup": {
+    "reviewed_head": "c5ae7bbd4583136c4473e0d53f39f86921a791f1",
+    "finding": "Portaled verification selectors were outside the account focus boundary",
+    "fix": "Use the existing floating-family containment helper and exercise production portals in the regression",
+    "modified_product_sources": [
+      "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-account-menu.gjs"
+    ],
+    "core_and_styles_unchanged": true,
+    "native_lint": "passed for both modified files",
+    "targeted_regression": {
+      "tests": 1,
+      "assertions": 19,
+      "failed": 0,
+      "client_errors": [],
+      "production_portals": true,
+      "verification_and_second_factor": true,
+      "password_and_token_drafts_preserved": true
+    },
+    "previous_successful_checks_repeated": false,
+    "menu_policy": {
+      "tests_passed": 5,
+      "files_checked": 5841,
+      "findings": 0
+    },
+    "local_harness": "First attempt had no theme stylesheet and stopped before assertions; temporary local view explicitly loaded actual validation theme CSS and was restored. No product or CI view change."
+  }
+}

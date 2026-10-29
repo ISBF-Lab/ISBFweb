@@ -1,5 +1,5 @@
 {
-  "base_commit": "9ca49588e44c18957733311239a0f355314a2980",
+  "base_commit": "13d66d6f415a7a6b496741155cb55315e208f882",
   "sources": [
     {
       "path": "frontend/discourse/select-kit/components/select-kit.js",
@@ -7,11 +7,11 @@
     },
     {
       "path": "frontend/discourse/select-kit/components/select-kit/select-kit-body.gjs",
-      "sha256": "8698bc8d3259a8baf995a317e9960cd4e340950748c405e759f2568ad67189e4"
+      "sha256": "1494cb954f35d13173f2f3c33381de6630b4b223c8220669df7647a3cbc9366c"
     },
     {
       "path": "frontend/discourse/tests/integration/components/select-kit/combo-box-test.gjs",
-      "sha256": "50a5bdcbbc493db092851a4f7d73d0ffa5299fa21f6d5cfa81afd78c0de23385"
+      "sha256": "ed2837adfd054a659a70b3e5ca2580f13b1dbae9ce881dabba093f8cc5a1245b"
     },
     {
       "path": "themes/isbf-campus-feed/common/common.scss",
@@ -19,13 +19,24 @@
     },
     {
       "path": "themes/isbf-campus-feed/stylesheets/dropdowns.scss",
-      "sha256": "7d0283f34a59212c9807b104d3f01cc7be0ee1be7d97a412e6aad1d280de43a8"
+      "sha256": "71bdcb39e78b75805f9b045130fade9b75351a700d37fcef5370d5c67b9d39b3"
     },
     {
       "path": "themes/isbf-campus-feed/test/integration/select-kit-scrolling-test.gjs",
-      "sha256": "f1ffacb9ee9ff23612ac0d91b7eb8b345b9217bf83805e13df3d370433ca4579"
+      "sha256": "066ca3e74bf65c441b3edaa56ece6ba4d286636ea77bc91c8b39857e50297d84"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/-internals/menu-highlight.ts",
+      "sha256": "5ee0f0b09de872228097f2352bbd65e807a184fa1fafa1c003525ad7b3f7e2f7"
+    },
+    {
+      "path": "app/assets/stylesheets/common/components/d-menu-surface.scss",
+      "sha256": "f44429422f74fec1208de100b8ddbfef7857f99296c27ebe3b4aac2fe4025849"
     }
   ],
   "javascript_runtime_changed": true,
-  "ci": "Dedicated SelectKit anchored-search gate added; all existing checks retained"
+  "ci": "Dedicated SelectKit anchored-search gate added; all existing checks retained",
+  "previous_reviewed_head": "745780f7759a93a3fde2ba547b3477a683f3c214",
+  "integrated_account_pr": 100,
+  "cursor_viewport": "SelectKit passes its existing collection selector; other shared menus retain the owner-based default. Native overflow clips the cursor including partially scrolled rows."
 }

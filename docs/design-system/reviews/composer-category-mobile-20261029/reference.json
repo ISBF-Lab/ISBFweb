@@ -4,5 +4,5 @@
   "screenshot_sha256": "e66b47ce83e23fcfbf03fc048fb0e668a2cb14bdaf1e86dc627f6977eabb6184",
   "screenshot_private": true,
   "design_changes": "None; restore scrolling and stable searching with existing approved appearance",
-  "prior_work": "PR100 cc04e356 remains on its intact worktree and independent CI job2b56506f"
+  "prior_work": "PR100 merged at13d66d6f415a7a6b496741155cb55315e208f882; original account worktree cc04e356 preserved; production publication pending"
 }

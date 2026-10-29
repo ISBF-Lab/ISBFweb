@@ -22,6 +22,7 @@ export default class SelectKitBody extends Component {
     this.#highlight = new MenuHighlight(this.element, {
       itemSelector: ".select-kit-row",
       activeSelector: ".is-highlighted",
+      viewportSelector: ".select-kit-collection",
     });
 
     document.addEventListener("click", this.handleClick, true);
