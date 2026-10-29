@@ -36,3 +36,5 @@ docs/ai-moderation-verification/*.log -text whitespace=-blank-at-eof,-blank-at-e
 
 # Keep vendored questionnaire source hashes stable across platforms.
 plugins/isbf-mbti/data/upstream/* -text
+
+/.github/fixtures/isbf-mbti-runtime/** -text

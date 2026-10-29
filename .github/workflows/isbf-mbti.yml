@@ -7,6 +7,7 @@ on:
       - "themes/isbf-campus-feed/**"
       - ".github/workflows/isbf-mbti.yml"
       - ".github/fixtures/isbf-mbti-*.json"
+      - ".github/fixtures/isbf-mbti-runtime/**"
       - ".github/scripts/restore-mbti-production-ui.py"
       - ".github/tests/test_restore_mbti_production_ui.py"
   workflow_dispatch:
@@ -80,14 +81,28 @@ jobs:
           ref: 9ca49588e44c18957733311239a0f355314a2980
           path: production-ui-baseline
           sparse-checkout: |
-            frontend/discourse/app/ui-kit
-            frontend/discourse/app/lib
-            frontend/discourse/app/form-kit/components/fk/control
+            frontend/discourse/app
             frontend/discourse/float-kit
             frontend/discourse/select-kit
             frontend/discourse/tests/helpers
             app/assets/stylesheets/common/components
             themes/isbf-campus-feed
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        if: matrix.baseline == 'production-132'
+        with:
+          ref: 13d66d6f415a7a6b496741155cb55315e208f882
+          path: production-float-source
+          sparse-checkout: |
+            frontend/discourse/float-kit/lib
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        if: matrix.baseline == 'production-132'
+        with:
+          ref: 211f043f51681951bbb6d562ca9df66ea73366c6
+          path: production-otp-source
+          sparse-checkout: |
+            frontend/discourse/app/ui-kit/d-otp
           persist-credentials: false
       - name: CI runtime-fixture helper regression
         run: >-
@@ -181,9 +196,15 @@ jobs:
         if: matrix.baseline == 'production-132'
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE/production-ui-baseline"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/production-float-source"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/production-otp-source"
           python3 ../candidate/.github/scripts/restore-mbti-production-ui.py \
             --manifest ../candidate/.github/fixtures/isbf-mbti-production-ui.json \
             --source ../production-ui-baseline \
+            --extra-source 13d66d6f415a7a6b496741155cb55315e208f882=../production-float-source \
+            --extra-source 211f043f51681951bbb6d562ca9df66ea73366c6=../production-otp-source \
+            --audit ../candidate/.github/fixtures/isbf-mbti-production-source-audit.json \
+            --capture ../candidate/.github/fixtures/isbf-mbti-runtime \
             --target . > tmp/mbti-production-ui.json
       - name: Restore the native select test helper from the fixed UI source
         if: matrix.baseline == 'production-132'
@@ -252,12 +273,11 @@ jobs:
           DISCOURSE_DEV_DB: discourse_test
         run: >-
           bin/rails runner 'theme = RemoteTheme.import_theme_from_directory(Rails.root.join("themes/isbf-campus-feed")); theme.set_default!'
-      - name: MBTI and existing workbench component regression
+      - name: Full theme component and acceptance regression
         if: always() && steps.assets.outcome == 'success'
         env:
           DISCOURSE_DEV_DB: discourse_test
           QUNIT_RAILS_ENV: development
-          FILTER: "/MBTI|Workbench/i"
         run: |
           set -o pipefail
           bin/rake 'themes:qunit[name,ISBF Campus Feed]' | tee tmp/mbti-qunit.log
