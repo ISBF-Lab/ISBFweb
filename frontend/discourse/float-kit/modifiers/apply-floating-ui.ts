@@ -32,6 +32,8 @@ export default class FloatKitApplyFloatingUi extends Modifier<FloatKitApplyFloat
   declare options: PositioningOptions;
   declare cleanup?: () => void;
 
+  #reference: FloatKitTrigger | null = null;
+
   constructor(owner: Owner, args: ArgsFor<FloatKitApplyFloatingUiSignature>) {
     super(owner, args);
     registerDestructor(this, (instance) => instance.teardown());
@@ -45,19 +47,14 @@ export default class FloatKitApplyFloatingUi extends Modifier<FloatKitApplyFloat
       instance,
     ]: FloatKitApplyFloatingUiSignature["Args"]["Positional"]
   ) {
+    this.teardown();
     instance.content = element;
     this.instance = instance;
     this.options = options ?? {};
+    this.#reference = this.#resolveReference(trigger);
 
     if (this.options.autoUpdate) {
-      this.cleanup = autoUpdate(
-        trigger,
-        element,
-        this.update,
-        typeof this.options.autoUpdate === "object"
-          ? this.options.autoUpdate
-          : {}
-      );
+      this.#observeReference();
     } else {
       this.update();
     }
@@ -65,8 +62,21 @@ export default class FloatKitApplyFloatingUi extends Modifier<FloatKitApplyFloat
 
   @bind
   async update() {
-    if (this.instance.triggerElement?.isConnected === false) {
+    if (
+      this.instance.triggerElement?.isConnected === false ||
+      !this.instance.content?.isConnected
+    ) {
       return;
+    }
+
+    const reference = this.#resolveReference();
+    if (reference !== this.#reference) {
+      this.teardown();
+      this.#reference = reference;
+      if (this.options.autoUpdate) {
+        this.#observeReference();
+        return;
+      }
     }
 
     // Positioning is what finally gives a float its size, and it resolves off a promise the
@@ -74,11 +84,32 @@ export default class FloatKitApplyFloatingUi extends Modifier<FloatKitApplyFloat
     // unpositioned, so a test reads it at zero size — and anything that measures the float to
     // decide what to render, such as a virtualized list, computes an empty window from it.
     await waitForPromise(
-      updatePosition(this.instance.trigger, this.instance.content, this.options)
+      updatePosition(reference, this.instance.content, this.options)
     );
   }
 
   teardown() {
     this.cleanup?.();
+    this.cleanup = undefined;
+  }
+
+  #observeReference() {
+    if (!this.#reference || !this.instance.content) {
+      return;
+    }
+
+    this.cleanup = autoUpdate(
+      this.#reference,
+      this.instance.content,
+      this.update,
+      typeof this.options.autoUpdate === "object" ? this.options.autoUpdate : {}
+    );
+  }
+
+  #resolveReference(
+    trigger: FloatKitTrigger = this.instance.trigger
+  ): FloatKitTrigger {
+    const anchor = this.options.anchorElement?.();
+    return anchor?.isConnected ? anchor : trigger;
   }
 }

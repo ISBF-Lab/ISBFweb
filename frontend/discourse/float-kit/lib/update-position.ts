@@ -37,6 +37,8 @@ import { headerOffset } from "discourse/lib/offset-calculator";
  * which centers the float over its trigger instead of anchoring to an edge.
  */
 export interface PositioningOptions {
+  /** Resolves a positioning reference without changing the interactive trigger. */
+  anchorElement?: (() => HTMLElement | null) | null;
   placement?: FloatUiPlacement | "center";
   strategy?: Strategy;
   autoUpdate?: boolean | AutoUpdateOptions;

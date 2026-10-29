@@ -6,7 +6,15 @@ on:
       - "plugins/isbf-mbti/**"
       - "themes/isbf-campus-feed/**"
       - ".github/workflows/isbf-mbti.yml"
+      - ".github/fixtures/isbf-mbti-*.json"
+      - ".github/scripts/restore-mbti-production-ui.py"
+      - ".github/tests/test_restore_mbti_production_ui.py"
   workflow_dispatch:
+    inputs:
+      pr:
+        description: Pull request number for production theme patch verification
+        required: true
+        type: number
 
 permissions:
   contents: read
@@ -79,6 +87,7 @@ jobs:
             frontend/discourse/select-kit
             frontend/discourse/tests/helpers
             app/assets/stylesheets/common/components
+            themes/isbf-campus-feed
           persist-credentials: false
       - name: CI runtime-fixture helper regression
         run: >-
@@ -114,10 +123,60 @@ jobs:
             test ! -L themes/isbf-campus-feed
             rm -r themes/isbf-campus-feed
           fi
-          cp -a ../candidate/themes/isbf-campus-feed themes/isbf-campus-feed
+          if test "${{ matrix.baseline }}" = "production-132"; then
+            cp -a ../production-ui-baseline/themes/isbf-campus-feed themes/isbf-campus-feed
+          else
+            cp -a ../candidate/themes/isbf-campus-feed themes/isbf-campus-feed
+          fi
           mkdir -p tmp
           git -C ../candidate rev-parse HEAD > tmp/mbti-source-sha.txt
           git rev-parse HEAD > tmp/mbti-runtime-sha.txt
+      - name: Apply only the tested PR theme patch to the compatible production baseline
+        if: matrix.baseline == 'production-132'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr }}
+          SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, re, urllib.request
+          from pathlib import Path
+          number = os.environ["PR_NUMBER"]
+          assert number.isdecimal(), "Production patch verification requires a PR number"
+          url = f"{os.environ['GITHUB_API_URL']}/repos/{os.environ['GITHUB_REPOSITORY']}/pulls/{number}"
+          def read(accept):
+              request = urllib.request.Request(url, headers={
+                  "Authorization": "Bearer " + os.environ["GITHUB_TOKEN"],
+                  "Accept": accept,
+              })
+              with urllib.request.urlopen(request, timeout=45) as response:
+                  return response.read()
+          before = json.loads(read("application/vnd.github+json"))
+          assert before["state"] == "open" and before["head"]["sha"] == os.environ["SOURCE_SHA"]
+          patch = read("application/vnd.github.diff")
+          after = json.loads(read("application/vnd.github+json"))
+          assert after["head"]["sha"] == before["head"]["sha"]
+          assert after["base"]["sha"] == before["base"]["sha"]
+          assert patch.startswith(b"diff --git ") and b"isbf-mbti" in patch
+          allowed = set(json.loads(Path("../candidate/.github/fixtures/isbf-mbti-theme-paths.json").read_text()))
+          paths = []
+          for line in patch.splitlines():
+              if line.startswith(b"diff --git ") and b"themes/isbf-campus-feed/" in line:
+                  match = re.fullmatch(rb"diff --git a/(themes/isbf-campus-feed/[^ ]+) b/([^ ]+)", line)
+                  assert match and match[1] == match[2], "Unexpected theme diff path"
+                  path = match[1].decode("utf-8")
+                  assert path in allowed, "Theme changes outside the reviewed MBTI scope require review"
+                  paths.append(path)
+          assert "themes/isbf-campus-feed/javascripts/discourse/components/isbf-mbti.gjs" in paths
+          Path("tmp/mbti-theme.patch").write_bytes(patch)
+          Path("tmp/mbti-theme-patch.json").write_text(json.dumps({
+              "head": before["head"]["sha"], "base": before["base"]["sha"],
+              "sha256": hashlib.sha256(patch).hexdigest(),
+              "paths": paths, "scope": "themes/isbf-campus-feed/**", "theme_baseline": "9ca49588e44c18957733311239a0f355314a2980",
+          }))
+          PY
+          git apply --check --include='themes/isbf-campus-feed/**' tmp/mbti-theme.patch
+          git apply --include='themes/isbf-campus-feed/**' tmp/mbti-theme.patch
       - name: Restore audited production UI components only in the isolated CI runtime
         if: matrix.baseline == 'production-132'
         run: |
@@ -155,7 +214,7 @@ jobs:
         id: formatting
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.number }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr }}
         run: |
           python3 plugins/isbf-mbti/scripts/check-files.py > tmp/mbti-files.txt
           while IFS= read -r source; do sha256sum "$source"; done < tmp/mbti-files.txt > tmp/mbti-before.sha256
@@ -219,6 +278,8 @@ jobs:
             discourse/tmp/mbti-*.sha256
             discourse/tmp/mbti-*.log
             discourse/tmp/mbti-production-ui.json
+            discourse/tmp/mbti-theme.patch
+            discourse/tmp/mbti-theme-patch.json
             discourse/tmp/mbti-browser
             discourse/tmp/capybara
             discourse/log/test.log

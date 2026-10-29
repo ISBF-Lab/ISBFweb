@@ -65,6 +65,66 @@
   min-width: 0;
 }
 
+.isbf-v2-account-menu__card-space {
+  display: none;
+}
+
+.isbf-v2-account-menu.is-enclosed {
+  isolation: isolate;
+
+  &::before {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    border-radius: var(--isbf-v2-radius-pill);
+    background: var(--isbf-v2-hover);
+    content: "";
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.is-open::before {
+    opacity: 1;
+  }
+
+  > .isbf-v2-side__account,
+  > .isbf-v2-account-menu__trigger {
+    position: relative;
+    z-index: 2;
+  }
+
+  .isbf-v2-account-menu__float {
+    z-index: 0;
+    width: calc(
+      var(--isbf-account-card-width) + 2 * var(--isbf-account-card-outset)
+    );
+
+    > .d-menu-surface {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      max-height: min(
+        55dvh,
+        var(--d-menu-available-height, 55dvh),
+        var(--isbf-account-frame-height)
+      );
+      overflow: hidden;
+    }
+  }
+
+  .isbf-v2-account-menu__panel {
+    flex: 0 1 auto;
+    min-height: 0;
+    overflow: hidden auto;
+    overscroll-behavior: contain;
+  }
+
+  .isbf-v2-account-menu__card-space {
+    display: block;
+    flex: 0 0 calc(var(--isbf-account-card-height) + var(--d-menu-padding));
+  }
+}
+
 .isbf-notifications__menu {
   display: inline-flex;
   align-items: center;
