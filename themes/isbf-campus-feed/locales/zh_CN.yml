@@ -432,3 +432,10 @@ zh_CN:
     pin: 置顶
     pin_update: 调整置顶时间
     pin_cancel: 取消置顶
+  error_page:
+    offline: "离线"
+    unknown: "错误"
+    server_description: "页面暂时无法加载，请稍后重试。"
+    details: "详细信息"
+    status: "状态"
+    request: "失败的请求"

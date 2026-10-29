@@ -405,6 +405,50 @@ class ElasticField {
   }
 }
 
+function rasterizeText(text, width, height, ratio, palette, fit) {
+  const characters = Array.from(text);
+  const cellWidth = width / characters.length;
+  const font = document.createElement("canvas").getContext("2d");
+  let fontSize = Math.min(cellWidth * 1.8, height * 1.28);
+  if (fit) {
+    font.font = `750 ${fontSize}px ${palette.font}`;
+    const metrics = characters.map((character) => font.measureText(character));
+    const widest = Math.max(...metrics.map((metric) => metric.width));
+    const tallest = Math.max(
+      ...metrics.map(
+        (metric) =>
+          metric.actualBoundingBoxAscent + metric.actualBoundingBoxDescent
+      )
+    );
+    fontSize *= Math.min(
+      1,
+      (cellWidth * 0.92) / widest,
+      (height * 0.9) / tallest
+    );
+  }
+
+  return characters.map((character) => {
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.ceil(cellWidth * ratio);
+    canvas.height = Math.ceil(height * ratio);
+    const context = canvas.getContext("2d");
+    context.scale(ratio, ratio);
+    context.fillStyle = palette.accent;
+    context.font = `750 ${fontSize}px ${palette.font}`;
+    context.textAlign = "center";
+    const metrics = context.measureText(character);
+    context.fillText(
+      character,
+      cellWidth / 2,
+      (height +
+        metrics.actualBoundingBoxAscent -
+        metrics.actualBoundingBoxDescent) /
+        2
+    );
+    return canvas;
+  });
+}
+
 class NotFoundInteraction {
   #announce;
   #canvas;
@@ -421,25 +465,31 @@ class NotFoundInteraction {
   #glyphKey = "";
   #glyphVersion = 0;
   #height = 0;
+  #hasGame;
+  #text;
   #keys = new Set();
   #lastFrame = 0;
   #media;
   #observer;
   #palette;
+  #pixelRatio = 0;
   #pointer = null;
   #record;
   #revealed = false;
   #root;
+  #resizeFrameId = null;
   #spring = 0;
   #stage;
   #velocity = 0;
   #width = 0;
   #zero = 0;
 
-  constructor(root, announce) {
+  constructor(root, announce, { text = "404", gameEnabled = true } = {}) {
+    this.#hasGame = gameEnabled;
+    this.#text = text;
     this.#root = root;
     this.#announce = announce;
-    this.#stage = root.querySelector("[data-stage]");
+    this.#stage = gameEnabled ? root.querySelector("[data-stage]") : root;
     this.#canvas = root.querySelector("[data-canvas]");
     this.#fieldCanvas = root.querySelector("[data-elastic-canvas]");
     this.#context = this.#canvas.getContext("2d");
@@ -453,16 +503,18 @@ class NotFoundInteraction {
     } catch {
       this.#field = null;
     }
-    let storage;
-    try {
-      storage = window.localStorage;
-    } catch {
-      storage = null;
+    if (this.#hasGame) {
+      let storage;
+      try {
+        storage = window.localStorage;
+      } catch {
+        storage = null;
+      }
+      this.#record = new BestTime(storage);
+      root.querySelector("[data-best]").textContent = formatTime(
+        this.#record.value
+      );
     }
-    this.#record = new BestTime(storage);
-    root.querySelector("[data-best]").textContent = formatTime(
-      this.#record.value
-    );
     this.#listen(this.#stage, "pointermove", (event) =>
       this.#pointerMove(event)
     );
@@ -470,31 +522,41 @@ class NotFoundInteraction {
       this.#pointer = null;
       this.#schedule();
     });
-    const reveal = root.querySelector("[data-reveal]");
-    reveal.hidden = false;
-    this.#listen(reveal, "pointerdown", (event) => this.#pointerDown(event));
-    this.#listen(reveal, "pointerup", (event) => this.#pointerUp(event));
-    this.#listen(reveal, "pointercancel", (event) => this.#pointerUp(event));
-    this.#listen(reveal, "lostpointercapture", () => this.#releaseDrag());
-    this.#listen(reveal, "click", (event) => {
-      if (event.detail === 0) {
-        this.#reveal();
-      }
-    });
-    this.#listen(root.querySelector("[data-play]"), "click", () =>
-      this.#openGame()
-    );
-    this.#listen(root.querySelector("[data-start]"), "click", () =>
-      this.#start()
-    );
-    this.#listen(root.querySelector("[data-exit]"), "click", () =>
-      this.#exit()
-    );
-    this.#listen(root, "keydown", (event) => this.#keyDown(event));
-    this.#listen(root, "keyup", (event) => this.#keys.delete(event.key));
+    if (this.#hasGame) {
+      const reveal = root.querySelector("[data-reveal]");
+      reveal.hidden = false;
+      this.#listen(reveal, "pointerdown", (event) => this.#pointerDown(event));
+      this.#listen(reveal, "pointerup", (event) => this.#pointerUp(event));
+      this.#listen(reveal, "pointercancel", (event) => this.#pointerUp(event));
+      this.#listen(reveal, "lostpointercapture", () => this.#releaseDrag());
+      this.#listen(reveal, "click", (event) => {
+        if (event.detail === 0) {
+          this.#reveal();
+        }
+      });
+      this.#listen(root.querySelector("[data-play]"), "click", () =>
+        this.#openGame()
+      );
+      this.#listen(root.querySelector("[data-start]"), "click", () =>
+        this.#start()
+      );
+      this.#listen(root.querySelector("[data-exit]"), "click", () =>
+        this.#exit()
+      );
+      this.#listen(root, "keydown", (event) => this.#keyDown(event));
+      this.#listen(root, "keyup", (event) => this.#keys.delete(event.key));
+    } else {
+      this.#listen(this.#stage, "pointerdown", (event) =>
+        this.#pointerMove(event)
+      );
+    }
     this.#listen(document, "visibilitychange", () => {
       if (document.hidden) {
         this.#finish();
+        cancelAnimationFrame(this.#frameId);
+        this.#frameId = null;
+      } else {
+        this.#schedule();
       }
     });
     this.#listen(window, "blur", () => this.#finish());
@@ -503,9 +565,12 @@ class NotFoundInteraction {
     this.#listen(matchMedia("(prefers-color-scheme: dark)"), "change", () =>
       this.#resize()
     );
-    this.#observer = new ResizeObserver(() => this.#resize());
+    // Canvas dimensions affect layout, so observer writes need a separate frame.
+    this.#observer = new ResizeObserver(() => this.#requestResize());
     this.#observer.observe(this.#stage);
-    document.body.classList.add("elastic-not-found-page");
+    if (this.#hasGame) {
+      document.body.classList.add("elastic-not-found-page");
+    }
     root.classList.add("--enhanced");
     this.#resize();
     document.fonts?.ready.then(() => {
@@ -517,17 +582,23 @@ class NotFoundInteraction {
   }
 
   destroy() {
+    if (this.#destroyed) {
+      return;
+    }
     this.#finish();
     this.#destroyed = true;
     this.#events.abort();
     this.#observer.disconnect();
     this.#field?.destroy();
     cancelAnimationFrame(this.#frameId);
+    cancelAnimationFrame(this.#resizeFrameId);
     this.#keys.clear();
     this.#releaseDrag();
     this.#root.classList.remove("--enhanced");
     this.#root.classList.remove("--webgl");
-    document.body.classList.remove("elastic-not-found-page");
+    if (this.#hasGame) {
+      document.body.classList.remove("elastic-not-found-page");
+    }
     mounted.delete(this.#root);
   }
 
@@ -702,14 +773,35 @@ class NotFoundInteraction {
     }
   }
 
+  #requestResize() {
+    if (this.#destroyed || this.#resizeFrameId !== null) {
+      return;
+    }
+    this.#resizeFrameId = requestAnimationFrame(() => {
+      this.#resizeFrameId = null;
+      if (!this.#destroyed) {
+        this.#resize();
+      }
+    });
+  }
+
   #resize() {
-    const width = this.#stage.getBoundingClientRect().width;
-    if (!width) {
+    const { width, height } = this.#stage.getBoundingClientRect();
+    if (!width || !height || this.#destroyed) {
+      return;
+    }
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    if (
+      width === this.#width &&
+      height === this.#height &&
+      ratio === this.#pixelRatio
+    ) {
+      this.#draw();
       return;
     }
     this.#width = width;
-    this.#height = this.#stage.getBoundingClientRect().height;
-    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    this.#height = height;
+    this.#pixelRatio = ratio;
     this.#canvas.width = Math.round(width * ratio);
     this.#canvas.height = Math.round(this.#height * ratio);
     this.#context.setTransform(ratio, 0, 0, ratio, 0, 0);
@@ -719,7 +811,7 @@ class NotFoundInteraction {
   }
 
   #schedule() {
-    if (!this.#destroyed && this.#frameId === null) {
+    if (!this.#destroyed && !document.hidden && this.#frameId === null) {
       this.#frameId = requestAnimationFrame((now) => this.#frame(now));
     }
   }
@@ -816,36 +908,25 @@ class NotFoundInteraction {
     if (key !== this.#glyphKey) {
       this.#glyphKey = key;
       this.#glyphVersion++;
-      this.#glyphs = ["4", "0", "4"].map((digit) => {
-        const canvas = document.createElement("canvas");
-        canvas.width = Math.ceil((width / 3) * ratio);
-        canvas.height = Math.ceil(height * ratio);
-        const context = canvas.getContext("2d");
-        context.scale(ratio, ratio);
-        context.fillStyle = this.#palette.accent;
-        context.font = `750 ${Math.min(width * 0.6, height * 1.28)}px ${this.#palette.font}`;
-        context.textAlign = "center";
-        const metrics = context.measureText(digit);
-        context.fillText(
-          digit,
-          width / 6,
-          (height +
-            metrics.actualBoundingBoxAscent -
-            metrics.actualBoundingBoxDescent) /
-            2
-        );
-        return canvas;
-      });
+      this.#glyphs = rasterizeText(
+        this.#text,
+        width,
+        height,
+        ratio,
+        this.#palette,
+        !this.#hasGame
+      );
     }
-    for (let index = 0; index < 3; index++) {
+    const count = this.#glyphs.length;
+    for (let index = 0; index < count; index++) {
       const glyph = this.#glyphs[index];
-      const offset = index === 1 ? this.#zero : 0;
+      const offset = this.#hasGame && index === 1 ? this.#zero : 0;
       if (this.#field && !this.#media.matches) {
         this.#context.drawImage(
           glyph,
-          (index * width) / 3 + offset,
+          (index * width) / count + offset,
           0,
-          width / 3,
+          width / count,
           height
         );
         continue;
@@ -855,7 +936,8 @@ class NotFoundInteraction {
           ? (row - this.#pointer.y) / (width * 0.17)
           : 0;
         const horizontal = this.#pointer
-          ? (this.#pointer.x - ((index + 0.5) * width) / 3) / (width / 3)
+          ? (this.#pointer.x - ((index + 0.5) * width) / count) /
+            (width / count)
           : 0;
         const influence = this.#pointer
           ? Math.exp(-distance * distance * 2 - horizontal * horizontal)
@@ -868,9 +950,9 @@ class NotFoundInteraction {
           row * ratio,
           glyph.width,
           Math.min((slice + 0.5) * ratio, glyph.height - row * ratio),
-          (index * width) / 3 + offset + shift,
+          (index * width) / count + offset + shift,
           row,
-          width / 3,
+          width / count,
           slice + 0.5
         );
       }
@@ -899,19 +981,30 @@ class NotFoundInteraction {
   }
 }
 
-export function mountNotFound(root, { announce } = {}) {
+function mountInteraction(root, options) {
   if (mounted.has(root)) {
     return mounted.get(root);
   }
   let interaction;
   try {
-    interaction = new NotFoundInteraction(root, announce);
+    interaction = new NotFoundInteraction(root, options.announce, options);
   } catch {
     return () => {};
   }
   const destroy = () => interaction.destroy();
   mounted.set(root, destroy);
   return destroy;
+}
+
+export function mountNotFound(root, { announce } = {}) {
+  return mountInteraction(root, { announce });
+}
+
+export function mountElasticStatus(root, { text }) {
+  if (!String(text ?? "").trim()) {
+    return () => {};
+  }
+  return mountInteraction(root, { text: String(text), gameEnabled: false });
 }
 
 if (

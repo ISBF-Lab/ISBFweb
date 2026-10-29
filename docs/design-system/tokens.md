@@ -417,3 +417,7 @@ A08/C02 新增经用户确认的局部排布：卡片 1:1，面板内容宽度 6
 ## 2026-10-28 桌面账号菜单布局
 
 账号菜单包裹布局继续使用现有菜单24px／16px圆角、8px内距、1px边框和既有椭圆卡片。宽高按实际卡片测量，仅新增布局变量，不产生颜色、圆角或阴影token。范围见[本轮记录](reviews/account-menu-enclosure-20261028/README.md)。
+
+## 2026-10-29 C21通用错误页局部组合
+
+本轮复用C20全屏布局及A01品牌，继续使用V2 background/text/muted/accent/accent-contrast/border-strong/focus-ring、站点字体及space-2/4/6/8。标题font-xl/weight-bold、说明font-sm、详情font-xs；主操作沿用132px最小宽、44px最小高和pill，次级文字操作44px最小高和radius-sm。技术详情40ch最大阅读宽及状态字形按容器测量适配只限C21，不增加全局token。范围与状态见[记录](reviews/error-pages-20261029/README.md)。

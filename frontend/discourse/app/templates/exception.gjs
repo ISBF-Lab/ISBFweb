@@ -10,7 +10,11 @@ import { i18n } from "discourse-i18n";
 export default <template>
   <PluginOutlet
     @name="exception-wrapper"
-    @outletArgs={{lazyHash thrown=this.thrown reason=this.reason}}
+    @outletArgs={{lazyHash
+      controller=@controller
+      thrown=this.thrown
+      reason=this.reason
+    }}
   >
     <div class="container">
       {{#if (and @controller.errorHtml @controller.isForbidden)}}

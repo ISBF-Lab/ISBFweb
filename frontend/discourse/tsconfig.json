@@ -8,6 +8,7 @@
     "./truth-helpers/**/*",
     "./type-tests/**/*",
     "./dialog-holder/**/*",
+    "./scripts/js/elastic-not-found.js",
     "./config/environment.js"
   ],
   "exclude": ["./tests/unit/utils/decorators-test.js"],
