@@ -9,6 +9,7 @@ RSpec.describe IsbfMbti::ResultsController do
   let(:submission) do
     { variant: "28", version: "isbf-1", attempt_id: SecureRandom.uuid, answers: answers }
   end
+
   before { SiteSetting.isbf_mbti_enabled = true }
 
   def save_result(owner, choice = 1)
@@ -17,7 +18,7 @@ RSpec.describe IsbfMbti::ResultsController do
       variant: "28",
       version: "isbf-1",
       attempt_id: SecureRandom.uuid,
-      answers: (1..28).map { |question_id| { id: question_id, choice: choice } }
+      answers: (1..28).map { |question_id| { id: question_id, choice: choice } },
     )
   end
 

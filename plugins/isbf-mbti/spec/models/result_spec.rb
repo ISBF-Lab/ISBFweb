@@ -15,7 +15,7 @@ RSpec.describe IsbfMbti::Result do
           variant: "40",
           version: "isbf-1",
           attempt_id: attempt_id,
-          answers: answers
+          answers: answers,
         )
       retry_result =
         described_class.record!(
@@ -23,7 +23,7 @@ RSpec.describe IsbfMbti::Result do
           variant: "40",
           version: "isbf-1",
           attempt_id: attempt_id.upcase,
-          answers: answers.reverse
+          answers: answers.reverse,
         )
       expect(retry_result.id).to eq(result.id)
       expect(described_class.where(user_id: user.id).count).to eq(1)
@@ -36,7 +36,7 @@ RSpec.describe IsbfMbti::Result do
         "T" => 9,
         "F" => 0,
         "J" => 11,
-        "P" => 0
+        "P" => 0,
       )
       expect(result.attributes.keys).not_to include("answers")
     end
@@ -48,7 +48,7 @@ RSpec.describe IsbfMbti::Result do
           variant: "40",
           version: "isbf-1",
           attempt_id: attempt_id,
-          answers: answers
+          answers: answers,
         )
       changed = answers.map { |answer| answer.merge(choice: 2) }
       expect do
@@ -57,7 +57,7 @@ RSpec.describe IsbfMbti::Result do
           variant: "40",
           version: "isbf-1",
           attempt_id: attempt_id,
-          answers: changed
+          answers: changed,
         )
       end.to raise_error(described_class::SubmissionConflict)
       expect(result.reload.personality_type).to eq("ESTJ")
@@ -71,7 +71,7 @@ RSpec.describe IsbfMbti::Result do
           variant: "40",
           version: "isbf-1",
           attempt_id: attempt_id,
-          answers: answers
+          answers: answers,
         )
       second =
         described_class.record!(
@@ -79,7 +79,7 @@ RSpec.describe IsbfMbti::Result do
           variant: "40",
           version: "isbf-1",
           attempt_id: attempt_id,
-          answers: answers
+          answers: answers,
         )
       expect(first.id).not_to eq(second.id)
       expect([first.user_id, second.user_id]).to contain_exactly(user.id, other.id)
@@ -92,7 +92,7 @@ RSpec.describe IsbfMbti::Result do
           variant: "40",
           version: "isbf-1",
           attempt_id: "not-a-uuid",
-          answers: answers
+          answers: answers,
         )
       end.to raise_error(IsbfMbti::Questionnaire::InvalidAnswers)
       expect(described_class.where(user_id: user.id)).to be_empty
@@ -111,14 +111,16 @@ RSpec.describe IsbfMbti::Result do
             "T" => 3,
             "F" => 6,
             "J" => 5,
-            "P" => 6
-          }
+            "P" => 6,
+          },
         )
       expect(result.dimensions.map { |dimension| dimension[:first_percent] }).to eq(
-        [45, 44, 33, 45]
+        [45, 44, 33, 45],
       )
       expect(
-        result.dimensions.map { |dimension| dimension[:first_percent] + dimension[:second_percent] }
+        result.dimensions.map do |dimension|
+          dimension[:first_percent] + dimension[:second_percent]
+        end,
       ).to eq([100, 100, 100, 100])
       result.scores = {
         "E" => 2,
@@ -128,7 +130,7 @@ RSpec.describe IsbfMbti::Result do
         "T" => 1,
         "F" => 1,
         "J" => 4,
-        "P" => 4
+        "P" => 4,
       }
       expect(result.dimensions).to all(include(first_percent: 50, second_percent: 50, tied: true))
       expect(described_class.type_for(result.scores)).to eq("INFP")
@@ -143,7 +145,7 @@ RSpec.describe IsbfMbti::Result do
           variant: "40",
           version: "isbf-1",
           attempt_id: attempt_id,
-          answers: answers
+          answers: answers,
         )
       SiteSetting.isbf_mbti_enabled = false
       UserAnonymizer.new(user).make_anonymous
@@ -159,7 +161,7 @@ RSpec.describe IsbfMbti::Result do
           variant: "40",
           version: "isbf-1",
           attempt_id: attempt_id,
-          answers: answers
+          answers: answers,
         )
       end.to raise_error(described_class::AccountChanged)
       expect(described_class.where(user_id: user.id)).to be_empty
@@ -172,7 +174,7 @@ RSpec.describe IsbfMbti::Result do
           variant: "40",
           version: "isbf-1",
           attempt_id: attempt_id,
-          answers: answers
+          answers: answers,
         )
       SiteSetting.isbf_mbti_enabled = false
       user.destroy!

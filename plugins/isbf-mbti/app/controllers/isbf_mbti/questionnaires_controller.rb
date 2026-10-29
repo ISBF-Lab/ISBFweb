@@ -7,7 +7,7 @@ module IsbfMbti
     def index
       render json: {
                questionnaires:
-                 Questionnaire::VARIANTS.map { |variant| Questionnaire.fetch(variant).metadata }
+                 Questionnaire::VARIANTS.map { |variant| Questionnaire.fetch(variant).metadata },
              }
     end
 

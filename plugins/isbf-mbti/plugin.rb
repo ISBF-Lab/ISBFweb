@@ -31,8 +31,8 @@ after_initialize do
   end
 
   Discourse::Application.routes.prepend do
-    get "/isbf/mbti" => "isbf_mbti/pages#index"
-    mount ::IsbfMbti::Engine, at: "/isbf/api/mbti"
+    get "/isbf/mbti" => "isbf_mbti/pages#index", :as => :isbf_mbti_page
+    mount ::IsbfMbti::Engine, at: "/isbf/api/mbti", as: :isbf_mbti_api
   end
 
   add_to_serializer(:site, :isbf_mbti, include_condition: -> { SiteSetting.isbf_mbti_enabled }) do

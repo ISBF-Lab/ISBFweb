@@ -27,7 +27,7 @@ RSpec.describe IsbfMbti::Questionnaire do
         answers.first(39) + [{ id: true, choice: 1 }],
         answers.first(39) + [{ id: "40oops", choice: 1 }],
         answers.first(39) + [{ id: 40, choice: "01" }],
-        answers.first(39) + [{ id: 40, choice: 1, score: "E" }]
+        answers.first(39) + [{ id: 40, choice: 1, score: "E" }],
       ]
       invalid.each do |submitted|
         expect do
@@ -54,7 +54,7 @@ RSpec.describe IsbfMbti::Questionnaire do
           "T" => 7,
           "F" => 0,
           "J" => 7,
-          "P" => 0
+          "P" => 0,
         },
         "40" => {
           "E" => 11,
@@ -64,7 +64,7 @@ RSpec.describe IsbfMbti::Questionnaire do
           "T" => 9,
           "F" => 0,
           "J" => 11,
-          "P" => 0
+          "P" => 0,
         },
         "93" => {
           "E" => 15,
@@ -74,8 +74,8 @@ RSpec.describe IsbfMbti::Questionnaire do
           "T" => 9,
           "F" => 13,
           "J" => 14,
-          "P" => 11
-        }
+          "P" => 11,
+        },
       }
       expected.each do |variant, scores|
         questionnaire = described_class.fetch(variant)
@@ -90,10 +90,10 @@ RSpec.describe IsbfMbti::Questionnaire do
           "T" => "F",
           "F" => "T",
           "J" => "P",
-          "P" => "J"
+          "P" => "J",
         }
         expect(questionnaire.score(second)).to eq(
-          scores.transform_keys { |pole| opposite.fetch(pole) }
+          scores.transform_keys { |pole| opposite.fetch(pole) },
         )
       end
     end

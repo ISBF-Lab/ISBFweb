@@ -31,7 +31,7 @@ RSpec.describe IsbfMbti::Result, type: :model do
                 variant: "40",
                 version: "isbf-1",
                 attempt_id: attempt_id,
-                answers: answers
+                answers: answers,
               ).id
             end
           end

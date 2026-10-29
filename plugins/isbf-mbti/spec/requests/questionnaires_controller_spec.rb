@@ -14,7 +14,7 @@ RSpec.describe IsbfMbti::QuestionnairesController do
       expect(summaries.map { |summary| summary["variant"] }).to eq(%w[28 40 93])
       expect(summaries.map { |summary| summary["question_count"] }).to eq([28, 40, 93])
       expect(summaries.map { |summary| summary.keys }).to all(
-        contain_exactly("variant", "question_count", "version", "source_commit")
+        contain_exactly("variant", "question_count", "version", "source_commit"),
       )
     end
 

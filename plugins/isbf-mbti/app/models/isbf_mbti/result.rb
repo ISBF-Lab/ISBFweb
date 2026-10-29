@@ -50,7 +50,7 @@ module IsbfMbti
           scores: counts,
           personality_type: type_for(counts),
           attempt_id: attempt_id.downcase,
-          submission_digest: digest
+          submission_digest: digest,
         )
       end
     end
@@ -78,7 +78,7 @@ module IsbfMbti
           second_count: second_count,
           first_percent: first_percent,
           second_percent: 100 - first_percent,
-          tied: first_count == second_count
+          tied: first_count == second_count,
         }
       end
     end

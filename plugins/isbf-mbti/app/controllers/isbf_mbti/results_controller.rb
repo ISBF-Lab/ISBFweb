@@ -34,7 +34,7 @@ module IsbfMbti
       render json: {
                results: serialize_data(records.first(PAGE_SIZE), ResultSerializer),
                has_more: records.size > PAGE_SIZE,
-               page: page.to_i
+               page: page.to_i,
              }
     end
 
@@ -50,7 +50,7 @@ module IsbfMbti
           variant: params[:variant],
           version: params[:version],
           attempt_id: params[:attempt_id],
-          answers: params[:answers]
+          answers: params[:answers],
         )
       render json: { result: serialize_data(result, ResultSerializer) }, status: :created
     end

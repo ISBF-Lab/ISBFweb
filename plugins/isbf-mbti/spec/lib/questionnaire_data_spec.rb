@@ -3,13 +3,13 @@
 require_relative "../plugin_helper"
 require "digest"
 
-RSpec.describe "MBTI questionnaire provenance" do
+RSpec.describe IsbfMbti::Questionnaire, "source provenance" do
   it "retains exact upstream bytes, complete bilingual questions and audited option directions" do
     root = File.expand_path("../../data", __dir__)
     hashes = {
       "28" => "a49e693e134d4cfe18149e675b05fb679471e9a5283d2846ed41cfdc8f52aaa9",
       "40" => "492cccf54baab11a55e37ea012eac4668a04f682a55ed196e79842242747616f",
-      "93" => "b14875063cd60664c36e6264777fcff59713ba7fdce9da072eace1f488d0e479"
+      "93" => "b14875063cd60664c36e6264777fcff59713ba7fdce9da072eace1f488d0e479",
     }
     audit = JSON.parse(File.read(File.join(root, "scoring.json")))
     expect(audit["source_commit"]).to eq("daaf70bfa171fb5487b59cf9f03455dfa2dd9f22")
@@ -35,7 +35,7 @@ RSpec.describe "MBTI questionnaire provenance" do
       end
     end
     expect(Digest::SHA256.file(File.join(root, "upstream", "LICENSE")).hexdigest).to eq(
-      "1aa502a8586cdf4a8100309d94069606396d79dd87410947d2d830de81aaac47"
+      "1aa502a8586cdf4a8100309d94069606396d79dd87410947d2d830de81aaac47",
     )
   end
 end

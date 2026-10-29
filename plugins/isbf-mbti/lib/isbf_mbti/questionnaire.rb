@@ -15,7 +15,7 @@ module IsbfMbti
     end
 
     def self.fetch(variant)
-      raise Discourse::InvalidParameters.new(:variant) unless VARIANTS.include?(variant.to_s)
+      raise Discourse::InvalidParameters.new(:variant) if VARIANTS.exclude?(variant.to_s)
       @questionnaires ||= {}
       @questionnaires[variant.to_s] ||= new(variant.to_s)
     end
@@ -30,7 +30,7 @@ module IsbfMbti
       @mapping = scoring.fetch("variants").fetch(variant)
       @questions =
         JSON.parse(File.read(File.join(DATA_PATH, "upstream", "questions_#{variant}.json"))).fetch(
-          "MBTI_questions"
+          "MBTI_questions",
         )
     end
 
@@ -39,7 +39,7 @@ module IsbfMbti
         variant: variant,
         question_count: @questions.size,
         version: version,
-        source_commit: source_commit
+        source_commit: source_commit,
       }
     end
 
@@ -50,9 +50,9 @@ module IsbfMbti
             {
               id: question.fetch("id"),
               question: question.fetch("question").fetch("zh"),
-              options: question.fetch("options").fetch("zh")
+              options: question.fetch("options").fetch("zh"),
             }
-          end
+          end,
       )
     end
 
@@ -68,7 +68,7 @@ module IsbfMbti
             end
             question_id = integer(answer[:id] || answer["id"])
             choice = integer(answer[:choice] || answer["choice"])
-            raise InvalidAnswers unless [1, 2].include?(choice)
+            raise InvalidAnswers if [1, 2].exclude?(choice)
             [question_id, choice]
           end
           .sort_by(&:first)
