@@ -172,9 +172,22 @@
         "sha256": "7dca9b24154885bb7f6ae52863b265b8acfb1eaf04cf00c25ce5602a461591a0",
         "approved_development_sha256": "98d5fc61e44cef3244f773b18dd24ab6cdcbc8b6d0f8ed11f2f800750cd78d77",
         "base_sha256": "5fa255987bb61b35dc30d535b1a760bc327914d708d257313b1ef4e0bd1b40e4"
+      },
+      {
+        "repository_path": "frontend/discourse/tsconfig.json",
+        "sha256": "c64d655bd431ebc22a80295b82fe974d3c54250e75313cea1a7a0ce5589c076a",
+        "approved_development_sha256": null,
+        "base_sha256": "a25025dacab5122097bf37bc273f2076646ebf3b3cbc1f5538ef13f80289f022",
+        "scope": "Build configuration; excluded from the runtime publication increment."
       }
     ],
     "scoped_increment_only": true,
     "runtime_policy": "Merge only this delta with the actual production runtime; never install repository main wholesale."
+  },
+  "ci_follow_up": {
+    "repository_path": "frontend/discourse/tsconfig.json",
+    "sha256": "c64d655bd431ebc22a80295b82fe974d3c54250e75313cea1a7a0ce5589c076a",
+    "before_sha256": "a25025dacab5122097bf37bc273f2076646ebf3b3cbc1f5538ef13f80289f022",
+    "scope": "Type-check project membership; no runtime or visual change."
   }
 }

@@ -59,5 +59,23 @@
     "temporary_browser_container_removed": true,
     "internal_browser_network_removed": true,
     "temporary_lint_alias_removed": true
+  },
+  "ci_follow_up": {
+    "failed_head": "5764ee8b77d12a2dd962ae10c8d26fd3b1d25195",
+    "failed_run": "https://github.com/ISBF-Lab/ISBFweb/actions/runs/40864913331",
+    "failed_step": "Frontend types",
+    "diagnostic": "TS6307: the dynamically imported shared elastic renderer was outside the composite project's include list.",
+    "fix": "Include only scripts/js/elastic-not-found.js in frontend/discourse/tsconfig.json.",
+    "config_sha256": "c64d655bd431ebc22a80295b82fe974d3c54250e75313cea1a7a0ce5589c076a",
+    "config_before_sha256": "a25025dacab5122097bf37bc273f2076646ebf3b3cbc1f5538ef13f80289f022",
+    "full_types": {
+      "command": "pnpm lint:types",
+      "exit_code": 0,
+      "completed_at_utc": "2026-10-29T11:53:42.458494+00:00",
+      "log_sha256": "9d0a5c1bc6c24b16659f99b3e7bd12c9555012696df8251a02a4d72b86d5c587",
+      "environment": "Isolated release worktree; identical dependency lock; offline single tool container."
+    },
+    "production_runtime_scope": "Four core source paths and six theme fields; this type-check configuration is outside the runtime publication increment.",
+    "ui_changed": false
   }
 }
