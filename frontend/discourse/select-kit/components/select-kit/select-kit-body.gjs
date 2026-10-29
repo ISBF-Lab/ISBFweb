@@ -22,9 +22,11 @@ export default class SelectKitBody extends Component {
     this.#highlight = new MenuHighlight(this.element, {
       itemSelector: ".select-kit-row",
       activeSelector: ".is-highlighted",
+      viewportSelector: ".select-kit-collection",
     });
 
     document.addEventListener("click", this.handleClick, true);
+    this.element.addEventListener("scroll", this.handleScroll, true);
     this.selectKit
       .mainElement()
       .addEventListener("keydown", this._handleKeydown, true);
@@ -34,6 +36,7 @@ export default class SelectKitBody extends Component {
     super.willDestroyElement(...arguments);
     this.#highlight?.disconnect();
     document.removeEventListener("click", this.handleClick, true);
+    this.element.removeEventListener("scroll", this.handleScroll, true);
     this.selectKit
       .mainElement()
       ?.removeEventListener("keydown", this._handleKeydown, true);
@@ -50,6 +53,11 @@ export default class SelectKitBody extends Component {
     }
 
     this.selectKit.close(event);
+  }
+
+  @bind
+  handleScroll() {
+    this.#highlight?.refresh();
   }
 
   @bind
