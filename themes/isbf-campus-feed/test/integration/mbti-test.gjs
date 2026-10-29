@@ -268,6 +268,48 @@ module("ISBF | Integration | Component | ISBFMbti", function (hooks) {
       .exists({ count: 1 }, "the first page is not duplicated");
   });
 
+  test("failed stale draft cleanup is visible without blocking a fresh quiz", async function (assert) {
+    this.keyValueStore.set({
+      key: MBTI_DRAFT_KEY,
+      value: JSON.stringify({
+        owner: this.currentUser.id,
+        entries: {
+          40: {
+            variant: "40",
+            version: "old-bank",
+            attempt_id: "6e7de90b-57de-4170-9ee0-3707f51b643c",
+            index: 1,
+            answers: { 1: 2 },
+          },
+        },
+      }),
+    });
+    const removal = sinon
+      .stub(this.keyValueStore, "remove")
+      .throws(new Error("Storage blocked"));
+    try {
+      await render(<template><ISBFMbti /></template>);
+      assert
+        .dom("[data-test-mbti-storage-warning]")
+        .exists("the failed stale draft cleanup is disclosed");
+      assert
+        .dom("[data-test-mbti-resume]")
+        .doesNotExist("incompatible answers cannot be resumed");
+      assert
+        .dom("[data-test-mbti-start]")
+        .isNotDisabled("the loaded questionnaire remains available");
+      await click("[data-test-mbti-start]");
+      assert
+        .dom("[data-test-mbti-question]")
+        .hasAttribute("data-question-id", "1", "a fresh quiz starts normally");
+      assert
+        .dom('[data-test-mbti-choice="2"]')
+        .isNotChecked("the stale answer is not restored");
+    } finally {
+      removal.restore();
+    }
+  });
+
   test("failed draft cleanup is visible after a successful server save", async function (assert) {
     pretender.post("/isbf/api/mbti/results.json", () => response({ result }));
     await render(<template><ISBFMbti /></template>);

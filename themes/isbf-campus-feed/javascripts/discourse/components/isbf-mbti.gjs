@@ -199,7 +199,12 @@ export default class ISBFMbti extends Component {
       this.drafts = restored.drafts;
       this.staleDraft = restored.stale;
       if (restored.stale) {
-        saveMbtiDrafts(this.keyValueStore, owner, this.drafts);
+        this.cleanupFailed = !saveMbtiDrafts(
+          this.keyValueStore,
+          owner,
+          this.drafts
+        );
+        this.storageUnavailable = this.cleanupFailed;
       }
     } catch (error) {
       if (this.#active(token, owner)) {
