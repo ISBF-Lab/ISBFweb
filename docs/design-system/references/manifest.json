@@ -2292,6 +2292,14 @@
       "verification": "../reviews/error-pages-20261029/verification.json",
       "visual_acceptance": "pending_user_review",
       "status": "implemented_verified_isolated_development"
+    },
+    {
+      "id": "calendar-pill-nav-20261029",
+      "origin": "User-supplied PillNav JavaScript/CSS and explicitly approved implementation plan",
+      "scope": "A07/C01 calendar content filter capsules only",
+      "status": "Design confirmed; engineering verification and publication recorded separately",
+      "source_manifest": "../reviews/calendar-pill-nav-20261029/source-manifest.json",
+      "source_manifest_sha256": "3b115397a0f0e7f248d08a6b1700bfd42e0da5185e3ede3b679c4b20f99de9cc"
     }
   ]
 }

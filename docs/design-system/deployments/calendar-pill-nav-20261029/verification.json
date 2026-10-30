@@ -1,0 +1,98 @@
+{
+  "development_browser_checks": 49,
+  "development_javascript_errors": [],
+  "calendar_suite": {
+    "passed": true,
+    "no_new_failures": true,
+    "tests": 5,
+    "passing_tests": 4,
+    "assertions": 14,
+    "passing_assertions": 11,
+    "pre_existing_failed_assertions": 3,
+    "pre_existing_failed_tests": [
+      "the entry editor focuses the title and closes with Escape"
+    ],
+    "development_theme_restored": true
+  },
+  "native_file_lint": "passed",
+  "production_candidate_lint": "passed",
+  "menu_policy": {
+    "findings": 0,
+    "files": 5939
+  },
+  "production_browser_checks": 42,
+  "production_javascript_errors": [],
+  "production_failed_data_responses": [],
+  "production_resources": {
+    "passed": true,
+    "tls_verified": true,
+    "resources": [
+      {
+        "url": "/theme-javascripts/664a8d8eb86d7d228ab76e9b5a18c38124397280.js?__ws=isbf-one.com",
+        "sha256": "33eda070c57b9050bfba511e639e4620a78ba3acd086d7f719568a45cc07cb16",
+        "source_bytes": 617831,
+        "served_bytes": 617916,
+        "served_sha256": "c02cfbdeb2b97b720995190c3a45d18a7f9be800cddea9136336eadb7ca7284a",
+        "native_source_map_comment_bytes": 85
+      },
+      {
+        "url": "/stylesheets/common_theme_4_66e134f71eda8b1ae85f97378ed1087962eb87dc.css?__ws=isbf-one.com",
+        "sha256": "3947fc5e3855939510c53978180fbbe0c406644592136feb759e40abbd10d9a0",
+        "source_bytes": 385903,
+        "served_bytes": 385903,
+        "served_sha256": "3947fc5e3855939510c53978180fbbe0c406644592136feb759e40abbd10d9a0",
+        "native_source_map_comment_bytes": 0
+      },
+      {
+        "url": "/stylesheets/desktop_theme_4_d44d959b9d3365aa9e056c0f1ce5873f6b34f6cd.css?__ws=isbf-one.com",
+        "sha256": "dc264b496d2510f3f66656193dcce912a1b531dda27d32ab72a1821d1d79c321",
+        "source_bytes": 108,
+        "served_bytes": 108,
+        "served_sha256": "dc264b496d2510f3f66656193dcce912a1b531dda27d32ab72a1821d1d79c321",
+        "native_source_map_comment_bytes": 0
+      },
+      {
+        "url": "/stylesheets/mobile_theme_4_d44d959b9d3365aa9e056c0f1ce5873f6b34f6cd.css?__ws=isbf-one.com",
+        "sha256": "737eb274cb214e4633d139a94af66df88fa59490136e6ab9655f13834871f254",
+        "source_bytes": 107,
+        "served_bytes": 107,
+        "served_sha256": "737eb274cb214e4633d139a94af66df88fa59490136e6ab9655f13834871f254",
+        "native_source_map_comment_bytes": 0
+      }
+    ]
+  },
+  "preservation": {
+    "published": true,
+    "published_at_utc": "2026-10-29T17:08:54Z",
+    "source_version": "e0940faca0f8d46b9ce5f56b056d2c552e0d1d31ddee9fa43995d0c163fe9d3f",
+    "theme_only": true,
+    "controlled_fields": 2,
+    "preserved_fields": 306,
+    "preserved_settings": 17,
+    "runtime_files": 27052,
+    "plugins": 67,
+    "generated_manifests": 72
+  },
+  "recovery": {
+    "verified": true,
+    "source_version": "e0940faca0f8d46b9ce5f56b056d2c552e0d1d31ddee9fa43995d0c163fe9d3f",
+    "theme_only": true,
+    "tag": "local_discourse/isbf_app:error-pages-after-20261029-ff40f0d1b9cb",
+    "image": "sha256:55a92bc2f17032b0996f2ac5ea9dee77d537dd7bf5e335bebdcf33f0741f3f1c",
+    "reused_existing_verified_image": true,
+    "complete_current_inventory_matches_verified_image": true,
+    "runtime_files": 27052,
+    "plugins": 67,
+    "generated_manifests": 72,
+    "runtime_core_head": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+    "database_theme_backup": "/home/codex/discourse/deploy-work/calendar-pill-nav-20261029/theme-after.json",
+    "shared_plugin_releases_required": true,
+    "compare_complete_current_inventory_before_restore": true,
+    "browser_checks": 42,
+    "global_latest_changed": false,
+    "new_recovery_image_created": false
+  },
+  "temporary_read_only_key_revoked": true,
+  "forwarding_closed": true,
+  "scope_limit": "Chromium desktop/mobile emulation; physical Safari and user visual acceptance are separate."
+}
