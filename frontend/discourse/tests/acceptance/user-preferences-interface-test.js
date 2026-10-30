@@ -33,6 +33,8 @@ acceptance("User Preferences - Interface", function (needs) {
 
     await visit("/u/eviltrout/preferences/interface");
 
+    assert.dom("[data-setting-name='user-home']").doesNotExist();
+
     // Live changes without reload
     const textSize = selectKit(".text-size .combo-box");
     await textSize.expand();
@@ -47,6 +49,8 @@ acceptance("User Preferences - Interface", function (needs) {
 
     // Click save (by default this sets for all browsers, no cookie)
     await savePreferences();
+
+    assert.false(Object.hasOwn(lastUserData, "homepage_id"));
 
     assert.strictEqual(cookie("text_size"), undefined, "cookie is not set");
 

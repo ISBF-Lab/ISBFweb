@@ -5,8 +5,8 @@ describe "Homepage" do
   fab!(:user)
   fab!(:topics) { Fabricate.times(5, :post).map(&:topic) }
   let(:discovery) { PageObjects::Pages::Discovery.new }
+
   fab!(:theme)
-  let(:user_preferences_interface_page) { PageObjects::Pages::UserPreferencesInterface.new }
 
   before do
     # A workaround to avoid the global notice from interfering with the tests
@@ -20,42 +20,11 @@ describe "Homepage" do
     expect(discovery.topic_list).to have_topics(count: 5)
   end
 
-  it "allows users to pick their homepage" do
-    sign_in user
-    visit "/"
-
-    expect(page).to have_css(".navigation-container .latest.active", text: "Latest")
-
-    user_preferences_interface_page.visit(user)
-
-    homepage_picker = PageObjects::Components::SelectKit.new("#home-selector")
-    homepage_picker.expand
-    homepage_picker.select_row_by_name("Hot")
-
-    user_preferences_interface_page.save_changes
-
-    visit "/"
-
-    expect(page).to have_css(".navigation-container .hot.active", text: "Hot")
-  end
-
-  it "allows users to reset their homepage preference to the site default" do
+  it "takes users with a saved personal homepage to the site homepage" do
     user.user_option.update!(homepage_id: UserOption::HOMEPAGES.key("hot"))
     SiteSetting.default_homepage = "categories"
 
     sign_in user
-    visit "/"
-
-    expect(page).to have_css(".navigation-container .hot.active", text: "Hot")
-
-    user_preferences_interface_page.visit(user)
-
-    homepage_picker = PageObjects::Components::SelectKit.new("#home-selector")
-    homepage_picker.expand
-    homepage_picker.select_row_by_name("Default")
-
-    user_preferences_interface_page.save_changes
-
     visit "/"
 
     expect(page).to have_css(".navigation-container .categories.active", text: "Categories")
@@ -134,43 +103,16 @@ describe "Homepage" do
       expect(page).to have_css(".new-home", text: "Hi friends!")
     end
 
-    it "respects the user's homepage choice" do
-      visit "/"
-
-      expect(page).not_to have_css(".list-container")
-      expect(page).to have_css(".new-home", text: "Hi friends!")
-
+    it "takes users with a saved personal homepage to the theme homepage" do
+      user.user_option.update!(homepage_id: UserOption::HOMEPAGES.key("hot"))
       sign_in user
-
-      visit ""
-      expect(page).to have_css(".new-home", text: "Hi friends!")
-
-      user_preferences_interface_page.visit(user)
-
-      homepage_picker = PageObjects::Components::SelectKit.new("#home-selector")
-      homepage_picker.expand
-      # user overrides theme custom homepage
-      homepage_picker.select_row_by_name("Hot")
-      user_preferences_interface_page.save_changes
-
-      expect(user.user_option.homepage_id).to eq(UserOption::HOMEPAGES.key("hot"))
-
-      click_logo
-
-      expect(page).to have_css(".navigation-container .hot.active", text: "Hot")
-
-      user_preferences_interface_page.visit(user)
-
-      homepage_picker = PageObjects::Components::SelectKit.new("#home-selector")
-      homepage_picker.expand
-      # user selects theme custom homepage again
-      homepage_picker.select_row_by_name("Default")
-      user_preferences_interface_page.save_changes
+      visit "/latest"
 
       click_logo
 
       expect(page).to have_current_path("/")
       expect(page).to have_css(".new-home", text: "Hi friends!")
+      expect(page).to have_no_css(".list-container")
     end
   end
 

@@ -1,0 +1,43 @@
+{
+  "environment": "isolated pinned development runtime; no production test writes",
+  "rspec": {
+    "examples": 23,
+    "failures": 0
+  },
+  "qunit": {
+    "tests": 6,
+    "assertions": 52,
+    "failed": 0
+  },
+  "browser": {
+    "checks": 14,
+    "client_errors": 0,
+    "viewports": [
+      {
+        "width": 1440,
+        "scheme": "light"
+      },
+      {
+        "width": 390,
+        "scheme": "dark"
+      }
+    ],
+    "fixture_preference_restored": true
+  },
+  "menus": {
+    "tests": 5,
+    "failed": 0,
+    "development_files_scanned": 5939,
+    "findings": 0
+  },
+  "native_system_suite_run_locally": false,
+  "temporary_test_database_removed": true,
+  "production_deployed": false,
+  "pull_request_candidate_native_lint": "passed",
+  "pull_request_menu_policy": {
+    "tests": 5,
+    "failed": 0,
+    "scan_scope": "isolated sparse worktree",
+    "findings": 0
+  }
+}

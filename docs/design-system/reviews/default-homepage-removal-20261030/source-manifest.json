@@ -1,0 +1,70 @@
+{
+  "base_commit": "8f78277f175ef88c47bdbefb8bce390a8d655b44",
+  "source_files": [
+    {
+      "repository_path": "frontend/discourse/app/controllers/preferences/interface.js",
+      "base_sha256": "c7e3eecb2596f85a76e9678fa5326adb6cd38855ab0255c774d728d881ff12f3",
+      "captured_before_sha256": "c7e3eecb2596f85a76e9678fa5326adb6cd38855ab0255c774d728d881ff12f3",
+      "approved_development_sha256": "d19a69e214cf7d0d36df821628e125337df43271544418c126be6da023d8a8fa",
+      "sha256": "d19a69e214cf7d0d36df821628e125337df43271544418c126be6da023d8a8fa"
+    },
+    {
+      "repository_path": "frontend/discourse/app/templates/preferences/interface.gjs",
+      "base_sha256": "a3437c2fe2412bc54d200a7ca2f39789a88d56496b7e7f969270be78fb6934ea",
+      "captured_before_sha256": "a3437c2fe2412bc54d200a7ca2f39789a88d56496b7e7f969270be78fb6934ea",
+      "approved_development_sha256": "188987b6beea4b5c43c8c9fe382c835b4f70e58551ab00ece63551702ac8b2c1",
+      "sha256": "188987b6beea4b5c43c8c9fe382c835b4f70e58551ab00ece63551702ac8b2c1"
+    },
+    {
+      "repository_path": "frontend/discourse/tests/acceptance/user-preferences-interface-test.js",
+      "base_sha256": "e99e0955bce66e28408a7b0ad2f2793de99a7f49c4851c96d51fc52bd12014b8",
+      "captured_before_sha256": "e99e0955bce66e28408a7b0ad2f2793de99a7f49c4851c96d51fc52bd12014b8",
+      "approved_development_sha256": "7e38aa64eff6be549e948755c812e7a4f4046b3375932d15a53aeffffd59ff3c",
+      "sha256": "7e38aa64eff6be549e948755c812e7a4f4046b3375932d15a53aeffffd59ff3c"
+    },
+    {
+      "repository_path": "app/controllers/application_controller.rb",
+      "base_sha256": "db3beb2743dc730c0961b28ab90ef50d89f21f50a15160c303edc0508b6cf3a0",
+      "captured_before_sha256": "db3beb2743dc730c0961b28ab90ef50d89f21f50a15160c303edc0508b6cf3a0",
+      "approved_development_sha256": "3d1c1359694e29da2153505d47b76f6680a2ad6299f2b9e05e8885f4585c1440",
+      "sha256": "3d1c1359694e29da2153505d47b76f6680a2ad6299f2b9e05e8885f4585c1440"
+    },
+    {
+      "repository_path": "app/helpers/application_helper.rb",
+      "base_sha256": "9343218f7875b8bb11b7e775d3c6a8e2bffc29511baaa46430d8d9b172659c6c",
+      "captured_before_sha256": "9343218f7875b8bb11b7e775d3c6a8e2bffc29511baaa46430d8d9b172659c6c",
+      "approved_development_sha256": "2574a9ed648f38d4d9a642c5df6d7e49f532d8a40972d5fea4578d7bef3dce2b",
+      "sha256": "2574a9ed648f38d4d9a642c5df6d7e49f532d8a40972d5fea4578d7bef3dce2b"
+    },
+    {
+      "repository_path": "lib/homepage_constraint.rb",
+      "base_sha256": "120a6d2ca967604fc729b625d938615e0419ed4eb0cdfd547291f2efe92fcb67",
+      "captured_before_sha256": "120a6d2ca967604fc729b625d938615e0419ed4eb0cdfd547291f2efe92fcb67",
+      "approved_development_sha256": "b9961a3b850725f95c7962934338a4d99b164b79629f0fde2dc6d2fac5b9e44e",
+      "sha256": "b9961a3b850725f95c7962934338a4d99b164b79629f0fde2dc6d2fac5b9e44e"
+    },
+    {
+      "repository_path": "spec/requests/list_controller_spec.rb",
+      "base_sha256": "cee8b4ed79223c4ce7834cfcdc202414eff63a2781b3e2ddb7acec42240a9162",
+      "captured_before_sha256": "cee8b4ed79223c4ce7834cfcdc202414eff63a2781b3e2ddb7acec42240a9162",
+      "approved_development_sha256": "a08fd21ec91f49994ec4a825237df79c4670f166c9446c90ce72e2857181e4b1",
+      "sha256": "a08fd21ec91f49994ec4a825237df79c4670f166c9446c90ce72e2857181e4b1"
+    },
+    {
+      "repository_path": "spec/system/homepage_spec.rb",
+      "base_sha256": "6d27b1618472407b30e65a2dbbca26d7deef108c086dc8c661a1c33ba26d5d03",
+      "captured_before_sha256": "6d27b1618472407b30e65a2dbbca26d7deef108c086dc8c661a1c33ba26d5d03",
+      "approved_development_sha256": "4592b2aef9c846a57bc757482e1e59c6409efef9ec009f6ab6aca8e3b619d9fa",
+      "sha256": "4592b2aef9c846a57bc757482e1e59c6409efef9ec009f6ab6aca8e3b619d9fa"
+    },
+    {
+      "repository_path": "spec/system/user_page/user_preferences_interface_spec.rb",
+      "base_sha256": "cf094a4e382a708df439e61aca44b3fbd8782e8b312db79e6e25f8e9e85f2cf4",
+      "captured_before_sha256": "cf094a4e382a708df439e61aca44b3fbd8782e8b312db79e6e25f8e9e85f2cf4",
+      "approved_development_sha256": "574c5bdd71859f03aca3911a2c6ecd0973161be780455811494afce9e43cbf88",
+      "sha256": "574c5bdd71859f03aca3911a2c6ecd0973161be780455811494afce9e43cbf88"
+    }
+  ],
+  "runtime_policy": "Apply this delta to the verified actual runtime; never replace pinned production with main.",
+  "native_lint": "passed; bin/lint --fix and both menu policy commands in the isolated sparse worktree"
+}
