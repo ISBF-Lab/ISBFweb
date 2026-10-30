@@ -38,3 +38,4 @@ docs/ai-moderation-verification/*.log -text whitespace=-blank-at-eof,-blank-at-e
 plugins/isbf-mbti/data/upstream/* -text
 
 /.github/fixtures/isbf-mbti-runtime/** -text
+/.github/tests/fixtures/mbti-qunit-*.txt -text

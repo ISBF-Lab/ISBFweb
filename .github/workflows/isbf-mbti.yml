@@ -9,7 +9,10 @@ on:
       - ".github/fixtures/isbf-mbti-*.json"
       - ".github/fixtures/isbf-mbti-runtime/**"
       - ".github/scripts/restore-mbti-production-ui.py"
+      - ".github/scripts/enable-mbti-qunit-theme-styles.py"
       - ".github/tests/test_restore_mbti_production_ui.py"
+      - ".github/tests/test_enable_mbti_qunit_theme_styles.py"
+      - ".github/tests/fixtures/mbti-qunit-*.txt"
   workflow_dispatch:
     inputs:
       pr:
@@ -86,6 +89,7 @@ jobs:
             frontend/discourse/select-kit
             frontend/discourse/tests/helpers
             app/assets/stylesheets/common/components
+            app/views/qunit/qunit.html.erb
             themes/isbf-campus-feed
           persist-credentials: false
       - uses: actions/checkout@v4
@@ -108,6 +112,10 @@ jobs:
         run: >-
           python3 -m unittest discover -s ../candidate/.github/tests
           -p test_restore_mbti_production_ui.py -v
+      - name: QUnit theme-style harness regression
+        run: >-
+          python3 -m unittest discover -s ../candidate/.github/tests
+          -p test_enable_mbti_qunit_theme_styles.py -v
       - name: Prepare dependencies and database services
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE/discourse"
@@ -235,6 +243,12 @@ jobs:
           helper.write_bytes(data)
           print("Restored the fixed-source native select helper only for CI tests")
           PY
+      - name: Enable native theme stylesheet loading only in the isolated QUnit harness
+        if: matrix.baseline == 'production-132'
+        run: |
+          python3 ../candidate/.github/scripts/enable-mbti-qunit-theme-styles.py \
+            --source ../production-ui-baseline \
+            --target . > tmp/mbti-qunit-style-harness.json
       - name: Register the candidate plugin as repository-owned for native lint
         run: |
           git add --intent-to-add --force -- plugins/isbf-mbti/plugin.rb
@@ -312,6 +326,7 @@ jobs:
             discourse/tmp/mbti-*.sha256
             discourse/tmp/mbti-*.log
             discourse/tmp/mbti-production-ui.json
+            discourse/tmp/mbti-qunit-style-harness.json
             discourse/tmp/mbti-theme.patch
             discourse/tmp/mbti-theme-patch.json
             discourse/tmp/mbti-browser
