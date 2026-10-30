@@ -12,7 +12,7 @@ class HomePageConstraint
     # ensures we resolve the theme id as early as possible
     ThemeResolver.resolve_theme_id(request, Guardian.new(current_user), current_user)
 
-    homepage = current_user&.user_option&.homepage || HomepageHelper.resolve(request, current_user)
+    homepage = HomepageHelper.resolve(request, current_user)
     homepage == @filter
   rescue Discourse::InvalidAccess, Discourse::ReadOnly
     false
