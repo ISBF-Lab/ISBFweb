@@ -1,0 +1,19 @@
+# Calendar filter capsules
+
+The user supplied React Bits PillNav JavaScript/CSS as the interaction reference, requested theme colors and immediate, persistent blue selection, selected the fill-and-rolling-label hover option, approved the implementation plan, and authorized publication after verification on 2026-10-29.
+
+This increment covers only the All, Personal schedule and Official activities filter group on `/isbf/calendar` (A07/C01). The existing `filter`/`setFilter` action, date window, entries, translations and guest visibility remain authoritative. Shared `DButton` supplies action and keyboard behavior; `aria-pressed` exposes the selection. The rolling duplicate label is hidden from assistive technology. No dependency, public API, setting or data migration is added.
+
+The active theme owns the appearance: existing neutral surface/hover/border tokens, pill radius, accent and accent-contrast supply both color modes. Existing group margins, 4px inset, 6px gap, 34px inner height and desktop content sizing/mobile equal columns are retained. Each unselected capsule has a neutral surface and semantic border. Hover on a fine pointer uses an expanding circle and vertically rolling text; keyboard focus exposes the same treatment and a focus ring. Selection immediately fills the complete capsule and remains filled after pointer exit. The local hover timings are 550ms/500ms with the supplied ease-out curve; they are not new global animation defaults. Reduced-motion mode changes state without animation.
+
+The actual workspace files are `external/active-theme/javascripts/discourse/components/isbf-v2-calendar.gjs` and `external/active-theme/common/common.scss`. Before/after source snapshots, native database transaction backups and candidate merge evidence are preserved under `.local/changes/calendar-pill-nav-20261029/` and `.local/releases/calendar-pill-nav-20261029/`. The original migration manifests and non-executable historical references are unchanged.
+
+Reproduction helpers, baseline/after screenshots and raw development results are in `docs/calendar-pill-nav-20261029/` at the migration workspace root. Production candidates are merged with the actual database theme and guarded by full field hashes and complete source/plugin inventories. Exact checks and publication status are recorded after execution. The approved local design does not grant visual approval to the whole calendar or unrelated controls; final user visual acceptance is separate.
+
+## Executed verification and publication
+
+Development passed 49 browser checks and both source/candidate lint. The unchanged existing suite has four passing tests and one proven pre-existing editor-selector failure (three assertions), with identical before/after results. Production publication completed at `2026-10-29T17:08:54Z` and passed 42 read-only browser checks and four TLS resource comparisons. Actual preservation, image reuse and recovery are recorded in [the deployment report](../../deployments/calendar-pill-nav-20261029/README.md) and [verification.json](verification.json). Final user visual acceptance remains separate.
+
+## Repository mapping
+
+This PR records the already deployed interaction increment. The active-theme files map to `themes/isbf-campus-feed` in this repository. A three-way merge applies only the approved calendar-filter delta to the current main branch, preserving its unrelated theme changes. Main's existing third filter is `community`, so its value and translation key remain `community`/`calendar_community`; the deployed runtime's corresponding option is `official`/`calendar_official`. Each version retains its existing data selection action. The source manifest separately binds the approved development, published candidate and repository versions. Private backups, credentials and screenshots are excluded.

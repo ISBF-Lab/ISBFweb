@@ -421,3 +421,7 @@ A08/C02 新增经用户确认的局部排布：卡片 1:1，面板内容宽度 6
 ## 2026-10-29 C21通用错误页局部组合
 
 本轮复用C20全屏布局及A01品牌，继续使用V2 background/text/muted/accent/accent-contrast/border-strong/focus-ring、站点字体及space-2/4/6/8。标题font-xl/weight-bold、说明font-sm、详情font-xs；主操作沿用132px最小宽、44px最小高和pill，次级文字操作44px最小高和radius-sm。技术详情40ch最大阅读宽及状态字形按容器测量适配只限C21，不增加全局token。范围与状态见[记录](reviews/error-pages-20261029/README.md)。
+
+## 2026-10-29 日历筛选局部组合
+
+A07/C01 日历筛选使用现有 surface/hover/text/border/accent/accent-contrast/focus-ring、radius-pill 与 weight-medium；保留原间距、34px 内层高度及手机等宽布局。悬停圆形填充 550ms、文字翻滚 500ms 和 ease-out 曲线仅限此组按钮，选中态立即完整填充，减少动态效果时直接切换。来源与验证见[记录](reviews/calendar-pill-nav-20261029/README.md)，没有新增全局 token。

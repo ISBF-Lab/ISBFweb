@@ -1,0 +1,41 @@
+{
+  "id": "calendar-pill-nav-20261029",
+  "source_version": "5ac1cf3e1dd06d3a785a8b0377ad86bd7f0a90fc9ac5f28088c45dc9abf7f3a5",
+  "origin": "User supplied React Bits PillNav JavaScript/CSS, selected hover fill and label roll, then approved the implementation plan and publication after verification.",
+  "scope": "A07/C01 /isbf/calendar content filter capsules",
+  "files": [
+    {
+      "path": "external/active-theme/javascripts/discourse/components/isbf-v2-calendar.gjs",
+      "before_sha256": "0f2e4841092633e3e1e0231339a794e414d58953d096c71e462eade4f47d49de",
+      "sha256": "2a90d1faa52cb5559e255c950886c57703cb0b77d676372167a605b967b2bd09"
+    },
+    {
+      "path": "external/active-theme/common/common.scss",
+      "before_sha256": "713b6ce71b069c497b2ca59f819efe1d6855659fd2acdb0012ed423699c101f4",
+      "sha256": "44563a3a45e88afa6f4932a6ecdc1964978c373e4957b5c6a895513ee31a88c8"
+    }
+  ],
+  "runtime_policy": "Merge the scoped delta with the actual database theme; preserve all unrelated fields/settings and the captured runtime.",
+  "pull_request": {
+    "base_commit": "c199c2f7b47906ef0e499ab015cb89433af4dacb",
+    "source_files": [
+      {
+        "repository_path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-calendar.gjs",
+        "sha256": "eb5814dd37b837270c274778dca808045dfd2c07d1921d857f16f1272d54411d",
+        "base_sha256": "a2a1f01424b2416e748084266fca9c7e1c1bb00bae1f4a30058b2706dd3c6948",
+        "approved_development_sha256": "2a90d1faa52cb5559e255c950886c57703cb0b77d676372167a605b967b2bd09",
+        "compatibility": "Retain main's existing community filter value and translation; the deployed runtime uses official."
+      },
+      {
+        "repository_path": "themes/isbf-campus-feed/common/common.scss",
+        "sha256": "1f9ae7e6ea13e4e14876e00548686d353278c0f7bc3d5874d54fd42cf7df996b",
+        "base_sha256": "fd4494055dd5f6f6d5881fe9f76861c92aabb9181211ad395baca40e29ee299f",
+        "approved_development_sha256": "44563a3a45e88afa6f4932a6ecdc1964978c373e4957b5c6a895513ee31a88c8",
+        "compatibility": null
+      }
+    ],
+    "scoped_increment_only": true,
+    "production_already_published": true,
+    "native_lint": "passed; bin/lint --fix plus menu policy tests and scan in the isolated sparse worktree"
+  }
+}

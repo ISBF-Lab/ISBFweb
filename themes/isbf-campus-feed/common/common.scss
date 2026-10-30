@@ -2068,22 +2068,121 @@ body:has(.isbf-v2-shell--workbench) {
   padding: 4px;
   border: 1px solid var(--isbf-v2-border);
   border-radius: var(--isbf-v2-radius-pill);
+  background: var(--isbf-v2-hover);
   width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-.isbf-v2-calendar__filters button {
+.isbf-v2-calendar__filter.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
   min-height: 34px;
+  margin: 0;
   padding: 0 16px;
-  border: 0;
+  border: 1px solid var(--isbf-v2-border);
   border-radius: var(--isbf-v2-radius-pill);
-  background: transparent;
-  color: var(--isbf-v2-muted);
+  background: var(--isbf-v2-surface);
+  color: var(--isbf-v2-text);
+  font-family: inherit;
+  font-weight: var(--isbf-v2-weight-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  isolation: isolate;
+  transition: none;
+
+  &::before {
+    position: absolute;
+    inset-block-start: 100%;
+    inset-inline-start: -60%;
+    z-index: -1;
+    width: 220%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--isbf-v2-accent);
+    content: "";
+    pointer-events: none;
+    transform: translateY(-50%) scale(0);
+  }
+
+  .d-button-label {
+    display: block;
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--isbf-v2-focus-ring);
+    outline-offset: 2px;
+  }
 }
 
-.isbf-v2-calendar__filters button.is-active {
+.isbf-v2-calendar__filter-label-alt {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--isbf-v2-accent-contrast);
+  pointer-events: none;
+  transform: translateY(calc(100% + 0.7em));
+}
+
+@mixin isbf-calendar-filter-fill {
+  &::before {
+    transform: translateY(-50%) scale(1);
+  }
+
+  .d-button-label {
+    transform: translateY(calc(-100% - 0.7em));
+  }
+
+  .isbf-v2-calendar__filter-label-alt {
+    transform: translateY(0);
+  }
+}
+
+.isbf-v2-calendar__filter:is(.is-active, :focus-visible) {
+  @include isbf-calendar-filter-fill;
+}
+
+.isbf-v2-calendar__filter.is-active {
   background: var(--isbf-v2-accent);
   color: var(--isbf-v2-accent-contrast);
-  font-weight: 700;
+  border-color: var(--isbf-v2-accent);
+
+  &::before,
+  .d-button-label,
+  .isbf-v2-calendar__filter-label-alt {
+    transition: none;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html.discourse-no-touch .isbf-v2-calendar__filter:hover {
+    @include isbf-calendar-filter-fill;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .isbf-v2-calendar__filter:not(.is-active) {
+    &::before {
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .d-button-label,
+    .isbf-v2-calendar__filter-label-alt {
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .isbf-v2-calendar__filter.btn {
+    transition: none;
+  }
 }
 
 .isbf-v2-calendar__layout {
@@ -2323,7 +2422,7 @@ body:has(.isbf-v2-shell--workbench) {
     width: 100%;
   }
 
-  .isbf-v2-calendar__filters button {
+  .isbf-v2-calendar__filter.btn {
     flex: 1;
     padding-inline: 5px;
     font-size: 12px;
