@@ -1,0 +1,16 @@
+[
+  {
+    "relative": "javascripts/discourse/components/isbf-v2-calendar.gjs",
+    "field_id": 206,
+    "before_sha256": "b9a5f6c497d2be3c1798d568f551fdc74d4be94ca6569f299e3d6afa076f50f5",
+    "sha256": "6f5b474cc0483e208930ec4b68b5035b4074aa7e9724534c7e10092783ad5347",
+    "approved_sha256": "2a90d1faa52cb5559e255c950886c57703cb0b77d676372167a605b967b2bd09"
+  },
+  {
+    "relative": "common/common.scss",
+    "field_id": 197,
+    "before_sha256": "6674155d2d3827071a50ee1d7773ea820575a553bca365e3f5ed71bc0cbd2ed5",
+    "sha256": "e1b0050c92ebdb5012bd8581d5a782e30e515e6f6f75a136329c85fd454f5d29",
+    "approved_sha256": "44563a3a45e88afa6f4932a6ecdc1964978c373e4957b5c6a895513ee31a88c8"
+  }
+]

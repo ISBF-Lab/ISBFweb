@@ -6,6 +6,7 @@ import { service } from "@ember/service";
 import { settings, themePrefix } from "virtual:theme";
 import { ajax } from "discourse/lib/ajax";
 import DButton from "discourse/ui-kit/d-button";
+import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
 import I18n, { i18n } from "discourse-i18n";
 import {
@@ -18,6 +19,11 @@ import ISBFCalendarNoteEditor from "./isbf-calendar-note-editor";
 import ISBFCalendarUpdateDialog from "./isbf-calendar-update-dialog";
 
 const WEEKDAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+const FILTERS = [
+  { value: "all", label: "isbf_v2.calendar_all" },
+  { value: "personal", label: "isbf_v2.calendar_personal" },
+  { value: "community", label: "isbf_v2.calendar_community" },
+];
 
 function dateKey(date) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
@@ -75,6 +81,12 @@ export default class ISBFV2Calendar extends Component {
     super.willDestroy(...arguments);
     this.appEvents.off("isbf:calendar-entry-changed", this.reloadEntries);
     this.router.off("routeDidChange", this.focusFromRoute);
+  }
+
+  get filterOptions() {
+    return FILTERS.filter(
+      (filter) => this.currentUser || filter.value !== "personal"
+    ).map((filter) => ({ ...filter, label: themePrefix(filter.label) }));
   }
 
   get monthLabel() {
@@ -467,21 +479,23 @@ export default class ISBFV2Calendar extends Component {
         class="isbf-v2-calendar__filters"
         role="group"
       >
-        <button
-          class={{if (eq this.filter "all") "is-active"}}
-          type="button"
-          {{on "click" (fn this.setFilter "all")}}
-        >{{i18n (themePrefix "isbf_v2.calendar_all")}}</button>
-        {{#if this.currentUser}}<button
-            class={{if (eq this.filter "personal") "is-active"}}
-            type="button"
-            {{on "click" (fn this.setFilter "personal")}}
-          >{{i18n (themePrefix "isbf_v2.calendar_personal")}}</button>{{/if}}
-        <button
-          class={{if (eq this.filter "community") "is-active"}}
-          type="button"
-          {{on "click" (fn this.setFilter "community")}}
-        >{{i18n (themePrefix "isbf_v2.calendar_community")}}</button>
+        {{#each this.filterOptions key="value" as |filter|}}
+          <DButton
+            class={{dConcatClass
+              "isbf-v2-calendar__filter"
+              (if (eq this.filter filter.value) "is-active")
+            }}
+            data-filter={{filter.value}}
+            @action={{fn this.setFilter filter.value}}
+            @ariaPressed={{eq this.filter filter.value}}
+            @label={{filter.label}}
+          >
+            <span
+              aria-hidden="true"
+              class="isbf-v2-calendar__filter-label-alt"
+            >{{i18n filter.label}}</span>
+          </DButton>
+        {{/each}}
       </div>
 
       {{#if this.updatesError}}
