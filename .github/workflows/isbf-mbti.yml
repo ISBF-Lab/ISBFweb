@@ -1,0 +1,336 @@
+name: MBTI workbench integration
+
+on:
+  pull_request:
+    paths:
+      - "plugins/isbf-mbti/**"
+      - "themes/isbf-campus-feed/**"
+      - ".github/workflows/isbf-mbti.yml"
+      - ".github/fixtures/isbf-mbti-*.json"
+      - ".github/fixtures/isbf-mbti-runtime/**"
+      - ".github/scripts/restore-mbti-production-ui.py"
+      - ".github/scripts/enable-mbti-qunit-theme-styles.py"
+      - ".github/tests/test_restore_mbti_production_ui.py"
+      - ".github/tests/test_enable_mbti_qunit_theme_styles.py"
+      - ".github/tests/fixtures/mbti-qunit-*.txt"
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: Pull request number for production theme patch verification
+        required: true
+        type: number
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: mbti-workbench-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native-integration:
+    name: MBTI (${{ matrix.baseline }})
+    runs-on: ubuntu-latest
+    container: discourse/discourse_test@sha256:94eca5318fed6171264b95204914de76a113c305cebb72d9fa9527e2c4496494
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        include:
+          - baseline: current
+            core_ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          - baseline: production-132
+            core_ref: 132cc95d043db01251eedf9c93b3927cd5ffee91
+    defaults:
+      run:
+        shell: bash
+        working-directory: discourse
+    env:
+      RAILS_ENV: test
+      PGUSER: discourse
+      PGPASSWORD: discourse
+      LOAD_PLUGINS: "1"
+      PARALLEL_TEST_PROCESSORS: "1"
+      CAPYBARA_DEFAULT_MAX_WAIT_TIME: "20"
+      QUNIT_PARALLEL: "1"
+      QUNIT_REUSE_BUILD: "1"
+      NODE_OPTIONS: --max-old-space-size=2048
+      CHEAP_SOURCE_MAPS: "1"
+      EMBER_ENV: development
+      PLAYWRIGHT_BROWSERS_PATH: /home/discourse/.cache/ms-playwright
+      DBUS_SESSION_BUS_ADDRESS: unix:path=/dev/null
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: candidate
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          sparse-checkout: |
+            plugins/isbf-mbti
+            themes/isbf-campus-feed
+            .github/fixtures
+            .github/scripts
+            .github/tests
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.core_ref }}
+          path: discourse
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        if: matrix.baseline == 'production-132'
+        with:
+          ref: 9ca49588e44c18957733311239a0f355314a2980
+          path: production-ui-baseline
+          sparse-checkout: |
+            frontend/discourse/app
+            frontend/discourse/float-kit
+            frontend/discourse/select-kit
+            frontend/discourse/tests/helpers
+            app/assets/stylesheets/common/components
+            app/views/qunit/qunit.html.erb
+            themes/isbf-campus-feed
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        if: matrix.baseline == 'production-132'
+        with:
+          ref: 13d66d6f415a7a6b496741155cb55315e208f882
+          path: production-float-source
+          sparse-checkout: |
+            frontend/discourse/float-kit/lib
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        if: matrix.baseline == 'production-132'
+        with:
+          ref: 211f043f51681951bbb6d562ca9df66ea73366c6
+          path: production-otp-source
+          sparse-checkout: |
+            frontend/discourse/app/ui-kit/d-otp
+          persist-credentials: false
+      - name: CI runtime-fixture helper regression
+        run: >-
+          python3 -m unittest discover -s ../candidate/.github/tests
+          -p test_restore_mbti_production_ui.py -v
+      - name: QUnit theme-style harness regression
+        run: >-
+          python3 -m unittest discover -s ../candidate/.github/tests
+          -p test_enable_mbti_qunit_theme_styles.py -v
+      - name: Prepare dependencies and database services
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/discourse"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/candidate"
+          redis-server /etc/redis/redis.conf --daemonize yes --logfile ""
+          chown -R postgres /var/run/postgresql
+          sudo -E -u postgres script/start_test_db.rb
+          sudo -u postgres psql -c "CREATE ROLE discourse LOGIN SUPERUSER PASSWORD 'discourse';"
+          ln -s /var/www/discourse/vendor/bundle vendor/bundle
+          bundle config --local path vendor/bundle
+          bundle config --local deployment true
+          bundle config --local without ""
+          bundle install --jobs 1
+          pnpm install --frozen-lockfile
+      - name: Prepare the native schema before migration generation
+        run: bin/rake db:create db:migrate
+      - name: Overlay only the candidate MBTI plugin and project theme
+        id: overlay
+        run: |
+          if test -e plugins/isbf-mbti; then
+            test -d plugins/isbf-mbti
+            test ! -L plugins/isbf-mbti
+            rm -r plugins/isbf-mbti
+          fi
+          cp -a ../candidate/plugins/isbf-mbti plugins/isbf-mbti
+          if test -e themes/isbf-campus-feed; then
+            test -d themes/isbf-campus-feed
+            test ! -L themes/isbf-campus-feed
+            rm -r themes/isbf-campus-feed
+          fi
+          if test "${{ matrix.baseline }}" = "production-132"; then
+            cp -a ../production-ui-baseline/themes/isbf-campus-feed themes/isbf-campus-feed
+          else
+            cp -a ../candidate/themes/isbf-campus-feed themes/isbf-campus-feed
+          fi
+          mkdir -p tmp
+          git -C ../candidate rev-parse HEAD > tmp/mbti-source-sha.txt
+          git rev-parse HEAD > tmp/mbti-runtime-sha.txt
+      - name: Apply only the tested PR theme patch to the compatible production baseline
+        if: matrix.baseline == 'production-132'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr }}
+          SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, re, urllib.parse, urllib.request
+          from pathlib import Path
+          number = os.environ["PR_NUMBER"]
+          assert number.isdecimal(), "Production patch verification requires a PR number"
+          repository = os.environ["GITHUB_REPOSITORY"]
+          api = f"{os.environ['GITHUB_API_URL']}/repos/{repository}"
+          pull_path = f"/pulls/{number}"
+          def read(path, accept="application/vnd.github+json"):
+              request = urllib.request.Request(api + path, headers={
+                  "Authorization": "Bearer " + os.environ["GITHUB_TOKEN"],
+                  "Accept": accept,
+              })
+              with urllib.request.urlopen(request, timeout=45) as response:
+                  return response.read()
+          before = json.loads(read(pull_path))
+          assert before["state"] == "open" and before["head"]["sha"] == os.environ["SOURCE_SHA"]
+          assert before["base"]["repo"]["full_name"] == repository, "Unexpected PR target repository"
+          base_ref = before["base"]["ref"]
+          base_path = "/git/ref/heads/" + urllib.parse.quote(base_ref, safe="")
+          live_base = json.loads(read(base_path))["object"]["sha"]
+          comparison_path = f"/compare/{live_base}...{os.environ['SOURCE_SHA']}"
+          comparison = json.loads(read(comparison_path))
+          assert comparison["merge_base_commit"]["sha"] == live_base, "PR must include the live target branch before theme projection"
+          patch = read(comparison_path, "application/vnd.github.diff")
+          after = json.loads(read(pull_path))
+          assert after["state"] == "open"
+          assert after["head"]["sha"] == before["head"]["sha"]
+          assert after["head"]["ref"] == before["head"]["ref"]
+          assert after["head"]["repo"]["full_name"] == before["head"]["repo"]["full_name"]
+          assert after["base"]["ref"] == base_ref
+          assert after["base"]["repo"]["full_name"] == repository
+          assert json.loads(read(base_path))["object"]["sha"] == live_base, "Live target branch changed during patch verification"
+          assert patch.startswith(b"diff --git ") and b"isbf-mbti" in patch
+          allowed = set(json.loads(Path("../candidate/.github/fixtures/isbf-mbti-theme-paths.json").read_text()))
+          paths = []
+          for line in patch.splitlines():
+              if line.startswith(b"diff --git ") and b"themes/isbf-campus-feed/" in line:
+                  match = re.fullmatch(rb"diff --git a/(themes/isbf-campus-feed/[^ ]+) b/([^ ]+)", line)
+                  assert match and match[1] == match[2], "Unexpected theme diff path"
+                  path = match[1].decode("utf-8")
+                  assert path in allowed, "Theme changes outside the reviewed MBTI scope require review"
+                  paths.append(path)
+          assert "themes/isbf-campus-feed/javascripts/discourse/components/isbf-mbti.gjs" in paths
+          Path("tmp/mbti-theme.patch").write_bytes(patch)
+          Path("tmp/mbti-theme-patch.json").write_text(json.dumps({
+              "head": before["head"]["sha"], "base": live_base,
+              "sha256": hashlib.sha256(patch).hexdigest(),
+              "paths": paths, "scope": "themes/isbf-campus-feed/**", "theme_baseline": "9ca49588e44c18957733311239a0f355314a2980",
+          }))
+          PY
+          git apply --check --include='themes/isbf-campus-feed/**' tmp/mbti-theme.patch
+          git apply --include='themes/isbf-campus-feed/**' tmp/mbti-theme.patch
+      - name: Restore audited production UI components only in the isolated CI runtime
+        if: matrix.baseline == 'production-132'
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/production-ui-baseline"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/production-float-source"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/production-otp-source"
+          python3 ../candidate/.github/scripts/restore-mbti-production-ui.py \
+            --manifest ../candidate/.github/fixtures/isbf-mbti-production-ui.json \
+            --source ../production-ui-baseline \
+            --extra-source 13d66d6f415a7a6b496741155cb55315e208f882=../production-float-source \
+            --extra-source 211f043f51681951bbb6d562ca9df66ea73366c6=../production-otp-source \
+            --audit ../candidate/.github/fixtures/isbf-mbti-production-source-audit.json \
+            --capture ../candidate/.github/fixtures/isbf-mbti-runtime \
+            --target . > tmp/mbti-production-ui.json
+      - name: Restore the native select test helper from the fixed UI source
+        if: matrix.baseline == 'production-132'
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          helper = Path("frontend/discourse/tests/helpers/d-select.js")
+          source = Path("../production-ui-baseline") / helper
+          data = source.read_bytes()
+          assert hashlib.sha256(data).hexdigest() == "58cff6b8fee57801d8aaf46812d35368e2a090e87b638fed0265a36009c6383c"
+          assert not helper.exists() and not helper.is_symlink()
+          helper.parent.mkdir(parents=True, exist_ok=True)
+          helper.write_bytes(data)
+          print("Restored the fixed-source native select helper only for CI tests")
+          PY
+      - name: Enable native theme stylesheet loading only in the isolated QUnit harness
+        if: matrix.baseline == 'production-132'
+        run: |
+          python3 ../candidate/.github/scripts/enable-mbti-qunit-theme-styles.py \
+            --source ../production-ui-baseline \
+            --target . > tmp/mbti-qunit-style-harness.json
+      - name: Register the candidate plugin as repository-owned for native lint
+        run: |
+          git add --intent-to-add --force -- plugins/isbf-mbti/plugin.rb
+          script/list_bundled_plugins | grep -Fxq 'plugins/isbf-mbti'
+      - name: Native migration helper regression
+        run: python3 -m unittest discover -s plugins/isbf-mbti/scripts -p 'test_generate_migration.py' -v
+      - name: Finalize migration using the native Rails generator
+        id: migration
+        run: |
+          python3 plugins/isbf-mbti/scripts/generate-migration.py | tee tmp/mbti-migration.txt
+      - name: Native formatting and source drift check
+        id: formatting
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr }}
+        run: |
+          python3 plugins/isbf-mbti/scripts/check-files.py > tmp/mbti-files.txt
+          while IFS= read -r source; do sha256sum "$source"; done < tmp/mbti-files.txt > tmp/mbti-before.sha256
+          xargs -d '\n' bin/lint --fix < tmp/mbti-files.txt
+          sha256sum --check tmp/mbti-before.sha256
+          git diff --exit-code -- Gemfile.lock pnpm-lock.yaml
+      - name: Migrate isolated database
+        id: database
+        if: always() && steps.migration.outcome == 'success'
+        run: bin/rake db:create db:migrate
+      - name: Regenerate native schema and model annotations
+        if: always() && steps.database.outcome == 'success'
+        run: bin/rake db:dump_structure annotate:clean
+      - name: Plugin scoring, ownership and private history regression
+        if: always() && steps.database.outcome == 'success'
+        env:
+          RSPEC_SEED: "16771"
+        run: |
+          set -o pipefail
+          bin/rake "plugin:spec[isbf-mbti]" | tee tmp/mbti-rspec.log
+      - name: Build native components and browser assets
+        id: assets
+        if: always() && steps.database.outcome == 'success'
+        run: |
+          pnpm playwright-install
+          script/assemble_ember_build.rb
+          mkdir -p "$HOME/.pki/nssdb" "$HOME/.local/share/pki/nssdb"
+          dbus-daemon --system --fork 2>/dev/null || true
+          mbti_bus_address=$(dbus-daemon --session --fork --print-address 2>/dev/null)
+          echo "DBUS_SESSION_BUS_ADDRESS=$mbti_bus_address" >> "$GITHUB_ENV"
+      - name: Install candidate theme into the synthetic QUnit database
+        if: always() && steps.assets.outcome == 'success'
+        env:
+          RAILS_ENV: development
+          DISCOURSE_DEV_DB: discourse_test
+        run: >-
+          bin/rails runner 'theme = RemoteTheme.import_theme_from_directory(Rails.root.join("themes/isbf-campus-feed")); theme.set_default!'
+      - name: Full theme component and acceptance regression
+        if: always() && steps.assets.outcome == 'success'
+        env:
+          DISCOURSE_DEV_DB: discourse_test
+          QUNIT_RAILS_ENV: development
+        run: |
+          set -o pipefail
+          bin/rake 'themes:qunit[name,ISBF Campus Feed]' | tee tmp/mbti-qunit.log
+      - name: Actual quiz, resume, private history and responsive pages
+        if: always() && steps.assets.outcome == 'success'
+        run: |
+          set -o pipefail
+          bin/rspec plugins/isbf-mbti/spec/system/take_mbti_test_spec.rb | tee tmp/mbti-system.log
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.overlay.outcome == 'success'
+        with:
+          name: mbti-${{ matrix.baseline }}-${{ github.run_id }}
+          path: |
+            discourse/plugins/isbf-mbti
+            discourse/themes/isbf-campus-feed
+            discourse/db/structure.sql
+            discourse/tmp/mbti-*.txt
+            discourse/tmp/mbti-*.sha256
+            discourse/tmp/mbti-*.log
+            discourse/tmp/mbti-production-ui.json
+            discourse/tmp/mbti-qunit-style-harness.json
+            discourse/tmp/mbti-theme.patch
+            discourse/tmp/mbti-theme-patch.json
+            discourse/tmp/mbti-browser
+            discourse/tmp/capybara
+            discourse/log/test.log
+          if-no-files-found: warn
+          retention-days: 7

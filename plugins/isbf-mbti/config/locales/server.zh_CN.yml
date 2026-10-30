@@ -1,0 +1,8 @@
+zh_CN:
+  site_settings:
+    isbf_mbti_enabled: "在工作台开放 MBTI 性格倾向测试。结果与历史记录仅本人可见。"
+  isbf_mbti:
+    invalid_answers: "请为每道题选择一个有效选项后再提交。"
+    stale_version: "题库版本已更新，请使用当前版本重新开始测试。"
+    submission_conflict: "本次测试已保存，提交的答案与原记录不同，请重新开始测试。"
+    account_changed: "保存期间账号状态发生变化，请重新登录后再试。"

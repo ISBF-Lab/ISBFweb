@@ -1,0 +1,726 @@
+{
+  "schema": 1,
+  "core_head": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "observed_at": "2026-10-29T15:25:48.041588+00:00",
+  "scope": "120 approved public frontend paths; hash-only observations; not a complete production inventory",
+  "files": [
+    {
+      "path": "app/assets/stylesheets/common/components/_d-otp-animated.scss",
+      "status": "hashed",
+      "bytes": 4198,
+      "sha256": "579bbebdbde9909f44a47d5c6e4169951f948d73541a3eaae78b972dc8efc620"
+    },
+    {
+      "path": "app/assets/stylesheets/common/components/_index.scss",
+      "status": "hashed",
+      "bytes": 2718,
+      "sha256": "59a1aca21105ce1d1c3b66ca0cfa27fbcebedc3ecf86c5bb33b1ec028ee3b032"
+    },
+    {
+      "path": "app/assets/stylesheets/common/components/d-hold-button.scss",
+      "status": "hashed",
+      "bytes": 5321,
+      "sha256": "e1690d7eced8ec65c0809b7888bffd3162a3c0dea353fc9819a2211c42ef72d8"
+    },
+    {
+      "path": "app/assets/stylesheets/common/components/d-menu-surface.scss",
+      "status": "hashed",
+      "bytes": 5156,
+      "sha256": "f44429422f74fec1208de100b8ddbfef7857f99296c27ebe3b4aac2fe4025849"
+    },
+    {
+      "path": "app/assets/stylesheets/common/components/d-otp.scss",
+      "status": "hashed",
+      "bytes": 1994,
+      "sha256": "1f34710de7d5a122cf492c014ab2d6f05f3fe4e8b74c5e1dfcfb0d2d2c167ad1"
+    },
+    {
+      "path": "frontend/discourse/app/components/bulk-select-topics-dropdown.gjs",
+      "status": "hashed",
+      "bytes": 15701,
+      "sha256": "6bd6cb88af4bc85c13ef34b4a223919f4932af387319e6c9c377564c5345758e"
+    },
+    {
+      "path": "frontend/discourse/app/components/code-login-form.gjs",
+      "status": "hashed",
+      "bytes": 51213,
+      "sha256": "c0cfeff18c23c6cd080ae8c201ebc3f8d5789222e1e39e775067390c429018ef"
+    },
+    {
+      "path": "frontend/discourse/app/components/composer-actions.gjs",
+      "status": "hashed",
+      "bytes": 17495,
+      "sha256": "d1fe8333c4ac4cf3669150e27019aff57b3b7de65f9055c6266dab1b3271b12b"
+    },
+    {
+      "path": "frontend/discourse/app/components/design-wizard/fonts-section.gjs",
+      "status": "hashed",
+      "bytes": 3825,
+      "sha256": "5b3fd286298f178563de1e517ebed845affd7a42b32f0e66d72ed697c9b55761"
+    },
+    {
+      "path": "frontend/discourse/app/components/form-template-field/dropdown.gjs",
+      "status": "hashed",
+      "bytes": 1469,
+      "sha256": "f44a7f70c1bf620f95d425ead92660b5ddaaaf5784da205388cc73c317fee12b"
+    },
+    {
+      "path": "frontend/discourse/app/components/form-template-field/multi-select.gjs",
+      "status": "hashed",
+      "bytes": 1747,
+      "sha256": "22b296414064bfba3b2379221c720d97b8253d83939db87e077119b8cca39713"
+    },
+    {
+      "path": "frontend/discourse/app/components/form-template-field/tag-chooser.gjs",
+      "status": "hashed",
+      "bytes": 5606,
+      "sha256": "6592d075ed0e5dd98920a2425db51344cce7354dac013c52755ebe45b485f7ad"
+    },
+    {
+      "path": "frontend/discourse/app/components/interface-color-selector.gjs",
+      "status": "hashed",
+      "bytes": 2658,
+      "sha256": "94130242b46e0699f04f74649ff3e15043fb85ebf9eecf8601f149b301f7fe06"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/anonymous-flag.gjs",
+      "status": "hashed",
+      "bytes": 1508,
+      "sha256": "948a468ebe8fadadc49954066984893ccb3b9cef7bec16fac84f76c555204962"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/create-invite-with-roles.gjs",
+      "status": "hashed",
+      "bytes": 34293,
+      "sha256": "2c00d3b7ddc31d115e1bc1fc6dfe73ee443bd753ec8433b44d65a8fc8d860338"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/jump-to-post.gjs",
+      "status": "hashed",
+      "bytes": 2698,
+      "sha256": "07c686eeeddc24025b5e337be17a0865d9ba6d24a5bd5b59da678dff7ed0ed06"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/share-topic.gjs",
+      "status": "hashed",
+      "bytes": 6596,
+      "sha256": "0e21b69917abfa975c6cb0a295f6b443e24b305db1b62e08b75220a3c6ee87bd"
+    },
+    {
+      "path": "frontend/discourse/app/components/modal/upsert-hyperlink.gjs",
+      "status": "hashed",
+      "bytes": 8983,
+      "sha256": "47d9583278432c2f10d7468f9524a5b532efeeb08a0b79b213f71c0d6965d0d0"
+    },
+    {
+      "path": "frontend/discourse/app/components/more-topics.gjs",
+      "status": "hashed",
+      "bytes": 1446,
+      "sha256": "671c4c2fd40e6387fbd55c1adf15f8875457944704f350c32933e8468c54ea77"
+    },
+    {
+      "path": "frontend/discourse/app/components/more-topics/browse-more.gjs",
+      "status": "hashed",
+      "bytes": 4268,
+      "sha256": "83b4c4af8ecadf4baff9de366044b02b7fc82752b434ae4dca0bf465fb5e2e6b"
+    },
+    {
+      "path": "frontend/discourse/app/components/navigation-bar.gjs",
+      "status": "hashed",
+      "bytes": 3633,
+      "sha256": "f569f4b12567ec00e194853aa794355c477c6d03f32d602979ca444bcf1bcfe6"
+    },
+    {
+      "path": "frontend/discourse/app/components/nested.gjs",
+      "status": "hashed",
+      "bytes": 38071,
+      "sha256": "1b6b2852ffaa8960fd35c5acc44780632746f54651de07574bb8b986b87c67f7"
+    },
+    {
+      "path": "frontend/discourse/app/components/nested/deleted-posts.gjs",
+      "status": "hashed",
+      "bytes": 5417,
+      "sha256": "b6ceb0ec4fbf499deac89358ee2e69c455ec36009e5160b483c841c8d33ce196"
+    },
+    {
+      "path": "frontend/discourse/app/components/nested/post-children.gjs",
+      "status": "hashed",
+      "bytes": 21539,
+      "sha256": "652cfc6de3e2372a58e86fb00f7d5efd4c480b1f29fcf63966f993351c7cb4dd"
+    },
+    {
+      "path": "frontend/discourse/app/components/nested/post.gjs",
+      "status": "hashed",
+      "bytes": 33593,
+      "sha256": "33f8ba78a56be6fba3af26059c60db680c5a015aaf4e2e34e93fb3f7135c65cf"
+    },
+    {
+      "path": "frontend/discourse/app/components/notifications-tracking.gjs",
+      "status": "hashed",
+      "bytes": 5035,
+      "sha256": "a3398383dce863442a72042c03a70bfb4b7fcc57e64bf21079d61244acfe4fc2"
+    },
+    {
+      "path": "frontend/discourse/app/components/pinned-options.gjs",
+      "status": "hashed",
+      "bytes": 4309,
+      "sha256": "b77c3c7705a071a5311be7dc9ac83aaac11c1d96b6acfe839e4ac7917308eb9d"
+    },
+    {
+      "path": "frontend/discourse/app/components/post-list/bulk-controls.gjs",
+      "status": "hashed",
+      "bytes": 2940,
+      "sha256": "45927cb590fe2e36c0e4ebdc2fa1864119bd078ed9ce712bf290bef77bd9a67e"
+    },
+    {
+      "path": "frontend/discourse/app/components/post-list/item/details.gjs",
+      "status": "hashed",
+      "bytes": 4366,
+      "sha256": "d53e767b709059bc838cc93ed7e45bb6844923849304d0a22ba695bd3dfa7676"
+    },
+    {
+      "path": "frontend/discourse/app/components/post-text-selection-toolbar.gjs",
+      "status": "hashed",
+      "bytes": 4789,
+      "sha256": "d01eda9d1e476844c05cc8e0ecc50d35a78b4e2dc084609cd104c9158f454ed8"
+    },
+    {
+      "path": "frontend/discourse/app/components/post-translation-editor.gjs",
+      "status": "hashed",
+      "bytes": 4160,
+      "sha256": "ec3fb798c40c89c65fdb5ff80f95d1ea5ea4d458eab7ed3894ae74877b2c09d6"
+    },
+    {
+      "path": "frontend/discourse/app/components/post/menu/buttons/like.gjs",
+      "status": "hashed",
+      "bytes": 3674,
+      "sha256": "a7f9948bf37c79a47986f91b1437b3571df821f9587104ef12ab820d25fcc5ab"
+    },
+    {
+      "path": "frontend/discourse/app/components/post/menu/liked-users-list.gjs",
+      "status": "hashed",
+      "bytes": 1957,
+      "sha256": "a0d07c6c6f0fb1a278884f99a19d9a4f887765b9bafabe9e57398519a5df129e"
+    },
+    {
+      "path": "frontend/discourse/app/components/search-menu/results/type/topic.gjs",
+      "status": "hashed",
+      "bytes": 2793,
+      "sha256": "bd6a514efeae867bf2ce37ad5da32abeff61dc9466d6deb7f5368611261f707f"
+    },
+    {
+      "path": "frontend/discourse/app/components/search-result-entry.gjs",
+      "status": "hashed",
+      "bytes": 5641,
+      "sha256": "8c0b3b6d7bf452d4597636dcad11e4c1ce012e42ba271cac901240cea8414525"
+    },
+    {
+      "path": "frontend/discourse/app/components/share-panel.gjs",
+      "status": "hashed",
+      "bytes": 3270,
+      "sha256": "a765fa0f4921a07e7cd72b2fcb209beaec15fac069e8f49129d80523cb3a941d"
+    },
+    {
+      "path": "frontend/discourse/app/components/sidebar/more-section-links.gjs",
+      "status": "hashed",
+      "bytes": 4016,
+      "sha256": "5254dd5ffe5c8623fc95e2bff4d2b51a19e24bac77daeb314dc9760591076a3d"
+    },
+    {
+      "path": "frontend/discourse/app/components/toolbar-popup-menu-options.gjs",
+      "status": "hashed",
+      "bytes": 6194,
+      "sha256": "e6908d5d9624db708c1e4375b46edd8de4a75e21320bfeed421109c229cce403"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-admin-menu.gjs",
+      "status": "hashed",
+      "bytes": 13826,
+      "sha256": "dc98134797e4bff3adb7d3fff13572dfd56a002f63ab52f193cdd88b37612bf5"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-bookmarks-menu.gjs",
+      "status": "hashed",
+      "bytes": 13654,
+      "sha256": "39546815d156fbf3e81e6360f5b69fd3408b62c9bd89d6fc7b24037af787f07c"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-drafts-dropdown.gjs",
+      "status": "hashed",
+      "bytes": 4249,
+      "sha256": "54797000b733338d7f0d73053f75e1bf7de2dca70ff99771a831bea6188e52bb"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-footer-buttons.gjs",
+      "status": "hashed",
+      "bytes": 11426,
+      "sha256": "1cda98e6f4b37cff87c6226f9eb5e72aaa61db90f2769f3c0637a0da984f9cc6"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-list/topic-link.gjs",
+      "status": "hashed",
+      "bytes": 1149,
+      "sha256": "6cdaa6a8b62eb47926e8e5ee0d0f80b3d749b4c75e7a659f939b0b4c6768a9cb"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-map/topic-map-summary.gjs",
+      "status": "hashed",
+      "bytes": 14031,
+      "sha256": "11b38f0a9e41e10685cf2ddd93533b8cb812a76f4a2ac1a7b8adf6c47c2d15be"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-navigation.gjs",
+      "status": "hashed",
+      "bytes": 8918,
+      "sha256": "87edb8d009bbe294bd2b7d9b1270d3257ca1b1fda88e92432810311859444798"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-reply-choice-dialog.gjs",
+      "status": "hashed",
+      "bytes": 2247,
+      "sha256": "f94c491652dba0d07945bf5cfbdc427b25c0db18ac115422e6206b8815ec51bc"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-timeline.gjs",
+      "status": "hashed",
+      "bytes": 2426,
+      "sha256": "f3668e2da2d901cc2f5b514001975b2380c559e5a759853132e5f6e1de712318"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-timeline/container.gjs",
+      "status": "hashed",
+      "bytes": 21758,
+      "sha256": "dce70a587f62e76a3f84d0f288d859f5d619dfcda40d4c7eaf663be83d34c731"
+    },
+    {
+      "path": "frontend/discourse/app/components/topic-timeline/scroller.gjs",
+      "status": "hashed",
+      "bytes": 2250,
+      "sha256": "93c8dcdc392eba8d91ff80727596f2c0808e1559080ffe1fff11b4873bd60ce5"
+    },
+    {
+      "path": "frontend/discourse/app/components/user-card-contents.gjs",
+      "status": "hashed",
+      "bytes": 29201,
+      "sha256": "80081b9171243e3afad73d116cdb53a10efb172377e181c344102a29676dd11c"
+    },
+    {
+      "path": "frontend/discourse/app/components/user-nav.gjs",
+      "status": "hashed",
+      "bytes": 3050,
+      "sha256": "fba7404b863e62996427f3a1e11d5dd9bc1b9efc39868fd7631947b4a9e17578"
+    },
+    {
+      "path": "frontend/discourse/app/components/user-stream.gjs",
+      "status": "hashed",
+      "bytes": 7049,
+      "sha256": "37e0fbd11e315d40065f41029d94869429d4253a249a4edd7ff403cf477e1f61"
+    },
+    {
+      "path": "frontend/discourse/app/components/user-summary-topic.gjs",
+      "status": "hashed",
+      "bytes": 1401,
+      "sha256": "7d7f4f6ed01b883b51b7c34968f0c7de103fb7a061bea8825538404caed40e21"
+    },
+    {
+      "path": "frontend/discourse/app/controllers/nested.js",
+      "status": "hashed",
+      "bytes": 36125,
+      "sha256": "b5d4f0561ecd77e9f42ebe75ae7647a65e7a6765d5dfdab12f3a75ca6be1be8b"
+    },
+    {
+      "path": "frontend/discourse/app/controllers/topic.js",
+      "status": "hashed",
+      "bytes": 61258,
+      "sha256": "3513e5f508c775eb5bb7cfeb776f6442229e3ecb0f6b82da6c792a769c219025"
+    },
+    {
+      "path": "frontend/discourse/app/controllers/user.js",
+      "status": "hashed",
+      "bytes": 8710,
+      "sha256": "c8ef2ad6e0d2faad9ae61b4a2e4b3b56750ffc55150940f5ee47be166a6b4f36"
+    },
+    {
+      "path": "frontend/discourse/app/form-kit/components/fk/control/color.gjs",
+      "status": "hashed",
+      "bytes": 9140,
+      "sha256": "45e81168c493753c3c7be6555c84e1cbebe87f1d11d8edcdd42c591b72941fd3"
+    },
+    {
+      "path": "frontend/discourse/app/form-kit/components/fk/control/menu.gjs",
+      "status": "hashed",
+      "bytes": 1807,
+      "sha256": "e83250866ab10ae7250c30811f26a5e8564452e27b25e1cc1f8d446c15c0a217"
+    },
+    {
+      "path": "frontend/discourse/app/form-kit/components/fk/control/password.gjs",
+      "status": "hashed",
+      "bytes": 2355,
+      "sha256": "8d6cb9797f2605b045972af0436d85c5825971b09176b4c5996704498e49e7fb"
+    },
+    {
+      "path": "frontend/discourse/app/form-kit/components/fk/control/select.gjs",
+      "status": "hashed",
+      "bytes": 1286,
+      "sha256": "e5d1dd0f67370b8a9a0f239d7afc0cf277f28d5bc5ae0be0b66f607b6351ab35"
+    },
+    {
+      "path": "frontend/discourse/app/lib/deleted-reply-items.js",
+      "status": "hashed",
+      "bytes": 1060,
+      "sha256": "ed7f74e35da4435c4f1c55a4f6939805b784c656d68e24d5ee9a031123d6e717"
+    },
+    {
+      "path": "frontend/discourse/app/lib/desktop-notifications.js",
+      "status": "hashed",
+      "bytes": 6026,
+      "sha256": "89abfb0cdbf1139b3790454d814d9f7a51ecd35100f47dfc9e1ee3915cdf0884"
+    },
+    {
+      "path": "frontend/discourse/app/lib/flat-replies.js",
+      "status": "hashed",
+      "bytes": 290,
+      "sha256": "a964955332d129653cce4cc332f7644bdb30432cbf2ac24e62498b6bbdf5fbfd"
+    },
+    {
+      "path": "frontend/discourse/app/lib/flat-reply-pages.js",
+      "status": "hashed",
+      "bytes": 2013,
+      "sha256": "b32313ced7a3bafd600148a48caa557d81c3439498c5b9328e6e93fb9e02a9aa"
+    },
+    {
+      "path": "frontend/discourse/app/lib/load-motion.js",
+      "status": "hashed",
+      "bytes": 202,
+      "sha256": "51903c1b619234eb129c0885af094d823ed8a7e4df0372a5df24e890a0899d46"
+    },
+    {
+      "path": "frontend/discourse/app/lib/nested-topic-model.js",
+      "status": "hashed",
+      "bytes": 4911,
+      "sha256": "adeddbe5defddb936e980d4295e77f04e46c0b4f00015a021e239500ca1af6b2"
+    },
+    {
+      "path": "frontend/discourse/app/lib/nested-view-cache-snapshot.js",
+      "status": "hashed",
+      "bytes": 8073,
+      "sha256": "c35ea54676c191704ad14ffd40eb48bd5b1c0db53c7e5e669012a8db61d1c1f9"
+    },
+    {
+      "path": "frontend/discourse/app/lib/notification-types/base.js",
+      "status": "hashed",
+      "bytes": 3628,
+      "sha256": "9bf22e1fb121f3447c55dd305cbf4dbeeab30d74765c291133937302d3f5b9f9"
+    },
+    {
+      "path": "frontend/discourse/app/lib/notification-types/bookmark-reminder.js",
+      "status": "hashed",
+      "bytes": 931,
+      "sha256": "4ae7981defedba8b7dd81eaf34efcf36e1dc2c39edd6915db98d108ce48efbd1"
+    },
+    {
+      "path": "frontend/discourse/app/lib/otp-feedback.js",
+      "status": "hashed",
+      "bytes": 668,
+      "sha256": "826c5bb09ea0ce78a298ecdd8dee4d95dee8b14adfa30aacb5b3b5e3eea0e711"
+    },
+    {
+      "path": "frontend/discourse/app/lib/push-notifications.js",
+      "status": "hashed",
+      "bytes": 4311,
+      "sha256": "c3f50b756f912d7ba9aac7e1883345edbba5cdd6208e503fe7706d29fbc9005e"
+    },
+    {
+      "path": "frontend/discourse/app/lib/registry/transformers.js",
+      "status": "hashed",
+      "bytes": 5799,
+      "sha256": "26c96cc45a92ea5eac5b17587139b26a6b2df705446817ab295676c1dbc7596b"
+    },
+    {
+      "path": "frontend/discourse/app/lib/topic-display-title.js",
+      "status": "hashed",
+      "bytes": 537,
+      "sha256": "12302245b8ed6e2292dbf5d815e823a88707812ef56cd1c9e56f723a6fc098b1"
+    },
+    {
+      "path": "frontend/discourse/app/lib/topic-fancy-title.js",
+      "status": "hashed",
+      "bytes": 909,
+      "sha256": "8fec0f09835bc4393e0700abb051dc7faa6d8494c7f178dc9f6ab4e03b269c20"
+    },
+    {
+      "path": "frontend/discourse/app/lib/topic-title-token.js",
+      "status": "hashed",
+      "bytes": 1269,
+      "sha256": "2149d7e1d78ae43c5ca3e7458fb33a9ad2c08618eb81ae545bdb56f097c0d9f2"
+    },
+    {
+      "path": "frontend/discourse/app/lib/url.js",
+      "status": "hashed",
+      "bytes": 19001,
+      "sha256": "740cd2ca3c85075928a990634678c42821ec25cda66c417c578f1422f33c2b97"
+    },
+    {
+      "path": "frontend/discourse/app/lib/user-menu/bookmark-item.js",
+      "status": "hashed",
+      "bytes": 1070,
+      "sha256": "694b2af41d0c6c6e6f1072054edf5658b1c86f1c7d6a6d563d39d3a66fd8fbb8"
+    },
+    {
+      "path": "frontend/discourse/app/lib/user-menu/message-item.js",
+      "status": "hashed",
+      "bytes": 1403,
+      "sha256": "9eff7517592c6c5510573e3b9d253e648b2d97b9036baa839926f17b58fdde26"
+    },
+    {
+      "path": "frontend/discourse/app/models/bookmark.js",
+      "status": "hashed",
+      "bytes": 6140,
+      "sha256": "1f9ee1abe152cb29b4df83a7d082bbe551e1a6e17900f3c9f6dd0a3452f7028e"
+    },
+    {
+      "path": "frontend/discourse/app/models/post.js",
+      "status": "hashed",
+      "bytes": 23281,
+      "sha256": "0bf79c1c15b3473510b5bdefe9e4ec3562636f998c9d3cbd74159eeebbc40aab"
+    },
+    {
+      "path": "frontend/discourse/app/models/topic.js",
+      "status": "hashed",
+      "bytes": 28983,
+      "sha256": "963159bbeb2589a3738f6c95003a4d7128ca536c19b879b7625a00b12249f241"
+    },
+    {
+      "path": "frontend/discourse/app/models/user-action.js",
+      "status": "hashed",
+      "bytes": 7496,
+      "sha256": "eb106e806be8d212b96a2b84fab5a324bd1f56aacd0fad18f4ed8223aaedc2a5"
+    },
+    {
+      "path": "frontend/discourse/app/models/user-draft.js",
+      "status": "hashed",
+      "bytes": 1442,
+      "sha256": "7105f3d37fc090d94a9f6e7993d457d7f040ba8866f6589802a92b9406a0d61a"
+    },
+    {
+      "path": "frontend/discourse/app/models/user-drafts-stream.js",
+      "status": "hashed",
+      "bytes": 2394,
+      "sha256": "8728fb678b0af9f659c59b71374913662b14071aa7dbf55de1cf326f98c5632a"
+    },
+    {
+      "path": "frontend/discourse/app/routes/topic/from-params.js",
+      "status": "hashed",
+      "bytes": 18114,
+      "sha256": "dcf18223157584c1c9a6e02c7e63cf615c5eb390e11f422549eafb84550be9df"
+    },
+    {
+      "path": "frontend/discourse/app/services/composer.js",
+      "status": "hashed",
+      "bytes": 60944,
+      "sha256": "e6bd10a293e88e276b10d8e7dde5a11de950f1291853f24d408d7662dc0f1552"
+    },
+    {
+      "path": "frontend/discourse/app/templates/preferences/profile.gjs",
+      "status": "hashed",
+      "bytes": 8633,
+      "sha256": "56335e698ecc791e45c92624f2f8f4beb87642f52134f157d4301eabc8b33323"
+    },
+    {
+      "path": "frontend/discourse/app/templates/topic.gjs",
+      "status": "hashed",
+      "bytes": 36857,
+      "sha256": "15dfce296d4be34c6adc3eb6ca7f554ae26a491bb08cd23fff500ce6fe74a3aa"
+    },
+    {
+      "path": "frontend/discourse/app/templates/user-invited/show.gjs",
+      "status": "hashed",
+      "bytes": 17388,
+      "sha256": "d53adcbf19897561b379e6ae75c9c7e7c6e4514a4a93f83e5025e33f51fc4232"
+    },
+    {
+      "path": "frontend/discourse/app/templates/user.gjs",
+      "status": "hashed",
+      "bytes": 19754,
+      "sha256": "feef72e15b5a7a129cc91cc3805d71511dc6a4c87f3b4be891f402d9f85e0a0b"
+    },
+    {
+      "path": "frontend/discourse/app/templates/user/summary.gjs",
+      "status": "hashed",
+      "bytes": 13291,
+      "sha256": "2269f5bd70a5ad66c55d68359baf5d75b72a281b11bb6b5fe2423d38ee658cd0"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/-internals/floating-family.ts",
+      "status": "hashed",
+      "bytes": 1084,
+      "sha256": "ca05a9f20a0fdb570ac3ef67a1178ddfa60ea85897ec21d71d2098fabe751e32"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/-internals/menu-highlight.ts",
+      "status": "hashed",
+      "bytes": 8010,
+      "sha256": "5ee0f0b09de872228097f2352bbd65e807a184fa1fafa1c003525ad7b3f7e2f7"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-access-control-permission-menu.gjs",
+      "status": "hashed",
+      "bytes": 2633,
+      "sha256": "d327efa682a45c7abafcc5a6085dd93ca04c3cdad49efdcb0080decdd66349a2"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-dropdown-menu.gjs",
+      "status": "hashed",
+      "bytes": 1127,
+      "sha256": "13b2cff6a23fe872cc3b3583043a6963c5a30081943627149ec236d6b5119281"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-hold-button.gts",
+      "status": "hashed",
+      "bytes": 12851,
+      "sha256": "8f3f77ac7723b883a041929ebd0d0eec9ede4f7b8a4634899dfa5a40c7dd2b71"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-multi-select.gjs",
+      "status": "hashed",
+      "bytes": 9890,
+      "sha256": "cdcbed5c7bf370211fabaac8d5b739cd791d894cf2e4e3a95487ffbf9fa19033"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-native-select.gjs",
+      "status": "hashed",
+      "bytes": 112,
+      "sha256": "c94d788258310cac98e90b8ad716f3142b99b4c3358a3b9aec72b9068178ac4d"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-otp/animated.gjs",
+      "status": "hashed",
+      "bytes": 14419,
+      "sha256": "5823dddedea6971647d0c544283fdd0bf72019a86eaf7f4d738f368beccdec7a"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-otp/index.gjs",
+      "status": "hashed",
+      "bytes": 8191,
+      "sha256": "3bb129ab22e4d98aa77edd8abcf06141155d90a7e117d2f16de7a5802f6f0b89"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-select.gts",
+      "status": "hashed",
+      "bytes": 12371,
+      "sha256": "e935e8a831e9c50466445e87a94d08ef229748c4aff466fa348b9593840b81db"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-select/native.gjs",
+      "status": "hashed",
+      "bytes": 2794,
+      "sha256": "ab0137493944965c8e37717439f75925b5cd543cad5ea3ba15e6c4b134cb65de"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/modifiers/d-close-on-click-outside.js",
+      "status": "hashed",
+      "bytes": 1374,
+      "sha256": "a9f669147ec044302c58ca6a42b83c3680bfd608574b4bdfd1170e5b81917531"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/modifiers/d-menu-highlight.ts",
+      "status": "hashed",
+      "bytes": 1258,
+      "sha256": "02df4697de8b100abf7d052d0b6eb2f5bce2a2fd90f15d7706a683252bd65636"
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/modifiers/d-roving-focus/keyboard.ts",
+      "status": "hashed",
+      "bytes": 12582,
+      "sha256": "b05bebd72e425a02cf0a43ff730a5d8a93671575ba0e26fd0b8278c4e702e10f"
+    },
+    {
+      "path": "frontend/discourse/float-kit/components/d-float-body.gts",
+      "status": "hashed",
+      "bytes": 12620,
+      "sha256": "a26af4fd277c6cff0d5d46480922cc1527dca24522ffa354402a537357708238"
+    },
+    {
+      "path": "frontend/discourse/float-kit/components/d-headless-menu.gts",
+      "status": "hashed",
+      "bytes": 1556,
+      "sha256": "8323567de651af920ceda1c03b64ab883bbd26a61383837207ca1c5785682c9c"
+    },
+    {
+      "path": "frontend/discourse/float-kit/components/d-inline-float.gts",
+      "status": "hashed",
+      "bytes": 3345,
+      "sha256": "177edeb1cdbfecd1cf2b4db357b0e5ea208292908a0f448ed65652493179de68"
+    },
+    {
+      "path": "frontend/discourse/float-kit/components/d-menu.gts",
+      "status": "hashed",
+      "bytes": 14228,
+      "sha256": "4ef77c08329dd5377e2bf87ac732fb4503cfabf3d4f4c19a1ad93448e3fec63d"
+    },
+    {
+      "path": "frontend/discourse/float-kit/lib/constants.ts",
+      "status": "hashed",
+      "bytes": 17885,
+      "sha256": "bf6657e1bb58b60293bdf3ed829f38a5c2359656f43783322b25f49a3cc4b01d"
+    },
+    {
+      "path": "frontend/discourse/float-kit/lib/d-menu-instance.ts",
+      "status": "hashed",
+      "bytes": 7399,
+      "sha256": "a550ee333789228c68a28a7559bd7954603f445be7bc0678cff0583e6c927208"
+    },
+    {
+      "path": "frontend/discourse/float-kit/lib/float-kit-instance.ts",
+      "status": "hashed",
+      "bytes": 14359,
+      "sha256": "abb92196ab38ae6ba425db0609b8c96dbc9c9c365af01ee94ac4dabf993b315a"
+    },
+    {
+      "path": "frontend/discourse/float-kit/lib/update-position.ts",
+      "status": "hashed",
+      "bytes": 10212,
+      "sha256": "5c46283baaa1edfc74c1b60e309dc639add00fcb3a0d120ed1bb3a96d4dc839d"
+    },
+    {
+      "path": "frontend/discourse/float-kit/modifiers/close-on-escape.ts",
+      "status": "hashed",
+      "bytes": 1869,
+      "sha256": "32ec12d81e9163e2cc0c2d4277effefa0893f72d1b3b686b988407033af496df"
+    },
+    {
+      "path": "frontend/discourse/float-kit/services/menu.ts",
+      "status": "hashed",
+      "bytes": 5963,
+      "sha256": "4f8fb81cfdbf7821eadcc7af406985bfca1550d4628f35aea0aaa07675375bc1"
+    },
+    {
+      "path": "frontend/discourse/select-kit/components/select-kit.js",
+      "status": "hashed",
+      "bytes": 36852,
+      "sha256": "4ca4cbb16fad8c4bc7c2f973816b8ee9e15b754c3241ce16fe7b5b9eb1339549"
+    },
+    {
+      "path": "frontend/discourse/select-kit/components/select-kit/select-kit-body.gjs",
+      "status": "hashed",
+      "bytes": 2267,
+      "sha256": "1494cb954f35d13173f2f3c33381de6630b4b223c8220669df7647a3cbc9366c"
+    },
+    {
+      "path": "frontend/discourse/tests/helpers/d-native-select-assertions.js",
+      "status": "hashed",
+      "bytes": 1546,
+      "sha256": "5dd3a67f97b2f0f658e719301f0764cc843073c3de227cb4e872f3fc0d4e5c1c"
+    },
+    {
+      "path": "frontend/discourse/tests/helpers/d-select.js",
+      "status": "missing"
+    },
+    {
+      "path": "frontend/discourse/tests/helpers/form-kit-assertions.js",
+      "status": "hashed",
+      "bytes": 7093,
+      "sha256": "90a3f932a8696c5fbc5c52ea8386598941bf520810f6443c606f6bdc6e57bd1a"
+    }
+  ]
+}
