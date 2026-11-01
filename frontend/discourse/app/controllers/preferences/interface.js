@@ -24,24 +24,8 @@ import {
   setLocalTheme,
 } from "discourse/lib/theme-selector";
 import { applyValueTransformer } from "discourse/lib/transformer";
-import {
-  setDefaultHomepage,
-  siteDefaultHomepage,
-} from "discourse/lib/utilities";
 import { AUTO_DELETE_PREFERENCES } from "discourse/models/bookmark";
 import { i18n } from "discourse-i18n";
-
-// same as UserOption::HOMEPAGES
-const USER_HOMES = {
-  1: "latest",
-  2: "categories",
-  3: "unread",
-  4: "new",
-  5: "top",
-  6: "bookmarks",
-  7: "unseen",
-  8: "hot",
-};
 
 const TEXT_SIZES = ["smallest", "smaller", "normal", "larger", "largest"];
 const TITLE_COUNT_MODES = ["notifications", "contextual"];
@@ -78,7 +62,6 @@ export default class InterfaceController extends Controller {
       "automatically_unpin_topics",
       "allow_private_messages",
       "enable_allowed_pm_users",
-      "homepage_id",
       "hide_presence",
       "text_size",
       "title_count_mode",
@@ -149,14 +132,6 @@ export default class InterfaceController extends Controller {
     return TEXT_SIZES.map((value) => {
       return { name: i18n(`user.text_size.${value}`), value };
     });
-  }
-
-  @computed("model.user_option.homepage_id", "userSelectableHome.[]")
-  get homepageId() {
-    return (
-      this.model.user_option.homepage_id ||
-      this.userSelectableHome.firstObject.value
-    );
   }
 
   @computed
@@ -284,38 +259,6 @@ export default class InterfaceController extends Controller {
     );
   }
 
-  @computed()
-  get userSelectableHome() {
-    let homeValues = {};
-    Object.keys(USER_HOMES).forEach((newValue) => {
-      const newKey = USER_HOMES[newValue];
-      homeValues[newKey] = newValue;
-    });
-
-    let result = [{ name: i18n("user.homepage.default"), value: -1 }];
-
-    const siteHome = siteDefaultHomepage(this.siteSettings);
-    const availableIds = this.siteSettings.top_menu
-      .split("|")
-      .filter((m) => m !== siteHome);
-    availableIds.unshift(siteHome);
-
-    const userHome = USER_HOMES[this.get("model.user_option.homepage_id")];
-
-    if (userHome && !availableIds.includes(userHome)) {
-      availableIds.push(USER_HOMES[this.homepageId]);
-    }
-
-    availableIds.forEach((m) => {
-      let id = homeValues[m];
-      if (id) {
-        result.push({ name: i18n(`filters.${m}.title`), value: Number(id) });
-      }
-    });
-
-    return result;
-  }
-
   @computed("selectedDarkColorSchemeId", "currentThemeId")
   get showInterfaceColorModeSelector() {
     const theme = this.userSelectableThemes?.find(
@@ -435,18 +378,6 @@ export default class InterfaceController extends Controller {
     );
   }
 
-  homeChanged() {
-    const siteHome = siteDefaultHomepage(this.siteSettings);
-
-    if (this.model.canPickThemeWithCustomHomepage) {
-      USER_HOMES[-1] = "custom";
-    }
-
-    const userHome = USER_HOMES[this.get("model.user_option.homepage_id")];
-
-    setDefaultHomepage(userHome || siteHome);
-  }
-
   getSelectedColorSchemeId() {
     if (!this.session.userColorSchemeId) {
       return;
@@ -546,8 +477,6 @@ export default class InterfaceController extends Controller {
               this.interfaceColor.forceDarkMode();
             }
           }
-
-          this.homeChanged();
 
           if (this.themeId && this.themeId !== this.currentThemeId) {
             reload();

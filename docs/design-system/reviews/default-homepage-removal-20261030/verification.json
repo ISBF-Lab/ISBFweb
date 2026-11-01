@@ -1,0 +1,55 @@
+{
+  "environment": "isolated pinned development runtime; no production test writes",
+  "rspec": {
+    "examples": 23,
+    "failures": 0
+  },
+  "qunit": {
+    "tests": 7,
+    "assertions": 60,
+    "failed": 0
+  },
+  "browser": {
+    "checks": 14,
+    "client_errors": 0,
+    "viewports": [
+      {
+        "width": 1440,
+        "scheme": "light"
+      },
+      {
+        "width": 390,
+        "scheme": "dark"
+      }
+    ],
+    "fixture_preference_restored": true
+  },
+  "menus": {
+    "tests": 5,
+    "failed": 0,
+    "development_files_scanned": 5939,
+    "findings": 0
+  },
+  "native_system_suite_run_locally": false,
+  "temporary_test_database_removed": true,
+  "production_deployed": false,
+  "pull_request_candidate_native_lint": "passed",
+  "pull_request_menu_policy": {
+    "tests": 5,
+    "failed": 0,
+    "scan_scope": "isolated sparse worktree",
+    "findings": 0
+  },
+  "ci_follow_up": {
+    "initial_frontend_suite": {
+      "tests": 1229,
+      "passed": 1228,
+      "failed": 1
+    },
+    "frontend_cause": "An obsolete personal-homepage test expected the removed selector.",
+    "plugin_cause": "The floating release test image moved to Ruby 4.0.9 while Gemfile requires Ruby ~> 3.4; no plugin tests ran.",
+    "focused_legacy_homepage_test_passed": true,
+    "workflow_yaml_format_and_shared_image_check": "passed",
+    "full_ci_recheck": "pending"
+  }
+}
