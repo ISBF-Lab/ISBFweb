@@ -7,6 +7,8 @@ import {
   visit,
 } from "@ember/test-helpers";
 import { test } from "qunit";
+import { cloneJSON } from "discourse/lib/object";
+import userFixtures from "discourse/tests/fixtures/user-fixtures";
 import {
   acceptance,
   updateCurrentUser,
@@ -165,32 +167,66 @@ acceptance("Custom User Fields", function (needs) {
   });
 });
 
-acceptance(
-  "User Preferences, selecting bookmarks discovery as user's default homepage",
-  function (needs) {
-    needs.user();
-    needs.settings({
-      top_menu: "categories|latest|top|bookmarks",
-    });
+acceptance("User Preferences, site homepage", function (needs) {
+  needs.user();
+  needs.settings({
+    default_homepage: "latest",
+    top_menu: "latest|categories|top|bookmarks",
+  });
 
-    test("selecting bookmarks as home directs home to bookmarks", async function (assert) {
-      await visit("/u/eviltrout/preferences/interface");
-      assert.dom(".home .combo-box").exists("it has a home selector combo-box");
-
-      const field = selectKit(".home .combo-box");
-      await field.expand();
-      await field.selectRowByValue("6");
-      await click(".save-changes");
-      await visit("/");
-      assert.dom(".topic-list").exists("The list of topics was rendered");
-      assert.strictEqual(
-        currentRouteName(),
-        "discovery.bookmarks",
-        "it navigates to bookmarks"
-      );
+  let savedPreferences;
+  needs.pretender((server, helper) => {
+    server.get("/u/eviltrout.json", () => {
+      const response = cloneJSON(userFixtures["/u/eviltrout.json"]);
+      response.user.can_edit = true;
+      response.user.user_option.homepage_id = 6;
+      return helper.response(response);
     });
-  }
-);
+    server.put("/u/eviltrout.json", (request) => {
+      savedPreferences = helper.parsePostData(request.requestBody);
+      return helper.response({ user: {} });
+    });
+  });
+
+  test("saving preferences with a legacy homepage keeps the site homepage", async function (assert) {
+    await visit("/u/eviltrout/preferences/interface");
+    assert.dom(".save-changes").exists("interface preferences are editable");
+    assert
+      .dom("[data-setting-name='user-home']")
+      .doesNotExist("personal homepage selection is unavailable");
+
+    await click(".save-changes");
+    assert
+      .dom(".saved")
+      .exists("other interface preferences can still be saved");
+    assert.false(
+      Object.hasOwn(savedPreferences, "homepage_id"),
+      "saving preferences does not submit the legacy homepage value"
+    );
+
+    await visit("/");
+    assert.dom(".topic-list").exists("The list of topics was rendered");
+    assert.strictEqual(
+      currentRouteName(),
+      "discovery.latest",
+      "the root URL uses the site homepage after saving"
+    );
+
+    await visit("/bookmarks");
+    assert.strictEqual(
+      currentRouteName(),
+      "discovery.bookmarks",
+      "bookmarks remain available through their own route"
+    );
+
+    await click("#site-logo");
+    assert.strictEqual(
+      currentRouteName(),
+      "discovery.latest",
+      "the logo returns to the site homepage"
+    );
+  });
+});
 
 acceptance("Ignored users", function (needs) {
   needs.user({ can_ignore_users: true });

@@ -63,8 +63,31 @@
       "captured_before_sha256": "cf094a4e382a708df439e61aca44b3fbd8782e8b312db79e6e25f8e9e85f2cf4",
       "approved_development_sha256": "574c5bdd71859f03aca3911a2c6ecd0973161be780455811494afce9e43cbf88",
       "sha256": "574c5bdd71859f03aca3911a2c6ecd0973161be780455811494afce9e43cbf88"
+    },
+    {
+      "repository_path": "frontend/discourse/tests/acceptance/preferences-test.js",
+      "base_sha256": "6454fa37141aa51730e265fd77115d6be8ea32ca357218fda5bf7021cd9869fd",
+      "captured_before_sha256": "6454fa37141aa51730e265fd77115d6be8ea32ca357218fda5bf7021cd9869fd",
+      "approved_development_sha256": "ddfe20bd94f29151c4c013210549de009324b896ad7685531e099539cd707efc",
+      "sha256": "ddfe20bd94f29151c4c013210549de009324b896ad7685531e099539cd707efc"
     }
   ],
   "runtime_policy": "Apply this delta to the verified actual runtime; never replace pinned production with main.",
-  "native_lint": "passed; bin/lint --fix and both menu policy commands in the isolated sparse worktree"
+  "native_lint": "passed; bin/lint --fix and both menu policy commands in the isolated sparse worktree",
+  "ci_files": [
+    {
+      "repository_path": ".github/workflows/isbf-plugin-regression.yml",
+      "base_sha256": "8415ae047f953c6ee4d852cf4d5bd26a97fbfdcea78a482eb1324f5b7bd0ddd0",
+      "sha256": "6c50e6f664237d4d5f4c7a66d6df154c88716902909e0acab3fb96894b3124f2"
+    }
+  ],
+  "ci_follow_up": {
+    "initial_head": "0e9779f0012b3aafe50e6f932d4cbdd6fa51f8d5",
+    "failed_jobs": [
+      123943753078,
+      123943753282
+    ],
+    "runtime_source_delta_changed": false,
+    "plugin_test_image": "discourse/discourse_test@sha256:94eca5318fed6171264b95204914de76a113c305cebb72d9fa9527e2c4496494"
+  }
 }

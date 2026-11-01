@@ -25,7 +25,7 @@ concurrency:
 jobs:
   plugins:
     runs-on: ubuntu-latest
-    container: discourse/discourse_test:release
+    container: discourse/discourse_test@sha256:94eca5318fed6171264b95204914de76a113c305cebb72d9fa9527e2c4496494
     timeout-minutes: 15
     defaults:
       run:
