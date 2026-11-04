@@ -1,0 +1,20 @@
+zh_CN:
+  js:
+    academy_roles:
+      activity_cosmetics:
+        title: 外观权限
+        description: 达到所选等级及以上即可解锁。工作人员保留现有外观权限；降级时暂停外观并保留选择，再次达标后恢复。
+        avatar_minimum: 头像框统一佩戴门槛
+        enable_name_color: 开放预设品红色姓名
+        name_minimum: 品红色姓名解锁等级
+        light_color: 浅色模式的品红色号
+        dark_color: 深色模式的品红色号
+        palette_description: 开放前请填写两套预设色号。普通用户只能开启或关闭，自选颜色仍限开发者使用。
+        save_levels_first: 新增的等级需要先保存，才能选作解锁门槛。
+        badge: 自动授予徽章
+        badge_description: 当前等级自动授予此徽章。替换时只收回等级系统发放的徽章，保留人工奖励。可在徽章后台创建符合条件的自定义徽章。
+        no_badge: 不自动授予徽章
+        unavailable_badge: "徽章 #%{id} 已不可用，请清除或替换"
+        referenced_level: "删除前请先修改并保存这些门槛：%{references}。"
+        locked: "达到 LV%{level} 解锁。你的外观选择仍然保留，再次达标后会恢复。"
+        name_description: 在信息流中将姓名显示为站点预设的品红色。等级不足时暂停显示并保留选择。

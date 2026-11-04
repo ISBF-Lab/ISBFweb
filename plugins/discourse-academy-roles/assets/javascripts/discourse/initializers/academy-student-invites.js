@@ -26,6 +26,11 @@ export default {
       if (currentUser?.admin) {
         api.addAdminPluginConfigurationNav("discourse-academy-roles", [
           {
+            label: "academy_roles.activity_levels.title",
+            route: "adminPlugins.show.academy-activity-levels",
+            description: "academy_roles.activity_levels.description",
+          },
+          {
             label: "academy_roles.moderator_permissions.title",
             route: "adminPlugins.show.academy-moderator-permissions",
             description: "academy_roles.moderator_permissions.description",

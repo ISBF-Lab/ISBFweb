@@ -9,6 +9,20 @@ module DiscourseAcademyRoles
 
   class ActivityLevel
     def self.update(user, now: Time.zone.now)
+      if ActivityLevels::Configuration.persisted?
+        return(
+          ActivityLevels.synchronize do
+            user.with_lock do
+              ActivityLevels::Evaluator.new(
+                user,
+                configuration: ActivityLevels::Configuration.current,
+                now: now,
+              ).update!
+            end
+          end
+        )
+      end
+
       fields = user.custom_fields
       previous_level = fields[ACTIVITY_LEVEL_FIELD].to_i
       previous_since = fields[LV3_SINCE_FIELD]
@@ -16,13 +30,9 @@ module DiscourseAcademyRoles
       requirements = ActivityRequirements.new(user)
 
       if requirements.requirements_met?
-        since = Time.zone.parse(fields[LV3_SINCE_FIELD]) if fields[
-          LV3_SINCE_FIELD
-        ].present?
-        last_check =
-          Time.zone.parse(previous_checked_at) if previous_checked_at.present?
-        since = now if since.nil? || last_check.nil? ||
-          last_check < now - 36.hours
+        since = Time.zone.parse(fields[LV3_SINCE_FIELD]) if fields[LV3_SINCE_FIELD].present?
+        last_check = Time.zone.parse(previous_checked_at) if previous_checked_at.present?
+        since = now if since.nil? || last_check.nil? || last_check < now - 36.hours
         level = since <= now - 90.days ? 4 : 3
         fields[LV3_SINCE_FIELD] = since.iso8601
         fields[LV3_CHECKED_AT_FIELD] = now.iso8601

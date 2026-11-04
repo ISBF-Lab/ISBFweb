@@ -498,7 +498,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_homepage
-    current_user&.user_option&.homepage || HomepageHelper.resolve(request, current_user)
+    HomepageHelper.resolve(request, current_user)
   end
 
   def serialize_data(obj, serializer, opts = nil)

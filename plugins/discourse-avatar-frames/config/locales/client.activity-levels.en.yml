@@ -1,0 +1,11 @@
+en:
+  js:
+    avatar_frames:
+      levels:
+        minimum: Minimum activity level
+        description: Members must meet both this level and the global wearing requirement. Grant-only frames still require an individual award.
+        follow_global: No additional requirement
+        number: "LV%{level}"
+        named: "LV%{level} (%{name})"
+        locked_frame: "%{name} — unlocks at LV%{level}"
+        locked_global: "Wearing avatar frames unlocks at LV%{level}. Your selection is preserved and resumes when you qualify again."

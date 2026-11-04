@@ -12,6 +12,31 @@ RSpec.describe ListController do
   end
 
   describe "#index" do
+    it "uses the site homepage and matching metadata despite a saved personal homepage" do
+      user.user_option.update!(homepage_id: UserOption::HOMEPAGES.key("unread"))
+      SiteSetting.has_login_hint = false
+      SiteSetting.default_homepage = "latest"
+      sign_in(user)
+
+      get "/", headers: { "HTTP_ACCEPT" => "application/json" }
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body["topic_list"]["topics"].map { |entry| entry["id"] }).to include(
+        topic.id,
+      )
+
+      get "/"
+
+      expect(response.status).to eq(200)
+      expect(response.body).to have_tag(
+        "meta",
+        with: {
+          name: "discourse_current_homepage",
+          content: "latest",
+        },
+      )
+    end
+
     it "does not expose the Klipy API key in anonymous preloaded site settings" do
       SiteSetting.klipy_api_key = "super-secret-klipy-key"
 

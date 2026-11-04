@@ -425,3 +425,11 @@ A08/C02 新增经用户确认的局部排布：卡片 1:1，面板内容宽度 6
 ## 2026-10-29 日历筛选局部组合
 
 A07/C01 日历筛选使用现有 surface/hover/text/border/accent/accent-contrast/focus-ring、radius-pill 与 weight-medium；保留原间距、34px 内层高度及手机等宽布局。悬停圆形填充 550ms、文字翻滚 500ms 和 ease-out 曲线仅限此组按钮，选中态立即完整填充，减少动态效果时直接切换。来源与验证见[记录](reviews/calendar-pill-nav-20261029/README.md)，没有新增全局 token。
+
+## 2026-11-03 C22活跃等级后台组合
+
+本页按用户确认复用当前后台的 AdminConfigAreaCard、FormKit 字段／提示／操作及 DButton，不定义新的颜色、字体、圆角、阴影或间距 token。条件选择器使用共享 DSelect，由活动主题供应菜单外观；删除使用已有 dialog 服务。明暗和窄屏沿用这些组件的实际规则。该批准仅限 C22，不能推广为其他后台或前台表单规范，见[来源与验证](reviews/activity-levels-20261103/README.md)。
+
+## 2026-11-04 C22外观解锁增量
+
+新增后台门槛、徽章和色号字段继续采用 C22／FormKit 的既有样式，没有新增全局视觉 token。姓名浅／深色号属于开发者配置的外观数据，仅信息流作者姓名按原生配色模式取值；不覆盖正文、账号链接或全站 accent。偏好页锁定态复用控件 disabled 状态及普通说明文字，头像框预览与姓名预览沿用原规则。来源与检查见[记录](reviews/activity-cosmetics-20261104/README.md)。

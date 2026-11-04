@@ -32,6 +32,9 @@ module DiscourseAvatarFrames
         on_model_errors(:frame) do |model|
           render_json_error(model.errors.full_messages, status: 422)
         end
+        on_exceptions(ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved) do
+          render_json_error(I18n.t("avatar_frames.levels.invalid"), status: 422)
+        end
         on_failure { render_json_error(I18n.t("avatar_frames.errors.unavailable"), status: 422) }
       end
     end
@@ -46,6 +49,9 @@ module DiscourseAvatarFrames
         end
         on_model_errors(:frame) do |model|
           render_json_error(model.errors.full_messages, status: 422)
+        end
+        on_exceptions(ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved) do
+          render_json_error(I18n.t("avatar_frames.levels.invalid"), status: 422)
         end
         on_failure { render_json_error(I18n.t("avatar_frames.errors.unavailable"), status: 422) }
       end

@@ -1,0 +1,316 @@
+{
+  "recorded_at": "2026-11-04T02:28:21.500482+00:00",
+  "baseline_commit": "60fa5beb771fe0c6253c6710f720910ef7e47875",
+  "source_core_commit": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "scope": "C22 approved native admin composition; final user visual acceptance pending; isolated development only",
+  "references": [
+    {
+      "source": "source/frontend/discourse/admin/components/admin-config-area-card.gjs",
+      "snapshot": "references/admin-config-area-card.gjs.txt",
+      "sha256": "75a024d043340eeea9bba66cbae09bf5eb9b26e488ee6c9e71682dfbee90301a"
+    },
+    {
+      "source": "source/app/assets/stylesheets/admin/admin_config_area.scss",
+      "snapshot": "references/admin_config_area.scss.txt",
+      "sha256": "b0e32bf4dc8aaec5da8045daf8bf44c71ae27ce261ea94547f03c7849f056927"
+    },
+    {
+      "source": "external/discourse-academy-roles/admin/assets/javascripts/discourse/components/academy-moderator-permissions.gjs",
+      "snapshot": "references/academy-moderator-permissions.gjs.txt",
+      "sha256": "185aaaa18ac947a1c701582168b373d50b4c6d5618601e4fed4f50d74dbdc0c4"
+    }
+  ],
+  "shared_menu_source": {
+    "path": "external/active-theme/stylesheets/dropdowns.scss",
+    "sha256": "71bdcb39e78b75805f9b045130fade9b75351a700d37fcef5370d5c67b9d39b3"
+  },
+  "implementation": [
+    {
+      "path": "admin/assets/javascripts/discourse/components/academy-activity-condition.gjs",
+      "before_sha256": null,
+      "after_sha256": "4e5ee3e73d9ef1c2b8c0cacb7df742ef6ea6b606fd23b9e90f3556c82a2c06cd"
+    },
+    {
+      "path": "admin/assets/javascripts/discourse/components/academy-activity-level-editor.gjs",
+      "before_sha256": null,
+      "after_sha256": "80f79894e0fd1a6da57e56550fc0689dc8d803da6e44dca709e3dc460023bdf7"
+    },
+    {
+      "path": "admin/assets/javascripts/discourse/components/academy-activity-levels.gjs",
+      "before_sha256": null,
+      "after_sha256": "5553ef885fe1ab0af40cadbe867278a1e31a9305568c32a07f220fa75f823abe"
+    },
+    {
+      "path": "admin/assets/javascripts/discourse/lib/activity-level-rules.js",
+      "before_sha256": null,
+      "after_sha256": "f39beea0c62e6cb9ed0c0589e841d6f13dcbb607ff5f588d44c68cc708fef856"
+    },
+    {
+      "path": "admin/assets/javascripts/discourse/routes/admin-plugins/show/academy-activity-levels.js",
+      "before_sha256": null,
+      "after_sha256": "55372b15c5a6afb4aed0138ab05b5f8cd6a7033f97e02127b6598252ddc43def"
+    },
+    {
+      "path": "admin/assets/javascripts/discourse/templates/admin-plugins/show/academy-activity-levels.gjs",
+      "before_sha256": null,
+      "after_sha256": "55d001f6ce8722a478502d596023cc84f2cb7d36670808a3b08cb762d502f398"
+    },
+    {
+      "path": "app/controllers/discourse_academy_roles/admin/activity_levels_controller.rb",
+      "before_sha256": null,
+      "after_sha256": "f7354b5ed6ac3faefc40267f9f14f5527e2ff0d9c582e43e9128833b33355c58"
+    },
+    {
+      "path": "app/jobs/regular/academy_recalculate_activity_levels.rb",
+      "before_sha256": null,
+      "after_sha256": "808acef83bc2e66d7b82b48545ab97c4874a5cf0e7cb984a064e945b1ab5a303"
+    },
+    {
+      "path": "app/jobs/scheduled/academy_activity_levels.rb",
+      "before_sha256": "2401ec6fd1a41a74d77280b72c2a8b1eebff6f9638212befc88d40273f94cf7b",
+      "after_sha256": "5732b6ee1473a60ce2d894f88060c35ca966ab8396c642cc0df55db39c2808ea"
+    },
+    {
+      "path": "app/serializers/discourse_academy_roles/activity_level_configuration_serializer.rb",
+      "before_sha256": null,
+      "after_sha256": "7bdc894208044a97d6118cc0f02f439f761d6d3d07fe458fb3e71c7404ef20a9"
+    },
+    {
+      "path": "app/serializers/discourse_academy_roles/activity_level_recalculation_serializer.rb",
+      "before_sha256": null,
+      "after_sha256": "2fd9d7aa9b47cccd62e2a1a596e95fb1dadf8777323baea15db95324233764a0"
+    },
+    {
+      "path": "app/services/discourse_academy_roles/activity_levels/retry_recalculation.rb",
+      "before_sha256": null,
+      "after_sha256": "2f1856b9228e7cf2a7bb698efef5fecfc6270a3b9eabfb51f2f4f4b04cef00f8"
+    },
+    {
+      "path": "app/services/discourse_academy_roles/activity_levels/save_configuration.rb",
+      "before_sha256": null,
+      "after_sha256": "8579f3cbb0fa18be3ccc8ae49aacb1ff198c666df5d48df94bcf7c5c9104cbdf"
+    },
+    {
+      "path": "assets/javascripts/discourse/admin-academy-roles-plugin-route-map.js",
+      "before_sha256": "a1166cbbf4b37b63f47b5e114a64ebc1dcdc8585becde9e71527678c21f03ec8",
+      "after_sha256": "2480e9057b77e41d9e3b991e96eae4b3765a4d9d7e98fefba40571312cc4b688"
+    },
+    {
+      "path": "assets/javascripts/discourse/connectors/admin-user-below-names/academy-activity-level.gjs",
+      "before_sha256": "6b752e3e3e9e297440368d4b238ff472c6b21c6dc840c5b88d5cc2bc511350f7",
+      "after_sha256": "02769700da9a9365b0e5f067448362842a467b3e11f0141650faeae20c3fbb3a"
+    },
+    {
+      "path": "assets/javascripts/discourse/connectors/user-profile-primary/academy-activity-level.gjs",
+      "before_sha256": "e2098d6329806ebcd7285a99c616a4dac948968529e6592792dbc26a99b559ca",
+      "after_sha256": "89795045207be2283ebbe4ae4ba72f9ea5431eaabb945c1f053f393acd96a0a1"
+    },
+    {
+      "path": "assets/javascripts/discourse/initializers/academy-student-invites.js",
+      "before_sha256": "30f51720ab899f98deb1a0b31e44925735c4023cae785b032594bd19cb666871",
+      "after_sha256": "10eadec5f6187429e8255167cf193c3ee8b9e6f7bcd7acbbf1b5988e8048d406"
+    },
+    {
+      "path": "config/locales/client.activity-levels.en.yml",
+      "before_sha256": null,
+      "after_sha256": "a55592905ea4315da39cc8f098d8d8fb0ccefe5151bcef02ddf440deefcec7af"
+    },
+    {
+      "path": "config/locales/client.activity-levels.zh_CN.yml",
+      "before_sha256": null,
+      "after_sha256": "8101103334387369691f645013fd48aa6b6365b4375ce7928ff99a8035c288ca"
+    },
+    {
+      "path": "config/locales/server.activity-levels.en.yml",
+      "before_sha256": null,
+      "after_sha256": "2671fcc820fd4131036a469ef400edc3991c32fb8f6ed998988d5f15e3fd7b23"
+    },
+    {
+      "path": "config/locales/server.activity-levels.zh_CN.yml",
+      "before_sha256": null,
+      "after_sha256": "0d5760316906683aa98636f903a8e9d28b53c112c273e480866badc91c6d27cf"
+    },
+    {
+      "path": "lib/discourse_academy_roles/activity_level.rb",
+      "before_sha256": "43152271405028d595dafd6e5c9a413985f02a8cce99b36ed356966faad3312e",
+      "after_sha256": "9f44a233c067aac4093da167a56aafaf3855bf467b0089e311b15287d388f7dd"
+    },
+    {
+      "path": "lib/discourse_academy_roles/activity_levels.rb",
+      "before_sha256": null,
+      "after_sha256": "233605970b58c6d61b5f4d14c450b3cfee1a16f5d44bd4fe2df4dc4458811225"
+    },
+    {
+      "path": "lib/discourse_academy_roles/activity_levels/catalog.rb",
+      "before_sha256": null,
+      "after_sha256": "aded1b57faf6c5830906e55056238977d7ababea038a035af925ae10eea175d1"
+    },
+    {
+      "path": "lib/discourse_academy_roles/activity_levels/configuration.rb",
+      "before_sha256": null,
+      "after_sha256": "0c548284cfa10875167ba520f125ad05b72f7743e499232515529fd998083224"
+    },
+    {
+      "path": "lib/discourse_academy_roles/activity_levels/evaluator.rb",
+      "before_sha256": null,
+      "after_sha256": "c5f580eb9da338c0eeb832891f40e4e267fe88e53058bc812a120a7f4a0fc18f"
+    },
+    {
+      "path": "lib/discourse_academy_roles/activity_levels/metrics.rb",
+      "before_sha256": null,
+      "after_sha256": "fbf9cd8c605eabad6feae0c3267da37d074341a2bd709ba764ae7b655e7c7502"
+    },
+    {
+      "path": "lib/discourse_academy_roles/activity_levels/recalculation.rb",
+      "before_sha256": null,
+      "after_sha256": "2b22bb428f2ec0c68d6ff6727d34f8866cf2da344d0007e7ec1ee724bf01050a"
+    },
+    {
+      "path": "plugin.rb",
+      "before_sha256": "f7400e23fbcf2a3c4e51ee9a6c78817e3db3b1b9513a0b3dfe74ccaa16352880",
+      "after_sha256": "d0f056e0ee349606d5aedba34c37d272276d9dbf1a650e1b5ddb51c7b62eeb49"
+    },
+    {
+      "path": "spec/fabricators/activity_levels_fabricators.rb",
+      "before_sha256": null,
+      "after_sha256": "5d70a920acbea5f94be01add1ca5361722a3f9b775a50a8d6cf8a1bf9d6fe26b"
+    },
+    {
+      "path": "spec/lib/activity_levels/configuration_spec.rb",
+      "before_sha256": null,
+      "after_sha256": "6042058874c811196d9ff88837d3dc707aa39507fbcfe021fa08352364292883"
+    },
+    {
+      "path": "spec/lib/activity_levels/evaluator_spec.rb",
+      "before_sha256": null,
+      "after_sha256": "0371a4fb97eb640ab93324f87ea9249dd86c0c33584117b031da2f828d7df8b0"
+    },
+    {
+      "path": "spec/lib/activity_levels/metrics_spec.rb",
+      "before_sha256": null,
+      "after_sha256": "c94734585ec5756af5be68b4f087af915631608fe58f1965ece3b2f30446728c"
+    },
+    {
+      "path": "spec/lib/activity_levels/recalculation_spec.rb",
+      "before_sha256": null,
+      "after_sha256": "c9a087beb51f5644b4c1e6f4c878ae2aabec4437ed5b78aea0c8cc0349242147"
+    },
+    {
+      "path": "spec/lib/activity_levels/user_spec.rb",
+      "before_sha256": null,
+      "after_sha256": "2b7e43b1f9ff04c05a571e5f9bc89311e5ea3791695485045f933c575c30be7e"
+    },
+    {
+      "path": "spec/lib/moderator_permissions_spec.rb",
+      "before_sha256": "845a527a86e8d5a4b8620a85583e617fa1f1b739ddafa8deaac083d7481dc54f",
+      "after_sha256": "2c8984bcbc5405bf0ad20e316404460e7133d60a4afcd4e86fc88f327fa6e3f2"
+    },
+    {
+      "path": "spec/requests/activity_levels_controller_spec.rb",
+      "before_sha256": null,
+      "after_sha256": "ab7041f2f1a9c2ec224e99d848923382089e5906714f41e15997493b23ec3366"
+    },
+    {
+      "path": "spec/requests/moderator_permissions_controller_spec.rb",
+      "before_sha256": "559fff4913e257c4dbee582c7663d89980e81080f28d5cd30f3741e150cb8a21",
+      "after_sha256": "9e55dfc5a4813a63226ae102808dd973300bc95f4fa1b3b51c1ee09ed6f1b5e8"
+    },
+    {
+      "path": "spec/services/activity_levels/retry_recalculation_spec.rb",
+      "before_sha256": null,
+      "after_sha256": "fceccd3d25f81460fadac211e2cf8c37145cfbc1da1b505af04256e245d3c57b"
+    },
+    {
+      "path": "spec/services/activity_levels/save_configuration_spec.rb",
+      "before_sha256": null,
+      "after_sha256": "2e1e30eb270cac6d8023b898fe18fe19c2b3827e85a09f641f86c9499371fa36"
+    },
+    {
+      "path": "spec/support/activity_levels_spec_helpers.rb",
+      "before_sha256": null,
+      "after_sha256": "19e4bf320b71c7e8ce1719cf6b4a4bc480be6d479a9231e625d48aa3413717e8"
+    },
+    {
+      "path": "test/javascripts/integration/components/academy-activity-levels-test.gjs",
+      "before_sha256": null,
+      "after_sha256": "ff3da893cdc7e54e9be7962b0761ce187a47994f4ace7adafcb82aa30a411624"
+    }
+  ],
+  "verification_artifacts": [
+    {
+      "path": "docs/activity-levels-20261103/results/backend-baseline-rspec.json",
+      "sha256": "0ef6086abfab8f18c0077e51c76b2ba858930fc6e7f45d2286f6231a172d8d2a"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/backend-baseline-rspec.log",
+      "sha256": "74615e6b4a49d19f99b598d8ddc895a199457630318e59c87b4b2859baf2280f"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/backend-bootstrap.log",
+      "sha256": "c139bd448f6f3ffc8e602a388a797ac8ee3fff4fb3c5922d5d39844df52794d8"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/backend-lint.log",
+      "sha256": "73300e8b91169bb8960c7940816458bbea71345582f18a04ee33d2b598103fff"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/backend-plugin-rspec.json",
+      "sha256": "859890c0de6b02972672c838987232c76d9e1ebfeb27f3271adc2a64f364c149"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/backend-plugin-rspec.log",
+      "sha256": "b53529b188d07ddefdb8368dff195cfd2bbaec1e01c5ebd3625a497223711a59"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/backend-rspec.json",
+      "sha256": "0431b81dc0ebf8c583884853b97ae43a88b5aec2fe3ea542ae8bd8b1a1ff88bd"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/backend-rspec.log",
+      "sha256": "8fede8a5334d95cacbe02d7ff6ec4577ca71b43faf748cfb60659794c821a5cf"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/development-final-state.json",
+      "sha256": "acf7e9c72787848b11176a17f605800854a0a40e2f44c6936529f7bb62b5a391"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/development-rules-before.json",
+      "sha256": "7cdf1b68128fb9e3d7a9a9d7f082857727a82a8681667ae7e13642d9e6621c0a"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/flows-report.json",
+      "sha256": "1a2ad1263a59c490e54f013e7973118220d40a2378d02539fed475c76f735810"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/implementation-lint.log",
+      "sha256": "c55acc89ffa3e6d1eaec7d99dbb2d3e99c130daceec36a3df438945135c1d5d3"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/management-1440-dark.png",
+      "sha256": "1e3b57dc227da39df5f5628db7d7923e423076563200672a4bea6b8fdbf43c40"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/management-1440-light.png",
+      "sha256": "21bfb651901b116349aa2666b783014bddadb6021e2d992f83fe71978a1630d4"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/management-320-light.png",
+      "sha256": "98048ddc5d0ba4babb4139a600993900345f0cdc4e9ca93afdc56f17375fb317"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/management-390-dark.png",
+      "sha256": "cd15503e6db736c0a9312d67a0b1e492fb2a0652611615ddebdcdd62cf2ef9ae"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/management-390-light.png",
+      "sha256": "f7f423ba375fe426bafc91cc0da03a0425238ba6b583ff869210f76be777f232"
+    },
+    {
+      "path": "docs/activity-levels-20261103/results/qunit-report.json",
+      "sha256": "e03bdafa0d8eb4a932b7554527b735e67db91250e812776c9ff2b097110e4827"
+    }
+  ],
+  "development_sync_manifest_sha256": "329548fb729c29e96f96e41793fef56124059aba0e4406f7b9fda804c9e910d8",
+  "preserved_production_source_manifest_sha256": "c290890066c554460f3cb66589d31a0162ce6432c545dd03e526bcb0187a1470",
+  "production_modified": false
+}

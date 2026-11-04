@@ -1,0 +1,8 @@
+zh_CN:
+  academy_roles:
+    activity_cosmetics:
+      invalid_configuration: 请检查外观解锁门槛，并使用六位十六进制色号填写浅色和深色预设。
+      referenced_level: "删除前请先修改这些门槛：%{references}。"
+      references:
+        avatar_minimum_level_id: 头像框统一佩戴门槛
+        name_color_minimum_level_id: 品红色姓名解锁门槛

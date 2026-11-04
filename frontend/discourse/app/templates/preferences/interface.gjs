@@ -196,21 +196,6 @@ export default <template>
     </fieldset>
   {{/if}}
 
-  <div class="control-group home" data-setting-name="user-home">
-    <label class="control-label" for="home-selector">{{i18n
-        "user.home"
-      }}</label>
-    <div class="controls">
-      <ComboBox
-        @content={{@controller.userSelectableHome}}
-        @id="home-selector"
-        @onChange={{fn (mut @controller.model.user_option.homepage_id)}}
-        @value={{@controller.homepageId}}
-        @valueProperty="value"
-      />
-    </div>
-  </div>
-
   {{#if @controller.siteSettings.enable_composer_toolbar_customization}}
     <fieldset
       class="control-group pref-composer-toolbar"
