@@ -13,7 +13,7 @@ RSpec.describe IsbfMbti::Result do
         described_class.record!(
           user: user,
           variant: "40",
-          version: "isbf-1",
+          version: "isbf-2",
           attempt_id: attempt_id,
           answers: answers,
         )
@@ -21,7 +21,7 @@ RSpec.describe IsbfMbti::Result do
         described_class.record!(
           user: user,
           variant: "40",
-          version: "isbf-1",
+          version: "isbf-2",
           attempt_id: attempt_id.upcase,
           answers: answers.reverse,
         )
@@ -41,12 +41,52 @@ RSpec.describe IsbfMbti::Result do
       expect(result.attributes.keys).not_to include("answers")
     end
 
+    it "preserves historical scores when an earlier-version attempt is retried" do
+      historical_answers = (1..93).map { |question_id| [question_id, 1] }
+      historical =
+        described_class.create!(
+          user: user,
+          variant: "93",
+          scoring_version: "isbf-1",
+          source_commit: "daaf70bfa171fb5487b59cf9f03455dfa2dd9f22",
+          personality_type: "ENFJ",
+          scores: {
+            "E" => 15,
+            "I" => 6,
+            "S" => 9,
+            "N" => 16,
+            "T" => 9,
+            "F" => 13,
+            "J" => 14,
+            "P" => 11,
+          },
+          attempt_id: attempt_id,
+          submission_digest:
+            Digest::SHA256.hexdigest(JSON.generate(["93", "isbf-1", historical_answers])),
+        )
+      stored_attributes = historical.attributes
+
+      expect do
+        described_class.record!(
+          user: user,
+          variant: "93",
+          version: "isbf-1",
+          attempt_id: attempt_id,
+          answers:
+            historical_answers.map { |question_id, choice| { id: question_id, choice: choice } },
+        )
+      end.to raise_error(IsbfMbti::Questionnaire::StaleVersion)
+
+      expect(described_class.where(user_id: user.id).count).to eq(1)
+      expect(historical.reload.attributes).to eq(stored_attributes)
+    end
+
     it "rejects changed answers for an existing attempt and keeps the saved result" do
       result =
         described_class.record!(
           user: user,
           variant: "40",
-          version: "isbf-1",
+          version: "isbf-2",
           attempt_id: attempt_id,
           answers: answers,
         )
@@ -55,7 +95,7 @@ RSpec.describe IsbfMbti::Result do
         described_class.record!(
           user: user,
           variant: "40",
-          version: "isbf-1",
+          version: "isbf-2",
           attempt_id: attempt_id,
           answers: changed,
         )
@@ -69,7 +109,7 @@ RSpec.describe IsbfMbti::Result do
         described_class.record!(
           user: user,
           variant: "40",
-          version: "isbf-1",
+          version: "isbf-2",
           attempt_id: attempt_id,
           answers: answers,
         )
@@ -77,7 +117,7 @@ RSpec.describe IsbfMbti::Result do
         described_class.record!(
           user: other,
           variant: "40",
-          version: "isbf-1",
+          version: "isbf-2",
           attempt_id: attempt_id,
           answers: answers,
         )
@@ -90,7 +130,7 @@ RSpec.describe IsbfMbti::Result do
         described_class.record!(
           user: user,
           variant: "40",
-          version: "isbf-1",
+          version: "isbf-2",
           attempt_id: "not-a-uuid",
           answers: answers,
         )
@@ -143,7 +183,7 @@ RSpec.describe IsbfMbti::Result do
         described_class.record!(
           user: user,
           variant: "40",
-          version: "isbf-1",
+          version: "isbf-2",
           attempt_id: attempt_id,
           answers: answers,
         )
@@ -159,7 +199,7 @@ RSpec.describe IsbfMbti::Result do
         described_class.record!(
           user: stale_user,
           variant: "40",
-          version: "isbf-1",
+          version: "isbf-2",
           attempt_id: attempt_id,
           answers: answers,
         )
@@ -172,7 +212,7 @@ RSpec.describe IsbfMbti::Result do
         described_class.record!(
           user: user,
           variant: "40",
-          version: "isbf-1",
+          version: "isbf-2",
           attempt_id: attempt_id,
           answers: answers,
         )

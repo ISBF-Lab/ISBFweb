@@ -1,6 +1,6 @@
 {
   "source_commit": "daaf70bfa171fb5487b59cf9f03455dfa2dd9f22",
-  "scoring_version": "isbf-1",
+  "scoring_version": "isbf-2",
   "variants": {
     "28": {
       "1": {
@@ -774,8 +774,8 @@
       "42": {
         "dimension": "TF",
         "poles": [
-          "T",
-          "F"
+          "F",
+          "T"
         ]
       },
       "43": {

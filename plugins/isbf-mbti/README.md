@@ -8,6 +8,8 @@ Private workbench preference tests adapted from [luhuadong/mbti-test](https://gi
 
 The server validates the complete question set and scores the pinned mapping. A unique per-user attempt UUID and a canonical digest make submission retries idempotent. The result table stores scores, type, questionnaire/scoring versions, source revision and the attempt digest; it does not persist individual answers. Answer parameters are filtered from logs. Result responses use private no-store headers. Device drafts are separate from account history.
 
+Scoring version `isbf-2` corrects question 42 in the 93-question variant to score Yes toward F and No toward T, matching its adopted audit rationale. All three variants share the published version. Submissions and retries using `isbf-1` receive HTTP 409; stale drafts cannot resume under the new version. Previously saved results retain their original version, scores and type. The upstream question files and the 28/40-question directions remain unchanged.
+
 A cascade foreign key is intentional: these private records must be removed on hard user deletion even if the feature is switched off. An unconditionally registered native anonymization event also removes results while disabled.
 
 ## Migration and verification

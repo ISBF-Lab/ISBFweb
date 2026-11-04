@@ -7,7 +7,32 @@ RSpec.describe IsbfMbti::ResultsController do
   fab!(:other_user, :user)
   let(:answers) { (1..28).map { |question_id| { id: question_id, choice: 1 } } }
   let(:submission) do
-    { variant: "28", version: "isbf-1", attempt_id: SecureRandom.uuid, answers: answers }
+    { variant: "28", version: "isbf-2", attempt_id: SecureRandom.uuid, answers: answers }
+  end
+
+  let(:historical_result) do
+    IsbfMbti::Result.create!(
+      user: user,
+      variant: "93",
+      scoring_version: "isbf-1",
+      source_commit: "daaf70bfa171fb5487b59cf9f03455dfa2dd9f22",
+      personality_type: "ENFJ",
+      scores: {
+        "E" => 15,
+        "I" => 6,
+        "S" => 9,
+        "N" => 16,
+        "T" => 9,
+        "F" => 13,
+        "J" => 14,
+        "P" => 11,
+      },
+      attempt_id: SecureRandom.uuid,
+      submission_digest:
+        Digest::SHA256.hexdigest(
+          JSON.generate(["93", "isbf-1", (1..93).map { |question_id| [question_id, 1] }]),
+        ),
+    )
   end
 
   before { SiteSetting.isbf_mbti_enabled = true }
@@ -16,7 +41,7 @@ RSpec.describe IsbfMbti::ResultsController do
     IsbfMbti::Result.record!(
       user: owner,
       variant: "28",
-      version: "isbf-1",
+      version: "isbf-2",
       attempt_id: SecureRandom.uuid,
       answers: (1..28).map { |question_id| { id: question_id, choice: choice } },
     )
@@ -39,7 +64,7 @@ RSpec.describe IsbfMbti::ResultsController do
       expect(result).to include(
         "type" => "ESTJ",
         "variant" => "28",
-        "version" => "isbf-1",
+        "version" => "isbf-2",
         "source_commit" => IsbfMbti::Questionnaire.fetch("28").source_commit,
       )
       expect(result.fetch("dimensions").map { |dimension| dimension.fetch("key") }).to eq(
@@ -65,6 +90,29 @@ RSpec.describe IsbfMbti::ResultsController do
       post "/isbf/api/mbti/results.json", params: changed, as: :json
       expect(response.status).to eq(409)
       expect(IsbfMbti::Result.count).to eq(1)
+    end
+
+    it "rejects earlier-version submissions without rewriting or adding history" do
+      sign_in(user)
+      stored_attributes = historical_result.attributes
+      stale_submission = {
+        variant: "93",
+        version: "isbf-1",
+        attempt_id: historical_result.attempt_id,
+        answers: (1..93).map { |question_id| { id: question_id, choice: 1 } },
+      }
+
+      [historical_result.attempt_id, SecureRandom.uuid].each do |attempt_id|
+        post "/isbf/api/mbti/results.json",
+             params: stale_submission.merge(attempt_id: attempt_id),
+             as: :json
+
+        expect(response.status).to eq(409)
+        expect(response.parsed_body.fetch("errors")).to eq([I18n.t("isbf_mbti.stale_version")])
+      end
+
+      expect(IsbfMbti::Result.where(user_id: user.id).count).to eq(1)
+      expect(historical_result.reload.attributes).to eq(stored_attributes)
     end
 
     it "uses the native write rate limiter" do
@@ -119,6 +167,30 @@ RSpec.describe IsbfMbti::ResultsController do
       )
       get "/isbf/api/mbti/results/#{foreign.id}.json"
       expect(response.status).to eq(404)
+    end
+
+    it "returns the exact stored version, scores and type of an earlier result" do
+      sign_in(user)
+      get "/isbf/api/mbti/results/#{historical_result.id}.json"
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.fetch("result")).to include(
+        "id" => historical_result.id,
+        "variant" => "93",
+        "version" => "isbf-1",
+        "source_commit" => "daaf70bfa171fb5487b59cf9f03455dfa2dd9f22",
+        "type" => "ENFJ",
+        "scores" => {
+          "E" => 15,
+          "I" => 6,
+          "S" => 9,
+          "N" => 16,
+          "T" => 9,
+          "F" => 13,
+          "J" => 14,
+          "P" => 11,
+        },
+      )
     end
 
     it "keeps other users' history private from staff" do

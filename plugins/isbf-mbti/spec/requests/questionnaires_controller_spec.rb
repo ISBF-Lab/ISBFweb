@@ -38,7 +38,7 @@ RSpec.describe IsbfMbti::QuestionnairesController do
       questionnaire = response.parsed_body.fetch("questionnaire")
       expect(questionnaire["questions"].size).to eq(93)
       expect(questionnaire["questions"].first.keys).to contain_exactly("id", "question", "options")
-      expect(questionnaire["version"]).to eq("isbf-1")
+      expect(questionnaire["version"]).to eq("isbf-2")
       expect(questionnaire["source_commit"]).to eq("daaf70bfa171fb5487b59cf9f03455dfa2dd9f22")
     end
   end

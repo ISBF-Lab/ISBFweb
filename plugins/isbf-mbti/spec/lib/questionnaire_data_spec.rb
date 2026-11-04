@@ -13,7 +13,7 @@ RSpec.describe IsbfMbti::Questionnaire do
     }
     audit = JSON.parse(File.read(File.join(root, "scoring.json")))
     expect(audit["source_commit"]).to eq("daaf70bfa171fb5487b59cf9f03455dfa2dd9f22")
-    expect(audit["scoring_version"]).to eq("isbf-1")
+    expect(audit["scoring_version"]).to eq("isbf-2")
     expect(audit["variants"].keys).to contain_exactly("28", "40", "93")
     hashes.each do |variant, expected_hash|
       source = File.join(root, "upstream", "questions_#{variant}.json")

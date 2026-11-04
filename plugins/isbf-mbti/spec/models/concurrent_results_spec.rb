@@ -31,7 +31,7 @@ RSpec.describe IsbfMbti::Result, type: :model do
               described_class.record!(
                 user: account,
                 variant: "40",
-                version: "isbf-1",
+                version: "isbf-2",
                 attempt_id: attempt_id,
                 answers: answers,
               ).id

@@ -9,7 +9,7 @@ RSpec.describe IsbfMbti::Questionnaire do
 
     it "accepts complete form-encoded and shuffled answers" do
       submitted = answers.reverse.map { |answer| answer.transform_values(&:to_s) }
-      normalized = questionnaire.normalize_answers(submitted, submitted_version: "isbf-1")
+      normalized = questionnaire.normalize_answers(submitted, submitted_version: "isbf-2")
       expect(normalized).to eq((1..40).map { |question_id| [question_id, 1] })
     end
 
@@ -31,7 +31,7 @@ RSpec.describe IsbfMbti::Questionnaire do
       ]
       invalid.each do |submitted|
         expect do
-          questionnaire.normalize_answers(submitted, submitted_version: "isbf-1")
+          questionnaire.normalize_answers(submitted, submitted_version: "isbf-2")
         end.to raise_error(described_class::InvalidAnswers)
       end
     end
@@ -71,8 +71,8 @@ RSpec.describe IsbfMbti::Questionnaire do
           "I" => 6,
           "S" => 9,
           "N" => 16,
-          "T" => 9,
-          "F" => 13,
+          "T" => 8,
+          "F" => 14,
           "J" => 14,
           "P" => 11,
         },
@@ -96,6 +96,37 @@ RSpec.describe IsbfMbti::Questionnaire do
           scores.transform_keys { |pole| opposite.fetch(pole) },
         )
       end
+    end
+
+    it "scores accepting majority opinions toward F at the 93-question T/F boundary" do
+      questionnaire = described_class.fetch("93")
+      majority_opinions =
+        (1..93).map { |question_id| [question_id, [9, 17, 24].include?(question_id) ? 2 : 1] }
+      personal_judgment =
+        majority_opinions.map do |question_id, choice|
+          [question_id, question_id == 42 ? 2 : choice]
+        end
+
+      expect(questionnaire.score(majority_opinions)).to eq(
+        "E" => 15,
+        "I" => 6,
+        "S" => 9,
+        "N" => 16,
+        "T" => 11,
+        "F" => 11,
+        "J" => 14,
+        "P" => 11,
+      )
+      expect(questionnaire.score(personal_judgment)).to eq(
+        "E" => 15,
+        "I" => 6,
+        "S" => 9,
+        "N" => 16,
+        "T" => 12,
+        "F" => 10,
+        "J" => 14,
+        "P" => 11,
+      )
     end
 
     it "scores preferring a few close friends toward I in the 93-question version" do
