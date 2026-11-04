@@ -24,6 +24,7 @@ export default class AvatarFrameForm extends Component {
       access_mode: frame?.access_mode || "granted",
       enabled: frame?.enabled ?? true,
       position: frame?.position || 0,
+      minimum_activity_level_id: frame?.minimum_activity_level_id || null,
       image_upload_id: frame?.image_upload_id,
       static_upload_id: frame?.static_upload_id,
       scale: frame?.scale ?? 120,
@@ -110,6 +111,38 @@ export default class AvatarFrameForm extends Component {
                   }}</select.Option>
               </field.Control>
             </form.Field>
+            {{#if this.site.academy_activity_levels}}
+              <form.Field
+                @description={{i18n "avatar_frames.levels.description"}}
+                @name="minimum_activity_level_id"
+                @title={{i18n "avatar_frames.levels.minimum"}}
+                @type="select"
+                as |field|
+              >
+                <field.Control
+                  @includeNone={{true}}
+                  @nonePlaceholder={{i18n "avatar_frames.levels.follow_global"}}
+                  as |select|
+                >
+                  {{#each this.site.academy_activity_levels as |level|}}
+                    <select.Option @value={{level.id}}>
+                      {{#if level.name}}
+                        {{i18n
+                          "avatar_frames.levels.named"
+                          level=level.number
+                          name=level.name
+                        }}
+                      {{else}}
+                        {{i18n
+                          "avatar_frames.levels.number"
+                          level=level.number
+                        }}
+                      {{/if}}
+                    </select.Option>
+                  {{/each}}
+                </field.Control>
+              </form.Field>
+            {{/if}}
             <form.Field
               @name="position"
               @title={{i18n "avatar_frames.admin.position"}}

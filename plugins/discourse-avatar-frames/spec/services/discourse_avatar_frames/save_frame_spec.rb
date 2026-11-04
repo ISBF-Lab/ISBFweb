@@ -68,6 +68,62 @@ RSpec.describe DiscourseAvatarFrames::SaveFrame do
       it { is_expected.to fail_with_an_invalid_model(:frame) }
     end
 
+    context "with an unknown activity level requirement" do
+      let(:params) { super().merge(minimum_activity_level_id: "removed-level") }
+
+      it { is_expected.to fail_with_an_invalid_model(:frame) }
+    end
+
+    context "when persistence is rejected after validation" do
+      before do
+        DiscourseAvatarFrames::Frame.any_instance.stubs(:save!).raises(ActiveRecord::RecordNotSaved)
+      end
+
+      it "returns the expected exception without creating a frame or audit" do
+        expect { result }.not_to change(DiscourseAvatarFrames::Frame, :count)
+        expect(result).to fail_with_exception(ActiveRecord::RecordNotSaved)
+        expect(
+          UserHistory.where(custom_type: "avatar_frame_saved", acting_user: acting_user),
+        ).not_to exist
+      end
+    end
+
+    context "when validation fails during persistence" do
+      before do
+        DiscourseAvatarFrames::Frame.any_instance.stubs(:save!).raises(ActiveRecord::RecordInvalid)
+      end
+
+      it "returns the expected invalid-record exception without creating a frame" do
+        expect { result }.not_to change(DiscourseAvatarFrames::Frame, :count)
+        expect(result).to fail_with_exception(ActiveRecord::RecordInvalid)
+      end
+    end
+
+    context "with an existing activity level requirement" do
+      let(:params) { super().merge(minimum_activity_level_id: "legacy-1") }
+
+      it "saves the stable minimum level with its normal audit record" do
+        expect(result).to run_successfully
+        expect(result.frame.reload.minimum_activity_level_id).to eq("legacy-1")
+        expect(
+          UserHistory.where(custom_type: "avatar_frame_saved", acting_user: acting_user),
+        ).to exist
+      end
+    end
+
+    context "when an older editor omits the existing level requirement" do
+      fab!(:frame) { Fabricate(:uploaded_avatar_frame, minimum_activity_level_id: "legacy-1") }
+      let(:params) { { frame_id: frame.id, name: "Preserved gate" } }
+
+      it "retains the frame's saved activity requirement" do
+        expect(result).to run_successfully
+        expect(frame.reload).to have_attributes(
+          name: "Preserved gate",
+          minimum_activity_level_id: "legacy-1",
+        )
+      end
+    end
+
     context "when saving an unconfirmed disabled draft" do
       let(:params) { super().except(:confirm_calibration).merge(enabled: false) }
 

@@ -1,0 +1,85 @@
+zh_CN:
+  js:
+    academy_roles:
+      activity_level_named: "活跃等级 LV%{level}（%{name}）"
+      activity_value_named: "LV%{level}（%{name}）"
+      activity_levels:
+        title: 活跃等级
+        description: 管理活跃等级及其升级条件。活跃等级不会授予额外权限。
+        general: 全局设置
+        participants: 开发者、管理员和已激活的普通用户全部参与。系统账号及自动生成的匿名账号不参与。
+        independent_rules: 各级分别判断，需要同时满足该级所有已启用条件，系统取达标的最高等级。
+        allow_demotion: 允许自动降级
+        demotion_description: 关闭后保留已经获得且仍然存在的等级；删除等级时，持有该等级的用户仍会重新归级。
+        initialize_description: 首次保存会导入当前门槛并重算全部参与账号。此后修改原生信任等级设置不会影响这里的规则。
+        level_heading: "LV%{level}"
+        name: 等级名称
+        name_description: 可不填写。填写后会显示在用户资料页的 LV 编号旁边。
+        base_description: 基础等级没有升级条件，也不能删除。
+        period_days: 近期统计窗口（天）
+        window_description: 选择近期统计的条件使用此窗口；累计条件另行判断。
+        conditions_description: 需要同时满足以下所有条件。
+        condition: 活跃条件
+        period: 统计范围
+        periods:
+          all_time: 累计
+          recent: "最近 %{days} 天"
+        minimum: 至少达到
+        maximum: 最多允许
+        cap: 所需数量上限
+        cap_description: 按百分比计算的要求不会超过这个数量。
+        penalty_months: 处罚记录回溯月数
+        penalty_description: 已撤销的处罚会抵扣；当前仍处于禁言或封禁状态的处罚会计入。
+        advanced: 高级条件
+        continuous_days: 连续达标天数
+        continuous_description: 设为 0 表示满足条件即可获得该等级；其他数值表示需要连续这么多天满足该级完整条件。
+        max_check_gap_hours: 最长检查间隔（小时）
+        gap_description: 后台两次检查超过这个间隔时，连续计时重新开始；这不是用户登录的时间限制。
+        demotion_buffer_percent: 降级缓冲比例（%）
+        buffer_description: 仅放宽近期数量下限，不放宽历史阅读和违规限制；连续达标仍要求满足完整条件。
+        add_level: 新增等级
+        delete_level: 删除等级
+        delete_confirmation: "删除 LV%{level}？目前有 %{count} 个账号持有该等级；保存后将按剩余规则重新归级，即使关闭自动降级也会重新归级。后续等级会重新编号。"
+        add_condition: 添加条件
+        add_advanced_condition: 添加高级条件
+        remove_condition: 删除条件
+        save: 保存并重算
+        saved: 规则已保存，已请求后台重新计算等级。
+        save_failed: 保存未完成，你的编辑内容仍然保留，请重试。
+        conflict: 规则已被其他页面修改。你的未提交内容仍然保留，请核对最新版本后再保存。
+        invalid_level: "请检查 LV%{level}：填写有效整数，并至少配置一项条件或连续达标天数。"
+        invalid_number: 请在允许范围内填写整数。
+        recalculation: 重新计算进度
+        progress: "已处理 %{processed} / %{total} 个账号：升级 %{upgraded}、降级 %{downgraded}、未变 %{unchanged}、失败 %{failed}。"
+        retry: 重试计算
+        retry_description: 已保存的规则仍然有效。重试会按当前规则重新计算账号等级。
+        polling_failed: 暂时无法刷新进度，你的编辑内容和已保存规则不受影响。
+        refresh_status: 刷新进度
+        statuses:
+          queued: 等待计算
+          running: 正在计算
+          completed: 计算完成
+          completed_with_errors: 已完成，部分账号需要重试
+          failed: 计算未完成
+        metrics:
+          days_visited: 访问天数
+          topics_entered: 浏览主题数
+          posts_read: 阅读帖子数
+          time_read_minutes: 阅读时长（分钟）
+          topics_replied_to: 回复的不同他人主题数
+          likes_given: 送出的赞数
+          likes_received: 收到的赞数
+          topics_viewed_all_time: 历史浏览主题总数
+          posts_read_all_time: 历史阅读帖子总数
+          likes_received_users: 获赞来源人数
+          likes_received_days: 获赞分布天数
+          topics_viewed_percent: 浏览主题数占同期新增主题数的比例（%）
+          posts_read_percent: 阅读帖子数占同期新增帖数的比例（%）
+          flagged_posts: 被确认违规的帖子数
+          flagged_by_users: 不同有效举报人数
+          penalty_count: 有效禁言和封禁次数
+    admin:
+      logs:
+        staff_actions:
+          actions:
+            academy_activity_levels_changed: 修改活跃等级规则

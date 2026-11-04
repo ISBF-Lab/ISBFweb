@@ -8,6 +8,7 @@ import DButton from "discourse/ui-kit/d-button";
 import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
 import { i18n } from "discourse-i18n";
 import {
+  activityNameColor,
   MAX_NAME_COLOR_STOPS,
   NAME_COLOR,
   NAME_COLOR_ENABLED,
@@ -23,6 +24,7 @@ export default class AcademyNameColor extends Component {
   @service a11y;
   @service currentUser;
   @service siteSettings;
+  @service site;
 
   @tracked gradient = nameColorFormData(this.args.outletArgs.model).gradient;
   @tracked
@@ -66,6 +68,29 @@ export default class AcademyNameColor extends Component {
     );
   }
 
+  get canWear() {
+    return get(this.currentUser, "academy_can_wear_name_color") === true;
+  }
+
+  get requirement() {
+    return get(this.currentUser, "academy_activity_cosmetics")?.name_color;
+  }
+
+  get requirementText() {
+    const level = this.requirement?.minimum_level;
+    return level
+      ? i18n("academy_roles.activity_cosmetics.locked", { level: level.number })
+      : "";
+  }
+
+  get isStaff() {
+    return (
+      this.currentUser?.admin ||
+      this.currentUser?.academy_moderator_role ||
+      this.canCustomize
+    );
+  }
+
   get draft() {
     return nameColorDraft(this.args.outletArgs.model);
   }
@@ -85,10 +110,13 @@ export default class AcademyNameColor extends Component {
 
   get previewStyle() {
     const { enabled, color } = this.draft;
-    const value = enabled
-      ? (this.canCustomize && normalizedNameColor(color)) ||
-        "var(--isbf-v2-accent, var(--tertiary))"
-      : "var(--isbf-v2-text, var(--primary))";
+    const value =
+      enabled && this.canWear
+        ? (this.canCustomize && normalizedNameColor(color)) ||
+          (!this.isStaff &&
+            activityNameColor(this.site.academy_activity_name_colors)) ||
+          "var(--isbf-v2-accent, var(--tertiary))"
+        : "var(--isbf-v2-text, var(--primary))";
     const stops = nameGradientStops(value);
     if (stops) {
       return trustHTML(
@@ -102,7 +130,7 @@ export default class AcademyNameColor extends Component {
     return (
       this.siteSettings.academy_roles_enabled &&
       this.currentUser?.id === this.args.outletArgs.model.id &&
-      get(this.currentUser, "academy_can_wear_name_color") === true
+      (this.canWear || this.requirement?.configured)
     );
   }
 
@@ -198,8 +226,12 @@ export default class AcademyNameColor extends Component {
             "academy_roles.name_color.title"
           }}</h3>
         <form.Field
-          @description={{i18n "academy_roles.name_color.description"}}
-          @disabled={{@outletArgs.model.isSaving}}
+          @description={{if
+            this.isStaff
+            (i18n "academy_roles.name_color.description")
+            (i18n "academy_roles.activity_cosmetics.name_description")
+          }}
+          @disabled={{if this.canWear @outletArgs.model.isSaving true}}
           @name="enabled"
           @title={{i18n "academy_roles.name_color.enabled"}}
           @type="checkbox"
@@ -207,6 +239,9 @@ export default class AcademyNameColor extends Component {
         >
           <field.Control />
         </form.Field>
+        {{#unless this.canWear}}
+          <p>{{this.requirementText}}</p>
+        {{/unless}}
         {{#if this.canCustomize}}
           <form.Field
             @description={{i18n

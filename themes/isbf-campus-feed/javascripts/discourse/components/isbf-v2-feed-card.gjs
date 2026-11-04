@@ -143,7 +143,11 @@ export default class ISBFV2FeedCard extends Component {
   }
 
   get creatorColorStyle() {
-    const style = feedAuthorStyle(this.args.topic.creator, this.currentUser);
+    const style = feedAuthorStyle(
+      this.args.topic.creator,
+      this.currentUser,
+      this.site.academy_activity_name_colors
+    );
     return style ? trustHTML(style) : null;
   }
 

@@ -1,0 +1,494 @@
+{
+  "status": "prepared; production not modified; PR and CI pending",
+  "authorized_on": "2026-11-04",
+  "repository_base": "99fc21340a07c5cfa5c2a5bac49248f6671b15ef",
+  "production_core_head": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "production_inventory": {
+    "runtime_files": 27052,
+    "plugins": 67,
+    "generated_manifests": 72,
+    "theme_fields": 308,
+    "theme_settings": 17,
+    "frame_count": 13
+  },
+  "production_feature_state": {
+    "activity_configuration_present": false,
+    "minimum_level_column_present": false
+  },
+  "plugin_runtime_files": 54,
+  "theme_fields": 2,
+  "development_validation": {
+    "qunit_tests": 17,
+    "qunit_assertions": 63,
+    "affected_backend_examples": 70,
+    "real_browser_checks": 40,
+    "broad_backend_examples": 538,
+    "broad_backend_failures": 4,
+    "broad_run_follow_up": "Three pre-feature failures remain documented; one stale avatar expectation was corrected in the passing affected follow-up; full suite was not rerun."
+  },
+  "release_lint": {
+    "files": 81,
+    "passed": true,
+    "menu_tests": 5,
+    "menu_scan_files": 5854,
+    "menu_findings": 0,
+    "exact_production_theme_files": 2,
+    "production_theme_lint_passed": true
+  },
+  "preserved_independent_changes": [
+    "production feed alumni label",
+    "repository password setup registration/completion/creation behavior",
+    "all unrelated runtime/plugin/theme configuration"
+  ],
+  "production_configuration_imported": false,
+  "runtime_sources": [
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-feed-card.gjs",
+      "before_sha256": "aba17399bf8857e940190e074de7a16c726079504e1368b61b170abbf2ad3b12",
+      "sha256": "061cc7dc902a4de94dca992c6851391641a75641a0b9fa7580c7a303d3618223",
+      "approved_sha256": "c280129fb41a5ad34570c2a81111401c4e9c2a53727e861a7f362ff2e0686887",
+      "theme": true,
+      "field_id": 227
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/user-display.js",
+      "before_sha256": "8329df75c1d06a0dcf2fd0e0038afef77b77b9399e18de667f493fa1a807d859",
+      "sha256": "820288f4d613313f0857804ae6b9980bc3a32ed17ce7dc7f481a98cbc5c942ea",
+      "approved_sha256": "820288f4d613313f0857804ae6b9980bc3a32ed17ce7dc7f481a98cbc5c942ea",
+      "theme": true,
+      "field_id": 406
+    },
+    {
+      "path": "plugins/discourse-academy-roles/admin/assets/javascripts/discourse/components/academy-activity-condition.gjs",
+      "before_sha256": null,
+      "sha256": "4e5ee3e73d9ef1c2b8c0cacb7df742ef6ea6b606fd23b9e90f3556c82a2c06cd",
+      "approved_sha256": "4e5ee3e73d9ef1c2b8c0cacb7df742ef6ea6b606fd23b9e90f3556c82a2c06cd",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/admin/assets/javascripts/discourse/components/academy-activity-cosmetics.gjs",
+      "before_sha256": null,
+      "sha256": "d1658f6c0d2c115b8e6ecdfc4a3520f3794fdd709caba20fa6ebb348b78f915b",
+      "approved_sha256": "d1658f6c0d2c115b8e6ecdfc4a3520f3794fdd709caba20fa6ebb348b78f915b",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/admin/assets/javascripts/discourse/components/academy-activity-level-editor.gjs",
+      "before_sha256": null,
+      "sha256": "efa8d38f3b46da70e1a3629936354feeae1209bea0dd3406e4019625c111915b",
+      "approved_sha256": "efa8d38f3b46da70e1a3629936354feeae1209bea0dd3406e4019625c111915b",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/admin/assets/javascripts/discourse/components/academy-activity-levels.gjs",
+      "before_sha256": null,
+      "sha256": "6e11e537a94cf6cd6bc7a68c576db4b9ac734f06152a4e862033250d2df4faf6",
+      "approved_sha256": "6e11e537a94cf6cd6bc7a68c576db4b9ac734f06152a4e862033250d2df4faf6",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/admin/assets/javascripts/discourse/lib/activity-level-rules.js",
+      "before_sha256": null,
+      "sha256": "01b75b0a55e61a0ccda89281992be56b4ef718649a0c7643e45a0722f84c5a62",
+      "approved_sha256": "01b75b0a55e61a0ccda89281992be56b4ef718649a0c7643e45a0722f84c5a62",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/admin/assets/javascripts/discourse/routes/admin-plugins/show/academy-activity-levels.js",
+      "before_sha256": null,
+      "sha256": "55372b15c5a6afb4aed0138ab05b5f8cd6a7033f97e02127b6598252ddc43def",
+      "approved_sha256": "55372b15c5a6afb4aed0138ab05b5f8cd6a7033f97e02127b6598252ddc43def",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/admin/assets/javascripts/discourse/templates/admin-plugins/show/academy-activity-levels.gjs",
+      "before_sha256": null,
+      "sha256": "55d001f6ce8722a478502d596023cc84f2cb7d36670808a3b08cb762d502f398",
+      "approved_sha256": "55d001f6ce8722a478502d596023cc84f2cb7d36670808a3b08cb762d502f398",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/app/controllers/discourse_academy_roles/admin/activity_levels_controller.rb",
+      "before_sha256": null,
+      "sha256": "80b544003a1d34bf7e867daf9be0b680fc66061a61575c62d588707c206bf304",
+      "approved_sha256": "80b544003a1d34bf7e867daf9be0b680fc66061a61575c62d588707c206bf304",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/app/jobs/regular/academy_recalculate_activity_levels.rb",
+      "before_sha256": null,
+      "sha256": "808acef83bc2e66d7b82b48545ab97c4874a5cf0e7cb984a064e945b1ab5a303",
+      "approved_sha256": "808acef83bc2e66d7b82b48545ab97c4874a5cf0e7cb984a064e945b1ab5a303",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/app/jobs/scheduled/academy_activity_levels.rb",
+      "before_sha256": "e0e48f5883967309b15c8d56b9cc513489bc040ff23a27f2d5b4025d28b93cc6",
+      "sha256": "5732b6ee1473a60ce2d894f88060c35ca966ab8396c642cc0df55db39c2808ea",
+      "approved_sha256": "5732b6ee1473a60ce2d894f88060c35ca966ab8396c642cc0df55db39c2808ea",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/app/serializers/discourse_academy_roles/activity_level_configuration_serializer.rb",
+      "before_sha256": null,
+      "sha256": "49622f79e5b47379a3f2a1293117f50f648e3f33f4bee28817e3cbc8416a2c93",
+      "approved_sha256": "49622f79e5b47379a3f2a1293117f50f648e3f33f4bee28817e3cbc8416a2c93",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/app/serializers/discourse_academy_roles/activity_level_recalculation_serializer.rb",
+      "before_sha256": null,
+      "sha256": "2fd9d7aa9b47cccd62e2a1a596e95fb1dadf8777323baea15db95324233764a0",
+      "approved_sha256": "2fd9d7aa9b47cccd62e2a1a596e95fb1dadf8777323baea15db95324233764a0",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/app/services/discourse_academy_roles/activity_levels/retry_recalculation.rb",
+      "before_sha256": null,
+      "sha256": "2f1856b9228e7cf2a7bb698efef5fecfc6270a3b9eabfb51f2f4f4b04cef00f8",
+      "approved_sha256": "2f1856b9228e7cf2a7bb698efef5fecfc6270a3b9eabfb51f2f4f4b04cef00f8",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/app/services/discourse_academy_roles/activity_levels/save_configuration.rb",
+      "before_sha256": null,
+      "sha256": "0e1ec6c92f140bc240fe626626820c128e62886c89656f8f0e891a7443796ef7",
+      "approved_sha256": "0e1ec6c92f140bc240fe626626820c128e62886c89656f8f0e891a7443796ef7",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/admin-academy-roles-plugin-route-map.js",
+      "before_sha256": "a1166cbbf4b37b63f47b5e114a64ebc1dcdc8585becde9e71527678c21f03ec8",
+      "sha256": "2480e9057b77e41d9e3b991e96eae4b3765a4d9d7e98fefba40571312cc4b688",
+      "approved_sha256": "2480e9057b77e41d9e3b991e96eae4b3765a4d9d7e98fefba40571312cc4b688",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/connectors/admin-user-below-names/academy-activity-level.gjs",
+      "before_sha256": "e39a6e005e81c4b57b11ddedce2533e7e31ff5225b26037242ad08d43fb5ac8c",
+      "sha256": "02769700da9a9365b0e5f067448362842a467b3e11f0141650faeae20c3fbb3a",
+      "approved_sha256": "02769700da9a9365b0e5f067448362842a467b3e11f0141650faeae20c3fbb3a",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/connectors/user-preferences-interface/academy-name-color.gjs",
+      "before_sha256": "247df148c75919f0d77e789e24e9ca8e1e5c9585fd791cba37286c7e2b142202",
+      "sha256": "482d71799379c83c8dca90c38e61d97052c6dfbc44114028fae0db9e9d992f92",
+      "approved_sha256": "482d71799379c83c8dca90c38e61d97052c6dfbc44114028fae0db9e9d992f92",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/connectors/user-profile-primary/academy-activity-level.gjs",
+      "before_sha256": "81bcae708ffbacb6f5de245ff2abaec863481aa9a9c3e85fb8e4fbf1ff443140",
+      "sha256": "89795045207be2283ebbe4ae4ba72f9ea5431eaabb945c1f053f393acd96a0a1",
+      "approved_sha256": "89795045207be2283ebbe4ae4ba72f9ea5431eaabb945c1f053f393acd96a0a1",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/initializers/academy-student-invites.js",
+      "before_sha256": "755e7902253f157497dd989c5b5916ce2eb6a8fed5e7c12a78145fc865444dca",
+      "sha256": "10eadec5f6187429e8255167cf193c3ee8b9e6f7bcd7acbbf1b5988e8048d406",
+      "approved_sha256": "10eadec5f6187429e8255167cf193c3ee8b9e6f7bcd7acbbf1b5988e8048d406",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/lib/name-color.js",
+      "before_sha256": "8104964c37ffb7f80a48e471175c67512682c1436a77ff87b905ddcd005f34be",
+      "sha256": "1175352916ee20212b67a54ab977def692f49caa5f71291093f11a09a18152cb",
+      "approved_sha256": "1175352916ee20212b67a54ab977def692f49caa5f71291093f11a09a18152cb",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/assets/javascripts/discourse/pre-initializers/academy-name-color.js",
+      "before_sha256": "8c4a8f7c0842343ef96b0ffcb3165134d71ef1eda4501b932171c3f1c1dbf74e",
+      "sha256": "19d2d7191864f25d1d83dcebb9e64d9f64b73c6603a60c0041f19976cf663d18",
+      "approved_sha256": "19d2d7191864f25d1d83dcebb9e64d9f64b73c6603a60c0041f19976cf663d18",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/client.activity-cosmetics.en.yml",
+      "before_sha256": null,
+      "sha256": "a1ac53dad960ba94c8f9c8d6344fe25bc3ada5983f99f3095f94fb88af95f7fe",
+      "approved_sha256": "a1ac53dad960ba94c8f9c8d6344fe25bc3ada5983f99f3095f94fb88af95f7fe",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/client.activity-cosmetics.zh_CN.yml",
+      "before_sha256": null,
+      "sha256": "c86816a0dcb899695acfc73e6fd153890dd7378640cf38489a6ef0254f8c96d5",
+      "approved_sha256": "c86816a0dcb899695acfc73e6fd153890dd7378640cf38489a6ef0254f8c96d5",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/client.activity-levels.en.yml",
+      "before_sha256": null,
+      "sha256": "a55592905ea4315da39cc8f098d8d8fb0ccefe5151bcef02ddf440deefcec7af",
+      "approved_sha256": "a55592905ea4315da39cc8f098d8d8fb0ccefe5151bcef02ddf440deefcec7af",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/client.activity-levels.zh_CN.yml",
+      "before_sha256": null,
+      "sha256": "8101103334387369691f645013fd48aa6b6365b4375ce7928ff99a8035c288ca",
+      "approved_sha256": "8101103334387369691f645013fd48aa6b6365b4375ce7928ff99a8035c288ca",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/server.activity-cosmetics.en.yml",
+      "before_sha256": null,
+      "sha256": "340ffaa6b8372b424d424db2014d890580926eecc5607563e507b98456cf6fb9",
+      "approved_sha256": "340ffaa6b8372b424d424db2014d890580926eecc5607563e507b98456cf6fb9",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/server.activity-cosmetics.zh_CN.yml",
+      "before_sha256": null,
+      "sha256": "b2d3f0b13552582104e735c596496f0c783519b26597b74ee52db98f8786957b",
+      "approved_sha256": "b2d3f0b13552582104e735c596496f0c783519b26597b74ee52db98f8786957b",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/server.activity-levels.en.yml",
+      "before_sha256": null,
+      "sha256": "2671fcc820fd4131036a469ef400edc3991c32fb8f6ed998988d5f15e3fd7b23",
+      "approved_sha256": "2671fcc820fd4131036a469ef400edc3991c32fb8f6ed998988d5f15e3fd7b23",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/server.activity-levels.zh_CN.yml",
+      "before_sha256": null,
+      "sha256": "0d5760316906683aa98636f903a8e9d28b53c112c273e480866badc91c6d27cf",
+      "approved_sha256": "0d5760316906683aa98636f903a8e9d28b53c112c273e480866badc91c6d27cf",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/activity_level.rb",
+      "before_sha256": "664720cddb5decbe8e5bcfbd969256b8bd1cdcac4e3acae834b518106741f313",
+      "sha256": "9f44a233c067aac4093da167a56aafaf3855bf467b0089e311b15287d388f7dd",
+      "approved_sha256": "9f44a233c067aac4093da167a56aafaf3855bf467b0089e311b15287d388f7dd",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/activity_levels.rb",
+      "before_sha256": null,
+      "sha256": "3db7c00384fb67f37b96e6a3b6789b9f2472b61d0eb47f0eb549a80205008c4f",
+      "approved_sha256": "3db7c00384fb67f37b96e6a3b6789b9f2472b61d0eb47f0eb549a80205008c4f",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/activity_levels/catalog.rb",
+      "before_sha256": null,
+      "sha256": "aded1b57faf6c5830906e55056238977d7ababea038a035af925ae10eea175d1",
+      "approved_sha256": "aded1b57faf6c5830906e55056238977d7ababea038a035af925ae10eea175d1",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/activity_levels/configuration.rb",
+      "before_sha256": null,
+      "sha256": "38c53f38e49ae0f4341b48e4b062dc3d2e2af3eb97c043bd43fe43d0d0acf8f4",
+      "approved_sha256": "38c53f38e49ae0f4341b48e4b062dc3d2e2af3eb97c043bd43fe43d0d0acf8f4",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/activity_levels/cosmetics.rb",
+      "before_sha256": null,
+      "sha256": "50336ac2b77f72113330da75e8a2797f2ba6a0c1845214163accd7b55155dd58",
+      "approved_sha256": "50336ac2b77f72113330da75e8a2797f2ba6a0c1845214163accd7b55155dd58",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/activity_levels/evaluator.rb",
+      "before_sha256": null,
+      "sha256": "5c7ee3b34878adc0119bf1f353bbda85829b27c6193169070b7df9505684e07c",
+      "approved_sha256": "5c7ee3b34878adc0119bf1f353bbda85829b27c6193169070b7df9505684e07c",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/activity_levels/level_badges.rb",
+      "before_sha256": null,
+      "sha256": "cffb76768420d6d2c4f761cfac280f7c9875c99fe108c44f16c08013473b087e",
+      "approved_sha256": "cffb76768420d6d2c4f761cfac280f7c9875c99fe108c44f16c08013473b087e",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/activity_levels/metrics.rb",
+      "before_sha256": null,
+      "sha256": "fbf9cd8c605eabad6feae0c3267da37d074341a2bd709ba764ae7b655e7c7502",
+      "approved_sha256": "fbf9cd8c605eabad6feae0c3267da37d074341a2bd709ba764ae7b655e7c7502",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/activity_levels/recalculation.rb",
+      "before_sha256": null,
+      "sha256": "2b22bb428f2ec0c68d6ff6727d34f8866cf2da344d0007e7ec1ee724bf01050a",
+      "approved_sha256": "2b22bb428f2ec0c68d6ff6727d34f8866cf2da344d0007e7ec1ee724bf01050a",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/name_color.rb",
+      "before_sha256": "8e83c5a5bc5de6f61ed92a05efb9477f2fb554187531dbdc4d76418fbb51b3a9",
+      "sha256": "1d549c20f160be6a0d73c20691c1a3f47a6c762417ae09b9f158fdf502da243b",
+      "approved_sha256": "1d549c20f160be6a0d73c20691c1a3f47a6c762417ae09b9f158fdf502da243b",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/plugin.rb",
+      "before_sha256": "f7400e23fbcf2a3c4e51ee9a6c78817e3db3b1b9513a0b3dfe74ccaa16352880",
+      "sha256": "0ab642d8c83330ec1ac69561c99e060a1134d0252ac6681c312fca0c148f6a6a",
+      "approved_sha256": "0ab642d8c83330ec1ac69561c99e060a1134d0252ac6681c312fca0c148f6a6a",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-avatar-frames/admin/assets/javascripts/admin/components/avatar-frame-form.gjs",
+      "before_sha256": "7ef1cec579c8fdc6994a1a751f52271c2221d15bfa3d084ca62d0936169dc350",
+      "sha256": "4c0fc37c73bc3e4d3d0140c889434833f7403ed6d089548f932c1ca4fd5058fe",
+      "approved_sha256": "4c0fc37c73bc3e4d3d0140c889434833f7403ed6d089548f932c1ca4fd5058fe",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-avatar-frames/app/controllers/discourse_avatar_frames/frames_controller.rb",
+      "before_sha256": "1fefc8ee05cfd063680106b73c19dcb39c27f727b93eb66e42827e39ef8e1071",
+      "sha256": "45b571244a92281fd3be91a2fa6fb7c926cea3d64ef4f24a993dc3ed4a883ed1",
+      "approved_sha256": "45b571244a92281fd3be91a2fa6fb7c926cea3d64ef4f24a993dc3ed4a883ed1",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-avatar-frames/app/models/discourse_avatar_frames/frame.rb",
+      "before_sha256": "9a16c4a6575d4b3406801928ee0f111c600ad281560f3a8ccc7b14af4f0d847c",
+      "sha256": "7cfce92bd327cbfc6cfd001298794aceadb929df815868b1fd85f201b6a86de9",
+      "approved_sha256": "7cfce92bd327cbfc6cfd001298794aceadb929df815868b1fd85f201b6a86de9",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-avatar-frames/app/serializers/discourse_avatar_frames/frame_serializer.rb",
+      "before_sha256": "63265588e833704e0d2d3c2b961fa6f3637b55b5e5e0dcad7220c5509997f76f",
+      "sha256": "34837f5728f099938397b49704ef444a560260b675b42148555903564123c76f",
+      "approved_sha256": "34837f5728f099938397b49704ef444a560260b675b42148555903564123c76f",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-avatar-frames/app/services/discourse_avatar_frames/save_frame.rb",
+      "before_sha256": "418344a037f5ec4ee805fec7f6e85dec7ee8ad945cf6f2de42c8caede7b28218",
+      "sha256": "fead3b42cf559817a781581d05ad484de1b046f714434085fb2fcdef249a0bcf",
+      "approved_sha256": "fead3b42cf559817a781581d05ad484de1b046f714434085fb2fcdef249a0bcf",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-avatar-frames/assets/javascripts/discourse/connectors/user-preferences-profile/avatar-frame-preferences.gjs",
+      "before_sha256": "60621865dfae7d72d04012305db8cceb11d4235bbf1218d862639e0b2d73d616",
+      "sha256": "34ed595cf18b7990feb87a77b995492360389f0ed5a7b9e507b8d4cd230508a2",
+      "approved_sha256": "34ed595cf18b7990feb87a77b995492360389f0ed5a7b9e507b8d4cd230508a2",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-avatar-frames/assets/javascripts/discourse/lib/avatar-frames.js",
+      "before_sha256": "ba02a6a1051af873f6a107681a12990e457d0c6b8aa9d88e8267deed6b536c52",
+      "sha256": "c5c583f9d7066f2d37bd9263df0e662f42db8291cf23ab877bb13e926bf9acca",
+      "approved_sha256": "c5c583f9d7066f2d37bd9263df0e662f42db8291cf23ab877bb13e926bf9acca",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-avatar-frames/config/locales/client.activity-levels.en.yml",
+      "before_sha256": null,
+      "sha256": "bf19ad63be38f8d9e200bd462acb23d3507b6e354d8a70673bb768a28eb71e8e",
+      "approved_sha256": "bf19ad63be38f8d9e200bd462acb23d3507b6e354d8a70673bb768a28eb71e8e",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-avatar-frames/config/locales/client.activity-levels.zh_CN.yml",
+      "before_sha256": null,
+      "sha256": "5abceccefd9ec0d11253f2856c0390cb8d7e014052242a54e36d39d43355ead6",
+      "approved_sha256": "5abceccefd9ec0d11253f2856c0390cb8d7e014052242a54e36d39d43355ead6",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-avatar-frames/config/locales/server.activity-levels.en.yml",
+      "before_sha256": null,
+      "sha256": "ae9a1ee72da864e582226d463652cbf7e9d1e91f696ffea4c72d32d54953dda3",
+      "approved_sha256": "ae9a1ee72da864e582226d463652cbf7e9d1e91f696ffea4c72d32d54953dda3",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-avatar-frames/config/locales/server.activity-levels.zh_CN.yml",
+      "before_sha256": null,
+      "sha256": "aec825ce9b2d103a557279663650550f862314f0902ffae415c5ee9a8160ef9c",
+      "approved_sha256": "aec825ce9b2d103a557279663650550f862314f0902ffae415c5ee9a8160ef9c",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-avatar-frames/db/migrate/20261104043140_add_minimum_activity_level_to_avatar_frames.rb",
+      "before_sha256": null,
+      "sha256": "af2b775a49f8911f2602911f52e107446cfbbfc4c899c360df7cf13703745fd1",
+      "approved_sha256": "af2b775a49f8911f2602911f52e107446cfbbfc4c899c360df7cf13703745fd1",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-avatar-frames/lib/discourse_avatar_frames.rb",
+      "before_sha256": "4d1d954f61138854bc9970be50f620c34cc17f6aaf9ebc758890a3f447bf2946",
+      "sha256": "48d3e11ae81ff820ac6e3b6d39b653089259d19518960818db136b8df33150cc",
+      "approved_sha256": "48d3e11ae81ff820ac6e3b6d39b653089259d19518960818db136b8df33150cc",
+      "theme": false,
+      "field_id": null
+    },
+    {
+      "path": "plugins/discourse-avatar-frames/plugin.rb",
+      "before_sha256": "74ffdef0c377358a1e16b35ac6919f88c728e472237cf80f8ea90be5dfb1e132",
+      "sha256": "758dc334b32c2c1b4ff00d02b0d42be75c506b06f3df6fa8692fe7036c268f3e",
+      "approved_sha256": "758dc334b32c2c1b4ff00d02b0d42be75c506b06f3df6fa8692fe7036c268f3e",
+      "theme": false,
+      "field_id": null
+    }
+  ]
+}

@@ -27,6 +27,17 @@ module DiscourseAvatarFrames
     Frame.available_for(user).exists?(key: frame_key)
   end
 
+  def self.activity_level_allowed?(user, frame)
+    if defined?(DiscourseAcademyRoles::ActivityLevels::Cosmetics)
+      DiscourseAcademyRoles::ActivityLevels::Cosmetics.avatar_allowed?(
+        user,
+        frame.minimum_activity_level_id,
+      )
+    else
+      frame.minimum_activity_level_id.blank?
+    end
+  end
+
   def self.preload(users)
     return unless SiteSetting.avatar_frames_enabled
     cache = Cache.frames ||= {}
@@ -35,12 +46,16 @@ module DiscourseAvatarFrames
     ids = missing.map(&:id)
     selections = UserCustomField.where(user_id: ids, name: FIELD).pluck(:user_id, :value).to_h
     anonymous = anonymous_ids(ids)
+    if defined?(DiscourseAcademyRoles::ActivityLevels::Cosmetics)
+      DiscourseAcademyRoles::ActivityLevels::Cosmetics.preload(missing)
+    end
     frames = catalog.index_by(&:key)
     awarded = Grant.where(user_id: ids).pluck(:user_id, :frame_id).group_by(&:first)
     missing.each do |user|
       frame = frames[selections[user.id]]
       permitted =
         user.id.positive? && !anonymous.include?(user.id) && frame &&
+          activity_level_allowed?(user, frame) &&
           (
             frame.access_mode == "public" ||
               awarded.fetch(user.id, []).any? { |_, frame_id| frame_id == frame.id }

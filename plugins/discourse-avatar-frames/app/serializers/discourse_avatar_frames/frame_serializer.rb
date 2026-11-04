@@ -18,7 +18,18 @@ module DiscourseAvatarFrames
                :offset_x,
                :offset_y,
                :calibration_confirmed,
-               :grants_count
+               :grants_count,
+               :minimum_activity_level_id,
+               :minimum_activity_level
+
+    def minimum_activity_level
+      if object.minimum_activity_level_id.present? &&
+           defined?(DiscourseAcademyRoles::ActivityLevels::Cosmetics)
+        DiscourseAcademyRoles::ActivityLevels::Cosmetics.level_info(
+          object.minimum_activity_level_id,
+        )
+      end
+    end
 
     def image_url
       GlobalPath.upload_cdn_path(object.image_url)

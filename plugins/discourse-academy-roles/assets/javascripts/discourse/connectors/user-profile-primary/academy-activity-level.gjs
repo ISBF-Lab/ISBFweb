@@ -10,10 +10,18 @@ export default class AcademyActivityLevel extends Component {
     {{#if this.siteSettings.academy_roles_enabled}}
       {{bodyClass "academy-roles-enabled"}}
       <span class="academy-activity-level" ...attributes>
-        {{i18n
-          "academy_roles.activity_level"
-          level=@outletArgs.model.academy_activity_level
-        }}
+        {{#if @outletArgs.model.academy_activity_level_name}}
+          {{i18n
+            "academy_roles.activity_level_named"
+            level=@outletArgs.model.academy_activity_level
+            name=@outletArgs.model.academy_activity_level_name
+          }}
+        {{else}}
+          {{i18n
+            "academy_roles.activity_level"
+            level=@outletArgs.model.academy_activity_level
+          }}
+        {{/if}}
       </span>
       {{#if @outletArgs.model.academy_official_member}}
         <span class="academy-official-badge">

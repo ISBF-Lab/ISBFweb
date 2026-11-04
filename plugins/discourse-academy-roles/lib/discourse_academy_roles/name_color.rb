@@ -36,8 +36,7 @@ module DiscourseAcademyRoles::NameColor
   end
 
   def self.eligible?(user)
-    SiteSetting.academy_roles_enabled? && user.is_a?(User) && user.id&.positive? &&
-      (developer?(user) || (user.has_attribute?(:moderator) && user[:moderator]))
+    SiteSetting.academy_roles_enabled? && user.is_a?(User) && user.id&.positive?
   end
 
   def self.developer?(user)
@@ -45,7 +44,11 @@ module DiscourseAcademyRoles::NameColor
   end
 
   def self.allowed?(user)
-    eligible?(user) && !selection(user)[:anonymous]
+    eligible?(user) && !selection(user)[:anonymous] &&
+      (
+        DiscourseAcademyRoles::ActivityLevels::Cosmetics.staff?(user) ||
+          DiscourseAcademyRoles::ActivityLevels::Cosmetics.name_color_allowed?(user)
+      )
   end
 
   def self.customizable?(user)
@@ -59,17 +62,14 @@ module DiscourseAcademyRoles::NameColor
 
     ids = missing.map(&:id)
     fields = User.custom_fields_for_ids(ids, FIELDS)
-    anonymous = AnonymousUser.where(user_id: ids).pluck(:user_id)
-    if defined?(IsbfAnonymous::PoolAccount)
-      anonymous.concat(IsbfAnonymous::PoolAccount.where(user_id: ids).pluck(:user_id))
-    end
+    DiscourseAcademyRoles::ActivityLevels::Cosmetics.preload(missing)
 
     missing.each do |user|
       values = fields.fetch(user.id, {})
       cache[user.id] = {
         enabled: enabled?(values[ENABLED_FIELD]),
         color: normalize(values[COLOR_FIELD]),
-        anonymous: anonymous.include?(user.id),
+        anonymous: !DiscourseAcademyRoles::ActivityLevels::Cosmetics.account(user)[:eligible],
       }
     end
   end
@@ -86,7 +86,11 @@ module DiscourseAcademyRoles::NameColor
   def self.effective_color(user)
     return unless allowed?(user) && selection(user)[:enabled]
 
-    (developer?(user) && selection(user)[:color]) || "theme"
+    if DiscourseAcademyRoles::ActivityLevels::Cosmetics.staff?(user)
+      (developer?(user) && selection(user)[:color]) || "theme"
+    else
+      "level_preset"
+    end
   end
 
   def self.changed_fields(user, fields)

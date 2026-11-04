@@ -71,6 +71,14 @@ after_initialize do
     DiscourseAvatarFrames::Frame.available_for(object).pluck(:key)
   end
 
+  %i[user current_user].each do |serializer|
+    add_to_serializer(
+      serializer,
+      :owned_avatar_frames,
+      include_condition: -> { scope.user&.id == object.id },
+    ) { DiscourseAvatarFrames::Frame.available_by_ownership(object).pluck(:key) }
+  end
+
   UserLookup.prepend(DiscourseAvatarFrames::UserLookupPreloader)
   TopicView.on_preload { |view| DiscourseAvatarFrames.preload(view.posts.map(&:user).compact) }
 

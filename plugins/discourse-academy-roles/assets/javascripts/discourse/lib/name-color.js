@@ -4,6 +4,14 @@ import { isValidHex, normalizeHex } from "discourse/lib/color-transformations";
 export const NAME_COLOR_ENABLED = "academy_name_color_enabled";
 export const NAME_COLOR = "academy_name_color";
 export const MAX_NAME_COLOR_STOPS = 10;
+
+export function activityNameColor(palette) {
+  return palette &&
+    /^#[0-9a-f]{6}$/i.test(palette.light) &&
+    /^#[0-9a-f]{6}$/i.test(palette.dark)
+    ? `light-dark(${palette.light}, ${palette.dark})`
+    : null;
+}
 const GRADIENT_COLOR = /^linear-gradient\((90|180)deg,\s*(.*)\)$/i;
 
 export function nameGradientStops(value) {

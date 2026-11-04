@@ -1,0 +1,11 @@
+zh_CN:
+  js:
+    avatar_frames:
+      levels:
+        minimum: 最低活跃等级
+        description: 普通用户需要同时达到此等级和统一佩戴门槛。单独授予的头像框仍需要先获得授权。
+        follow_global: 无额外门槛
+        number: "LV%{level}"
+        named: "LV%{level}（%{name}）"
+        locked_frame: "%{name} — LV%{level} 解锁"
+        locked_global: "达到 LV%{level} 后可佩戴头像框。你的选择仍然保留，再次达标后会恢复。"

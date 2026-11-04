@@ -1,0 +1,20 @@
+en:
+  js:
+    academy_roles:
+      activity_cosmetics:
+        title: Appearance unlocks
+        description: Members unlock appearances at the selected level or higher. Staff retain existing appearance permissions. Demotion pauses an appearance while preserving the selection.
+        avatar_minimum: Minimum level for wearing avatar frames
+        enable_name_color: Enable the preset magenta name color
+        name_minimum: Minimum level for the preset name color
+        light_color: Magenta color in light mode
+        dark_color: Magenta color in dark mode
+        palette_description: Set both preset colors before enabling. Members can turn the color on or off; custom colors remain restricted to developers.
+        save_levels_first: Save a new level before selecting it as a minimum level.
+        badge: Automatic level badge
+        badge_description: Award this badge for the current level. Replacing it removes only badges awarded by the level system; manual awards are preserved. Create eligible custom badges in the badge administration page.
+        no_badge: No automatic badge
+        unavailable_badge: "Badge #%{id} is unavailable — clear or replace it"
+        referenced_level: "Change and save these requirements before deleting this level: %{references}."
+        locked: "Unlocks at LV%{level}. Your saved appearance will resume when you qualify again."
+        name_description: Use the site's preset magenta color for your name in the feed. Your selection is preserved while your level is too low.
