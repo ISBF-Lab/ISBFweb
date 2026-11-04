@@ -96,4 +96,58 @@ RSpec.describe "Take an MBTI test" do
       end
     end
   end
+
+  [[390, "light"], [1440, "dark"]].each do |width, mode|
+    context "in Chinese with #{width}px #{mode} layout", mobile: width <= 600 do
+      before do
+        SiteSetting.default_locale = "zh_CN"
+        SiteSetting.allow_user_locale = true
+        user.update!(locale: "zh_CN")
+        scheme = theme.color_schemes.find_by!(name: "ISBF Community #{mode.capitalize}")
+        theme.update!(color_scheme_id: scheme.id)
+        user.user_option.update!(color_scheme_id: scheme.id, dark_scheme_id: scheme.id)
+        page.current_window.resize_to(width, 900)
+        sign_in(user)
+      end
+
+      it "shows Chinese questions, results and private history without horizontal overflow" do
+        mbti.visit_index
+        expect(mbti).to have_intro(heading: "了解你的类型倾向")
+        expect(mbti).to have_version("28 题")
+        expect(mbti).to have_privacy_notice(
+          "完成结果仅本人可见。未完成的答题进度保存在当前设备，退出账号时清除。",
+        )
+        expect(mbti).to be_contained
+        mbti.save_review("zh-CN-#{width}-#{mode}-intro")
+
+        mbti.choose_version("28", label: "28 题").start(label: "开始测试")
+        expect(mbti).to have_question(1)
+        expect(mbti).to have_question_progress("第 1 题 / 共 28 题")
+        mbti.answer(1)
+        expect(mbti).to have_selected_choice(1)
+        expect(mbti).to be_contained
+        mbti.save_review("zh-CN-#{width}-#{mode}-question")
+        mbti.next_question(label: "下一题")
+        mbti.finish_questions(from: 2, total: 28, next_text: "下一题", submit_text: "提交并查看结果")
+
+        expect(mbti).to have_result(heading: "本次类型倾向")
+        expect(mbti).to be_contained
+        mbti.save_review("zh-CN-#{width}-#{mode}-result")
+        mbti.open_history(label: "我的历史")
+        expect(mbti).to have_history_heading("我的历史")
+        expect(mbti).to have_history_item
+        expect(mbti).to have_privacy_notice(
+          "完成结果仅本人可见。未完成的答题进度保存在当前设备，退出账号时清除。",
+        )
+        expect(mbti).to be_contained
+        mbti.save_review("zh-CN-#{width}-#{mode}-history")
+
+        page.refresh
+        expect(mbti).to have_intro(heading: "了解你的类型倾向")
+        mbti.open_history(label: "我的历史")
+        expect(mbti).to have_history_heading("我的历史")
+        expect(mbti).to have_history_item
+      end
+    end
+  end
 end

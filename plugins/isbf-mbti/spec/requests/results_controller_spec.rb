@@ -92,6 +92,21 @@ RSpec.describe IsbfMbti::ResultsController do
       expect(IsbfMbti::Result.count).to eq(1)
     end
 
+    it "returns Chinese errors for a member using the Chinese locale" do
+      SiteSetting.default_locale = "zh_CN"
+      SiteSetting.allow_user_locale = true
+      user.update!(locale: "zh_CN")
+      sign_in(user)
+
+      post "/isbf/api/mbti/results.json",
+           params: submission.merge(version: "isbf-1"),
+           as: :json
+
+      expect(response.status).to eq(409)
+      expected_error = "题库版本已更新，请使用当前版本重新开始测试。"
+      expect(response.parsed_body.fetch("errors")).to eq([expected_error])
+    end
+
     it "rejects earlier-version submissions without rewriting or adding history" do
       sign_in(user)
       stored_attributes = historical_result.attributes

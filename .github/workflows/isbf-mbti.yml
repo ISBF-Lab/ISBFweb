@@ -284,6 +284,16 @@ jobs:
         run: |
           set -o pipefail
           bin/rake "plugin:spec[isbf-mbti]" | tee tmp/mbti-rspec.log
+      - name: Install CJK fonts for native browser evidence
+        if: always() && steps.database.outcome == 'success'
+        run: |
+          apt-get -qq update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends fonts-noto-cjk fontconfig
+          fc-cache -f
+          mkdir -p tmp
+          dpkg-query --show fonts-noto-cjk fontconfig > tmp/mbti-fonts.txt
+          fc-match -f '%{family}|%{file}\n' 'sans-serif:lang=zh-cn' >> tmp/mbti-fonts.txt
+          fc-match -f '%{family}' 'sans-serif:lang=zh-cn' | grep -Fq 'Noto Sans CJK'
       - name: Build native components and browser assets
         id: assets
         if: always() && steps.database.outcome == 'success'

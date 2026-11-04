@@ -8,13 +8,13 @@ module PageObjects
         self
       end
 
-      def choose_version(variant)
-        find(".isbf-mbti__versions button", text: /\A#{variant} questions/).click
+      def choose_version(variant, label: /\A#{variant} questions/)
+        find(".isbf-mbti__versions button", text: label).click
         self
       end
 
-      def start
-        find(".isbf-mbti-intro button", text: "Start test", exact_text: true).send_keys(:return)
+      def start(label: "Start test")
+        find(".isbf-mbti-intro button", text: label, exact_text: true).send_keys(:return)
         self
       end
 
@@ -28,8 +28,8 @@ module PageObjects
         self
       end
 
-      def next_question
-        find(".isbf-mbti-question button", text: "Next", exact_text: true).click
+      def next_question(label: "Next")
+        find(".isbf-mbti-question button", text: label, exact_text: true).click
         self
       end
 
@@ -38,16 +38,16 @@ module PageObjects
         self
       end
 
-      def finish_questions(from:, total:)
+      def finish_questions(from:, total:, next_text: "Next", submit_text: "Submit and view result")
         (from..total).each do |number|
           expect(self).to have_question(number)
           answer(1)
           if number < total
-            next_question
+            next_question(label: next_text)
           else
             find(
               ".isbf-mbti-question button",
-              text: "Submit and view result",
+              text: submit_text,
               exact_text: true,
             ).click
           end
@@ -55,8 +55,8 @@ module PageObjects
         self
       end
 
-      def open_history
-        find(".isbf-mbti__header button", text: "My history", exact_text: true).click
+      def open_history(label: "My history")
+        find(".isbf-mbti__header button", text: label, exact_text: true).click
         self
       end
 
@@ -76,8 +76,17 @@ module PageObjects
         self
       end
 
-      def has_intro?
-        has_css?(".isbf-mbti-intro")
+      def has_intro?(heading: nil)
+        has_css?(".isbf-mbti-intro") &&
+          (heading.nil? || has_css?(".isbf-mbti-intro h2", text: heading, exact_text: true))
+      end
+
+      def has_version?(label)
+        has_css?(".isbf-mbti__versions button", text: label, exact_text: true)
+      end
+
+      def has_privacy_notice?(text)
+        has_css?(".isbf-mbti-intro p, .isbf-mbti-history p", text: text, exact_text: true)
       end
 
       def has_versions?
@@ -90,6 +99,10 @@ module PageObjects
         has_css?(".isbf-mbti-question[data-question-id='#{number}']")
       end
 
+      def has_question_progress?(text)
+        has_css?(".isbf-mbti-question p[aria-live='polite']", text: text, exact_text: true)
+      end
+
       def has_selected_choice?(choice)
         has_css?(".isbf-mbti-question input[name='choice'][value='#{choice}']:checked")
       end
@@ -98,8 +111,15 @@ module PageObjects
         has_css?(".isbf-mbti-question button[disabled]", text: "Next", exact_text: true)
       end
 
-      def has_result?
-        has_css?(".isbf-mbti-result")
+      def has_result?(heading: nil)
+        return false unless has_css?(".isbf-mbti-result")
+        return true if heading.nil?
+
+        has_css?(".isbf-mbti-result__summary p", text: heading, exact_text: true)
+      end
+
+      def has_history_heading?(text)
+        has_css?(".isbf-mbti-history h2", text: text, exact_text: true)
       end
 
       def has_history_item?
