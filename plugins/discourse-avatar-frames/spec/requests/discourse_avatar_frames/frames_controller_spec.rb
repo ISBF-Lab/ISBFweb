@@ -79,6 +79,21 @@ RSpec.describe DiscourseAvatarFrames::FramesController do
       )
     end
 
+    it "returns 422 if a concurrent requirement change rejects persistence" do
+      DiscourseAvatarFrames::Frame.any_instance.stubs(:save!).raises(ActiveRecord::RecordNotSaved)
+
+      post "/avatar-frames/admin/frames.json",
+           params: {
+             name: "Concurrent gate",
+             image_upload_id: image.id,
+             static_upload_id: image.id,
+             confirm_calibration: true,
+           }
+
+      expect(response.status).to eq(422)
+      expect(response.parsed_body["errors"]).to include(I18n.t("avatar_frames.levels.invalid"))
+    end
+
     it "requires explicit confirmation even when the saved confirmation field is supplied" do
       post "/avatar-frames/admin/frames.json",
            params: {
@@ -113,6 +128,17 @@ RSpec.describe DiscourseAvatarFrames::FramesController do
         enabled: false,
       )
       expect(response.parsed_body["frame"]["key"]).to eq(frame.key)
+    end
+
+    it "returns 422 and retains metadata if a requirement becomes invalid during persistence" do
+      original_name = frame.name
+      DiscourseAvatarFrames::Frame.any_instance.stubs(:save!).raises(ActiveRecord::RecordInvalid)
+
+      put "/avatar-frames/admin/frames/#{frame.id}.json", params: { name: "Uncommitted gate" }
+
+      expect(response.status).to eq(422)
+      expect(response.parsed_body["errors"]).to include(I18n.t("avatar_frames.levels.invalid"))
+      expect(frame.reload.name).to eq(original_name)
     end
   end
 end

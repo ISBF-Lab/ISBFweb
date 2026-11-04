@@ -1,0 +1,8 @@
+en:
+  academy_roles:
+    activity_cosmetics:
+      invalid_configuration: Check the appearance requirements and enter both preset colors as six-digit hexadecimal colors.
+      referenced_level: "Change these requirements before deleting the level: %{references}."
+      references:
+        avatar_minimum_level_id: Avatar frame wearing requirement
+        name_color_minimum_level_id: Preset name color requirement

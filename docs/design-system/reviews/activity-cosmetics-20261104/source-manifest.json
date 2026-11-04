@@ -1,0 +1,390 @@
+{
+  "recorded_at": "2026-11-04T07:42:35.097246+00:00",
+  "source_core_commit": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "approved_scope": "C22 cosmetic requirements, existing frame editor/preferences, feed-only preset, current-level badges; final user visual acceptance pending",
+  "development_only": true,
+  "references": [
+    {
+      "source": "external/discourse-avatar-frames/admin/assets/javascripts/admin/components/avatar-frame-form.gjs",
+      "snapshot": "references/avatar-frame-form.gjs.txt",
+      "sha256": "7ef1cec579c8fdc6994a1a751f52271c2221d15bfa3d084ca62d0936169dc350"
+    },
+    {
+      "source": "external/discourse-avatar-frames/assets/javascripts/discourse/connectors/user-preferences-profile/avatar-frame-preferences.gjs",
+      "snapshot": "references/avatar-frame-preferences.gjs.txt",
+      "sha256": "60621865dfae7d72d04012305db8cceb11d4235bbf1218d862639e0b2d73d616"
+    },
+    {
+      "source": "external/discourse-academy-roles/assets/javascripts/discourse/connectors/user-preferences-interface/academy-name-color.gjs",
+      "snapshot": "references/academy-name-color.gjs.txt",
+      "sha256": "247df148c75919f0d77e789e24e9ca8e1e5c9585fd791cba37286c7e2b142202"
+    }
+  ],
+  "changes": [
+    {
+      "path": "external/active-theme/javascripts/discourse/components/isbf-v2-feed-card.gjs",
+      "before_sha256": "74e0799662065f281f0ba4887d45ee2c56eed998d8fcff2994bed6e45fc07842",
+      "after_sha256": "c280129fb41a5ad34570c2a81111401c4e9c2a53727e861a7f362ff2e0686887"
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/lib/user-display.js",
+      "before_sha256": "8329df75c1d06a0dcf2fd0e0038afef77b77b9399e18de667f493fa1a807d859",
+      "after_sha256": "820288f4d613313f0857804ae6b9980bc3a32ed17ce7dc7f481a98cbc5c942ea"
+    },
+    {
+      "path": "external/discourse-academy-roles/admin/assets/javascripts/discourse/components/academy-activity-cosmetics.gjs",
+      "before_sha256": null,
+      "after_sha256": "d1658f6c0d2c115b8e6ecdfc4a3520f3794fdd709caba20fa6ebb348b78f915b"
+    },
+    {
+      "path": "external/discourse-academy-roles/admin/assets/javascripts/discourse/components/academy-activity-level-editor.gjs",
+      "before_sha256": "80f79894e0fd1a6da57e56550fc0689dc8d803da6e44dca709e3dc460023bdf7",
+      "after_sha256": "efa8d38f3b46da70e1a3629936354feeae1209bea0dd3406e4019625c111915b"
+    },
+    {
+      "path": "external/discourse-academy-roles/admin/assets/javascripts/discourse/components/academy-activity-levels.gjs",
+      "before_sha256": "5553ef885fe1ab0af40cadbe867278a1e31a9305568c32a07f220fa75f823abe",
+      "after_sha256": "6e11e537a94cf6cd6bc7a68c576db4b9ac734f06152a4e862033250d2df4faf6"
+    },
+    {
+      "path": "external/discourse-academy-roles/admin/assets/javascripts/discourse/lib/activity-level-rules.js",
+      "before_sha256": "f39beea0c62e6cb9ed0c0589e841d6f13dcbb607ff5f588d44c68cc708fef856",
+      "after_sha256": "01b75b0a55e61a0ccda89281992be56b4ef718649a0c7643e45a0722f84c5a62"
+    },
+    {
+      "path": "external/discourse-academy-roles/app/controllers/discourse_academy_roles/admin/activity_levels_controller.rb",
+      "before_sha256": "f7354b5ed6ac3faefc40267f9f14f5527e2ff0d9c582e43e9128833b33355c58",
+      "after_sha256": "80b544003a1d34bf7e867daf9be0b680fc66061a61575c62d588707c206bf304"
+    },
+    {
+      "path": "external/discourse-academy-roles/app/serializers/discourse_academy_roles/activity_level_configuration_serializer.rb",
+      "before_sha256": "7bdc894208044a97d6118cc0f02f439f761d6d3d07fe458fb3e71c7404ef20a9",
+      "after_sha256": "49622f79e5b47379a3f2a1293117f50f648e3f33f4bee28817e3cbc8416a2c93"
+    },
+    {
+      "path": "external/discourse-academy-roles/app/services/discourse_academy_roles/activity_levels/save_configuration.rb",
+      "before_sha256": "8579f3cbb0fa18be3ccc8ae49aacb1ff198c666df5d48df94bcf7c5c9104cbdf",
+      "after_sha256": "0e1ec6c92f140bc240fe626626820c128e62886c89656f8f0e891a7443796ef7"
+    },
+    {
+      "path": "external/discourse-academy-roles/assets/javascripts/discourse/connectors/user-preferences-interface/academy-name-color.gjs",
+      "before_sha256": "247df148c75919f0d77e789e24e9ca8e1e5c9585fd791cba37286c7e2b142202",
+      "after_sha256": "482d71799379c83c8dca90c38e61d97052c6dfbc44114028fae0db9e9d992f92"
+    },
+    {
+      "path": "external/discourse-academy-roles/assets/javascripts/discourse/lib/name-color.js",
+      "before_sha256": "8104964c37ffb7f80a48e471175c67512682c1436a77ff87b905ddcd005f34be",
+      "after_sha256": "1175352916ee20212b67a54ab977def692f49caa5f71291093f11a09a18152cb"
+    },
+    {
+      "path": "external/discourse-academy-roles/assets/javascripts/discourse/pre-initializers/academy-name-color.js",
+      "before_sha256": "8c4a8f7c0842343ef96b0ffcb3165134d71ef1eda4501b932171c3f1c1dbf74e",
+      "after_sha256": "19d2d7191864f25d1d83dcebb9e64d9f64b73c6603a60c0041f19976cf663d18"
+    },
+    {
+      "path": "external/discourse-academy-roles/config/locales/client.activity-cosmetics.en.yml",
+      "before_sha256": null,
+      "after_sha256": "a1ac53dad960ba94c8f9c8d6344fe25bc3ada5983f99f3095f94fb88af95f7fe"
+    },
+    {
+      "path": "external/discourse-academy-roles/config/locales/client.activity-cosmetics.zh_CN.yml",
+      "before_sha256": null,
+      "after_sha256": "c86816a0dcb899695acfc73e6fd153890dd7378640cf38489a6ef0254f8c96d5"
+    },
+    {
+      "path": "external/discourse-academy-roles/config/locales/server.activity-cosmetics.en.yml",
+      "before_sha256": null,
+      "after_sha256": "340ffaa6b8372b424d424db2014d890580926eecc5607563e507b98456cf6fb9"
+    },
+    {
+      "path": "external/discourse-academy-roles/config/locales/server.activity-cosmetics.zh_CN.yml",
+      "before_sha256": null,
+      "after_sha256": "b2d3f0b13552582104e735c596496f0c783519b26597b74ee52db98f8786957b"
+    },
+    {
+      "path": "external/discourse-academy-roles/lib/discourse_academy_roles/activity_levels.rb",
+      "before_sha256": "233605970b58c6d61b5f4d14c450b3cfee1a16f5d44bd4fe2df4dc4458811225",
+      "after_sha256": "3db7c00384fb67f37b96e6a3b6789b9f2472b61d0eb47f0eb549a80205008c4f"
+    },
+    {
+      "path": "external/discourse-academy-roles/lib/discourse_academy_roles/activity_levels/configuration.rb",
+      "before_sha256": "0c548284cfa10875167ba520f125ad05b72f7743e499232515529fd998083224",
+      "after_sha256": "38c53f38e49ae0f4341b48e4b062dc3d2e2af3eb97c043bd43fe43d0d0acf8f4"
+    },
+    {
+      "path": "external/discourse-academy-roles/lib/discourse_academy_roles/activity_levels/cosmetics.rb",
+      "before_sha256": null,
+      "after_sha256": "50336ac2b77f72113330da75e8a2797f2ba6a0c1845214163accd7b55155dd58"
+    },
+    {
+      "path": "external/discourse-academy-roles/lib/discourse_academy_roles/activity_levels/evaluator.rb",
+      "before_sha256": "c5f580eb9da338c0eeb832891f40e4e267fe88e53058bc812a120a7f4a0fc18f",
+      "after_sha256": "5c7ee3b34878adc0119bf1f353bbda85829b27c6193169070b7df9505684e07c"
+    },
+    {
+      "path": "external/discourse-academy-roles/lib/discourse_academy_roles/activity_levels/level_badges.rb",
+      "before_sha256": null,
+      "after_sha256": "cffb76768420d6d2c4f761cfac280f7c9875c99fe108c44f16c08013473b087e"
+    },
+    {
+      "path": "external/discourse-academy-roles/lib/discourse_academy_roles/name_color.rb",
+      "before_sha256": "8e83c5a5bc5de6f61ed92a05efb9477f2fb554187531dbdc4d76418fbb51b3a9",
+      "after_sha256": "1d549c20f160be6a0d73c20691c1a3f47a6c762417ae09b9f158fdf502da243b"
+    },
+    {
+      "path": "external/discourse-academy-roles/plugin.rb",
+      "before_sha256": "d0f056e0ee349606d5aedba34c37d272276d9dbf1a650e1b5ddb51c7b62eeb49",
+      "after_sha256": "0ab642d8c83330ec1ac69561c99e060a1134d0252ac6681c312fca0c148f6a6a"
+    },
+    {
+      "path": "external/discourse-academy-roles/spec/fabricators/activity_levels_fabricators.rb",
+      "before_sha256": "5d70a920acbea5f94be01add1ca5361722a3f9b775a50a8d6cf8a1bf9d6fe26b",
+      "after_sha256": "a95abcfe50fbef6ba9af967f5cd5c18257a41a1fe1469ae35cb5b8d91bd1c85d"
+    },
+    {
+      "path": "external/discourse-academy-roles/spec/lib/activity_levels/cosmetics_spec.rb",
+      "before_sha256": null,
+      "after_sha256": "ed5a8825e1f3cca6e7a4921282585e9b7f982702376d68e5809b26d0ae69975c"
+    },
+    {
+      "path": "external/discourse-academy-roles/spec/lib/activity_levels/evaluator_spec.rb",
+      "before_sha256": "0371a4fb97eb640ab93324f87ea9249dd86c0c33584117b031da2f828d7df8b0",
+      "after_sha256": "f9536827f832f31542b07b7387a7a89584a46c04964d6bacebf663c37a9bd493"
+    },
+    {
+      "path": "external/discourse-academy-roles/spec/lib/activity_levels/level_badges_spec.rb",
+      "before_sha256": null,
+      "after_sha256": "31468b05fc9aa9323d51713d5e848a11aae555809f71495bfa43891cd8fbc69c"
+    },
+    {
+      "path": "external/discourse-academy-roles/spec/lib/activity_levels/name_color_spec.rb",
+      "before_sha256": null,
+      "after_sha256": "7dbe6f84c0ed62c2e3cd8c90e798bdbdfa4d9a96452fad9534d45035f11ceb4f"
+    },
+    {
+      "path": "external/discourse-academy-roles/spec/requests/activity_cosmetics_spec.rb",
+      "before_sha256": null,
+      "after_sha256": "5ccf241e633f3066bd062a92f3fb82d78d3c587951bd7486a4d55699efd7e0df"
+    },
+    {
+      "path": "external/discourse-academy-roles/spec/requests/activity_levels_controller_spec.rb",
+      "before_sha256": "ab7041f2f1a9c2ec224e99d848923382089e5906714f41e15997493b23ec3366",
+      "after_sha256": "a6d4238aa4c633d642456ce1a84c9f88e6e20fa6ac11607a01bc8abfb34d05da"
+    },
+    {
+      "path": "external/discourse-academy-roles/spec/services/activity_levels/save_configuration_spec.rb",
+      "before_sha256": "2e1e30eb270cac6d8023b898fe18fe19c2b3827e85a09f641f86c9499371fa36",
+      "after_sha256": "8cdb8667010e65545bed123a424301bf92669de7bf480eadf7065db8d4686ecd"
+    },
+    {
+      "path": "external/discourse-academy-roles/spec/support/activity_levels_spec_helpers.rb",
+      "before_sha256": "19e4bf320b71c7e8ce1719cf6b4a4bc480be6d479a9231e625d48aa3413717e8",
+      "after_sha256": "b3aedca59de24d91d0b559379ba3df87693b342da78701db6e708ef93ff86321"
+    },
+    {
+      "path": "external/discourse-academy-roles/test/javascripts/integration/components/academy-activity-levels-test.gjs",
+      "before_sha256": "ff3da893cdc7e54e9be7962b0761ce187a47994f4ace7adafcb82aa30a411624",
+      "after_sha256": "9ae16372ce5e7c8710417494332fe677d07d2d92943a539efc5afd609b3c12ab"
+    },
+    {
+      "path": "external/discourse-academy-roles/test/javascripts/integration/components/activity-name-preset-test.gjs",
+      "before_sha256": null,
+      "after_sha256": "6d3233b35ad2a8203d282f7fddc7dde88bfa46087ba5ae9bde5f8f9ef0086638"
+    },
+    {
+      "path": "external/discourse-avatar-frames/admin/assets/javascripts/admin/components/avatar-frame-form.gjs",
+      "before_sha256": "7ef1cec579c8fdc6994a1a751f52271c2221d15bfa3d084ca62d0936169dc350",
+      "after_sha256": "4c0fc37c73bc3e4d3d0140c889434833f7403ed6d089548f932c1ca4fd5058fe"
+    },
+    {
+      "path": "external/discourse-avatar-frames/app/controllers/discourse_avatar_frames/frames_controller.rb",
+      "before_sha256": "1fefc8ee05cfd063680106b73c19dcb39c27f727b93eb66e42827e39ef8e1071",
+      "after_sha256": "45b571244a92281fd3be91a2fa6fb7c926cea3d64ef4f24a993dc3ed4a883ed1"
+    },
+    {
+      "path": "external/discourse-avatar-frames/app/models/discourse_avatar_frames/frame.rb",
+      "before_sha256": "9a16c4a6575d4b3406801928ee0f111c600ad281560f3a8ccc7b14af4f0d847c",
+      "after_sha256": "7cfce92bd327cbfc6cfd001298794aceadb929df815868b1fd85f201b6a86de9"
+    },
+    {
+      "path": "external/discourse-avatar-frames/app/serializers/discourse_avatar_frames/frame_serializer.rb",
+      "before_sha256": "63265588e833704e0d2d3c2b961fa6f3637b55b5e5e0dcad7220c5509997f76f",
+      "after_sha256": "34837f5728f099938397b49704ef444a560260b675b42148555903564123c76f"
+    },
+    {
+      "path": "external/discourse-avatar-frames/app/services/discourse_avatar_frames/save_frame.rb",
+      "before_sha256": "418344a037f5ec4ee805fec7f6e85dec7ee8ad945cf6f2de42c8caede7b28218",
+      "after_sha256": "fead3b42cf559817a781581d05ad484de1b046f714434085fb2fcdef249a0bcf"
+    },
+    {
+      "path": "external/discourse-avatar-frames/assets/javascripts/discourse/connectors/user-preferences-profile/avatar-frame-preferences.gjs",
+      "before_sha256": "60621865dfae7d72d04012305db8cceb11d4235bbf1218d862639e0b2d73d616",
+      "after_sha256": "34ed595cf18b7990feb87a77b995492360389f0ed5a7b9e507b8d4cd230508a2"
+    },
+    {
+      "path": "external/discourse-avatar-frames/assets/javascripts/discourse/lib/avatar-frames.js",
+      "before_sha256": "ba02a6a1051af873f6a107681a12990e457d0c6b8aa9d88e8267deed6b536c52",
+      "after_sha256": "c5c583f9d7066f2d37bd9263df0e662f42db8291cf23ab877bb13e926bf9acca"
+    },
+    {
+      "path": "external/discourse-avatar-frames/config/locales/client.activity-levels.en.yml",
+      "before_sha256": null,
+      "after_sha256": "bf19ad63be38f8d9e200bd462acb23d3507b6e354d8a70673bb768a28eb71e8e"
+    },
+    {
+      "path": "external/discourse-avatar-frames/config/locales/client.activity-levels.zh_CN.yml",
+      "before_sha256": null,
+      "after_sha256": "5abceccefd9ec0d11253f2856c0390cb8d7e014052242a54e36d39d43355ead6"
+    },
+    {
+      "path": "external/discourse-avatar-frames/config/locales/server.activity-levels.en.yml",
+      "before_sha256": null,
+      "after_sha256": "ae9a1ee72da864e582226d463652cbf7e9d1e91f696ffea4c72d32d54953dda3"
+    },
+    {
+      "path": "external/discourse-avatar-frames/config/locales/server.activity-levels.zh_CN.yml",
+      "before_sha256": null,
+      "after_sha256": "aec825ce9b2d103a557279663650550f862314f0902ffae415c5ee9a8160ef9c"
+    },
+    {
+      "path": "external/discourse-avatar-frames/db/migrate/20261104043140_add_minimum_activity_level_to_avatar_frames.rb",
+      "before_sha256": null,
+      "after_sha256": "af2b775a49f8911f2602911f52e107446cfbbfc4c899c360df7cf13703745fd1"
+    },
+    {
+      "path": "external/discourse-avatar-frames/lib/discourse_avatar_frames.rb",
+      "before_sha256": "4d1d954f61138854bc9970be50f620c34cc17f6aaf9ebc758890a3f447bf2946",
+      "after_sha256": "48d3e11ae81ff820ac6e3b6d39b653089259d19518960818db136b8df33150cc"
+    },
+    {
+      "path": "external/discourse-avatar-frames/plugin.rb",
+      "before_sha256": "74ffdef0c377358a1e16b35ac6919f88c728e472237cf80f8ea90be5dfb1e132",
+      "after_sha256": "758dc334b32c2c1b4ff00d02b0d42be75c506b06f3df6fa8692fe7036c268f3e"
+    },
+    {
+      "path": "external/discourse-avatar-frames/spec/models/discourse_avatar_frames/activity_levels_spec.rb",
+      "before_sha256": null,
+      "after_sha256": "8c80b1699cf255dae4ea2916b3e1eb9c4f0b1db14a005788409286a97cfbdd83"
+    },
+    {
+      "path": "external/discourse-avatar-frames/spec/requests/avatar_frames_spec.rb",
+      "before_sha256": "7e64319e7e823a399bd5d3fd9f054ebc641d14073036f1a1232ef86968ae86ce",
+      "after_sha256": "43884dc6d9cd71a246639e40ac27a48274a9e10d12d5e51659e0c5fae66f3b32"
+    },
+    {
+      "path": "external/discourse-avatar-frames/spec/requests/discourse_avatar_frames/frames_controller_spec.rb",
+      "before_sha256": "0c639066daa41f2f09cda798e8cd601bdf809c3dce8108dbba0c9ebea4de677d",
+      "after_sha256": "349699566a7b95f89935e2beceaba9c27a927b2177f9bd07ea4429f11a24e465"
+    },
+    {
+      "path": "external/discourse-avatar-frames/spec/services/discourse_avatar_frames/save_frame_spec.rb",
+      "before_sha256": "bcccbc1e2214d1598160db373990ad82e13d47242a370e38ba086dae7ad487c6",
+      "after_sha256": "9d60d1cc6cc210f986e7123162e0dab40bd0d1ec3fc873471dfc853077291cef"
+    },
+    {
+      "path": "external/discourse-avatar-frames/test/javascripts/integration/components/activity-frame-editor-test.gjs",
+      "before_sha256": null,
+      "after_sha256": "b0bfe8f4647c3fa66e0c718d9c876cfa8bbd075f38e051971884fb7d8f533049"
+    },
+    {
+      "path": "external/discourse-avatar-frames/test/javascripts/integration/components/activity-frame-preferences-test.gjs",
+      "before_sha256": null,
+      "after_sha256": "d119d8dc4c654a036567bd066ea6422bad201f80f49928eabf58d4fede0ca40b"
+    }
+  ],
+  "verification_artifacts": [
+    {
+      "path": "docs/activity-cosmetics-20261104/results/backend-feature-subset.json",
+      "sha256": "bd998e50c1616e40dc214ef06bfe609f8385642bfa649a23d131cafacbe7ef4c"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/backend-lint.log",
+      "sha256": "382d2e7374fe89c740e6e45b74696838d5872e1d355c3f5dbccf3747919cd0eb"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/backend-native-badges.json",
+      "sha256": "53fe610db86269dc1d2b258ea5322d9732045b271a9437e2f028b8ad49b244c3"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/backend-plugin-rspec.json",
+      "sha256": "5390ebe088ff5d04c3cf2a9961e44561b354f8eaf2dc8c657100e8ee89c58233"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/backend-plugin-rspec.log",
+      "sha256": "2848f0a08d4c05d70a8fc57295cc48ace1d5e4d372349e9e27f8e43d440dac91"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/backend-rspec.json",
+      "sha256": "b58e1cd10e297b37e1c3d538d1fc778584b1a5dba3a5a6a093aa0438b6fd09e3"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/backend-rspec.log",
+      "sha256": "b1920f831005488bcf62051e282efb3ba28d761bc7aa2809dc67b32ea007b89c"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/browser-recovery.json",
+      "sha256": "98d1ae3cec2ffd51b37c3c319bfb481f4d84e8ef96e49e0e347446312fe02e54"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/cosmetics-1440-dark.png",
+      "sha256": "865726592fdaf7fc1ac62f59ced50f7cb85a503e500b808cfbd2ea282ae02488"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/cosmetics-1440-light.png",
+      "sha256": "70edace99800107da185e081a2558ee6db90125afa5cd446f402c15e96068e94"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/cosmetics-320-light.png",
+      "sha256": "b273eac6782b3de121d0a7efc69e1a4bcc6804cfa6bb2a582d7f62d583a57531"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/cosmetics-390-dark.png",
+      "sha256": "66babc5025e90db0a6eca42f11585ed0bed3d6a4490a4dcc8f229b6c2571d8da"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/cosmetics-390-light.png",
+      "sha256": "def2af8543c6cdf240d5fb88aa339c19b89cb2a1d4526c533045dace04a54e42"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/development-final-state.json",
+      "sha256": "c935b387acb914ca63121dc2cad8de10de6bdbbcc5b5a07c7235358ce5803cb2"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/development-frame-before.json",
+      "sha256": "6aac87e1e7d1493ac198e5d26f9bfb4bf734461fab90a1b89cba53f81ced1b72"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/development-rules-before.json",
+      "sha256": "34d7e7143d982a8156165142a6604dd8c8fc69a04441bdf8296489145f2f3595"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/flows-report.json",
+      "sha256": "6b854518be082fe35592620f4ef88758fecde50f238b2b2f5893d4c1a5265a60"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/implementation-lint.log",
+      "sha256": "19411e816cd376affded82ea12a0755b09a8a323426f7b79e2e8f13fa3663c68"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/preset-feed-dark.png",
+      "sha256": "121c6d238fa05177683954e44212e44b7e29182649c9e65208fde2093c0c3861"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/preset-feed-light.png",
+      "sha256": "886de612dba0067c7c44d3ca60ae3009e6d0077fc065ce05f5827cb2b4e66e84"
+    },
+    {
+      "path": "docs/activity-cosmetics-20261104/results/qunit-report.json",
+      "sha256": "140f5bb43a93cb51fef15adeba5b2dc9b7e2d03fd1f1db4a4d4439528c8687f5"
+    }
+  ],
+  "baseline_manifest_sha256": "61f7186d456f15258a8905f16392cbc919e1c59e569ed7de4e57987580572102",
+  "source_sync_manifest_sha256": "3ad54dfc44b2f085e14f4cb425300a11be1c0d60b52a1331be3336633916e558",
+  "theme_sync": {
+    "fields_before": 308,
+    "fields_after": 308,
+    "preserved_fields": 306,
+    "preserved_settings": 7
+  },
+  "production_modified": false
+}

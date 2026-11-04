@@ -1,0 +1,10 @@
+zh_CN:
+  academy_roles:
+    activity_levels:
+      invalid_configuration: 请检查活跃等级配置。
+      invalid_level: "LV%{level} 的条件无效，请填写有效整数，并至少配置一项条件或连续达标天数。"
+      duplicate_level: 等级列表存在重复项，请重新加载后再试。
+      conflict: 规则已被其他页面修改。你的未提交内容仍然保留，请核对最新版本后再保存。
+      unconfirmed_deletion: 删除等级前，请先确认受影响的账号数量。
+      save_failed: 保存未完成，你的编辑内容仍然保留。
+      initialize_first: 请先保存活跃等级规则，再请求重新计算。

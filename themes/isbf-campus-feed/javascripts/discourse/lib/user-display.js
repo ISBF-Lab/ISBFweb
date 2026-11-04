@@ -5,7 +5,7 @@ export function displayName(user) {
   return user?.name?.trim() ? user.name : user?.username;
 }
 
-export function feedAuthorColor(user, currentUser) {
+export function feedAuthorColor(user, currentUser, palette) {
   const source =
     user?.id === currentUser?.id &&
     currentUser &&
@@ -13,6 +13,13 @@ export function feedAuthorColor(user, currentUser) {
       ? currentUser
       : user;
   const color = source && get(source, "academy_display_name_color");
+  if (color === "level_preset") {
+    return palette &&
+      /^#[0-9a-f]{6}$/i.test(palette.light) &&
+      /^#[0-9a-f]{6}$/i.test(palette.dark)
+      ? `light-dark(${palette.light}, ${palette.dark})`
+      : null;
+  }
   if (color === "theme") {
     return "var(--isbf-v2-accent)";
   }
@@ -27,8 +34,8 @@ export function feedAuthorColor(user, currentUser) {
     : null;
 }
 
-export function feedAuthorStyle(user, currentUser) {
-  const color = feedAuthorColor(user, currentUser);
+export function feedAuthorStyle(user, currentUser, palette) {
+  const color = feedAuthorColor(user, currentUser, palette);
   if (!color) {
     return null;
   }

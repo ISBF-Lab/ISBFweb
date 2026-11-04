@@ -4,6 +4,24 @@ RSpec.describe "Avatar frames", type: :request do
   fab!(:user) { Fabricate(:user, trust_level: 0) }
   fab!(:other_user, :user)
   fab!(:frame, :avatar_frame)
+  fab!(:bubble_frame) do
+    Fabricate(
+      :avatar_frame,
+      key: "bubble",
+      builtin: "bubble",
+      name: "Bubble",
+      access_mode: "public",
+    )
+  end
+  fab!(:terrarium_frame) do
+    Fabricate(
+      :avatar_frame,
+      key: "terrarium",
+      builtin: "terrarium",
+      name: "Terrarium",
+      access_mode: "public",
+    )
+  end
 
   before do
     SiteSetting.avatar_frames_enabled = true
@@ -114,7 +132,7 @@ RSpec.describe "Avatar frames", type: :request do
     expect(response.parsed_body["user"]["avatar_frame"]).to be_nil
   end
 
-  it "returns linked account frames only to administrators" do
+  it "returns linked account frames to approved participants and administrators" do
     SiteSetting.isbf_account_switch_enabled = true
     other_user.custom_fields["avatar_frame"] = "terrarium"
     other_user.save!
@@ -128,9 +146,15 @@ RSpec.describe "Avatar frames", type: :request do
 
     get "/isbf/account-switch/accounts.json"
 
+    expect(response.status).to eq(200)
+    expect(response.parsed_body["links"].first["account"]["avatar_frame"]).to eq("terrarium")
+
+    sign_in(Fabricate(:user))
+    get "/isbf/account-switch/accounts.json"
     expect(response.status).to eq(403)
 
     user.update!(admin: true)
+    sign_in(user)
     get "/isbf/account-switch/accounts.json"
 
     expect(response.status).to eq(200)

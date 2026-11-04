@@ -15,6 +15,7 @@ module DiscourseAvatarFrames
       attribute :access_mode, :string, default: "granted"
       attribute :enabled, :boolean, default: true
       attribute :position, :integer, default: 0
+      attribute :minimum_activity_level_id, :string
       attribute :image_upload_id, :integer
       attribute :static_upload_id, :integer
       attribute :scale, :float, default: 120
@@ -34,13 +35,16 @@ module DiscourseAvatarFrames
                 }
       validates :position, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
       before_validation { self.name = name&.strip }
+      before_validation { self.minimum_activity_level_id = minimum_activity_level_id.presence }
     end
 
     model :frame, :build_frame
 
-    transaction do
-      step :save_frame
-      step :log_change
+    try ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved do
+      transaction do
+        step :save_frame
+        step :log_change
+      end
     end
 
     private
@@ -63,6 +67,7 @@ module DiscourseAvatarFrames
           :access_mode,
           :enabled,
           :position,
+          :minimum_activity_level_id,
           :image_upload_id,
           :static_upload_id,
           :scale,

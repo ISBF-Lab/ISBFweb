@@ -8,6 +8,7 @@ RSpec.describe DiscourseAcademyRoles::NameColor do
 
   before do
     described_class::Cache.reset
+    DiscourseAcademyRoles::ActivityLevels::Cosmetics::Cache.reset
     SiteSetting.academy_official_group = official_group.id
     SiteSetting.academy_official_category = official_category.id
     SiteSetting.academy_roles_enabled = true
@@ -30,6 +31,7 @@ RSpec.describe DiscourseAcademyRoles::NameColor do
       developer.save!
       AnonymousUser.create!(master_user: other_developer, user: developer, active: true)
       described_class::Cache.reset
+      DiscourseAcademyRoles::ActivityLevels::Cosmetics::Cache.reset
 
       expect(described_class.effective_color(developer)).to be_nil
     end
@@ -40,6 +42,7 @@ RSpec.describe DiscourseAcademyRoles::NameColor do
         developer.save!
         IsbfAnonymous::PoolAccount.create!(user: developer, slot: 999)
         described_class::Cache.reset
+        DiscourseAcademyRoles::ActivityLevels::Cosmetics::Cache.reset
 
         expect(described_class.effective_color(developer)).to be_nil
       end
@@ -97,8 +100,10 @@ RSpec.describe DiscourseAcademyRoles::NameColor do
         end
       end
       described_class::Cache.reset
+      DiscourseAcademyRoles::ActivityLevels::Cosmetics::Cache.reset
       one = track_sql_queries { serialize.call([developer.id]) }
       described_class::Cache.reset
+      DiscourseAcademyRoles::ActivityLevels::Cosmetics::Cache.reset
       two = track_sql_queries { serialize.call([developer.id, other_developer.id]) }
 
       expect(two.size).to eq(one.size)

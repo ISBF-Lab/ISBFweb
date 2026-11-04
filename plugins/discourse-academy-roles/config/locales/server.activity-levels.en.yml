@@ -1,0 +1,10 @@
+en:
+  academy_roles:
+    activity_levels:
+      invalid_configuration: Check the activity level configuration.
+      invalid_level: "LV%{level} has invalid requirements. Use valid whole numbers and add a condition or consecutive-day requirement."
+      duplicate_level: The level list contains duplicate entries. Reload it and try again.
+      conflict: These rules changed in another session. Your draft is retained; compare it with the latest version before saving again.
+      unconfirmed_deletion: Confirm the affected accounts before deleting a level.
+      save_failed: The rules could not be saved. Your changes are retained.
+      initialize_first: Save the activity level rules before requesting recalculation.

@@ -10,10 +10,18 @@ export default class AcademyAdminActivityLevel extends Component {
       <div class="display-row academy-admin-activity-level">
         <div class="field">{{i18n "academy_roles.activity_title"}}</div>
         <div class="value">
-          {{i18n
-            "academy_roles.activity_value"
-            level=@outletArgs.user.academy_activity_level
-          }}
+          {{#if @outletArgs.user.academy_activity_level_name}}
+            {{i18n
+              "academy_roles.activity_value_named"
+              level=@outletArgs.user.academy_activity_level
+              name=@outletArgs.user.academy_activity_level_name
+            }}
+          {{else}}
+            {{i18n
+              "academy_roles.activity_value"
+              level=@outletArgs.user.academy_activity_level
+            }}
+          {{/if}}
         </div>
       </div>
     {{/if}}

@@ -87,6 +87,11 @@ after_initialize do
              only: %i[update destroy]
 
     namespace :admin do
+      get "activity-levels" => "activity_levels#show"
+      put "activity-levels" => "activity_levels#update"
+      get "activity-levels/recalculation" => "activity_levels#status"
+      get "activity-levels/deletion-impact" => "activity_levels#deletion_impact"
+      post "activity-levels/recalculate" => "activity_levels#recalculate"
       resources :student_group_batches, path: "student-group-batches", only: %i[index show] do
         get :options, on: :collection
         post :preview, on: :collection
@@ -119,6 +124,8 @@ after_initialize do
     get "/admin/plugins/discourse-academy-roles/student-group-batches/:batch_id" =>
           "admin/plugins#index",
         :constraints => AdminConstraint.new
+    get "/admin/plugins/discourse-academy-roles/activity-levels" => "admin/plugins#index",
+        :constraints => AdminConstraint.new
     mount ::DiscourseAcademyRoles::Engine, at: "/academy-roles"
   end
 
@@ -131,7 +138,16 @@ after_initialize do
   require_relative "lib/discourse_academy_roles/official_post_quota"
   require_relative "lib/discourse_academy_roles/official_post_quota_creator"
   require_relative "lib/discourse_academy_roles/official_post_quota_publisher"
+  require_relative "lib/discourse_academy_roles/activity_levels"
+  BadgeGranter.prepend(DiscourseAcademyRoles::ActivityLevels::LevelBadges::ManualGrant)
+  require_relative "app/jobs/regular/academy_recalculate_activity_levels"
+  require_relative "app/jobs/scheduled/academy_activity_levels"
   require_relative "lib/discourse_academy_roles/activity_level"
+  require_relative "app/services/discourse_academy_roles/activity_levels/save_configuration"
+  require_relative "app/services/discourse_academy_roles/activity_levels/retry_recalculation"
+  require_relative "app/serializers/discourse_academy_roles/activity_level_recalculation_serializer"
+  require_relative "app/serializers/discourse_academy_roles/activity_level_configuration_serializer"
+  require_relative "app/controllers/discourse_academy_roles/admin/activity_levels_controller"
   require_relative "lib/discourse_academy_roles/student_invite_extension"
   require_relative "lib/discourse_academy_roles/moderator_permissions"
   require_relative "lib/discourse_academy_roles/moderator_user"
@@ -149,6 +165,7 @@ after_initialize do
   register_post_custom_field_type(DiscourseAcademyRoles::OFFICIAL_POST_FIELD, :boolean)
   TopicView.default_post_custom_fields << DiscourseAcademyRoles::OFFICIAL_POST_FIELD
   register_user_custom_field_type(DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD, :integer)
+  register_user_custom_field_type(DiscourseAcademyRoles::ActivityLevels::LEVEL_ID_FIELD, :string)
   register_user_custom_field_type(DiscourseAcademyRoles::PasswordSetup::PENDING_FIELD, :boolean)
 
   add_model_callback(:user_password, :after_commit, on: :create) do
@@ -261,7 +278,10 @@ after_initialize do
   end
 
   on(:user_created) do |user|
-    DiscourseAcademyRoles.lock_member_trust_level(user) if SiteSetting.academy_roles_enabled?
+    if SiteSetting.academy_roles_enabled?
+      DiscourseAcademyRoles.lock_member_trust_level(user)
+      DiscourseAcademyRoles::ActivityLevels.initialize_user(user)
+    end
     DiscourseAcademyRoles::PasswordSetup.mark_for(user)
   end
 
@@ -270,11 +290,17 @@ after_initialize do
   end
 
   add_to_serializer(:user, :academy_activity_level) do
-    object.custom_fields[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD].to_i
+    DiscourseAcademyRoles::ActivityLevels.level_number(object)
   end
 
   add_to_serializer(:admin_user, :academy_activity_level) do
-    object.custom_fields[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD].to_i
+    DiscourseAcademyRoles::ActivityLevels.level_number(object)
+  end
+
+  %i[user admin_user].each do |serializer|
+    add_to_serializer(serializer, :academy_activity_level_name) do
+      DiscourseAcademyRoles::ActivityLevels.level_name(object)
+    end
   end
 
   add_to_serializer(
@@ -304,8 +330,25 @@ after_initialize do
     DiscourseAcademyRoles::NameColor.effective_color(user)
   end
 
+  add_to_serializer(:site, :academy_activity_name_colors) do
+    DiscourseAcademyRoles::ActivityLevels::Cosmetics.name_colors
+  end
+
+  add_to_serializer(:site, :academy_activity_levels) do
+    DiscourseAcademyRoles::ActivityLevels::Cosmetics
+      .configuration
+      .levels
+      .each_with_index
+      .map { |level, number| { id: level["id"], number: number, name: level["name"] } }
+  end
+
   %i[user current_user].each do |serializer|
     own_preferences = -> { scope.user&.id == object.id }
+    add_to_serializer(
+      serializer,
+      :academy_activity_cosmetics,
+      include_condition: own_preferences,
+    ) { DiscourseAcademyRoles::ActivityLevels::Cosmetics.capabilities(object) }
     add_to_serializer(
       serializer,
       :academy_name_color_preferences,

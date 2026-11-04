@@ -26,16 +26,27 @@ module DiscourseAvatarFrames
                 less_than_or_equal_to: 100,
               }
     validate :validate_calibration
+    validate :validate_minimum_activity_level
+    before_validation :update_calibration_confirmation
+    around_save :lock_activity_level_configuration
 
     scope :active, -> { where(enabled: true) }
 
     before_validation { self.key ||= SecureRandom.uuid }
-    before_validation :update_calibration_confirmation
     after_save :update_upload_references
     after_save { self.confirm_calibration = false }
     after_commit :invalidate_catalog
 
     def self.available_for(user)
+      frames = available_by_ownership(user)
+      permitted =
+        frames
+          .select { |frame| DiscourseAvatarFrames.activity_level_allowed?(user, frame) }
+          .map(&:id)
+      frames.where(id: permitted)
+    end
+
+    def self.available_by_ownership(user)
       return none unless user && !DiscourseAvatarFrames.anonymous?(user)
 
       active.where(access_mode: "public").or(
@@ -70,6 +81,29 @@ module DiscourseAvatarFrames
     end
 
     private
+
+    def validate_minimum_activity_level
+      return if minimum_activity_level_id.blank?
+      valid =
+        defined?(DiscourseAcademyRoles::ActivityLevels::Cosmetics) &&
+          DiscourseAcademyRoles::ActivityLevels::Cosmetics.level_info(minimum_activity_level_id)
+      errors.add(:minimum_activity_level_id, I18n.t("avatar_frames.levels.invalid")) unless valid
+    end
+
+    def lock_activity_level_configuration
+      if defined?(DiscourseAcademyRoles::ActivityLevels)
+        DiscourseAcademyRoles::ActivityLevels.synchronize do
+          DiscourseAcademyRoles::ActivityLevels::Current.configuration =
+            DiscourseAcademyRoles::ActivityLevels::Configuration.current
+          errors.delete(:minimum_activity_level_id)
+          validate_minimum_activity_level
+          next false if errors[:minimum_activity_level_id].present?
+          yield
+        end
+      else
+        yield
+      end
+    end
 
     def update_calibration_confirmation
       if builtin.present? && image_upload_id.blank? && static_upload_id.blank?

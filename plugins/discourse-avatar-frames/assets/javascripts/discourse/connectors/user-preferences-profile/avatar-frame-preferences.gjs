@@ -30,9 +30,21 @@ export default class AvatarFramePreferences extends Component {
       { id: "none", name: i18n("avatar_frames.none") },
       ...availableFrames(
         this.site.avatar_frames,
-        this.args.outletArgs.model.available_avatar_frames
+        this.args.outletArgs.model.available_avatar_frames,
+        this.args.outletArgs.model.owned_avatar_frames,
+        this.args.outletArgs.model.academy_activity_cosmetics?.avatar_frames
+          ?.minimum_level?.number
       ),
     ];
+  }
+
+  get requirementText() {
+    const capability =
+      this.args.outletArgs.model.academy_activity_cosmetics?.avatar_frames;
+    const level = capability?.minimum_level;
+    return capability && !capability.unlocked && level
+      ? i18n("avatar_frames.levels.locked_global", { level: level.number })
+      : "";
   }
 
   @action
@@ -68,6 +80,7 @@ export default class AvatarFramePreferences extends Component {
             <field.Control @includeNone={{false}}>
               {{#each this.frames as |frame|}}
                 <DNativeSelectOption
+                  disabled={{frame.disabled}}
                   @selected={{field.value}}
                   @value={{frame.id}}
                 >
@@ -77,6 +90,7 @@ export default class AvatarFramePreferences extends Component {
             </field.Control>
           </div>
         </form.Field>
+        {{#if this.requirementText}}<p>{{this.requirementText}}</p>{{/if}}
       </Form>
     {{/if}}
   </template>

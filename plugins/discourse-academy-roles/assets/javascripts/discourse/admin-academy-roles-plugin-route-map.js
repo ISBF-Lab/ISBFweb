@@ -3,6 +3,7 @@ export default {
   path: "/plugins",
 
   map() {
+    this.route("academy-activity-levels", { path: "activity-levels" });
     this.route(
       "academy-student-group-batches",
       { path: "student-group-batches" },

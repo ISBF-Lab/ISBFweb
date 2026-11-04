@@ -41,6 +41,10 @@ export default {
             "academy_display_name_color",
             "academy_can_wear_name_color",
             "academy_can_customize_name_color",
+            "academy_activity_cosmetics",
+            "available_avatar_frames",
+            "owned_avatar_frames",
+            "avatar_frame",
           ]) {
             if (Object.hasOwn(saved, key)) {
               appearance[key] = saved[key];
