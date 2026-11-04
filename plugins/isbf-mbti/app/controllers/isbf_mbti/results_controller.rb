@@ -7,19 +7,28 @@ module IsbfMbti
     before_action :prevent_private_caching
 
     rescue_from Questionnaire::InvalidAnswers do
-      render json: { errors: [I18n.t("isbf_mbti.invalid_answers")] }, status: :unprocessable_entity
+      with_resolved_locale do
+        error = I18n.t("isbf_mbti.invalid_answers")
+        render json: { errors: [error] }, status: :unprocessable_entity
+      end
     end
 
     rescue_from Questionnaire::StaleVersion do
-      render json: { errors: [I18n.t("isbf_mbti.stale_version")] }, status: :conflict
+      with_resolved_locale do
+        render json: { errors: [I18n.t("isbf_mbti.stale_version")] }, status: :conflict
+      end
     end
 
     rescue_from Result::SubmissionConflict do
-      render json: { errors: [I18n.t("isbf_mbti.submission_conflict")] }, status: :conflict
+      with_resolved_locale do
+        render json: { errors: [I18n.t("isbf_mbti.submission_conflict")] }, status: :conflict
+      end
     end
 
     rescue_from Result::AccountChanged do
-      render json: { errors: [I18n.t("isbf_mbti.account_changed")] }, status: :conflict
+      with_resolved_locale do
+        render json: { errors: [I18n.t("isbf_mbti.account_changed")] }, status: :conflict
+      end
     end
 
     def index

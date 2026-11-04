@@ -92,19 +92,28 @@ RSpec.describe IsbfMbti::ResultsController do
       expect(IsbfMbti::Result.count).to eq(1)
     end
 
-    it "returns Chinese errors for a member using the Chinese locale" do
-      SiteSetting.default_locale = "zh_CN"
+    it "returns Chinese errors for a Chinese member on an English-default site" do
+      SiteSetting.default_locale = "en"
       SiteSetting.allow_user_locale = true
       user.update!(locale: "zh_CN")
       sign_in(user)
 
-      post "/isbf/api/mbti/results.json",
-           params: submission.merge(version: "isbf-1"),
-           as: :json
+      post "/isbf/api/mbti/results.json", params: submission.merge(answers: []), as: :json
+      expect(response.status).to eq(422)
+      expect(response.parsed_body.fetch("errors")).to eq(["请为每道题选择一个有效选项后再提交。"])
+
+      post "/isbf/api/mbti/results.json", params: submission.merge(version: "isbf-1"), as: :json
 
       expect(response.status).to eq(409)
       expected_error = "题库版本已更新，请使用当前版本重新开始测试。"
       expect(response.parsed_body.fetch("errors")).to eq([expected_error])
+
+      post "/isbf/api/mbti/results.json", params: submission, as: :json
+      expect(response.status).to eq(201)
+      changed = submission.merge(answers: answers.map { |answer| answer.merge(choice: 2) })
+      post "/isbf/api/mbti/results.json", params: changed, as: :json
+      expect(response.status).to eq(409)
+      expect(response.parsed_body.fetch("errors")).to eq(["本次测试已保存，提交的答案与原记录不同，请重新开始测试。"])
     end
 
     it "rejects earlier-version submissions without rewriting or adding history" do

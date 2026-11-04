@@ -114,9 +114,7 @@ RSpec.describe "Take an MBTI test" do
         mbti.visit_index
         expect(mbti).to have_intro(heading: "了解你的类型倾向")
         expect(mbti).to have_version("28 题")
-        expect(mbti).to have_privacy_notice(
-          "完成结果仅本人可见。未完成的答题进度保存在当前设备，退出账号时清除。",
-        )
+        expect(mbti).to have_privacy_notice("完成结果仅本人可见。未完成的答题进度保存在当前设备，退出账号时清除。")
         expect(mbti).to be_contained
         mbti.save_review("zh-CN-#{width}-#{mode}-intro")
 
@@ -136,9 +134,7 @@ RSpec.describe "Take an MBTI test" do
         mbti.open_history(label: "我的历史")
         expect(mbti).to have_history_heading("我的历史")
         expect(mbti).to have_history_item
-        expect(mbti).to have_privacy_notice(
-          "完成结果仅本人可见。未完成的答题进度保存在当前设备，退出账号时清除。",
-        )
+        expect(mbti).to have_privacy_notice("完成结果仅本人可见。未完成的答题进度保存在当前设备，退出账号时清除。")
         expect(mbti).to be_contained
         mbti.save_review("zh-CN-#{width}-#{mode}-history")
 

@@ -45,11 +45,7 @@ module PageObjects
           if number < total
             next_question(label: next_text)
           else
-            find(
-              ".isbf-mbti-question button",
-              text: submit_text,
-              exact_text: true,
-            ).click
+            find(".isbf-mbti-question button", text: submit_text, exact_text: true).click
           end
         end
         self
