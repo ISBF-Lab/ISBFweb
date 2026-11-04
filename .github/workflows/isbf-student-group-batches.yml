@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - "plugins/discourse-academy-roles/**"
+      - "plugins/discourse-avatar-frames/**"
+      - "frontend/discourse/tests/helpers/d-select.js"
       - ".github/workflows/isbf-student-group-batches.yml"
   workflow_dispatch:
 
@@ -42,7 +44,11 @@ jobs:
         with:
           path: candidate
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          sparse-checkout: plugins/discourse-academy-roles
+          sparse-checkout: |
+            plugins/discourse-academy-roles
+            plugins/discourse-avatar-frames
+            frontend/discourse/tests/helpers/d-select.js
+          sparse-checkout-cone-mode: false
           persist-credentials: false
       - uses: actions/checkout@v4
         with:
@@ -71,15 +77,19 @@ jobs:
           pnpm install --frozen-lockfile
       - name: Prepare the unchanged native schema for generator boot
         run: bin/rake db:create db:migrate
-      - name: Overlay the candidate identity plugin and fixed learning dependency
+      - name: Overlay the candidate identity plugin, frame dependency and fixed learning plugin
         id: overlay
         run: |
           test -d plugins/discourse-academy-roles
           test ! -L plugins/discourse-academy-roles
           rm -r plugins/discourse-academy-roles
           cp -a ../candidate/plugins/discourse-academy-roles plugins/discourse-academy-roles
+          test ! -e plugins/discourse-avatar-frames
+          cp -a ../candidate/plugins/discourse-avatar-frames plugins/discourse-avatar-frames
           test ! -e plugins/isbf-learning
           cp -a ../runtime-plugins/plugins/isbf-learning plugins/isbf-learning
+          test ! -e frontend/discourse/tests/helpers/d-select.js
+          cp -a ../candidate/frontend/discourse/tests/helpers/d-select.js frontend/discourse/tests/helpers/d-select.js
           mkdir -p tmp
           git -C ../candidate rev-parse HEAD > tmp/student-group-source-sha.txt
           git -C ../runtime-plugins rev-parse HEAD > tmp/student-group-learning-source-sha.txt

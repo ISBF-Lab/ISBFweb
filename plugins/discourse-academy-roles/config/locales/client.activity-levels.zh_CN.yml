@@ -34,7 +34,7 @@ zh_CN:
         continuous_days: 连续达标天数
         continuous_description: 设为 0 表示满足条件即可获得该等级；其他数值表示需要连续这么多天满足该级完整条件。
         max_check_gap_hours: 最长检查间隔（小时）
-        gap_description: 后台两次检查超过这个间隔时，连续计时重新开始；这不是用户登录的时间限制。
+        gap_description: 后台每天检查一次，至少设置 %{minimum} 小时以预留调度延迟；两次检查超过设定间隔时连续计时重新开始。这不是用户登录的时间限制。
         demotion_buffer_percent: 降级缓冲比例（%）
         buffer_description: 仅放宽近期数量下限，不放宽历史阅读和违规限制；连续达标仍要求满足完整条件。
         add_level: 新增等级

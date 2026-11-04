@@ -197,6 +197,30 @@ RSpec.describe DiscourseAcademyRoles::ActivityLevels::SaveConfiguration do
       expect(described_class.new(activity_rules(levels: [bounded, continuity_only]))).to be_valid
     end
 
+    it "rejects qualifying streak gaps shorter than the daily evaluation supports" do
+      [1, 12, 24, 35].each do |gap|
+        parameters = document.deep_dup
+        parameters["levels"][1].merge!("continuous_days" => 1, "max_check_gap_hours" => gap)
+
+        aggregate_failures("check gap #{gap} hours") do
+          expect(described_class.new(parameters)).to be_invalid
+        end
+      end
+    end
+
+    it "accepts supported streak gaps and short gaps for immediate qualification" do
+      [36, 48, 876_000].each do |gap|
+        parameters = document.deep_dup
+        parameters["levels"][1].merge!("continuous_days" => 1, "max_check_gap_hours" => gap)
+
+        expect(described_class.new(parameters)).to be_valid
+      end
+      immediate = document.deep_dup
+      immediate["levels"][1].merge!("continuous_days" => 0, "max_check_gap_hours" => 1)
+
+      expect(described_class.new(immediate)).to be_valid
+    end
+
     it "rejects non-scalar revisions without raising an exception" do
       [nil, [], {}, true, 1.5].each do |revision|
         expect(described_class.new(params.merge("revision" => revision))).to be_invalid

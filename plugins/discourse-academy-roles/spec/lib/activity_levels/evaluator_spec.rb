@@ -239,7 +239,7 @@ RSpec.describe DiscourseAcademyRoles::ActivityLevels::Evaluator do
                 identifier: "regular",
                 conditions: [activity_condition("days_visited", 1)],
                 continuous_days: 1,
-                gap_hours: 12,
+                gap_hours: 36,
               ),
             ],
           ),
@@ -248,7 +248,7 @@ RSpec.describe DiscourseAcademyRoles::ActivityLevels::Evaluator do
       now = Time.current
 
       described_class.new(member, configuration: configuration, now: now).update!
-      described_class.new(member, configuration: configuration, now: now + 1.day).update!
+      described_class.new(member, configuration: configuration, now: now + 2.days).update!
 
       expect(member.reload.custom_fields[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD]).to eq(0)
     end

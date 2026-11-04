@@ -1,0 +1,51 @@
+{
+  "review_base": "f22074a399b07d481e393459acd9ffad37709650",
+  "runtime_overrides": [
+    {
+      "path": "plugins/discourse-academy-roles/admin/assets/javascripts/discourse/components/academy-activity-level-editor.gjs",
+      "previous_sha256": "efa8d38f3b46da70e1a3629936354feeae1209bea0dd3406e4019625c111915b",
+      "sha256": "8fd523acf88d41aeaed990eef1084f896c050db1e5db4e5f744e56d52fbe3b90",
+      "production_before_sha256": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/admin/assets/javascripts/discourse/components/academy-activity-levels.gjs",
+      "previous_sha256": "6e11e537a94cf6cd6bc7a68c576db4b9ac734f06152a4e862033250d2df4faf6",
+      "sha256": "94572c94e10ae96ee769c03870da99e80f5f14b4d159f6f9ce664f62d993715c",
+      "production_before_sha256": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/app/serializers/discourse_academy_roles/activity_level_configuration_serializer.rb",
+      "previous_sha256": "49622f79e5b47379a3f2a1293117f50f648e3f33f4bee28817e3cbc8416a2c93",
+      "sha256": "aa3312661420956357ecdf7851901ff648ccbf8b9d87027c75e9f6e584dc3e0b",
+      "production_before_sha256": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/client.activity-levels.en.yml",
+      "previous_sha256": "a55592905ea4315da39cc8f098d8d8fb0ccefe5151bcef02ddf440deefcec7af",
+      "sha256": "507f86ac03f638191c5d5570a2ff3b7d54bfead615e1acab4d04a377ac68476e",
+      "production_before_sha256": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/config/locales/client.activity-levels.zh_CN.yml",
+      "previous_sha256": "8101103334387369691f645013fd48aa6b6365b4375ce7928ff99a8035c288ca",
+      "sha256": "4f9463d16762e279069adf0b961a8d8606e62db97eea5a5f920b034fc887fcbc",
+      "production_before_sha256": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/activity_levels.rb",
+      "previous_sha256": "3db7c00384fb67f37b96e6a3b6789b9f2472b61d0eb47f0eb549a80205008c4f",
+      "sha256": "d806bd735454c67dc7600eb6046579f9d213f2b426ea2497259562a4231830a1",
+      "production_before_sha256": null
+    },
+    {
+      "path": "plugins/discourse-academy-roles/lib/discourse_academy_roles/activity_levels/configuration.rb",
+      "previous_sha256": "38c53f38e49ae0f4341b48e4b062dc3d2e2af3eb97c043bd43fe43d0d0acf8f4",
+      "sha256": "53310e35603f1c4af050b1985e7b62a154632901cff49f3e9d5ea65e8634ab45",
+      "production_before_sha256": null
+    }
+  ],
+  "plugin_runtime_files": 54,
+  "theme_fields": 2,
+  "original_preparation_preserved": true,
+  "production_modified": false
+}

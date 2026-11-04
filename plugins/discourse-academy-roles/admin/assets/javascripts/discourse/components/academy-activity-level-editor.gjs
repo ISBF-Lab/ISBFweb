@@ -167,6 +167,7 @@ export default class AcademyActivityLevelEditor extends Component {
                   <fields.Field
                     @description={{i18n
                       "academy_roles.activity_levels.gap_description"
+                      minimum=@minimumContinuousCheckGapHours
                     }}
                     @name="max_check_gap_hours"
                     @title={{i18n
@@ -176,7 +177,10 @@ export default class AcademyActivityLevelEditor extends Component {
                     @validation="required"
                     as |field|
                   >
-                    <field.Control min="1" step="1" />
+                    <field.Control
+                      min={{@minimumContinuousCheckGapHours}}
+                      step="1"
+                    />
                   </fields.Field>
                 {{/if}}
                 <fields.Field

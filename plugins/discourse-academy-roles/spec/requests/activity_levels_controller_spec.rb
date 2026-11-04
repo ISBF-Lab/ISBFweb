@@ -32,6 +32,7 @@ RSpec.describe DiscourseAcademyRoles::Admin::ActivityLevelsController do
         "revision" => 0,
         "initialized" => false,
         "allow_demotion" => true,
+        "minimum_continuous_check_gap_hours" => 36,
       )
       expect(response.parsed_body["levels"].map { |level| level["number"] }).to eq([0, 1, 2, 3, 4])
       expect(response.parsed_body["catalog"].map { |metric| metric["key"] }).to include(

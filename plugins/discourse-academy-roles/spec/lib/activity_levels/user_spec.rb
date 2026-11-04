@@ -16,6 +16,15 @@ RSpec.describe User do
   after { DiscourseAcademyRoles::ActivityLevels::Current.reset }
 
   describe ".create!" do
+    it "defers stable activity identities while the legacy evaluator remains active" do
+      account = Fabricate(:user)
+
+      expect(DiscourseAcademyRoles::ActivityLevels::Configuration).not_to be_persisted
+      expect(account.reload.custom_fields.keys).not_to include(
+        DiscourseAcademyRoles::ActivityLevels::LEVEL_ID_FIELD,
+      )
+    end
+
     it "starts members and staff at the configured base activity level" do
       persist_activity_rules(
         activity_rules(

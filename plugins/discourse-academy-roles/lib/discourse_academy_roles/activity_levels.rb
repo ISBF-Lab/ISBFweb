@@ -78,7 +78,7 @@ module DiscourseAcademyRoles::ActivityLevels
     return if user.staged? || user.is_system_user?
 
     synchronize do
-      if user.custom_fields[LEVEL_ID_FIELD].blank?
+      if Configuration.persisted? && user.custom_fields[LEVEL_ID_FIELD].blank?
         user.custom_fields[LEVEL_ID_FIELD] = Configuration.current.levels.first["id"]
         user.save_custom_fields
       end

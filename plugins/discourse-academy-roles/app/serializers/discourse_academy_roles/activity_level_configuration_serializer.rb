@@ -8,7 +8,12 @@ class DiscourseAcademyRoles::ActivityLevelConfigurationSerializer < ApplicationS
              :recalculation,
              :initialized,
              :cosmetics,
-             :badge_options
+             :badge_options,
+             :minimum_continuous_check_gap_hours
+
+  def minimum_continuous_check_gap_hours
+    DiscourseAcademyRoles::ActivityLevels::Configuration::MIN_CONTINUOUS_CHECK_GAP_HOURS
+  end
 
   def cosmetics
     object.cosmetics

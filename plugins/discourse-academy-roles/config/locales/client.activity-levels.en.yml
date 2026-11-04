@@ -34,7 +34,7 @@ en:
         continuous_days: "Consecutive qualifying days"
         continuous_description: "0 awards the level immediately when its conditions are met. Other values require its full conditions to remain satisfied for this many days."
         max_check_gap_hours: "Maximum check interval (hours)"
-        gap_description: "The qualifying streak restarts if the background checks are farther apart than this. This is not a member login deadline."
+        gap_description: "Checks run daily. Use at least %{minimum} hours to allow for scheduling delays; a longer gap restarts the qualifying streak. This is not a member login deadline."
         demotion_buffer_percent: "Demotion buffer (%)"
         buffer_description: "Applies to recent minimum counts only. Historical reading and violation limits are unchanged. Consecutive qualification still requires full conditions."
         add_level: "Add level"

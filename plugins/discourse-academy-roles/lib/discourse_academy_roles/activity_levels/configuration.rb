@@ -7,6 +7,8 @@ module DiscourseAcademyRoles::ActivityLevels
   class Configuration
     include ActiveModel::Model
 
+    MIN_CONTINUOUS_CHECK_GAP_HOURS = 36
+
     LEVEL_KEYS = %w[
       id
       name
@@ -45,7 +47,7 @@ module DiscourseAcademyRoles::ActivityLevels
           "name" => "",
           "period_days" => SiteSetting.tl3_time_period,
           "continuous_days" => 0,
-          "max_check_gap_hours" => 36,
+          "max_check_gap_hours" => MIN_CONTINUOUS_CHECK_GAP_HOURS,
           "demotion_buffer_percent" => number == 3 ? 10 : 0,
           "conditions" => conditions,
         }
@@ -194,10 +196,10 @@ module DiscourseAcademyRoles::ActivityLevels
             )
           users.each do |user|
             values = fields.fetch(user.id, {})
-            if values[LEVEL_ID_FIELD].blank?
-              level =
-                configuration.levels[values[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD].to_i] ||
-                  configuration.levels.first
+            level =
+              configuration.levels[values[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD].to_i] ||
+                configuration.levels.first
+            if values[LEVEL_ID_FIELD] != level["id"]
               user.custom_fields[LEVEL_ID_FIELD] = level["id"]
               user.save_custom_fields
             end
@@ -268,7 +270,12 @@ module DiscourseAcademyRoles::ActivityLevels
               (entry["badge_id"].is_a?(Integer) && available_badges.include?(entry["badge_id"]))
           valid &&= Catalog.integer?(entry["period_days"], minimum: 1, maximum: 36_500)
           valid &&= Catalog.integer?(entry["continuous_days"], maximum: 36_500)
-          valid &&= Catalog.integer?(entry["max_check_gap_hours"], minimum: 1, maximum: 876_000)
+          valid &&=
+            Catalog.integer?(
+              entry["max_check_gap_hours"],
+              minimum: entry["continuous_days"].to_i.positive? ? MIN_CONTINUOUS_CHECK_GAP_HOURS : 1,
+              maximum: 876_000,
+            )
           valid &&= Catalog.integer?(entry["demotion_buffer_percent"], maximum: 100)
           conditions = entry["conditions"]
           valid &&=

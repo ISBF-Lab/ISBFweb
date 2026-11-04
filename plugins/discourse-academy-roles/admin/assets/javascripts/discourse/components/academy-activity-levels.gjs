@@ -67,6 +67,10 @@ export default class AcademyActivityLevels extends Component {
     return ["failed", "completed_with_errors"].includes(this.run?.status);
   }
 
+  get minimumContinuousCheckGapHours() {
+    return this.model.minimum_continuous_check_gap_hours ?? 36;
+  }
+
   @action
   registerForm(api) {
     this.#formApi = api;
@@ -147,7 +151,11 @@ export default class AcademyActivityLevels extends Component {
       for (const [field, minimum, maximum] of [
         ["period_days", 1, 36500],
         ["continuous_days", 0, 36500],
-        ["max_check_gap_hours", 1, 876000],
+        [
+          "max_check_gap_hours",
+          level.continuous_days > 0 ? this.minimumContinuousCheckGapHours : 1,
+          876000,
+        ],
         ["demotion_buffer_percent", 0, 100],
       ]) {
         if (!numeric(level[field], minimum, maximum)) {
@@ -334,6 +342,7 @@ export default class AcademyActivityLevels extends Component {
               @form={{form}}
               @index={{index}}
               @level={{level}}
+              @minimumContinuousCheckGapHours={{this.minimumContinuousCheckGapHours}}
               @onDelete={{fn this.deleteLevel fields index level}}
             />
           </form.Collection>

@@ -74,9 +74,9 @@ RSpec.describe DiscourseAcademyRoles::ActivityLevels::Configuration do
       expect(updated.revision).to eq(2)
     end
 
-    it "preserves legacy level assignments and continuity during initialization" do
+    it "reconciles stale legacy identities and preserves continuity during initialization" do
       member = Fabricate(:user)
-      member.custom_fields.delete(DiscourseAcademyRoles::ActivityLevels::LEVEL_ID_FIELD)
+      member.custom_fields[DiscourseAcademyRoles::ActivityLevels::LEVEL_ID_FIELD] = "legacy-0"
       member.custom_fields[DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD] = 3
       member.custom_fields[DiscourseAcademyRoles::LV3_SINCE_FIELD] = 30.days.ago.iso8601
       member.custom_fields[DiscourseAcademyRoles::LV3_CHECKED_AT_FIELD] = 1.day.ago.iso8601
@@ -98,6 +98,57 @@ RSpec.describe DiscourseAcademyRoles::ActivityLevels::Configuration do
         "fingerprint" => previous.fingerprint(previous.levels[4]),
       )
       expect(persisted.revision).to eq(1)
+    end
+
+    it "keeps a level earned before initialization when automatic demotion is disabled" do
+      member = Fabricate(:user, created_at: 30.days.ago)
+      SiteSetting.tl2_requires_topic_reply_count = 0
+      member.user_stat.update!(
+        topics_entered: SiteSetting.tl2_requires_topics_entered,
+        posts_read_count: SiteSetting.tl2_requires_read_posts,
+        time_read: SiteSetting.tl2_requires_time_spent_mins * 60,
+        days_visited: SiteSetting.tl2_requires_days_visited,
+        likes_received: SiteSetting.tl2_requires_likes_received,
+        likes_given: SiteSetting.tl2_requires_likes_given,
+      )
+
+      DiscourseAcademyRoles::ActivityLevel.update(member)
+
+      expect(member.reload.custom_fields).to include(
+        DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD => 2,
+      )
+      expect(member.custom_fields[DiscourseAcademyRoles::ActivityLevels::LEVEL_ID_FIELD]).to be_nil
+      member.user_stat.update!(posts_read_count: 0)
+
+      persist_activity_rules(described_class.defaults.merge("allow_demotion" => false))
+      DiscourseAcademyRoles::ActivityLevel.update(member.reload)
+
+      expect(member.reload.custom_fields).to include(
+        DiscourseAcademyRoles::ACTIVITY_LEVEL_FIELD => 2,
+        DiscourseAcademyRoles::ActivityLevels::LEVEL_ID_FIELD => "legacy-2",
+      )
+    end
+
+    it "preserves stable identities on subsequent saves despite an outdated numeric field" do
+      configuration =
+        persist_activity_rules(
+          activity_rules(
+            levels: [
+              activity_tier(
+                identifier: "reader",
+                conditions: [activity_condition("posts_read", 1)],
+              ),
+            ],
+          ),
+        )
+      member = Fabricate(:user)
+      assign_activity_level(member, identifier: "reader", number: 0)
+
+      persist_activity_rules(configuration.document)
+
+      expect(
+        member.reload.custom_fields[DiscourseAcademyRoles::ActivityLevels::LEVEL_ID_FIELD],
+      ).to eq("reader")
     end
 
     it "rolls back both rules and pending progress when persistence fails" do

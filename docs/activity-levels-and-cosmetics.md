@@ -32,6 +32,12 @@ requires clearing/rebinding all global and per-frame references first. Appearanc
 changes do not reset continuity: metadata is excluded from qualification fingerprints and
 the form preserves the original order of grouped conditions when submitting them.
 
+Daily evaluation uses a minimum 36-hour check interval for consecutive qualification, including
+the existing scheduling-delay allowance. The developer API supplies this minimum to the form;
+shorter values are rejected when consecutive qualification is enabled. Before the first save,
+stable-ID initialization is deferred, and the initial backfill reconciles legacy numeric levels
+so that an earned level remains the previous assignment when demotion is disabled.
+
 ## Persistence and permissions
 
 The developer-only `/academy-roles/admin/activity-levels` endpoints provide configuration,
@@ -51,15 +57,19 @@ is preserved. Public site data exposes only level identifiers/names and validate
 
 ## Validation and production delivery
 
-Isolated development validation passed 17 native QUnit tests/63 assertions, the final
-70-case affected backend regression, 40 real browser flow checks, scoped source/spec lint
-and the shared menu checks. The broad backend run recorded 538 examples/four failures:
+Isolated development validation passed 40 real browser flow checks. The review follow-up
+passed 18 native QUnit tests/67 assertions and 126 related backend examples, including the
+60 new review-boundary cases, plus scoped source/spec lint and the shared menu checks.
+The initial broad backend run recorded 538 examples/four failures:
 three were reproduced before this feature; the fourth was an old account-switch expectation,
 which was corrected and passed in the affected follow-up. The full suite was not rerun after
 those localized changes and is not described as entirely green.
 
 The feature CI runs native configuration/evaluation/permission/badge and avatar-frame cases,
 plus both plugins' frontend tests, against a synthetic database. Existing project checks remain.
+The first CI run's dependency failures and review fixes are documented in the dated deployment
+record's `ci-follow-up.md`; its successful new-feature and frontend workflows do not erase the
+recorded failures in the other workflows.
 Design approval covers the existing FormKit/admin composition and the existing feed/preference
 surfaces; it does not extend to unrelated pages. See the dated C22 design review records.
 

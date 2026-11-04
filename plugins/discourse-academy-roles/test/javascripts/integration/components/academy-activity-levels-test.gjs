@@ -334,4 +334,27 @@ module("Integration | Component | Academy activity levels", function (hooks) {
     await formKit().submit();
     assert.strictEqual(this.requests[0].levels[1].badge_id, null);
   });
+
+  test("continuous qualification uses the server's minimum check interval", async function (assert) {
+    this.model.minimum_continuous_check_gap_hours = 36;
+    this.model.levels[1].continuous_days = 1;
+    this.model.levels[1].max_check_gap_hours = 12;
+    await render(
+      <template><AcademyActivityLevels @model={{this.model}} /></template>
+    );
+    await click(
+      findAll(".academy-activity-levels__level")[1].querySelector(
+        ".admin-config-area-card__toggle-button"
+      )
+    );
+    assert
+      .dom('input[name="levels.1.max_check_gap_hours"]')
+      .hasAttribute("min", "36");
+    await formKit().submit();
+    assert.strictEqual(this.requests.length, 0);
+    await formKit().field("levels.1.max_check_gap_hours").fillIn("36");
+    await formKit().submit();
+    assert.strictEqual(this.requests.length, 1);
+    assert.strictEqual(this.requests[0].levels[1].max_check_gap_hours, 36);
+  });
 });
