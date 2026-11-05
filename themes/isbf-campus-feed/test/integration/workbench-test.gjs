@@ -1,4 +1,4 @@
-import { render } from "@ember/test-helpers";
+import { findAll, render, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
@@ -37,6 +37,7 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
       isbf_marketplace: { category_id: 4, private_images: true, version: 1 },
       isbf_teamup: { category_id: 5, enabled: true, version: 1 },
       isbf_alumni: { enabled: true, countries: [] },
+      isbf_mbti: null,
     };
     this.previousConfiguration = Object.fromEntries(
       Object.keys(configuration).map((name) => [name, this.site[name]])
@@ -78,6 +79,43 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
         '[data-workbench-key="learning_resources"] .isbf-workbench-grid__label'
       )
       .hasStyle({ opacity: "1" });
+  });
+
+  test("MBTI is appended only when its plugin capability is enabled", async function (assert) {
+    await render(<template><ISBFV2Workbench /></template>);
+    assert
+      .dom('[data-workbench-key="mbti"]')
+      .doesNotExist("a missing capability creates no dead link");
+
+    this.site.set("isbf_mbti", { enabled: true, path: "/isbf/mbti" });
+    await settled();
+    const cards = findAll("[data-workbench-key]");
+    assert.strictEqual(
+      cards.at(-1).dataset.workbenchKey,
+      "mbti",
+      "the existing entry order is retained when the capability arrives"
+    );
+    assert
+      .dom('[data-workbench-key="mbti"]')
+      .hasAttribute("href", "/isbf/mbti", "the new card opens its real route");
+
+    this.site.set("isbf_mbti", { enabled: false, path: "/isbf/mbti" });
+    await settled();
+    assert
+      .dom('[data-workbench-key="mbti"]')
+      .doesNotExist("disabling the capability removes its existing card");
+
+    this.site.set("isbf_mbti", { enabled: true, path: "/isbf/mbti" });
+    await settled();
+    assert
+      .dom('[data-workbench-key="mbti"]')
+      .exists({ count: 1 }, "re-enabling restores exactly one card");
+
+    this.site.set("isbf_mbti", null);
+    await settled();
+    assert
+      .dom('[data-workbench-key="mbti"]')
+      .doesNotExist("removing the capability removes its existing card");
   });
 
   test("disabled services keep their existing visibility and placeholder rules", async function (assert) {

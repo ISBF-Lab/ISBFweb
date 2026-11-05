@@ -7657,6 +7657,44 @@ ALTER SEQUENCE public.isbf_join_applications_id_seq OWNED BY public.isbf_join_ap
 
 
 --
+-- Name: isbf_mbti_results; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.isbf_mbti_results (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    variant character varying NOT NULL,
+    scoring_version character varying NOT NULL,
+    source_commit character varying(40) NOT NULL,
+    personality_type character varying(4) NOT NULL,
+    scores jsonb NOT NULL,
+    attempt_id uuid NOT NULL,
+    submission_digest character varying(64) NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: isbf_mbti_results_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.isbf_mbti_results_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: isbf_mbti_results_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.isbf_mbti_results_id_seq OWNED BY public.isbf_mbti_results.id;
+
+
+--
 -- Name: isbf_post_view_impressions; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -15750,6 +15788,13 @@ ALTER TABLE ONLY public.isbf_join_applications ALTER COLUMN id SET DEFAULT nextv
 
 
 --
+-- Name: isbf_mbti_results id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_mbti_results ALTER COLUMN id SET DEFAULT nextval('public.isbf_mbti_results_id_seq'::regclass);
+
+
+--
 -- Name: isbf_post_view_impressions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -18577,6 +18622,14 @@ ALTER TABLE ONLY public.isbf_calendar_official_items
 
 ALTER TABLE ONLY public.isbf_join_applications
     ADD CONSTRAINT isbf_join_applications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: isbf_mbti_results isbf_mbti_results_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_mbti_results
+    ADD CONSTRAINT isbf_mbti_results_pkey PRIMARY KEY (id);
 
 
 --
@@ -23370,6 +23423,20 @@ CREATE UNIQUE INDEX index_isbf_join_applications_on_submission_id ON public.isbf
 
 
 --
+-- Name: index_isbf_mbti_results_on_user_id_and_attempt_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_isbf_mbti_results_on_user_id_and_attempt_id ON public.isbf_mbti_results USING btree (user_id, attempt_id);
+
+
+--
+-- Name: index_isbf_mbti_results_on_user_id_and_created_at_and_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_isbf_mbti_results_on_user_id_and_created_at_and_id ON public.isbf_mbti_results USING btree (user_id, created_at, id);
+
+
+--
 -- Name: index_isbf_post_view_impressions_on_post_id_and_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -26544,6 +26611,14 @@ ALTER TABLE ONLY public.optimized_videos
 
 
 --
+-- Name: isbf_mbti_results fk_rails_831b1c4fce; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.isbf_mbti_results
+    ADD CONSTRAINT fk_rails_831b1c4fce FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
 -- Name: poll_votes fk_rails_848ece0184; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -26726,6 +26801,7 @@ ALTER TABLE ONLY public.ad_plugin_house_ads_groups
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261029003825'),
 ('20261018210240'),
 ('20261014151020'),
 ('20261014104229'),

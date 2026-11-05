@@ -1,0 +1,4 @@
+plugins:
+  isbf_mbti_enabled:
+    default: false
+    client: true

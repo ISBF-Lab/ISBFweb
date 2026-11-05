@@ -23,6 +23,7 @@ import ISBFAlumni from "./isbf-alumni";
 import ISBFExplore from "./isbf-explore";
 import ISBFLearning from "./isbf-learning";
 import ISBFMarketplace from "./isbf-marketplace";
+import ISBFMbti from "./isbf-mbti";
 import ISBFNotificationBell from "./isbf-notification-bell";
 import ISBFNotifications from "./isbf-notifications";
 import ISBFOfficialFeed from "./isbf-official-feed";
@@ -87,6 +88,9 @@ export default class ISBFV2Shell extends Component {
       this.siteSettings.isbf_resume_enabled
     ) {
       return "resume";
+    }
+    if (path === "/isbf/mbti") {
+      return "mbti";
     }
     if (path === "/isbf/workbench") {
       return "workbench";
@@ -189,11 +193,16 @@ export default class ISBFV2Shell extends Component {
   get isWorkbench() {
     return [
       "workbench",
+      "mbti",
       "resume",
       "learning",
       "alumni",
       "marketplace",
     ].includes(this.pageKind);
+  }
+
+  get isMbti() {
+    return this.pageKind === "mbti";
   }
 
   get isWorkbenchHome() {
@@ -223,6 +232,7 @@ export default class ISBFV2Shell extends Component {
         "marketplace",
         "notifications",
         "workbench",
+        "mbti",
         "resume",
       ].includes(this.pageKind)
     );
@@ -569,6 +579,7 @@ export default class ISBFV2Shell extends Component {
         {{#if this.isAlumni}}<ISBFAlumni />
         {{else if this.isMarketplace}}<ISBFMarketplace />
         {{else if this.isLearning}}<ISBFLearning />
+        {{else if this.isMbti}}<ISBFMbti />
         {{else if this.isWorkbenchHome}}<ISBFV2Workbench />{{/if}}
 
         {{#if this.showMobileCompose}}
