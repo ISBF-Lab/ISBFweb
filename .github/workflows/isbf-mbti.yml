@@ -10,6 +10,7 @@ on:
       - ".github/fixtures/isbf-mbti-runtime/**"
       - ".github/scripts/restore-mbti-production-ui.py"
       - ".github/scripts/enable-mbti-qunit-theme-styles.py"
+      - ".github/scripts/build-mbti-production-assets.rb"
       - ".github/tests/test_restore_mbti_production_ui.py"
       - ".github/tests/test_enable_mbti_qunit_theme_styles.py"
       - ".github/tests/fixtures/mbti-qunit-*.txt"
@@ -265,9 +266,14 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr }}
         run: |
+          mkdir -p .github/scripts
+          cp ../candidate/.github/scripts/build-mbti-production-assets.rb .github/scripts/
+          git add --intent-to-add --force -- .github/scripts/build-mbti-production-assets.rb
           python3 plugins/isbf-mbti/scripts/check-files.py > tmp/mbti-files.txt
+          printf '%s\n' '.github/scripts/build-mbti-production-assets.rb' >> tmp/mbti-files.txt
           while IFS= read -r source; do sha256sum "$source"; done < tmp/mbti-files.txt > tmp/mbti-before.sha256
           xargs -d '\n' bin/lint --fix < tmp/mbti-files.txt
+          cp .github/scripts/build-mbti-production-assets.rb tmp/mbti-production-assets-helper.rb
           sha256sum --check tmp/mbti-before.sha256
           git diff --exit-code -- Gemfile.lock pnpm-lock.yaml
       - name: Migrate isolated database
@@ -323,7 +329,46 @@ jobs:
         if: always() && steps.assets.outcome == 'success'
         run: |
           set -o pipefail
-          bin/rspec plugins/isbf-mbti/spec/system/take_mbti_test_spec.rb | tee tmp/mbti-system.log
+          bin/rspec plugins/isbf-mbti/spec/system/take_mbti_test_spec.rb --format progress --format json --out tmp/mbti-system.json | tee tmp/mbti-system.log
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path("tmp/mbti-system.json").read_text())["summary"]
+          assert summary["example_count"] == 18
+          assert summary["failure_count"] == summary["pending_count"] == 0
+          PY
+      - name: Build only the MBTI production plugin assets in isolation
+        id: production_assets
+        if: always() && steps.assets.outcome == 'success'
+        env:
+          RAILS_ENV: production
+          EMBER_ENV: production
+          SKIP_DB_AND_REDIS: "1"
+        run: >-
+          bin/rails runner .github/scripts/build-mbti-production-assets.rb
+      - name: Verify the minified plugin bundle in the native mobile flow
+        if: always() && steps.production_assets.outcome == 'success'
+        env:
+          ISBF_MBTI_PRODUCTION_ASSETS_SMOKE: "1"
+        run: |
+          set -o pipefail
+          bin/rspec plugins/isbf-mbti/spec/system/take_mbti_test_spec.rb --tag mbti_release_mobile --format progress --format json --out tmp/mbti-production-smoke.json | tee tmp/mbti-production-smoke.log
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          artifact = Path("tmp/mbti-production-assets")
+          receipt = json.loads((artifact / "receipt.json").read_text())
+          smoke = json.loads(Path("tmp/mbti-production-smoke.json").read_text())
+          assert smoke["summary"]["example_count"] == 1
+          assert smoke["summary"]["failure_count"] == 0
+          assert smoke["summary"]["pending_count"] == 0
+          assert receipt["rails_env"] == receipt["ember_env"] == "production"
+          for relative, expected in receipt["asset_sha256"].items():
+              for path in (artifact / relative, Path("app/assets/generated") / relative):
+                  assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, str(path)
+          print("Production bundle and manifest stayed unchanged throughout the native browser flow")
+          PY
       - uses: actions/upload-artifact@v4
         if: always() && steps.overlay.outcome == 'success'
         with:
@@ -335,11 +380,15 @@ jobs:
             discourse/tmp/mbti-*.txt
             discourse/tmp/mbti-*.sha256
             discourse/tmp/mbti-*.log
+            discourse/tmp/mbti-production-assets-helper.rb
+            discourse/tmp/mbti-production-smoke.json
+            discourse/tmp/mbti-system.json
             discourse/tmp/mbti-production-ui.json
             discourse/tmp/mbti-qunit-style-harness.json
             discourse/tmp/mbti-theme.patch
             discourse/tmp/mbti-theme-patch.json
             discourse/tmp/mbti-browser
+            discourse/tmp/mbti-production-assets
             discourse/tmp/capybara
             discourse/log/test.log
           if-no-files-found: warn

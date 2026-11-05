@@ -98,7 +98,9 @@ RSpec.describe "Take an MBTI test" do
   end
 
   [[390, "light"], [1440, "dark"]].each do |width, mode|
-    context "in Chinese with #{width}px #{mode} layout", mobile: width <= 600 do
+    context "in Chinese with #{width}px #{mode} layout",
+            mobile: width <= 600,
+            mbti_release_mobile: width == 390 do
       before do
         SiteSetting.default_locale = "zh_CN"
         SiteSetting.allow_user_locale = true
@@ -113,6 +115,9 @@ RSpec.describe "Take an MBTI test" do
       it "shows Chinese questions, results and private history without horizontal overflow" do
         mbti.visit_index
         expect(mbti).to have_intro(heading: "了解你的类型倾向")
+        if ENV["ISBF_MBTI_PRODUCTION_ASSETS_SMOKE"] == "1"
+          expect(mbti).to have_production_bundle
+        end
         expect(mbti).to have_version("28 题")
         expect(mbti).to have_privacy_notice("完成结果仅本人可见。未完成的答题进度保存在当前设备，退出账号时清除。")
         expect(mbti).to be_contained
@@ -131,6 +136,17 @@ RSpec.describe "Take an MBTI test" do
         expect(mbti).to have_result(heading: "本次类型倾向")
         expect(mbti).to be_contained
         mbti.save_review("zh-CN-#{width}-#{mode}-result")
+        if width == 390
+          (1..4).each do |number|
+            mbti.scroll_to_result_dimension(number)
+            expect(mbti).to have_result_dimension_in_viewport(number)
+            mbti.save_review("zh-CN-#{width}-#{mode}-dimension-#{number}", full_page: false)
+          end
+          mbti.scroll_to_result_actions
+          expect(mbti).to have_docked_mobile_navigation
+          expect(mbti).to have_result_actions_in_viewport
+          mbti.save_review("zh-CN-#{width}-#{mode}-result-actions", full_page: false)
+        end
         mbti.open_history(label: "我的历史")
         expect(mbti).to have_history_heading("我的历史")
         expect(mbti).to have_history_item
@@ -143,6 +159,17 @@ RSpec.describe "Take an MBTI test" do
         mbti.open_history(label: "我的历史")
         expect(mbti).to have_history_heading("我的历史")
         expect(mbti).to have_history_item
+        if width == 390
+          mbti.open_latest_result.scroll_to_result_actions
+          expect(mbti).to have_result_actions_in_viewport
+          mbti.retest(label: "重新测试")
+          expect(mbti).to have_intro(heading: "了解你的类型倾向")
+
+          mbti.open_history(label: "我的历史").open_latest_result.scroll_to_result_actions
+          expect(mbti).to have_result_actions_in_viewport
+          mbti.delete_result(label: "删除结果")
+          expect(mbti).to have_empty_history(text: "还没有已完成的测试。")
+        end
       end
     end
   end
