@@ -115,9 +115,7 @@ RSpec.describe "Take an MBTI test" do
       it "shows Chinese questions, results and private history without horizontal overflow" do
         mbti.visit_index
         expect(mbti).to have_intro(heading: "了解你的类型倾向")
-        if ENV["ISBF_MBTI_PRODUCTION_ASSETS_SMOKE"] == "1"
-          expect(mbti).to have_production_bundle
-        end
+        expect(mbti).to have_production_bundle if ENV["ISBF_MBTI_PRODUCTION_ASSETS_SMOKE"] == "1"
         expect(mbti).to have_version("28 题")
         expect(mbti).to have_privacy_notice("完成结果仅本人可见。未完成的答题进度保存在当前设备，退出账号时清除。")
         expect(mbti).to be_contained

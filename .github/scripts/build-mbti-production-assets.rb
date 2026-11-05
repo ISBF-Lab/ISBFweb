@@ -65,11 +65,14 @@ end
 FileUtils.mkdir_p(output)
 FileUtils.cp_r(generated, output.join("isbf-mbti"))
 asset_hashes =
-  Dir.glob(output.join("isbf-mbti/**/*"), File::FNM_DOTMATCH).filter_map do |path|
-    raise "Unexpected asset symlink" if File.symlink?(path)
-    next unless File.file?(path)
-    [Pathname.new(path).relative_path_from(output).to_s, Digest::SHA256.file(path).hexdigest]
-  end.to_h
+  Dir
+    .glob(output.join("isbf-mbti/**/*"), File::FNM_DOTMATCH)
+    .filter_map do |path|
+      raise "Unexpected asset symlink" if File.symlink?(path)
+      next unless File.file?(path)
+      [Pathname.new(path).relative_path_from(output).to_s, Digest::SHA256.file(path).hexdigest]
+    end
+    .to_h
 tracked, _, status =
   Open3.capture3(
     "git",
@@ -85,14 +88,16 @@ tracked, _, status =
   )
 raise "Could not read candidate plugin paths" unless status.success?
 plugin_hashes = {}
-tracked.split("\0").each do |path|
-  relative = path.delete_prefix("plugins/isbf-mbti/")
-  runtime_path = plugin_root.join(relative)
-  raise "Unexpected plugin symlink" if runtime_path.symlink?
-  expected = Digest::SHA256.file(candidate_root.join(path)).hexdigest
-  raise "Plugin source drift: #{path}" if Digest::SHA256.file(runtime_path).hexdigest != expected
-  plugin_hashes[relative] = expected
-end
+tracked
+  .split("\0")
+  .each do |path|
+    relative = path.delete_prefix("plugins/isbf-mbti/")
+    runtime_path = plugin_root.join(relative)
+    raise "Unexpected plugin symlink" if runtime_path.symlink?
+    expected = Digest::SHA256.file(candidate_root.join(path)).hexdigest
+    raise "Plugin source drift: #{path}" if Digest::SHA256.file(runtime_path).hexdigest != expected
+    plugin_hashes[relative] = expected
+  end
 compiler_hashes =
   %w[
     lib/plugin/js_manager.rb

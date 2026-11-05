@@ -154,25 +154,21 @@ module PageObjects
       def has_production_bundle?
         receipt = JSON.parse(Rails.root.join("tmp/mbti-production-assets/receipt.json").read)
         filename = receipt.fetch("manifest").fetch("main").fetch("fileName")
-        has_css?(".isbf-mbti-intro") do
-          page.evaluate_script(<<~JS)
+        has_css?(".isbf-mbti-intro") { page.evaluate_script(<<~JS) }
             performance.getEntriesByType("resource").some((entry) =>
               new URL(entry.name).pathname.endsWith(#{"/#{filename}".to_json})
             )
           JS
-        end
       end
 
       def has_docked_mobile_navigation?
-        has_css?(".isbf-v2-mobile-nav") do |navigation|
-          page.evaluate_script(<<~JS, navigation)
+        has_css?(".isbf-v2-mobile-nav") { |navigation| page.evaluate_script(<<~JS, navigation) }
             (() => {
               const rect = arguments[0].getBoundingClientRect();
               return window.scrollY > 0 && rect.top > 0 &&
                 Math.abs(rect.bottom - window.innerHeight) <= 1;
             })()
           JS
-        end
       end
 
       def has_history_heading?(text)
