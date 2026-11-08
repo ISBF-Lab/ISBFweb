@@ -107,7 +107,11 @@ jobs:
           cp -a ../academy/plugins/discourse-avatar-frames plugins/discourse-avatar-frames
           mkdir plugins/isbf-learning tmp/catalog-theme
           git -C ../learning archive HEAD | tar -x -C plugins/isbf-learning
-          git -C ../theme archive HEAD | tar -x -C tmp/catalog-theme
+          # The theme compiler loads test sources before QUnit applies its module filter.
+          git -C ../theme archive HEAD -- . ':(exclude)test' ':(exclude)javascripts/discourse/tests' \
+            | tar -x -C tmp/catalog-theme
+          git -C ../theme archive HEAD -- test/integration/resource-catalog-test.gjs \
+            | tar -x -C tmp/catalog-theme
           # Match the native student-group lane's test helper overlay.
           test ! -e frontend/discourse/tests/helpers/d-select.js
           cp ../academy/frontend/discourse/tests/helpers/d-select.js frontend/discourse/tests/helpers/d-select.js
@@ -173,6 +177,7 @@ jobs:
             --qunit-path /theme-qunit --theme-name "ISBF Campus Feed" \
             --rails-env development --module "ISBF | Integration | Component | ResourceCatalog" \
             | sed -E $'s/\033\\[[0-9;]*m//g' | tee tmp/catalog-release/theme-qunit.log
+          grep -E '^# tests[[:space:]]+7$' tmp/catalog-release/theme-qunit.log
           grep -E '^ok [0-9]+ .*adding a category uses the name-only form' tmp/catalog-release/theme-qunit.log
           grep -E '^ok [0-9]+ .*the sidebar exposes directory actions only to directory managers' tmp/catalog-release/theme-qunit.log
           grep -E '^ok [0-9]+ .*saving a library category keeps the draft on denial' tmp/catalog-release/theme-qunit.log
