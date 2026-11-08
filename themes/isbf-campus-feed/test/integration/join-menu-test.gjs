@@ -21,7 +21,6 @@ module(
 
     hooks.afterEach(function () {
       this.redirect.restore();
-      this.transition?.restore();
       this.siteSettings.isbf_guides_enabled = this.previousGuidesEnabled;
     });
 
@@ -58,10 +57,8 @@ module(
 
     test("enabled Guides follows the existing actions and closes the menu before navigation", async function (assert) {
       this.siteSettings.isbf_guides_enabled = true;
-      this.transition = sinon.spy(
-        this.container.lookup("service:router"),
-        "transitionTo"
-      );
+      this.transition = sinon.stub();
+      this.container.lookup("service:router").transitionTo = this.transition;
       await render(
         <template><ISBFV2UtilityActions @menu={{this.menu}} /></template>
       );

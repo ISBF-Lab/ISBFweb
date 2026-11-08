@@ -10,7 +10,12 @@
       "fixture_helper_tests": 37,
       "projection_checks": 7,
       "projected_theme_files": 259,
-      "github_ci": "pending for the follow-up commit"
+      "github_ci": "pending for the follow-up commit",
+      "native_menu_tests": 2,
+      "native_menu_assertions": 9,
+      "current_theme_fixture_checks": 5,
+      "current_theme_modules": 2,
+      "temporary_menu_fixture_removed": true
     }
   },
   "status": {
@@ -18,6 +23,16 @@
     "production_deployed": false
   },
   "files": [
+    {
+      "path": ".github/fixtures/isbf-mbti-current-theme-source-audit.json",
+      "sha256": "3b631a11a96c593fb14dcd5c76e9a23bb44e445650748b8553fbf33a3e47877e",
+      "bytes": 697
+    },
+    {
+      "path": ".github/fixtures/isbf-mbti-current-theme-ui.json",
+      "sha256": "e25a9483fa8f42ee59a723cdb69a165519b7abfb10e7ff194a6c7013115151bc",
+      "bytes": 677
+    },
     {
       "path": ".github/fixtures/isbf-mbti-theme-paths.json",
       "sha256": "feff5e450441d2f036132aa06ca41b192654a2388be5771b98961167efab053f",
@@ -35,8 +50,8 @@
     },
     {
       "path": ".github/workflows/isbf-mbti.yml",
-      "sha256": "34f0d61f84211c351947028e9fd845d55662b71ece410ab499828b227762a860",
-      "bytes": 20027
+      "sha256": "e20d0fdfb3b01ae820ab25649887133a402c98f1e84f890278ad4bcf6716a994",
+      "bytes": 21129
     },
     {
       "path": ".gitignore",
@@ -55,8 +70,8 @@
     },
     {
       "path": "docs/design-system/reviews/guides-20261108/README.md",
-      "sha256": "b9da03c762a1911500ddc6491f0bdd1c3ce35098c7ebe2c6b687552ebfbaef8e",
-      "bytes": 3489
+      "sha256": "fb84300f2993e553843698a955058057ea333e5ed0814abcc698c12c15571a26",
+      "bytes": 4046
     },
     {
       "path": "docs/design-system/tokens.md",
@@ -515,8 +530,8 @@
     },
     {
       "path": "themes/isbf-campus-feed/test/integration/join-menu-test.gjs",
-      "sha256": "acea806c88caa7f61b247cbd8be3f2223d093bc6b470feedeedb75fdaba089db",
-      "bytes": 3075
+      "sha256": "654078952d5c11212388a0f3a0fd15c6e9307b52f202d97a6ee860b5aa6efca6",
+      "bytes": 3041
     },
     {
       "path": "themes/isbf-campus-feed/test/integration/workbench-test.gjs",

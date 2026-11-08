@@ -44,6 +44,14 @@ branch movement and unreviewed theme paths. All 37 existing fixture-helper tests
 passed. The focused Markdown and HTML renderer regression passed all 10 examples
 using the release plugin. The full MBTI and frontend gates remain enabled.
 
+The menu regression supplies the router stub's navigation callback explicitly;
+both affected native QUnit tests passed all nine assertions in a temporary
+development theme, which was then removed. An additive audited fixture restores
+the two existing error-page modules required by the current theme into the pinned
+CI core. Both public-source hashes match the recorded runtime observations. Five
+fixture checks cover restoration, preservation, idempotence, the transitive module
+dependency and rejection of modified source before writing any target file.
+
 ## Release boundary
 
 The user authorized PR, merge and production rollout. Deployment must preserve

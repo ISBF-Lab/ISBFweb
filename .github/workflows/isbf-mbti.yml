@@ -103,6 +103,16 @@ jobs:
       - uses: actions/checkout@v4
         if: matrix.baseline == 'production-132'
         with:
+          ref: 025feb7a029db226caf47da2d7f5e942b7fafb85
+          path: production-theme-core-source
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            frontend/discourse/app/lib/elastic-status.js
+            frontend/discourse/scripts/js/elastic-not-found.js
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        if: matrix.baseline == 'production-132'
+        with:
           ref: 13d66d6f415a7a6b496741155cb55315e208f882
           path: production-float-source
           sparse-checkout: |
@@ -241,6 +251,15 @@ jobs:
             --audit ../candidate/.github/fixtures/isbf-mbti-production-source-audit.json \
             --capture ../candidate/.github/fixtures/isbf-mbti-runtime \
             --target . > tmp/mbti-production-ui.json
+      - name: Restore audited current-theme dependencies only in the isolated CI runtime
+        if: matrix.baseline == 'production-132'
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/production-theme-core-source"
+          python3 ../candidate/.github/scripts/restore-mbti-production-ui.py \
+            --manifest ../candidate/.github/fixtures/isbf-mbti-current-theme-ui.json \
+            --source ../production-theme-core-source \
+            --audit ../candidate/.github/fixtures/isbf-mbti-current-theme-source-audit.json \
+            --target . > tmp/mbti-current-theme-ui.json
       - name: Restore the native select test helper from the fixed UI source
         if: matrix.baseline == 'production-132'
         run: |
@@ -396,6 +415,7 @@ jobs:
             discourse/tmp/mbti-production-smoke.json
             discourse/tmp/mbti-system.json
             discourse/tmp/mbti-production-ui.json
+            discourse/tmp/mbti-current-theme-ui.json
             discourse/tmp/mbti-qunit-style-harness.json
             discourse/tmp/mbti-theme.patch
             discourse/tmp/mbti-theme-patch.json

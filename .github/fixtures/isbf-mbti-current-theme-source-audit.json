@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "core_head": "132cc95d043db01251eedf9c93b3927cd5ffee91",
+  "observed_at": "2026-11-08T10:20:02.185815+00:00",
+  "scope": "Two public core modules required by the current project theme; hash-only observations, not a complete runtime inventory",
+  "files": [
+    {
+      "path": "frontend/discourse/app/lib/elastic-status.js",
+      "status": "hashed",
+      "bytes": 269,
+      "sha256": "b35e7c1af44cb6ae1a96c2add65a398679be4df58c788f5dc60207a779e6e8fc"
+    },
+    {
+      "path": "frontend/discourse/scripts/js/elastic-not-found.js",
+      "status": "hashed",
+      "bytes": 29442,
+      "sha256": "96e73bc7acebb78641a157ee6b0a4d01669532ff8e0c20e09a1be086defc0fc5"
+    }
+  ]
+}
