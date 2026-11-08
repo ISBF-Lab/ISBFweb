@@ -433,3 +433,19 @@ A07/C01 日历筛选使用现有 surface/hover/text/border/accent/accent-contras
 ## 2026-11-04 C22外观解锁增量
 
 新增后台门槛、徽章和色号字段继续采用 C22／FormKit 的既有样式，没有新增全局视觉 token。姓名浅／深色号属于开发者配置的外观数据，仅信息流作者姓名按原生配色模式取值；不覆盖正文、账号链接或全站 accent。偏好页锁定态复用控件 disabled 状态及普通说明文字，头像框预览与姓名预览沿用原规则。来源与检查见[记录](reviews/activity-cosmetics-20261104/README.md)。
+
+## 2026-11-04 使用指南局部组合
+
+使用既有 V2 语义颜色、字体及 space/radius 变量；正文 16px/1.45，feature-width 阅读区与 240px 目录间隔 space-6，1279px 以下目录移至文首折叠，600px 以下保留 space-4 和安全区。截图最高 36rem，仅属于本轮教程用途，不新增全站 token。[确认与验证](reviews/guides-20261108/README.md)。
+
+## 2026-11-08 C23 HTML 正文局部规则
+
+继续使用 V2 字体与语义配色。原教程的正文 16px/1.65、常规图片列 280px、宽图列 340px、图片最高 520px 仅用于指南文档。阅读区保留 feature-width，内容列不超过 42rem 时图文上下排列；全宽度目录位于页首。复用已有 space/radius/focus-ring，不新增全站 token。[来源及验收边界](reviews/guides-20261108/README.md)。
+
+## 2026-11-08 工作台指南图标
+
+专属指南针沿用工作台图标的 24×24 viewBox、1.5 描边、圆角端点与 currentColor；色调、电脑／手机图形尺寸及触控区域沿用既有 A08/C02。手机 SVG 分组显式 fill=none，保证轮廓清晰；不新增颜色、间距或全局 token。[限定范围](reviews/guides-20261108/README.md)。
+
+## 2026-11-08 工作台指南图形放大与填充
+
+按用户追加要求，指南针使用 currentColor 实心路径及透明镂空，图形在原容器内 scale 1.15。仅作用于 guides 入口的两种图标槽位；其余图形、底板、间距和触控尺寸沿用原值。该项替代此前 1.5 描边的指南针，不新增全局 token。[来源](reviews/guides-20261108/README.md)。

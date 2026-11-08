@@ -16,6 +16,7 @@ export default class ISBFV2UtilityActions extends Component {
   @service modal;
   @service router;
   @service site;
+  @service siteSettings;
 
   get items() {
     return [
@@ -43,6 +44,16 @@ export default class ISBFV2UtilityActions extends Component {
         label: i18n(themePrefix("isbf_v2.join_us")),
         action: this.openJoin,
       },
+      ...(this.siteSettings.isbf_guides_enabled
+        ? [
+            {
+              key: "guides",
+              icon: "book-open",
+              label: i18n(themePrefix("isbf_v2.guides")),
+              action: this.openGuides,
+            },
+          ]
+        : []),
     ];
   }
 
@@ -87,6 +98,12 @@ export default class ISBFV2UtilityActions extends Component {
   async openJoin() {
     await this.args.menu?.close();
     DiscourseURL.redirectTo("/join/");
+  }
+
+  @action
+  async openGuides() {
+    await this.args.menu?.close();
+    this.router.transitionTo("/guides");
   }
 
   <template>

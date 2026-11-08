@@ -1,0 +1,37 @@
+.isbf-guides-admin__list {
+  margin-block: 1em;
+  padding: 0;
+  list-style: none;
+}
+
+.isbf-guides-admin__entry {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1em;
+  padding-block: 1em;
+  border-block-end: 1px solid var(--primary-low);
+  overflow-wrap: anywhere;
+}
+
+.isbf-guides-admin__pagination,
+.isbf-guides-editor__publication {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75em;
+  margin-block: 1.5em;
+}
+
+.isbf-guides-editor__publication p {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+.isbf-guides-editor__images {
+  margin-block: 1em;
+}
+
+.isbf-guides-editor .form-kit__control-composer {
+  min-height: 20em;
+}

@@ -39,6 +39,8 @@ en:
       workbench_plate_teamup_color_light: "Desktop workbench: Team up (light mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
       workbench_plate_teamup_color_dark: "Desktop workbench: Team up (dark mode). Enter #RRGGBB; leave blank to inherit the default/theme. Does not change mobile colors."
   isbf_v2:
+    guides: Guides
+    workbench_guides: Guides
     top_topics:
       title: Popular topics
       period: Time range

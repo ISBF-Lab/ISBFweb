@@ -39,6 +39,8 @@ zh_CN:
       workbench_plate_teamup_color_light: "电脑工作台：组队（浅色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
       workbench_plate_teamup_color_dark: "电脑工作台：组队（深色模式），填写 #RRGGBB。留空使用统一默认色，再回退到主题颜色。仅影响电脑，不改变手机旧版配色。"
   isbf_v2:
+    guides: 使用指南
+    workbench_guides: 使用指南
     top_topics:
       title: 热门话题
       period: 统计周期
