@@ -154,7 +154,7 @@ jobs:
       - name: Run the native developer permission form
         run: |
           bin/qunit --standalone --target discourse-academy-roles --filter AcademyModeratorPermissions \
-            | tee tmp/catalog-release/admin-qunit.log
+            | sed -E $'s/\033\\[[0-9;]*m//g' | tee tmp/catalog-release/admin-qunit.log
           grep -E '^ok [0-9]+ .*renders twenty-three switches for developers' tmp/catalog-release/admin-qunit.log
           grep -E '^ok [0-9]+ .*saves only changed switches' tmp/catalog-release/admin-qunit.log
 
@@ -172,7 +172,7 @@ jobs:
           bin/qunit --standalone --target discourse-academy-roles \
             --qunit-path /theme-qunit --theme-name "ISBF Campus Feed" \
             --rails-env development --module "ISBF | Integration | Component | ResourceCatalog" \
-            | tee tmp/catalog-release/theme-qunit.log
+            | sed -E $'s/\033\\[[0-9;]*m//g' | tee tmp/catalog-release/theme-qunit.log
           grep -E '^ok [0-9]+ .*adding a category uses the name-only form' tmp/catalog-release/theme-qunit.log
           grep -E '^ok [0-9]+ .*the sidebar exposes directory actions only to directory managers' tmp/catalog-release/theme-qunit.log
           grep -E '^ok [0-9]+ .*saving a library category keeps the draft on denial' tmp/catalog-release/theme-qunit.log
