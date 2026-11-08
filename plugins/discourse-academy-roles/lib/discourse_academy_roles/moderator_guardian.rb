@@ -11,9 +11,9 @@ module DiscourseAcademyRoles::ModeratorGuardian
 
   def academy_has_management_permissions?
     # Catalog operations use their own plugin routes and do not need staff route access.
-    DiscourseAcademyRoles::ModeratorPermissions.for(user).any? do |permission, allowed|
-      allowed && permission != :manage_resource_catalogs
-    end
+    DiscourseAcademyRoles::ModeratorPermissions
+      .for(user)
+      .any? { |permission, allowed| allowed && permission != :manage_resource_catalogs }
   end
 
   def is_staff?
