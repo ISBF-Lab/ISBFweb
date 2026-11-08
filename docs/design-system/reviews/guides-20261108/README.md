@@ -52,6 +52,12 @@ CI core. Both public-source hashes match the recorded runtime observations. Five
 fixture checks cover restoration, preservation, idempotence, the transitive module
 dependency and rejection of modified source before writing any target file.
 
+Account enclosure tests wait for the account request and complete frame positioning
+before measuring the original card. Their original one-pixel tolerance and all
+geometry assertions remain in place, with explicit edge deltas for diagnostics.
+All six native account regressions passed 43 assertions; the temporary development
+test field, view and theme settings were restored.
+
 ## Release boundary
 
 The user authorized PR, merge and production rollout. Deployment must preserve

@@ -44,10 +44,18 @@ async function renderCard(context, mobile = false) {
 async function openCard() {
   await triggerEvent(card, "mouseenter");
   await waitUntil(() => find(surface));
+  await settled();
   await waitUntil(() => {
     const element = find(card);
-    const width = element.getBoundingClientRect().width;
-    const scale = width / parseFloat(getComputedStyle(element).width);
+    const bounds = element.getBoundingClientRect();
+    const cardStyle = getComputedStyle(element);
+    const scale = bounds.width / parseFloat(cardStyle.width);
+    const outer = find(surface).getBoundingClientRect();
+    const style = getComputedStyle(find(surface));
+    const inset =
+      parseFloat(style.paddingLeft) + parseFloat(style.borderLeftWidth);
+    const insetX = inset * scale;
+    const insetY = (inset * bounds.height) / parseFloat(cardStyle.height);
     const finished = find(".isbf-v2-account-menu__float")
       .getAnimations()
       .every(
@@ -56,9 +64,10 @@ async function openCard() {
       );
     return (
       finished &&
-      Math.abs(
-        find(surface).getBoundingClientRect().width - width - 18 * scale
-      ) < 1
+      Math.abs(outer.width - bounds.width - 18 * scale) < 1 &&
+      Math.abs(outer.left + insetX - bounds.left) < 1 &&
+      Math.abs(outer.right - insetX - bounds.right) < 1 &&
+      Math.abs(outer.bottom - insetY - bounds.bottom) < 1
     );
   });
 }
@@ -112,9 +121,18 @@ module("ISBF | Integration | Account menu enclosure", function (hooks) {
     const cardStyle = getComputedStyle(find(card));
     const insetX = (inset * after.width) / parseFloat(cardStyle.width);
     const insetY = (inset * after.height) / parseFloat(cardStyle.height);
-    assert.true(Math.abs(outer.left + insetX - after.left) < 1);
-    assert.true(Math.abs(outer.right - insetX - after.right) < 1);
-    assert.true(Math.abs(outer.bottom - insetY - after.bottom) < 1);
+    assert.true(
+      Math.abs(outer.left + insetX - after.left) < 1,
+      `left frame inset: ${outer.left + insetX - after.left}`
+    );
+    assert.true(
+      Math.abs(outer.right - insetX - after.right) < 1,
+      `right frame inset: ${outer.right - insetX - after.right}`
+    );
+    assert.true(
+      Math.abs(outer.bottom - insetY - after.bottom) < 1,
+      `bottom frame inset: ${outer.bottom - insetY - after.bottom}`
+    );
     assert.strictEqual(before.x, after.x);
     assert.strictEqual(before.y, after.y);
     assert.strictEqual(before.width, after.width);

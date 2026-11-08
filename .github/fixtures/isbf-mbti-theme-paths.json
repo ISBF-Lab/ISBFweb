@@ -17,6 +17,7 @@
   "themes/isbf-campus-feed/stylesheets/mbti.scss",
   "themes/isbf-campus-feed/stylesheets/guides.scss",
   "themes/isbf-campus-feed/stylesheets/workbench.scss",
+  "themes/isbf-campus-feed/test/integration/account-menu-enclosure-test.gjs",
   "themes/isbf-campus-feed/test/integration/join-menu-test.gjs",
   "themes/isbf-campus-feed/test/integration/mbti-test.gjs",
   "themes/isbf-campus-feed/test/integration/workbench-test.gjs",

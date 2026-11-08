@@ -10,12 +10,16 @@
       "fixture_helper_tests": 37,
       "projection_checks": 7,
       "projected_theme_files": 259,
-      "github_ci": "pending for the follow-up commit",
+      "github_ci": "pending for the account geometry synchronization commit",
       "native_menu_tests": 2,
       "native_menu_assertions": 9,
       "current_theme_fixture_checks": 5,
       "current_theme_modules": 2,
-      "temporary_menu_fixture_removed": true
+      "temporary_menu_fixture_removed": true,
+      "account_geometry_wait": "Await account loading and complete frame positioning at the unchanged one-pixel tolerance",
+      "native_account_tests": 6,
+      "native_account_assertions": 43,
+      "account_test_harness_restored": true
     }
   },
   "status": {
@@ -35,8 +39,8 @@
     },
     {
       "path": ".github/fixtures/isbf-mbti-theme-paths.json",
-      "sha256": "feff5e450441d2f036132aa06ca41b192654a2388be5771b98961167efab053f",
-      "bytes": 1519
+      "sha256": "893cfb9332c5a025c49e0e3e247b62b2a5c31431dfacd773a1ad4098e2624505",
+      "bytes": 1597
     },
     {
       "path": ".github/workflows/isbf-frontend-consistency.yml",
@@ -70,8 +74,8 @@
     },
     {
       "path": "docs/design-system/reviews/guides-20261108/README.md",
-      "sha256": "fb84300f2993e553843698a955058057ea333e5ed0814abcc698c12c15571a26",
-      "bytes": 4046
+      "sha256": "5a68e1aa7b0ad14d5ecd40c9190cccbe5bf68de3a3dc34d18b0b0830c041d5db",
+      "bytes": 4424
     },
     {
       "path": "docs/design-system/tokens.md",
@@ -527,6 +531,11 @@
       "path": "themes/isbf-campus-feed/stylesheets/workbench.scss",
       "sha256": "f8aff6ecb095c515b75e51d5bff51dcb562ce97b44b6a0e4053ad49ffe3017d3",
       "bytes": 7952
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/account-menu-enclosure-test.gjs",
+      "sha256": "f2355ca6aa4a3984aea41f7374ac29dd49f60474b652a8674196fc3af372700c",
+      "bytes": 8950
     },
     {
       "path": "themes/isbf-campus-feed/test/integration/join-menu-test.gjs",
