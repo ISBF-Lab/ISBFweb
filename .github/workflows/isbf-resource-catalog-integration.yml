@@ -53,6 +53,7 @@ jobs:
             plugins/discourse-academy-roles
             plugins/discourse-avatar-frames
             frontend/discourse/tests/helpers/d-select.js
+            themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-brand.gjs
           sparse-checkout-cone-mode: false
           persist-credentials: false
       - uses: actions/checkout@v4
@@ -112,6 +113,11 @@ jobs:
             | tar -x -C tmp/catalog-theme
           git -C ../theme archive HEAD -- test/integration/resource-catalog-test.gjs \
             | tar -x -C tmp/catalog-theme
+          # The standalone theme omits this component from the active production theme.
+          brand=javascripts/discourse/components/isbf-v2-brand.gjs
+          test ! -e "tmp/catalog-theme/$brand"
+          cp "../academy/themes/isbf-campus-feed/$brand" "tmp/catalog-theme/$brand"
+          printf '%s  %s\n' '2b728a4708e65fc7c4adc1f64c3894cf8801805c84413be51c56661454d1906c' "tmp/catalog-theme/$brand" | sha256sum -c -
           # Match the native student-group lane's test helper overlay.
           test ! -e frontend/discourse/tests/helpers/d-select.js
           cp ../academy/frontend/discourse/tests/helpers/d-select.js frontend/discourse/tests/helpers/d-select.js
