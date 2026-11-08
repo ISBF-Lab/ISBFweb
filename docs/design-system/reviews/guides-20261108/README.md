@@ -31,6 +31,19 @@ passed scoped native lint; existing page receipts cover its size, fill and posit
 Repository CI additionally checks the plugin suite, editor async lifecycle and the
 existing frontend/theme gates, including MBTI coexistence.
 
+The CI follow-up isolates the Guides feature flag in the existing Join menu test
+and covers enabled Guides navigation after menu dismissal. Both document renderers
+supply the native viewer's known image dimensions, preserving lazy loading and
+avoiding screenshot downloads before chapter navigation.
+
+The MBTI production-core job keeps its fixed, audited UI fixture and projects the
+reviewed PR patch onto the current target branch's theme. Its explicit theme scope
+includes the Guides integration; the complete projected theme must equal the
+candidate. Offline checks verified all 259 theme files and rejected stale commits,
+branch movement and unreviewed theme paths. All 37 existing fixture-helper tests
+passed. The focused Markdown and HTML renderer regression passed all 10 examples
+using the release plugin. The full MBTI and frontend gates remain enabled.
+
 ## Release boundary
 
 The user authorized PR, merge and production rollout. Deployment must preserve

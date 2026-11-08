@@ -67,6 +67,8 @@ module ::IsbfGuides
             wrapper.add_child(image)
           end
           wrapper["data-download-href"] = source
+          wrapper["data-target-width"] = row[2].to_s
+          wrapper["data-target-height"] = row[3].to_s
           row[1]
         end
         .uniq

@@ -15,10 +15,14 @@ module(
     hooks.beforeEach(function () {
       this.redirect = sinon.stub(DiscourseURL, "redirectTo");
       this.menu = { close: sinon.stub().resolves() };
+      this.previousGuidesEnabled = this.siteSettings.isbf_guides_enabled;
+      this.siteSettings.isbf_guides_enabled = false;
     });
 
     hooks.afterEach(function () {
       this.redirect.restore();
+      this.transition?.restore();
+      this.siteSettings.isbf_guides_enabled = this.previousGuidesEnabled;
     });
 
     test("the existing fourth action closes the menu and opens the public join page", async function (assert) {
@@ -50,6 +54,32 @@ module(
         this.redirect.calledAfter(this.menu.close),
         "navigation follows menu dismissal"
       );
+    });
+
+    test("enabled Guides follows the existing actions and closes the menu before navigation", async function (assert) {
+      this.siteSettings.isbf_guides_enabled = true;
+      this.transition = sinon.spy(
+        this.container.lookup("service:router"),
+        "transitionTo"
+      );
+      await render(
+        <template><ISBFV2UtilityActions @menu={{this.menu}} /></template>
+      );
+
+      assert.deepEqual(
+        findAll(".isbf-v2-more-menu__item").map((button) =>
+          button.textContent.trim()
+        ),
+        ["sidebar_settings", "appearance", "feedback", "join_us", "guides"].map(
+          (key) => i18n(themePrefix(`isbf_v2.${key}`))
+        )
+      );
+
+      await click(".dropdown-menu__item:last-child button");
+
+      assert.true(this.menu.close.calledOnce);
+      assert.true(this.transition.calledOnceWithExactly("/guides"));
+      assert.true(this.transition.calledAfter(this.menu.close));
     });
   }
 );

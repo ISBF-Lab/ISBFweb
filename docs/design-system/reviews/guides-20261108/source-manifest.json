@@ -4,7 +4,14 @@
     "development_backend_examples": 162,
     "development_browser_flows": "passed",
     "native_release_lint": "passed",
-    "additional_icon_acceptance": "waived by user"
+    "additional_icon_acceptance": "waived by user",
+    "ci_followup": {
+      "renderer_examples": 10,
+      "fixture_helper_tests": 37,
+      "projection_checks": 7,
+      "projected_theme_files": 259,
+      "github_ci": "pending for the follow-up commit"
+    }
   },
   "status": {
     "release_authorized": true,
@@ -12,54 +19,64 @@
   },
   "files": [
     {
-      "path": "themes/isbf-campus-feed/common/common.scss",
-      "sha256": "26150ec8c3c732cc839d5bf4c56b2fb0097e4ffc3647f268380d9336a8ac507e",
-      "bytes": 115191
+      "path": ".github/fixtures/isbf-mbti-theme-paths.json",
+      "sha256": "feff5e450441d2f036132aa06ca41b192654a2388be5771b98961167efab053f",
+      "bytes": 1519
     },
     {
-      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
-      "sha256": "b5fb66f565e705b03e62e913f42616916c739e84b240cf0c03797e05272d034b",
-      "bytes": 18152
+      "path": ".github/workflows/isbf-frontend-consistency.yml",
+      "sha256": "66c433f6bd1d739532597d8852491ed73fc210ebc652c30a153715d4c753a174",
+      "bytes": 10817
     },
     {
-      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-side-nav.gjs",
-      "sha256": "fdbc9b7f1db6e67a4fc8123eb7ebcb82aa18884698a2cf6793ff71d1171745f1",
-      "bytes": 5429
+      "path": ".github/workflows/isbf-guides.yml",
+      "sha256": "74a3341a5a3c10fc46918d7e2c804b338426bbf19cb1c3d0102c92bf87871303",
+      "bytes": 2099
     },
     {
-      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-utility-actions.gjs",
-      "sha256": "034116c50165ced6a7aa887be11f3269029b98305e28b7817ffa990dfbe5d091",
-      "bytes": 3172
+      "path": ".github/workflows/isbf-mbti.yml",
+      "sha256": "34f0d61f84211c351947028e9fd845d55662b71ece410ab499828b227762a860",
+      "bytes": 20027
     },
     {
-      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-workbench.gjs",
-      "sha256": "9e8bc78113ba98af398a2eb9b10039eae9ea064b73591b1b0636ee355039d389",
-      "bytes": 4024
+      "path": ".gitignore",
+      "sha256": "3a3e8a1ffbb87f144e6c104549bb9107b961a1f261d1f05b0d785fa770d681a9",
+      "bytes": 3726
     },
     {
-      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-icons.js",
-      "sha256": "f4a201680fbf5e608a6a98b47f2f33c37301e08573632d0146c3cf348f8cc71b",
-      "bytes": 6305
+      "path": "docs/design-system/components.md",
+      "sha256": "a0efc7d2468a23a95a706ccc97926944975f7e47fe07e7aab0e1bdaa9dc2e1e8",
+      "bytes": 55594
     },
     {
-      "path": "themes/isbf-campus-feed/locales/en.yml",
-      "sha256": "8c4fcceb1f6f2049c9ae08f56e45fc71ee2c1b5c22df3d13caa8538bfc68368d",
-      "bytes": 27577
+      "path": "docs/design-system/reference-map.md",
+      "sha256": "0b93da71df9a4458b3008a0d4bda6acecf948e40c25dc2359fd83f10643db135",
+      "bytes": 41687
     },
     {
-      "path": "themes/isbf-campus-feed/locales/zh_CN.yml",
-      "sha256": "ebbfdf893325aa39079e1150762008a049d0eb97f9068a431c0084f81fb55840",
-      "bytes": 27461
+      "path": "docs/design-system/reviews/guides-20261108/README.md",
+      "sha256": "b9da03c762a1911500ddc6491f0bdd1c3ce35098c7ebe2c6b687552ebfbaef8e",
+      "bytes": 3489
     },
     {
-      "path": "themes/isbf-campus-feed/stylesheets/guides.scss",
-      "sha256": "e1d3b8f8e2d7d2416e02bdd20cfbaef4f79edec2299487be10a8d162eccc008d",
-      "bytes": 13627
+      "path": "docs/design-system/tokens.md",
+      "sha256": "a04e5d6feaa452b194a815812d36f60ad358c7c9f0a128777be3b11284401e99",
+      "bytes": 46715
     },
     {
-      "path": "themes/isbf-campus-feed/stylesheets/workbench.scss",
-      "sha256": "f8aff6ecb095c515b75e51d5bff51dcb562ce97b44b6a0e4053ad49ffe3017d3",
-      "bytes": 7952
+      "path": "docs/design-system/ui-status.md",
+      "sha256": "098fc861476f1b96c58b06b7f9e42101a05e655b08ddf0d22554796f534cabde",
+      "bytes": 55650
+    },
+    {
+      "path": "frontend/discourse/app/static/prosemirror/components/prosemirror-editor.gts",
+      "sha256": "fb5c90bdaad0db4a1c7018b1b6013ab96706188e044ec72309a2603256fdad4e",
+      "bytes": 17187
+    },
+    {
+      "path": "frontend/discourse/tests/integration/components/prosemirror-editor/async-plugin-lifecycle-test.gjs",
+      "sha256": "d2ce5eb17e77bfb864231a157a14c61859ce33dab92531db8591ba8076e7a431",
+      "bytes": 1744
     },
     {
       "path": "plugins/isbf-guides/README.md",
@@ -333,8 +350,8 @@
     },
     {
       "path": "plugins/isbf-guides/lib/isbf_guides/renderer.rb",
-      "sha256": "d8d16a3b4fc8f496003d4c9044652966b71d2c055835d0b4c0c9acd05fda311f",
-      "bytes": 2265
+      "sha256": "9838cf3dfab32f18851a75d16b8e73d7268b4d8b2f143c5760067115697382f0",
+      "bytes": 2372
     },
     {
       "path": "plugins/isbf-guides/lib/isbf_guides/templates/example.png",
@@ -378,8 +395,8 @@
     },
     {
       "path": "plugins/isbf-guides/spec/lib/html_renderer_spec.rb",
-      "sha256": "81ab35dc76506038fd9b425e12808c299792142c5d4292cc04db617585bf26dc",
-      "bytes": 3960
+      "sha256": "5a66bd44d5ce76e71f2db22c306e1e0013b178803daeebf18df71b458a654ce9",
+      "bytes": 4167
     },
     {
       "path": "plugins/isbf-guides/spec/lib/legacy_import_spec.rb",
@@ -388,8 +405,8 @@
     },
     {
       "path": "plugins/isbf-guides/spec/lib/renderer_spec.rb",
-      "sha256": "c8344a6d222e5cae0fcc5ca74a5d078a6ba3985fb102f6783227be7b213ce31f",
-      "bytes": 2118
+      "sha256": "f452b0e59deff4852d1e521ff32f99dfed71ec922e16802b340d447b22476b75",
+      "bytes": 2301
     },
     {
       "path": "plugins/isbf-guides/spec/models/guide_spec.rb",
@@ -447,59 +464,64 @@
       "bytes": 2437
     },
     {
-      "path": "frontend/discourse/app/static/prosemirror/components/prosemirror-editor.gts",
-      "sha256": "fb5c90bdaad0db4a1c7018b1b6013ab96706188e044ec72309a2603256fdad4e",
-      "bytes": 17187
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "sha256": "26150ec8c3c732cc839d5bf4c56b2fb0097e4ffc3647f268380d9336a8ac507e",
+      "bytes": 115191
     },
     {
-      "path": "frontend/discourse/tests/integration/components/prosemirror-editor/async-plugin-lifecycle-test.gjs",
-      "sha256": "d2ce5eb17e77bfb864231a157a14c61859ce33dab92531db8591ba8076e7a431",
-      "bytes": 1744
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+      "sha256": "b5fb66f565e705b03e62e913f42616916c739e84b240cf0c03797e05272d034b",
+      "bytes": 18152
     },
     {
-      "path": ".gitignore",
-      "sha256": "3a3e8a1ffbb87f144e6c104549bb9107b961a1f261d1f05b0d785fa770d681a9",
-      "bytes": 3726
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-side-nav.gjs",
+      "sha256": "fdbc9b7f1db6e67a4fc8123eb7ebcb82aa18884698a2cf6793ff71d1171745f1",
+      "bytes": 5429
     },
     {
-      "path": ".github/workflows/isbf-guides.yml",
-      "sha256": "74a3341a5a3c10fc46918d7e2c804b338426bbf19cb1c3d0102c92bf87871303",
-      "bytes": 2099
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-utility-actions.gjs",
+      "sha256": "034116c50165ced6a7aa887be11f3269029b98305e28b7817ffa990dfbe5d091",
+      "bytes": 3172
     },
     {
-      "path": ".github/workflows/isbf-frontend-consistency.yml",
-      "sha256": "66c433f6bd1d739532597d8852491ed73fc210ebc652c30a153715d4c753a174",
-      "bytes": 10817
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-workbench.gjs",
+      "sha256": "9e8bc78113ba98af398a2eb9b10039eae9ea064b73591b1b0636ee355039d389",
+      "bytes": 4024
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-icons.js",
+      "sha256": "f4a201680fbf5e608a6a98b47f2f33c37301e08573632d0146c3cf348f8cc71b",
+      "bytes": 6305
+    },
+    {
+      "path": "themes/isbf-campus-feed/locales/en.yml",
+      "sha256": "8c4fcceb1f6f2049c9ae08f56e45fc71ee2c1b5c22df3d13caa8538bfc68368d",
+      "bytes": 27577
+    },
+    {
+      "path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+      "sha256": "ebbfdf893325aa39079e1150762008a049d0eb97f9068a431c0084f81fb55840",
+      "bytes": 27461
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/guides.scss",
+      "sha256": "e1d3b8f8e2d7d2416e02bdd20cfbaef4f79edec2299487be10a8d162eccc008d",
+      "bytes": 13627
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/workbench.scss",
+      "sha256": "f8aff6ecb095c515b75e51d5bff51dcb562ce97b44b6a0e4053ad49ffe3017d3",
+      "bytes": 7952
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/join-menu-test.gjs",
+      "sha256": "acea806c88caa7f61b247cbd8be3f2223d093bc6b470feedeedb75fdaba089db",
+      "bytes": 3075
     },
     {
       "path": "themes/isbf-campus-feed/test/integration/workbench-test.gjs",
       "sha256": "a7d14f2eb34292ed56e6d1163ce7fcde25792babb1813603ae16ec59b61935e6",
       "bytes": 6947
-    },
-    {
-      "path": "docs/design-system/components.md",
-      "sha256": "a0efc7d2468a23a95a706ccc97926944975f7e47fe07e7aab0e1bdaa9dc2e1e8",
-      "bytes": 55594
-    },
-    {
-      "path": "docs/design-system/tokens.md",
-      "sha256": "a04e5d6feaa452b194a815812d36f60ad358c7c9f0a128777be3b11284401e99",
-      "bytes": 46715
-    },
-    {
-      "path": "docs/design-system/reference-map.md",
-      "sha256": "0b93da71df9a4458b3008a0d4bda6acecf948e40c25dc2359fd83f10643db135",
-      "bytes": 41687
-    },
-    {
-      "path": "docs/design-system/ui-status.md",
-      "sha256": "098fc861476f1b96c58b06b7f9e42101a05e655b08ddf0d22554796f534cabde",
-      "bytes": 55650
-    },
-    {
-      "path": "docs/design-system/reviews/guides-20261108/README.md",
-      "sha256": "84409937eff81494f248e3f6942ca803f43a0fdbad8f545c78128bc0764266d9",
-      "bytes": 2625
     }
   ]
 }

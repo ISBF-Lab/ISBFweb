@@ -28,10 +28,10 @@ RSpec.describe IsbfGuides::HtmlRenderer do
     end
 
     it "keeps figures, captions and approved callout structure" do
-      image = Fabricate(:isbf_guide_image, guide:)
+      image = Fabricate(:isbf_guide_image, guide:, data: file_from_fixtures("logo.png").read)
       raw = <<~HTML
         <section id="setup"><h2>Setup</h2>
-        <figure class="isbf-guide__shot"><img src="#{image.url}" alt="Phone settings"><figcaption class="isbf-guide__caption">Figure one</figcaption></figure>
+        <figure class="isbf-guide__shot"><a href="#{image.url}"><img src="#{image.url}" alt="Phone settings"></a><figcaption class="isbf-guide__caption">Figure one</figcaption></figure>
         <div class="isbf-guide__callout --danger"><strong>Important</strong><p>Keep forum messages enabled.</p></div>
         </section>
       HTML
@@ -41,7 +41,11 @@ RSpec.describe IsbfGuides::HtmlRenderer do
 
       expect(document.at_css("figure.isbf-guide__shot figcaption").text).to eq("Figure one")
       expect(document.at_css(".isbf-guide__callout p").text).to eq("Keep forum messages enabled.")
-      expect(document.at_css("a.lightbox")["href"]).to eq(image.url)
+      expect(document.at_css("a.lightbox").attributes.transform_values(&:value)).to include(
+        "href" => image.url,
+        "data-target-width" => "244",
+        "data-target-height" => "66",
+      )
       expect(result[:image_ids]).to eq([image.id])
     end
 

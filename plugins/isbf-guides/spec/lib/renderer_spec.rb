@@ -20,18 +20,22 @@ RSpec.describe IsbfGuides::Renderer do
     end
 
     it "adds the native image viewer link and captures only referenced private images" do
-      image = Fabricate(:isbf_guide_image, guide:)
+      image = Fabricate(:isbf_guide_image, guide:, data: file_from_fixtures("logo.png").read)
       Fabricate(:isbf_guide_image, guide:)
 
       result = described_class.new(guide:, raw: "![Notification settings](#{image.url})").render
       document = Nokogiri::HTML5.fragment(result[:cooked])
 
       expect(result[:image_ids]).to eq([image.id])
-      expect(document.at_css("a.lightbox")["href"]).to eq(image.url)
+      expect(document.at_css("a.lightbox").attributes.transform_values(&:value)).to include(
+        "href" => image.url,
+        "data-target-width" => "244",
+        "data-target-height" => "66",
+      )
       expect(document.at_css("img").attributes.transform_values(&:value)).to include(
         "src" => image.url,
-        "width" => "1",
-        "height" => "1",
+        "width" => "244",
+        "height" => "66",
         "loading" => "lazy",
       )
     end
