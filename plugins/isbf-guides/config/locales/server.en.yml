@@ -1,0 +1,24 @@
+en:
+  site_settings:
+    isbf_guides_enabled: "Enable member guides and administrator guide management."
+  isbf_guides:
+    document:
+      intro: "Before you begin"
+    errors:
+      document_invalid_file: "Upload an HTML or ZIP guide file no larger than 10 MiB."
+      document_invalid_archive: "The guide package could not be read. Check the ZIP file and images; the limit is 500 entries and 50 MiB of expanded content."
+      document_too_large: "The guide package is too large. Reduce the image or file size and try again."
+      document_encoding: "Save the HTML file using UTF-8 encoding."
+      document_empty: "The file has no guide content to display."
+      document_missing_html: "Include index.html or a single HTML document in the guide package."
+      document_invalid_path: "The guide package contains an invalid file path. Use paths within the package."
+      document_image_source: "Include images in the ZIP package or embed them in HTML. External image URLs are not supported."
+      document_missing_image: "The referenced image was not found: %{path}. Include it with the HTML in the ZIP package."
+      document_invalid_image: "Invalid image format: %{path}. Use JPG, PNG, WebP, or GIF."
+      document_duplicate_id: "A chapter or step identifier is repeated: %{identifier}. Use a different identifier for each section."
+      fixed_slug: "cannot change after the first publication"
+      immutable_revision: "Published content cannot be edited directly. Save a draft instead."
+      invalid_content: "The guide could not be saved. Check its content and try again."
+      invalid_image_reference: "must use images uploaded to this guide"
+      invalid_image: "Upload a valid JPG, PNG, WebP or GIF within the site's image size limit."
+      conflict: "This guide changed in another session. Reload it before saving or publishing."

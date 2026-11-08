@@ -73,6 +73,12 @@ const CARDS = [
     tone: "violet",
   },
   { key: "mbti", icon: "brain", mobileIcon: "brain", tone: "blue" },
+  {
+    key: "guides",
+    icon: "isbf-workbench-guides",
+    mobileIcon: "isbf-workbench-guides",
+    tone: "blue",
+  },
 ];
 
 export default class ISBFV2Workbench extends Component {
@@ -83,29 +89,32 @@ export default class ISBFV2Workbench extends Component {
     return CARDS.filter(
       (card) =>
         (card.key !== "alumni" || alumniConfig(this.site)) &&
-        (card.key !== "mbti" || mbtiConfig(this.site))
+        (card.key !== "mbti" || mbtiConfig(this.site)) &&
+        (card.key !== "guides" || this.siteSettings.isbf_guides_enabled)
     ).map((card) => ({
       ...card,
       label: i18n(themePrefix(`isbf_v2.workbench_${card.key}`)),
       href:
         card.key === "mbti"
           ? "/isbf/mbti"
-          : card.key === "learning_resources" && learningConfig(this.site)
-            ? "/isbf/learning"
-            : card.key === "library" && libraryConfig(this.site)
-              ? "/isbf/library"
-              : card.key === "careers" && careersConfig(this.site)
-                ? "/isbf/careers"
-                : card.key === "marketplace" && marketplaceConfig(this.site)
-                  ? "/isbf/marketplace"
-                  : card.key === "teamup" && teamupConfig(this.site)
-                    ? "/isbf/teamup"
-                    : card.key === "alumni"
-                      ? "/isbf/alumni"
-                      : card.key === "resume" &&
-                          this.siteSettings.isbf_resume_enabled
-                        ? "/isbf/workbench/resume"
-                        : null,
+          : card.key === "guides"
+            ? "/guides"
+            : card.key === "learning_resources" && learningConfig(this.site)
+              ? "/isbf/learning"
+              : card.key === "library" && libraryConfig(this.site)
+                ? "/isbf/library"
+                : card.key === "careers" && careersConfig(this.site)
+                  ? "/isbf/careers"
+                  : card.key === "marketplace" && marketplaceConfig(this.site)
+                    ? "/isbf/marketplace"
+                    : card.key === "teamup" && teamupConfig(this.site)
+                      ? "/isbf/teamup"
+                      : card.key === "alumni"
+                        ? "/isbf/alumni"
+                        : card.key === "resume" &&
+                            this.siteSettings.isbf_resume_enabled
+                          ? "/isbf/workbench/resume"
+                          : null,
     }));
   }
 

@@ -158,6 +158,11 @@ jobs:
           frontend/discourse/tests/integration/components/nested/deleted-posts-test.gjs
           frontend/discourse/tests/unit/controllers/nested-test.js
 
+      - name: Rich editor asynchronous plugin lifecycle regression
+        env:
+          LOAD_PLUGINS: "0"
+        run: bin/qunit --standalone frontend/discourse/tests/integration/components/prosemirror-editor/async-plugin-lifecycle-test.gjs
+
       - name: Native title display regression
         env:
           LOAD_PLUGINS: "0"

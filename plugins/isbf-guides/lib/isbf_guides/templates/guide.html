@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>教程标题</title>
+  </head>
+  <body>
+    <main data-guide-content>
+      <!-- 字体、配色与明暗主题由网站统一提供。请在后台填写页面标题和摘要。 -->
+      <section class="isbf-guide__intro" id="prep">
+        <h1>教程标题</h1>
+        <p class="isbf-guide__lead">在这里说明本教程适用于谁、需要准备什么，以及完成后的效果。</p>
+        <div class="isbf-guide__info-grid">
+          <div class="isbf-guide__info-item">
+            <strong class="isbf-guide__info-title">开始前准备</strong>
+            <span class="isbf-guide__info-desc">在这里填写必要的条件。</span>
+          </div>
+        </div>
+      </section>
+      <section class="isbf-guide__section" id="section-1">
+        <div class="isbf-guide__section-head">
+          <h2 class="isbf-guide__section-title">一、第一章</h2>
+          <p class="isbf-guide__section-desc">在这里填写章节说明。</p>
+        </div>
+        <!-- 复制 article 可以增加步骤；每个章节和步骤的 id 必须唯一。 -->
+        <article class="isbf-guide__step" id="step-1">
+          <div class="isbf-guide__step-body">
+            <div class="isbf-guide__step-meta"><span class="isbf-guide__badge">第 1 步</span></div>
+            <h3 class="isbf-guide__step-title">第一步的标题</h3>
+            <p>在这里填写操作说明。可使用<strong>粗体</strong>、列表、链接和表格。</p>
+            <div class="isbf-guide__callout"><span class="isbf-guide__callout-label">说明：</span>填写补充说明；重要提醒可增加 --danger 类。</div>
+          </div>
+          <figure class="isbf-guide__shot">
+            <!-- 将示例图片替换为你的截图，并与 HTML 一起放入 ZIP。 -->
+            <img src="images/example.png" alt="请替换为本步骤的截图">
+            <figcaption class="isbf-guide__caption">图 1：请填写图片说明。</figcaption>
+          </figure>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

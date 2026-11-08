@@ -104,6 +104,12 @@ export default class ISBFV2Shell extends Component {
     if (path === "/isbf/learning") {
       return "learning";
     }
+    if (
+      this.siteSettings.isbf_guides_enabled &&
+      /^\/guides(?:\/|$)/.test(path)
+    ) {
+      return "guides";
+    }
     if (/^\/u\/[^/]+\/notifications(\/|$)/.test(path)) {
       return "notifications";
     }
@@ -198,6 +204,7 @@ export default class ISBFV2Shell extends Component {
       "learning",
       "alumni",
       "marketplace",
+      "guides",
     ].includes(this.pageKind);
   }
 
@@ -234,6 +241,7 @@ export default class ISBFV2Shell extends Component {
         "workbench",
         "mbti",
         "resume",
+        "guides",
       ].includes(this.pageKind)
     );
   }

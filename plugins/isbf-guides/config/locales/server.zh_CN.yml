@@ -1,0 +1,24 @@
+zh_CN:
+  site_settings:
+    isbf_guides_enabled: "启用登录用户使用指南与管理员教程管理。"
+  isbf_guides:
+    document:
+      intro: "开始前说明"
+    errors:
+      document_invalid_file: "请上传不超过 10 MiB 的 HTML 或 ZIP 教程文件。"
+      document_invalid_archive: "无法读取教程包。请检查 ZIP 文件和图片，文件数量不得超过 500 项，解压内容不得超过 50 MiB。"
+      document_too_large: "教程包内容过大，请减少图片或文件体积后重新上传。"
+      document_encoding: "HTML 文件需要使用 UTF-8 编码保存。"
+      document_empty: "文件中没有可展示的教程正文。"
+      document_missing_html: "教程包需要包含 index.html，或唯一的 HTML 正文文件。"
+      document_invalid_path: "教程包包含无效的文件路径，请使用包内的相对路径。"
+      document_image_source: "请将图片放入 ZIP 教程包或嵌入 HTML，不支持从外部网址加载图片。"
+      document_missing_image: "找不到正文引用的图片：%{path}。请将图片与 HTML 一起打包上传。"
+      document_invalid_image: "图片格式无效：%{path}。请使用 JPG、PNG、WebP 或 GIF。"
+      document_duplicate_id: "正文存在重复的章节或步骤标识：%{identifier}。请为每个标识设置不同的名称。"
+      fixed_slug: "首次发布后不能修改"
+      immutable_revision: "已发布内容不能直接修改，请先保存草稿。"
+      invalid_content: "教程保存失败，请检查内容后重试。"
+      invalid_image_reference: "只能使用上传到本篇教程的图片"
+      invalid_image: "请上传有效的 JPG、PNG、WebP 或 GIF，且不超过网站图片大小限制。"
+      conflict: "教程已在其他会话中更新，请重新加载后再保存或发布。"

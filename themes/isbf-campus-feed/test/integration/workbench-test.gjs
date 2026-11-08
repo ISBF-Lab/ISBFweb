@@ -43,14 +43,17 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
       Object.keys(configuration).map((name) => [name, this.site[name]])
     );
     this.previousResumeEnabled = this.siteSettings.isbf_resume_enabled;
+    this.previousGuidesEnabled = this.siteSettings.isbf_guides_enabled;
     this.site.setProperties(configuration);
     this.siteSettings.isbf_resume_enabled = true;
+    this.siteSettings.isbf_guides_enabled = false;
   });
 
   hooks.afterEach(function () {
     this.contextStub.restore();
     this.site.setProperties(this.previousConfiguration);
     this.siteSettings.isbf_resume_enabled = this.previousResumeEnabled;
+    this.siteSettings.isbf_guides_enabled = this.previousGuidesEnabled;
   });
 
   test("the new presentation preserves real links and non-interactive placeholders", async function (assert) {
@@ -116,6 +119,27 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
     assert
       .dom('[data-workbench-key="mbti"]')
       .doesNotExist("removing the capability removes its existing card");
+  });
+
+  test("Guides remains last when MBTI is available and respects its feature flag", async function (assert) {
+    this.siteSettings.isbf_guides_enabled = true;
+    this.site.set("isbf_mbti", { enabled: true, path: "/isbf/mbti" });
+    await render(<template><ISBFV2Workbench /></template>);
+
+    const cards = findAll("[data-workbench-key]");
+    assert.strictEqual(cards.at(-1).dataset.workbenchKey, "guides");
+    assert.dom('[data-workbench-key="guides"]').hasAttribute("href", "/guides");
+    assert
+      .dom('[data-workbench-key="mbti"]')
+      .hasAttribute("href", "/isbf/mbti");
+
+    this.siteSettings.isbf_guides_enabled = false;
+    await settled();
+    assert.dom('[data-workbench-key="guides"]').doesNotExist();
+    assert.strictEqual(
+      findAll("[data-workbench-key]").at(-1).dataset.workbenchKey,
+      "mbti"
+    );
   });
 
   test("disabled services keep their existing visibility and placeholder rules", async function (assert) {

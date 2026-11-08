@@ -238,6 +238,10 @@ export default class ProsemirrorEditor extends Component<ProsemirrorEditorSignat
 
   @action
   handleAsyncPlugin(plugin: Plugin): void {
+    if (this.view.isDestroyed) {
+      return;
+    }
+
     const state = this.view.state.reconfigure({
       plugins: [...this.view.state.plugins, plugin],
     });

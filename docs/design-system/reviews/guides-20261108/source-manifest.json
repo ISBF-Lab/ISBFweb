@@ -1,0 +1,505 @@
+{
+  "design": "User-approved Guides center, HTML/ZIP authoring and final solid workbench icon",
+  "verification": {
+    "development_backend_examples": 162,
+    "development_browser_flows": "passed",
+    "native_release_lint": "passed",
+    "additional_icon_acceptance": "waived by user"
+  },
+  "status": {
+    "release_authorized": true,
+    "production_deployed": false
+  },
+  "files": [
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "sha256": "26150ec8c3c732cc839d5bf4c56b2fb0097e4ffc3647f268380d9336a8ac507e",
+      "bytes": 115191
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
+      "sha256": "b5fb66f565e705b03e62e913f42616916c739e84b240cf0c03797e05272d034b",
+      "bytes": 18152
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-side-nav.gjs",
+      "sha256": "fdbc9b7f1db6e67a4fc8123eb7ebcb82aa18884698a2cf6793ff71d1171745f1",
+      "bytes": 5429
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-utility-actions.gjs",
+      "sha256": "034116c50165ced6a7aa887be11f3269029b98305e28b7817ffa990dfbe5d091",
+      "bytes": 3172
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-workbench.gjs",
+      "sha256": "9e8bc78113ba98af398a2eb9b10039eae9ea064b73591b1b0636ee355039d389",
+      "bytes": 4024
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-icons.js",
+      "sha256": "f4a201680fbf5e608a6a98b47f2f33c37301e08573632d0146c3cf348f8cc71b",
+      "bytes": 6305
+    },
+    {
+      "path": "themes/isbf-campus-feed/locales/en.yml",
+      "sha256": "8c4fcceb1f6f2049c9ae08f56e45fc71ee2c1b5c22df3d13caa8538bfc68368d",
+      "bytes": 27577
+    },
+    {
+      "path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+      "sha256": "ebbfdf893325aa39079e1150762008a049d0eb97f9068a431c0084f81fb55840",
+      "bytes": 27461
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/guides.scss",
+      "sha256": "e1d3b8f8e2d7d2416e02bdd20cfbaef4f79edec2299487be10a8d162eccc008d",
+      "bytes": 13627
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/workbench.scss",
+      "sha256": "f8aff6ecb095c515b75e51d5bff51dcb562ce97b44b6a0e4053ad49ffe3017d3",
+      "bytes": 7952
+    },
+    {
+      "path": "plugins/isbf-guides/README.md",
+      "sha256": "e9a86b7d4e98dce8ead45f252a5433bdf5abc8bc1f4de7d0dd95496a1d523244",
+      "bytes": 6200
+    },
+    {
+      "path": "plugins/isbf-guides/admin/assets/javascripts/discourse/components/isbf-guides-editor.gjs",
+      "sha256": "953ff6bdb4a6e3809d5bdac24bf4b8c1fbdaecd0e98ea28c0268568deb9a5295",
+      "bytes": 11701
+    },
+    {
+      "path": "plugins/isbf-guides/admin/assets/javascripts/discourse/controllers/admin-plugins/show/isbf-guides-guides.js",
+      "sha256": "bc6c2a36d7421a3b2ff20f94582870abb93af5270679a99f8e189060471a8739",
+      "bytes": 114
+    },
+    {
+      "path": "plugins/isbf-guides/admin/assets/javascripts/discourse/controllers/admin-plugins/show/isbf-guides-guides/index.js",
+      "sha256": "e1e8603c16085a96d018c27f1d9c8eaa0f330a8802ec0a941ce0b4e55ceafb6b",
+      "bytes": 212
+    },
+    {
+      "path": "plugins/isbf-guides/admin/assets/javascripts/discourse/routes/admin-plugins/show/isbf-guides-guides.js",
+      "sha256": "b5a00ce32615848143555756f0a012df0234c069c0e89e9a01ac362b4ad6f6d1",
+      "bytes": 207
+    },
+    {
+      "path": "plugins/isbf-guides/admin/assets/javascripts/discourse/routes/admin-plugins/show/isbf-guides-guides/edit.js",
+      "sha256": "5bffdc79c0c2bc483685aa4aff7b08d19d2a12ab06d235eb09d0d64f5bad9809",
+      "bytes": 232
+    },
+    {
+      "path": "plugins/isbf-guides/admin/assets/javascripts/discourse/routes/admin-plugins/show/isbf-guides-guides/index.js",
+      "sha256": "58c261d0e320c611bb448eb849af4ac11471a89d1aadd25e77f8bba742634f5a",
+      "bytes": 288
+    },
+    {
+      "path": "plugins/isbf-guides/admin/assets/javascripts/discourse/routes/admin-plugins/show/isbf-guides-guides/new.js",
+      "sha256": "58000769561a629f3c8a5793efe1192af6fcfc051ca57521f14c2dcba237c5af",
+      "bytes": 141
+    },
+    {
+      "path": "plugins/isbf-guides/admin/assets/javascripts/discourse/templates/admin-plugins/show/isbf-guides-guides.gjs",
+      "sha256": "c8ef6829a4b67641588b700266830d8d6d3c2fe9261d989be49f86d6b007286c",
+      "bytes": 114
+    },
+    {
+      "path": "plugins/isbf-guides/admin/assets/javascripts/discourse/templates/admin-plugins/show/isbf-guides-guides/edit.gjs",
+      "sha256": "879f79629575b1de677bcb44f999434e3456d792a27bdbc8b8bf3a8c427c2ef1",
+      "bytes": 296
+    },
+    {
+      "path": "plugins/isbf-guides/admin/assets/javascripts/discourse/templates/admin-plugins/show/isbf-guides-guides/index.gjs",
+      "sha256": "d83226d6e8ef6297d02b5d7a57754df911c62d6b08349c27a69441dbcca57778",
+      "bytes": 2315
+    },
+    {
+      "path": "plugins/isbf-guides/admin/assets/javascripts/discourse/templates/admin-plugins/show/isbf-guides-guides/new.gjs",
+      "sha256": "879f79629575b1de677bcb44f999434e3456d792a27bdbc8b8bf3a8c427c2ef1",
+      "bytes": 296
+    },
+    {
+      "path": "plugins/isbf-guides/app/controllers/isbf_guides/admin/guides_controller.rb",
+      "sha256": "bcb09841681f62b1db534271c824ce1d78c9785f66fa955b20d837d9ddb50a90",
+      "bytes": 6861
+    },
+    {
+      "path": "plugins/isbf-guides/app/controllers/isbf_guides/guides_controller.rb",
+      "sha256": "c235b1deffc7fb8ba949931f5d4f96c3d6515a1c1cc320b629674cd189de66c3",
+      "bytes": 2561
+    },
+    {
+      "path": "plugins/isbf-guides/app/models/isbf_guides/guide.rb",
+      "sha256": "0b768a315cffb1ab6ab9606a6b80abd6f0a5bd81272316c9e515b18992798aee",
+      "bytes": 3252
+    },
+    {
+      "path": "plugins/isbf-guides/app/models/isbf_guides/image.rb",
+      "sha256": "1071ec466decb4451b2d729b2b4c64343d1b731e97567332729107e6c3b8599a",
+      "bytes": 2097
+    },
+    {
+      "path": "plugins/isbf-guides/app/models/isbf_guides/revision.rb",
+      "sha256": "f97ac1c1afd169e0478dd7d88ef4145881c60830563f01b5ceacbd24b3cf5be5",
+      "bytes": 3276
+    },
+    {
+      "path": "plugins/isbf-guides/app/serializers/isbf_guides/admin_guide_serializer.rb",
+      "sha256": "929c61a0cc0c1ae3c1c73d0f618cbca51623398d5719fdbfc670d3a23a5357f8",
+      "bytes": 690
+    },
+    {
+      "path": "plugins/isbf-guides/app/serializers/isbf_guides/admin_revision_serializer.rb",
+      "sha256": "7013b7ce3d2062fbd550a44f507574ca1052caf26f953bd468331c2db7736046",
+      "bytes": 207
+    },
+    {
+      "path": "plugins/isbf-guides/app/serializers/isbf_guides/guide_serializer.rb",
+      "sha256": "4f59d76780256b0b62071faa5e012c5ce9daae432d85f5f525c46a2141e19424",
+      "bytes": 433
+    },
+    {
+      "path": "plugins/isbf-guides/app/serializers/isbf_guides/guide_summary_serializer.rb",
+      "sha256": "3d4099e2fd1d25f61ad8bb30cc048e6ea6a261ff72d62b0520985c48d10011ad",
+      "bytes": 468
+    },
+    {
+      "path": "plugins/isbf-guides/app/services/isbf_guides/import_document.rb",
+      "sha256": "24464aabf2977b9690a1a1f224b61d8ecc50e13652b5580c054074a1419cb467",
+      "bytes": 1833
+    },
+    {
+      "path": "plugins/isbf-guides/app/services/isbf_guides/publish.rb",
+      "sha256": "d2163a2f5e58eebb5dd60fd06b8c83e4404bf02bb682dc6f68d6eb2965c461c8",
+      "bytes": 1251
+    },
+    {
+      "path": "plugins/isbf-guides/app/services/isbf_guides/save_draft.rb",
+      "sha256": "14d0a17b32bfaf2d48773f7448caf567b668924fd9fdfa01602f079208419dc8",
+      "bytes": 2140
+    },
+    {
+      "path": "plugins/isbf-guides/app/services/isbf_guides/unpublish.rb",
+      "sha256": "e3dc456064c69b028378416d00c700a5be3e63ce100bdad14758d486c27ef828",
+      "bytes": 734
+    },
+    {
+      "path": "plugins/isbf-guides/app/services/isbf_guides/upload_image.rb",
+      "sha256": "0623fc6f1a3a40fd45cf6deb3df265197a2dcb3ca0ac8f07b4b1b6ecd3864d13",
+      "bytes": 1151
+    },
+    {
+      "path": "plugins/isbf-guides/assets/javascripts/discourse/admin-isbf-guides-route-map.js",
+      "sha256": "99dd2dfc65b21f0d7ac43cb67de163d62d6b1539e54f0c2a0785a7fb082f5aea",
+      "bytes": 249
+    },
+    {
+      "path": "plugins/isbf-guides/assets/javascripts/discourse/components/isbf-guide-content.gjs",
+      "sha256": "032484274b4105fd835ae49953149cfb37690331c83769953f6264339bb0410b",
+      "bytes": 2652
+    },
+    {
+      "path": "plugins/isbf-guides/assets/javascripts/discourse/components/isbf-guide-toc.gjs",
+      "sha256": "7fa25bc795f7b788ecb2560c0c5e6bc1c79f3898448a72dfcbedf1465d011089",
+      "bytes": 528
+    },
+    {
+      "path": "plugins/isbf-guides/assets/javascripts/discourse/controllers/isbf-guides/show.js",
+      "sha256": "8bb578d74b892eb0c60f7377fa5e2ff04abebd88647fd6cec81d684cbfdf04dc",
+      "bytes": 215
+    },
+    {
+      "path": "plugins/isbf-guides/assets/javascripts/discourse/initializers/isbf-guides.js",
+      "sha256": "ff1abc586d91047d9c0df93cde60edac80c1582c76d6ad7cadc66502af6afb67",
+      "bytes": 1388
+    },
+    {
+      "path": "plugins/isbf-guides/assets/javascripts/discourse/isbf-guides-route-map.js",
+      "sha256": "053e4fbdbc5bb01dc3e272dac03bafb20707552b3745e74a70f7afaf852be4d7",
+      "bytes": 143
+    },
+    {
+      "path": "plugins/isbf-guides/assets/javascripts/discourse/routes/isbf-guides.js",
+      "sha256": "0019e42c385650a4d52ca90637c23d1c2bd9f369b8f2d4d5288b5a969fb99e01",
+      "bytes": 1002
+    },
+    {
+      "path": "plugins/isbf-guides/assets/javascripts/discourse/routes/isbf-guides/index.js",
+      "sha256": "0a41525952b777e074c09c1697ba6865c534f1d3d5efd6d27e875d0665ab00ec",
+      "bytes": 219
+    },
+    {
+      "path": "plugins/isbf-guides/assets/javascripts/discourse/routes/isbf-guides/show.js",
+      "sha256": "200d87dae395a48a34a3e320ba85139f10e510cbe525a2e166831b656b0ef46f",
+      "bytes": 423
+    },
+    {
+      "path": "plugins/isbf-guides/assets/javascripts/discourse/templates/isbf-guides/index.gjs",
+      "sha256": "b25277c28939bd2cf131f7a868792a1bfd9705da7e012eb6c9df2321c5426ec1",
+      "bytes": 2635
+    },
+    {
+      "path": "plugins/isbf-guides/assets/javascripts/discourse/templates/isbf-guides/show.gjs",
+      "sha256": "be1aa4f693867b0839524179cc37e7ecf277763b1619cf20109f3482b5dca346",
+      "bytes": 510
+    },
+    {
+      "path": "plugins/isbf-guides/assets/stylesheets/common/isbf-guides.scss",
+      "sha256": "f6d9add757727261bdfa94cf08e0376e4249f82b391fa5de754cd5a3d4c6fcdc",
+      "bytes": 652
+    },
+    {
+      "path": "plugins/isbf-guides/config/locales/client.en.yml",
+      "sha256": "8797c59c72399148e6a2c85dff81e4d89a10495bab264ac1985034eabf5d1a4b",
+      "bytes": 2208
+    },
+    {
+      "path": "plugins/isbf-guides/config/locales/client.zh_CN.yml",
+      "sha256": "940f676010be6373abc60f4632df697ed79b4cc197be06eab46fcf443c09f8e6",
+      "bytes": 2209
+    },
+    {
+      "path": "plugins/isbf-guides/config/locales/server.en.yml",
+      "sha256": "c683e4c0919afca60318318c8c9fe11fe31bf85397d43e0fb634ffbcd752d550",
+      "bytes": 1853
+    },
+    {
+      "path": "plugins/isbf-guides/config/locales/server.zh_CN.yml",
+      "sha256": "b57c00b2547e2753ba18f7b622a5612b5ce371f67f35160d2a4ec1e4beaa36f5",
+      "bytes": 1837
+    },
+    {
+      "path": "plugins/isbf-guides/config/nginx/40-isbf-guides.conf",
+      "sha256": "09a96af7d9fbc6390932736702b10a37695dc4aea9ec315955de2b4fbe42c518",
+      "bytes": 2530
+    },
+    {
+      "path": "plugins/isbf-guides/config/routes.rb",
+      "sha256": "5b9004ec2dba3118b9382a87a5df0da36ef846d986ff2129686319ead21db23d",
+      "bytes": 476
+    },
+    {
+      "path": "plugins/isbf-guides/config/settings.yml",
+      "sha256": "570d614cc1b80609fab06e5a70466b8334beb0bd31ab10682e9634bf71f4dd2e",
+      "bytes": 67
+    },
+    {
+      "path": "plugins/isbf-guides/db/migrate/20261104152632_create_guide_tables.rb",
+      "sha256": "ff86bd33b2f993ede5a579f28867b346701cb6857c2e0d0ea0cb28716cbd03e2",
+      "bytes": 1567
+    },
+    {
+      "path": "plugins/isbf-guides/db/migrate/20261108071604_add_guide_content_format.rb",
+      "sha256": "b2e4ef1e556a59af1317cf1839a5dc4054fc26eabea34365aaca18127403b6d7",
+      "bytes": 210
+    },
+    {
+      "path": "plugins/isbf-guides/lib/isbf_guides/document_archive.rb",
+      "sha256": "84277b8aad06c6a73ccc65550e3c4307c25775bd6719148901de1e12030efab0",
+      "bytes": 1901
+    },
+    {
+      "path": "plugins/isbf-guides/lib/isbf_guides/document_error.rb",
+      "sha256": "350adb691afe3ce037bb56c6f88f4562b92c38a62038a80fcb3386b3bd87ba8d",
+      "bytes": 248
+    },
+    {
+      "path": "plugins/isbf-guides/lib/isbf_guides/document_markup.rb",
+      "sha256": "31ec3f966aa167a78cf1c4b620eb53c5c699a1e57a36e55c77ecb7d8e7638a23",
+      "bytes": 3320
+    },
+    {
+      "path": "plugins/isbf-guides/lib/isbf_guides/document_package.rb",
+      "sha256": "6778004bbfb87566e118f9aafeb50d06033707eb8bdcb6e78eed154739784875",
+      "bytes": 6179
+    },
+    {
+      "path": "plugins/isbf-guides/lib/isbf_guides/engine.rb",
+      "sha256": "611c81a4b3eda854920b527a08bde6650eb583e2a56d8ff9f423631063bf4fed",
+      "bytes": 155
+    },
+    {
+      "path": "plugins/isbf-guides/lib/isbf_guides/html_renderer.rb",
+      "sha256": "f8e24cb509ec2dfaa7c6aa9e7e99244ea05b7cb34b0b9bc74f1b8fa24858c118",
+      "bytes": 1631
+    },
+    {
+      "path": "plugins/isbf-guides/lib/isbf_guides/legacy_import.rb",
+      "sha256": "6730677f4bdea13698270601256dd80b6be7fdfdb0b0742507d49cc2cc28bdd1",
+      "bytes": 3821
+    },
+    {
+      "path": "plugins/isbf-guides/lib/isbf_guides/renderer.rb",
+      "sha256": "d8d16a3b4fc8f496003d4c9044652966b71d2c055835d0b4c0c9acd05fda311f",
+      "bytes": 2265
+    },
+    {
+      "path": "plugins/isbf-guides/lib/isbf_guides/templates/example.png",
+      "sha256": "78714eec810d7c578e54697b1218d579ddf544bf101eff299c1310ac06db19e0",
+      "bytes": 68
+    },
+    {
+      "path": "plugins/isbf-guides/lib/isbf_guides/templates/guide.html",
+      "sha256": "0a9b3f49666e8fb7fb302e0de2a6e11d982a44888ad8ca907e9182680c28efe3",
+      "bytes": 2189
+    },
+    {
+      "path": "plugins/isbf-guides/lib/tasks/isbf_guides.rake",
+      "sha256": "fbaf41362de18ac6a62c4246f14cd012de9f65156baf0dd157877c187e0759d7",
+      "bytes": 603
+    },
+    {
+      "path": "plugins/isbf-guides/plugin.rb",
+      "sha256": "611bb6172eb360682b8caee0dbb62ae7bf3b3667f66d4078897e0ed9a88cab55",
+      "bytes": 1412
+    },
+    {
+      "path": "plugins/isbf-guides/spec/fabricators/isbf_guides_fabricator.rb",
+      "sha256": "7da55f3adfd07f82b3c97d92d61619d2d269deabef224a15aa78a16dce9b1a07",
+      "bytes": 1871
+    },
+    {
+      "path": "plugins/isbf-guides/spec/fixtures/step.png",
+      "sha256": "78714eec810d7c578e54697b1218d579ddf544bf101eff299c1310ac06db19e0",
+      "bytes": 68
+    },
+    {
+      "path": "plugins/isbf-guides/spec/lib/document_archive_spec.rb",
+      "sha256": "39aaebbfae66edbd83304c7109a3509136bfe9ccff345b996c378dcae114ec02",
+      "bytes": 3713
+    },
+    {
+      "path": "plugins/isbf-guides/spec/lib/document_package_spec.rb",
+      "sha256": "07404a730b3bb818280d7e7bbaeeda61205406c121036452bf0029870a7b55fb",
+      "bytes": 6976
+    },
+    {
+      "path": "plugins/isbf-guides/spec/lib/html_renderer_spec.rb",
+      "sha256": "81ab35dc76506038fd9b425e12808c299792142c5d4292cc04db617585bf26dc",
+      "bytes": 3960
+    },
+    {
+      "path": "plugins/isbf-guides/spec/lib/legacy_import_spec.rb",
+      "sha256": "54393a3e95165503109fcb7fba158baa00708906704e5a6af8929468ccbb1ba7",
+      "bytes": 4827
+    },
+    {
+      "path": "plugins/isbf-guides/spec/lib/renderer_spec.rb",
+      "sha256": "c8344a6d222e5cae0fcc5ca74a5d078a6ba3985fb102f6783227be7b213ce31f",
+      "bytes": 2118
+    },
+    {
+      "path": "plugins/isbf-guides/spec/models/guide_spec.rb",
+      "sha256": "141ef787c3b237c3d5943553799b6452abca10b65d0b5e4c27a991ca2c1666e4",
+      "bytes": 2415
+    },
+    {
+      "path": "plugins/isbf-guides/spec/models/image_spec.rb",
+      "sha256": "b445d631c041dd7ccfc840e090be7074c7dce4e096e906f601e1d345f2d1daf0",
+      "bytes": 901
+    },
+    {
+      "path": "plugins/isbf-guides/spec/models/revision_spec.rb",
+      "sha256": "9aa0251e68c7205564f3fa9cac182ec0f1fd772ec15160c7f53a064abf998451",
+      "bytes": 1736
+    },
+    {
+      "path": "plugins/isbf-guides/spec/requests/admin_guides_controller_spec.rb",
+      "sha256": "415c26c43184fbdcd041451ce11de0e42dbd6a6c6ab2f9681498e035308e2a3e",
+      "bytes": 13157
+    },
+    {
+      "path": "plugins/isbf-guides/spec/requests/guides_controller_spec.rb",
+      "sha256": "dc0b7110a7e1cc1b70a4b6aa267ac17c825b2c804f29c485db38de5d0a75b80f",
+      "bytes": 6353
+    },
+    {
+      "path": "plugins/isbf-guides/spec/services/import_document_spec.rb",
+      "sha256": "8e91c675eb12f65f248189c7bc1e41af4b089feb6871069456e44d91e87f0c83",
+      "bytes": 11286
+    },
+    {
+      "path": "plugins/isbf-guides/spec/services/publish_spec.rb",
+      "sha256": "c0f1039c8d827b9ec956bb9385a994d21eabae7b7fd51eb782f4a67ac73e45b4",
+      "bytes": 2924
+    },
+    {
+      "path": "plugins/isbf-guides/spec/services/save_draft_spec.rb",
+      "sha256": "462341f1ac17e19db38bb024c9cac203a0b956192603aada23900f92ea065a05",
+      "bytes": 6286
+    },
+    {
+      "path": "plugins/isbf-guides/spec/services/unpublish_spec.rb",
+      "sha256": "5b8869f0c245a6da425c4f181dcc82115a5644499295ccb7c202883185139cdd",
+      "bytes": 1950
+    },
+    {
+      "path": "plugins/isbf-guides/spec/services/upload_image_spec.rb",
+      "sha256": "e83473ac03c82489bb8721093f812fcf7df35f54bd90cc1305cf54c56622bd0c",
+      "bytes": 2682
+    },
+    {
+      "path": "plugins/isbf-guides/spec/support/document_helpers.rb",
+      "sha256": "48b173bafe09214f8da66de6023cb9a47070fce57948edcef4f2858b07a22298",
+      "bytes": 2437
+    },
+    {
+      "path": "frontend/discourse/app/static/prosemirror/components/prosemirror-editor.gts",
+      "sha256": "fb5c90bdaad0db4a1c7018b1b6013ab96706188e044ec72309a2603256fdad4e",
+      "bytes": 17187
+    },
+    {
+      "path": "frontend/discourse/tests/integration/components/prosemirror-editor/async-plugin-lifecycle-test.gjs",
+      "sha256": "d2ce5eb17e77bfb864231a157a14c61859ce33dab92531db8591ba8076e7a431",
+      "bytes": 1744
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "3a3e8a1ffbb87f144e6c104549bb9107b961a1f261d1f05b0d785fa770d681a9",
+      "bytes": 3726
+    },
+    {
+      "path": ".github/workflows/isbf-guides.yml",
+      "sha256": "74a3341a5a3c10fc46918d7e2c804b338426bbf19cb1c3d0102c92bf87871303",
+      "bytes": 2099
+    },
+    {
+      "path": ".github/workflows/isbf-frontend-consistency.yml",
+      "sha256": "66c433f6bd1d739532597d8852491ed73fc210ebc652c30a153715d4c753a174",
+      "bytes": 10817
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/workbench-test.gjs",
+      "sha256": "a7d14f2eb34292ed56e6d1163ce7fcde25792babb1813603ae16ec59b61935e6",
+      "bytes": 6947
+    },
+    {
+      "path": "docs/design-system/components.md",
+      "sha256": "a0efc7d2468a23a95a706ccc97926944975f7e47fe07e7aab0e1bdaa9dc2e1e8",
+      "bytes": 55594
+    },
+    {
+      "path": "docs/design-system/tokens.md",
+      "sha256": "a04e5d6feaa452b194a815812d36f60ad358c7c9f0a128777be3b11284401e99",
+      "bytes": 46715
+    },
+    {
+      "path": "docs/design-system/reference-map.md",
+      "sha256": "0b93da71df9a4458b3008a0d4bda6acecf948e40c25dc2359fd83f10643db135",
+      "bytes": 41687
+    },
+    {
+      "path": "docs/design-system/ui-status.md",
+      "sha256": "098fc861476f1b96c58b06b7f9e42101a05e655b08ddf0d22554796f534cabde",
+      "bytes": 55650
+    },
+    {
+      "path": "docs/design-system/reviews/guides-20261108/README.md",
+      "sha256": "84409937eff81494f248e3f6942ca803f43a0fdbad8f545c78128bc0764266d9",
+      "bytes": 2625
+    }
+  ]
+}
