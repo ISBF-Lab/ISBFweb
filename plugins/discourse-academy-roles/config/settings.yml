@@ -95,6 +95,11 @@ academy_roles:
     client: true
     refresh: true
     area: "group_permissions"
+  academy_moderators_manage_resource_catalogs:
+    default: false
+    client: true
+    refresh: true
+    area: "group_permissions"
   academy_moderators_trace_anonymous:
     default: false
     client: true

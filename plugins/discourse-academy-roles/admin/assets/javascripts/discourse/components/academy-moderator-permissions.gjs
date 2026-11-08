@@ -26,6 +26,7 @@ const GROUPS = {
     "review_resources",
     "review_resumes",
     "manage_resources",
+    "manage_resource_catalogs",
     "review_alumni",
   ],
   sensitive: ["view_emails", "trace_anonymous"],
@@ -48,6 +49,12 @@ export default class AcademyModeratorPermissions extends Component {
     return Object.entries(GROUPS).map(([name, capabilities]) => ({
       heading: `academy_roles.moderator_permissions.groups.${name}`,
       fields: capabilities.map((capability) => ({
+        description:
+          capability === "manage_resource_catalogs"
+            ? i18n(
+                "academy_roles.moderator_permissions.manage_resource_catalogs_description"
+              )
+            : undefined,
         name: this.args.model.settings[capability],
         title: i18n(
           `academy_roles.moderator_permissions.capabilities.${capability}`
@@ -121,6 +128,7 @@ export default class AcademyModeratorPermissions extends Component {
               <:content>
                 {{#each group.fields as |field|}}
                   <form.Field
+                    @description={{field.description}}
                     @name={{field.name}}
                     @title={{field.title}}
                     @type="toggle"

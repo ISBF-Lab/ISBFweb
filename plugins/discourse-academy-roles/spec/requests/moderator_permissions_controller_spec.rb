@@ -14,12 +14,15 @@ RSpec.describe DiscourseAcademyRoles::Admin::ModeratorPermissionsController do
   end
 
   describe "#index" do
-    it "returns the twenty-two switches to developers" do
+    it "returns the twenty-three switches to developers" do
       sign_in(developer)
       get "/academy-roles/admin/moderator-permissions.json"
       expect(response.status).to eq(200)
-      expect(response.parsed_body.fetch("settings").length).to eq(22)
-      expect(response.parsed_body.fetch("values").values).to eq([false] * 22)
+      expect(response.parsed_body.fetch("settings").length).to eq(23)
+      expect(response.parsed_body.fetch("settings")).to include(
+        "manage_resource_catalogs" => "academy_moderators_manage_resource_catalogs",
+      )
+      expect(response.parsed_body.fetch("values").values).to eq([false] * 23)
     end
 
     it "keeps permission configuration developer-only with every switch enabled" do
@@ -37,10 +40,14 @@ RSpec.describe DiscourseAcademyRoles::Admin::ModeratorPermissionsController do
               academy_moderators_review_content: {
                 value: false,
               },
+              academy_moderators_manage_resource_catalogs: {
+                value: false,
+              },
             },
           }
       expect(response.status).to eq(404)
       expect(SiteSetting.academy_moderators_review_content).to eq(true)
+      expect(SiteSetting.academy_moderators_manage_resource_catalogs).to eq(true)
     end
 
     it "keeps ordinary accounts outside the management interface" do
@@ -165,12 +172,17 @@ RSpec.describe Admin::SiteSettingsController do
               academy_moderators_suspend_users: {
                 value: true,
               },
+              academy_moderators_manage_resource_catalogs: {
+                value: true,
+              },
             },
           }
       expect(response.status).to eq(204)
       expect(SiteSetting.academy_moderators_review_content).to eq(true)
       expect(SiteSetting.academy_moderators_suspend_users).to eq(true)
       expect(SiteSetting.academy_moderators_silence_users).to eq(false)
+      expect(SiteSetting.academy_moderators_manage_resource_catalogs).to eq(true)
+      expect(SiteSetting.academy_moderators_manage_resources).to eq(false)
       expect(
         UserHistory.where(
           acting_user_id: developer.id,
