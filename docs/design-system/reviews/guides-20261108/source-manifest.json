@@ -10,16 +10,17 @@
       "fixture_helper_tests": 37,
       "projection_checks": 7,
       "projected_theme_files": 259,
-      "github_ci": "pending for the account geometry synchronization commit",
+      "github_ci": "pending for the complete compatibility fixture commit",
       "native_menu_tests": 2,
       "native_menu_assertions": 9,
-      "current_theme_fixture_checks": 5,
-      "current_theme_modules": 2,
+      "current_theme_fixture_checks": 9,
+      "current_theme_modules": 3,
       "temporary_menu_fixture_removed": true,
       "account_geometry_wait": "Await account loading and complete frame positioning at the unchanged one-pixel tolerance",
       "native_account_tests": 6,
       "native_account_assertions": 43,
-      "account_test_harness_restored": true
+      "account_test_harness_restored": true,
+      "layout_dependency_audit": "passed, no omitted runtime changes"
     }
   },
   "status": {
@@ -29,13 +30,13 @@
   "files": [
     {
       "path": ".github/fixtures/isbf-mbti-current-theme-source-audit.json",
-      "sha256": "3b631a11a96c593fb14dcd5c76e9a23bb44e445650748b8553fbf33a3e47877e",
-      "bytes": 697
+      "sha256": "0864e5c3cd35e32ac1d6264f780ccf1607d0fcabfd4f7887d0defe01f17fa28e",
+      "bytes": 938
     },
     {
       "path": ".github/fixtures/isbf-mbti-current-theme-ui.json",
-      "sha256": "e25a9483fa8f42ee59a723cdb69a165519b7abfb10e7ff194a6c7013115151bc",
-      "bytes": 677
+      "sha256": "69afd6b6293d05b117343969f3ed817d35bd4be50830011f7ac1ed301d49a867",
+      "bytes": 939
     },
     {
       "path": ".github/fixtures/isbf-mbti-theme-paths.json",
@@ -54,8 +55,8 @@
     },
     {
       "path": ".github/workflows/isbf-mbti.yml",
-      "sha256": "e20d0fdfb3b01ae820ab25649887133a402c98f1e84f890278ad4bcf6716a994",
-      "bytes": 21129
+      "sha256": "fc4c0c6bcc84fa8e73cc3ecc415200e8c73b51cb173daacd6cf1aa02297d72f1",
+      "bytes": 21201
     },
     {
       "path": ".gitignore",
@@ -74,8 +75,8 @@
     },
     {
       "path": "docs/design-system/reviews/guides-20261108/README.md",
-      "sha256": "5a68e1aa7b0ad14d5ecd40c9190cccbe5bf68de3a3dc34d18b0b0830c041d5db",
-      "bytes": 4424
+      "sha256": "b61d04cfbd598d2f8dd78d3c05028a17c91320dcf7fa3cd2a6dc182d9e595a92",
+      "bytes": 4819
     },
     {
       "path": "docs/design-system/tokens.md",

@@ -47,16 +47,22 @@ using the release plugin. The full MBTI and frontend gates remain enabled.
 The menu regression supplies the router stub's navigation callback explicitly;
 both affected native QUnit tests passed all nine assertions in a temporary
 development theme, which was then removed. An additive audited fixture restores
-the two existing error-page modules required by the current theme into the pinned
-CI core. Both public-source hashes match the recorded runtime observations. Five
-fixture checks cover restoration, preservation, idempotence, the transitive module
-dependency and rejection of modified source before writing any target file.
+the three existing modules required by the current theme's error pages and anchored
+menus into the pinned CI core. Their public-source hashes match the recorded runtime
+observations. Nine fixture checks cover exact sources and preimages, restoration,
+preservation, idempotence, module dependencies, complete layout dependency coverage
+and rejection of modified source before writing any target file.
 
 Account enclosure tests wait for the account request and complete frame positioning
 before measuring the original card. Their original one-pixel tolerance and all
 geometry assertions remain in place, with explicit edge deltas for diagnostics.
 All six native account regressions passed 43 assertions; the temporary development
 test field, view and theme settings were restored.
+
+The compatibility fixture also restores the deployed floating-position modifier,
+which resolves the card's anchor before positioning or observing it. Its exact
+source and original core preimage are checked, completing the audited floating,
+UI primitive and common stylesheet dependencies in the pinned test runtime.
 
 ## Release boundary
 

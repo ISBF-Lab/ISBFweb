@@ -2,7 +2,7 @@
   "schema": 1,
   "core_head": "132cc95d043db01251eedf9c93b3927cd5ffee91",
   "observed_at": "2026-11-08T10:20:02.185815+00:00",
-  "scope": "Two public core modules required by the current project theme; hash-only observations, not a complete runtime inventory",
+  "scope": "Three public core modules required by the current project theme and anchored menus; hash-only observations, not a complete runtime inventory",
   "files": [
     {
       "path": "frontend/discourse/app/lib/elastic-status.js",
@@ -15,6 +15,12 @@
       "status": "hashed",
       "bytes": 29442,
       "sha256": "96e73bc7acebb78641a157ee6b0a4d01669532ff8e0c20e09a1be086defc0fc5"
+    },
+    {
+      "path": "frontend/discourse/float-kit/modifiers/apply-floating-ui.ts",
+      "status": "hashed",
+      "bytes": 3302,
+      "sha256": "8845dfd41011ec38dbb7eae4c5ee34a3592b44ac190be13229c70208c47811a3"
     }
   ]
 }

@@ -3,7 +3,7 @@
   "core_head": "132cc95d043db01251eedf9c93b3927cd5ffee91",
   "source_commit": "025feb7a029db226caf47da2d7f5e942b7fafb85",
   "observed_date": "2026-11-08",
-  "audit_sha256": "bc95c25c9c3dba786452a74bead90a6da5c4be4812fbf7d391ada0e8b890c24e",
+  "audit_sha256": "fc333263444c07287122c531c7dde47cc6675d90e0d735cf12a5afdb0801c231",
   "files": [
     {
       "path": "frontend/discourse/app/lib/elastic-status.js",
@@ -14,6 +14,11 @@
       "path": "frontend/discourse/scripts/js/elastic-not-found.js",
       "sha256": "96e73bc7acebb78641a157ee6b0a4d01669532ff8e0c20e09a1be086defc0fc5",
       "base_sha256": null
+    },
+    {
+      "path": "frontend/discourse/float-kit/modifiers/apply-floating-ui.ts",
+      "sha256": "8845dfd41011ec38dbb7eae4c5ee34a3592b44ac190be13229c70208c47811a3",
+      "base_sha256": "897524fec86a64f2a494582195313c78e53025b31a6f313232bd27185b0466ca"
     }
   ],
   "preserved_files": []
