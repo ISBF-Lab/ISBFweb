@@ -32,6 +32,12 @@ requires clearing/rebinding all global and per-frame references first. Appearanc
 changes do not reset continuity: metadata is excluded from qualification fingerprints and
 the form preserves the original order of grouped conditions when submitting them.
 
+Level-badge options must be enabled custom badges with multiple grants disabled, the
+automatic trigger set to `none`, and no SQL query. Badge type, icon/image and title
+permission do not affect eligibility. New badges select the server's named `none`
+trigger explicitly, regardless of the order of trigger metadata. Refresh the level
+configuration page after creating a badge to load the updated options.
+
 Daily evaluation uses a minimum 36-hour check interval for consecutive qualification, including
 the existing scheduling-delay allowance. The developer API supplies this minimum to the form;
 shorter values are rejected when consecutive qualification is enabled. Before the first save,

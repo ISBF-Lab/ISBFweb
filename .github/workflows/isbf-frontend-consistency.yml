@@ -5,6 +5,8 @@ on:
     paths:
       - "themes/isbf-campus-feed/**"
       - "frontend/discourse/app/**"
+      - "frontend/discourse/admin/routes/admin-badges/show.js"
+      - "frontend/discourse/tests/unit/routes/admin-badges-show-test.js"
       - "frontend/discourse/tests/integration/ui-kit/d-hold-button-test.gjs"
       - "frontend/discourse/dialog-holder/**"
       - "frontend/discourse/float-kit/**"

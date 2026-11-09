@@ -20,7 +20,7 @@ export default class AdminBadgesShowRoute extends Route {
         enabled: true,
         badge_type_id: this.adminBadges.badgeTypes[0].id,
         badge_grouping_id: this.adminBadges.badgeGroupings[0].id,
-        trigger: this.adminBadges.badgeTriggers[0].id,
+        trigger: this.adminBadges.data.admin_badges.triggers.none,
       });
     }
 
