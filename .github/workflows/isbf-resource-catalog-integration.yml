@@ -1,0 +1,196 @@
+name: Resource catalog release integration
+
+on:
+  pull_request:
+    branches:
+      - codex/resource-catalog-permissions
+    paths:
+      - .github/workflows/isbf-resource-catalog-integration.yml
+
+permissions:
+  contents: read
+
+jobs:
+  combined-native:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    container: discourse/discourse_test@sha256:94eca5318fed6171264b95204914de76a113c305cebb72d9fa9527e2c4496494
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+        working-directory: discourse
+    env:
+      CORE_REF: 132cc95d043db01251eedf9c93b3927cd5ffee91
+      ACADEMY_REF: f532921b7f2ca9d208f9cbf780e84fca87d00815
+      LEARNING_REF: 3833f3321583dc5346bcd04f4edf245670437e45
+      THEME_REF: 71ae00403d7b39ca66243d1ab6069fb742771316
+      RAILS_ENV: test
+      PGUSER: discourse
+      PGPASSWORD: discourse
+      LOAD_PLUGINS: "1"
+      PARALLEL_TEST_PROCESSORS: "1"
+      QUNIT_PARALLEL: "1"
+      QUNIT_REUSE_BUILD: "1"
+      NODE_OPTIONS: --max-old-space-size=2048
+      CHEAP_SOURCE_MAPS: "1"
+      EMBER_ENV: development
+      PLAYWRIGHT_BROWSERS_PATH: /home/discourse/.cache/ms-playwright
+      DBUS_SESSION_BUS_ADDRESS: unix:path=/dev/null
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ISBF-Lab/ISBFweb
+          ref: ${{ env.CORE_REF }}
+          path: discourse
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ISBF-Lab/ISBFweb
+          ref: ${{ env.ACADEMY_REF }}
+          path: academy
+          sparse-checkout: |
+            plugins/discourse-academy-roles
+            plugins/discourse-avatar-frames
+            frontend/discourse/tests/helpers/d-select.js
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ISBF-Lab/ISBF-Learning
+          ref: ${{ env.LEARNING_REF }}
+          path: learning
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ISBF-Lab/ISBF-UI
+          ref: ${{ env.THEME_REF }}
+          path: theme
+          persist-credentials: false
+
+      - name: Verify the checked-out release sources
+        run: |
+          for checkout in discourse academy learning theme; do
+            git config --global --add safe.directory "$GITHUB_WORKSPACE/$checkout"
+          done
+          test "$(git rev-parse HEAD)" = "$CORE_REF"
+          test "$(git -C ../academy rev-parse HEAD)" = "$ACADEMY_REF"
+          test "$(git -C ../learning rev-parse HEAD)" = "$LEARNING_REF"
+          test "$(git -C ../theme rev-parse HEAD)" = "$THEME_REF"
+          mkdir -p tmp/catalog-release
+          printf 'core=%s\nacademy=%s\nlearning=%s\ntheme=%s\n' \
+            "$CORE_REF" "$ACADEMY_REF" "$LEARNING_REF" "$THEME_REF" \
+            | tee tmp/catalog-release/sources.txt
+
+      - name: Prepare the fixed test runtime
+        run: |
+          redis-server /etc/redis/redis.conf --daemonize yes --logfile ""
+          chown -R postgres /var/run/postgresql
+          sudo -E -u postgres script/start_test_db.rb
+          sudo -u postgres psql -c "CREATE ROLE discourse LOGIN SUPERUSER PASSWORD 'discourse';"
+          ln -s /var/www/discourse/vendor/bundle vendor/bundle
+          bundle config --local path vendor/bundle
+          bundle config --local deployment true
+          bundle config --local without ""
+          bundle install --jobs 1
+          pnpm install --frozen-lockfile
+          bin/rake db:create db:migrate
+
+      - name: Install the two plugins and export the catalog theme fixture
+        run: |
+          test -d plugins/discourse-academy-roles
+          test ! -L plugins/discourse-academy-roles
+          test ! -e plugins/discourse-avatar-frames
+          test ! -e plugins/isbf-learning
+          mv plugins/discourse-academy-roles ../baseline-academy
+          cp -a ../academy/plugins/discourse-academy-roles plugins/discourse-academy-roles
+          cp -a ../academy/plugins/discourse-avatar-frames plugins/discourse-avatar-frames
+          mkdir plugins/isbf-learning tmp/catalog-theme
+          git -C ../learning archive HEAD | tar -x -C plugins/isbf-learning
+          # The catalog rendering tests use these components and the theme's styling and translations.
+          git -C ../theme archive HEAD -- \
+            about.json common locales settings.yml stylesheets \
+            javascripts/discourse/components/isbf-learning-directory-editor.gjs \
+            javascripts/discourse/components/isbf-resource-add-dialog.gjs \
+            javascripts/discourse/components/isbf-resource-catalog.gjs \
+            javascripts/discourse/components/isbf-resource-directory-dialog.gjs \
+            javascripts/discourse/components/isbf-resource-parent-picker.gjs \
+            test/integration/resource-catalog-test.gjs \
+            | tar -x -C tmp/catalog-theme
+          # Match the native student-group lane's test helper overlay.
+          test ! -e frontend/discourse/tests/helpers/d-select.js
+          cp ../academy/frontend/discourse/tests/helpers/d-select.js frontend/discourse/tests/helpers/d-select.js
+          bin/rake db:migrate
+
+      - name: Run developer and delegated catalog request coverage
+        run: |
+          bin/rspec \
+            plugins/discourse-academy-roles/spec/lib/moderator_permissions_spec.rb \
+            plugins/discourse-academy-roles/spec/requests/moderator_permissions_controller_spec.rb \
+            plugins/isbf-learning/spec/requests/learning_management_permissions_spec.rb \
+            plugins/isbf-learning/spec/requests/learning_directory_deletion_spec.rb \
+            --format progress --format json --out tmp/catalog-release/rspec.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          result = json.loads(Path("tmp/catalog-release/rspec.json").read_text())
+          summary = result["summary"]
+          if summary["failure_count"] or summary["pending_count"] or summary.get("errors_outside_of_examples_count"):
+              raise SystemExit(summary)
+          passed = {item["description"] for item in result["examples"] if item["status"] == "passed"}
+          required = {
+              "returns the twenty-three switches to developers",
+              "keeps catalog management outside general staff route access",
+              "authorizes learning category and course changes independently of resource management",
+              "manages library categories and groups with catalog permission alone",
+              "allows a catalog cascade and rejects a previously issued plan after revocation",
+          }
+          if missing := required - passed:
+              raise SystemExit(f"Catalog examples did not pass: {sorted(missing)}")
+          print(result["summary_line"])
+          PY
+
+      - name: Build the shared native QUnit assets
+        run: |
+          pnpm playwright-install
+          script/assemble_ember_build.rb
+          mkdir -p "$HOME/.pki/nssdb" "$HOME/.local/share/pki/nssdb"
+          dbus-daemon --system --fork 2>/dev/null || true
+          catalog_bus_address=$(dbus-daemon --session --fork --print-address 2>/dev/null)
+          echo "DBUS_SESSION_BUS_ADDRESS=$catalog_bus_address" >> "$GITHUB_ENV"
+
+      - name: Run the native developer permission form
+        run: |
+          bin/qunit --standalone --target discourse-academy-roles --filter AcademyModeratorPermissions \
+            | sed -E $'s/\033\\[[0-9;]*m//g' | tee tmp/catalog-release/admin-qunit.log
+          grep -E '^ok [0-9]+ .*renders twenty-three switches for developers' tmp/catalog-release/admin-qunit.log
+          grep -E '^ok [0-9]+ .*saves only changed switches' tmp/catalog-release/admin-qunit.log
+
+      - name: Import the pinned catalog theme fixture into the test database
+        env:
+          RAILS_ENV: development
+          DISCOURSE_DEV_DB: discourse_test
+        run: >-
+          bin/rails runner 'theme = RemoteTheme.import_theme_from_directory(Rails.root.join("tmp/catalog-theme")); theme.set_default!'
+
+      - name: Run the independent theme's catalog integration tests
+        env:
+          DISCOURSE_DEV_DB: discourse_test
+        run: |
+          bin/qunit --standalone --target discourse-academy-roles \
+            --qunit-path /theme-qunit --theme-name "ISBF Campus Feed" \
+            --rails-env development --module "ISBF | Integration | Component | ResourceCatalog" \
+            | sed -E $'s/\033\\[[0-9;]*m//g' | tee tmp/catalog-release/theme-qunit.log
+          grep -E '^# tests[[:space:]]+7$' tmp/catalog-release/theme-qunit.log
+          grep -E '^ok [0-9]+ .*adding a category uses the name-only form' tmp/catalog-release/theme-qunit.log
+          grep -E '^ok [0-9]+ .*the sidebar exposes directory actions only to directory managers' tmp/catalog-release/theme-qunit.log
+          grep -E '^ok [0-9]+ .*saving a library category keeps the draft on denial' tmp/catalog-release/theme-qunit.log
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: resource-catalog-integration-${{ github.run_id }}
+          path: discourse/tmp/catalog-release/
+          if-no-files-found: warn
+          retention-days: 7
