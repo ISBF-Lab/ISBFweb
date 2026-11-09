@@ -35,5 +35,7 @@ zh_CN:
           review_resumes: "审核简历分享"
           review_alumni: "审核校友"
           manage_resources: "管理学习资源"
+          manage_resource_catalogs: "管理资源目录"
           view_emails: "查看他人邮箱"
           trace_anonymous: "查询匿名作者"
+        manage_resource_catalogs_description: "允许新增、改名、移动或删除课程资源和资料库的目录。删除目录时会一并移除下级目录和资料。"

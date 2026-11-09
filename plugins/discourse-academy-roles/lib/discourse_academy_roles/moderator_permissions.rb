@@ -23,6 +23,7 @@ module DiscourseAcademyRoles
       review_resumes: :academy_moderators_review_resumes,
       review_alumni: :academy_moderators_review_alumni,
       manage_resources: :academy_moderators_manage_resources,
+      manage_resource_catalogs: :academy_moderators_manage_resource_catalogs,
       view_emails: :moderators_view_emails,
       trace_anonymous: :academy_moderators_trace_anonymous,
     }.freeze

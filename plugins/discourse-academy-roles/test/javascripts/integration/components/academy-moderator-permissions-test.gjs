@@ -24,7 +24,9 @@ const SETTINGS = {
   publish_official: "academy_moderators_publish_official",
   review_resources: "academy_moderators_review_resources",
   review_resumes: "academy_moderators_review_resumes",
+  review_alumni: "academy_moderators_review_alumni",
   manage_resources: "academy_moderators_manage_resources",
+  manage_resource_catalogs: "academy_moderators_manage_resource_catalogs",
   view_emails: "moderators_view_emails",
   trace_anonymous: "academy_moderators_trace_anonymous",
 };
@@ -44,7 +46,7 @@ module(
       };
     });
 
-    test("renders twenty-one switches for developers", async function (assert) {
+    test("renders twenty-three switches for developers", async function (assert) {
       await render(
         <template>
           <AcademyModeratorPermissions @model={{this.model}} />
@@ -52,7 +54,7 @@ module(
       );
       assert
         .dom("[role='switch']")
-        .exists({ count: 21 }, "all independent capabilities are configurable");
+        .exists({ count: 23 }, "all independent capabilities are configurable");
       assert
         .form()
         .field(SETTINGS.review_resumes)
@@ -69,6 +71,10 @@ module(
       assert
         .dom("[role='switch'][aria-checked='true']")
         .doesNotExist("the initial permissions are disabled");
+      assert
+        .form()
+        .field(SETTINGS.manage_resource_catalogs)
+        .hasTitle("Manage resource catalogs (optional)");
     });
 
     test("does not render the configuration to moderators", async function (assert) {
@@ -95,7 +101,7 @@ module(
         </template>
       );
       await formKit().field(SETTINGS.review).toggle();
-      await formKit().field(SETTINGS.suspend_users).toggle();
+      await formKit().field(SETTINGS.manage_resource_catalogs).toggle();
       assert.strictEqual(
         requests.length,
         0,
@@ -108,9 +114,11 @@ module(
         "review access is enabled"
       );
       assert.strictEqual(
-        requests[0].get(`settings[${SETTINGS.suspend_users}][value]`),
+        requests[0].get(
+          `settings[${SETTINGS.manage_resource_catalogs}][value]`
+        ),
         "true",
-        "suspension access is enabled"
+        "resource catalog management is enabled"
       );
       assert.strictEqual(
         [...requests[0].keys()].length,

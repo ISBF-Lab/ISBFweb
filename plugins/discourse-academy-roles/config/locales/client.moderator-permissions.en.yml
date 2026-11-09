@@ -35,5 +35,7 @@ en:
           review_resumes: "Review shared resumes"
           review_alumni: "Review alumni applications"
           manage_resources: "Manage learning resources"
+          manage_resource_catalogs: "Manage resource catalogs"
           view_emails: "View other members’ email addresses"
           trace_anonymous: "Look up anonymous authors"
+        manage_resource_catalogs_description: "Add, rename, move, or delete directories in Course Resources and the Resource Library. Deleting a directory also removes its child directories and resources."

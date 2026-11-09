@@ -27,8 +27,8 @@ RSpec.describe DiscourseAcademyRoles::ModeratorPermissions do
   end
 
   describe ".for" do
-    it "starts with all 22 capabilities disabled and retains the persisted role" do
-      expect(described_class.for(moderator).values).to eq([false] * 22)
+    it "starts with all 23 capabilities disabled and retains the persisted role" do
+      expect(described_class.for(moderator).values).to eq([false] * 23)
       expect(moderator.reload[:moderator]).to eq(true)
       expect(moderator.groups.pluck(:id)).to include(
         Group::AUTO_GROUPS[:moderators],
@@ -59,14 +59,23 @@ RSpec.describe DiscourseAcademyRoles::ModeratorPermissions do
       expect(moderator.staff?).to eq(false)
     end
 
+    it "keeps catalog management outside general staff route access" do
+      SiteSetting.academy_moderators_manage_resource_catalogs = true
+      expect(moderator.guardian.academy_can?(:manage_resource_catalogs)).to eq(true)
+      expect(moderator.guardian.academy_has_management_permissions?).to eq(false)
+
+      SiteSetting.academy_moderators_manage_resources = true
+      expect(moderator.guardian.academy_has_management_permissions?).to eq(true)
+    end
+
     it "keeps developers unrestricted and never grants capabilities to ordinary or anonymous users" do
       developer.update!(moderator: true)
-      expect(described_class.for(developer).values).to eq([true] * 22)
+      expect(described_class.for(developer).values).to eq([true] * 23)
       described_class::SETTINGS.values.each do |setting|
         SiteSetting.public_send("#{setting}=", true)
       end
-      expect(described_class.for(member).values).to eq([false] * 22)
-      expect(described_class.for(nil).values).to eq([false] * 22)
+      expect(described_class.for(member).values).to eq([false] * 23)
+      expect(described_class.for(nil).values).to eq([false] * 23)
       expect(moderator.guardian.can_invite_to_forum?).to eq(false)
       expect(moderator.guardian.can_administer_user?(member)).to eq(false)
     end
