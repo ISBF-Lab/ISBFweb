@@ -54,6 +54,7 @@ jobs:
             plugins/discourse-avatar-frames
             frontend/discourse/tests/helpers/d-select.js
             themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-brand.gjs
+            themes/isbf-campus-feed/javascripts/discourse/pre-initializers/isbf-composer-optional-title.js
           sparse-checkout-cone-mode: false
           persist-credentials: false
       - uses: actions/checkout@v4
@@ -113,11 +114,17 @@ jobs:
             | tar -x -C tmp/catalog-theme
           git -C ../theme archive HEAD -- test/integration/resource-catalog-test.gjs \
             | tar -x -C tmp/catalog-theme
-          # The standalone theme omits this component from the active production theme.
+          # The active production theme supplies both of these dependencies.
           brand=javascripts/discourse/components/isbf-v2-brand.gjs
+          optional_title=javascripts/discourse/pre-initializers/isbf-composer-optional-title.js
           test ! -e "tmp/catalog-theme/$brand"
+          test ! -e "tmp/catalog-theme/$optional_title"
           cp "../academy/themes/isbf-campus-feed/$brand" "tmp/catalog-theme/$brand"
-          printf '%s  %s\n' '2b728a4708e65fc7c4adc1f64c3894cf8801805c84413be51c56661454d1906c' "tmp/catalog-theme/$brand" | sha256sum -c -
+          cp "../academy/themes/isbf-campus-feed/$optional_title" "tmp/catalog-theme/$optional_title"
+          printf '%s  %s\n' \
+            '2b728a4708e65fc7c4adc1f64c3894cf8801805c84413be51c56661454d1906c' "tmp/catalog-theme/$brand" \
+            'f3a0647d9209085518dbe9075020a5a179cd513d5ad860fe98eb4fa8ba0a8531' "tmp/catalog-theme/$optional_title" \
+            | sha256sum -c -
           # Match the native student-group lane's test helper overlay.
           test ! -e frontend/discourse/tests/helpers/d-select.js
           cp ../academy/frontend/discourse/tests/helpers/d-select.js frontend/discourse/tests/helpers/d-select.js
