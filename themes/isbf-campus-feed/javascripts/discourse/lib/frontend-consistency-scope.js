@@ -39,6 +39,7 @@ const USER_CONTENT = new Map([
   ["user.badges", "profile-badges"],
   ["user.deleted-posts", "deleted-posts"],
   ["user.profile-hidden", "profile-hidden"],
+  ["user.profile-private", "profile-hidden"],
 ]);
 
 const GROUP_PAGES = new Set([
