@@ -1,0 +1,33 @@
+// The visibility region replaces this single option. The ID keeps the rule ahead of
+// themes that lay out every preference group.
+body.isbf-profile-visibility
+  #main-outlet
+  .user-preferences
+  .form-vertical
+  > .control-group.user-hide-profile {
+  display: none;
+}
+
+// The region is rendered by the outlet at the end of the form; it belongs where the option was.
+.user-preferences .form-vertical > .profile-visibility {
+  order: -1;
+}
+
+body.isbf-profile-summary-hidden {
+  .user-navigation-primary .user-nav__summary,
+  .sidebar-section-link[data-link-name="summary"] {
+    display: none;
+  }
+}
+
+// The plugin keeps a hidden profile's header expanded, which leaves an empty details panel.
+// The ID and :not() keep this ahead of themes that lay out the expanded header.
+#main-outlet .container.profile-hidden .user-main .about:not(.collapsed-info) {
+  .details {
+    border-bottom: 0;
+  }
+
+  .secondary {
+    display: none;
+  }
+}
