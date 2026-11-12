@@ -6,6 +6,8 @@ zh_CN:
           academy_roles: 学院身份
   js:
     academy_roles:
+      admin:
+        title: 学院身份
       official_post_quota:
         title: 官方每周发帖额度
         limit: 每周主题上限

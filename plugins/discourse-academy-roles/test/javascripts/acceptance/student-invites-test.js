@@ -20,7 +20,7 @@ acceptance("Academy student invitations", function (needs) {
         humanized_name: "Academy roles",
         is_discourse_owned: false,
         admin_route: {
-          label: "academy_roles.student_invites.title",
+          label: "academy_roles.admin.title",
           location: "discourse-academy-roles",
           use_new_show_route: true,
         },

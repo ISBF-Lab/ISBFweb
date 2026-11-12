@@ -6,6 +6,8 @@ en:
           academy_roles: "Academy roles"
   js:
     academy_roles:
+      admin:
+        title: "Academy roles"
       official_post_quota:
         title: Official weekly posting limit
         limit: Weekly topic limit

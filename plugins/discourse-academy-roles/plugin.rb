@@ -8,9 +8,7 @@
 require_relative "app/validators/academy_roles_enabled_validator"
 
 enabled_site_setting :academy_roles_enabled
-add_admin_route "academy_roles.student_invites.title",
-                "discourse-academy-roles",
-                use_new_show_route: true
+add_admin_route "academy_roles.admin.title", "discourse-academy-roles", use_new_show_route: true
 
 register_asset "stylesheets/common/academy-roles.scss"
 register_asset "stylesheets/common/academy-auth.scss"
