@@ -23,8 +23,27 @@ module ::IsbfProfileVisibility
   def self.hidden_by_owner?(user, section)
     return false unless FIELDS.key?(section)
 
+    load_preloaded_fields(user)
     value = user.custom_fields[FIELDS[section]]
     value == true || HasCustomFields::Helpers::CUSTOM_FIELD_TRUE.include?(value.to_s)
+  end
+
+  # Reading a field that a batch preload left out raises, so fill the gap for this user.
+  def self.load_preloaded_fields(user)
+    return unless user.custom_fields_preloaded?
+    return if FIELDS.each_value.all? { |name| user.custom_field_preloaded?(name) }
+
+    stored = UserCustomField.where(user_id: user.id, name: FIELDS.values).pluck(:name, :value).to_h
+    user.set_preloaded_custom_fields(
+      user.preloaded_custom_fields.merge(FIELDS.values.index_with { |name| stored[name] }),
+    )
+  end
+
+  # Batch user loaders preload only the fields they serialize; adding these avoids one query per user.
+  module PreloadedUserFields
+    def preload_custom_fields(objects, fields)
+      super(objects, [*fields, *IsbfProfileVisibility::FIELDS.values].uniq)
+    end
   end
 
   def self.choices(user)
@@ -63,6 +82,7 @@ after_initialize do
 
   reloadable_patch do
     Guardian.prepend(IsbfProfileVisibility::GuardianExtension)
+    User.singleton_class.prepend(IsbfProfileVisibility::PreloadedUserFields)
     UserCardSerializer.prepend(IsbfProfileVisibility::UserCardFields)
     UsersController.prepend(IsbfProfileVisibility::SummaryEndpoint)
     ListController.include(IsbfProfileVisibility::ActivityEndpoint)

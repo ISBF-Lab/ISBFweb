@@ -1,4 +1,9 @@
 zh_CN:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          isbf_profile_visibility: "资料可见性"
   js:
     isbf_profile_visibility:
       title: "资料可见性"

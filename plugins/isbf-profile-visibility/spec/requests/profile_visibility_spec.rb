@@ -20,6 +20,13 @@ RSpec.describe "ISBF profile visibility" do
     owner.save_custom_fields
   end
 
+  it "names its settings category for administrators" do
+    plugin = Discourse.plugins_by_name["isbf-profile-visibility"]
+
+    expect(plugin.humanized_name).to eq("Profile visibility")
+    I18n.with_locale(:zh_CN) { expect(plugin.humanized_name).to eq("资料可见性") }
+  end
+
   describe "profile and user card" do
     it "omits the bio fields and lists the section when the bio is hidden" do
       hide(:bio)
@@ -64,6 +71,22 @@ RSpec.describe "ISBF profile visibility" do
 
       get "/u/#{owner.username}/card.json"
       expect(response.parsed_body["user"].keys).not_to include("featured_topic", "bio_excerpt")
+    end
+
+    it "applies the choices to batch-loaded user cards" do
+      other = Fabricate(:user)
+      hide(:bio, :summary)
+      sign_in(viewer)
+
+      get "/user-cards.json", params: { user_ids: [owner.id, other.id].join(",") }
+
+      expect(response.status).to eq(200)
+      card = response.parsed_body["users"].find { |user| user["id"] == owner.id }
+      expect(card.keys).not_to include("bio_excerpt", "location", "website", "time_read")
+      expect(response.parsed_body["users"].map { |user| user["id"] }).to contain_exactly(
+        owner.id,
+        other.id,
+      )
     end
 
     it "returns the full profile and the saved choices to the owner" do

@@ -1,4 +1,9 @@
 en:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          isbf_profile_visibility: "Profile visibility"
   js:
     isbf_profile_visibility:
       title: "Profile visibility"

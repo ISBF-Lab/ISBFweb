@@ -36,6 +36,18 @@ RSpec.describe IsbfProfileVisibility::GuardianExtension do
       end
     end
 
+    it "reads the owner's choice when another loader preloaded only its own fields" do
+      hide(:activity)
+      User.preload_custom_fields([owner], [])
+      expect(owner.custom_field_preloaded?(IsbfProfileVisibility::FIELDS[:activity])).to eq(true)
+
+      owner.set_preloaded_custom_fields({ "unrelated" => nil })
+
+      expect(Guardian.new(viewer).can_see_profile_section?(owner, :activity)).to eq(false)
+      expect(Guardian.new(viewer).can_see_profile_section?(owner, :bio)).to eq(true)
+      expect(owner.custom_fields["unrelated"]).to be_nil
+    end
+
     it "keeps hidden sections visible to the owner and to staff" do
       hide(:bio, :summary, :activity)
 
