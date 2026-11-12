@@ -1,0 +1,25 @@
+zh_CN:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          isbf_profile_visibility: "资料可见性"
+  js:
+    isbf_profile_visibility:
+      title: "资料可见性"
+      hide_profile_description: "开启后，其他人只能看到你的头像和姓名。"
+      sections_title: "公开展示以下内容"
+      note: "未勾选的部分仅你自己和管理人员可见。"
+      bio:
+        title: "简介信息"
+        description: "个人简介、所在地、网站、精选话题和封面。"
+      summary:
+        title: "总结"
+        description: "数据统计、热门话题与回复、互动最多的用户。"
+      activity:
+        title: "活动"
+        description: "发布的话题、回复与点赞记录。"
+      profile_hidden_title: "个人资料已隐藏"
+      sections_hidden:
+        title: "暂无公开内容"
+        body: "此用户未公开总结和活动。"

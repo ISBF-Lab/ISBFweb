@@ -1,0 +1,4 @@
+isbf_profile_visibility:
+  isbf_profile_visibility_enabled:
+    default: true
+    client: true

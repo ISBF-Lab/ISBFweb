@@ -1,0 +1,25 @@
+en:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          isbf_profile_visibility: "Profile visibility"
+  js:
+    isbf_profile_visibility:
+      title: "Profile visibility"
+      hide_profile_description: "When enabled, other people only see your avatar and name."
+      sections_title: "Show publicly"
+      note: "Sections you leave unchecked are visible only to you and staff."
+      bio:
+        title: "About me"
+        description: "Bio, location, website, featured topic and cover image."
+      summary:
+        title: "Summary"
+        description: "Stats, top topics and replies, and the people you interact with most."
+      activity:
+        title: "Activity"
+        description: "Topics, replies and likes."
+      profile_hidden_title: "Profile hidden"
+      sections_hidden:
+        title: "Nothing public yet"
+        body: "This user has not made their summary or activity public."
