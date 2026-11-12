@@ -42,6 +42,7 @@
 !/plugins/isbf-mbti
 !/plugins/isbf-moderation
 !/plugins/isbf-notifications
+!/plugins/isbf-profile-visibility
 !/plugins/isbf-repost
 !/plugins/isbf-resume
 !/plugins/isbf-views

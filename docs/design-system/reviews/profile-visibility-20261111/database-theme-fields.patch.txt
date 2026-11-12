@@ -1,0 +1,169 @@
+--- a/javascripts/discourse/components/isbf-profile-summary.gjs
++++ b/javascripts/discourse/components/isbf-profile-summary.gjs
+@@ -8,8 +8,16 @@
+     return this.summary && this.user?.id != null ? [this.user] : [];
+   }
+ 
++  get repliesRoute() {
++    return this.summary.can_see_user_actions ? "userActivity.replies" : null;
++  }
++
+   get summary() {
+     return this.args.outletArgs?.model;
++  }
++
++  get topicsRoute() {
++    return this.summary.can_see_user_actions ? "userActivity.topics" : null;
+   }
+ 
+   get user() {
+@@ -23,7 +31,7 @@
+           @emptyKey="user.summary.no_replies"
+           @items={{this.summary.replies}}
+           @moreLabel="user.summary.more_replies"
+-          @moreRoute="userActivity.replies"
++          @moreRoute={{this.repliesRoute}}
+           @title="top_replies"
+           @user={{profileUser}}
+           as |reply|
+@@ -40,7 +48,7 @@
+           @emptyKey="user.summary.no_topics"
+           @items={{this.summary.topics}}
+           @moreLabel="user.summary.more_topics"
+-          @moreRoute="userActivity.topics"
++          @moreRoute={{this.topicsRoute}}
+           @title="top_topics"
+           @user={{profileUser}}
+           as |topic|
+--- a/javascripts/discourse/lib/profile-navigation.js
++++ b/javascripts/discourse/lib/profile-navigation.js
+@@ -111,7 +111,8 @@
+     }
+     this.#element.classList.remove(
+       "isbf-profile-navigation",
+-      "--indicator-ready"
++      "--indicator-ready",
++      "is-empty"
+     );
+   }
+ 
+@@ -159,6 +160,12 @@
+   }
+ 
+   #sync(animate) {
++    // Plugins may hide tabs with CSS, so only rendered links keep the track.
++    const visible = [...this.#list.querySelectorAll("a")].some(
++      (link) => link.getClientRects().length
++    );
++    this.#element.classList.toggle("is-empty", !visible);
++
+     if (this.#element.classList.contains("user-navigation-primary")) {
+       for (const [item, icon] of Object.entries(ICONS)) {
+         const link = this.#list.querySelector(`.user-nav__${item} > a`);
+--- a/stylesheets/profile-content.scss
++++ b/stylesheets/profile-content.scss
+@@ -236,6 +236,30 @@
+       line-height: 1.45;
+     }
+ 
++    .profile-visibility {
++      .form-kit__fieldset-title {
++        margin: 0;
++        color: var(--isbf-v2-text);
++        font-size: var(--isbf-v2-font-sm);
++        font-weight: var(--isbf-v2-weight-medium);
++      }
++
++      .form-kit__fieldset-description,
++      .form-kit__control-checkbox-description {
++        color: var(--primary-high);
++        font-size: var(--isbf-v2-font-xs);
++        line-height: 1.45;
++      }
++
++      // Sections stay locked while the whole profile is hidden.
++      .form-kit__field.is-disabled {
++        .form-kit__control-checkbox-label,
++        .form-kit__control-checkbox-description {
++          color: var(--isbf-v2-muted);
++        }
++      }
++    }
++
+     .academy-name-color__preview {
+       margin-block-start: var(--isbf-v2-space-3);
+       padding: var(--isbf-v2-space-3);
+--- a/stylesheets/profile-navigation.scss
++++ b/stylesheets/profile-navigation.scss
+@@ -5,6 +5,11 @@
+   padding: 0;
+   border: 0;
+   background: var(--isbf-v2-surface);
++}
++
++// A profile whose tabs are all hidden from the viewer has no track to show.
++.isbf-profile-navigation.is-empty {
++  display: none;
+ }
+ 
+ .isbf-profile-navigation .horizontal-overflow-nav {
+--- /dev/null
++++ b/test/integration/profile-summary-test.gjs
+@@ -0,0 +1,57 @@
++import { render } from "@ember/test-helpers";
++import { module, test } from "qunit";
++import { setupRenderingTest } from "discourse/tests/helpers/component-test";
++import ISBFProfileSummary from "../../discourse/components/isbf-profile-summary";
++
++function outletArgs(canSeeActivity) {
++  const topics = Array.from({ length: 6 }, (_, index) => ({
++    id: index + 1,
++    fancyTitle: `Summary topic ${index + 1}`,
++    url: `/t/summary-topic/${index + 1}`,
++    like_count: 0,
++    created_at: "2026-10-20T01:00:00Z",
++  }));
++
++  return {
++    user: { id: 7, username: "charlie" },
++    model: {
++      topics,
++      replies: [],
++      most_replied_to_users: [],
++      most_liked_by_users: [],
++      most_liked_users: [],
++      can_see_user_actions: canSeeActivity,
++    },
++  };
++}
++
++module("ISBF | Integration | Component | ISBFProfileSummary", function (hooks) {
++  setupRenderingTest(hooks);
++
++  test("links a full list to the activity page while activity is visible", async function (assert) {
++    const args = outletArgs(true);
++
++    await render(
++      <template><ISBFProfileSummary @outletArgs={{args}} /></template>
++    );
++
++    assert
++      .dom(".isbf-profile-summary__more")
++      .exists({ count: 1 }, "the topics list links to more topics");
++  });
++
++  test("omits the activity link when activity is hidden", async function (assert) {
++    const args = outletArgs(false);
++
++    await render(
++      <template><ISBFProfileSummary @outletArgs={{args}} /></template>
++    );
++
++    assert
++      .dom(".isbf-profile-summary__toggle")
++      .exists("the list can still be expanded");
++    assert
++      .dom(".isbf-profile-summary__more")
++      .doesNotExist("no link leads into the hidden activity");
++  });
++});
