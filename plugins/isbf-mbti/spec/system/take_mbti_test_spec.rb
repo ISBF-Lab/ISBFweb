@@ -60,6 +60,26 @@ RSpec.describe "Take an MBTI test" do
     expect(mbti).to have_empty_history
   end
 
+  it "lets a member choose the second answer in the Chinese 93-question test and advance" do
+    SiteSetting.default_locale = "zh_CN"
+    SiteSetting.allow_user_locale = true
+    user.update!(locale: "zh_CN")
+    sign_in(user)
+
+    mbti.visit_index
+    mbti.choose_version("93", label: "93 题").start(label: "开始测试")
+    expect(mbti).to have_question(1)
+    expect(mbti).to have_question_progress("第 1 题 / 共 93 题")
+    expect(mbti).to have_choice_label(1, "事先计划好了，然后再去")
+    expect(mbti).to have_choice_label(2, "先去，然后随机应变")
+
+    mbti.answer(2)
+    expect(mbti).to have_selected_choice(2)
+    mbti.next_question(label: "下一题")
+    expect(mbti).to have_question(2)
+    expect(mbti).to have_question_progress("第 2 题 / 共 93 题")
+  end
+
   it "takes a guest to native login before answering questions" do
     mbti.visit_index
     expect(mbti).to have_intro

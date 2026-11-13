@@ -1,6 +1,6 @@
 # ISBF MBTI
 
-Private workbench preference tests adapted from [luhuadong/mbti-test](https://github.com/luhuadong/mbti-test/tree/daaf70bfa171fb5487b59cf9f03455dfa2dd9f22), source revision `daaf70bfa171fb5487b59cf9f03455dfa2dd9f22` (MIT). Original source bytes and license are in `data/upstream/`; the per-question semantic scoring audit is in `docs/questionnaire-audit.md`. This adaptation is not an official MBTI assessment or a validation of the questionnaire's psychometric properties.
+Private workbench preference tests. The 28- and 40-question variants use [luhuadong/mbti-test](https://github.com/luhuadong/mbti-test/tree/daaf70bfa171fb5487b59cf9f03455dfa2dd9f22). The 93-question variant uses [zcw576020095/mbti-test](https://github.com/zcw576020095/mbti-test/tree/9960e585c4a949f3138eaff21494b1f99c3ba5db). Their source files and MIT licenses are in `data/upstream/` and `data/zcw93/`. See the [questionnaire audit](docs/questionnaire-audit.md) for scoring and provenance. This adaptation is not an official MBTI assessment or a validation of the questionnaire's psychometric properties.
 
 ## Privacy and API
 
@@ -8,7 +8,7 @@ Private workbench preference tests adapted from [luhuadong/mbti-test](https://gi
 
 The server validates the complete question set and scores the pinned mapping. A unique per-user attempt UUID and a canonical digest make submission retries idempotent. The result table stores scores, type, questionnaire/scoring versions, source revision and the attempt digest; it does not persist individual answers. Answer parameters are filtered from logs. Result responses use private no-store headers. Device drafts are separate from account history.
 
-Scoring version `isbf-2` corrects question 42 in the 93-question variant to score Yes toward F and No toward T, matching its adopted audit rationale. All three variants share the published version. Submissions and retries using `isbf-1` receive HTTP 409; stale drafts cannot resume under the new version. Previously saved results retain their original version, scores and type. The upstream question files and the 28/40-question directions remain unchanged.
+The 28- and 40-question variants use `isbf-2`. The replacement 93-question bank uses `isbf-3` and the upstream A/B scoring keys. An older 93-question draft expires, and submissions and retries with its old version receive HTTP 409. Previously saved results retain their source, version, scores and type. The earlier 93-question scoring correction and original files remain available for audit.
 
 A cascade foreign key is intentional: these private records must be removed on hard user deletion even if the feature is switched off. An unconditionally registered native anonymization event also removes results while disabled.
 

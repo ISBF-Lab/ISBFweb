@@ -35,6 +35,31 @@ RSpec.describe IsbfMbti::ResultsController do
     )
   end
 
+  let(:historical_v2_result) do
+    IsbfMbti::Result.create!(
+      user: user,
+      variant: "93",
+      scoring_version: "isbf-2",
+      source_commit: "daaf70bfa171fb5487b59cf9f03455dfa2dd9f22",
+      personality_type: "ENFJ",
+      scores: {
+        "E" => 15,
+        "I" => 6,
+        "S" => 9,
+        "N" => 16,
+        "T" => 8,
+        "F" => 14,
+        "J" => 14,
+        "P" => 11,
+      },
+      attempt_id: SecureRandom.uuid,
+      submission_digest:
+        Digest::SHA256.hexdigest(
+          JSON.generate(["93", "isbf-2", (1..93).map { |question_id| [question_id, 1] }]),
+        ),
+    )
+  end
+
   before { SiteSetting.isbf_mbti_enabled = true }
 
   def save_result(owner, choice = 1)
@@ -139,6 +164,28 @@ RSpec.describe IsbfMbti::ResultsController do
       expect(historical_result.reload.attributes).to eq(stored_attributes)
     end
 
+    it "returns a stale-version error for isbf-2 93-question retries and unsubmitted attempts" do
+      sign_in(user)
+      stored_attributes = historical_v2_result.attributes
+      stale_submission = {
+        variant: "93",
+        version: "isbf-2",
+        answers: (1..93).map { |question_id| { id: question_id, choice: 1 } },
+      }
+
+      [historical_v2_result.attempt_id, SecureRandom.uuid].each do |attempt_id|
+        post "/isbf/api/mbti/results.json",
+             params: stale_submission.merge(attempt_id: attempt_id),
+             as: :json
+
+        expect(response.status).to eq(409)
+        expect(response.parsed_body.fetch("errors")).to eq([I18n.t("isbf_mbti.stale_version")])
+      end
+
+      expect(IsbfMbti::Result.where(user_id: user.id).count).to eq(1)
+      expect(historical_v2_result.reload.attributes).to eq(stored_attributes)
+    end
+
     it "uses the native write rate limiter" do
       sign_in(user)
       RateLimiter.enable
@@ -214,6 +261,21 @@ RSpec.describe IsbfMbti::ResultsController do
           "J" => 14,
           "P" => 11,
         },
+      )
+    end
+
+    it "returns the stored result from the previous 93-question bank" do
+      sign_in(user)
+      get "/isbf/api/mbti/results/#{historical_v2_result.id}.json"
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.fetch("result")).to include(
+        "id" => historical_v2_result.id,
+        "variant" => "93",
+        "version" => "isbf-2",
+        "source_commit" => "daaf70bfa171fb5487b59cf9f03455dfa2dd9f22",
+        "type" => "ENFJ",
+        "scores" => historical_v2_result.scores,
       )
     end
 

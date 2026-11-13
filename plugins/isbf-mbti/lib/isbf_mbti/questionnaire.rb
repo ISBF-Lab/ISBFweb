@@ -7,6 +7,7 @@ module IsbfMbti
     VARIANTS = %w[28 40 93].freeze
     DIMENSIONS = %w[EI SN TF JP].freeze
     DATA_PATH = File.expand_path("../../data", __dir__)
+    ZCW_93_PATH = File.join(DATA_PATH, "zcw93")
 
     class InvalidAnswers < StandardError
     end
@@ -24,14 +25,31 @@ module IsbfMbti
 
     def initialize(variant)
       @variant = variant
-      scoring = JSON.parse(File.read(File.join(DATA_PATH, "scoring.json")))
+      if variant == "93"
+        scoring = JSON.parse(File.read(File.join(ZCW_93_PATH, "scoring.json")))
+        source = File.join(ZCW_93_PATH, "questions_standard_mbti_93.json")
+        @questions =
+          JSON
+            .parse(File.read(source))
+            .map do |question|
+              {
+                "id" => question.fetch("id"),
+                "question" => {
+                  "zh" => question.fetch("question"),
+                },
+                "options" => {
+                  "zh" => [question.fetch("optionA"), question.fetch("optionB")],
+                },
+              }
+            end
+      else
+        scoring = JSON.parse(File.read(File.join(DATA_PATH, "scoring.json")))
+        source = File.join(DATA_PATH, "upstream", "questions_#{variant}.json")
+        @questions = JSON.parse(File.read(source)).fetch("MBTI_questions")
+      end
       @version = scoring.fetch("scoring_version")
       @source_commit = scoring.fetch("source_commit")
       @mapping = scoring.fetch("variants").fetch(variant)
-      @questions =
-        JSON.parse(File.read(File.join(DATA_PATH, "upstream", "questions_#{variant}.json"))).fetch(
-          "MBTI_questions",
-        )
     end
 
     def metadata

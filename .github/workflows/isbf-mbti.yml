@@ -366,7 +366,7 @@ jobs:
           import json
           from pathlib import Path
           summary = json.loads(Path("tmp/mbti-system.json").read_text())["summary"]
-          assert summary["example_count"] == 18
+          assert summary["example_count"] == 19
           assert summary["failure_count"] == summary["pending_count"] == 0
           PY
       - name: Build only the MBTI production plugin assets in isolation
