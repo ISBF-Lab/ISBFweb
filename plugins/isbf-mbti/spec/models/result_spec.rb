@@ -41,6 +41,28 @@ RSpec.describe IsbfMbti::Result do
       expect(result.attributes.keys).not_to include("answers")
     end
 
+    it "stores the active 93-question source and resolves score ties using the existing rules" do
+      result =
+        described_class.record!(
+          user: user,
+          variant: "93",
+          version: "isbf-3",
+          attempt_id: attempt_id,
+          answers: (1..93).map { |question_id| { id: question_id, choice: 1 } },
+        )
+
+      expect(result.reload).to have_attributes(
+        variant: "93",
+        scoring_version: "isbf-3",
+        source_commit: "9960e585c4a949f3138eaff21494b1f99c3ba5db",
+        personality_type: "ENTP",
+      )
+      expect(result.dimensions.select { |dimension| dimension[:tied] }).to contain_exactly(
+        include(key: "SN", first_percent: 50, second_percent: 50),
+        include(key: "JP", first_percent: 50, second_percent: 50),
+      )
+    end
+
     it "preserves historical scores when an earlier-version attempt is retried" do
       historical_answers = (1..93).map { |question_id| [question_id, 1] }
       historical =

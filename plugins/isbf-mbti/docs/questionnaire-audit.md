@@ -1,10 +1,20 @@
 # MBTI 题库与计分方向审计
 
+## 93 题 A/B 版
+
+`isbf-3` 的 93 题固定使用 `zcw576020095/mbti-test` 提交 `9960e585c4a949f3138eaff21494b1f99c3ba5db`。题目编号、原文和 A/B 顺序来自 `data/questions_standard_mbti_93.json`。`data/zcw93/` 保存原始题库、MIT 许可证及含来源摘要的逐题映射。[固定题库](https://github.com/zcw576020095/mbti-test/blob/9960e585c4a949f3138eaff21494b1f99c3ba5db/data/questions_standard_mbti_93.json) · [固定计分规则](https://github.com/zcw576020095/mbti-test/blob/9960e585c4a949f3138eaff21494b1f99c3ba5db/mbti/services_standard.py)
+
+四维题数为 EI 21、SN 26、TF 24、JP 22。根据上游的八组题号转换每题两极。比如 `I_B` 组的 B 加 E，A 加 I。计分在 ISBF 服务端完成，使用实际维度题数计算比例。28、40 题继续读取各自的 `isbf-2` 题库和计分。历史结果按保存的来源、版本和分数读取。
+
+## luhuadong 题库审计
+
+以下逐题表记录现有 28、40 题和历史 93 题的固定来源及计分。历史 93 题表用于追溯 `isbf-1` 和 `isbf-2` 的结果。
+
 来源：[luhuadong/mbti-test](https://github.com/luhuadong/mbti-test/tree/daaf70bfa171fb5487b59cf9f03455dfa2dd9f22)，固定提交 `daaf70bfa171fb5487b59cf9f03455dfa2dd9f22`。
 
 许可证为 MIT，原始许可保存在 `data/upstream/LICENSE`；原始题目文件按字节保留。本站修正版计分版本为 `isbf-2`。以下是题目语义与程序计分的一致性审计，不是心理测量信效度验证，也不表示这些题库是官方 MBTI 量表。
 
-2026-11-05：`isbf-2` 将93题第42题的“是／否”计分修正为F／T，与本表原有语义说明一致；`isbf-1` 的表格与程序曾误写为T／F。28／40题的方向、全部题目原文及维度题数不变。三套问卷共用计分版本；旧版本提交返回过期状态，草稿不能按新版本恢复，已经保存的历史结果保留原版本和分数，不重新计分。该题仍是群体意见偏好的弱代理，不将其视为F的定义。
+2026-11-05：`isbf-2` 将历史 93 题第 42 题的“是／否”计分修正为 F／T，与本表原有语义说明一致。`isbf-1` 的表格与程序曾误写为 T／F。该次修订保留了题目原文及 28／40 题方向。当时三套问卷共用 `isbf-2`，历史结果保存原版本和分数。该题用于近似表达群体意见偏好。
 
 ## 约定与限制
 

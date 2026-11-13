@@ -124,6 +124,14 @@ module PageObjects
         has_css?(".isbf-mbti-question p[aria-live='polite']", text: text, exact_text: true)
       end
 
+      def has_choice_label?(choice, text)
+        has_css?(
+          ".isbf-mbti-question label:has(input[name='choice'][value='#{choice}'])",
+          text: text,
+          exact_text: true,
+        )
+      end
+
       def has_selected_choice?(choice)
         has_css?(".isbf-mbti-question input[name='choice'][value='#{choice}']:checked")
       end

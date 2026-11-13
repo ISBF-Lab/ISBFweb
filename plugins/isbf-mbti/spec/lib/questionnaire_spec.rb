@@ -67,13 +67,13 @@ RSpec.describe IsbfMbti::Questionnaire do
           "P" => 0,
         },
         "93" => {
-          "E" => 15,
-          "I" => 6,
-          "S" => 9,
-          "N" => 16,
-          "T" => 8,
-          "F" => 14,
-          "J" => 14,
+          "E" => 11,
+          "I" => 10,
+          "S" => 13,
+          "N" => 13,
+          "T" => 13,
+          "F" => 11,
+          "J" => 11,
           "P" => 11,
         },
       }
@@ -98,44 +98,25 @@ RSpec.describe IsbfMbti::Questionnaire do
       end
     end
 
-    it "scores accepting majority opinions toward F at the 93-question T/F boundary" do
-      questionnaire = described_class.fetch("93")
-      majority_opinions =
-        (1..93).map { |question_id| [question_id, [9, 17, 24].include?(question_id) ? 2 : 1] }
-      personal_judgment =
-        majority_opinions.map do |question_id, choice|
-          [question_id, question_id == 42 ? 2 : choice]
-        end
-
-      expect(questionnaire.score(majority_opinions)).to eq(
-        "E" => 15,
-        "I" => 6,
-        "S" => 9,
-        "N" => 16,
-        "T" => 11,
-        "F" => 11,
-        "J" => 14,
-        "P" => 11,
-      )
-      expect(questionnaire.score(personal_judgment)).to eq(
-        "E" => 15,
-        "I" => 6,
-        "S" => 9,
-        "N" => 16,
-        "T" => 12,
-        "F" => 10,
-        "J" => 14,
-        "P" => 11,
-      )
-    end
-
-    it "scores preferring a few close friends toward I in the 93-question version" do
+    it "scores planning ahead toward J in the 93-question version" do
       questionnaire = described_class.fetch("93")
       first = (1..93).map { |question_id| [question_id, 1] }
       other = first.map { |question_id, choice| [question_id, question_id == 1 ? 2 : choice] }
       original = questionnaire.score(first)
-      changed = questionnaire.score(other)
-      expect(changed).to eq(original.merge("I" => original["I"] - 1, "E" => original["E"] + 1))
+
+      expect(questionnaire.score(other)).to eq(original.merge("J" => 10, "P" => 12))
+    end
+
+    it "uses I for the first option of questions 13 and 42 in the 93-question version" do
+      questionnaire = described_class.fetch("93")
+      first = (1..93).map { |question_id| [question_id, 1] }
+      original = questionnaire.score(first)
+
+      [13, 42].each do |changed_id|
+        other =
+          first.map { |question_id, choice| [question_id, question_id == changed_id ? 2 : choice] }
+        expect(questionnaire.score(other)).to eq(original.merge("I" => 9, "E" => 12))
+      end
     end
   end
 

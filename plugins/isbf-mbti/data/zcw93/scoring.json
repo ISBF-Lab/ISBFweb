@@ -1,0 +1,677 @@
+{
+  "source_repository": "https://github.com/zcw576020095/mbti-test",
+  "source_commit": "9960e585c4a949f3138eaff21494b1f99c3ba5db",
+  "scoring_version": "isbf-3",
+  "sources": {
+    "data/questions_standard_mbti_93.json": {
+      "git_blob": "b881b30a82cb4666a669ff97f3e73ec9c51e75f6",
+      "sha256": "5e699d6c35a3c3787456392834acbfe9d537f60dcc52ade62ecd1d9240d32f8a",
+      "bytes": 13928
+    },
+    "mbti/services_standard.py": {
+      "git_blob": "7c2d8d159ec0c4b7f0d6598b864fdc41e5d67a16",
+      "sha256": "9f8f158462eb5426d2a72150709466b4c1ce9310c3f464b3b21eaaa0b622ee7e",
+      "bytes": 10001
+    },
+    "LICENSE": {
+      "git_blob": "3e4c4339bb797ed6d5d17beae5643be7f7d563b1",
+      "sha256": "3bed3331b7048bac17cf50e249d560ccc9508c970da8d7b9283bf4f2e633a91d",
+      "bytes": 1055
+    }
+  },
+  "variants": {
+    "93": {
+      "1": {
+        "dimension": "JP",
+        "poles": [
+          "J",
+          "P"
+        ]
+      },
+      "2": {
+        "dimension": "SN",
+        "poles": [
+          "S",
+          "N"
+        ]
+      },
+      "3": {
+        "dimension": "EI",
+        "poles": [
+          "E",
+          "I"
+        ]
+      },
+      "4": {
+        "dimension": "JP",
+        "poles": [
+          "J",
+          "P"
+        ]
+      },
+      "5": {
+        "dimension": "SN",
+        "poles": [
+          "N",
+          "S"
+        ]
+      },
+      "6": {
+        "dimension": "TF",
+        "poles": [
+          "F",
+          "T"
+        ]
+      },
+      "7": {
+        "dimension": "EI",
+        "poles": [
+          "E",
+          "I"
+        ]
+      },
+      "8": {
+        "dimension": "JP",
+        "poles": [
+          "P",
+          "J"
+        ]
+      },
+      "9": {
+        "dimension": "SN",
+        "poles": [
+          "S",
+          "N"
+        ]
+      },
+      "10": {
+        "dimension": "EI",
+        "poles": [
+          "E",
+          "I"
+        ]
+      },
+      "11": {
+        "dimension": "SN",
+        "poles": [
+          "N",
+          "S"
+        ]
+      },
+      "12": {
+        "dimension": "JP",
+        "poles": [
+          "J",
+          "P"
+        ]
+      },
+      "13": {
+        "dimension": "EI",
+        "poles": [
+          "I",
+          "E"
+        ]
+      },
+      "14": {
+        "dimension": "JP",
+        "poles": [
+          "J",
+          "P"
+        ]
+      },
+      "15": {
+        "dimension": "TF",
+        "poles": [
+          "F",
+          "T"
+        ]
+      },
+      "16": {
+        "dimension": "EI",
+        "poles": [
+          "I",
+          "E"
+        ]
+      },
+      "17": {
+        "dimension": "JP",
+        "poles": [
+          "P",
+          "J"
+        ]
+      },
+      "18": {
+        "dimension": "SN",
+        "poles": [
+          "N",
+          "S"
+        ]
+      },
+      "19": {
+        "dimension": "EI",
+        "poles": [
+          "E",
+          "I"
+        ]
+      },
+      "20": {
+        "dimension": "JP",
+        "poles": [
+          "J",
+          "P"
+        ]
+      },
+      "21": {
+        "dimension": "TF",
+        "poles": [
+          "F",
+          "T"
+        ]
+      },
+      "22": {
+        "dimension": "SN",
+        "poles": [
+          "N",
+          "S"
+        ]
+      },
+      "23": {
+        "dimension": "EI",
+        "poles": [
+          "E",
+          "I"
+        ]
+      },
+      "24": {
+        "dimension": "JP",
+        "poles": [
+          "P",
+          "J"
+        ]
+      },
+      "25": {
+        "dimension": "SN",
+        "poles": [
+          "S",
+          "N"
+        ]
+      },
+      "26": {
+        "dimension": "EI",
+        "poles": [
+          "I",
+          "E"
+        ]
+      },
+      "27": {
+        "dimension": "SN",
+        "poles": [
+          "N",
+          "S"
+        ]
+      },
+      "28": {
+        "dimension": "JP",
+        "poles": [
+          "J",
+          "P"
+        ]
+      },
+      "29": {
+        "dimension": "TF",
+        "poles": [
+          "F",
+          "T"
+        ]
+      },
+      "30": {
+        "dimension": "SN",
+        "poles": [
+          "S",
+          "N"
+        ]
+      },
+      "31": {
+        "dimension": "TF",
+        "poles": [
+          "T",
+          "F"
+        ]
+      },
+      "32": {
+        "dimension": "EI",
+        "poles": [
+          "E",
+          "I"
+        ]
+      },
+      "33": {
+        "dimension": "TF",
+        "poles": [
+          "T",
+          "F"
+        ]
+      },
+      "34": {
+        "dimension": "SN",
+        "poles": [
+          "S",
+          "N"
+        ]
+      },
+      "35": {
+        "dimension": "TF",
+        "poles": [
+          "T",
+          "F"
+        ]
+      },
+      "36": {
+        "dimension": "JP",
+        "poles": [
+          "J",
+          "P"
+        ]
+      },
+      "37": {
+        "dimension": "TF",
+        "poles": [
+          "F",
+          "T"
+        ]
+      },
+      "38": {
+        "dimension": "EI",
+        "poles": [
+          "I",
+          "E"
+        ]
+      },
+      "39": {
+        "dimension": "SN",
+        "poles": [
+          "S",
+          "N"
+        ]
+      },
+      "40": {
+        "dimension": "TF",
+        "poles": [
+          "F",
+          "T"
+        ]
+      },
+      "41": {
+        "dimension": "JP",
+        "poles": [
+          "J",
+          "P"
+        ]
+      },
+      "42": {
+        "dimension": "EI",
+        "poles": [
+          "I",
+          "E"
+        ]
+      },
+      "43": {
+        "dimension": "TF",
+        "poles": [
+          "T",
+          "F"
+        ]
+      },
+      "44": {
+        "dimension": "SN",
+        "poles": [
+          "N",
+          "S"
+        ]
+      },
+      "45": {
+        "dimension": "TF",
+        "poles": [
+          "T",
+          "F"
+        ]
+      },
+      "46": {
+        "dimension": "SN",
+        "poles": [
+          "N",
+          "S"
+        ]
+      },
+      "47": {
+        "dimension": "TF",
+        "poles": [
+          "T",
+          "F"
+        ]
+      },
+      "48": {
+        "dimension": "SN",
+        "poles": [
+          "N",
+          "S"
+        ]
+      },
+      "49": {
+        "dimension": "TF",
+        "poles": [
+          "T",
+          "F"
+        ]
+      },
+      "50": {
+        "dimension": "SN",
+        "poles": [
+          "S",
+          "N"
+        ]
+      },
+      "51": {
+        "dimension": "TF",
+        "poles": [
+          "F",
+          "T"
+        ]
+      },
+      "52": {
+        "dimension": "SN",
+        "poles": [
+          "S",
+          "N"
+        ]
+      },
+      "53": {
+        "dimension": "TF",
+        "poles": [
+          "F",
+          "T"
+        ]
+      },
+      "54": {
+        "dimension": "SN",
+        "poles": [
+          "S",
+          "N"
+        ]
+      },
+      "55": {
+        "dimension": "JP",
+        "poles": [
+          "P",
+          "J"
+        ]
+      },
+      "56": {
+        "dimension": "TF",
+        "poles": [
+          "T",
+          "F"
+        ]
+      },
+      "57": {
+        "dimension": "EI",
+        "poles": [
+          "I",
+          "E"
+        ]
+      },
+      "58": {
+        "dimension": "TF",
+        "poles": [
+          "T",
+          "F"
+        ]
+      },
+      "59": {
+        "dimension": "JP",
+        "poles": [
+          "P",
+          "J"
+        ]
+      },
+      "60": {
+        "dimension": "SN",
+        "poles": [
+          "S",
+          "N"
+        ]
+      },
+      "61": {
+        "dimension": "TF",
+        "poles": [
+          "T",
+          "F"
+        ]
+      },
+      "62": {
+        "dimension": "EI",
+        "poles": [
+          "E",
+          "I"
+        ]
+      },
+      "63": {
+        "dimension": "SN",
+        "poles": [
+          "S",
+          "N"
+        ]
+      },
+      "64": {
+        "dimension": "JP",
+        "poles": [
+          "J",
+          "P"
+        ]
+      },
+      "65": {
+        "dimension": "SN",
+        "poles": [
+          "N",
+          "S"
+        ]
+      },
+      "66": {
+        "dimension": "TF",
+        "poles": [
+          "T",
+          "F"
+        ]
+      },
+      "67": {
+        "dimension": "SN",
+        "poles": [
+          "N",
+          "S"
+        ]
+      },
+      "68": {
+        "dimension": "EI",
+        "poles": [
+          "I",
+          "E"
+        ]
+      },
+      "69": {
+        "dimension": "SN",
+        "poles": [
+          "N",
+          "S"
+        ]
+      },
+      "70": {
+        "dimension": "TF",
+        "poles": [
+          "F",
+          "T"
+        ]
+      },
+      "71": {
+        "dimension": "SN",
+        "poles": [
+          "N",
+          "S"
+        ]
+      },
+      "72": {
+        "dimension": "TF",
+        "poles": [
+          "F",
+          "T"
+        ]
+      },
+      "73": {
+        "dimension": "SN",
+        "poles": [
+          "S",
+          "N"
+        ]
+      },
+      "74": {
+        "dimension": "EI",
+        "poles": [
+          "E",
+          "I"
+        ]
+      },
+      "75": {
+        "dimension": "TF",
+        "poles": [
+          "T",
+          "F"
+        ]
+      },
+      "76": {
+        "dimension": "JP",
+        "poles": [
+          "J",
+          "P"
+        ]
+      },
+      "77": {
+        "dimension": "EI",
+        "poles": [
+          "I",
+          "E"
+        ]
+      },
+      "78": {
+        "dimension": "JP",
+        "poles": [
+          "P",
+          "J"
+        ]
+      },
+      "79": {
+        "dimension": "EI",
+        "poles": [
+          "E",
+          "I"
+        ]
+      },
+      "80": {
+        "dimension": "JP",
+        "poles": [
+          "P",
+          "J"
+        ]
+      },
+      "81": {
+        "dimension": "EI",
+        "poles": [
+          "E",
+          "I"
+        ]
+      },
+      "82": {
+        "dimension": "SN",
+        "poles": [
+          "N",
+          "S"
+        ]
+      },
+      "83": {
+        "dimension": "EI",
+        "poles": [
+          "E",
+          "I"
+        ]
+      },
+      "84": {
+        "dimension": "JP",
+        "poles": [
+          "P",
+          "J"
+        ]
+      },
+      "85": {
+        "dimension": "EI",
+        "poles": [
+          "I",
+          "E"
+        ]
+      },
+      "86": {
+        "dimension": "JP",
+        "poles": [
+          "J",
+          "P"
+        ]
+      },
+      "87": {
+        "dimension": "TF",
+        "poles": [
+          "T",
+          "F"
+        ]
+      },
+      "88": {
+        "dimension": "JP",
+        "poles": [
+          "P",
+          "J"
+        ]
+      },
+      "89": {
+        "dimension": "TF",
+        "poles": [
+          "F",
+          "T"
+        ]
+      },
+      "90": {
+        "dimension": "JP",
+        "poles": [
+          "P",
+          "J"
+        ]
+      },
+      "91": {
+        "dimension": "EI",
+        "poles": [
+          "I",
+          "E"
+        ]
+      },
+      "92": {
+        "dimension": "SN",
+        "poles": [
+          "S",
+          "N"
+        ]
+      },
+      "93": {
+        "dimension": "JP",
+        "poles": [
+          "P",
+          "J"
+        ]
+      }
+    }
+  }
+}
