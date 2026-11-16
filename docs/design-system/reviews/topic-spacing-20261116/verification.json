@@ -23,5 +23,6 @@
     "mobile"
   ],
   "served_stylesheets_match_compilation": true,
-  "file_scoped_lint_passed": true
+  "file_scoped_lint_passed": true,
+  "compatibility_theme_projection_scope_checked": true
 }

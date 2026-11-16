@@ -11,6 +11,8 @@
 
 源码：`themes/isbf-campus-feed/stylesheets/reply-conversations.scss`。
 
+兼容性 CI 的主题补丁清单仅补入这份已审阅的回复样式路径，保留其他路径限制。
+
 ## 验证
 
 - 定向 `bin/lint --fix` 通过。
