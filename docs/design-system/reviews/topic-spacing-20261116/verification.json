@@ -1,0 +1,28 @@
+{
+  "viewports": [
+    1440,
+    390
+  ],
+  "color_modes": [
+    "light",
+    "dark"
+  ],
+  "browser_records_passed": 16,
+  "page_script_errors": 0,
+  "empty_controls_height_px": {
+    "before": 58,
+    "after": 0
+  },
+  "post_padding_px": 16,
+  "child_reply_padding_px": 12,
+  "activity_log_entry_visible": true,
+  "flat_topic_spacing_unchanged": true,
+  "native_stylesheet_targets_passed": [
+    "common",
+    "desktop",
+    "mobile"
+  ],
+  "served_stylesheets_match_compilation": true,
+  "file_scoped_lint_passed": true,
+  "compatibility_theme_projection_scope_checked": true
+}
