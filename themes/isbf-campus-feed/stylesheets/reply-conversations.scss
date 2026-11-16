@@ -18,7 +18,9 @@ body:has(.isbf-v2-shell--topic-conversations) .nested-view {
 
   .nested-view__controls {
     position: static;
+    min-height: 0;
     margin: 0;
+    padding-block: 0;
     padding-inline: var(--isbf-v2-space-4);
     border: 0;
   }
