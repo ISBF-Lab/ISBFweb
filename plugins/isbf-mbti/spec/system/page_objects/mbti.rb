@@ -102,8 +102,16 @@ module PageObjects
           (heading.nil? || has_css?(".isbf-mbti-intro h2", text: heading, exact_text: true))
       end
 
+      def has_intro_copy?(description:)
+        has_css?(
+          ".isbf-mbti-intro h2 + p:has(+ .isbf-mbti__versions)",
+          text: description,
+          exact_text: true,
+        ) && has_css?(".isbf-mbti-intro p", count: 2, visible: :all)
+      end
+
       def has_version?(label)
-        has_css?(".isbf-mbti__versions button", text: label, exact_text: true)
+        has_css?(".isbf-mbti__versions button span", text: label, exact_text: true)
       end
 
       def has_privacy_notice?(text)

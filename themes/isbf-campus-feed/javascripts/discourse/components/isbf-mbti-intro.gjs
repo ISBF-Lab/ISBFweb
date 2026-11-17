@@ -8,9 +8,6 @@ export default <template>
     <div class="isbf-mbti__panel">
       <h2>{{i18n (themePrefix "isbf_v2.mbti_intro_heading")}}</h2>
       <p>{{i18n (themePrefix "isbf_v2.mbti_intro")}}</p>
-      <p class="isbf-mbti__muted">{{i18n
-          (themePrefix "isbf_v2.mbti_disclaimer")
-        }}</p>
       <div
         aria-label={{i18n (themePrefix "isbf_v2.mbti_choose_version")}}
         class="isbf-mbti__versions"
@@ -68,11 +65,5 @@ export default <template>
             (themePrefix "isbf_v2.mbti_stale_draft")
           }}</p>{{/if}}
     </div>
-    <p class="isbf-mbti__source">{{i18n (themePrefix "isbf_v2.mbti_source")}}
-      <a
-        href="https://github.com/luhuadong/mbti-test/tree/daaf70bfa171fb5487b59cf9f03455dfa2dd9f22"
-        rel="noopener noreferrer"
-        target="_blank"
-      >luhuadong/mbti-test</a></p>
   </section>
 </template>
