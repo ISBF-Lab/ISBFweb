@@ -94,21 +94,27 @@ RSpec.describe AiForumAssistantRequest do
       expect(AiForumAssistantQuota.used_by(other_member.id)).to eq(1)
     end
 
-    it "starts a fresh quota period at the configured local midnight" do
-      freeze_time(Time.utc(2026, 11, 17, 15, 59))
-      previous_period = DiscourseAi::ForumAssistant::Configuration.period_start
-      AiForumAssistantQuota.for_period(member.id, previous_period).update!(used: 20)
-      freeze_time(2.minutes.from_now)
+    context "when midnight passes in the configured timezone" do
+      let(:release_initial_request) { false }
 
-      admission.finish!("completed")
+      it "starts a fresh quota period" do
+        freeze_time(Time.utc(2026, 11, 17, 15, 59))
+        initial_request = accepted_request
+        initial_request.finish!("completed")
+        previous_period = initial_request.period_start
+        AiForumAssistantQuota.for_period(member.id, previous_period).update!(used: 20)
+        freeze_time(2.minutes.from_now)
 
-      expect(AiForumAssistantQuota.used_by(member.id)).to eq(1)
-      expect(
-        AiForumAssistantQuota.find_by!(user_id: member.id, period_start: previous_period).used,
-      ).to eq(20)
-      expect(DiscourseAi::ForumAssistant::Configuration.resets_at).to eq_time(
-        Time.utc(2026, 11, 18, 16),
-      )
+        admission.finish!("completed")
+
+        expect(AiForumAssistantQuota.used_by(member.id)).to eq(1)
+        expect(
+          AiForumAssistantQuota.find_by!(user_id: member.id, period_start: previous_period).used,
+        ).to eq(20)
+        expect(DiscourseAi::ForumAssistant::Configuration.resets_at).to eq_time(
+          Time.utc(2026, 11, 18, 16),
+        )
+      end
     end
   end
 
