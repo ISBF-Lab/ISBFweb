@@ -45,12 +45,25 @@ module DiscourseAi
       # Anonymous users can't converse with a bot. Adding them to
       # `ai_bot_allowed_groups` only lets them preview the conversations page.
       def self.anonymous_preview_allowed?
+        return false if SiteSetting.ai_forum_assistant_restrict_members
         SiteSetting.ai_bot_enabled &&
           SiteSetting.ai_bot_allowed_groups_map.include?(Group::AUTO_GROUPS[:anonymous_users])
       end
 
       def self.personal_message_bot_user_ids(user)
         return [] if user.blank? || !SiteSetting.ai_bot_enabled
+        if DiscourseAi::ForumAssistant::Configuration.restricted?(user)
+          configuration = DiscourseAi::ForumAssistant::Configuration
+          return(
+            (
+              if configuration.available? && configuration.allowed_user?(user)
+                [configuration.bot_user.id]
+              else
+                []
+              end
+            )
+          )
+        end
 
         bot_user_ids = []
 
@@ -235,18 +248,22 @@ module DiscourseAi
           :ai_enabled_agents,
           include_condition: -> { scope.authenticated? },
         ) do
-          DiscourseAi::Agents::Agent
-            .all(user: scope.user)
-            .map do |agent|
-              {
-                id: agent.id,
-                name: agent.name,
-                description: agent.description,
-                force_default_llm: agent.force_default_llm,
-                username: agent.username,
-                allow_personal_messages: agent.allow_personal_messages,
-              }
-            end
+          if DiscourseAi::ForumAssistant::Configuration.restricted?(scope.user)
+            [DiscourseAi::ForumAssistant::Configuration.agent_option].compact
+          else
+            DiscourseAi::Agents::Agent
+              .all(user: scope.user)
+              .map do |agent|
+                {
+                  id: agent.id,
+                  name: agent.name,
+                  description: agent.description,
+                  force_default_llm: agent.force_default_llm,
+                  username: agent.username,
+                  allow_personal_messages: agent.allow_personal_messages,
+                }
+              end
+          end
         end
 
         plugin.add_to_serializer(
@@ -264,35 +281,43 @@ module DiscourseAi
           :ai_enabled_chat_bots,
           include_condition: -> do
             SiteSetting.ai_bot_enabled && scope.authenticated? &&
-              scope.user.in_any_groups?(SiteSetting.ai_bot_allowed_groups_map)
+              (
+                DiscourseAi::ForumAssistant::Configuration.restricted?(scope.user) ||
+                  scope.user.in_any_groups?(SiteSetting.ai_bot_allowed_groups_map)
+              )
           end,
         ) do
-          bots_map = DiscourseAi::AiBot::EntryPoint.enabled_user_ids_and_models_map
+          if DiscourseAi::ForumAssistant::Configuration.restricted?(scope.user)
+            [DiscourseAi::ForumAssistant::Configuration.bot_option].compact
+          else
+            bots_map = DiscourseAi::AiBot::EntryPoint.enabled_user_ids_and_models_map
 
-          agent_users = AiAgent.agent_users(user: scope.user)
-          if agent_users.present?
-            agent_users.filter! { |agent_user| agent_user[:username].present? }
+            agent_users = AiAgent.agent_users(user: scope.user)
+            if agent_users.present?
+              agent_users.filter! { |agent_user| agent_user[:username].present? }
 
-            bots_map.concat(
-              agent_users.map do |agent_user|
-                {
-                  "id" => agent_user[:user_id],
-                  "username" => agent_user[:username],
-                  "has_default_llm" =>
-                    agent_user[:default_llm_id].present? ||
-                      SiteSetting.ai_default_llm_model.present?,
-                  "force_default_llm" => agent_user[:force_default_llm],
-                  "is_agent" => true,
-                }
-              end,
-            )
+              bots_map.concat(
+                agent_users.map do |agent_user|
+                  {
+                    "id" => agent_user[:user_id],
+                    "username" => agent_user[:username],
+                    "has_default_llm" =>
+                      agent_user[:default_llm_id].present? ||
+                        SiteSetting.ai_default_llm_model.present?,
+                    "force_default_llm" => agent_user[:force_default_llm],
+                    "is_agent" => true,
+                  }
+                end,
+              )
+            end
+
+            bots_map
           end
-
-          bots_map
         end
 
         plugin.add_to_serializer(:current_user, :can_share_ai_bot_conversations) do
-          scope.user.in_any_groups?(SiteSetting.ai_bot_public_sharing_allowed_groups_map)
+          !DiscourseAi::ForumAssistant::Configuration.restricted?(scope.user) &&
+            scope.user.in_any_groups?(SiteSetting.ai_bot_public_sharing_allowed_groups_map)
         end
 
         plugin.add_to_serializer(

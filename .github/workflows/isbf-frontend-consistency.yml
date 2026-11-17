@@ -192,6 +192,21 @@ jobs:
           LOAD_PLUGINS: "0"
         run: bin/qunit --standalone frontend/discourse/tests/acceptance/push-notification-navigation-test.js
 
+      - name: Disabled composer and topic readiness regression
+        env:
+          LOAD_PLUGINS: "0"
+        run: |
+          bin/qunit --standalone --filter '/DockedComposer|d-editor|stats arrive before/i' \
+            frontend/discourse/tests/integration/components/docked-composer-test.gjs \
+            frontend/discourse/tests/integration/ui-kit/d-editor-test.gjs \
+            frontend/discourse/tests/unit/controllers/topic-test.js
+
+      - name: Forum assistant workspace regression
+        env:
+          LOAD_PLUGINS: "1"
+        run: |
+          bin/qunit --standalone --filter '/forum-assistant|ai-bot-docked-submit|ai-feature-setting-groups|AI Bot - Conversations/' plugins/discourse-ai/test/javascripts
+
       - name: Project theme QUnit
         id: theme_qunit
         env:

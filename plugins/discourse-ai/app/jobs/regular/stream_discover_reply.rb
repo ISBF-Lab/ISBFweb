@@ -17,6 +17,7 @@ module Jobs
       return if ask_log&.ask_outcome.present?
 
       return if (user = User.find_by(id: args[:user_id])).nil?
+      return if DiscourseAi::ForumAssistant::Configuration.restricted?(user)
       return if (query = args[:query]).blank?
       return if !DiscourseAi::Discoveries.enabled_for_user?(user)
       return if !DiscourseAi::Discoveries.valid_request_id?(args[:request_id])
@@ -269,6 +270,7 @@ module Jobs
     def execute_legacy(args)
       return if !SiteSetting.ai_discover_enabled
       return if (user = User.find_by(id: args[:user_id])).nil?
+      return if DiscourseAi::ForumAssistant::Configuration.restricted?(user)
       return if (query = args[:query]).blank?
 
       ai_agent_class =

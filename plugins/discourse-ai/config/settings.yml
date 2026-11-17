@@ -1,4 +1,78 @@
 discourse_ai:
+  ai_forum_assistant_enabled:
+    default: false
+    client: true
+    area: "ai-features/bot"
+  ai_forum_assistant_restrict_members:
+    default: false
+    client: true
+    area: "ai-features/bot"
+  ai_forum_assistant_agent:
+    default: "-1"
+    type: enum
+    enum: "DiscourseAi::Configuration::AgentEnumerator"
+    area: "ai-features/bot"
+  ai_forum_assistant_model:
+    default: ""
+    type: enum
+    enum: "DiscourseAi::Configuration::LlmEnumerator"
+    allow_any: false
+    area: "ai-features/bot"
+  ai_forum_assistant_daily_limit:
+    default: 20
+    min: 1
+    max: 1000
+    area: "ai-features/bot"
+  ai_forum_assistant_questions_per_minute:
+    default: 3
+    min: 1
+    max: 60
+    area: "ai-features/bot"
+  ai_forum_assistant_global_daily_limit:
+    default: 1000
+    min: 1
+    max: 100000
+    area: "ai-features/bot"
+  ai_forum_assistant_max_question_chars:
+    default: 4000
+    min: 100
+    max: 10000
+    client: true
+    area: "ai-features/bot"
+  ai_forum_assistant_max_response_tokens:
+    default: 2000
+    min: 100
+    max: 4000
+    area: "ai-features/bot"
+  ai_forum_assistant_timeout_seconds:
+    default: 90
+    min: 10
+    max: 180
+    area: "ai-features/bot"
+  ai_forum_assistant_violation_limit:
+    default: 5
+    min: 1
+    max: 50
+    area: "ai-features/bot"
+  ai_forum_assistant_violation_window_minutes:
+    default: 10
+    min: 1
+    max: 60
+    area: "ai-features/bot"
+  ai_forum_assistant_cooldown_minutes:
+    default: 30
+    min: 1
+    max: 1440
+    area: "ai-features/bot"
+  ai_forum_assistant_timezone:
+    default: "Asia/Shanghai"
+    validator: "DiscourseAi::Configuration::ForumAssistantTimezoneValidator"
+    area: "ai-features/bot"
+  ai_forum_assistant_log_retention_days:
+    default: 30
+    min: 1
+    max: 365
+    area: "ai-features/bot"
   discourse_ai_enabled:
     default: false
     client: true

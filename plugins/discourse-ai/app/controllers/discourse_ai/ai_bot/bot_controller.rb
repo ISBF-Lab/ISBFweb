@@ -4,6 +4,7 @@ module DiscourseAi
   module AiBot
     class BotController < ::ApplicationController
       include AiCreditLimitHandler
+      include AiForumAssistantErrors
 
       requires_plugin PLUGIN_NAME
       requires_login
@@ -49,12 +50,17 @@ module DiscourseAi
 
       def stop_streaming_response
         raise Discourse::InvalidAccess unless SiteSetting.ai_bot_enabled
-        unless current_user.in_any_groups?(SiteSetting.ai_bot_allowed_groups_map)
-          raise Discourse::InvalidAccess
-        end
-
         post = Post.find(params[:post_id])
         guardian.ensure_can_see!(post)
+
+        if DiscourseAi::ForumAssistant::Policy.managed_topic?(post.topic)
+          raise Discourse::InvalidAccess unless post.topic.user_id == current_user.id
+          AiForumAssistantRequest
+            .where(user_id: current_user.id, reply_post_id: post.id, status: %w[queued running])
+            .find_each { |request| request.finish!("cancelled") }
+        elsif !current_user.in_any_groups?(SiteSetting.ai_bot_allowed_groups_map)
+          raise Discourse::InvalidAccess
+        end
 
         Discourse.redis.del("gpt_cancel:#{post.id}")
 
@@ -63,7 +69,8 @@ module DiscourseAi
 
       def retry_response
         raise Discourse::InvalidAccess unless SiteSetting.ai_bot_enabled
-        unless current_user.in_any_groups?(SiteSetting.ai_bot_allowed_groups_map)
+        unless DiscourseAi::ForumAssistant::Configuration.restricted?(current_user) ||
+                 current_user.in_any_groups?(SiteSetting.ai_bot_allowed_groups_map)
           raise Discourse::InvalidAccess
         end
 
@@ -78,6 +85,19 @@ module DiscourseAi
         raise Discourse::NotFound if prompt_post.blank?
 
         guardian.ensure_can_see!(prompt_post)
+
+        if DiscourseAi::ForumAssistant::Configuration.restricted?(current_user) ||
+             (
+               DiscourseAi::ForumAssistant::Configuration.enabled? &&
+                 DiscourseAi::ForumAssistant::Policy.managed_topic?(post.topic)
+             )
+          raise Discourse::InvalidAccess unless prompt_post.user_id == current_user.id
+          request =
+            AiForumAssistantRequest.admit!(user: current_user, post: prompt_post, reply_post: post)
+          Jobs.enqueue(:create_ai_forum_assistant_reply, request_id: request.id)
+          render json: success_json
+          return
+        end
 
         agent_id = retry_agent_id(post, prompt_post)
         llm_model_id = post.custom_fields[DiscourseAi::AiBot::POST_AI_LLM_MODEL_ID_FIELD]

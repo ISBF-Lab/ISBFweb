@@ -48,6 +48,9 @@ export default class DockedComposer extends Component {
   #rootElement = null;
 
   #handlePaste = (event) => {
+    if (!this.allowUploads) {
+      return;
+    }
     if (!this.inputElement || document.activeElement !== this.inputElement) {
       return;
     }
@@ -126,6 +129,10 @@ export default class DockedComposer extends Component {
 
   get uploadType() {
     return this.args.uploadType ?? "composer";
+  }
+
+  get allowUploads() {
+    return this.args.allowUploads !== false;
   }
 
   get minLength() {
@@ -233,6 +240,10 @@ export default class DockedComposer extends Component {
     this.args.onRegisterApi?.({ setReply: this.setReply, focus: this.focus });
     this.loadDraft();
 
+    if (!this.allowUploads) {
+      return;
+    }
+
     this.uppyUpload = new UppyUpload(getOwner(this), {
       id: this.uploaderId,
       type: this.uploadType,
@@ -284,13 +295,15 @@ export default class DockedComposer extends Component {
 
   @action
   addToolbarButtons(toolbar) {
-    toolbar.addButton({
-      id: "docked-composer-upload",
-      group: "insertions",
-      icon: "upload",
-      title: this.args.uploadTitle ?? "composer.upload_title",
-      sendAction: () => this.openFileUpload(),
-    });
+    if (this.allowUploads) {
+      toolbar.addButton({
+        id: "docked-composer-upload",
+        group: "insertions",
+        icon: "upload",
+        title: this.args.uploadTitle ?? "composer.upload_title",
+        sendAction: () => this.openFileUpload(),
+      });
+    }
 
     this.args.extraToolbarButtons?.(toolbar);
   }
@@ -414,6 +427,7 @@ export default class DockedComposer extends Component {
               @categoryId={{@categoryId}}
               @change={{this.onReplyChange}}
               @composerEvents={{this.composerEvents}}
+              @disabled={{@disabled}}
               @extraButtons={{this.addToolbarButtons}}
               @onSetup={{this.setupEditor}}
               @placeholder={{@placeholder}}
@@ -443,13 +457,13 @@ export default class DockedComposer extends Component {
             </DEditor>
           </div>
 
-          <input
-            class="hidden-upload-field"
-            id={{this.uploaderId}}
-            multiple="multiple"
-            type="file"
-            {{didInsert this.registerFileInput}}
-          />
+          {{#if this.allowUploads}}<input
+              class="hidden-upload-field"
+              id={{this.uploaderId}}
+              multiple="multiple"
+              type="file"
+              {{didInsert this.registerFileInput}}
+            />{{/if}}
         </div>
 
         {{#if this.showUploadsContainer}}

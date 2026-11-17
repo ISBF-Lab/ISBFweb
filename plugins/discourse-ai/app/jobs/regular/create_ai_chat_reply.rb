@@ -10,6 +10,7 @@ module Jobs
 
       message = ::Chat::Message.find_by(id: args[:message_id])
       return if message.blank?
+      return if DiscourseAi::ForumAssistant::Configuration.restricted?(message.user)
 
       agentClass = DiscourseAi::Agents::Agent.find_by(id: args[:agent_id], user: message.user)
       return if agentClass.blank?

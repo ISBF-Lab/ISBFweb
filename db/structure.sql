@@ -768,6 +768,82 @@ CREATE TABLE public.ai_document_fragments_embeddings (
 
 
 --
+-- Name: ai_forum_assistant_quotas; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ai_forum_assistant_quotas (
+    id bigint NOT NULL,
+    user_id integer NOT NULL,
+    period_start timestamp(6) without time zone NOT NULL,
+    used integer DEFAULT 0 NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: ai_forum_assistant_quotas_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.ai_forum_assistant_quotas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ai_forum_assistant_quotas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.ai_forum_assistant_quotas_id_seq OWNED BY public.ai_forum_assistant_quotas.id;
+
+
+--
+-- Name: ai_forum_assistant_requests; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ai_forum_assistant_requests (
+    id bigint NOT NULL,
+    user_id integer NOT NULL,
+    post_id integer,
+    reply_post_id integer,
+    request_uuid uuid NOT NULL,
+    question_digest character varying NOT NULL,
+    period_start timestamp(6) without time zone NOT NULL,
+    expires_at timestamp(6) without time zone NOT NULL,
+    status character varying DEFAULT 'queued'::character varying NOT NULL,
+    reason character varying,
+    source_refs jsonb DEFAULT '[]'::jsonb NOT NULL,
+    personal_quota_refunded boolean DEFAULT false NOT NULL,
+    input_tokens integer DEFAULT 0 NOT NULL,
+    output_tokens integer DEFAULT 0 NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: ai_forum_assistant_requests_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.ai_forum_assistant_requests_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ai_forum_assistant_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.ai_forum_assistant_requests_id_seq OWNED BY public.ai_forum_assistant_requests.id;
+
+
+--
 -- Name: ai_mcp_oauth_tokens; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -14542,6 +14618,20 @@ ALTER TABLE ONLY public.ai_artifacts ALTER COLUMN id SET DEFAULT nextval('public
 
 
 --
+-- Name: ai_forum_assistant_quotas id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ai_forum_assistant_quotas ALTER COLUMN id SET DEFAULT nextval('public.ai_forum_assistant_quotas_id_seq'::regclass);
+
+
+--
+-- Name: ai_forum_assistant_requests id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ai_forum_assistant_requests ALTER COLUMN id SET DEFAULT nextval('public.ai_forum_assistant_requests_id_seq'::regclass);
+
+
+--
 -- Name: ai_mcp_oauth_tokens id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -17150,6 +17240,22 @@ ALTER TABLE ONLY public.ai_artifact_versions
 
 ALTER TABLE ONLY public.ai_artifacts
     ADD CONSTRAINT ai_artifacts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ai_forum_assistant_quotas ai_forum_assistant_quotas_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ai_forum_assistant_quotas
+    ADD CONSTRAINT ai_forum_assistant_quotas_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ai_forum_assistant_requests ai_forum_assistant_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ai_forum_assistant_requests
+    ADD CONSTRAINT ai_forum_assistant_requests_pkey PRIMARY KEY (id);
 
 
 --
@@ -21558,6 +21664,41 @@ CREATE UNIQUE INDEX index_ai_artifact_versions_on_ai_artifact_id_and_version_num
 --
 
 CREATE UNIQUE INDEX index_ai_fragments_embeddings_on_model_strategy_fragment ON public.ai_document_fragments_embeddings USING btree (model_id, strategy_id, rag_document_fragment_id);
+
+
+--
+-- Name: index_ai_forum_assistant_quotas_on_period_start_and_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_ai_forum_assistant_quotas_on_period_start_and_user_id ON public.ai_forum_assistant_quotas USING btree (period_start, user_id);
+
+
+--
+-- Name: index_ai_forum_assistant_requests_on_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ai_forum_assistant_requests_on_created_at ON public.ai_forum_assistant_requests USING btree (created_at);
+
+
+--
+-- Name: index_ai_forum_assistant_requests_on_post_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ai_forum_assistant_requests_on_post_id ON public.ai_forum_assistant_requests USING btree (post_id);
+
+
+--
+-- Name: index_ai_forum_assistant_requests_on_request_uuid; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_ai_forum_assistant_requests_on_request_uuid ON public.ai_forum_assistant_requests USING btree (request_uuid);
+
+
+--
+-- Name: index_ai_forum_assistant_requests_on_user_id_and_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ai_forum_assistant_requests_on_user_id_and_created_at ON public.ai_forum_assistant_requests USING btree (user_id, created_at);
 
 
 --
@@ -26801,6 +26942,7 @@ ALTER TABLE ONLY public.ad_plugin_house_ads_groups
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261117052611'),
 ('20261029003825'),
 ('20261018210240'),
 ('20261014151020'),

@@ -37,6 +37,7 @@ module DiscourseAi
       end
 
       def self.schedule_chat_reply(message, channel, user, context)
+        return if DiscourseAi::ForumAssistant::Configuration.restricted?(user)
         return if !SiteSetting.ai_bot_enabled
 
         all_chat =
@@ -98,6 +99,12 @@ module DiscourseAi
 
       def self.schedule_reply(post)
         return if is_bot_user_id?(post.user_id)
+        if DiscourseAi::ForumAssistant::Policy.applies_to_post?(post)
+          request = AiForumAssistantRequest.find_by(post_id: post.id, status: "queued")
+          Jobs.enqueue(:create_ai_forum_assistant_reply, request_id: request.id) if request
+          return
+        end
+        return if DiscourseAi::ForumAssistant::Configuration.restricted?(post.user)
         mentionables = nil
 
         if post.topic.private_message?
@@ -515,6 +522,10 @@ module DiscourseAi
         feature_context: nil,
         authorization_user_id: nil,
         visibility_user: post.user,
+        prepared_context: nil,
+        llm_args: {},
+        on_reply_created: nil,
+        error_message: nil,
         &blk
       )
         # this is a multithreading issue
@@ -544,27 +555,28 @@ module DiscourseAi
         context_llm = bot.llm
         visibility_guardian = Guardian.new(visibility_user)
         context =
-          DiscourseAi::Agents::BotContext.new(
-            post: post,
-            user: attributed_user,
-            guardian: visibility_guardian,
-            custom_instructions: custom_instructions,
-            feature_name: feature_name,
-            feature_context: feature_context,
-            messages:
-              DiscourseAi::Completions::PromptMessagesBuilder.messages_from_post(
-                post,
-                guardian: visibility_guardian,
-                style: context_style,
-                max_posts: DiscourseAi::Completions::PromptMessagesBuilder::MAX_CONTEXT_MESSAGES,
-                context_token_budget: context_token_budget(context_llm),
-                tokenizer: context_llm.tokenizer,
-                include_image_uploads: include_image_uploads?,
-                include_document_uploads: include_document_uploads?,
-                allowed_attachment_types: bot.model.allowed_attachment_types,
-                bot_usernames: available_bot_usernames,
-              ),
-          )
+          prepared_context ||
+            DiscourseAi::Agents::BotContext.new(
+              post: post,
+              user: attributed_user,
+              guardian: visibility_guardian,
+              custom_instructions: custom_instructions,
+              feature_name: feature_name,
+              feature_context: feature_context,
+              messages:
+                DiscourseAi::Completions::PromptMessagesBuilder.messages_from_post(
+                  post,
+                  guardian: visibility_guardian,
+                  style: context_style,
+                  max_posts: DiscourseAi::Completions::PromptMessagesBuilder::MAX_CONTEXT_MESSAGES,
+                  context_token_budget: context_token_budget(context_llm),
+                  tokenizer: context_llm.tokenizer,
+                  include_image_uploads: include_image_uploads?,
+                  include_document_uploads: include_document_uploads?,
+                  allowed_attachment_types: bot.model.allowed_attachment_types,
+                  bot_usernames: available_bot_usernames,
+                ),
+            )
 
         context.messages.concat(additional_messages)
 
@@ -633,6 +645,8 @@ module DiscourseAi
 
           save_ai_custom_fields(reply_post, authorization_user_id: authorization_user_id)
 
+          on_reply_created&.call(reply_post)
+
           stream_user_ids = reply_post.topic.allowed_users.pluck(:id)
           stream_group_ids = reply_post.topic.allowed_groups.pluck(:id)
 
@@ -650,11 +664,11 @@ module DiscourseAi
 
           cancel_manager ||= DiscourseAi::Completions::CancelManager.new
           context.cancel_manager = cancel_manager
-          context
-            .cancel_manager
-            .start_monitor(delay: 0.2) do
-              context.cancel_manager.cancel! if !Discourse.redis.get(redis_stream_key)
-            end
+          unless context.cancel_manager.monitor_thread
+            context
+              .cancel_manager
+              .start_monitor(delay: 0.2) { !Discourse.redis.get(redis_stream_key) }
+          end
 
           context.cancel_manager.add_callback(
             lambda { reply_post.update!(raw: reply, cooked: PrettyText.cook(reply)) },
@@ -666,7 +680,7 @@ module DiscourseAi
         started_thinking = false
 
         new_custom_prompts =
-          bot.reply(context) do |partial, placeholder, type|
+          bot.reply(context, llm_args: llm_args) do |partial, placeholder, type|
             if context.skip_show_thinking && %i[thinking partial_tool partial_invoke].include?(type)
               next
             end
@@ -799,7 +813,7 @@ module DiscourseAi
         if reply_post
           details = e.message.to_s
           reply =
-            "#{reply}#{started_thinking ? "\n\n</details>" : ""}\n\n#{I18n.t("discourse_ai.ai_bot.reply_error", details: details)}"
+            "#{reply}#{started_thinking ? "\n\n</details>" : ""}\n\n#{error_message || I18n.t("discourse_ai.ai_bot.reply_error", details: details)}"
           reply_post.revise(
             bot.bot_user,
             { raw: reply },

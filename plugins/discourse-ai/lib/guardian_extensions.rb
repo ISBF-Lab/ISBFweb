@@ -2,6 +2,28 @@
 
 module DiscourseAi
   module GuardianExtensions
+    def can_create_post_on_topic?(topic)
+      if DiscourseAi::ForumAssistant::Configuration.restricted?(user) &&
+           DiscourseAi::ForumAssistant::Policy.ai_topic?(topic)
+        unless DiscourseAi::ForumAssistant::Policy.authorized_conversation?(topic, user)
+          return false
+        end
+      end
+      super
+    end
+
+    def can_invite_to?(object, groups = nil)
+      if object.is_a?(Topic) && DiscourseAi::ForumAssistant::Policy.managed_topic?(object)
+        return false
+      end
+      super
+    end
+
+    def can_invite_group_to_private_message?(group, topic)
+      return false if DiscourseAi::ForumAssistant::Policy.managed_topic?(topic)
+      super
+    end
+
     def can_see_summary?(target, cached_summary: nil)
       return false if !SiteSetting.ai_summarization_enabled
 
@@ -80,6 +102,10 @@ module DiscourseAi
 
     def can_share_ai_bot_conversation?(target)
       return false if anonymous?
+      return false if DiscourseAi::ForumAssistant::Configuration.restricted?(user)
+      if target.is_a?(Topic) && DiscourseAi::ForumAssistant::Policy.managed_topic?(target)
+        return false
+      end
 
       if !SiteSetting.discourse_ai_enabled || !SiteSetting.ai_bot_enabled ||
            !SiteSetting.ai_bot_public_sharing_allowed_groups_map.any?

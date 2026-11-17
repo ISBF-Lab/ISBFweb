@@ -7,6 +7,7 @@ module Jobs
     def execute(args)
       return unless args[:prompt]
       return unless user = User.find_by(id: args[:user_id])
+      return if DiscourseAi::ForumAssistant::Configuration.restricted?(user)
       return unless args[:text]
       return unless args[:client_id]
       return unless args[:progress_channel]

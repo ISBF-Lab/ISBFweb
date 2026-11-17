@@ -1,3 +1,4 @@
+import { getOwner } from "@ember/owner";
 import { findAll, render, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
@@ -44,6 +45,10 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
     );
     this.previousResumeEnabled = this.siteSettings.isbf_resume_enabled;
     this.previousGuidesEnabled = this.siteSettings.isbf_guides_enabled;
+    this.previousAssistant = getOwner(this).lookup(
+      "service:current-user"
+    ).forum_assistant;
+    getOwner(this).lookup("service:current-user").set("forum_assistant", null);
     this.site.setProperties(configuration);
     this.siteSettings.isbf_resume_enabled = true;
     this.siteSettings.isbf_guides_enabled = false;
@@ -54,6 +59,9 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
     this.site.setProperties(this.previousConfiguration);
     this.siteSettings.isbf_resume_enabled = this.previousResumeEnabled;
     this.siteSettings.isbf_guides_enabled = this.previousGuidesEnabled;
+    getOwner(this)
+      .lookup("service:current-user")
+      .set("forum_assistant", this.previousAssistant);
   });
 
   test("the new presentation preserves real links and non-interactive placeholders", async function (assert) {
@@ -172,5 +180,33 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
         ".isbf-v2-workbench__heading-dot, .isbf-v2-workbench__signature, .isbf-v2-workbench__caption, .isbf-v2-workbench__heading p, .isbf-v2-workbench__mobile-brand"
       )
       .doesNotExist();
+  });
+
+  test("the configured forum assistant opens the existing conversation page before guides", async function (assert) {
+    const user = getOwner(this).lookup("service:current-user");
+    user.set("forum_assistant", {
+      enabled: true,
+      configured: true,
+      can_ask: false,
+    });
+    this.siteSettings.isbf_guides_enabled = true;
+    await render(<template><ISBFV2Workbench /></template>);
+    assert
+      .dom('[data-workbench-key="ai_assistant"]')
+      .hasAttribute("href", "/discourse-ai/ai-bot/conversations");
+    assert
+      .dom(".isbf-workbench-grid__item:last-child")
+      .hasAttribute("data-workbench-key", "guides");
+    assert
+      .dom(".isbf-workbench-grid__item:nth-last-child(2)")
+      .hasAttribute("data-workbench-key", "ai_assistant");
+  });
+
+  test("an unconfigured assistant has no workbench entry", async function (assert) {
+    getOwner(this)
+      .lookup("service:current-user")
+      .set("forum_assistant", { enabled: true, configured: false });
+    await render(<template><ISBFV2Workbench /></template>);
+    assert.dom('[data-workbench-key="ai_assistant"]').doesNotExist();
   });
 });

@@ -1,0 +1,38 @@
+zh_CN:
+  site_settings:
+    ai_forum_assistant_enabled: "配置好助手、模型及机器人账号后启用论坛助手。"
+    ai_forum_assistant_restrict_members: "普通用户的交互式 AI 入口统一限制为论坛助手；助手关闭时也不恢复其他 AI 对话。"
+    ai_forum_assistant_agent: "论坛助手复用的现有智能体。"
+    ai_forum_assistant_model: "论坛助手固定使用的模型。留空使用智能体或站点默认模型；智能体或模型须已创建机器人账号。"
+    ai_forum_assistant_daily_limit: "每个账号每日可提问次数；关联账号独立计数。"
+    ai_forum_assistant_questions_per_minute: "每个账号每分钟可尝试提问次数。"
+    ai_forum_assistant_global_daily_limit: "全站每日最多受理的论坛助手提问次数。"
+    ai_forum_assistant_max_question_chars: "每次论坛助手提问的最大字符数。"
+    ai_forum_assistant_max_response_tokens: "每次论坛助手回答的最大输出 token 数。"
+    ai_forum_assistant_timeout_seconds: "从受理提问到完成回答的最长秒数；每个账号同时仅处理一个问题。"
+    ai_forum_assistant_violation_limit: "触发冷却的明确越界或提示词攻击拒答次数。"
+    ai_forum_assistant_violation_window_minutes: "统计违规次数的滚动时间窗口，单位为分钟。"
+    ai_forum_assistant_cooldown_minutes: "连续违规后暂停助手的分钟数，不封禁论坛账号。"
+    ai_forum_assistant_timezone: "每日提问额度重置所用时区。"
+    ai_forum_assistant_log_retention_days: "助手请求元数据的保留天数；不改变原有会话保留规则。"
+  discourse_ai:
+    forum_assistant:
+      scope: "回答论坛帖子、论坛使用问题，并帮助查找工作台资料。"
+      help_title: "论坛助手使用说明"
+      help_text: "从工作台的 AI 助手入口进入，创建一对一私有会话。支持论坛帖子问答、论坛使用帮助，以及课程资源和资料库的目录、介绍、文件名和获取入口查找；不读取附件或外部文件正文。每个账号每日 %{daily} 问、每分钟 %{minute} 次尝试，同时处理一个请求；关联账号独立计数。每日按 %{timezone} 时区零点重置，页面显示剩余额度和恢复时间。连续明确越界可能暂停助手 %{cooldown} 分钟，不封禁论坛账号。点击停止本次请求可取消问题校验或生成。问题通过校验后流式回答，回答应附来源链接。"
+      invalid_timezone: "请输入有效时区，例如 Asia/Shanghai。"
+      errors:
+        unavailable: "论坛助手暂不可用，请稍后重试。"
+        forum_only: "请使用论坛助手咨询本论坛内容、使用方法及资料查找。"
+        private_conversation_required: "请与论坛助手新建一对一私有会话后提问。"
+        question_length: "问题为空或超过助手的长度限制，请精简后发送。"
+        attachments_disabled: "请描述你要查找的资料；助手目前不读取上传文件。"
+        cooldown: "连续越界请求已触发助手冷却，请在助手页面查看恢复时间。"
+        busy: "你的账号已有一个回答正在生成，请等待完成或先停止生成。"
+        daily_limit: "你今天的提问额度已用完，请在助手页面查看重置时间。"
+        global_limit: "论坛助手今天的全站额度已用完，请在每日重置后再试。"
+      replies:
+        refused: "我可以回答本论坛帖子、论坛使用问题，并帮助查找工作台资料。请围绕这些内容提问。"
+        clarify: "你想查找哪个论坛话题、功能、课程或资料？请补充名称或相关信息。"
+        not_found: "在你当前有权查看的论坛内容中，没有找到相关信息。可以补充课程名、文件名或话题关键词，也可以前往[论坛搜索](/search)或[使用指南](/guides)查找。"
+        unavailable: "这次请求未能完成，已归还你的个人每日提问额度，请稍后重试。"

@@ -7,6 +7,7 @@ module DiscourseAi
 
       requires_plugin PLUGIN_NAME
       requires_login
+      before_action { DiscourseAi::ForumAssistant::Policy.ensure_interactive_access!(current_user) }
       before_action :ensure_can_request_composer_suggestions, except: :stream_suggestion
       before_action :ensure_can_request_stream_suggestions, only: :stream_suggestion
       before_action :rate_limiter_performed!

@@ -79,7 +79,8 @@ function initializeAIBotReplies(api) {
   // rendering nothing regardless of transition timing.
   api.registerValueTransformer("more-topics-tabs", ({ value, context }) => {
     if (
-      siteSettings.ai_bot_enable_docked_composer &&
+      (siteSettings.ai_bot_enable_docked_composer ||
+        context?.topic?.is_forum_assistant) &&
       context?.topic?.is_bot_pm
     ) {
       return [];
@@ -176,7 +177,11 @@ function initializeAIBotReplies(api) {
   // receives is relayed to the docked composer via `composer:insert-block`
   // which our DEditor subscribes to.
   api.onAppEvent("page:compose-reply", (topic) => {
-    if (siteSettings.ai_bot_enable_docked_composer && topic?.is_bot_pm) {
+    if (
+      (siteSettings.ai_bot_enable_docked_composer ||
+        topic?.is_forum_assistant) &&
+      topic?.is_bot_pm
+    ) {
       focusDockedComposer();
     }
   });
@@ -272,7 +277,11 @@ function initializeFooterButtonsVisibility(api) {
     ({ value, context: { topic } }) => {
       // On AI bot PMs the docked composer replaces the topic footer, so its
       // buttons (reply, admin wrench, etc.) are redundant — skip rendering it.
-      if (siteSettings.ai_bot_enable_docked_composer && topic?.is_bot_pm) {
+      if (
+        (siteSettings.ai_bot_enable_docked_composer ||
+          topic?.is_forum_assistant) &&
+        topic?.is_bot_pm
+      ) {
         return false;
       }
       return value;

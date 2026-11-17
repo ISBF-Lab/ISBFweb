@@ -477,6 +477,11 @@ export default class ProsemirrorEditor extends Component<ProsemirrorEditorSignat
   }
 
   @action
+  updateEditable(): void {
+    this.view.setProps({ editable: () => this.args.disabled !== true });
+  }
+
+  @action
   updateContext(element: HTMLElement, [key, value]: [string, unknown]): void {
     this.view.dispatch(
       this.view.state.tr
@@ -490,6 +495,7 @@ export default class ProsemirrorEditor extends Component<ProsemirrorEditorSignat
       class="ProseMirror-container"
       {{didInsert this.setup}}
       {{didUpdate this.convertFromValue @value}}
+      {{didUpdate this.updateEditable @disabled}}
       {{didUpdate this.updateContext "placeholder" @placeholder}}
       {{willDestroy this.teardown}}
       {{forceScrollingElementPosition}}

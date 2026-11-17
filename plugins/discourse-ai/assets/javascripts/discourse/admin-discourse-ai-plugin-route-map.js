@@ -30,6 +30,7 @@ export default {
     this.route("discourse-ai-translations", { path: "ai-translations" });
     this.route("discourse-ai-usage", { path: "ai-usage" });
     this.route("discourse-ai-logs", { path: "ai-logs" });
+    this.route("discourse-ai-forum-assistant", { path: "forum-assistant" });
 
     this.route(
       "discourse-ai-embeddings",

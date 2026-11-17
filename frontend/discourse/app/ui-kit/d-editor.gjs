@@ -313,7 +313,7 @@ export default class DEditor extends Component {
 
   @action
   handleFocusIn() {
-    this.set("isEditorFocused", true);
+    scheduleOnce("afterRender", this, this.#setEditorFocused, true);
   }
 
   @action
@@ -322,7 +322,8 @@ export default class DEditor extends Component {
       return;
     }
 
-    this.set("isEditorFocused", false);
+    // Disabling a focused input can emit blur during a render.
+    scheduleOnce("afterRender", this, this.#setEditorFocused, false);
   }
 
   /**
@@ -470,6 +471,12 @@ export default class DEditor extends Component {
           "indentSelection"
         );
       };
+    }
+  }
+
+  #setEditorFocused(focused) {
+    if (!this.isDestroying) {
+      this.set("isEditorFocused", focused);
     }
   }
 

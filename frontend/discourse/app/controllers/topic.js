@@ -1790,7 +1790,7 @@ export default class TopicController extends Controller {
           updateStream = true;
         }
 
-        if (updateStream) {
+        if (updateStream && !postStream.firstPostNotLoaded) {
           postStream.triggerChangedTopicStats();
         }
         break;

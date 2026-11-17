@@ -32,6 +32,7 @@ import dAutocomplete from "discourse/ui-kit/modifiers/d-autocomplete";
 import { i18n } from "discourse-i18n";
 import AiAgentLlmSelector from "discourse/plugins/discourse-ai/discourse/components/ai-agent-llm-selector";
 import AiBotConversationsLayout from "discourse/plugins/discourse-ai/discourse/components/ai-bot-conversations-layout";
+import ForumAssistantStatus from "discourse/plugins/discourse-ai/discourse/components/forum-assistant-status";
 import { takeConversationDraft } from "discourse/plugins/discourse-ai/discourse/lib/ai-bot-conversation-draft";
 
 @tagName("")
@@ -40,6 +41,7 @@ export default class AiBotConversations extends Component {
   @service aiBotConversationsHiddenSubmit;
   @service capabilities;
   @service currentUser;
+  @service forumAssistant;
   @service mediaOptimizationWorker;
   @service sessionStore;
   @service site;
@@ -48,6 +50,7 @@ export default class AiBotConversations extends Component {
 
   @tracked creditStatus = null;
   @tracked selectedLlmId = null;
+  @tracked selectedAgentId = null;
   @tracked uploads = trackedArray();
 
   shiftHeldOnEnter = false;
@@ -80,6 +83,9 @@ export default class AiBotConversations extends Component {
   });
 
   #handlePaste = (event) => {
+    if (this.isForumAssistant) {
+      return;
+    }
     if (document.activeElement !== this.textarea) {
       return;
     }
@@ -173,7 +179,14 @@ export default class AiBotConversations extends Component {
   }
 
   get isSubmitDisabled() {
-    return this.creditStatus?.hard_limit_reached === true;
+    return (
+      this.creditStatus?.hard_limit_reached === true ||
+      (this.isForumAssistant && !this.forumAssistant.status?.can_ask)
+    );
+  }
+
+  get isForumAssistant() {
+    return this.forumAssistant.isSelected(this.selectedAgentId);
   }
 
   get sendOnMetaEnter() {
@@ -184,6 +197,7 @@ export default class AiBotConversations extends Component {
 
   @action
   async setAgentId(id) {
+    this.selectedAgentId = id;
     this.aiBotConversationsHiddenSubmit.agentId = id;
     // Only check agent credits if no LLM is explicitly selected
     // (e.g., when agent has force_default_llm)
@@ -436,6 +450,9 @@ export default class AiBotConversations extends Component {
       @updateInput={{this.updateInputValue}}
     >
       <:default>
+        {{#if this.isForumAssistant}}
+          <ForumAssistantStatus />
+        {{/if}}
         <div
           class={{dConcatClass
             "ai-bot-conversations__input-wrapper"
@@ -443,18 +460,26 @@ export default class AiBotConversations extends Component {
           }}
           {{this.creditLimitTooltipModifier}}
         >
-          <DButton
-            class="btn btn-transparent ai-bot-upload-btn"
-            @action={{unless this.isSubmitDisabled this.openFileUpload}}
-            @disabled={{this.isSubmitDisabled}}
-            @icon="upload"
-            @title="discourse_ai.ai_bot.conversations.upload_files"
-          />
+          {{#unless this.isForumAssistant}}<DButton
+              class="btn btn-transparent ai-bot-upload-btn"
+              @action={{unless this.isSubmitDisabled this.openFileUpload}}
+              @disabled={{this.isSubmitDisabled}}
+              @icon="upload"
+              @title="discourse_ai.ai_bot.conversations.upload_files"
+            />{{/unless}}
           <textarea
             autofocus={{unless this.isSubmitDisabled "true"}}
             disabled={{if this.isSubmitDisabled true this.loading}}
             id="ai-bot-conversations-input"
-            minlength="10"
+            maxlength={{if
+              this.isForumAssistant
+              this.siteSettings.ai_forum_assistant_max_question_chars
+            }}
+            minlength={{if
+              this.isForumAssistant
+              1
+              this.siteSettings.min_personal_message_post_length
+            }}
             placeholder={{i18n "discourse_ai.ai_bot.conversations.placeholder"}}
             rows="1"
             {{didInsert this.setTextArea}}
@@ -470,13 +495,13 @@ export default class AiBotConversations extends Component {
             @isLoading={{unless this.isSubmitDisabled this.loading}}
             @title="discourse_ai.ai_bot.conversations.header"
           />
-          <input
-            class="hidden-upload-field"
-            id="ai-bot-file-uploader"
-            multiple="multiple"
-            type="file"
-            {{didInsert this.registerFileInput}}
-          />
+          {{#unless this.isForumAssistant}}<input
+              class="hidden-upload-field"
+              id="ai-bot-file-uploader"
+              multiple="multiple"
+              type="file"
+              {{didInsert this.registerFileInput}}
+            />{{/unless}}
         </div>
 
         <AiAgentLlmSelector

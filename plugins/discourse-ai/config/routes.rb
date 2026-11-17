@@ -28,6 +28,12 @@ DiscourseAi::Engine.routes.draw do
   end
 
   scope module: :ai_bot, path: "/ai-bot", defaults: { format: :json } do
+    get "forum-assistant/status" => "forum_assistant#status"
+    post "forum-assistant/cancel" => "forum_assistant#cancel"
+    get "forum-assistant/conversations" => "forum_assistant_conversations#index"
+    get "forum-assistant/conversations/:id" => "forum_assistant_conversations#show"
+    post "forum-assistant/conversations" => "forum_assistant_conversations#create"
+    post "forum-assistant/conversations/:id/messages" => "forum_assistant_conversations#reply"
     get "bot-username" => "bot#show_bot_username"
     get "post/:post_id/show-debug-info" => "bot#show_debug_info"
     get "show-debug-info/:id" => "bot#show_debug_info_by_id"
@@ -97,6 +103,10 @@ Discourse::Application.routes.draw do
       :constraints => StaffConstraint.new
 
   scope "/admin/plugins/discourse-ai", constraints: AdminConstraint.new do
+    get "/forum-assistant" => "discourse_ai/admin/forum_assistant#index", :format => :json
+    delete "/forum-assistant/cooldown/:user_id" =>
+             "discourse_ai/admin/forum_assistant#clear_cooldown",
+           :format => :json
     get "/ask-ai-reports/:report_id/subjects/:subject_id/asks" =>
           "discourse_ai/admin/ask_ai_reports#asks",
         :format => :json

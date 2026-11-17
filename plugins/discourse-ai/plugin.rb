@@ -20,6 +20,7 @@ register_asset "stylesheets/common/streaming.scss"
 register_asset "stylesheets/common/ai-blinking-animation.scss"
 register_asset "stylesheets/common/ai-user-settings.scss"
 register_asset "stylesheets/common/ai-features.scss"
+register_asset "stylesheets/common/forum-assistant.scss"
 register_asset "stylesheets/common/ai-payload-viewer.scss"
 register_asset "stylesheets/common/ai-decoded-transcript.scss"
 
@@ -136,6 +137,7 @@ after_initialize do
     DiscourseAi::AiHelper::EntryPoint.new,
     DiscourseAi::Summarization::EntryPoint.new,
     DiscourseAi::AiBot::EntryPoint.new,
+    DiscourseAi::ForumAssistant::EntryPoint.new,
     DiscourseAi::AiModeration::EntryPoint.new,
     DiscourseAi::Translation::EntryPoint.new,
     DiscourseAi::Discover::EntryPoint.new,
@@ -187,6 +189,7 @@ after_initialize do
   end
 
   reloadable_patch do |plugin|
+    PostValidator.prepend DiscourseAi::ForumAssistant::PostValidatorExtension
     Guardian.prepend DiscourseAi::GuardianExtensions
     Topic.prepend DiscourseAi::TopicExtensions
     Post.prepend DiscourseAi::PostExtensions

@@ -1,0 +1,38 @@
+en:
+  site_settings:
+    ai_forum_assistant_enabled: "Enable the forum assistant once its agent, model and bot account are configured."
+    ai_forum_assistant_restrict_members: "Restrict non-admin interactive AI access to the forum assistant, including when the assistant is turned off."
+    ai_forum_assistant_agent: "Existing agent used by the forum assistant."
+    ai_forum_assistant_model: "Fixed forum assistant model. Blank uses the agent or site default model. Configure a bot account for the model or agent."
+    ai_forum_assistant_daily_limit: "Questions per account per day. Linked accounts have separate limits."
+    ai_forum_assistant_questions_per_minute: "Question attempts per account per minute."
+    ai_forum_assistant_global_daily_limit: "Accepted forum assistant questions per day across the site."
+    ai_forum_assistant_max_question_chars: "Maximum characters in each forum assistant question."
+    ai_forum_assistant_max_response_tokens: "Maximum output tokens per forum assistant answer."
+    ai_forum_assistant_timeout_seconds: "Maximum seconds from accepting a question to finishing its answer. One active question per account."
+    ai_forum_assistant_violation_limit: "Clear out-of-scope or prompt-injection refusals that trigger a cooldown."
+    ai_forum_assistant_violation_window_minutes: "Rolling window in minutes for counting policy violations."
+    ai_forum_assistant_cooldown_minutes: "Minutes to pause the assistant after repeated violations. This does not suspend the forum account."
+    ai_forum_assistant_timezone: "Time zone for resetting daily question limits."
+    ai_forum_assistant_log_retention_days: "Days to retain assistant request metadata. Conversation retention is unchanged."
+  discourse_ai:
+    forum_assistant:
+      scope: "Questions about forum posts, using the forum, and finding workbench resources."
+      help_title: "Using the forum assistant"
+      help_text: "Open AI assistant from the workbench and start a private one-to-one conversation. Ask about forum posts, forum usage, or course resources and resource-library metadata and access links. The assistant does not read attachments or external file contents. Each account has %{daily} questions per day and %{minute} attempts per minute, with one active request. Linked accounts are counted separately. Daily limits reset at midnight in %{timezone}; the assistant page shows remaining questions and recovery times. Repeated clear out-of-scope requests can pause the assistant for %{cooldown} minutes. Use Stop this request to cancel checking or generation. Replies are streamed after the question check and should cite their sources."
+      invalid_timezone: "Enter a valid time zone, such as Asia/Shanghai."
+      errors:
+        unavailable: "The forum assistant is temporarily unavailable. Please try again later."
+        forum_only: "Please use the forum assistant for questions about this forum and its resources."
+        private_conversation_required: "Start a private conversation with the forum assistant to ask a question."
+        question_length: "The question is empty or exceeds the assistant's length limit."
+        attachments_disabled: "Please describe what resource you need. The assistant does not read uploaded files."
+        cooldown: "The forum assistant is temporarily paused after repeated out-of-scope requests. Check the assistant page for the recovery time."
+        busy: "An answer is already being generated for your account. Please wait or stop it first."
+        daily_limit: "You have reached today's question limit. Check the assistant page for the reset time."
+        global_limit: "The forum assistant has reached today's site-wide limit. Please try again after the daily reset."
+      replies:
+        refused: "I can help with this forum's posts, how to use the forum, and finding workbench resources. Please ask a question within that scope."
+        clarify: "Which forum topic, feature, course or resource would you like help finding? Please add its name or a few details."
+        not_found: "I couldn't find relevant information in the forum content available to your account. Try a specific course, file or topic name, or visit [forum search](/search) and [usage guides](/guides)."
+        unavailable: "The assistant couldn't finish this request. Your personal daily question allowance has been restored. Please try again later."

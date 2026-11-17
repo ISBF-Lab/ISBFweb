@@ -13,6 +13,16 @@ export default class AiConversationInvite extends Component {
 
   @service modal;
   @service header;
+  @service forumAssistant;
+
+  get canInvite() {
+    const topic = this.args.outletArgs.topic;
+    return (
+      !this.forumAssistant.restricted &&
+      !topic.is_forum_assistant &&
+      topic.details?.can_invite_to
+    );
+  }
 
   get participants() {
     const participants = [
@@ -34,12 +44,14 @@ export default class AiConversationInvite extends Component {
 
   <template>
     <div class="ai-conversation__participants">
-      <DButton
-        class="btn-default ai-conversations__invite-button"
-        @action={{this.showInvite}}
-        @icon="user-plus"
-        @label="discourse_ai.ai_bot.invite_ai_conversation.button"
-      />
+      {{#if this.canInvite}}
+        <DButton
+          class="btn-default ai-conversations__invite-button"
+          @action={{this.showInvite}}
+          @icon="user-plus"
+          @label="discourse_ai.ai_bot.invite_ai_conversation.button"
+        />
+      {{/if}}
       {{#each this.participants as |participant|}}
         <Participant
           @avatarSize="medium"
