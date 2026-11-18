@@ -1,0 +1,940 @@
+{
+  "base_commit": "b967f46a340f79b9941ca1a3407459ba4e3d1bea",
+  "scope": "Forum assistant runtime and regression source; CI workflow and documentation changes are reviewed in the PR diff",
+  "files": [
+    {
+      "path": "themes/isbf-campus-feed/common/common.scss",
+      "workspace_path": "external/active-theme/common/common.scss",
+      "baseline_sha256": "698e49d674b17dc889ff562954f24fb960e57e40bc6c381b7ac2488a9b18e6b5",
+      "approved_sha256": "ef34cbaeb0daf6185fdfef40cc4a7d04c68c92a85919ff255124e1a4aec5be43",
+      "repository_before_sha256": "26150ec8c3c732cc839d5bf4c56b2fb0097e4ffc3647f268380d9336a8ac507e",
+      "sha256": "96929bf50636ef83b889529e70738eb9ff372232f5f86f1cbddf0a192228657e",
+      "theme": true
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-forum-assistant.gjs",
+      "workspace_path": "external/active-theme/javascripts/discourse/api-initializers/isbf-forum-assistant.gjs",
+      "baseline_sha256": null,
+      "approved_sha256": "9f146faa95e24c40e8ef37d7b12df69aed7169736d489e92d5072b3f16206c78",
+      "repository_before_sha256": null,
+      "sha256": "9f146faa95e24c40e8ef37d7b12df69aed7169736d489e92d5072b3f16206c78",
+      "theme": true
+    },
+    {
+      "path": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-workbench.gjs",
+      "workspace_path": "external/active-theme/javascripts/discourse/components/isbf-v2-workbench.gjs",
+      "baseline_sha256": "197052ebb52735a539c8c0fd671159759919de5f72189a734877bbc0db8cb43b",
+      "approved_sha256": "bde8868805540fc686dcdc1c940b372c05e7f5fc7b09ab89a0e2cad89f3c96df",
+      "repository_before_sha256": "9e8bc78113ba98af398a2eb9b10039eae9ea064b73591b1b0636ee355039d389",
+      "sha256": "9b2445c7b8d729c121c3929709093a125aff518741a23a39a52b60e2b8ab1ff4",
+      "theme": true
+    },
+    {
+      "path": "themes/isbf-campus-feed/locales/en.yml",
+      "workspace_path": "external/active-theme/locales/en.yml",
+      "baseline_sha256": "64042537595f14a4f968bb292268cbad2f2b4b3321cb768efce52a2aef8069e2",
+      "approved_sha256": "df508c3c026d62e1a232888ae641ab161f115183def4da4320dbdee7e6afa677",
+      "repository_before_sha256": "0217e614c5067c64564096601a77d79d22231722a0191970c561d95b4d5a114a",
+      "sha256": "1d8d8a508679a58580262e0a81770841b0d3d127d9895e5c996d5a4939c0abfe",
+      "theme": true
+    },
+    {
+      "path": "themes/isbf-campus-feed/locales/zh_CN.yml",
+      "workspace_path": "external/active-theme/locales/zh_CN.yml",
+      "baseline_sha256": "4338ee9a70ccf38cacc8d2b43317df009b13d46e2b5fc8cf97ce1e79e53445fd",
+      "approved_sha256": "f61ce9add0df1fe762231563dcc0b572b9c9bc340b2d6addbb3edf7f963e3eb7",
+      "repository_before_sha256": "0f1f7f14a4c535ef6643e3808869e1b84f283ced40aa84283ac2d0a818e87ade",
+      "sha256": "406d3466965653d06142a573ab92bb7fbf89b14f4ac78d3a5494a0ab93f2e5a1",
+      "theme": true
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/forum-assistant.scss",
+      "workspace_path": "external/active-theme/stylesheets/forum-assistant.scss",
+      "baseline_sha256": null,
+      "approved_sha256": "15422c918a0b188496d38ab8125f1844a8276011c096b94d4b68bcf3e5161848",
+      "repository_before_sha256": null,
+      "sha256": "15422c918a0b188496d38ab8125f1844a8276011c096b94d4b68bcf3e5161848",
+      "theme": true
+    },
+    {
+      "path": "themes/isbf-campus-feed/stylesheets/workbench.scss",
+      "workspace_path": "external/active-theme/stylesheets/workbench.scss",
+      "baseline_sha256": "f8aff6ecb095c515b75e51d5bff51dcb562ce97b44b6a0e4053ad49ffe3017d3",
+      "approved_sha256": "dc83b9a4ed909fec90c9bd8a04ba0e1f5f1b64859657646fc7e255b1c1aebb61",
+      "repository_before_sha256": "f8aff6ecb095c515b75e51d5bff51dcb562ce97b44b6a0e4053ad49ffe3017d3",
+      "sha256": "dc83b9a4ed909fec90c9bd8a04ba0e1f5f1b64859657646fc7e255b1c1aebb61",
+      "theme": true
+    },
+    {
+      "path": "themes/isbf-campus-feed/test/integration/workbench-test.gjs",
+      "workspace_path": "external/active-theme/test/integration/workbench-test.gjs",
+      "baseline_sha256": "561fc8e9757fbc69867dd5b7822b7e84c93efd03e6f60f5466c1472512cc91c8",
+      "approved_sha256": "8bce4b9968dc1cbb824d7fec338ad1326f5c26dd37cfc13332c37ff49bdceb83",
+      "repository_before_sha256": "a7d14f2eb34292ed56e6d1163ce7fcde25792babb1813603ae16ec59b61935e6",
+      "sha256": "816a8aee6595064e12d979a6ad965570773428ce2e76dd1ae9400bd9d971bc07",
+      "theme": true
+    },
+    {
+      "path": "db/structure.sql",
+      "workspace_path": "source/db/structure.sql",
+      "baseline_sha256": "ae94a7447e9066e6f1654cf5517a5cb46e394185d4e03a08bab82616a4e18803",
+      "approved_sha256": "6ba19f6d655bd12d39529445d476d02e69aeabeb4412e32ec3833d7331d98da3",
+      "repository_before_sha256": "f03b42f5a3bac6b8f5a58bd1fe197a97655f59bf50eb19d02027e5df3d9984ba",
+      "sha256": "73f6268a91f53887ce676e7f0aaab1af0948f26953a98b18249db010df5b6199",
+      "theme": false
+    },
+    {
+      "path": "frontend/discourse/app/components/docked-composer.gjs",
+      "workspace_path": "source/frontend/discourse/app/components/docked-composer.gjs",
+      "baseline_sha256": "b2507e219ca78a407041387be2f59ab3abb0b46645c0ad6db14cfd1b7f843b17",
+      "approved_sha256": "b6ceae9c485c6e97975f73e3e9f0c15fe3a07a9fc43727e35bb2ad50352c2014",
+      "repository_before_sha256": "b2507e219ca78a407041387be2f59ab3abb0b46645c0ad6db14cfd1b7f843b17",
+      "sha256": "b6ceae9c485c6e97975f73e3e9f0c15fe3a07a9fc43727e35bb2ad50352c2014",
+      "theme": false
+    },
+    {
+      "path": "frontend/discourse/app/controllers/topic.js",
+      "workspace_path": "source/frontend/discourse/app/controllers/topic.js",
+      "baseline_sha256": "3513e5f508c775eb5bb7cfeb776f6442229e3ecb0f6b82da6c792a769c219025",
+      "approved_sha256": "12be13e99ba398131bedb3e0d151cb9f3c2e9f3f8829cd3f6d7e9c4ac0709086",
+      "repository_before_sha256": "3513e5f508c775eb5bb7cfeb776f6442229e3ecb0f6b82da6c792a769c219025",
+      "sha256": "12be13e99ba398131bedb3e0d151cb9f3c2e9f3f8829cd3f6d7e9c4ac0709086",
+      "theme": false
+    },
+    {
+      "path": "frontend/discourse/app/static/prosemirror/components/prosemirror-editor.gts",
+      "workspace_path": "source/frontend/discourse/app/static/prosemirror/components/prosemirror-editor.gts",
+      "baseline_sha256": "fb5c90bdaad0db4a1c7018b1b6013ab96706188e044ec72309a2603256fdad4e",
+      "approved_sha256": "92a93f6102e638016c817ccd3264ea73410bda47f1d7f79d0c0d5db8c21239ee",
+      "repository_before_sha256": "fb5c90bdaad0db4a1c7018b1b6013ab96706188e044ec72309a2603256fdad4e",
+      "sha256": "92a93f6102e638016c817ccd3264ea73410bda47f1d7f79d0c0d5db8c21239ee",
+      "theme": false
+    },
+    {
+      "path": "frontend/discourse/app/ui-kit/d-editor.gjs",
+      "workspace_path": "source/frontend/discourse/app/ui-kit/d-editor.gjs",
+      "baseline_sha256": "780dd1873e61902aa3f502e6a4853876f70ce4b6098a74ab173a259fbe8b9d3c",
+      "approved_sha256": "acd55912d8f3a803467f1aff007d4b3de8047e0c74ede79eb476878c1e0fe9ee",
+      "repository_before_sha256": "780dd1873e61902aa3f502e6a4853876f70ce4b6098a74ab173a259fbe8b9d3c",
+      "sha256": "acd55912d8f3a803467f1aff007d4b3de8047e0c74ede79eb476878c1e0fe9ee",
+      "theme": false
+    },
+    {
+      "path": "frontend/discourse/tests/integration/components/docked-composer-test.gjs",
+      "workspace_path": "source/frontend/discourse/tests/integration/components/docked-composer-test.gjs",
+      "baseline_sha256": "b92cf38df1f203c7369e0f43c90cf25144a62b189f91690648fa382febdaebc1",
+      "approved_sha256": "8d514bcee46cf7a0d3c2cef3d2666a81a7bccbfc99145405a3d45d03a02acf99",
+      "repository_before_sha256": "b92cf38df1f203c7369e0f43c90cf25144a62b189f91690648fa382febdaebc1",
+      "sha256": "8d514bcee46cf7a0d3c2cef3d2666a81a7bccbfc99145405a3d45d03a02acf99",
+      "theme": false
+    },
+    {
+      "path": "frontend/discourse/tests/unit/controllers/topic-test.js",
+      "workspace_path": "source/frontend/discourse/tests/unit/controllers/topic-test.js",
+      "baseline_sha256": "ca1bfdfaae7ca5bac6bcba3834dc7958d345b0dd957e38f80571ec0741662c7c",
+      "approved_sha256": "c919f2d97247ba85b6d2b8cf886ef0749c9dbb8358c8d2057a82f02c3b76654e",
+      "repository_before_sha256": "ca1bfdfaae7ca5bac6bcba3834dc7958d345b0dd957e38f80571ec0741662c7c",
+      "sha256": "c919f2d97247ba85b6d2b8cf886ef0749c9dbb8358c8d2057a82f02c3b76654e",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/admin/assets/javascripts/discourse/components/forum-assistant-admin.gjs",
+      "workspace_path": "source/plugins/discourse-ai/admin/assets/javascripts/discourse/components/forum-assistant-admin.gjs",
+      "baseline_sha256": null,
+      "approved_sha256": "409d70eea7c33bdcbd0263d7961996ed2d066f8261d5fa2a389fbbbc2e9208c8",
+      "repository_before_sha256": null,
+      "sha256": "409d70eea7c33bdcbd0263d7961996ed2d066f8261d5fa2a389fbbbc2e9208c8",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/admin/assets/javascripts/discourse/routes/admin-plugins/show/discourse-ai-forum-assistant.js",
+      "workspace_path": "source/plugins/discourse-ai/admin/assets/javascripts/discourse/routes/admin-plugins/show/discourse-ai-forum-assistant.js",
+      "baseline_sha256": null,
+      "approved_sha256": "772d3f3f9fac14ebc5217e079c87f4c0b32d3af16cf743ebf9a774d87e26a7f1",
+      "repository_before_sha256": null,
+      "sha256": "772d3f3f9fac14ebc5217e079c87f4c0b32d3af16cf743ebf9a774d87e26a7f1",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/admin/assets/javascripts/discourse/templates/admin-plugins/show/discourse-ai-forum-assistant.gjs",
+      "workspace_path": "source/plugins/discourse-ai/admin/assets/javascripts/discourse/templates/admin-plugins/show/discourse-ai-forum-assistant.gjs",
+      "baseline_sha256": null,
+      "approved_sha256": "93b6bd60b9d6c062521686d8ad4a446b2140bce6cd95dffe7f3cc774055a782e",
+      "repository_before_sha256": null,
+      "sha256": "93b6bd60b9d6c062521686d8ad4a446b2140bce6cd95dffe7f3cc774055a782e",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/controllers/concerns/ai_forum_assistant_errors.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/controllers/concerns/ai_forum_assistant_errors.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "ce1d85ded0bea66e8c618cbdfa35a3243ce671349816c2ade01aace377ba07c8",
+      "repository_before_sha256": null,
+      "sha256": "ce1d85ded0bea66e8c618cbdfa35a3243ce671349816c2ade01aace377ba07c8",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/controllers/discourse_ai/admin/forum_assistant_controller.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/controllers/discourse_ai/admin/forum_assistant_controller.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "b3dbdd84d49a4448e98d0c409cc28bced7173072a7efe6154cea6e5b32d7bd6c",
+      "repository_before_sha256": null,
+      "sha256": "b3dbdd84d49a4448e98d0c409cc28bced7173072a7efe6154cea6e5b32d7bd6c",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/controllers/discourse_ai/ai_bot/bot_controller.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/controllers/discourse_ai/ai_bot/bot_controller.rb",
+      "baseline_sha256": "6e1b03c23b56582476989be6974f4fd965443f2d017792286932cc75f7175b4b",
+      "approved_sha256": "4866bc8edfd5f7ca1e8d9eda6778d4fdd8d01a30cb45b706f9c51a0630722bb3",
+      "repository_before_sha256": "6e1b03c23b56582476989be6974f4fd965443f2d017792286932cc75f7175b4b",
+      "sha256": "4866bc8edfd5f7ca1e8d9eda6778d4fdd8d01a30cb45b706f9c51a0630722bb3",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/controllers/discourse_ai/ai_bot/conversations_controller.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/controllers/discourse_ai/ai_bot/conversations_controller.rb",
+      "baseline_sha256": "a2824d3e34319fa9515d7881e739c06158dadc91a2c9fd6572399462d82cdec7",
+      "approved_sha256": "f4cf9564f116987f868ef5072299e4dc50bc3c01a2cd496150c0f8be83c81e01",
+      "repository_before_sha256": "a2824d3e34319fa9515d7881e739c06158dadc91a2c9fd6572399462d82cdec7",
+      "sha256": "f4cf9564f116987f868ef5072299e4dc50bc3c01a2cd496150c0f8be83c81e01",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/controllers/discourse_ai/ai_bot/forum_assistant_controller.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/controllers/discourse_ai/ai_bot/forum_assistant_controller.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "de05b6a38ad58beb3e526564c3d412a890cd7321ec627adb98cb7e237260760c",
+      "repository_before_sha256": null,
+      "sha256": "de05b6a38ad58beb3e526564c3d412a890cd7321ec627adb98cb7e237260760c",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/controllers/discourse_ai/ai_bot/forum_assistant_conversations_controller.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/controllers/discourse_ai/ai_bot/forum_assistant_conversations_controller.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "7ef019061a893584f9ad3d9738cb823a643579a126ca1ca71f17c6be02ec2049",
+      "repository_before_sha256": null,
+      "sha256": "7ef019061a893584f9ad3d9738cb823a643579a126ca1ca71f17c6be02ec2049",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/controllers/discourse_ai/ai_helper/assistant_controller.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/controllers/discourse_ai/ai_helper/assistant_controller.rb",
+      "baseline_sha256": "2860dfd17909bda797eb835e77c31d3dce32e9979a25da65c1f3b4380de4ba86",
+      "approved_sha256": "0dffb67f62ef27b9930bfb8649c89f6ef7623c5b025a713907012416f9594ebe",
+      "repository_before_sha256": "2860dfd17909bda797eb835e77c31d3dce32e9979a25da65c1f3b4380de4ba86",
+      "sha256": "0dffb67f62ef27b9930bfb8649c89f6ef7623c5b025a713907012416f9594ebe",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/controllers/discourse_ai/discover/discoveries_controller.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/controllers/discourse_ai/discover/discoveries_controller.rb",
+      "baseline_sha256": "4ae880155c4ddb23239e5a0db1bef1d9f9b147907e2cca27db4a81e4bdc333d7",
+      "approved_sha256": "e2e74cf9e9bf70f2723493a2b20c05d08ac84a5a2b8bd77da583019e58ff7a11",
+      "repository_before_sha256": "4ae880155c4ddb23239e5a0db1bef1d9f9b147907e2cca27db4a81e4bdc333d7",
+      "sha256": "e2e74cf9e9bf70f2723493a2b20c05d08ac84a5a2b8bd77da583019e58ff7a11",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/jobs/regular/create_ai_chat_reply.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/jobs/regular/create_ai_chat_reply.rb",
+      "baseline_sha256": "bb8d87b49496b01a004ab7257c22e9d6015d327c8dbf3d473fc45c2ab851f075",
+      "approved_sha256": "0749739a641f48129a40dcd53fd722b7734caa504b0968b2cc548a15a0a849ae",
+      "repository_before_sha256": "bb8d87b49496b01a004ab7257c22e9d6015d327c8dbf3d473fc45c2ab851f075",
+      "sha256": "0749739a641f48129a40dcd53fd722b7734caa504b0968b2cc548a15a0a849ae",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/jobs/regular/create_ai_forum_assistant_reply.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/jobs/regular/create_ai_forum_assistant_reply.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "6d08593c96d06380be55ed39aaf1705a1d60e4a5113205dc4ef92e6951a324ef",
+      "repository_before_sha256": null,
+      "sha256": "6d08593c96d06380be55ed39aaf1705a1d60e4a5113205dc4ef92e6951a324ef",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/jobs/regular/create_ai_reply.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/jobs/regular/create_ai_reply.rb",
+      "baseline_sha256": "a31419ab1169978d48d3c497200b62dda10b3b3d6f183df1255f1b7d6643d096",
+      "approved_sha256": "0c560dec819cbb3980bd1858627e636559fddcb86a9dbf2cd81280e537c21ef5",
+      "repository_before_sha256": "a31419ab1169978d48d3c497200b62dda10b3b3d6f183df1255f1b7d6643d096",
+      "sha256": "0c560dec819cbb3980bd1858627e636559fddcb86a9dbf2cd81280e537c21ef5",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/jobs/regular/stream_composer_helper.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/jobs/regular/stream_composer_helper.rb",
+      "baseline_sha256": "32b591f1f6780bc7efbcd6b60a993d422fe5a7ec86c3b21fc4de6ad5c9835a26",
+      "approved_sha256": "b26120b2957246c6312a749c636b2017a341b97ceb920418edbff2890bad2fa3",
+      "repository_before_sha256": "32b591f1f6780bc7efbcd6b60a993d422fe5a7ec86c3b21fc4de6ad5c9835a26",
+      "sha256": "b26120b2957246c6312a749c636b2017a341b97ceb920418edbff2890bad2fa3",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/jobs/regular/stream_discover_reply.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/jobs/regular/stream_discover_reply.rb",
+      "baseline_sha256": "86e7aab65ee46566bdc977411c84723509b5e247a358097be0318549937a4828",
+      "approved_sha256": "c8c1c6c7f2544ca8a64dd67306a91efa9b7cd081155a7042538643b284b4cda9",
+      "repository_before_sha256": "86e7aab65ee46566bdc977411c84723509b5e247a358097be0318549937a4828",
+      "sha256": "c8c1c6c7f2544ca8a64dd67306a91efa9b7cd081155a7042538643b284b4cda9",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/jobs/regular/stream_post_helper.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/jobs/regular/stream_post_helper.rb",
+      "baseline_sha256": "d43e7eae9273042a84aee58d4ca63e9856e3aabbdcc903ed85bc33d6898d1edb",
+      "approved_sha256": "fd2c52f63152333ab9bef900f78294e1162bfd806abaaa058d27bc476027623c",
+      "repository_before_sha256": "d43e7eae9273042a84aee58d4ca63e9856e3aabbdcc903ed85bc33d6898d1edb",
+      "sha256": "fd2c52f63152333ab9bef900f78294e1162bfd806abaaa058d27bc476027623c",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/jobs/scheduled/clean_up_ai_forum_assistant_requests.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/jobs/scheduled/clean_up_ai_forum_assistant_requests.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "a4b3ed515a1a66065e084cd1c23188229d6a861eed311aceb8968f6f2b0d4ff6",
+      "repository_before_sha256": null,
+      "sha256": "a4b3ed515a1a66065e084cd1c23188229d6a861eed311aceb8968f6f2b0d4ff6",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/models/ai_forum_assistant_quota.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/models/ai_forum_assistant_quota.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "8dae564e4321f65ef669ea00e430bfa3cde61898648e3e02390992b267a6d0e8",
+      "repository_before_sha256": null,
+      "sha256": "8dae564e4321f65ef669ea00e430bfa3cde61898648e3e02390992b267a6d0e8",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/models/ai_forum_assistant_request.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/models/ai_forum_assistant_request.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "f3bf9d53a2694deb68b9e511172edd89aeaabf0f03a3d3bfa8d8f4cd622570b9",
+      "repository_before_sha256": null,
+      "sha256": "f3bf9d53a2694deb68b9e511172edd89aeaabf0f03a3d3bfa8d8f4cd622570b9",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/serializers/ai_forum_assistant_conversation_serializer.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/serializers/ai_forum_assistant_conversation_serializer.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "a86952b5920ccefaff72b99abebdabffacc5ee932b20b25bac85793d134e1d48",
+      "repository_before_sha256": null,
+      "sha256": "a86952b5920ccefaff72b99abebdabffacc5ee932b20b25bac85793d134e1d48",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/serializers/ai_forum_assistant_message_serializer.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/serializers/ai_forum_assistant_message_serializer.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "5736c7d43229cbe168a6f3387f10f7d7a64ca7cf09a291c3687604201c86eabd",
+      "repository_before_sha256": null,
+      "sha256": "5736c7d43229cbe168a6f3387f10f7d7a64ca7cf09a291c3687604201c86eabd",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/serializers/ai_forum_assistant_request_serializer.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/serializers/ai_forum_assistant_request_serializer.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "27b6ab16e7838fde78912f55a7cd9d5b401ea3a8c9d7ecf9f152ff14a5a6cf55",
+      "repository_before_sha256": null,
+      "sha256": "27b6ab16e7838fde78912f55a7cd9d5b401ea3a8c9d7ecf9f152ff14a5a6cf55",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/app/services/discourse_ai/forum_assistant/answer.rb",
+      "workspace_path": "source/plugins/discourse-ai/app/services/discourse_ai/forum_assistant/answer.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "6c1c99432a56644c6b5a8c1d5f67d2cdc01986e13f948634055b2333af0b6724",
+      "repository_before_sha256": null,
+      "sha256": "6c1c99432a56644c6b5a8c1d5f67d2cdc01986e13f948634055b2333af0b6724",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/admin-discourse-ai-plugin-route-map.js",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/admin-discourse-ai-plugin-route-map.js",
+      "baseline_sha256": "0c52c5359a01311aed34aeb4549d34fa9a162f46d22ec61cc29ece5dab78e238",
+      "approved_sha256": "2d8feaafc17124f3bb4ecf8ab7eebbf56c1437de73a98ffa6336392e87e21057",
+      "repository_before_sha256": "0c52c5359a01311aed34aeb4549d34fa9a162f46d22ec61cc29ece5dab78e238",
+      "sha256": "2d8feaafc17124f3bb4ecf8ab7eebbf56c1437de73a98ffa6336392e87e21057",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/ai-bot-conversations.gjs",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/components/ai-bot-conversations.gjs",
+      "baseline_sha256": "9d35ab97fc57445a33bcac40520da13da87ef31d1297a6209b8d6548cb6c6c0f",
+      "approved_sha256": "a6e1b6dbff9a036279de0941c221c5dbfe4768527de719ece1d03cdae547b162",
+      "repository_before_sha256": "9d35ab97fc57445a33bcac40520da13da87ef31d1297a6209b8d6548cb6c6c0f",
+      "sha256": "a6e1b6dbff9a036279de0941c221c5dbfe4768527de719ece1d03cdae547b162",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/ai-bot-docked-composer.gjs",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/components/ai-bot-docked-composer.gjs",
+      "baseline_sha256": "e67d96b038c51b4a4dc68f3622a6dc6bc437998602c8ecd0859cffc0855f32ef",
+      "approved_sha256": "0edd96434afacacab3ca3c002a1cdbfa378a9af68f66928c71e4fc03af08fc66",
+      "repository_before_sha256": "e67d96b038c51b4a4dc68f3622a6dc6bc437998602c8ecd0859cffc0855f32ef",
+      "sha256": "0edd96434afacacab3ca3c002a1cdbfa378a9af68f66928c71e4fc03af08fc66",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/forum-assistant-composer.gjs",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/components/forum-assistant-composer.gjs",
+      "baseline_sha256": null,
+      "approved_sha256": "ca46e69e4e9bce54cd828f95e8965fadaca9af031ae2270f17afe701ab34d231",
+      "repository_before_sha256": null,
+      "sha256": "ca46e69e4e9bce54cd828f95e8965fadaca9af031ae2270f17afe701ab34d231",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/forum-assistant-status.gjs",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/components/forum-assistant-status.gjs",
+      "baseline_sha256": null,
+      "approved_sha256": "4a0213abbb8de0c4d9203cdb1c0cb9ee3e757fbf8c1426eacf3ced99d88027e7",
+      "repository_before_sha256": null,
+      "sha256": "4a0213abbb8de0c4d9203cdb1c0cb9ee3e757fbf8c1426eacf3ced99d88027e7",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/forum-assistant-topic-status.gjs",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/components/forum-assistant-topic-status.gjs",
+      "baseline_sha256": null,
+      "approved_sha256": "6f2fc67cd1e80583f9aef71006a08520a1bc92ef0683257a4984f8d019502386",
+      "repository_before_sha256": null,
+      "sha256": "6f2fc67cd1e80583f9aef71006a08520a1bc92ef0683257a4984f8d019502386",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/components/forum-assistant-workspace.gjs",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/components/forum-assistant-workspace.gjs",
+      "baseline_sha256": null,
+      "approved_sha256": "9c49d6d567e3c8dc79db85c3dc604ac79d12ac75e3e60cf1a47cd2725215cb82",
+      "repository_before_sha256": null,
+      "sha256": "9c49d6d567e3c8dc79db85c3dc604ac79d12ac75e3e60cf1a47cd2725215cb82",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/connectors/topic-map-participants-after/ai-conversation-invite.gjs",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/connectors/topic-map-participants-after/ai-conversation-invite.gjs",
+      "baseline_sha256": "2ed8d8ce3ff64eae41a41ddb729af3612f4916973f569b72688fe3d1f4ec3d6c",
+      "approved_sha256": "11e1364337f25012c589c25436a7d514924f6d2c47a41681be7030b6727528b7",
+      "repository_before_sha256": "2ed8d8ce3ff64eae41a41ddb729af3612f4916973f569b72688fe3d1f4ec3d6c",
+      "sha256": "11e1364337f25012c589c25436a7d514924f6d2c47a41681be7030b6727528b7",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/controllers/discourse-ai-bot-conversations.gjs",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/controllers/discourse-ai-bot-conversations.gjs",
+      "baseline_sha256": "63d53bfbee981091694016ac60ec499d3e914b883bec0ba7adc180b67ffe59bc",
+      "approved_sha256": "4d8365efe9026eb3785da949c751c9dffd0b7680b9827f179130443acd546ba3",
+      "repository_before_sha256": "63d53bfbee981091694016ac60ec499d3e914b883bec0ba7adc180b67ffe59bc",
+      "sha256": "4d8365efe9026eb3785da949c751c9dffd0b7680b9827f179130443acd546ba3",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/initializers/admin-plugin-configuration-nav.js",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/initializers/admin-plugin-configuration-nav.js",
+      "baseline_sha256": "52bc9537850c4219893c9d66e70b059deebe62813af1ca5469edd5114ed4ab5f",
+      "approved_sha256": "4dba0759ef1ddcffa4634674b85e9b79853e5c70fcf72a985b347f099e19f661",
+      "repository_before_sha256": "52bc9537850c4219893c9d66e70b059deebe62813af1ca5469edd5114ed4ab5f",
+      "sha256": "4dba0759ef1ddcffa4634674b85e9b79853e5c70fcf72a985b347f099e19f661",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/initializers/ai-bot-replies.js",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/initializers/ai-bot-replies.js",
+      "baseline_sha256": "8674ce85d64daefb8f71135878d755e7db6050539f73510a5ff72d0618e1b71c",
+      "approved_sha256": "da56119adfa81d1ed40cc8f8f758d8ee7bc0a5f0de3a1cc53152d3bb2c010841",
+      "repository_before_sha256": "8674ce85d64daefb8f71135878d755e7db6050539f73510a5ff72d0618e1b71c",
+      "sha256": "da56119adfa81d1ed40cc8f8f758d8ee7bc0a5f0de3a1cc53152d3bb2c010841",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/initializers/ai-conversations-sidebar.js",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/initializers/ai-conversations-sidebar.js",
+      "baseline_sha256": "ec8fd2108b7e76e1074f6e14c05a238a89962bb6c91ba6ee2ebfa29a582a2f04",
+      "approved_sha256": "40c2a0ebae68e29b8832a1ae585243b85e6e69ed6f48245f8b3ce005ece74232",
+      "repository_before_sha256": "ec8fd2108b7e76e1074f6e14c05a238a89962bb6c91ba6ee2ebfa29a582a2f04",
+      "sha256": "40c2a0ebae68e29b8832a1ae585243b85e6e69ed6f48245f8b3ce005ece74232",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/initializers/forum-assistant.js",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/initializers/forum-assistant.js",
+      "baseline_sha256": null,
+      "approved_sha256": "99226fad36f69bda1a7f01f306b57784664dea43d4db6997f8325e37058c921c",
+      "repository_before_sha256": null,
+      "sha256": "99226fad36f69bda1a7f01f306b57784664dea43d4db6997f8325e37058c921c",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/lib/ai-feature-setting-groups.js",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/lib/ai-feature-setting-groups.js",
+      "baseline_sha256": "d5a9a62f30b8eca25f9284e7f25fa75a47bab34297db8d359d895696fc0ec694",
+      "approved_sha256": "2b4eb472ed036ba1f10e36d3dd73936b0c4fb30a7c121a4f8adc4faa7f0fffec",
+      "repository_before_sha256": "d5a9a62f30b8eca25f9284e7f25fa75a47bab34297db8d359d895696fc0ec694",
+      "sha256": "2b4eb472ed036ba1f10e36d3dd73936b0c4fb30a7c121a4f8adc4faa7f0fffec",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/lib/forum-assistant-links.js",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/lib/forum-assistant-links.js",
+      "baseline_sha256": null,
+      "approved_sha256": "12b609f23e2fbd18b74bee4dd6b3adbfe03fb7f42f8d6b37ae7171551538c43f",
+      "repository_before_sha256": null,
+      "sha256": "12b609f23e2fbd18b74bee4dd6b3adbfe03fb7f42f8d6b37ae7171551538c43f",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/routes/discourse-ai-bot-conversations.js",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/routes/discourse-ai-bot-conversations.js",
+      "baseline_sha256": "ccaaf9d2e8a3ac7af8bec557c7e2e6cf495f6fa27870fea5954ba26e1d4e733f",
+      "approved_sha256": "9c3e837c14f50265e2c4da717c9cfe74b3696f81972e939f88d3343bd71ac2ef",
+      "repository_before_sha256": "ccaaf9d2e8a3ac7af8bec557c7e2e6cf495f6fa27870fea5954ba26e1d4e733f",
+      "sha256": "9c3e837c14f50265e2c4da717c9cfe74b3696f81972e939f88d3343bd71ac2ef",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/services/ai-bot-conversations-hidden-submit.js",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/services/ai-bot-conversations-hidden-submit.js",
+      "baseline_sha256": "cb8c8704cd6990f8bf8bbbb0aa9e97c086aed4fce8b36ad09aece975d029d721",
+      "approved_sha256": "3c4f491f468c9d0862bbbeca2c615f3121c924ad8c74cae3d70d4f1fac3bd253",
+      "repository_before_sha256": "cb8c8704cd6990f8bf8bbbb0aa9e97c086aed4fce8b36ad09aece975d029d721",
+      "sha256": "3c4f491f468c9d0862bbbeca2c615f3121c924ad8c74cae3d70d4f1fac3bd253",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/services/ai-bot-docked-submit.js",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/services/ai-bot-docked-submit.js",
+      "baseline_sha256": "8290d529c4a0e15458b91822a4ea412a5ea93476591066fc195ac6643ab0fcdd",
+      "approved_sha256": "f36af010be568e826382dc22cb18642a4b5b333e763fceff77cb77e28760bbd0",
+      "repository_before_sha256": "8290d529c4a0e15458b91822a4ea412a5ea93476591066fc195ac6643ab0fcdd",
+      "sha256": "f36af010be568e826382dc22cb18642a4b5b333e763fceff77cb77e28760bbd0",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/services/forum-assistant-workspace.js",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/services/forum-assistant-workspace.js",
+      "baseline_sha256": null,
+      "approved_sha256": "e25d451d5602ab191a472d43c146bd178325a5880000f3f92e5960da0912b54a",
+      "repository_before_sha256": null,
+      "sha256": "e25d451d5602ab191a472d43c146bd178325a5880000f3f92e5960da0912b54a",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/services/forum-assistant.js",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/services/forum-assistant.js",
+      "baseline_sha256": null,
+      "approved_sha256": "7d1384188c062cbc077d3553a4c4e4aa3fa482dd21615b934333b04c13c6bfac",
+      "repository_before_sha256": null,
+      "sha256": "7d1384188c062cbc077d3553a4c4e4aa3fa482dd21615b934333b04c13c6bfac",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/javascripts/discourse/templates/discourse-ai-bot-conversations.gjs",
+      "workspace_path": "source/plugins/discourse-ai/assets/javascripts/discourse/templates/discourse-ai-bot-conversations.gjs",
+      "baseline_sha256": "8937be90976cf198cf3fcaea93322ecf28d9426867cc12e07116068b62089b0d",
+      "approved_sha256": "31f770847dd3b27ff60ac403794ba31c2473f335b6daf1149f5141eb4555a7a4",
+      "repository_before_sha256": "8937be90976cf198cf3fcaea93322ecf28d9426867cc12e07116068b62089b0d",
+      "sha256": "31f770847dd3b27ff60ac403794ba31c2473f335b6daf1149f5141eb4555a7a4",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/assets/stylesheets/common/forum-assistant.scss",
+      "workspace_path": "source/plugins/discourse-ai/assets/stylesheets/common/forum-assistant.scss",
+      "baseline_sha256": null,
+      "approved_sha256": "291a28ffaf08d965fc508ac780cb112bbd561ae1455ef47836c93a939fe7131f",
+      "repository_before_sha256": null,
+      "sha256": "291a28ffaf08d965fc508ac780cb112bbd561ae1455ef47836c93a939fe7131f",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/config/locales/client.forum_assistant.en.yml",
+      "workspace_path": "source/plugins/discourse-ai/config/locales/client.forum_assistant.en.yml",
+      "baseline_sha256": null,
+      "approved_sha256": "9ff4a8e1a0a6977cb06a53d27d7df36c29a2849ddc7fc23e8b3ceb42edc2b379",
+      "repository_before_sha256": null,
+      "sha256": "9ff4a8e1a0a6977cb06a53d27d7df36c29a2849ddc7fc23e8b3ceb42edc2b379",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/config/locales/client.forum_assistant.zh_CN.yml",
+      "workspace_path": "source/plugins/discourse-ai/config/locales/client.forum_assistant.zh_CN.yml",
+      "baseline_sha256": null,
+      "approved_sha256": "4ec9439894b1f97f25fb67bd2c0d88a79c4efa81c7cacffcabb98d6b4576c8d6",
+      "repository_before_sha256": null,
+      "sha256": "4ec9439894b1f97f25fb67bd2c0d88a79c4efa81c7cacffcabb98d6b4576c8d6",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/config/locales/server.forum_assistant.en.yml",
+      "workspace_path": "source/plugins/discourse-ai/config/locales/server.forum_assistant.en.yml",
+      "baseline_sha256": null,
+      "approved_sha256": "2c5ce13f7092f2561a39dd3895ff08446490a83f61169781b83cffffca27fbe9",
+      "repository_before_sha256": null,
+      "sha256": "2c5ce13f7092f2561a39dd3895ff08446490a83f61169781b83cffffca27fbe9",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/config/locales/server.forum_assistant.zh_CN.yml",
+      "workspace_path": "source/plugins/discourse-ai/config/locales/server.forum_assistant.zh_CN.yml",
+      "baseline_sha256": null,
+      "approved_sha256": "882304a3e706629d53a217ab156d644e0ec1d8a0a6addd45052cd4533fed3588",
+      "repository_before_sha256": null,
+      "sha256": "882304a3e706629d53a217ab156d644e0ec1d8a0a6addd45052cd4533fed3588",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/config/routes.rb",
+      "workspace_path": "source/plugins/discourse-ai/config/routes.rb",
+      "baseline_sha256": "00a4bb1f7a69e2aaa53d0bc229bb53d3e5614b2d0275d5aadb309f00cda6761e",
+      "approved_sha256": "a4019c6a27b142e6c9872d1c51f7095b87ad81a16e62df841d0e4aeeed9c097a",
+      "repository_before_sha256": "00a4bb1f7a69e2aaa53d0bc229bb53d3e5614b2d0275d5aadb309f00cda6761e",
+      "sha256": "a4019c6a27b142e6c9872d1c51f7095b87ad81a16e62df841d0e4aeeed9c097a",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/config/settings.yml",
+      "workspace_path": "source/plugins/discourse-ai/config/settings.yml",
+      "baseline_sha256": "fc2abdb8015705e76ccdac8d609b4fb6b375eb2fb5bf430c8a7374de7762d4f2",
+      "approved_sha256": "b313645a11e8e2c2f94bc1f80705b74fba8092d9e23f86d6578d8e77f850ad5c",
+      "repository_before_sha256": "fc2abdb8015705e76ccdac8d609b4fb6b375eb2fb5bf430c8a7374de7762d4f2",
+      "sha256": "b313645a11e8e2c2f94bc1f80705b74fba8092d9e23f86d6578d8e77f850ad5c",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/db/migrate/20261117052611_create_ai_forum_assistant_requests.rb",
+      "workspace_path": "source/plugins/discourse-ai/db/migrate/20261117052611_create_ai_forum_assistant_requests.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "6dba090bed5f52a4ab9e68e497e8d2cc113e7d4e62e27aa34ec641dcf75df1c3",
+      "repository_before_sha256": null,
+      "sha256": "6dba090bed5f52a4ab9e68e497e8d2cc113e7d4e62e27aa34ec641dcf75df1c3",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/agents/agent.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/agents/agent.rb",
+      "baseline_sha256": "c30ccb3e0a9f60e155d8ce1cbd74bd65fdcd7df2b9201752be8b311f9aacae80",
+      "approved_sha256": "814aac6794c454f2c59df1cc552114c8f4e4da0c62b80440424e18df4477403b",
+      "repository_before_sha256": "c30ccb3e0a9f60e155d8ce1cbd74bd65fdcd7df2b9201752be8b311f9aacae80",
+      "sha256": "814aac6794c454f2c59df1cc552114c8f4e4da0c62b80440424e18df4477403b",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/ai_bot/entry_point.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/ai_bot/entry_point.rb",
+      "baseline_sha256": "f114efd6cba5edbbf48fd7875762c9f32fa6a49d681565f8c9169671865a54d0",
+      "approved_sha256": "f07311677a1d42daf277fe8016827331dc835525c28dd0146e117fcbcecccae7",
+      "repository_before_sha256": "f114efd6cba5edbbf48fd7875762c9f32fa6a49d681565f8c9169671865a54d0",
+      "sha256": "f07311677a1d42daf277fe8016827331dc835525c28dd0146e117fcbcecccae7",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/ai_bot/playground.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/ai_bot/playground.rb",
+      "baseline_sha256": "731d873b15818cf18a14d2c4d7fd7e75e0806572f445ecb5f8774877b93d3885",
+      "approved_sha256": "936170d792f869ee5ad2aeade30de430da64a248da53c076c465a5c28b99b47f",
+      "repository_before_sha256": "731d873b15818cf18a14d2c4d7fd7e75e0806572f445ecb5f8774877b93d3885",
+      "sha256": "936170d792f869ee5ad2aeade30de430da64a248da53c076c465a5c28b99b47f",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/ai_helper/assistant.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/ai_helper/assistant.rb",
+      "baseline_sha256": "ff58c8a0264136f830fab883a148f0b1ddacd0b1961f8848311cd538804e2413",
+      "approved_sha256": "5eac608c0077b3db0772ad799864d7591691873d3e7414c11ffc43505f90cd68",
+      "repository_before_sha256": "ff58c8a0264136f830fab883a148f0b1ddacd0b1961f8848311cd538804e2413",
+      "sha256": "5eac608c0077b3db0772ad799864d7591691873d3e7414c11ffc43505f90cd68",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/ai_helper/entry_point.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/ai_helper/entry_point.rb",
+      "baseline_sha256": "33e76fa060839dbca116e61fee974da660c91bea83fa6278c7fa57808e8f068a",
+      "approved_sha256": "0ec958ee53a36942a999754da04bddf56647b2b71281cda00d415a4b5b9ba623",
+      "repository_before_sha256": "33e76fa060839dbca116e61fee974da660c91bea83fa6278c7fa57808e8f068a",
+      "sha256": "0ec958ee53a36942a999754da04bddf56647b2b71281cda00d415a4b5b9ba623",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/configuration/forum_assistant_timezone_validator.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/configuration/forum_assistant_timezone_validator.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "32deb5e1d967eb07f0f673cb5a2903407c91d8712589787261d091bff8d14680",
+      "repository_before_sha256": null,
+      "sha256": "32deb5e1d967eb07f0f673cb5a2903407c91d8712589787261d091bff8d14680",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/discoveries.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/discoveries.rb",
+      "baseline_sha256": "99db946797f2203117157c3437e8e885ff67f9ac089ceab77fc133523ee4b54f",
+      "approved_sha256": "51d2f697e48f66cce7b3f9761c3c0d3ff82802790cb228e763bf3a1e6744204a",
+      "repository_before_sha256": "99db946797f2203117157c3437e8e885ff67f9ac089ceab77fc133523ee4b54f",
+      "sha256": "51d2f697e48f66cce7b3f9761c3c0d3ff82802790cb228e763bf3a1e6744204a",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/forum_assistant/configuration.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/forum_assistant/configuration.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "fe1c98f52e6cb838739fe8d98b88ef58580b51db1dc01ae2c6090974dfea8fbf",
+      "repository_before_sha256": null,
+      "sha256": "fe1c98f52e6cb838739fe8d98b88ef58580b51db1dc01ae2c6090974dfea8fbf",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/forum_assistant/conversations.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/forum_assistant/conversations.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "014152715e3877c48e44578501e5ff9a5322183a16640b2aa9768c9e903e12b8",
+      "repository_before_sha256": null,
+      "sha256": "014152715e3877c48e44578501e5ff9a5322183a16640b2aa9768c9e903e12b8",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/forum_assistant/entry_point.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/forum_assistant/entry_point.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "59d07d88b9c80cbd0951e567468c0574852c05673ea83250211b60697b7ae025",
+      "repository_before_sha256": null,
+      "sha256": "59d07d88b9c80cbd0951e567468c0574852c05673ea83250211b60697b7ae025",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/forum_assistant/evidence.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/forum_assistant/evidence.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "f93a5d911054affa05c98f539a0a305b199a621b0fe5c621e3168515fa593723",
+      "repository_before_sha256": null,
+      "sha256": "f93a5d911054affa05c98f539a0a305b199a621b0fe5c621e3168515fa593723",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/forum_assistant/policy.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/forum_assistant/policy.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "df710e9ab40e99e2a7dd51a2b1ad32d38ad2ecf3304140207bba99b77dce7b6f",
+      "repository_before_sha256": null,
+      "sha256": "df710e9ab40e99e2a7dd51a2b1ad32d38ad2ecf3304140207bba99b77dce7b6f",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/forum_assistant/post_validator_extension.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/forum_assistant/post_validator_extension.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "e9174009a0fed2eb10fa0bf96589a9bbe7f36a02f835600e03c73a8cf3c87c7b",
+      "repository_before_sha256": null,
+      "sha256": "e9174009a0fed2eb10fa0bf96589a9bbe7f36a02f835600e03c73a8cf3c87c7b",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/forum_assistant/question_classifier.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/forum_assistant/question_classifier.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "700a1e67825ec18691dfda9d265f265dc09adb98e199ce76148add3c48405f06",
+      "repository_before_sha256": null,
+      "sha256": "700a1e67825ec18691dfda9d265f265dc09adb98e199ce76148add3c48405f06",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/forum_assistant/responder.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/forum_assistant/responder.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "226b89531fad12ba717686b085249ec27a3dfba9f77140e216f3917c2f1a573e",
+      "repository_before_sha256": null,
+      "sha256": "226b89531fad12ba717686b085249ec27a3dfba9f77140e216f3917c2f1a573e",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/forum_assistant/status.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/forum_assistant/status.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "9ab89942b805859416a0ed18f8d2093f4564d5c3ef8ae448acf49a5190f4cb2e",
+      "repository_before_sha256": null,
+      "sha256": "9ab89942b805859416a0ed18f8d2093f4564d5c3ef8ae448acf49a5190f4cb2e",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/forum_assistant/throttle.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/forum_assistant/throttle.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "84f16906c7d12baaf5b181c24865c349ab1a4b52149d3cce0385a2150dc73e7e",
+      "repository_before_sha256": null,
+      "sha256": "84f16906c7d12baaf5b181c24865c349ab1a4b52149d3cce0385a2150dc73e7e",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/lib/guardian_extensions.rb",
+      "workspace_path": "source/plugins/discourse-ai/lib/guardian_extensions.rb",
+      "baseline_sha256": "0a71184debeb7fc93cf0d1eda4bfd900d09c7ae429a25873f9e0072cd81153b4",
+      "approved_sha256": "402b9b75d068b2bf9a40e814337d8e8492875884c1ab55503ca478c75286eeb8",
+      "repository_before_sha256": "0a71184debeb7fc93cf0d1eda4bfd900d09c7ae429a25873f9e0072cd81153b4",
+      "sha256": "402b9b75d068b2bf9a40e814337d8e8492875884c1ab55503ca478c75286eeb8",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/plugin.rb",
+      "workspace_path": "source/plugins/discourse-ai/plugin.rb",
+      "baseline_sha256": "484e04ce1e99ae21d05af946d54e76481d7907e37c3d9f138cb8c6d2dd6a8aaa",
+      "approved_sha256": "aacea9bbe8f9251f8d37bddd91bf61c64a2817c18e5f4e5d689107798243045a",
+      "repository_before_sha256": "484e04ce1e99ae21d05af946d54e76481d7907e37c3d9f138cb8c6d2dd6a8aaa",
+      "sha256": "aacea9bbe8f9251f8d37bddd91bf61c64a2817c18e5f4e5d689107798243045a",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/spec/forum_assistant/README.md",
+      "workspace_path": "source/plugins/discourse-ai/spec/forum_assistant/README.md",
+      "baseline_sha256": null,
+      "approved_sha256": "bce20cfd72c84ea2242ca532e5f62c2afefb0b902e676fc26ebc63db1635909a",
+      "repository_before_sha256": null,
+      "sha256": "bce20cfd72c84ea2242ca532e5f62c2afefb0b902e676fc26ebc63db1635909a",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/spec/forum_assistant/answer_spec.rb",
+      "workspace_path": "source/plugins/discourse-ai/spec/forum_assistant/answer_spec.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "e456d02797d5f22dda6b46f160ad6bf9251ce20957305c8cc71e1002b24e5f4d",
+      "repository_before_sha256": null,
+      "sha256": "e456d02797d5f22dda6b46f160ad6bf9251ce20957305c8cc71e1002b24e5f4d",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/spec/forum_assistant/controllers_spec.rb",
+      "workspace_path": "source/plugins/discourse-ai/spec/forum_assistant/controllers_spec.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "d0ad5e6d83734a7120a85d968c2ad04915745dc7f3b0840ab90dd2666b3b54ab",
+      "repository_before_sha256": null,
+      "sha256": "d0ad5e6d83734a7120a85d968c2ad04915745dc7f3b0840ab90dd2666b3b54ab",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/spec/forum_assistant/evidence_spec.rb",
+      "workspace_path": "source/plugins/discourse-ai/spec/forum_assistant/evidence_spec.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "ccb276721e04d2d87266aeaf36ec7b11a92843f3dc6305954511bf30bde4dfb1",
+      "repository_before_sha256": null,
+      "sha256": "2709aad97bb61f1b2d95b708f62207a08733e2cab0a340cc5f6a0e7d2685073a",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/spec/forum_assistant/jobs_spec.rb",
+      "workspace_path": "source/plugins/discourse-ai/spec/forum_assistant/jobs_spec.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "ff4924b29dc8336d852c157cb795f48e51bbfefb692a7b38a752178d53f1ee1f",
+      "repository_before_sha256": null,
+      "sha256": "ff4924b29dc8336d852c157cb795f48e51bbfefb692a7b38a752178d53f1ee1f",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/spec/forum_assistant/provider_boundary_spec.rb",
+      "workspace_path": "source/plugins/discourse-ai/spec/forum_assistant/provider_boundary_spec.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "b8ff05045064fb3a76f61ab2f7149f5269885e740e512876a03ca5b727fa587a",
+      "repository_before_sha256": null,
+      "sha256": "b8ff05045064fb3a76f61ab2f7149f5269885e740e512876a03ca5b727fa587a",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/spec/forum_assistant/question_classifier_spec.rb",
+      "workspace_path": "source/plugins/discourse-ai/spec/forum_assistant/question_classifier_spec.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "248531386d8eabe6dd7896bd2c53a5a436a6769183b14c797b350a141af6f1ee",
+      "repository_before_sha256": null,
+      "sha256": "248531386d8eabe6dd7896bd2c53a5a436a6769183b14c797b350a141af6f1ee",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/spec/forum_assistant/request_spec.rb",
+      "workspace_path": "source/plugins/discourse-ai/spec/forum_assistant/request_spec.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "aac6b9a52921b54354e1631e5517ff9ca0382ca49fb85d43c279dd8a29b0a172",
+      "repository_before_sha256": null,
+      "sha256": "609252f6fab6612f28d59771c50efc35dbcd20a6d4404bf67c19cccf1b1c263b",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/spec/forum_assistant/support.rb",
+      "workspace_path": "source/plugins/discourse-ai/spec/forum_assistant/support.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "4d93efef1e45bcfaa78c449d267f1875adf917eb0d64850a7c5a660c738b4923",
+      "repository_before_sha256": null,
+      "sha256": "4d93efef1e45bcfaa78c449d267f1875adf917eb0d64850a7c5a660c738b4923",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/spec/forum_assistant/workspace_controller_spec.rb",
+      "workspace_path": "source/plugins/discourse-ai/spec/forum_assistant/workspace_controller_spec.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "64c765d19b32491f9ac85dfcd6a1fa342fdcb14efa750ff17a0b6902c4c86da8",
+      "repository_before_sha256": null,
+      "sha256": "64c765d19b32491f9ac85dfcd6a1fa342fdcb14efa750ff17a0b6902c4c86da8",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/spec/forum_assistant/workspace_updates_spec.rb",
+      "workspace_path": "source/plugins/discourse-ai/spec/forum_assistant/workspace_updates_spec.rb",
+      "baseline_sha256": null,
+      "approved_sha256": "bec3353d7d5e12b895d67e483201967224c4a2192067665838b34d01b6b7b458",
+      "repository_before_sha256": null,
+      "sha256": "bec3353d7d5e12b895d67e483201967224c4a2192067665838b34d01b6b7b458",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/test/javascripts/integration/components/forum-assistant-status-test.gjs",
+      "workspace_path": "source/plugins/discourse-ai/test/javascripts/integration/components/forum-assistant-status-test.gjs",
+      "baseline_sha256": null,
+      "approved_sha256": "740a1589c41ea5c32963888e12553c0f9e8c471e500373be82c7c9849c2ee10d",
+      "repository_before_sha256": null,
+      "sha256": "740a1589c41ea5c32963888e12553c0f9e8c471e500373be82c7c9849c2ee10d",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/test/javascripts/integration/components/forum-assistant-workspace-test.gjs",
+      "workspace_path": "source/plugins/discourse-ai/test/javascripts/integration/components/forum-assistant-workspace-test.gjs",
+      "baseline_sha256": null,
+      "approved_sha256": "fab4c21a822043e841eee32647e2e21ecc15a59b2cac59370cfe1ece1b47d69d",
+      "repository_before_sha256": null,
+      "sha256": "fab4c21a822043e841eee32647e2e21ecc15a59b2cac59370cfe1ece1b47d69d",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/test/javascripts/unit/lib/ai-feature-setting-groups-test.js",
+      "workspace_path": "source/plugins/discourse-ai/test/javascripts/unit/lib/ai-feature-setting-groups-test.js",
+      "baseline_sha256": "24231acf153f2b14d13427a00151a0e3101f15776f135bd20c31821f79dc766d",
+      "approved_sha256": "450439501662bd1e9583f2cee939d528d2135f6fb8374d3881dc700225a7e97c",
+      "repository_before_sha256": "24231acf153f2b14d13427a00151a0e3101f15776f135bd20c31821f79dc766d",
+      "sha256": "450439501662bd1e9583f2cee939d528d2135f6fb8374d3881dc700225a7e97c",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/test/javascripts/unit/services/forum-assistant-test.js",
+      "workspace_path": "source/plugins/discourse-ai/test/javascripts/unit/services/forum-assistant-test.js",
+      "baseline_sha256": null,
+      "approved_sha256": "679c5392c98db8bcd8c2337c98991fbdfde02f394ce9d15cf0350f3a6ec5d37d",
+      "repository_before_sha256": null,
+      "sha256": "679c5392c98db8bcd8c2337c98991fbdfde02f394ce9d15cf0350f3a6ec5d37d",
+      "theme": false
+    },
+    {
+      "path": "plugins/discourse-ai/test/javascripts/unit/services/forum-assistant-workspace-test.js",
+      "workspace_path": "source/plugins/discourse-ai/test/javascripts/unit/services/forum-assistant-workspace-test.js",
+      "baseline_sha256": null,
+      "approved_sha256": "e3b86bd6d5a31fa9e925955c2f338325d5f60c63214c0da9d77a6f7376e8f212",
+      "repository_before_sha256": null,
+      "sha256": "e3b86bd6d5a31fa9e925955c2f338325d5f60c63214c0da9d77a6f7376e8f212",
+      "theme": false
+    }
+  ],
+  "integration_notes": [
+    "Preserve current main MBTI workbench entry and permission gate.",
+    "Add only the forum-assistant import to main common stylesheet.",
+    "Retain current main migration versions.",
+    "Seed private resource metadata by persisted field name, independent of optional development-only constants.",
+    "Freeze time before creating the first quota record in the midnight regression so CI is independent of its wall clock."
+  ]
+}

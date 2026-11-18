@@ -74,6 +74,12 @@ const CARDS = [
   },
   { key: "mbti", icon: "brain", mobileIcon: "brain", tone: "blue" },
   {
+    key: "ai_assistant",
+    icon: "far-discobot",
+    mobileIcon: "far-discobot",
+    tone: "blue",
+  },
+  {
     key: "guides",
     icon: "isbf-workbench-guides",
     mobileIcon: "isbf-workbench-guides",
@@ -82,6 +88,7 @@ const CARDS = [
 ];
 
 export default class ISBFV2Workbench extends Component {
+  @service currentUser;
   @service site;
   @service siteSettings;
 
@@ -90,6 +97,9 @@ export default class ISBFV2Workbench extends Component {
       (card) =>
         (card.key !== "alumni" || alumniConfig(this.site)) &&
         (card.key !== "mbti" || mbtiConfig(this.site)) &&
+        (card.key !== "ai_assistant" ||
+          (this.currentUser?.forum_assistant?.enabled &&
+            this.currentUser?.forum_assistant?.configured)) &&
         (card.key !== "guides" || this.siteSettings.isbf_guides_enabled)
     ).map((card) => ({
       ...card,
@@ -97,24 +107,26 @@ export default class ISBFV2Workbench extends Component {
       href:
         card.key === "mbti"
           ? "/isbf/mbti"
-          : card.key === "guides"
-            ? "/guides"
-            : card.key === "learning_resources" && learningConfig(this.site)
-              ? "/isbf/learning"
-              : card.key === "library" && libraryConfig(this.site)
-                ? "/isbf/library"
-                : card.key === "careers" && careersConfig(this.site)
-                  ? "/isbf/careers"
-                  : card.key === "marketplace" && marketplaceConfig(this.site)
-                    ? "/isbf/marketplace"
-                    : card.key === "teamup" && teamupConfig(this.site)
-                      ? "/isbf/teamup"
-                      : card.key === "alumni"
-                        ? "/isbf/alumni"
-                        : card.key === "resume" &&
-                            this.siteSettings.isbf_resume_enabled
-                          ? "/isbf/workbench/resume"
-                          : null,
+          : card.key === "ai_assistant"
+            ? "/discourse-ai/ai-bot/conversations"
+            : card.key === "guides"
+              ? "/guides"
+              : card.key === "learning_resources" && learningConfig(this.site)
+                ? "/isbf/learning"
+                : card.key === "library" && libraryConfig(this.site)
+                  ? "/isbf/library"
+                  : card.key === "careers" && careersConfig(this.site)
+                    ? "/isbf/careers"
+                    : card.key === "marketplace" && marketplaceConfig(this.site)
+                      ? "/isbf/marketplace"
+                      : card.key === "teamup" && teamupConfig(this.site)
+                        ? "/isbf/teamup"
+                        : card.key === "alumni"
+                          ? "/isbf/alumni"
+                          : card.key === "resume" &&
+                              this.siteSettings.isbf_resume_enabled
+                            ? "/isbf/workbench/resume"
+                            : null,
     }));
   }
 

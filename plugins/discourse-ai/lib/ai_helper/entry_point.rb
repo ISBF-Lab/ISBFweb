@@ -8,14 +8,17 @@ module DiscourseAi
         )
 
         plugin.add_to_serializer(:current_user, :can_use_assistant) do
-          scope.user.in_any_groups?(SiteSetting.composer_ai_helper_allowed_groups_map)
+          !DiscourseAi::ForumAssistant::Configuration.restricted?(scope.user) &&
+            scope.user.in_any_groups?(SiteSetting.composer_ai_helper_allowed_groups_map)
         end
 
         plugin.add_to_serializer(:current_user, :can_use_assistant_in_post) do
-          scope.user.in_any_groups?(SiteSetting.post_ai_helper_allowed_groups_map)
+          !DiscourseAi::ForumAssistant::Configuration.restricted?(scope.user) &&
+            scope.user.in_any_groups?(SiteSetting.post_ai_helper_allowed_groups_map)
         end
 
         plugin.add_to_serializer(:current_user, :can_use_custom_prompts) do
+          next false if DiscourseAi::ForumAssistant::Configuration.restricted?(scope.user)
           return [] if !SiteSetting.ai_helper_enabled
 
           custom_prompt_allowed_group_ids =

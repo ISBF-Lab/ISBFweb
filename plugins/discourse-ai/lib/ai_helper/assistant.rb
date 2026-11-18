@@ -304,6 +304,7 @@ module DiscourseAi
       end
 
       def ensure_mode_access!(helper_mode, user)
+        DiscourseAi::ForumAssistant::Policy.ensure_interactive_access!(user)
         ai_agent = ai_agent_for_mode(helper_mode)
         return if ai_agent.nil?
 

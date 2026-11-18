@@ -4,6 +4,7 @@ module DiscourseAi
   module AiBot
     class ConversationsController < ::ApplicationController
       include AiCreditLimitHandler
+      include AiForumAssistantErrors
 
       requires_plugin PLUGIN_NAME
       # `index` also serves the page's HTML, which anonymous visitors may load
@@ -64,6 +65,16 @@ module DiscourseAi
 
       def create_params
         bot_user = find_bot_user!
+        if DiscourseAi::ForumAssistant::Configuration.restricted?(current_user)
+          agent_id =
+            params[:ai_agent_id].presence || DiscourseAi::ForumAssistant::Configuration.agent&.id
+          DiscourseAi::ForumAssistant::Policy.ensure_target!(
+            current_user,
+            agent_id: agent_id,
+            target_user: bot_user,
+          )
+          params[:ai_agent_id] = agent_id
+        end
         topic_custom_fields = create_topic_custom_fields
 
         create_params = {

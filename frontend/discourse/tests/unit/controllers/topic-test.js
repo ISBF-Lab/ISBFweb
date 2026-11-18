@@ -27,6 +27,20 @@ module("Unit | Controller | topic", function (hooks) {
     this.store = getOwner(this).lookup("service:store");
   });
 
+  test("stats arrive before the first post finishes loading", async function (assert) {
+    const controller = getOwner(this).lookup("controller:topic");
+    const model = this.store.createRecord("topic", {
+      id: 42,
+      archetype: "private_message",
+      posts_count: 1,
+    });
+    controller.set("model", model);
+    controller.onMessage({ type: "stats", posts_count: 2 });
+    await settled();
+    assert.strictEqual(model.posts_count, 2);
+    assert.true(model.postStream.firstPostNotLoaded);
+  });
+
   test("revised messages skip only the originating optimistic refresh", function (assert) {
     const controller = getOwner(this).lookup("controller:topic");
     const model = this.store.createRecord("topic", { id: 1 });

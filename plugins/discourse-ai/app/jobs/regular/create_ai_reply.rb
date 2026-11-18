@@ -7,6 +7,11 @@ module Jobs
     def execute(args)
       return unless bot_user = User.find_by(id: args[:bot_user_id])
       return unless post = Post.includes(:topic).find_by(id: args[:post_id])
+      return if DiscourseAi::ForumAssistant::Configuration.restricted?(post.user)
+      if DiscourseAi::ForumAssistant::Configuration.enabled? &&
+           DiscourseAi::ForumAssistant::Policy.managed_topic?(post.topic)
+        return
+      end
       reply_post = Post.find_by(id: args[:reply_post_id]) if args[:reply_post_id].present?
       return if args[:reply_post_id].present? && reply_post.nil?
       return if reply_post && reply_post.topic_id != post.topic_id

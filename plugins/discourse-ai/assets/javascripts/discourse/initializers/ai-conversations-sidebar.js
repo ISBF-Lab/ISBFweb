@@ -35,6 +35,14 @@ export default {
 
       const setSidebarPanel = (transition) => {
         if (transition?.to?.name === "discourse-ai-bot-conversations") {
+          const siteSettings = api.container.lookup("service:site-settings");
+          if (
+            currentUser &&
+            (siteSettings.ai_forum_assistant_enabled ||
+              siteSettings.ai_forum_assistant_restrict_members)
+          ) {
+            return aiConversationsSidebarManager.stopForcingCustomSidebar();
+          }
           return aiConversationsSidebarManager.forceCustomSidebar();
         }
 

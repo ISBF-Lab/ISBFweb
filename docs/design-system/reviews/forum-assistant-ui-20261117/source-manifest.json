@@ -1,0 +1,168 @@
+{
+  "recorded_at": "2026-11-17T13:32:52.604909+00:00",
+  "environment": "Independent development verification, before release integration",
+  "design_confirmed": true,
+  "visual_acceptance": "Implementation accepted by user on 2026-11-17; scope in README",
+  "files": [
+    {
+      "path": "external/active-theme/common/common.scss",
+      "before_sha256": "698e49d674b17dc889ff562954f24fb960e57e40bc6c381b7ac2488a9b18e6b5",
+      "sha256": "ef34cbaeb0daf6185fdfef40cc4a7d04c68c92a85919ff255124e1a4aec5be43"
+    },
+    {
+      "path": "external/active-theme/javascripts/discourse/api-initializers/isbf-forum-assistant.gjs",
+      "before_sha256": null,
+      "sha256": "9f146faa95e24c40e8ef37d7b12df69aed7169736d489e92d5072b3f16206c78"
+    },
+    {
+      "path": "external/active-theme/stylesheets/forum-assistant.scss",
+      "before_sha256": null,
+      "sha256": "15422c918a0b188496d38ab8125f1844a8276011c096b94d4b68bcf3e5161848"
+    },
+    {
+      "path": "source/docs/design-system/components.md",
+      "before_sha256": "6b7a98096a07c4cd6d0a936ffaf6b7847ab8e3c42b6ebd005ecad4de5d1c68b9",
+      "sha256": "038ce173e60fddae852734727653af3fd406a60794a9e5bacf4f9c6131826d4b"
+    },
+    {
+      "path": "source/docs/design-system/reference-map.md",
+      "before_sha256": "8f646688aaa72130f065babdebc5204606dbdd6261d08db30d8fb1349a050e5d",
+      "sha256": "f340effe8bcb32bb2fdb358b44ba82716100d87f18590c4a50df979b5c9dd7ef"
+    },
+    {
+      "path": "source/docs/design-system/reviews/forum-assistant-ui-20261117/README.md",
+      "before_sha256": null,
+      "sha256": "53048de269aaa67a4bbe33431f17b3ddfe4cff9a4bc28abc31776d116ae2216b"
+    },
+    {
+      "path": "source/docs/design-system/reviews/forum-assistant-ui-20261117/prepare_development.rb",
+      "before_sha256": null,
+      "sha256": "225d16bad8373c915ead6c44996e524a8e55faa240ac0b2b3361372133257572"
+    },
+    {
+      "path": "source/docs/design-system/tokens.md",
+      "before_sha256": "3fda2a4ff33050ba45b67eb2e080e52197bdb5c4ce70b4aede39258e56a34540",
+      "sha256": "ae78c7fdfbd0616264c421d688601805b6c86040fd83e9ed119d5d46597807eb"
+    },
+    {
+      "path": "source/docs/design-system/ui-status.md",
+      "before_sha256": "e019e43645c259391104cc24cc7a52063bc44d70d050a2f8a0273e63a9c12c41",
+      "sha256": "a30f7c221e3e228a57caafa43d7c8bfa764bcd632995ac8dff0fedfece5bb8d8"
+    },
+    {
+      "path": "source/plugins/discourse-ai/app/controllers/discourse_ai/ai_bot/forum_assistant_controller.rb",
+      "before_sha256": "b1cef7151c5610157e05c8a31732d77f5417ed0a470b26b66a3aed7f90c2496f",
+      "sha256": "de05b6a38ad58beb3e526564c3d412a890cd7321ec627adb98cb7e237260760c"
+    },
+    {
+      "path": "source/plugins/discourse-ai/app/controllers/discourse_ai/ai_bot/forum_assistant_conversations_controller.rb",
+      "before_sha256": null,
+      "sha256": "7ef019061a893584f9ad3d9738cb823a643579a126ca1ca71f17c6be02ec2049"
+    },
+    {
+      "path": "source/plugins/discourse-ai/app/models/ai_forum_assistant_request.rb",
+      "before_sha256": "3fdc3e1617027d8ccc8be46d4249d918a401bcf69a2b2a749d2b6a647c9886c4",
+      "sha256": "f3bf9d53a2694deb68b9e511172edd89aeaabf0f03a3d3bfa8d8f4cd622570b9"
+    },
+    {
+      "path": "source/plugins/discourse-ai/app/serializers/ai_forum_assistant_conversation_serializer.rb",
+      "before_sha256": null,
+      "sha256": "a86952b5920ccefaff72b99abebdabffacc5ee932b20b25bac85793d134e1d48"
+    },
+    {
+      "path": "source/plugins/discourse-ai/app/serializers/ai_forum_assistant_message_serializer.rb",
+      "before_sha256": null,
+      "sha256": "5736c7d43229cbe168a6f3387f10f7d7a64ca7cf09a291c3687604201c86eabd"
+    },
+    {
+      "path": "source/plugins/discourse-ai/assets/javascripts/discourse/components/forum-assistant-composer.gjs",
+      "before_sha256": null,
+      "sha256": "ca46e69e4e9bce54cd828f95e8965fadaca9af031ae2270f17afe701ab34d231"
+    },
+    {
+      "path": "source/plugins/discourse-ai/assets/javascripts/discourse/components/forum-assistant-workspace.gjs",
+      "before_sha256": null,
+      "sha256": "9c49d6d567e3c8dc79db85c3dc604ac79d12ac75e3e60cf1a47cd2725215cb82"
+    },
+    {
+      "path": "source/plugins/discourse-ai/assets/javascripts/discourse/controllers/discourse-ai-bot-conversations.gjs",
+      "before_sha256": "63d53bfbee981091694016ac60ec499d3e914b883bec0ba7adc180b67ffe59bc",
+      "sha256": "4d8365efe9026eb3785da949c751c9dffd0b7680b9827f179130443acd546ba3"
+    },
+    {
+      "path": "source/plugins/discourse-ai/assets/javascripts/discourse/initializers/ai-conversations-sidebar.js",
+      "before_sha256": "ec8fd2108b7e76e1074f6e14c05a238a89962bb6c91ba6ee2ebfa29a582a2f04",
+      "sha256": "40c2a0ebae68e29b8832a1ae585243b85e6e69ed6f48245f8b3ce005ece74232"
+    },
+    {
+      "path": "source/plugins/discourse-ai/assets/javascripts/discourse/initializers/forum-assistant.js",
+      "before_sha256": "634971d16bb75fa4988092e7a00db45a9bdd1c4c3c0cc41708917a8452f4c22f",
+      "sha256": "99226fad36f69bda1a7f01f306b57784664dea43d4db6997f8325e37058c921c"
+    },
+    {
+      "path": "source/plugins/discourse-ai/assets/javascripts/discourse/lib/forum-assistant-links.js",
+      "before_sha256": null,
+      "sha256": "12b609f23e2fbd18b74bee4dd6b3adbfe03fb7f42f8d6b37ae7171551538c43f"
+    },
+    {
+      "path": "source/plugins/discourse-ai/assets/javascripts/discourse/routes/discourse-ai-bot-conversations.js",
+      "before_sha256": "ccaaf9d2e8a3ac7af8bec557c7e2e6cf495f6fa27870fea5954ba26e1d4e733f",
+      "sha256": "9c3e837c14f50265e2c4da717c9cfe74b3696f81972e939f88d3343bd71ac2ef"
+    },
+    {
+      "path": "source/plugins/discourse-ai/assets/javascripts/discourse/services/forum-assistant-workspace.js",
+      "before_sha256": null,
+      "sha256": "e25d451d5602ab191a472d43c146bd178325a5880000f3f92e5960da0912b54a"
+    },
+    {
+      "path": "source/plugins/discourse-ai/assets/javascripts/discourse/templates/discourse-ai-bot-conversations.gjs",
+      "before_sha256": "8937be90976cf198cf3fcaea93322ecf28d9426867cc12e07116068b62089b0d",
+      "sha256": "31f770847dd3b27ff60ac403794ba31c2473f335b6daf1149f5141eb4555a7a4"
+    },
+    {
+      "path": "source/plugins/discourse-ai/config/locales/client.forum_assistant.en.yml",
+      "before_sha256": "83564faf8026609f46828e8243e2b65f66e7652b45d5ec9f73d698bda54467db",
+      "sha256": "9ff4a8e1a0a6977cb06a53d27d7df36c29a2849ddc7fc23e8b3ceb42edc2b379"
+    },
+    {
+      "path": "source/plugins/discourse-ai/config/locales/client.forum_assistant.zh_CN.yml",
+      "before_sha256": "8e17d2c3e0e0fdb1f17f5bc703c411d269a0f210a48e6fa03d36472e041e9642",
+      "sha256": "4ec9439894b1f97f25fb67bd2c0d88a79c4efa81c7cacffcabb98d6b4576c8d6"
+    },
+    {
+      "path": "source/plugins/discourse-ai/config/routes.rb",
+      "before_sha256": "d75a432f124cf8a3f7e6cc3de60ae6823dc944d183edf0e5e123a0d3289577b7",
+      "sha256": "a4019c6a27b142e6c9872d1c51f7095b87ad81a16e62df841d0e4aeeed9c097a"
+    },
+    {
+      "path": "source/plugins/discourse-ai/lib/forum_assistant/conversations.rb",
+      "before_sha256": null,
+      "sha256": "014152715e3877c48e44578501e5ff9a5322183a16640b2aa9768c9e903e12b8"
+    },
+    {
+      "path": "source/plugins/discourse-ai/lib/forum_assistant/status.rb",
+      "before_sha256": "b046dc9a3ee45fac8bc9a90c0c43071dcee245b2673ae30871bf9222439f9f24",
+      "sha256": "9ab89942b805859416a0ed18f8d2093f4564d5c3ef8ae448acf49a5190f4cb2e"
+    },
+    {
+      "path": "source/plugins/discourse-ai/spec/forum_assistant/workspace_controller_spec.rb",
+      "before_sha256": null,
+      "sha256": "64c765d19b32491f9ac85dfcd6a1fa342fdcb14efa750ff17a0b6902c4c86da8"
+    },
+    {
+      "path": "source/plugins/discourse-ai/spec/forum_assistant/workspace_updates_spec.rb",
+      "before_sha256": null,
+      "sha256": "bec3353d7d5e12b895d67e483201967224c4a2192067665838b34d01b6b7b458"
+    },
+    {
+      "path": "source/plugins/discourse-ai/test/javascripts/integration/components/forum-assistant-workspace-test.gjs",
+      "before_sha256": null,
+      "sha256": "fab4c21a822043e841eee32647e2e21ecc15a59b2cac59370cfe1ece1b47d69d"
+    },
+    {
+      "path": "source/plugins/discourse-ai/test/javascripts/unit/services/forum-assistant-workspace-test.js",
+      "before_sha256": null,
+      "sha256": "e3b86bd6d5a31fa9e925955c2f338325d5f60c63214c0da9d77a6f7376e8f212"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 [
   "themes/isbf-campus-feed/common/common.scss",
+  "themes/isbf-campus-feed/javascripts/discourse/api-initializers/isbf-forum-assistant.gjs",
   "themes/isbf-campus-feed/javascripts/discourse/components/isbf-mbti-history.gjs",
   "themes/isbf-campus-feed/javascripts/discourse/components/isbf-mbti-intro.gjs",
   "themes/isbf-campus-feed/javascripts/discourse/components/isbf-mbti-question.gjs",
@@ -15,6 +16,7 @@
   "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-icons.js",
   "themes/isbf-campus-feed/locales/en.yml",
   "themes/isbf-campus-feed/locales/zh_CN.yml",
+  "themes/isbf-campus-feed/stylesheets/forum-assistant.scss",
   "themes/isbf-campus-feed/stylesheets/mbti.scss",
   "themes/isbf-campus-feed/stylesheets/guides.scss",
   "themes/isbf-campus-feed/stylesheets/reply-conversations.scss",

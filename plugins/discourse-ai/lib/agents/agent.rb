@@ -74,6 +74,11 @@ module DiscourseAi
         end
 
         def all(user:)
+          if DiscourseAi::ForumAssistant::Configuration.restricted?(user)
+            configuration = DiscourseAi::ForumAssistant::Configuration
+            return [] unless configuration.available? && configuration.allowed_user?(user)
+            return [configuration.agent.class_instance]
+          end
           # listing tools has to be dynamic cause site settings may change
           AiAgent.all_agents.filter do |agent|
             next false if !user.in_any_groups?(agent.allowed_group_ids)

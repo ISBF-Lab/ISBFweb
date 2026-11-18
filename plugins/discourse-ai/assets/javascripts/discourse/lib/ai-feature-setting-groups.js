@@ -107,6 +107,39 @@ export const AI_FEATURE_SETTING_GROUPS = {
 
   bot: [
     {
+      key: "forum_assistant",
+      titleKey: "discourse_ai.forum_assistant.settings_title",
+      settings: [
+        "ai_forum_assistant_enabled",
+        "ai_forum_assistant_agent",
+        "ai_forum_assistant_model",
+        "ai_forum_assistant_restrict_members",
+      ],
+    },
+    {
+      key: "forum_assistant_limits",
+      titleKey: "discourse_ai.forum_assistant.limits_title",
+      settings: [
+        "ai_forum_assistant_daily_limit",
+        "ai_forum_assistant_questions_per_minute",
+        "ai_forum_assistant_global_daily_limit",
+        "ai_forum_assistant_timezone",
+        "ai_forum_assistant_max_question_chars",
+        "ai_forum_assistant_max_response_tokens",
+        "ai_forum_assistant_timeout_seconds",
+      ],
+    },
+    {
+      key: "forum_assistant_abuse",
+      titleKey: "discourse_ai.forum_assistant.abuse_title",
+      settings: [
+        "ai_forum_assistant_violation_limit",
+        "ai_forum_assistant_violation_window_minutes",
+        "ai_forum_assistant_cooldown_minutes",
+        "ai_forum_assistant_log_retention_days",
+      ],
+    },
+    {
       key: "settings",
       titleKey: "discourse_ai.features.bot.setting_groups.settings",
       settings: [

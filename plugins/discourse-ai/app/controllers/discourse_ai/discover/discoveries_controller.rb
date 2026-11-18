@@ -9,6 +9,7 @@ module DiscourseAi
 
       requires_plugin PLUGIN_NAME
       requires_login
+      before_action { DiscourseAi::ForumAssistant::Policy.ensure_interactive_access!(current_user) }
       before_action :check_permissions!
 
       def reply

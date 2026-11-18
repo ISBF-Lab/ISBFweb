@@ -1,5 +1,5 @@
 import { getOwner } from "@ember/owner";
-import { fillIn, render, triggerKeyEvent } from "@ember/test-helpers";
+import { fillIn, render, settled, triggerKeyEvent } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import DockedComposer from "discourse/components/docked-composer";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
@@ -10,6 +10,55 @@ module("Integration | Component | DockedComposer", function (hooks) {
 
   hooks.beforeEach(function () {
     pretender.get("/emojis/search-aliases.json", () => response([]));
+  });
+
+  test("disables editing and preserves the draft until input is available again", async function (assert) {
+    this.set("disabled", false);
+    const handleSubmit = async () => ({ ok: true });
+    await render(
+      <template>
+        <DockedComposer
+          @composerEvents={{false}}
+          @disabled={{this.disabled}}
+          @draftKey="test-disabled-input"
+          @onSubmit={{handleSubmit}}
+        />
+      </template>
+    );
+    await fillIn(".d-editor-input", "A question to keep");
+    this.set("disabled", true);
+    await settled();
+    assert.dom(".d-editor-input").isDisabled();
+    this.set("disabled", false);
+    await settled();
+    assert
+      .dom(".d-editor-input")
+      .isNotDisabled()
+      .hasValue("A question to keep");
+  });
+
+  test("can disable uploads while retaining ordinary text submission", async function (assert) {
+    let submitted;
+    const handleSubmit = async (data) => {
+      submitted = data;
+      return { ok: true };
+    };
+    await render(
+      <template>
+        <DockedComposer
+          @allowUploads={{false}}
+          @composerEvents={{false}}
+          @draftKey="test-text-only"
+          @onSubmit={{handleSubmit}}
+        />
+      </template>
+    );
+    assert.dom(".hidden-upload-field").doesNotExist();
+    assert.dom(".docked-composer-upload").doesNotExist();
+    await fillIn(".d-editor-input", "Text without attachments");
+    await triggerKeyEvent(".d-editor-input", "keydown", "Enter");
+    assert.strictEqual(submitted.raw, "Text without attachments");
+    assert.deepEqual(submitted.uploads, []);
   });
 
   test("submits on bare Enter by default", async function (assert) {

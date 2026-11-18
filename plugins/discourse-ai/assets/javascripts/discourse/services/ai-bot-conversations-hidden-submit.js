@@ -10,6 +10,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
   @service appEvents;
   @service composer;
   @service dialog;
+  @service forumAssistant;
   @service router;
   @service siteSettings;
 
@@ -31,14 +32,36 @@ export default class AiBotConversationsHiddenSubmit extends Service {
 
   @action
   async submitToBot(uploadData) {
-    if (
-      this.inputValue.length <
-      this.siteSettings.min_personal_message_post_length
-    ) {
+    if (this.loading) {
+      return;
+    }
+    if (this.forumAssistant.isSelected(this.agentId)) {
+      const status = await this.forumAssistant.refresh();
+      if (!status?.can_ask) {
+        return this.dialog.alert({ message: this.forumAssistant.message });
+      }
+      if (uploadData.uploads?.length || uploadData.inProgressUploadsCount > 0) {
+        return this.dialog.alert({
+          message: i18n("discourse_ai.forum_assistant.attachments_disabled"),
+        });
+      }
+      if (
+        this.inputValue.length >
+        this.siteSettings.ai_forum_assistant_max_question_chars
+      ) {
+        return this.dialog.alert({
+          message: i18n("discourse_ai.forum_assistant.question_length"),
+        });
+      }
+    }
+    const minLength = this.forumAssistant.isSelected(this.agentId)
+      ? 1
+      : this.siteSettings.min_personal_message_post_length;
+    if (this.inputValue.trim().length < minLength) {
       return this.dialog.alert({
         message: i18n(
           "discourse_ai.ai_bot.conversations.min_input_length_message",
-          { count: this.siteSettings.min_personal_message_post_length }
+          { count: minLength }
         ),
         didConfirm: () => this.focusInput(),
         didCancel: () => this.focusInput(),
@@ -90,6 +113,9 @@ export default class AiBotConversationsHiddenSubmit extends Service {
       this.router.transitionTo(response.post_url);
     } finally {
       this.loading = false;
+      if (this.forumAssistant.isSelected(this.agentId)) {
+        await this.forumAssistant.refresh();
+      }
     }
   }
 }

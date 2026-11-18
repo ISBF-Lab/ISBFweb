@@ -449,3 +449,11 @@ A07/C01 日历筛选使用现有 surface/hover/text/border/accent/accent-contras
 ## 2026-11-08 工作台指南图形放大与填充
 
 按用户追加要求，指南针使用 currentColor 实心路径及透明镂空，图形在原容器内 scale 1.15。仅作用于 guides 入口的两种图标槽位；其余图形、底板、间距和触控尺寸沿用原值。该项替代此前 1.5 描边的指南针，不新增全局 token。[来源](reviews/guides-20261108/README.md)。
+
+## 2026-11-17 论坛助手局部复用
+
+工作台 AI 入口沿用 C02 现有 blue 色调、图标槽位和分端布局。会话状态提示只使用 `--primary-medium`、`--font-down-1`、`--space-2`，操作复用现有 DButton 和 44px 触控目标；没有新增全局 token 或表面变体。[实施范围](reviews/forum-assistant-20261117/README.md)。
+
+## 2026-11-17 论坛助手工作区局部组合
+
+新工作区复用 V2 的 surface/text/muted/border/accent/focus-ring、既有字体与间距、8/16px 和 pill 半径、1260/260/600px 布局变量。用户气泡最大 85% 为本区域局部约束；1023px 及以下使用单列历史切换，键盘高度与 safe-area 仅影响本页。没有新增全站 token；[来源与验证](reviews/forum-assistant-ui-20261117/README.md)。

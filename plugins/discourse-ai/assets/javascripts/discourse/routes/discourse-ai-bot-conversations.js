@@ -8,6 +8,7 @@ export default class DiscourseAiBotConversationsRoute extends DiscourseRoute {
   queryParams = {
     agent: { replace: true },
     llm: { replace: true },
+    conversation: { replace: false },
   };
 
   beforeModel(transition) {

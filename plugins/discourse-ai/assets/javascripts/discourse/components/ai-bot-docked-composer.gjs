@@ -32,6 +32,7 @@ export default class AiBotDockedComposer extends Component {
   @service appEvents;
   @service aiBotDockedSubmit;
   @service aiBotStreamingState;
+  @service forumAssistant;
   @service siteSettings;
   @service store;
 
@@ -145,8 +146,10 @@ export default class AiBotDockedComposer extends Component {
 
   get isBotPm() {
     return (
-      this.siteSettings.ai_bot_enable_docked_composer &&
-      this.topic?.is_bot_pm === true
+      (this.siteSettings.ai_bot_enable_docked_composer ||
+        this.isForumAssistant) &&
+      this.topic?.is_bot_pm === true &&
+      !this.topic?.forum_assistant_read_only
     );
   }
 
@@ -169,7 +172,21 @@ export default class AiBotDockedComposer extends Component {
   }
 
   get minLength() {
+    if (this.isForumAssistant) {
+      return 1;
+    }
     return this.siteSettings.min_personal_message_post_length ?? 1;
+  }
+
+  get isForumAssistant() {
+    return this.forumAssistant.restricted || this.topic?.is_forum_assistant;
+  }
+
+  get composerDisabled() {
+    return (
+      this.isStreaming ||
+      (this.isForumAssistant && !this.forumAssistant.status?.can_ask)
+    );
   }
 
   get composerClass() {
@@ -325,6 +342,7 @@ export default class AiBotDockedComposer extends Component {
       raw,
       uploads,
       inProgressUploadsCount,
+      isForumAssistant: this.isForumAssistant,
     });
     if (result) {
       this.pendingBotReply = true;
@@ -484,10 +502,11 @@ export default class AiBotDockedComposer extends Component {
       </div>
     {{/if}}
     <DockedComposer
+      @allowUploads={{if this.isForumAssistant false true}}
       @autoResize={{true}}
       @bodyClassName="has-ai-bot-docked-composer"
       @class={{this.composerClass}}
-      @disabled={{this.isStreaming}}
+      @disabled={{this.composerDisabled}}
       @draftKey={{this.draftKey}}
       @isSubmitting={{this.aiBotDockedSubmit.loading}}
       @maxResizeOffset={{this.maxResizeOffset}}

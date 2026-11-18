@@ -172,6 +172,10 @@
     scale: 1.15;
   }
 
+  [data-workbench-key="ai_assistant"] &__glyph .d-icon {
+    fill: currentcolor;
+  }
+
   [data-workbench-tone="mint"] &__mobile-icon,
   [data-workbench-tone="teal"] &__mobile-icon {
     background: color-mix(in srgb, #35b595 19%, var(--isbf-v2-surface));

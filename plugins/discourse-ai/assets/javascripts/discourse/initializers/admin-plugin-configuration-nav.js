@@ -15,6 +15,11 @@ export default {
       api.setAdminPluginIcon(PLUGIN_ID, "discourse-sparkles");
       api.addAdminPluginConfigurationNav(PLUGIN_ID, [
         {
+          label: "discourse_ai.forum_assistant.admin_title",
+          route: "adminPlugins.show.discourse-ai-forum-assistant",
+          description: "discourse_ai.forum_assistant.admin_description",
+        },
+        {
           label: "discourse_ai.features.short_title",
           route: "adminPlugins.show.discourse-ai-features",
           description: "discourse_ai.features.description",

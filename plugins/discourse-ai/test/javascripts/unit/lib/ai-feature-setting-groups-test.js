@@ -32,11 +32,18 @@ module("Unit | Lib | ai-feature-setting-groups", function () {
   test("returns correct groups for bot", function (assert) {
     const groups = getSettingGroupsForFeature("bot");
 
-    assert.strictEqual(groups.length, 4, "bot should have 4 groups");
     assert.strictEqual(
       groups[0].key,
-      "settings",
-      "first group should be settings"
+      "forum_assistant",
+      "forum policy is the first settings section"
+    );
+    const settings = groups.flatMap((group) => group.settings);
+    assert.true(settings.includes("ai_forum_assistant_model"));
+    assert.true(settings.includes("ai_forum_assistant_daily_limit"));
+    assert.true(settings.includes("ai_forum_assistant_violation_limit"));
+    assert.true(
+      settings.includes("ai_bot_enabled"),
+      "existing bot settings remain accessible"
     );
     assert.false(
       groups.some((group) => group.settings.includes("ai_image_caption_agent")),

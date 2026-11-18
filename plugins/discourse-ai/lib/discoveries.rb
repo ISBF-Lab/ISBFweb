@@ -49,6 +49,7 @@ module DiscourseAi
       end
 
       def eligible_for_user?(user)
+        return false if DiscourseAi::ForumAssistant::Configuration.restricted?(user)
         return false if user.nil?
         return false if !SiteSetting.discourse_ai_enabled || !SiteSetting.ai_ask_ai_enabled
         return false if !user.in_any_groups?(SiteSetting.ai_ask_ai_allowed_groups_map)
