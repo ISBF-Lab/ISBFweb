@@ -164,7 +164,8 @@ function mountGlass(stage, settings) {
     const colors = workbenchColors(
       settings,
       dark ? "dark" : "light",
-      items.map((item) => item.dataset.workbenchKey)
+      items.map((item) => item.dataset.workbenchKey),
+      items.map((item) => item.dataset.workbenchPalette)
     );
     const customColor = (element, name, value) => {
       if (!element) {

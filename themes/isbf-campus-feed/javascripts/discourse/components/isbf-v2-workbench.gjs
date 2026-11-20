@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
-import { themePrefix } from "virtual:theme";
+import { settings, themePrefix } from "virtual:theme";
+import { isExistingIconId } from "discourse/lib/icon-library";
 import { i18n } from "discourse-i18n";
 import { alumniConfig } from "../lib/alumni";
 import { careersConfig } from "../lib/careers";
@@ -8,84 +9,9 @@ import { learningConfig, libraryConfig } from "../lib/learning-resources";
 import { marketplaceConfig } from "../lib/marketplace";
 import { mbtiConfig } from "../lib/mbti";
 import { teamupConfig } from "../lib/teamup";
+import { mergeWorkbenchEntries } from "../lib/workbench-entries";
 import ISBFV2MoreMenu from "./isbf-v2-more-menu";
 import ISBFWorkbenchGrid from "./isbf-workbench-grid";
-
-const CARDS = [
-  {
-    key: "learning_resources",
-    icon: "isbf-workbench-book-open",
-    mobileIcon: "book-open",
-    tone: "blue",
-  },
-  {
-    key: "library",
-    icon: "isbf-workbench-database",
-    mobileIcon: "database",
-    tone: "indigo",
-  },
-  {
-    key: "courses",
-    icon: "isbf-workbench-graduation-cap",
-    mobileIcon: "graduation-cap",
-    tone: "violet",
-  },
-  {
-    key: "careers",
-    icon: "isbf-workbench-briefcase",
-    mobileIcon: "briefcase",
-    tone: "amber",
-  },
-  {
-    key: "resume",
-    icon: "isbf-workbench-file-lines",
-    mobileIcon: "file-lines",
-    tone: "mint",
-  },
-  {
-    key: "campus_services",
-    icon: "isbf-workbench-building-columns",
-    mobileIcon: "building-columns",
-    tone: "sky",
-  },
-  {
-    key: "student_identity",
-    icon: "isbf-workbench-id-card",
-    mobileIcon: "id-card",
-    tone: "rose",
-  },
-  {
-    key: "alumni",
-    icon: "isbf-workbench-user-group",
-    mobileIcon: "user-group",
-    tone: "teal",
-  },
-  {
-    key: "marketplace",
-    icon: "isbf-workbench-bag-shopping",
-    mobileIcon: "bag-shopping",
-    tone: "amber",
-  },
-  {
-    key: "teamup",
-    icon: "isbf-workbench-user-group",
-    mobileIcon: "user-group",
-    tone: "violet",
-  },
-  { key: "mbti", icon: "brain", mobileIcon: "brain", tone: "blue" },
-  {
-    key: "ai_assistant",
-    icon: "far-discobot",
-    mobileIcon: "far-discobot",
-    tone: "blue",
-  },
-  {
-    key: "guides",
-    icon: "isbf-workbench-guides",
-    mobileIcon: "isbf-workbench-guides",
-    tone: "blue",
-  },
-];
 
 export default class ISBFV2Workbench extends Component {
   @service currentUser;
@@ -93,41 +19,44 @@ export default class ISBFV2Workbench extends Component {
   @service siteSettings;
 
   get cards() {
-    return CARDS.filter(
-      (card) =>
-        (card.key !== "alumni" || alumniConfig(this.site)) &&
-        (card.key !== "mbti" || mbtiConfig(this.site)) &&
-        (card.key !== "ai_assistant" ||
-          (this.currentUser?.forum_assistant?.enabled &&
-            this.currentUser?.forum_assistant?.configured)) &&
-        (card.key !== "guides" || this.siteSettings.isbf_guides_enabled)
-    ).map((card) => ({
-      ...card,
-      label: i18n(themePrefix(`isbf_v2.workbench_${card.key}`)),
-      href:
-        card.key === "mbti"
-          ? "/isbf/mbti"
-          : card.key === "ai_assistant"
-            ? "/discourse-ai/ai-bot/conversations"
-            : card.key === "guides"
-              ? "/guides"
-              : card.key === "learning_resources" && learningConfig(this.site)
-                ? "/isbf/learning"
-                : card.key === "library" && libraryConfig(this.site)
-                  ? "/isbf/library"
-                  : card.key === "careers" && careersConfig(this.site)
-                    ? "/isbf/careers"
-                    : card.key === "marketplace" && marketplaceConfig(this.site)
-                      ? "/isbf/marketplace"
-                      : card.key === "teamup" && teamupConfig(this.site)
-                        ? "/isbf/teamup"
-                        : card.key === "alumni"
-                          ? "/isbf/alumni"
-                          : card.key === "resume" &&
-                              this.siteSettings.isbf_resume_enabled
-                            ? "/isbf/workbench/resume"
-                            : null,
-    }));
+    return mergeWorkbenchEntries(settings.workbench_entries, isExistingIconId)
+      .filter(
+        (card) =>
+          (card.key !== "alumni" || alumniConfig(this.site)) &&
+          (card.key !== "mbti" || mbtiConfig(this.site)) &&
+          (card.key !== "ai_assistant" ||
+            (this.currentUser?.forum_assistant?.enabled &&
+              this.currentUser?.forum_assistant?.configured)) &&
+          (card.key !== "guides" || this.siteSettings.isbf_guides_enabled)
+      )
+      .map((card) => ({
+        ...card,
+        label: i18n(themePrefix(`isbf_v2.workbench_${card.key}`)),
+        href:
+          card.key === "mbti"
+            ? "/isbf/mbti"
+            : card.key === "ai_assistant"
+              ? "/discourse-ai/ai-bot/conversations"
+              : card.key === "guides"
+                ? "/guides"
+                : card.key === "learning_resources" && learningConfig(this.site)
+                  ? "/isbf/learning"
+                  : card.key === "library" && libraryConfig(this.site)
+                    ? "/isbf/library"
+                    : card.key === "careers" && careersConfig(this.site)
+                      ? "/isbf/careers"
+                      : card.key === "marketplace" &&
+                          marketplaceConfig(this.site)
+                        ? "/isbf/marketplace"
+                        : card.key === "teamup" && teamupConfig(this.site)
+                          ? "/isbf/teamup"
+                          : card.key === "alumni"
+                            ? "/isbf/alumni"
+                            : card.key === "resume" &&
+                                this.siteSettings.isbf_resume_enabled
+                              ? "/isbf/workbench/resume"
+                              : null,
+      }));
   }
 
   <template>

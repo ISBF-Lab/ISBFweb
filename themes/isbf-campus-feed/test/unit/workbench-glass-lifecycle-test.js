@@ -73,6 +73,62 @@ module("ISBF | Unit | workbench glass lifecycle", function () {
     destroy();
   });
 
+  test("reordered entries keep their exact colors and palette pixels at their own drawing positions", function (assert) {
+    const fixture = workbenchStage({ reduced: true });
+    fixture.items[0].dataset.workbenchKey = "courses";
+    fixture.items[0].dataset.workbenchPalette = "mint";
+    fixture.items[1].dataset.workbenchKey = "learning_resources";
+    fixture.items[1].dataset.workbenchPalette = "violet";
+    const destroy = mountWorkbenchGlass(fixture.stage, {
+      workbench_plate_color_dark: "#112233",
+      workbench_plate_learning_resources_color_dark: "#f4c6d4",
+    });
+    assert.deepEqual(
+      [...fixture.calls("texImage2D").at(-1).args.at(-1)],
+      [105, 181, 230, 255, 244, 198, 212, 255],
+      "first DOM position uses its computed palette; second uses its own exact key color"
+    );
+    assert.strictEqual(
+      fixture.items[0].style.getPropertyValue("--isbf-workbench-custom-plate"),
+      "",
+      "a selected palette takes precedence over the shared exact color"
+    );
+    assert.strictEqual(
+      fixture.items[1].style.getPropertyValue("--isbf-workbench-custom-plate"),
+      "#f4c6d4"
+    );
+    fixture.viewport.matches = false;
+    fixture.viewport.dispatch("change");
+    fixture.viewport.matches = true;
+    fixture.viewport.dispatch("change");
+    assert.deepEqual(
+      [...fixture.calls("texImage2D").at(-1).args.at(-1)],
+      [105, 181, 230, 255, 244, 198, 212, 255]
+    );
+    destroy();
+    assert.strictEqual(fixture.listeners(), 0);
+  });
+
+  test("mobile glass keeps a selected palette while desktop exact colors are ignored", function (assert) {
+    const fixture = workbenchStage({ desktop: false, reduced: true });
+    fixture.items[0].dataset.workbenchPalette = "mint";
+    const destroy = mountWorkbenchGlass(fixture.stage, {
+      workbench_layout_mobile: "glass",
+      workbench_plate_color_dark: "#112233",
+      workbench_plate_learning_resources_color_dark: "#f4c6d4",
+    });
+    assert.strictEqual(
+      fixture.items[0].style.getPropertyValue("--isbf-workbench-custom-plate"),
+      ""
+    );
+    assert.deepEqual(
+      [...fixture.calls("texImage2D").at(-1).args.at(-1)].slice(0, 4),
+      [105, 181, 230, 255],
+      "the mobile renderer reads the palette from its own plate"
+    );
+    destroy();
+  });
+
   test("the administrator can select traditional layout on both device sizes", function (assert) {
     const fixture = workbenchStage();
     const destroy = mountWorkbenchGlass(fixture.stage, {

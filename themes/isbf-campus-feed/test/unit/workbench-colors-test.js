@@ -51,6 +51,43 @@ module("ISBF | Unit | workbench colors", function () {
     assert.strictEqual(colors.plates[0], "");
   });
 
+  test("desktop glass resolves exact entry color before palette, shared color, and theme fallback", function (assert) {
+    for (const mode of ["light", "dark"]) {
+      const settings = {
+        [`workbench_plate_color_${mode}`]: "#123456",
+        [`workbench_plate_library_color_${mode}`]: "#abcdef",
+      };
+      const keys = ["library", "resume", "courses", "guides"];
+      assert.deepEqual(
+        workbenchColors(settings, mode, keys, ["mint", "amber", "", "bad"])
+          .plates,
+        ["#abcdef", "", "#123456", "#123456"],
+        "an empty exact result lets the selected CSS palette supply the plate"
+      );
+      delete settings[`workbench_plate_color_${mode}`];
+      assert.deepEqual(
+        workbenchColors(settings, mode, keys, ["theme", "violet"]).plates,
+        ["#abcdef", "", "", ""]
+      );
+    }
+  });
+
+  test("colors follow keys when entry order changes", function (assert) {
+    const settings = {
+      workbench_plate_color_light: "#123456",
+      workbench_plate_library_color_light: "#abcdef",
+    };
+    assert.deepEqual(
+      workbenchColors(
+        settings,
+        "light",
+        ["resume", "library"],
+        ["mint", "amber"]
+      ).plates,
+      ["", "#abcdef"]
+    );
+  });
+
   test("light and dark backgrounds choose contrasting existing foreground tokens", function (assert) {
     assert.strictEqual(
       workbenchInk([255, 255, 255]),

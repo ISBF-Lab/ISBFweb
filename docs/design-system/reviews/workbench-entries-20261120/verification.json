@@ -1,0 +1,181 @@
+{
+  "date": "2026-11-20 Asia/Shanghai",
+  "repository": "ISBF-Lab/ISBFweb",
+  "base": "e69bfa59825a89800215a765ecf5091a678eca0d",
+  "branch": "codex/workbench-entry-configuration",
+  "commitBinding": "The commit containing this receipt; exact runtime file hashes below",
+  "coreChanges": false,
+  "entryCount": 13,
+  "checks": [
+    {
+      "name": "prettier-final",
+      "exitCode": 0
+    },
+    {
+      "name": "eslint-final",
+      "exitCode": 0
+    },
+    {
+      "name": "stylelint-final",
+      "exitCode": 0
+    },
+    {
+      "name": "menu-tests",
+      "exitCode": 0
+    },
+    {
+      "name": "menus-changed",
+      "exitCode": 0
+    },
+    {
+      "name": "menus-whole-windows",
+      "exitCode": 1
+    },
+    {
+      "name": "unit-source",
+      "exitCode": 0
+    },
+    {
+      "name": "yaml-schema-defaults-and-locales",
+      "exitCode": 0
+    },
+    {
+      "name": "git-diff-check",
+      "exitCode": 0
+    },
+    {
+      "name": "prettier-render-recheck",
+      "exitCode": 0
+    },
+    {
+      "name": "eslint-render-recheck",
+      "exitCode": 0
+    },
+    {
+      "name": "stylelint-render-recheck",
+      "exitCode": 0
+    },
+    {
+      "name": "unit-source-render-recheck",
+      "exitCode": 0
+    }
+  ],
+  "sourceUnitExecution": {
+    "runtime": "v24.22.0",
+    "kind": "Node VM + node:assert adapter for actual QUnit source files, no Ember",
+    "tests": 37,
+    "assertions": 192,
+    "failures": 0
+  },
+  "staticBrowser": {
+    "kind": "offline-static-browser-preview",
+    "summary": {
+      "cases": 56,
+      "overflowCases": [],
+      "invisibleLabels": [],
+      "minimumLabelContrast": 4.909032157767397,
+      "minimumExplicitPaletteIconContrast": 4.909032157767397,
+      "layoutSelectionFailures": 0,
+      "orderOrHrefFailures": 0,
+      "lineFillFailures": [],
+      "solidFillFailures": [],
+      "labelContrastFailures": [],
+      "iconContrastFailures": []
+    },
+    "limitations": [
+      "SCSS selectors expanded with postcss-scss and postcss-resolve-nested-selector; not a production Sass compilation.",
+      "Fixture omits native app/navigation, admin object editor, permission checks, settings save/reload and native SVG sprite asset delivery.",
+      "Uses actual theme tokens, palettes, custom paths, merge module and glass lifecycle; WebGL2 disabled to exercise the actual static fallback.",
+      "Native primary derived levels use the declared about.json hover color only as a fixture shell fallback; main text/surface/accent and inverse token come from source.",
+      "Browser viewport emulation is not physical-device verification."
+    ],
+    "sources": {
+      "themes/isbf-campus-feed/common/common.scss": "1e3a75a0975b69430c684132dffa766129baf0579ddaa3fd76b4c4edf8e5a93e",
+      "themes/isbf-campus-feed/stylesheets/workbench.scss": "5844334793cda370fda593e9318fac1a69ecab64fe3db1e597044eb4204e93af",
+      "app/assets/stylesheets/common/tokens.scss": "89c2eee25d9cb2b94496ba8cb12f2df1d4fe9e9003d7a52a725c3fda3f76c5d7",
+      "themes/isbf-campus-feed/about.json": "7619f0da1b62a06ea5384fa2993137fd9e6e7c00753eea74a8d7d1011059e619",
+      "themes/isbf-campus-feed/locales/zh_CN.yml": "81b816dc42fedc3559c51b83540e1be82b712e1a3070a6da3be869c024248d54",
+      "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-entries.js": "039f9c2d4a25e48999b2a6a299e769d7aac4faad94faeea6851fe3efab6a3f42",
+      "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-icons.js": "2da1b5ff97809a50fba25bf89b3249690a4221fc284db4d5f8c08dc89bab2dac",
+      "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-glass.js": "4c644b3ea923b4f4fe7399a9eadbe7a74ed33968bf659ae6edc0c21d4a4ef318",
+      "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-colors.js": "7dd0ce8919ce7bc6eb8484ec256cd75a648b10ccaeb50f17c0757d336d7f1c94",
+      "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-glass-renderer.js": "c0136f26c31c87213932a4604dff13c2af6b37b608e4003500f1e46196211a25",
+      "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-glass-shaders.js": "4f17a06d3ca0f053f9d55fa2c8961ae1278da3fcd9b3d3353f180656a0ea73c9"
+    }
+  },
+  "nativeIntegration": "Not executed: no Ruby/Bundle/Docker or verified independent dev site; complete-library picker declined by user",
+  "prescribedCommandBlockers": {
+    "bin/lint --fix": "Ruby executable absent",
+    "pnpm test:menus": "pnpm 11.25.0 incompatible with ^10",
+    "pnpm lint:menus": "same engine blocker; direct whole scan reports 5 existing Windows path allowlist issues"
+  },
+  "pending": [
+    "Independent dev site/ownership and actual ./dev theme-sync",
+    "Native QUnit, RSpec requests and system test",
+    "Admin save/reload/reset, regular user/moderator write rejection and first sprite resource request",
+    "Full built-in icon search deferred by user choice; no Core changes",
+    "Native WebGL, full shared navigation and physical devices"
+  ],
+  "sourceFiles": [
+    {
+      "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-workbench.gjs",
+      "sha256": "e2c4ee8752e042a4973abf7908d68d2ac902aed311c541fb57dcb5445cd61cf9"
+    },
+    {
+      "file": "themes/isbf-campus-feed/javascripts/discourse/components/isbf-workbench-grid.gjs",
+      "sha256": "6643a72a8860414f68ad061ab73c23f641727cc2ea61b7932b39b13062bd6f0a"
+    },
+    {
+      "file": "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-entries.js",
+      "sha256": "039f9c2d4a25e48999b2a6a299e769d7aac4faad94faeea6851fe3efab6a3f42"
+    },
+    {
+      "file": "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-colors.js",
+      "sha256": "7dd0ce8919ce7bc6eb8484ec256cd75a648b10ccaeb50f17c0757d336d7f1c94"
+    },
+    {
+      "file": "themes/isbf-campus-feed/javascripts/discourse/lib/workbench-glass.js",
+      "sha256": "4c644b3ea923b4f4fe7399a9eadbe7a74ed33968bf659ae6edc0c21d4a4ef318"
+    },
+    {
+      "file": "themes/isbf-campus-feed/test/unit/workbench-entries-test.js",
+      "sha256": "470bdfd887c4f4a2368464ee0d416c22ea5da8f0e7186e6750dfcbb7d6cd0ea3"
+    },
+    {
+      "file": "themes/isbf-campus-feed/test/unit/workbench-colors-test.js",
+      "sha256": "727f269e5398f416f7e9c2c58f092c43472177b1fcf1e921628b27d84bb56fc0"
+    },
+    {
+      "file": "themes/isbf-campus-feed/test/unit/workbench-glass-lifecycle-test.js",
+      "sha256": "9c7b34493e5563e5bdb5ba20b65a493d1b4840760632e4e74880b120327cb145"
+    },
+    {
+      "file": "themes/isbf-campus-feed/test/integration/workbench-test.gjs",
+      "sha256": "1e80d03b3d63f5a93352be62294b4872f3f86a85aea3526df7d534934e94d766"
+    },
+    {
+      "file": "themes/isbf-campus-feed/stylesheets/workbench.scss",
+      "sha256": "5844334793cda370fda593e9318fac1a69ecab64fe3db1e597044eb4204e93af"
+    },
+    {
+      "file": "themes/isbf-campus-feed/settings.yml",
+      "sha256": "f8676e84ca0037d122dff3cef0c7a6175541a85d25912d8cb6b1752e145c5a5a"
+    },
+    {
+      "file": "themes/isbf-campus-feed/locales/en.yml",
+      "sha256": "8090a5959a9defe29efe7a15b22fbfb5d2a6ecece0f1a3c50570881ea3efaae4"
+    },
+    {
+      "file": "themes/isbf-campus-feed/locales/zh_CN.yml",
+      "sha256": "81b816dc42fedc3559c51b83540e1be82b712e1a3070a6da3be869c024248d54"
+    },
+    {
+      "file": "themes/isbf-campus-feed/spec/requests/workbench_entries_spec.rb",
+      "sha256": "f56a1f87e52669d7d736374424d2c64f37572435f1cc300e437f67490753d63c"
+    },
+    {
+      "file": "themes/isbf-campus-feed/spec/system/workbench_entries_spec.rb",
+      "sha256": "27ed943cef549f919c361c15d98208f9746a3d22f0eceb3996be037593f0cb5a"
+    }
+  ]
+}

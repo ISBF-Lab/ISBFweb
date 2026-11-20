@@ -1,16 +1,18 @@
+import { WORKBENCH_PALETTE_TONES } from "./workbench-entries";
+
 export function workbenchColor(value) {
   const color = typeof value === "string" ? value.trim() : "";
   return /^#[0-9a-f]{6}$/i.test(color) ? color.toLowerCase() : "";
 }
 
-export function workbenchColors(settings, mode, keys) {
+export function workbenchColors(settings, mode, keys, palettes = []) {
   const fallback = workbenchColor(settings[`workbench_plate_color_${mode}`]);
   return {
     panel: workbenchColor(settings[`workbench_panel_color_${mode}`]),
     plates: keys.map(
-      (key) =>
+      (key, index) =>
         workbenchColor(settings[`workbench_plate_${key}_color_${mode}`]) ||
-        fallback
+        (WORKBENCH_PALETTE_TONES.includes(palettes[index]) ? "" : fallback)
     ),
   };
 }

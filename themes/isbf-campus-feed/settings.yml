@@ -49,6 +49,85 @@ svg_icons:
   list_type: compact
   description: "商城工作台入口使用的图标。"
 
+workbench_entries:
+  type: objects
+  refresh: true
+  default:
+    - key: learning_resources
+      icon: ""
+      tone: default
+    - key: library
+      icon: ""
+      tone: default
+    - key: courses
+      icon: ""
+      tone: default
+    - key: careers
+      icon: ""
+      tone: default
+    - key: resume
+      icon: ""
+      tone: default
+    - key: campus_services
+      icon: ""
+      tone: default
+    - key: student_identity
+      icon: ""
+      tone: default
+    - key: alumni
+      icon: ""
+      tone: default
+    - key: marketplace
+      icon: ""
+      tone: default
+    - key: teamup
+      icon: ""
+      tone: default
+    - key: mbti
+      icon: ""
+      tone: default
+    - key: ai_assistant
+      icon: ""
+      tone: default
+    - key: guides
+      icon: ""
+      tone: default
+  schema:
+    name: workbench entry
+    identifier: key
+    properties:
+      key:
+        type: enum
+        required: true
+        choices:
+          - learning_resources
+          - library
+          - courses
+          - careers
+          - resume
+          - campus_services
+          - student_identity
+          - alumni
+          - marketplace
+          - teamup
+          - mbti
+          - ai_assistant
+          - guides
+      icon:
+        type: icon
+      tone:
+        type: enum
+        default: default
+        choices:
+          - default
+          - theme
+          - mint
+          - amber
+          - violet
+  description:
+    zh_CN: "工作台入口：使用上下移动按钮排序，选择内置图标和预设色板。手机与电脑共用此配置，保存后刷新工作台生效。清空图标或使用默认色板可恢复原有显示；关闭的功能保留配置，重新开启后恢复位置。遗漏入口按原顺序补到末尾，重复标识取第一项，未知标识忽略。名称、链接和权限由原业务提供。"
+    en: "Workbench entries: use the move buttons to reorder entries, then choose built-in icons and preset palettes. Mobile and desktop share this configuration; save and refresh the workbench to apply it. Clear an icon or select the default palette to restore the original appearance. Disabled features retain their configuration and position. Missing entries are appended in the original order; the first duplicate key wins and unknown keys are ignored. Names, links, and permissions remain controlled by each feature."
+
 workbench_layout_mobile:
   default: traditional
   type: enum

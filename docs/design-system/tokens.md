@@ -1,5 +1,9 @@
 # Design tokens：真实数值与作用域
 
+2026-11-20 工作台显式预设复用原 accent、薄荷/琥珀/紫色及 15%/19%/21%/92% 混合比例。
+变量只作用于所选入口；传统图标与 text 混色、底色与 surface 混色，玻璃前景沿用亮度判断。
+没有新增全站 token；来源和未完成验收见[局部记录](reviews/workbench-entries-20261120/README.md)。
+
 2026-10-22 姓名渐变复用已确认颜色区域的原有 token；两端色号与方向是账号偏好数据，不是全站设计 token。见[局部记录](reviews/feed-name-gradients-20261022/README.md)。
 
 2026-10-21局部增量：信息流标题采用已有`font-lg`（18px），标题至正文采用`space-6`（24px总间距）；正文16px/1.45不变。新增姓名颜色偏好区域采用`space-4`、已有surface/text/muted/border/focus-ring及`radius-sm`，范围和状态见[记录](reviews/feed-name-colors-20261021/README.md)。开发者自选色是账号数据，不是新全站token。

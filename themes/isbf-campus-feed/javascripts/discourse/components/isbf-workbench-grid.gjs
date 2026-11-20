@@ -10,6 +10,7 @@ export default <template>
           <a
             class="isbf-workbench-grid__item"
             data-workbench-key={{card.key}}
+            data-workbench-palette={{card.paletteTone}}
             data-workbench-tone={{card.tone}}
             href={{card.href}}
           >
@@ -23,6 +24,7 @@ export default <template>
           <div
             class="isbf-workbench-grid__item"
             data-workbench-key={{card.key}}
+            data-workbench-palette={{card.paletteTone}}
             data-workbench-tone={{card.tone}}
           >
             <ISBFWorkbenchIcon
