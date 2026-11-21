@@ -357,6 +357,22 @@ jobs:
         run: |
           set -o pipefail
           bin/rake 'themes:qunit[name,ISBF Campus Feed]' | tee tmp/mbti-qunit.log
+      - name: Workbench entry settings, permissions and icon resources
+        if: always() && steps.assets.outcome == 'success'
+        run: |
+          set -o pipefail
+          bin/rspec \
+            themes/isbf-campus-feed/spec/requests/workbench_entries_spec.rb \
+            themes/isbf-campus-feed/spec/system/workbench_entries_spec.rb \
+            --format progress --format json --out tmp/workbench-entries-rspec.json \
+            | tee tmp/workbench-entries-rspec.log
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path("tmp/workbench-entries-rspec.json").read_text())["summary"]
+          assert summary["example_count"] >= 6
+          assert summary["failure_count"] == summary["pending_count"] == 0
+          PY
       - name: Actual quiz, resume, private history and responsive pages
         if: always() && steps.assets.outcome == 'success'
         run: |
@@ -422,6 +438,7 @@ jobs:
             discourse/tmp/mbti-theme-patch.json
             discourse/tmp/mbti-browser
             discourse/tmp/mbti-production-assets
+            discourse/tmp/workbench-entries-rspec.*
             discourse/tmp/capybara
             discourse/log/test.log
           if-no-files-found: warn
