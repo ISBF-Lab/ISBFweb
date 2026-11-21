@@ -1,8 +1,8 @@
 # 工作台排序与图标统一配置
 
-2026-11-20；源码仓库 `ISBF-Lab/ISBFweb`，目标分支 `main`，开发分支
+2026-11-20 实现，2026-11-21 补充 CI 证据。源码仓库 `ISBF-Lab/ISBFweb`，目标分支 `main`，开发分支
 `codex/workbench-entry-configuration`，基线 `e69bfa59825a89800215a765ecf5091a678eca0d`。
-本轮交付主题实现、定向测试和交接。原生环境验证尚未完成，未合并或发布。
+当前候选和生产验证进度见 [PR #117](https://github.com/ISBF-Lab/ISBFweb/pull/117)。
 
 ## 配置入口与格式
 
@@ -52,7 +52,7 @@ workbench_entries:
 - 按保存顺序取已知入口；重复 key 只取第一项，未知或无效对象忽略。
 - 未配置的已知入口按上述原始顺序补到末尾。
 - 缺失设置、非数组旧值和空数组均恢复原始顺序和显示。
-- 图标清空、类型错误或不在当前图标清单内时保留入口原有电脑/手机图标。
+- 图标清空、类型错误或原生资源中缺少对应符号时保留入口原有电脑/手机图标。
 - 无效或默认 tone 保留原色调，不引入显式色板。
 - 完整合并后才执行原有业务能力判断；功能关闭期间不改持久值，重新开启恢复配置位置。
 - 名称、链接、占位入口和权限不从设置读取。输入与默认列表均不被合并过程修改。
@@ -61,6 +61,7 @@ workbench_entries:
 
 复用原生对象字段 `type: icon` 和 `DIconGridPicker`，不维护另一份图标库。
 原生 `SvgSprite.theme_icons` / `objects_setting_icons` 会扫描对象图标字段并将保存值纳入主题资源。
+主题从页面 SVG sprite 检查图标是否可渲染。首次进入工作台时，异步到达的符号会替换回退图标。
 所选图标用于两端和两种布局；清空恢复各入口原来的变体。
 玻璃 glyph 支持 `currentColor` 实心图形，并保留已有 `fill="none"` 线条图形。
 指南针的放大仅作用于原指南针图形，替换图标不继承放大。
@@ -91,10 +92,9 @@ workbench_entries:
 
 ## 验证与接续
 
-当前 Windows 会话没有 Ruby、Bundle 或 Docker。仅有的 WSL Ubuntu 已停止；没有启动它或完整论坛。
-未找到 `./dev` 或 `theme-sync`，也未获得独立开发站 URL、主机连接或同步目录。
-最新 CI 等待状态已核对：worker 未运行，记录均为 delivered/cancelled，无活动等待。
-原有工作树和任务内容保持。
+Windows 开发工作区缺少 Ruby、Bundle 与 Docker。已授权主机上的独立 `discourse_dev`
+检出为 `de585fb1654ac6e667f33d42902e7fd94350bc9e`。3000 端口返回空响应，未发现
+历史 `./dev theme-sync` 入口，开发域名指向另一地址。独立站同步及真实页面验收待补。
 
 已执行：
 
@@ -112,24 +112,26 @@ workbench_entries:
   预览使用实际 tokens、SCSS 嵌套展开、图标路径、合并模块和真实玻璃静态回退；
   未加载原生 sprite、Ember 后台或 WebGL。已核对 11 份来源摘要且关闭任务浏览器。
 
-规定命令的阻塞：`bin/lint --fix` 所需 Ruby 不存在；默认 pnpm 为 11.25.0，
-仓库要求 pnpm 10.34.5 / `^10`，两条 `pnpm …:menus` 被 engine 检查阻止。
-未修改依赖锁或工程约束；Node 直接执行的菜单脚本与 package.json 指向相同。
+使用仓库指定的 pnpm 10.34.5 执行 `pnpm test:menus`，Windows 通过 5 项。
+在 Linux 主机的独立任务目录运行 `pnpm lint:menus`，扫描 5,912 文件零发现；
+该目录下 `pnpm test:menus` 通过 4 项，余下一项缺少 ESLint 依赖。
 
-已补充、尚未在 Discourse 运行的测试：
+候选 `0caa34d4bdc337545e61bba0785462c64cdd5d18` 的原生 CI 结果如下。
 
-```bash
-bin/qunit themes/isbf-campus-feed/test/unit/workbench-entries-test.js
-bin/qunit themes/isbf-campus-feed/test/unit/workbench-colors-test.js
-bin/qunit themes/isbf-campus-feed/test/unit/workbench-glass-lifecycle-test.js
+- `current` 和 `production-132` 各通过 6 项后台请求及浏览器系统规格。覆盖管理员保存、重载、
+  清空、恢复默认、键盘和移动边界、首次 sprite 请求、普通用户及 moderator 写入拒绝。
+- 两套完整主题 QUnit 各运行 320 项，318 项通过，2 项选择图标的渲染断言失败。
+  原判断依赖只在开发模式初始化的图标表。后续候选改为验证原生 sprite，并增加资源晚到回归。
+- 两套 `bin/lint --fix` 均修复了 Ruby 系统规格的冗余 `type: :system`，源文件校验因此失败。
+  后续候选已纳入该原生修复，等待对新提交重新验证。
+
+定向复验命令：
+
+```sh
 bin/qunit themes/isbf-campus-feed/test/integration/workbench-test.gjs
 bin/rspec themes/isbf-campus-feed/spec/requests/workbench_entries_spec.rb
 bin/rspec themes/isbf-campus-feed/spec/system/workbench_entries_spec.rb
 ```
 
-请求测试覆盖管理员保存、重读、清空、默认恢复、首次 sprite 请求和普通用户/moderator 写入拒绝。
-系统测试覆盖移动按钮边界、Enter 与焦点、预加载图标选择、保存重载、清空和默认恢复。
-恢复原生环境后使用 Ruby 3.4 与冻结锁要求的工具，串行执行测试和规定 lint/menus，
-再核实独立开发站归属及资源后执行其真实 `./dev theme-sync`。
 开发站需补充真实页面的两布局、两端、明暗及 390/430/600/601/768/1024/1440px、键盘和对比度验证。
 静态离线预览不替代原生表单、服务端权限、主题资源加载或真机验收。

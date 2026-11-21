@@ -1,8 +1,9 @@
 import { getOwner } from "@ember/owner";
-import { findAll, render, settled } from "@ember/test-helpers";
+import { findAll, render, settled, waitFor } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
 import { settings } from "virtual:theme";
+import { addExtraSpriteSymbols } from "discourse/lib/svg-sprite-loader";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import ISBFV2Workbench from "../../discourse/components/isbf-v2-workbench";
 
@@ -292,5 +293,26 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
     assert
       .dom(".isbf-workbench-grid__item:nth-child(2)")
       .hasAttribute("data-workbench-key", "mbti");
+  });
+
+  test("a saved icon replaces the fallback as soon as the sprite arrives", async function (assert) {
+    const icon = "isbf-test-late-workbench-icon";
+    const card = '[data-workbench-key="resume"]';
+    const mobileIcon = `${card} .isbf-workbench-grid__mobile-icon use`;
+    const glyph = `${card} .isbf-workbench-grid__glyph use`;
+    settings.workbench_entries = [{ key: "resume", icon }];
+
+    await render(<template><ISBFV2Workbench /></template>);
+    assert.dom(mobileIcon).hasAttribute("href", "#file-lines");
+
+    addExtraSpriteSymbols([{ id: icon, symbol: `<symbol id="${icon}" />` }]);
+    try {
+      await waitFor(`${glyph}[href="#${icon}"]`);
+      assert.dom(glyph).hasAttribute("href", `#${icon}`);
+      assert.dom(mobileIcon).hasAttribute("href", `#${icon}`);
+      assert.dom(card).hasAttribute("href", "/isbf/workbench/resume");
+    } finally {
+      document.getElementById(icon)?.remove();
+    }
   });
 });

@@ -34,7 +34,7 @@ module PageObjects
   end
 end
 
-RSpec.describe "Workbench entries in the native theme editor", type: :system do
+RSpec.describe "Workbench entries in the native theme editor" do
   fab!(:admin)
   fab!(:theme)
 

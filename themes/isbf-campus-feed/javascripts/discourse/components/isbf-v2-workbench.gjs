@@ -1,7 +1,9 @@
 import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
 import { service } from "@ember/service";
+import { modifier } from "ember-modifier";
 import { settings, themePrefix } from "virtual:theme";
-import { isExistingIconId } from "discourse/lib/icon-library";
+import { hasSpriteSymbol } from "discourse/lib/svg-sprite-loader";
 import { i18n } from "discourse-i18n";
 import { alumniConfig } from "../lib/alumni";
 import { careersConfig } from "../lib/careers";
@@ -18,8 +20,29 @@ export default class ISBFV2Workbench extends Component {
   @service site;
   @service siteSettings;
 
+  trackSprite = modifier((element) => {
+    const sprite = element.ownerDocument.getElementById("svg-sprites");
+    if (!sprite) {
+      return;
+    }
+
+    // The native sprite can finish loading after the workbench first renders.
+    const observer = new MutationObserver(() => {
+      this._spriteIcons = new Set(
+        Array.from(sprite.querySelectorAll("symbol[id]"), ({ id }) => id)
+      );
+    });
+    observer.observe(sprite, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  });
+
+  @tracked _spriteIcons;
+
   get cards() {
-    return mergeWorkbenchEntries(settings.workbench_entries, isExistingIconId)
+    return mergeWorkbenchEntries(
+      settings.workbench_entries,
+      (icon) => this._spriteIcons?.has(icon) ?? hasSpriteSymbol(icon)
+    )
       .filter(
         (card) =>
           (card.key !== "alumni" || alumniConfig(this.site)) &&
@@ -67,6 +90,7 @@ export default class ISBFV2Workbench extends Component {
       <section
         aria-label={{i18n (themePrefix "isbf_v2.workbench")}}
         class="isbf-v2-workbench__panel"
+        {{this.trackSprite}}
       >
         <ISBFWorkbenchGrid @cards={{this.cards}} />
       </section>
