@@ -125,6 +125,12 @@ Windows 开发工作区缺少 Ruby、Bundle 与 Docker。已授权主机上的�
 - 两套 `bin/lint --fix` 均修复了 Ruby 系统规格的冗余 `type: :system`，源文件校验因此失败。
   后续候选已纳入该原生修复，等待对新提交重新验证。
 
+候选 `d8ff5dcbb6f79f000082767326ae2897753e3cb8` 的两套原生 CI 各通过 6 项后台规格、
+39 项插件规格和 19 项 MBTI 浏览器规格。主题 QUnit 各通过 320/321，已选图标和首访资源晚到用例均通过。
+剩余 QUnit 断言把 grid 的画布计为入口。本次改按入口 key 比较功能关闭后重新开启的完整顺序、色板和图标。
+Ruby 请求规格已同步 CI 产物中的原生 Syntax Tree 格式。后续候选待检查通过后发布。
+[原生 CI](https://github.com/ISBF-Lab/ISBFweb/actions/runs/44888516821)
+
 定向复验命令：
 
 ```sh

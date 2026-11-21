@@ -258,6 +258,8 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
   });
 
   test("capabilities are checked after merging so re-enabled entries return to their configured positions", async function (assert) {
+    const visibleKeys = () =>
+      findAll("[data-workbench-key]").map((item) => item.dataset.workbenchKey);
     settings.workbench_entries = [
       { key: "library" },
       { key: "mbti", icon: "heart", tone: "violet" },
@@ -266,33 +268,26 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
     this.siteSettings.isbf_guides_enabled = true;
     await render(<template><ISBFV2Workbench /></template>);
     assert.dom('[data-workbench-key="mbti"]').doesNotExist();
-    assert.deepEqual(
-      findAll("[data-workbench-key]")
-        .slice(0, 2)
-        .map((item) => item.dataset.workbenchKey),
-      ["library", "guides"]
-    );
+    assert.deepEqual(visibleKeys().slice(0, 2), ["library", "guides"]);
+
     this.site.set("isbf_mbti", { enabled: true, path: "/isbf/mbti" });
     await settled();
-    assert.deepEqual(
-      findAll("[data-workbench-key]")
-        .slice(0, 3)
-        .map((item) => item.dataset.workbenchKey),
-      ["library", "mbti", "guides"]
-    );
+    const enabledOrder = visibleKeys();
+    assert.deepEqual(enabledOrder.slice(0, 3), ["library", "mbti", "guides"]);
+
+    this.site.set("isbf_mbti", null);
+    await settled();
+    assert.dom('[data-workbench-key="mbti"]').doesNotExist();
+
+    this.site.set("isbf_mbti", { enabled: true, path: "/isbf/mbti" });
+    await settled();
+    assert.deepEqual(visibleKeys(), enabledOrder);
     assert
       .dom('[data-workbench-key="mbti"]')
       .hasAttribute("data-workbench-palette", "violet");
     assert
       .dom('[data-workbench-key="mbti"] .isbf-workbench-grid__glyph use')
       .hasAttribute("href", "#heart");
-    this.site.set("isbf_mbti", null);
-    await settled();
-    this.site.set("isbf_mbti", { enabled: true, path: "/isbf/mbti" });
-    await settled();
-    assert
-      .dom(".isbf-workbench-grid__item:nth-child(2)")
-      .hasAttribute("data-workbench-key", "mbti");
   });
 
   test("a saved icon replaces the fallback as soon as the sprite arrives", async function (assert) {

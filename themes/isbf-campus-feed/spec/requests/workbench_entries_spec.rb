@@ -24,7 +24,10 @@ RSpec.describe Admin::ThemesController, type: :request do
       entries.first.merge!("icon" => "gas-pump", "tone" => "mint")
 
       put "/admin/themes/#{theme.id}/setting.json",
-          params: { name: "workbench_entries", value: entries.to_json }
+          params: {
+            name: "workbench_entries",
+            value: entries.to_json,
+          }
 
       expect(response.status).to eq(200)
       expect(response.parsed_body["workbench_entries"]).to eq(entries)
@@ -50,13 +53,19 @@ RSpec.describe Admin::ThemesController, type: :request do
 
       entries.first["icon"] = nil
       put "/admin/themes/#{theme.id}/setting.json",
-          params: { name: "workbench_entries", value: entries.to_json }
+          params: {
+            name: "workbench_entries",
+            value: entries.to_json,
+          }
 
       expect(response.status).to eq(200)
       expect(theme.reload.settings[:workbench_entries].value).to eq(entries)
 
       put "/admin/themes/#{theme.id}/setting.json",
-          params: { name: "workbench_entries", value: defaults.to_json }
+          params: {
+            name: "workbench_entries",
+            value: defaults.to_json,
+          }
 
       expect(response.status).to eq(200)
       expect(theme.reload.settings[:workbench_entries].value).to eq(defaults)
@@ -70,7 +79,10 @@ RSpec.describe Admin::ThemesController, type: :request do
       entries.first["icon"] = icon
 
       put "/admin/themes/#{theme.id}/setting.json",
-          params: { name: "workbench_entries", value: entries.to_json }
+          params: {
+            name: "workbench_entries",
+            value: entries.to_json,
+          }
 
       expect(response.status).to eq(200)
       expect(SvgSprite.all_icons(theme.id)).to include(icon)
@@ -87,7 +99,10 @@ RSpec.describe Admin::ThemesController, type: :request do
         original = defaults.deep_dup
 
         put "/admin/themes/#{theme.id}/setting.json",
-            params: { name: "workbench_entries", value: original.reverse.to_json }
+            params: {
+              name: "workbench_entries",
+              value: original.reverse.to_json,
+            }
 
         expect(response.status).to eq(404)
         expect(theme.reload.settings[:workbench_entries].value).to eq(original)
