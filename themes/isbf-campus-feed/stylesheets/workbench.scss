@@ -94,7 +94,10 @@
   }
 
   &__plate {
-    background: var(--isbf-workbench-custom-plate, var(--isbf-workbench-plate));
+    background: var(
+      --isbf-workbench-custom-plate,
+      var(--isbf-workbench-palette-plate, var(--isbf-workbench-plate))
+    );
     transform: translate(13%, -13%);
 
     .has-webgl & {
@@ -141,8 +144,12 @@
     .d-icon {
       inline-size: 100%;
       block-size: 100%;
-      fill: none;
+      fill: currentcolor;
       color: inherit;
+
+      &[fill="none"] {
+        fill: none;
+      }
     }
   }
 
@@ -167,13 +174,9 @@
     }
   }
 
-  [data-workbench-key="guides"] &__glyph .d-icon,
-  [data-workbench-key="guides"] &__mobile-icon .d-icon {
+  &__glyph .d-icon-isbf-workbench-guides,
+  &__mobile-icon .d-icon-isbf-workbench-guides {
     scale: 1.15;
-  }
-
-  [data-workbench-key="ai_assistant"] &__glyph .d-icon {
-    fill: currentcolor;
   }
 
   [data-workbench-tone="mint"] &__mobile-icon,
@@ -192,6 +195,47 @@
   [data-workbench-tone="indigo"] &__mobile-icon {
     background: color-mix(in srgb, #9480d8 19%, var(--isbf-v2-surface));
     color: #7965ba;
+  }
+
+  [data-workbench-palette="theme"] {
+    --isbf-workbench-palette-base: var(--isbf-v2-accent);
+    --isbf-workbench-palette-ratio: 15%;
+  }
+
+  [data-workbench-palette="mint"] {
+    --isbf-workbench-palette-base: #35b595;
+    --isbf-workbench-palette-ratio: 19%;
+  }
+
+  [data-workbench-palette="amber"] {
+    --isbf-workbench-palette-base: #e5a659;
+    --isbf-workbench-palette-ratio: 21%;
+  }
+
+  [data-workbench-palette="violet"] {
+    --isbf-workbench-palette-base: #9480d8;
+    --isbf-workbench-palette-ratio: 19%;
+  }
+
+  [data-workbench-palette]:not([data-workbench-palette=""]) {
+    --isbf-workbench-palette-plate: color-mix(
+      in srgb,
+      var(--isbf-workbench-palette-base) 92%,
+      var(--isbf-v2-surface)
+    );
+
+    .isbf-workbench-grid__mobile-icon {
+      background: color-mix(
+        in srgb,
+        var(--isbf-workbench-palette-base) var(--isbf-workbench-palette-ratio),
+        var(--isbf-v2-surface)
+      );
+      color: color-mix(
+        in srgb,
+        var(--isbf-workbench-palette-base) var(--isbf-workbench-palette-ratio),
+        var(--isbf-v2-text)
+      );
+    }
   }
 
   &__label {

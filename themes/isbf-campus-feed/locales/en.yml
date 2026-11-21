@@ -4,6 +4,19 @@ en:
     settings:
       brand_show_logo: "Show the logo from the native logo settings for the current layout and color mode."
       brand_show_name: "Show the platform name, with or without its logo. Turning both switches off hides the brand area."
+      workbench_entries:
+        description: "Workbench entries: use the move buttons to reorder entries, then choose built-in icons and preset palettes. Mobile and desktop share this configuration; save and refresh the workbench to apply it. Clear an icon or select the default palette to restore the original appearance. Disabled features retain their configuration and position. Missing entries are appended in the original order; the first duplicate key wins and unknown keys are ignored. Names, links, and permissions remain controlled by each feature."
+        schema:
+          properties:
+            key:
+              label: "Entry key"
+              description: "A stable feature identifier, not its display name. Keep one entry for each existing key; use the move buttons to change its position."
+            icon:
+              label: "Icon"
+              description: "Search currently available built-in icons shared by mobile and desktop in both layouts. Clear the selection to restore the entry's original icon."
+            tone:
+              label: "Preset palette"
+              description: "default: original appearance; theme: theme color; mint: mint green; amber: amber; violet: purple. Applies to the icon and background in traditional layouts and the backing plate in glass layouts. Desktop glass priority: per-entry exact color, selected palette, shared exact color, original color."
       workbench_layout_mobile:
         description: "Mobile workbench layout for everyone, independent of desktop. Choose the original flat entries or compact liquid glass."
         choices:
@@ -489,7 +502,7 @@ en:
     mbti_cleanup_failed: "This device could not clear its saved answers. Check your browser’s storage settings."
 
     preview_post: "View post"
-    official_inactive: 'Inactive: %{label}'
+    official_inactive: "Inactive: %{label}"
     pin: Pin
     pin_update: Adjust pin duration
     pin_cancel: Unpin

@@ -1,7 +1,9 @@
 import { getOwner } from "@ember/owner";
-import { findAll, render, settled } from "@ember/test-helpers";
+import { findAll, render, settled, waitFor } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
+import { settings } from "virtual:theme";
+import { addExtraSpriteSymbols } from "discourse/lib/svg-sprite-loader";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import ISBFV2Workbench from "../../discourse/components/isbf-v2-workbench";
 
@@ -44,6 +46,8 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
       Object.keys(configuration).map((name) => [name, this.site[name]])
     );
     this.previousResumeEnabled = this.siteSettings.isbf_resume_enabled;
+    this.previousWorkbenchEntries = settings.workbench_entries;
+    settings.workbench_entries = [];
     this.previousGuidesEnabled = this.siteSettings.isbf_guides_enabled;
     this.previousAssistant = getOwner(this).lookup(
       "service:current-user"
@@ -58,6 +62,7 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
     this.contextStub.restore();
     this.site.setProperties(this.previousConfiguration);
     this.siteSettings.isbf_resume_enabled = this.previousResumeEnabled;
+    settings.workbench_entries = this.previousWorkbenchEntries;
     this.siteSettings.isbf_guides_enabled = this.previousGuidesEnabled;
     getOwner(this)
       .lookup("service:current-user")
@@ -208,5 +213,101 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
       .set("forum_assistant", { enabled: true, configured: false });
     await render(<template><ISBFV2Workbench /></template>);
     assert.dom('[data-workbench-key="ai_assistant"]').doesNotExist();
+  });
+
+  test("saved order, icons, palettes and real links remain attached to their keys", async function (assert) {
+    settings.workbench_entries = [
+      { key: "resume", icon: "heart", tone: "mint" },
+      { key: "library", icon: "not-an-icon", tone: "amber" },
+      { key: "resume", icon: "star", tone: "violet" },
+      { key: "unknown" },
+    ];
+    await render(<template><ISBFV2Workbench /></template>);
+    assert.deepEqual(
+      findAll("[data-workbench-key]")
+        .slice(0, 3)
+        .map((item) => item.dataset.workbenchKey),
+      ["resume", "library", "learning_resources"]
+    );
+    assert
+      .dom('[data-workbench-key="resume"]')
+      .hasAttribute("href", "/isbf/workbench/resume");
+    assert
+      .dom('[data-workbench-key="resume"]')
+      .hasAttribute("data-workbench-palette", "mint");
+    assert
+      .dom('[data-workbench-key="resume"] .isbf-workbench-grid__glyph use')
+      .hasAttribute("href", "#heart");
+    assert
+      .dom(
+        '[data-workbench-key="resume"] .isbf-workbench-grid__mobile-icon use'
+      )
+      .hasAttribute("href", "#heart");
+    assert
+      .dom('[data-workbench-key="library"]')
+      .hasAttribute("href", "/isbf/library");
+    assert
+      .dom('[data-workbench-key="library"]')
+      .hasAttribute("data-workbench-palette", "amber");
+    assert
+      .dom(
+        '[data-workbench-key="library"] .isbf-workbench-grid__mobile-icon use'
+      )
+      .hasAttribute("href", "#database");
+    assert.dom('[data-workbench-key="unknown"]').doesNotExist();
+  });
+
+  test("capabilities are checked after merging so re-enabled entries return to their configured positions", async function (assert) {
+    const visibleKeys = () =>
+      findAll("[data-workbench-key]").map((item) => item.dataset.workbenchKey);
+    settings.workbench_entries = [
+      { key: "library" },
+      { key: "mbti", icon: "heart", tone: "violet" },
+      { key: "guides" },
+    ];
+    this.siteSettings.isbf_guides_enabled = true;
+    await render(<template><ISBFV2Workbench /></template>);
+    assert.dom('[data-workbench-key="mbti"]').doesNotExist();
+    assert.deepEqual(visibleKeys().slice(0, 2), ["library", "guides"]);
+
+    this.site.set("isbf_mbti", { enabled: true, path: "/isbf/mbti" });
+    await settled();
+    const enabledOrder = visibleKeys();
+    assert.deepEqual(enabledOrder.slice(0, 3), ["library", "mbti", "guides"]);
+
+    this.site.set("isbf_mbti", null);
+    await settled();
+    assert.dom('[data-workbench-key="mbti"]').doesNotExist();
+
+    this.site.set("isbf_mbti", { enabled: true, path: "/isbf/mbti" });
+    await settled();
+    assert.deepEqual(visibleKeys(), enabledOrder);
+    assert
+      .dom('[data-workbench-key="mbti"]')
+      .hasAttribute("data-workbench-palette", "violet");
+    assert
+      .dom('[data-workbench-key="mbti"] .isbf-workbench-grid__glyph use')
+      .hasAttribute("href", "#heart");
+  });
+
+  test("a saved icon replaces the fallback as soon as the sprite arrives", async function (assert) {
+    const icon = "isbf-test-late-workbench-icon";
+    const card = '[data-workbench-key="resume"]';
+    const mobileIcon = `${card} .isbf-workbench-grid__mobile-icon use`;
+    const glyph = `${card} .isbf-workbench-grid__glyph use`;
+    settings.workbench_entries = [{ key: "resume", icon }];
+
+    await render(<template><ISBFV2Workbench /></template>);
+    assert.dom(mobileIcon).hasAttribute("href", "#file-lines");
+
+    addExtraSpriteSymbols([{ id: icon, symbol: `<symbol id="${icon}" />` }]);
+    try {
+      await waitFor(`${glyph}[href="#${icon}"]`);
+      assert.dom(glyph).hasAttribute("href", `#${icon}`);
+      assert.dom(mobileIcon).hasAttribute("href", `#${icon}`);
+      assert.dom(card).hasAttribute("href", "/isbf/workbench/resume");
+    } finally {
+      document.getElementById(icon)?.remove();
+    }
   });
 });
