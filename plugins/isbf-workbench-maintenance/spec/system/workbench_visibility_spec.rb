@@ -34,11 +34,14 @@ RSpec.describe "Workbench maintenance in the campus theme" do
         theme.update_setting(:workbench_layout_mobile, mobile)
         theme.update_setting(:workbench_layout_desktop, desktop)
         theme.save!
-        page.current_window.resize_to(1440, 900)
         visit "/isbf/workbench"
 
         [390, 430, 600, 601, 768, 1024, 1440].each do |width|
-          page.current_window.resize_to(width, 900)
+          page.driver.with_playwright_page do |playwright_page|
+            playwright_page.set_viewport_size(width:, height: 900)
+          end
+          expect(page.evaluate_script("window.innerWidth")).to eq(width)
+
           layout = width <= 600 ? mobile : desktop
           expect(page).to have_css(%(.isbf-v2-workbench[data-workbench-layout="#{layout}"]))
           expect(page).to have_no_css(hidden_card)

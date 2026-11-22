@@ -26,7 +26,7 @@ RSpec.describe "Toggle workbench maintenance" do
     expect(toggle["aria-expanded"]).to eq("false")
     expect(page).to have_no_css("#isbf-workbench-maintenance-settings")
     toggle.send_keys(:enter)
-    expect(page).to have_css(".isbf-workbench-maintenance__toggle:focus")
+    expect(page).to have_css('.isbf-workbench-maintenance__toggle[aria-expanded="true"]:focus')
 
     expect(page).to have_css("#isbf-workbench-maintenance-settings .row.setting", count: 13)
     within('.isbf-workbench-maintenance [data-setting="isbf_workbench_pause_careers"]') do

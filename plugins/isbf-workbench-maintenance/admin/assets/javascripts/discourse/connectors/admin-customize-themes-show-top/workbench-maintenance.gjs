@@ -88,7 +88,7 @@ export default class WorkbenchMaintenance extends Component {
       >
         <DButton
           aria-controls="isbf-workbench-maintenance-settings"
-          aria-expanded={{this.expanded}}
+          aria-expanded={{if this.expanded "true" "false"}}
           class="btn-default isbf-workbench-maintenance__toggle"
           @action={{this.toggle}}
           @icon={{if this.expanded "angle-up" "angle-down"}}
