@@ -30,8 +30,11 @@ RSpec.describe "Toggle workbench maintenance" do
 
     expect(page).to have_css("#isbf-workbench-maintenance-settings .row.setting", count: 13)
     within('.isbf-workbench-maintenance [data-setting="isbf_workbench_pause_careers"]') do
-      expect(page).to have_css('input[type="checkbox"]:not(:checked)', visible: :all)
-      find('input[type="checkbox"]').send_keys(:space)
+      checkbox = find('input[type="checkbox"]:not(:checked)', visible: :all)
+      page.execute_script("arguments[0].focus()", checkbox)
+      expect(page).to have_css('input[type="checkbox"]:focus', visible: :all)
+      checkbox.send_keys(:space)
+      expect(page).to have_css('input[type="checkbox"]:checked', visible: :all)
       find(".setting-controls__ok").click
       expect(page).to have_no_css(".setting-controls__ok")
     end
@@ -40,7 +43,8 @@ RSpec.describe "Toggle workbench maintenance" do
     find(".isbf-workbench-maintenance__toggle").click
     within('.isbf-workbench-maintenance [data-setting="isbf_workbench_pause_careers"]') do
       expect(page).to have_css('input[type="checkbox"]:checked', visible: :all)
-      find('input[type="checkbox"]').uncheck
+      find("label.form-kit__control-checkbox-label").click
+      expect(page).to have_css('input[type="checkbox"]:not(:checked)', visible: :all)
       find(".setting-controls__ok").click
       expect(page).to have_no_css(".setting-controls__ok")
     end
