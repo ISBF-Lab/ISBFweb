@@ -24,7 +24,9 @@ RSpec.describe Admin::SiteSettingsController do
     get "/admin/site_settings.json", params: { names: [setting_name] }
 
     expect(response.status).to eq(200)
-    expect(response.parsed_body.fetch("site_settings").sole.fetch("value")).to eq("true")
+    setting =
+      response.parsed_body.fetch("site_settings").find { |item| item["setting"] == setting_name }
+    expect(setting).to include("value" => "true")
 
     put "/admin/site_settings/#{setting_name}.json", params: { setting_name => "false" }
 

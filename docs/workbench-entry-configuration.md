@@ -179,6 +179,10 @@ bin/rspec themes/isbf-campus-feed/spec/system/workbench_entries_spec.rb
 
 已获准的工作台设计继续沿用 [现有主题设计记录](design-system/reviews/workbench-entries-20261120/README.md)。后台沿用原生主题编辑扩展点及站点设置行。Linux 的 MBTI 兼容工作流还会验证 production-132 的主题基线。真实运行版本与隔离站同步须以发布前的重新核验为准。
 
+首轮 CI 对候选 `a2710fd6b888a01cbfe4f97543b8f7c99888b575` 完成 Linux 定向原生 lint、323 项主题 QUnit 和 5913 文件的菜单扫描。菜单零发现。七条工作流中五条通过。插件回归与工作台联测分别报告 4 项和 7 项请求失败，本轮新增的后台与布局浏览器规格等候复验。[前端 CI](https://github.com/ISBF-Lab/ISBFweb/actions/runs/45003306924) · [插件回归](https://github.com/ISBF-Lab/ISBFweb/actions/runs/45003306877) · [工作台联测](https://github.com/ISBF-Lab/ISBFweb/actions/runs/45003306959)
+
+复验候选在 HTML 外壳渲染前检查课程资源和资料库的停用值，并让镜像的直接下载进入原有鉴权与文件响应。请求规格按名称读取原生设置，业务测试替身完整实现门禁方法。招聘、商城和组队的独立 CI 采用同一 Ruby 3.4 镜像，保留各自的 Core 版本。联测固定到更新后的插件提交，并在隔离数据库和浏览器资产就绪后记录浏览器结果。
+
 ### 发布与回退
 
 1. 核对主 PR 和各独立 PR 的精确提交、完整检查与未解决审查。记录用户授权、本次服务端候选和活动主题来源。

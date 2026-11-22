@@ -10,6 +10,7 @@ module IsbfLibrary
     wrap_parameters false
     requires_login
     requires_plugin "isbf-learning"
+    prepend_before_action :ensure_workbench_available
     before_action :check_category
 
     def page
@@ -159,8 +160,11 @@ module IsbfLibrary
       render_json_error(I18n.t("isbf_library.directory_storage_error"), status: 422)
     end
 
-    def check_category
+    def ensure_workbench_available
       IsbfLibrary.ensure_workbench_available!
+    end
+
+    def check_category
       category = Category.find_by(id: IsbfLibrary.category_id)
       unless IsbfLibrary.enabled? && category && guardian.can_see_category?(category)
         raise Discourse::InvalidAccess

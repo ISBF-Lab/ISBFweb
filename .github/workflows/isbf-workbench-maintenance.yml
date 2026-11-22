@@ -47,19 +47,19 @@ jobs:
       - uses: actions/checkout@v7
         with:
           repository: ISBF-Lab/ISBF-Careers
-          ref: 2b8043cf706b4552e5b593ef61a5b2fe85b74b1d
+          ref: ee5510cdc97eaf7b04b5b1d7706e1d1841b3263a
           path: plugins/isbf-careers
           persist-credentials: false
       - uses: actions/checkout@v7
         with:
           repository: ISBF-Lab/ISBF-Teamup
-          ref: e4a64b7471af2ef7806b9204eaf7c65df022108e
+          ref: df2dff2f11c435a9968c97e21027fd210f2e4821
           path: plugins/isbf-teamup
           persist-credentials: false
       - uses: actions/checkout@v7
         with:
           repository: ISBF-Lab/ISBF-Marketplace
-          ref: ac5abf2588beda1b7a1ea0a7b13f4f728afa590f
+          ref: 62c811a038b951277aea5bc2c8d73fe6e25c1d70
           path: plugins/isbf-marketplace
           persist-credentials: false
       - uses: actions/checkout@v7
@@ -71,7 +71,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           repository: ISBF-Lab/ISBF-Learning
-          ref: 08f829749275c9cb03a81759ceaaef4e8e1a9d24
+          ref: 3b90c43bdc1c76c13cd26c9694a6746e5583f8fe
           path: tmp/workbench-plugins/learning
           persist-credentials: false
 
@@ -103,6 +103,7 @@ jobs:
           git diff --exit-code -- "${files[@]}" Gemfile Gemfile.lock pnpm-lock.yaml
 
       - name: Load the official Learning candidate and migrate the synthetic database
+        id: database
         run: |
           mv plugins/isbf-learning tmp/workbench-plugins/learning-mirror
           mv tmp/workbench-plugins/learning plugins/isbf-learning
@@ -126,6 +127,8 @@ jobs:
             | tee tmp/workbench-results/requests.log
 
       - name: Prepare browser assets and Chromium
+        id: browser_assets
+        if: ${{ !cancelled() && steps.database.outcome == 'success' }}
         run: |
           pnpm playwright-install
           script/assemble_ember_build.rb
@@ -135,6 +138,7 @@ jobs:
           echo "DBUS_SESSION_BUS_ADDRESS=$isbf_bus_address" >> "$GITHUB_ENV"
 
       - name: Native administrator and workbench browser regression
+        if: ${{ !cancelled() && steps.browser_assets.outcome == 'success' }}
         run: |
           bin/rspec plugins/isbf-workbench-maintenance/spec/system \
             themes/isbf-campus-feed/spec/system/workbench_entries_spec.rb \

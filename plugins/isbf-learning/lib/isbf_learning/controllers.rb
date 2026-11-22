@@ -10,7 +10,9 @@ module IsbfLearning
     wrap_parameters false
     requires_login
     requires_plugin "isbf-learning"
+    prepend_before_action :ensure_workbench_available
     before_action :check_category
+    skip_before_action :preload_json, :check_xhr, only: :download
 
     def page
       render html: "".html_safe, layout: "application"
@@ -176,8 +178,11 @@ module IsbfLearning
 
     private
 
-    def check_category
+    def ensure_workbench_available
       IsbfLearning.ensure_workbench_available!
+    end
+
+    def check_category
       category = Category.find_by(id: IsbfLearning.category_id)
       raise Discourse::InvalidAccess unless category && guardian.can_see_category?(category)
     end

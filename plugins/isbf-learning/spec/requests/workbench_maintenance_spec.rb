@@ -13,8 +13,9 @@ RSpec.describe "Independent workbench resource maintenance", type: :request do
   around do |example|
     maintenance = Module.new
     paused = paused_keys
+    maintenance.define_singleton_method(:paused?) { |key| paused.include?(key.to_s) }
     maintenance.define_singleton_method(:ensure_available!) do |key|
-      raise Discourse::NotFound if paused.include?(key.to_s)
+      raise Discourse::NotFound if paused?(key)
     end
     stub_const(Object, :IsbfWorkbenchMaintenance, maintenance) { example.run }
   end
