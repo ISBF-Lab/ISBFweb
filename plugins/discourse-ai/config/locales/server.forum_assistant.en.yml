@@ -31,8 +31,16 @@ en:
         busy: "An answer is already being generated for your account. Please wait or stop it first."
         daily_limit: "You have reached today's question limit. Check the assistant page for the reset time."
         global_limit: "The forum assistant has reached today's site-wide limit. Please try again after the daily reset."
+      sources:
+        courses: "Course resources"
+        library: "Resource library"
       replies:
         refused: "I can help with this forum's posts, how to use the forum, and finding workbench resources. Please ask a question within that scope."
         clarify: "Which forum topic, feature, course or resource would you like help finding? Please add its name or a few details."
-        not_found: "I couldn't find relevant information in the forum content available to your account. Try a specific course, file or topic name, or visit [forum search](/search) and [usage guides](/guides)."
+        not_found: "I couldn't find a matching post. Try [forum search](%{search_url}) or give me another name or keyword."
+        resources_not_found: "I couldn't find that resource. Browse %{links}, or try the course or file name."
+        overview: "You can browse these collections for the full list. Here are some directories and examples."
+        overview_directories: "Directories include %{names}."
+        overview_examples: "Example resources"
+        sources_found: "I found these sources on the site."
         unavailable: "The assistant couldn't finish this request. Your personal daily question allowance has been restored. Please try again later."

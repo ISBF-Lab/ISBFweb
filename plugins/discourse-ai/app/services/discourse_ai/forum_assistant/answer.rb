@@ -18,6 +18,7 @@ module DiscourseAi
       only_if(:out_of_scope?) { step :record_violation }
       only_if(:allowed?) do
         model :evidence
+        policy :request_active
         only_if(:has_evidence?) { step :stream_answer }
         only_if(:no_evidence?) { step :report_not_found }
       end
@@ -97,18 +98,18 @@ module DiscourseAi
         request.finish!("completed")
       end
 
-      def report_not_found(request:)
-        Responder.new(request).publish("not_found")
+      def report_not_found(request:, decision:, evidence:)
+        Responder.new(request).publish("not_found", decision:, evidence:)
         request.finish!("not_found", reason: "no_sources")
       end
 
       def refuse_question(request:, decision:)
-        Responder.new(request).publish("refused")
+        Responder.new(request).publish("refused", decision:)
         request.finish!("refused", reason: decision.reason)
       end
 
-      def clarify_question(request:)
-        Responder.new(request).publish("clarify")
+      def clarify_question(request:, decision:)
+        Responder.new(request).publish("clarify", decision:)
         request.finish!("clarified", reason: "ambiguous")
       end
     end

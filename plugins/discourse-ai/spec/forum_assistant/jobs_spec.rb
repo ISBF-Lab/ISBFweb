@@ -87,6 +87,71 @@ RSpec.describe Jobs::CreateAiForumAssistantReply do
       SearchIndexer.disable
     end
 
+    context "when the latest question is Chinese" do
+      let(:question_raw) { "微观经济学有哪些资料？" }
+
+      it "publishes Chinese citations when the model emits an English answer" do
+        SiteSetting.search_tokenize_chinese = true
+        SearchIndexer.enable
+        topic = Fabricate(:topic, title: "微观经济学课程和复习资料浏览指南")
+        source = Fabricate(:post, topic: topic, raw: "微观经济学 课程讨论。")
+        classification = {
+          action: "allow",
+          intent: "forum",
+          query: "微观经济学",
+          reason: "forum_question",
+          language: "zh-CN",
+        }.to_json
+        english_prose = "The forum has a discussion on this subject."
+        english_answer = "#{english_prose}\n\n[#{topic.title}](#{source.relative_url})"
+
+        updates =
+          DiscourseAi::Completions::Llm.with_prepared_responses(
+            [classification, english_answer],
+            llm: llm_model,
+          ) do |gateway|
+            messages =
+              MessageBus.track_publish("discourse-ai/ai-bot/topic/#{conversation.id}") { execution }
+            expect(gateway.completions).to eq(2)
+            messages
+          end
+
+        expect(accepted_request.reload.status).to eq("completed")
+        expect(accepted_request.reply_post.raw).to include(source.relative_url)
+        expect(accepted_request.reply_post.raw).to match(/\p{Han}/)
+        expect(accepted_request.reply_post.raw).not_to include(english_prose)
+        expect(updates).to be_present
+        expect(updates.map(&:data).to_json).not_to include(english_prose)
+      ensure
+        SearchIndexer.disable
+      end
+    end
+
+    it "uses English for an English question after a Chinese question in the same conversation" do
+      previous = PostCreator.create!(member, topic_id: conversation.id, raw: "请问论坛有什么复习资料？")
+      AiForumAssistantRequest.find_by!(post_id: previous.id).finish!("completed")
+      SearchIndexer.enable
+      source = Fabricate(:post, raw: "Quartzpilot revision notes are available in this discussion.")
+      classification = {
+        action: "allow",
+        intent: "forum",
+        query: "quartzpilot",
+        reason: "forum_question",
+        language: "en",
+      }.to_json
+      english_answer = "See the [discussion](#{source.relative_url}) for the revision notes."
+
+      DiscourseAi::Completions::Llm.with_prepared_responses(
+        [classification, english_answer],
+        llm: llm_model,
+      ) { execution }
+
+      expect(accepted_request.reload.status).to eq("completed")
+      expect(accepted_request.reply_post.raw).to eq(english_answer)
+    ensure
+      SearchIndexer.disable
+    end
+
     it "refuses execution when the question's author loses access before the job runs" do
       accepted_request
       conversation.topic_allowed_users.where(user_id: member.id).delete_all

@@ -31,8 +31,16 @@ zh_CN:
         busy: "你的账号已有一个回答正在生成，请等待完成或先停止生成。"
         daily_limit: "你今天的提问额度已用完，请在助手页面查看重置时间。"
         global_limit: "论坛助手今天的全站额度已用完，请在每日重置后再试。"
+      sources:
+        courses: "课程资源"
+        library: "资料库"
       replies:
         refused: "我可以回答本论坛帖子、论坛使用问题，并帮助查找工作台资料。请围绕这些内容提问。"
         clarify: "你想查找哪个论坛话题、功能、课程或资料？请补充名称或相关信息。"
-        not_found: "在你当前有权查看的论坛内容中，没有找到相关信息。可以补充课程名、文件名或话题关键词，也可以前往[论坛搜索](/search)或[使用指南](/guides)查找。"
+        not_found: "我没找到相关帖子。你可以换个关键词，或在[论坛搜索](%{search_url})里继续查找。"
+        resources_not_found: "我没找到这份资料。可以从%{links}浏览，也可以试试课程名或文件名。"
+        overview: "以下是可浏览的目录入口和部分示例。点击栏目名称可以查看完整列表。"
+        overview_directories: "目录包括 %{names}。"
+        overview_examples: "资料示例"
+        sources_found: "我找到了这些站内来源："
         unavailable: "这次请求未能完成，已归还你的个人每日提问额度，请稍后重试。"

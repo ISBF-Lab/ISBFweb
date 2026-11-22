@@ -8,11 +8,21 @@ history and composer. Its native header chat and avatar entries are removed.
 
 ## Policy and limits
 
-Every question is classified before generation. General chat, homework, code
-generation, translation, external actions and anonymous-author identification are
-outside the supported scope. Retrieval applies the user's Guardian permissions;
-attachment contents and external pages are not fetched. The server owns model and
-agent selection. Conversation APIs expose only the owner's forum conversations.
+Every question is classified before retrieval. Concrete site questions can use a
+subject or event name without adding “on the forum”. Search tries the original
+subject and a bounded number of aliases. Replies cite useful matches when the
+sources cover the topic but omit a detail the user asked for. General chat,
+homework, code generation, translation, external actions and anonymous-author
+identification are outside the supported scope.
+
+Course resources and the resource library use their existing catalogue and
+published-topic permissions. The assistant searches course or group names,
+categories, titles, descriptions and stored filenames. Resource citations point to
+site entries. Catalogue overviews list a sample and link to the full collections.
+Attachment contents and external pages are not fetched. The server owns model and
+agent selection, and conversation APIs expose only the owner's conversations.
+Replies follow the current question's language. If a Chinese answer starts in
+another language, the assistant displays the authorized sources in Chinese.
 
 Defaults are 20 questions per account per day, three attempts per minute, one
 active request per account and 1,000 accepted requests per site per day. Five clear

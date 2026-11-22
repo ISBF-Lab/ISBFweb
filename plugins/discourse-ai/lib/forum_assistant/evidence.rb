@@ -23,6 +23,10 @@ module DiscourseAi
         原帖
         原帖链接
         链接
+        资料
+        课程资料
+        课程资源
+        资料库
         获取
         查看
         查找
@@ -32,27 +36,47 @@ module DiscourseAi
         about
       ].freeze
 
-      attr_reader :sources
+      attr_reader :sources, :query
 
       def initialize(user:, decision:)
-        @user = user
         @guardian = user.guardian
         @decision = decision
-        @query = decision.query.gsub(/[^\p{L}\p{N}\s_-]/u, " ").squish.first(200)
+        @query = normalize(decision.query)
+        @locale = ReplyLanguage.translation_locale(decision.locale || user.effective_locale)
+        @resources = ResourceEvidence.new(guardian: @guardian, locale: @locale)
         @sources = []
       end
 
       def retrieve
-        return self if @query.blank?
-        add_assistant_help if @decision.intent == "help"
-        add_guides if @decision.intent == "help"
-        add_posts
+        case @decision.intent
+        when "resource_overview"
+          @sources = @resources.overview(@decision.resource_scope)
+        when "resources"
+          @sources = @resources.search(queries: search_queries, scope: @decision.resource_scope)
+        else
+          if @decision.intent == "help"
+            add_assistant_help
+            add_guides
+          end
+          add_posts
+          if @sources.empty? && @decision.intent == "forum"
+            @sources = @resources.search(queries: search_queries, scope: "both")
+          end
+        end
         trim_sources
         self
       end
 
       def references
         sources.map { |source| source.slice(:kind, :id) }
+      end
+
+      def resource_entries
+        @resources.entries(@decision.resource_scope)
+      end
+
+      def resource_question?
+        %w[resources resource_overview].include?(@decision.intent)
       end
 
       private
@@ -62,12 +86,13 @@ module DiscourseAi
         @sources << {
           kind: "assistant_help",
           id: 0,
-          title: I18n.t("discourse_ai.forum_assistant.help_title"),
+          title: I18n.t("discourse_ai.forum_assistant.help_title", locale: @locale),
           url: "/discourse-ai/ai-bot/conversations",
           authority: "official",
           content:
             I18n.t(
               "discourse_ai.forum_assistant.help_text",
+              locale: @locale,
               daily: SiteSetting.ai_forum_assistant_daily_limit,
               minute: SiteSetting.ai_forum_assistant_questions_per_minute,
               timezone: SiteSetting.ai_forum_assistant_timezone,
@@ -109,37 +134,56 @@ module DiscourseAi
       end
 
       def add_posts
-        count = @sources.length
-        add_search_results(@query)
-        if @sources.length == count
-          searchable_terms
-            .sort_by { |term| -term.length }
-            .first(Configuration::MAX_FALLBACK_SEARCHES)
-            .each do |term|
-              next if term == @query
-              add_search_results(term)
-              break if @sources.length >= Configuration::MAX_SOURCE_COUNT
-            end
+        search_queries.each do |phrase|
+          break if @sources.length >= Configuration::MAX_SOURCE_COUNT
+          add_search_results(phrase)
         end
       end
 
-      def searchable_terms
-        terms = @query.split.uniq.reject { |term| SEARCH_CONTEXT_TERMS.include?(term.downcase) }
-        terms
+      def searchable_terms(phrase = @query)
+        phrase.split.uniq.reject { |term| SEARCH_CONTEXT_TERMS.include?(term.downcase) }
       end
 
-      def add_search_results(query)
-        result = ::Search.new(query, guardian: @guardian, search_type: :full_page).execute
+      def normalize(phrase)
+        phrase.unicode_normalize(:nfkc).gsub(/[^\p{L}\p{M}\p{N}.\s_-]/u, " ").squish.first(200)
+      end
+
+      def search_queries
+        alternatives = @decision.alternatives.map { |phrase| normalize(phrase) }
+        [@query, *alternatives, *searchable_terms.sort_by { |term| -term.length }].map do |phrase|
+            searchable_terms(phrase).join(" ")
+          end
+          .select { |phrase| phrase.match?(/[\p{L}\p{N}]/) }
+          .uniq
+          .first(1 + Configuration::MAX_FALLBACK_SEARCHES)
+      end
+
+      def add_search_results(phrase)
+        # The general search minimum can discard Chinese names and nicknames after segmentation.
+        result =
+          ::Search.new(
+            phrase,
+            guardian: @guardian,
+            search_type: :full_page,
+            min_search_term_length: (1 if phrase.match?(/\A\p{Han}{2,}\z/)),
+          ).execute(readonly_mode: true)
         return if !result || result.error
         result
           .posts
           .first(30)
           .each do |post|
             next unless visible_post?(post)
-            resource = resource_for(post.topic)
-            if resource
-              @sources << resource
-            elsif @decision.intent != "resources"
+            catalog = @resources.catalog_for(post.topic)
+            if catalog
+              if @sources.any? { |source|
+                   source[:kind] == "resource" && source[:id] == post.topic_id
+                 }
+                next
+              end
+              resource = @resources.for_topic(catalog, post.topic)
+              @sources << resource if resource
+            else
+              next if @sources.any? { |source| source[:kind] == "post" && source[:id] == post.id }
               @sources << {
                 kind: "post",
                 id: post.id,
@@ -150,6 +194,7 @@ module DiscourseAi
                 updated_at: post.updated_at,
               }
             end
+            break if @sources.length >= Configuration::MAX_SOURCE_COUNT
           end
       end
 
@@ -158,28 +203,6 @@ module DiscourseAi
           post.post_type == Post.types[:regular] && !post.hidden? && !post.user_deleted &&
           !post.deleted_at && @guardian.can_see_post?(post) &&
           !(defined?(::IsbfModeration::Hold) && ::IsbfModeration::Hold.persisted?(post))
-      end
-
-      def resource_for(topic)
-        library =
-          if defined?(::IsbfLibrary) && ::IsbfLibrary.learning_topic?(topic)
-            ::IsbfLibrary
-          elsif defined?(::IsbfLearning) && ::IsbfLearning.learning_topic?(topic)
-            ::IsbfLearning
-          end
-        return unless library&.enabled?
-        resource = library.resource(topic, @guardian)
-        return unless resource
-        metadata =
-          resource.slice(:title, :description, :grade, :course, :category, :group, :files, :links)
-        {
-          kind: "resource",
-          id: topic.id,
-          title: resource[:title],
-          url: resource[:url],
-          content: metadata.to_json,
-          updated_at: topic.updated_at,
-        }
       end
 
       def trim_sources
@@ -192,7 +215,7 @@ module DiscourseAi
           source[:content] = source[:content].first([remaining, 3000].min)
           remaining -= source[:content].length
         end
-        @sources.reject! { |source| source[:content].blank? }
+        @sources.reject! { |source| source[:content].blank? && source[:kind] != "resource_catalog" }
       end
     end
   end
