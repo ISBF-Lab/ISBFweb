@@ -179,6 +179,12 @@
     scale: 1.15;
   }
 
+  [data-workbench-key="ai_assistant"] &__glyph .d-icon-discobot,
+  [data-workbench-key="ai_assistant"] &__mobile-icon .d-icon-discobot {
+    fill: currentcolor;
+    scale: 1.15;
+  }
+
   [data-workbench-tone="mint"] &__mobile-icon,
   [data-workbench-tone="teal"] &__mobile-icon {
     background: color-mix(in srgb, #35b595 19%, var(--isbf-v2-surface));

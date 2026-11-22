@@ -214,6 +214,9 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
       .dom('[data-workbench-key="ai_assistant"]')
       .hasAttribute("href", "/discourse-ai/ai-bot/conversations");
     assert
+      .dom('[data-workbench-key="ai_assistant"] .d-icon-discobot')
+      .exists({ count: 2 });
+    assert
       .dom(".isbf-workbench-grid__item:last-child")
       .hasAttribute("data-workbench-key", "guides");
     assert

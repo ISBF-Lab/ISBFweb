@@ -19,13 +19,8 @@ RSpec.shared_context "with a configured forum assistant" do
 
   let(:bot_user) { llm_model.reload.user }
   let(:conversation) { Fabricate(:private_message_topic, user: member, recipient: bot_user) }
-  let(:question) do
-    PostCreator.create!(
-      member,
-      topic_id: conversation.id,
-      raw: "Where can I find quartzpilot resources in this forum?",
-    )
-  end
+  let(:question_raw) { "Where can I find quartzpilot resources in this forum?" }
+  let(:question) { PostCreator.create!(member, topic_id: conversation.id, raw: question_raw) }
   let(:accepted_request) { AiForumAssistantRequest.find_by!(post_id: question.id) }
   let(:observe_rate_limits) { false }
 

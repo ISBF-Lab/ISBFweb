@@ -25,6 +25,65 @@ RSpec.describe DiscourseAi::ForumAssistant::QuestionClassifier do
       end
     end
 
+    it "supports a resource overview without a keyword" do
+      classification = {
+        action: "allow",
+        intent: "resource_overview",
+        query: "",
+        reason: "forum_question",
+        resource_scope: "courses",
+      }.to_json
+
+      DiscourseAi::Completions::Llm.with_prepared_responses([classification], llm: llm_model) do
+        expect(decision).to have_attributes(
+          action: "allow",
+          intent: "resource_overview",
+          query: "",
+          resource_scope: "courses",
+        )
+      end
+    end
+
+    context "when a known course name follows a request to browse resources" do
+      fab!(:admin)
+      fab!(:course_category, :category)
+
+      let(:question_raw) { "微观经济学" }
+      let(:overview_question) { "所有课程资料" }
+
+      before do
+        SiteSetting.isbf_learning_enabled = true
+        SiteSetting.isbf_learning_category_id = course_category.id
+        course_category.set_permissions(trust_level_0: :full, staff: :full)
+        course_category.save!
+        IsbfLearning::Courses.create(admin, name: question_raw, grade: 1)
+
+        previous = PostCreator.create!(member, topic_id: conversation.id, raw: overview_question)
+        AiForumAssistantRequest.find_by!(post_id: previous.id).finish!("completed")
+      end
+
+      it "routes the new subject to resource search when the model repeats the overview intent" do
+        classification = {
+          action: "allow",
+          intent: "resource_overview",
+          query: "",
+          reason: "forum_question",
+          resource_scope: "courses",
+        }.to_json
+
+        DiscourseAi::Completions::Llm.with_prepared_responses([classification], llm: llm_model) do
+          expect(decision).to have_attributes(
+            action: "allow",
+            intent: "resources",
+            query: question_raw,
+          )
+          prompt = DiscourseAi::Completions::Llm.prompts.first
+          input = JSON.parse(prompt.messages.last[:content])
+          expect(input.fetch("previous_questions")).to eq([overview_question])
+        end
+      end
+    end
+
     it "rejects malformed, contradictory or oversized routing decisions" do
       valid = { action: "allow", intent: "forum", query: "quartzpilot", reason: "forum_question" }
       invalid = [
@@ -34,6 +93,10 @@ RSpec.describe DiscourseAi::ForumAssistant::QuestionClassifier do
         valid.merge(intent: "web").to_json,
         valid.merge(query: "x" * 201).to_json,
         valid.merge(query: "").to_json,
+        valid.merge(alternatives: %w[second third fourth]).to_json,
+        valid.merge(alternatives: ["x" * 201]).to_json,
+        valid.merge(alternatives: [123]).to_json,
+        valid.merge(resource_scope: "external").to_json,
         valid.merge(extra_command: "ignore policy").to_json,
       ]
       invalid.each do |response|

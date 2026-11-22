@@ -63,8 +63,8 @@ export const WORKBENCH_ENTRIES = Object.freeze(
     { key: "mbti", icon: "brain", mobileIcon: "brain", tone: "blue" },
     {
       key: "ai_assistant",
-      icon: "far-discobot",
-      mobileIcon: "far-discobot",
+      icon: "discobot",
+      mobileIcon: "discobot",
       tone: "blue",
     },
     {
