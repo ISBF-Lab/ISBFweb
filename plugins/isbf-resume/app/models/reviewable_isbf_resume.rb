@@ -32,6 +32,7 @@ class ReviewableIsbfResume < Reviewable
   end
 
   def update_fields(params, performed_by, version: nil)
+    ensure_workbench_available!
     raise Discourse::InvalidAccess unless editable_resume?(performed_by.guardian)
     updates = params[:payload]
     raise Discourse::InvalidParameters.new(:payload) unless updates.respond_to?(:each_pair)
@@ -92,6 +93,10 @@ class ReviewableIsbfResume < Reviewable
 
   private
 
+  def ensure_workbench_available!
+    ::IsbfWorkbenchMaintenance.ensure_available!("resume") if defined?(::IsbfWorkbenchMaintenance)
+  end
+
   def editable_resume?(guardian)
     (pending? || approved?) && can_review_target?(guardian) && shared_resume.status == status
   end
@@ -101,6 +106,7 @@ class ReviewableIsbfResume < Reviewable
   end
 
   def review_resume(performed_by, decision, args)
+    ensure_workbench_available!
     shared_resume.review!(
       reviewer: performed_by,
       decision: decision,

@@ -12,6 +12,7 @@ module DiscourseAi
       # already rendered that HTML, so it only guards the conversation list.
       requires_login except: %i[index]
       before_action :ensure_logged_in, only: %i[index]
+      prepend_before_action :ensure_workbench_available
 
       def index
         ListConversations.call(service_params) do
@@ -62,6 +63,19 @@ module DiscourseAi
       end
 
       private
+
+      def ensure_workbench_available
+        configuration = DiscourseAi::ForumAssistant::Configuration
+        return unless configuration.paused?
+        if action_name == "index" && configuration.restricted?(current_user)
+          configuration.ensure_available!
+        elsif action_name == "create"
+          DiscourseAi::ForumAssistant::Policy.ensure_target_available!(
+            agent_id: params[:ai_agent_id],
+            target_user: User.find_by(username_lower: params[:target_username].to_s.downcase),
+          )
+        end
+      end
 
       def create_params
         bot_user = find_bot_user!

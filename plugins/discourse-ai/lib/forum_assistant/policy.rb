@@ -23,7 +23,7 @@ module DiscourseAi
       end
 
       def self.managed_topic?(topic)
-        return false unless Configuration.enforced?
+        return false unless Configuration.enforced? || Configuration.paused?
         return false unless topic&.private_message?
         agent_id = topic.custom_fields["ai_agent_id"]
         return agent_id.to_i == SiteSetting.ai_forum_assistant_agent.to_i if agent_id.present?
@@ -34,7 +34,37 @@ module DiscourseAi
       def self.applies_to_post?(post)
         return false unless post.user_id&.positive? && ai_topic?(post.topic)
         Configuration.restricted?(post.user) ||
-          (Configuration.enabled? && managed_topic?(post.topic))
+          ((Configuration.enabled? || Configuration.paused?) && managed_topic?(post.topic))
+      end
+
+      def self.ensure_target_available!(agent_id:, target_user:)
+        return unless Configuration.paused?
+        assistant_target =
+          if agent_id.present?
+            configured_agent_id = SiteSetting.ai_forum_assistant_agent.to_i
+            configured_agent_id.positive? && agent_id.to_i == configured_agent_id
+          else
+            target_user && target_user.id == Configuration.bot_user&.id
+          end
+        Configuration.ensure_available! if assistant_target
+      end
+
+      def self.ensure_options_available!(options)
+        return unless Configuration.paused?
+        topic = Topic.find_by(id: options[:topic_id]) if options[:topic_id].present?
+        Configuration.ensure_available! if managed_topic?(topic)
+        return unless options[:archetype] == Archetype.private_message
+
+        fields =
+          (
+            options.dig(:topic_opts, :custom_fields) || options[:custom_fields] || {}
+          ).with_indifferent_access
+        names = options[:target_usernames].to_s.split(",").map { |name| name.strip.downcase }
+        ids = Array(options[:target_user_ids]).map(&:to_i)
+        bot_user = Configuration.bot_user
+        target_user = bot_user if bot_user &&
+          (names.include?(bot_user.username_lower) || ids.include?(bot_user.id))
+        ensure_target_available!(agent_id: fields[:ai_agent_id], target_user: target_user)
       end
 
       def self.pending_question?(options)
@@ -62,6 +92,7 @@ module DiscourseAi
       end
 
       def self.validate_question!(post)
+        Configuration.ensure_available!
         raise Rejected.new(:unavailable) unless Configuration.available?
         unless authorized_conversation?(post.topic, post.user) &&
                  post.post_type == Post.types[:regular]

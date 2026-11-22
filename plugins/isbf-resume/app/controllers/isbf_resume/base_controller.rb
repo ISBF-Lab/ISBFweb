@@ -8,6 +8,7 @@ module IsbfResume
     private
 
     def ensure_resume_access
+      ::IsbfWorkbenchMaintenance.ensure_available!("resume") if defined?(::IsbfWorkbenchMaintenance)
       raise Discourse::NotFound unless SiteSetting.isbf_resume_enabled
       raise Discourse::InvalidAccess unless guardian.can_generate_isbf_resume?
     end

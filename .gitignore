@@ -46,6 +46,7 @@
 !/plugins/isbf-repost
 !/plugins/isbf-resume
 !/plugins/isbf-views
+!/plugins/isbf-workbench-maintenance
 !/plugins/discourse-details
 !/plugins/discourse-local-dates
 !/plugins/discourse-narrative-bot

@@ -273,6 +273,7 @@ zh_CN:
     reading_progress: "阅读进度"
     back_home: "返回首页"
     workbench: "工作台"
+    workbench_empty: "暂无可用入口"
     workbench_pending: "即将开放"
     workbench_intro: "你在校园生活中常用的工具，将陆续汇集于此。"
     workbench_modules: "未来服务"

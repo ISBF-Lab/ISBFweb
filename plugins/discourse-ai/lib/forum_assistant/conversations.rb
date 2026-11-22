@@ -7,7 +7,7 @@ module DiscourseAi
 
       def self.for_user(user)
         topics = Topic.private_messages_for_user(user).where(user_id: user.id)
-        return topics.none unless Configuration.enforced?
+        return topics.none unless Configuration.enforced? || Configuration.paused?
 
         agent_topics =
           TopicCustomField.where(

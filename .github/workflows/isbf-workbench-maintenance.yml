@@ -1,0 +1,155 @@
+name: Workbench maintenance integration
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/isbf-workbench-maintenance.yml"
+      - "plugins/discourse-ai/**"
+      - "plugins/isbf-guides/**"
+      - "plugins/isbf-learning/**"
+      - "plugins/isbf-mbti/**"
+      - "plugins/isbf-resume/**"
+      - "plugins/isbf-workbench-maintenance/**"
+      - "themes/isbf-campus-feed/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: isbf-workbench-maintenance-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  workbench:
+    runs-on: ubuntu-latest
+    container: discourse/discourse_test@sha256:94eca5318fed6171264b95204914de76a113c305cebb72d9fa9527e2c4496494
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+    env:
+      RAILS_ENV: test
+      PGUSER: discourse
+      PGPASSWORD: discourse
+      LOAD_PLUGINS: "1"
+      PARALLEL_TEST_PROCESSORS: "1"
+      NODE_OPTIONS: --max-old-space-size=2048
+      CHEAP_SOURCE_MAPS: "1"
+      EMBER_ENV: development
+      CAPYBARA_DEFAULT_MAX_WAIT_TIME: "20"
+      PLAYWRIGHT_BROWSERS_PATH: /home/discourse/.cache/ms-playwright
+      DBUS_SESSION_BUS_ADDRESS: unix:path=/dev/null
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          repository: ISBF-Lab/ISBF-Careers
+          ref: ee5510cdc97eaf7b04b5b1d7706e1d1841b3263a
+          path: plugins/isbf-careers
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          repository: ISBF-Lab/ISBF-Teamup
+          ref: df2dff2f11c435a9968c97e21027fd210f2e4821
+          path: plugins/isbf-teamup
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          repository: ISBF-Lab/ISBF-Marketplace
+          ref: 62c811a038b951277aea5bc2c8d73fe6e25c1d70
+          path: plugins/isbf-marketplace
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          repository: ISBF-Lab/ISBF-Alumni
+          ref: 8bfe4c8838fc591a78575c48e6ca81b4be7315cc
+          path: plugins/isbf-alumni
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          repository: ISBF-Lab/ISBF-Learning
+          ref: 3b90c43bdc1c76c13cd26c9694a6746e5583f8fe
+          path: tmp/workbench-plugins/learning
+          persist-credentials: false
+
+      - name: Prepare isolated database services
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          redis-server /etc/redis/redis.conf --daemonize yes --logfile ""
+          chown -R postgres /var/run/postgresql
+          sudo -E -u postgres script/start_test_db.rb
+          sudo -u postgres psql -c "CREATE ROLE discourse LOGIN SUPERUSER PASSWORD 'discourse';"
+
+      - name: Install dependencies
+        run: |
+          ln -s /var/www/discourse/vendor/bundle vendor/bundle
+          bundle config --local path vendor/bundle
+          bundle config --local deployment true
+          bundle config --local without ""
+          bundle install --jobs 1
+          pnpm install --frozen-lockfile
+
+      - name: Verify native formatting for the changed source
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git fetch --no-tags --depth=1 origin "$BASE_SHA"
+          git diff -z --name-only --diff-filter=AM "$BASE_SHA" HEAD -- plugins themes .github > tmp/workbench-lint-files
+          mapfile -d '' -t files < tmp/workbench-lint-files
+          bin/lint --fix "${files[@]}"
+          git diff --exit-code -- "${files[@]}" Gemfile Gemfile.lock pnpm-lock.yaml
+
+      - name: Load the official Learning candidate and migrate the synthetic database
+        id: database
+        run: |
+          mv plugins/isbf-learning tmp/workbench-plugins/learning-mirror
+          mv tmp/workbench-plugins/learning plugins/isbf-learning
+          bin/rake db:create db:migrate
+
+      - name: Native settings, request and business permissions regression
+        run: |
+          mkdir -p tmp/workbench-results
+          bin/rspec \
+            plugins/isbf-workbench-maintenance/spec/lib \
+            plugins/isbf-workbench-maintenance/spec/requests \
+            plugins/isbf-learning/spec/requests/workbench_maintenance_spec.rb \
+            plugins/isbf-guides/spec/requests/workbench_maintenance_spec.rb \
+            plugins/isbf-mbti/spec/requests/workbench_maintenance_spec.rb \
+            plugins/isbf-resume/spec/requests/workbench_maintenance_spec.rb \
+            plugins/discourse-ai/spec/forum_assistant/workbench_maintenance_spec.rb \
+            plugins/isbf-alumni/spec/isbf_alumni_identities_requests_spec.rb \
+            plugins/isbf-careers/spec/requests/careers_spec.rb \
+            plugins/isbf-marketplace/spec/requests/marketplace_spec.rb \
+            plugins/isbf-teamup/spec/requests/teamup_spec.rb \
+            | tee tmp/workbench-results/requests.log
+
+      - name: Prepare browser assets and Chromium
+        id: browser_assets
+        if: ${{ !cancelled() && steps.database.outcome == 'success' }}
+        run: |
+          pnpm playwright-install
+          script/assemble_ember_build.rb
+          mkdir -p "$HOME/.pki/nssdb" "$HOME/.local/share/pki/nssdb"
+          dbus-daemon --system --fork 2>/dev/null || true
+          isbf_bus_address=$(dbus-daemon --session --fork --print-address 2>/dev/null)
+          echo "DBUS_SESSION_BUS_ADDRESS=$isbf_bus_address" >> "$GITHUB_ENV"
+
+      - name: Native administrator and workbench browser regression
+        if: ${{ !cancelled() && steps.browser_assets.outcome == 'success' }}
+        run: |
+          bin/rspec plugins/isbf-workbench-maintenance/spec/system \
+            themes/isbf-campus-feed/spec/system/workbench_entries_spec.rb \
+            | tee tmp/workbench-results/browser.log
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: workbench-maintenance-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            tmp/workbench-results/
+            tmp/capybara/

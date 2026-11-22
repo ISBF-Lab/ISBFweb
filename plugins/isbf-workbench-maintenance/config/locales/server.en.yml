@@ -1,0 +1,15 @@
+en:
+  site_settings:
+    isbf_workbench_pause_learning_resources: "Temporarily pause course resources."
+    isbf_workbench_pause_library: "Temporarily pause the resource library."
+    isbf_workbench_pause_courses: "Temporarily hide the Courses workbench entry."
+    isbf_workbench_pause_careers: "Temporarily pause careers."
+    isbf_workbench_pause_resume: "Temporarily pause resume tools."
+    isbf_workbench_pause_campus_services: "Temporarily hide the Campus services workbench entry."
+    isbf_workbench_pause_student_identity: "Temporarily hide the Student identity workbench entry."
+    isbf_workbench_pause_alumni: "Temporarily pause alumni."
+    isbf_workbench_pause_marketplace: "Temporarily pause the marketplace."
+    isbf_workbench_pause_teamup: "Temporarily pause Team up."
+    isbf_workbench_pause_mbti: "Temporarily pause MBTI."
+    isbf_workbench_pause_ai_assistant: "Temporarily pause the forum AI assistant."
+    isbf_workbench_pause_guides: "Temporarily pause guides."

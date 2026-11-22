@@ -279,6 +279,7 @@ en:
     reading_progress: "Reading progress"
     back_home: "Back to home"
     workbench: "Workbench"
+    workbench_empty: "No workbench entries available."
     workbench_pending: "Coming soon"
     workbench_intro: "The tools you use for campus life will gradually come together here."
     workbench_modules: "Future services"
