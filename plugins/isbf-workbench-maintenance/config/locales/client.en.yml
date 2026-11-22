@@ -1,0 +1,19 @@
+en:
+  js:
+    isbf_workbench_maintenance:
+      title: "Workbench maintenance"
+      description: "Check Temporarily pause and save the feature's setting to hide its workbench entry and pause its dedicated pages and APIs. Clear the checkbox and save to restore the original order, icon and palette. Existing forum posts keep their normal access permissions. Placeholder entries can be hidden here too."
+      entries:
+        learning_resources: "Course resources"
+        library: "Resource library"
+        courses: "Courses"
+        careers: "Careers"
+        resume: "Resume tools"
+        campus_services: "Campus services"
+        student_identity: "Student identity"
+        alumni: "Alumni"
+        marketplace: "Marketplace"
+        teamup: "Team up"
+        mbti: "MBTI"
+        ai_assistant: "AI assistant"
+        guides: "Guides"

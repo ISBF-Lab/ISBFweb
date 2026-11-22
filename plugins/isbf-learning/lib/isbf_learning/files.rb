@@ -70,6 +70,7 @@ module IsbfLearning
       end
 
       def download(id, user, guardian)
+        IsbfLearning.ensure_workbench_available!
         path(id)
         unless user && IsbfLearning.file_accessible?(id, user, guardian)
           raise Discourse::InvalidAccess

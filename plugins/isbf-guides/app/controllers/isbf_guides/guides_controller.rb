@@ -7,6 +7,7 @@ module ::IsbfGuides
     prepend_before_action :guide_login_redirect, only: %i[index show]
     skip_before_action :check_xhr, only: %i[index show image]
     before_action :private_response
+    prepend_before_action :ensure_workbench_available
 
     def index
       respond_to do |format|
@@ -63,6 +64,10 @@ module ::IsbfGuides
     end
 
     private
+
+    def ensure_workbench_available
+      ::IsbfWorkbenchMaintenance.ensure_available!("guides") if defined?(::IsbfWorkbenchMaintenance)
+    end
 
     def guide_login_redirect
       redirect_to_login if request.format.html? && !current_user

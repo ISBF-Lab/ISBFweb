@@ -42,7 +42,15 @@ module DiscourseAi
 
       def self.enabled?
         SiteSetting.discourse_ai_enabled && SiteSetting.ai_bot_enabled &&
-          SiteSetting.ai_forum_assistant_enabled
+          SiteSetting.ai_forum_assistant_enabled && !paused?
+      end
+
+      def self.paused?
+        defined?(::IsbfWorkbenchMaintenance) && ::IsbfWorkbenchMaintenance.paused?("ai_assistant")
+      end
+
+      def self.ensure_available!
+        raise Discourse::NotFound if paused?
       end
 
       def self.available?

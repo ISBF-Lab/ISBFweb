@@ -1,0 +1,15 @@
+zh_CN:
+  site_settings:
+    isbf_workbench_pause_learning_resources: "暂时停用课程资源。"
+    isbf_workbench_pause_library: "暂时停用资料库。"
+    isbf_workbench_pause_courses: "暂时隐藏课程专区工作台入口。"
+    isbf_workbench_pause_careers: "暂时停用求职实习。"
+    isbf_workbench_pause_resume: "暂时停用简历工具。"
+    isbf_workbench_pause_campus_services: "暂时隐藏校园服务工作台入口。"
+    isbf_workbench_pause_student_identity: "暂时隐藏学生身份工作台入口。"
+    isbf_workbench_pause_alumni: "暂时停用校友。"
+    isbf_workbench_pause_marketplace: "暂时停用商城。"
+    isbf_workbench_pause_teamup: "暂时停用组队。"
+    isbf_workbench_pause_mbti: "暂时停用 MBTI。"
+    isbf_workbench_pause_ai_assistant: "暂时停用论坛 AI 助手。"
+    isbf_workbench_pause_guides: "暂时停用使用指南。"

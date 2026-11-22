@@ -5,6 +5,7 @@ module DiscourseAi
     class ForumAssistantController < ::ApplicationController
       requires_plugin PLUGIN_NAME
       requires_login
+      prepend_before_action { DiscourseAi::ForumAssistant::Configuration.ensure_available! }
 
       def status
         render json: DiscourseAi::ForumAssistant::Status.new(current_user).as_json

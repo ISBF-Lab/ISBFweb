@@ -45,6 +45,7 @@ export default class ISBFV2Workbench extends Component {
     )
       .filter(
         (card) =>
+          this.siteSettings[`isbf_workbench_pause_${card.key}`] !== true &&
           (card.key !== "alumni" || alumniConfig(this.site)) &&
           (card.key !== "mbti" || mbtiConfig(this.site)) &&
           (card.key !== "ai_assistant" ||
@@ -92,7 +93,13 @@ export default class ISBFV2Workbench extends Component {
         class="isbf-v2-workbench__panel"
         {{this.trackSprite}}
       >
-        <ISBFWorkbenchGrid @cards={{this.cards}} />
+        {{#let this.cards as |cards|}}
+          {{#if cards.length}}
+            <ISBFWorkbenchGrid @cards={{cards}} />
+          {{else}}
+            <p>{{i18n (themePrefix "isbf_v2.workbench_empty")}}</p>
+          {{/if}}
+        {{/let}}
       </section>
       <div class="isbf-v2-workbench__more">
         <div class="isbf-v2-workbench__more-control">

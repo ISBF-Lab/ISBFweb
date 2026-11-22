@@ -7,6 +7,7 @@ module DiscourseAi
 
       requires_plugin PLUGIN_NAME
       requires_login
+      prepend_before_action { DiscourseAi::ForumAssistant::Configuration.ensure_available! }
 
       def index
         page = Integer(params.fetch(:page, 0), exception: false)

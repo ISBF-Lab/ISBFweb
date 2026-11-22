@@ -160,6 +160,7 @@ module IsbfLibrary
     end
 
     def check_category
+      IsbfLibrary.ensure_workbench_available!
       category = Category.find_by(id: IsbfLibrary.category_id)
       unless IsbfLibrary.enabled? && category && guardian.can_see_category?(category)
         raise Discourse::InvalidAccess

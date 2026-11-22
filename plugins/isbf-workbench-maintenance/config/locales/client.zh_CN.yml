@@ -1,0 +1,19 @@
+zh_CN:
+  js:
+    isbf_workbench_maintenance:
+      title: "工作台维护"
+      description: "勾选「暂时停用」并保存该项设置后，将隐藏工作台入口并暂停对应功能页面和专用接口。取消勾选并保存即可恢复原位置、图标和色板。已有论坛帖子继续按原权限访问。占位入口也可以在这里隐藏。"
+      entries:
+        learning_resources: "课程资源"
+        library: "资料库"
+        courses: "课程专区"
+        careers: "求职实习"
+        resume: "简历工具"
+        campus_services: "校园服务"
+        student_identity: "学生认证"
+        alumni: "校友网络"
+        marketplace: "商城"
+        teamup: "组队"
+        mbti: "MBTI"
+        ai_assistant: "AI 助手"
+        guides: "使用指南"

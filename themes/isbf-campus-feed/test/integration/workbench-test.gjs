@@ -1,11 +1,18 @@
 import { getOwner } from "@ember/owner";
-import { findAll, render, settled, waitFor } from "@ember/test-helpers";
+import {
+  clearRender,
+  findAll,
+  render,
+  settled,
+  waitFor,
+} from "@ember/test-helpers";
 import { module, test } from "qunit";
 import sinon from "sinon";
 import { settings } from "virtual:theme";
 import { addExtraSpriteSymbols } from "discourse/lib/svg-sprite-loader";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import ISBFV2Workbench from "../../discourse/components/isbf-v2-workbench";
+import { WORKBENCH_ENTRIES } from "../../discourse/lib/workbench-entries";
 
 module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
   setupRenderingTest(hooks, { stubRouter: true });
@@ -49,6 +56,12 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
     this.previousWorkbenchEntries = settings.workbench_entries;
     settings.workbench_entries = [];
     this.previousGuidesEnabled = this.siteSettings.isbf_guides_enabled;
+    this.previousMaintenanceFlags = Object.fromEntries(
+      WORKBENCH_ENTRIES.map(({ key }) => {
+        const name = `isbf_workbench_pause_${key}`;
+        return [name, this.siteSettings[name]];
+      })
+    );
     this.previousAssistant = getOwner(this).lookup(
       "service:current-user"
     ).forum_assistant;
@@ -64,6 +77,7 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
     this.siteSettings.isbf_resume_enabled = this.previousResumeEnabled;
     settings.workbench_entries = this.previousWorkbenchEntries;
     this.siteSettings.isbf_guides_enabled = this.previousGuidesEnabled;
+    Object.assign(this.siteSettings, this.previousMaintenanceFlags);
     getOwner(this)
       .lookup("service:current-user")
       .set("forum_assistant", this.previousAssistant);
@@ -288,6 +302,61 @@ module("ISBF | Integration | Component | ISBFV2Workbench", function (hooks) {
     assert
       .dom('[data-workbench-key="mbti"] .isbf-workbench-grid__glyph use')
       .hasAttribute("href", "#heart");
+  });
+
+  test("maintenance hides a business and a placeholder and preserves the restored card configuration", async function (assert) {
+    const careers = '[data-workbench-key="careers"]';
+    const courses = '[data-workbench-key="courses"]';
+    const visibleKeys = () =>
+      findAll("[data-workbench-key]").map((item) => item.dataset.workbenchKey);
+    settings.workbench_entries = [
+      { key: "library" },
+      { key: "careers", icon: "heart", tone: "violet" },
+      { key: "courses" },
+    ];
+    this.siteSettings.isbf_workbench_pause_careers = true;
+    this.siteSettings.isbf_workbench_pause_courses = true;
+
+    await render(<template><ISBFV2Workbench /></template>);
+
+    assert.dom(careers).doesNotExist();
+    assert.dom(courses).doesNotExist();
+    assert.deepEqual(visibleKeys().slice(0, 2), [
+      "library",
+      "learning_resources",
+    ]);
+
+    await clearRender();
+    this.siteSettings.isbf_workbench_pause_careers = false;
+    this.siteSettings.isbf_workbench_pause_courses = false;
+    await render(<template><ISBFV2Workbench /></template>);
+
+    assert.deepEqual(visibleKeys().slice(0, 3), [
+      "library",
+      "careers",
+      "courses",
+    ]);
+    assert.dom(careers).hasAttribute("href", "/isbf/careers");
+    assert.dom(careers).hasAttribute("data-workbench-palette", "violet");
+    assert
+      .dom(`${careers} .isbf-workbench-grid__glyph use`)
+      .hasAttribute("href", "#heart");
+    assert
+      .dom(`${careers} .isbf-workbench-grid__mobile-icon use`)
+      .hasAttribute("href", "#heart");
+  });
+
+  test("pausing every entry shows a localized empty state with legacy theme settings", async function (assert) {
+    for (const { key } of WORKBENCH_ENTRIES) {
+      this.siteSettings[`isbf_workbench_pause_${key}`] = true;
+    }
+
+    await render(<template><ISBFV2Workbench /></template>);
+
+    assert
+      .dom(".isbf-v2-workbench__panel")
+      .hasText("No workbench entries available.");
+    assert.dom(".isbf-workbench-grid").doesNotExist();
   });
 
   test("a saved icon replaces the fallback as soon as the sprite arrives", async function (assert) {

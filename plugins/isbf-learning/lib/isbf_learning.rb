@@ -4,6 +4,12 @@ require "uri"
 require "cgi"
 
 module IsbfLearning
+  def self.ensure_workbench_available!
+    if defined?(::IsbfWorkbenchMaintenance)
+      ::IsbfWorkbenchMaintenance.ensure_available!(:learning_resources)
+    end
+  end
+
   def self.can_manage?(guardian)
     guardian.is_admin? ||
       (guardian.respond_to?(:academy_can?) && guardian.academy_can?(:manage_resources))
@@ -78,6 +84,7 @@ module IsbfLearning
   end
 
   def self.ensure_can_submit!(user, guardian)
+    ensure_workbench_available!
     category = Category.find_by(id: category_id)
     permitted =
       SiteSetting.isbf_learning_enabled && user&.active? && (user.staff? || user.approved?) &&

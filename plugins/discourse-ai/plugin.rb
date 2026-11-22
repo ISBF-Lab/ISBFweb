@@ -189,6 +189,7 @@ after_initialize do
   end
 
   reloadable_patch do |plugin|
+    PostsController.prepend DiscourseAi::ForumAssistant::PostsControllerExtension
     PostValidator.prepend DiscourseAi::ForumAssistant::PostValidatorExtension
     Guardian.prepend DiscourseAi::GuardianExtensions
     Topic.prepend DiscourseAi::TopicExtensions

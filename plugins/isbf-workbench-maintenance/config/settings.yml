@@ -1,0 +1,40 @@
+plugins:
+  isbf_workbench_pause_learning_resources:
+    default: false
+    client: true
+  isbf_workbench_pause_library:
+    default: false
+    client: true
+  isbf_workbench_pause_courses:
+    default: false
+    client: true
+  isbf_workbench_pause_careers:
+    default: false
+    client: true
+  isbf_workbench_pause_resume:
+    default: false
+    client: true
+  isbf_workbench_pause_campus_services:
+    default: false
+    client: true
+  isbf_workbench_pause_student_identity:
+    default: false
+    client: true
+  isbf_workbench_pause_alumni:
+    default: false
+    client: true
+  isbf_workbench_pause_marketplace:
+    default: false
+    client: true
+  isbf_workbench_pause_teamup:
+    default: false
+    client: true
+  isbf_workbench_pause_mbti:
+    default: false
+    client: true
+  isbf_workbench_pause_ai_assistant:
+    default: false
+    client: true
+  isbf_workbench_pause_guides:
+    default: false
+    client: true

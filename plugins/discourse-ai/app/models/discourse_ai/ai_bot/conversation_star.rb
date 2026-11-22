@@ -25,11 +25,19 @@ module DiscourseAi
       validates :topic_id, presence: true, uniqueness: { scope: :user_id }
 
       def self.conversations_query_for(user)
-        Topic
-          .private_messages_for_user(user)
-          .where(user: user)
-          .joins(Topic.ai_conversation_custom_field_join_sql)
-          .distinct
+        conversations =
+          Topic
+            .private_messages_for_user(user)
+            .where(user: user)
+            .joins(Topic.ai_conversation_custom_field_join_sql)
+            .distinct
+        if DiscourseAi::ForumAssistant::Configuration.paused?
+          conversations =
+            conversations.where.not(
+              id: DiscourseAi::ForumAssistant::Conversations.for_user(user).select(:id),
+            )
+        end
+        conversations
       end
 
       def self.starred_conversations_for(user, limit: MAX_STARS_PER_USER)

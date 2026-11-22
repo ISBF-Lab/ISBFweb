@@ -5,6 +5,7 @@ module DiscourseAi
     class EntryPoint
       def inject_into(plugin)
         plugin.on(:before_create_post) do |post, options|
+          Policy.ensure_options_available!(options)
           if Policy.pending_question?(options)
             # New-topic body validation runs before the Topic association exists.
             post.instance_variable_set(:@forum_assistant_question, true)

@@ -143,6 +143,7 @@ module IsbfLearning
 
     # Called inside ReviewableIsbfLearningCourse#perform's shared catalog lock.
     def self.approve_locked(user, name:, grade:)
+      IsbfLearning.ensure_workbench_available!
       ensure_staff!(user, review: true)
       add(normalize(name: name, grade: grade), reuse_existing: true)
     end

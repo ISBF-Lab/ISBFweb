@@ -76,6 +76,9 @@ module DiscourseAi
 
         post = Post.find(params[:post_id])
         guardian.ensure_can_see!(post)
+        if DiscourseAi::ForumAssistant::Policy.managed_topic?(post.topic)
+          DiscourseAi::ForumAssistant::Configuration.ensure_available!
+        end
 
         if !DiscourseAi::AiBot::EntryPoint.all_bot_ids.include?(post.user_id)
           raise Discourse::InvalidParameters.new(:post_id)
