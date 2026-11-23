@@ -7,8 +7,8 @@ import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import didUpdate from "@ember/render-modifiers/modifiers/did-update";
 import { service } from "@ember/service";
 import { trustHTML } from "@ember/template";
-import PluginOutlet from "discourse/components/plugin-outlet";
 import bodyClass from "discourse/helpers/body-class";
+import getURL from "discourse/lib/get-url";
 import { wantsNewWindow } from "discourse/lib/intercept-click";
 import { eq } from "discourse/truth-helpers";
 import DButton from "discourse/ui-kit/d-button";
@@ -26,7 +26,6 @@ export default class ForumAssistantWorkspace extends Component {
   @service forumAssistant;
   @service("forum-assistant-workspace") workspace;
   @service router;
-  @service siteSettings;
 
   @tracked historyOpen = false;
 
@@ -223,16 +222,19 @@ export default class ForumAssistantWorkspace extends Component {
       {{didUpdate this.selectConversation @conversationId}}
     >
       <header class="forum-assistant-workspace__header">
-        <PluginOutlet @name="forum-assistant-brand">
-          <a
-            class="forum-assistant-workspace__brand"
-            href="/isbf/workbench"
-          >{{this.siteSettings.title}}</a>
-        </PluginOutlet>
-        <a class="forum-assistant-workspace__back" href="/isbf/workbench">
-          {{dIcon "arrow-left"}}
-          <span>{{i18n "discourse_ai.forum_assistant.workspace.back"}}</span>
-        </a>
+        <a
+          aria-label={{i18n "discourse_ai.forum_assistant.workspace.back"}}
+          class="forum-assistant-workspace__back"
+          href={{getURL "/isbf/workbench"}}
+        >{{dIcon "arrow-left"}}</a>
+        <h1>{{i18n "discourse_ai.forum_assistant.workspace.title"}}</h1>
+        <DButton
+          aria-controls="forum-assistant-history"
+          aria-expanded={{if this.historyOpen "true" "false"}}
+          class="btn-flat forum-assistant-workspace__open-history"
+          @action={{this.toggleHistory}}
+          @label="discourse_ai.forum_assistant.workspace.history"
+        />
       </header>
       <div class="forum-assistant-workspace__body">
         <aside
@@ -316,23 +318,14 @@ export default class ForumAssistantWorkspace extends Component {
           aria-label={{i18n "discourse_ai.forum_assistant.workspace.title"}}
           class="forum-assistant-workspace__main"
         >
-          <div class="forum-assistant-workspace__conversation-heading">
-            <DButton
-              aria-controls="forum-assistant-history"
-              aria-expanded={{this.historyOpen}}
-              class="btn-flat forum-assistant-workspace__open-history"
-              @action={{this.toggleHistory}}
-              @icon="bars"
-              @title="discourse_ai.forum_assistant.workspace.history"
-            />
-            <h1>{{i18n "discourse_ai.forum_assistant.workspace.title"}}</h1>
-            {{#if this.workspace.conversation}}
+          {{#if this.workspace.conversation}}
+            <div class="forum-assistant-workspace__conversation-heading">
               <span
                 class="forum-assistant-workspace__conversation-title"
                 title={{this.workspace.conversation.title}}
               >{{this.workspace.conversation.title}}</span>
-            {{/if}}
-          </div>
+            </div>
+          {{/if}}
           <div
             aria-busy={{this.workspace.loading}}
             class="forum-assistant-workspace__messages"

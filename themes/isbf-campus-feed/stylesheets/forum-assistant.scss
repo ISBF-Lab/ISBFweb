@@ -60,47 +60,39 @@ body.forum-assistant-workspace-page {
   &__header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--isbf-v2-space-4);
-    min-height: 60px;
-    padding-inline: var(--isbf-v2-space-6);
+    gap: var(--isbf-v2-space-3);
+    padding: var(--isbf-v2-space-4);
     border-bottom: 1px solid var(--isbf-v2-border);
 
-    .isbf-v2-brand {
+    h1 {
+      flex: 1;
       min-width: 0;
-      max-width: 60%;
       margin: 0;
-      padding: 0;
-      color: var(--isbf-v2-text);
-      font-size: var(--isbf-v2-font-lg);
-    }
-
-    .isbf-v2-brand__image {
-      width: 32px;
-      height: 32px;
-      max-height: none;
-    }
-
-    .isbf-v2-brand__name {
-      display: block;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      font-size: var(--isbf-v2-font-xl);
+      font-weight: var(--isbf-v2-weight-bold);
+      line-height: 1.25;
     }
   }
 
   &__back {
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
-    gap: var(--isbf-v2-space-2);
-    min-height: 44px;
-    color: var(--isbf-v2-muted);
-    font-size: var(--isbf-v2-font-sm);
+    display: grid;
+    flex: 0 0 44px;
+    height: 44px;
+    place-items: center;
+    border-radius: var(--isbf-v2-radius-pill);
+    color: var(--isbf-v2-text);
 
-    &:hover {
-      color: var(--isbf-v2-accent);
+    html.discourse-no-touch &:hover {
+      background: var(--isbf-v2-hover);
     }
+  }
+
+  &__open-history.btn {
+    flex-shrink: 0;
+    padding-inline: var(--isbf-v2-space-2);
+    color: var(--isbf-v2-text);
+    font-size: var(--isbf-v2-font-sm);
+    white-space: nowrap;
   }
 
   &__body {
@@ -209,13 +201,6 @@ body.forum-assistant-workspace-page {
     gap: var(--isbf-v2-space-3);
     min-height: 60px;
     padding-inline: var(--isbf-v2-space-6);
-
-    h1 {
-      flex-shrink: 0;
-      margin: 0;
-      font-size: var(--isbf-v2-font-lg);
-      font-weight: var(--isbf-v2-weight-medium);
-    }
   }
 
   &__conversation-title {
@@ -228,6 +213,7 @@ body.forum-assistant-workspace-page {
 
   &__messages {
     display: flex;
+    grid-row: 2;
     flex-direction: column;
     min-height: 0;
     overflow: auto;
@@ -302,6 +288,7 @@ body.forum-assistant-workspace-page {
   }
 
   &__footer {
+    grid-row: 3;
     padding-block: var(--isbf-v2-space-3)
       max(var(--isbf-v2-space-4), env(safe-area-inset-bottom));
     background: var(--isbf-v2-surface);
@@ -492,18 +479,19 @@ body.forum-assistant-workspace-page {
   .forum-assistant-workspace {
     border-inline: 0;
 
-    &__header,
+    &__header {
+      gap: var(--isbf-v2-space-2);
+      padding: var(--isbf-v2-space-2);
+      padding-top: max(var(--isbf-v2-space-2), env(safe-area-inset-top));
+    }
+
     &__conversation-heading {
-      padding-inline: var(--isbf-v2-space-4);
+      display: none;
     }
 
     &__message-content,
     &__composer-content {
       padding-inline: var(--isbf-v2-space-4);
-    }
-
-    &__conversation-title {
-      display: none;
     }
   }
 }

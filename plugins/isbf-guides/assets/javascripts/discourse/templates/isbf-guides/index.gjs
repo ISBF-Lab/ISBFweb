@@ -2,6 +2,7 @@ import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import routeTemplate from "ember-route-template";
+import PluginOutlet from "discourse/components/plugin-outlet";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import DButton from "discourse/ui-kit/d-button";
@@ -52,35 +53,41 @@ class IsbfGuidesIndex extends Component {
   }
 
   <template>
-    <main class="isbf-guides isbf-v2-feature">
+    <main class="isbf-guides isbf-v2-feature --index">
       <header class="isbf-guides__heading">
-        <h1>{{i18n "isbf_guides.title"}}</h1>
-        <p class="isbf-guides__intro">{{i18n "isbf_guides.intro"}}</p>
+        <PluginOutlet @name="isbf-guides-index-header">
+          <h1>{{i18n "isbf_guides.title"}}</h1>
+        </PluginOutlet>
       </header>
-      <div class="isbf-guides__list">
-        {{#each this.guides key="id" as |guide|}}
-          <a class="isbf-guides__entry" href={{guide.url}}>
-            <div class="isbf-guides__entry-content">
-              <h2>{{guide.title}}</h2>
-              <p>{{guide.summary}}</p>
-              <span class="isbf-guides__updated">{{i18n "isbf_guides.updated"}}
-                <time datetime={{guide.updated_at}}>{{dFormatDate
-                    guide.updated_at
-                  }}</time></span>
-            </div>
-            {{dIcon "chevron-right"}}
-          </a>
-        {{else}}
-          <p class="isbf-guides__empty">{{i18n "isbf_guides.empty"}}</p>
-        {{/each}}
+      <div class="isbf-guides__index-content">
+        <p class="isbf-guides__intro">{{i18n "isbf_guides.intro"}}</p>
+        <div class="isbf-guides__list">
+          {{#each this.guides key="id" as |guide|}}
+            <a class="isbf-guides__entry" href={{guide.url}}>
+              <div class="isbf-guides__entry-content">
+                <h2>{{guide.title}}</h2>
+                <p>{{guide.summary}}</p>
+                <span class="isbf-guides__updated">{{i18n
+                    "isbf_guides.updated"
+                  }}
+                  <time datetime={{guide.updated_at}}>{{dFormatDate
+                      guide.updated_at
+                    }}</time></span>
+              </div>
+              {{dIcon "chevron-right"}}
+            </a>
+          {{else}}
+            <p class="isbf-guides__empty">{{i18n "isbf_guides.empty"}}</p>
+          {{/each}}
+        </div>
+        {{#if this.hasMore}}
+          <DButton
+            @action={{this.loadMore}}
+            @isLoading={{this.loading}}
+            @label="isbf_guides.more"
+          />
+        {{/if}}
       </div>
-      {{#if this.hasMore}}
-        <DButton
-          @action={{this.loadMore}}
-          @isLoading={{this.loading}}
-          @label="isbf_guides.more"
-        />
-      {{/if}}
     </main>
   </template>
 }
