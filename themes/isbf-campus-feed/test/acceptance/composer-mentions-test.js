@@ -4,6 +4,7 @@ import {
   settled,
   triggerKeyEvent,
   visit,
+  waitFor,
 } from "@ember/test-helpers";
 import { test } from "qunit";
 import { USER_OPTION_COMPOSITION_MODES } from "discourse/lib/constants";
@@ -23,6 +24,10 @@ acceptance("ISBF | Homepage composer mentions", function (needs) {
   });
 
   needs.pretender((server, helper) => {
+    server.get("/filter.json", () =>
+      helper.response({ users: [], topic_list: { topics: [] } })
+    );
+    server.post("/isbf/views/impressions", () => helper.response({}));
     server.get("/u/search/users", ({ queryParams }) => {
       const { term, last_seen_users: lastSeenUsers } = queryParams;
       let users = [];
@@ -50,6 +55,7 @@ acceptance("ISBF | Homepage composer mentions", function (needs) {
 
       await visit("/latest");
       await click(".isbf-v2-compose__button");
+      await waitFor(editor);
       await focus(editor);
       document.execCommand("insertText", false, "@");
       await settled();
