@@ -1,8 +1,15 @@
 import { getOwner } from "@ember/owner";
-import { click, fillIn, render, triggerKeyEvent } from "@ember/test-helpers";
+import {
+  click,
+  fillIn,
+  render,
+  triggerKeyEvent,
+  waitUntil,
+} from "@ember/test-helpers";
 import { module, test } from "qunit";
 import { setupRenderingTest } from "discourse/tests/helpers/component-test";
 import pretender, { response } from "discourse/tests/helpers/create-pretender";
+import { i18n } from "discourse-i18n";
 import ForumAssistantWorkspace from "discourse/plugins/discourse-ai/discourse/components/forum-assistant-workspace";
 
 const BASE = "/discourse-ai/ai-bot/forum-assistant/conversations";
@@ -72,6 +79,19 @@ module("Integration | Component | forum-assistant-workspace", function (hooks) {
     assert
       .dom(".forum-assistant-workspace__back")
       .hasAttribute("href", "/isbf/workbench");
+    assert
+      .dom(".forum-assistant-workspace__header > :first-child")
+      .hasAttribute(
+        "aria-label",
+        i18n("discourse_ai.forum_assistant.workspace.back")
+      );
+    assert.dom(".forum-assistant-workspace h1").exists({ count: 1 });
+    assert
+      .dom(".forum-assistant-workspace__header h1")
+      .hasText(i18n("discourse_ai.forum_assistant.workspace.title"));
+    assert
+      .dom(".forum-assistant-workspace__conversation-title")
+      .hasText(this.detail.conversation.title);
     assert
       .dom(".topic-area, .topic-map, .topic-timeline, input[type=file]")
       .doesNotExist();
@@ -163,10 +183,46 @@ module("Integration | Component | forum-assistant-workspace", function (hooks) {
     this.status.remaining_today = 0;
     await render(<template><ForumAssistantWorkspace /></template>);
     assert.dom(".forum-assistant-composer textarea").isDisabled();
+    assert
+      .dom(".forum-assistant-workspace__conversation-heading")
+      .doesNotExist();
+    assert
+      .dom(
+        ".forum-assistant-workspace__header .forum-assistant-workspace__open-history"
+      )
+      .hasText(i18n("discourse_ai.forum_assistant.workspace.history"))
+      .hasAttribute("aria-controls", "forum-assistant-history")
+      .hasAttribute("aria-expanded", "false");
     await click(".forum-assistant-workspace__open-history");
     assert.dom(".forum-assistant-workspace").hasClass("--history-open");
+    assert
+      .dom(".forum-assistant-workspace__open-history")
+      .hasAttribute("aria-expanded", "true");
+    assert.dom(".forum-assistant-workspace__back").exists();
     await click(".forum-assistant-workspace__close-history");
 
     assert.dom(".forum-assistant-workspace").doesNotHaveClass("--history-open");
+    await waitUntil(() =>
+      document.activeElement?.matches(
+        ".forum-assistant-workspace__open-history"
+      )
+    );
+    assert
+      .dom(".forum-assistant-workspace__open-history")
+      .hasAttribute("aria-expanded", "false")
+      .isFocused();
+    await click(".forum-assistant-workspace__open-history");
+    await triggerKeyEvent(
+      ".forum-assistant-workspace__new",
+      "keydown",
+      "Escape"
+    );
+    await waitUntil(() =>
+      document.activeElement?.matches(
+        ".forum-assistant-workspace__open-history"
+      )
+    );
+    assert.dom(".forum-assistant-workspace").doesNotHaveClass("--history-open");
+    assert.dom(".forum-assistant-workspace__open-history").isFocused();
   });
 });

@@ -142,6 +142,7 @@ jobs:
         run: |
           bin/rspec plugins/isbf-workbench-maintenance/spec/system \
             themes/isbf-campus-feed/spec/system/workbench_entries_spec.rb \
+            themes/isbf-campus-feed/spec/system/workbench_navigation_spec.rb \
             | tee tmp/workbench-results/browser.log
 
       - uses: actions/upload-artifact@v7
