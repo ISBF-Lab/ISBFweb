@@ -42,7 +42,13 @@ acceptance("ISBF | Homepage composer mentions", function (needs) {
       return helper.response({ users });
     });
     server.get("/composer/mentions", () =>
-      helper.response({ users: [MATCHED_USER.username], groups: {} })
+      helper.response({
+        users: [MATCHED_USER.username],
+        user_reasons: {},
+        groups: {},
+        group_reasons: {},
+        max_users_notified_per_group_mention: 100,
+      })
     );
   });
 
