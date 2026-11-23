@@ -28,6 +28,9 @@ acceptance("ISBF | Homepage composer mentions", function (needs) {
       helper.response({ users: [], topic_list: { topics: [] } })
     );
     server.post("/isbf/views/impressions", () => helper.response({}));
+    server.get("/similar_topics", () =>
+      helper.response({ similar_topics: [] })
+    );
     server.get("/u/search/users", ({ queryParams }) => {
       const { term, last_seen_users: lastSeenUsers } = queryParams;
       let users = [];
