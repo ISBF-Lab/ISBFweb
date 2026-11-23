@@ -66,7 +66,9 @@ jobs:
       - name: Error pages, moderation, learning resources and notifications
         run: |
           mkdir -p tmp
-          bin/rspec spec/requests/exceptions_controller_spec.rb spec/requests/qunit_controller_spec.rb plugins/isbf-moderation/spec plugins/isbf-learning/spec plugins/isbf-notifications/spec | tee tmp/isbf-plugin-rspec.log
+          # The moderation modes integration job prepares browser assets for this system spec.
+          bin/rspec spec/requests/exceptions_controller_spec.rb spec/requests/qunit_controller_spec.rb plugins/isbf-moderation/spec plugins/isbf-learning/spec plugins/isbf-notifications/spec \
+            --exclude-pattern 'plugins/isbf-moderation/spec/system/ai_moderation_modes_spec.rb' | tee tmp/isbf-plugin-rspec.log
 
       - uses: actions/upload-artifact@v7
         if: always()

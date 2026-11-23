@@ -17,7 +17,7 @@ RSpec.describe "AI-held content", type: :request do
     SiteSetting.isbf_ai_moderation_model = model.id.to_s
     SiteSetting.isbf_ai_moderation_enabled = true
     DiscourseAi::Completions::Llm.with_prepared_responses(
-      [{ needs_review: true, rule: "fraud", reason: "需要核实的诈骗内容", evidence: post.raw }],
+      [{ matches: [{ rule: "fraud", reason: "需要核实的诈骗内容", evidence: post.raw }] }],
     ) { IsbfModeration::AiScanner.scan(post.id) }
   end
 

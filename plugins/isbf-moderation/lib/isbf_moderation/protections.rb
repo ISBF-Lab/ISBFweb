@@ -110,17 +110,28 @@ module IsbfModeration
     end
 
     def perform(performed_by, action_id, args = nil)
-      return super unless Hold.persisted?(post)
-      raise Discourse::InvalidAccess unless Policy.staff_reviewer?(performed_by, post)
+      held = Hold.persisted?(post)
+      approve_visible_ai =
+        post.present? && performed_by.human? &&
+          %w[agree_and_keep disagree].include?(action_id.to_s) &&
+          payload&.dig(AiReview::KEY, "action") == AiModes::REVIEW_ONLY
+      return super unless held || approve_visible_ai
 
       result = nil
       Notifications.defer(post: post) do
         post.with_lock(requires_new: true) do
-          @isbf_severe_reviewer_id = performed_by.id
+          if Hold.persisted?(post)
+            raise Discourse::InvalidAccess unless Policy.staff_reviewer?(performed_by, post)
+            @isbf_severe_reviewer_id = performed_by.id
+          end
           result = super
           raise ActiveRecord::Rollback unless result&.success?
           if result&.success? && !pending? && payload[Hold::PENDING]
             update!(payload: payload.merge(Hold::PENDING => false))
+          end
+          if approve_visible_ai && !post.hidden? && !post.trashed? &&
+               AiScanner.content_fingerprint(post) == payload.dig(AiReview::KEY, "content_digest")
+            AiScanner.approve!(post)
           end
         ensure
           @isbf_severe_reviewer_id = nil
@@ -153,7 +164,8 @@ module IsbfModeration
     # Core's restore message contains the original raw body. Do not enqueue it until
     # the validated restore transaction has committed successfully.
     def notify_poster(performed_by)
-      if payload[AiReview::KEY].present?
+      if payload[AiReview::KEY].present? &&
+           payload.dig(AiReview::KEY, "action") != AiModes::REVIEW_ONLY
         return unless performed_by.human? && performed_by.staff?
 
         post_id = post.id

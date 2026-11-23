@@ -12,9 +12,12 @@ Public discussion topics, replies and edits are eligible, including anonymous po
 messages, restricted/official categories and learning resources are excluded. Exempt groups are
 checked against the real anonymous owner without adding their identity to the model prompt.
 
-Matches use the existing strict content hold and native staff review. AI source, evidence and
-model selection are recorded separately from community severe reports. No account is automatically
-silenced or suspended. Author notifications resolve shared anonymous identities to the real owner.
+In **Admin → Plugins → Isbf moderation → Moderation modes**, developers can select the active
+level per category and edit each level's policy and action. Changes apply to new and in-flight scans.
+Matches enter native staff review. A match configured to hide uses the existing strict content hold.
+The review record includes every matched rule and its evidence, and the AI log shows the active
+levels and rule revision. Account actions remain with reviewers. Author notifications resolve shared
+anonymous identities to the real owner.
 Failed requests leave content published and retry after 1, 5 and 15 minutes; local rate limits
 reschedule work. Stale responses cannot act on edited content or changed settings. Disabling the
 feature does not release existing holds.
