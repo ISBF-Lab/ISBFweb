@@ -106,22 +106,30 @@ module IsbfModeration
         if current != replacement
           configuration[category] = replacement
           SiteSetting.refresh! if SiteSetting.public_send(SETTING) != previous_value
-          SiteSetting::Update.call(
-            guardian: guardian,
-            params: {
-              settings: [{ setting_name: SETTING, value: configuration.to_json }],
-            },
-            options: {
-              allow_changing_hidden: [SETTING],
-              expected_values: {
-                SETTING => previous_value,
+          SiteSetting.transaction do
+            # The native setting updater skips operation logs for hidden settings.
+            StaffActionLogger.new(guardian.user).log_site_setting_change(
+              SETTING,
+              audit_summary(category, current),
+              audit_summary(category, replacement),
+            )
+            SiteSetting::Update.call(
+              guardian: guardian,
+              params: {
+                settings: [{ setting_name: SETTING, value: configuration.to_json }],
               },
-            },
-          ) do
-            on_success { configuration }
-            on_failed_policy(:current_user_is_admin) { raise Discourse::InvalidAccess }
-            on_exceptions(SiteSetting::Update::Conflict) { raise Conflict }
-            on_failure { raise InvalidConfiguration }
+              options: {
+                allow_changing_hidden: [SETTING],
+                expected_values: {
+                  SETTING => previous_value,
+                },
+              },
+            ) do
+              on_success { configuration }
+              on_failed_policy(:current_user_is_admin) { raise Discourse::InvalidAccess }
+              on_exceptions(SiteSetting::Update::Conflict) { raise Conflict }
+              on_failure { raise InvalidConfiguration }
+            end
           end
         end
 
@@ -142,6 +150,15 @@ module IsbfModeration
     rescue JSON::ParserError
       raise InvalidConfiguration
     end
+
+    def self.audit_summary(category, configuration)
+      {
+        category: category,
+        active_level: configuration.fetch("active_level"),
+        revision: revision(configuration),
+      }.to_json
+    end
+    private_class_method :audit_summary
 
     def self.stored_value
       SiteSetting.provider.find(SETTING)&.value.to_s

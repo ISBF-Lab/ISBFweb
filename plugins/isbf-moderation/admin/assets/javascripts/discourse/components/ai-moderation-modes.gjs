@@ -328,10 +328,10 @@ export default class AiModerationModes extends Component {
                         @includeNone={{false}}
                         as |select|
                       >
-                        {{#each this.actions as |action|}}
+                        {{#each this.actions as |option|}}
                           <select.Option
-                            @value={{action.value}}
-                          >{{action.label}}</select.Option>
+                            @value={{option.value}}
+                          >{{option.label}}</select.Option>
                         {{/each}}
                       </field.Control>
                     </profileFields.Field>

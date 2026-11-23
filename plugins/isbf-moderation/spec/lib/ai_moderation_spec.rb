@@ -421,7 +421,8 @@ RSpec.describe IsbfModeration::AiScanner, type: :model do
       ]
       responses.each do |response|
         post = isbf_fabricate(:post, topic: isbf_fabricate(:topic, category: category))
-        DiscourseAi::Completions::Llm.with_prepared_responses([response]) do
+        # Canned responses remove unexpected schema fields before the classifier sees them.
+        DiscourseAi::Completions::Endpoints::Fake.with_fake_content(response.to_json) do
           described_class.scan(post.id)
         end
         expect(post.reload).not_to be_hidden

@@ -77,8 +77,41 @@ RSpec.describe IsbfModeration::Admin::AiModerationModesController do
       expect(saved.fetch("revision")).not_to eq(previous_revision)
       expect(saved.except("revision")).to eq(document.except("category", "revision"))
       expect(response.parsed_body.fetch("categories").except("fraud")).to eq(previous_categories)
+      history =
+        UserHistory
+          .where(
+            action: UserHistory.actions[:change_site_setting],
+            acting_user_id: admin.id,
+            subject: "isbf_ai_moderation_modes",
+          )
+          .order(:id)
+          .last
+      expect(JSON.parse(history.previous_value)).to eq(
+        "category" => "fraud",
+        "active_level" => "standard",
+        "revision" => previous_revision,
+      )
+      expect(JSON.parse(history.new_value)).to eq(
+        "category" => "fraud",
+        "active_level" => "strict",
+        "revision" => saved.fetch("revision"),
+      )
       get endpoint
       expect(response.parsed_body.fetch("categories").fetch("fraud")).to eq(saved)
+    end
+
+    it "keeps an unchanged category save free of audit entries" do
+      sign_in(admin)
+      document = category_update
+      stored = SiteSetting.isbf_ai_moderation_modes
+
+      expect { put endpoint, params: document, as: :json }.not_to change(UserHistory, :count)
+
+      expect(response.status).to eq(200)
+      expect(SiteSetting.isbf_ai_moderation_modes).to eq(stored)
+      expect(response.parsed_body.fetch("categories").fetch("fraud")).to eq(
+        document.except("category"),
+      )
     end
 
     it "rejects stale same-category changes and allows an independent category save" do

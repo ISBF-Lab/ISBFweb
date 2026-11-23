@@ -111,11 +111,12 @@ module IsbfModeration
 
     def perform(performed_by, action_id, args = nil)
       held = Hold.persisted?(post)
-      approve_visible_ai =
+      action = action_id.to_s
+      visible_ai_review =
         post.present? && performed_by.human? &&
-          %w[agree_and_keep disagree].include?(action_id.to_s) &&
+          %w[agree_and_keep agree_and_hide disagree].include?(action) &&
           payload&.dig(AiReview::KEY, "action") == AiModes::REVIEW_ONLY
-      return super unless held || approve_visible_ai
+      return super unless held || visible_ai_review
 
       result = nil
       Notifications.defer(post: post) do
@@ -129,9 +130,14 @@ module IsbfModeration
           if result&.success? && !pending? && payload[Hold::PENDING]
             update!(payload: payload.merge(Hold::PENDING => false))
           end
-          if approve_visible_ai && !post.hidden? && !post.trashed? &&
-               AiScanner.content_fingerprint(post) == payload.dig(AiReview::KEY, "content_digest")
-            AiScanner.approve!(post)
+          if visible_ai_review && !post.hidden? && !post.trashed?
+            if action == "agree_and_hide"
+              # Core hides on an agreed PostAction, which an AI-only score does not have.
+              post.hide!(PostActionType.types[:notify_moderators])
+            elsif AiScanner.content_fingerprint(post) ==
+                  payload.dig(AiReview::KEY, "content_digest")
+              AiScanner.approve!(post)
+            end
           end
         ensure
           @isbf_severe_reviewer_id = nil
