@@ -68,7 +68,7 @@ acceptance("ISBF | Homepage composer mentions", function (needs) {
 
       document.execCommand("insertText", false, "m");
       await settled();
-      await triggerKeyEvent(editor, "keyup", "m");
+      await triggerKeyEvent(editor, "keyup", "M");
       assert.dom(".ac-user .username").hasText(MATCHED_USER.username);
 
       await click(".ac-user li a");
