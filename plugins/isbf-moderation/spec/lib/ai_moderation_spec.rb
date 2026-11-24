@@ -296,6 +296,45 @@ RSpec.describe IsbfModeration::AiScanner, type: :model do
       expect(forum_post.reload).to be_hidden
     end
 
+    it "lets reviewers restore an AI-held post after AI moderation is disabled" do
+      DiscourseAi::Completions::Llm.with_prepared_responses([review_result]) do
+        described_class.scan(forum_post.id)
+      end
+      reviewable = forum_post.reload.reviewable_flag
+      expect(reviewable).to be_pending
+      expect(forum_post).to be_hidden
+      expect(IsbfModeration::Hold.persisted?(forum_post)).to eq(true)
+      SiteSetting.isbf_ai_moderation_enabled = false
+
+      expect(
+        reviewable.perform(moderator, :disagree_and_restore, version: reviewable.version),
+      ).to be_success
+      expect(reviewable.reload).not_to be_pending
+      expect(forum_post.reload).not_to be_hidden
+      expect(forum_post.topic.reload).to be_visible
+      expect(IsbfModeration::Hold.persisted?(forum_post)).to eq(false)
+    end
+
+    it "lets reviewers hide a review-only AI match after AI moderation is disabled" do
+      modes = IsbfModeration::AiModes.defaults
+      modes["fraud"]["profiles"]["standard"]["action"] = "review_only"
+      SiteSetting.isbf_ai_moderation_modes = modes.to_json
+      DiscourseAi::Completions::Llm.with_prepared_responses([review_result]) do
+        described_class.scan(forum_post.id)
+      end
+      reviewable = forum_post.reload.reviewable_flag
+      expect(reviewable).to be_pending
+      expect(forum_post).not_to be_hidden
+      expect(PostAction.active.where(post_id: forum_post.id)).to be_empty
+      SiteSetting.isbf_ai_moderation_enabled = false
+
+      expect(
+        reviewable.perform(moderator, :agree_and_hide, version: reviewable.version),
+      ).to be_success
+      expect(reviewable.reload).not_to be_pending
+      expect(forum_post.reload).to be_hidden
+    end
+
     it "retains a hold after the feature is disabled and the author edits" do
       DiscourseAi::Completions::Llm.with_prepared_responses([review_result]) do
         described_class.scan(forum_post.id)
