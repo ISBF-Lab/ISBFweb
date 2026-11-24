@@ -111,5 +111,9 @@ after_initialize do
     get "/admin/ai-moderation-modes" => "admin/ai_moderation_modes#show"
     put "/admin/ai-moderation-modes" => "admin/ai_moderation_modes#update"
   end
-  Discourse::Application.routes.append { mount ::IsbfModeration::Engine, at: "/isbf/moderation" }
+  Discourse::Application.routes.append do
+    get "/admin/plugins/isbf-moderation/ai-moderation-modes" => "admin/plugins#index",
+        :constraints => AdminConstraint.new
+    mount ::IsbfModeration::Engine, at: "/isbf/moderation"
+  end
 end

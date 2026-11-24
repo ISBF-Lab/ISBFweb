@@ -6,8 +6,8 @@ import AdminConfigAreaCard from "discourse/admin/components/admin-config-area-ca
 import Form from "discourse/components/form";
 import { ajax } from "discourse/lib/ajax";
 import DButton from "discourse/ui-kit/d-button";
+import DNativeSelect from "discourse/ui-kit/d-native-select";
 import DPageSubheader from "discourse/ui-kit/d-page-subheader";
-import DSelect from "discourse/ui-kit/d-select";
 import { i18n } from "discourse-i18n";
 
 const ENDPOINT = "/isbf/moderation/admin/ai-moderation-modes.json";
@@ -231,7 +231,7 @@ export default class AiModerationModes extends Component {
         <label for="ai-moderation-mode-category">{{i18n
             "isbf_moderation.admin.modes.category"
           }}</label>
-        <DSelect
+        <DNativeSelect
           data-test-ai-mode-category
           id="ai-moderation-mode-category"
           @disabled={{this.busy}}
@@ -244,7 +244,7 @@ export default class AiModerationModes extends Component {
               @value={{category.value}}
             >{{category.label}}</select.Option>
           {{/each}}
-        </DSelect>
+        </DNativeSelect>
         <Form
           @commitOnSubmit={{false}}
           @data={{this.formData}}
@@ -283,7 +283,7 @@ export default class AiModerationModes extends Component {
                 <label for="ai-moderation-mode-edit-level">{{i18n
                     "isbf_moderation.admin.modes.edited_level"
                   }}</label>
-                <DSelect
+                <DNativeSelect
                   data-test-ai-mode-edit-level
                   id="ai-moderation-mode-edit-level"
                   @disabled={{this.busy}}
@@ -296,7 +296,7 @@ export default class AiModerationModes extends Component {
                       @value={{level.value}}
                     >{{level.label}}</select.Option>
                   {{/each}}
-                </DSelect>
+                </DNativeSelect>
                 <categoryFields.Object @name="profiles" as |profilesFields|>
                   <profilesFields.Object
                     @name={{this.editedLevel}}
