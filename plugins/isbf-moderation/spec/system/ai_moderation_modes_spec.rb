@@ -111,6 +111,8 @@ module PageObjects
         keyboard ? trigger.send_keys(:down) : trigger.click
         option = find("[role='option']", exact_text: label(group, value))
         keyboard ? option.send_keys(:enter) : option.click
+        expect(page).to have_no_css("[role='listbox']")
+        expect(page).to have_css("[data-test-ai-mode-#{control}]:focus")
         self
       end
 
