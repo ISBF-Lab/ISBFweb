@@ -108,7 +108,7 @@ module PageObjects
 
       def choose(control, group, value, keyboard: false)
         trigger = find("[data-test-ai-mode-#{control}]")
-        keyboard ? trigger.send_keys(:arrow_down) : trigger.click
+        keyboard ? trigger.send_keys(:down) : trigger.click
         option = find("[role='option']", exact_text: label(group, value))
         keyboard ? option.send_keys(:enter) : option.click
         self
