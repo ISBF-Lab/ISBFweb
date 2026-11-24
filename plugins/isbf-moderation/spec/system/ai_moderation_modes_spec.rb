@@ -240,9 +240,12 @@ RSpec.describe "Edit AI moderation modes" do
     %w[light dark].each do |mode|
       page.driver.with_playwright_page { |browser| browser.emulate_media(colorScheme: mode) }
       [390, 430, 600, 601, 768, 1024, 1440].each do |width|
-        page.current_window.resize_to(width, 900)
+        page.driver.with_playwright_page do |browser|
+          browser.set_viewport_size(width:, height: 900)
+        end
         editor.visit_editor
         expect(editor).to have_editor
+        expect(page.evaluate_script("window.innerWidth")).to eq(width)
         expect(editor).to have_active_level("standard")
         editor.edit_level("strict", keyboard: true)
         expect(editor).to have_action("hide_and_review")
