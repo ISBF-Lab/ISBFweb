@@ -65,8 +65,8 @@ module IsbfModeration
       )
     end
 
-    def self.fingerprint(post)
-      Digest::SHA256.hexdigest([content_fingerprint(post), AiConfiguration.fingerprint].to_json)
+    def self.fingerprint(post, modes: AiModes.effective, content_digest: content_fingerprint(post))
+      Digest::SHA256.hexdigest([content_digest, AiConfiguration.fingerprint(modes: modes)].to_json)
     end
 
     def self.approve!(post)
@@ -77,7 +77,9 @@ module IsbfModeration
     def self.scan(post_id, attempt: 0, expected_fingerprint: nil)
       post = Post.find_by(id: post_id)
       return unless eligible?(post)
-      scanned_fingerprint = fingerprint(post)
+      modes = AiModes.effective
+      content_digest = content_fingerprint(post)
+      scanned_fingerprint = fingerprint(post, modes: modes, content_digest: content_digest)
       return if finished?(post, scanned_fingerprint)
       if expected_fingerprint && expected_fingerprint != scanned_fingerprint
         Jobs.enqueue(:isbf_ai_moderation, post_id: post.id)
@@ -107,22 +109,31 @@ module IsbfModeration
         MAX_SCANS_PER_MINUTE,
         1.minute,
       ).performed!
-      result = AiClassifier.classify(post, model: model, image_ids: image_ids)
+      matches = AiClassifier.classify(post, model: model, image_ids: image_ids, modes: modes)
 
       Notifications.defer(post: post) do
-        post.with_lock do
-          post.reload
-          next unless eligible?(post) && !finished?(post, scanned_fingerprint)
-          if fingerprint(post) != scanned_fingerprint
-            ActiveRecord.after_all_transactions_commit do
-              Jobs.enqueue(:isbf_ai_moderation, post_id: post.id)
+        AiModes.synchronize do
+          post.with_lock do
+            post.reload
+            next unless eligible?(post) && !finished?(post, scanned_fingerprint)
+            if fingerprint(post) != scanned_fingerprint
+              ActiveRecord.after_all_transactions_commit do
+                Jobs.enqueue(:isbf_ai_moderation, post_id: post.id)
+              end
+              next
             end
-            next
+            if matches.present?
+              AiReview.apply!(
+                post,
+                matches,
+                fingerprint: scanned_fingerprint,
+                content_digest: content_digest,
+                model_id: model.id,
+                modes: modes,
+              )
+            end
+            save_state!(post, scanned_fingerprint, "completed")
           end
-          if result["needs_review"]
-            AiReview.apply!(post, result, fingerprint: scanned_fingerprint, model_id: model.id)
-          end
-          save_state!(post, scanned_fingerprint, "completed")
         end
       end
     rescue RateLimiter::LimitExceeded
@@ -133,6 +144,11 @@ module IsbfModeration
         attempt: attempt,
         fingerprint: scanned_fingerprint,
       )
+    rescue AiModes::InvalidConfiguration
+      Rails.logger.warn("Invalid AI moderation mode configuration for post #{post_id}")
+      if delay = RETRY_DELAYS[attempt]
+        Jobs.enqueue_in(delay, :isbf_ai_moderation, post_id: post_id, attempt: attempt + 1)
+      end
     rescue StandardError => error
       retry_scan(post_id, scanned_fingerprint, attempt, error)
     end

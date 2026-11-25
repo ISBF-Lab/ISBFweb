@@ -15,10 +15,8 @@ RSpec.describe IsbfModeration::AiScanner, type: :model do
   end
   fab!(:model) { Fabricate(:fake_model, vision_enabled: true) }
 
-  let(:review_result) do
-    { needs_review: true, rule: "fraud", reason: "疑似诈骗引流", evidence: "要求向陌生人转账" }
-  end
-  let(:pass_result) { { needs_review: false, rule: "none", reason: "", evidence: "" } }
+  let(:review_result) { { matches: [{ rule: "fraud", reason: "疑似诈骗引流", evidence: "要求向陌生人转账" }] } }
+  let(:pass_result) { { matches: [] } }
 
   before do
     SiteSetting.discourse_ai_enabled = true
@@ -72,7 +70,7 @@ RSpec.describe IsbfModeration::AiScanner, type: :model do
       expect(original.reviewable.reload.reviewable_scores.count).to eq(2)
       score = original.reviewable.reviewable_scores.find_by!(reason: "isbf_ai_moderation")
       rendered = ReviewableScoreSerializer.new(score, scope: moderator.guardian).reason
-      expect(rendered).to include("AI review", review_result[:reason])
+      expect(rendered).to include("AI review", review_result[:matches].first[:reason])
       expect(IsbfModeration::Audit.severe?(score)).to eq(false)
     end
 
@@ -92,6 +90,249 @@ RSpec.describe IsbfModeration::AiScanner, type: :model do
         described_class.scan(forum_post.id)
         expect(prompts).to be_empty
       end
+    end
+
+    it "keeps review-only matches visible and creates one pending AI score" do
+      modes = IsbfModeration::AiModes.defaults
+      modes["fraud"]["profiles"]["standard"]["action"] = "review_only"
+      SiteSetting.isbf_ai_moderation_modes = modes.to_json
+
+      DiscourseAi::Completions::Llm.with_prepared_responses([review_result]) do |_, _, prompts|
+        2.times { described_class.scan(forum_post.id) }
+        expect(prompts.size).to eq(1)
+      end
+
+      reviewable = forum_post.reload.reviewable_flag
+      expect(forum_post).not_to be_hidden
+      expect(forum_post.topic.reload).to be_visible
+      expect(IsbfModeration::Hold.persisted?(forum_post)).to eq(false)
+      expect(author.guardian.can_see_post?(forum_post)).to eq(true)
+      expect(reviewable).to be_pending
+      expect(reviewable.reviewable_scores.where(reason: IsbfModeration::AiReview::KEY).count).to eq(
+        1,
+      )
+      expect(reviewable.payload.dig(IsbfModeration::AiReview::KEY, "action")).to eq("review_only")
+    end
+
+    it "uses the strongest matching action and preserves every match in one review" do
+      modes = IsbfModeration::AiModes.defaults
+      modes["fraud"]["profiles"]["standard"]["action"] = "review_only"
+      modes["harassment"]["active_level"] = "strict"
+      SiteSetting.isbf_ai_moderation_modes = modes.to_json
+      matches = [
+        review_result[:matches].first,
+        { rule: "harassment", reason: "对特定个人的辱骂", evidence: "定向辱骂证据" },
+      ]
+
+      DiscourseAi::Completions::Llm.with_prepared_responses([{ matches: matches }]) do
+        described_class.scan(forum_post.id)
+      end
+
+      reviewable = forum_post.reload.reviewable_flag
+      details = reviewable.payload.fetch(IsbfModeration::AiReview::KEY)
+      expect(forum_post).to be_hidden
+      expect(IsbfModeration::Hold.persisted?(forum_post)).to eq(true)
+      expect(reviewable.reviewable_scores.where(reason: IsbfModeration::AiReview::KEY).count).to eq(
+        1,
+      )
+      expect(details["action"]).to eq("hide_and_review")
+      expect(details["matches"].map { |match| match.fetch("rule") }).to contain_exactly(
+        "fraud",
+        "harassment",
+      )
+      expect(details.dig("modes", "fraud")).to include(
+        "level" => "standard",
+        "action" => "review_only",
+      )
+      expect(details.dig("modes", "harassment")).to include(
+        "level" => "strict",
+        "action" => "hide_and_review",
+      )
+      expect(details["policy_revision"]).to be_present
+      rendered =
+        ReviewableScoreSerializer.new(
+          reviewable.reviewable_scores.find_by!(reason: IsbfModeration::AiReview::KEY),
+          scope: moderator.guardian,
+        ).reason
+      expect(rendered).to include(*matches.map { |match| match.fetch(:reason) })
+    end
+
+    it "uses each category's active custom policy while keeping backup profiles inactive" do
+      modes = IsbfModeration::AiModes.defaults
+      modes["fraud"]["active_level"] = "strict"
+      modes["fraud"]["profiles"]["strict"]["policy"] = "特别规则：课程群交易引流交人工复核。"
+      modes["fraud"]["profiles"]["lenient"]["policy"] = "备用规则：只复核明确钓鱼。"
+      modes["harassment"]["active_level"] = "lenient"
+      modes["harassment"]["profiles"]["lenient"]["policy"] = "特别规则：只复核可信的人身威胁。"
+      SiteSetting.isbf_ai_moderation_modes = modes.to_json
+
+      DiscourseAi::Completions::Llm.with_prepared_responses([pass_result]) do |_, _, prompts|
+        described_class.scan(forum_post.id)
+        system_prompt = prompts.last.messages.first[:content]
+        expect(system_prompt).to include(
+          modes["fraud"]["profiles"]["strict"]["policy"],
+          modes["harassment"]["profiles"]["lenient"]["policy"],
+        )
+        expect(system_prompt).not_to include(modes["fraud"]["profiles"]["lenient"]["policy"])
+      end
+    end
+
+    it "sends each preset for an identical Chinese sample" do
+      sample = Fabricate(:post, topic: forum_post.topic, raw: "这个方案很差，可以先核对课程资料里的数据。")
+      modes = IsbfModeration::AiModes.defaults
+
+      %w[lenient standard strict].each do |level|
+        modes.each_value { |category| category["active_level"] = level }
+        SiteSetting.isbf_ai_moderation_modes = modes.to_json
+
+        DiscourseAi::Completions::Llm.with_prepared_responses([pass_result]) do |_, _, prompts|
+          described_class.scan(sample.id)
+          message = JSON.parse(prompts.last.messages.last[:content])
+          expect(message.fetch("body")).to eq(sample.raw)
+          system_prompt = prompts.last.messages.first[:content]
+          modes.each_value do |category|
+            policy = category.fetch("profiles").fetch(level).fetch("policy")
+            expect(system_prompt).to include(policy.to_json)
+          end
+        end
+      end
+
+      expect(sample.reload).not_to be_hidden
+    end
+
+    it "discards an in-flight match when its active policy changes" do
+      modes = IsbfModeration::AiModes.defaults
+      allow_any_instance_of(DiscourseAi::Completions::Llm).to receive(
+        :generate,
+      ).and_wrap_original do |method, *arguments, **options|
+        result = method.call(*arguments, **options)
+        modes["fraud"]["profiles"]["standard"]["policy"] = "新的生效规则，只复核明确钓鱼。"
+        SiteSetting.isbf_ai_moderation_modes = modes.to_json
+        result
+      end
+
+      DiscourseAi::Completions::Llm.with_prepared_responses([review_result]) do
+        described_class.scan(forum_post.id)
+      end
+
+      expect(forum_post.reload).not_to be_hidden
+      expect(forum_post.reviewable_flag).to be_nil
+      expect(Jobs::IsbfAiModeration.jobs.last["args"].first["post_id"]).to eq(forum_post.id)
+    end
+
+    it "applies an in-flight match when only an inactive profile changes" do
+      modes = IsbfModeration::AiModes.defaults
+      allow_any_instance_of(DiscourseAi::Completions::Llm).to receive(
+        :generate,
+      ).and_wrap_original do |method, *arguments, **options|
+        result = method.call(*arguments, **options)
+        modes["fraud"]["profiles"]["lenient"]["policy"] = "新的备用规则。"
+        SiteSetting.isbf_ai_moderation_modes = modes.to_json
+        result
+      end
+
+      DiscourseAi::Completions::Llm.with_prepared_responses([review_result]) do
+        described_class.scan(forum_post.id)
+      end
+
+      expect(forum_post.reload).to be_hidden
+      expect(forum_post.reviewable_flag).to be_pending
+    end
+
+    it "lets reviewers dismiss a visible AI match and keeps that content approved after mode changes" do
+      modes = IsbfModeration::AiModes.defaults
+      modes["fraud"]["profiles"]["standard"]["action"] = "review_only"
+      SiteSetting.isbf_ai_moderation_modes = modes.to_json
+      DiscourseAi::Completions::Llm.with_prepared_responses([review_result]) do
+        described_class.scan(forum_post.id)
+      end
+      reviewable = forum_post.reload.reviewable_flag
+      expect(reviewable.perform(moderator, :disagree, version: reviewable.version)).to be_success
+      modes["fraud"]["active_level"] = "strict"
+      SiteSetting.isbf_ai_moderation_modes = modes.to_json
+
+      DiscourseAi::Completions::Llm.with_prepared_responses([]) do |_, _, prompts|
+        described_class.scan(forum_post.id)
+        expect(prompts).to be_empty
+      end
+      expect(forum_post.reload).not_to be_hidden
+      expect(reviewable.reload).not_to be_pending
+    end
+
+    it "keeps a native reviewer-approved visible post exempt from unchanged-content rescans" do
+      modes = IsbfModeration::AiModes.defaults
+      modes["fraud"]["profiles"]["standard"]["action"] = "review_only"
+      SiteSetting.isbf_ai_moderation_modes = modes.to_json
+      DiscourseAi::Completions::Llm.with_prepared_responses([review_result]) do
+        described_class.scan(forum_post.id)
+      end
+      reviewable = forum_post.reload.reviewable_flag
+      expect(
+        reviewable.perform(moderator, :agree_and_keep, version: reviewable.version),
+      ).to be_success
+      modes["fraud"]["profiles"]["standard"]["action"] = "hide_and_review"
+      SiteSetting.isbf_ai_moderation_modes = modes.to_json
+
+      DiscourseAi::Completions::Llm.with_prepared_responses([]) do |_, _, prompts|
+        described_class.scan(forum_post.id)
+        expect(prompts).to be_empty
+      end
+      expect(forum_post.reload).not_to be_hidden
+      expect(reviewable.reload).not_to be_pending
+    end
+
+    it "allows native reviewers to hide a visible AI match" do
+      modes = IsbfModeration::AiModes.defaults
+      modes["fraud"]["profiles"]["standard"]["action"] = "review_only"
+      SiteSetting.isbf_ai_moderation_modes = modes.to_json
+      DiscourseAi::Completions::Llm.with_prepared_responses([review_result]) do
+        described_class.scan(forum_post.id)
+      end
+      reviewable = forum_post.reload.reviewable_flag
+
+      expect(
+        reviewable.perform(moderator, :agree_and_hide, version: reviewable.version),
+      ).to be_success
+      expect(forum_post.reload).to be_hidden
+    end
+
+    it "lets reviewers restore an AI-held post after AI moderation is disabled" do
+      DiscourseAi::Completions::Llm.with_prepared_responses([review_result]) do
+        described_class.scan(forum_post.id)
+      end
+      reviewable = forum_post.reload.reviewable_flag
+      expect(reviewable).to be_pending
+      expect(forum_post).to be_hidden
+      expect(IsbfModeration::Hold.persisted?(forum_post)).to eq(true)
+      SiteSetting.isbf_ai_moderation_enabled = false
+
+      expect(
+        reviewable.perform(moderator, :disagree_and_restore, version: reviewable.version),
+      ).to be_success
+      expect(reviewable.reload).not_to be_pending
+      expect(forum_post.reload).not_to be_hidden
+      expect(forum_post.topic.reload).to be_visible
+      expect(IsbfModeration::Hold.persisted?(forum_post)).to eq(false)
+    end
+
+    it "lets reviewers hide a review-only AI match after AI moderation is disabled" do
+      modes = IsbfModeration::AiModes.defaults
+      modes["fraud"]["profiles"]["standard"]["action"] = "review_only"
+      SiteSetting.isbf_ai_moderation_modes = modes.to_json
+      DiscourseAi::Completions::Llm.with_prepared_responses([review_result]) do
+        described_class.scan(forum_post.id)
+      end
+      reviewable = forum_post.reload.reviewable_flag
+      expect(reviewable).to be_pending
+      expect(forum_post).not_to be_hidden
+      expect(PostAction.active.where(post_id: forum_post.id)).to be_empty
+      SiteSetting.isbf_ai_moderation_enabled = false
+
+      expect(
+        reviewable.perform(moderator, :agree_and_hide, version: reviewable.version),
+      ).to be_success
+      expect(reviewable.reload).not_to be_pending
+      expect(forum_post.reload).to be_hidden
     end
 
     it "retains a hold after the feature is disabled and the author edits" do
@@ -211,14 +452,16 @@ RSpec.describe IsbfModeration::AiScanner, type: :model do
 
     it "rejects contradictory and incomplete model decisions" do
       responses = [
-        review_result.merge(needs_review: "true"),
-        review_result.merge(rule: "none"),
-        review_result.merge(evidence: ""),
+        review_result.merge(matches: "fraud"),
+        { matches: [review_result[:matches].first.merge(rule: "none")] },
+        { matches: [review_result[:matches].first.merge(evidence: "")] },
         pass_result.merge(rule: "fraud"),
+        { matches: review_result[:matches] * 2 },
       ]
       responses.each do |response|
         post = isbf_fabricate(:post, topic: isbf_fabricate(:topic, category: category))
-        DiscourseAi::Completions::Llm.with_prepared_responses([response]) do
+        # Canned responses remove unexpected schema fields before the classifier sees them.
+        DiscourseAi::Completions::Endpoints::Fake.with_fake_content(response.to_json) do
           described_class.scan(post.id)
         end
         expect(post.reload).not_to be_hidden
@@ -250,7 +493,11 @@ RSpec.describe IsbfModeration::AiScanner, type: :model do
           },
         )
       SiteSetting.isbf_ai_moderation_model = compatible.id.to_s
-      decisions = [pass_result, review_result.except(:evidence), review_result]
+      decisions = [
+        pass_result,
+        { matches: [review_result[:matches].first.except(:evidence)] },
+        review_result,
+      ]
       replies =
         decisions.map do |decision|
           {
@@ -323,16 +570,43 @@ RSpec.describe IsbfModeration::AiScanner, type: :model do
       expect(forum_post.reload).not_to be_hidden
     end
 
+    it "keeps historical single-rule AI scores readable for reviewers" do
+      DiscourseAi::Completions::Llm.with_prepared_responses([review_result]) do
+        described_class.scan(forum_post.id)
+      end
+      score =
+        forum_post.reload.reviewable_flag.reviewable_scores.find_by!(
+          reason: IsbfModeration::AiReview::KEY,
+        )
+      original_details =
+        review_result[:matches].first.merge(
+          needs_review: true,
+          rules_version: 1,
+          model_id: model.id,
+        )
+      score.update!(context: { IsbfModeration::AiReview::KEY => original_details }.to_json)
+
+      rendered = ReviewableScoreSerializer.new(score, scope: moderator.guardian).reason
+
+      expect(rendered).to include(
+        "AI review",
+        original_details.fetch(:reason),
+        original_details.fetch(:evidence),
+      )
+    end
+
     it "escapes the model explanation rendered to reviewers" do
-      result = review_result.merge(reason: "<script>alert(1)</script>")
+      result = {
+        matches: [review_result[:matches].first.merge(reason: "<script>alert(1)</script>")],
+      }
       DiscourseAi::Completions::Llm.with_prepared_responses([result]) do
         described_class.scan(forum_post.id)
       end
       score =
         forum_post.reload.reviewable_flag.reviewable_scores.find_by!(reason: "isbf_ai_moderation")
       rendered = ReviewableScoreSerializer.new(score, scope: moderator.guardian).reason
-      expect(rendered).to include(CGI.escapeHTML(result[:reason]))
-      expect(rendered).not_to include(result[:reason])
+      expect(rendered).to include(CGI.escapeHTML(result[:matches].first[:reason]))
+      expect(rendered).not_to include(result[:matches].first[:reason])
     end
   end
 

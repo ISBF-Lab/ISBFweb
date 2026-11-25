@@ -1,0 +1,212 @@
+name: AI moderation modes integration
+
+on:
+  pull_request:
+    paths:
+      - "plugins/isbf-moderation/**"
+      - ".github/workflows/isbf-ai-moderation-modes.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: isbf-ai-moderation-modes-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native-integration:
+    name: AI moderation modes (${{ matrix.baseline }})
+    runs-on: ubuntu-latest
+    container: discourse/discourse_test@sha256:94eca5318fed6171264b95204914de76a113c305cebb72d9fa9527e2c4496494
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        include:
+          - baseline: current
+            core_ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          - baseline: production-132
+            core_ref: 132cc95d043db01251eedf9c93b3927cd5ffee91
+    defaults:
+      run:
+        shell: bash
+        working-directory: discourse
+    env:
+      RAILS_ENV: test
+      PGUSER: discourse
+      PGPASSWORD: discourse
+      LOAD_PLUGINS: "1"
+      PARALLEL_TEST_PROCESSORS: "1"
+      NODE_OPTIONS: --max-old-space-size=2048
+      CHEAP_SOURCE_MAPS: "1"
+      EMBER_ENV: development
+      CAPYBARA_DEFAULT_MAX_WAIT_TIME: "20"
+      PLAYWRIGHT_BROWSERS_PATH: /home/discourse/.cache/ms-playwright
+      DBUS_SESSION_BUS_ADDRESS: unix:path=/dev/null
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          path: candidate
+          sparse-checkout: |
+            plugins/isbf-moderation
+            .github/fixtures
+            .github/scripts
+            .github/tests
+          persist-credentials: false
+
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ matrix.core_ref }}
+          path: discourse
+          persist-credentials: false
+
+      - uses: actions/checkout@v7
+        if: matrix.baseline == 'production-132'
+        with:
+          ref: 9ca49588e44c18957733311239a0f355314a2980
+          path: production-ui-baseline
+          sparse-checkout: |
+            frontend/discourse/app
+            frontend/discourse/float-kit
+            frontend/discourse/select-kit
+            frontend/discourse/tests/helpers
+            app/assets/stylesheets/common/components
+            app/views/qunit/qunit.html.erb
+          persist-credentials: false
+
+      - uses: actions/checkout@v7
+        if: matrix.baseline == 'production-132'
+        with:
+          ref: 13d66d6f415a7a6b496741155cb55315e208f882
+          path: production-float-source
+          sparse-checkout: frontend/discourse/float-kit/lib
+          persist-credentials: false
+
+      - uses: actions/checkout@v7
+        if: matrix.baseline == 'production-132'
+        with:
+          ref: 211f043f51681951bbb6d562ca9df66ea73366c6
+          path: production-otp-source
+          sparse-checkout: frontend/discourse/app/ui-kit/d-otp
+          persist-credentials: false
+
+      - name: Overlay only the candidate moderation plugin
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/discourse"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/candidate"
+          test -d plugins/isbf-moderation
+          test ! -L plugins/isbf-moderation
+          rm -r plugins/isbf-moderation
+          cp -a ../candidate/plugins/isbf-moderation plugins/isbf-moderation
+          mkdir -p tmp/ai-moderation-results
+          git -C ../candidate rev-parse HEAD > tmp/ai-moderation-results/source-sha.txt
+          git rev-parse HEAD > tmp/ai-moderation-results/core-sha.txt
+
+      - name: Restore audited production UI in the isolated runtime
+        if: matrix.baseline == 'production-132'
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/production-ui-baseline"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/production-float-source"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/production-otp-source"
+          python3 ../candidate/.github/scripts/restore-mbti-production-ui.py \
+            --manifest ../candidate/.github/fixtures/isbf-mbti-production-ui.json \
+            --source ../production-ui-baseline \
+            --extra-source 13d66d6f415a7a6b496741155cb55315e208f882=../production-float-source \
+            --extra-source 211f043f51681951bbb6d562ca9df66ea73366c6=../production-otp-source \
+            --audit ../candidate/.github/fixtures/isbf-mbti-production-source-audit.json \
+            --capture ../candidate/.github/fixtures/isbf-mbti-runtime \
+            --target . > tmp/ai-moderation-results/production-ui.json
+
+      - name: Prepare isolated services and frozen dependencies
+        run: |
+          redis-server /etc/redis/redis.conf --daemonize yes --logfile ""
+          chown -R postgres /var/run/postgresql
+          sudo -E -u postgres script/start_test_db.rb
+          sudo -u postgres psql -c "CREATE ROLE discourse LOGIN SUPERUSER PASSWORD 'discourse';"
+          ln -s /var/www/discourse/vendor/bundle vendor/bundle
+          bundle config --local path vendor/bundle
+          bundle config --local deployment true
+          bundle config --local without ""
+          bundle install --jobs 1
+          pnpm install --frozen-lockfile
+
+      - name: Verify native formatting without changing candidate source
+        run: |
+          git add --intent-to-add --force plugins/isbf-moderation/plugin.rb
+          script/list_bundled_plugins | grep -Fxq 'plugins/isbf-moderation'
+          find plugins/isbf-moderation -type f -print0 | sort -z | xargs -0 sha256sum > tmp/ai-moderation-results/source-before.sha256
+          sha256sum Gemfile.lock pnpm-lock.yaml > tmp/ai-moderation-results/locks-before.sha256
+          bin/lint --fix plugins/isbf-moderation
+          sha256sum --check tmp/ai-moderation-results/source-before.sha256
+          sha256sum --check tmp/ai-moderation-results/locks-before.sha256
+
+      - name: Migrate the synthetic database
+        id: database
+        run: bin/rake db:create db:migrate
+
+      - name: Native configuration, authorization and moderation regression
+        run: |
+          set -o pipefail
+          bin/rspec \
+            plugins/isbf-moderation/spec/lib \
+            plugins/isbf-moderation/spec/models \
+            plugins/isbf-moderation/spec/requests \
+            --format progress --format json --out tmp/ai-moderation-results/backend.json \
+            | tee tmp/ai-moderation-results/backend.log
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path("tmp/ai-moderation-results/backend.json").read_text())["summary"]
+          assert summary["example_count"] > 0
+          assert summary["failure_count"] == summary["pending_count"] == 0
+          PY
+
+      - name: Prepare native browser assets and Chinese fonts
+        id: browser_assets
+        if: ${{ !cancelled() && steps.database.outcome == 'success' }}
+        run: |
+          apt-get -qq update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends fonts-noto-cjk fontconfig
+          fc-cache -f
+          dpkg-query --show fonts-noto-cjk fontconfig > tmp/ai-moderation-results/fonts.txt
+          fc-match -f '%{family}|%{file}\n' 'sans-serif:lang=zh-cn' >> tmp/ai-moderation-results/fonts.txt
+          fc-match -f '%{family}' 'sans-serif:lang=zh-cn' | grep -Fq 'Noto Sans CJK'
+          pnpm playwright-install
+          script/assemble_ember_build.rb
+          mkdir -p "$HOME/.pki/nssdb" "$HOME/.local/share/pki/nssdb"
+          dbus-daemon --system --fork 2>/dev/null || true
+          moderation_bus_address=$(dbus-daemon --session --fork --print-address 2>/dev/null)
+          echo "DBUS_SESSION_BUS_ADDRESS=$moderation_bus_address" >> "$GITHUB_ENV"
+
+      - name: Native developer editing and responsive browser regression
+        if: ${{ !cancelled() && steps.browser_assets.outcome == 'success' }}
+        run: |
+          set -o pipefail
+          bin/rspec plugins/isbf-moderation/spec/system/ai_moderation_modes_spec.rb \
+            --format progress --format json --out tmp/ai-moderation-results/browser.json \
+            | tee tmp/ai-moderation-results/browser.log
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path("tmp/ai-moderation-results/browser.json").read_text())["summary"]
+          assert summary["example_count"] == 5
+          assert summary["failure_count"] == summary["pending_count"] == 0
+          PY
+          sha256sum --check tmp/ai-moderation-results/source-before.sha256
+          sha256sum --check tmp/ai-moderation-results/locks-before.sha256
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: ai-moderation-modes-${{ matrix.baseline }}-${{ github.run_id }}
+          path: |
+            discourse/plugins/isbf-moderation/
+            discourse/tmp/ai-moderation-results/
+            discourse/tmp/ai-moderation-browser/
+            discourse/tmp/capybara/
+            discourse/log/test.log
+          if-no-files-found: warn
+          retention-days: 14

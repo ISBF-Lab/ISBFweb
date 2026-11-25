@@ -16,3 +16,7 @@ plugins:
   isbf_ai_moderation_exempt_groups:
     default: ""
     type: group_list
+  isbf_ai_moderation_modes:
+    default: ""
+    hidden: true
+    validator: "IsbfModeration::AiModesValidator"

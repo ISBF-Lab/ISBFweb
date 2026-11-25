@@ -1,0 +1,39 @@
+zh_CN:
+  js:
+    isbf_moderation:
+      admin:
+        title: "Isbf moderation"
+        modes:
+          title: "审核模式"
+          description: "编辑各类别的三档审核规则，并分别选择生效档位。保存类别后，规则和处置用于新开始和仍在处理的审核。"
+          category: "审核类别"
+          configuration: "规则与处置"
+          active_level: "生效档位"
+          active_level_description: "保存类别后，此档位生效。可以先编辑其他档位，之后再启用。"
+          edited_level: "正在编辑的档位"
+          policy: "判定规则与样例"
+          policy_description: "填写送审条件、放行样例和送审样例，每档最多 %{count} 个字符。"
+          action: "命中后的处置"
+          save: "保存此类别"
+          saved: "此类别的审核配置已保存。"
+          restore: "恢复此档默认值"
+          restored: "此档的默认规则和处置已载入草稿，保存类别后生效。"
+          conflict: "其他开发者已修改此类别。你的草稿已保留，请刷新已保存版本进行比较，再次保存以应用你的修改。"
+          refresh_saved_version: "刷新已保存版本并保留草稿"
+          refreshed: "已读取最新保存版本，草稿已保留。再次保存将应用你的草稿。"
+          saved_version: "对照最新保存版本"
+          saved_active_level: "已保存的生效档位为%{level}。"
+          request_failed: "读取或保存审核配置失败，请重试。"
+          invalid_policy: "%{level}的规则必须包含 1–%{count} 个字符。"
+          categories:
+            fraud: "垃圾广告与诈骗"
+            harassment: "攻击性言论"
+            privacy: "隐私泄露"
+            sexual: "露骨色情"
+          levels:
+            lenient: "宽松"
+            standard: "标准"
+            strict: "严格"
+          actions:
+            review_only: "仅送人工复核"
+            hide_and_review: "先隐藏再复核"

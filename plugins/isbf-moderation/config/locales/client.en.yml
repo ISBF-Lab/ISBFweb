@@ -1,0 +1,39 @@
+en:
+  js:
+    isbf_moderation:
+      admin:
+        title: "ISBF moderation"
+        modes:
+          title: "Moderation modes"
+          description: "Edit each category’s three moderation profiles and choose the active level. Save a category to apply its rules and actions to new and pending reviews."
+          category: "Moderation category"
+          configuration: "Rules and actions"
+          active_level: "Active level"
+          active_level_description: "This level takes effect when you save this category. You can edit another level before activating it."
+          edited_level: "Level to edit"
+          policy: "Rules and examples"
+          policy_description: "Describe when to request review and include examples to allow and review. Each profile accepts up to %{count} characters."
+          action: "Action when matched"
+          save: "Save category"
+          saved: "This category’s moderation configuration has been saved."
+          restore: "Restore this level’s defaults"
+          restored: "The level’s default rules and action are now in your draft. Save the category to apply them."
+          conflict: "Another developer changed this category. Your draft is preserved. Refresh the saved version, compare it with your draft, and save again to apply your changes."
+          refresh_saved_version: "Refresh saved version and keep draft"
+          refreshed: "The latest saved version is available for comparison. Your draft is preserved. Saving again will apply your draft."
+          saved_version: "Compare latest saved version"
+          saved_active_level: "Saved active level is %{level}."
+          request_failed: "Could not load or save the moderation configuration. Try again."
+          invalid_policy: "%{level} rules must contain 1–%{count} characters."
+          categories:
+            fraud: "Spam and fraud"
+            harassment: "Abusive language"
+            privacy: "Privacy disclosures"
+            sexual: "Sexual content"
+          levels:
+            lenient: "Lenient"
+            standard: "Standard"
+            strict: "Strict"
+          actions:
+            review_only: "Send for human review"
+            hide_and_review: "Hide and send for human review"

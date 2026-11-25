@@ -8,6 +8,9 @@
 # required_version: 3.5.0
 
 require_relative "lib/isbf_moderation/ai_configuration"
+require_relative "lib/isbf_moderation/ai_modes"
+
+add_admin_route "isbf_moderation.admin.title", "isbf-moderation", use_new_show_route: true
 
 after_initialize do
   require_relative "lib/isbf_moderation/hold"
@@ -101,6 +104,16 @@ after_initialize do
     end
   end
 
-  IsbfModeration::Engine.routes.draw { post "/severe-reports" => "severe_reports#create" }
-  Discourse::Application.routes.append { mount ::IsbfModeration::Engine, at: "/isbf/moderation" }
+  require_relative "app/controllers/isbf_moderation/admin/ai_moderation_modes_controller"
+
+  IsbfModeration::Engine.routes.draw do
+    post "/severe-reports" => "severe_reports#create"
+    get "/admin/ai-moderation-modes" => "admin/ai_moderation_modes#show"
+    put "/admin/ai-moderation-modes" => "admin/ai_moderation_modes#update"
+  end
+  Discourse::Application.routes.append do
+    get "/admin/plugins/isbf-moderation/ai-moderation-modes" => "admin/plugins#index",
+        :constraints => AdminConstraint.new
+    mount ::IsbfModeration::Engine, at: "/isbf/moderation"
+  end
 end

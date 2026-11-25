@@ -18,7 +18,7 @@ module IsbfModeration
       :vision_required if images_enabled && !selected.agent_image_capable?
     end
 
-    def self.fingerprint
+    def self.fingerprint(modes: AiModes.effective)
       selected = model
       Digest::SHA256.hexdigest(
         [
@@ -30,6 +30,7 @@ module IsbfModeration
           SiteSetting.isbf_ai_moderation_images_enabled,
           SiteSetting.isbf_ai_moderation_exempt_groups,
           AiClassifier::RULES_VERSION,
+          AiModes.revision(modes),
         ].to_json,
       )
     end

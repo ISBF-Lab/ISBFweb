@@ -4,7 +4,12 @@ module IsbfModeration
   module AiReview
     KEY = "isbf_ai_moderation"
 
-    def self.apply!(post, result, fingerprint:, model_id:)
+    def self.apply!(post, matches, fingerprint:, content_digest:, model_id:, modes:)
+      primary =
+        matches.find do |match|
+          modes.fetch(match.fetch("rule")).fetch("action") == AiModes::HIDE_AND_REVIEW
+        end || matches.first
+      action = modes.fetch(primary.fetch("rule")).fetch("action")
       reviewable =
         ReviewableFlaggedPost.needs_review!(
           target: post,
@@ -16,8 +21,13 @@ module IsbfModeration
         )
       reviewable.lock!
       details =
-        result.merge(
+        primary.merge(
+          AiModes.audit_context(modes).stringify_keys,
+          "needs_review" => true,
+          "matches" => matches,
+          "action" => action,
           "fingerprint" => fingerprint,
+          "content_digest" => content_digest,
           "model_id" => model_id,
           "rules_version" => AiClassifier::RULES_VERSION,
           "scanned_at" => Time.current.utc.iso8601(6),
@@ -34,6 +44,8 @@ module IsbfModeration
         reviewable_by_moderator: true,
         force_review: true,
       )
+      return if action == AiModes::REVIEW_ONLY
+
       Hold.set!(post, reviewable)
       post.hide!(PostActionType.types[:notify_moderators], custom_message: :isbf_ai_post_hidden)
       raise ActiveRecord::RecordInvalid.new(post) unless post.hidden?

@@ -1,10 +1,11 @@
 en:
   site_settings:
     isbf_severe_reports_enabled: "Allow signed-in normal accounts to submit severe reports. Existing content holds remain protected when disabled."
-    isbf_ai_moderation_enabled: "Automatically review new and edited public discussion posts, including anonymous posts and replies. Matches are hidden until staff review. Personal messages, restricted categories, official categories and learning resources are excluded. Existing holds remain when disabled. Requires {{setting:isbf_ai_moderation_model}}."
+    isbf_ai_moderation_enabled: "Automatically review new and edited public discussion posts, including anonymous posts and replies. Moderation modes determine how matching posts enter the staff queue. Personal messages, restricted categories, official categories and learning resources are excluded. Existing holds remain when disabled. Requires {{setting:isbf_ai_moderation_model}}."
     isbf_ai_moderation_model: "Model connection used for automatic post review. Change this selection to switch models without changing the review rules. Images require native vision or a configured vision delegate when {{setting:isbf_ai_moderation_images_enabled}} is enabled."
     isbf_ai_moderation_images_enabled: "Include uploaded images in automatic post review. Requires an image-capable model. Disable to review text only."
     isbf_ai_moderation_exempt_groups: "Skip AI review for authors in any selected group. Anonymous posts use the real author's groups without sending identity to the model. Empty means no group exemptions. Existing holds and manual reports are unaffected."
+    isbf_ai_moderation_modes: "Rules and actions saved through the Moderation modes page."
   isbf_moderation:
     held_notice: "This content is temporarily hidden while awaiting staff review."
     severe_label: "Severe report"
@@ -15,15 +16,18 @@ en:
         unavailable: "Enable Discourse AI before enabling automatic post review."
         model_required: "Select an existing model connection before enabling automatic post review."
         vision_required: "Select an image-capable model or disable image review first."
+      modes:
+        invalid: "Enter a valid moderation mode and a rule of up to %{maximum} characters for every level."
+        conflict: "Another developer saved this category. Load the saved version and review your draft before saving again."
       rules:
         fraud: "Scams or commercial spam"
-        harassment: "Severe harassment or threats"
+        harassment: "Insults, harassment or threats"
         privacy: "Disclosure of sensitive personal information"
         sexual: "Explicit sexual content"
   reviewables:
     reasons:
       isbf_severe_report: "A community member confirmed a severe report. The content is held for staff review."
-      isbf_ai_moderation: "AI found content that needs human review. The content is held until staff resolves the review."
+      isbf_ai_moderation: "AI found content that needs human review under the active moderation modes."
   system_messages:
     isbf_ai_post_hidden:
       title: "Content temporarily held for review"
