@@ -2064,32 +2064,42 @@ body:has(.isbf-v2-shell--workbench) {
 
 .isbf-v2-calendar__filters {
   display: flex;
-  gap: 6px;
+  gap: var(--isbf-v2-space-1);
   margin: 28px 0 18px;
-  padding: 4px;
+  padding: var(--isbf-v2-space-1);
   border: 1px solid var(--isbf-v2-border);
   border-radius: var(--isbf-v2-radius-pill);
-  background: var(--isbf-v2-hover);
+  background: color-mix(
+    in srgb,
+    var(--isbf-v2-surface) 98%,
+    var(--isbf-v2-text)
+  );
   width: fit-content;
   max-width: 100%;
   box-sizing: border-box;
 }
 
 .isbf-v2-calendar__filter.btn {
+  --d-button-border: 0;
+  --d-button-default-bg-color: transparent;
+  --d-button-default-bg-color--hover: var(--d-button-default-bg-color);
+  --d-button-default-text-color: light-dark(
+    var(--token-color-text-subtle),
+    var(--isbf-v2-muted)
+  );
+  --d-button-default-text-color--hover: var(--d-button-default-text-color);
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 0;
-  min-height: 34px;
+  min-width: 76px;
+  min-height: 36px;
   margin: 0;
-  padding: 0 16px;
-  border: 1px solid var(--isbf-v2-border);
+  padding: 0 18px;
   border-radius: var(--isbf-v2-radius-pill);
-  background: var(--isbf-v2-surface);
-  color: var(--isbf-v2-text);
   font-family: inherit;
-  font-weight: var(--isbf-v2-weight-medium);
+  font-size: var(--isbf-v2-font-sm);
+  font-weight: 650;
   white-space: nowrap;
   overflow: hidden;
   isolation: isolate;
@@ -2150,9 +2160,9 @@ body:has(.isbf-v2-shell--workbench) {
 }
 
 .isbf-v2-calendar__filter.is-active {
-  background: var(--isbf-v2-accent);
-  color: var(--isbf-v2-accent-contrast);
-  border-color: var(--isbf-v2-accent);
+  --d-button-default-bg-color: var(--isbf-v2-accent);
+  --d-button-default-text-color: var(--isbf-v2-accent-contrast);
+  font-weight: var(--isbf-v2-weight-bold);
 
   &::before,
   .d-button-label,
@@ -2421,12 +2431,22 @@ body:has(.isbf-v2-shell--workbench) {
 
   .isbf-v2-calendar__filters {
     width: 100%;
+    padding: 3px;
   }
 
   .isbf-v2-calendar__filter.btn {
-    flex: 1;
-    padding-inline: 5px;
-    font-size: 12px;
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 44px;
+    padding-inline: var(--isbf-v2-space-1);
+    font-size: 14px;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .isbf-v2-calendar__filter-label-alt {
+    padding-inline: var(--isbf-v2-space-1);
   }
 
   .isbf-v2-calendar__month,
