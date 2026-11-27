@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { array, concat } from "@ember/helper";
+import { array, concat, fn } from "@ember/helper";
+import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { modifier } from "ember-modifier";
@@ -12,6 +13,7 @@ import lazyHash from "discourse/helpers/lazy-hash";
 import { ajax } from "discourse/lib/ajax";
 import logout from "discourse/lib/logout";
 import { getCurrentPushSubscription } from "discourse/lib/push-notifications";
+import { and, eq, or } from "discourse/truth-helpers";
 import { containsFloatingTarget } from "discourse/ui-kit/-internals/floating-family";
 import DButton from "discourse/ui-kit/d-button";
 import dIcon from "discourse/ui-kit/helpers/d-icon";
@@ -512,7 +514,7 @@ export default class ISBFV2AccountMenu extends Component {
           @anchorElement={{this.anchorElement}}
           @ariaLabel={{i18n (themePrefix "isbf_v2.account_actions")}}
           @contentClass="isbf-v2-account-menu__float"
-          @hoverGracePeriod={{250}}
+          @hoverGracePeriod={{if @mobile 0 250}}
           @inlineTabOrder={{true}}
           @onClose={{this.menuClosed}}
           @onRegisterApi={{this.registerMenu}}

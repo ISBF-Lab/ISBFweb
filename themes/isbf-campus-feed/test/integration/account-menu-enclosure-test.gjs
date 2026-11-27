@@ -1,3 +1,4 @@
+import { run } from "@ember/runloop";
 import {
   click,
   fillIn,
@@ -236,5 +237,53 @@ module("ISBF | Integration | Account menu enclosure", function (hooks) {
       "none"
     );
     assert.dom(".isbf-v2-side__account").doesNotExist();
+  });
+
+  test("mobile touch release keeps device verification open without button focus", async function (assert) {
+    await renderCard(this, true);
+    await focus(".after-card");
+    run(() => find(trigger).click());
+    await settled();
+    const float = find(".isbf-v2-account-menu__float");
+    const verifyButton = find(".isbf-v2-account-menu__linked-account > button");
+    assert.dom(float).exists();
+    assert.false(float.contains(document.activeElement));
+
+    // Touch release leaves the float before clicking, without focusing the button.
+    run(() => {
+      for (const type of ["pointerdown", "pointerup"]) {
+        verifyButton.dispatchEvent(
+          new PointerEvent(type, {
+            bubbles: true,
+            button: 0,
+            isPrimary: true,
+            pointerId: 1,
+            pointerType: "touch",
+          })
+        );
+      }
+      float.dispatchEvent(
+        new PointerEvent("pointerleave", {
+          isPrimary: true,
+          pointerId: 1,
+          pointerType: "touch",
+        })
+      );
+      verifyButton.click();
+    });
+    assert.dom(".isbf-v2-account-menu__verify").exists();
+    assert.false(float.contains(document.activeElement));
+    await settled();
+
+    assert.dom(surface).exists("touch release does not dismiss the menu");
+    assert
+      .dom(".isbf-v2-account-menu__verify")
+      .exists("verification survives the hover-close timer");
+    assert.dom(".isbf-v2-account-menu__verify input[type='password']").exists();
+    await click(trigger);
+    assert
+      .dom(surface)
+      .doesNotExist("the three-dot button still closes the menu");
+    assert.dom(".isbf-v2-account-menu__verify").doesNotExist();
   });
 });

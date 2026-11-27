@@ -8,6 +8,7 @@
   "themes/isbf-campus-feed/javascripts/discourse/components/isbf-mbti-question.gjs",
   "themes/isbf-campus-feed/javascripts/discourse/components/isbf-mbti-result.gjs",
   "themes/isbf-campus-feed/javascripts/discourse/components/isbf-mbti.gjs",
+  "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-account-menu.gjs",
   "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-shell.gjs",
   "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-side-nav.gjs",
   "themes/isbf-campus-feed/javascripts/discourse/components/isbf-v2-utility-actions.gjs",
